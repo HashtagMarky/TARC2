@@ -129,5 +129,6 @@ u8 AddSecondaryPopUpWindow(void);
 u8 GetSecondaryPopUpWindowId(void);
 void RemoveSecondaryPopUpWindow(void);
 void HBlankCB_DoublePopupWindow(void);
+void DrawDialogFrameWithCustomTile(u8 windowId, bool8 copyToVram, u16 tileNum);
 
 #endif // GUARD_MENU_H
