@@ -37,7 +37,7 @@
     After this it progresses to the title screen
 */
 
-void IntroAfterCopyright();
+void HandleAfterCopyright();
 
 #if SKIP_INTRO_AFTER_COPYRIGHT == FALSE
 // Scene 1 main tasks
@@ -1144,7 +1144,7 @@ static u8 SetUpCopyrightScreen(void)
         SetMainCallback2(CB2_ExpansionIntro);
         CreateTask(Task_HandleExpansionIntro, 0);
 #else
-        IntroAfterCopyright();
+        HandleAfterCopyright();
 #endif
         if (gMultibootProgramStruct.gcmb_field_2 != 0)
         {
@@ -1170,7 +1170,7 @@ static u8 SetUpCopyrightScreen(void)
     return 1;
 }
 
-void IntroAfterCopyright(void)
+void HandleAfterCopyright(void)
 {
     #if SKIP_INTRO_AFTER_COPYRIGHT == FALSE
     CreateTask(Task_Scene1_Load, 0);

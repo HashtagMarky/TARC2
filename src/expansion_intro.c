@@ -286,7 +286,7 @@ void Task_HandleExpansionIntro(u8 taskId)
             ResetSpriteData();
             FreeAllSpritePalettes();
             DestroyTask(taskId);
-            IntroAfterCopyright();
+            HandleAfterCopyright();
         }
         break;
     }
