@@ -256,11 +256,19 @@ void Task_HandleExpansionIntro(u8 taskId)
         if (tFrameCounter == 208)
         {
             tState++;
+            #if SKIP_INTRO_AFTER_COPYRIGHT == FALSE
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            #else
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
+            #endif
         }
         else if (gMain.newKeys != 0)
         {
+            #if SKIP_INTRO_AFTER_COPYRIGHT == FALSE
             CpuFill16(0, gPlttBufferFaded, sizeof(gPlttBufferFaded));
+            #else
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
+            #endif
             if (IsCryPlaying())
                 StopCry();
             m4aSongNumStop(SE_BIKE_HOP);
@@ -279,7 +287,7 @@ void Task_HandleExpansionIntro(u8 taskId)
             FreeAllSpritePalettes();
             DestroyTask(taskId);
             CreateTask(Task_Scene1_Load, 0);
-            SetMainCallback2(MainCB2_Intro);
+            IntroAfterCopyright();
         }
         break;
     }

@@ -70,6 +70,7 @@
 #define SKIP_COPYRIGHT               TRUE    // If TRUE, the copyright screen can be skipped with a button press.
 #define HM_PRODUCTIONS_COPYRIGHT     TRUE    // If TRUE, a custom #M Productions intro will replace the vanilla copyright screen.
 #define EXPANSION_INTRO              TRUE    // If TRUE, a custom RHH intro will play after the vanilla copyright screen.
+#define SKIP_INTRO_AFTER_COPYRIGHT   FALSE   // If TRUE, a the intro cutscene will be skipped.
 #define TITLE_SCREEN_FLASH           TRUE    // If TRUE, the background will flash a colour when the Pokémon Logo appears in the opening screen.
 #define TITLE_SCREEN_FLASH_COLOR     RGB_EMERALD    // See rgb.h for colors and color creation funtion.
 #define POKEDEX_PLUS_HGSS            FALSE   // If TRUE, enables the custom HGSS style Pokedex.

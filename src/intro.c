@@ -37,6 +37,8 @@
     After this it progresses to the title screen
 */
 
+void IntroAfterCopyright();
+
 // Scene 1 main tasks
 static void Task_Scene1_FadeIn(u8);
 static void Task_Scene1_WaterDrops(u8);
@@ -1118,7 +1120,11 @@ static u8 SetUpCopyrightScreen(void)
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
         if (gMultibootProgramStruct.gcmb_field_2 != 1)
         {
+            #if SKIP_INTRO_AFTER_COPYRIGHT == TRUE && EXPANSION_INTRO == FALSE
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
+            #else
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            #endif
             gMain.state++;
         }
         break;
@@ -1130,7 +1136,7 @@ static u8 SetUpCopyrightScreen(void)
         CreateTask(Task_HandleExpansionIntro, 0);
 #else
         CreateTask(Task_Scene1_Load, 0);
-        SetMainCallback2(MainCB2_Intro);
+        IntroAfterCopyright();
 #endif
         if (gMultibootProgramStruct.gcmb_field_2 != 0)
         {
@@ -1154,6 +1160,15 @@ static u8 SetUpCopyrightScreen(void)
     }
 
     return 1;
+}
+
+void IntroAfterCopyright(void)
+{
+    #if SKIP_INTRO_AFTER_COPYRIGHT == FALSE
+    SetMainCallback2(MainCB2_Intro);
+    #else
+    SetMainCallback2(CB2_InitTitleScreen);
+    #endif
 }
 
 void CB2_InitCopyrightScreenAfterBootup(void)
