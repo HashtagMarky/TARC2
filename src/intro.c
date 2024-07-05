@@ -39,6 +39,7 @@
 
 void IntroAfterCopyright();
 
+#if SKIP_INTRO_AFTER_COPYRIGHT == FALSE
 // Scene 1 main tasks
 static void Task_Scene1_FadeIn(u8);
 static void Task_Scene1_WaterDrops(u8);
@@ -127,6 +128,7 @@ extern const struct SpriteTemplate gAncientPowerRockSpriteTemplate[];
 
 #define TAG_FLYGON_SILHOUETTE 2002
 #define TAG_RAYQUAZA_ORB      2003
+#endif
 
 #define COLOSSEUM_GAME_CODE 0x65366347 // "Gc6e" in ASCII
 
@@ -140,6 +142,8 @@ extern const struct SpriteTemplate gAncientPowerRockSpriteTemplate[];
     to trigger actions or progress through the cutscene.
     The values for these are defined contiguously below.
 */
+
+#if SKIP_INTRO_AFTER_COPYRIGHT == FALSE
 #define TIMER_BIG_DROP_START             76
 #define TIMER_LOGO_APPEAR               128
 #define TIMER_LOGO_LETTERS_COLOR        144
@@ -173,10 +177,12 @@ extern const struct SpriteTemplate gAncientPowerRockSpriteTemplate[];
 static EWRAM_DATA u16 sIntroCharacterGender = 0;
 static EWRAM_DATA u16 UNUSED sUnusedVar = 0;
 static EWRAM_DATA u16 sFlygonYOffset = 0;
+#endif
 
 u32 gIntroFrameCounter;
 struct GcmbStruct gMultibootProgramStruct;
 
+#if SKIP_INTRO_AFTER_COPYRIGHT == FALSE
 static const u16 sIntroDrops_Pal[]            = INCBIN_U16("graphics/intro/scene_1/drops.gbapal");
 static const u16 sIntroLogo_Pal[]             = INCBIN_U16("graphics/intro/scene_1/logo.gbapal");
 static const u32 sIntroDropsLogo_Gfx[]        = INCBIN_U32("graphics/intro/scene_1/drops_logo.4bpp.lz");
@@ -1025,6 +1031,7 @@ static const struct SpritePalette sSpritePalette_RayquazaOrb[] =
     {sIntroRayquzaOrb_Pal, TAG_RAYQUAZA_ORB},
     {},
 };
+#endif
 
 
 static void VBlankCB_Intro(void)
@@ -1035,6 +1042,7 @@ static void VBlankCB_Intro(void)
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
+#if SKIP_INTRO_AFTER_COPYRIGHT == FALSE
 void MainCB2_Intro(void)
 {
     RunTasks();
@@ -1052,6 +1060,7 @@ static void MainCB2_EndIntro(void)
     if (!UpdatePaletteFade())
         SetMainCallback2(CB2_InitTitleScreen);
 }
+#endif
 
 static void LoadCopyrightGraphics(u16 tilesetAddress, u16 tilemapAddress, u16 paletteOffset)
 {
@@ -1191,6 +1200,7 @@ void CB2_InitCopyrightScreenAfterTitleScreen(void)
     SetUpCopyrightScreen();
 }
 
+#if SKIP_INTRO_AFTER_COPYRIGHT == FALSE
 #define sBigDropSpriteId data[0]
 
 void Task_Scene1_Load(u8 taskId)
@@ -2830,6 +2840,7 @@ static void Task_BlendLogoOut(u8 taskId)
         break;
     }
 }
+#endif
 
 void PanFadeAndZoomScreen(u16 screenX, u16 screenY, u16 zoom, u16 alpha)
 {
@@ -2854,6 +2865,7 @@ void PanFadeAndZoomScreen(u16 screenX, u16 screenY, u16 zoom, u16 alpha)
     SetGpuReg(REG_OFFSET_BG2Y_H, dest.dy >> 16);
 }
 
+#if SKIP_INTRO_AFTER_COPYRIGHT == FALSE
 static void SpriteCB_WaterDrop_Ripple(struct Sprite *sprite)
 {
     u8 palNum;
@@ -3457,3 +3469,4 @@ static void SpriteCB_RayquazaOrb(struct Sprite *sprite)
         break;
     }
 }
+#endif

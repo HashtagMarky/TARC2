@@ -10,8 +10,11 @@ void CB2_InitCopyrightScreenAfterBootup(void);
 void CB2_InitCopyrightScreenAfterTitleScreen(void);
 void PanFadeAndZoomScreen(u16, u16, u16, u16);
 void IntroAfterCopyright();
+
+#if SKIP_INTRO_AFTER_COPYRIGHT == FALSE
 void MainCB2_Intro(void);
 void Task_Scene1_Load(u8);
+#endif
 
 
 #endif // GUARD_INTRO_H
