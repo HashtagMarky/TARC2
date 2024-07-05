@@ -67,16 +67,18 @@
 #define GEN_LATEST GEN_9
 
 // General settings
+#define POKEDEX_PLUS_HGSS            FALSE   // If TRUE, enables the custom HGSS style Pokedex.
+#define SUMMARY_SCREEN_NATURE_COLORS TRUE    // If TRUE, nature-based stat boosts and reductions will be red and blue in the summary screen.
+#define HQ_RANDOM                    TRUE    // If TRUE, replaces the default RNG with an implementation of SFC32 RNG. May break code that relies on RNG.
+#define COMPETITIVE_PARTY_SYNTAX     TRUE    // If TRUE, parties are defined in "competitive syntax".
+
+// Startup setting
 #define SKIP_COPYRIGHT               TRUE    // If TRUE, the copyright screen can be skipped with a button press.
 #define HM_PRODUCTIONS_COPYRIGHT     TRUE    // If TRUE, a custom #M Productions intro will replace the vanilla copyright screen.
 #define EXPANSION_INTRO              TRUE    // If TRUE, a custom RHH intro will play after the vanilla copyright screen.
 #define SKIP_INTRO_AFTER_COPYRIGHT   TRUE    // If TRUE, a the intro cutscene will be skipped.
 #define TITLE_SCREEN_FLASH           TRUE    // If TRUE, the background will flash a colour when the Pokémon Logo appears in the opening screen.
 #define TITLE_SCREEN_FLASH_COLOR     RGB_EMERALD    // See rgb.h for colors and color creation funtion.
-#define POKEDEX_PLUS_HGSS            FALSE   // If TRUE, enables the custom HGSS style Pokedex.
-#define SUMMARY_SCREEN_NATURE_COLORS TRUE    // If TRUE, nature-based stat boosts and reductions will be red and blue in the summary screen.
-#define HQ_RANDOM                    TRUE    // If TRUE, replaces the default RNG with an implementation of SFC32 RNG. May break code that relies on RNG.
-#define COMPETITIVE_PARTY_SYNTAX     TRUE    // If TRUE, parties are defined in "competitive syntax".
 
 // Measurement system constants to be used for UNITS
 #define UNITS_IMPERIAL               0       // Inches, feet, pounds
