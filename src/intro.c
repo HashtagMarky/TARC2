@@ -1053,8 +1053,13 @@ static void MainCB2_EndIntro(void)
 
 static void LoadCopyrightGraphics(u16 tilesetAddress, u16 tilemapAddress, u16 paletteOffset)
 {
+    #if HM_PRODUCTIONS_COPYRIGHT == FALSE
     LZ77UnCompVram(gIntroCopyright_Gfx, (void *)(VRAM + tilesetAddress));
     LZ77UnCompVram(gIntroCopyright_Tilemap, (void *)(VRAM + tilemapAddress));
+    #else
+    LZ77UnCompVram(gIntroHMProductionsCopyright_Gfx, (void *)(VRAM + tilesetAddress));
+    LZ77UnCompVram(gIntroHMProductionsCopyright_Tilemap, (void *)(VRAM + tilemapAddress));
+    #endif
     LoadPalette(gIntroCopyright_Pal, paletteOffset, PLTT_SIZE_4BPP);
 }
 

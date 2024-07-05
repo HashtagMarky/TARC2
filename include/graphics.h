@@ -1762,8 +1762,13 @@ extern const u32 gIntroSparkle_Gfx[];
 extern const u32 gIntroFlygonSilhouette_Gfx[];
 extern const u32 gIntroLightning_Gfx[];
 extern const u16 gIntroLightning_Pal[];
+#if HM_PRODUCTIONS_COPYRIGHT == FALSE
 extern const u32 gIntroCopyright_Gfx[];
 extern const u32 gIntroCopyright_Tilemap[];
+#else
+extern const u32 gIntroHMProductionsCopyright_Gfx[];
+extern const u32 gIntroHMProductionsCopyright_Tilemap[];
+#endif
 extern const u16 gIntroCopyright_Pal[16];
 extern const u32 gIntroVolbeat_Gfx[];
 extern const u16 gIntroVolbeat_Pal[];

@@ -68,6 +68,7 @@
 
 // General settings
 #define SKIP_COPYRIGHT               TRUE    // If TRUE, the copyright screen can be skipped with a button press.
+#define HM_PRODUCTIONS_COPYRIGHT     TRUE    // If TRUE, a custom #M Productions intro will replace the vanilla copyright screen.
 #define EXPANSION_INTRO              TRUE    // If TRUE, a custom RHH intro will play after the vanilla copyright screen.
 #define POKEDEX_PLUS_HGSS            FALSE   // If TRUE, enables the custom HGSS style Pokedex.
 #define SUMMARY_SCREEN_NATURE_COLORS TRUE    // If TRUE, nature-based stat boosts and reductions will be red and blue in the summary screen.

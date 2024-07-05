@@ -1774,8 +1774,13 @@ const u16 gSummaryScreen_MoveEffect_Contest_Tilemap[] = INCBIN_U16("graphics/sum
 const u16 gSummaryScreen_MoveEffect_Cancel_Tilemap[] = INCBIN_U16("graphics/summary_screen/effect_cancel.bin");
 
 const u16 gIntroCopyright_Pal[] = INCBIN_U16("graphics/intro/copyright.gbapal");
+#if HM_PRODUCTIONS_COPYRIGHT == FALSE
 const u32 gIntroCopyright_Gfx[] = INCBIN_U32("graphics/intro/copyright.4bpp.lz");
 const u32 gIntroCopyright_Tilemap[] = INCBIN_U32("graphics/intro/copyright.bin.lz");
+#else
+const u32 gIntroHMProductionsCopyright_Gfx[] = INCBIN_U32("graphics/intro/hmprods_copyright.4bpp.lz");
+const u32 gIntroHMProductionsCopyright_Tilemap[] = INCBIN_U32("graphics/intro/hmprods_copyright.bin.lz");
+#endif
 
 const u16 gPokedexAreaScreenAreaUnknown_Pal[] = INCBIN_U16("graphics/pokedex/area_unknown.gbapal");
 const u32 gPokedexAreaScreenAreaUnknown_Gfx[] = INCBIN_U32("graphics/pokedex/area_unknown.4bpp.lz");
