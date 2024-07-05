@@ -13,6 +13,7 @@
 #define RGB_ALPHA       (1 << 15)
 #define IS_ALPHA(color) ((color) & RGB_ALPHA)
 
+#define RGB_EMERALD    RGB(24, 31, 12)
 #define RGB_BLACK      RGB(0, 0, 0)
 #define RGB_WHITE      RGB(31, 31, 31)
 #define RGB_RED        RGB(31, 0, 0)
@@ -25,7 +26,5 @@
 #define RGB_WHITEALPHA (RGB_WHITE | RGB_ALPHA)
 
 #define RGB_LIME_GREEN  RGB2GBA(222, 230, 49)
-
-#define RGB_EMERALD    RGB(24, 31, 12)
 
 #endif // GUARD_RGB_H
