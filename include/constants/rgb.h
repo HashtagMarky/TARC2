@@ -26,4 +26,6 @@
 
 #define RGB_LIME_GREEN  RGB2GBA(222, 230, 49)
 
+#define RGB_EMERALD    RGB(24, 31, 12)
+
 #endif // GUARD_RGB_H
