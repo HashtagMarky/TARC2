@@ -51,6 +51,7 @@ static void CB2_GoToResetRtcScreen(void);
 static void CB2_GoToBerryFixScreen(void);
 static void CB2_GoToCopyrightScreen(void);
 static void UpdateLegendaryMarkingColor(u8);
+// static void UpdatePokemonLogoToStone(void);
 
 static void SpriteCB_VersionBannerLeft(struct Sprite *sprite);
 static void SpriteCB_VersionBannerRight(struct Sprite *sprite);
@@ -603,6 +604,10 @@ void CB2_InitTitleScreen(void)
         LZ77UnCompVram(gTitleScreenPokemonLogoGfx, (void *)(BG_CHAR_ADDR(0)));
         LZ77UnCompVram(gTitleScreenPokemonLogoTilemap, (void *)(BG_SCREEN_ADDR(9)));
         LoadPalette(gTitleScreenBgPalettes, BG_PLTT_ID(0), 15 * PLTT_SIZE_4BPP);
+        /*
+        if (statement to determine whether tutorial is incomplete and stone logo should be shown)
+            UpdatePokemonLogoToStone();
+        */
         // bg3
         LZ77UnCompVram(sTitleScreenRayquazaGfx, (void *)(BG_CHAR_ADDR(2)));
         LZ77UnCompVram(sTitleScreenRayquazaTilemap, (void *)(BG_SCREEN_ADDR(26)));
@@ -871,3 +876,15 @@ static void UpdateLegendaryMarkingColor(u8 frameNum)
         LoadPalette(&color, BG_PLTT_ID(14) + 15, sizeof(color));
    }
 }
+/*
+static void UpdatePokemonLogoToStone(void)
+{
+    u16 color1 = RGB_IKIGAI_DARK_GREY;
+    u16 color2 = RGB_IKIGAI_GREY;
+    u16 color3 = RGB_IKIGAI_DARKEST_GREY;
+
+    LoadPalette(&color1, BG_PLTT_ID(0) + 1, sizeof(color1));
+    LoadPalette(&color2, BG_PLTT_ID(0) + 2, sizeof(color2));
+    LoadPalette(&color3, BG_PLTT_ID(0) + 3, sizeof(color3));
+}
+*/
