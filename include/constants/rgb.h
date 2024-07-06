@@ -27,4 +27,7 @@
 
 #define RGB_LIME_GREEN  RGB2GBA(222, 230, 49)
 
+#define RGB_IKIGAI_BLUE      RGB2GBA(204, 229, 236)
+#define RGB_IKIGAI_PINK      RGB2GBA(249, 219, 253)
+
 #endif // GUARD_RGB_H
