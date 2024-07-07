@@ -52,6 +52,8 @@ static void CB2_GoToBerryFixScreen(void);
 static void CB2_GoToCopyrightScreen(void);
 static void UpdateLegendaryMarkingColor(u8);
 // static void UpdatePokemonLogoToStone(void);
+// static void UpdateCherryBlossomTreeColour(void);
+static void UpdateCherryBlossomTreeOffset(void);
 
 static void SpriteCB_VersionBannerLeft(struct Sprite *sprite);
 static void SpriteCB_VersionBannerRight(struct Sprite *sprite);
@@ -61,10 +63,10 @@ static void SpriteCB_PokemonLogoShine(struct Sprite *sprite);
 // const rom data
 static const u16 sUnusedUnknownPal[] = INCBIN_U16("graphics/title_screen/unused.gbapal");
 
-static const u32 sTitleScreenRayquazaGfx[] = INCBIN_U32("graphics/title_screen/rayquaza.4bpp.lz");
-static const u32 sTitleScreenRayquazaTilemap[] = INCBIN_U32("graphics/title_screen/rayquaza.bin.lz");
+static const u32 sTitleScreenCherryBlossomTreeGfx[] = INCBIN_U32("graphics/title_screen/cherry_blossom_tree.4bpp.lz");
+static const u32 sTitleScreenCherryBlossomTreeTilemap[] = INCBIN_U32("graphics/title_screen/cherry_blossom_tree.bin.lz");
+static const u32 sTitleScreenCherryBlossomLeavesGfx[] = INCBIN_U32("graphics/title_screen/cherry_blossom_leaves.4bpp.lz");
 static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/logo_shine.4bpp.lz");
-static const u32 sTitleScreenCloudsGfx[] = INCBIN_U32("graphics/title_screen/clouds.4bpp.lz");
 
 
 
@@ -569,7 +571,7 @@ static void VBlankCB(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
+    SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
 }
 
 void CB2_InitTitleScreen(void)
@@ -605,15 +607,23 @@ void CB2_InitTitleScreen(void)
         LZ77UnCompVram(gTitleScreenPokemonLogoTilemap, (void *)(BG_SCREEN_ADDR(9)));
         LoadPalette(gTitleScreenBgPalettes, BG_PLTT_ID(0), 15 * PLTT_SIZE_4BPP);
         /*
-        if (statement to determine whether tutorial is incomplete and stone logo should be shown)
+        if (statement to determine whether tutorial is incomplete and greyscale logo should be shown)
             UpdatePokemonLogoToStone();
         */
         // bg3
-        LZ77UnCompVram(sTitleScreenRayquazaGfx, (void *)(BG_CHAR_ADDR(2)));
-        LZ77UnCompVram(sTitleScreenRayquazaTilemap, (void *)(BG_SCREEN_ADDR(26)));
+        LZ77UnCompVram(sTitleScreenCherryBlossomTreeGfx, (void *)(BG_CHAR_ADDR(2)));
+        LZ77UnCompVram(sTitleScreenCherryBlossomTreeTilemap, (void *)(BG_SCREEN_ADDR(26)));
+        UpdateCherryBlossomTreeOffset();
+        /*
+        if (statement to determine whether tutorial is incomplete and greyscale logo should be shown)
+            UpdateCherryBlossomTreeColour();
+        */
         // bg1
-        LZ77UnCompVram(sTitleScreenCloudsGfx, (void *)(BG_CHAR_ADDR(3)));
-        LZ77UnCompVram(gTitleScreenCloudsTilemap, (void *)(BG_SCREEN_ADDR(27)));
+        /*
+        if !(statement to determine whether tutorial is incomplete and leaves should be shown)
+        */
+        LZ77UnCompVram(sTitleScreenCherryBlossomLeavesGfx, (void *)(BG_CHAR_ADDR(3)));
+        LZ77UnCompVram(gTitleScreenCherryBlossomLeavesTilemap, (void *)(BG_SCREEN_ADDR(27)));
         ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
@@ -757,7 +767,7 @@ static void Task_TitleScreenPhase2(u8 taskId)
     {
         gTasks[taskId].tSkipToNext = TRUE;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BD);
-        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(6, 15));
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(9, 11)); // Alpha Blending of Leaves
         SetGpuReg(REG_OFFSET_BLDY, 0);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1
                                     | DISPCNT_OBJ_1D_MAP
@@ -818,8 +828,8 @@ static void Task_TitleScreenPhase3(u8 taskId)
         if (++gTasks[taskId].tCounter & 1)
         {
             gTasks[taskId].tBg1Y++;
-            gBattle_BG1_Y = gTasks[taskId].tBg1Y / 2;
-            gBattle_BG1_X = 0;
+            gBattle_BG1_Y = 0; 
+            gBattle_BG1_X = -gTasks[taskId].tBg1Y * 2 / 3;
         }
         UpdateLegendaryMarkingColor(gTasks[taskId].tCounter);
         if ((gMPlayInfo_BGM.status & 0xFFFF) == 0)
@@ -887,4 +897,26 @@ static void UpdatePokemonLogoToStone(void)
     LoadPalette(&color2, BG_PLTT_ID(0) + 2, sizeof(color2));
     LoadPalette(&color3, BG_PLTT_ID(0) + 3, sizeof(color3));
 }
+
+static void UpdateCherryBlossomTreeColour(void)
+{
+    // Update Cherry Blossom Tree to Greyscale
+}
 */
+static void UpdateCherryBlossomTreeOffset(void)
+{
+    /*
+    u8 yOffset;
+    u8 yOffsetMax;
+    Currently broken as some tiles show wrong image and palette.
+
+    Add conditions to change yOffset.
+    if
+        yOffsetMax = 96;
+    yOffset = Random() % yOffsetMax;
+    */
+
+    SetGpuReg(REG_OFFSET_BG0HOFS, Random() % 17);
+    // SetGpuReg(REG_OFFSET_BG0VOFS, yOffset);
+}
+
