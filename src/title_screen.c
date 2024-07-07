@@ -50,7 +50,7 @@ static void CB2_GoToClearSaveDataScreen(void);
 static void CB2_GoToResetRtcScreen(void);
 static void CB2_GoToBerryFixScreen(void);
 static void CB2_GoToCopyrightScreen(void);
-static void UpdateLegendaryMarkingColor(u8);
+// static void UpdateLegendaryMarkingColor(u8);
 // static void UpdatePokemonLogoToStone(void);
 // static void UpdateCherryBlossomTreeColour(void);
 static void UpdateCherryBlossomTreeOffset(void);
@@ -831,7 +831,7 @@ static void Task_TitleScreenPhase3(u8 taskId)
             gBattle_BG1_Y = 0; 
             gBattle_BG1_X = -gTasks[taskId].tBg1Y * 2 / 3;
         }
-        UpdateLegendaryMarkingColor(gTasks[taskId].tCounter);
+        // UpdateLegendaryMarkingColor(gTasks[taskId].tCounter);
         if ((gMPlayInfo_BGM.status & 0xFFFF) == 0)
         {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITEALPHA);
@@ -872,7 +872,7 @@ static void CB2_GoToBerryFixScreen(void)
         SetMainCallback2(CB2_InitBerryFixProgram);
     }
 }
-
+/*
 static void UpdateLegendaryMarkingColor(u8 frameNum)
 {
     if ((frameNum % 4) == 0) // Change color every 4th frame
@@ -886,7 +886,7 @@ static void UpdateLegendaryMarkingColor(u8 frameNum)
         LoadPalette(&color, BG_PLTT_ID(14) + 15, sizeof(color));
    }
 }
-/*
+
 static void UpdatePokemonLogoToStone(void)
 {
     u16 color1 = RGB_IKIGAI_DARK_GREY;
