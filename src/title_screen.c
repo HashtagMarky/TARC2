@@ -78,7 +78,7 @@ static const u32 sTitleScreenLogoIkigaiVersionNumberPal[] = INCBIN_U32("graphics
 
 
 
-// Used to blend "Emerald Version" as it passes over over the Pokémon banner.
+// Used to blend "Emerald Version (now Ikigai)" as it passes over over the Pokémon banner.
 // Also used by the intro to blend the Game Freak name/logo in and out as they appear and disappear
 const u16 gTitleScreenAlphaBlend[64] =
 {
@@ -195,7 +195,7 @@ static const struct SpriteTemplate sVersionBannerRightSpriteTemplate =
     .callback = SpriteCB_VersionBannerRight,
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_EmeraldVersion[] =
+static const struct CompressedSpriteSheet sSpriteSheet_IkigaiVersion[] =
 {
     {
         .data = gTitleScreenIkigaiVersionGfx,
@@ -351,7 +351,7 @@ static const struct SpritePalette sSpritePalette_PressStart[] =
     {},
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_IkigaiVersion[] =
+static const struct CompressedSpriteSheet sSpriteSheet_IkigaiVersionNumber[] =
 {
     {
         .data = sTitleScreenLogoIkigaiVersionNumber,
@@ -361,7 +361,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_IkigaiVersion[] =
     {},
 };
 
-static const struct CompressedSpritePalette sSpritePalette_IkigaiVersion[] =
+static const struct CompressedSpritePalette sSpritePalette_IkigaiVersionNumber[] =
 {
     {
         .data = sTitleScreenLogoIkigaiVersionNumberPal,
@@ -685,13 +685,13 @@ void CB2_InitTitleScreen(void)
         ResetSpriteData();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 9;
-        LoadCompressedSpriteSheet(&sSpriteSheet_EmeraldVersion[0]);
+        LoadCompressedSpriteSheet(&sSpriteSheet_IkigaiVersion[0]);
         LoadCompressedSpriteSheet(&sSpriteSheet_PressStart[0]);
         LoadCompressedSpriteSheet(&sPokemonLogoShineSpriteSheet[0]);
         LoadPalette(gTitleScreenIkigaiVersionStonePal, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
         LoadSpritePalette(&sSpritePalette_PressStart[0]);
-        LoadCompressedSpriteSheet(sSpriteSheet_IkigaiVersion);
-        LoadCompressedSpritePalette(sSpritePalette_IkigaiVersion);
+        LoadCompressedSpriteSheet(sSpriteSheet_IkigaiVersionNumber);
+        LoadCompressedSpritePalette(sSpritePalette_IkigaiVersionNumber);
         gMain.state = 2;
         break;
     case 2:
