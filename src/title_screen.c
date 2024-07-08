@@ -34,7 +34,10 @@ enum {
 #define VERSION_BANNER_RIGHT_X 217
 #define VERSION_BANNER_Y 2
 #define VERSION_BANNER_Y_GOAL 72
-#define START_BANNER_X 128
+#define START_BANNER_X 130
+#define START_BANNER_Y 108
+#define START_COPYRIGHT_X 128
+#define START_COPYRIGHT_Y 148
 
 #define CLEAR_SAVE_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_UP)
 #define RESET_RTC_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_LEFT)
@@ -308,7 +311,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_PressStart[] =
 static const struct SpritePalette sSpritePalette_PressStart[] =
 {
     {
-        .data = gTitleScreenPressStartPal,
+        .data = gTitleScreenPressStartStonePal,
         .tag = TAG_PRESS_START_COPYRIGHT
     },
     {},
@@ -775,8 +778,8 @@ static void Task_TitleScreenPhase2(u8 taskId)
                                     | DISPCNT_BG1_ON
                                     | DISPCNT_BG2_ON
                                     | DISPCNT_OBJ_ON);
-        CreatePressStartBanner(START_BANNER_X, 108);
-        CreateCopyrightBanner(START_BANNER_X, 148);
+        CreatePressStartBanner(START_BANNER_X, START_BANNER_Y);
+        CreateCopyrightBanner(START_COPYRIGHT_X, START_COPYRIGHT_Y);
         gTasks[taskId].tBg1Y = 0;
         gTasks[taskId].func = Task_TitleScreenPhase3;
     }
