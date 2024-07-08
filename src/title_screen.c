@@ -27,6 +27,7 @@ enum {
     TAG_VERSION = 1000,
     TAG_PRESS_START_COPYRIGHT,
     TAG_LOGO_SHINE,
+    TAG_IKIGAI_VERSION,
 };
 
 #define VERSION_BANNER_RIGHT_TILEOFFSET 64
@@ -38,6 +39,8 @@ enum {
 #define START_BANNER_Y 108
 #define START_COPYRIGHT_X 128
 #define START_COPYRIGHT_Y 148
+#define IKIGAI_VERSION_NUMBER_X 151
+#define IKIGAI_VERSION_NUMBER_Y 56
 
 #define CLEAR_SAVE_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_UP)
 #define RESET_RTC_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_LEFT)
@@ -70,6 +73,8 @@ static const u32 sTitleScreenCherryBlossomTreeGfx[] = INCBIN_U32("graphics/title
 static const u32 sTitleScreenCherryBlossomTreeTilemap[] = INCBIN_U32("graphics/title_screen/cherry_blossom_tree.bin.lz");
 static const u32 sTitleScreenCherryBlossomLeavesGfx[] = INCBIN_U32("graphics/title_screen/cherry_blossom_leaves.4bpp.lz");
 static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/logo_shine.4bpp.lz");
+static const u32 sTitleScreenLogoIkigaiVersionNumber[] = INCBIN_U32("graphics/title_screen/ikigai_version_number.4bpp.lz");
+static const u32 sTitleScreenLogoIkigaiVersionNumberPal[] = INCBIN_U32("graphics/title_screen/ikigai_version_number.gbapal.lz");
 
 
 
@@ -200,6 +205,35 @@ static const struct CompressedSpriteSheet sSpriteSheet_EmeraldVersion[] =
     {},
 };
 
+static const struct OamData sIkigaiVersionOamData =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct SpriteTemplate sIkigaiVersionSpriteTemplate =
+
+{
+    .tileTag = TAG_IKIGAI_VERSION,
+    .paletteTag = TAG_IKIGAI_VERSION,
+    .oam = &sIkigaiVersionOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
 static const struct OamData sOamData_CopyrightBanner =
 {
     .y = DISPLAY_HEIGHT,
@@ -313,6 +347,25 @@ static const struct SpritePalette sSpritePalette_PressStart[] =
     {
         .data = gTitleScreenPressStartStonePal,
         .tag = TAG_PRESS_START_COPYRIGHT
+    },
+    {},
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_IkigaiVersion[] =
+{
+    {
+        .data = sTitleScreenLogoIkigaiVersionNumber,
+        .size = 4096,
+        .tag = TAG_IKIGAI_VERSION
+    },
+    {},
+};
+
+static const struct CompressedSpritePalette sSpritePalette_IkigaiVersion[] =
+{
+    {
+        .data = sTitleScreenLogoIkigaiVersionNumberPal,
+        .tag = TAG_IKIGAI_VERSION
     },
     {},
 };
@@ -637,6 +690,8 @@ void CB2_InitTitleScreen(void)
         LoadCompressedSpriteSheet(&sPokemonLogoShineSpriteSheet[0]);
         LoadPalette(gTitleScreenIkigaiVersionStonePal, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
         LoadSpritePalette(&sSpritePalette_PressStart[0]);
+        LoadCompressedSpriteSheet(sSpriteSheet_IkigaiVersion);
+        LoadCompressedSpritePalette(sSpritePalette_IkigaiVersion);
         gMain.state = 2;
         break;
     case 2:
@@ -780,6 +835,7 @@ static void Task_TitleScreenPhase2(u8 taskId)
                                     | DISPCNT_OBJ_ON);
         CreatePressStartBanner(START_BANNER_X, START_BANNER_Y);
         CreateCopyrightBanner(START_COPYRIGHT_X, START_COPYRIGHT_Y);
+        CreateSprite(&sIkigaiVersionSpriteTemplate, IKIGAI_VERSION_NUMBER_X, IKIGAI_VERSION_NUMBER_Y, 0);
         gTasks[taskId].tBg1Y = 0;
         gTasks[taskId].func = Task_TitleScreenPhase3;
     }
