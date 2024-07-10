@@ -675,11 +675,9 @@ void CB2_InitTitleScreen(void)
             UpdateCherryBlossomTreeColour();
         */
         // bg1
-        /*
-        if !(statement to determine whether tutorial is incomplete and leaves should be shown)
-        */
-        LZ77UnCompVram(sTitleScreenCherryBlossomLeavesGfx, (void *)(BG_CHAR_ADDR(3)));
-        LZ77UnCompVram(gTitleScreenCherryBlossomLeavesTilemap, (void *)(BG_SCREEN_ADDR(27)));
+        // if !(statement to determine whether tutorial is incomplete and leaves should be shown)
+            LZ77UnCompVram(sTitleScreenCherryBlossomLeavesGfx, (void *)(BG_CHAR_ADDR(3)));
+            LZ77UnCompVram(gTitleScreenCherryBlossomLeavesTilemap, (void *)(BG_SCREEN_ADDR(27)));
         ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
@@ -825,7 +823,7 @@ static void Task_TitleScreenPhase2(u8 taskId)
     {
         gTasks[taskId].tSkipToNext = TRUE;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BD);
-        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(9, 11)); // Alpha Blending of Leaves
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(7, 11)); // Alpha Blending of Leaves
         SetGpuReg(REG_OFFSET_BLDY, 0);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1
                                     | DISPCNT_OBJ_1D_MAP
@@ -964,18 +962,54 @@ static void UpdateCherryBlossomTreeColour(void)
 */
 static void UpdateCherryBlossomTreeOffset(void)
 {
-    /*
+    u8 xOffset;
+    u8 xOffsetMax = Random() % 17;
     u8 yOffset;
+    u8 yOffsetMin = 0;
     u8 yOffsetMax;
-    Currently broken as some tiles show wrong image and palette.
 
-    Add conditions to change yOffset.
-    if
-        yOffsetMax = 96;
-    yOffset = Random() % yOffsetMax;
-    */
+    u8 TestCondition = 0; // Condition for offset during testing.
+    // xOffset is randomised by default but set to 0 in first condition.
+    // yOffset is randomised with a maximum value dependant on conditions.
+    // yOffsetMin may be used in order to control the minimum offset.
 
-    SetGpuReg(REG_OFFSET_BG0HOFS, Random() % 17);
-    // SetGpuReg(REG_OFFSET_BG0VOFS, yOffset);
+    switch(TestCondition)
+    {
+        default:
+        case 0:
+            xOffsetMax = 0;
+            yOffsetMax = 0;
+            break;
+        case 1:
+            yOffsetMax = 24;
+            break;
+        case 2:
+            yOffsetMax = 48;
+            break;
+        case 3:
+            yOffsetMin = 48;
+            yOffsetMax = 72;
+            break;
+        case 4:
+            yOffsetMin = 64;
+            yOffsetMax = 96;
+            break;
+    }
+
+    if (xOffsetMax == 0)
+        xOffset = xOffsetMax;
+    else   
+        xOffset = Random() % xOffsetMax;
+
+    if (yOffsetMax == 0)
+        yOffset = yOffsetMax;
+    else if (yOffsetMin != 0)
+        yOffset = yOffsetMin + (Random() % (yOffsetMax - yOffsetMin));
+    else
+        yOffset = Random() % yOffsetMax;
+
+    SetGpuReg(REG_OFFSET_BG0HOFS, xOffset);
+    SetGpuReg(REG_OFFSET_BG0VOFS, yOffset);
+    SetGpuReg(REG_OFFSET_BG1VOFS, yOffset);
 }
 
