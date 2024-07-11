@@ -554,3 +554,7 @@ gSpecials::
 	def_special Script_GetChosenMonDefensiveEVs
 	def_special Script_GetChosenMonOffensiveIVs
 	def_special Script_GetChosenMonDefensiveIVs
+	def_special DynPal_ShowFullToneMenu
+	def_special DynPal_ShowToneMenuA
+	def_special DynPal_ShowToneMenuB
+	def_special DynPal_ShowToneMenuC

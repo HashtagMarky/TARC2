@@ -12,6 +12,7 @@
 #include "battle_tv.h"
 #include "cable_club.h"
 #include "event_object_movement.h"
+#include "dynamic_palettes.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "palette.h"
@@ -2905,7 +2906,7 @@ void BtlController_HandleIntroTrainerBallThrow(u32 battler, u16 tagTrainerPal, c
         StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 1);
 
         paletteNum = AllocSpritePalette(tagTrainerPal);
-        LoadCompressedPalette(trainerPal, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
+        DynPal_LoadPaletteByOffset(sDynPalPlayerBattleBack, OBJ_PLTT_ID(paletteNum));
         gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = paletteNum;
     }
     else

@@ -181,6 +181,9 @@ struct SaveBlock3
 #if OW_USE_FAKE_RTC
     struct Time fakeRTC;
 #endif
+    u8 dynPalSkinTone;
+    u8 dynPalHairTone;
+    u8 dynPalClothesTone;
 };
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;

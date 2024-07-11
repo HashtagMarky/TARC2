@@ -8,6 +8,7 @@
 #include "debug.h"
 #include "decoration.h"
 #include "decompress.h"
+#include "dynamic_palettes.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -479,17 +480,22 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Npc2Reflection,        OBJ_EVENT_PAL_TAG_NPC_2_REFLECTION},
     {gObjectEventPal_Npc3Reflection,        OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION},
     {gObjectEventPal_Npc4Reflection,        OBJ_EVENT_PAL_TAG_NPC_4_REFLECTION},
-    {gObjectEventPal_Brendan,               OBJ_EVENT_PAL_TAG_BRENDAN},
-    {gObjectEventPal_BrendanReflection,     OBJ_EVENT_PAL_TAG_BRENDAN_REFLECTION},
+    // {gObjectEventPal_Brendan,               OBJ_EVENT_PAL_TAG_BRENDAN},                  // DYNPAL Old
+    // {gObjectEventPal_BrendanReflection,     OBJ_EVENT_PAL_TAG_BRENDAN_REFLECTION},       // DYNPAL Old
+    {sDynPalPlayerOverworld,                OBJ_EVENT_PAL_TAG_BRENDAN},                     // DYNPAL New
+    {sDynPalPlayerReflection,               OBJ_EVENT_PAL_TAG_BRENDAN_REFLECTION},          // DYNPAL New
     {gObjectEventPal_BridgeReflection,      OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION},
-    {gObjectEventPal_PlayerUnderwater,      OBJ_EVENT_PAL_TAG_PLAYER_UNDERWATER},
+    // {gObjectEventPal_PlayerUnderwater,      OBJ_EVENT_PAL_TAG_PLAYER_UNDERWATER},        // DYNPAL Old
+    {sDynPalPlayerUnderwater,               OBJ_EVENT_PAL_TAG_PLAYER_UNDERWATER},           // DYNPAL New
     {gObjectEventPal_QuintyPlump,           OBJ_EVENT_PAL_TAG_QUINTY_PLUMP},
     {gObjectEventPal_QuintyPlumpReflection, OBJ_EVENT_PAL_TAG_QUINTY_PLUMP_REFLECTION},
     {gObjectEventPal_Truck,                 OBJ_EVENT_PAL_TAG_TRUCK},
     {gObjectEventPal_Vigoroth,              OBJ_EVENT_PAL_TAG_VIGOROTH},
     {gObjectEventPal_EnemyZigzagoon,        OBJ_EVENT_PAL_TAG_ZIGZAGOON},
-    {gObjectEventPal_May,                   OBJ_EVENT_PAL_TAG_MAY},
-    {gObjectEventPal_MayReflection,         OBJ_EVENT_PAL_TAG_MAY_REFLECTION},
+    // {gObjectEventPal_May,                   OBJ_EVENT_PAL_TAG_MAY},                       // DYNPAL Old
+    // {gObjectEventPal_MayReflection,         OBJ_EVENT_PAL_TAG_MAY_REFLECTION},            // DYNPAL Old
+    {sDynPalPlayerOverworld,                OBJ_EVENT_PAL_TAG_MAY},                          // DYNPAL New
+    {sDynPalPlayerReflection,               OBJ_EVENT_PAL_TAG_MAY_REFLECTION},               // DYNPAL New
     {gObjectEventPal_MovingBox,             OBJ_EVENT_PAL_TAG_MOVING_BOX},
     {gObjectEventPal_CableCar,              OBJ_EVENT_PAL_TAG_CABLE_CAR},
     {gObjectEventPal_SSTidal,               OBJ_EVENT_PAL_TAG_SSTIDAL},

@@ -26,6 +26,7 @@
 #include "expansion_intro.h"
 #include "constants/rgb.h"
 #include "constants/battle_anim.h"
+#include "dynamic_palettes.h"
 
 /*
     The intro is grouped into the following scenes
@@ -1191,6 +1192,7 @@ void CB2_InitCopyrightScreenAfterBootup(void)
         if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
             Sav2_ClearSetDefault();
         SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
+        DynPal_InitAllDynamicPalettes();
         InitHeap(gHeap, HEAP_SIZE);
     }
 }

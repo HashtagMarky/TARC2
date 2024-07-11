@@ -5,6 +5,7 @@
 #include "battle_anim.h"
 #include "constants/battle_anim.h"
 #include "battle_interface.h"
+#include "dynamic_palettes.h"
 #include "main.h"
 #include "dma3.h"
 #include "malloc.h"
@@ -26,6 +27,7 @@
 #include "constants/rgb.h"
 #include "constants/battle_palace.h"
 #include "constants/battle_move_effects.h"
+#include "constants/trainers.h"
 
 
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
@@ -661,8 +663,13 @@ void DecompressTrainerBackPic(u16 backPicId, u8 battler)
     u8 position = GetBattlerPosition(battler);
     DecompressPicFromTable(&gTrainerBacksprites[backPicId].backPic,
                            gMonSpritesGfxPtr->spritesGfx[position]);
-    LoadCompressedPalette(gTrainerBacksprites[backPicId].palette.data,
-                          OBJ_PLTT_ID(battler), PLTT_SIZE_4BPP);
+    if (backPicId == TRAINER_BACK_PIC_BRENDAN || backPicId == TRAINER_BACK_PIC_MAY) {
+        DynPal_LoadPaletteByOffset(sDynPalPlayerBattleBack, OBJ_PLTT_ID(battler));
+    }
+    else {
+        LoadCompressedPalette(gTrainerBacksprites[backPicId].palette.data,
+            OBJ_PLTT_ID(battler), PLTT_SIZE_4BPP);
+    }
 }
 
 void FreeTrainerFrontPicPalette(u16 frontPicId)
