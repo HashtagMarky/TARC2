@@ -250,6 +250,7 @@ static void MainMenu_FormatSavegamePokedex(void);
 static void MainMenu_FormatSavegameTime(void);
 static void MainMenu_FormatSavegameBadges(void);
 static void NewGameBirchSpeech_CreateDialogueWindowBorder(u8, u8, u8, u8, u8, u8);
+static void RandomiseMessageBox(void);
 
 // .rodata
 
@@ -1281,6 +1282,7 @@ static void Task_NewGameBirchSpeech_Init(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
 
+    RandomiseMessageBox();
     LZ77UnCompVram(sSamuelSpeechShadowGfx, (void *)VRAM);
     LZ77UnCompVram(sBirchSpeechBgMap, (void *)(BG_SCREEN_ADDR(7)));
     LoadPalette(sSamuelSpeechBgPals, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
@@ -2371,6 +2373,11 @@ static void Task_NewGameBirchSpeech_ReturnFromNamingScreenShowTextbox(u8 taskId)
         NewGameBirchSpeech_ShowDialogueWindow(0, 1);
         gTasks[taskId].func = Task_NewGameBirchSpeech_SoItsPlayerName;
     }
+}
+
+static void RandomiseMessageBox(void)
+{
+    gSaveBlock2Ptr->messageBox = Random() % 2;
 }
 
 #undef tTimer

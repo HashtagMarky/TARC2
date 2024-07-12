@@ -186,7 +186,10 @@ const u16 *GetTextWindowPalette(u8 id)
 
 const u16 *GetOverworldTextboxPalettePtr(void)
 {
-    return gMessageBox_Pal;
+    if (gSaveBlock2Ptr->messageBox == IKIGAI_TEXT_BOX_BLUE)
+        return gMessageBox_BluePal;
+    else
+        return gMessageBox_PinkPal;
 }
 
 // Effectively LoadUserWindowBorderGfx but specifying the bg directly instead of a window from that bg
