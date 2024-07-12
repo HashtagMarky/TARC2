@@ -250,8 +250,9 @@ static u8 sActiveList[32];
 extern u8 *gFieldEffectScriptPointers[];
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 
-static const u32 sNewGameSamuel_Gfx[] = INCBIN_U32("graphics/samuel_speech/samuel.4bpp");
-static const u32 sNewGameSamuelBriefcase_Gfx[] = INCBIN_U32("graphics/samuel_speech/samuel_briefcase.4bpp");
+static const u32 sNewGameSamuelTop_Gfx[] = INCBIN_U32("graphics/samuel_speech/samuel_top.4bpp");
+static const u32 sNewGameSamuelBottom_Gfx[] = INCBIN_U32("graphics/samuel_speech/samuel_bottom.4bpp");
+static const u32 sNewGameSamuelBottomBriefcase_Gfx[] = INCBIN_U32("graphics/samuel_speech/samuel_bottom_briefcase.4bpp");
 static const u16 sNewGameSamuel_Pal[16] = INCBIN_U16("graphics/samuel_speech/samuel.gbapal");
 
 static const u32 sPokeballGlow_Gfx[] = INCBIN_U32("graphics/field_effects/pics/pokeball_glow.4bpp");
@@ -333,14 +334,19 @@ static const struct OamData sOam_16x16 =
     .paletteNum = 0,
 };
 
-static const struct SpriteFrameImage sPicTable_NewGameSamuel[] =
+static const struct SpriteFrameImage sPicTable_NewGameSamuelTop[] =
 {
-    obj_frame_tiles(sNewGameSamuel_Gfx)
+    obj_frame_tiles(sNewGameSamuelTop_Gfx)
 };
 
-static const struct SpriteFrameImage sPicTable_NewGameSamuelBriefcase[] =
+static const struct SpriteFrameImage sPicTable_NewGameSamuelBottom[] =
 {
-    obj_frame_tiles(sNewGameSamuelBriefcase_Gfx)
+    obj_frame_tiles(sNewGameSamuelBottom_Gfx)
+};
+
+static const struct SpriteFrameImage sPicTable_NewGameSamuelBottomBriefcase[] =
+{
+    obj_frame_tiles(sNewGameSamuelBottomBriefcase_Gfx)
 };
 
 static const struct SpritePalette sSpritePalette_NewGameSamuel =
@@ -360,24 +366,35 @@ static const union AnimCmd *const sAnimTable_NewGameSamuel[] =
     sAnim_NewGameSamuel
 };
 
-static const struct SpriteTemplate sSpriteTemplate_NewGameSamuel =
+static const struct SpriteTemplate sSpriteTemplate_NewGameSamuelTop =
 {
     .tileTag = TAG_NONE,
     .paletteTag = 0x1006,
     .oam = &sOam_64x64,
     .anims = sAnimTable_NewGameSamuel,
-    .images = sPicTable_NewGameSamuel,
+    .images = sPicTable_NewGameSamuelTop,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct SpriteTemplate sSpriteTemplate_NewGameSamuelBriefcase =
+static const struct SpriteTemplate sSpriteTemplate_NewGameSamuelBottom =
 {
     .tileTag = TAG_NONE,
     .paletteTag = 0x1006,
     .oam = &sOam_64x64,
     .anims = sAnimTable_NewGameSamuel,
-    .images = sPicTable_NewGameSamuelBriefcase,
+    .images = sPicTable_NewGameSamuelBottom,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteTemplate sSpriteTemplate_NewGameSamuelBottomBriefcase =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = 0x1006,
+    .oam = &sOam_64x64,
+    .anims = sAnimTable_NewGameSamuel,
+    .images = sPicTable_NewGameSamuelBottomBriefcase,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
@@ -941,10 +958,22 @@ static void UNUSED LoadTrainerGfx_TrainerCard(u8 gender, u16 palOffset, u8 *dest
     LoadCompressedPalette(gTrainerSprites[gender].palette.data, palOffset, PLTT_SIZE_4BPP);
 }
 
-u8 AddNewGameSamuelObject(s16 x, s16 y, u8 subpriority)
+u8 AddNewGameSamuelObjectTop(s16 x, s16 y, u8 subpriority)
 {
     LoadSpritePalette(&sSpritePalette_NewGameSamuel);
-    return CreateSprite(&sSpriteTemplate_NewGameSamuel, x, y, subpriority);
+    return CreateSprite(&sSpriteTemplate_NewGameSamuelTop, x, y, subpriority);
+}
+
+u8 AddNewGameSamuelObjectBottom(s16 x, s16 y, u8 subpriority)
+{
+    LoadSpritePalette(&sSpritePalette_NewGameSamuel);
+    return CreateSprite(&sSpriteTemplate_NewGameSamuelBottom, x, y, subpriority);
+}
+
+u8 AddNewGameSamuelObjectBottomBriefcase(s16 x, s16 y, u8 subpriority)
+{
+    LoadSpritePalette(&sSpritePalette_NewGameSamuel);
+    return CreateSprite(&sSpriteTemplate_NewGameSamuelBottomBriefcase, x, y, subpriority);
 }
 
 u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
