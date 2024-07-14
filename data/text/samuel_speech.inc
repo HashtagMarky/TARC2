@@ -34,8 +34,8 @@ gText_Samuel_BoyOrGirl::
 	.string "Or are you a girl?$"
 
 gText_Samuel_ForgottenName::
-	.string "I'm so sorry!\n"
-	.string "I haven’t even asked for your name yet.\l"
+	.string "I haven’t even asked for your name yet,\n"
+	.string "I'm so sorry!\l"
 	.string "What should I call you?$"
 
 gText_Samuel_SoYourePlayer::
@@ -45,24 +45,26 @@ gText_Samuel_JobIsYours::
 	.string "Well {PLAYER}, I think you'll fit right in.\n"
 	.string "The job is most certainly yours.\p"
 	.string "I cannot wait for you to see VYRATON,\n"
-	.string "in all of it's radiant beauty!\p"
+	.string "in all of it's humble beauty!\p"
 	.string "Nor can I wait to see your first battle\n"
-	.string "as our resident GYM LEADER!\p"
-	.string "Though if you'll excuse me, I'll be\n"
+	.string "as our own resident GYM LEADER!\p"
+	.string "However, if you'll excuse me, I'll be\n"
 	.string "grabbing my case and heading on my way.\p"
 	.string "There's been some strange activities\n"
 	.string "in the surrounding area as of late,\l"
 	.string "but you need not concern yourself.\p"
+	.string "Your upcoming adventure awaits you!\p"
 	.string "$"
 
 gText_Samuel_TravelSafely::
 	.string "I just know having someone like you\n"
-	.string "around is going to help so much!\p"
+	.string "around is going to improve so much,\l"
+	.string "create a real spark in the community!\p"
 	.string "I'll look forward to your arrival and\n"
 	.string "meet you on the pier when you do.\l"
 	.string "Travel safely, {PLAYER}{KUN}.\p"
 	.string "$"
 
 gText_Samuel_ChooseTones::
-	.string "Ah… Brilliant…\n"
-	.string "Tell me more…$"
+	.string "Ah, okay… Brilliant…\n"
+	.string "Please tell me more…$"
