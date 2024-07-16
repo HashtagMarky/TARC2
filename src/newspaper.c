@@ -1,5 +1,5 @@
 #include "global.h"
-#include "ui_menu.h"
+#include "newspaper.h"
 #include "strings.h"
 #include "bg.h"
 #include "data.h"
@@ -104,9 +104,9 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     DUMMY_WIN_TEMPLATE,
 };
 
-static const u32 sMenuTiles[] = INCBIN_U32("graphics/ui_menu/tiles.4bpp.lz");
-static const u32 sMenuTilemap[] = INCBIN_U32("graphics/ui_menu/tilemap.bin.lz");
-static const u16 sMenuPalette[] = INCBIN_U16("graphics/ui_menu/palette.gbapal");
+static const u32 sMenuTiles[] = INCBIN_U32("graphics/newspaper/tiles.4bpp.lz");
+static const u32 sMenuTilemap[] = INCBIN_U32("graphics/newspaper/tilemap.bin.lz");
+static const u16 sMenuPalette[] = INCBIN_U16("graphics/newspaper/palette.gbapal");
 
 enum Colors
 {
