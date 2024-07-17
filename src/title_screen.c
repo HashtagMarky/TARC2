@@ -73,7 +73,11 @@ static const u32 sTitleScreenCherryBlossomTreeGfx[] = INCBIN_U32("graphics/title
 static const u32 sTitleScreenCherryBlossomTreeTilemap[] = INCBIN_U32("graphics/title_screen/cherry_blossom_tree.bin.lz");
 static const u32 sTitleScreenCherryBlossomLeavesGfx[] = INCBIN_U32("graphics/title_screen/cherry_blossom_leaves.4bpp.lz");
 static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/logo_shine.4bpp.lz");
-static const u32 sTitleScreenLogoIkigaiVersionNumber[] = INCBIN_U32("graphics/title_screen/ikigai_version_number.4bpp.lz");
+#if TITLE_SCREEN_VERSION_NUMBER == TRUE
+    static const u32 sTitleScreenLogoIkigaiVersionNumber[] = INCBIN_U32("graphics/title_screen/ikigai_version_number.4bpp.lz");
+#else
+    static const u32 sTitleScreenLogoIkigaiVersionNumber[] = INCBIN_U32("graphics/title_screen/ikigai_version_number_blank.4bpp.lz");
+#endif
 static const u32 sTitleScreenLogoIkigaiVersionNumberPal[] = INCBIN_U32("graphics/title_screen/ikigai_version_number.gbapal.lz");
 
 

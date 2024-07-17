@@ -79,6 +79,7 @@
 #define SKIP_INTRO_AFTER_COPYRIGHT   TRUE    // If TRUE, a the intro cutscene will be skipped.
 #define TITLE_SCREEN_FLASH           TRUE    // If TRUE, the background will flash a colour when the Pokémon Logo appears in the opening screen.
 #define TITLE_SCREEN_FLASH_COLOR     RGB_IKIGAI_BLUE    // See rgb.h for colors and color creation funtion.
+#define TITLE_SCREEN_VERSION_NUMBER  FALSE   // If TRUE, shows the game version number on the title screen.
 
 // Measurement system constants to be used for UNITS
 #define UNITS_IMPERIAL               0       // Inches, feet, pounds
