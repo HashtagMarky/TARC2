@@ -251,6 +251,7 @@ static void MainMenu_FormatSavegameTime(void);
 static void MainMenu_FormatSavegameBadges(void);
 static void NewGameSamuelSpeech_CreateDialogueWindowBorder(u8, u8, u8, u8, u8, u8);
 static void RandomiseMessageBox(void);
+static void NewGameSamuelSpeech_SetPlayerNameKoleAnka(void);
 
 // .rodata
 
@@ -1650,7 +1651,8 @@ static void Task_NewGameSamuelSpeech_StartNamingScreen(u8 taskId)
     {
         FreeAllWindowBuffers();
         FreeAndDestroyMonPicSprite(gTasks[taskId].tCastformSpriteId);
-        NewGameSamuelSpeech_SetDefaultPlayerName(Random() % NUM_PRESET_NAMES);
+        // NewGameSamuelSpeech_SetDefaultPlayerName(Random() % NUM_PRESET_NAMES);
+        NewGameSamuelSpeech_SetPlayerNameKoleAnka();
         DestroyTask(taskId);
         DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_NewGameSamuelSpeech_ReturnFromNamingScreen);
     }
@@ -2184,6 +2186,23 @@ void NewGameSamuelSpeech_SetDefaultPlayerName(u8 nameId)
         name = sMalePresetNames[nameId];
     else
         name = sFemalePresetNames[nameId];
+    for (i = 0; i < PLAYER_NAME_LENGTH; i++)
+        gSaveBlock2Ptr->playerName[i] = name[i];
+    gSaveBlock2Ptr->playerName[PLAYER_NAME_LENGTH] = EOS;
+}
+
+const u8 gText_Kole[] = _("KOLE");
+const u8 gText_Anka[] = _("ANKA");
+
+static void NewGameSamuelSpeech_SetPlayerNameKoleAnka(void)
+{
+    const u8 *name;
+    u8 i;
+
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        name = gText_Kole;
+    else
+        name = gText_Anka;
     for (i = 0; i < PLAYER_NAME_LENGTH; i++)
         gSaveBlock2Ptr->playerName[i] = name[i];
     gSaveBlock2Ptr->playerName[PLAYER_NAME_LENGTH] = EOS;
