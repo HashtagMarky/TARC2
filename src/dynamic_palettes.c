@@ -24,19 +24,19 @@ EWRAM_DATA u16 sDynPalPlayerBattleBack[16] = {0};
 
 // *MODIFY*
 // Define palette colors from files
-const u16 sDynPal_Base[] = INCBIN_U16("graphics/dynpal/player_dynpal_sample_base.gbapal");
+const u16 sDynPal_Base[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_base.gbapal");
 // SAMPLE PALETTE PARTS
-const u16 sDynPal_Part_Skin1[] = INCBIN_U16("graphics/dynpal/player_dynpal_sample_skin1.gbapal");
-const u16 sDynPal_Part_Skin2[] = INCBIN_U16("graphics/dynpal/player_dynpal_sample_skin2.gbapal");
-const u16 sDynPal_Part_Skin3[] = INCBIN_U16("graphics/dynpal/player_dynpal_sample_skin3.gbapal");
-const u16 sDynPal_Part_Misc1[] = INCBIN_U16("graphics/dynpal/player_dynpal_sample_brendanpants1.gbapal");
-const u16 sDynPal_Part_Misc2[] = INCBIN_U16("graphics/dynpal/player_dynpal_sample_brendanpants2.gbapal");
-const u16 sDynPal_Part_Misc3[] = INCBIN_U16("graphics/dynpal/player_dynpal_sample_maypantshair1.gbapal");
-const u16 sDynPal_Part_Misc4[] = INCBIN_U16("graphics/dynpal/player_dynpal_sample_maypantshair2.gbapal");
-const u16 sDynPal_Part_Clothes1[] = INCBIN_U16("graphics/dynpal/player_dynpal_sample_clothesemerald.gbapal");
-const u16 sDynPal_Part_Clothes2[] = INCBIN_U16("graphics/dynpal/player_dynpal_sample_clothesrs.gbapal");
-const u16 sDynPal_Part_Clothes3[] = INCBIN_U16("graphics/dynpal/player_dynpal_sample_clothes3.gbapal");
-const u16 sDynPal_Part_Clothes4[] = INCBIN_U16("graphics/dynpal/player_dynpal_sample_clothes4.gbapal");
+const u16 sDynPal_Part_Skin1[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_skin1.gbapal");
+const u16 sDynPal_Part_Skin2[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_skin2.gbapal");
+const u16 sDynPal_Part_Skin3[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_skin3.gbapal");
+const u16 sDynPal_Part_Misc1[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_brendanpants1.gbapal");
+const u16 sDynPal_Part_Misc2[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_brendanpants2.gbapal");
+const u16 sDynPal_Part_Misc3[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_maypantshair1.gbapal");
+const u16 sDynPal_Part_Misc4[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_maypantshair2.gbapal");
+const u16 sDynPal_Part_Clothes1[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_clothesemerald.gbapal");
+const u16 sDynPal_Part_Clothes2[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_clothesrs.gbapal");
+const u16 sDynPal_Part_Clothes3[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_clothes3.gbapal");
+const u16 sDynPal_Part_Clothes4[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_clothes4.gbapal");
 
 // *MODIFY*
 // Text definitions for intro / menus
@@ -167,6 +167,17 @@ static void DynPal_InitOverworld(u16* dest, const u16* partAPalData, const u16* 
     DynPal_CopySection(partCPalData, dest, 1, 10, groupOffset, 4);
     //Black&White 14-15
     DynPal_CopySection(sDynPal_Base, dest, 2, 14, groupOffset, 2);
+
+    /* DRAFT
+    // Skin & Lips/Pokéball 1-4
+    DynPal_CopySection(partAPalData, dest, 1, 1, groupOffset, 4);
+    // Hair 5-7
+    DynPal_CopySection(partBPalData, dest, 1, 5, groupOffset, 3);
+    // Clothes 8-12
+    DynPal_CopySection(partCPalData, dest, 1, 8, groupOffset, 5);
+    // White, Grey & Black 13-15
+    DynPal_CopySection(sDynPal_Base, dest, 2, 14, groupOffset, 3);
+    */
 }
 
 // *MODIFY*
