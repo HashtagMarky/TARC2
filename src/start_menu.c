@@ -47,7 +47,7 @@
 #include "constants/battle_frontier.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "newspaper.h"
+#include "social_media.h"
 
 // Menu actions
 enum
@@ -66,7 +66,7 @@ enum
     MENU_ACTION_RETIRE_FRONTIER,
     MENU_ACTION_PYRAMID_BAG,
     MENU_ACTION_DEBUG,
-    MENU_ACTION_NEWSPAPER,
+    MENU_ACTION_SOCIAL_MEDIA,
 };
 
 // Save status
@@ -204,7 +204,7 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_RETIRE_FRONTIER] = {gText_MenuRetire,  {.u8_void = StartMenuBattlePyramidRetireCallback}},
     [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}},
     [MENU_ACTION_DEBUG]           = {sText_MenuDebug,   {.u8_void = StartMenuDebugCallback}},
-    [MENU_ACTION_NEWSPAPER]         = {sText_NewMenu,     {.u8_void = StartMenuUiMenuCallback}}
+    [MENU_ACTION_SOCIAL_MEDIA]         = {sText_NewMenu,     {.u8_void = StartMenuUiMenuCallback}}
 };
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
@@ -346,7 +346,7 @@ static void BuildNormalStartMenu(void)
         AddStartMenuAction(MENU_ACTION_POKENAV);
     }
     
-    AddStartMenuAction(MENU_ACTION_NEWSPAPER);
+    AddStartMenuAction(MENU_ACTION_SOCIAL_MEDIA);
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);

@@ -360,7 +360,7 @@ SECTIONS {
         src/international_string_util.o(.text);
         src/pokemon_sprite_visualizer.o(.text);
         src/expansion_intro.o(.text);
-		src/newspaper.o(.text);
+		src/social_media.o(.text);
     } > ROM =0
 
     script_data :
@@ -729,7 +729,7 @@ SECTIONS {
         data/sound_data.o(.rodata);
         src/pokemon_sprite_visualizer.o(.rodata);
         src/expansion_intro.o(.rodata);
-		src/newspaper.o(.rodata);
+		src/social_media.o(.rodata);
     } > ROM =0
 
     song_data :
