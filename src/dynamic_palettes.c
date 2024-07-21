@@ -150,6 +150,15 @@ void DynPal_InitAllDynamicPalettes()
 // *MODIFY*
 // Load each section of the palette. Your implementation will differ depending on how the sprite palette is arranged.
 // For any sections of the palette that should remain constant regardless of parts, use sDynPal_Base as <src>
+#define PART_A_INDEX_START 1
+#define PART_A_NUMBER_OF_COLOURS 4
+#define PART_B_INDEX_START 5
+#define PART_B_NUMBER_OF_COLOURS 3
+#define PART_C_INDEX_START 8
+#define PART_C_NUMBER_OF_COLOURS 5
+#define BASE_INDEX_START 13
+#define BASE_NUMBER_OF_COLOURS 3
+
 static void DynPal_InitOverworld(u16* dest, const u16* partAPalData, const u16* partBPalData, const u16* partCPalData, int groupOffset)
 {
     // Change this function to match your palette setup
@@ -157,27 +166,14 @@ static void DynPal_InitOverworld(u16* dest, const u16* partAPalData, const u16* 
     // This setup assumes your male and female characters will be using the same base palette
     // If they don't, you can create a second base palette and check against the selected gender
 
-    //Skin 1-4
-    DynPal_CopySection(partAPalData, dest, 1, 1, groupOffset, 4);
-    //Misc 5-8
-    DynPal_CopySection(partBPalData, dest, 1, 5, groupOffset, 4);
-    //Grey 9
-    DynPal_CopySection(sDynPal_Base, dest, 1, 9, groupOffset, 1);
-    //Clothes 10-13
-    DynPal_CopySection(partCPalData, dest, 1, 10, groupOffset, 4);
-    //Black&White 14-15
-    DynPal_CopySection(sDynPal_Base, dest, 2, 14, groupOffset, 2);
-
-    /* DRAFT
     // Skin & Lips/Pokéball 1-4
-    DynPal_CopySection(partAPalData, dest, 1, 1, groupOffset, 4);
+    DynPal_CopySection(partAPalData, dest, 1, PART_A_INDEX_START, groupOffset, PART_A_NUMBER_OF_COLOURS);
     // Hair 5-7
-    DynPal_CopySection(partBPalData, dest, 1, 5, groupOffset, 3);
+    DynPal_CopySection(partBPalData, dest, 1, PART_B_INDEX_START, groupOffset, PART_B_NUMBER_OF_COLOURS);
     // Clothes 8-12
-    DynPal_CopySection(partCPalData, dest, 1, 8, groupOffset, 5);
+    DynPal_CopySection(partCPalData, dest, 1, PART_C_INDEX_START, groupOffset, PART_C_NUMBER_OF_COLOURS);
     // White, Grey & Black 13-15
-    DynPal_CopySection(sDynPal_Base, dest, 2, 14, groupOffset, 3);
-    */
+    DynPal_CopySection(sDynPal_Base, dest, 1, BASE_INDEX_START, groupOffset, BASE_NUMBER_OF_COLOURS);
 }
 
 // *MODIFY*
@@ -202,8 +198,8 @@ static void DynPal_InitBattleBack(u16* dest, const u16* partAPalData, const u16*
 // If you don't want the character sprites to load with parts {0, 0, 0} in the intro, you can set the preferred palette indices here
 void DynPal_LoadIntroToneIndices()
 {
-    DynPal_ReloadPlayerPaletteForMenu(TRAINER_PIC_BRENDAN, 0, 0, 0);
-    DynPal_ReloadPlayerPaletteForMenu(TRAINER_PIC_MAY, 0, 2, 0);
+    DynPal_ReloadPlayerPaletteForMenu(TRAINER_PIC_KOLE, 0, 0, 0);
+    DynPal_ReloadPlayerPaletteForMenu(TRAINER_PIC_ANKA, 0, 0, 0);
 }
 
 // Copies <numberOfColors> values from the ROM palette <src>, to dynamic palette <dest>
@@ -582,20 +578,19 @@ static void DynPal_ReloadPlayerPaletteForMenu(u16 paletteTag, u8 partATone, u8 p
     if (partATone != 0xFF)
     {
         const u16* partAPalData = sDynPalPartAPresets[min(partATone, COUNT_PART_A_TONES)].data;
-        DynPal_CopySection(partAPalData, &gPlttBufferUnfaded[offset], 1, 1, DYNPAL_COLOR_GROUP_NORMAL, 4);
+        DynPal_CopySection(partAPalData, &gPlttBufferUnfaded[offset], 1, PART_A_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_A_NUMBER_OF_COLOURS);
     }
     if (partBTone != 0xFF)
     {
         const u16* partBPalData = sDynPalPartBPresets[min(partBTone, COUNT_PART_B_TONES)].data;
-        DynPal_CopySection(partBPalData, &gPlttBufferUnfaded[offset], 1, 5, DYNPAL_COLOR_GROUP_NORMAL, 4);
+        DynPal_CopySection(partBPalData, &gPlttBufferUnfaded[offset], 1, PART_B_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_B_NUMBER_OF_COLOURS);
     }
     if (partCTone != 0xFF)
     {
         const u16* partCPalData = sDynPalPartCPresets[min(partCTone, COUNT_PART_C_TONES)].data;
-        DynPal_CopySection(partCPalData, &gPlttBufferUnfaded[offset], 1, 10, DYNPAL_COLOR_GROUP_NORMAL, 4);
+        DynPal_CopySection(partCPalData, &gPlttBufferUnfaded[offset], 1, PART_C_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_C_NUMBER_OF_COLOURS);
     }
-    DynPal_CopySection(sDynPal_Base, &gPlttBufferUnfaded[offset], 1, 9, DYNPAL_COLOR_GROUP_NORMAL, 1);
-    DynPal_CopySection(sDynPal_Base, &gPlttBufferUnfaded[offset], 2, 14, DYNPAL_COLOR_GROUP_NORMAL, 2);
+    DynPal_CopySection(sDynPal_Base, &gPlttBufferUnfaded[offset], 1, BASE_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, BASE_NUMBER_OF_COLOURS);
 
     /*
     if (!sDynPalMenu.isOverworld)
