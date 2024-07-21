@@ -932,7 +932,7 @@ u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buf
 
     // DYNPAL: override palette
     // NEEDS CHANGES IF USING RHH EXPANSION
-    if (trainerSpriteID == TRAINER_PIC_BRENDAN || trainerSpriteID == TRAINER_PIC_MAY)
+    if (trainerSpriteID == TRAINER_PIC_KOLE || trainerSpriteID == TRAINER_PIC_ANKA)
     {
         DynPal_LoadPaletteByTag(sDynPalPlayerBattleFront, gTrainerSprites[trainerSpriteID].palette.tag);
     }
