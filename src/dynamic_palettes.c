@@ -119,6 +119,7 @@ static void DynPal_SetToneIndices(u8 partATone, u8 partBTone, u8 partCTone);
 
 static void Task_DynPal_MenuOne(u8 taskId);
 static void Task_DynPal_MenuSequence(u8 taskId);
+static void Task_DynPal_CharacteristicsMenuSequence(u8 taskId);
 static void Task_DynPal_MenuFinish(u8 taskId);
 static void Task_DynPal_MenuCancel(u8 taskId);
 static void Task_HandleDynPalMultichoiceInput(u8 taskId);
@@ -309,14 +310,17 @@ void DynPal_ShowMenuSingleton(s16 dynPalType, u8 taskId, TaskFunc nFuncFinish, T
 }
 
 // Show all three menus in sequence with nothing in between
-void DynPal_ShowMenuSequence(u8 taskId, TaskFunc nFuncFinish, TaskFunc nFuncCancel, bool8 isOverworld)
+void DynPal_ShowMenuSequence(u8 taskId, TaskFunc nFuncFinish, TaskFunc nFuncCancel, bool8 isOverworld, bool8 characteristicsMenu)
 {
     sDynPalMenu.menuSeq = DYNPAL_MENU_ID_PART_A;
     sDynPalMenu.funcCancel = nFuncCancel;
     sDynPalMenu.funcFinish = nFuncFinish;
     sDynPalMenu.isOverworld = isOverworld;
     DynPal_MenuInit();
-    gTasks[taskId].func = Task_DynPal_MenuSequence;
+    if (!characteristicsMenu) // If bool8 characteristicsMenu was set to be true in DynPal_ShowMenuSequence, only the skin and hair menu are shown.
+        gTasks[taskId].func = Task_DynPal_MenuSequence;
+    else
+        gTasks[taskId].func = Task_DynPal_CharacteristicsMenuSequence;
 }
 
 // Manager task for singleton dynpal menu
@@ -337,6 +341,27 @@ static void Task_DynPal_MenuSequence(u8 taskId)
         switch (sDynPalMenu.menuSeq)
         {
         case DYNPAL_MENU_ID_FINISH:
+            gTasks[taskId].func = Task_DynPal_MenuFinish;
+            break;
+        case DYNPAL_MENU_ID_CANCEL:
+            gTasks[taskId].func = Task_DynPal_MenuCancel;
+            break;
+        default:
+            DynPal_MenuShow(taskId);
+            break;
+        }
+    }
+}
+
+// Manager task for characteristics sequence dynpal menu
+static void Task_DynPal_CharacteristicsMenuSequence(u8 taskId)
+{
+    if (!sDynPalMenu.isActive)
+    {
+        switch (sDynPalMenu.menuSeq)
+        {
+        case DYNPAL_MENU_ID_FINISH:
+        case DYNPAL_MENU_ID_PART_C:
             gTasks[taskId].func = Task_DynPal_MenuFinish;
             break;
         case DYNPAL_MENU_ID_CANCEL:
@@ -608,7 +633,12 @@ static void DynPal_ReloadPlayerPaletteForMenu(u16 paletteTag, u8 partATone, u8 p
 // SCRIPT SPECIAL WRAPPERS
 void DynPal_ShowFullToneMenu(void)
 {
-    DynPal_ShowMenuSequence(CreateTask(NULL, 0), NULL, NULL, TRUE);
+    DynPal_ShowMenuSequence(CreateTask(NULL, 0), NULL, NULL, TRUE, FALSE);
+}
+
+void DynPal_ShowCharacteristicsToneMenu(void)
+{
+    DynPal_ShowMenuSequence(CreateTask(NULL, 0), NULL, NULL, TRUE, TRUE);
 }
 
 void DynPal_ShowToneMenuA(void)

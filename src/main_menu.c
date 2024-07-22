@@ -1611,7 +1611,7 @@ static void Task_NewGame_DynPal_ShowToneMenu(u8 taskId)
 {
     if (!RunTextPrintersAndIsPrinter0Active() && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
     {
-        DynPal_ShowMenuSequence(taskId, Task_NewGameSamuelSpeech_WhatsYourName, Task_NewGame_CharacterRestart, FALSE);
+        DynPal_ShowMenuSequence(taskId, Task_NewGameSamuelSpeech_WhatsYourName, Task_NewGame_CharacterRestart, FALSE, TRUE);
     }
 }
 
