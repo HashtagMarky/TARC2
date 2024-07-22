@@ -24,11 +24,11 @@ EWRAM_DATA u16 sDynPalPlayerBattleBack[16] = {0};
 
 // *MODIFY*
 // Define palette colors from files
-const u16 sDynPal_Base[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_base.gbapal");
-// SAMPLE PALETTE PARTS
-const u16 sDynPal_Part_Skin1[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_skin1.gbapal");
-const u16 sDynPal_Part_Skin2[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_skin2.gbapal");
-const u16 sDynPal_Part_Skin3[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_skin3.gbapal");
+const u16 sDynPal_Base[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/base.gbapal");
+const u16 sDynPal_Part_SkinPale[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/skin_pale.gbapal");
+const u16 sDynPal_Part_SkinLight[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/skin_light.gbapal");
+const u16 sDynPal_Part_SkinMedium[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/skin_medium.gbapal");
+const u16 sDynPal_Part_SkinDark[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/skin_dark.gbapal");
 const u16 sDynPal_Part_Misc1[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_brendanpants1.gbapal");
 const u16 sDynPal_Part_Misc2[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_brendanpants2.gbapal");
 const u16 sDynPal_Part_Misc3[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_maypantshair1.gbapal");
@@ -40,9 +40,10 @@ const u16 sDynPal_Part_Clothes4[] = INCBIN_U16("graphics/protagonist_sprites/dyn
 
 // *MODIFY*
 // Text definitions for intro / menus
-const u8 sText_DynPal_Skin1[] = _("SKIN TONE 1");
-const u8 sText_DynPal_Skin2[] = _("SKIN TONE 2");
-const u8 sText_DynPal_Skin3[] = _("SKIN TONE 3");
+const u8 sText_DynPal_SkinPale[] = _("PALE SKIN");
+const u8 sText_DynPal_SkinLight[] = _("LIGHT SKIN");
+const u8 sText_DynPal_SkinMedium[] = _("MEDIUM SKIN");
+const u8 sText_DynPal_SkinDark[] = _("DARK SKIN");
 const u8 sText_DynPal_Misc1[] = _("PANTS 1");
 const u8 sText_DynPal_Misc2[] = _("PANTS 2");
 const u8 sText_DynPal_Misc3[] = _("MAY PANTS 1");
@@ -55,39 +56,41 @@ const u8 sText_DynPal_Clothes4[] = _("WHITE");
 // *MODIFY*
 // Preset lists (indices in these lists are what is saved to game save)
 static const struct SpritePalette sDynPalPartAPresets[] = {
-    {sDynPal_Part_Skin1, 0x1301},
-    {sDynPal_Part_Skin2, 0x1302},
-    {sDynPal_Part_Skin3, 0x1303}
+    {sDynPal_Part_SkinPale, 0x1301},
+    {sDynPal_Part_SkinLight, 0x1302},
+    {sDynPal_Part_SkinMedium, 0x1303},
+    {sDynPal_Part_SkinDark, 0x1304}
 };
 
 // *MODIFY*
 static const struct SpritePalette sDynPalPartBPresets[] = {
-    {sDynPal_Part_Misc1, 0x1304},
-    {sDynPal_Part_Misc2, 0x1305},
-    {sDynPal_Part_Misc3, 0x1306},
-    {sDynPal_Part_Misc4, 0x1307}
+    {sDynPal_Part_Misc1, 0x1305},
+    {sDynPal_Part_Misc2, 0x1306},
+    {sDynPal_Part_Misc3, 0x1307},
+    {sDynPal_Part_Misc4, 0x1308}
 };
 
 // *MODIFY*
 static const struct SpritePalette sDynPalPartCPresets[] = {
-    {sDynPal_Part_Clothes1, 0x1308},
-    {sDynPal_Part_Clothes2, 0x1309},
-    {sDynPal_Part_Clothes3, 0x130A},
-    {sDynPal_Part_Clothes4, 0x130B}
+    {sDynPal_Part_Clothes1, 0x1309},
+    {sDynPal_Part_Clothes2, 0x130A},
+    {sDynPal_Part_Clothes3, 0x130B},
+    {sDynPal_Part_Clothes4, 0x130C}
 };
 
 // *MODIFY*
 // Change to match counts for preceding arrays
-#define COUNT_PART_A_TONES 3
+#define COUNT_PART_A_TONES 4
 #define COUNT_PART_B_TONES 4
 #define COUNT_PART_C_TONES 4
 
 // *MODIFY*
 // List text definitions for menu
 static const struct ListMenuItem sListItems_DynPal_PartATones[] = {
-    {sText_DynPal_Skin1, 0},
-    {sText_DynPal_Skin2, 1},
-    {sText_DynPal_Skin3, 2}
+    {sText_DynPal_SkinPale, 0},
+    {sText_DynPal_SkinLight, 1},
+    {sText_DynPal_SkinMedium, 2},
+    {sText_DynPal_SkinDark, 3}
 };
 static const struct ListMenuItem sListItems_DynPal_PartBTones[] = {
     {sText_DynPal_Misc1, 0},
