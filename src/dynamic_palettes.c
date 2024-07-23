@@ -47,6 +47,9 @@ const u16 sDynPal_Part_Clothes4[] = INCBIN_U16("graphics/protagonist_sprites/dyn
 
 // *MODIFY*
 // Text definitions for intro / menus
+const u8 sText_DynPalName_Complexion[] = _("COMPLEXION");
+const u8 sText_DynPalName_Hair[] = _("HAIR");
+const u8 sText_DynPalName_Clothes[] = _("CLOTHES");
 const u8 sText_DynPal_SkinPale[] = _("PALE SKIN");
 const u8 sText_DynPal_SkinLight[] = _("LIGHT SKIN");
 const u8 sText_DynPal_SkinMedium[] = _("MEDIUM SKIN");
@@ -101,19 +104,24 @@ static const struct SpritePalette sDynPalPartCPresets[] = {
 
 // *MODIFY*
 // Change to match counts for preceding arrays
+#define DYN_PAL_LIST_NAME 1
 #define COUNT_PART_A_TONES 4
 #define COUNT_PART_B_TONES 11
 #define COUNT_PART_C_TONES 4
 
+#define DYNPAL_MENU_MAX_SHOWN 5
+
 // *MODIFY*
 // List text definitions for menu
 static const struct ListMenuItem sListItems_DynPal_PartATones[] = {
+    {sText_DynPalName_Complexion, LIST_HEADER},
     {sText_DynPal_SkinPale, 0},
     {sText_DynPal_SkinLight, 1},
     {sText_DynPal_SkinMedium, 2},
     {sText_DynPal_SkinDark, 3}
 };
 static const struct ListMenuItem sListItems_DynPal_PartBTones[] = {
+    {sText_DynPalName_Hair, LIST_HEADER},
     {sText_DynPal_HairBlack, 0},
     {sText_DynPal_HairBrown, 1},
     {sText_DynPal_HairBlonde, 2},
@@ -127,6 +135,7 @@ static const struct ListMenuItem sListItems_DynPal_PartBTones[] = {
     {sText_DynPal_HairWhite, 10}
 };
 static const struct ListMenuItem sListItems_DynPal_PartCTones[] = {
+    {sText_DynPalName_Clothes, LIST_HEADER},
     {sText_DynPal_Clothes1, 0},
     {sText_DynPal_Clothes2, 1},
     {sText_DynPal_Clothes3, 2},
@@ -476,16 +485,16 @@ static void DynPal_MenuShow(u8 taskId)
     {
     case DYNPAL_MENU_ID_PART_A:
         menuItems = sListItems_DynPal_PartATones;
-        numItems = COUNT_PART_A_TONES;
+        numItems = COUNT_PART_A_TONES + DYN_PAL_LIST_NAME;
         break;
     case DYNPAL_MENU_ID_PART_B:
         menuItems = sListItems_DynPal_PartBTones;
-        numItems = COUNT_PART_B_TONES;
+        numItems = COUNT_PART_B_TONES + DYN_PAL_LIST_NAME;
         break;
     default: // prevent compiler from being sad
     case DYNPAL_MENU_ID_PART_C:
         menuItems = sListItems_DynPal_PartCTones;
-        numItems = COUNT_PART_C_TONES;
+        numItems = COUNT_PART_C_TONES + DYN_PAL_LIST_NAME;
         break;
     }
     // If the menu has no values, skip past it. If you don't want to use one of the part groups this should handle it
@@ -495,10 +504,10 @@ static void DynPal_MenuShow(u8 taskId)
         return;
     }
 
-    maxShownItems = min(5, numItems);
+    maxShownItems = min(DYNPAL_MENU_MAX_SHOWN, numItems);
 
     // Create window and menu templates
-    windowTemplate = CreateWindowTemplate(0, 2, 2, 10, maxShownItems * 2, 15, 0x80);
+    windowTemplate = CreateWindowTemplate(0, 2, 2, 10, (maxShownItems * 2), 15, 0x80);
     windowId = AddWindow(&windowTemplate);
     LoadUserWindowBorderGfx_(windowId, 0xF3, BG_PLTT_ID(2));
     DrawTextBorderOuter(windowId, 0xF3, 2);
@@ -510,7 +519,7 @@ static void DynPal_MenuShow(u8 taskId)
     gMultiuseListMenuTemplate.windowId = windowId;
 
     listTaskId = CreateTask(Task_HandleDynPalMultichoiceInput, 0);
-    gTasks[listTaskId].tDynpalListMenuTask = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
+    gTasks[listTaskId].tDynpalListMenuTask = ListMenuInit(&gMultiuseListMenuTemplate, 0, 1);
     gTasks[listTaskId].tDynpalWindowId = windowId;
     gTasks[listTaskId].tDynpalNumItems = numItems;
     gTasks[listTaskId].tDynpalMaxItems = maxShownItems;
@@ -522,7 +531,7 @@ static void DynPal_MenuShow(u8 taskId)
     if (numItems > maxShownItems)
     {
         gTasks[listTaskId].tDynpalScrollArrows = AddScrollIndicatorArrowPairParameterized(
-            SCROLL_ARROW_UP, 56, 12, 100, numItems - 1, 2000, 100, &(sDynPalMenu.scrollOffset));
+            SCROLL_ARROW_UP, 56, 12, 100, numItems - 1 - DYN_PAL_LIST_NAME, 2000, 100, &(sDynPalMenu.scrollOffset));
     }
     else
     {
@@ -559,6 +568,8 @@ static void Task_HandleDynPalMultichoiceInput(u8 taskId)
         ++sDynPalMenu.menuSeq;
         break;
     }
+
+    //PrintToDynPalNameWindow(gTasks[taskId].tDynpalWindowId);
 
     if (done)
     {
