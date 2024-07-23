@@ -680,17 +680,17 @@ void DynPal_ShowCharacteristicsToneMenu(void)
     DynPal_ShowMenuSequence(CreateTask(NULL, 0), NULL, NULL, TRUE, TRUE);
 }
 
-void DynPal_ShowToneMenuA(void)
+void DynPal_ShowToneMenu_Skin(void)
 {
     DynPal_ShowMenuSingleton(DYNPAL_MENU_ID_PART_A, CreateTask(NULL, 0), NULL, NULL, TRUE);
 }
 
-void DynPal_ShowToneMenuB(void)
+void DynPal_ShowToneMenu_Hair(void)
 {
     DynPal_ShowMenuSingleton(DYNPAL_MENU_ID_PART_B, CreateTask(NULL, 0), NULL, NULL, TRUE);
 }
 
-void DynPal_ShowToneMenuC(void)
+void DynPal_ShowToneMenu_Clothes(void)
 {
     DynPal_ShowMenuSingleton(DYNPAL_MENU_ID_PART_C, CreateTask(NULL, 0), NULL, NULL, TRUE);
 }

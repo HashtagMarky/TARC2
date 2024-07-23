@@ -555,6 +555,7 @@ gSpecials::
 	def_special Script_GetChosenMonOffensiveIVs
 	def_special Script_GetChosenMonDefensiveIVs
 	def_special DynPal_ShowFullToneMenu
-	def_special DynPal_ShowToneMenuA
-	def_special DynPal_ShowToneMenuB
-	def_special DynPal_ShowToneMenuC
+	def_special DynPal_ShowCharacteristicsToneMenu
+	def_special DynPal_ShowToneMenu_Skin
+	def_special DynPal_ShowToneMenu_Hair
+	def_special DynPal_ShowToneMenu_Clothes
