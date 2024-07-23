@@ -40,10 +40,10 @@ const u16 sDynPal_Part_HairPink[] = INCBIN_U16("graphics/protagonist_sprites/dyn
 const u16 sDynPal_Part_HairCyan[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/hair_cyan.gbapal");
 const u16 sDynPal_Part_HairPurple[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/hair_purple.gbapal");
 const u16 sDynPal_Part_HairWhite[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/hair_white.gbapal");
-const u16 sDynPal_Part_Clothes1[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_clothesemerald.gbapal");
-const u16 sDynPal_Part_Clothes2[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_clothesrs.gbapal");
-const u16 sDynPal_Part_Clothes3[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_clothes3.gbapal");
-const u16 sDynPal_Part_Clothes4[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/player_dynpal_sample_clothes4.gbapal");
+const u16 sDynPal_Part_ClothesBlue[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/clothes_blue.gbapal");
+const u16 sDynPal_Part_ClothesPink[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/clothes_pink.gbapal");
+const u16 sDynPal_Part_ClothesWhite[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/clothes_white.gbapal");
+const u16 sDynPal_Part_ClothesBlack[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/clothes_black.gbapal");
 
 // *MODIFY*
 // Text definitions for intro / menus
@@ -65,10 +65,10 @@ const u8 sText_DynPal_HairPink[] = _("HAIR PINK");
 const u8 sText_DynPal_HairCyan[] = _("HAIR CYAN");
 const u8 sText_DynPal_HairPurple[] = _("HAIR PURPLE");
 const u8 sText_DynPal_HairWhite[] = _("HAIR WHITE");
-const u8 sText_DynPal_Clothes1[] = _("EMERALD");
-const u8 sText_DynPal_Clothes2[] = _("RS");
-const u8 sText_DynPal_Clothes3[] = _("BLUE");
-const u8 sText_DynPal_Clothes4[] = _("WHITE");
+const u8 sText_DynPal_ClothesBlue[] = _("BLUE");
+const u8 sText_DynPal_ClothesPink[] = _("PINK");
+const u8 sText_DynPal_ClothesWhite[] = _("WHITE");
+const u8 sText_DynPal_ClothesBlack[] = _("BLACK");
 
 // *MODIFY*
 // Preset lists (indices in these lists are what is saved to game save)
@@ -96,10 +96,10 @@ static const struct SpritePalette sDynPalPartBPresets[] = {
 
 // *MODIFY*
 static const struct SpritePalette sDynPalPartCPresets[] = {
-    {sDynPal_Part_Clothes1, 0x1310},
-    {sDynPal_Part_Clothes2, 0x1311},
-    {sDynPal_Part_Clothes3, 0x1312},
-    {sDynPal_Part_Clothes4, 0x1313}
+    {sDynPal_Part_ClothesBlue, 0x1310},
+    {sDynPal_Part_ClothesPink, 0x1311},
+    {sDynPal_Part_ClothesWhite, 0x1312},
+    {sDynPal_Part_ClothesBlack, 0x1313}
 };
 
 // *MODIFY*
@@ -136,10 +136,10 @@ static const struct ListMenuItem sListItems_DynPal_PartBTones[] = {
 };
 static const struct ListMenuItem sListItems_DynPal_PartCTones[] = {
     {sText_DynPalName_Clothes, LIST_HEADER},
-    {sText_DynPal_Clothes1, 0},
-    {sText_DynPal_Clothes2, 1},
-    {sText_DynPal_Clothes3, 2},
-    {sText_DynPal_Clothes4, 3}
+    {sText_DynPal_ClothesBlue, 0},
+    {sText_DynPal_ClothesPink, 1},
+    {sText_DynPal_ClothesWhite, 2},
+    {sText_DynPal_ClothesBlack, 3}
 };
 
 // Dynamic palette definitions are split into 3 groups of 5, starting from palette index 1.
