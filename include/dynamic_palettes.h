@@ -17,7 +17,7 @@ void DynPal_LoadPaletteByTag(u16* paletteData, u16 paletteTag);
 // Menu for intro & script specials
 void DynPal_ShowMenuSingleton(s16 dynPalType, u8 taskId, TaskFunc nFuncFinish, TaskFunc nFuncCancel, bool8 isOverworld);
 void DynPal_ShowMenuSequence(u8 taskId, TaskFunc nFuncFinish, TaskFunc nFuncCancel, bool8 isOverworld, bool8 characteristicsMenu);
-void DynPal_LoadIntroToneIndices();
+void DynPal_LoadIntroToneIndices(bool8 introReload, u8 loadCycle);
 
 // Script Specials
 void DynPal_ShowFullToneMenu(void); // Do complete sequence of 3 menus

@@ -1269,6 +1269,7 @@ static void HighlightSelectedMainMenuItem(u8 menuType, u8 selectedMenuItem, s16 
 #define tCastformSpriteId data[11]
 #define tBrendanSpriteId data[12]
 #define tMaySpriteId data[13]
+#define tDynPalLoadCycle data[14]
 
 static void Task_NewGameSamuelSpeech_Init(u8 taskId)
 { 
@@ -1488,7 +1489,9 @@ static void Task_NewGameSamuelSpeech_StartPlayerFadeIn(u8 taskId)
             gTasks[taskId].func = Task_NewGameSamuelSpeech_WaitForPlayerFadeIn;
 
             // DYNPAL Preload custom part indices if they exist
-            DynPal_LoadIntroToneIndices();
+            gTasks[taskId].tDynPalLoadCycle = 0;
+            DynPal_LoadIntroToneIndices(FALSE, gTasks[taskId].tDynPalLoadCycle);
+            gTasks[taskId].tDynPalLoadCycle = 1;
         }
     }
 }
@@ -1509,7 +1512,8 @@ static void Task_NewGameSamuelSpeech_BoyOrGirl(u8 taskId)
     AddTextPrinterForMessage(TRUE);
 
     // DYNPAL Load indices again. Necessary for returning from "no" after naming screen
-    DynPal_LoadIntroToneIndices();
+    DynPal_LoadIntroToneIndices(TRUE, gTasks[taskId].tDynPalLoadCycle);
+    gTasks[taskId].tDynPalLoadCycle = 0;
 
     gTasks[taskId].func = Task_NewGameSamuelSpeech_WaitToShowGenderMenu;
 }
@@ -1543,6 +1547,7 @@ static void Task_NewGameSamuelSpeech_ChooseGender(u8 taskId)
             gTasks[taskId].func = Task_NewGame_DynPal_ChoosePlayerTonesStart;
             break;
     }
+    gTasks[taskId].tDynPalLoadCycle = 2;
     gender2 = Menu_GetCursorPos();
     if (gender2 != gTasks[taskId].tPlayerGender)
     {
@@ -1611,7 +1616,7 @@ static void Task_NewGame_DynPal_ShowToneMenu(u8 taskId)
 {
     if (!RunTextPrintersAndIsPrinter0Active() && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
     {
-        DynPal_ShowMenuSequence(taskId, Task_NewGameSamuelSpeech_WhatsYourName, Task_NewGame_CharacterRestart, FALSE, TRUE);
+        DynPal_ShowMenuSequence(taskId, Task_NewGameSamuelSpeech_WhatsYourName, Task_NewGame_CharacterRestart, FALSE, FALSE);
     }
 }
 
@@ -1689,6 +1694,7 @@ static void Task_NewGameSamuelSpeech_ProcessNameYesNoMenu(u8 taskId)
         case MENU_B_PRESSED:
         case 1:
             PlaySE(SE_SELECT);
+            gTasks[taskId].tDynPalLoadCycle = 3;
             gTasks[taskId].func = Task_NewGameSamuelSpeech_BoyOrGirl;
     }
 }
@@ -1991,6 +1997,7 @@ static void AddSamuelSpeechObjects(u8 taskId)
 #undef tCastformSpriteId
 #undef tBrendanSpriteId
 #undef tMaySpriteId
+#undef tDynPalLoadCycle
 
 #define tMainTask data[0]
 #define tAlphaCoeff1 data[1]

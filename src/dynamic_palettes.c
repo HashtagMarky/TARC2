@@ -3,6 +3,7 @@
 #include "list_menu.h"
 #include "menu.h"
 #include "palette.h"
+#include "random.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
@@ -237,10 +238,125 @@ static void DynPal_InitBattleBack(u16* dest, const u16* partAPalData, const u16*
 
 // *MODIFY*
 // If you don't want the character sprites to load with parts {0, 0, 0} in the intro, you can set the preferred palette indices here
-void DynPal_LoadIntroToneIndices()
+void DynPal_LoadIntroToneIndices(bool8 introReload, u8 loadCycle)
 {
-    DynPal_ReloadPlayerPaletteForMenu(TRAINER_PIC_KOLE, 0, 0, 0);
-    DynPal_ReloadPlayerPaletteForMenu(TRAINER_PIC_ANKA, 0, 0, 0);
+    u8 koleSkin = Random() % COUNT_PART_A_TONES;
+    u8 ankaSkin = Random() % COUNT_PART_A_TONES;
+    u8 koleHair = Random() % COUNT_PART_B_TONES;
+    u8 ankaHair = Random() % COUNT_PART_B_TONES;
+    u8 koleClothes, ankaClothes;
+    u8 noKoleReload = 0;
+    u8 noAnkaReload = 0;
+
+    // Randomises skin so one of the lighter and darker tones are always shown. 
+    while ((koleSkin <= 1 && ankaSkin <= 1) || (koleSkin >= 2 && ankaSkin >= 2))
+    {
+        ankaSkin = Random() % COUNT_PART_A_TONES;
+    }
+
+    // Randomises hair so two different are always shown.
+    while (koleHair == ankaHair)
+    {
+        ankaHair = Random() % COUNT_PART_B_TONES;
+    }
+
+    // Randomises clothes when reloading only, if not clothes match the message box.
+    if (!introReload)
+    {
+        koleClothes = gSaveBlock2Ptr->messageBox;
+        ankaClothes = gSaveBlock2Ptr->messageBox;
+    }
+    else
+    {
+        koleClothes = Random() % COUNT_PART_C_TONES;
+        ankaClothes = Random() % COUNT_PART_C_TONES;
+
+        while (koleClothes == ankaClothes)
+        {
+            ankaClothes = Random() % COUNT_PART_C_TONES;
+        }
+    }
+
+    // Prevents reloading after initial load in.
+    if ((introReload && loadCycle == 1))
+    {
+        noKoleReload = 1;
+        noAnkaReload = 1;
+    }
+
+    // Prevents reloading of displayed sprite when returning to gender menu from pallette menu.
+    // Includes complete randomisation of the other sprite pallete.
+    if (loadCycle == 2)
+    {
+        if (gSaveBlock2Ptr->playerGender == MALE)
+        {
+            noKoleReload = 1;
+        }
+        else
+        {
+            noAnkaReload = 1;
+        }
+    }
+
+    // Prevents reloading of displayed sprite when returning to gender menu from naming screen.
+    // Includes randomisation of the other sprite pallete using the same rules as above.
+    if (loadCycle == 3)
+    {
+        if (gSaveBlock2Ptr->playerGender == MALE)
+        {
+            noKoleReload = 1;
+
+            // Skin Randomisation
+            while ((gSaveBlock3Ptr->dynPalPartAPreset <= 1 && ankaSkin <= 1) || (gSaveBlock3Ptr->dynPalPartAPreset >= 2 && ankaSkin >= 2))
+            {
+                ankaSkin = Random() % COUNT_PART_A_TONES;
+            }
+
+            // Hair Randomisation
+            while (gSaveBlock3Ptr->dynPalPartBPreset == ankaHair)
+            {
+                ankaHair = Random() % COUNT_PART_B_TONES;
+            }
+
+            // Clothes Randomisation
+            while (gSaveBlock3Ptr->dynPalPartCPreset == ankaClothes)
+            {
+                ankaClothes = Random() % COUNT_PART_C_TONES;
+            }
+        }
+        else
+        {
+            noAnkaReload = 1;
+
+            // Skin Randomisation
+            while ((gSaveBlock3Ptr->dynPalPartAPreset <= 1 && koleSkin <= 1) || (gSaveBlock3Ptr->dynPalPartAPreset >= 2 && koleSkin >= 2))
+            {
+                koleSkin = Random() % COUNT_PART_A_TONES;
+            }
+
+            // Hair Randomisation
+            while (gSaveBlock3Ptr->dynPalPartBPreset == koleHair)
+            {
+                koleHair = Random() % COUNT_PART_B_TONES;
+            }
+
+            // Clothes Randomisation
+            while (gSaveBlock3Ptr->dynPalPartCPreset == koleClothes)
+            {
+                koleClothes = Random() % COUNT_PART_C_TONES;
+            }
+        }
+    }
+
+    // Prevents reloading of each pallete.
+    if (noKoleReload != 1)
+    {
+        DynPal_ReloadPlayerPaletteForMenu(TRAINER_PIC_KOLE, koleSkin, koleHair, koleClothes);
+    }
+    if (noAnkaReload != 1)
+    {
+        DynPal_ReloadPlayerPaletteForMenu(TRAINER_PIC_ANKA, ankaSkin, ankaHair, ankaClothes);
+    }
 }
 
 // Copies <numberOfColors> values from the ROM palette <src>, to dynamic palette <dest>
