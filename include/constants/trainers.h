@@ -113,8 +113,8 @@
 #define TRAINER_PIC_COUNT                 95
 
 // The player back pics are assumed to alternate according to the gender values (MALE/FEMALE)
-#define TRAINER_BACK_PIC_BRENDAN                0
-#define TRAINER_BACK_PIC_MAY                    1
+#define TRAINER_BACK_PIC_KOLE                   0
+#define TRAINER_BACK_PIC_ANKA                   1
 #define TRAINER_BACK_PIC_RED                    2
 #define TRAINER_BACK_PIC_LEAF                   3
 #define TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN  4

@@ -293,9 +293,11 @@ const u32 gTrainerBackPicPalette_Red[] = INCBIN_U32("graphics/trainers/back_pics
 const u32 gTrainerBackPicPalette_Leaf[] = INCBIN_U32("graphics/trainers/back_pics/leaf.gbapal.lz");
 
 const u32 gTrainerFrontPic_Kole[] = INCBIN_U32("graphics/protagonist_sprites/kole_front_pic.4bpp.lz");
+const u8 gTrainerBackPic_Kole[] = INCBIN_U8("graphics/protagonist_sprites/kole_back_pic.4bpp");
 const u32 gTrainerPalette_Kole[] = INCBIN_U32("graphics/protagonist_sprites/protagonist.gbapal.lz");
 
 const u32 gTrainerFrontPic_Anka[] = INCBIN_U32("graphics/protagonist_sprites/anka_front_pic.4bpp.lz");
+const u8 gTrainerBackPic_Anka[] = INCBIN_U8("graphics/protagonist_sprites/anka_back_pic.4bpp");
 const u32 gTrainerPalette_Anka[] = INCBIN_U32("graphics/protagonist_sprites/protagonist.gbapal.lz");
 
 // The first two parameters invoke a front pic and palette by
@@ -465,20 +467,20 @@ static const union AnimCmd *const sBackAnims_Kanto[] =
     sAnimCmd_Point_HGSS_Red_Leaf,
 };
 
-const struct SpriteFrameImage gTrainerBackPicTable_Brendan[] =
+const struct SpriteFrameImage gTrainerBackPicTable_Kole[] =
 {
-    {gTrainerBackPic_Brendan + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Brendan + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Brendan + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Brendan + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Kole + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Kole + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Kole + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Kole + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
 };
 
-const struct SpriteFrameImage gTrainerBackPicTable_May[] =
+const struct SpriteFrameImage gTrainerBackPicTable_Anka[] =
 {
-    {gTrainerBackPic_May + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_May + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_May + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_May + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Anka + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Anka + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Anka + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Anka + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
 };
 
 const struct SpriteFrameImage gTrainerBackPicTable_Red[] =
@@ -545,8 +547,8 @@ const struct SpriteFrameImage gTrainerBackPicTable_Steven[] =
 
 const struct TrainerBacksprite gTrainerBacksprites[] =
 {
-    TRAINER_BACK_SPRITE(BRENDAN, 4, Brendan, Palette_Brendan, Hoenn),
-    TRAINER_BACK_SPRITE(MAY, 4, May, Palette_May, Hoenn),
+    TRAINER_BACK_SPRITE(KOLE, 4, Kole, Palette_Kole, Hoenn),
+    TRAINER_BACK_SPRITE(ANKA, 4, Anka, Palette_Anka, Hoenn),
     TRAINER_BACK_SPRITE(RED, 5, Red, BackPicPalette_Red, Kanto),
     TRAINER_BACK_SPRITE(LEAF, 5, Leaf, BackPicPalette_Leaf, Kanto),
     TRAINER_BACK_SPRITE(RUBY_SAPPHIRE_BRENDAN, 4, RubySapphireBrendan, Palette_RubySapphireBrendan, Hoenn),
