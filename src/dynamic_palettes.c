@@ -40,7 +40,7 @@ const u16 sDynPal_Part_HairGreen[] = INCBIN_U16("graphics/protagonist_sprites/dy
 const u16 sDynPal_Part_HairPink[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/hair/pink.gbapal");
 const u16 sDynPal_Part_HairCyan[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/hair/cyan.gbapal");
 const u16 sDynPal_Part_HairPurple[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/hair/purple.gbapal");
-const u16 sDynPal_Part_HairWhite[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/hair/white.gbapal");
+const u16 sDynPal_Part_HairSilver[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/hair/silver.gbapal");
 const u16 sDynPal_Part_ClothesBlue[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/clothes/blue.gbapal");
 const u16 sDynPal_Part_ClothesPink[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/clothes/pink.gbapal");
 const u16 sDynPal_Part_ClothesWhite[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/clothes/white.gbapal");
@@ -65,7 +65,7 @@ const u8 sText_DynPal_HairGreen[] = _("GREEN");
 const u8 sText_DynPal_HairPink[] = _("PINK");
 const u8 sText_DynPal_HairCyan[] = _("CYAN");
 const u8 sText_DynPal_HairPurple[] = _("PURPLE");
-const u8 sText_DynPal_HairWhite[] = _("WHITE");
+const u8 sText_DynPal_HairSilver[] = _("SILVER");
 const u8 sText_DynPal_ClothesBlue[] = _("BLUE");
 const u8 sText_DynPal_ClothesPink[] = _("PINK");
 const u8 sText_DynPal_ClothesWhite[] = _("WHITE");
@@ -92,7 +92,7 @@ static const struct SpritePalette sDynPalPartBPresets[] = {
     {sDynPal_Part_HairPink, 0x130C},
     {sDynPal_Part_HairCyan, 0x130D},
     {sDynPal_Part_HairPurple, 0x130E},
-    {sDynPal_Part_HairWhite, 0x130F}
+    {sDynPal_Part_HairSilver, 0x130F}
 };
 
 // *MODIFY*
@@ -133,7 +133,7 @@ static const struct ListMenuItem sListItems_DynPal_PartBTones[] = {
     {sText_DynPal_HairPink, 7},
     {sText_DynPal_HairCyan, 8},
     {sText_DynPal_HairPurple, 9},
-    {sText_DynPal_HairWhite, 10}
+    {sText_DynPal_HairSilver, 10}
 };
 static const struct ListMenuItem sListItems_DynPal_PartCTones[] = {
     {sText_DynPalName_Clothes, LIST_HEADER},
