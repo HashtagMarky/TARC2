@@ -1,5 +1,5 @@
-static const struct SpriteFrameImage sPicTable_BrendanNormal[] = {
-    overworld_ascending_frames(gObjectEventPic_BrendanNormalRunning, 2, 4),
+static const struct SpriteFrameImage sPicTable_KoleNormal[] = {
+    overworld_ascending_frames(gObjectEventPic_KoleNormalRunning, 2, 4),
 };
 
 static const struct SpriteFrameImage sPicTable_BrendanMachBike[] = {
@@ -410,8 +410,8 @@ static const struct SpriteFrameImage sPicTable_Artist[] = {
     overworld_ascending_frames(gObjectEventPic_Artist, 2, 4),
 };
 
-static const struct SpriteFrameImage sPicTable_MayNormal[] = {
-    overworld_ascending_frames(gObjectEventPic_MayNormalRunning, 2, 4),
+static const struct SpriteFrameImage sPicTable_AnkaNormal[] = {
+    overworld_ascending_frames(gObjectEventPic_AnkaNormalRunning, 2, 4),
 };
 
 static const struct SpriteFrameImage sPicTable_MayMachBike[] = {
