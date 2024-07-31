@@ -184,6 +184,11 @@ struct SaveBlock3
     u8 dynPalSkinTone;
     u8 dynPalHairTone;
     u8 dynPalClothesTone;
+    bool8 autoRun:1;
+    bool8 autoBike:1;
+    bool8 fastBike:1;
+    bool8 fastSurf:1;
+    u8 padding:4;
 };
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;

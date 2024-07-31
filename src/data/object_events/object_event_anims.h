@@ -688,6 +688,16 @@ static const union AnimCmd sAnim_FieldMove[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnim_FieldMove_Bike[] =
+{
+    ANIMCMD_FRAME(5, 4),
+    ANIMCMD_FRAME(6, 4),
+    ANIMCMD_FRAME(7, 4),
+    ANIMCMD_FRAME(8, 4),
+    ANIMCMD_FRAME(9, 8),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd sAnim_GetOnOffSurfBlobSouth[] =
 {
     ANIMCMD_FRAME(9, 32),
@@ -1454,6 +1464,7 @@ static const union AnimCmd *const sAnimTable_Nurse[] = {
 
 static const union AnimCmd *const sAnimTable_FieldMove[] = {
     [ANIM_FIELD_MOVE] = sAnim_FieldMove,
+    [ANIM_FIELD_MOVE_BIKE] = sAnim_FieldMove_Bike,
 };
 
 static const union AnimCmd *const sAnimTable_BerryTree[] = {

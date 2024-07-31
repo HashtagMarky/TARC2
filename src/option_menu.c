@@ -12,6 +12,7 @@
 #include "task.h"
 #include "text.h"
 #include "text_window.h"
+#include "toggleable_transport.h"
 #include "window.h"
 #include "gba/m4a_internal.h"
 #include "constants/rgb.h"

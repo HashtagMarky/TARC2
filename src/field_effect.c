@@ -26,6 +26,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "toggleable_transport.h"
 #include "trainer_pokemon_sprites.h"
 #include "trig.h"
 #include "util.h"
@@ -3086,7 +3087,6 @@ static void SurfFieldEffect_Init(struct Task *task)
     // Put follower into pokeball before using Surf
     HideFollowerForFieldEffect();
     gPlayerAvatar.preventStep = TRUE;
-    SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_SURFING);
     PlayerGetDestCoords(&task->tDestX, &task->tDestY);
     MoveCoords(gObjectEvents[gPlayerAvatar.objectEventId].movementDirection, &task->tDestX, &task->tDestY);
     task->tState++;
@@ -3099,6 +3099,7 @@ static void SurfFieldEffect_FieldMovePose(struct Task *task)
     if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         SetPlayerAvatarFieldMove();
+        SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_SURFING);
         ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->tState++;
     }
@@ -3270,7 +3271,6 @@ static void FlyOutFieldEffect_FieldMovePose(struct Task *task)
     {
         task->tAvatarFlags = gPlayerAvatar.flags;
         gPlayerAvatar.preventStep = TRUE;
-        SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_ON_FOOT);
         SetPlayerAvatarFieldMove();
         ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->tState++;
@@ -3669,7 +3669,7 @@ static void FlyInFieldEffect_End(struct Task *task)
     if ((--task->data[1]) == 0)
     {
         objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-        state = PLAYER_AVATAR_STATE_NORMAL;
+        state = AutoBike_ReturnPlayerAvatarStateId();
         if (task->tAvatarFlags & PLAYER_AVATAR_FLAG_SURFING)
         {
             state = PLAYER_AVATAR_STATE_SURFING;

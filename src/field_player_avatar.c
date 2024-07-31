@@ -19,6 +19,7 @@
 #include "sprite.h"
 #include "strings.h"
 #include "task.h"
+#include "toggleable_transport.h"
 #include "tv.h"
 #include "wild_encounter.h"
 #include "constants/abilities.h"
@@ -92,7 +93,6 @@ static bool8 PlayerAnimIsMultiFrameStationaryAndStateNotTurning(void);
 static bool8 PlayerIsAnimActive(void);
 static bool8 PlayerCheckIfAnimFinishedOrInactive(void);
 
-static void PlayerRun(u8);
 static void PlayerNotOnBikeCollide(u8);
 static void PlayerNotOnBikeCollideWithFarawayIslandMew(u8);
 
@@ -610,6 +610,9 @@ static u8 CheckMovementInputNotOnBike(u8 direction)
 
 static void PlayerNotOnBikeNotMoving(u8 direction, u16 heldKeys)
 {
+    if (CanSetAutoBike())
+        GetOnOffToggleableBike();
+
     PlayerFaceDirection(GetPlayerFacingDirection());
 }
 
@@ -643,18 +646,16 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
         }
     }
 
-    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) || TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_UNDERWATER))
     {
-        // same speed as running
-        PlayerWalkFast(direction);
+        HandleFastSurf(direction);
         return;
     }
 
-    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_UNDERWATER) && (heldKeys & B_BUTTON) && FlagGet(FLAG_SYS_B_DASH)
+    if ((/*heldKeys & B_BUTTON ||*/ gSaveBlock3Ptr->autoRun) && FlagGet(FLAG_SYS_B_DASH)
      && IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) == 0)
     {
-        PlayerRun(direction);
-        gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
+        HandleRunning(direction);
         return;
     }
     else
@@ -987,7 +988,7 @@ void PlayerWalkFaster(u8 direction)
     PlayerSetAnimId(GetWalkFasterMovementAction(direction), COPY_MOVE_WALK);
 }
 
-static void PlayerRun(u8 direction)
+void PlayerRun(u8 direction)
 {
     PlayerSetAnimId(GetPlayerRunMovementAction(direction), COPY_MOVE_WALK);
 }
@@ -1397,7 +1398,10 @@ void SetPlayerInvisibility(bool8 invisible)
 void SetPlayerAvatarFieldMove(void)
 {
     ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_FIELD_MOVE));
-    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], ANIM_FIELD_MOVE);
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
+        StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], ANIM_FIELD_MOVE_BIKE);
+    else
+        StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], ANIM_FIELD_MOVE);
 }
 
 static void SetPlayerAvatarFishing(u8 direction)
@@ -1656,7 +1660,7 @@ static void Task_WaitStopSurfing(u8 taskId)
 
     if (ObjectEventClearHeldMovementIfFinished(playerObjEvent))
     {
-        ObjectEventSetGraphicsId(playerObjEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_NORMAL));
+        ObjectEventSetGraphicsId(playerObjEvent, GetPlayerAvatarGraphicsIdByStateId(AutoBike_ReturnPlayerAvatarStateId()));
         ObjectEventSetHeldMovement(playerObjEvent, GetFaceDirectionMovementAction(playerObjEvent->facingDirection));
         gPlayerAvatar.preventStep = FALSE;
         UnlockPlayerFieldControls();

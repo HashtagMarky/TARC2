@@ -46,6 +46,8 @@
 #include "constants/songs.h"
 #include "constants/map_types.h"
 
+#include "toggleable_transport.h"
+
 static void SetUpItemUseCallback(u8);
 static void FieldCB_UseItemOnField(void);
 static void Task_CallItemUseOnFieldCallback(u8);
@@ -256,8 +258,10 @@ static void ItemUseOnFieldCB_Bike(u8 taskId)
 {
     if (ItemId_GetSecondaryId(gSpecialVar_ItemId) == MACH_BIKE)
         GetOnOffBike(PLAYER_AVATAR_FLAG_MACH_BIKE);
-    else // ACRO_BIKE
+    else if (ItemId_GetSecondaryId(gSpecialVar_ItemId) == ACRO_BIKE)
         GetOnOffBike(PLAYER_AVATAR_FLAG_ACRO_BIKE);
+    else if (ItemId_GetSecondaryId(gSpecialVar_ItemId) == BICYCLE)
+        GetOnOffToggleableBike();
     ScriptUnfreezeObjectEvents();
     UnlockPlayerFieldControls();
     DestroyTask(taskId);

@@ -4,6 +4,7 @@
 #include "battle_setup.h"
 #include "berry.h"
 #include "bg.h"
+#include "bike.h"
 #include "cable_club.h"
 #include "clock.h"
 #include "event_data.h"
@@ -54,6 +55,7 @@
 #include "task.h"
 #include "tileset_anims.h"
 #include "time_events.h"
+#include "toggleable_transport.h"
 #include "trainer_hill.h"
 #include "trainer_pokemon_sprites.h"
 #include "tv.h"
@@ -925,7 +927,7 @@ if (I_VS_SEEKER_CHARGING != 0)
 void ResetInitialPlayerAvatarState(void)
 {
     sInitialPlayerAvatarState.direction = DIR_SOUTH;
-    sInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_ON_FOOT;
+    sInitialPlayerAvatarState.transitionFlags = AutoBike_ReturnPlayerAvatarTransitionFlags();
 }
 
 void StoreInitialPlayerAvatarState(void)

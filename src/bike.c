@@ -7,6 +7,7 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "sound.h"
+#include "toggleable_transport.h"
 #include "constants/map_types.h"
 #include "constants/songs.h"
 
@@ -976,6 +977,7 @@ void GetOnOffBike(u8 transitionFlags)
     if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
     {
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
+        gSaveBlock3Ptr->autoBike = FALSE;
         Overworld_ClearSavedMusic();
         Overworld_PlaySpecialMapMusic();
     }
@@ -984,6 +986,7 @@ void GetOnOffBike(u8 transitionFlags)
         SetPlayerAvatarTransitionFlags(transitionFlags);
         Overworld_SetSavedMusic(MUS_CYCLING);
         Overworld_ChangeMusicTo(MUS_CYCLING);
+        HandleBikeTransition(transitionFlags);
     }
 }
 

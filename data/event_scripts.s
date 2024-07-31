@@ -1074,3 +1074,4 @@ EventScript_VsSeekerChargingDone::
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/samuel_speech.inc"
+	.include "data/scripts/toggleable_transport.inc"

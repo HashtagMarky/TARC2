@@ -26,6 +26,7 @@
 #include "secret_base.h"
 #include "sound.h"
 #include "start_menu.h"
+#include "toggleable_transport.h"
 #include "trainer_see.h"
 #include "trainer_hill.h"
 #include "vs_seeker.h"
@@ -84,6 +85,8 @@ void FieldClearPlayerInput(struct FieldInput *input)
     input->heldDirection2 = FALSE;
     input->tookStep = FALSE;
     input->pressedBButton = FALSE;
+    input->pressedRButton = FALSE;
+    input->pressedBandRButton = FALSE;
     input->input_field_1_0 = FALSE;
     input->input_field_1_1 = FALSE;
     input->input_field_1_2 = FALSE;
@@ -109,6 +112,10 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
                 input->pressedAButton = TRUE;
             if (newKeys & B_BUTTON)
                 input->pressedBButton = TRUE;
+            if (newKeys & R_BUTTON && !(heldKeys & B_BUTTON)) // Not Holding B Button as may cause Acro Bike freeze.
+                input->pressedRButton = TRUE;
+            if (((newKeys & B_BUTTON) && (newKeys & R_BUTTON)) || ((heldKeys & B_BUTTON) && (newKeys & R_BUTTON)) || ((newKeys & B_BUTTON) && (heldKeys & R_BUTTON)))
+                input->pressedBandRButton = TRUE;
         }
 
         if (heldKeys & (DPAD_UP | DPAD_DOWN | DPAD_LEFT | DPAD_RIGHT))
@@ -199,6 +206,11 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         return TRUE;
     }
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
+        return TRUE;
+
+    if (input->pressedBandRButton && ToggleAutoBike())
+        return TRUE;
+    else if (input->pressedRButton && ToggleTransport())
         return TRUE;
 
 #if DEBUG_OVERWORLD_MENU == TRUE && DEBUG_OVERWORLD_IN_MENU == FALSE
