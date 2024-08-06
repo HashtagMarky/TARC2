@@ -1094,7 +1094,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             gReservedSpritePaletteCount = 8;
             ResetAllPicSprites();
             BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
-            LoadPalette(GetTextWindowPalette(0), 15*16, 0x40);
+            LoadPalette(GetTextBoxPalette(gSaveBlock2Ptr->optionsIkigaiWindowFrame + DEFAULT_TEXT_BOX_FRAME_PALETTES), 15*16, 0x40);
 
             FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 15);
             InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
