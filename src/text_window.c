@@ -182,8 +182,7 @@ const u16 *GetOverworldTextboxPalettePtr(void)
     {
     case IKIGAI_TEXT_WINDOW_GYM_TYPE_COLOUR_DARK:
     case IKIGAI_TEXT_WINDOW_GYM_TYPE_COLOUR:
-        // return GetTextBoxPalette(gymType + DEFAULT_TEXT_BOX_FRAME_PALETTES + IKIGAI_DEFAULT_WINDOW_FRAMES_COUNT);
-        return GetTextBoxPalette(0);
+        return GetTextBoxPalette(gSaveBlock2Ptr->ikigaiGymType + DEFAULT_TEXT_BOX_FRAME_PALETTES + IKIGAI_DEFAULT_WINDOW_FRAMES_COUNT);
         break;
     case IKIGAI_TEXT_WINDOW_PINK:
     case IKIGAI_TEXT_WINDOW_BLUE:
@@ -203,8 +202,7 @@ void LoadUserWindowBorderGfxOnBg(u8 bg, u16 destOffset, u8 palOffset)
     {
     case IKIGAI_TEXT_WINDOW_GYM_TYPE_COLOUR_DARK:
     case IKIGAI_TEXT_WINDOW_GYM_TYPE_COLOUR:
-        // return LoadPalette(GetWindowFrameTilesPal(gymType + IKIGAI_DEFAULT_WINDOW_FRAMES_COUNT)->pal, palOffset, PLTT_SIZE_4BPP);
-        return LoadPalette(GetWindowFrameTilesPal(0)->pal, palOffset, PLTT_SIZE_4BPP);
+        return LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->ikigaiGymType + IKIGAI_DEFAULT_WINDOW_FRAMES_COUNT)->pal, palOffset, PLTT_SIZE_4BPP);
         break;
     case IKIGAI_TEXT_WINDOW_PINK:
     case IKIGAI_TEXT_WINDOW_BLUE:
