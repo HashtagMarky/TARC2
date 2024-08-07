@@ -8315,7 +8315,7 @@ static bool8 MultiMove_Cancel(void)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             SetCursorPriorityTo1();
-            LoadPalette(GetTextBoxPalette(3), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+            LoadPalette(GetTextWindowPalette(3), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
             ShowBg(0);
             return FALSE;
         }
@@ -8421,7 +8421,7 @@ static bool8 MultiMove_PlaceMons(void)
     case 3:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            LoadPalette(GetTextBoxPalette(3), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+            LoadPalette(GetTextWindowPalette(3), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
             SetCursorPriorityTo1();
             ShowBg(0);
             return FALSE;

@@ -1,7 +1,7 @@
 #include "global.h"
 
 const u32 gBattleTextboxTiles[] = INCBIN_U32("graphics/battle_interface/textbox.4bpp.lz");
-const u32 gBattleTextboxPalette[] = INCBIN_U32("graphics/battle_interface/textbox.gbapal.lz");
+const u32 gBattleTextboxPalette[] = INCBIN_U32("graphics/battle_interface/textbox_emerald.gbapal.lz");
 const u32 gBattleTextboxTilemap[] = INCBIN_U32("graphics/battle_interface/textbox_map.bin.lz");
 
 const u32 gUnusedGfx_OldCharmap[] = INCBIN_U32("graphics/unused/old_charmap.4bpp.lz"); // japanese table and bunch of stuff
@@ -1993,9 +1993,7 @@ const u16 gTradeUnused_Tilemap[] = INCBIN_U16("graphics/trade/unused.bin");
 const u16 gTradeMenu_Tilemap[] = INCBIN_U16("graphics/trade/menu.bin");
 const u16 gTradeMenuMonBox_Tilemap[] = INCBIN_U16("graphics/trade/menu_mon_box.bin");
 
-const u16 gMessageBox_BluePal[] = INCBIN_U16("graphics/text_window/message_box_blue.gbapal");
-const u16 gMessageBox_PinkPal[] = INCBIN_U16("graphics/text_window/message_box_pink.gbapal");
-const u8 gMessageBox_Gfx[] = INCBIN_U8("graphics/text_window/message_box_blue.4bpp");
+const u8 gMessageBox_Gfx[] = INCBIN_U8("graphics/text_window/message_box.4bpp");
 
 const u32 gWallpaperIcon_Cross[] = INCBIN_U32("graphics/pokemon_storage/wallpapers/icons/cross.4bpp.lz");
 const u32 gWallpaperIcon_Bolt[] = INCBIN_U32("graphics/pokemon_storage/wallpapers/icons/bolt.4bpp.lz");

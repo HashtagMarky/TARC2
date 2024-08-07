@@ -5213,7 +5213,7 @@ static bool32 LoadBgGfx(void)
             return FALSE;
         break;
     case 5:
-        LoadPalette(GetTextBoxPalette(3), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        LoadPalette(GetTextWindowPalette(3), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
     default:
         sGfx->loadState = 0;
