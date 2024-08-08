@@ -1,8 +1,10 @@
 #include "global.h"
 
 const u32 gBattleTextboxTiles[] = INCBIN_U32("graphics/battle_interface/textbox.4bpp.lz");
-const u32 gBattleTextboxPalette[] = INCBIN_U32("graphics/battle_interface/textbox_emerald.gbapal.lz");
 const u32 gBattleTextboxTilemap[] = INCBIN_U32("graphics/battle_interface/textbox_map.bin.lz");
+const u32 gBattleTextboxPalette_Emerald[] = INCBIN_U32("graphics/battle_interface/textbox_emerald.gbapal.lz");
+const u32 gBattleTextboxPalette_Blue[] = INCBIN_U32("graphics/battle_interface/textbox_ikigai_blue.gbapal.lz");
+const u32 gBattleTextboxPalette_Pink[] = INCBIN_U32("graphics/battle_interface/textbox_ikigai_pink.gbapal.lz");
 
 const u32 gUnusedGfx_OldCharmap[] = INCBIN_U32("graphics/unused/old_charmap.4bpp.lz"); // japanese table and bunch of stuff
 const u32 gUnusedTimemap_OldCharmap[] = INCBIN_U32("graphics/unused/old_charmap.bin.lz");

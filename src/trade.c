@@ -2963,13 +2963,13 @@ static void TradeAnimInit_LoadGfx(void)
     DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
     LZDecompressWram(gBattleTextboxTilemap, gDecompressionBuffer);
     CopyToBgTilemapBuffer(0, gDecompressionBuffer, BG_SCREEN_SIZE, 0);
-    LoadCompressedPalette(gBattleTextboxPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+    LoadCompressedPalette(GetBattleTextboxPalettePtr(), BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     InitWindows(sTradeSequenceWindowTemplates);
     // ... and doing the same load again
     DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
     LZDecompressWram(gBattleTextboxTilemap, gDecompressionBuffer);
     CopyToBgTilemapBuffer(0, gDecompressionBuffer, BG_SCREEN_SIZE, 0);
-    LoadCompressedPalette(gBattleTextboxPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+    LoadCompressedPalette(GetBattleTextboxPalettePtr(), BG_PLTT_ID(0), PLTT_SIZE_4BPP);
 }
 
 static void CB2_InitInGameTrade(void)

@@ -50,6 +50,7 @@
 #include "task.h"
 #include "test_runner.h"
 #include "text.h"
+#include "text_window.h"
 #include "trig.h"
 #include "tv.h"
 #include "util.h"
@@ -2208,7 +2209,7 @@ void CB2_InitEndLinkBattle(void)
         gBattle_BG3_Y = 0;
 
         InitBattleBgsVideo();
-        LoadCompressedPalette(gBattleTextboxPalette, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+        LoadCompressedPalette(GetBattleTextboxPalettePtr(), BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
         LoadBattleMenuWindowGfx();
         ResetSpriteData();
         ResetTasks();

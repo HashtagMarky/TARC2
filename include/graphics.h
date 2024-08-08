@@ -204,7 +204,9 @@ extern const u16 gBerryFixWindow_Pal[];
 
 extern const u32 gBattleTextboxTiles[];
 extern const u32 gBattleTextboxTilemap[];
-extern const u32 gBattleTextboxPalette[];
+extern const u32 gBattleTextboxPalette_Emerald[];
+extern const u32 gBattleTextboxPalette_Blue[];
+extern const u32 gBattleTextboxPalette_Pink[];
 extern const u32 gVsLettersGfx[];
 extern const u32 gBattleVSFrame_Gfx[];
 extern const u32 gBattleVSFrame_Pal[];

@@ -191,8 +191,7 @@ const u16 *GetOverworldTextboxPalettePtr(void)
     default:
         return GetTextWindowPalette(gSaveBlock2Ptr->optionsIkigaiWindowFrame + DEFAULT_TEXT_BOX_FRAME_PALETTES);
         break;
-    }
-        
+    }   
 }
 
 // Effectively LoadUserWindowBorderGfx but specifying the bg directly instead of a window from that bg
@@ -212,4 +211,22 @@ void LoadUserWindowBorderGfxOnBg(u8 bg, u16 destOffset, u8 palOffset)
         return LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsIkigaiWindowFrame)->pal, palOffset, PLTT_SIZE_4BPP);
         break;
     }
+}
+
+const u32 *GetBattleTextboxPalettePtr(void)
+{
+    switch (gSaveBlock2Ptr->optionsIkigaiWindowFrame)
+    {
+    case IKIGAI_TEXT_WINDOW_GYM_TYPE_COLOUR_DARK:
+    case IKIGAI_TEXT_WINDOW_GYM_TYPE_COLOUR:
+        return gBattleTextboxPalette_Emerald;
+        break;
+    case IKIGAI_TEXT_WINDOW_PINK:
+        return gBattleTextboxPalette_Pink;
+        break;
+    case IKIGAI_TEXT_WINDOW_BLUE:
+    default:
+        return gBattleTextboxPalette_Blue;
+        break;
+    }   
 }
