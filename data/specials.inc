@@ -559,3 +559,4 @@ gSpecials::
 	def_special DynPal_ShowToneMenu_Skin
 	def_special DynPal_ShowToneMenu_Hair
 	def_special DynPal_ShowToneMenu_Clothes
+	def_special GetOverworldMonSpecies
