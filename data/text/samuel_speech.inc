@@ -14,7 +14,7 @@ gText_Samuel_Castform_Unused:: @@ See strings.c
 gText_Samuel_MainSpeech::
 	.string "CASTFORM is only one of the many\n"
 	.string "POKéMON that inhabit the world.\l"
-	.string "One of the many that live alongside us.\p"
+	.string "One of many that live alongside us.\p"
 	.string "Some of us work with POKéMON.\n"
 	.string "Some people even study them.\p"
 	.string "And I'm sure you know, others unite with\n"
@@ -49,7 +49,7 @@ gText_Samuel_JobIsYours::
 	.string "Nor can I wait to see your first battle\n"
 	.string "as our own resident GYM LEADER!\p"
 	.string "However, if you'll excuse me, I'll be\n"
-	.string "grabbing my case and heading on my way.\p"
+	.string "grabbing my case and departing now.\p"
 	.string "There's been some strange activities\n"
 	.string "in the surrounding area as of late,\l"
 	.string "but you need not concern yourself.\p"
