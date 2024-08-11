@@ -17,6 +17,7 @@
 #include "event_object_movement.h"
 #include "event_scripts.h"
 #include "field_message_box.h"
+#include "field_mugshot.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
 #include "field_specials.h"
@@ -52,6 +53,7 @@
 #include "list_menu.h"
 #include "malloc.h"
 #include "constants/event_objects.h"
+#include "constants/field_mugshots.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(struct ScriptContext *ctx);
@@ -2478,4 +2480,17 @@ bool8 ScrCmd_warpwhitefade(struct ScriptContext *ctx)
 void ScriptSetDoubleBattleFlag(struct ScriptContext *ctx)
 {
     sIsScriptedWildDouble = TRUE;
+}
+
+bool8 ScrCmd_createfieldmugshot(struct ScriptContext *ctx)
+{
+    u8 mugshotType = ScriptReadByte(ctx);
+    u16 mugshotId = VarGet(ScriptReadHalfword(ctx));
+    u8 mugshotEmotion = ScriptReadByte(ctx);
+
+    if (mugshotType != MUGSHOT_DEFINED)
+        mugshotId = gObjectEvents[gSelectedObjectEvent].graphicsId;
+
+    CreateFieldMugshot(mugshotType, mugshotId, mugshotEmotion);
+    return FALSE;
 }

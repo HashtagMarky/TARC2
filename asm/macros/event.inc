@@ -1891,6 +1891,19 @@
 	.4byte \text
 	.endm
 
+	@ spawn a windowed mugshot in the overworld above a message box
+	.macro createfieldmugshot type:req, id=0, emotion=EMOTE_NORMAL
+	.byte 0xe6
+	.byte \type
+	.2byte \id
+	.byte \emotion
+	.endm
+
+	@ destroys a mugshot in the overworld, if there is one
+	.macro removefieldmugshot
+	callnative RemoveFieldMugshot
+	.endm
+
 @ Supplementary
 
 	.macro goto_if_unset flag:req, dest:req
