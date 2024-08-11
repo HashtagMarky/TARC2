@@ -1,7 +1,7 @@
 #ifndef GUARD_FIELD_MUGSHOTS_H
 #define GUARD_FIELD_MUGSHOTS_H
 
-void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion);
+void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y);
 void RemoveFieldMugshot(void);
 
 #endif // GUARD_FIELD_MUGSHOTS_H

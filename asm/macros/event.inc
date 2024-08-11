@@ -1892,11 +1892,13 @@
 	.endm
 
 	@ spawn a windowed mugshot in the overworld above a message box
-	.macro createfieldmugshot type:req, id=0, emotion=EMOTE_NORMAL
+	.macro createfieldmugshot type:req, id=0, emotion=EMOTE_NORMAL, x=168, y=51
 	.byte 0xe6
 	.byte \type
 	.2byte \id
 	.byte \emotion
+	.2byte \x
+	.2byte \y
 	.endm
 
 	@ destroys a mugshot in the overworld, if there is one

@@ -23,10 +23,6 @@ static EWRAM_DATA u8 sFieldMugshotSpriteId = 0;
 
 #define TAG_MUGSHOT 0x9000
 
-// don't remove the `+ 32` for 
-// otherwise your sprite will not be placed in the place you desire
-#define MUGSHOT_DEFINED_X   168 + 32
-#define MUGSHOT_DEFINED_Y   51  + 32
 #define MUGSHOT_NPC_X       200
 #define MUGSHOT_NPC_Y       74
 #define MUGSHOT_PMD_X       192
@@ -88,11 +84,17 @@ void RemoveFieldMugshot(void)
     }
 }
 
-void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u16 mugshotEmotion)
+void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u16 mugshotEmotion, s16 x, s16 y)
 {
     u8 windowId = 0;
-    s16 x = MUGSHOT_DEFINED_X;
-    s16 y = MUGSHOT_DEFINED_Y;
+
+    // Verification that sprite isn't placed offscreen.
+    // The +32 makes it so the defined x & y position are the top left.
+    x = (x > 176) ? 176 : x;
+    x = x + 32;
+    
+    y = (y > 96) ? 96 : y;
+    y = y + 32;
 
     struct CompressedSpriteSheet sheet = { .size=0x1000, .tag=TAG_MUGSHOT };
     struct SpritePalette pal = { .tag = sheet.tag };
