@@ -7,14 +7,19 @@
 // Mugshot Types
 #define MUGSHOT_DEFINED     0
 #define MUGSHOT_NPC         1
-#define MUGSHOT_PMD         2
-#define MUGSHOT_TYPES       3
+#define MUGSHOT_POKEMON     2
+#define MUGSHOT_FOLLOWER    3
+#define MUGSHOT_TYPES       4
 
 // Mugshot IDs
 #define MUGSHOT_BRENDAN                     OBJ_EVENT_GFX_BRENDAN_NORMAL
 #define MUGSHOT_MAY                         OBJ_EVENT_GFX_MAY_NORMAL
 #define MUGSHOT_SUBSTITUTE_DOLL             OBJ_EVENT_GFX_SPECIES(NONE)
 #define MUGSHOT_SUBSTITUTE_DOLL_SHINY       OBJ_EVENT_GFX_SPECIES_SHINY(NONE)
+#define MUGSHOT_EEVEE                       OBJ_EVENT_GFX_SPECIES(EEVEE)
+#define MUGSHOT_EEVEE_SHINY                 OBJ_EVENT_GFX_SPECIES_SHINY(EEVEE)
+#define MUGSHOT_INFERNAPE                   OBJ_EVENT_GFX_SPECIES(INFERNAPE)
+#define MUGSHOT_INFERNAPE_SHINY             OBJ_EVENT_GFX_SPECIES_SHINY(INFERNAPE)
 
 // Emotes
 #define EMOTE_NORMAL        0

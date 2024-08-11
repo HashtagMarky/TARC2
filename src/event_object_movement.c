@@ -19,6 +19,7 @@
 #include "field_player_avatar.h"
 #include "field_weather.h"
 #include "fieldmap.h"
+#include "field_mugshot.h"
 #include "follower_helper.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -2307,6 +2308,7 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
     };
     u32 i, j;
     bool32 pickedCondition = FALSE;
+    bool8 shiny;
     if (mon == NULL) // failsafe
     {
         ScriptCall(ctx, EventScript_FollowerLovesYou);
@@ -2315,6 +2317,7 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
     // Set the script to the very end; we'll be calling another script dynamically
     ScriptJump(ctx, EventScript_FollowerEnd);
     species = GetMonData(mon, MON_DATA_SPECIES);
+    shiny = GetMonData(mon, MON_DATA_IS_SHINY);
     multi = GetMonData(mon, MON_DATA_FRIENDSHIP);
     if (multi > 80)
     {
@@ -2434,6 +2437,7 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
     if (pickedCondition)
     {
         emotion = gFollowerConditionalMessages[multi].emotion;
+        CreateFollowerFieldMugshot(species, emotion, shiny);
         ObjectEventEmote(objEvent, emotion);
         ctx->data[0] = (u32) gFollowerConditionalMessages[multi].text;
         // text choices are spread across array; pick a random one
@@ -2450,6 +2454,7 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
         return;
     }
     // otherwise, a basic or C-based message was picked
+    CreateFollowerFieldMugshot(species, emotion, shiny);
     ObjectEventEmote(objEvent, emotion);
     ctx->data[0] = (u32) gFollowerBasicMessages[emotion].messages[multi].text; // Load message text
     ScriptCall(ctx, gFollowerBasicMessages[emotion].messages[multi].script ?
