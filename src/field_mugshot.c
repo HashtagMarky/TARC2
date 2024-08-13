@@ -9,6 +9,7 @@
 #include "field_weather.h"
 #include "follower_helper.h"
 #include "menu.h"
+#include "task.h"
 #include "constants/event_objects.h"
 #include "constants/flags.h"
 #include "constants/field_mugshots.h"
@@ -60,23 +61,35 @@ static const struct SpriteTemplate sFieldMugshot_SpriteTemplate = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
+#define taskId        NUM_TASKS - 1
+#define tWindowId     data[0]
+
 void RemoveFieldMugshot(void)
 {
-    u8 windowId;
+    u8 windowTask = taskId;
+    u8 windowId = 0;
     
     if (IndexOfSpritePaletteTag(TAG_MUGSHOT) != 0xFF)
     {
         ResetPreservedPalettesInWeather();
+        /*
         windowId = AddWindow(&sMugshotWindowNPC);
         ClearStdWindowAndFrame(windowId, TRUE);
         RemoveWindow(windowId);
         windowId = AddWindow(&sMugshotWindowPokemon);
         ClearStdWindowAndFrame(windowId, TRUE);
         RemoveWindow(windowId);
+        */
         DestroySprite(&gSprites[sFieldMugshotSpriteId]);
         FreeSpritePaletteByTag(TAG_MUGSHOT);
         FreeSpriteTilesByTag(TAG_MUGSHOT);
         sFieldMugshotSpriteId = SPRITE_NONE;
+
+        if (GetTaskCount() < (NUM_TASKS - 1))
+            windowId = gTasks[windowTask].tWindowId;
+            ClearStdWindowAndFrame(windowId, TRUE);
+            RemoveWindow(windowId);
+            DestroyTask(windowTask);
     }
 };
 
@@ -130,6 +143,7 @@ void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 
 
 void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y)
 {
+    u8 windowTask = taskId;
     u8 windowId = 0;
 
     // Verification that sprite isn't placed offscreen.
@@ -201,8 +215,11 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
             y = MUGSHOT_POKEMON_Y;
         }
         
-        DrawStdWindowFrame(windowId, FALSE);
-        CopyWindowToVram(windowId, 3);
+        if (GetTaskCount() < (NUM_TASKS - 1))
+            gTasks[windowTask].tWindowId = windowId;
+            DrawStdWindowFrame(windowId, FALSE);
+            CopyWindowToVram(windowId, 3);
+            DestroyTask(windowTask);
     }
 
     LoadCompressedSpriteSheet(&sheet);
@@ -215,3 +232,5 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
     }
     PreservePaletteInWeather(gSprites[sFieldMugshotSpriteId].oam.paletteNum + 0x10);
 }
+
+#undef tWindowId
