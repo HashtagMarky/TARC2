@@ -20,6 +20,7 @@
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "field_mugshot.h"
+#include "field_message_box.h"
 #include "follower_helper.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -2290,8 +2291,11 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
     struct SpecialEmote condEmotes[16] = {0};
     u32 condCount = 0;
     u32 emotion;
+    u8 monNickname[POKEMON_NAME_LENGTH + 1];
     struct ObjectEvent *objEvent = GetFollowerObject();
     struct Pokemon *mon = GetFirstLiveMon();
+    GetMonData(GetFirstLiveMon(), MON_DATA_NICKNAME, monNickname);
+    SetSpeakerName(monNickname);
     u8 emotion_weight[FOLLOWER_EMOTION_LENGTH] =
     {
         [FOLLOWER_EMOTION_HAPPY] = 10,
