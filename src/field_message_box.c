@@ -204,10 +204,12 @@ void SetSpeakerName(const u8* name)
 
 void SetSpeakerAuto(u16 graphicsId)
 {
-    if (graphicsId >= NELEMS(gSpeakerNamesText))
+    if (graphicsId < NELEMS(gSpeakerNamesText))
+    {
+        gSpeakerName = gSpeakerNamesText[graphicsId];
+    }
+    else
     {
         gSpeakerName = NULL;
     }
-
-    gSpeakerName = gSpeakerNamesText[graphicsId];
 }
