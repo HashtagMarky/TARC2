@@ -204,7 +204,17 @@ void SetSpeakerName(const u8* name)
 
 void SetSpeakerAuto(u16 graphicsId)
 {
-    if (graphicsId < NELEMS(gSpeakerNamesText))
+    int species = graphicsId - OBJ_EVENT_GFX_MON_BASE;
+
+    if ((graphicsId > OBJ_EVENT_GFX_MON_BASE && graphicsId < OBJ_EVENT_GFX_MON_BASE + NUM_SPECIES))
+    {
+        gSpeakerName = GetSpeciesName(species);
+    }
+    else if (graphicsId > OBJ_EVENT_GFX_MON_BASE + SPECIES_SHINY_TAG && graphicsId < OBJ_EVENT_GFX_MON_BASE + NUM_SPECIES + SPECIES_SHINY_TAG)
+    {
+        gSpeakerName = GetSpeciesName(species - SPECIES_SHINY_TAG);
+    }
+    else if (graphicsId < NELEMS(gSpeakerNamesText))
     {
         gSpeakerName = gSpeakerNamesText[graphicsId];
     }
