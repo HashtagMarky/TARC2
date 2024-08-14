@@ -3527,23 +3527,23 @@ void GetOverworldMonSpecies(void)
         break;
     
     default:
-        if (!(gObjectEvents[gSelectedObjectEvent].graphicsId > OBJ_EVENT_GFX_MON_BASE
-            && gObjectEvents[gSelectedObjectEvent].graphicsId < OBJ_EVENT_GFX_MON_BASE + NUM_SPECIES)
-            || (gObjectEvents[gSelectedObjectEvent].graphicsId > OBJ_EVENT_GFX_MON_BASE + SPECIES_SHINY_TAG
-            && gObjectEvents[gSelectedObjectEvent].graphicsId < OBJ_EVENT_GFX_MON_BASE + NUM_SPECIES + SPECIES_SHINY_TAG))
+        if (!(gObjectEvents[gSelectedObjectEvent].graphicsId > OBJ_EVENT_GFX_SPECIES(NONE)
+            && gObjectEvents[gSelectedObjectEvent].graphicsId < OBJ_EVENT_GFX_SPECIES(EGG))
+            || (gObjectEvents[gSelectedObjectEvent].graphicsId > OBJ_EVENT_GFX_SPECIES_SHINY(NONE)
+            && gObjectEvents[gSelectedObjectEvent].graphicsId < OBJ_EVENT_GFX_SPECIES_SHINY(EGG)))
             {
                 gSpecialVar_0x8004 = SPECIES_NONE;
             }
         else
         {
-            if (gObjectEvents[gSelectedObjectEvent].graphicsId > OBJ_EVENT_GFX_MON_BASE + SPECIES_SHINY_TAG)
+            if (gObjectEvents[gSelectedObjectEvent].graphicsId > OBJ_EVENT_GFX_SPECIES_SHINY(NONE))
             {
-                gSpecialVar_0x8004 = gObjectEvents[gSelectedObjectEvent].graphicsId - OBJ_EVENT_GFX_MON_BASE - SPECIES_SHINY_TAG;
+                gSpecialVar_0x8004 = gObjectEvents[gSelectedObjectEvent].graphicsId - OBJ_EVENT_GFX_SPECIES_SHINY(NONE);
                 gSpecialVar_0x8005 = 1;
             }
             else
             {
-                gSpecialVar_0x8004 = gObjectEvents[gSelectedObjectEvent].graphicsId - OBJ_EVENT_GFX_MON_BASE;
+                gSpecialVar_0x8004 = gObjectEvents[gSelectedObjectEvent].graphicsId - OBJ_EVENT_GFX_SPECIES(NONE);
             }
         }
         break;
