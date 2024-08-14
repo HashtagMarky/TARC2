@@ -20,7 +20,7 @@ static EWRAM_DATA u8 sFieldMugshotSpriteId = 0;
 #define TAG_MUGSHOT 0x9000
 
 #define MUGSHOT_NPC_X           200
-#define MUGSHOT_NPC_Y           74
+#define MUGSHOT_NPC_Y           72
 #define MUGSHOT_POKEMON_X       192
 #define MUGSHOT_POKEMON_Y       72
 
@@ -120,6 +120,7 @@ void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 
         mugshotEmotion = EMOTE_WORRIED;
         break;
     case FOLLOWER_EMOTION_LOVE:
+    case FOLLOWER_EMOTION_MUSIC:
         mugshotEmotion = EMOTE_JOYOUS;
         break;
     case FOLLOWER_EMOTION_SURPRISE:
@@ -131,7 +132,6 @@ void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 
     case FOLLOWER_EMOTION_POISONED:
         mugshotEmotion = EMOTE_PAIN;
         break;
-    case FOLLOWER_EMOTION_MUSIC:
     case FOLLOWER_EMOTION_NEUTRAL:
     default:
         mugshotEmotion = EMOTE_NORMAL;
@@ -158,17 +158,13 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
     struct SpritePalette pal = { .tag = sheet.tag };
 
     RemoveFieldMugshot();
-    if (mugshotId >= NELEMS(sFieldMugshots))
-    {
-        return;
-    }
-
-    if (FlagGet(FLAG_SUPPRESS_MUGSHOT)
+    if (mugshotId >= NELEMS(sFieldMugshots)
+        || FlagGet(FLAG_SUPPRESS_MUGSHOT)
         || (gSaveBlock2Ptr->optionsSuppressNPCMugshots == TRUE && mugshotType != MUGSHOT_FOLLOWER)
         || (gSaveBlock2Ptr->optionsSuppressFollowerMugshots == TRUE && mugshotType == MUGSHOT_FOLLOWER))
-    {
-        return;
-    }
+        {
+            return;
+        }
 
     if ((sFieldMugshots[mugshotId][mugshotEmotion].gfx != NULL && sFieldMugshots[mugshotId][mugshotEmotion].pal != NULL))
     {
