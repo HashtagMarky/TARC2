@@ -1886,8 +1886,9 @@
 	.endm
 
 	@ Sets the text of the name box in the next-shown message box.
-	.macro speakername text:req
+	.macro speakername auto:req, text
 	.byte 0xe5
+	.byte \auto
 	.4byte \text
 	.endm
 

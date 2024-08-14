@@ -6,12 +6,20 @@
 #include "text.h"
 #include "match_call.h"
 #include "field_message_box.h"
+#include "constants/event_objects.h"
+#include "constants/species.h"
 
 static EWRAM_DATA u8 sFieldMessageBoxMode = 0;
 EWRAM_DATA const u8* gSpeakerName = NULL;
 
 static void ExpandStringAndStartDrawFieldMessage(const u8 *, bool32);
 static void StartDrawFieldMessage(void);
+
+static const u8 *const gSpeakerNamesText[] =
+{
+    [OBJ_EVENT_GFX_BRENDAN_NORMAL] = COMPOUND_STRING("BRENDAN"),
+    [OBJ_EVENT_GFX_MAY_NORMAL] = COMPOUND_STRING("MAY"),
+};
 
 void InitFieldMessageBox(void)
 {
@@ -192,4 +200,14 @@ void StopFieldMessage(void)
 void SetSpeakerName(const u8* name)
 {
     gSpeakerName = name;
+}
+
+void SetSpeakerAuto(u16 graphicsId)
+{
+    if (graphicsId >= NELEMS(gSpeakerNamesText))
+    {
+        gSpeakerName = NULL;
+    }
+
+    gSpeakerName = gSpeakerNamesText[graphicsId];
 }
