@@ -21,8 +21,8 @@ static EWRAM_DATA u8 sFieldMugshotSpriteId = 0;
 
 #define MUGSHOT_NPC_X           200
 #define MUGSHOT_NPC_Y           72
-#define MUGSHOT_POKEMON_X       192
-#define MUGSHOT_POKEMON_Y       72
+#define MUGSHOT_PMD_X           192
+#define MUGSHOT_PMD_Y           72
 
 static const struct WindowTemplate sMugshotWindowNPC =
 {
@@ -204,11 +204,11 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
             x = MUGSHOT_NPC_X;
             y = MUGSHOT_NPC_Y;
         }
-        else if (mugshotType == MUGSHOT_POKEMON || mugshotType == MUGSHOT_FOLLOWER)
+        else if (mugshotType == MUGSHOT_PMD || mugshotType == MUGSHOT_FOLLOWER)
         {
             windowId = AddWindow(&sMugshotWindowPokemon);
-            x = MUGSHOT_POKEMON_X;
-            y = MUGSHOT_POKEMON_Y;
+            x = MUGSHOT_PMD_X;
+            y = MUGSHOT_PMD_Y;
         }
         
         if (GetTaskCount() < (NUM_TASKS - 1))

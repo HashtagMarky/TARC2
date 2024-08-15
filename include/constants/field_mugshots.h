@@ -7,11 +7,12 @@
 // Mugshot Types
 #define MUGSHOT_DEFINED     0
 #define MUGSHOT_NPC         1
-#define MUGSHOT_POKEMON     2
+#define MUGSHOT_PMD         2
 #define MUGSHOT_FOLLOWER    3
 #define MUGSHOT_TYPES       4
 
 // Mugshot IDs
+#define MUGSHOT_AUTO_GRAPHICS_ID            NUM_OBJ_EVENT_GFX
 #define MUGSHOT_BRENDAN                     OBJ_EVENT_GFX_BRENDAN_NORMAL
 #define MUGSHOT_MAY                         OBJ_EVENT_GFX_MAY_NORMAL
 #define MUGSHOT_SUBSTITUTE_DOLL             OBJ_EVENT_GFX_SPECIES(NONE)

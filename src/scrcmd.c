@@ -2500,7 +2500,7 @@ bool8 ScrCmd_createfieldmugshot(struct ScriptContext *ctx)
     s16 x = VarGet(ScriptReadHalfword(ctx));
     s16 y = VarGet(ScriptReadHalfword(ctx));
 
-    if (mugshotType != MUGSHOT_DEFINED)
+    if (mugshotId == MUGSHOT_AUTO_GRAPHICS_ID)
         mugshotId = gObjectEvents[gSelectedObjectEvent].graphicsId;
 
     CreateFieldMugshot(mugshotType, mugshotId, mugshotEmotion, x, y);
