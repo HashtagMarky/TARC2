@@ -9,7 +9,9 @@
 
 const u8 gTextWindowFrame_Gfx[] = INCBIN_U8("graphics/text_window/window_frame.4bpp");
 const u16 gTextWindowFrame_EmeraldPal[] = INCBIN_U16("graphics/text_window/window_frame_emerald.gbapal");
+static const u16 gTextWindowFrame_GreenPal[] = INCBIN_U16("graphics/text_window/window_frame_ikigai_green.gbapal");
 static const u16 gTextWindowFrame_BluePal[] = INCBIN_U16("graphics/text_window/window_frame_ikigai_blue.gbapal");
+static const u16 gTextWindowFrame_OrangePal[] = INCBIN_U16("graphics/text_window/window_frame_ikigai_orange.gbapal");
 static const u16 gTextWindowFrame_PinkPal[] = INCBIN_U16("graphics/text_window/window_frame_ikigai_pink.gbapal");
 
 static const u16 sTextWindowPalettes[IKIGAI_TEXT_BOX_FRAMES_COUNT][16] = // Ikigai Type Window Pals Here
@@ -19,8 +21,10 @@ static const u16 sTextWindowPalettes[IKIGAI_TEXT_BOX_FRAMES_COUNT][16] = // Ikig
     INCBIN_U16("graphics/text_window/text_window_pal2.gbapal"),
     INCBIN_U16("graphics/text_window/text_window_pal3.gbapal"),
     INCBIN_U16("graphics/text_window/text_window_pal4.gbapal"),
-    INCBIN_U16("graphics/text_window/message_box_ikigai_blue.gbapal"),     // IKIGAI_TEXT_WINDOW_BLUE + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    INCBIN_U16("graphics/text_window/message_box_ikigai_pink.gbapal")      // IKIGAI_TEXT_WINDOW_PINK + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/message_box_ikigai_green.gbapal"),         // IKIGAI_TEXT_WINDOW_BLUE + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/message_box_ikigai_blue.gbapal"),          // IKIGAI_TEXT_WINDOW_BLUE + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/message_box_ikigai_orange.gbapal"),        // IKIGAI_TEXT_WINDOW_BLUE + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/message_box_ikigai_pink.gbapal")           // IKIGAI_TEXT_WINDOW_PINK + DEFAULT_TEXT_BOX_FRAME_PALETTES
     // TYPE_NONE + DEFAULT_TEXT_BOX_FRAME_PALETTES
     // TYPE_NORMAL + DEFAULT_TEXT_BOX_FRAME_PALETTES
     // TYPE_FIGHTING + DEFAULT_TEXT_BOX_FRAME_PALETTES
@@ -45,7 +49,9 @@ static const u16 sTextWindowPalettes[IKIGAI_TEXT_BOX_FRAMES_COUNT][16] = // Ikig
 
 static const struct TilesPal sWindowFrames[IKIGAI_WINDOW_FRAMES_COUNT] =
 {
+    {gTextWindowFrame_Gfx, gTextWindowFrame_GreenPal},       // IKIGAI_TEXT_WINDOW_GREEN
     {gTextWindowFrame_Gfx, gTextWindowFrame_BluePal},        // IKIGAI_TEXT_WINDOW_BLUE
+    {gTextWindowFrame_Gfx, gTextWindowFrame_OrangePal},      // IKIGAI_TEXT_WINDOW_ORANGE
     {gTextWindowFrame_Gfx, gTextWindowFrame_PinkPal},        // IKIGAI_TEXT_WINDOW_PINK
     {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_NONE + IKIGAI_DEFAULT_WINDOW_FRAMES_COUNT
     {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_NORMAL + IKIGAI_DEFAULT_WINDOW_FRAMES_COUNT
@@ -167,11 +173,17 @@ const u16 *GetTextWindowPalette(u8 id)
     case 4:
         id = 0x40;
         break;
-    case IKIGAI_TEXT_WINDOW_BLUE + DEFAULT_TEXT_BOX_FRAME_PALETTES:
+    case IKIGAI_TEXT_WINDOW_GREEN + DEFAULT_TEXT_BOX_FRAME_PALETTES:
         id = 0x50;
         break;
-    case IKIGAI_TEXT_WINDOW_PINK + DEFAULT_TEXT_BOX_FRAME_PALETTES:
+    case IKIGAI_TEXT_WINDOW_BLUE + DEFAULT_TEXT_BOX_FRAME_PALETTES:
         id = 0x60;
+        break;
+    case IKIGAI_TEXT_WINDOW_ORANGE + DEFAULT_TEXT_BOX_FRAME_PALETTES:
+        id = 0x70;
+        break;
+    case IKIGAI_TEXT_WINDOW_PINK + DEFAULT_TEXT_BOX_FRAME_PALETTES:
+        id = 0x80;
         break;
     }
 
@@ -182,12 +194,13 @@ const u16 *GetOverworldTextboxPalettePtr(void)
 {
     switch (gSaveBlock2Ptr->optionsIkigaiWindowFrame)
     {
-    case IKIGAI_TEXT_WINDOW_GYM_TYPE_COLOUR_DARK:
     case IKIGAI_TEXT_WINDOW_GYM_TYPE_COLOUR:
         return GetTextWindowPalette(gSaveBlock2Ptr->ikigaiGymType + DEFAULT_TEXT_BOX_FRAME_PALETTES + IKIGAI_DEFAULT_WINDOW_FRAMES_COUNT);
         break;
     case IKIGAI_TEXT_WINDOW_PINK:
+    case IKIGAI_TEXT_WINDOW_ORANGE:
     case IKIGAI_TEXT_WINDOW_BLUE:
+    case IKIGAI_TEXT_WINDOW_GREEN:
     default:
         return GetTextWindowPalette(gSaveBlock2Ptr->optionsIkigaiWindowFrame + DEFAULT_TEXT_BOX_FRAME_PALETTES);
         break;
@@ -201,12 +214,13 @@ void LoadUserWindowBorderGfxOnBg(u8 bg, u16 destOffset, u8 palOffset)
     LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsIkigaiWindowFrame)->pal, palOffset, PLTT_SIZE_4BPP);
     switch (gSaveBlock2Ptr->optionsIkigaiWindowFrame)
     {
-    case IKIGAI_TEXT_WINDOW_GYM_TYPE_COLOUR_DARK:
     case IKIGAI_TEXT_WINDOW_GYM_TYPE_COLOUR:
         return LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->ikigaiGymType + IKIGAI_DEFAULT_WINDOW_FRAMES_COUNT)->pal, palOffset, PLTT_SIZE_4BPP);
         break;
     case IKIGAI_TEXT_WINDOW_PINK:
+    case IKIGAI_TEXT_WINDOW_ORANGE:
     case IKIGAI_TEXT_WINDOW_BLUE:
+    case IKIGAI_TEXT_WINDOW_GREEN:
     default:
         return LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsIkigaiWindowFrame)->pal, palOffset, PLTT_SIZE_4BPP);
         break;
@@ -217,16 +231,21 @@ const u32 *GetBattleTextboxPalettePtr(void)
 {
     switch (gSaveBlock2Ptr->optionsIkigaiWindowFrame)
     {
-    case IKIGAI_TEXT_WINDOW_GYM_TYPE_COLOUR_DARK:
     case IKIGAI_TEXT_WINDOW_GYM_TYPE_COLOUR:
         return gBattleTextboxPalette_Emerald;
         break;
     case IKIGAI_TEXT_WINDOW_PINK:
         return gBattleTextboxPalette_Pink;
         break;
+    case IKIGAI_TEXT_WINDOW_ORANGE:
+        return gBattleTextboxPalette_Orange;
+        break;
     case IKIGAI_TEXT_WINDOW_BLUE:
-    default:
         return gBattleTextboxPalette_Blue;
+        break;
+    default:
+    case IKIGAI_TEXT_WINDOW_GREEN:
+        return gBattleTextboxPalette_Green;
         break;
     }   
 }

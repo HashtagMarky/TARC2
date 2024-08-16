@@ -515,7 +515,7 @@ struct SaveBlock2
     /*0x13*/ u8 playTimeVBlanks;
     /*0x14*/ u16 optionsButtonMode:2;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
              u16 optionsTextSpeed:2; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
-             u16 optionsIkigaiWindowFrame:2; // Specifies one of the Ikigai Blue, Pink and Gym Colour with Light and Dark Modes
+             u16 optionsIkigaiWindowFrame:3; // Specifies one of the Ikigai Blue, Pink and Gym Colour with Light and Dark Modes
              u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
              u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
              u16 optionsBattleSceneOff:1; // whether battle animations are disabled
@@ -523,7 +523,7 @@ struct SaveBlock2
              u16 optionsFollowerMugshotPlaceholder:1; // whether Substitute Mugshot is shown where follower species does not have a musghot.
              u16 optionsSuppressFollowerMugshots:1; // whether Follower Mugshots are disabled
              u16 regionMapZoom:1; // whether the map is zoomed in
-             //u16 padding1:3;
+             //u16 padding1:2;
              //u16 padding2;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 filler_90[0x8];
