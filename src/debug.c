@@ -96,6 +96,7 @@ enum UtilDebugMenu
     DEBUG_UTIL_MENU_ITEM_PLAYER_NAME,
     DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER,
     DEBUG_UTIL_MENU_ITEM_PLAYER_ID,
+    DEBUG_UTIL_MENU_PLAYER_DYNPALS,
     DEBUG_UTIL_MENU_ITEM_CHEAT,
     DEBUG_UTIL_MENU_ITEM_EXPANSION_VER,
     DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS,
@@ -373,6 +374,7 @@ static void DebugAction_Util_WatchCredits(u8 taskId);
 static void DebugAction_Util_Player_Name(u8 taskId);
 static void DebugAction_Util_Player_Gender(u8 taskId);
 static void DebugAction_Util_Player_Id(u8 taskId);
+static void DebugAction_Util_PlayerDynPals(u8 taskId);
 static void DebugAction_Util_CheatStart(u8 taskId);
 static void DebugAction_Util_ExpansionVersion(u8 taskId);
 static void DebugAction_Util_BerryFunctions(u8 taskId);
@@ -472,6 +474,7 @@ extern const u8 DebugScript_OneDaycareMons[];
 extern const u8 DebugScript_ZeroDaycareMons[];
 
 extern const u8 Debug_ShowFieldMessageStringVar4[];
+extern const u8 Debug_OpenDynPalMenu[];
 extern const u8 Debug_CheatStart[];
 extern const u8 Debug_HatchAnEgg[];
 extern const u8 PlayersHouse_2F_EventScript_SetWallClock[];
@@ -534,6 +537,7 @@ static const u8 sDebugText_Util_WatchCredits[] =             _("Watch credits…
 static const u8 sDebugText_Util_Player_Name[] =              _("Player name");
 static const u8 sDebugText_Util_Player_Gender[] =            _("Toggle gender");
 static const u8 sDebugText_Util_Player_Id[] =                _("New Trainer ID");
+static const u8 sDebugText_Util_DynPals[]=                   _("Player DynPal Menu");
 static const u8 sDebugText_Util_CheatStart[] =               _("Cheat start");
 static const u8 sDebugText_Util_ExpansionVersion[] =         _("Expansion Version");
 static const u8 sDebugText_Util_BerryFunctions[] =           _("Berry Functions…{CLEAR_TO 110}{RIGHT_ARROW}");
@@ -724,6 +728,7 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]     = {sDebugText_Util_Player_Name,      DEBUG_UTIL_MENU_ITEM_PLAYER_NAME},
     [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]   = {sDebugText_Util_Player_Gender,    DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER},
     [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]       = {sDebugText_Util_Player_Id,        DEBUG_UTIL_MENU_ITEM_PLAYER_ID},
+    [DEBUG_UTIL_MENU_PLAYER_DYNPALS]       = {sDebugText_Util_DynPals,          DEBUG_UTIL_MENU_PLAYER_DYNPALS},
     [DEBUG_UTIL_MENU_ITEM_CHEAT]           = {sDebugText_Util_CheatStart,       DEBUG_UTIL_MENU_ITEM_CHEAT},
     [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]   = {sDebugText_Util_ExpansionVersion, DEBUG_UTIL_MENU_ITEM_EXPANSION_VER},
     [DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS] = {sDebugText_Util_BerryFunctions,   DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS},
@@ -895,6 +900,7 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]     = DebugAction_Util_Player_Name,
     [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]   = DebugAction_Util_Player_Gender,
     [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]       = DebugAction_Util_Player_Id,
+    [DEBUG_UTIL_MENU_PLAYER_DYNPALS]       = DebugAction_Util_PlayerDynPals,
     [DEBUG_UTIL_MENU_ITEM_CHEAT]           = DebugAction_Util_CheatStart,
     [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]   = DebugAction_Util_ExpansionVersion,
     [DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS] = DebugAction_Util_BerryFunctions,
@@ -2340,6 +2346,13 @@ static void DebugAction_Util_Player_Id(u8 taskId)
     SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
     Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
+}
+
+static void DebugAction_Util_PlayerDynPals(u8 taskId)
+{
+    Debug_DestroyMenu_Full(taskId);
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(Debug_OpenDynPalMenu);
 }
 
 static void DebugAction_Util_CheatStart(u8 taskId)

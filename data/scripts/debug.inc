@@ -137,6 +137,14 @@ Debug_EventScript_Text_OffensiveIVs:
 Debug_EventScript_Text_DefensiveIVs:
 	.string "HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}$"
 
+Debug_OpenDynPalMenu::
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
+	waitmovement OBJ_EVENT_ID_PLAYER
+	special DynPal_ShowFullToneMenu
+	waitstate
+	release
+	end
+
 Debug_EventScript_Script_1::
 	release
 	end
