@@ -1,5 +1,6 @@
 #include "global.h"
 #include "dynamic_palettes.h"
+#include "event_object_movement.h"
 #include "list_menu.h"
 #include "menu.h"
 #include "palette.h"
@@ -548,8 +549,8 @@ static void Task_DynPal_MenuFinish(u8 taskId)
         // This code assumes fixed IDs for player palette, so you may need to change this.
         if (sDynPalMenu.isOverworld)
         {
-            DynPal_LoadPaletteByOffset(sDynPalPlayerOverworld, OBJ_PLTT_ID(0));
-            DynPal_LoadPaletteByOffset(sDynPalPlayerReflection, OBJ_PLTT_ID(1));
+            DynPal_LoadPaletteByOffset(sDynPalPlayerOverworld, OBJ_PLTT_ID(2));
+            // DynPal_LoadPaletteByOffset(sDynPalPlayerReflection, OBJ_PLTT_ID(1));
             ScriptContext_Enable();
         }
 
@@ -573,8 +574,8 @@ static void Task_DynPal_MenuCancel(u8 taskId)
 
         if (sDynPalMenu.isOverworld)
         {
-            DynPal_LoadPaletteByOffset(sDynPalPlayerOverworld, OBJ_PLTT_ID(0));
-            DynPal_LoadPaletteByOffset(sDynPalPlayerReflection, OBJ_PLTT_ID(1));
+            DynPal_LoadPaletteByOffset(sDynPalPlayerOverworld, OBJ_PLTT_ID(2));
+            // DynPal_LoadPaletteByOffset(sDynPalPlayerReflection, OBJ_PLTT_ID(1));
             ScriptContext_Enable();
         }
 
@@ -759,7 +760,7 @@ static void DynPal_ReloadPlayerPaletteForMenu(u16 paletteTag, u8 partATone, u8 p
     u16 offset;
     if (sDynPalMenu.isOverworld)
     {
-        offset = OBJ_PLTT_ID(0);
+        offset = OBJ_PLTT_ID(2);
     }
     else
     {
