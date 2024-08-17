@@ -131,6 +131,15 @@
 
 #define FEATURE_FLAG_ASSERT(flag, id) STATIC_ASSERT(flag > TEMP_FLAGS_END || flag == 0, id)
 
+#define IKIGAI_INTERFACE_GREEN                0
+#define IKIGAI_INTERFACE_BLUE                 1
+#define IKIGAI_INTERFACE_ORANGE               2
+#define IKIGAI_INTERFACE_PINK                 3
+#define IKIGAI_DEFAULT_INTERFACE_COUNT        4
+#define IKIGAI_INTERFACE_GYM_TYPE_COLOUR      IKIGAI_DEFAULT_INTERFACE_COUNT
+// #define IKIGAI_INTERFACE_GYM_TYPE_COLOUR_DARK IKIGAI_INTERFACE_GYM_TYPE_COLOUR + 1
+
+
 struct Coords8
 {
     s8 x;
@@ -515,7 +524,7 @@ struct SaveBlock2
     /*0x13*/ u8 playTimeVBlanks;
     /*0x14*/ u16 optionsButtonMode:2;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
              u16 optionsTextSpeed:2; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
-             u16 optionsIkigaiWindowFrame:3; // Specifies one of the Ikigai Blue, Pink and Gym Colour with Light and Dark Modes
+             u16 optionsInterfaceColor:3; // Specifies one of the Ikigai Green, Blue, Orange, Pink and Gym Colours
              u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
              u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
              u16 optionsBattleSceneOff:1; // whether battle animations are disabled

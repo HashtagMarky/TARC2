@@ -92,7 +92,7 @@ static void SetDefaultOptions(void)
 {
     gSaveBlock2Ptr->ikigaiGymType = TYPE_NONE;
     gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
-    gSaveBlock2Ptr->optionsIkigaiWindowFrame = 0;
+    gSaveBlock2Ptr->optionsInterfaceColor = 0;
     gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_MONO;
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;

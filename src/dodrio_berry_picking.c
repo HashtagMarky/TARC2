@@ -4613,7 +4613,7 @@ static void LoadGfx(void)
         sGfx->state++;
         break;
     case 4:
-        LoadWindowFrameGfx(gSaveBlock2Ptr->optionsIkigaiWindowFrame);
+        LoadWindowFrameGfx(gSaveBlock2Ptr->optionsInterfaceColor);
         LoadUserWindowFrameGfx();
         sGfx->state++;
         break;

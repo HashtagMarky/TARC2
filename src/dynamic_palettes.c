@@ -272,8 +272,8 @@ void DynPal_LoadIntroToneIndices(bool8 introReload, u8 loadCycle)
     // Randomises clothes when reloading only, if not clothes match the message box.
     if (!introReload)
     {
-        koleClothes = gSaveBlock2Ptr->optionsIkigaiWindowFrame;
-        ankaClothes = gSaveBlock2Ptr->optionsIkigaiWindowFrame;
+        koleClothes = gSaveBlock2Ptr->optionsInterfaceColor;
+        ankaClothes = gSaveBlock2Ptr->optionsInterfaceColor;
     }
     else
     {

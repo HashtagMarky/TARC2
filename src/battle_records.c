@@ -503,7 +503,7 @@ static void CB2_ShowTrainerHillRecords(void)
         break;
     case 3:
         LoadTrainerHillRecordsWindowGfx(3);
-        LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsIkigaiWindowFrame + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         gMain.state++;
         break;
     case 4:

@@ -196,12 +196,12 @@ void CB2_InitOptionMenu(void)
         gMain.state++;
         break;
     case 3:
-        LoadBgTiles(1, GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsIkigaiWindowFrame)->tiles, 0x120, 0x1A2);
+        LoadBgTiles(1, GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsInterfaceColor)->tiles, 0x120, 0x1A2);
         gMain.state++;
         break;
     case 4:
         LoadPalette(sOptionMenuBg_Pal, BG_PLTT_ID(0), sizeof(sOptionMenuBg_Pal));
-        LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsIkigaiWindowFrame)->pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+        LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsInterfaceColor)->pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
         gMain.state++;
         break;
     case 5:
@@ -234,7 +234,7 @@ void CB2_InitOptionMenu(void)
         gTasks[taskId].tBattleStyle = gSaveBlock2Ptr->optionsBattleStyle;
         gTasks[taskId].tSound = gSaveBlock2Ptr->optionsSound;
         gTasks[taskId].tButtonMode = gSaveBlock2Ptr->optionsButtonMode;
-        gTasks[taskId].tWindowFrameType = gSaveBlock2Ptr->optionsIkigaiWindowFrame;
+        gTasks[taskId].tWindowFrameType = gSaveBlock2Ptr->optionsInterfaceColor;
 
         TextSpeed_DrawChoices(gTasks[taskId].tTextSpeed);
         BattleScene_DrawChoices(gTasks[taskId].tBattleSceneOff);
@@ -356,7 +356,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsBattleStyle = gTasks[taskId].tBattleStyle;
     gSaveBlock2Ptr->optionsSound = gTasks[taskId].tSound;
     gSaveBlock2Ptr->optionsButtonMode = gTasks[taskId].tButtonMode;
-    gSaveBlock2Ptr->optionsIkigaiWindowFrame = gTasks[taskId].tWindowFrameType;
+    gSaveBlock2Ptr->optionsInterfaceColor = gTasks[taskId].tWindowFrameType;
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
