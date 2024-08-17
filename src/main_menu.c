@@ -2403,7 +2403,7 @@ static void Task_NewGameSamuelSpeech_ReturnFromNamingScreenShowTextbox(u8 taskId
 
 static void RandomiseMessageBox(void)
 {
-    gSaveBlock2Ptr->optionsIkigaiWindowFrame = Random() % 2;
+    gSaveBlock2Ptr->optionsIkigaiWindowFrame = Random() % IKIGAI_DEFAULT_WINDOW_FRAMES_COUNT;
 }
 
 #undef tTimer
