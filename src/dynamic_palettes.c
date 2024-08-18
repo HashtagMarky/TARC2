@@ -2,6 +2,7 @@
 #include "dynamic_palettes.h"
 #include "event_object_movement.h"
 #include "list_menu.h"
+#include "map_name_popup.h"
 #include "menu.h"
 #include "palette.h"
 #include "random.h"
@@ -12,6 +13,7 @@
 #include "text.h"
 #include "text_window.h"
 #include "window.h"
+#include "constants/event_objects.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
@@ -549,8 +551,11 @@ static void Task_DynPal_MenuFinish(u8 taskId)
         // This code assumes fixed IDs for player palette, so you may need to change this.
         if (sDynPalMenu.isOverworld)
         {
-            DynPal_LoadPaletteByOffset(sDynPalPlayerOverworld, OBJ_PLTT_ID(2));
-            // DynPal_LoadPaletteByOffset(sDynPalPlayerReflection, OBJ_PLTT_ID(1));
+            DynPal_LoadPaletteByOffset(sDynPalPlayerOverworld, OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_BRENDAN)));
+            DynPal_LoadPaletteByOffset(sDynPalPlayerReflection, OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_BRENDAN_REFLECTION)));
+            DynPal_LoadPaletteByOffset(sDynPalPlayerOverworld, OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_MAY)));
+            DynPal_LoadPaletteByOffset(sDynPalPlayerReflection, OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_MAY_REFLECTION)));
+            DynPal_LoadPaletteByOffset(sDynPalPlayerReflection, OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_PLAYER_UNDERWATER)));
             ScriptContext_Enable();
         }
 
@@ -574,8 +579,11 @@ static void Task_DynPal_MenuCancel(u8 taskId)
 
         if (sDynPalMenu.isOverworld)
         {
-            DynPal_LoadPaletteByOffset(sDynPalPlayerOverworld, OBJ_PLTT_ID(2));
-            // DynPal_LoadPaletteByOffset(sDynPalPlayerReflection, OBJ_PLTT_ID(1));
+            DynPal_LoadPaletteByOffset(sDynPalPlayerOverworld, OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_BRENDAN)));
+            DynPal_LoadPaletteByOffset(sDynPalPlayerReflection, OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_BRENDAN_REFLECTION)));
+            DynPal_LoadPaletteByOffset(sDynPalPlayerOverworld, OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_MAY)));
+            DynPal_LoadPaletteByOffset(sDynPalPlayerReflection, OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_MAY_REFLECTION)));
+            DynPal_LoadPaletteByOffset(sDynPalPlayerReflection, OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_PLAYER_UNDERWATER)));
             ScriptContext_Enable();
         }
 
@@ -631,11 +639,19 @@ static void DynPal_MenuShow(u8 taskId)
 
     maxShownItems = min(DYNPAL_MENU_MAX_SHOWN, numItems);
 
+    HideMapNamePopUpWindow();
     // Create window and menu templates
     windowTemplate = CreateWindowTemplate(0, 2, 2, 9, (maxShownItems * 2), 15, 0x80);
     windowId = AddWindow(&windowTemplate);
-    LoadUserWindowBorderGfx_(windowId, 0xF3, BG_PLTT_ID(2));
-    DrawTextBorderOuter(windowId, 0xF3, 2);
+    if (!sDynPalMenu.isOverworld)
+    {
+        LoadUserWindowBorderGfx_(windowId, 0xF3, BG_PLTT_ID(2));
+        DrawTextBorderOuter(windowId, 0xF3, 2);
+    }
+    else
+    {
+        DrawStdWindowFrame(windowId, FALSE);
+    }
 
     gMultiuseListMenuTemplate = sListTemplate_DynPal;
     gMultiuseListMenuTemplate.items = menuItems;
@@ -760,7 +776,10 @@ static void DynPal_ReloadPlayerPaletteForMenu(u16 paletteTag, u8 partATone, u8 p
     u16 offset;
     if (sDynPalMenu.isOverworld)
     {
-        offset = OBJ_PLTT_ID(2);
+        if (gSaveBlock2Ptr->playerGender == MALE)
+            offset = OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_BRENDAN));
+        else
+            offset = OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_MAY));
     }
     else
     {
