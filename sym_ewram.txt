@@ -154,4 +154,5 @@
 	.include "src/pokedex_plus_hgss.o"
 	.include "src/social_media.o"
 	.include "src/field_mugshot.o"
+	.include "src/overworld_encounters.o"
 

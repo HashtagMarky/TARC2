@@ -324,7 +324,7 @@ static void DrawLevelUpWindow2(void);
 static void PutMonIconOnLvlUpBanner(void);
 static void DrawLevelUpBannerText(void);
 static void SpriteCB_MonIconOnLvlUpBanner(struct Sprite *sprite);
-static bool32 CriticalCapture(u32 odds);
+bool32 CriticalCapture(u32 odds);
 static void BestowItem(u32 battlerAtk, u32 battlerDef);
 static bool8 IsFinalStrikeEffect(u32 moveEffect);
 static void TryUpdateRoundTurnOrder(void);
@@ -15879,7 +15879,7 @@ void BS_DoStockpileStatChangesWearOff(void)
     }
 }
 
-static bool32 CriticalCapture(u32 odds)
+bool32 CriticalCapture(u32 odds)
 {
     u32 numCaught;
 
