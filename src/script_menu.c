@@ -24,6 +24,9 @@
 
 #include "data/script_menu.h"
 
+#include "constants/field_mugshots.h"
+#include "field_mugshot.h"
+
 struct DynamicListMenuEventArgs
 {
     struct ListMenuTemplate *list;
@@ -67,6 +70,9 @@ static void MultichoiceDynamicEventDebug_OnDestroy(struct DynamicListMenuEventAr
 static void MultichoiceDynamicEventShowItem_OnInit(struct DynamicListMenuEventArgs *eventArgs);
 static void MultichoiceDynamicEventShowItem_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
 static void MultichoiceDynamicEventShowItem_OnDestroy(struct DynamicListMenuEventArgs *eventArgs);
+static void MultichoiceDynamicEventShowPMD_OnInit(struct DynamicListMenuEventArgs *eventArgs);
+static void MultichoiceDynamicEventShowPMD_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
+static void MultichoiceDynamicEventShowPMD_OnDestroy(struct DynamicListMenuEventArgs *eventArgs);
 
 static const struct DynamicListMenuEventCollection sDynamicListMenuEventCollections[] =
 {
@@ -81,6 +87,12 @@ static const struct DynamicListMenuEventCollection sDynamicListMenuEventCollecti
         .OnInit = MultichoiceDynamicEventShowItem_OnInit,
         .OnSelectionChanged = MultichoiceDynamicEventShowItem_OnSelectionChanged,
         .OnDestroy = MultichoiceDynamicEventShowItem_OnDestroy
+    },
+    [DYN_MULTICHOICE_CB_SHOW_PMD] =
+    {
+        .OnInit = MultichoiceDynamicEventShowPMD_OnInit,
+        .OnSelectionChanged = MultichoiceDynamicEventShowPMD_OnSelectionChanged,
+        .OnDestroy = MultichoiceDynamicEventShowPMD_OnDestroy
     }
 };
 
@@ -156,6 +168,7 @@ static void MultichoiceDynamicEventDebug_OnDestroy(struct DynamicListMenuEventAr
 
 #define sAuxWindowId sDynamicMenuEventScratchPad[0]
 #define sItemSpriteId sDynamicMenuEventScratchPad[1]
+#define sPMDSpriteId sDynamicMenuEventScratchPad[2]
 #define TAG_CB_ITEM_ICON 3000
 
 static void MultichoiceDynamicEventShowItem_OnInit(struct DynamicListMenuEventArgs *eventArgs)
@@ -203,8 +216,54 @@ static void MultichoiceDynamicEventShowItem_OnDestroy(struct DynamicListMenuEven
     }
 }
 
+static void MultichoiceDynamicEventShowPMD_OnInit(struct DynamicListMenuEventArgs *eventArgs)
+{
+    struct WindowTemplate *template = &gWindows[eventArgs->windowId].window;
+    u32 baseBlock = template->baseBlock + template->width * template->height;
+    struct WindowTemplate auxTemplate = CreateWindowTemplate(0, template->tilemapLeft + template->width + 2, template->tilemapTop, 5, 5, 15, baseBlock);
+    u32 auxWindowId = AddWindow(&auxTemplate);
+    SetStandardWindowBorderStyle(auxWindowId, FALSE);
+    FillWindowPixelBuffer(auxWindowId, 0x11);
+    CopyWindowToVram(auxWindowId, COPYWIN_FULL);
+    sAuxWindowId = auxWindowId;
+    sPMDSpriteId = MAX_SPRITES;
+}
+
+static void MultichoiceDynamicEventShowPMD_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs)
+{
+    struct WindowTemplate *template = &gWindows[eventArgs->windowId].window;
+    u32 x = template->tilemapLeft * 8 + template->width * 8 + 24;
+    u32 y = template->tilemapTop * 8 + 8;
+
+    if (sPMDSpriteId != MAX_SPRITES)
+    {
+        FreeSpriteTilesByTag(TAG_MUGSHOT);
+        FreeSpritePaletteByTag(TAG_MUGSHOT);
+        DestroySprite(&gSprites[sPMDSpriteId]);
+    }
+
+    sPMDSpriteId = CreateFieldMugshotSprite(gSpecialVar_0x8004, EMOTE_ANGRY);
+    gSprites[sPMDSpriteId].oam.priority = 0;
+    gSprites[sPMDSpriteId].x = x;
+    gSprites[sPMDSpriteId].y = y;
+}
+
+static void MultichoiceDynamicEventShowPMD_OnDestroy(struct DynamicListMenuEventArgs *eventArgs)
+{
+    ClearStdWindowAndFrame(sAuxWindowId, TRUE);
+    RemoveWindow(sAuxWindowId);
+
+    if (sPMDSpriteId != MAX_SPRITES)
+    {
+        FreeSpriteTilesByTag(TAG_MUGSHOT);
+        FreeSpritePaletteByTag(TAG_MUGSHOT);
+        DestroySprite(&gSprites[sPMDSpriteId]);
+    }
+}
+
 #undef sAuxWindowId
 #undef sItemSpriteId
+#undef sPMDSpriteId
 #undef TAG_CB_ITEM_ICON
 
 static void FreeListMenuItems(struct ListMenuItem *items, u32 count)
