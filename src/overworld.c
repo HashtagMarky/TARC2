@@ -3283,7 +3283,7 @@ static void SpriteCB_LinkPlayer(struct Sprite *sprite)
 
 void GetOverworldMonSpecies(void)
 {
-    gSpecialVar_0x8005 = 0;
+    gSpecialVar_0x8005 = gObjectEvents[gSelectedObjectEvent].shiny;
 
     switch (gObjectEvents[gSelectedObjectEvent].graphicsId)
     {
@@ -3527,25 +3527,10 @@ void GetOverworldMonSpecies(void)
         break;
     
     default:
-        if (!(gObjectEvents[gSelectedObjectEvent].graphicsId > OBJ_EVENT_GFX_SPECIES(NONE)
-            && gObjectEvents[gSelectedObjectEvent].graphicsId < OBJ_EVENT_GFX_SPECIES(EGG))
-            || (gObjectEvents[gSelectedObjectEvent].graphicsId > OBJ_EVENT_GFX_SPECIES_SHINY(NONE)
-            && gObjectEvents[gSelectedObjectEvent].graphicsId < OBJ_EVENT_GFX_SPECIES_SHINY(EGG)))
-            {
-                gSpecialVar_0x8004 = SPECIES_NONE;
-            }
+        if (gObjectEvents[gSelectedObjectEvent].graphicsId > OBJ_EVENT_GFX_SPECIES(NONE) && gObjectEvents[gSelectedObjectEvent].graphicsId < OBJ_EVENT_GFX_SPECIES(EGG))
+            gSpecialVar_0x8004 = gObjectEvents[gSelectedObjectEvent].graphicsId - OBJ_EVENT_GFX_SPECIES(NONE);    
         else
-        {
-            if (gObjectEvents[gSelectedObjectEvent].graphicsId > OBJ_EVENT_GFX_SPECIES_SHINY(NONE))
-            {
-                gSpecialVar_0x8004 = gObjectEvents[gSelectedObjectEvent].graphicsId - OBJ_EVENT_GFX_SPECIES_SHINY(NONE);
-                gSpecialVar_0x8005 = 1;
-            }
-            else
-            {
-                gSpecialVar_0x8004 = gObjectEvents[gSelectedObjectEvent].graphicsId - OBJ_EVENT_GFX_SPECIES(NONE);
-            }
-        }
+            gSpecialVar_0x8004 = SPECIES_NONE;
         break;
     }
 }
