@@ -158,6 +158,11 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
     struct SpritePalette pal = { .tag = sheet.tag };
 
     RemoveFieldMugshot();
+
+    if ((mugshotId >= NELEMS(sFieldMugshots)
+        && gSaveBlock2Ptr->optionsFollowerMugshotPlaceholder == TRUE && mugshotType == MUGSHOT_FOLLOWER))
+        mugshotId = MUGSHOT_SUBSTITUTE_DOLL;
+
     if (mugshotId >= NELEMS(sFieldMugshots)
         || FlagGet(FLAG_SUPPRESS_MUGSHOT)
         || (gSaveBlock2Ptr->optionsSuppressNPCMugshots == TRUE && mugshotType != MUGSHOT_FOLLOWER)
