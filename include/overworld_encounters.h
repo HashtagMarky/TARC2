@@ -1,0 +1,6 @@
+#ifndef GUARD_OVERWORLD_ENCOUNTERS_H
+#define GUARD_OVERWORLD_ENCOUNTERS_H
+
+void GetOverworldSpeciesCatchRate(void);
+
+#endif // GUARD_OVERWORLD_ENCOUNTERS_H
