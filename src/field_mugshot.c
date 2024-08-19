@@ -100,7 +100,7 @@ void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 
      
     mugshotId = followerSpecies + OBJ_EVENT_GFX_SPECIES(NONE);
     if (shiny)
-        mugshotId = mugshotId + SPECIES_SHINY_TAG;
+        mugshotId += SPECIES_SHINY_TAG;
 
     switch (followerEmotion)
     {
