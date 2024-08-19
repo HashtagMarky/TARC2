@@ -4,6 +4,8 @@
 #include "constants/event_objects.h"
 #include "constants/species.h"
 
+#define TAG_MUGSHOT 0x9000
+
 // Mugshot Types
 #define MUGSHOT_DEFINED     0
 #define MUGSHOT_NPC         1

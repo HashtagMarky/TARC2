@@ -17,8 +17,6 @@
 
 static EWRAM_DATA u8 sFieldMugshotSpriteId = 0;
 
-#define TAG_MUGSHOT 0x9000
-
 #define MUGSHOT_NPC_X           200
 #define MUGSHOT_NPC_Y           72
 #define MUGSHOT_PMD_X           192
@@ -167,9 +165,7 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
         || FlagGet(FLAG_SUPPRESS_MUGSHOT)
         || (gSaveBlock2Ptr->optionsSuppressNPCMugshots == TRUE && mugshotType != MUGSHOT_FOLLOWER)
         || (gSaveBlock2Ptr->optionsSuppressFollowerMugshots == TRUE && mugshotType == MUGSHOT_FOLLOWER))
-        {
             return;
-        }
 
     if ((sFieldMugshots[mugshotId][mugshotEmotion].gfx != NULL && sFieldMugshots[mugshotId][mugshotEmotion].pal != NULL))
     {
@@ -235,3 +231,55 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
 }
 
 #undef tWindowId
+
+u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion)
+{
+    struct CompressedSpriteSheet sheet = { .size=0x1000, .tag=TAG_MUGSHOT };
+    struct SpritePalette pal = { .tag = sheet.tag };
+
+    mugshotId += OBJ_EVENT_GFX_SPECIES(NONE);
+    if (gSpecialVar_0x8005 == 1)
+        mugshotId += SPECIES_SHINY_TAG;
+
+    RemoveFieldMugshot();
+
+    if (mugshotId >= NELEMS(sFieldMugshots))
+        mugshotId = MUGSHOT_SUBSTITUTE_DOLL;
+
+    if ((sFieldMugshots[mugshotId][mugshotEmotion].gfx != NULL && sFieldMugshots[mugshotId][mugshotEmotion].pal != NULL))
+    {
+        sheet.data = sFieldMugshots[mugshotId][mugshotEmotion].gfx;
+        pal.data = sFieldMugshots[mugshotId][mugshotEmotion].pal;
+    }
+    else if ((sFieldMugshots[mugshotId][EMOTE_NORMAL].gfx != NULL && sFieldMugshots[mugshotId][EMOTE_NORMAL].pal != NULL))
+    {
+        sheet.data = sFieldMugshots[mugshotId][EMOTE_NORMAL].gfx;
+        pal.data = sFieldMugshots[mugshotId][EMOTE_NORMAL].pal;
+    }
+    else if (mugshotId > (OBJ_EVENT_GFX_SPECIES_SHINY(NONE)) && (sFieldMugshots[mugshotId - SPECIES_SHINY_TAG][mugshotEmotion].gfx != NULL && sFieldMugshots[mugshotId - SPECIES_SHINY_TAG][mugshotEmotion].pal != NULL))
+    {
+        sheet.data = sFieldMugshots[mugshotId - SPECIES_SHINY_TAG][mugshotEmotion].gfx;
+        pal.data = sFieldMugshots[mugshotId - SPECIES_SHINY_TAG][mugshotEmotion].pal;
+    }
+    else if (mugshotId > (OBJ_EVENT_GFX_SPECIES_SHINY(NONE)) && (sFieldMugshots[mugshotId - SPECIES_SHINY_TAG][EMOTE_NORMAL].gfx != NULL && sFieldMugshots[mugshotId - SPECIES_SHINY_TAG][EMOTE_NORMAL].pal != NULL))
+    {
+        sheet.data = sFieldMugshots[mugshotId - SPECIES_SHINY_TAG][EMOTE_NORMAL].gfx;
+        pal.data = sFieldMugshots[mugshotId - SPECIES_SHINY_TAG][EMOTE_NORMAL].pal;
+    }
+    else
+    {
+        sheet.data = sFieldMugshots[MUGSHOT_SUBSTITUTE_DOLL][mugshotEmotion].gfx;
+        pal.data = sFieldMugshots[MUGSHOT_SUBSTITUTE_DOLL][mugshotEmotion].pal;
+    }
+
+    LoadCompressedSpriteSheet(&sheet);
+    LoadSpritePalette(&pal);
+
+    sFieldMugshotSpriteId = CreateSprite(&sFieldMugshot_SpriteTemplate, 0, 0, 0);
+    if (sFieldMugshotSpriteId == SPRITE_NONE)
+    {
+        return NULL;
+    }
+    PreservePaletteInWeather(gSprites[sFieldMugshotSpriteId].oam.paletteNum + 0x10);
+    return sFieldMugshotSpriteId;
+}
