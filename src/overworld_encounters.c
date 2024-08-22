@@ -17,6 +17,8 @@
 #include "constants/items.h"
 #include "constants/map_types.h"
 
+#define OVERWORLD_CATCH_SUCCESS_MULTIPLYER      gSaveBlock2Ptr->/*optionsOverworldCatchSuccessMultiplyer*/optionsSound + 1;
+
 void GetOverworldMonSpecies(void)
 {
     gSpecialVar_0x8005 = gObjectEvents[gSelectedObjectEvent].shiny;
@@ -488,6 +490,8 @@ void GetOverworldSpeciesCatchRate(void)
     */
         
     odds = (catchRate * ballMultiplier / 100) * (3 - 2) / (3);
+
+    odds *= OVERWORLD_CATCH_SUCCESS_MULTIPLYER;
 
     if (odds > 254) // mon caught
     {
