@@ -560,3 +560,6 @@ gSpecials::
 	def_special DynPal_ShowToneMenu_Hair
 	def_special DynPal_ShowToneMenu_Clothes
 	def_special GetOverworldMonSpecies
+	def_special HasAtLeastOnePokeBall
+	def_special GetOverworldSpeciesCatchRate
+	def_special OverworldTrappedInBattle
