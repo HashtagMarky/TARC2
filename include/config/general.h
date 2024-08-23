@@ -81,6 +81,8 @@
 #define TITLE_SCREEN_FLASH_COLOR     RGB_IKIGAI_BLUE    // See rgb.h for colors and color creation funtion.
 #define TITLE_SCREEN_VERSION_NUMBER  FALSE   // If TRUE, shows the game version number on the title screen.
 
+// Textboxes
+#define MESSAGE_BOX_WHITESPACE       TRUE   // If TRUE, removes the colored bar inside the message boxes.
 // Measurement system constants to be used for UNITS
 #define UNITS_IMPERIAL               0       // Inches, feet, pounds
 #define UNITS_METRIC                 1       // meters, kilograms
