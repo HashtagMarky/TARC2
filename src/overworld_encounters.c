@@ -476,25 +476,8 @@ void GetOverworldSpeciesCatchRate(void)
         catchRate = 1;
     else
         catchRate = catchRate + ballAddition;
-
-    /*
-    odds = (catchRate * ballMultiplier / 100)
-        * (gBattleMons[gBattlerTarget].maxHP * 3 - gBattleMons[gBattlerTarget].hp * 2)
-        / (3 * gBattleMons[gBattlerTarget].maxHP);
-    */
         
-    /*
-    if (gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP | STATUS1_FREEZE))
-        odds *= 2;
-    if (gBattleMons[gBattlerTarget].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON | STATUS1_FROSTBITE))
-        odds = (odds * 15) / 10;
-
-    if (gBattleResults.catchAttempts[gLastUsedItem - FIRST_BALL] < 255)
-        gBattleResults.catchAttempts[gLastUsedItem - FIRST_BALL]++;
-    */
-        
-    odds = (catchRate * ballMultiplier / 100) * (3 - 2) / (3);
-
+    odds = (catchRate * ballMultiplier / 100) * (3 - 2) / (3); // Full HP calculation.
     odds *= OVERWORLD_CATCH_SUCCESS_MULTIPLYER;
 
     if (odds > 254) // mon caught
@@ -543,13 +526,10 @@ u8 OverworldTrappedInBattle(void)
     u8 leadMonAbilityNum = GetMonData(GetFirstLiveMon(), MON_DATA_ABILITY_NUM);
     u8 i;
 
-    if (heldItem == ITEM_ENIGMA_BERRY_E_READER)
-        // holdEffect = gEnigmaBerries[battler].holdEffect;
+    if (heldItem == ITEM_NONE || heldItem == ITEM_ENIGMA_BERRY_E_READER)
         holdEffect = HOLD_EFFECT_NONE;
     else
         holdEffect = ItemId_GetHoldEffect(heldItem);
-
-    // gPotentialItemEffectBattler = battler;
 
     if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN || holdEffect == HOLD_EFFECT_SHED_SHELL)
         return BATTLE_RUN_SUCCESS;
@@ -560,22 +540,11 @@ u8 OverworldTrappedInBattle(void)
     if (gSpeciesInfo[leadMonSpecies].abilities[leadMonAbilityNum] == ABILITY_RUN_AWAY)
         return BATTLE_RUN_SUCCESS;
 
-    /*
-    if ((i = IsAbilityPreventingEscape(battler)))
-    {
-        gBattleScripting.battler = i - 1;
-        gLastUsedAbility = gBattleMons[i - 1].ability;
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PREVENTS_ESCAPE;
-        return BATTLE_RUN_FAILURE;
-    }
-    */
-
     for (i = 0; i < NUM_ABILITY_SLOTS; i++)
     {
         if (gSpeciesInfo[enemyMonSpecies].abilities[i] == ABILITY_SHADOW_TAG
-            && ((B_SHADOW_TAG_ESCAPE >= GEN_4
-            && gSpeciesInfo[leadMonSpecies].abilities[leadMonAbilityNum] != ABILITY_SHADOW_TAG)
-            || B_SHADOW_TAG_ESCAPE < GEN_4)
+            && (!(B_SHADOW_TAG_ESCAPE >= GEN_4
+            && gSpeciesInfo[leadMonSpecies].abilities[leadMonAbilityNum] == ABILITY_SHADOW_TAG))
             && Random() % NUM_ABILITY_SLOTS == BATTLE_RUN_FAILURE)
             return BATTLE_RUN_FAILURE;
         
