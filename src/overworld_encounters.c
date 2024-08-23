@@ -7,15 +7,19 @@
 #include "fieldmap.h"
 #include "field_player_avatar.h"
 #include "global.fieldmap.h"
+#include "item.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "overworld_encounters.h"
 #include "pokedex.h"
 #include "pokemon.h"
 #include "rtc.h"
+#include "constants/abilities.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
+#include "constants/hold_effects.h"
 #include "constants/map_types.h"
+#include "constants/pokemon.h"
 
 #define OVERWORLD_CATCH_SUCCESS_MULTIPLYER      gSaveBlock2Ptr->/*optionsOverworldCatchSuccessMultiplyer*/optionsSound + 1;
 
@@ -526,4 +530,72 @@ void GetOverworldSpeciesCatchRate(void)
         }
         gSpecialVar_Result = result;
     }
+}
+
+// This Should Replicate IsRunningFromBattleImpossible in battle_main.c
+// It also combines IsAbilityPreventingEscape and CanBattlerEscape from battle_util.c
+u8 OverworldTrappedInBattle(void)
+{
+    u32 holdEffect;
+    u16 heldItem = GetMonData(GetFirstLiveMon(), MON_DATA_HELD_ITEM);
+    u16 leadMonSpecies = GetMonData(GetFirstLiveMon(), MON_DATA_SPECIES);
+    u16 enemyMonSpecies = gSpecialVar_0x8004;
+    u8 leadMonAbilityNum = GetMonData(GetFirstLiveMon(), MON_DATA_ABILITY_NUM);
+    u8 i;
+
+    if (heldItem == ITEM_ENIGMA_BERRY_E_READER)
+        // holdEffect = gEnigmaBerries[battler].holdEffect;
+        holdEffect = HOLD_EFFECT_NONE;
+    else
+        holdEffect = ItemId_GetHoldEffect(heldItem);
+
+    // gPotentialItemEffectBattler = battler;
+
+    if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN || holdEffect == HOLD_EFFECT_SHED_SHELL)
+        return BATTLE_RUN_SUCCESS;
+    if (B_GHOSTS_ESCAPE >= GEN_6 &&
+        (gSpeciesInfo[leadMonSpecies].types[0] == TYPE_GHOST
+        || gSpeciesInfo[leadMonSpecies].types[1] == TYPE_GHOST))
+        return BATTLE_RUN_SUCCESS;
+    if (gSpeciesInfo[leadMonSpecies].abilities[leadMonAbilityNum] == ABILITY_RUN_AWAY)
+        return BATTLE_RUN_SUCCESS;
+
+    /*
+    if ((i = IsAbilityPreventingEscape(battler)))
+    {
+        gBattleScripting.battler = i - 1;
+        gLastUsedAbility = gBattleMons[i - 1].ability;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PREVENTS_ESCAPE;
+        return BATTLE_RUN_FAILURE;
+    }
+    */
+
+    for (i = 0; i < NUM_ABILITY_SLOTS; i++)
+    {
+        if (gSpeciesInfo[enemyMonSpecies].abilities[i] == ABILITY_SHADOW_TAG
+            && ((B_SHADOW_TAG_ESCAPE >= GEN_4
+            && gSpeciesInfo[leadMonSpecies].abilities[leadMonAbilityNum] != ABILITY_SHADOW_TAG)
+            || B_SHADOW_TAG_ESCAPE < GEN_4)
+            && Random() % NUM_ABILITY_SLOTS == BATTLE_RUN_FAILURE)
+            return BATTLE_RUN_FAILURE;
+        
+        if (gSpeciesInfo[enemyMonSpecies].abilities[i] == ABILITY_ARENA_TRAP
+            && (holdEffect != HOLD_EFFECT_AIR_BALLOON
+            || holdEffect == HOLD_EFFECT_IRON_BALL
+            || (gSpeciesInfo[leadMonSpecies].types[0] != TYPE_FLYING
+            && gSpeciesInfo[leadMonSpecies].types[1] != TYPE_FLYING))
+            && Random() % NUM_ABILITY_SLOTS == BATTLE_RUN_FAILURE)
+            return BATTLE_RUN_FAILURE;
+
+        if (gSpeciesInfo[enemyMonSpecies].abilities[i] == ABILITY_MAGNET_PULL
+            && (gSpeciesInfo[leadMonSpecies].types[0] == TYPE_STEEL
+            || gSpeciesInfo[leadMonSpecies].types[1] == TYPE_STEEL)
+            && Random() % NUM_ABILITY_SLOTS == BATTLE_RUN_FAILURE)
+            return BATTLE_RUN_FAILURE;
+    }
+
+    if (gSpeciesInfo[leadMonSpecies].baseSpeed >= gSpeciesInfo[enemyMonSpecies].baseSpeed)
+        return BATTLE_RUN_SUCCESS;
+    else
+        return BATTLE_RUN_FAILURE;
 }
