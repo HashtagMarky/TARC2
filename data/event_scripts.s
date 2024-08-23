@@ -1076,3 +1076,4 @@ EventScript_VsSeekerChargingDone::
 	.include "data/text/save.inc"
 	.include "data/text/samuel_speech.inc"
 	.include "data/scripts/toggleable_transport.inc"
+	.include "data/scripts/overworld_encounters.inc"

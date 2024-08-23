@@ -1,0 +1,128 @@
+// 0x8004 Species
+// 0x8005 Shiny Status
+// 0x8006 Level
+// 0x8007 Pokéball
+
+script OverworldEncounters_EventScript_Encounter {
+    lock
+    faceplayer
+    setvar (VAR_0x8006, 5)
+	special (GetOverworldMonSpecies)
+    bufferspeciesname(STR_VAR_1, VAR_0x8004)
+    specialvar (VAR_RESULT, HasAtLeastOnePokeBall)
+    playmoncry (VAR_0x8004, CRY_MODE_ENCOUNTER)
+    message(format("It's a wild {STR_VAR_1}!\n What will {PLAYER} do?"))
+    waitmessage
+    dynmultipush("{FONT_NARROW}FIGHT", 0)
+    if (var(VAR_RESULT) == TRUE) {
+        dynmultipush("{FONT_NARROWER}{POKE}BALL", 1)
+    }
+    dynmultipush("{FONT_NARROW}RUN", 2)
+    dynmultistack(0, 0, TRUE, 3, TRUE, 0, DYN_MULTICHOICE_CB_SHOW_PMD)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(OverworldEncounters_EventScript_Fight)
+        case 1:
+            goto(OverworldEncounters_EventScript_Ball)
+        case 2:
+            goto(OverworldEncounters_EventScript_Run)
+    }
+}
+
+script OverworldEncounters_EventScript_Fight {
+    createmon (B_SIDE_OPPONENT, B_FLANK_LEFT, VAR_0x8004, VAR_0x8006, isShiny=VAR_0x8005)
+    closemessage
+    waitmoncry
+    dowildbattle
+    specialvar (VAR_RESULT, GetBattleOutcome)
+    switch (var(VAR_RESULT))
+    {
+        case B_OUTCOME_WON:
+        case B_OUTCOME_MON_FLED:
+        case B_OUTCOME_CAUGHT:
+            playmoncry (VAR_0x8004, CRY_MODE_FAINT)
+            goto(OverworldEncounters_EventScript_EncounterRemove)
+        default:
+            playmoncry (VAR_0x8004, CRY_MODE_DOUBLES)
+    }
+    waitmoncry
+    goto(OverworldEncounters_EventScript_EncounterEnd)
+}
+
+script OverworldEncounters_EventScript_Ball {
+    setvar(VAR_0x8007, FIRST_BALL)
+    while (var(VAR_0x8007) <= LAST_BALL) {
+        checkitem(VAR_0x8007)
+        if (var(VAR_RESULT) == TRUE) {
+            bufferitemname(STR_VAR_1, VAR_0x8007)
+            dynmultipush("{FONT_NARROW}{STR_VAR_1}", VAR_0x8007)
+        }
+        addvar(VAR_0x8007, 1)
+    }
+    message(format("What type of {FONT_NARROWER}{POKE}BALL {FONT_NORMAL}will {PLAYER} use?"))
+    waitmessage
+    dynmultistack(0, 0, FALSE, 3, TRUE, 0, DYN_MULTICHOICE_CB_SHOW_ITEM)
+    if (var(VAR_RESULT) == MULTI_B_PRESSED) {
+        goto(OverworldEncounters_EventScript_Encounter)
+    } else {
+        copyvar(VAR_0x8007, VAR_RESULT)
+        removeitem(VAR_0x8007, 1)
+        goto(OverworldEncounters_EventScript_CatchAttempt)
+    }
+}
+
+script OverworldEncounters_EventScript_CatchAttempt {
+    special(GetOverworldSpeciesCatchRate)
+    bufferspeciesname(STR_VAR_1, VAR_0x8004)
+    switch (var(VAR_RESULT))
+    {
+        case 3:
+            message(format("The wild {STR_VAR_1} was caught!\n It was a critical capture!"))
+        case 1:
+            message(format("The wild {STR_VAR_1} was caught!"))
+        default:
+            message(format("The wild {STR_VAR_1} broke free!\p The wild {STR_VAR_1} lunged\n at {PLAYER}!"))
+            waitmessage
+            waitbuttonpress
+            goto(OverworldEncounters_EventScript_Fight)
+    }
+    playfanfare(MUS_OBTAIN_ITEM)
+    waitfanfare
+    waitmessage
+    waitbuttonpress
+    closemessage
+    givemon(VAR_0x8004, VAR_0x8006, isShiny=VAR_0x8005)
+    playmoncry (VAR_0x8004, CRY_MODE_NORMAL)
+    goto(OverworldEncounters_EventScript_EncounterRemove)
+}
+
+script OverworldEncounters_EventScript_Run {
+    specialvar(VAR_RESULT, OverworldTrappedInBattle)
+    if (var(VAR_RESULT) == BATTLE_RUN_SUCCESS) {
+        message(format("{PLAYER} got away from the\n wild {STR_VAR_1}!"))
+        waitmessage
+        waitbuttonpress
+        closemessage
+        goto(OverworldEncounters_EventScript_EncounterEnd)
+    } else {
+        message(format("Couldn't get away from the\n wild {STR_VAR_1}!\p The wild {STR_VAR_1} lunged\n at {PLAYER}!"))
+        waitmessage
+        waitbuttonpress
+        goto(OverworldEncounters_EventScript_Fight)
+    }
+}
+
+script OverworldEncounters_EventScript_EncounterEnd
+{
+    // setobjectmovement(VAR_LAST_TALKED)
+    releaseall
+    end
+}
+
+script OverworldEncounters_EventScript_EncounterRemove
+{
+    call(Common_EventScript_RemoveStaticPokemon)
+    waitfanfare
+    waitmoncry
+    goto(OverworldEncounters_EventScript_EncounterEnd)
+}
