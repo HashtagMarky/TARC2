@@ -1650,7 +1650,9 @@ static u16 PackGraphicsId(const struct ObjectEventTemplate *template)
     u32 form = 0;
     // set form based on template's script,
     // if first command is bufferspeciesname
-    if (graphicsId >= OBJ_EVENT_GFX_MON_BASE)
+    // if TRAINER_TYPE_POKEMON then ignore form changes, next line to rectify
+    // bit shifting caused by changes to gObjectEvents[gSelectedObjectEvent].trainerRange_berryTreeId
+    if (graphicsId >= OBJ_EVENT_GFX_MON_BASE && template->trainerType != TRAINER_TYPE_POKEMON)
     {
         if (template->script && template->script[0] == 0x7d)
         {
@@ -10648,4 +10650,9 @@ void GetDaycareGraphics(struct ScriptContext *ctx)
         VarSet(varForm[i], form | (shiny << 5));
     }
     gSpecialVar_Result = i;
+}
+
+u16 GetObjectEventTrainerSightFlagByObjectEventId(u8 objEventId)
+{
+    return GetObjectEventTemplateByLocalIdAndMap(gObjectEvents[objEventId].localId, gObjectEvents[objEventId].mapNum, gObjectEvents[objEventId].mapGroup)->trainerType;
 }

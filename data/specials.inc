@@ -563,3 +563,4 @@ gSpecials::
 	def_special HasAtLeastOnePokeBall
 	def_special GetOverworldSpeciesCatchRate
 	def_special OverworldTrappedInBattle
+	def_special WillOverworldEncounterRun

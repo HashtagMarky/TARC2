@@ -1,10 +1,15 @@
 #include "global.h"
 #include "script.h"
 #include "event_data.h"
+#include "event_scripts.h"
 #include "mystery_gift.h"
+#include "overworld_encounters.h"
 #include "util.h"
 #include "constants/event_objects.h"
+#include "constants/field_mugshots.h"
 #include "constants/map_scripts.h"
+
+#include "trainer_see.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -500,4 +505,18 @@ void InitRamScript_NoObjectEvent(u8 *script, u16 scriptSize)
         scriptSize = sizeof(gSaveBlock1Ptr->ramScript.data.script);
     InitRamScript(script, scriptSize, MAP_GROUP(UNDEFINED), MAP_NUM(UNDEFINED), NO_OBJECT);
 #endif //FREE_MYSTERY_EVENT_BUFFERS
+}
+
+bool8 LoadOverworldPokemonObjectScript(void)
+{
+    if (WillOverworldEncounterRun())
+    {
+        sGlobalScriptContext.scriptPtr = OverworldEncounters_EventScript_EncounterEscape;
+    }
+    else
+    {
+        gSpecialVar_0x8008 = EMOTE_ANGRY;
+        sGlobalScriptContext.scriptPtr = OverworldEncounters_EventScript_Encounter;
+    }
+    return TRUE;
 }
