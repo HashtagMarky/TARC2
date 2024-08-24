@@ -647,4 +647,8 @@ extern const u8 EventScript_VsSeekerChargingDone[];
 extern const u8 Common_Movement_FollowerSafeStart[];
 extern const u8 Common_Movement_FollowerSafeEnd[];
 
+extern const u8 OverworldEncounters_EventScript_EncounterApproachPlayer[];
+extern const u8 OverworldEncounters_EventScript_Encounter[];
+extern const u8 OverworldEncounters_EventScript_EncounterEscape[];
+
 #endif // GUARD_EVENT_SCRIPTS_H

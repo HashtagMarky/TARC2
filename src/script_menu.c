@@ -242,7 +242,7 @@ static void MultichoiceDynamicEventShowPMD_OnSelectionChanged(struct DynamicList
         DestroySprite(&gSprites[sPMDSpriteId]);
     }
 
-    sPMDSpriteId = CreateFieldMugshotSprite(gSpecialVar_0x8004, EMOTE_ANGRY);
+    sPMDSpriteId = CreateFieldMugshotSprite(gSpecialVar_0x8004, gSpecialVar_0x8008);
     gSprites[sPMDSpriteId].oam.priority = 0;
     gSprites[sPMDSpriteId].x = x;
     gSprites[sPMDSpriteId].y = y;

@@ -17,6 +17,7 @@
 #include "constants/abilities.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
+#include "constants/field_mugshots.h"
 #include "constants/hold_effects.h"
 #include "constants/map_types.h"
 #include "constants/pokemon.h"
@@ -269,6 +270,8 @@ void GetOverworldMonSpecies(void)
         break;
     
     default:
+        // Include next line to rectify bit shifting caused by changes to gObjectEvents[gSelectedObjectEvent].trainerRange_berryTreeId
+        // gObjectEvents[gSelectedObjectEvent].graphicsId -= (OW_FORM(&gObjectEvents[gSelectedObjectEvent]) << OBJ_EVENT_GFX_SPECIES_BITS);
         if (gObjectEvents[gSelectedObjectEvent].graphicsId > OBJ_EVENT_GFX_SPECIES(NONE) && gObjectEvents[gSelectedObjectEvent].graphicsId < OBJ_EVENT_GFX_SPECIES(EGG))
             gSpecialVar_0x8004 = gObjectEvents[gSelectedObjectEvent].graphicsId - OBJ_EVENT_GFX_SPECIES(NONE);    
         else
@@ -283,7 +286,7 @@ void GetOverworldSpeciesCatchRate(void)
     u16 ballMultiplier = 100;
     s8 ballAddition = 0;
     u16 species = gSpecialVar_0x8004;
-    u16 level = gSpecialVar_0x8006;
+    u16 level = VarGet(VAR_OVERWORLD_MON_LEVEL);
     u32 odds, i;
     u8 catchRate;
     u16 ball = gSpecialVar_0x8007;
@@ -479,6 +482,8 @@ void GetOverworldSpeciesCatchRate(void)
         
     odds = (catchRate * ballMultiplier / 100) * (3 - 2) / (3); // Full HP calculation.
     odds *= OVERWORLD_CATCH_SUCCESS_MULTIPLYER;
+    if (gSpecialVar_0x8006 == EMOTE_SURPRISED)
+        odds *= 2;
 
     if (odds > 254) // mon caught
     {
@@ -567,4 +572,26 @@ u8 OverworldTrappedInBattle(void)
         return BATTLE_RUN_SUCCESS;
     else
         return BATTLE_RUN_FAILURE;
+}
+
+// Can be updated to include run away function above.
+bool8 WillOverworldEncounterRun(void)
+{
+    // u32 holdEffect;
+    u16 leadMonSpecies = GetMonData(GetFirstLiveMon(), MON_DATA_SPECIES);
+    u16 enemyMonSpecies = gSpecialVar_0x8004;
+    // u16 commonHeldItem = gSpeciesInfo[enemyMonSpecies].itemCommon;
+    // u16 rareHeldItem = gSpeciesInfo[enemyMonSpecies].itemRare;
+    // u8 leadMonAbilityNum = GetMonData(GetFirstLiveMon(), MON_DATA_ABILITY_NUM);
+    // u8 i;
+
+    if (((gSpeciesInfo[leadMonSpecies].baseAttack >= gSpeciesInfo[leadMonSpecies].baseSpAttack
+        ? gSpeciesInfo[leadMonSpecies].baseAttack : gSpeciesInfo[leadMonSpecies].baseSpAttack)
+        >= (gSpeciesInfo[enemyMonSpecies].baseDefense >= gSpeciesInfo[enemyMonSpecies].baseSpDefense
+        ? gSpeciesInfo[enemyMonSpecies].baseDefense : gSpeciesInfo[enemyMonSpecies].baseSpDefense))
+        && gSpeciesInfo[enemyMonSpecies].baseSpeed > gSpeciesInfo[enemyMonSpecies].baseHP
+        && Random() % 2 == 0) // 50% Chance Pokemon runs if conditions met.
+        return TRUE;
+    else
+        return FALSE;
 }

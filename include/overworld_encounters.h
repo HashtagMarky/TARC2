@@ -4,5 +4,6 @@
 void GetOverworldMonSpecies(void);
 void GetOverworldSpeciesCatchRate(void);
 u8 OverworldTrappedInBattle(void);
+bool8 WillOverworldEncounterRun(void);
 
 #endif // GUARD_OVERWORLD_ENCOUNTERS_H
