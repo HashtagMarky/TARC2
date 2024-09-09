@@ -589,8 +589,8 @@ bool8 WillOverworldEncounterRun(void)
         ? gSpeciesInfo[leadMonSpecies].baseAttack : gSpeciesInfo[leadMonSpecies].baseSpAttack)
         >= (gSpeciesInfo[enemyMonSpecies].baseDefense >= gSpeciesInfo[enemyMonSpecies].baseSpDefense
         ? gSpeciesInfo[enemyMonSpecies].baseDefense : gSpeciesInfo[enemyMonSpecies].baseSpDefense))
-        && gSpeciesInfo[enemyMonSpecies].baseSpeed > gSpeciesInfo[enemyMonSpecies].baseHP
-        && Random() % 2 == 0) // 50% Chance Pokemon runs if conditions met.
+        && gSpeciesInfo[enemyMonSpecies].baseSpeed > gSpeciesInfo[enemyMonSpecies].baseHP * 3 / 2
+        && Random() % 3 == 0) // 33% Chance Pokemon runs if conditions met.
         return TRUE;
     else
         return FALSE;
