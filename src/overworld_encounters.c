@@ -491,7 +491,7 @@ void GetOverworldSpeciesCatchRate(void)
     }
     else // mon may be caught, calculate shakes
     {   
-        if (CriticalCapture(odds))
+        if (IsCatchCritical(odds))
         {
             maxShakes = BALL_1_SHAKE;  // critical capture doesn't guarantee capture
             result = 2;

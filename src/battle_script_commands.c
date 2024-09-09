@@ -324,7 +324,7 @@ static void DrawLevelUpWindow2(void);
 static void PutMonIconOnLvlUpBanner(void);
 static void DrawLevelUpBannerText(void);
 static void SpriteCB_MonIconOnLvlUpBanner(struct Sprite *sprite);
-bool32 CriticalCapture(u32 odds);
+static bool32 CriticalCapture(u32 odds);
 static void BestowItem(u32 battlerAtk, u32 battlerDef);
 static bool8 IsFinalStrikeEffect(u32 moveEffect);
 static void TryUpdateRoundTurnOrder(void);
@@ -15879,7 +15879,7 @@ void BS_DoStockpileStatChangesWearOff(void)
     }
 }
 
-bool32 CriticalCapture(u32 odds)
+static bool32 CriticalCapture(u32 odds)
 {
     u32 numCaught;
 
@@ -17131,4 +17131,10 @@ void BS_DamageToQuarterTargetHP(void)
         gBattleMoveDamage = 1;
 
     gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+// Non-static version of function
+bool32 IsCatchCritical(u32 odds)
+{
+    return CriticalCapture(odds);
 }
