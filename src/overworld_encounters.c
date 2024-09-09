@@ -27,6 +27,7 @@
 void GetOverworldMonSpecies(void)
 {
     gSpecialVar_0x8005 = gObjectEvents[gSelectedObjectEvent].shiny;
+    SantizeOverworldMonLevel();
 
     switch (gObjectEvents[gSelectedObjectEvent].graphicsId)
     {
@@ -278,6 +279,15 @@ void GetOverworldMonSpecies(void)
             gSpecialVar_0x8004 = SPECIES_NONE;
         break;
     }
+}
+
+void SantizeOverworldMonLevel(void)
+{
+    if (VarGet(VAR_OVERWORLD_MON_LEVEL) > 100)
+        VarSet(VAR_OVERWORLD_MON_LEVEL, 100);
+
+    if (VarGet(VAR_OVERWORLD_MON_LEVEL) <= 0)
+        VarSet(VAR_OVERWORLD_MON_LEVEL, 1);
 }
 
 // This Should Replicate Cmd_handleballthrow in battle_script_commands.c

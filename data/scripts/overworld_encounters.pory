@@ -19,14 +19,6 @@ script OverworldEncounters_EventScript_Encounter
 {
     lock
     faceplayer
-    if (var(VAR_OVERWORLD_MON_LEVEL) > 100)
-    {
-        setvar(VAR_OVERWORLD_MON_LEVEL, 100)
-    }
-    elif (var(VAR_OVERWORLD_MON_LEVEL) <= 0)
-    {
-        setvar(VAR_OVERWORLD_MON_LEVEL, 1)
-    }
     special(GetOverworldMonSpecies)
     if (var(VAR_0x8008) != EMOTE_ANGRY)
     {
