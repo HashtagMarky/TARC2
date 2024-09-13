@@ -25,7 +25,12 @@
 #include "constants/map_types.h"
 #include "constants/pokemon.h"
 
-#define OVERWORLD_CATCH_SUCCESS_MULTIPLYER      gSaveBlock2Ptr->/*optionsOverworldCatchSuccessMultiplyer*/optionsSound + 1;
+#define HEADER_NONE                     0xFFFF                  // Should be same as in wild_encounter.c
+#define OBJ_EVENT_GFX_LAST              OBJ_EVENT_GFX_VAR_F     // Last variable object event
+
+#define OVERWORLD_CATCH_SMULTIPLYER     gSaveBlock2Ptr->/*optionsOverworldCatchSuccessMultiplyer*/optionsSound + 1;
+#define SPAWN_ODDS_DENOMINATOR          3                       // Spawn Odds = 1/SPAWN_ODDS_DENOMINATOR
+#define RUN_ODDS_DENOMINATOR            3                       // Spawn Odds = 1/RUN_ODDS_DENOMINATOR
 
 void GetOverworldMonSpecies(void)
 {
@@ -494,7 +499,7 @@ void GetOverworldSpeciesCatchRate(void)
         catchRate = catchRate + ballAddition;
         
     odds = (catchRate * ballMultiplier / 100) * (3 - 2) / (3); // Full HP calculation.
-    odds *= OVERWORLD_CATCH_SUCCESS_MULTIPLYER;
+    odds *= OVERWORLD_CATCH_SMULTIPLYER;
     if (gSpecialVar_0x8006 == EMOTE_SURPRISED)
         odds *= 2;
 
@@ -603,7 +608,7 @@ bool8 WillOverworldEncounterRun(void)
         >= (gSpeciesInfo[enemyMonSpecies].baseDefense >= gSpeciesInfo[enemyMonSpecies].baseSpDefense
         ? gSpeciesInfo[enemyMonSpecies].baseDefense : gSpeciesInfo[enemyMonSpecies].baseSpDefense))
         && gSpeciesInfo[enemyMonSpecies].baseSpeed > gSpeciesInfo[enemyMonSpecies].baseHP * 3 / 2
-        && Random() % 3 == 0) // 33% Chance Pokemon runs if conditions met.
+        && !(Random() % RUN_ODDS_DENOMINATOR))
         return TRUE;
     else
         return FALSE;
@@ -611,10 +616,6 @@ bool8 WillOverworldEncounterRun(void)
 
 bool8 ScrCmd_SetObjectAsWildEncounter(struct ScriptContext *ctx)
 {
-    #define HEADER_NONE             0xFFFF                  // Should be same as in wild_encounter.c
-    #define OBJ_EVENT_GFX_LAST      OBJ_EVENT_GFX_VAR_F     // Last variable object event
-    #define SPAWN_ODDS              32768                   // Actual probability is SPAWN_ODDS/65536
-
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 encounterType = VarGet(ScriptReadHalfword(ctx));
     u16 headerId = ReturnCurrentMapWildMonHeaderId();
@@ -654,13 +655,13 @@ bool8 ScrCmd_SetObjectAsWildEncounter(struct ScriptContext *ctx)
     }
 */
 
-    if (Random() < SPAWN_ODDS) // (WillWildEncounterSpawn(encounterRate, TRUE))
+    if (Random() % SPAWN_ODDS_DENOMINATOR) // (WillWildEncounterSpawn(encounterRate, TRUE))
     {
-        VarSet(objectEventVariable, ReturnHeaderSpeciesEncounter(encounterType, headerId));
+        FlagSet(ReturnObjectEventFlagIdByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup));
     }
     else
     {
-        FlagSet(ReturnObjectEventFlagIdByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup));
+        VarSet(objectEventVariable, ReturnHeaderSpeciesEncounter(encounterType, headerId));
     }
 
     return FALSE;
