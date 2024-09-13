@@ -29,8 +29,8 @@
 #define OBJ_EVENT_GFX_LAST              OBJ_EVENT_GFX_VAR_F     // Last variable object event
 
 #define OVERWORLD_CATCH_SMULTIPLYER     gSaveBlock2Ptr->/*optionsOverworldCatchSuccessMultiplyer*/optionsSound + 1;
-#define SPAWN_ODDS_DENOMINATOR          3                       // Spawn Odds = 1/SPAWN_ODDS_DENOMINATOR
-#define RUN_ODDS_DENOMINATOR            3                       // Spawn Odds = 1/RUN_ODDS_DENOMINATOR
+#define SPAWN_ODDS_DENOMINATOR          2                       // Spawn Odds = 1/SPAWN_ODDS_DENOMINATOR
+#define RUN_ODDS_DENOMINATOR            3                       // Run Odds = 1/RUN_ODDS_DENOMINATOR
 
 void GetOverworldMonSpecies(void)
 {
@@ -617,7 +617,7 @@ bool8 WillOverworldEncounterRun(void)
 bool8 ScrCmd_SetObjectAsWildEncounter(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
-    u8 encounterType = VarGet(ScriptReadHalfword(ctx));
+    u8 encounterType = ScriptReadByte(ctx);
     u16 headerId = ReturnCurrentMapWildMonHeaderId();
     // u32 encounterRate;
     u16 graphicsId = GetObjectEventGraphicsIdByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
@@ -636,19 +636,19 @@ bool8 ScrCmd_SetObjectAsWildEncounter(struct ScriptContext *ctx)
         return FALSE;
     }
 
-    if (encounterType != TYPE_WATER)
+    if (encounterType != ENCOUNTER_WATER)
     {
-        encounterType = TYPE_GROUND;
+        encounterType = ENCOUNTER_LAND;
     }
 
 /*
     switch (encounterType)
     {
-    case TYPE_WATER:
+    case ENCOUNTER_WATER:
         encounterRate = gWildMonHeaders[headerId].waterMonsInfo->encounterRate;
         break;
     
-    case TYPE_GROUND:
+    case ENCOUNTER_LAND:
     default:
         encounterRate = gWildMonHeaders[headerId].landMonsInfo->encounterRate;
         break;
@@ -679,12 +679,12 @@ u16 ReturnHeaderSpeciesEncounter(u8 encounterType, u16 headerId)
 {
     u16 shinyTag = GeneratedOverworldMonShinyRoll() ? SPECIES_SHINY_TAG : 0;
 
-    if (encounterType == TYPE_GROUND && gWildMonHeaders[headerId].landMonsInfo != NULL)
+    if (encounterType == ENCOUNTER_LAND && gWildMonHeaders[headerId].landMonsInfo != NULL)
         return GetLocalLandMon() + OBJ_EVENT_GFX_SPECIES(NONE) + shinyTag;
-    else if (encounterType == TYPE_WATER && gWildMonHeaders[headerId].landMonsInfo != NULL)
+    else if (encounterType == ENCOUNTER_WATER && gWildMonHeaders[headerId].waterMonsInfo != NULL)
         return GetLocalWaterMon() + OBJ_EVENT_GFX_SPECIES(NONE) + shinyTag;
     else
-        return ReturnFixedSpeciesEncounter() + OBJ_EVENT_GFX_SPECIES(NONE) + shinyTag;
+        return ReturnFixedSpeciesEncounter();
 }
 
 bool8 GeneratedOverworldMonShinyRoll(void)
