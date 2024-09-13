@@ -14,6 +14,9 @@
 #include "pokedex.h"
 #include "pokemon.h"
 #include "rtc.h"
+#include "script.h"
+#include "script_movement.h"
+#include "wild_encounter.h"
 #include "constants/abilities.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
@@ -604,4 +607,102 @@ bool8 WillOverworldEncounterRun(void)
         return TRUE;
     else
         return FALSE;
+}
+
+bool8 ScrCmd_SetObjectAsWildEncounter(struct ScriptContext *ctx)
+{
+    #define HEADER_NONE             0xFFFF                  // Should be same as in wild_encounter.c
+    #define OBJ_EVENT_GFX_LAST      OBJ_EVENT_GFX_VAR_F     // Last variable object event
+    #define SPAWN_ODDS              32768                   // Actual probability is SPAWN_ODDS/65536
+
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    u8 encounterType = VarGet(ScriptReadHalfword(ctx));
+    u16 headerId = ReturnCurrentMapWildMonHeaderId();
+    // u32 encounterRate;
+    u16 graphicsId = GetObjectEventGraphicsIdByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    u16 variableOffset = (graphicsId >= OBJ_EVENT_GFX_VAR_0) ? graphicsId - OBJ_EVENT_GFX_VAR_0 : 0;
+    u16 objectEventVariable = VAR_OBJ_GFX_ID_0 + variableOffset;
+
+    if (!(graphicsId >= OBJ_EVENT_GFX_VARS
+        && graphicsId <= OBJ_EVENT_GFX_VAR_F))
+    {
+        return FALSE;
+    }
+
+    if (headerId == HEADER_NONE)
+    {
+        VarSet(objectEventVariable, ReturnFixedSpeciesEncounter());
+        return FALSE;
+    }
+
+    if (encounterType != TYPE_WATER)
+    {
+        encounterType = TYPE_GROUND;
+    }
+
+/*
+    switch (encounterType)
+    {
+    case TYPE_WATER:
+        encounterRate = gWildMonHeaders[headerId].waterMonsInfo->encounterRate;
+        break;
+    
+    case TYPE_GROUND:
+    default:
+        encounterRate = gWildMonHeaders[headerId].landMonsInfo->encounterRate;
+        break;
+    }
+*/
+
+    if (Random() < SPAWN_ODDS) // (WillWildEncounterSpawn(encounterRate, TRUE))
+    {
+        VarSet(objectEventVariable, ReturnHeaderSpeciesEncounter(encounterType, headerId));
+    }
+    else
+    {
+        FlagSet(ReturnObjectEventFlagIdByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup));
+    }
+
+    return FALSE;
+}
+
+u16 ReturnFixedSpeciesEncounter(void)
+{
+    u16 shinyTag = GeneratedOverworldMonShinyRoll() ? SPECIES_SHINY_TAG : 0;
+    u16 species = SPECIES_PIKACHU;
+    
+    return species + OBJ_EVENT_GFX_SPECIES(NONE) + shinyTag;
+}
+
+u16 ReturnHeaderSpeciesEncounter(u8 encounterType, u16 headerId)
+{
+    u16 shinyTag = GeneratedOverworldMonShinyRoll() ? SPECIES_SHINY_TAG : 0;
+
+    if (encounterType == TYPE_GROUND && gWildMonHeaders[headerId].landMonsInfo != NULL)
+        return GetLocalLandMon() + OBJ_EVENT_GFX_SPECIES(NONE) + shinyTag;
+    else if (encounterType == TYPE_WATER && gWildMonHeaders[headerId].landMonsInfo != NULL)
+        return GetLocalWaterMon() + OBJ_EVENT_GFX_SPECIES(NONE) + shinyTag;
+    else
+        return ReturnFixedSpeciesEncounter() + OBJ_EVENT_GFX_SPECIES(NONE) + shinyTag;
+}
+
+bool8 GeneratedOverworldMonShinyRoll(void)
+{
+    u8 shinyRolls = 1;
+
+    if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
+        shinyRolls += I_SHINY_CHARM_ADDITIONAL_ROLLS;
+    if (LURE_STEP_COUNT != 0)
+        shinyRolls += 1;
+    
+    while (shinyRolls > 0)
+    {
+        if (Random() < SHINY_ODDS)
+        {
+            return TRUE;
+        }
+        shinyRolls -= 1;
+    }
+    
+    return FALSE;
 }

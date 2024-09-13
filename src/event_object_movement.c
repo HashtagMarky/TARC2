@@ -10656,3 +10656,19 @@ u16 GetObjectEventTrainerSightFlagByObjectEventId(u8 objEventId)
 {
     return GetObjectEventTemplateByLocalIdAndMap(gObjectEvents[objEventId].localId, gObjectEvents[objEventId].mapNum, gObjectEvents[objEventId].mapGroup)->trainerType;
 }
+
+u16 ReturnObjectEventFlagIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    return GetObjectEventFlagIdByLocalIdAndMap(localId, mapNum, mapGroup);
+}
+
+u16 GetObjectEventGraphicsIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    const struct ObjectEventTemplate *obj = GetObjectEventTemplateByLocalIdAndMap(localId, mapNum, mapGroup);
+#ifdef UBFIX
+    // BUG: The function may return NULL, and attempting to read from NULL may freeze the game using modern compilers.
+    if (obj == NULL)
+        return 0;
+#endif // UBFIX
+    return obj->graphicsId;
+}

@@ -942,6 +942,20 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
     }
 }
 
+u16 GetLocalLandMon(void)
+{
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+
+    if (headerId != HEADER_NONE)
+    {
+        const struct WildPokemonInfo *landMonsInfo = gWildMonHeaders[headerId].landMonsInfo;
+
+        if (landMonsInfo)
+            return landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
+    }
+    return SPECIES_NONE;
+}
+
 u16 GetLocalWaterMon(void)
 {
     u16 headerId = GetCurrentMapWildMonHeaderId();
@@ -1137,4 +1151,16 @@ bool8 StandardWildEncounter_Debug(void)
 
     DoStandardWildBattle_Debug();
     return TRUE;
+}
+
+// Non-static version of function
+bool8 WillWildEncounterSpawn(u32 encounterRate, bool8 ignoreAbility)
+{
+    return WildEncounterCheck(encounterRate, ignoreAbility);
+}
+
+// Non-static version of function
+u16 ReturnCurrentMapWildMonHeaderId(void)
+{
+    return GetCurrentMapWildMonHeaderId();
 }

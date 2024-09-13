@@ -1907,6 +1907,14 @@
 	callnative RemoveFieldMugshot
 	.endm
 
+	@ sets variable overworld object event to a Pokémon for a wild encounter
+	.macro setobjectaswildencounter localId:req, encounterType=TYPE_GROUND
+	.byte 0xe7
+	.2byte \localId
+	.byte \encounterType
+	release
+	.endm
+
 @ Supplementary
 
 	.macro goto_if_unset flag:req, dest:req
