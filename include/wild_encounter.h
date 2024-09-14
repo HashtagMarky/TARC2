@@ -38,10 +38,17 @@ bool8 SweetScentWildEncounter(void);
 bool8 DoesCurrentMapHaveFishingMons(void);
 void FishingWildEncounter(u8 rod);
 u16 GetLocalWildMon(bool8 *isWaterMon);
+u16 GetLocalLandMon(void);
 u16 GetLocalWaterMon(void);
+u16 GetLocalRockSmashMon(void);
+u16 GetLocalFishingMon(u8 rod);
 bool8 UpdateRepelCounter(void);
 bool8 TryDoDoubleWildBattle(void);
 bool8 StandardWildEncounter_Debug(void);
 u32 CalculateChainFishingShinyRolls(void);
+bool8 WillWildEncounterSpawn(u32 encounterRate, bool8 ignoreAbility);
+u16 ReturnCurrentMapWildMonHeaderId(void);
+u8 ReturnWildMonIndex_Land(void);
+u8 ReturnWildMonIndex_Water(void);
 
 #endif // GUARD_WILD_ENCOUNTER_H

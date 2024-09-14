@@ -942,6 +942,20 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
     }
 }
 
+u16 GetLocalLandMon(void)
+{
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+
+    if (headerId != HEADER_NONE)
+    {
+        const struct WildPokemonInfo *landMonsInfo = gWildMonHeaders[headerId].landMonsInfo;
+
+        if (landMonsInfo)
+            return landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
+    }
+    return SPECIES_NONE;
+}
+
 u16 GetLocalWaterMon(void)
 {
     u16 headerId = GetCurrentMapWildMonHeaderId();
@@ -952,6 +966,34 @@ u16 GetLocalWaterMon(void)
 
         if (waterMonsInfo)
             return waterMonsInfo->wildPokemon[ChooseWildMonIndex_WaterRock()].species;
+    }
+    return SPECIES_NONE;
+}
+
+u16 GetLocalRockSmashMon(void)
+{
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+
+    if (headerId != HEADER_NONE)
+    {
+        const struct WildPokemonInfo *rockSmashMonsInfo = gWildMonHeaders[headerId].rockSmashMonsInfo;
+
+        if (rockSmashMonsInfo)
+            return rockSmashMonsInfo->wildPokemon[ChooseWildMonIndex_WaterRock()].species;
+    }
+    return SPECIES_NONE;
+}
+
+u16 GetLocalFishingMon(u8 rod)
+{
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+
+    if (headerId != HEADER_NONE)
+    {
+        const struct WildPokemonInfo *fishingMonsInfo = gWildMonHeaders[headerId].fishingMonsInfo;
+
+        if (fishingMonsInfo)
+            return fishingMonsInfo->wildPokemon[ChooseWildMonIndex_Fishing(rod)].species;
     }
     return SPECIES_NONE;
 }
@@ -1137,4 +1179,16 @@ bool8 StandardWildEncounter_Debug(void)
 
     DoStandardWildBattle_Debug();
     return TRUE;
+}
+
+// Non-static version of function
+bool8 WillWildEncounterSpawn(u32 encounterRate, bool8 ignoreAbility)
+{
+    return WildEncounterCheck(encounterRate, ignoreAbility);
+}
+
+// Non-static version of function
+u16 ReturnCurrentMapWildMonHeaderId(void)
+{
+    return GetCurrentMapWildMonHeaderId();
 }

@@ -1907,6 +1907,19 @@
 	callnative RemoveFieldMugshot
 	.endm
 
+	@ sets variable overworld object event to a Pokémon for a wild encounter
+	.macro setobjectaswildencounter localId:req, encounterType=ENCOUNTER_LAND
+	.byte 0xe7
+	.2byte \localId
+	.byte \encounterType
+	release
+	.endm
+
+	@ starts a safari, normal or double battle
+	.macro dowildsafaribattle
+	.byte 0xe8
+	.endm
+
 @ Supplementary
 
 	.macro goto_if_unset flag:req, dest:req

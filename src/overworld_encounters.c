@@ -14,6 +14,9 @@
 #include "pokedex.h"
 #include "pokemon.h"
 #include "rtc.h"
+#include "script.h"
+#include "script_movement.h"
+#include "wild_encounter.h"
 #include "constants/abilities.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
@@ -22,11 +25,17 @@
 #include "constants/map_types.h"
 #include "constants/pokemon.h"
 
-#define OVERWORLD_CATCH_SUCCESS_MULTIPLYER      gSaveBlock2Ptr->/*optionsOverworldCatchSuccessMultiplyer*/optionsSound + 1;
+#define HEADER_NONE                     0xFFFF                  // Should be same as in wild_encounter.c
+#define OBJ_EVENT_GFX_LAST              OBJ_EVENT_GFX_VAR_F     // Last variable object event
+
+#define OVERWORLD_CATCH_SMULTIPLYER     gSaveBlock2Ptr->/*optionsOverworldCatchSuccessMultiplyer*/optionsSound + 1;
+#define SPAWN_ODDS_DENOMINATOR          3                       // Spawn Odds = 1 - 1/SPAWN_ODDS_DENOMINATOR
+#define RUN_ODDS_DENOMINATOR            3                       // Run Odds = 1/RUN_ODDS_DENOMINATOR
 
 void GetOverworldMonSpecies(void)
 {
     gSpecialVar_0x8005 = gObjectEvents[gSelectedObjectEvent].shiny;
+    SantizeOverworldMonLevel();
 
     switch (gObjectEvents[gSelectedObjectEvent].graphicsId)
     {
@@ -280,6 +289,15 @@ void GetOverworldMonSpecies(void)
     }
 }
 
+void SantizeOverworldMonLevel(void)
+{
+    if (VarGet(VAR_OVERWORLD_MON_LEVEL) > 100)
+        VarSet(VAR_OVERWORLD_MON_LEVEL, 100);
+
+    if (VarGet(VAR_OVERWORLD_MON_LEVEL) <= 0)
+        VarSet(VAR_OVERWORLD_MON_LEVEL, 1);
+}
+
 // This Should Replicate Cmd_handleballthrow in battle_script_commands.c
 void GetOverworldSpeciesCatchRate(void)
 {
@@ -481,7 +499,7 @@ void GetOverworldSpeciesCatchRate(void)
         catchRate = catchRate + ballAddition;
         
     odds = (catchRate * ballMultiplier / 100) * (3 - 2) / (3); // Full HP calculation.
-    odds *= OVERWORLD_CATCH_SUCCESS_MULTIPLYER;
+    odds *= OVERWORLD_CATCH_SMULTIPLYER;
     if (gSpecialVar_0x8006 == EMOTE_SURPRISED)
         odds *= 2;
 
@@ -491,7 +509,7 @@ void GetOverworldSpeciesCatchRate(void)
     }
     else // mon may be caught, calculate shakes
     {   
-        if (CriticalCapture(odds))
+        if (IsCatchCritical(odds))
         {
             maxShakes = BALL_1_SHAKE;  // critical capture doesn't guarantee capture
             result = 2;
@@ -589,9 +607,128 @@ bool8 WillOverworldEncounterRun(void)
         ? gSpeciesInfo[leadMonSpecies].baseAttack : gSpeciesInfo[leadMonSpecies].baseSpAttack)
         >= (gSpeciesInfo[enemyMonSpecies].baseDefense >= gSpeciesInfo[enemyMonSpecies].baseSpDefense
         ? gSpeciesInfo[enemyMonSpecies].baseDefense : gSpeciesInfo[enemyMonSpecies].baseSpDefense))
-        && gSpeciesInfo[enemyMonSpecies].baseSpeed > gSpeciesInfo[enemyMonSpecies].baseHP
-        && Random() % 2 == 0) // 50% Chance Pokemon runs if conditions met.
+        && gSpeciesInfo[enemyMonSpecies].baseSpeed > gSpeciesInfo[enemyMonSpecies].baseHP * 3 / 2
+        && !(Random() % RUN_ODDS_DENOMINATOR))
         return TRUE;
     else
         return FALSE;
+}
+
+bool8 ScrCmd_SetObjectAsWildEncounter(struct ScriptContext *ctx)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    u8 encounterType = ScriptReadByte(ctx);
+    // u32 encounterRate;
+    u16 headerId = ReturnCurrentMapWildMonHeaderId();
+    u16 graphicsId = GetObjectEventGraphicsIdByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    u16 variableOffset = (graphicsId >= OBJ_EVENT_GFX_VAR_0) ? graphicsId - OBJ_EVENT_GFX_VAR_0 : 0;
+    u16 objectEventVariable = VAR_OBJ_GFX_ID_0 + variableOffset;
+
+    if (!(graphicsId >= OBJ_EVENT_GFX_VARS
+        && graphicsId <= OBJ_EVENT_GFX_VAR_F))
+    {
+        return FALSE;
+    }
+
+    encounterType = (encounterType < ENCOUNTER_TYPES) ? encounterType : ENCOUNTER_LAND;
+
+    if (headerId == HEADER_NONE || encounterType == ENCOUNTER_FIXED)
+    {
+        VarSet(objectEventVariable, ReturnFixedSpeciesEncounter());
+        return FALSE;
+    }
+
+/*
+    switch (encounterType)
+    {
+    case ENCOUNTER_SURF:
+        encounterRate = gWildMonHeaders[headerId].waterMonsInfo->encounterRate;
+        break;
+    
+    case ENCOUNTER_LAND:
+    default:
+        encounterRate = gWildMonHeaders[headerId].landMonsInfo->encounterRate;
+        break;
+    }
+*/
+
+    if (Random() % SPAWN_ODDS_DENOMINATOR) // (WillWildEncounterSpawn(encounterRate, TRUE))
+    {
+        FlagSet(ReturnObjectEventFlagIdByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup));
+    }
+    else
+    {
+        VarSet(objectEventVariable, ReturnHeaderSpeciesEncounter(encounterType, headerId));
+    }
+
+    return FALSE;
+}
+
+u16 ReturnFixedSpeciesEncounter(void)
+{
+    u16 shinyTag = GeneratedOverworldMonShinyRoll() ? SPECIES_SHINY_TAG : 0;
+    u16 species = SPECIES_NONE;
+
+    species = SPECIES_PIKACHU;
+    
+    return species + OBJ_EVENT_GFX_SPECIES(NONE) + shinyTag;
+}
+
+u16 ReturnHeaderSpeciesEncounter(u8 encounterType, u16 headerId)
+{
+    u16 shinyTag = GeneratedOverworldMonShinyRoll() ? SPECIES_SHINY_TAG : 0;
+    u16 species = SPECIES_NONE;
+
+    switch (encounterType)
+    {
+    case ENCOUNTER_LAND:
+        species = GetLocalLandMon();
+        break;
+
+    case ENCOUNTER_SURF:
+        species = GetLocalWaterMon();
+        break;
+
+    case ENCOUNTER_ROCK_SMASH:
+        species = GetLocalRockSmashMon();
+        break;
+
+    case ENCOUNTER_OLD_ROD:
+        species = GetLocalFishingMon(OLD_ROD);
+        break;
+
+    case ENCOUNTER_GOOD_ROD:
+        species = GetLocalFishingMon(GOOD_ROD);
+        break;
+
+    case ENCOUNTER_SUPER_ROD:
+        species = GetLocalFishingMon(SUPER_ROD);
+        break;
+    }
+
+    if (species != SPECIES_NONE)
+        return species + OBJ_EVENT_GFX_SPECIES(NONE) + shinyTag;
+    else
+        return ReturnFixedSpeciesEncounter();
+}
+
+bool8 GeneratedOverworldMonShinyRoll(void)
+{
+    u8 shinyRolls = 1;
+
+    if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
+        shinyRolls += I_SHINY_CHARM_ADDITIONAL_ROLLS;
+    if (LURE_STEP_COUNT != 0)
+        shinyRolls += 1;
+    
+    while (shinyRolls > 0)
+    {
+        if (Random() < SHINY_ODDS)
+        {
+            return TRUE;
+        }
+        shinyRolls -= 1;
+    }
+    
+    return FALSE;
 }

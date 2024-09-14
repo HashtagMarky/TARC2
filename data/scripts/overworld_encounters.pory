@@ -19,14 +19,6 @@ script OverworldEncounters_EventScript_Encounter
 {
     lock
     faceplayer
-    if (var(VAR_OVERWORLD_MON_LEVEL) > 100)
-    {
-        setvar(VAR_OVERWORLD_MON_LEVEL, 100)
-    }
-    elif (var(VAR_OVERWORLD_MON_LEVEL) <= 0)
-    {
-        setvar(VAR_OVERWORLD_MON_LEVEL, 1)
-    }
     special(GetOverworldMonSpecies)
     if (var(VAR_0x8008) != EMOTE_ANGRY)
     {
@@ -54,20 +46,27 @@ script OverworldEncounters_EventScript_Encounter
         special(RemoveCameraObject)
     }
     waitmessage
-    specialvar(VAR_RESULT, HasAtLeastOnePokeBall)
     dynmultipush("{FONT_NARROW}FIGHT", 0)
+    specialvar(VAR_RESULT, HasAtLeastOnePokeBall)
     if (var(VAR_RESULT) == TRUE)
     {
         dynmultipush("{FONT_NARROWER}{POKE}BALL", 1)
     }
-    dynmultipush("{FONT_NARROW}RUN", 2)
-    dynmultistack(0, 0, TRUE, 3, TRUE, 0, DYN_MULTICHOICE_CB_SHOW_PMD)
+    checkitem(ITEM_POKEBLOCK_CASE)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        dynmultipush("{FONT_NARROW}APPROACH", 2)
+    }
+    dynmultipush("{FONT_NARROW}RUN", 3)
+    dynmultistack(0, 0, TRUE, 4, TRUE, 0, DYN_MULTICHOICE_CB_SHOW_PMD)
     switch (var(VAR_RESULT))
     {
         case 0:
             goto(OverworldEncounters_EventScript_Fight)
         case 1:
             goto(OverworldEncounters_EventScript_ThrowBall)
+        case 2:
+            goto(OverworldEncounters_EventScript_Approach)
         default:
             goto(OverworldEncounters_EventScript_RunAway)
     }
@@ -79,7 +78,7 @@ script OverworldEncounters_EventScript_Fight
     createmon(B_SIDE_OPPONENT, B_FLANK_LEFT, VAR_0x8004, VAR_OVERWORLD_MON_LEVEL, isShiny=VAR_0x8005)
     closemessage
     waitmoncry
-    dowildbattle
+    dowildsafaribattle
     specialvar(VAR_RESULT, GetBattleOutcome)
     switch (var(VAR_RESULT))
     {
@@ -126,6 +125,12 @@ script OverworldEncounters_EventScript_ThrowBall
         goto(OverworldEncounters_EventScript_CatchAttempt)
     }
     end
+}
+
+script OverworldEncounters_EventScript_Approach
+{
+    special(EnterSafariMode)
+    goto(OverworldEncounters_EventScript_Fight)
 }
 
 script OverworldEncounters_EventScript_CatchAttempt
@@ -230,6 +235,7 @@ script OverworldEncounters_EventScript_EncounterEnd
     }
     setvar(VAR_0x8008, EMOTE_NORMAL)
     clearflag(FLAG_SYS_OVERWORLD_ENCOUNTER_CAMERA)
+    special(ExitSafariMode)
     releaseall
     end
 }

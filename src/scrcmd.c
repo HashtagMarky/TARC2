@@ -37,6 +37,7 @@
 #include "overworld.h"
 #include "rotating_tile_puzzle.h"
 #include "rtc.h"
+#include "safari_zone.h"
 #include "script.h"
 #include "script_menu.h"
 #include "script_movement.h"
@@ -2050,6 +2051,20 @@ bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
 bool8 ScrCmd_dowildbattle(struct ScriptContext *ctx)
 {
     if (sIsScriptedWildDouble == FALSE)
+        BattleSetup_StartScriptedWildBattle();
+    else
+        BattleSetup_StartScriptedDoubleWildBattle();
+
+    ScriptContext_Stop();
+
+    return TRUE;
+}
+
+bool8 ScrCmd_dowildsafaribattle(struct ScriptContext *ctx)
+{
+    if (GetSafariZoneFlag())
+        BeginSafariBattle();
+    else if (sIsScriptedWildDouble == FALSE)
         BattleSetup_StartScriptedWildBattle();
     else
         BattleSetup_StartScriptedDoubleWildBattle();

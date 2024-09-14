@@ -17132,3 +17132,9 @@ void BS_DamageToQuarterTargetHP(void)
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
+
+// Non-static version of function
+bool32 IsCatchCritical(u32 odds)
+{
+    return CriticalCapture(odds);
+}

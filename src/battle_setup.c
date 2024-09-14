@@ -2053,3 +2053,8 @@ u16 CountBattledRematchTeams(u16 trainerId)
 
     return i;
 }
+
+void BeginSafariBattle(void)
+{
+    DoSafariBattle();
+}

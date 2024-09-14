@@ -488,5 +488,7 @@ bool32 IsVirtualObjectAnimating(u8 virtualObjId);
 bool8 MovementAction_EmoteX_Step0(struct ObjectEvent *, struct Sprite *);
 bool8 MovementAction_EmoteDoubleExclamationMark_Step0(struct ObjectEvent *, struct Sprite *);
 u16 GetObjectEventTrainerSightFlagByObjectEventId(u8 objEventId);
+u16 ReturnObjectEventFlagIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup);
+u16 GetObjectEventGraphicsIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup);
 
 #endif //GUARD_EVENT_OBJECT_MOVEMENT_H
