@@ -1915,6 +1915,11 @@
 	release
 	.endm
 
+	@ starts a safari, normal or double battle
+	.macro dowildsafaribattle
+	.byte 0xe8
+	.endm
+
 @ Supplementary
 
 	.macro goto_if_unset flag:req, dest:req

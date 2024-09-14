@@ -31,13 +31,18 @@ OverworldEncounters_EventScript_Encounter_8:
 	compare VAR_RESULT, TRUE
 	goto_if_eq OverworldEncounters_EventScript_Encounter_14
 OverworldEncounters_EventScript_Encounter_13:
-	dynmultipush OverworldEncounters_EventScript_Encounter_Text_4, 2
-	dynmultistack 0, 0, TRUE, 3, TRUE, 0, DYN_MULTICHOICE_CB_SHOW_PMD
-	switch VAR_RESULT
-	case 0, OverworldEncounters_EventScript_Encounter_18
-	case 1, OverworldEncounters_EventScript_Encounter_19
-	goto OverworldEncounters_EventScript_RunAway
+	checkitem ITEM_POKEBLOCK_CASE
+	compare VAR_RESULT, TRUE
+	goto_if_eq OverworldEncounters_EventScript_Encounter_17
 OverworldEncounters_EventScript_Encounter_16:
+	dynmultipush OverworldEncounters_EventScript_Encounter_Text_5, 3
+	dynmultistack 0, 0, TRUE, 4, TRUE, 0, DYN_MULTICHOICE_CB_SHOW_PMD
+	switch VAR_RESULT
+	case 0, OverworldEncounters_EventScript_Encounter_21
+	case 1, OverworldEncounters_EventScript_Encounter_22
+	case 2, OverworldEncounters_EventScript_Encounter_23
+	goto OverworldEncounters_EventScript_RunAway
+OverworldEncounters_EventScript_Encounter_19:
 	end
 
 OverworldEncounters_EventScript_Encounter_2:
@@ -66,20 +71,28 @@ OverworldEncounters_EventScript_Encounter_14:
 	dynmultipush OverworldEncounters_EventScript_Encounter_Text_3, 1
 	goto OverworldEncounters_EventScript_Encounter_13
 
-OverworldEncounters_EventScript_Encounter_18:
-	goto OverworldEncounters_EventScript_Fight
+OverworldEncounters_EventScript_Encounter_17:
+	dynmultipush OverworldEncounters_EventScript_Encounter_Text_4, 2
 	goto OverworldEncounters_EventScript_Encounter_16
 
-OverworldEncounters_EventScript_Encounter_19:
+OverworldEncounters_EventScript_Encounter_21:
+	goto OverworldEncounters_EventScript_Fight
+	goto OverworldEncounters_EventScript_Encounter_19
+
+OverworldEncounters_EventScript_Encounter_22:
 	goto OverworldEncounters_EventScript_ThrowBall
-	goto OverworldEncounters_EventScript_Encounter_16
+	goto OverworldEncounters_EventScript_Encounter_19
+
+OverworldEncounters_EventScript_Encounter_23:
+	goto OverworldEncounters_EventScript_Approach
+	goto OverworldEncounters_EventScript_Encounter_19
 
 
 OverworldEncounters_EventScript_Fight::
 	createmon B_SIDE_OPPONENT, B_FLANK_LEFT, VAR_0x8004, VAR_OVERWORLD_MON_LEVEL, isShiny = VAR_0x8005
 	closemessage
 	waitmoncry
-	dowildbattle
+	dowildsafaribattle
 	specialvar VAR_RESULT, GetBattleOutcome
 	switch VAR_RESULT
 	case B_OUTCOME_WON, OverworldEncounters_EventScript_Fight_3
@@ -138,6 +151,12 @@ OverworldEncounters_EventScript_ThrowBall_10:
 	bufferitemname STR_VAR_1, VAR_0x8007
 	dynmultipush OverworldEncounters_EventScript_ThrowBall_Text_0, VAR_0x8007
 	goto OverworldEncounters_EventScript_ThrowBall_9
+
+
+OverworldEncounters_EventScript_Approach::
+	special EnterSafariMode
+	goto OverworldEncounters_EventScript_Fight
+	return
 
 
 OverworldEncounters_EventScript_CatchAttempt::
@@ -237,6 +256,7 @@ OverworldEncounters_EventScript_EncounterEnd::
 OverworldEncounters_EventScript_EncounterEnd_1:
 	setvar VAR_0x8008, EMOTE_NORMAL
 	clearflag FLAG_SYS_OVERWORLD_ENCOUNTER_CAMERA
+	special ExitSafariMode
 	releaseall
 	end
 
@@ -279,6 +299,9 @@ OverworldEncounters_EventScript_Encounter_Text_3:
 	.string "{FONT_NARROWER}{POKE}BALL$"
 
 OverworldEncounters_EventScript_Encounter_Text_4:
+	.string "{FONT_NARROW}APPROACH$"
+
+OverworldEncounters_EventScript_Encounter_Text_5:
 	.string "{FONT_NARROW}RUN$"
 
 OverworldEncounters_EventScript_ThrowBall_Text_0:
