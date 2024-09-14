@@ -40,6 +40,8 @@ void FishingWildEncounter(u8 rod);
 u16 GetLocalWildMon(bool8 *isWaterMon);
 u16 GetLocalLandMon(void);
 u16 GetLocalWaterMon(void);
+u16 GetLocalRockSmashMon(void);
+u16 GetLocalFishingMon(u8 rod);
 bool8 UpdateRepelCounter(void);
 bool8 TryDoDoubleWildBattle(void);
 bool8 StandardWildEncounter_Debug(void);

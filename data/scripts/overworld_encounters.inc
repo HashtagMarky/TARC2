@@ -26,8 +26,8 @@ OverworldEncounters_EventScript_Encounter_4:
 	goto_if_eq OverworldEncounters_EventScript_Encounter_10
 OverworldEncounters_EventScript_Encounter_8:
 	waitmessage
-	specialvar VAR_RESULT, HasAtLeastOnePokeBall
 	dynmultipush OverworldEncounters_EventScript_Encounter_Text_2, 0
+	specialvar VAR_RESULT, HasAtLeastOnePokeBall
 	compare VAR_RESULT, TRUE
 	goto_if_eq OverworldEncounters_EventScript_Encounter_14
 OverworldEncounters_EventScript_Encounter_13:

@@ -970,6 +970,34 @@ u16 GetLocalWaterMon(void)
     return SPECIES_NONE;
 }
 
+u16 GetLocalRockSmashMon(void)
+{
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+
+    if (headerId != HEADER_NONE)
+    {
+        const struct WildPokemonInfo *rockSmashMonsInfo = gWildMonHeaders[headerId].rockSmashMonsInfo;
+
+        if (rockSmashMonsInfo)
+            return rockSmashMonsInfo->wildPokemon[ChooseWildMonIndex_WaterRock()].species;
+    }
+    return SPECIES_NONE;
+}
+
+u16 GetLocalFishingMon(u8 rod)
+{
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+
+    if (headerId != HEADER_NONE)
+    {
+        const struct WildPokemonInfo *fishingMonsInfo = gWildMonHeaders[headerId].fishingMonsInfo;
+
+        if (fishingMonsInfo)
+            return fishingMonsInfo->wildPokemon[ChooseWildMonIndex_Fishing(rod)].species;
+    }
+    return SPECIES_NONE;
+}
+
 bool8 UpdateRepelCounter(void)
 {
     u16 repelLureVar = VarGet(VAR_REPEL_STEP_COUNT);

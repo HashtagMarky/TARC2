@@ -46,8 +46,8 @@ script OverworldEncounters_EventScript_Encounter
         special(RemoveCameraObject)
     }
     waitmessage
-    specialvar(VAR_RESULT, HasAtLeastOnePokeBall)
     dynmultipush("{FONT_NARROW}FIGHT", 0)
+    specialvar(VAR_RESULT, HasAtLeastOnePokeBall)
     if (var(VAR_RESULT) == TRUE)
     {
         dynmultipush("{FONT_NARROWER}{POKE}BALL", 1)

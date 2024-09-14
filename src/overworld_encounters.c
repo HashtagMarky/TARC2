@@ -29,7 +29,7 @@
 #define OBJ_EVENT_GFX_LAST              OBJ_EVENT_GFX_VAR_F     // Last variable object event
 
 #define OVERWORLD_CATCH_SMULTIPLYER     gSaveBlock2Ptr->/*optionsOverworldCatchSuccessMultiplyer*/optionsSound + 1;
-#define SPAWN_ODDS_DENOMINATOR          2                       // Spawn Odds = 1/SPAWN_ODDS_DENOMINATOR
+#define SPAWN_ODDS_DENOMINATOR          3                       // Spawn Odds = 1 - 1/SPAWN_ODDS_DENOMINATOR
 #define RUN_ODDS_DENOMINATOR            3                       // Run Odds = 1/RUN_ODDS_DENOMINATOR
 
 void GetOverworldMonSpecies(void)
@@ -618,8 +618,8 @@ bool8 ScrCmd_SetObjectAsWildEncounter(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 encounterType = ScriptReadByte(ctx);
-    u16 headerId = ReturnCurrentMapWildMonHeaderId();
     // u32 encounterRate;
+    u16 headerId = ReturnCurrentMapWildMonHeaderId();
     u16 graphicsId = GetObjectEventGraphicsIdByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
     u16 variableOffset = (graphicsId >= OBJ_EVENT_GFX_VAR_0) ? graphicsId - OBJ_EVENT_GFX_VAR_0 : 0;
     u16 objectEventVariable = VAR_OBJ_GFX_ID_0 + variableOffset;
@@ -630,21 +630,18 @@ bool8 ScrCmd_SetObjectAsWildEncounter(struct ScriptContext *ctx)
         return FALSE;
     }
 
-    if (headerId == HEADER_NONE)
+    encounterType = (encounterType < ENCOUNTER_TYPES) ? encounterType : ENCOUNTER_LAND;
+
+    if (headerId == HEADER_NONE || encounterType == ENCOUNTER_FIXED)
     {
         VarSet(objectEventVariable, ReturnFixedSpeciesEncounter());
         return FALSE;
     }
 
-    if (encounterType != ENCOUNTER_WATER)
-    {
-        encounterType = ENCOUNTER_LAND;
-    }
-
 /*
     switch (encounterType)
     {
-    case ENCOUNTER_WATER:
+    case ENCOUNTER_SURF:
         encounterRate = gWildMonHeaders[headerId].waterMonsInfo->encounterRate;
         break;
     
@@ -670,7 +667,9 @@ bool8 ScrCmd_SetObjectAsWildEncounter(struct ScriptContext *ctx)
 u16 ReturnFixedSpeciesEncounter(void)
 {
     u16 shinyTag = GeneratedOverworldMonShinyRoll() ? SPECIES_SHINY_TAG : 0;
-    u16 species = SPECIES_PIKACHU;
+    u16 species = SPECIES_NONE;
+
+    species = SPECIES_PIKACHU;
     
     return species + OBJ_EVENT_GFX_SPECIES(NONE) + shinyTag;
 }
@@ -678,11 +677,37 @@ u16 ReturnFixedSpeciesEncounter(void)
 u16 ReturnHeaderSpeciesEncounter(u8 encounterType, u16 headerId)
 {
     u16 shinyTag = GeneratedOverworldMonShinyRoll() ? SPECIES_SHINY_TAG : 0;
+    u16 species = SPECIES_NONE;
 
-    if (encounterType == ENCOUNTER_LAND && gWildMonHeaders[headerId].landMonsInfo != NULL)
-        return GetLocalLandMon() + OBJ_EVENT_GFX_SPECIES(NONE) + shinyTag;
-    else if (encounterType == ENCOUNTER_WATER && gWildMonHeaders[headerId].waterMonsInfo != NULL)
-        return GetLocalWaterMon() + OBJ_EVENT_GFX_SPECIES(NONE) + shinyTag;
+    switch (encounterType)
+    {
+    case ENCOUNTER_LAND:
+        species = GetLocalLandMon();
+        break;
+
+    case ENCOUNTER_SURF:
+        species = GetLocalWaterMon();
+        break;
+
+    case ENCOUNTER_ROCK_SMASH:
+        species = GetLocalRockSmashMon();
+        break;
+
+    case ENCOUNTER_OLD_ROD:
+        species = GetLocalFishingMon(OLD_ROD);
+        break;
+
+    case ENCOUNTER_GOOD_ROD:
+        species = GetLocalFishingMon(GOOD_ROD);
+        break;
+
+    case ENCOUNTER_SUPER_ROD:
+        species = GetLocalFishingMon(SUPER_ROD);
+        break;
+    }
+
+    if (species != SPECIES_NONE)
+        return species + OBJ_EVENT_GFX_SPECIES(NONE) + shinyTag;
     else
         return ReturnFixedSpeciesEncounter();
 }
