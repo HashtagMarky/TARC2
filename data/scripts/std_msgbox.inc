@@ -47,3 +47,27 @@ Common_EventScript_SaveGame::
 	special SaveGame
 	waitstate
 	return
+
+Std_MsgboxMusghotNPC::
+	lock
+	faceplayer
+	createfieldmugshot MUGSHOT_NPC
+	speakername TRUE
+	message NULL
+	waitmessage
+	waitbuttonpress
+	removefieldmugshot
+	release
+	return
+
+Std_MsgboxMugshotPokemon::
+	lock
+	faceplayer
+	createfieldmugshot MUGSHOT_PMD
+	speakername TRUE
+	message NULL
+	waitmessage
+	waitbuttonpress
+	removefieldmugshot
+	release
+	return
