@@ -65,9 +65,12 @@ Std_MsgboxMugshotPokemon::
 	faceplayer
 	createfieldmugshot MUGSHOT_PMD
 	speakername TRUE
+	special GetOverworldMonSpecies
+	playmoncry VAR_0x8004, CRY_MODE_NORMAL
 	message NULL
 	waitmessage
 	waitbuttonpress
+	waitmoncry
 	removefieldmugshot
 	release
 	return
