@@ -2511,7 +2511,7 @@ bool8 ScrCmd_createfieldmugshot(struct ScriptContext *ctx)
 {
     u8 mugshotType = ScriptReadByte(ctx);
     u16 mugshotId = VarGet(ScriptReadHalfword(ctx));
-    u8 mugshotEmotion = ScriptReadByte(ctx);
+    u16 mugshotEmotion = VarGet(ScriptReadHalfword(ctx));
     s16 x = VarGet(ScriptReadHalfword(ctx));
     s16 y = VarGet(ScriptReadHalfword(ctx));
 

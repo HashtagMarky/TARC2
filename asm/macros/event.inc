@@ -1897,7 +1897,7 @@
 	.byte 0xe6
 	.byte \type
 	.2byte \id
-	.byte \emotion
+	.2byte \emotion
 	.2byte \x
 	.2byte \y
 	.endm
@@ -2072,8 +2072,9 @@
 	NO  = 0
 
 	@ Buffers the given text and calls the relevant standard message script (see gStdScripts).
-	.macro msgbox text:req, type=MSGBOX_DEFAULT
+	.macro msgbox text:req, type=MSGBOX_DEFAULT mugshotEmotion=EMOTE_NORMAL
 	loadword 0, \text
+	setvar VAR_SPECIAL_IKIGAI, \mugshotEmotion
 	callstd \type
 	.endm
 
