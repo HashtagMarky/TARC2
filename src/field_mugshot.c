@@ -5,6 +5,7 @@
 #include "sprite.h"
 #include "script.h"
 #include "event_data.h"
+#include "field_message_box.h"
 #include "field_mugshot.h"
 #include "field_weather.h"
 #include "follower_helper.h"
@@ -16,6 +17,7 @@
 #include "data/field_mugshots.h"
 
 static EWRAM_DATA u8 sFieldMugshotSpriteId = 0;
+static EWRAM_DATA u8 sIsFieldMugshotActive = 0;
 
 #define MUGSHOT_NPC_X           200
 #define MUGSHOT_NPC_Y           72
@@ -44,13 +46,24 @@ static const struct WindowTemplate sMugshotWindowPokemon =
     .baseBlock = 1,
 };
 
+static void SpriteCB_FieldMugshot(struct Sprite *s);
+
 static const struct OamData sFieldMugshot_Oam = {
     .size = SPRITE_SIZE(64x64),
     .shape = SPRITE_SHAPE(64x64),
     .priority = 0,
 };
 
-static const struct SpriteTemplate sFieldMugshot_SpriteTemplate = {
+static const struct SpriteTemplate sFieldMugshotMsgBox_SpriteTemplate = {
+    .tileTag = TAG_MUGSHOT,
+    .paletteTag = TAG_MUGSHOT,
+    .oam = &sFieldMugshot_Oam,
+    .callback = SpriteCB_FieldMugshot,
+    .anims = gDummySpriteAnimTable,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+static const struct SpriteTemplate sFieldMugshotSprite_SpriteTemplate = {
     .tileTag = TAG_MUGSHOT,
     .paletteTag = TAG_MUGSHOT,
     .oam = &sFieldMugshot_Oam,
@@ -58,6 +71,18 @@ static const struct SpriteTemplate sFieldMugshot_SpriteTemplate = {
     .anims = gDummySpriteAnimTable,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
+
+static void SpriteCB_FieldMugshot(struct Sprite *s)
+{
+    if (s->data[0] == TRUE)
+    {
+        s->invisible = FALSE;
+    }
+    else
+    {
+        s->invisible = TRUE;
+    }
+}
 
 #define taskId        NUM_TASKS - 1
 #define tWindowId     data[0]
@@ -88,6 +113,8 @@ void RemoveFieldMugshot(void)
             ClearStdWindowAndFrame(windowId, TRUE);
             RemoveWindow(windowId);
             DestroyTask(windowTask);
+
+        sIsFieldMugshotActive = FALSE;
     }
 };
 
@@ -222,12 +249,24 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
     LoadCompressedSpriteSheet(&sheet);
     LoadSpritePalette(&pal);
 
-    sFieldMugshotSpriteId = CreateSprite(&sFieldMugshot_SpriteTemplate, x, y, 0);
+    sFieldMugshotSpriteId = CreateSprite(&sFieldMugshotMsgBox_SpriteTemplate, x, y, 0);
     if (sFieldMugshotSpriteId == SPRITE_NONE)
     {
         return;
     }
     PreservePaletteInWeather(gSprites[sFieldMugshotSpriteId].oam.paletteNum + 0x10);
+    gSprites[sFieldMugshotSpriteId].data[0] = FALSE;
+    sIsFieldMugshotActive = TRUE;
+}
+
+u8 GetFieldMugshotSpriteId(void)
+{
+    return sFieldMugshotSpriteId;
+}
+
+u8 IsFieldMugshotActive(void)
+{
+    return sIsFieldMugshotActive;
 }
 
 #undef tWindowId
@@ -275,7 +314,7 @@ u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion)
     LoadCompressedSpriteSheet(&sheet);
     LoadSpritePalette(&pal);
 
-    sFieldMugshotSpriteId = CreateSprite(&sFieldMugshot_SpriteTemplate, 0, 0, 0);
+    sFieldMugshotSpriteId = CreateSprite(&sFieldMugshotSprite_SpriteTemplate, 0, 0, 0);
     if (sFieldMugshotSpriteId == SPRITE_NONE)
     {
         return NULL;

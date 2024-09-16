@@ -5,5 +5,7 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
 void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 shiny);
 u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion);
 void RemoveFieldMugshot(void);
+u8 GetFieldMugshotSpriteId(void);
+u8 IsFieldMugshotActive(void);
 
 #endif // GUARD_FIELD_MUGSHOTS_H
