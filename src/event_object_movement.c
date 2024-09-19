@@ -45,6 +45,7 @@
 #include "constants/battle.h"
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
+#include "constants/field_mugshots.h"
 #include "constants/items.h"
 #include "constants/map_types.h"
 #include "constants/mauville_old_man.h"
@@ -2443,7 +2444,10 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
     if (pickedCondition)
     {
         emotion = gFollowerConditionalMessages[multi].emotion;
-        CreateFollowerFieldMugshot(species, emotion, shiny);
+        if (!shiny)
+            CreateFieldMugshot(MUGSHOT_FOLLOWER, species + OBJ_EVENT_GFX_SPECIES(NONE), gFollowerConditionalMessages[multi].emotionPMD, 0, 0);
+        else
+            CreateFieldMugshot(MUGSHOT_FOLLOWER, species + OBJ_EVENT_GFX_SPECIES_SHINY(NONE), gFollowerConditionalMessages[multi].emotionPMD, 0, 0);
         ObjectEventEmote(objEvent, emotion);
         ctx->data[0] = (u32) gFollowerConditionalMessages[multi].text;
         // text choices are spread across array; pick a random one
