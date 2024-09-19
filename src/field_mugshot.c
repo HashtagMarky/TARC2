@@ -174,10 +174,10 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
     // Verification that sprite isn't placed offscreen.
     // The +32 makes it so the defined x & y position are the top left.
     x = (x > 176) ? 176 : x;
-    x = x + 32;
+    x += 32;
     
     y = (y > 96) ? 96 : y;
-    y = y + 32;
+    y += 32;
 
     struct CompressedSpriteSheet sheet = { .size=0x1000, .tag=TAG_MUGSHOT };
     struct SpritePalette pal = { .tag = sheet.tag };
