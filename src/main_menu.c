@@ -530,6 +530,11 @@ static const u8 *const sFemalePresetNames[] = {
     COMPOUND_STRING("HALIE")
 };
 
+static const u8 *const sIkigaiPresetNames[] = {
+    COMPOUND_STRING("KOLE"),
+    COMPOUND_STRING("ANKA")
+};
+
 // The number of male vs. female names is assumed to be the same.
 // If they aren't, the smaller of the two sizes will be used and any extra names will be ignored.
 #define NUM_PRESET_NAMES min(ARRAY_COUNT(sMalePresetNames), ARRAY_COUNT(sFemalePresetNames))
@@ -2218,18 +2223,12 @@ void NewGameSamuelSpeech_SetDefaultPlayerName(u8 nameId)
     gSaveBlock2Ptr->playerName[PLAYER_NAME_LENGTH] = EOS;
 }
 
-const u8 gText_Kole[] = _("KOLE");
-const u8 gText_Anka[] = _("ANKA");
-
 static void NewGameSamuelSpeech_SetPlayerNameKoleAnka(void)
 {
     const u8 *name;
     u8 i;
 
-    if (gSaveBlock2Ptr->playerGender == MALE)
-        name = gText_Kole;
-    else
-        name = gText_Anka;
+    name = sIkigaiPresetNames[gSaveBlock2Ptr->playerGender];
     for (i = 0; i < PLAYER_NAME_LENGTH; i++)
         gSaveBlock2Ptr->playerName[i] = name[i];
     gSaveBlock2Ptr->playerName[PLAYER_NAME_LENGTH] = EOS;
