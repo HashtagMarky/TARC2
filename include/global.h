@@ -139,6 +139,30 @@
 #define IKIGAI_INTERFACE_GYM_TYPE_COLOUR      IKIGAI_DEFAULT_INTERFACE_COUNT
 // #define IKIGAI_INTERFACE_GYM_TYPE_COLOUR_DARK IKIGAI_INTERFACE_GYM_TYPE_COLOUR + 1
 
+#ifndef NDEBUG
+static inline void CycleCountStart()
+{
+    REG_TM2CNT_H = 0;
+    REG_TM3CNT_H = 0;
+
+    REG_TM2CNT_L = 0;
+    REG_TM3CNT_L = 0;
+
+    // init timers (tim3 count up mode, tim2 every clock cycle)
+    REG_TM3CNT_H = TIMER_ENABLE | TIMER_COUNTUP;
+    REG_TM2CNT_H = TIMER_1CLK | TIMER_ENABLE;
+}
+
+static inline u32 CycleCountEnd()
+{
+    // stop timers
+    REG_TM2CNT_H = 0;
+    REG_TM3CNT_H = 0;
+
+    // return result
+    return REG_TM2CNT_L | (REG_TM3CNT_L << 16u);
+}
+#endif
 
 struct Coords8
 {
@@ -184,6 +208,8 @@ struct Time
     /*0x04*/ s8 seconds;
 };
 
+#include "constants/items.h"
+#define ITEM_FLAGS_COUNT ((ITEMS_COUNT / 8) + ((ITEMS_COUNT % 8) ? 1 : 0))
 
 struct SaveBlock3
 {
@@ -198,6 +224,9 @@ struct SaveBlock3
     bool8 fastBike:1;
     bool8 fastSurf:1;
     u8 padding:4;
+#if OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_FIRST_TIME
+    u8 itemFlags[ITEM_FLAGS_COUNT];
+#endif
 };
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;
