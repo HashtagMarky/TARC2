@@ -2072,10 +2072,20 @@
 	NO  = 0
 
 	@ Buffers the given text and calls the relevant standard message script (see gStdScripts).
-	.macro msgbox text:req, type=MSGBOX_DEFAULT mugshotEmotion=EMOTE_NORMAL
+	.macro msgbox text:req, type=MSGBOX_DEFAULT
 	loadword 0, \text
-	setvar VAR_SPECIAL_IKIGAI, \mugshotEmotion
 	callstd \type
+	.endm
+
+	@ Buffers the given text and calls the relevant message, name and mugshot script (see gStdScripts).
+	.macro mnmbox text:req, PMD=FALSE, mugshotEmotion=EMOTE_NORMAL
+	loadword 0, \text
+	setvar VAR_0x8002, \mugshotEmotion
+	.if \PMD == FALSE
+		callstd MSGBOX_NPC_MUG
+	.else
+		callstd MSGBOX_PKMN_MUG
+	.endif
 	.endm
 
 	@ Gives 'amount' of the specified 'item' to the player and prints a message with fanfare.

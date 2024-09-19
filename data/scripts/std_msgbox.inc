@@ -51,7 +51,7 @@ Common_EventScript_SaveGame::
 Std_MsgboxMusghotNPC::
 	lock
 	faceplayer
-	createfieldmugshot MUGSHOT_NPC, emotion=VAR_SPECIAL_IKIGAI
+	createfieldmugshot MUGSHOT_NPC, emotion=VAR_0x8002
 	speakername TRUE
 	message NULL
 	waitmessage
@@ -63,7 +63,7 @@ Std_MsgboxMusghotNPC::
 Std_MsgboxMugshotPokemon::
 	lock
 	faceplayer
-	createfieldmugshot MUGSHOT_PMD, emotion=VAR_SPECIAL_IKIGAI
+	createfieldmugshot MUGSHOT_PMD, emotion=VAR_0x8002
 	speakername TRUE
 	special GetOverworldMonSpecies
 	playmoncry VAR_0x8004, CRY_MODE_NORMAL
