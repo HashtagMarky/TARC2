@@ -47,6 +47,7 @@ static const struct WindowTemplate sMugshotWindowPokemon =
 };
 
 static void SpriteCB_FieldMugshot(struct Sprite *s);
+static void Task_MugshotHandler(u8 taskId);
 
 static const struct OamData sFieldMugshot_Oam = {
     .size = SPRITE_SIZE(64x64),
@@ -84,39 +85,38 @@ static void SpriteCB_FieldMugshot(struct Sprite *s)
     }
 }
 
-#define taskId        NUM_TASKS - 1
-#define tWindowId     data[0]
+static void Task_MugshotHandler(u8 taskId) {}
+
+#define tWindowId   data[0]
 
 void RemoveFieldMugshot(void)
 {
-    u8 windowTask = taskId;
-    u8 windowId = 0;
-    
+    u8 windowTask = FindTaskIdByFunc(Task_MugshotHandler);  // Find the task responsible for the window
+    u8 windowId;
+
+    if (windowTask == TASK_NONE)  // If no task exists, exit early
+        return;
+
     if (IndexOfSpritePaletteTag(TAG_MUGSHOT) != 0xFF)
     {
         ResetPreservedPalettesInWeather();
-        /*
-        windowId = AddWindow(&sMugshotWindowNPC);
+
+        // Clear and remove the window if valid
+        windowId = gTasks[windowTask].tWindowId;
         ClearStdWindowAndFrame(windowId, TRUE);
         RemoveWindow(windowId);
-        windowId = AddWindow(&sMugshotWindowPokemon);
-        ClearStdWindowAndFrame(windowId, TRUE);
-        RemoveWindow(windowId);
-        */
+
         DestroySprite(&gSprites[sFieldMugshotSpriteId]);
         FreeSpritePaletteByTag(TAG_MUGSHOT);
         FreeSpriteTilesByTag(TAG_MUGSHOT);
         sFieldMugshotSpriteId = SPRITE_NONE;
 
-        if (GetTaskCount() < (NUM_TASKS - 1))
-            windowId = gTasks[windowTask].tWindowId;
-            ClearStdWindowAndFrame(windowId, TRUE);
-            RemoveWindow(windowId);
-            DestroyTask(windowTask);
+        // Destroy the task now that all cleanup is done
+        DestroyTask(windowTask);
 
         sIsFieldMugshotActive = FALSE;
     }
-};
+}
 
 void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 shiny)
 {
@@ -168,7 +168,7 @@ void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 
 
 void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y)
 {
-    u8 windowTask = taskId;
+    u8 windowTask = CreateTask(Task_MugshotHandler, 0);  // Create a new task and get its task ID
     u8 windowId = 0;
 
     // Verification that sprite isn't placed offscreen.
@@ -224,6 +224,7 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
         return;
     }
     
+    // Create windows based on the mugshot type
     if (mugshotType != MUGSHOT_DEFINED)
     {
         if (mugshotType == MUGSHOT_NPC)
@@ -238,26 +239,30 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
             x = MUGSHOT_PMD_X;
             y = MUGSHOT_PMD_Y;
         }
-        
-        if (GetTaskCount() < (NUM_TASKS - 1))
-            gTasks[windowTask].tWindowId = windowId;
-            DrawStdWindowFrame(windowId, FALSE);
-            CopyWindowToVram(windowId, 3);
-            DestroyTask(windowTask);
+
+        gTasks[windowTask].tWindowId = windowId;  // Store windowId in task's data
+        DrawStdWindowFrame(windowId, FALSE);
+        CopyWindowToVram(windowId, 3);
     }
 
+    // Logic for loading and creating the sprite
     LoadCompressedSpriteSheet(&sheet);
     LoadSpritePalette(&pal);
 
     sFieldMugshotSpriteId = CreateSprite(&sFieldMugshotMsgBox_SpriteTemplate, x, y, 0);
     if (sFieldMugshotSpriteId == SPRITE_NONE)
     {
+        RemoveWindow(windowId);  // Clean up if sprite creation fails
+        DestroyTask(windowTask);  // Destroy the task if sprite creation fails
         return;
     }
+
     PreservePaletteInWeather(gSprites[sFieldMugshotSpriteId].oam.paletteNum + 0x10);
     gSprites[sFieldMugshotSpriteId].data[0] = FALSE;
     sIsFieldMugshotActive = TRUE;
 }
+
+#undef  tWindowId
 
 u8 GetFieldMugshotSpriteId(void)
 {
@@ -268,8 +273,6 @@ u8 IsFieldMugshotActive(void)
 {
     return sIsFieldMugshotActive;
 }
-
-#undef tWindowId
 
 u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion)
 {
