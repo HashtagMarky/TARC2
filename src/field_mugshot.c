@@ -118,7 +118,7 @@ void RemoveFieldMugshot(void)
     }
 }
 
-void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 shiny)
+void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 shiny, bool8 emotePMD)
 {
     u16 mugshotId;
     u8 mugshotEmotion;
@@ -127,41 +127,44 @@ void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 
     if (shiny)
         mugshotId += SPECIES_SHINY_TAG;
 
-    switch (followerEmotion)
-    {
-    case FOLLOWER_EMOTION_HAPPY:
-        mugshotEmotion = EMOTE_HAPPY;
-        break;
-    case FOLLOWER_EMOTION_SAD:
-        mugshotEmotion = EMOTE_SAD;
-        break;
-    case FOLLOWER_EMOTION_UPSET:
-        mugshotEmotion = EMOTE_TEARY;
-        break;
-    case FOLLOWER_EMOTION_ANGRY:
-        mugshotEmotion = EMOTE_ANGRY;
-        break;
-    case FOLLOWER_EMOTION_PENSIVE:
-        mugshotEmotion = EMOTE_WORRIED;
-        break;
-    case FOLLOWER_EMOTION_LOVE:
-    case FOLLOWER_EMOTION_MUSIC:
-        mugshotEmotion = EMOTE_JOYOUS;
-        break;
-    case FOLLOWER_EMOTION_SURPRISE:
-        mugshotEmotion = EMOTE_STUNNED;
-        break;
-    case FOLLOWER_EMOTION_CURIOUS:
-        mugshotEmotion = EMOTE_WORRIED;
-        break;
-    case FOLLOWER_EMOTION_POISONED:
-        mugshotEmotion = EMOTE_PAIN;
-        break;
-    case FOLLOWER_EMOTION_NEUTRAL:
-    default:
-        mugshotEmotion = EMOTE_NORMAL;
-        break;
-    }
+    if (emotePMD)
+        mugshotEmotion = followerEmotion;
+    else
+        switch (followerEmotion)
+        {
+        case FOLLOWER_EMOTION_HAPPY:
+            mugshotEmotion = EMOTE_HAPPY;
+            break;
+        case FOLLOWER_EMOTION_SAD:
+            mugshotEmotion = EMOTE_SAD;
+            break;
+        case FOLLOWER_EMOTION_UPSET:
+            mugshotEmotion = EMOTE_TEARY;
+            break;
+        case FOLLOWER_EMOTION_ANGRY:
+            mugshotEmotion = EMOTE_ANGRY;
+            break;
+        case FOLLOWER_EMOTION_PENSIVE:
+            mugshotEmotion = EMOTE_WORRIED;
+            break;
+        case FOLLOWER_EMOTION_LOVE:
+        case FOLLOWER_EMOTION_MUSIC:
+            mugshotEmotion = EMOTE_JOYOUS;
+            break;
+        case FOLLOWER_EMOTION_SURPRISE:
+            mugshotEmotion = EMOTE_STUNNED;
+            break;
+        case FOLLOWER_EMOTION_CURIOUS:
+            mugshotEmotion = EMOTE_WORRIED;
+            break;
+        case FOLLOWER_EMOTION_POISONED:
+            mugshotEmotion = EMOTE_PAIN;
+            break;
+        case FOLLOWER_EMOTION_NEUTRAL:
+        default:
+            mugshotEmotion = EMOTE_NORMAL;
+            break;
+        }
 
     CreateFieldMugshot(MUGSHOT_FOLLOWER, mugshotId, mugshotEmotion, 0, 0);
 }
