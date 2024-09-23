@@ -1091,5 +1091,21 @@ static void UpdateLegendaryMarkingColor(u8 frameNum)
 
 static u8 ChooseIkigaiLegendary(void)
 {
-    return Random() % IKIGAI_DEFAULT_INTERFACE_COUNT;
+    if (gSaveBlock2Ptr->ikigaiGymType == TYPE_NONE)
+    {
+        return Random() % IKIGAI_DEFAULT_INTERFACE_COUNT;
+    }
+
+    if (gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_GYM_TYPE_COLOUR)
+    {
+        return Random() % IKIGAI_DEFAULT_INTERFACE_COUNT;
+    }
+
+    if (gSaveBlock2Ptr->optionsInterfaceColor != IKIGAI_INTERFACE_GYM_TYPE_COLOUR
+    && gSaveBlock2Ptr->optionsTitleScreenInterface == FALSE)
+    {
+        return Random() % IKIGAI_DEFAULT_INTERFACE_COUNT;
+    }
+
+    return gSaveBlock2Ptr->optionsInterfaceColor;
 }
