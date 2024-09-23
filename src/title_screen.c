@@ -56,7 +56,7 @@ static void CB2_GoToClearSaveDataScreen(void);
 static void CB2_GoToResetRtcScreen(void);
 static void CB2_GoToBerryFixScreen(void);
 static void CB2_GoToCopyrightScreen(void);
-static void UpdateLegendaryMarkingColor(u8, u8);
+static void UpdateLegendaryMarkingColor(u8);
 
 static void SpriteCB_VersionBannerLeft(struct Sprite *sprite);
 static void SpriteCB_VersionBannerRight(struct Sprite *sprite);
@@ -457,7 +457,6 @@ static const struct CompressedSpriteSheet sPokemonLogoShineSpriteSheet[] =
 #define tPointless  data[2] // Incremented but never used to do anything.
 #define tBg2Y       data[3]
 #define tBg1Y       data[4]
-#define tLegendary  data[7] // data[5] and data[6] are unused but set
 
 // Sprite data for sVersionBannerLeftSpriteTemplate / sVersionBannerRightSpriteTemplate
 #define sAlphaBlendIdx data[0]
@@ -817,7 +816,6 @@ void CB2_InitTitleScreen(void)
         gTasks[taskId].tSkipToNext = FALSE;
         gTasks[taskId].tPointless = -16;
         gTasks[taskId].tBg2Y = -32;
-        gTasks[taskId].tLegendary = gIkigaiLegendaryScreen;
         gMain.state = 3;
         break;
     }
@@ -1006,7 +1004,7 @@ static void Task_TitleScreenPhase3(u8 taskId)
             gBattle_BG1_Y = 0; 
             gBattle_BG1_X = 0;
         }
-        UpdateLegendaryMarkingColor(gTasks[taskId].tCounter, gTasks[taskId].tLegendary);
+        UpdateLegendaryMarkingColor(gTasks[taskId].tCounter);
         if ((gMPlayInfo_BGM.status & 0xFFFF) == 0)
         {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_IKIGAI_PINK_ALPHA);
@@ -1048,7 +1046,7 @@ static void CB2_GoToBerryFixScreen(void)
     }
 }
 
-static void UpdateLegendaryMarkingColor(u8 frameNum, u8 gIkigaiLegendaryScreen)
+static void UpdateLegendaryMarkingColor(u8 frameNum)
 {
     if ((frameNum % 4) == 0) // Change color every 4th frame
     {
