@@ -39,8 +39,8 @@ enum {
 #define START_BANNER_Y 113
 #define START_COPYRIGHT_X 128
 #define START_COPYRIGHT_Y 148
-#define IKIGAI_VERSION_NUMBER_X 203
-#define IKIGAI_VERSION_NUMBER_Y 69
+#define IKIGAI_VERSION_NUMBER_X 205
+#define IKIGAI_VERSION_NUMBER_Y 34
 
 #define CLEAR_SAVE_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_UP)
 #define RESET_RTC_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_LEFT)
@@ -87,7 +87,8 @@ static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/
 #else
     static const u32 sTitleScreenLogoIkigaiVersionNumber[] = INCBIN_U32("graphics/title_screen/ikigai_version_number_blank.4bpp.lz");
 #endif
-static const u32 sTitleScreenLogoIkigaiVersionNumberPal[] = INCBIN_U32("graphics/title_screen/ikigai_version_number.gbapal.lz");
+static const u32 sTitleScreenLogoIkigaiVersionNumberPal_Blue[] = INCBIN_U32("graphics/title_screen/ikigai_version_number_blue.gbapal.lz");
+static const u32 sTitleScreenLogoIkigaiVersionNumberPal_Pink[] = INCBIN_U32("graphics/title_screen/ikigai_version_number_pink.gbapal.lz");
 
 
 
@@ -374,10 +375,19 @@ static const struct CompressedSpriteSheet sSpriteSheet_IkigaiVersionNumber[] =
     {},
 };
 
-static const struct CompressedSpritePalette sSpritePalette_IkigaiVersionNumber[] =
+static const struct CompressedSpritePalette sSpritePalette_IkigaiVersionNumber_Blue[] =
 {
     {
-        .data = sTitleScreenLogoIkigaiVersionNumberPal,
+        .data = sTitleScreenLogoIkigaiVersionNumberPal_Blue,
+        .tag = TAG_IKIGAI_VERSION
+    },
+    {},
+};
+
+static const struct CompressedSpritePalette sSpritePalette_IkigaiVersionNumber_Pink[] =
+{
+    {
+        .data = sTitleScreenLogoIkigaiVersionNumberPal_Pink,
         .tag = TAG_IKIGAI_VERSION
     },
     {},
@@ -754,7 +764,18 @@ void CB2_InitTitleScreen(void)
         LoadPalette(gTitleScreenIkigaiVersionStonePal, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
         LoadSpritePalette(&sSpritePalette_PressStart[0]);
         LoadCompressedSpriteSheet(sSpriteSheet_IkigaiVersionNumber);
-        LoadCompressedSpritePalette(sSpritePalette_IkigaiVersionNumber);
+        switch (gIkigaiLegendaryScreen)
+        {
+        case IKIGAI_INTERFACE_GREEN:
+        case IKIGAI_INTERFACE_BLUE:
+            LoadCompressedSpritePalette(sSpritePalette_IkigaiVersionNumber_Pink);
+            break;
+        
+        case IKIGAI_INTERFACE_ORANGE:
+        case IKIGAI_INTERFACE_PINK:
+            LoadCompressedSpritePalette(sSpritePalette_IkigaiVersionNumber_Blue);
+            break;
+        }
         gMain.state = 2;
         break;
     case 2:
