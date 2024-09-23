@@ -2066,10 +2066,9 @@ extern const u32 gTitleScreenEnamorusBorderTilemap[];
 extern const u32 gTitleScreenPokemonLogoGfx[];
 extern const u32 gTitleScreenPokemonLogoTilemap[];
 extern const u32 gTitleScreenPressStartGfx[];
-extern const u16 gTitleScreenPressStartStonePal[];
-extern const u16 gTitleScreenPressStartStoneLightPal[];
 extern const u32 gTitleScreenIkigaiVersionGfx[];
-extern const u16 gTitleScreenIkigaiVersionStonePal[];
+extern const u16 gIkigaiTitleScreenPal_Blue[];
+extern const u16 gIkigaiTitleScreenPal_Pink[];
 // extern const u16 gTitleScreenIkigaiVersionNormalPal[];
 
 // Battle Dome

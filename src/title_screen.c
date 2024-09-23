@@ -35,9 +35,9 @@ enum {
 #define VERSION_BANNER_RIGHT_X 217
 #define VERSION_BANNER_Y 2
 #define VERSION_BANNER_Y_GOAL 72
-#define START_BANNER_X 130
-#define START_BANNER_Y 113
-#define START_COPYRIGHT_X 128
+#define START_BANNER_X 190
+#define START_BANNER_Y 111
+#define START_COPYRIGHT_X 188
 #define START_COPYRIGHT_Y 148
 #define IKIGAI_VERSION_NUMBER_X 205
 #define IKIGAI_VERSION_NUMBER_Y 34
@@ -87,8 +87,8 @@ static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/
 #else
     static const u32 sTitleScreenLogoIkigaiVersionNumber[] = INCBIN_U32("graphics/title_screen/ikigai_version_number_blank.4bpp.lz");
 #endif
-static const u32 sTitleScreenLogoIkigaiVersionNumberPal_Blue[] = INCBIN_U32("graphics/title_screen/ikigai_version_number_blue.gbapal.lz");
-static const u32 sTitleScreenLogoIkigaiVersionNumberPal_Pink[] = INCBIN_U32("graphics/title_screen/ikigai_version_number_pink.gbapal.lz");
+static const u32 sTitleScreenLogoIkigaiVersionNumberPal_Blue[] = INCBIN_U32("graphics/title_screen/ikigai_title_screen_blue.gbapal.lz");
+static const u32 sTitleScreenLogoIkigaiVersionNumberPal_Pink[] = INCBIN_U32("graphics/title_screen/ikigai_title_screen_pink.gbapal.lz");
 
 
 
@@ -356,10 +356,19 @@ static const struct CompressedSpriteSheet sSpriteSheet_PressStart[] =
     {},
 };
 
-static const struct SpritePalette sSpritePalette_PressStart[] =
+static const struct SpritePalette sSpritePalette_PressStart_Blue[] =
 {
     {
-        .data = gTitleScreenPressStartStonePal,
+        .data = gIkigaiTitleScreenPal_Blue,
+        .tag = TAG_PRESS_START_COPYRIGHT
+    },
+    {},
+};
+
+static const struct SpritePalette sSpritePalette_PressStart_Pink[] =
+{
+    {
+        .data = gIkigaiTitleScreenPal_Pink,
         .tag = TAG_PRESS_START_COPYRIGHT
     },
     {},
@@ -761,8 +770,30 @@ void CB2_InitTitleScreen(void)
         LoadCompressedSpriteSheet(&sSpriteSheet_IkigaiVersion[0]);
         LoadCompressedSpriteSheet(&sSpriteSheet_PressStart[0]);
         LoadCompressedSpriteSheet(&sPokemonLogoShineSpriteSheet[0]);
-        LoadPalette(gTitleScreenIkigaiVersionStonePal, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
-        LoadSpritePalette(&sSpritePalette_PressStart[0]);
+        switch (gIkigaiLegendaryScreen)
+        {
+        case IKIGAI_INTERFACE_GREEN:
+        case IKIGAI_INTERFACE_BLUE:
+            LoadPalette(gIkigaiTitleScreenPal_Pink, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
+            break;
+        
+        case IKIGAI_INTERFACE_ORANGE:
+        case IKIGAI_INTERFACE_PINK:
+            LoadPalette(gIkigaiTitleScreenPal_Blue, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
+            break;
+        }
+        switch (gIkigaiLegendaryScreen)
+        {
+        case IKIGAI_INTERFACE_GREEN:
+        case IKIGAI_INTERFACE_BLUE:
+            LoadSpritePalette(&sSpritePalette_PressStart_Pink[0]);
+            break;
+        
+        case IKIGAI_INTERFACE_ORANGE:
+        case IKIGAI_INTERFACE_PINK:
+            LoadSpritePalette(&sSpritePalette_PressStart_Blue[0]);
+            break;
+        }
         LoadCompressedSpriteSheet(sSpriteSheet_IkigaiVersionNumber);
         switch (gIkigaiLegendaryScreen)
         {
