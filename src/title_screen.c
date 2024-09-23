@@ -56,22 +56,31 @@ static void CB2_GoToClearSaveDataScreen(void);
 static void CB2_GoToResetRtcScreen(void);
 static void CB2_GoToBerryFixScreen(void);
 static void CB2_GoToCopyrightScreen(void);
-// static void UpdateLegendaryMarkingColor(u8);
-// static void UpdatePokemonLogoToStone(void);
-// static void UpdateCherryBlossomTreeColour(void);
-static void UpdateCherryBlossomTreeOffset(void);
+static void UpdateLegendaryMarkingColor(u8, u8);
 
 static void SpriteCB_VersionBannerLeft(struct Sprite *sprite);
 static void SpriteCB_VersionBannerRight(struct Sprite *sprite);
 static void SpriteCB_PressStartCopyrightBanner(struct Sprite *sprite);
 static void SpriteCB_PokemonLogoShine(struct Sprite *sprite);
 
+static u8 gIkigaiLegendaryScreen;
+static u8 ChooseIkigaiLegendary(void);
+
 // const rom data
 static const u16 sUnusedUnknownPal[] = INCBIN_U16("graphics/title_screen/unused.gbapal");
 
-static const u32 sTitleScreenCherryBlossomTreeGfx[] = INCBIN_U32("graphics/title_screen/cherry_blossom_tree.4bpp.lz");
-static const u32 sTitleScreenCherryBlossomTreeTilemap[] = INCBIN_U32("graphics/title_screen/cherry_blossom_tree.bin.lz");
-static const u32 sTitleScreenCherryBlossomLeavesGfx[] = INCBIN_U32("graphics/title_screen/cherry_blossom_leaves.4bpp.lz");
+static const u32 sTitleScreenTornadusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/tornadus.4bpp.lz");
+static const u32 sTitleScreenTornadusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/tornadus.bin.lz");
+static const u32 sTitleScreenTornadusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/tornadus_border.4bpp.lz");
+static const u32 sTitleScreenThundurusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/thundurus.4bpp.lz");
+static const u32 sTitleScreenThundurusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/thundurus.bin.lz");
+static const u32 sTitleScreenThundurusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/thundurus_border.4bpp.lz");
+static const u32 sTitleScreenLandorusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/landorus.4bpp.lz");
+static const u32 sTitleScreenLandorusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/landorus.bin.lz");
+static const u32 sTitleScreenLandorusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/landorus_border.4bpp.lz");
+static const u32 sTitleScreenEnamorusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/enamorus.4bpp.lz");
+static const u32 sTitleScreenEnamorusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/enamorus.bin.lz");
+static const u32 sTitleScreenEnamorusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/enamorus_border.4bpp.lz");
 static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/logo_shine.4bpp.lz");
 #if TITLE_SCREEN_VERSION_NUMBER == TRUE
     static const u32 sTitleScreenLogoIkigaiVersionNumber[] = INCBIN_U32("graphics/title_screen/ikigai_version_number.4bpp.lz");
@@ -429,6 +438,7 @@ static const struct CompressedSpriteSheet sPokemonLogoShineSpriteSheet[] =
 #define tPointless  data[2] // Incremented but never used to do anything.
 #define tBg2Y       data[3]
 #define tBg1Y       data[4]
+#define tLegendary  data[7] // data[5] and data[6] are unused but set
 
 // Sprite data for sVersionBannerLeftSpriteTemplate / sVersionBannerRightSpriteTemplate
 #define sAlphaBlendIdx data[0]
@@ -631,7 +641,7 @@ static void VBlankCB(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
+    SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG1_X);
 }
 
 void CB2_InitTitleScreen(void)
@@ -659,29 +669,80 @@ void CB2_InitTitleScreen(void)
         DmaFill32(3, 0, (void *)OAM, OAM_SIZE);
         DmaFill16(3, 0, (void *)(PLTT + 2), PLTT_SIZE - 2);
         ResetPaletteFade();
+        gIkigaiLegendaryScreen = ChooseIkigaiLegendary();
         gMain.state = 1;
         break;
     case 1:
         // bg2
         LZ77UnCompVram(gTitleScreenPokemonLogoGfx, (void *)(BG_CHAR_ADDR(0)));
         LZ77UnCompVram(gTitleScreenPokemonLogoTilemap, (void *)(BG_SCREEN_ADDR(9)));
-        LoadPalette(gTitleScreenBgPalettes, BG_PLTT_ID(0), 15 * PLTT_SIZE_4BPP);
-        /*
-        if (statement to determine whether tutorial is incomplete and greyscale logo should be shown)
-            UpdatePokemonLogoToStone();
-        */
+        switch (gIkigaiLegendaryScreen)
+        {
+        case IKIGAI_INTERFACE_GREEN:
+            LoadPalette(gTitleScreenTornadusBgPalettes, BG_PLTT_ID(0), 15 * PLTT_SIZE_4BPP);
+            break;
+        
+        case IKIGAI_INTERFACE_BLUE:
+            LoadPalette(gTitleScreenThundurusBgPalettes, BG_PLTT_ID(0), 15 * PLTT_SIZE_4BPP);
+            break;
+        
+        case IKIGAI_INTERFACE_ORANGE:
+            LoadPalette(gTitleScreenLandorusBgPalettes, BG_PLTT_ID(0), 15 * PLTT_SIZE_4BPP);
+            break;
+        
+        case IKIGAI_INTERFACE_PINK:
+            LoadPalette(gTitleScreenEnamorusBgPalettes, BG_PLTT_ID(0), 15 * PLTT_SIZE_4BPP);
+            break;
+        }
+
         // bg3
-        LZ77UnCompVram(sTitleScreenCherryBlossomTreeGfx, (void *)(BG_CHAR_ADDR(2)));
-        LZ77UnCompVram(sTitleScreenCherryBlossomTreeTilemap, (void *)(BG_SCREEN_ADDR(26)));
-        UpdateCherryBlossomTreeOffset();
-        /*
-        if (statement to determine whether tutorial is incomplete and greyscale logo should be shown)
-            UpdateCherryBlossomTreeColour();
-        */
+        switch (gIkigaiLegendaryScreen)
+        {
+        case IKIGAI_INTERFACE_GREEN:
+            LZ77UnCompVram(sTitleScreenTornadusGfx, (void *)(BG_CHAR_ADDR(2)));
+            LZ77UnCompVram(sTitleScreenTornadusTilemap, (void *)(BG_SCREEN_ADDR(26)));
+            break;
+        
+        case IKIGAI_INTERFACE_BLUE:
+            LZ77UnCompVram(sTitleScreenThundurusGfx, (void *)(BG_CHAR_ADDR(2)));
+            LZ77UnCompVram(sTitleScreenThundurusTilemap, (void *)(BG_SCREEN_ADDR(26)));
+            break;
+        
+        case IKIGAI_INTERFACE_ORANGE:
+            LZ77UnCompVram(sTitleScreenLandorusGfx, (void *)(BG_CHAR_ADDR(2)));
+            LZ77UnCompVram(sTitleScreenLandorusTilemap, (void *)(BG_SCREEN_ADDR(26)));
+            break;
+        
+        case IKIGAI_INTERFACE_PINK:
+            LZ77UnCompVram(sTitleScreenEnamorusGfx, (void *)(BG_CHAR_ADDR(2)));
+            LZ77UnCompVram(sTitleScreenEnamorusTilemap, (void *)(BG_SCREEN_ADDR(26)));
+            break;
+        }
+
         // bg1
-        // if !(statement to determine whether tutorial is incomplete and leaves should be shown)
-            LZ77UnCompVram(sTitleScreenCherryBlossomLeavesGfx, (void *)(BG_CHAR_ADDR(3)));
-            LZ77UnCompVram(gTitleScreenCherryBlossomLeavesTilemap, (void *)(BG_SCREEN_ADDR(27)));
+        switch (gIkigaiLegendaryScreen)
+        {
+        case IKIGAI_INTERFACE_GREEN:
+            LZ77UnCompVram(sTitleScreenTornadusBorderGfx, (void *)(BG_CHAR_ADDR(3)));
+            LZ77UnCompVram(gTitleScreenTornadusBorderTilemap, (void *)(BG_SCREEN_ADDR(27)));
+            break;
+        
+        case IKIGAI_INTERFACE_BLUE:
+            LZ77UnCompVram(sTitleScreenThundurusBorderGfx, (void *)(BG_CHAR_ADDR(3)));
+            LZ77UnCompVram(gTitleScreenThundurusBorderTilemap, (void *)(BG_SCREEN_ADDR(27)));
+            break;
+        
+        case IKIGAI_INTERFACE_ORANGE:
+            LZ77UnCompVram(sTitleScreenLandorusBorderGfx, (void *)(BG_CHAR_ADDR(3)));
+            LZ77UnCompVram(gTitleScreenLandorusBorderTilemap, (void *)(BG_SCREEN_ADDR(27)));
+            break;
+        
+        case IKIGAI_INTERFACE_PINK:
+            LZ77UnCompVram(sTitleScreenEnamorusBorderGfx, (void *)(BG_CHAR_ADDR(3)));
+            LZ77UnCompVram(gTitleScreenEnamorusBorderTilemap, (void *)(BG_SCREEN_ADDR(27)));
+            break;
+        }
+
         ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
@@ -704,6 +765,7 @@ void CB2_InitTitleScreen(void)
         gTasks[taskId].tSkipToNext = FALSE;
         gTasks[taskId].tPointless = -16;
         gTasks[taskId].tBg2Y = -32;
+        gTasks[taskId].tLegendary = gIkigaiLegendaryScreen;
         gMain.state = 3;
         break;
     }
@@ -744,7 +806,7 @@ void CB2_InitTitleScreen(void)
         if (!UpdatePaletteFade())
         {
             StartPokemonLogoShine(SHINE_MODE_SINGLE_NO_BG_COLOR);
-            ScanlineEffect_InitWave(0, DISPLAY_HEIGHT, 4, 4, 0, SCANLINE_EFFECT_REG_BG1HOFS, TRUE);
+            // ScanlineEffect_InitWave(0, DISPLAY_HEIGHT, 4, 4, 0, SCANLINE_EFFECT_REG_BG1HOFS, TRUE);
             SetMainCallback2(MainCB2);
         }
         break;
@@ -827,7 +889,7 @@ static void Task_TitleScreenPhase2(u8 taskId)
     {
         gTasks[taskId].tSkipToNext = TRUE;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BD);
-        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(7, 11)); // Alpha Blending of Leaves
+        // SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(7, 11)); // Alpha Blending
         SetGpuReg(REG_OFFSET_BLDY, 0);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1
                                     | DISPCNT_OBJ_1D_MAP
@@ -890,9 +952,9 @@ static void Task_TitleScreenPhase3(u8 taskId)
         {
             gTasks[taskId].tBg1Y++;
             gBattle_BG1_Y = 0; 
-            gBattle_BG1_X = -gTasks[taskId].tBg1Y * 2 / 3;
+            gBattle_BG1_X = 0;
         }
-        // UpdateLegendaryMarkingColor(gTasks[taskId].tCounter);
+        UpdateLegendaryMarkingColor(gTasks[taskId].tCounter, gTasks[taskId].tLegendary);
         if ((gMPlayInfo_BGM.status & 0xFFFF) == 0)
         {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_IKIGAI_PINK_ALPHA);
@@ -933,87 +995,51 @@ static void CB2_GoToBerryFixScreen(void)
         SetMainCallback2(CB2_InitBerryFixProgram);
     }
 }
-/*
-static void UpdateLegendaryMarkingColor(u8 frameNum)
+
+static void UpdateLegendaryMarkingColor(u8 frameNum, u8 gIkigaiLegendaryScreen)
 {
     if ((frameNum % 4) == 0) // Change color every 4th frame
     {
         s32 intensity = Cos(frameNum, 128) + 128;
-        s32 r = 31 - ((intensity * 32 - intensity) / 256);
-        s32 g = 31 - (intensity * 22 / 256);
-        s32 b = 12;
+        u8 valueR = 255, valueG = 255, valueB = 255;
 
-        u16 color = RGB(r, g, b);
-        LoadPalette(&color, BG_PLTT_ID(14) + 15, sizeof(color));
-   }
-}
-
-static void UpdatePokemonLogoToStone(void)
-{
-    u16 color1 = RGB_IKIGAI_DARK_GREY;
-    u16 color2 = RGB_IKIGAI_GREY;
-    u16 color3 = RGB_IKIGAI_DARKEST_GREY;
-
-    LoadPalette(&color1, BG_PLTT_ID(0) + 1, sizeof(color1));
-    LoadPalette(&color2, BG_PLTT_ID(0) + 2, sizeof(color2));
-    LoadPalette(&color3, BG_PLTT_ID(0) + 3, sizeof(color3));
-}
-
-static void UpdateCherryBlossomTreeColour(void)
-{
-    // Update Cherry Blossom Tree to Greyscale
-}
-*/
-static void UpdateCherryBlossomTreeOffset(void)
-{
-    u8 xOffset;
-    u8 xOffsetMax = Random() % 17;
-    u8 yOffset;
-    u8 yOffsetMin = 0;
-    u8 yOffsetMax;
-
-    u8 TestCondition = 0; // Condition for offset during testing.
-    // xOffset is randomised by default but set to 0 in first condition.
-    // yOffset is randomised with a maximum value dependant on conditions.
-    // yOffsetMin may be used in order to control the minimum offset.
-
-    switch(TestCondition)
-    {
-        default:
-        case 0:
-            xOffsetMax = 0;
-            yOffsetMax = 0;
+        switch (gIkigaiLegendaryScreen)
+        {
+        case IKIGAI_INTERFACE_GREEN:
+            valueR = 0;
+            valueG = 38;
+            valueB = 17;
             break;
-        case 1:
-            yOffsetMax = 24;
+        
+        case IKIGAI_INTERFACE_BLUE:
+            valueR = 0;
+            valueG = 20;
+            valueB = 38;
             break;
-        case 2:
-            yOffsetMax = 48;
+        
+        case IKIGAI_INTERFACE_ORANGE:
+            valueR = 82;
+            valueG = 36;
+            valueB = 0;
             break;
-        case 3:
-            yOffsetMin = 48;
-            yOffsetMax = 72;
+        
+        case IKIGAI_INTERFACE_PINK:
+            valueR = 81;
+            valueG = 2;
+            valueB = 48;
             break;
-        case 4:
-            yOffsetMin = 64;
-            yOffsetMax = 96;
-            break;
+        }
+
+        s32 r = 255 - ((255 - valueR) * intensity / 256);
+        s32 g = 255 - ((255 - valueG) * intensity / 256);
+        s32 b = 255 - ((255 - valueB) * intensity / 256);
+        u16 color = RGB2GBA(r, g, b);
+
+        LoadPalette(&color, BG_PLTT_ID(14) + 1, sizeof(color));
     }
-
-    if (xOffsetMax == 0)
-        xOffset = xOffsetMax;
-    else   
-        xOffset = Random() % xOffsetMax;
-
-    if (yOffsetMax == 0)
-        yOffset = yOffsetMax;
-    else if (yOffsetMin != 0)
-        yOffset = yOffsetMin + (Random() % (yOffsetMax - yOffsetMin));
-    else
-        yOffset = Random() % yOffsetMax;
-
-    SetGpuReg(REG_OFFSET_BG0HOFS, xOffset);
-    SetGpuReg(REG_OFFSET_BG0VOFS, yOffset);
-    SetGpuReg(REG_OFFSET_BG1VOFS, yOffset);
 }
 
+static u8 ChooseIkigaiLegendary(void)
+{
+    return Random() % IKIGAI_DEFAULT_INTERFACE_COUNT;
+}
