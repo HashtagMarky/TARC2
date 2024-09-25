@@ -1091,6 +1091,8 @@ static void UpdateLegendaryMarkingColor(u8 frameNum)
 
 static u8 ChooseIkigaiLegendary(void)
 {
+    return Random() % IKIGAI_DEFAULT_INTERFACE_COUNT;
+    /*
     if (gSaveBlock2Ptr->ikigaiGymType == TYPE_NONE)
     {
         return Random() % IKIGAI_DEFAULT_INTERFACE_COUNT;
@@ -1108,4 +1110,5 @@ static u8 ChooseIkigaiLegendary(void)
     }
 
     return gSaveBlock2Ptr->optionsInterfaceColor;
+    */
 }
