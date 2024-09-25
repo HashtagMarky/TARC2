@@ -11,6 +11,7 @@
 #include "follower_helper.h"
 #include "menu.h"
 #include "task.h"
+#include "window.h"
 #include "constants/event_objects.h"
 #include "constants/flags.h"
 #include "constants/field_mugshots.h"
@@ -83,6 +84,23 @@ static void SpriteCB_FieldMugshot(struct Sprite *s)
     {
         s->invisible = TRUE;
     }
+}
+
+struct MugshotDetails gActiveMugshotDetails;
+
+void SetMugshotDetails(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y, u8 windowType)
+{
+    gActiveMugshotDetails.mugshotType = mugshotType;
+    gActiveMugshotDetails.mugshotId = mugshotId;
+    gActiveMugshotDetails.mugshotEmotion = mugshotEmotion;
+    gActiveMugshotDetails.x = x;
+    gActiveMugshotDetails.y = y;
+    gActiveMugshotDetails.windowType = windowType;
+}
+
+struct MugshotDetails GetMugshotDetails(void)
+{
+    return gActiveMugshotDetails;
 }
 
 static void Task_MugshotHandler(u8 taskId) {}
@@ -173,6 +191,7 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
 {
     u8 windowTask = CreateTask(Task_MugshotHandler, 0);  // Create a new task and get its task ID
     u8 windowId = 0;
+    u8 windowType = WINDOW_NONE;
 
     // Verification that sprite isn't placed offscreen.
     // The +32 makes it so the defined x & y position are the top left.
@@ -235,12 +254,14 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
             windowId = AddWindow(&sMugshotWindowNPC);
             x = MUGSHOT_NPC_X;
             y = MUGSHOT_NPC_Y;
+            windowType = MUGSHOT_NPC;
         }
         else if (mugshotType == MUGSHOT_PMD || mugshotType == MUGSHOT_FOLLOWER)
         {
             windowId = AddWindow(&sMugshotWindowPokemon);
             x = MUGSHOT_PMD_X;
             y = MUGSHOT_PMD_Y;
+            windowType = MUGSHOT_PMD;
         }
 
         gTasks[windowTask].tWindowId = windowId;  // Store windowId in task's data
@@ -255,11 +276,13 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
     sFieldMugshotSpriteId = CreateSprite(&sFieldMugshotMsgBox_SpriteTemplate, x, y, 0);
     if (sFieldMugshotSpriteId == SPRITE_NONE)
     {
+        windowType = WINDOW_NONE;
         RemoveWindow(windowId);  // Clean up if sprite creation fails
         DestroyTask(windowTask);  // Destroy the task if sprite creation fails
         return;
     }
 
+    SetMugshotDetails(mugshotType, mugshotId, mugshotEmotion, x, y, windowType);
     PreservePaletteInWeather(gSprites[sFieldMugshotSpriteId].oam.paletteNum + 0x10);
     gSprites[sFieldMugshotSpriteId].data[0] = FALSE;
     sIsFieldMugshotActive = TRUE;
