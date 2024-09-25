@@ -48,6 +48,7 @@
 #define MUGSHOT_INFERNAPE_SHINY             OBJ_EVENT_GFX_SPECIES_SHINY(INFERNAPE)
 
 // Emotes
+// Also set in charmap.txt
 #define EMOTE_NORMAL        0
 #define EMOTE_ANGRY         1
 #define EMOTE_CRYING        2

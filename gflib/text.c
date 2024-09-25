@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "field_mugshot.h"
 #include "main.h"
 #include "m4a.h"
 #include "palette.h"
@@ -1201,6 +1202,24 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             case EXT_CTRL_CODE_ENG:
                 textPrinter->japanese = FALSE;
                 return RENDER_REPEAT;
+            case EXT_CTRL_CODE_CHANGE_MUGSHOT_EMOTE:
+            {
+                struct MugshotDetails mugshotDetails = GetMugshotDetails();
+
+                u32 emote;
+                emote = *textPrinter->printerTemplate.currentChar;
+                textPrinter->printerTemplate.currentChar++;
+
+                CreateFieldMugshot(mugshotDetails.mugshotType, mugshotDetails.mugshotId, emote, mugshotDetails.x, mugshotDetails.y);
+                if (IsFieldMugshotActive())
+                {
+                    gSprites[GetFieldMugshotSpriteId()].data[0] = TRUE;
+                }
+            }
+                return RENDER_REPEAT;
+            case EXT_CTRL_CODE_DESTROY_MUGSHOT:
+                RemoveFieldMugshot();
+                return RENDER_REPEAT;
             }
             break;
         case CHAR_PROMPT_CLEAR:
@@ -1372,6 +1391,8 @@ static u32 UNUSED GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 lett
             {
             case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
                 ++strPos;
+            case EXT_CTRL_CODE_CHANGE_MUGSHOT_EMOTE:
+            case EXT_CTRL_CODE_DESTROY_MUGSHOT:
             case EXT_CTRL_CODE_PLAY_BGM:
             case EXT_CTRL_CODE_PLAY_SE:
                 ++strPos;
