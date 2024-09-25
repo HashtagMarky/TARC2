@@ -107,30 +107,31 @@ static void Task_MugshotHandler(u8 taskId) {}
 
 #define tWindowId   data[0]
 
-void RemoveFieldMugshot(void)
+void RemoveFieldMugshotAndWindow(void)
+{
+    RemoveFieldMugshot(FALSE);
+}
+
+void RemoveFieldMugshot(bool8 retainWindow)
 {
     u8 windowTask = FindTaskIdByFunc(Task_MugshotHandler);  // Find the task responsible for the window
-    u8 windowId;
-
-    if (windowTask == TASK_NONE)  // If no task exists, exit early
-        return;
+    u8 windowId = WINDOW_NONE;
 
     if (IndexOfSpritePaletteTag(TAG_MUGSHOT) != 0xFF)
     {
         ResetPreservedPalettesInWeather();
 
         // Clear and remove the window if valid
-        windowId = gTasks[windowTask].tWindowId;
-        ClearStdWindowAndFrame(windowId, TRUE);
-        RemoveWindow(windowId);
+        if (windowTask != TASK_NONE && retainWindow != TRUE)
+            windowId = gTasks[windowTask].tWindowId;
+            ClearStdWindowAndFrame(windowId, TRUE);
+            RemoveWindow(windowId);
+            DestroyTask(windowTask);
 
         DestroySprite(&gSprites[sFieldMugshotSpriteId]);
         FreeSpritePaletteByTag(TAG_MUGSHOT);
         FreeSpriteTilesByTag(TAG_MUGSHOT);
         sFieldMugshotSpriteId = SPRITE_NONE;
-
-        // Destroy the task now that all cleanup is done
-        DestroyTask(windowTask);
 
         sIsFieldMugshotActive = FALSE;
     }
@@ -184,13 +185,13 @@ void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 
             break;
         }
 
-    CreateFieldMugshot(MUGSHOT_FOLLOWER, mugshotId, mugshotEmotion, 0, 0);
+    CreateFieldMugshot(MUGSHOT_FOLLOWER, mugshotId, mugshotEmotion, 0, 0, FALSE);
 }
 
-void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y)
+void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y, bool8 retainWindow)
 {
     u8 windowTask = CreateTask(Task_MugshotHandler, 0);  // Create a new task and get its task ID
-    u8 windowId = 0;
+    u8 windowId = WINDOW_NONE;
     u8 windowType = WINDOW_NONE;
 
     // Verification that sprite isn't placed offscreen.
@@ -204,7 +205,7 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
     struct CompressedSpriteSheet sheet = { .size=0x1000, .tag=TAG_MUGSHOT };
     struct SpritePalette pal = { .tag = sheet.tag };
 
-    RemoveFieldMugshot();
+    RemoveFieldMugshot(retainWindow);
 
     if ((mugshotId >= NELEMS(sFieldMugshots)
         && gSaveBlock2Ptr->optionsFollowerMugshotPlaceholder == TRUE && mugshotType == MUGSHOT_FOLLOWER))
@@ -309,7 +310,7 @@ u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion)
     if (gSpecialVar_0x8005 == 1)
         mugshotId += SPECIES_SHINY_TAG;
 
-    RemoveFieldMugshot();
+    RemoveFieldMugshot(FALSE);
 
     if (mugshotId >= NELEMS(sFieldMugshots))
         mugshotId = MUGSHOT_SUBSTITUTE_DOLL;

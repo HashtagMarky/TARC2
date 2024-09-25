@@ -1904,7 +1904,7 @@
 
 	@ destroys a mugshot in the overworld, if there is one
 	.macro removefieldmugshot
-	callnative RemoveFieldMugshot
+	callnative RemoveFieldMugshotAndWindow
 	.endm
 
 	@ sets variable overworld object event to a Pokémon for a wild encounter

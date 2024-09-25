@@ -1210,7 +1210,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
                 emote = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
 
-                CreateFieldMugshot(mugshotDetails.mugshotType, mugshotDetails.mugshotId, emote, mugshotDetails.x, mugshotDetails.y);
+                CreateFieldMugshot(mugshotDetails.mugshotType, mugshotDetails.mugshotId, emote, mugshotDetails.x, mugshotDetails.y, TRUE);
                 if (IsFieldMugshotActive())
                 {
                     gSprites[GetFieldMugshotSpriteId()].data[0] = TRUE;
@@ -1218,7 +1218,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             }
                 return RENDER_REPEAT;
             case EXT_CTRL_CODE_DESTROY_MUGSHOT:
-                RemoveFieldMugshot();
+                RemoveFieldMugshot(FALSE);
                 return RENDER_REPEAT;
             }
             break;
