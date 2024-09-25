@@ -1920,6 +1920,12 @@
 	.byte 0xe8
 	.endm
 
+	@ sets localId stored in gSelectedObjectEvent
+	.macro setselectedobjectevent localId:req
+	.byte 0xe9
+	.2byte \localId
+	.endm
+
 @ Supplementary
 
 	.macro goto_if_unset flag:req, dest:req

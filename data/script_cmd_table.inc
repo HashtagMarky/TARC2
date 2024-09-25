@@ -233,6 +233,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_createfieldmugshot				@ 0xe6
 	.4byte ScrCmd_SetObjectAsWildEncounter			@ 0xe7
 	.4byte ScrCmd_dowildsafaribattle				@ 0xe8
+	.4byte ScrCmd_setselectedobjectevent			@ 0xe9
 
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

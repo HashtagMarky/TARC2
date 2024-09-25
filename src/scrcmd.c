@@ -2524,3 +2524,11 @@ bool8 ScrCmd_createfieldmugshot(struct ScriptContext *ctx)
     CreateFieldMugshot(mugshotType, mugshotId, mugshotEmotion, x, y);
     return FALSE;
 }
+
+bool8 ScrCmd_setselectedobjectevent(struct ScriptContext *ctx)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+
+    gSelectedObjectEvent = localId;
+    return FALSE;
+}
