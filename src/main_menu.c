@@ -255,13 +255,31 @@ static void NewGameSamuelSpeech_SetPlayerNameKoleAnka(void);
 
 // .rodata
 
-static const u16 sSamuelSpeechBgPals[][16] = {
-    INCBIN_U16("graphics/samuel_speech/bg0.gbapal"),
-    INCBIN_U16("graphics/samuel_speech/bg1.gbapal")
+static const u16 sSamuelSpeechBgPals_Green[][16] = {
+    INCBIN_U16("graphics/samuel_speech/shadow_green.gbapal"),
+    INCBIN_U16("graphics/samuel_speech/shadow_green.gbapal")
+};
+static const u16 sSamuelSpeechBgPals_Blue[][16] = {
+    INCBIN_U16("graphics/samuel_speech/shadow_blue.gbapal"),
+    INCBIN_U16("graphics/samuel_speech/shadow_blue.gbapal")
+};
+static const u16 sSamuelSpeechBgPals_Orange[][16] = {
+    INCBIN_U16("graphics/samuel_speech/shadow_orange.gbapal"),
+    INCBIN_U16("graphics/samuel_speech/shadow_orange.gbapal")
+};
+static const u16 sSamuelSpeechBgPals_Pink[][16] = {
+    INCBIN_U16("graphics/samuel_speech/shadow_pink.gbapal"),
+    INCBIN_U16("graphics/samuel_speech/shadow_pink.gbapal")
 };
 
-static const u32 sSamuelSpeechShadowGfx[] = INCBIN_U32("graphics/samuel_speech/shadow.4bpp.lz");
-static const u32 sSamuelSpeechBgMap[] = INCBIN_U32("graphics/samuel_speech/shadow.bin.lz");
+static const u32 sSamuelSpeechShadowGfx_Green[] = INCBIN_U32("graphics/samuel_speech/shadow_green.4bpp.lz");
+static const u32 sSamuelSpeechBgMap_Green[] = INCBIN_U32("graphics/samuel_speech/shadow_green.bin.lz");
+static const u32 sSamuelSpeechShadowGfx_Blue[] = INCBIN_U32("graphics/samuel_speech/shadow_blue.4bpp.lz");
+static const u32 sSamuelSpeechBgMap_Blue[] = INCBIN_U32("graphics/samuel_speech/shadow_blue.bin.lz");
+static const u32 sSamuelSpeechShadowGfx_Orange[] = INCBIN_U32("graphics/samuel_speech/shadow_orange.4bpp.lz");
+static const u32 sSamuelSpeechBgMap_Orange[] = INCBIN_U32("graphics/samuel_speech/shadow_orange.bin.lz");
+static const u32 sSamuelSpeechShadowGfx_Pink[] = INCBIN_U32("graphics/samuel_speech/shadow_pink.4bpp.lz");
+static const u32 sSamuelSpeechBgMap_Pink[] = INCBIN_U32("graphics/samuel_speech/shadow_pink.bin.lz");
 
 static const u8 gText_SaveFileCorrupted[] = _("The save file is corrupted. The\nprevious save file will be loaded.");
 static const u8 gText_SaveFileErased[] = _("The save file has been erased\ndue to corruption or damage.");
@@ -1310,9 +1328,32 @@ static void Task_NewGameSamuelSpeech_Init(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDY, 0);
 
     RandomiseMessageBox();
-    LZ77UnCompVram(sSamuelSpeechShadowGfx, (void *)VRAM);
-    LZ77UnCompVram(sSamuelSpeechBgMap, (void *)(BG_SCREEN_ADDR(7)));
-    LoadPalette(sSamuelSpeechBgPals, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+    switch (gIkigaiLegendaryScreen)
+        {
+        case IKIGAI_INTERFACE_GREEN:
+            LZ77UnCompVram(sSamuelSpeechShadowGfx_Green, (void *)VRAM);
+            LZ77UnCompVram(sSamuelSpeechBgMap_Green, (void *)(BG_SCREEN_ADDR(7)));
+            LoadPalette(sSamuelSpeechBgPals_Green, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+            break;
+        
+        case IKIGAI_INTERFACE_BLUE:
+            LZ77UnCompVram(sSamuelSpeechShadowGfx_Blue, (void *)VRAM);
+            LZ77UnCompVram(sSamuelSpeechBgMap_Blue, (void *)(BG_SCREEN_ADDR(7)));
+            LoadPalette(sSamuelSpeechBgPals_Blue, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+            break;
+        
+        case IKIGAI_INTERFACE_ORANGE:
+            LZ77UnCompVram(sSamuelSpeechShadowGfx_Orange, (void *)VRAM);
+            LZ77UnCompVram(sSamuelSpeechBgMap_Orange, (void *)(BG_SCREEN_ADDR(7)));
+            LoadPalette(sSamuelSpeechBgPals_Orange, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+            break;
+        
+        case IKIGAI_INTERFACE_PINK:
+            LZ77UnCompVram(sSamuelSpeechShadowGfx_Pink, (void *)VRAM);
+            LZ77UnCompVram(sSamuelSpeechBgMap_Pink, (void *)(BG_SCREEN_ADDR(7)));
+            LoadPalette(sSamuelSpeechBgPals_Pink, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+            break;
+        }
     ScanlineEffect_Stop();
     ResetSpriteData();
     FreeAllSpritePalettes();
@@ -1902,9 +1943,32 @@ static void CB2_NewGameSamuelSpeech_ReturnFromNamingScreen(void)
     DmaFill32(3, 0, OAM, OAM_SIZE);
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
     ResetPaletteFade();
-    LZ77UnCompVram(sSamuelSpeechShadowGfx, (u8 *)VRAM);
-    LZ77UnCompVram(sSamuelSpeechBgMap, (u8 *)(BG_SCREEN_ADDR(7)));
-    LoadPalette(sSamuelSpeechBgPals, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+    switch (gIkigaiLegendaryScreen)
+        {
+        case IKIGAI_INTERFACE_GREEN:
+            LZ77UnCompVram(sSamuelSpeechShadowGfx_Green, (u8 *)VRAM);
+            LZ77UnCompVram(sSamuelSpeechBgMap_Green, (void *)(BG_SCREEN_ADDR(7)));
+            LoadPalette(sSamuelSpeechBgPals_Green, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+            break;
+        
+        case IKIGAI_INTERFACE_BLUE:
+            LZ77UnCompVram(sSamuelSpeechShadowGfx_Blue, (u8 *)VRAM);
+            LZ77UnCompVram(sSamuelSpeechBgMap_Blue, (void *)(BG_SCREEN_ADDR(7)));
+            LoadPalette(sSamuelSpeechBgPals_Blue, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+            break;
+        
+        case IKIGAI_INTERFACE_ORANGE:
+            LZ77UnCompVram(sSamuelSpeechShadowGfx_Orange, (u8 *)VRAM);
+            LZ77UnCompVram(sSamuelSpeechBgMap_Orange, (void *)(BG_SCREEN_ADDR(7)));
+            LoadPalette(sSamuelSpeechBgPals_Orange, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+            break;
+        
+        case IKIGAI_INTERFACE_PINK:
+            LZ77UnCompVram(sSamuelSpeechShadowGfx_Pink, (u8 *)VRAM);
+            LZ77UnCompVram(sSamuelSpeechBgMap_Pink, (void *)(BG_SCREEN_ADDR(7)));
+            LoadPalette(sSamuelSpeechBgPals_Pink, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+            break;
+        }
     ResetTasks();
     taskId = CreateTask(Task_NewGameSamuelSpeech_ReturnFromNamingScreenShowTextbox, 0);
     gTasks[taskId].tTimer = 5;
@@ -2422,7 +2486,7 @@ static void Task_NewGameSamuelSpeech_ReturnFromNamingScreenShowTextbox(u8 taskId
 
 static void RandomiseMessageBox(void)
 {
-    gSaveBlock2Ptr->optionsInterfaceColor = Random() % IKIGAI_DEFAULT_INTERFACE_COUNT;
+    gSaveBlock2Ptr->optionsInterfaceColor = gIkigaiLegendaryScreen;
 }
 
 #undef tTimer

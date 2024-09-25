@@ -63,8 +63,8 @@ static void SpriteCB_VersionBannerRight(struct Sprite *sprite);
 static void SpriteCB_PressStartCopyrightBanner(struct Sprite *sprite);
 static void SpriteCB_PokemonLogoShine(struct Sprite *sprite);
 
-static u8 gIkigaiLegendaryScreen;
 static u8 ChooseIkigaiLegendary(void);
+u8 gIkigaiLegendaryScreen;
 
 // const rom data
 static const u16 sUnusedUnknownPal[] = INCBIN_U16("graphics/title_screen/unused.gbapal");
