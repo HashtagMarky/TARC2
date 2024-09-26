@@ -1209,13 +1209,15 @@ static u16 RenderText(struct TextPrinter *textPrinter)
                 u32 emote;
                 emote = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
-                
-                if (mugshotDetails.mugshotActive)
+
+                if (IsFieldMugshotActive()) // Check if mugshot is active to change emote
+                {
                     CreateFieldMugshot(mugshotDetails.mugshotType, mugshotDetails.mugshotId, emote, mugshotDetails.x, mugshotDetails.y, TRUE);
-                    if (IsFieldMugshotActive())
+                    if (IsFieldMugshotActive()) // Seems redundant but new mugshot may not be active after removing last
                     {
                         gSprites[GetFieldMugshotSpriteId()].data[0] = TRUE;
                     }
+                }
             }
                 return RENDER_REPEAT;
             case EXT_CTRL_CODE_DESTROY_MUGSHOT:

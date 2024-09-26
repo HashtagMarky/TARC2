@@ -90,7 +90,6 @@ struct MugshotDetails gActiveMugshotDetails;
 
 void SetMugshotDetails(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y, u8 windowType)
 {
-    gActiveMugshotDetails.mugshotActive = TRUE;
     gActiveMugshotDetails.mugshotType = mugshotType;
     gActiveMugshotDetails.mugshotId = mugshotId;
     gActiveMugshotDetails.mugshotEmotion = mugshotEmotion;
@@ -135,7 +134,6 @@ void RemoveFieldMugshot(bool8 retainWindow)
         sFieldMugshotSpriteId = SPRITE_NONE;
 
         sIsFieldMugshotActive = FALSE;
-        gActiveMugshotDetails.mugshotActive = FALSE;
     }
 }
 
