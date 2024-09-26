@@ -112,7 +112,7 @@ void RemoveFieldMugshotAndWindow(void)
     RemoveFieldMugshot(FALSE);
 }
 
-void RemoveFieldMugshot(bool8 retainWindow)
+void RemoveFieldMugshot(bool8 retainDetails)
 {
     u8 windowTask = FindTaskIdByFunc(Task_MugshotWindow);  // Find the task responsible for the window
     u8 windowId = WINDOW_NONE;
@@ -122,7 +122,7 @@ void RemoveFieldMugshot(bool8 retainWindow)
         ResetPreservedPalettesInWeather();
 
         // Clear and remove the window if valid
-        if (windowTask != TASK_NONE && retainWindow != TRUE)
+        if (windowTask != TASK_NONE && retainDetails != TRUE)
             windowId = gTasks[windowTask].tWindowId;
             ClearStdWindowAndFrame(windowId, TRUE);
             RemoveWindow(windowId);
@@ -188,7 +188,7 @@ void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 
     CreateFieldMugshot(MUGSHOT_FOLLOWER, mugshotId, mugshotEmotion, 0, 0, FALSE);
 }
 
-void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y, bool8 retainWindow)
+void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y, bool8 retainDetails)
 {
     u8 windowTask = TASK_NONE;
     u8 windowId = WINDOW_NONE;
@@ -196,16 +196,19 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
 
     // Verification that sprite isn't placed offscreen.
     // The +32 makes it so the defined x & y position are the top left.
-    x = (x > 176) ? 176 : x;
-    x += 32;
+    if (!retainDetails)
+    {
+        x = (x > 176) ? 176 : x;
+        x += 32;
     
-    y = (y > 96) ? 96 : y;
-    y += 32;
+        y = (y > 96) ? 96 : y;
+        y += 32;
+    }
 
     struct CompressedSpriteSheet sheet = { .size=0x1000, .tag=TAG_MUGSHOT };
     struct SpritePalette pal = { .tag = sheet.tag };
 
-    RemoveFieldMugshot(retainWindow);
+    RemoveFieldMugshot(retainDetails);
 
     if ((mugshotId >= NELEMS(sFieldMugshots)
         && gSaveBlock2Ptr->optionsFollowerMugshotPlaceholder == TRUE && mugshotType == MUGSHOT_FOLLOWER))
