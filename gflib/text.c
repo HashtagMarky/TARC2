@@ -1209,12 +1209,13 @@ static u16 RenderText(struct TextPrinter *textPrinter)
                 u32 emote;
                 emote = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
-
-                CreateFieldMugshot(mugshotDetails.mugshotType, mugshotDetails.mugshotId, emote, mugshotDetails.x, mugshotDetails.y, TRUE);
-                if (IsFieldMugshotActive())
-                {
-                    gSprites[GetFieldMugshotSpriteId()].data[0] = TRUE;
-                }
+                
+                if (mugshotDetails.mugshotActive)
+                    CreateFieldMugshot(mugshotDetails.mugshotType, mugshotDetails.mugshotId, emote, mugshotDetails.x, mugshotDetails.y, TRUE);
+                    if (IsFieldMugshotActive())
+                    {
+                        gSprites[GetFieldMugshotSpriteId()].data[0] = TRUE;
+                    }
             }
                 return RENDER_REPEAT;
             case EXT_CTRL_CODE_DESTROY_MUGSHOT:

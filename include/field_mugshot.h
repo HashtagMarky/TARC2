@@ -12,6 +12,7 @@ void SetMugshotDetails(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, 
 
 struct MugshotDetails
 {
+    bool8 mugshotActive;   // Indicates if the mugshot is active
     u8 mugshotType;        // Type of the mugshot
     u16 mugshotId;         // ID of the mugshot
     u8 mugshotEmotion;     // Emotion of the character
