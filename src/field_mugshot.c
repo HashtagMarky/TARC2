@@ -48,7 +48,7 @@ static const struct WindowTemplate sMugshotWindowPokemon =
 };
 
 static void SpriteCB_FieldMugshot(struct Sprite *s);
-static void Task_MugshotHandler(u8 taskId);
+static void Task_MugshotWindow(u8 taskId);
 
 static const struct OamData sFieldMugshot_Oam = {
     .size = SPRITE_SIZE(64x64),
@@ -103,7 +103,7 @@ struct MugshotDetails GetMugshotDetails(void)
     return gActiveMugshotDetails;
 }
 
-static void Task_MugshotHandler(u8 taskId) {}
+static void Task_MugshotWindow(u8 taskId) {}
 
 #define tWindowId   data[0]
 
@@ -114,7 +114,7 @@ void RemoveFieldMugshotAndWindow(void)
 
 void RemoveFieldMugshot(bool8 retainWindow)
 {
-    u8 windowTask = FindTaskIdByFunc(Task_MugshotHandler);  // Find the task responsible for the window
+    u8 windowTask = FindTaskIdByFunc(Task_MugshotWindow);  // Find the task responsible for the window
     u8 windowId = WINDOW_NONE;
 
     if (IndexOfSpritePaletteTag(TAG_MUGSHOT) != 0xFF)
@@ -190,7 +190,7 @@ void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 
 
 void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y, bool8 retainWindow)
 {
-    u8 windowTask = CreateTask(Task_MugshotHandler, 0);  // Create a new task and get its task ID
+    u8 windowTask = TASK_NONE;
     u8 windowId = WINDOW_NONE;
     u8 windowType = WINDOW_NONE;
 
@@ -250,6 +250,8 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
     // Create windows based on the mugshot type
     if (mugshotType != MUGSHOT_DEFINED)
     {
+        windowTask = CreateTask(Task_MugshotWindow, 0);  // Create a new task and get its task ID
+
         if (mugshotType == MUGSHOT_NPC)
         {
             windowId = AddWindow(&sMugshotWindowNPC);
