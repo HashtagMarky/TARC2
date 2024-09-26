@@ -4,6 +4,7 @@
 #include "blit.h"
 #include "dma3.h"
 #include "event_data.h"
+#include "field_mugshot.h"
 #include "field_weather.h"
 #include "graphics.h"
 #include "main.h"
@@ -164,6 +165,7 @@ void InitStandardTextBoxWindows(void)
     sMapNamePopupWindowId = WINDOW_NONE;
     if (OW_POPUP_GENERATION == GEN_5)
         sSecondaryPopupWindowId = WINDOW_NONE;
+    SetFieldMugshotSpriteId(SPRITE_NONE);
 }
 
 void FreeAllOverworldWindowBuffers(void)

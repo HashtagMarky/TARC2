@@ -357,3 +357,8 @@ u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion)
     PreservePaletteInWeather(gSprites[sFieldMugshotSpriteId].oam.paletteNum + 0x10);
     return sFieldMugshotSpriteId;
 }
+
+void SetFieldMugshotSpriteId(u32 value)
+{
+    sFieldMugshotSpriteId = value;
+}
