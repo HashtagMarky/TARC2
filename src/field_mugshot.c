@@ -310,7 +310,7 @@ u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion)
     if (gSpecialVar_0x8005 == 1)
         mugshotId += SPECIES_SHINY_TAG;
 
-    RemoveFieldMugshot(FALSE);
+    RemoveFieldMugshotAndWindow();
 
     if (mugshotId >= NELEMS(sFieldMugshots))
         mugshotId = MUGSHOT_SUBSTITUTE_DOLL;

@@ -2087,10 +2087,10 @@
 	.macro mnmbox text:req, PMD=FALSE, mugshotEmotion=EMOTE_NORMAL
 	loadword 0, \text
 	setvar VAR_0x8002, \mugshotEmotion
-	.if \PMD == FALSE
-		callstd MSGBOX_NPC_MUG
-	.else
+	.if \PMD == TRUE
 		callstd MSGBOX_PKMN_MUG
+	.else
+		callstd MSGBOX_NPC_MUG
 	.endif
 	.endm
 

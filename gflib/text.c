@@ -1221,7 +1221,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             }
                 return RENDER_REPEAT;
             case EXT_CTRL_CODE_DESTROY_MUGSHOT:
-                RemoveFieldMugshot(FALSE);
+                RemoveFieldMugshotAndWindow();
                 return RENDER_REPEAT;
             }
             break;

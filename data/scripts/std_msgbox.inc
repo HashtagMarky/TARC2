@@ -56,7 +56,6 @@ Std_MsgboxMusghotNPC::
 	message NULL
 	waitmessage
 	waitbuttonpress
-	removefieldmugshot
 	release
 	return
 
@@ -71,6 +70,5 @@ Std_MsgboxMugshotPokemon::
 	waitmessage
 	waitbuttonpress
 	waitmoncry
-	removefieldmugshot
 	release
 	return

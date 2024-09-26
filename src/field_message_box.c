@@ -174,7 +174,7 @@ void HideFieldMessageBox(void)
     if (IsFieldMugshotActive())
     {
         gSprites[GetFieldMugshotSpriteId()].data[0] = FALSE;
-        RemoveFieldMugshot(FALSE);
+        RemoveFieldMugshotAndWindow();
     }
 }
 

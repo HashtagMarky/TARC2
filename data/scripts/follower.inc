@@ -18,7 +18,6 @@ EventScript_Follower::
 EventScript_FollowerEnd::
 	waitfieldeffect FLDEFF_EMOTE
 	waitmovement OBJ_EVENT_ID_FOLLOWER
-	removefieldmugshot
 	release
 	end
 
