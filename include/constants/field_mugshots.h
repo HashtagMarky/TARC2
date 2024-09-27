@@ -4,8 +4,7 @@
 #include "constants/event_objects.h"
 #include "constants/species.h"
 
-#define TAG_MUGSHOT     0x9000
-#define TAG_MUGSHOT_2   0x9001
+#define TAG_MUGSHOT 0x9000
 
 // Mugshot Types
 #define MUGSHOT_DEFINED     0

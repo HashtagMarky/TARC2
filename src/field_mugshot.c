@@ -17,9 +17,8 @@
 #include "constants/field_mugshots.h"
 #include "data/field_mugshots.h"
 
-static EWRAM_DATA u8 sFieldMugshotSpriteIds[2] = {};
+static EWRAM_DATA u8 sFieldMugshotSpriteId = 0;
 static EWRAM_DATA u8 sIsFieldMugshotActive = 0;
-static EWRAM_DATA u8 sFieldMugshotSlot = 0;
 
 #define MUGSHOT_NPC_X           200
 #define MUGSHOT_NPC_Y           72
@@ -118,9 +117,10 @@ void RemoveFieldMugshot(bool8 retainDetails)
     u8 windowTask = FindTaskIdByFunc(Task_MugshotWindow);  // Find the task responsible for the window
     u8 windowId = WINDOW_NONE;
 
-    ResetPreservedPalettesInWeather();
-    if (sFieldMugshotSpriteIds[0] != SPRITE_NONE)
+    if (IndexOfSpritePaletteTag(TAG_MUGSHOT) != 0xFF)
     {
+        ResetPreservedPalettesInWeather();
+
         // Clear and remove the window if valid
         if (windowTask != TASK_NONE && retainDetails != TRUE)
             windowId = gTasks[windowTask].tWindowId;
@@ -128,36 +128,12 @@ void RemoveFieldMugshot(bool8 retainDetails)
             RemoveWindow(windowId);
             DestroyTask(windowTask);
 
-        DestroySpriteAndFreeResources(&gSprites[sFieldMugshotSpriteIds[0]]);
-        sFieldMugshotSpriteIds[0] = SPRITE_NONE;
-    }
-    if (sFieldMugshotSpriteIds[1] != 0xFF)
-    {
-        // Clear and remove the window if valid
-        if (windowTask != TASK_NONE && retainDetails != TRUE)
-            windowId = gTasks[windowTask].tWindowId;
-            ClearStdWindowAndFrame(windowId, TRUE);
-            RemoveWindow(windowId);
-            DestroyTask(windowTask);
+        DestroySprite(&gSprites[sFieldMugshotSpriteId]);
+        FreeSpritePaletteByTag(TAG_MUGSHOT);
+        FreeSpriteTilesByTag(TAG_MUGSHOT);
+        sFieldMugshotSpriteId = SPRITE_NONE;
 
-        DestroySpriteAndFreeResources(&gSprites[sFieldMugshotSpriteIds[1]]);
-        sFieldMugshotSpriteIds[1] = SPRITE_NONE;
-    }
-    sIsFieldMugshotActive = FALSE;
-}
-
-void _RemoveFieldMugshot(u8 slot)
-{
-    ResetPreservedPalettesInWeather();
-    if (sFieldMugshotSpriteIds[slot ^ 1] != SPRITE_NONE)
-    {
-        gSprites[sFieldMugshotSpriteIds[slot ^ 1]].data[0] = FALSE; // same as setting visibility
-    }
-    if (sFieldMugshotSpriteIds[slot] != SPRITE_NONE)
-    {
-        gSprites[sFieldMugshotSpriteIds[slot]].data[0] = FALSE; // same as setting visibility
-        DestroySpriteAndFreeResources(&gSprites[sFieldMugshotSpriteIds[slot]]);
-        sFieldMugshotSpriteIds[slot] = SPRITE_NONE;
+        sIsFieldMugshotActive = FALSE;
     }
 }
 
@@ -217,7 +193,6 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
     u8 windowTask = TASK_NONE;
     u8 windowId = WINDOW_NONE;
     u8 windowType = WINDOW_NONE;
-    u32 slot = sFieldMugshotSlot;
 
     // Verification that sprite isn't placed offscreen.
     // The +32 makes it so the defined x & y position are the top left.
@@ -230,16 +205,10 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
         y += 32;
     }
 
-    struct SpriteTemplate temp = sFieldMugshotSprite_SpriteTemplate;
-    struct CompressedSpriteSheet sheet = { .size=0x1000, .tag=slot+TAG_MUGSHOT };
+    struct CompressedSpriteSheet sheet = { .size=0x1000, .tag=TAG_MUGSHOT };
     struct SpritePalette pal = { .tag = sheet.tag };
 
-    _RemoveFieldMugshot(slot ^ 1);
-    if (sIsFieldMugshotActive)
-    {
-        FreeSpriteTilesByTag(slot + TAG_MUGSHOT);
-        FreeSpritePaletteByTag(slot + TAG_MUGSHOT);
-    }
+    RemoveFieldMugshot(retainDetails);
 
     if ((mugshotId >= NELEMS(sFieldMugshots)
         && gSaveBlock2Ptr->optionsFollowerMugshotPlaceholder == TRUE && mugshotType == MUGSHOT_FOLLOWER))
@@ -250,9 +219,6 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
         || (gSaveBlock2Ptr->optionsSuppressNPCMugshots == TRUE && mugshotType != MUGSHOT_FOLLOWER)
         || (gSaveBlock2Ptr->optionsSuppressFollowerMugshots == TRUE && mugshotType == MUGSHOT_FOLLOWER))
             return;
-
-    temp.tileTag = sheet.tag;
-    temp.paletteTag = sheet.tag;
 
     if ((sFieldMugshots[mugshotId][mugshotEmotion].gfx != NULL && sFieldMugshots[mugshotId][mugshotEmotion].pal != NULL))
     {
@@ -310,11 +276,11 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
     }
 
     // Logic for loading and creating the sprite
-    LoadSpritePalette(&pal);
     LoadCompressedSpriteSheet(&sheet);
+    LoadSpritePalette(&pal);
 
-    sFieldMugshotSpriteIds[slot] = CreateSprite(&temp, x, y, 0);
-    if (sFieldMugshotSpriteIds[slot] == SPRITE_NONE)
+    sFieldMugshotSpriteId = CreateSprite(&sFieldMugshotMsgBox_SpriteTemplate, x, y, 0);
+    if (sFieldMugshotSpriteId == SPRITE_NONE)
     {
         windowType = WINDOW_NONE;
         RemoveWindow(windowId);  // Clean up if sprite creation fails
@@ -323,17 +289,16 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
     }
 
     SetMugshotDetails(mugshotType, mugshotId, mugshotEmotion, x, y, windowType);
-    PreservePaletteInWeather(gSprites[sFieldMugshotSpriteIds[slot]].oam.paletteNum + 0x10);
-    gSprites[sFieldMugshotSpriteIds[slot]].data[0] = FALSE;
+    PreservePaletteInWeather(gSprites[sFieldMugshotSpriteId].oam.paletteNum + 0x10);
+    gSprites[sFieldMugshotSpriteId].data[0] = FALSE;
     sIsFieldMugshotActive = TRUE;
-    sFieldMugshotSlot ^= 1;
 }
 
 #undef  tWindowId
 
 u8 GetFieldMugshotSpriteId(void)
 {
-    return sFieldMugshotSpriteIds[sFieldMugshotSlot ^ 1];
+    return sFieldMugshotSpriteId;
 }
 
 u8 IsFieldMugshotActive(void)
@@ -343,10 +308,7 @@ u8 IsFieldMugshotActive(void)
 
 u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion)
 {
-    u32 slot = sFieldMugshotSlot;
-    
-    struct SpriteTemplate temp = sFieldMugshotSprite_SpriteTemplate;
-    struct CompressedSpriteSheet sheet = { .size=0x1000, .tag=slot+TAG_MUGSHOT };
+    struct CompressedSpriteSheet sheet = { .size=0x1000, .tag=TAG_MUGSHOT };
     struct SpritePalette pal = { .tag = sheet.tag };
 
     mugshotId += OBJ_EVENT_GFX_SPECIES(NONE);
@@ -357,9 +319,6 @@ u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion)
 
     if (mugshotId >= NELEMS(sFieldMugshots))
         mugshotId = MUGSHOT_SUBSTITUTE_DOLL;
-
-    temp.tileTag = sheet.tag;
-    temp.paletteTag = sheet.tag;
 
     if ((sFieldMugshots[mugshotId][mugshotEmotion].gfx != NULL && sFieldMugshots[mugshotId][mugshotEmotion].pal != NULL))
     {
@@ -387,20 +346,19 @@ u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion)
         pal.data = sFieldMugshots[MUGSHOT_SUBSTITUTE_DOLL][mugshotEmotion].pal;
     }
 
-    LoadSpritePalette(&pal);
     LoadCompressedSpriteSheet(&sheet);
+    LoadSpritePalette(&pal);
 
-    sFieldMugshotSpriteIds[slot] = CreateSprite(&temp, 0, 0, 0);
-    if (sFieldMugshotSpriteIds[slot] == SPRITE_NONE)
+    sFieldMugshotSpriteId = CreateSprite(&sFieldMugshotSprite_SpriteTemplate, 0, 0, 0);
+    if (sFieldMugshotSpriteId == SPRITE_NONE)
     {
         return NULL;
     }
-    PreservePaletteInWeather(gSprites[sFieldMugshotSpriteIds[slot]].oam.paletteNum + 0x10);
-    return sFieldMugshotSpriteIds[slot];
+    PreservePaletteInWeather(gSprites[sFieldMugshotSpriteId].oam.paletteNum + 0x10);
+    return sFieldMugshotSpriteId;
 }
 
 void SetFieldMugshotSpriteId(u32 value)
 {
-    sFieldMugshotSpriteIds[0] = value;
-    sFieldMugshotSpriteIds[1] = value;
+    sFieldMugshotSpriteId = value;
 }
