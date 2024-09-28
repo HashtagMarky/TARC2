@@ -194,8 +194,6 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
     u8 windowId = WINDOW_NONE;
     u8 windowType = WINDOW_NONE;
 
-    // Verification that sprite isn't placed offscreen.
-    // The +32 makes it so the defined x & y position are the top left.
     if (!retainDetails)
     {
         x = (x > 176) ? 176 : x;
@@ -250,10 +248,9 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
         return;
     }
     
-    // Create windows based on the mugshot type
     if (mugshotType != MUGSHOT_DEFINED)
     {
-        windowTask = CreateTask(Task_MugshotWindow, 0);  // Create a new task and get its task ID
+        windowTask = CreateTask(Task_MugshotWindow, 0);
 
         if (mugshotType == MUGSHOT_NPC)
         {
@@ -270,21 +267,22 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
             windowType = MUGSHOT_PMD;
         }
 
-        gTasks[windowTask].tWindowId = windowId;  // Store windowId in task's data
+        gTasks[windowTask].tWindowId = windowId;
         DrawStdWindowFrame(windowId, FALSE);
         CopyWindowToVram(windowId, 3);
     }
 
-    // Logic for loading and creating the sprite
-    LoadCompressedSpriteSheet(&sheet);
     LoadSpritePalette(&pal);
+    while (REG_VCOUNT >= 160);          // Wait until VBlank starts
+    while (REG_VCOUNT < 160);           // Wait until VBlank ends
+    LoadCompressedSpriteSheet(&sheet);
 
     sFieldMugshotSpriteId = CreateSprite(&sFieldMugshotMsgBox_SpriteTemplate, x, y, 0);
     if (sFieldMugshotSpriteId == SPRITE_NONE)
     {
         windowType = WINDOW_NONE;
-        RemoveWindow(windowId);  // Clean up if sprite creation fails
-        DestroyTask(windowTask);  // Destroy the task if sprite creation fails
+        RemoveWindow(windowId);
+        DestroyTask(windowTask);
         return;
     }
 
