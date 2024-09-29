@@ -252,7 +252,6 @@ static void MainMenu_FormatSavegamePokedex(void);
 static void MainMenu_FormatSavegameTime(void);
 static void MainMenu_FormatSavegameBadges(void);
 static void NewGameSamuelSpeech_CreateDialogueWindowBorder(u8, u8, u8, u8, u8, u8);
-static void RandomiseMessageBox(void);
 static void NewGameSamuelSpeech_SetPlayerNameKoleAnka(void);
 
 // .rodata
@@ -1334,7 +1333,7 @@ static void Task_NewGameSamuelSpeech_Init(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
 
-    RandomiseMessageBox();
+    gSaveBlock2Ptr->optionsInterfaceColor = gIkigaiLegendaryScreen;
     switch (gIkigaiLegendaryScreen)
         {
         case IKIGAI_INTERFACE_GREEN:
@@ -1402,7 +1401,7 @@ void CB2_NewGameSamuelSpeech_FromNewMainMenu(void)
     DmaFill32(3, 0, OAM, OAM_SIZE);
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
     ResetPaletteFade();
-    RandomiseMessageBox();
+    gSaveBlock2Ptr->optionsInterfaceColor = gIkigaiLegendaryScreen;
     switch (gIkigaiLegendaryScreen)
         {
         case IKIGAI_INTERFACE_GREEN:
@@ -2573,11 +2572,6 @@ static void Task_NewGameSamuelSpeech_ReturnFromNamingScreenShowTextbox(u8 taskId
         DrawDialogFrameWithCustomTile(0, TRUE, 0xFC);
         gTasks[taskId].func = Task_NewGameSamuelSpeech_SoItsPlayerName;
     }
-}
-
-static void RandomiseMessageBox(void)
-{
-    gSaveBlock2Ptr->optionsInterfaceColor = gIkigaiLegendaryScreen;
 }
 
 #undef tTimer
