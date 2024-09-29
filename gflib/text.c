@@ -5,6 +5,7 @@
 #include "m4a.h"
 #include "palette.h"
 #include "sound.h"
+#include "constants/field_mugshots.h"
 #include "constants/songs.h"
 #include "string_util.h"
 #include "window.h"
@@ -1212,7 +1213,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
 
                 if (IsFieldMugshotActive()) // Check if mugshot is active to change emote
                 {
-                    CreateFieldMugshot(mugshotDetails.mugshotType, mugshotDetails.mugshotId, emote, mugshotDetails.x, mugshotDetails.y, TRUE);
+                    CreateFieldMugshot(MUGSHOT_DEFINED, mugshotDetails.mugshotId, emote, mugshotDetails.x, mugshotDetails.y, TRUE);
                     if (IsFieldMugshotActive()) // Seems redundant but new mugshot may not be active after removing last
                     {
                         gSprites[GetFieldMugshotSpriteId()].data[0] = TRUE;

@@ -123,10 +123,12 @@ void RemoveFieldMugshot(bool8 retainDetails)
 
         // Clear and remove the window if valid
         if (windowTask != TASK_NONE && retainDetails != TRUE)
+        {
             windowId = gTasks[windowTask].tWindowId;
             ClearStdWindowAndFrame(windowId, TRUE);
             RemoveWindow(windowId);
             DestroyTask(windowTask);
+        }
 
         DestroySprite(&gSprites[sFieldMugshotSpriteId]);
         FreeSpritePaletteByTag(TAG_MUGSHOT);
