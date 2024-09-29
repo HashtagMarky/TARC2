@@ -2055,15 +2055,20 @@ extern const u16 gBattlePyramidFloor_Pal[][16];
 
 extern const u16 gStandardMenuPalette[];
 
-extern const u16 gTitleScreenBgPalettes[];
-extern const u32 gTitleScreenCherryBlossomLeavesTilemap[];
+extern const u16 gTitleScreenTornadusBgPalettes[];
+extern const u32 gTitleScreenTornadusBorderTilemap[];
+extern const u16 gTitleScreenThundurusBgPalettes[];
+extern const u32 gTitleScreenThundurusBorderTilemap[];
+extern const u16 gTitleScreenLandorusBgPalettes[];
+extern const u32 gTitleScreenLandorusBorderTilemap[];
+extern const u16 gTitleScreenEnamorusBgPalettes[];
+extern const u32 gTitleScreenEnamorusBorderTilemap[];
 extern const u32 gTitleScreenPokemonLogoGfx[];
 extern const u32 gTitleScreenPokemonLogoTilemap[];
 extern const u32 gTitleScreenPressStartGfx[];
-extern const u16 gTitleScreenPressStartStonePal[];
-extern const u16 gTitleScreenPressStartStoneLightPal[];
 extern const u32 gTitleScreenIkigaiVersionGfx[];
-extern const u16 gTitleScreenIkigaiVersionStonePal[];
+extern const u16 gIkigaiTitleScreenPal_Blue[];
+extern const u16 gIkigaiTitleScreenPal_Pink[];
 // extern const u16 gTitleScreenIkigaiVersionNormalPal[];
 
 // Battle Dome

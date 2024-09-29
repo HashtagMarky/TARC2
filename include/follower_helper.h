@@ -40,6 +40,7 @@ struct FollowerMsgInfoExtended
     const u8 *script;
 
     u32 emotion:4;
+    u32 emotionPMD:4;
     u32 weight:3;
     // if set, `text` is treated as an array of up to 4 texts instead
     // which one is displayed is chosen at random

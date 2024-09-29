@@ -11,6 +11,7 @@
 #include "follower_helper.h"
 #include "menu.h"
 #include "task.h"
+#include "window.h"
 #include "constants/event_objects.h"
 #include "constants/flags.h"
 #include "constants/field_mugshots.h"
@@ -47,7 +48,7 @@ static const struct WindowTemplate sMugshotWindowPokemon =
 };
 
 static void SpriteCB_FieldMugshot(struct Sprite *s);
-static void Task_MugshotHandler(u8 taskId);
+static void Task_MugshotWindow(u8 taskId);
 
 static const struct OamData sFieldMugshot_Oam = {
     .size = SPRITE_SIZE(64x64),
@@ -85,40 +86,58 @@ static void SpriteCB_FieldMugshot(struct Sprite *s)
     }
 }
 
-static void Task_MugshotHandler(u8 taskId) {}
+struct MugshotDetails gActiveMugshotDetails;
+
+void SetMugshotDetails(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y, u8 windowType)
+{
+    gActiveMugshotDetails.mugshotType = mugshotType;
+    gActiveMugshotDetails.mugshotId = mugshotId;
+    gActiveMugshotDetails.mugshotEmotion = mugshotEmotion;
+    gActiveMugshotDetails.x = x;
+    gActiveMugshotDetails.y = y;
+    gActiveMugshotDetails.windowType = windowType;
+}
+
+struct MugshotDetails GetMugshotDetails(void)
+{
+    return gActiveMugshotDetails;
+}
+
+static void Task_MugshotWindow(u8 taskId) {}
 
 #define tWindowId   data[0]
 
-void RemoveFieldMugshot(void)
+void RemoveFieldMugshotAndWindow(void)
 {
-    u8 windowTask = FindTaskIdByFunc(Task_MugshotHandler);  // Find the task responsible for the window
-    u8 windowId;
+    RemoveFieldMugshot(FALSE);
+}
 
-    if (windowTask == TASK_NONE)  // If no task exists, exit early
-        return;
+void RemoveFieldMugshot(bool8 retainDetails)
+{
+    u8 windowTask = FindTaskIdByFunc(Task_MugshotWindow);  // Find the task responsible for the window
+    u8 windowId = WINDOW_NONE;
 
     if (IndexOfSpritePaletteTag(TAG_MUGSHOT) != 0xFF)
     {
         ResetPreservedPalettesInWeather();
 
         // Clear and remove the window if valid
-        windowId = gTasks[windowTask].tWindowId;
-        ClearStdWindowAndFrame(windowId, TRUE);
-        RemoveWindow(windowId);
+        if (windowTask != TASK_NONE && retainDetails != TRUE)
+            windowId = gTasks[windowTask].tWindowId;
+            ClearStdWindowAndFrame(windowId, TRUE);
+            RemoveWindow(windowId);
+            DestroyTask(windowTask);
 
         DestroySprite(&gSprites[sFieldMugshotSpriteId]);
         FreeSpritePaletteByTag(TAG_MUGSHOT);
         FreeSpriteTilesByTag(TAG_MUGSHOT);
         sFieldMugshotSpriteId = SPRITE_NONE;
 
-        // Destroy the task now that all cleanup is done
-        DestroyTask(windowTask);
-
         sIsFieldMugshotActive = FALSE;
     }
 }
 
-void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 shiny)
+void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 shiny, bool8 emotePMD)
 {
     u16 mugshotId;
     u8 mugshotEmotion;
@@ -127,62 +146,67 @@ void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 
     if (shiny)
         mugshotId += SPECIES_SHINY_TAG;
 
-    switch (followerEmotion)
-    {
-    case FOLLOWER_EMOTION_HAPPY:
-        mugshotEmotion = EMOTE_HAPPY;
-        break;
-    case FOLLOWER_EMOTION_SAD:
-        mugshotEmotion = EMOTE_SAD;
-        break;
-    case FOLLOWER_EMOTION_UPSET:
-        mugshotEmotion = EMOTE_TEARY;
-        break;
-    case FOLLOWER_EMOTION_ANGRY:
-        mugshotEmotion = EMOTE_ANGRY;
-        break;
-    case FOLLOWER_EMOTION_PENSIVE:
-        mugshotEmotion = EMOTE_WORRIED;
-        break;
-    case FOLLOWER_EMOTION_LOVE:
-    case FOLLOWER_EMOTION_MUSIC:
-        mugshotEmotion = EMOTE_JOYOUS;
-        break;
-    case FOLLOWER_EMOTION_SURPRISE:
-        mugshotEmotion = EMOTE_STUNNED;
-        break;
-    case FOLLOWER_EMOTION_CURIOUS:
-        mugshotEmotion = EMOTE_WORRIED;
-        break;
-    case FOLLOWER_EMOTION_POISONED:
-        mugshotEmotion = EMOTE_PAIN;
-        break;
-    case FOLLOWER_EMOTION_NEUTRAL:
-    default:
-        mugshotEmotion = EMOTE_NORMAL;
-        break;
-    }
+    if (emotePMD)
+        mugshotEmotion = followerEmotion;
+    else
+        switch (followerEmotion)
+        {
+        case FOLLOWER_EMOTION_HAPPY:
+            mugshotEmotion = EMOTE_HAPPY;
+            break;
+        case FOLLOWER_EMOTION_SAD:
+            mugshotEmotion = EMOTE_SAD;
+            break;
+        case FOLLOWER_EMOTION_UPSET:
+            mugshotEmotion = EMOTE_TEARY;
+            break;
+        case FOLLOWER_EMOTION_ANGRY:
+            mugshotEmotion = EMOTE_ANGRY;
+            break;
+        case FOLLOWER_EMOTION_PENSIVE:
+            mugshotEmotion = EMOTE_WORRIED;
+            break;
+        case FOLLOWER_EMOTION_LOVE:
+        case FOLLOWER_EMOTION_MUSIC:
+            mugshotEmotion = EMOTE_JOYOUS;
+            break;
+        case FOLLOWER_EMOTION_SURPRISE:
+            mugshotEmotion = EMOTE_STUNNED;
+            break;
+        case FOLLOWER_EMOTION_CURIOUS:
+            mugshotEmotion = EMOTE_WORRIED;
+            break;
+        case FOLLOWER_EMOTION_POISONED:
+            mugshotEmotion = EMOTE_PAIN;
+            break;
+        case FOLLOWER_EMOTION_NEUTRAL:
+        default:
+            mugshotEmotion = EMOTE_NORMAL;
+            break;
+        }
 
-    CreateFieldMugshot(MUGSHOT_FOLLOWER, mugshotId, mugshotEmotion, 0, 0);
+    CreateFieldMugshot(MUGSHOT_FOLLOWER, mugshotId, mugshotEmotion, 0, 0, FALSE);
 }
 
-void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y)
+void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y, bool8 retainDetails)
 {
-    u8 windowTask = CreateTask(Task_MugshotHandler, 0);  // Create a new task and get its task ID
-    u8 windowId = 0;
+    u8 windowTask = TASK_NONE;
+    u8 windowId = WINDOW_NONE;
+    u8 windowType = WINDOW_NONE;
 
-    // Verification that sprite isn't placed offscreen.
-    // The +32 makes it so the defined x & y position are the top left.
-    x = (x > 176) ? 176 : x;
-    x += 32;
+    if (!retainDetails)
+    {
+        x = (x > 176) ? 176 : x;
+        x += 32;
     
-    y = (y > 96) ? 96 : y;
-    y += 32;
+        y = (y > 96) ? 96 : y;
+        y += 32;
+    }
 
     struct CompressedSpriteSheet sheet = { .size=0x1000, .tag=TAG_MUGSHOT };
     struct SpritePalette pal = { .tag = sheet.tag };
 
-    RemoveFieldMugshot();
+    RemoveFieldMugshot(retainDetails);
 
     if ((mugshotId >= NELEMS(sFieldMugshots)
         && gSaveBlock2Ptr->optionsFollowerMugshotPlaceholder == TRUE && mugshotType == MUGSHOT_FOLLOWER))
@@ -224,39 +248,45 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
         return;
     }
     
-    // Create windows based on the mugshot type
     if (mugshotType != MUGSHOT_DEFINED)
     {
+        windowTask = CreateTask(Task_MugshotWindow, 0);
+
         if (mugshotType == MUGSHOT_NPC)
         {
             windowId = AddWindow(&sMugshotWindowNPC);
             x = MUGSHOT_NPC_X;
             y = MUGSHOT_NPC_Y;
+            windowType = MUGSHOT_NPC;
         }
         else if (mugshotType == MUGSHOT_PMD || mugshotType == MUGSHOT_FOLLOWER)
         {
             windowId = AddWindow(&sMugshotWindowPokemon);
             x = MUGSHOT_PMD_X;
             y = MUGSHOT_PMD_Y;
+            windowType = MUGSHOT_PMD;
         }
 
-        gTasks[windowTask].tWindowId = windowId;  // Store windowId in task's data
+        gTasks[windowTask].tWindowId = windowId;
         DrawStdWindowFrame(windowId, FALSE);
         CopyWindowToVram(windowId, 3);
     }
 
-    // Logic for loading and creating the sprite
-    LoadCompressedSpriteSheet(&sheet);
     LoadSpritePalette(&pal);
+    while (REG_VCOUNT >= 160);          // Wait until VBlank starts
+    while (REG_VCOUNT < 160);           // Wait until VBlank ends
+    LoadCompressedSpriteSheet(&sheet);
 
     sFieldMugshotSpriteId = CreateSprite(&sFieldMugshotMsgBox_SpriteTemplate, x, y, 0);
     if (sFieldMugshotSpriteId == SPRITE_NONE)
     {
-        RemoveWindow(windowId);  // Clean up if sprite creation fails
-        DestroyTask(windowTask);  // Destroy the task if sprite creation fails
+        windowType = WINDOW_NONE;
+        RemoveWindow(windowId);
+        DestroyTask(windowTask);
         return;
     }
 
+    SetMugshotDetails(mugshotType, mugshotId, mugshotEmotion, x, y, windowType);
     PreservePaletteInWeather(gSprites[sFieldMugshotSpriteId].oam.paletteNum + 0x10);
     gSprites[sFieldMugshotSpriteId].data[0] = FALSE;
     sIsFieldMugshotActive = TRUE;
@@ -283,7 +313,7 @@ u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion)
     if (gSpecialVar_0x8005 == 1)
         mugshotId += SPECIES_SHINY_TAG;
 
-    RemoveFieldMugshot();
+    RemoveFieldMugshotAndWindow();
 
     if (mugshotId >= NELEMS(sFieldMugshots))
         mugshotId = MUGSHOT_SUBSTITUTE_DOLL;
@@ -324,4 +354,9 @@ u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion)
     }
     PreservePaletteInWeather(gSprites[sFieldMugshotSpriteId].oam.paletteNum + 0x10);
     return sFieldMugshotSpriteId;
+}
+
+void SetFieldMugshotSpriteId(u32 value)
+{
+    sFieldMugshotSpriteId = value;
 }

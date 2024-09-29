@@ -3,6 +3,7 @@
 #include "event_scripts.h"
 #include "follower_helper.h"
 #include "constants/battle.h"
+#include "constants/field_mugshots.h"
 #include "constants/followers.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/pokemon.h"
@@ -76,6 +77,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .textSpread = 1,
         .script = EventScript_FollowerDance,
         .emotion = FOLLOWER_EMOTION_NEUTRAL,
+        .emotionPMD = EMOTE_JOYOUS, // Dancing happily
         .conditions =
         {
             MATCH_SPECIES(SPECIES_CELEBI),
@@ -86,6 +88,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .text = (u8*)sFireTexts,
         .textSpread = 1,
         .emotion = FOLLOWER_EMOTION_NEUTRAL,
+        .emotionPMD = EMOTE_DETERMINED, // Vigorously producing fire
         .conditions =
         {
             MATCH_TYPES(TYPE_FIRE, TYPE_FIRE),
@@ -96,6 +99,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .text = sCondMsg06,
         .script = EventScript_FollowerFaceUp,
         .emotion = FOLLOWER_EMOTION_HAPPY,
+        .emotionPMD = EMOTE_DETERMINED, // Staring at Pokémon League
         .conditions =
         {
             MATCH_MAP(EVER_GRANDE_CITY),
@@ -105,6 +109,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
     {
         .text = sCondMsg07,
         .emotion = FOLLOWER_EMOTION_HAPPY,
+        .emotionPMD = EMOTE_INSPIRED, // Staring intently at mountain
         .conditions =
         {
             MATCH_MAP(ROUTE112),
@@ -115,6 +120,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .text = sCondMsg08,
         .script = EventScript_FollowerNostalgia,
         .emotion = FOLLOWER_EMOTION_NEUTRAL,
+        .emotionPMD = EMOTE_JOYOUS, // Sniffing happily
         .conditions =
         {
             MATCH_MAP(ROUTE117_POKEMON_DAY_CARE)
@@ -126,6 +132,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .textSpread = 1,
         .script = EventScript_FollowerLookAround,
         .emotion = FOLLOWER_EMOTION_NEUTRAL,
+        .emotionPMD = EMOTE_INSPIRED, // Surveying shelves restlessly
         .conditions =
         {
             MATCH_MUSIC(MUS_POKE_MART)
@@ -135,6 +142,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
     {
         .text = sCondMsg11,
         .emotion = FOLLOWER_EMOTION_PENSIVE,
+        .emotionPMD = EMOTE_DETERMINED, // Focused with sharp gaze
         .conditions =
         {
             MATCH_MUSIC(MUS_VICTORY_ROAD)
@@ -144,6 +152,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
     {
         .text = sCondMsg12,
         .emotion = FOLLOWER_EMOTION_PENSIVE,
+        .emotionPMD = EMOTE_INSPIRED, // Interested in bicycles
         .conditions =
         {
             MATCH_MAP(MAUVILLE_CITY_BIKE_SHOP)
@@ -154,6 +163,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .text = (u8*)sMachineTexts,
         .textSpread = 1,
         .emotion = FOLLOWER_EMOTION_MUSIC,
+        .emotionPMD = EMOTE_INSPIRED, // Listening to machines
         .orFlag = 1, // match any of these maps
         .conditions =
         {
@@ -167,6 +177,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .text = (u8*)sBoatTexts,
         .textSpread = 1,
         .emotion = FOLLOWER_EMOTION_MUSIC,
+        .emotionPMD = EMOTE_HAPPY, // Swaying with the boat
         .script = EventScript_FollowerLookAround,
         .conditions =
         {
@@ -178,6 +189,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .text = sCondMsg18,
         .script = EventScript_FollowerHopping,
         .emotion = FOLLOWER_EMOTION_MUSIC,
+        .emotionPMD = EMOTE_JOYOUS, // Splashing water
         .conditions =
         {
             MATCH_ON_MB(MB_SHALLOW_WATER, MB_PUDDLE),
@@ -187,6 +199,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
     {
         .text = sCondMsg19,
         .emotion = FOLLOWER_EMOTION_MUSIC,
+        .emotionPMD = EMOTE_JOYOUS, // Blowing sand in the air
         .conditions =
         {
             MATCH_ON_MB(MB_SAND, MB_DEEP_SAND),
@@ -196,6 +209,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
     {
         .text = sCondMsg20,
         .emotion = FOLLOWER_EMOTION_MUSIC,
+        .emotionPMD = EMOTE_HAPPY, // Playing with grass
         .conditions =
         {
             MATCH_ON_MB(MB_TALL_GRASS, MB_LONG_GRASS),
@@ -205,6 +219,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
     {
         .text = sCondMsg21,
         .emotion = FOLLOWER_EMOTION_MUSIC,
+        .emotionPMD = EMOTE_JOYOUS, // Looking at footprints
         .conditions =
         {
             MATCH_ON_MB(MB_SAND, MB_FOOTPRINTS),
@@ -215,6 +230,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .text = (u8*)sElevatorTexts,
         .textSpread = 1,
         .emotion = FOLLOWER_EMOTION_SURPRISE,
+        .emotionPMD = EMOTE_WORRIED, // Nervous in confined area
         .conditions =
         {
             MATCH_MAP(LILYCOVE_CITY_DEPARTMENT_STORE_ELEVATOR),
@@ -225,6 +241,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .text = (u8*)sColdTexts,
         .textSpread = 1,
         .emotion = FOLLOWER_EMOTION_SURPRISE,
+        .emotionPMD = EMOTE_SURPRISED, // Surprised to touch ice
         .conditions =
         {
             MATCH_MAP(SHOAL_CAVE_LOW_TIDE_ICE_ROOM),
@@ -234,6 +251,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
     {
         .text = sCondMsg27,
         .emotion = FOLLOWER_EMOTION_SURPRISE,
+        .emotionPMD = EMOTE_SURPRISED, // Flower petal on face
         .conditions =
         {
             MATCH_MAP(ROUTE117),
@@ -243,6 +261,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
     {
         .text = sCondMsg28,
         .emotion = FOLLOWER_EMOTION_UPSET,
+        .emotionPMD = EMOTE_ANGRY, // Growling softly
         .conditions =
         {
             MATCH_TYPES(TYPE_DRAGON, TYPE_DRAGON),
@@ -254,6 +273,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .text = (u8*)sFearTexts,
         .textSpread = 1,
         .emotion = FOLLOWER_EMOTION_UPSET,
+        .emotionPMD = EMOTE_WORRIED, // Trembling with fear
         .conditions =
         {
             MATCH_NOT_TYPES(TYPE_GHOST, TYPE_GHOST),
@@ -265,6 +285,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
     {
         .text = sCondMsg31,
         .emotion = FOLLOWER_EMOTION_UPSET,
+        .emotionPMD = EMOTE_SAD, // Taking shelter in rain
         .conditions =
         {
             MATCH_TYPES(TYPE_FIRE, TYPE_FIRE),
@@ -275,6 +296,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
     {
         .text = sCondMsg32,
         .emotion = FOLLOWER_EMOTION_UPSET,
+        .emotionPMD = EMOTE_CRYING, // Frozen and cold
         .conditions =
         {
            MATCH_STATUS(STATUS1_FREEZE),
@@ -286,6 +308,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .textSpread = 1,
         .script = EventScript_FollowerFaceResult,
         .emotion = FOLLOWER_EMOTION_MUSIC,
+        .emotionPMD = EMOTE_HAPPY, // Staring at the sea
         .conditions =
         {
             MATCH_NEAR_MB(MB_OCEAN_WATER, 5),
@@ -296,6 +319,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .text = sCondMsg36,
         .script = EventScript_FollowerFaceResult,
         .emotion = FOLLOWER_EMOTION_MUSIC,
+        .emotionPMD = EMOTE_HAPPY, // Listening to waterfall
         .conditions =
         {
             MATCH_NEAR_MB(MB_WATERFALL, 5),
@@ -305,6 +329,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
     {
         .text = sCondMsg37,
         .emotion = FOLLOWER_EMOTION_MUSIC,
+        .emotionPMD = EMOTE_HAPPY, // Enjoying the rain
         .conditions =
         {
         MATCH_NOT_TYPES(TYPE_FIRE, TYPE_FIRE),
@@ -316,6 +341,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .text = sCondMsg38,
         .script = EventScript_FollowerFaceResult,
         .emotion = FOLLOWER_EMOTION_PENSIVE,
+        .emotionPMD = EMOTE_SIGH, // Gazing at reflection
         .conditions =
         {
             MATCH_NEAR_MB(MB_POND_WATER, 1),
@@ -325,6 +351,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
     {
         .text = sCondMsg39,
         .emotion = FOLLOWER_EMOTION_PENSIVE,
+        .emotionPMD = EMOTE_INSPIRED, // Listening to the sound of leaves
         .conditions =
         {
             MATCH_MAPSEC(MAPSEC_PETALBURG_WOODS),
@@ -336,6 +363,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .textSpread = 1,
         .script = EventScript_FollowerFaceResult,
         .emotion = FOLLOWER_EMOTION_PENSIVE,
+        .emotionPMD = EMOTE_SURPRISED, // Startled by cold ice
         .conditions =
         {
             MATCH_NEAR_MB(MB_ICE, 1),
@@ -345,6 +373,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
     {
         .text = sCondMsg42,
         .emotion = FOLLOWER_EMOTION_SAD,
+        .emotionPMD = EMOTE_PAIN, // Sad due to burn injury
         .conditions =
         {
             MATCH_STATUS(STATUS1_BURN),

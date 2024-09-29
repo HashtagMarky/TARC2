@@ -2075,16 +2075,24 @@ const u16 gMonIconPalettes[][16] =
     INCBIN_U16("graphics/pokemon/icon_palettes/pal5.gbapal"),
 };
 
-const u16 gTitleScreenBgPalettes[]                       = INCBIN_U16("graphics/title_screen/pokemon_logo.gbapal",
-                                                                      "graphics/title_screen/cherry_blossom.gbapal");
-const u32 gTitleScreenCherryBlossomLeavesTilemap[]       = INCBIN_U32("graphics/title_screen/cherry_blossom_leaves.bin.lz");
+const u16 gTitleScreenTornadusBgPalettes[]               = INCBIN_U16("graphics/title_screen/pokemon_logo.gbapal",
+                                                                      "graphics/title_screen/forces_of_nature/tornadus_border.gbapal");
+const u32 gTitleScreenTornadusBorderTilemap[]            = INCBIN_U32("graphics/title_screen/forces_of_nature/tornadus_border.bin.lz");
+const u16 gTitleScreenThundurusBgPalettes[]              = INCBIN_U16("graphics/title_screen/pokemon_logo.gbapal",
+                                                                      "graphics/title_screen/forces_of_nature/thundurus_border.gbapal");
+const u32 gTitleScreenThundurusBorderTilemap[]           = INCBIN_U32("graphics/title_screen/forces_of_nature/thundurus_border.bin.lz");
+const u16 gTitleScreenLandorusBgPalettes[]               = INCBIN_U16("graphics/title_screen/pokemon_logo.gbapal",
+                                                                      "graphics/title_screen/forces_of_nature/landorus_border.gbapal");
+const u32 gTitleScreenLandorusBorderTilemap[]            = INCBIN_U32("graphics/title_screen/forces_of_nature/landorus_border.bin.lz");
+const u16 gTitleScreenEnamorusBgPalettes[]               = INCBIN_U16("graphics/title_screen/pokemon_logo.gbapal",
+                                                                      "graphics/title_screen/forces_of_nature/enamorus_border.gbapal");
+const u32 gTitleScreenEnamorusBorderTilemap[]            = INCBIN_U32("graphics/title_screen/forces_of_nature/enamorus_border.bin.lz");
 const u32 gTitleScreenPokemonLogoGfx[]                   = INCBIN_U32("graphics/title_screen/pokemon_logo.8bpp.lz");
 const u32 gTitleScreenPokemonLogoTilemap[]               = INCBIN_U32("graphics/title_screen/pokemon_logo.bin.lz");
 const u32 gTitleScreenPressStartGfx[]                    = INCBIN_U32("graphics/title_screen/press_start.4bpp.lz");
-const u16 gTitleScreenPressStartStonePal[]               = INCBIN_U16("graphics/title_screen/press_start_stone_dark.gbapal");
-const u16 gTitleScreenPressStartStoneLightPal[]          = INCBIN_U16("graphics/title_screen/press_start_stone_light.gbapal");
 const u32 gTitleScreenIkigaiVersionGfx[]                 = INCBIN_U32("graphics/title_screen/ikigai_version.8bpp.lz");
-const u16 gTitleScreenIkigaiVersionStonePal[]            = INCBIN_U16("graphics/title_screen/ikigai_version.gbapal");
+const u16 gIkigaiTitleScreenPal_Blue[]                   = INCBIN_U16("graphics/title_screen/ikigai_title_screen_blue.gbapal");
+const u16 gIkigaiTitleScreenPal_Pink[]                   = INCBIN_U16("graphics/title_screen/ikigai_title_screen_pink.gbapal");
 // const u16 gTitleScreenIkigaiVersionNormalPal[]           = INCBIN_U16("graphics/title_screen/ikigai_palettes/normal.gbapal");
 
 const u16 gFrontierPassBg_Pal[]                          = INCBIN_U16("graphics/frontier_pass/bg.gbapal"); // 8 x 16

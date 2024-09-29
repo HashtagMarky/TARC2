@@ -1904,7 +1904,7 @@
 
 	@ destroys a mugshot in the overworld, if there is one
 	.macro removefieldmugshot
-	callnative RemoveFieldMugshot
+	callnative RemoveFieldMugshotAndWindow
 	.endm
 
 	@ sets variable overworld object event to a Pokémon for a wild encounter
@@ -1918,6 +1918,12 @@
 	@ starts a safari, normal or double battle
 	.macro dowildsafaribattle
 	.byte 0xe8
+	.endm
+
+	@ sets localId stored in gSelectedObjectEvent
+	.macro setselectedobjectevent localId:req
+	.byte 0xe9
+	.2byte \localId
 	.endm
 
 @ Supplementary
@@ -2081,10 +2087,10 @@
 	.macro mnmbox text:req, PMD=FALSE, mugshotEmotion=EMOTE_NORMAL
 	loadword 0, \text
 	setvar VAR_0x8002, \mugshotEmotion
-	.if \PMD == FALSE
-		callstd MSGBOX_NPC_MUG
-	.else
+	.if \PMD == TRUE
 		callstd MSGBOX_PKMN_MUG
+	.else
+		callstd MSGBOX_NPC_MUG
 	.endif
 	.endm
 

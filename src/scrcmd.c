@@ -2521,6 +2521,14 @@ bool8 ScrCmd_createfieldmugshot(struct ScriptContext *ctx)
         if (gObjectEvents[gSelectedObjectEvent].shiny)
             mugshotId += SPECIES_SHINY_TAG;
 
-    CreateFieldMugshot(mugshotType, mugshotId, mugshotEmotion, x, y);
+    CreateFieldMugshot(mugshotType, mugshotId, mugshotEmotion, x, y, FALSE);
+    return FALSE;
+}
+
+bool8 ScrCmd_setselectedobjectevent(struct ScriptContext *ctx)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+
+    gSelectedObjectEvent = localId;
     return FALSE;
 }
