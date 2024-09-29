@@ -1,10 +1,10 @@
 // Brendan
-static const u32 sFieldMugshotGfx_Brendan[] = INCBIN_U32("graphics/field_mugshots/people/brendan/brendan.4bpp.lz");
-static const u16 sFieldMugshotPal_Brendan[] = INCBIN_U16("graphics/field_mugshots/people/brendan/brendan.gbapal");
+const u32 sFieldMugshotGfx_Brendan[] = INCBIN_U32("graphics/field_mugshots/people/brendan/brendan.4bpp.lz");
+const u16 sFieldMugshotPal_Brendan[] = INCBIN_U16("graphics/field_mugshots/people/brendan/brendan.gbapal");
 
 // May
-static const u32 sFieldMugshotGfx_May[] = INCBIN_U32("graphics/field_mugshots/people/may/may.4bpp.lz");
-static const u16 sFieldMugshotPal_May[] = INCBIN_U16("graphics/field_mugshots/people/may/may.gbapal");
+const u32 sFieldMugshotGfx_May[] = INCBIN_U32("graphics/field_mugshots/people/may/may.4bpp.lz");
+const u16 sFieldMugshotPal_May[] = INCBIN_U16("graphics/field_mugshots/people/may/may.gbapal");
 
 // Substitute Doll (SPECIES_NONE)
 static const u32 sFieldMugshotGfx_SubstituteDollNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/substitute_doll/normal.4bpp.lz");

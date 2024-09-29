@@ -17,6 +17,13 @@
 #include "constants/field_mugshots.h"
 #include "data/field_mugshots.h"
 
+/*
+// Brendan & May Mugshots
+const u32 sFieldMugshotGfx_Brendan[] = INCBIN_U32("graphics/field_mugshots/people/brendan/brendan.4bpp.lz");
+const u16 sFieldMugshotPal_Brendan[] = INCBIN_U16("graphics/field_mugshots/people/brendan/brendan.gbapal");
+const u32 sFieldMugshotGfx_May[] = INCBIN_U32("graphics/field_mugshots/people/may/may.4bpp.lz");
+const u16 sFieldMugshotPal_May[] = INCBIN_U16("graphics/field_mugshots/people/may/may.gbapal");
+*/
 static EWRAM_DATA u8 sFieldMugshotSpriteId = 0;
 static EWRAM_DATA u8 sIsFieldMugshotActive = 0;
 

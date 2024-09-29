@@ -155,4 +155,4 @@
 	.include "src/social_media.o"
 	.include "src/field_mugshot.o"
 	.include "src/overworld_encounters.o"
-
+	.include "src/ui_main_menu.o"
