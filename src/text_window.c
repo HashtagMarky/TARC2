@@ -6,6 +6,7 @@
 #include "constants/pokemon.h"
 #include "bg.h"
 #include "graphics.h"
+#include "menu.h"
 
 const u8 gTextWindowFrame_Gfx[] = INCBIN_U8("graphics/text_window/window_frame.4bpp");
 const u16 gTextWindowFrame_EmeraldPal[] = INCBIN_U16("graphics/text_window/window_frame_emerald.gbapal");
@@ -88,6 +89,12 @@ void LoadMessageBoxGfx(u8 windowId, u16 destOffset, u8 palOffset)
 {
     LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), gMessageBox_Gfx, 0x280, destOffset);
     LoadPalette(GetOverworldTextboxPalettePtr(), palOffset, PLTT_SIZE_4BPP);
+}
+
+void LoadSignBoxGfx(u8 windowId, u16 destOffset, u8 palOffset)
+{
+    LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), gSignpostWindow_Gfx, 0x1C0, destOffset);
+    LoadPalette(GetTextWindowPalette(1), palOffset, PLTT_SIZE_4BPP);
 }
 
 void LoadUserWindowBorderGfx_(u8 windowId, u16 destOffset, u8 palOffset)

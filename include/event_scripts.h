@@ -652,5 +652,8 @@ extern const u8 Common_Movement_FollowerSafeEnd[];
 extern const u8 OverworldEncounters_EventScript_EncounterApproachPlayer[];
 extern const u8 OverworldEncounters_EventScript_Encounter[];
 extern const u8 OverworldEncounters_EventScript_EncounterEscape[];
+extern const u8 EventScript_CancelMessageBox[];
+extern const u8 Common_EventScript_ShowPokemonCenterSign[];
+extern const u8 Common_EventScript_ShowPokemartSign[];
 
 #endif // GUARD_EVENT_SCRIPTS_H

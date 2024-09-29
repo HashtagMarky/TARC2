@@ -7,12 +7,15 @@
 #include "match_call.h"
 #include "field_message_box.h"
 #include "field_mugshot.h"
+#include "script.h"
 #include "sprite.h"
+#include "text_window.h"
 #include "constants/event_objects.h"
 #include "constants/species.h"
 #include "data/speaker_names.h"
 
 static EWRAM_DATA u8 sFieldMessageBoxMode = 0;
+EWRAM_DATA u8 gWalkAwayFromSignpostTimer = 0;
 EWRAM_DATA const u8* gSpeakerName = NULL;
 
 static void ExpandStringAndStartDrawFieldMessage(const u8 *, bool32);
@@ -36,9 +39,14 @@ static void Task_DrawFieldMessage(u8 taskId)
     switch (task->tState)
     {
         case 0:
-            LoadMessageBoxAndBorderGfx();
+            if (gMsgIsSignPost)
+                LoadSignPostWindowFrameGfx();
+            else
+                LoadMessageBoxAndBorderGfx();
             task->tState++;
             break;
+           task->tState++;
+           break;
         case 1:
             DrawDialogueFrame(0, TRUE);
             if (gSpeakerName != NULL && !FlagGet(FLAG_SUPPRESS_SPEAKER_NAME))
