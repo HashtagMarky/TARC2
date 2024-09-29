@@ -254,6 +254,10 @@ static void MainMenu_FormatSavegameBadges(void);
 static void NewGameSamuelSpeech_CreateDialogueWindowBorder(u8, u8, u8, u8, u8, u8);
 static void NewGameSamuelSpeech_SetPlayerNameKoleAnka(void);
 
+static const u32 *ReturnShadowGfx(void);
+static const u32 *ReturnSpeechBgMap(void);
+static const void *ReturnSpeechBgPals(void);
+
 // .rodata
 
 static const u16 sSamuelSpeechBgPals_Green[][16] = {
@@ -1334,32 +1338,9 @@ static void Task_NewGameSamuelSpeech_Init(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDY, 0);
 
     gSaveBlock2Ptr->optionsInterfaceColor = gIkigaiLegendaryScreen;
-    switch (gIkigaiLegendaryScreen)
-        {
-        case IKIGAI_INTERFACE_GREEN:
-            LZ77UnCompVram(sSamuelSpeechShadowGfx_Green, (void *)VRAM);
-            LZ77UnCompVram(sSamuelSpeechBgMap_Green, (void *)(BG_SCREEN_ADDR(7)));
-            LoadPalette(sSamuelSpeechBgPals_Green, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
-            break;
-        
-        case IKIGAI_INTERFACE_BLUE:
-            LZ77UnCompVram(sSamuelSpeechShadowGfx_Blue, (void *)VRAM);
-            LZ77UnCompVram(sSamuelSpeechBgMap_Blue, (void *)(BG_SCREEN_ADDR(7)));
-            LoadPalette(sSamuelSpeechBgPals_Blue, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
-            break;
-        
-        case IKIGAI_INTERFACE_ORANGE:
-            LZ77UnCompVram(sSamuelSpeechShadowGfx_Orange, (void *)VRAM);
-            LZ77UnCompVram(sSamuelSpeechBgMap_Orange, (void *)(BG_SCREEN_ADDR(7)));
-            LoadPalette(sSamuelSpeechBgPals_Orange, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
-            break;
-        
-        case IKIGAI_INTERFACE_PINK:
-            LZ77UnCompVram(sSamuelSpeechShadowGfx_Pink, (void *)VRAM);
-            LZ77UnCompVram(sSamuelSpeechBgMap_Pink, (void *)(BG_SCREEN_ADDR(7)));
-            LoadPalette(sSamuelSpeechBgPals_Pink, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
-            break;
-        }
+    LZ77UnCompVram(ReturnShadowGfx(), (void *)VRAM);
+    LZ77UnCompVram(ReturnSpeechBgMap(), (void *)(BG_SCREEN_ADDR(7)));
+    LoadPalette(ReturnSpeechBgPals(), BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
     ScanlineEffect_Stop();
     ResetSpriteData();
     FreeAllSpritePalettes();
@@ -1402,32 +1383,9 @@ void CB2_NewGameSamuelSpeech_FromNewMainMenu(void)
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
     ResetPaletteFade();
     gSaveBlock2Ptr->optionsInterfaceColor = gIkigaiLegendaryScreen;
-    switch (gIkigaiLegendaryScreen)
-        {
-        case IKIGAI_INTERFACE_GREEN:
-            LZ77UnCompVram(sSamuelSpeechShadowGfx_Green, (u8 *)VRAM);
-            LZ77UnCompVram(sSamuelSpeechBgMap_Green, (u8 *)(BG_SCREEN_ADDR(7)));
-            LoadPalette(sSamuelSpeechBgPals_Green, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
-            break;
-        
-        case IKIGAI_INTERFACE_BLUE:
-            LZ77UnCompVram(sSamuelSpeechShadowGfx_Blue, (u8 *)VRAM);
-            LZ77UnCompVram(sSamuelSpeechBgMap_Blue, (u8 *)(BG_SCREEN_ADDR(7)));
-            LoadPalette(sSamuelSpeechBgPals_Blue, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
-            break;
-        
-        case IKIGAI_INTERFACE_ORANGE:
-            LZ77UnCompVram(sSamuelSpeechShadowGfx_Orange, (u8 *)VRAM);
-            LZ77UnCompVram(sSamuelSpeechBgMap_Orange, (u8 *)(BG_SCREEN_ADDR(7)));
-            LoadPalette(sSamuelSpeechBgPals_Orange, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
-            break;
-        
-        case IKIGAI_INTERFACE_PINK:
-            LZ77UnCompVram(sSamuelSpeechShadowGfx_Pink, (u8 *)VRAM);
-            LZ77UnCompVram(sSamuelSpeechBgMap_Pink, (u8 *)(BG_SCREEN_ADDR(7)));
-            LoadPalette(sSamuelSpeechBgPals_Pink, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
-            break;
-        }
+    LZ77UnCompVram(ReturnShadowGfx(), (u8 *)VRAM);
+    LZ77UnCompVram(ReturnSpeechBgMap(), (u8 *)(BG_SCREEN_ADDR(7)));
+    LoadPalette(ReturnSpeechBgPals(), BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
     // LoadPalette(sSamuelSpeechPlatformBlackPal, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(8));
     ResetTasks();
     taskId = CreateTask(Task_NewGameSamuelSpeech_WaitToShowSamuel, 0);
@@ -2033,32 +1991,9 @@ static void CB2_NewGameSamuelSpeech_ReturnFromNamingScreen(void)
     DmaFill32(3, 0, OAM, OAM_SIZE);
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
     ResetPaletteFade();
-    switch (gIkigaiLegendaryScreen)
-        {
-        case IKIGAI_INTERFACE_GREEN:
-            LZ77UnCompVram(sSamuelSpeechShadowGfx_Green, (u8 *)VRAM);
-            LZ77UnCompVram(sSamuelSpeechBgMap_Green, (void *)(BG_SCREEN_ADDR(7)));
-            LoadPalette(sSamuelSpeechBgPals_Green, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
-            break;
-        
-        case IKIGAI_INTERFACE_BLUE:
-            LZ77UnCompVram(sSamuelSpeechShadowGfx_Blue, (u8 *)VRAM);
-            LZ77UnCompVram(sSamuelSpeechBgMap_Blue, (void *)(BG_SCREEN_ADDR(7)));
-            LoadPalette(sSamuelSpeechBgPals_Blue, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
-            break;
-        
-        case IKIGAI_INTERFACE_ORANGE:
-            LZ77UnCompVram(sSamuelSpeechShadowGfx_Orange, (u8 *)VRAM);
-            LZ77UnCompVram(sSamuelSpeechBgMap_Orange, (void *)(BG_SCREEN_ADDR(7)));
-            LoadPalette(sSamuelSpeechBgPals_Orange, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
-            break;
-        
-        case IKIGAI_INTERFACE_PINK:
-            LZ77UnCompVram(sSamuelSpeechShadowGfx_Pink, (u8 *)VRAM);
-            LZ77UnCompVram(sSamuelSpeechBgMap_Pink, (void *)(BG_SCREEN_ADDR(7)));
-            LoadPalette(sSamuelSpeechBgPals_Pink, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
-            break;
-        }
+    LZ77UnCompVram(ReturnShadowGfx(), (u8 *)VRAM);
+    LZ77UnCompVram(ReturnSpeechBgMap(), (void *)(BG_SCREEN_ADDR(7)));
+    LoadPalette(ReturnSpeechBgPals(), BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
     ResetTasks();
     taskId = CreateTask(Task_NewGameSamuelSpeech_ReturnFromNamingScreenShowTextbox, 0);
     gTasks[taskId].tTimer = 5;
@@ -2571,6 +2506,63 @@ static void Task_NewGameSamuelSpeech_ReturnFromNamingScreenShowTextbox(u8 taskId
     {
         DrawDialogFrameWithCustomTile(0, TRUE, 0xFC);
         gTasks[taskId].func = Task_NewGameSamuelSpeech_SoItsPlayerName;
+    }
+}
+
+static const u32 *ReturnShadowGfx(void)
+{
+    switch (gIkigaiLegendaryScreen)
+    {
+        default:
+        case IKIGAI_INTERFACE_GREEN:
+            return sSamuelSpeechShadowGfx_Green;
+        
+        case IKIGAI_INTERFACE_BLUE:
+            return sSamuelSpeechShadowGfx_Blue;
+        
+        case IKIGAI_INTERFACE_ORANGE:
+            return sSamuelSpeechShadowGfx_Orange;
+        
+        case IKIGAI_INTERFACE_PINK:
+            return sSamuelSpeechShadowGfx_Pink;
+    }
+}
+
+static const u32 *ReturnSpeechBgMap(void)
+{
+    switch (gIkigaiLegendaryScreen)
+    {
+        default:
+        case IKIGAI_INTERFACE_GREEN:
+            return sSamuelSpeechBgMap_Green;
+        
+        case IKIGAI_INTERFACE_BLUE:
+            return sSamuelSpeechBgMap_Blue;
+        
+        case IKIGAI_INTERFACE_ORANGE:
+            return sSamuelSpeechBgMap_Orange;
+        
+        case IKIGAI_INTERFACE_PINK:
+            return sSamuelSpeechBgMap_Pink;
+    }
+}
+
+static const void *ReturnSpeechBgPals(void)
+{
+    switch (gIkigaiLegendaryScreen)
+    {
+        default:
+        case IKIGAI_INTERFACE_GREEN:
+            return sSamuelSpeechBgPals_Green;
+        
+        case IKIGAI_INTERFACE_BLUE:
+            return sSamuelSpeechBgPals_Blue;
+        
+        case IKIGAI_INTERFACE_ORANGE:
+            return sSamuelSpeechBgPals_Orange;
+        
+        case IKIGAI_INTERFACE_PINK:
+            return sSamuelSpeechBgPals_Pink;
     }
 }
 
