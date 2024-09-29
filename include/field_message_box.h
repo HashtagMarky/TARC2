@@ -23,4 +23,6 @@ void InitFieldMessageBox(void);
 void SetSpeakerName(const u8* name);
 void SetSpeakerAuto(u16 graphicsId);
 
+extern u8 gWalkAwayFromSignpostTimer;
+
 #endif // GUARD_FIELD_MESSAGE_BOX_H
