@@ -156,3 +156,4 @@
 	.include "src/field_mugshot.o"
 	.include "src/overworld_encounters.o"
 	.include "src/ui_main_menu.o"
+	.include "src/ikigai_scrolling_background.o"

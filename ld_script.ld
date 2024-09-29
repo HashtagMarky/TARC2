@@ -363,6 +363,7 @@ SECTIONS {
 		src/social_media.o(.text);
 		src/toggleable_transport.o(.text);
         src/ui_main_menu.o(.text);
+        src/ikigai_scrolling_background.o(.text);
     } > ROM =0
 
     script_data :
@@ -734,6 +735,7 @@ SECTIONS {
 		src/social_media.o(.rodata);
 		src/toggleable_transport.o(.rodata);
         src/ui_main_menu.o(.rodata);
+        src/ikigai_scrolling_background.o(.rodata);
     } > ROM =0
 
     song_data :
