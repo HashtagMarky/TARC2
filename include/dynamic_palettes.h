@@ -6,6 +6,7 @@ extern u16 sDynPalPlayerReflection[];
 extern u16 sDynPalPlayerUnderwater[];
 extern u16 sDynPalPlayerBattleFront[];
 extern u16 sDynPalPlayerBattleBack[];
+extern u16 sDynPalPlayerMugshot[];
 
 // Called at game start
 void DynPal_InitAllDynamicPalettes();

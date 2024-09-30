@@ -2,6 +2,7 @@
 #include "gba/defines.h"
 #include "data.h"
 #include "decompress.h"
+#include "dynamic_palettes.h"
 #include "sprite.h"
 #include "script.h"
 #include "event_data.h"
@@ -17,13 +18,6 @@
 #include "constants/field_mugshots.h"
 #include "data/field_mugshots.h"
 
-/*
-// Brendan & May Mugshots
-const u32 sFieldMugshotGfx_Brendan[] = INCBIN_U32("graphics/field_mugshots/people/brendan/brendan.4bpp.lz");
-const u16 sFieldMugshotPal_Brendan[] = INCBIN_U16("graphics/field_mugshots/people/brendan/brendan.gbapal");
-const u32 sFieldMugshotGfx_May[] = INCBIN_U32("graphics/field_mugshots/people/may/may.4bpp.lz");
-const u16 sFieldMugshotPal_May[] = INCBIN_U16("graphics/field_mugshots/people/may/may.gbapal");
-*/
 static EWRAM_DATA u8 sFieldMugshotSpriteId = 0;
 static EWRAM_DATA u8 sIsFieldMugshotActive = 0;
 
@@ -282,6 +276,8 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
     }
 
     LoadSpritePalette(&pal);
+    if (mugshotId == MUGSHOT_KOLE || mugshotId == MUGSHOT_ANKA)
+        DynPal_LoadPaletteByTag(sDynPalPlayerMugshot, TAG_MUGSHOT);
     while (REG_VCOUNT >= 160);          // Wait until VBlank starts
     while (REG_VCOUNT < 160);           // Wait until VBlank ends
     LoadCompressedSpriteSheet(&sheet);
@@ -355,6 +351,8 @@ u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion)
 
     LoadCompressedSpriteSheet(&sheet);
     LoadSpritePalette(&pal);
+    if (mugshotId == MUGSHOT_KOLE || mugshotId == MUGSHOT_ANKA)
+        DynPal_LoadPaletteByTag(sDynPalPlayerMugshot, TAG_MUGSHOT);
 
     sFieldMugshotSpriteId = CreateSprite(&sFieldMugshotSprite_SpriteTemplate, 0, 0, 0);
     if (sFieldMugshotSpriteId == SPRITE_NONE)

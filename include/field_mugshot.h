@@ -2,10 +2,9 @@
 #define GUARD_FIELD_MUGSHOTS_H
 
 // Player Mugshots
-extern const u32 sFieldMugshotGfx_Brendan[];
-extern const u16 sFieldMugshotPal_Brendan[];
-extern const u32 sFieldMugshotGfx_May[];
-extern const u16 sFieldMugshotPal_May[];
+extern const u32 sFieldMugshotGfx_Kole[];
+extern const u32 sFieldMugshotGfx_Anka[];
+extern const u16 sFieldMugshotPal_Protagonist[];
 
 void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y, bool8 retainDetails);
 void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 shiny, bool8 emotePMD);

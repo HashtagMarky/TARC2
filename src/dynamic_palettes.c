@@ -25,6 +25,7 @@ EWRAM_DATA u16 sDynPalPlayerReflection[16] = {0};
 EWRAM_DATA u16 sDynPalPlayerUnderwater[16] = {0};
 EWRAM_DATA u16 sDynPalPlayerBattleFront[16] = {0};
 EWRAM_DATA u16 sDynPalPlayerBattleBack[16] = {0};
+EWRAM_DATA u16 sDynPalPlayerMugshot[16] = {0};
 
 // *MODIFY*
 // Define palette colors from files
@@ -135,6 +136,7 @@ static const struct ListMenuItem sListItems_DynPal_PartCTones[] = {
 static void DynPal_InitOverworld(u16* dest, const u16* partAPalData, const u16* partBPalData, const u16* partCPalData, int groupOffset);
 static void DynPal_InitBattleFront(u16* dest, const u16* partAPalData, const u16* partBPalData, const u16* partCPalData, int groupOffset);
 static void DynPal_InitBattleBack(u16* dest, const u16* partAPalData, const u16* partBPalData, const u16* partCPalData, int groupOffset);
+static void DynPal_InitFieldMugshot(u16* dest, const u16* partAPalData, const u16* partBPalData, const u16* partCPalData, int groupOffset);
 
 static void DynPal_CopySection(const u16* src, u16* dest, int srcInd, int destInd, int groupOffset, int numberOfColors);
 static void DynPal_SetToneIndices(u8 partATone, u8 partBTone, u8 partCTone);
@@ -171,6 +173,8 @@ void DynPal_InitAllDynamicPalettes()
     DynPal_InitBattleFront(sDynPalPlayerBattleFront, partAPalData, partBPalData, partCPalData, DYNPAL_COLOR_GROUP_NORMAL);
     // Player Battle Back
     DynPal_InitBattleBack(sDynPalPlayerBattleBack, partAPalData, partBPalData, partCPalData, DYNPAL_COLOR_GROUP_NORMAL);
+    // Player Field Mugshot
+    DynPal_InitFieldMugshot(sDynPalPlayerMugshot, partAPalData, partBPalData, partCPalData, DYNPAL_COLOR_GROUP_NORMAL);
 }
 
 // *MODIFY*
@@ -212,8 +216,17 @@ static void DynPal_InitBattleFront(u16* dest, const u16* partAPalData, const u16
 }
 
 // *MODIFY*
-// Derive battle front sprite palette - first load the overworld palette, then make modifications. Your specific implementation may differ.
+// Derive battle back sprite palette - first load the overworld palette, then make modifications. Your specific implementation may differ.
 static void DynPal_InitBattleBack(u16* dest, const u16* partAPalData, const u16* partBPalData, const u16* partCPalData, int groupOffset)
+{
+    DynPal_InitOverworld(dest, partAPalData, partBPalData, partCPalData, groupOffset);
+    
+    //Add any modifications you need here
+}
+
+// *MODIFY*
+// Derive field mugshot sprite palette - first load the overworld palette, then make modifications. Your specific implementation may differ.
+static void DynPal_InitFieldMugshot(u16* dest, const u16* partAPalData, const u16* partBPalData, const u16* partCPalData, int groupOffset)
 {
     DynPal_InitOverworld(dest, partAPalData, partBPalData, partCPalData, groupOffset);
     

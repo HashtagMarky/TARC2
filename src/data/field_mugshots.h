@@ -1,10 +1,15 @@
+// Protagonist Mugshots
+const u32 sFieldMugshotGfx_Kole[] = INCBIN_U32("graphics/protagonist_sprites/anka_mugshot.4bpp.lz");
+const u32 sFieldMugshotGfx_Anka[] = INCBIN_U32("graphics/protagonist_sprites/anka_mugshot.4bpp.lz");
+const u16 sFieldMugshotPal_Protagonist[] = INCBIN_U16("graphics/protagonist_sprites/protagonist.gbapal");
+
 // Brendan
-const u32 sFieldMugshotGfx_Brendan[] = INCBIN_U32("graphics/field_mugshots/people/brendan/brendan.4bpp.lz");
-const u16 sFieldMugshotPal_Brendan[] = INCBIN_U16("graphics/field_mugshots/people/brendan/brendan.gbapal");
+static const u32 sFieldMugshotGfx_Brendan[] = INCBIN_U32("graphics/field_mugshots/people/brendan/brendan.4bpp.lz");
+static const u16 sFieldMugshotPal_Brendan[] = INCBIN_U16("graphics/field_mugshots/people/brendan/brendan.gbapal");
 
 // May
-const u32 sFieldMugshotGfx_May[] = INCBIN_U32("graphics/field_mugshots/people/may/may.4bpp.lz");
-const u16 sFieldMugshotPal_May[] = INCBIN_U16("graphics/field_mugshots/people/may/may.gbapal");
+static const u32 sFieldMugshotGfx_May[] = INCBIN_U32("graphics/field_mugshots/people/may/may.4bpp.lz");
+static const u16 sFieldMugshotPal_May[] = INCBIN_U16("graphics/field_mugshots/people/may/may.gbapal");
 
 // Substitute Doll (SPECIES_NONE)
 static const u32 sFieldMugshotGfx_SubstituteDollNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/substitute_doll/normal.4bpp.lz");
@@ -1026,21 +1031,21 @@ struct MugshotGfx
 
 static const struct MugshotGfx sFieldMugshots[][EMOTE_COUNT] =
 {
-    [MUGSHOT_BRENDAN] =
+    [MUGSHOT_KOLE] =
     {
         [EMOTE_NORMAL] =
         {
-            .gfx = sFieldMugshotGfx_Brendan,
-            .pal = sFieldMugshotPal_Brendan,
+            .gfx = sFieldMugshotGfx_Kole,
+            .pal = sFieldMugshotPal_Protagonist,
         },
     },
 
-    [MUGSHOT_MAY] =
+    [MUGSHOT_ANKA] =
     {
         [EMOTE_NORMAL] =
         {
-            .gfx = sFieldMugshotGfx_May,
-            .pal = sFieldMugshotPal_May,
+            .gfx = sFieldMugshotGfx_Anka,
+            .pal = sFieldMugshotPal_Protagonist,
         },
     },
 

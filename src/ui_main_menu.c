@@ -4,6 +4,7 @@
 #include "bg.h"
 #include "data.h"
 #include "decompress.h"
+#include "dynamic_palettes.h"
 #include "event_data.h"
 #include "field_mugshot.h"
 #include "field_weather.h"
@@ -33,6 +34,7 @@
 #include "overworld.h"
 #include "event_data.h"
 #include "constants/items.h"
+#include "constants/field_mugshots.h"
 #include "constants/field_weather.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
@@ -222,7 +224,6 @@ static const u16 sMainBgPalettePink[] = INCBIN_U16("graphics/ui_main_menu/main_t
 //
 //  Sprite Data for Mugshots and Icon Shadows 
 //
-#define TAG_MUGSHOT 30012
 #define TAG_ICON_BOX 30006
 static const struct OamData sOamData_Mugshot =
 {
@@ -231,29 +232,23 @@ static const struct OamData sOamData_Mugshot =
     .priority = 1,
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_BrendanMugshot =
+static const struct CompressedSpriteSheet sSpriteSheet_KoleMugshot =
 {
-    .data = sFieldMugshotGfx_Brendan,
+    .data = sFieldMugshotGfx_Kole,
     .size = 64*64*1/2,
     .tag = TAG_MUGSHOT,
 };
 
-static const struct SpritePalette sSpritePal_BrendanMugshot =
+static const struct CompressedSpriteSheet sSpriteSheet_AnkaMugshot =
 {
-    .data = sFieldMugshotPal_Brendan,
-    .tag = TAG_MUGSHOT
-};
-
-static const struct CompressedSpriteSheet sSpriteSheet_MayMugshot =
-{
-    .data = sFieldMugshotGfx_May,
+    .data = sFieldMugshotGfx_Anka,
     .size = 64*64*1/2,
     .tag = TAG_MUGSHOT,
 };
 
-static const struct SpritePalette sSpritePal_MayMugshot =
+static const struct SpritePalette sSpritePal_ProtagonistMugshot =
 {
-    .data = sFieldMugshotPal_May,
+    .data = sFieldMugshotPal_Protagonist,
     .tag = TAG_MUGSHOT
 };
 
@@ -642,14 +637,14 @@ static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spr
         LoadSpritePalette(ReturnIconBoxPalette());
         if(gSaveBlock2Ptr->playerGender == MALE)
         {
-            LoadCompressedSpriteSheet(&sSpriteSheet_BrendanMugshot);
-            LoadSpritePalette(&sSpritePal_BrendanMugshot);
+            LoadCompressedSpriteSheet(&sSpriteSheet_KoleMugshot);
         }
         else
         {
-            LoadCompressedSpriteSheet(&sSpriteSheet_MayMugshot);
-            LoadSpritePalette(&sSpritePal_MayMugshot);
+            LoadCompressedSpriteSheet(&sSpriteSheet_AnkaMugshot);
         }
+        LoadSpritePalette(&sSpritePal_ProtagonistMugshot);
+        DynPal_LoadPaletteByTag(sDynPalPlayerMugshot, TAG_MUGSHOT);
         LoadPalette(ReturnMenuBgPalette(), 0, 32);
         LoadPalette(ReturnScrollingBackgroundPalette(), 16, 32);
     }
