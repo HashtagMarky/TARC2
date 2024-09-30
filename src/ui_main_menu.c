@@ -125,6 +125,11 @@ static u32 GetHPEggCyclePercent(u32 partyIndex);
 static void CreatePartyMonIcons();
 static void DestroyMonIcons();
 
+static const u16 *ReturnMenuBgPalette(void);
+static const u16 *ReturnMenuBgGymPalette(void);
+static const struct SpritePalette *ReturnIconBoxPalette(void);
+static const struct SpritePalette *ReturnIconBoxGymPalette(void);
+
 
 //==========Background and Window Data==========//
 static const struct BgTemplate sMainMenuBgTemplates[] =
@@ -199,21 +204,21 @@ static const struct HWWindowPosition HWinCoords[6] =
 
 
 //
-//  Graphic and Tilemap Pointers for Bgs and Mughsots
+//  Graphic and Tilemap Pointers for Bgs
 //
-static const u32 sMainBgTiles[] = INCBIN_U32("graphics/ui_main_menu/main_tiles.4bpp.lz");
+static const u32 sIconBoxGfx[] = INCBIN_U32("graphics/ui_main_menu/icon_shadow.4bpp.lz");
+// Icon shadow becomes second colour in MainBgPalette File
+
 static const u32 sMainBgTilemap[] = INCBIN_U32("graphics/ui_main_menu/main_tiles.bin.lz");
-static const u16 sMainBgPalette[] = INCBIN_U16("graphics/ui_main_menu/main_tiles.gbapal");
+static const u32 sMainBgTiles[] = INCBIN_U32("graphics/ui_main_menu/main_tiles_male.4bpp.lz");
 
-static const u32 sMainBgTilesFem[] = INCBIN_U32("graphics/ui_main_menu/main_tiles_fem.4bpp.lz");
-static const u32 sMainBgTilemapFem[] = INCBIN_U32("graphics/ui_main_menu/main_tiles_fem.bin.lz");
-static const u16 sMainBgPaletteFem[] = INCBIN_U16("graphics/ui_main_menu/main_tiles_fem.gbapal");
+static const u16 sMainBgPaletteMale[] = INCBIN_U16("graphics/ui_main_menu/main_tiles_male.gbapal");
+static const u16 sMainBgPaletteFemale[] = INCBIN_U16("graphics/ui_main_menu/main_tiles_female.gbapal");
+static const u16 sMainBgPaletteGreen[] = INCBIN_U16("graphics/ui_main_menu/main_tiles_green.gbapal");
+static const u16 sMainBgPaletteBlue[] = INCBIN_U16("graphics/ui_main_menu/main_tiles_blue.gbapal");
+static const u16 sMainBgPaletteOrange[] = INCBIN_U16("graphics/ui_main_menu/main_tiles_orange.gbapal");
+static const u16 sMainBgPalettePink[] = INCBIN_U16("graphics/ui_main_menu/main_tiles_pink.gbapal");
 
-static const u16 sIconBox_Pal[] = INCBIN_U16("graphics/ui_main_menu/icon_shadow.gbapal");
-static const u32 sIconBox_Gfx[] = INCBIN_U32("graphics/ui_main_menu/icon_shadow.4bpp.lz");
-
-static const u16 sIconBox_PalFem[] = INCBIN_U16("graphics/ui_main_menu/icon_shadow_fem.gbapal");
-static const u32 sIconBox_GfxFem[] = INCBIN_U32("graphics/ui_main_menu/icon_shadow_fem.4bpp.lz");
 
 //
 //  Sprite Data for Mugshots and Icon Shadows 
@@ -284,27 +289,44 @@ static const struct OamData sOamData_IconBox =
 
 static const struct CompressedSpriteSheet sSpriteSheet_IconBox =
 {
-    .data = sIconBox_Gfx,
+    .data = sIconBoxGfx,
     .size = 32*32*1/2,
     .tag = TAG_ICON_BOX,
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_IconBoxFem =
+static const struct SpritePalette sSpritePal_IconBoxMale =
 {
-    .data = sIconBox_GfxFem,
-    .size = 32*32*1/2,
-    .tag = TAG_ICON_BOX,
-};
-
-static const struct SpritePalette sSpritePal_IconBox =
-{
-    .data = sIconBox_Pal,
+    .data = sMainBgPaletteMale,
     .tag = TAG_ICON_BOX
 };
 
-static const struct SpritePalette sSpritePal_IconBoxFem =
+static const struct SpritePalette sSpritePal_IconBoxFemale =
 {
-    .data = sIconBox_PalFem,
+    .data = sMainBgPaletteFemale,
+    .tag = TAG_ICON_BOX
+};
+
+static const struct SpritePalette sSpritePal_IconBoxGreen =
+{
+    .data = sMainBgPaletteGreen,
+    .tag = TAG_ICON_BOX
+};
+
+static const struct SpritePalette sSpritePal_IconBoxBlue =
+{
+    .data = sMainBgPaletteBlue,
+    .tag = TAG_ICON_BOX
+};
+
+static const struct SpritePalette sSpritePal_IconBoxOrange =
+{
+    .data = sMainBgPaletteOrange,
+    .tag = TAG_ICON_BOX
+};
+
+static const struct SpritePalette sSpritePal_IconBoxPink =
+{
+    .data = sMainBgPalettePink,
     .tag = TAG_ICON_BOX
 };
 
@@ -599,27 +621,13 @@ static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spr
     {
     case 0:
         ResetTempTileDataBuffers();
-        if (gSaveBlock2Ptr->playerGender == MALE)
-        {
-            DecompressAndCopyTileDataToVram(1, sMainBgTiles, 0, 0, 0);
-        }
-        else
-        {
-            DecompressAndCopyTileDataToVram(1, sMainBgTilesFem, 0, 0, 0);
-        }
+        DecompressAndCopyTileDataToVram(1, sMainBgTiles, 0, 0, 0);
         sMainMenuDataPtr->gfxLoadState++;
         break;
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            if (gSaveBlock2Ptr->playerGender == MALE)
-            {
-                LZDecompressWram(sMainBgTilemap, sBg1TilemapBuffer);
-            }
-            else
-            {
-                LZDecompressWram(sMainBgTilemapFem, sBg1TilemapBuffer);
-            }
+            LZDecompressWram(sMainBgTilemap, sBg1TilemapBuffer);
             sMainMenuDataPtr->gfxLoadState++;
         }
         break;
@@ -637,22 +645,19 @@ static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spr
         break;
     case 4:
     {
+        LoadCompressedSpriteSheet(&sSpriteSheet_IconBox);
+        LoadSpritePalette(ReturnIconBoxPalette());
         if(gSaveBlock2Ptr->playerGender == MALE)
         {
-            LoadCompressedSpriteSheet(&sSpriteSheet_IconBox);
-            LoadSpritePalette(&sSpritePal_IconBox);
             LoadCompressedSpriteSheet(&sSpriteSheet_BrendanMugshot);
             LoadSpritePalette(&sSpritePal_BrendanMugshot);
-            LoadPalette(sMainBgPalette, 0, 32);
         }
         else
         {
-            LoadCompressedSpriteSheet(&sSpriteSheet_IconBoxFem);
-            LoadSpritePalette(&sSpritePal_IconBoxFem);
             LoadCompressedSpriteSheet(&sSpriteSheet_MayMugshot);
             LoadSpritePalette(&sSpritePal_MayMugshot);
-            LoadPalette(sMainBgPaletteFem, 0, 32);
         }
+        LoadPalette(ReturnMenuBgPalette(), 0, 32);
         LoadPalette(ReturnScrollingBackgroundPalette(), 16, 32);
     }
         sMainMenuDataPtr->gfxLoadState++;
@@ -820,11 +825,10 @@ static void DestroyMonIcons()
 //
 //  Print The Text For Dex Num, Badges, Name, Playtime, Location
 //
-static const u8 sText_DexNum[] = _("Dex {STR_VAR_1}");
-static const u8 sText_Badges[] = _("Badges {STR_VAR_1}");
 static void PrintToWindow(u8 windowId, u8 colorIdx)
 {
-    const u8 colors[3] = {0,  2,  3}; 
+    const u8 colorsGameText[3] = {0,  5,  3};
+    const u8 colorsTrainerText[3] = {0,  5,  2};
     u8 mapDisplayHeader[24];
     u8 *withoutPrefixPtr, *playTimePtr;
     u16 dexCount = 0; u8 badgeCount = 0;
@@ -839,13 +843,13 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
     mapDisplayHeader[0] = EXT_CTRL_CODE_BEGIN;
     mapDisplayHeader[1] = EXT_CTRL_CODE_HIGHLIGHT;
     mapDisplayHeader[2] = TEXT_COLOR_TRANSPARENT;
-    AddTextPrinterParameterized4(WINDOW_HEADER, FONT_NARROW, GetStringCenterAlignXOffset(FONT_NARROW, withoutPrefixPtr, 10 * 8), 1, 0, 0, colors, 0xFF, mapDisplayHeader);
+    AddTextPrinterParameterized4(WINDOW_HEADER, FONT_NARROW, GetStringCenterAlignXOffset(FONT_NARROW, withoutPrefixPtr, 10 * 8), 1, 0, 0, colorsGameText, 0xFF, mapDisplayHeader);
 
     // Print Playtime In Header
     playTimePtr = ConvertIntToDecimalStringN(gStringVar4, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
     *playTimePtr = 0xF0;
     ConvertIntToDecimalStringN(playTimePtr + 1, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
-    AddTextPrinterParameterized4(WINDOW_HEADER, FONT_NORMAL, (104 - 12) + GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, (6*8)), 1, 0, 0, colors, TEXT_SKIP_DRAW, gStringVar4);
+    AddTextPrinterParameterized4(WINDOW_HEADER, FONT_NORMAL, (104 - 12) + GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, (6*8)), 1, 0, 0, colorsGameText, TEXT_SKIP_DRAW, gStringVar4);
 
     // Print Dex Numbers if You Have It
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
@@ -855,8 +859,8 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
         else
             dexCount = GetHoennPokedexCount(FLAG_GET_CAUGHT);
         ConvertIntToDecimalStringN(gStringVar1, dexCount, STR_CONV_MODE_RIGHT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar4, sText_DexNum);
-        AddTextPrinterParameterized4(WINDOW_MIDDLE, FONT_NORMAL, 8 + 8, 16 + 2, 0, 0, colors, TEXT_SKIP_DRAW, gStringVar4);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Dex {STR_VAR_1}"));
+        AddTextPrinterParameterized4(WINDOW_MIDDLE, FONT_NORMAL, 8 + 8, 16 + 2, 0, 0, colorsTrainerText, TEXT_SKIP_DRAW, gStringVar4);
     }
 
     // Print Badge Numbers if You Have Them
@@ -866,11 +870,11 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
             badgeCount++;
     } 
     ConvertIntToDecimalStringN(gStringVar1, badgeCount, STR_CONV_MODE_LEADING_ZEROS, 1);
-    StringExpandPlaceholders(gStringVar4, sText_Badges);
-    AddTextPrinterParameterized4(WINDOW_MIDDLE, FONT_NORMAL, 16, 32 + 2, 0, 0, colors, TEXT_SKIP_DRAW, gStringVar4);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Badges {STR_VAR_1}"));
+    AddTextPrinterParameterized4(WINDOW_MIDDLE, FONT_NORMAL, 16, 32 + 2, 0, 0, colorsTrainerText, TEXT_SKIP_DRAW, gStringVar4);
 
     // Print Player Name
-    AddTextPrinterParameterized3(WINDOW_MIDDLE, FONT_NORMAL, 16, 2, colors, TEXT_SKIP_DRAW, gSaveBlock2Ptr->playerName);
+    AddTextPrinterParameterized3(WINDOW_MIDDLE, FONT_NORMAL, 16, 2, colorsTrainerText, TEXT_SKIP_DRAW, gSaveBlock2Ptr->playerName);
 
     PutWindowTilemap(WINDOW_HEADER);
     CopyWindowToVram(WINDOW_HEADER, 3);
@@ -1022,5 +1026,78 @@ static void Task_MainMenuMain(u8 taskId)
                 break;
         }
         MoveHWindowsWithInput();
+    }
+}
+
+static const u16 *ReturnMenuBgPalette(void)
+{
+    switch (gSaveBlock2Ptr->optionsInterfaceColor)
+    {
+        case IKIGAI_INTERFACE_GREEN:
+            return sMainBgPaletteGreen;
+        
+        case IKIGAI_INTERFACE_BLUE:
+            return sMainBgPaletteBlue;
+        
+        case IKIGAI_INTERFACE_ORANGE:
+            return sMainBgPaletteOrange;
+        
+        case IKIGAI_INTERFACE_PINK:
+            return sMainBgPalettePink;
+            
+        case IKIGAI_INTERFACE_GYM_TYPE_COLOUR:
+        default:
+            return ReturnMenuBgGymPalette();
+    }
+}
+
+static const u16 *ReturnMenuBgGymPalette(void)
+{
+    switch (gSaveBlock2Ptr->ikigaiGymType)
+    {
+        case TYPE_NONE:
+        default:
+            if (gSaveBlock2Ptr->playerGender == MALE)
+            {
+                return sMainBgPaletteMale;
+            }
+            else
+            {
+                return sMainBgPaletteFemale;
+            }
+    }
+}
+
+static const struct SpritePalette *ReturnIconBoxPalette(void)
+{
+    switch (gSaveBlock2Ptr->optionsInterfaceColor)
+    {
+        case IKIGAI_INTERFACE_GREEN:
+            return &sSpritePal_IconBoxGreen;
+        
+        case IKIGAI_INTERFACE_BLUE:
+            return &sSpritePal_IconBoxBlue;
+        
+        case IKIGAI_INTERFACE_ORANGE:
+            return &sSpritePal_IconBoxOrange;
+        
+        case IKIGAI_INTERFACE_PINK:
+            return &sSpritePal_IconBoxPink;
+        
+        case IKIGAI_INTERFACE_GYM_TYPE_COLOUR:
+        default:
+            return ReturnIconBoxGymPalette();
+    }
+}
+
+static const struct SpritePalette *ReturnIconBoxGymPalette(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+    {
+        return &sSpritePal_IconBoxMale;
+    }
+    else
+    {
+        return &sSpritePal_IconBoxFemale;
     }
 }
