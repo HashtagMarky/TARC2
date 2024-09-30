@@ -52,33 +52,6 @@ const u16 sDynPal_Part_ClothesWhite[] = INCBIN_U16("graphics/protagonist_sprites
 const u16 sDynPal_Part_ClothesBlack[] = INCBIN_U16("graphics/protagonist_sprites/dynamic_palettes/clothes/black.gbapal");
 
 // *MODIFY*
-// Text definitions for intro / menus
-const u8 sText_DynPalName_Complexion[] = _("SKIN TONE");
-const u8 sText_DynPalName_Hair[] = _("HAIR TYPE");
-const u8 sText_DynPalName_Clothes[] = _("CLOTHING");
-const u8 sText_DynPal_SkinPale[] = _("PALE");
-const u8 sText_DynPal_SkinLight[] = _("LIGHT");
-const u8 sText_DynPal_SkinMedium[] = _("MEDIUM");
-const u8 sText_DynPal_SkinDark[] = _("DARK");
-const u8 sText_DynPal_HairBlack[] = _("BLACK");
-const u8 sText_DynPal_HairBrown[] = _("BROWN");
-const u8 sText_DynPal_HairBlonde[] = _("BLONDE");
-const u8 sText_DynPal_HairGinger[] = _("GINGER");
-const u8 sText_DynPal_HairRed[] = _("RED");
-const u8 sText_DynPal_HairBlue[] = _("BLUE");
-const u8 sText_DynPal_HairGreen[] = _("GREEN");
-const u8 sText_DynPal_HairPink[] = _("PINK");
-const u8 sText_DynPal_HairCyan[] = _("CYAN");
-const u8 sText_DynPal_HairPurple[] = _("PURPLE");
-const u8 sText_DynPal_HairSilver[] = _("SILVER");
-const u8 sText_DynPal_ClothesGreen[] = _("GREEN");
-const u8 sText_DynPal_ClothesBlue[] = _("BLUE");
-const u8 sText_DynPal_ClothesOrange[] = _("ORANGE");
-const u8 sText_DynPal_ClothesPink[] = _("PINK");
-const u8 sText_DynPal_ClothesWhite[] = _("WHITE");
-const u8 sText_DynPal_ClothesBlack[] = _("BLACK");
-
-// *MODIFY*
 // Preset lists (indices in these lists are what is saved to game save)
 static const struct SpritePalette sDynPalPartAPresets[] = {
     {sDynPal_Part_SkinPale, 0x1301},
@@ -124,34 +97,34 @@ static const struct SpritePalette sDynPalPartCPresets[] = {
 // *MODIFY*
 // List text definitions for menu
 static const struct ListMenuItem sListItems_DynPal_PartATones[] = {
-    {sText_DynPalName_Complexion, LIST_HEADER},
-    {sText_DynPal_SkinPale, 0},
-    {sText_DynPal_SkinLight, 1},
-    {sText_DynPal_SkinMedium, 2},
-    {sText_DynPal_SkinDark, 3}
+    {COMPOUND_STRING("SKIN TONE"), LIST_HEADER},
+    {COMPOUND_STRING("PALE"), 0},
+    {COMPOUND_STRING("LIGHT"), 1},
+    {COMPOUND_STRING("MEDIUM"), 2},
+    {COMPOUND_STRING("DARK"), 3}
 };
 static const struct ListMenuItem sListItems_DynPal_PartBTones[] = {
-    {sText_DynPalName_Hair, LIST_HEADER},
-    {sText_DynPal_HairBlack, 0},
-    {sText_DynPal_HairBrown, 1},
-    {sText_DynPal_HairBlonde, 2},
-    {sText_DynPal_HairGinger, 3},
-    {sText_DynPal_HairRed, 4},
-    {sText_DynPal_HairBlue, 5},
-    {sText_DynPal_HairGreen, 6},
-    {sText_DynPal_HairPink, 7},
-    {sText_DynPal_HairCyan, 8},
-    {sText_DynPal_HairPurple, 9},
-    {sText_DynPal_HairSilver, 10}
+    {COMPOUND_STRING("HAIR TYPE"), LIST_HEADER},
+    {COMPOUND_STRING("BLACK"), 0},
+    {COMPOUND_STRING("BROWN"), 1},
+    {COMPOUND_STRING("BLONDE"), 2},
+    {COMPOUND_STRING("GINGER"), 3},
+    {COMPOUND_STRING("RED"), 4},
+    {COMPOUND_STRING("BLUE"), 5},
+    {COMPOUND_STRING("GREEN"), 6},
+    {COMPOUND_STRING("PINK"), 7},
+    {COMPOUND_STRING("CYAN"), 8},
+    {COMPOUND_STRING("PURPLE"), 9},
+    {COMPOUND_STRING("SILVER"), 10}
 };
 static const struct ListMenuItem sListItems_DynPal_PartCTones[] = {
-    {sText_DynPalName_Clothes, LIST_HEADER},
-    {sText_DynPal_ClothesGreen, 0},
-    {sText_DynPal_ClothesBlue, 1},
-    {sText_DynPal_ClothesOrange, 2},
-    {sText_DynPal_ClothesPink, 3},
-    {sText_DynPal_ClothesWhite, 4},
-    {sText_DynPal_ClothesBlack, 5}
+    {COMPOUND_STRING("CLOTHING"), LIST_HEADER},
+    {COMPOUND_STRING("GREEN"), 0},
+    {COMPOUND_STRING("BLUE"), 1},
+    {COMPOUND_STRING("ORANGE"), 2},
+    {COMPOUND_STRING("PINK"), 3},
+    {COMPOUND_STRING("WHITE"), 4},
+    {COMPOUND_STRING("BLACK"), 5}
 };
 
 // Dynamic palette definitions are split into 3 groups of 5, starting from palette index 1.

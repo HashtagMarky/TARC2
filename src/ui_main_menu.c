@@ -210,10 +210,9 @@ static const u32 sIconBoxGfx[] = INCBIN_U32("graphics/ui_main_menu/icon_shadow.4
 // Icon shadow becomes second colour in MainBgPalette File
 
 static const u32 sMainBgTilemap[] = INCBIN_U32("graphics/ui_main_menu/main_tiles.bin.lz");
-static const u32 sMainBgTiles[] = INCBIN_U32("graphics/ui_main_menu/main_tiles_male.4bpp.lz");
+static const u32 sMainBgTiles[] = INCBIN_U32("graphics/ui_main_menu/main_tiles.4bpp.lz");
 
-static const u16 sMainBgPaletteMale[] = INCBIN_U16("graphics/ui_main_menu/main_tiles_male.gbapal");
-static const u16 sMainBgPaletteFemale[] = INCBIN_U16("graphics/ui_main_menu/main_tiles_female.gbapal");
+static const u16 sMainBgPalette[] = INCBIN_U16("graphics/ui_main_menu/main_tiles.gbapal");
 static const u16 sMainBgPaletteGreen[] = INCBIN_U16("graphics/ui_main_menu/main_tiles_green.gbapal");
 static const u16 sMainBgPaletteBlue[] = INCBIN_U16("graphics/ui_main_menu/main_tiles_blue.gbapal");
 static const u16 sMainBgPaletteOrange[] = INCBIN_U16("graphics/ui_main_menu/main_tiles_orange.gbapal");
@@ -294,15 +293,9 @@ static const struct CompressedSpriteSheet sSpriteSheet_IconBox =
     .tag = TAG_ICON_BOX,
 };
 
-static const struct SpritePalette sSpritePal_IconBoxMale =
+static const struct SpritePalette sSpritePal_IconBox =
 {
-    .data = sMainBgPaletteMale,
-    .tag = TAG_ICON_BOX
-};
-
-static const struct SpritePalette sSpritePal_IconBoxFemale =
-{
-    .data = sMainBgPaletteFemale,
+    .data = sMainBgPalette,
     .tag = TAG_ICON_BOX
 };
 
@@ -1057,14 +1050,7 @@ static const u16 *ReturnMenuBgGymPalette(void)
     {
         case TYPE_NONE:
         default:
-            if (gSaveBlock2Ptr->playerGender == MALE)
-            {
-                return sMainBgPaletteMale;
-            }
-            else
-            {
-                return sMainBgPaletteFemale;
-            }
+            return sMainBgPalette;
     }
 }
 
@@ -1092,12 +1078,10 @@ static const struct SpritePalette *ReturnIconBoxPalette(void)
 
 static const struct SpritePalette *ReturnIconBoxGymPalette(void)
 {
-    if (gSaveBlock2Ptr->playerGender == MALE)
+    switch (gSaveBlock2Ptr->ikigaiGymType)
     {
-        return &sSpritePal_IconBoxMale;
-    }
-    else
-    {
-        return &sSpritePal_IconBoxFemale;
+        case TYPE_NONE:
+        default:
+            return &sSpritePal_IconBox;
     }
 }
