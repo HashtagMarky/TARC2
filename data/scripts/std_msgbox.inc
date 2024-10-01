@@ -52,7 +52,7 @@ Std_MsgboxMusghotNPC::
 	lock
 	faceplayer
 	createfieldmugshot MUGSHOT_NPC, emotion=VAR_0x8002
-	speakername TRUE
+	speakername
 	message NULL
 	waitmessage
 	waitbuttonpress
@@ -63,7 +63,7 @@ Std_MsgboxMugshotPokemon::
 	lock
 	faceplayer
 	createfieldmugshot MUGSHOT_PMD, emotion=VAR_0x8002
-	speakername TRUE
+	speakername
 	special GetOverworldMonSpecies
 	playmoncry VAR_0x8004, CRY_MODE_NORMAL
 	message NULL

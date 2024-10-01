@@ -211,6 +211,28 @@ void StopFieldMessage(void)
     sFieldMessageBoxMode = FIELD_MESSAGE_BOX_HIDDEN;
 }
 
+bool8 ScrCmd_setspeaker(struct ScriptContext *ctx)
+{
+    const u8 *name = (const u8 *)ScriptReadWord(ctx);
+    bool8 isAuto = ScriptReadByte(ctx);
+    bool8 isKnown = ScriptReadByte(ctx);
+
+    if (!isKnown)
+    {
+        SetSpeakerAuto(NAME_UNKNOWN);
+    }
+    else if (isAuto)
+    {
+        SetSpeakerAuto(gObjectEvents[gSelectedObjectEvent].graphicsId);
+    }
+    else
+    {
+        SetSpeakerName(name);
+    }
+    
+    return FALSE;
+}
+
 void SetSpeakerName(const u8* name)
 {
     gSpeakerName = name;

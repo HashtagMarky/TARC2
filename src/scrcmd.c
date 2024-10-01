@@ -1317,23 +1317,6 @@ bool8 ScrCmd_release(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_setspeaker(struct ScriptContext *ctx)
-{
-    bool8 isAuto = ScriptReadByte(ctx);
-    const u8 *name = (const u8 *)ScriptReadWord(ctx);
-
-    if (isAuto)
-    {
-        SetSpeakerAuto(gObjectEvents[gSelectedObjectEvent].graphicsId);
-    }
-    else
-    {
-        SetSpeakerName(name);
-    }
-    
-    return FALSE;
-}
-
 bool8 ScrCmd_message(struct ScriptContext *ctx)
 {
     const u8 *msg = (const u8 *)ScriptReadWord(ctx);
