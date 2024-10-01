@@ -32,7 +32,7 @@ struct MugshotGfx
     const u16 *pal;
 };
 
-extern const struct MugshotGfx sFieldMugshots[][EMOTE_COUNT];
+extern const struct MugshotGfx gFieldMugshots[][EMOTE_COUNT];
 extern struct MugshotDetails gActiveMugshotDetails;
 struct MugshotDetails GetMugshotDetails(void);
 

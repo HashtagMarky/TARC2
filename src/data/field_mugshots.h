@@ -1023,7 +1023,7 @@ static const u16 sFieldMugshotPal_InfernapeWorriedShiny[] = INCBIN_U16("graphics
 #include "constants/event_objects.h"
 #include "constants/species.h"
 
-const struct MugshotGfx sFieldMugshots[][EMOTE_COUNT] =
+const struct MugshotGfx gFieldMugshots[][EMOTE_COUNT] =
 {
     [MUGSHOT_KOLE] =
     {

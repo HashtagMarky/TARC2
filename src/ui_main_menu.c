@@ -238,11 +238,11 @@ static struct CompressedSpriteSheet sSpriteSheet_AnkaMugshot;
 
 static void CreateProtagonistMugshotSpriteSheets()
 {
-    sSpriteSheet_KoleMugshot.data = sFieldMugshots[MUGSHOT_KOLE][EMOTE_NORMAL].gfx;
+    sSpriteSheet_KoleMugshot.data = gFieldMugshots[MUGSHOT_KOLE][EMOTE_NORMAL].gfx;
     sSpriteSheet_KoleMugshot.size = 64 * 64 * 1 / 2;
     sSpriteSheet_KoleMugshot.tag = TAG_MUGSHOT;
 
-    sSpriteSheet_AnkaMugshot.data = sFieldMugshots[MUGSHOT_ANKA][EMOTE_NORMAL].gfx;
+    sSpriteSheet_AnkaMugshot.data = gFieldMugshots[MUGSHOT_ANKA][EMOTE_NORMAL].gfx;
     sSpriteSheet_AnkaMugshot.size = 64 * 64 * 1 / 2;
     sSpriteSheet_AnkaMugshot.tag = TAG_MUGSHOT;
 }
