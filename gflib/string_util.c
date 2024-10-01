@@ -687,6 +687,7 @@ u8 GetExtCtrlCodeLength(u8 code)
         [EXT_CTRL_CODE_RESUME_MUSIC]           = 1,
         [EXT_CTRL_CODE_CHANGE_MUGSHOT_EMOTE]   = 2,
         [EXT_CTRL_CODE_DESTROY_MUGSHOT]        = 1,
+        [EXT_CTRL_CODE_SPEAKER_NAME]           = 2,
     };
 
     u8 length = 0;

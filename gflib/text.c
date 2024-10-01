@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "field_message_box.h"
 #include "field_mugshot.h"
 #include "main.h"
 #include "m4a.h"
@@ -1224,6 +1225,18 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             case EXT_CTRL_CODE_DESTROY_MUGSHOT:
                 RemoveFieldMugshotAndWindow();
                 return RENDER_REPEAT;
+            case EXT_CTRL_CODE_SPEAKER_NAME:
+                bool32 nameUnknown;
+                nameUnknown = *textPrinter->printerTemplate.currentChar;
+                textPrinter->printerTemplate.currentChar++;
+
+                if (nameUnknown)
+                    SetSpeakerAuto(NAME_UNKNOWN);
+                else
+                    SetSpeakerAuto(gObjectEvents[gSelectedObjectEvent].graphicsId);
+                
+                ReprintSpeakerName();
+                return RENDER_REPEAT;
             }
             break;
         case CHAR_PROMPT_CLEAR:
@@ -1397,6 +1410,7 @@ static u32 UNUSED GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 lett
                 ++strPos;
             case EXT_CTRL_CODE_CHANGE_MUGSHOT_EMOTE:
             case EXT_CTRL_CODE_DESTROY_MUGSHOT:
+            case EXT_CTRL_CODE_SPEAKER_NAME:
             case EXT_CTRL_CODE_PLAY_BGM:
             case EXT_CTRL_CODE_PLAY_SE:
                 ++strPos;

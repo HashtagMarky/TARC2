@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_MESSAGE_BOX_H
 #define GUARD_FIELD_MESSAGE_BOX_H
 
+#define NAME_UNKNOWN    NUM_OBJ_EVENT_GFX
+
 enum
 {
     FIELD_MESSAGE_BOX_HIDDEN,
@@ -22,6 +24,7 @@ void StopFieldMessage(void);
 void InitFieldMessageBox(void);
 void SetSpeakerName(const u8* name);
 void SetSpeakerAuto(u16 graphicsId);
+void ReprintSpeakerName(void);
 
 extern u8 gWalkAwayFromSignpostTimer;
 

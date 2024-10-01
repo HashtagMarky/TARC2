@@ -1,5 +1,3 @@
-#define NAME_UNKNOWN    NUM_OBJ_EVENT_GFX
-
 static const u8 *const gSpeakerNamesText[] =
 {
     [OBJ_EVENT_GFX_BRENDAN_NORMAL] = COMPOUND_STRING("KOLE"),

@@ -450,6 +450,7 @@ PAUSE_MUSIC = FC 17
 RESUME_MUSIC = FC 18
 CHANGE_MUGSHOT_EMOTE = FC 19
 DESTROY_MUGSHOT = FC 1A
+SPEAKER_NAME = FC 1B
 
 @ emotes found in include/constants/field_mugshots.h
 EMOTE_NORMAL = 00
@@ -471,6 +472,10 @@ EMOTE_WORRIED = 0F
 EMOTE_SPECIAL = 10
 EMOTE_COUNT = 11
 @ mugshot emotes end
+
+@ speakername constants
+NAME_AUTO = 00
+NAME_UNKNOWN = 01
 
 @ fonts
 
