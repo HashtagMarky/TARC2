@@ -233,18 +233,14 @@ static const struct OamData sOamData_Mugshot =
     .priority = 1,
 };
 
-static struct CompressedSpriteSheet sSpriteSheet_KoleMugshot;
-static struct CompressedSpriteSheet sSpriteSheet_AnkaMugshot;
+static struct CompressedSpriteSheet sSpriteSheet_ProtagonistMugshot;
 
 static void CreateProtagonistMugshotSpriteSheets()
 {
-    sSpriteSheet_KoleMugshot.data = gFieldMugshots[MUGSHOT_KOLE][EMOTE_NORMAL].gfx;
-    sSpriteSheet_KoleMugshot.size = 64 * 64 * 1 / 2;
-    sSpriteSheet_KoleMugshot.tag = TAG_MUGSHOT;
-
-    sSpriteSheet_AnkaMugshot.data = gFieldMugshots[MUGSHOT_ANKA][EMOTE_NORMAL].gfx;
-    sSpriteSheet_AnkaMugshot.size = 64 * 64 * 1 / 2;
-    sSpriteSheet_AnkaMugshot.tag = TAG_MUGSHOT;
+    u16 mugshotId = (gSaveBlock2Ptr->playerGender == MALE) ? MUGSHOT_KOLE : MUGSHOT_ANKA;
+    sSpriteSheet_ProtagonistMugshot.data = gFieldMugshots[mugshotId][EMOTE_NORMAL].gfx;
+    sSpriteSheet_ProtagonistMugshot.size = 64 * 64 * 1 / 2;
+    sSpriteSheet_ProtagonistMugshot.tag = TAG_MUGSHOT;
 }
 
 static const struct SpritePalette sSpritePal_ProtagonistMugshot =
@@ -637,14 +633,7 @@ static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spr
         LoadCompressedSpriteSheet(&sSpriteSheet_IconBox);
         LoadSpritePalette(ReturnIconBoxPalette());
         CreateProtagonistMugshotSpriteSheets();
-        if(gSaveBlock2Ptr->playerGender == MALE)
-        {
-            LoadCompressedSpriteSheet(&sSpriteSheet_KoleMugshot);
-        }
-        else
-        {
-            LoadCompressedSpriteSheet(&sSpriteSheet_AnkaMugshot);
-        }
+        LoadCompressedSpriteSheet(&sSpriteSheet_ProtagonistMugshot);
         LoadSpritePalette(&sSpritePal_ProtagonistMugshot);
         DynPal_LoadPaletteByTag(sDynPalPlayerMugshot, TAG_MUGSHOT);
         LoadPalette(ReturnMenuBgPalette(), 0, 32);
