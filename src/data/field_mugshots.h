@@ -1,6 +1,6 @@
 // Protagonist Mugshots
-const u32 sFieldMugshotGfx_Kole[] = INCBIN_U32("graphics/protagonist_sprites/anka_mugshot.4bpp.lz");
-const u32 sFieldMugshotGfx_Anka[] = INCBIN_U32("graphics/protagonist_sprites/anka_mugshot.4bpp.lz");
+static const u32 sFieldMugshotGfx_KoleNormal[] = INCBIN_U32("graphics/protagonist_sprites/kole_mugshots/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_AnkaNormal[] = INCBIN_U32("graphics/protagonist_sprites/anka_mugshots/normal.4bpp.lz");
 const u16 sFieldMugshotPal_Protagonist[] = INCBIN_U16("graphics/protagonist_sprites/protagonist.gbapal");
 
 // Brendan
@@ -1023,19 +1023,13 @@ static const u16 sFieldMugshotPal_InfernapeWorriedShiny[] = INCBIN_U16("graphics
 #include "constants/event_objects.h"
 #include "constants/species.h"
 
-struct MugshotGfx
-{
-    const u32 *gfx;
-    const u16 *pal;
-};
-
-static const struct MugshotGfx sFieldMugshots[][EMOTE_COUNT] =
+const struct MugshotGfx sFieldMugshots[][EMOTE_COUNT] =
 {
     [MUGSHOT_KOLE] =
     {
         [EMOTE_NORMAL] =
         {
-            .gfx = sFieldMugshotGfx_Kole,
+            .gfx = sFieldMugshotGfx_KoleNormal,
             .pal = sFieldMugshotPal_Protagonist,
         },
     },
@@ -1044,7 +1038,7 @@ static const struct MugshotGfx sFieldMugshots[][EMOTE_COUNT] =
     {
         [EMOTE_NORMAL] =
         {
-            .gfx = sFieldMugshotGfx_Anka,
+            .gfx = sFieldMugshotGfx_AnkaNormal,
             .pal = sFieldMugshotPal_Protagonist,
         },
     },

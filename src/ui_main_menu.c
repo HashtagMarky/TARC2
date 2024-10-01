@@ -119,6 +119,7 @@ static void Task_MainMenuWaitFadeIn(u8 taskId);
 static void Task_MainMenuMain(u8 taskId);
 static void MainMenu_InitializeGPUWindows(void);
 
+static void CreateProtagonistMugshotSpriteSheets();
 static void CreateMugshot();
 static void DestroyMugshot();
 static void CreateIconShadow();
@@ -232,19 +233,19 @@ static const struct OamData sOamData_Mugshot =
     .priority = 1,
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_KoleMugshot =
-{
-    .data = sFieldMugshotGfx_Kole,
-    .size = 64*64*1/2,
-    .tag = TAG_MUGSHOT,
-};
+static struct CompressedSpriteSheet sSpriteSheet_KoleMugshot;
+static struct CompressedSpriteSheet sSpriteSheet_AnkaMugshot;
 
-static const struct CompressedSpriteSheet sSpriteSheet_AnkaMugshot =
+static void CreateProtagonistMugshotSpriteSheets()
 {
-    .data = sFieldMugshotGfx_Anka,
-    .size = 64*64*1/2,
-    .tag = TAG_MUGSHOT,
-};
+    sSpriteSheet_KoleMugshot.data = sFieldMugshots[MUGSHOT_KOLE][EMOTE_NORMAL].gfx;
+    sSpriteSheet_KoleMugshot.size = 64 * 64 * 1 / 2;
+    sSpriteSheet_KoleMugshot.tag = TAG_MUGSHOT;
+
+    sSpriteSheet_AnkaMugshot.data = sFieldMugshots[MUGSHOT_ANKA][EMOTE_NORMAL].gfx;
+    sSpriteSheet_AnkaMugshot.size = 64 * 64 * 1 / 2;
+    sSpriteSheet_AnkaMugshot.tag = TAG_MUGSHOT;
+}
 
 static const struct SpritePalette sSpritePal_ProtagonistMugshot =
 {
@@ -635,6 +636,7 @@ static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spr
     {
         LoadCompressedSpriteSheet(&sSpriteSheet_IconBox);
         LoadSpritePalette(ReturnIconBoxPalette());
+        CreateProtagonistMugshotSpriteSheets();
         if(gSaveBlock2Ptr->playerGender == MALE)
         {
             LoadCompressedSpriteSheet(&sSpriteSheet_KoleMugshot);

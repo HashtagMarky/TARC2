@@ -1,9 +1,9 @@
 #ifndef GUARD_FIELD_MUGSHOTS_H
 #define GUARD_FIELD_MUGSHOTS_H
 
-// Player Mugshots
-extern const u32 sFieldMugshotGfx_Kole[];
-extern const u32 sFieldMugshotGfx_Anka[];
+#include "constants/field_mugshots.h"
+
+// Player Mugshot Palette
 extern const u16 sFieldMugshotPal_Protagonist[];
 
 void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y, bool8 retainDetails);
@@ -26,6 +26,13 @@ struct MugshotDetails
     u8 windowType;         // Type of window (NPC, Follower, etc.)
 };
 
+struct MugshotGfx
+{
+    const u32 *gfx;
+    const u16 *pal;
+};
+
+extern const struct MugshotGfx sFieldMugshots[][EMOTE_COUNT];
 extern struct MugshotDetails gActiveMugshotDetails;
 struct MugshotDetails GetMugshotDetails(void);
 
