@@ -1,6 +1,8 @@
 // Protagonist Mugshots
 static const u32 sFieldMugshotGfx_KoleNormal[] = INCBIN_U32("graphics/protagonist_sprites/kole_mugshots/normal.4bpp.lz");
 static const u32 sFieldMugshotGfx_AnkaNormal[] = INCBIN_U32("graphics/protagonist_sprites/anka_mugshots/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_KoleHappy[] = INCBIN_U32("graphics/protagonist_sprites/kole_mugshots/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_AnkaHappy[] = INCBIN_U32("graphics/protagonist_sprites/anka_mugshots/happy.4bpp.lz");
 const u16 sFieldMugshotPal_Protagonist[] = INCBIN_U16("graphics/protagonist_sprites/protagonist.gbapal");
 
 // Brendan
@@ -1032,6 +1034,12 @@ const struct MugshotGfx gFieldMugshots[][EMOTE_COUNT] =
             .gfx = sFieldMugshotGfx_KoleNormal,
             .pal = sFieldMugshotPal_Protagonist,
         },
+
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_KoleHappy,
+            .pal = sFieldMugshotPal_Protagonist,
+        },
     },
 
     [MUGSHOT_ANKA] =
@@ -1039,6 +1047,12 @@ const struct MugshotGfx gFieldMugshots[][EMOTE_COUNT] =
         [EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_AnkaNormal,
+            .pal = sFieldMugshotPal_Protagonist,
+        },
+
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_AnkaHappy,
             .pal = sFieldMugshotPal_Protagonist,
         },
     },
