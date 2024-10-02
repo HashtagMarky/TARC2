@@ -1,3 +1,6 @@
+#include "field_message_box.h"
+#include "constants/event_objects.h"
+
 static const u8 *const gSpeakerNamesText[] =
 {
     [OBJ_EVENT_GFX_BRENDAN_NORMAL] = COMPOUND_STRING("KOLE"),
