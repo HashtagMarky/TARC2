@@ -60,6 +60,7 @@
 #include "constants/union_room.h"
 #include "constants/weather.h"
 #include "wild_encounter.h"
+#include "data/speaker_names.h"
 
 #define FRIENDSHIP_EVO_THRESHOLD ((P_FRIENDSHIP_EVO_THRESHOLD >= GEN_9) ? 160 : 220)
 
@@ -3528,6 +3529,8 @@ bool8 IsPokemonStorageFull(void)
 const u8 *GetSpeciesName(u16 species)
 {
     species = SanitizeSpeciesId(species);
+    if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
+        return gSpeakerNamesText[NAME_UNKNOWN];
     if (gSpeciesInfo[species].speciesName[0] == 0)
         return gSpeciesInfo[SPECIES_NONE].speciesName;
     return gSpeciesInfo[species].speciesName;
@@ -6230,6 +6233,12 @@ u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
 void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
 {
     u8 getFlagCaseId = (caseId == FLAG_SET_SEEN) ? FLAG_GET_SEEN : FLAG_GET_CAUGHT;
+    /*
+    if (!FlagGet(FLAG_SYS_POKEDEX_GET))
+    {
+        return;
+    }
+    */
     if (!GetSetPokedexFlag(nationalNum, getFlagCaseId)) // don't set if it's already set
     {
         GetSetPokedexFlag(nationalNum, caseId);
