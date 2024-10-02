@@ -4,14 +4,14 @@
 #include "bg.h"
 #include "constants/pokemon.h"
 
-const u32 sScrollBgTiles[] = INCBIN_U32("graphics/ui_main_menu/scroll_tiles.4bpp.lz");
-const u32 sScrollBgTilemap[] = INCBIN_U32("graphics/ui_main_menu/scroll_tiles.bin.lz");
+const u32 sScrollBgTiles[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles.4bpp.lz");
+const u32 sScrollBgTilemap[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles.bin.lz");
 
-static const u16 sScrollBgPalette[] = INCBIN_U16("graphics/ui_main_menu/scroll_tiles.gbapal");
-static const u16 sScrollBgPaletteGreen[] = INCBIN_U16("graphics/ui_main_menu/scroll_tiles_green.gbapal");
-static const u16 sScrollBgPaletteBlue[] = INCBIN_U16("graphics/ui_main_menu/scroll_tiles_blue.gbapal");
-static const u16 sScrollBgPaletteOrange[] = INCBIN_U16("graphics/ui_main_menu/scroll_tiles_orange.gbapal");
-static const u16 sScrollBgPalettePink[] = INCBIN_U16("graphics/ui_main_menu/scroll_tiles_pink.gbapal");
+static const u16 sScrollBgPalette[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles.gbapal");
+static const u16 sScrollBgPaletteGreen[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles_green.gbapal");
+static const u16 sScrollBgPaletteBlue[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles_blue.gbapal");
+static const u16 sScrollBgPaletteOrange[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles_orange.gbapal");
+static const u16 sScrollBgPalettePink[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles_pink.gbapal");
 
 #define SCROLLING_SPEED         64
 #define SCROLL_X_DIRECTION      1
