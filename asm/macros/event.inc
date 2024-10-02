@@ -2089,9 +2089,10 @@
 	.endm
 
 	@ Buffers the given text and calls the relevant message, name and mugshot script (see gStdScripts).
-	.macro mnmbox text:req, PMD=FALSE, mugshotEmotion=EMOTE_NORMAL
+	.macro mnmbox text:req, PMD=FALSE, mugshotEmotion=EMOTE_NORMAL, nameKnown=TRUE
 	loadword 0, \text
 	setvar VAR_0x8002, \mugshotEmotion
+	setvar VAR_0x8003, \nameKnown
 	.if \PMD == TRUE
 		callstd MSGBOX_PKMN_MUG
 	.else

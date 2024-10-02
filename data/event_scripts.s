@@ -103,7 +103,7 @@ gStdScripts::
 	.4byte Std_RegisteredInMatchCall   @ STD_REGISTER_MATCH_CALL
 	.4byte Std_MsgboxGetPoints         @ MSGBOX_GETPOINTS
 	.4byte Std_MsgboxPokenav           @ MSGBOX_POKENAV
-	.4byte Std_MsgboxMusghotNPC		   @ MSGBOX_NPC_MUG
+	.4byte Std_MsgboxMugshotNPC		   @ MSGBOX_NPC_MUG
 	.4byte Std_MsgboxMugshotPokemon    @ MSGBOX_PKMN_MUG
 gStdScripts_End::
 
