@@ -1440,9 +1440,9 @@ static void Task_NewGameSamuelSpeech_WaitToShowSamuel(u8 taskId)
         gSprites[spriteId2].y = y+64;
         gSprites[spriteId2].invisible = FALSE;
         gSprites[spriteId2].oam.objMode = ST_OAM_OBJ_BLEND;
-        NewGameSamuelSpeech_StartFadeInTarget1OutTarget2(taskId, 0);
-        NewGameSamuelSpeech_StartFadePlatformOut(taskId, 0);
-        gTasks[taskId].tTimer = 0;
+        NewGameSamuelSpeech_StartFadeInTarget1OutTarget2(taskId, 3);
+        NewGameSamuelSpeech_StartFadePlatformOut(taskId, 20);
+        gTasks[taskId].tTimer = 40;
         gTasks[taskId].func = Task_NewGameSamuelSpeech_WaitForSpriteFadeInWelcome;
     }
 }

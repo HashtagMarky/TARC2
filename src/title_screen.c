@@ -564,6 +564,21 @@ static void SpriteCB_PokemonLogoShine(struct Sprite *sprite)
         if (sprite->sMode != SHINE_MODE_SINGLE_NO_BG_COLOR)
         {
             u16 backgroundColor;
+            u16 flashColor;
+
+            switch (gIkigaiLegendaryScreen)
+            {
+            case IKIGAI_INTERFACE_GREEN:
+            case IKIGAI_INTERFACE_BLUE:
+                flashColor = RGB_IKIGAI_PINK;
+                break;
+            
+            case IKIGAI_INTERFACE_ORANGE:
+            case IKIGAI_INTERFACE_PINK:
+            default:
+                flashColor = RGB_IKIGAI_BLUE;
+                break;
+            }
 
             if (sprite->x < DISPLAY_WIDTH / 2)
             {
@@ -586,17 +601,13 @@ static void SpriteCB_PokemonLogoShine(struct Sprite *sprite)
 
             // Flash the background green for 4 frames of movement.
             // Otherwise use the updating color.
-            #if TITLE_SCREEN_FLASH == TRUE
             if (sprite->x == DISPLAY_WIDTH / 2 + (3 * SHINE_SPEED)
              || sprite->x == DISPLAY_WIDTH / 2 + (4 * SHINE_SPEED)
              || sprite->x == DISPLAY_WIDTH / 2 + (5 * SHINE_SPEED)
              || sprite->x == DISPLAY_WIDTH / 2 + (6 * SHINE_SPEED))
-                gPlttBufferFaded[0] = TITLE_SCREEN_FLASH_COLOR;
+                gPlttBufferFaded[0] = flashColor;
             else
                 gPlttBufferFaded[0] = backgroundColor;
-            #else
-            gPlttBufferFaded[0] = backgroundColor;
-            #endif
         }
 
         sprite->x += SHINE_SPEED;
@@ -1014,7 +1025,22 @@ static void Task_TitleScreenPhase3(u8 taskId)
         UpdateLegendaryMarkingColor(gTasks[taskId].tCounter);
         if ((gMPlayInfo_BGM.status & 0xFFFF) == 0)
         {
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_IKIGAI_PINK_ALPHA);
+            u16 flashColor;
+
+            switch (gIkigaiLegendaryScreen)
+            {
+            case IKIGAI_INTERFACE_GREEN:
+            case IKIGAI_INTERFACE_BLUE:
+                flashColor = RGB_IKIGAI_PINK_ALPHA;
+                break;
+            
+            case IKIGAI_INTERFACE_ORANGE:
+            case IKIGAI_INTERFACE_PINK:
+            default:
+                flashColor = RGB_IKIGAI_BLUE_ALPHA;
+                break;
+            }
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, flashColor);
             SetMainCallback2(CB2_GoToCopyrightScreen);
         }
     }
