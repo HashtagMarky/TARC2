@@ -625,7 +625,7 @@ bool8 ScrCmd_SetObjectAsWildEncounter(struct ScriptContext *ctx)
     u16 objectEventVariable = VAR_OBJ_GFX_ID_0 + variableOffset;
 
     if (!(graphicsId >= OBJ_EVENT_GFX_VARS
-        && graphicsId <= OBJ_EVENT_GFX_VAR_F))
+        && graphicsId <= OBJ_EVENT_GFX_LAST))
     {
         return FALSE;
     }
