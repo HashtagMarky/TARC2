@@ -72,6 +72,7 @@ Std_MsgboxMugshotPokemon::
 	waitmessage
 	waitbuttonpress
 	waitmoncry
+	call EventScript_DisplayPokedexHeader
 	release
 	return
 

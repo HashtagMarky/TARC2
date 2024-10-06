@@ -5,6 +5,7 @@
 #include "main.h"
 #include "m4a.h"
 #include "palette.h"
+#include "pokedex.h"
 #include "sound.h"
 #include "constants/field_mugshots.h"
 #include "constants/songs.h"
@@ -1236,6 +1237,12 @@ static u16 RenderText(struct TextPrinter *textPrinter)
                     SetSpeakerAuto(gObjectEvents[gSelectedObjectEvent].graphicsId);
                 
                 ReprintSpeakerName();
+                return RENDER_REPEAT;
+            case EXT_CTRL_CODE_SHOW_POKEDEX_HEADER:
+                ShowPokedexHeaderMessage();
+                return RENDER_REPEAT;
+            case EXT_CTRL_CODE_HIDE_POKEDEX_HEADER:
+                HidePokedexHeaderMessage();
                 return RENDER_REPEAT;
             }
             break;

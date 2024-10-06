@@ -7,6 +7,7 @@
 #include "match_call.h"
 #include "field_message_box.h"
 #include "field_mugshot.h"
+#include "pokedex.h"
 #include "script.h"
 #include "sprite.h"
 #include "text_window.h"
@@ -184,6 +185,7 @@ void HideFieldMessageBox(void)
         gSprites[GetFieldMugshotSpriteId()].data[0] = FALSE;
         RemoveFieldMugshotAndWindow();
     }
+    HidePokedexHeaderMessage();
 }
 
 u8 GetFieldMessageBoxMode(void)

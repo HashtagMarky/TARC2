@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle_main.h"
 #include "bg.h"
+#include "battle_pyramid.h"
 #include "data.h"
 #include "decompress.h"
 #include "event_data.h"
@@ -17,6 +18,7 @@
 #include "pokedex_area_screen.h"
 #include "pokedex_cry_screen.h"
 #include "pokedex_plus_hgss.h"
+#include "pokemon_icon.h"
 #include "scanline_effect.h"
 #include "sound.h"
 #include "sprite.h"
@@ -116,10 +118,16 @@ enum {
 #define MON_PAGE_X 48
 #define MON_PAGE_Y 56
 
+#define PKMN_ICON_X     26
+#define PKMN_ICON_Y     24
+
 static EWRAM_DATA struct PokedexView *sPokedexView = NULL;
 static EWRAM_DATA u16 sLastSelectedPokemon = 0;
 static EWRAM_DATA u8 sPokeBallRotation = 0;
 static EWRAM_DATA struct PokedexListItem *sPokedexListItem = NULL;
+EWRAM_DATA static u8 sHeaderBoxWindowId = 0;
+EWRAM_DATA u8 sMonIconSpriteId = 0;
+EWRAM_DATA u8 sMonIconSpriteId2 = 0;
 
 // This is written to, but never read.
 u8 gUnusedPokedexU8;
@@ -322,6 +330,10 @@ static void EraseSelectorArrow(u32);
 static void PrintSelectorArrow(u32);
 static void PrintSearchParameterTitle(u32, const u8 *);
 static void ClearSearchParameterBoxText(void);
+static void ShowMonIconSprite(u16 species, bool8 firstTime, bool8 flash);
+static void DestroyMonIconSprite(void);
+
+static u8 gActivePokedexHeader;
 
 // const rom data
 #include "data/pokemon/pokedex_orders.h"
@@ -5873,4 +5885,120 @@ static void PrintSearchParameterTitle(u32 y, const u8 *str)
 static void ClearSearchParameterBoxText(void)
 {
     ClearSearchMenuRect(144, 8, 96, 96);
+}
+
+void ShowPokedexHeaderMessage(void)
+{
+    struct WindowTemplate template;
+    u16 species = gSpecialVar_0x8004;
+    u8 textY = 0;
+    bool8 handleFlash = FALSE;
+
+    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
+        return;
+
+    HidePokedexHeaderMessage();
+    gActivePokedexHeader = TRUE;
+    
+    GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_SEEN);
+
+    if (GetFlashLevel() > 0 || InBattlePyramid_())
+        handleFlash = TRUE;
+
+    // Show the Pokémon icon and message box
+    SetWindowTemplateFields(&template, 0, 1, 1, 28, 3, 15, 8);
+    sHeaderBoxWindowId = AddWindow(&template);
+    FillWindowPixelBuffer(sHeaderBoxWindowId, PIXEL_FILL(0));
+    PutWindowTilemap(sHeaderBoxWindowId);
+    CopyWindowToVram(sHeaderBoxWindowId, 3);
+    SetStandardWindowBorderStyle(sHeaderBoxWindowId, FALSE);
+    // DrawStdFrameWithCustomTileAndPalette(sHeaderBoxWindowId, FALSE, 0x214, 14);
+
+    ShowMonIconSprite(species, TRUE, handleFlash);
+    StringCopy(gStringVar1, GetSpeciesName(species));
+    StringExpandPlaceholders(gStringVar2, COMPOUND_STRING("Some data on {STR_VAR_1} has been added\nto the POKéDEX!"));
+    AddTextPrinterParameterized(sHeaderBoxWindowId, 0, gStringVar2, PKMN_ICON_X + 2, textY, 0, NULL);
+}
+
+void HidePokedexHeaderMessage(void)
+{
+    if (gActivePokedexHeader == TRUE)
+    {
+        gActivePokedexHeader = FALSE;
+        DestroyMonIconSprite();
+        ClearStdWindowAndFrameToTransparent(sHeaderBoxWindowId, FALSE);
+        CopyWindowToVram(sHeaderBoxWindowId, 3);
+        RemoveWindow(sHeaderBoxWindowId);
+    }
+}
+
+static void ShowMonIconSprite(u16 species, bool8 firstTime, bool8 flash)
+{
+    s16 x = 0, y = 0;
+    u8 spriteId2 = MAX_SPRITES;
+
+    // Load Pokémon icon palettes
+    LoadMonIconPalettes();
+
+    if (flash)
+    {
+        // Enable flash effects if needed
+        SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJWIN_ON);
+        SetGpuRegBits(REG_OFFSET_WINOUT, WINOUT_WINOBJ_OBJ);
+    }
+
+    // Create the Pokémon icon sprite
+    sMonIconSpriteId = CreateMonIconNoPersonality(species, SpriteCB_MonIcon, PKMN_ICON_X - 20, PKMN_ICON_Y - 18, 0);
+    
+    if (sMonIconSpriteId != MAX_SPRITES)
+    {
+        x = 15;  // Position in header box
+        y = 11;
+
+        // Set the icon position and priority
+        gSprites[sMonIconSpriteId].x2 = x;
+        gSprites[sMonIconSpriteId].y2 = y;
+        gSprites[sMonIconSpriteId].oam.priority = 0;
+    }
+
+    // Flash-related second sprite handling (ensure sprite is valid)
+    if (flash)
+    {
+        spriteId2 = CreateMonIconNoPersonality(species, SpriteCB_MonIcon, PKMN_ICON_X - 20, PKMN_ICON_Y - 18, 0); // Create second sprite
+
+        if (spriteId2 != MAX_SPRITES)  // Only proceed if sprite creation succeeded
+        {
+            gSprites[spriteId2].x2 = x;
+            gSprites[spriteId2].y2 = y;
+            gSprites[spriteId2].oam.priority = 0;
+            gSprites[spriteId2].oam.objMode = ST_OAM_OBJ_WINDOW;
+            sMonIconSpriteId2 = spriteId2;
+        }
+        else
+        {
+            // Handle the failure case where the second sprite couldn't be created (prevent softlock)
+            ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJWIN_ON);
+            ClearGpuRegBits(REG_OFFSET_WINOUT, WINOUT_WINOBJ_OBJ);
+            sMonIconSpriteId2 = MAX_SPRITES;  // Reset to prevent invalid accesses
+        }
+    }
+}
+
+static void DestroyMonIconSprite(void)
+{
+    // Free resources for the main Pokémon icon sprite
+    FreeSpriteOamMatrix(&gSprites[sMonIconSpriteId]);
+    DestroySprite(&gSprites[sMonIconSpriteId]);
+
+    // Flash-related second sprite handling (if applicable)
+    if ((GetFlashLevel() > 0 || InBattlePyramid_()) && sMonIconSpriteId2 != MAX_SPRITES)
+    {
+        FreeSpriteOamMatrix(&gSprites[sMonIconSpriteId2]);
+        DestroySprite(&gSprites[sMonIconSpriteId2]);
+
+        // Clear flash mode if it was enabled
+        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJWIN_ON);
+        ClearGpuRegBits(REG_OFFSET_WINOUT, WINOUT_WINOBJ_OBJ);
+        sMonIconSpriteId2 = MAX_SPRITES;  // Reset to avoid reusing an invalid sprite ID
+    }
 }
