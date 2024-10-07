@@ -15,6 +15,7 @@ void PlayerWalkNormal(u8 direction);
 void PlayerWalkFast(u8 direction);
 void PlayerRideWaterCurrent(u8 direction);
 void PlayerWalkFaster(u8 direction);
+void PlayerRunSlow(u8 direction);
 void PlayerRun(u8 direction);
 void PlayerOnBikeCollide(u8 direction);
 void PlayerFaceDirection(u8 direction);
