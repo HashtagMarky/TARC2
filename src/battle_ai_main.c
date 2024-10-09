@@ -873,6 +873,12 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         // target ability checks
         if (!DoesBattlerIgnoreAbilityChecks(aiData->abilities[battlerAtk], move))
         {
+            if (CanAbilityBlockMove(battlerAtk, battlerDef, move, aiData->abilities[battlerDef]))
+                RETURN_SCORE_MINUS(20);
+
+            if (CanAbilityAbsorbMove(battlerAtk, battlerDef, aiData->abilities[battlerDef], move, moveType))
+                RETURN_SCORE_MINUS(20);
+
             switch (aiData->abilities[battlerDef])
             {
             case ABILITY_MAGIC_GUARD:
@@ -901,12 +907,6 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             case ABILITY_RATTLED:
                 if (!IS_MOVE_STATUS(move)
                   && (moveType == TYPE_DARK || moveType == TYPE_GHOST || moveType == TYPE_BUG))
-                    RETURN_SCORE_MINUS(10);
-                break;
-            case ABILITY_DAZZLING:
-            case ABILITY_QUEENLY_MAJESTY:
-            case ABILITY_ARMOR_TAIL:
-                if (atkPriority > 0)
                     RETURN_SCORE_MINUS(10);
                 break;
             case ABILITY_AROMA_VEIL:
@@ -972,37 +972,14 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                   && IsNonVolatileStatusMoveEffect(moveEffect))
                     RETURN_SCORE_MINUS(10);
                 break;
-            case ABILITY_LIGHTNING_ROD:
-                if (B_REDIRECT_ABILITY_IMMUNITY < GEN_5)
-                    break;
-                // Fallthrough
-            case ABILITY_MOTOR_DRIVE:
-            case ABILITY_VOLT_ABSORB:
-                if (moveType == TYPE_ELECTRIC)
-                    RETURN_SCORE_MINUS(20);
-                break;
-            case ABILITY_STORM_DRAIN:
-                if (B_REDIRECT_ABILITY_IMMUNITY < GEN_5)
-                    break;
-                // Fallthrough
-            case ABILITY_WATER_ABSORB:
-            case ABILITY_DRY_SKIN:
-                if (moveType == TYPE_WATER)
-                    RETURN_SCORE_MINUS(20);
-                break;
-            case ABILITY_FLASH_FIRE:
-                if (moveType == TYPE_FIRE)
-                    RETURN_SCORE_MINUS(20);
-                break;
-            case ABILITY_EARTH_EATER:
-                if (moveType == TYPE_GROUND)
-                    RETURN_SCORE_MINUS(20);
-                break;
             } // def ability checks
 
             // target partner ability checks & not attacking partner
             if (isDoubleBattle)
             {
+                if (CanPartnerAbilityBlockMove(battlerAtk, battlerDef, move, aiData->abilities[BATTLE_PARTNER(battlerDef)]))
+                    RETURN_SCORE_MINUS(20);
+
                 switch (aiData->abilities[BATTLE_PARTNER(battlerDef)])
                 {
                 case ABILITY_LIGHTNING_ROD:
@@ -1027,12 +1004,6 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                     break;
                 case ABILITY_AROMA_VEIL:
                     if (IsAromaVeilProtectedMove(move))
-                        RETURN_SCORE_MINUS(10);
-                    break;
-                case ABILITY_DAZZLING:
-                case ABILITY_QUEENLY_MAJESTY:
-                case ABILITY_ARMOR_TAIL:
-                    if (atkPriority > 0)
                         RETURN_SCORE_MINUS(10);
                     break;
                 }
@@ -3348,6 +3319,7 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
     case EFFECT_ABSORB:
         if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_BIG_ROOT && effectiveness >= AI_EFFECTIVENESS_x1)
             ADJUST_SCORE(DECENT_EFFECT);
+        break;
     case EFFECT_EXPLOSION:
     case EFFECT_MEMENTO:
         if (AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_WILL_SUICIDE && gBattleMons[battlerDef].statStages[STAT_EVASION] < 7)
@@ -3362,7 +3334,7 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
         break;
     case EFFECT_MIRROR_MOVE:
         if (predictedMove != MOVE_NONE)
-            return AI_CheckViability(battlerAtk, battlerDef, gLastMoves[battlerDef], score);
+            return AI_CheckViability(battlerAtk, battlerDef, predictedMove, score);
         break;
     case EFFECT_ATTACK_UP:
     case EFFECT_ATTACK_UP_USER_ALLY:
