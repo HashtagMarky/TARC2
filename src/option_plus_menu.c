@@ -325,8 +325,8 @@ static const u8 sText_Desc_SoundStereo[]        = _("Play the left and right aud
 static const u8 sText_Desc_ButtonMode[]         = _("All buttons work as normal.");
 static const u8 sText_Desc_ButtonMode_LR[]      = _("On some screens the L and R buttons\nact as left and right.");
 static const u8 sText_Desc_ButtonMode_LA[]      = _("The L button acts as another A\nbutton for one-handed play.");
-static const u8 sText_Desc_UnitSystemImperial[] = _("Display BERRY and POKéMON weight\nand size in pounds and inches.");
-static const u8 sText_Desc_UnitSystemMetric[]   = _("Display BERRY and POKéMON weight\nand size in kilograms and meters.");
+static const u8 sText_Desc_UnitSystemImperial[] = _("Display weights and sizes\nin pounds and inches.");
+static const u8 sText_Desc_UnitSystemMetric[]   = _("Display weights and sizes\nin kilograms and meters.");
 static const u8 sText_Desc_FrameType[]          = _("Choose the frame surrounding the\nwindows.");
 static const u8 *const sOptionMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
 {
@@ -1220,8 +1220,8 @@ static void DrawChoices_UnitSystem(int selection, int y)
     u8 styles[2] = {0};
     styles[selection] = 1;
 
-    DrawOptionMenuChoice(gText_UnitSystemImperial, 104, y, styles[0], active);
-    DrawOptionMenuChoice(gText_UnitSystemMetric, GetStringRightAlignXOffset(1, gText_UnitSystemMetric, 198), y, styles[1], active);
+    DrawOptionMenuChoice(gText_UnitSystemMetric, 104, y, styles[1], active);
+    DrawOptionMenuChoice(gText_UnitSystemImperial, GetStringRightAlignXOffset(1, gText_UnitSystemImperial, 198), y, styles[0], active);
 }
 
 static void DrawChoices_FrameType(int selection, int y)
