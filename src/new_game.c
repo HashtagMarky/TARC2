@@ -97,6 +97,11 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_MONO;
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
+    gSaveBlock2Ptr->optionsUnitSystem = 0;  //tx_optionsPlus
+    gSaveBlock2Ptr->optionsHpBarSpeed = 0;  //tx_optionsPlus
+    gSaveBlock2Ptr->optionsExpBarSpeed = 0; //tx_optionsPlus
+    gSaveBlock2Ptr->optionsDisableMatchCall = 0;    //tx_optionsPlus
+    gSaveBlock2Ptr->optionsCurrentFont = 0;         //tx_optionsPlus
     gSaveBlock2Ptr->regionMapZoom = FALSE;
     gSaveBlock3Ptr->autoRun = FALSE;
     gSaveBlock3Ptr->autoBike = FALSE;

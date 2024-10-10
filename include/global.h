@@ -558,12 +558,16 @@ struct SaveBlock2
              u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
              u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
              u16 optionsBattleSceneOff:1; // whether battle animations are disabled
+             u16 optionsUnitSystem:1;   //tx_optionsPlus
+             u16 optionsHpBarSpeed:4;   //tx_optionsPlus
+             u16 optionsExpBarSpeed:4;  //tx_optionsPlus
+             u16 optionsDisableMatchCall:1; //tx_optionsPlus
+             u16 optionsCurrentFont:1;  //tx_optionsPlus
              u16 optionsSuppressNPCMugshots:1; // whether NPC Mugshots are disabled
              u16 optionsFollowerMugshotPlaceholder:1; // whether Substitute Mugshot is shown where follower species does not have a musghot.
              u16 optionsSuppressFollowerMugshots:1; // whether Follower Mugshots are disabled
              u16 regionMapZoom:1; // whether the map is zoomed in
-             //u16 padding1:2;
-             //u16 padding2;
+             //u16 padding1:7;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 filler_90[0x8];
     /*0x98*/ struct Time localTimeOffset;
