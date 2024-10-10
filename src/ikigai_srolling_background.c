@@ -4,14 +4,15 @@
 #include "bg.h"
 #include "constants/pokemon.h"
 
-const u32 sScrollBgTiles[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles.4bpp.lz");
-const u32 sScrollBgTilemap[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles.bin.lz");
+const u32 IkigaiScrollingBgTiles[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles.4bpp.lz");
+const u32 IkigaiScrollingBgTilemap_PalOne[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles_pal_one.bin.lz");
+const u32 IkigaiScrollingBgTilemap_PalTwo[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles_pal_two.bin.lz");
 
-static const u16 sScrollBgPalette[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles.gbapal");
-static const u16 sScrollBgPaletteGreen[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles_green.gbapal");
-static const u16 sScrollBgPaletteBlue[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles_blue.gbapal");
-static const u16 sScrollBgPaletteOrange[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles_orange.gbapal");
-static const u16 sScrollBgPalettePink[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles_pink.gbapal");
+static const u16 IkigaiScrollingBgPal_Default[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles.gbapal");
+static const u16 IkigaiScrollingBgPal_Green[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles_green.gbapal");
+static const u16 IkigaiScrollingBgPal_Blue[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles_blue.gbapal");
+static const u16 IkigaiScrollingBgPal_Orange[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles_orange.gbapal");
+static const u16 IkigaiScrollingBgPal_Pink[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles_pink.gbapal");
 
 #define SCROLLING_SPEED         64
 #define SCROLL_X_DIRECTION      1
@@ -29,16 +30,16 @@ const u16 *ReturnScrollingBackgroundPalette(void)
     switch (gSaveBlock2Ptr->optionsInterfaceColor)
     {
         case IKIGAI_INTERFACE_GREEN:
-            return sScrollBgPaletteGreen;
+            return IkigaiScrollingBgPal_Green;
         
         case IKIGAI_INTERFACE_BLUE:
-            return sScrollBgPaletteBlue;
+            return IkigaiScrollingBgPal_Blue;
         
         case IKIGAI_INTERFACE_ORANGE:
-            return sScrollBgPaletteOrange;
+            return IkigaiScrollingBgPal_Orange;
         
         case IKIGAI_INTERFACE_PINK:
-            return sScrollBgPalettePink;
+            return IkigaiScrollingBgPal_Pink;
 
         case IKIGAI_INTERFACE_GYM_TYPE_COLOUR:
         default:
@@ -52,6 +53,6 @@ const u16 *ReturnScrollingBackgroundGymPalette(void)
     {
         case TYPE_NONE:
         default:
-            return sScrollBgPalette;
+            return IkigaiScrollingBgPal_Default;
     }
 }

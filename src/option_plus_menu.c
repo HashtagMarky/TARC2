@@ -18,6 +18,7 @@
 #include "constants/rgb.h"
 #include "menu_helpers.h"
 #include "decompress.h"
+#include "ikigai_scrolling_background.h"
 
 enum
 {
@@ -198,10 +199,6 @@ static const u32 sOptionsPlusTiles[] = INCBIN_U32("graphics/ui_options_plus/opti
 static const u16 sOptionsPlusPalette[] = INCBIN_U16("graphics/ui_options_plus/options_plus_tiles.gbapal");
 static const u32 sOptionsPlusTilemap[] = INCBIN_U32("graphics/ui_options_plus/options_plus_tiles.bin.lz");
 
-// Scrolling Background
-static const u32 sScrollBgTiles[] = INCBIN_U32("graphics/ui_options_plus/scroll_tiles.4bpp.lz");
-static const u32 sScrollBgTilemap[] = INCBIN_U32("graphics/ui_options_plus/scroll_tiles.bin.lz");
-static const u16 sScrollBgPalette[] = INCBIN_U16("graphics/ui_options_plus/scroll_tiles.gbapal");
 
 #define TEXT_COLOR_OPTIONS_WHITE                1
 #define TEXT_COLOR_OPTIONS_GRAY_FG              2
@@ -447,7 +444,7 @@ static void VBlankCB(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    ChangeBgY(3, 96, BG_COORD_ADD);
+    StartScrollingBackground(3, BG_COORD_SUB);
 }
 
 static const u8 sText_TopBar_Main[]         = _("GENERAL");
@@ -567,7 +564,7 @@ static void HighlightOptionMenuItem(void)
     SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(8, 232));
     SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(cursor * Y_DIFF + 24, cursor * Y_DIFF + 40));
 }
-
+static const u16 IkigaiScrollingBgPal_Default[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles.gbapal");
 static bool8 OptionsMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spritesheets, and palettes
 {
     switch (sOptions->gfxLoadState)
@@ -586,19 +583,19 @@ static bool8 OptionsMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, 
         break;
     case 2:
         ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(3, sScrollBgTiles, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(3, IkigaiScrollingBgTiles, 0, 0, 0);
         sOptions->gfxLoadState++;
         break;
     case 3:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(sScrollBgTilemap, sBg3TilemapBuffer);
+            LZDecompressWram(IkigaiScrollingBgTilemap_PalTwo, sBg3TilemapBuffer);
             sOptions->gfxLoadState++;
         }
         break;
     case 4:
         LoadPalette(sOptionsPlusPalette, 64, 32);
-        LoadPalette(sScrollBgPalette, 32, 32);
+        LoadPalette(ReturnScrollingBackgroundPalette(), 32, 32);
         sOptions->gfxLoadState++;
         break;
     default:
