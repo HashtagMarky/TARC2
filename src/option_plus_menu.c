@@ -1262,8 +1262,8 @@ static void DrawChoices_Font(int selection, int y)
     u8 styles[2] = {0};
     styles[selection] = 1;
 
-    DrawOptionMenuChoice(gText_OptionFontEmerald, 104, y, styles[0], active);
-    DrawOptionMenuChoice(gText_OptionFontFireRed, GetStringRightAlignXOffset(1, gText_OptionFontFireRed, 198), y, styles[1], active);
+    DrawOptionMenuChoice(gText_OptionFontCompact, 104, y, styles[0], active);
+    DrawOptionMenuChoice(gText_OptionFontSpread, GetStringRightAlignXOffset(1, gText_OptionFontSpread, 198), y, styles[1], active);
 }
 
 static void DrawChoices_MatchCall(int selection, int y)
