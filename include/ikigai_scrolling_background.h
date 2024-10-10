@@ -6,6 +6,8 @@
 void StartScrollingBackground(u8 background, u8 op);
 extern const u16 *ReturnScrollingBackgroundPalette(void);
 extern const u16 *ReturnScrollingBackgroundGymPalette(void);
+extern const u16 *ReturnMenuUIPalette(void);
+extern const u16 *ReturnMenuUIGymPalette(void);
 
 extern const u32 IkigaiScrollingBgTiles[];
 extern const u32 IkigaiScrollingBgTilemap_PalOne[];

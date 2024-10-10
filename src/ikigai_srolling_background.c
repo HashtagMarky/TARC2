@@ -14,6 +14,12 @@ static const u16 IkigaiScrollingBgPal_Blue[] = INCBIN_U16("graphics/ikigai_scrol
 static const u16 IkigaiScrollingBgPal_Orange[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles_orange.gbapal");
 static const u16 IkigaiScrollingBgPal_Pink[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles_pink.gbapal");
 
+static const u16 IkigaiMainUIPal[] = INCBIN_U16("graphics/ikigai_scrolling_background/main_tiles_default.gbapal");
+static const u16 IkigaiMainUIPal_Green[] = INCBIN_U16("graphics/ikigai_scrolling_background/main_tiles_green.gbapal");
+static const u16 IkigaiMainUIPal_Blue[] = INCBIN_U16("graphics/ikigai_scrolling_background/main_tiles_blue.gbapal");
+static const u16 IkigaiMainUIPal_Orange[] = INCBIN_U16("graphics/ikigai_scrolling_background/main_tiles_orange.gbapal");
+static const u16 IkigaiMainUIPal_Pink[] = INCBIN_U16("graphics/ikigai_scrolling_background/main_tiles_pink.gbapal");
+
 #define SCROLLING_SPEED         64
 #define SCROLL_X_DIRECTION      1
 #define SCROLL_Y_DIRECTION      -1
@@ -54,5 +60,37 @@ const u16 *ReturnScrollingBackgroundGymPalette(void)
         case TYPE_NONE:
         default:
             return IkigaiScrollingBgPal_Default;
+    }
+}
+
+const u16 *ReturnMenuUIPalette(void)
+{
+    switch (gSaveBlock2Ptr->optionsInterfaceColor)
+    {
+        case IKIGAI_INTERFACE_GREEN:
+            return IkigaiMainUIPal_Green;
+        
+        case IKIGAI_INTERFACE_BLUE:
+            return IkigaiMainUIPal_Blue;
+        
+        case IKIGAI_INTERFACE_ORANGE:
+            return IkigaiMainUIPal_Orange;
+        
+        case IKIGAI_INTERFACE_PINK:
+            return IkigaiMainUIPal_Pink;
+            
+        case IKIGAI_INTERFACE_GYM_TYPE_COLOUR:
+        default:
+            return ReturnMenuUIGymPalette();
+    }
+}
+
+const u16 *ReturnMenuUIGymPalette(void)
+{
+    switch (gSaveBlock2Ptr->ikigaiGymType)
+    {
+        case TYPE_NONE:
+        default:
+            return IkigaiMainUIPal;
     }
 }
