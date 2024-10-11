@@ -771,6 +771,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
     const u8 colorsTrainerText[3] = {0,  5,  2};
     u8 mapDisplayHeader[24];
     u8 *withoutPrefixPtr, *playTimePtr;
+    u8 yOffset = (gSaveBlock2Ptr->optionsCurrentFont == 0) ? 1 : 0;
     u16 dexCount = 0; u8 badgeCount = 0;
     u32 i = 0;
 
@@ -789,7 +790,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
     playTimePtr = ConvertIntToDecimalStringN(gStringVar4, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
     *playTimePtr = 0xF0;
     ConvertIntToDecimalStringN(playTimePtr + 1, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
-    AddTextPrinterParameterized4(WINDOW_HEADER, FONT_NORMAL, (104 - 12) + GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, (6*8)), 1, 0, 0, colorsGameText, TEXT_SKIP_DRAW, gStringVar4);
+    AddTextPrinterParameterized4(WINDOW_HEADER, FONT_NORMAL, (104 - 12) + GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, (6*8)), 1 + yOffset, 0, 0, colorsGameText, TEXT_SKIP_DRAW, gStringVar4);
 
     // Print Dex Numbers if You Have It
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
