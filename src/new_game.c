@@ -93,7 +93,7 @@ static void SetDefaultOptions(void)
 {
     gSaveBlock2Ptr->ikigaiGymType = TYPE_NONE;
     gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST;
-    gSaveBlock2Ptr->optionsInterfaceColor = 0;
+    gSaveBlock2Ptr->optionsTitleScreenRandomise = FALSE;
     gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_MONO;
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
@@ -102,6 +102,10 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsExpBarSpeed = 0; //tx_optionsPlus
     gSaveBlock2Ptr->optionsDisableMatchCall = 0;    //tx_optionsPlus
     gSaveBlock2Ptr->optionsCurrentFont = 0;         //tx_optionsPlus
+    gSaveBlock2Ptr->optionsSuppressNPCMugshots = FALSE;
+    gSaveBlock2Ptr->optionsFollowerMugshotPlaceholder = FALSE;
+    gSaveBlock2Ptr->optionsSuppressFollowerMugshots = FALSE;
+    gSaveBlock2Ptr->optionsOverworldCatchSuccessMultiplyer = FALSE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
     gSaveBlock3Ptr->autoRun = FALSE;
     gSaveBlock3Ptr->autoBike = FALSE;
