@@ -141,6 +141,7 @@ struct OptionMenu
 #define Y_DIFF 16 // Difference in pixels between items.
 #define OPTIONS_ON_SCREEN 5
 #define NUM_OPTIONS_FROM_BORDER 1
+#define OPTIONS_TEXT_OFFSET 16
 
 // local functions
 static void MainCB2(void);
@@ -192,7 +193,7 @@ static EWRAM_DATA u8 *sBg3TilemapBuffer = NULL;
 
 // const data
 static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/interface/option_menu_equals_sign.4bpp"); // note: this is only used in the Japanese release
-static const u16 sOptionMenuBg_Pal[] = {RGB(17, 18, 31)};
+static const u16 sOptionMenuBg_Pal[] = {RGB_IKIGAI_BLUE};
 static const u16 sOptionMenuText_Pal[] = INCBIN_U16("graphics/interface/option_menu_text_custom.gbapal");
 
 static const u32 sOptionsPlusTiles[] = INCBIN_U32("graphics/ui_options_plus/options_plus_tiles.4bpp.lz");
@@ -452,7 +453,7 @@ static const u8 sText_TopBar_Custom[]       = _("CUSTOM");
 static const u8 sText_TopBar_Custom_Left[]  = _("{L_BUTTON}GENERAL");
 static void DrawTopBarText(void)
 {
-    const u8 color[3] = { 0, TEXT_COLOR_WHITE, TEXT_COLOR_OPTIONS_GRAY_FG };
+    const u8 color[3] = { 0, TEXT_COLOR_WHITE, TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG };
 
     FillWindowPixelBuffer(WIN_TOPBAR, PIXEL_FILL(0));
     switch (sOptions->submenu)
@@ -514,6 +515,8 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
 {
     u8 color_red[3];
     u8 color_gray[3];
+    const u16 *selectedColorPal = ReturnMenuUIPalette();
+    u16 selectedTextColor = selectedColorPal[2];
 
     if (active)
     {
@@ -522,23 +525,28 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
         color_red[2] = TEXT_COLOR_OPTIONS_GRAY_FG;
         color_gray[0] = TEXT_COLOR_TRANSPARENT;
         color_gray[1] = TEXT_COLOR_OPTIONS_WHITE;
-        color_gray[2] = TEXT_COLOR_OPTIONS_GRAY_FG;
+        color_gray[2] = TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG;
     }
     else
     {
         color_red[0] = TEXT_COLOR_TRANSPARENT;
         color_red[1] = TEXT_COLOR_OPTIONS_WHITE;
-        color_red[2] = TEXT_COLOR_OPTIONS_GRAY_FG;
+        color_red[2] = TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG;
         color_gray[0] = TEXT_COLOR_TRANSPARENT;
         color_gray[1] = TEXT_COLOR_OPTIONS_WHITE;
-        color_gray[2] = TEXT_COLOR_OPTIONS_GRAY_FG;
+        color_gray[2] = TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG;
     }
 
 
     if (choosen)
+    {
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, x, y, 0, 0, color_red, TEXT_SKIP_DRAW, text);
+        LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_red[1], sizeof(selectedTextColor));
+    }
     else
+    {
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, x, y, 0, 0, color_gray, TEXT_SKIP_DRAW, text);
+    }
 }
 
 static void DrawChoices(u32 id, int y) //right side draw function
@@ -672,7 +680,7 @@ void CB2_InitOptionPlusMenu(void)
         gMain.state++;
         break;
     case 5:
-        LoadPalette(sOptionMenuText_Pal, 16, sizeof(sOptionMenuText_Pal));
+        LoadPalette(sOptionMenuText_Pal, OPTIONS_TEXT_OFFSET, sizeof(sOptionMenuText_Pal));
         gMain.state++;
         break;
     case 6:
