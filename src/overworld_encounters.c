@@ -28,7 +28,7 @@
 #define HEADER_NONE                     0xFFFF                  // Should be same as in wild_encounter.c
 #define OBJ_EVENT_GFX_LAST              OBJ_EVENT_GFX_VAR_F     // Last variable object event
 
-#define OVERWORLD_CATCH_SMULTIPLYER     gSaveBlock2Ptr->/*optionsOverworldCatchSuccessMultiplyer*/optionsSound + 1;
+#define OVERWORLD_CATCH_RATE_MULTIPLYER gSaveBlock2Ptr->/*optionsOverworldCatchSuccessMultiplyer*/optionsSound + 1;
 #define SPAWN_ODDS_DENOMINATOR          3                       // Spawn Odds = 1 - 1/SPAWN_ODDS_DENOMINATOR
 #define RUN_ODDS_DENOMINATOR            3                       // Run Odds = 1/RUN_ODDS_DENOMINATOR
 
@@ -499,7 +499,7 @@ void GetOverworldSpeciesCatchRate(void)
         catchRate = catchRate + ballAddition;
         
     odds = (catchRate * ballMultiplier / 100) * (3 - 2) / (3); // Full HP calculation.
-    odds *= OVERWORLD_CATCH_SMULTIPLYER;
+    odds *= OVERWORLD_CATCH_RATE_MULTIPLYER;
     if (gSpecialVar_0x8006 == EMOTE_SURPRISED)
         odds *= 2;
 
