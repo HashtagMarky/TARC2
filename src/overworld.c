@@ -1247,12 +1247,14 @@ static void TransitionMapMusic(void)
                 return;
             if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && gSaveBlock2Ptr->optionsSurfMusic == FALSE)
                 newMusic = MUS_SURF;
+            if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE) && gSaveBlock2Ptr->optionsBikeMusic == FALSE)
+                newMusic = MUS_CYCLING;
         }
         if (newMusic != currentMusic)
         {
-            if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
-                FadeOutAndFadeInNewMapMusic(newMusic, 4, 4);
-            else
+            // if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
+            //     FadeOutAndFadeInNewMapMusic(newMusic, 4, 4);
+            // else
                 FadeOutAndPlayNewMapMusic(newMusic, 8);
         }
     }

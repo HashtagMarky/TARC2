@@ -106,6 +106,7 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsFollowerMugshotPlaceholder = FALSE;
     gSaveBlock2Ptr->optionsSuppressFollowerMugshots = FALSE;
     gSaveBlock2Ptr->optionsOverworldCatchSuccessMultiplyer = FALSE;
+    gSaveBlock2Ptr->optionsBikeMusic = FALSE;
     gSaveBlock2Ptr->optionsSurfMusic = FALSE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
     gSaveBlock3Ptr->autoRun = FALSE;
