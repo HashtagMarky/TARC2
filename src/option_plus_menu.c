@@ -43,6 +43,7 @@ enum
 
 enum
 {
+    MENUITEM_OVERWORLD_SURF_MUSIC,
     MENUITEM_OVERWORLD_MATCHCALL,
     MENUITEM_OVERWORLD_CANCEL,
     MENUITEM_OVERWORLD_COUNT,
@@ -192,6 +193,7 @@ static void DrawChoices_UnitSystem(int selection, int y);
 static void DrawChoices_Font(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_MatchCall(int selection, int y);
+static void DrawChoices_SurfMusic(int selection, int y);
 static void DrawBgWindowFrames(void);
 
 // EWRAM vars
@@ -245,6 +247,7 @@ struct // MENU_OVERWORLD
     int (*processInput)(int selection);
 } static const sItemFunctionsOverworld[MENUITEM_OVERWORLD_COUNT] =
 {
+    [MENUITEM_OVERWORLD_SURF_MUSIC] = {DrawChoices_SurfMusic,   ProcessInput_Options_Two},
     [MENUITEM_OVERWORLD_MATCHCALL]  = {DrawChoices_MatchCall,   ProcessInput_Options_Two},
     [MENUITEM_OVERWORLD_CANCEL]     = {NULL, NULL},
 };
@@ -266,6 +269,7 @@ struct // MENU_BATTLE
 static const u8 sText_HpBar[]       = _("HP BAR");
 static const u8 sText_ExpBar[]      = _("EXP BAR");
 static const u8 sText_UnitSystem[]  = _("UNIT SYSTEM");
+static const u8 sText_SurfMusic[]   = _("SURF MUSIC");
 static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 {
     [MENUITEM_MAIN_TEXTSPEED]       = gText_TextSpeed,
@@ -279,6 +283,7 @@ static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 
 static const u8 *const sOptionMenuItemsNamesOverworld[MENUITEM_OVERWORLD_COUNT] =
 {
+    [MENUITEM_OVERWORLD_SURF_MUSIC] = sText_SurfMusic,
     [MENUITEM_OVERWORLD_MATCHCALL]  = gText_OptionMatchCalls,
     [MENUITEM_OVERWORLD_CANCEL]     = gText_OptionMenuSave,
 };
@@ -323,6 +328,7 @@ static bool8 CheckConditions(int selection)
     case MENU_OVERWORLD:
         switch (selection)
         {
+        case MENUITEM_OVERWORLD_SURF_MUSIC: return TRUE;
         case MENUITEM_OVERWORLD_MATCHCALL:  return TRUE;
         case MENUITEM_OVERWORLD_CANCEL:     return TRUE;
         }
@@ -360,7 +366,7 @@ static const u8 sText_Desc_FrameType[]          = _("Choose the frame surroundin
 // Custom Descriptions
 static const u8 sText_Desc_BattleHPBar[]        = _("Choose how fast the HP BAR will get\ndrained in battles.");
 static const u8 sText_Desc_BattleExpBar[]       = _("Choose how fast the EXP BAR will get\nfilled in battles.");
-static const u8 sText_Desc_SurfOff[]            = _("Disables the SURF theme when\nusing SURF.");
+static const u8 sText_Desc_SurfOff[]            = _("Disables the SURF theme\nwhen using SURF.");
 static const u8 sText_Desc_SurfOn[]             = _("Enables the SURF theme\nwhen using SURF.");
 static const u8 sText_Desc_BikeOff[]            = _("Disables the BIKE theme when\nusing the BIKE.");
 static const u8 sText_Desc_BikeOn[]             = _("Enables the BIKE theme when\nusing the BIKE.");
@@ -388,6 +394,7 @@ static const u8 *const sOptionMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
 
 static const u8 *const sOptionMenuItemDescriptionsOverworld[MENUITEM_OVERWORLD_COUNT][2] =
 {
+    [MENUITEM_OVERWORLD_SURF_MUSIC] = {sText_Desc_SurfOn,               sText_Desc_SurfOff},
     [MENUITEM_OVERWORLD_MATCHCALL]  = {sText_Desc_OverworldCallsOn,     sText_Desc_OverworldCallsOff},
     [MENUITEM_OVERWORLD_CANCEL]     = {sText_Desc_Save,                 sText_Empty},
 };
@@ -415,6 +422,7 @@ static const u8 *const sOptionMenuItemDescriptionsDisabledMain[MENUITEM_MAIN_COU
 // Disabled Overworld
 static const u8 *const sOptionMenuItemDescriptionsDisabledOverworld[MENUITEM_OVERWORLD_COUNT] =
 {
+    [MENUITEM_OVERWORLD_SURF_MUSIC] = sText_Empty,
     [MENUITEM_OVERWORLD_MATCHCALL]  = sText_Empty,
     [MENUITEM_OVERWORLD_CANCEL]     = sText_Empty,
 };
@@ -754,6 +762,7 @@ void CB2_InitOptionPlusMenu(void)
         sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM]                = gSaveBlock2Ptr->optionsUnitSystem;
         sOptions->sel[MENUITEM_MAIN_FRAMETYPE]                  = gSaveBlock2Ptr->optionsInterfaceColor;
         
+        sOptions->sel_overworld[MENUITEM_OVERWORLD_SURF_MUSIC]  = gSaveBlock2Ptr->optionsSurfMusic;
         sOptions->sel_overworld[MENUITEM_OVERWORLD_MATCHCALL]   = gSaveBlock2Ptr->optionsDisableMatchCall;
 
         sOptions->sel_battle[MENUITEM_BATTLE_BATTLESCENE]       = gSaveBlock2Ptr->optionsBattleSceneOff;
@@ -981,6 +990,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsUnitSystem       = sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM];
     gSaveBlock2Ptr->optionsInterfaceColor   = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
 
+    gSaveBlock2Ptr->optionsSurfMusic        = sOptions->sel_overworld[MENUITEM_OVERWORLD_SURF_MUSIC];
     gSaveBlock2Ptr->optionsDisableMatchCall = sOptions->sel_overworld[MENUITEM_OVERWORLD_MATCHCALL];
 
     gSaveBlock2Ptr->optionsBattleSceneOff   = sOptions->sel_battle[MENUITEM_BATTLE_BATTLESCENE];
@@ -1358,6 +1368,16 @@ static void DrawChoices_Font(int selection, int y)
 static void DrawChoices_MatchCall(int selection, int y)
 {
     bool8 active = CheckConditions(MENUITEM_OVERWORLD_MATCHCALL);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_BattleSceneOn, 104, y, styles[0], active);
+    DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(1, gText_BattleSceneOff, 198), y, styles[1], active);
+}
+
+static void DrawChoices_SurfMusic(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_OVERWORLD_SURF_MUSIC);
     u8 styles[2] = {0};
     styles[selection] = 1;
 

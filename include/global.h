@@ -567,6 +567,7 @@ struct SaveBlock2
              u16 optionsFollowerMugshotPlaceholder:1; // whether Substitute Mugshot is shown where follower species does not have a musghot.
              u16 optionsSuppressFollowerMugshots:1; // whether Follower Mugshots are disabled
              u16 optionsOverworldCatchSuccessMultiplyer:1; // whether or not a x1 or x2 multiplier is used in Overworld Capture Odds
+             u16 optionsSurfMusic:1; // whether or not surf music is played
              u16 regionMapZoom:1; // whether the map is zoomed in
              //u16 padding1:6;
     /*0x18*/ struct Pokedex pokedex;
