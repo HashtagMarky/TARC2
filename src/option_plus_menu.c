@@ -1255,9 +1255,6 @@ static int ProcessInput_Interface(int selection)
             selection++;
         else
             selection = 0;
-
-        LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
-        LoadPalette(GetWindowFrameTilesPal(selection)->pal, 0x70, 0x20);
     }
     if (JOY_NEW(DPAD_LEFT))
     {
@@ -1265,10 +1262,16 @@ static int ProcessInput_Interface(int selection)
             selection--;
         else
             selection = IKIGAI_INTERFACE_GYM_TYPE_COLOUR;
-
-        LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
-        LoadPalette(GetWindowFrameTilesPal(selection)->pal, 0x70, 0x20);
     }
+    
+    gSaveBlock2Ptr->optionsInterfaceColor = selection;
+    while (REG_VCOUNT >= 160);          // Wait until VBlank starts
+    while (REG_VCOUNT < 160);           // Wait until VBlank ends
+    LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
+    LoadPalette(GetWindowFrameTilesPal(selection)->pal, 0x70, 0x20);
+    // Reloads Palettes in case of Interface Changes
+    LoadPalette(ReturnMenuUIPalette(), 64, 32);
+    LoadPalette(ReturnScrollingBackgroundPalette(), 32, 32);
     return selection;
 }
 
