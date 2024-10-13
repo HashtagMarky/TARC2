@@ -656,7 +656,7 @@ static void DrawLeftSideOptionText(int selection, int y)
 
     color_yellow[0] = TEXT_COLOR_TRANSPARENT;
     color_yellow[1] = TEXT_COLOR_WHITE;
-    color_yellow[2] = TEXT_COLOR_OPTIONS_GRAY_FG;
+    color_yellow[2] = TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG;
     color_gray[0] = TEXT_COLOR_TRANSPARENT;
     color_gray[1] = TEXT_COLOR_WHITE;
     color_gray[2] = TEXT_COLOR_OPTIONS_GRAY_SHADOW;
@@ -696,12 +696,12 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
 
     if (choosen)
     {
-        AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, x, y, 0, 0, color_red, TEXT_SKIP_DRAW, text);
-        LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_red[1], sizeof(selectedTextColor));
+        AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, x, y, 0, 0, color_gray, TEXT_SKIP_DRAW, text);
     }
     else
     {
-        AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, x, y, 0, 0, color_gray, TEXT_SKIP_DRAW, text);
+        AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, x, y, 0, 0, color_red, TEXT_SKIP_DRAW, text);
+        LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_red[1], sizeof(selectedTextColor));
     }
 }
 
