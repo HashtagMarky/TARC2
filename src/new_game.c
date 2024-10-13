@@ -96,7 +96,7 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsTitleScreenRandomise = FALSE;
     gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_MONO;
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
-    gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
+    gSaveBlock2Ptr->optionsBattleScene = 0;
     gSaveBlock2Ptr->optionsUnitSystem = UNITS_METRIC;  //tx_optionsPlus
     gSaveBlock2Ptr->optionsDisableMatchCall = 0;    //tx_optionsPlus
     gSaveBlock2Ptr->optionsCurrentFont = 0;         //tx_optionsPlus

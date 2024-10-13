@@ -19,6 +19,7 @@
 #include "menu_helpers.h"
 #include "decompress.h"
 #include "ikigai_scrolling_background.h"
+#include "constants/battle.h"
 
 enum
 {
@@ -273,7 +274,7 @@ struct // MENU_BATTLE
     int (*processInput)(int selection);
 } static const sItemFunctionsBattle[MENUITEM_BATTLE_COUNT] =
 { 
-    [MENUITEM_BATTLE_BATTLESCENE]   = {DrawChoices_BattleScene, ProcessInput_Options_Two},
+    [MENUITEM_BATTLE_BATTLESCENE]   = {DrawChoices_BattleScene, ProcessInput_Options_Four},
     [MENUITEM_BATTLE_BATTLESTYLE]   = {DrawChoices_BattleStyle, ProcessInput_Options_Two},
     [MENUITEM_BATTLE_WILD_SPEED]    = {DrawChoices_BattleSpeed, ProcessInput_Options_Four},
     [MENUITEM_BATTLE_TRAINER_SPEED] = {DrawChoices_BattleSpeed, ProcessInput_Options_Four},
@@ -421,8 +422,10 @@ static bool8 CheckConditions(int selection)
 static const u8 sText_Empty[]                   = _("");
 static const u8 sText_Desc_Save[]               = _("Save your settings.");
 static const u8 sText_Desc_TextSpeed[]          = _("Choose one of the four text-display\nspeeds.");
-static const u8 sText_Desc_BattleScene_On[]     = _("Show the POKéMON battle animations.");
+static const u8 sText_Desc_BattleScene_Full[]   = _("Show all POKéMON battle animations.");
+static const u8 sText_Desc_BattleScene_Low[]    = _("Remove POKéMON KO celebrations and\nreduce held item animations.");
 static const u8 sText_Desc_BattleScene_Off[]    = _("Skip the POKéMON battle animations.");
+static const u8 sText_Desc_BattleScene_NoIntro[] = _("Skip the POKéMON battle animations\nand streamline the introduction.");
 static const u8 sText_Desc_BattleStyle_Shift[]  = _("Get the option to switch your\nPOKéMON after the enemies faints.");
 static const u8 sText_Desc_BattleStyle_Set[]    = _("No free switch after fainting the\nenemies POKéMON.");
 static const u8 sText_Desc_SoundMono[]          = _("Sound is the same in all speakers.\nRecommended for original hardware.");
@@ -481,13 +484,13 @@ static const u8 *const sOptionMenuItemDescriptionsOverworld[MENUITEM_OVERWORLD_C
     [MENUITEM_OVERWORLD_CANCEL]         = {sText_Desc_Save,                         sText_Empty,                    sText_Empty},
 };
 
-static const u8 *const sOptionMenuItemDescriptionsBattle[MENUITEM_BATTLE_COUNT][2] =
+static const u8 *const sOptionMenuItemDescriptionsBattle[MENUITEM_BATTLE_COUNT][4] =
 {
-    [MENUITEM_BATTLE_BATTLESCENE]   = {sText_Desc_BattleScene_On,       sText_Desc_BattleScene_Off},
-    [MENUITEM_BATTLE_BATTLESTYLE]   = {sText_Desc_BattleStyle_Shift,    sText_Desc_BattleStyle_Set},
-    [MENUITEM_BATTLE_WILD_SPEED]    = {sText_Desc_WildSpeed,            sText_Empty},
-    [MENUITEM_BATTLE_TRAINER_SPEED] = {sText_Desc_TrainerSpeed,         sText_Empty},
-    [MENUITEM_BATTLE_CANCEL]        = {sText_Desc_Save,                 sText_Empty},
+    [MENUITEM_BATTLE_BATTLESCENE]   = {sText_Desc_BattleScene_Full,     sText_Desc_BattleScene_Low,     sText_Desc_BattleScene_Off,     sText_Desc_BattleScene_NoIntro},
+    [MENUITEM_BATTLE_BATTLESTYLE]   = {sText_Desc_BattleStyle_Shift,    sText_Desc_BattleStyle_Set,     sText_Empty,                    sText_Empty},
+    [MENUITEM_BATTLE_WILD_SPEED]    = {sText_Desc_WildSpeed,            sText_Empty,                    sText_Empty,                    sText_Empty},
+    [MENUITEM_BATTLE_TRAINER_SPEED] = {sText_Desc_TrainerSpeed,         sText_Empty,                    sText_Empty,                    sText_Empty},
+    [MENUITEM_BATTLE_CANCEL]        = {sText_Desc_Save,                 sText_Empty,                    sText_Empty,                    sText_Empty},
 };
 
 static const u8 *const sOptionMenuItemDescriptionsDisabledMain[MENUITEM_MAIN_COUNT] =
@@ -855,7 +858,7 @@ void CB2_InitOptionPlusMenu(void)
         sOptions->sel_overworld[MENUITEM_OVERWORLD_FOLLOWER_MUG]    = gSaveBlock2Ptr->optionsFollowerMugshots;
         sOptions->sel_overworld[MENUITEM_OVERWORLD_MATCHCALL]       = gSaveBlock2Ptr->optionsDisableMatchCall;
 
-        sOptions->sel_battle[MENUITEM_BATTLE_BATTLESCENE]       = gSaveBlock2Ptr->optionsBattleSceneOff;
+        sOptions->sel_battle[MENUITEM_BATTLE_BATTLESCENE]       = gSaveBlock2Ptr->optionsBattleScene;
         sOptions->sel_battle[MENUITEM_BATTLE_BATTLESTYLE]       = gSaveBlock2Ptr->optionsBattleStyle;
         sOptions->sel_battle[MENUITEM_BATTLE_WILD_SPEED]        = gSaveBlock2Ptr->optionsWildBattleSpeed;
         sOptions->sel_battle[MENUITEM_BATTLE_TRAINER_SPEED]     = gSaveBlock2Ptr->optionsTrainerBattleSpeed;
@@ -1087,7 +1090,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsFollowerMugshots     = sOptions->sel_overworld[MENUITEM_OVERWORLD_FOLLOWER_MUG];
     gSaveBlock2Ptr->optionsDisableMatchCall     = sOptions->sel_overworld[MENUITEM_OVERWORLD_MATCHCALL];
 
-    gSaveBlock2Ptr->optionsBattleSceneOff       = sOptions->sel_battle[MENUITEM_BATTLE_BATTLESCENE];
+    gSaveBlock2Ptr->optionsBattleScene          = sOptions->sel_battle[MENUITEM_BATTLE_BATTLESCENE];
     gSaveBlock2Ptr->optionsBattleStyle          = sOptions->sel_battle[MENUITEM_BATTLE_BATTLESTYLE];
     gSaveBlock2Ptr->optionsWildBattleSpeed      = sOptions->sel_battle[MENUITEM_BATTLE_WILD_SPEED];
     gSaveBlock2Ptr->optionsTrainerBattleSpeed   = sOptions->sel_battle[MENUITEM_BATTLE_TRAINER_SPEED];
@@ -1379,11 +1382,22 @@ static void DrawChoices_TextSpeed(int selection, int y)
 static void DrawChoices_BattleScene(int selection, int y)
 {
     bool8 active = CheckConditions(MENUITEM_BATTLE_BATTLESCENE);
-    u8 styles[2] = {0};
-    styles[selection] = 1;
-
-    DrawOptionMenuChoice(gText_BattleSceneOn, 104, y, styles[0], active);
-    DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleSceneOff, 198), y, styles[1], active);
+    switch (selection)
+    {
+        default:
+        case OPTIONS_BATTLE_SCENE_FULL_ANIMATION:
+            DrawOptionMenuChoice(COMPOUND_STRING("CINEMATIC MODE"), 104, y, 1, active);
+            break;
+        case OPTIONS_BATTLE_SCENE_LOW_ANIMATION:
+            DrawOptionMenuChoice(COMPOUND_STRING("LOW ANIMATIONS"), 104, y, 1, active);
+            break;
+        case OPTIONS_BATTLE_SCENE_NO_ANIMATION:
+            DrawOptionMenuChoice(COMPOUND_STRING("STATIC BATTLES"), 104, y, 1, active);
+            break;
+        case OPTIONS_BATTLE_SCENE_NO_INTRO:
+            DrawOptionMenuChoice(COMPOUND_STRING("STREAMLINED INTRO"), 104, y, 1, active);
+            break;
+    }
 }
 
 static void DrawChoices_BattleStyle(int selection, int y)
