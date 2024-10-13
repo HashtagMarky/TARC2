@@ -1458,8 +1458,8 @@ static void DrawChoices_BattleSpeed(int selection, int y)
         DrawOptionMenuChoice(sText_Normal, 104, y, 1, active);
     else
     {
-        u8 textMultipler[] = _("x2{0x77}{0x77}{0x77}{0x77}{0x77}");
-        textMultipler[1] = CHAR_0 + selection;
+        u8 textMultipler[] = _("x1{0x77}{0x77}{0x77}{0x77}{0x77}");
+        textMultipler[1] = CHAR_1 + selection;
         DrawOptionMenuChoice(textMultipler, 104, y, 1, active);
     }
 }
