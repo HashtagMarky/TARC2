@@ -559,8 +559,6 @@ struct SaveBlock2
              u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
              u16 optionsBattleSceneOff:1; // whether battle animations are disabled
              u16 optionsUnitSystem:1;   //tx_optionsPlus
-             u16 optionsHpBarSpeed:4;   //tx_optionsPlus
-             u16 optionsExpBarSpeed:4;  //tx_optionsPlus
              u16 optionsDisableMatchCall:1; //tx_optionsPlus
              u16 optionsCurrentFont:1;  //tx_optionsPlus
              u16 optionsSuppressNPCMugshots:1; // whether NPC Mugshots are disabled
@@ -571,7 +569,7 @@ struct SaveBlock2
              u16 optionsWildBattleSpeed:2; // speed of wild battles
              u16 optionsTrainerBattleSpeed:2; // speed of trainer battles
              u16 regionMapZoom:1; // whether the map is zoomed in
-             //u16 padding1:4;
+             //u16 padding1:12;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 filler_90[0x8];
     /*0x98*/ struct Time localTimeOffset;

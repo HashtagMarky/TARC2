@@ -56,9 +56,9 @@ enum
 enum
 {
     MENUITEM_BATTLE_BATTLESTYLE,
+    MENUITEM_BATTLE_WILD_SPEED,
+    MENUITEM_BATTLE_TRAINER_SPEED,
     MENUITEM_BATTLE_BATTLESCENE,
-    MENUITEM_BATTLE_HP_BAR,
-    MENUITEM_BATTLE_EXP_BAR,
     MENUITEM_BATTLE_CANCEL,
     MENUITEM_BATTLE_COUNT,
 };
@@ -194,6 +194,7 @@ static void DrawChoices_BattleStyle(int selection, int y);
 static void DrawChoices_Sound(int selection, int y);
 static void DrawChoices_ButtonMode(int selection, int y);
 static void DrawChoices_BarSpeed(int selection, int y); //HP and EXP
+static void DrawChoices_BattleSpeed(int selection, int y);
 static void DrawChoices_UnitSystem(int selection, int y);
 static void DrawChoices_Font(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
@@ -274,14 +275,17 @@ struct // MENU_BATTLE
 { 
     [MENUITEM_BATTLE_BATTLESCENE]   = {DrawChoices_BattleScene, ProcessInput_Options_Two},
     [MENUITEM_BATTLE_BATTLESTYLE]   = {DrawChoices_BattleStyle, ProcessInput_Options_Two},
-    [MENUITEM_BATTLE_HP_BAR]        = {DrawChoices_BarSpeed,    ProcessInput_Options_Eleven},
-    [MENUITEM_BATTLE_EXP_BAR]       = {DrawChoices_BarSpeed,    ProcessInput_Options_Eleven},
+    [MENUITEM_BATTLE_WILD_SPEED]    = {DrawChoices_BattleSpeed, ProcessInput_Options_Four},
+    [MENUITEM_BATTLE_TRAINER_SPEED] = {DrawChoices_BattleSpeed, ProcessInput_Options_Four},
     [MENUITEM_BATTLE_CANCEL]        = {NULL, NULL},
 };
 
 // Menu left side option names text
-static const u8 sText_HpBar[]               = _("HP BAR");
-static const u8 sText_ExpBar[]              = _("EXP BAR");
+static const u8 sText_WildSpeed_Compact[]   = _("{FONT_SHORT_NARROW}WILD BATTLE SPEED{FONT_NORMAL}");
+static const u8 sText_WildSpeed_Spread[]    = _("{FONT_NARROW}WILD BATTLE SPEED{FONT_NORMAL}");
+static const u8 sText_TrainerSpeed[]        = _("SHOWDOWN SPEED{FONT_NORMAL}");
+static const u8 sText_TrainerSpeed_Compact[] = _("{FONT_SHORT_NARROW}SHOWDOWN SPEED{FONT_NORMAL}");
+static const u8 sText_TrainerSpeed_Spread[] = _("{FONT_NARROW}SHOWDOWN SPEED{FONT_NORMAL}");
 static const u8 sText_UnitSystem[]          = _("UNIT SYSTEM");
 static const u8 sText_BikeMusic[]           = _("BIKE MUSIC");
 static const u8 sText_SurfMusic[]           = _("SURF MUSIC");
@@ -322,12 +326,21 @@ static const u8 *const sOptionMenuItemsNamesOverworld_Spread[MENUITEM_OVERWORLD_
     [MENUITEM_OVERWORLD_CANCEL]         = gText_OptionMenuSave,
 };
 
-static const u8 *const sOptionMenuItemsNamesBattle[MENUITEM_BATTLE_COUNT] =
+static const u8 *const sOptionMenuItemsNamesBattle_Compact[MENUITEM_BATTLE_COUNT] =
 {
     [MENUITEM_BATTLE_BATTLESCENE]   = gText_BattleScene,
     [MENUITEM_BATTLE_BATTLESTYLE]   = gText_BattleStyle,
-    [MENUITEM_BATTLE_HP_BAR]        = sText_HpBar,
-    [MENUITEM_BATTLE_EXP_BAR]       = sText_ExpBar,
+    [MENUITEM_BATTLE_WILD_SPEED]    = sText_WildSpeed_Compact,
+    [MENUITEM_BATTLE_TRAINER_SPEED] = sText_TrainerSpeed,
+    [MENUITEM_BATTLE_CANCEL]        = gText_OptionMenuSave,
+};
+
+static const u8 *const sOptionMenuItemsNamesBattle_Spread[MENUITEM_BATTLE_COUNT] =
+{
+    [MENUITEM_BATTLE_BATTLESCENE]   = gText_BattleScene,
+    [MENUITEM_BATTLE_BATTLESTYLE]   = gText_BattleStyle,
+    [MENUITEM_BATTLE_WILD_SPEED]    = sText_WildSpeed_Spread,
+    [MENUITEM_BATTLE_TRAINER_SPEED] = sText_TrainerSpeed,
     [MENUITEM_BATTLE_CANCEL]        = gText_OptionMenuSave,
 };
 
@@ -347,7 +360,17 @@ static const u8 *const OptionTextRight(u8 menuItem)
             return sOptionMenuItemsNamesOverworld_Spread[menuItem];
         }
     }
-    case MENU_BATTLE:       return sOptionMenuItemsNamesBattle[menuItem];
+    case MENU_BATTLE:
+    {
+        if (gSaveBlock2Ptr->optionsCurrentFont == 0)
+        {
+            return sOptionMenuItemsNamesBattle_Compact[menuItem];
+        }
+        else
+        {
+            return sOptionMenuItemsNamesBattle_Spread[menuItem];
+        }
+    }
     }
     return sOptionMenuItemsNamesMain[menuItem];
 }
@@ -385,8 +408,8 @@ static bool8 CheckConditions(int selection)
         {
         case MENUITEM_BATTLE_BATTLESCENE:   return TRUE;
         case MENUITEM_BATTLE_BATTLESTYLE:   return TRUE;
-        case MENUITEM_BATTLE_HP_BAR:        return TRUE;
-        case MENUITEM_BATTLE_EXP_BAR:       return TRUE;
+        case MENUITEM_BATTLE_WILD_SPEED:    return TRUE;
+        case MENUITEM_BATTLE_TRAINER_SPEED: return TRUE;
         case MENUITEM_BATTLE_CANCEL:        return TRUE;
         case MENUITEM_BATTLE_COUNT:         return TRUE;
         }
@@ -412,8 +435,8 @@ static const u8 sText_Desc_UnitSystemMetric[]   = _("Display weights and sizes i
 static const u8 sText_Desc_FrameType[]          = _("Choose the interface styling.");
 
 // Custom Descriptions
-static const u8 sText_Desc_BattleHPBar[]                = _("Choose how fast the HP BAR will get\ndrained in battles.");
-static const u8 sText_Desc_BattleExpBar[]               = _("Choose how fast the EXP BAR will get\nfilled in battles.");
+static const u8 sText_Desc_WildSpeed[]                  = _("Choose the speed of wild battles.\n(Important battles are not included.)");
+static const u8 sText_Desc_TrainerSpeed[]               = _("Choose the speed of trainer battles.\n(Important battles are not included.)");
 static const u8 sText_Desc_SurfOff[]                    = _("Disables the SURF theme\nwhen using SURF.");
 static const u8 sText_Desc_SurfOn[]                     = _("Enables the SURF theme\nwhen using SURF.");
 static const u8 sText_Desc_BikeOff[]                    = _("Disables the BIKE theme when\nusing the BIKE.");
@@ -462,8 +485,8 @@ static const u8 *const sOptionMenuItemDescriptionsBattle[MENUITEM_BATTLE_COUNT][
 {
     [MENUITEM_BATTLE_BATTLESCENE]   = {sText_Desc_BattleScene_On,       sText_Desc_BattleScene_Off},
     [MENUITEM_BATTLE_BATTLESTYLE]   = {sText_Desc_BattleStyle_Shift,    sText_Desc_BattleStyle_Set},
-    [MENUITEM_BATTLE_HP_BAR]        = {sText_Desc_BattleHPBar,          sText_Empty},
-    [MENUITEM_BATTLE_EXP_BAR]       = {sText_Desc_BattleExpBar,         sText_Empty},
+    [MENUITEM_BATTLE_WILD_SPEED]    = {sText_Desc_WildSpeed,            sText_Empty},
+    [MENUITEM_BATTLE_TRAINER_SPEED] = {sText_Desc_TrainerSpeed,         sText_Empty},
     [MENUITEM_BATTLE_CANCEL]        = {sText_Desc_Save,                 sText_Empty},
 };
 
@@ -494,8 +517,8 @@ static const u8 *const sOptionMenuItemDescriptionsDisabledBattle[MENUITEM_BATTLE
 {
     [MENUITEM_BATTLE_BATTLESCENE]   = sText_Empty,
     [MENUITEM_BATTLE_BATTLESTYLE]   = sText_Empty,
-    [MENUITEM_BATTLE_HP_BAR]        = sText_Desc_Disabled_BattleHPBar,
-    [MENUITEM_BATTLE_EXP_BAR]       = sText_Empty,
+    [MENUITEM_BATTLE_WILD_SPEED]    = sText_Empty,
+    [MENUITEM_BATTLE_TRAINER_SPEED] = sText_Empty,
     [MENUITEM_BATTLE_CANCEL]        = sText_Empty,
 };
 
@@ -523,7 +546,7 @@ static const u8 *const OptionTextDescription(void)
         if (!CheckConditions(menuItem))
             return sOptionMenuItemDescriptionsDisabledMain[menuItem]; // Maybe Edit
         selection = sOptions->sel_battle[menuItem];
-        if (menuItem == MENUITEM_BATTLE_HP_BAR || menuItem == MENUITEM_BATTLE_EXP_BAR)
+        if (menuItem == MENUITEM_BATTLE_WILD_SPEED || menuItem == MENUITEM_BATTLE_TRAINER_SPEED)
             selection = 0;
         return sOptionMenuItemDescriptionsBattle[menuItem][selection];
     }
@@ -834,8 +857,8 @@ void CB2_InitOptionPlusMenu(void)
 
         sOptions->sel_battle[MENUITEM_BATTLE_BATTLESCENE]       = gSaveBlock2Ptr->optionsBattleSceneOff;
         sOptions->sel_battle[MENUITEM_BATTLE_BATTLESTYLE]       = gSaveBlock2Ptr->optionsBattleStyle;
-        sOptions->sel_battle[MENUITEM_BATTLE_HP_BAR]            = gSaveBlock2Ptr->optionsHpBarSpeed;
-        sOptions->sel_battle[MENUITEM_BATTLE_EXP_BAR]           = gSaveBlock2Ptr->optionsExpBarSpeed;
+        sOptions->sel_battle[MENUITEM_BATTLE_WILD_SPEED]        = gSaveBlock2Ptr->optionsWildBattleSpeed;
+        sOptions->sel_battle[MENUITEM_BATTLE_TRAINER_SPEED]     = gSaveBlock2Ptr->optionsTrainerBattleSpeed;
 
         sOptions->submenu = MENU_MAIN;
 
@@ -1064,10 +1087,10 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsFollowerMugshots     = sOptions->sel_overworld[MENUITEM_OVERWORLD_FOLLOWER_MUG];
     gSaveBlock2Ptr->optionsDisableMatchCall     = sOptions->sel_overworld[MENUITEM_OVERWORLD_MATCHCALL];
 
-    gSaveBlock2Ptr->optionsBattleSceneOff   = sOptions->sel_battle[MENUITEM_BATTLE_BATTLESCENE];
-    gSaveBlock2Ptr->optionsBattleStyle      = sOptions->sel_battle[MENUITEM_BATTLE_BATTLESTYLE];
-    gSaveBlock2Ptr->optionsHpBarSpeed       = sOptions->sel_battle[MENUITEM_BATTLE_HP_BAR];
-    gSaveBlock2Ptr->optionsExpBarSpeed      = sOptions->sel_battle[MENUITEM_BATTLE_EXP_BAR];
+    gSaveBlock2Ptr->optionsBattleSceneOff       = sOptions->sel_battle[MENUITEM_BATTLE_BATTLESCENE];
+    gSaveBlock2Ptr->optionsBattleStyle          = sOptions->sel_battle[MENUITEM_BATTLE_BATTLESTYLE];
+    gSaveBlock2Ptr->optionsWildBattleSpeed      = sOptions->sel_battle[MENUITEM_BATTLE_WILD_SPEED];
+    gSaveBlock2Ptr->optionsTrainerBattleSpeed   = sOptions->sel_battle[MENUITEM_BATTLE_TRAINER_SPEED];
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
@@ -1396,6 +1419,7 @@ static void DrawChoices_ButtonMode(int selection, int y)
 }
 
 static const u8 sText_Normal[] = _("NORMAL");
+/*
 static void DrawChoices_BarSpeed(int selection, int y) //HP and EXP
 {
     bool8 active = CheckConditions(MENUITEM_BATTLE_EXP_BAR);
@@ -1410,6 +1434,20 @@ static void DrawChoices_BarSpeed(int selection, int y) //HP and EXP
     }
     else
         DrawOptionMenuChoice(sText_Instant, 104, y, 1, active);
+}
+*/
+static void DrawChoices_BattleSpeed(int selection, int y) 
+{
+    bool8 active = CheckConditions(MENUITEM_BATTLE_TRAINER_SPEED);
+
+    if (selection == 0)
+        DrawOptionMenuChoice(sText_Normal, 104, y, 1, active);
+    else
+    {
+        u8 textMultipler[] = _("x2{0x77}{0x77}{0x77}{0x77}{0x77}");
+        textMultipler[1] = CHAR_0 + selection;
+        DrawOptionMenuChoice(textMultipler, 104, y, 1, active);
+    }
 }
 
 static void DrawChoices_UnitSystem(int selection, int y)
