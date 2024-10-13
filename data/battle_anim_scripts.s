@@ -28216,6 +28216,15 @@ gBattleAnimGeneral_HeldItemEffect::
 	waitforvisualfinish
 	end
 
+gBattleAnimGeneral_HeldItemEffectShortened::
+	loadspritegfx ANIM_TAG_THIN_RING
+	delay 0
+	playsewithpan SE_SHINY, SOUND_PAN_ATTACKER
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_ATTACKER, 3, 7, 0, RGB(17, 31, 25)
+	createsprite gThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0
+	waitforvisualfinish
+	end
+
 gBattleAnimGeneral_SmokeballEscape::
 	loadspritegfx ANIM_TAG_PINK_CLOUD
 	monbg ANIM_ATTACKER
