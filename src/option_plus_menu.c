@@ -37,6 +37,7 @@ enum
     MENUITEM_MAIN_BUTTONMODE,
     MENUITEM_MAIN_UNIT_SYSTEM,
     MENUITEM_MAIN_FRAMETYPE,
+    MENUITEM_MAIN_TITLE_SCREEN,
     MENUITEM_MAIN_CANCEL,
     MENUITEM_MAIN_COUNT,
 };
@@ -200,6 +201,7 @@ static void DrawChoices_BikeMusic(int selection, int y);
 static void DrawChoices_SurfMusic(int selection, int y);
 static void DrawChoices_MugshotsNPC(int selection, int y);
 static void DrawChoices_MugshotsFollower(int selection, int y);
+static void DrawChoices_TitleScreen(int selection, int y);
 static void DrawBgWindowFrames(void);
 
 // EWRAM vars
@@ -244,6 +246,7 @@ struct // MENU_MAIN
     [MENUITEM_MAIN_BUTTONMODE]      = {DrawChoices_ButtonMode,  ProcessInput_Options_Three},
     [MENUITEM_MAIN_UNIT_SYSTEM]     = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
     [MENUITEM_MAIN_FRAMETYPE]       = {DrawChoices_FrameType,   ProcessInput_FrameType},
+    [MENUITEM_MAIN_TITLE_SCREEN]    = {DrawChoices_TitleScreen, ProcessInput_Options_Two},
     [MENUITEM_MAIN_CANCEL]          = {NULL, NULL},
 };
 
@@ -284,6 +287,7 @@ static const u8 sText_MugshotNPC_Compact[]  = _("{FONT_SHORT_NARROW}NPC MUGSHOTS
 static const u8 sText_MugshotNPC_Spread[]   = _("{FONT_NARROW}NPC MUGSHOTS{FONT_NORMAL}");
 static const u8 sText_MugshotFollower_Compact[] = _("{FONT_SHORT_NARROW}FOLLOWER MUGSHOTS{FONT_NORMAL}");
 static const u8 sText_MugshotFollower_Spread[]  = _("{FONT_NARROW}FOLLOWER MUGSHOTS{FONT_NORMAL}");
+static const u8 sText_TitleScreen[]         = _("TITLE SCREEN");
 static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 {
     [MENUITEM_MAIN_TEXTSPEED]       = gText_TextSpeed,
@@ -292,6 +296,7 @@ static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
     [MENUITEM_MAIN_BUTTONMODE]      = gText_ButtonMode,
     [MENUITEM_MAIN_UNIT_SYSTEM]     = sText_UnitSystem,
     [MENUITEM_MAIN_FRAMETYPE]       = gText_Frame,
+    [MENUITEM_MAIN_TITLE_SCREEN]    = sText_TitleScreen,
     [MENUITEM_MAIN_CANCEL]          = gText_OptionMenuSave,
 };
 
@@ -359,6 +364,7 @@ static bool8 CheckConditions(int selection)
         case MENUITEM_MAIN_BUTTONMODE:      return TRUE;
         case MENUITEM_MAIN_UNIT_SYSTEM:     return TRUE;
         case MENUITEM_MAIN_FRAMETYPE:       return TRUE;
+        case MENUITEM_MAIN_TITLE_SCREEN:    return TRUE;
         case MENUITEM_MAIN_CANCEL:          return TRUE;
         case MENUITEM_MAIN_COUNT:           return TRUE;
         }
@@ -419,6 +425,8 @@ static const u8 sText_Desc_MugshotNPCOff[]              = _("Hide NPC mugshots d
 static const u8 sText_Desc_MugshotFollowerPlaceholder[] = _("Show a placeholder mugshot when\nfollowing POKéMON do not have one.");
 static const u8 sText_Desc_MugshotFollowerOn[]          = _("Show mugshot of following POKéMON if\nthey are available.");
 static const u8 sText_Desc_MugshotFollowerOff[]         = _("Hide following POKéMON mugshots.");
+static const u8 sText_Desc_TitleScreenMatch[]           = _("Title screen legendary matches choice\nof interface, if available.");
+static const u8 sText_Desc_TitleScreenRandom[]          = _("Title screen legendary is randomised.");
 
 // Disabled Descriptions
 static const u8 sText_Desc_Disabled_Textspeed[]     = _("Only active if xyz.");
@@ -434,6 +442,7 @@ static const u8 *const sOptionMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
     [MENUITEM_MAIN_BUTTONMODE]      = {sText_Desc_ButtonMode,           sText_Desc_ButtonMode_LR,       sText_Desc_ButtonMode_LA},
     [MENUITEM_MAIN_UNIT_SYSTEM]     = {sText_Desc_UnitSystemImperial,   sText_Desc_UnitSystemMetric,    sText_Empty},
     [MENUITEM_MAIN_FRAMETYPE]       = {sText_Desc_FrameType,            sText_Empty,                    sText_Empty},
+    [MENUITEM_MAIN_TITLE_SCREEN]    = {sText_Desc_TitleScreenMatch,     sText_Desc_TitleScreenRandom,   sText_Empty},
     [MENUITEM_MAIN_CANCEL]          = {sText_Desc_Save,                 sText_Empty,                    sText_Empty},
 };
 
@@ -464,6 +473,7 @@ static const u8 *const sOptionMenuItemDescriptionsDisabledMain[MENUITEM_MAIN_COU
     [MENUITEM_MAIN_BUTTONMODE]      = sText_Empty,
     [MENUITEM_MAIN_UNIT_SYSTEM]     = sText_Empty,
     [MENUITEM_MAIN_FRAMETYPE]       = sText_Empty,
+    [MENUITEM_MAIN_TITLE_SCREEN]    = sText_Empty,
     [MENUITEM_MAIN_CANCEL]          = sText_Empty,
 };
 
@@ -812,6 +822,7 @@ void CB2_InitOptionPlusMenu(void)
         sOptions->sel[MENUITEM_MAIN_BUTTONMODE]                 = gSaveBlock2Ptr->optionsButtonMode;
         sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM]                = gSaveBlock2Ptr->optionsUnitSystem;
         sOptions->sel[MENUITEM_MAIN_FRAMETYPE]                  = gSaveBlock2Ptr->optionsInterfaceColor;
+        sOptions->sel[MENUITEM_MAIN_TITLE_SCREEN]               = gSaveBlock2Ptr->optionsTitleScreenRandomise;
         
         sOptions->sel_overworld[MENUITEM_OVERWORLD_BIKE_MUSIC]      = gSaveBlock2Ptr->optionsBikeMusic;
         sOptions->sel_overworld[MENUITEM_OVERWORLD_SURF_MUSIC]      = gSaveBlock2Ptr->optionsSurfMusic;
@@ -1037,12 +1048,13 @@ static void Task_OptionMenuProcessInput(u8 taskId)
 
 static void Task_OptionMenuSave(u8 taskId)
 {
-    gSaveBlock2Ptr->optionsTextSpeed        = sOptions->sel[MENUITEM_MAIN_TEXTSPEED];
-    gSaveBlock2Ptr->optionsCurrentFont      = sOptions->sel[MENUITEM_MAIN_FONT];
-    gSaveBlock2Ptr->optionsSound            = sOptions->sel[MENUITEM_MAIN_SOUND];
-    gSaveBlock2Ptr->optionsButtonMode       = sOptions->sel[MENUITEM_MAIN_BUTTONMODE];
-    gSaveBlock2Ptr->optionsUnitSystem       = sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM];
-    gSaveBlock2Ptr->optionsInterfaceColor   = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
+    gSaveBlock2Ptr->optionsTextSpeed                = sOptions->sel[MENUITEM_MAIN_TEXTSPEED];
+    gSaveBlock2Ptr->optionsCurrentFont              = sOptions->sel[MENUITEM_MAIN_FONT];
+    gSaveBlock2Ptr->optionsSound                    = sOptions->sel[MENUITEM_MAIN_SOUND];
+    gSaveBlock2Ptr->optionsButtonMode               = sOptions->sel[MENUITEM_MAIN_BUTTONMODE];
+    gSaveBlock2Ptr->optionsUnitSystem               = sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM];
+    gSaveBlock2Ptr->optionsInterfaceColor           = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
+    gSaveBlock2Ptr->optionsTitleScreenRandomise     = sOptions->sel[MENUITEM_MAIN_TITLE_SCREEN];
 
     gSaveBlock2Ptr->optionsBikeMusic            = sOptions->sel_overworld[MENUITEM_OVERWORLD_BIKE_MUSIC];
     gSaveBlock2Ptr->optionsSurfMusic            = sOptions->sel_overworld[MENUITEM_OVERWORLD_SURF_MUSIC];
@@ -1475,6 +1487,18 @@ static void DrawChoices_MugshotsFollower(int selection, int y)
     }
     else
         DrawOptionMenuChoice(gText_BattleSceneOff, 104, y, 1, active);
+}
+
+static void DrawChoices_TitleScreen(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_MAIN_TITLE_SCREEN);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    if (selection == 0)
+        DrawOptionMenuChoice(COMPOUND_STRING("MATCH INTERFACE"), 104, y, styles[0], active);
+    else
+        DrawOptionMenuChoice(COMPOUND_STRING("RANDOMISE LEGEND"), 104, y, 1, active);
 }
 
 
