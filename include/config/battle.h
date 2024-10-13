@@ -286,13 +286,4 @@
 // Pokémon battle sprite settings
 #define B_ENEMY_MON_SHADOW_STYLE        GEN_LATEST // In Gen4+, all enemy Pokemon will have a shadow drawn beneath them.
 
-// Battle Speed Up (Credit to Pokabbie)
-#define B_BATTLE_SPEED                  0 // Usage with a variable
-#define OPTIONS_BATTLE_SCENE_1X         0
-#define OPTIONS_BATTLE_SCENE_2X         1
-#define OPTIONS_BATTLE_SCENE_3X         2
-#define OPTIONS_BATTLE_SCENE_4X         3
-#define OPTIONS_BATTLE_SCENE_DISABLED   4
-#define OPTIONS_BATTLE_SCENE_COUNT      5
-
 #endif // GUARD_CONFIG_BATTLE_H

@@ -568,8 +568,10 @@ struct SaveBlock2
              u16 optionsOverworldCatchSuccessMultiplyer:1; // whether or not a x1 or x2 multiplier is used in Overworld Capture Odds
              u16 optionsBikeMusic:1; // whether or not bike music is played
              u16 optionsSurfMusic:1; // whether or not surf music is played
+             u16 optionsWildBattleSpeed:2; // speed of wild battles
+             u16 optionsTrainerBattleSpeed:2; // speed of trainer battles
              u16 regionMapZoom:1; // whether the map is zoomed in
-             //u16 padding1:6;
+             //u16 padding1:4;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 filler_90[0x8];
     /*0x98*/ struct Time localTimeOffset;

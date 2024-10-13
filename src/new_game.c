@@ -107,6 +107,8 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsOverworldCatchSuccessMultiplyer = FALSE;
     gSaveBlock2Ptr->optionsBikeMusic = FALSE;
     gSaveBlock2Ptr->optionsSurfMusic = FALSE;
+    gSaveBlock2Ptr->optionsWildBattleSpeed = 0;
+    gSaveBlock2Ptr->optionsTrainerBattleSpeed = 0;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
     gSaveBlock3Ptr->autoRun = FALSE;
     gSaveBlock3Ptr->autoBike = FALSE;
