@@ -564,8 +564,7 @@ struct SaveBlock2
              u16 optionsDisableMatchCall:1; //tx_optionsPlus
              u16 optionsCurrentFont:1;  //tx_optionsPlus
              u16 optionsSuppressNPCMugshots:1; // whether NPC Mugshots are disabled
-             u16 optionsFollowerMugshotPlaceholder:1; // whether Substitute Mugshot is shown where follower species does not have a musghot.
-             u16 optionsSuppressFollowerMugshots:1; // whether Follower Mugshots are disabled
+             u16 optionsFollowerMugshots:2; // whether Follower Mugshots/Placeholders are disabled
              u16 optionsOverworldCatchSuccessMultiplyer:1; // whether or not a x1 or x2 multiplier is used in Overworld Capture Odds
              u16 optionsBikeMusic:1; // whether or not bike music is played
              u16 optionsSurfMusic:1; // whether or not surf music is played

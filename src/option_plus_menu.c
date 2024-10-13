@@ -45,6 +45,8 @@ enum
 {
     MENUITEM_OVERWORLD_BIKE_MUSIC,
     MENUITEM_OVERWORLD_SURF_MUSIC,
+    MENUITEM_OVERWORLD_NPC_MUG,
+    MENUITEM_OVERWORLD_FOLLOWER_MUG,
     MENUITEM_OVERWORLD_MATCHCALL,
     MENUITEM_OVERWORLD_CANCEL,
     MENUITEM_OVERWORLD_COUNT,
@@ -196,6 +198,8 @@ static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_MatchCall(int selection, int y);
 static void DrawChoices_BikeMusic(int selection, int y);
 static void DrawChoices_SurfMusic(int selection, int y);
+static void DrawChoices_MugshotsNPC(int selection, int y);
+static void DrawChoices_MugshotsFollower(int selection, int y);
 static void DrawBgWindowFrames(void);
 
 // EWRAM vars
@@ -249,10 +253,12 @@ struct // MENU_OVERWORLD
     int (*processInput)(int selection);
 } static const sItemFunctionsOverworld[MENUITEM_OVERWORLD_COUNT] =
 {
-    [MENUITEM_OVERWORLD_BIKE_MUSIC] = {DrawChoices_BikeMusic,   ProcessInput_Options_Two},
-    [MENUITEM_OVERWORLD_SURF_MUSIC] = {DrawChoices_SurfMusic,   ProcessInput_Options_Two},
-    [MENUITEM_OVERWORLD_MATCHCALL]  = {DrawChoices_MatchCall,   ProcessInput_Options_Two},
-    [MENUITEM_OVERWORLD_CANCEL]     = {NULL, NULL},
+    [MENUITEM_OVERWORLD_BIKE_MUSIC]     = {DrawChoices_BikeMusic,           ProcessInput_Options_Two},
+    [MENUITEM_OVERWORLD_SURF_MUSIC]     = {DrawChoices_SurfMusic,           ProcessInput_Options_Two},
+    [MENUITEM_OVERWORLD_NPC_MUG]        = {DrawChoices_MugshotsNPC,         ProcessInput_Options_Two},
+    [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = {DrawChoices_MugshotsFollower,    ProcessInput_Options_Three},
+    [MENUITEM_OVERWORLD_MATCHCALL]      = {DrawChoices_MatchCall,           ProcessInput_Options_Two},
+    [MENUITEM_OVERWORLD_CANCEL]         = {NULL, NULL},
 };
 
 struct // MENU_BATTLE
@@ -269,11 +275,15 @@ struct // MENU_BATTLE
 };
 
 // Menu left side option names text
-static const u8 sText_HpBar[]       = _("HP BAR");
-static const u8 sText_ExpBar[]      = _("EXP BAR");
-static const u8 sText_UnitSystem[]  = _("UNIT SYSTEM");
-static const u8 sText_BikeMusic[]   = _("BIKE MUSIC");
-static const u8 sText_SurfMusic[]   = _("SURF MUSIC");
+static const u8 sText_HpBar[]               = _("HP BAR");
+static const u8 sText_ExpBar[]              = _("EXP BAR");
+static const u8 sText_UnitSystem[]          = _("UNIT SYSTEM");
+static const u8 sText_BikeMusic[]           = _("BIKE MUSIC");
+static const u8 sText_SurfMusic[]           = _("SURF MUSIC");
+static const u8 sText_MugshotNPC_Compact[]  = _("{FONT_SHORT_NARROW}NPC MUGSHOTS{FONT_NORMAL}");
+static const u8 sText_MugshotNPC_Spread[]   = _("{FONT_NARROW}NPC MUGSHOTS{FONT_NORMAL}");
+static const u8 sText_MugshotFollower_Compact[] = _("{FONT_SHORT_NARROW}FOLLOWER MUGSHOTS{FONT_NORMAL}");
+static const u8 sText_MugshotFollower_Spread[]  = _("{FONT_NARROW}FOLLOWER MUGSHOTS{FONT_NORMAL}");
 static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 {
     [MENUITEM_MAIN_TEXTSPEED]       = gText_TextSpeed,
@@ -285,12 +295,24 @@ static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
     [MENUITEM_MAIN_CANCEL]          = gText_OptionMenuSave,
 };
 
-static const u8 *const sOptionMenuItemsNamesOverworld[MENUITEM_OVERWORLD_COUNT] =
+static const u8 *const sOptionMenuItemsNamesOverworld_Compact[MENUITEM_OVERWORLD_COUNT] =
 {
-    [MENUITEM_OVERWORLD_BIKE_MUSIC] = sText_BikeMusic,
-    [MENUITEM_OVERWORLD_SURF_MUSIC] = sText_SurfMusic,
-    [MENUITEM_OVERWORLD_MATCHCALL]  = gText_OptionMatchCalls,
-    [MENUITEM_OVERWORLD_CANCEL]     = gText_OptionMenuSave,
+    [MENUITEM_OVERWORLD_BIKE_MUSIC]     = sText_BikeMusic,
+    [MENUITEM_OVERWORLD_SURF_MUSIC]     = sText_SurfMusic,
+    [MENUITEM_OVERWORLD_NPC_MUG]        = sText_MugshotNPC_Compact,
+    [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = sText_MugshotFollower_Compact,
+    [MENUITEM_OVERWORLD_MATCHCALL]      = gText_OptionMatchCalls,
+    [MENUITEM_OVERWORLD_CANCEL]         = gText_OptionMenuSave,
+};
+
+static const u8 *const sOptionMenuItemsNamesOverworld_Spread[MENUITEM_OVERWORLD_COUNT] =
+{
+    [MENUITEM_OVERWORLD_BIKE_MUSIC]     = sText_BikeMusic,
+    [MENUITEM_OVERWORLD_SURF_MUSIC]     = sText_SurfMusic,
+    [MENUITEM_OVERWORLD_NPC_MUG]        = sText_MugshotNPC_Spread,
+    [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = sText_MugshotFollower_Spread,
+    [MENUITEM_OVERWORLD_MATCHCALL]      = gText_OptionMatchCalls,
+    [MENUITEM_OVERWORLD_CANCEL]         = gText_OptionMenuSave,
 };
 
 static const u8 *const sOptionMenuItemsNamesBattle[MENUITEM_BATTLE_COUNT] =
@@ -307,7 +329,17 @@ static const u8 *const OptionTextRight(u8 menuItem)
     switch (sOptions->submenu)
     {
     case MENU_MAIN:         return sOptionMenuItemsNamesMain[menuItem];
-    case MENU_OVERWORLD:    return sOptionMenuItemsNamesOverworld[menuItem];
+    case MENU_OVERWORLD:
+    {
+        if (gSaveBlock2Ptr->optionsCurrentFont == 0)
+        {
+            return sOptionMenuItemsNamesOverworld_Compact[menuItem];
+        }
+        else
+        {
+            return sOptionMenuItemsNamesOverworld_Spread[menuItem];
+        }
+    }
     case MENU_BATTLE:       return sOptionMenuItemsNamesBattle[menuItem];
     }
     return sOptionMenuItemsNamesMain[menuItem];
@@ -333,10 +365,12 @@ static bool8 CheckConditions(int selection)
     case MENU_OVERWORLD:
         switch (selection)
         {
-        case MENUITEM_OVERWORLD_BIKE_MUSIC: return TRUE;
-        case MENUITEM_OVERWORLD_SURF_MUSIC: return TRUE;
-        case MENUITEM_OVERWORLD_MATCHCALL:  return TRUE;
-        case MENUITEM_OVERWORLD_CANCEL:     return TRUE;
+        case MENUITEM_OVERWORLD_BIKE_MUSIC:     return TRUE;
+        case MENUITEM_OVERWORLD_SURF_MUSIC:     return TRUE;
+        case MENUITEM_OVERWORLD_NPC_MUG:        return TRUE;
+        case MENUITEM_OVERWORLD_FOLLOWER_MUG:   return TRUE;
+        case MENUITEM_OVERWORLD_MATCHCALL:      return TRUE;
+        case MENUITEM_OVERWORLD_CANCEL:         return TRUE;
         }
     case MENU_BATTLE:
         switch(selection)
@@ -370,16 +404,21 @@ static const u8 sText_Desc_UnitSystemMetric[]   = _("Display weights and sizes i
 static const u8 sText_Desc_FrameType[]          = _("Choose the frame surrounding the\nwindows.");
 
 // Custom Descriptions
-static const u8 sText_Desc_BattleHPBar[]        = _("Choose how fast the HP BAR will get\ndrained in battles.");
-static const u8 sText_Desc_BattleExpBar[]       = _("Choose how fast the EXP BAR will get\nfilled in battles.");
-static const u8 sText_Desc_SurfOff[]            = _("Disables the SURF theme\nwhen using SURF.");
-static const u8 sText_Desc_SurfOn[]             = _("Enables the SURF theme\nwhen using SURF.");
-static const u8 sText_Desc_BikeOff[]            = _("Disables the BIKE theme when\nusing the BIKE.");
-static const u8 sText_Desc_BikeOn[]             = _("Enables the BIKE theme when\nusing the BIKE.");
-static const u8 sText_Desc_FontTypeCompact[]    = _("Printed text uses a font\nwhich is more compact.");
-static const u8 sText_Desc_FontTypeSpread[]     = _("Printed text uses a font\nwhich is more spread.");
-static const u8 sText_Desc_OverworldCallsOn[]   = _("TRAINERs will be able to call you,\noffering rematches and info.");
-static const u8 sText_Desc_OverworldCallsOff[]  = _("You will not receive calls.\nSpecial events will still occur.");
+static const u8 sText_Desc_BattleHPBar[]                = _("Choose how fast the HP BAR will get\ndrained in battles.");
+static const u8 sText_Desc_BattleExpBar[]               = _("Choose how fast the EXP BAR will get\nfilled in battles.");
+static const u8 sText_Desc_SurfOff[]                    = _("Disables the SURF theme\nwhen using SURF.");
+static const u8 sText_Desc_SurfOn[]                     = _("Enables the SURF theme\nwhen using SURF.");
+static const u8 sText_Desc_BikeOff[]                    = _("Disables the BIKE theme when\nusing the BIKE.");
+static const u8 sText_Desc_BikeOn[]                     = _("Enables the BIKE theme when\nusing the BIKE.");
+static const u8 sText_Desc_FontTypeCompact[]            = _("Printed text uses a font\nwhich is more compact.");
+static const u8 sText_Desc_FontTypeSpread[]             = _("Printed text uses a font\nwhich is more spread.");
+static const u8 sText_Desc_OverworldCallsOn[]           = _("TRAINERs will be able to call you,\noffering rematches and info.");
+static const u8 sText_Desc_OverworldCallsOff[]          = _("You will not receive calls.\nSpecial events will still occur.");
+static const u8 sText_Desc_MugshotNPCOn[]               = _("Show NPC mugshots during dialogue.\n(Does not include following POKéMON.)");
+static const u8 sText_Desc_MugshotNPCOff[]              = _("Hide NPC mugshots during dialogue.\n(Does not include following POKéMON.)");
+static const u8 sText_Desc_MugshotFollowerPlaceholder[] = _("Show a placeholder mugshot when\nfollowing POKéMON do not have one.");
+static const u8 sText_Desc_MugshotFollowerOn[]          = _("Show mugshot of following POKéMON if\nthey are available.");
+static const u8 sText_Desc_MugshotFollowerOff[]         = _("Hide following POKéMON mugshots.");
 
 // Disabled Descriptions
 static const u8 sText_Desc_Disabled_Textspeed[]     = _("Only active if xyz.");
@@ -398,12 +437,14 @@ static const u8 *const sOptionMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
     [MENUITEM_MAIN_CANCEL]          = {sText_Desc_Save,                 sText_Empty,                    sText_Empty},
 };
 
-static const u8 *const sOptionMenuItemDescriptionsOverworld[MENUITEM_OVERWORLD_COUNT][2] =
+static const u8 *const sOptionMenuItemDescriptionsOverworld[MENUITEM_OVERWORLD_COUNT][3] =
 {
-    [MENUITEM_OVERWORLD_BIKE_MUSIC] = {sText_Desc_BikeOn,               sText_Desc_BikeOff},
-    [MENUITEM_OVERWORLD_SURF_MUSIC] = {sText_Desc_SurfOn,               sText_Desc_SurfOff},
-    [MENUITEM_OVERWORLD_MATCHCALL]  = {sText_Desc_OverworldCallsOn,     sText_Desc_OverworldCallsOff},
-    [MENUITEM_OVERWORLD_CANCEL]     = {sText_Desc_Save,                 sText_Empty},
+    [MENUITEM_OVERWORLD_BIKE_MUSIC]     = {sText_Desc_BikeOn,                       sText_Desc_BikeOff,             sText_Empty},
+    [MENUITEM_OVERWORLD_SURF_MUSIC]     = {sText_Desc_SurfOn,                       sText_Desc_SurfOff,             sText_Empty},
+    [MENUITEM_OVERWORLD_NPC_MUG]        = {sText_Desc_MugshotNPCOn,                 sText_Desc_MugshotNPCOff,       sText_Empty},
+    [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = {sText_Desc_MugshotFollowerPlaceholder,   sText_Desc_MugshotFollowerOn,   sText_Desc_MugshotFollowerOff},
+    [MENUITEM_OVERWORLD_MATCHCALL]      = {sText_Desc_OverworldCallsOn,             sText_Desc_OverworldCallsOff,   sText_Empty},
+    [MENUITEM_OVERWORLD_CANCEL]         = {sText_Desc_Save,                         sText_Empty,                    sText_Empty},
 };
 
 static const u8 *const sOptionMenuItemDescriptionsBattle[MENUITEM_BATTLE_COUNT][2] =
@@ -429,10 +470,12 @@ static const u8 *const sOptionMenuItemDescriptionsDisabledMain[MENUITEM_MAIN_COU
 // Disabled Overworld
 static const u8 *const sOptionMenuItemDescriptionsDisabledOverworld[MENUITEM_OVERWORLD_COUNT] =
 {
-    [MENUITEM_OVERWORLD_BIKE_MUSIC] = sText_Empty,
-    [MENUITEM_OVERWORLD_SURF_MUSIC] = sText_Empty,
-    [MENUITEM_OVERWORLD_MATCHCALL]  = sText_Empty,
-    [MENUITEM_OVERWORLD_CANCEL]     = sText_Empty,
+    [MENUITEM_OVERWORLD_BIKE_MUSIC]     = sText_Empty,
+    [MENUITEM_OVERWORLD_SURF_MUSIC]     = sText_Empty,
+    [MENUITEM_OVERWORLD_NPC_MUG]        = sText_Empty,
+    [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = sText_Empty,
+    [MENUITEM_OVERWORLD_MATCHCALL]      = sText_Empty,
+    [MENUITEM_OVERWORLD_CANCEL]         = sText_Empty,
 };
 
 static const u8 *const sOptionMenuItemDescriptionsDisabledBattle[MENUITEM_BATTLE_COUNT] =
@@ -770,9 +813,11 @@ void CB2_InitOptionPlusMenu(void)
         sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM]                = gSaveBlock2Ptr->optionsUnitSystem;
         sOptions->sel[MENUITEM_MAIN_FRAMETYPE]                  = gSaveBlock2Ptr->optionsInterfaceColor;
         
-        sOptions->sel_overworld[MENUITEM_OVERWORLD_BIKE_MUSIC]  = gSaveBlock2Ptr->optionsBikeMusic;
-        sOptions->sel_overworld[MENUITEM_OVERWORLD_SURF_MUSIC]  = gSaveBlock2Ptr->optionsSurfMusic;
-        sOptions->sel_overworld[MENUITEM_OVERWORLD_MATCHCALL]   = gSaveBlock2Ptr->optionsDisableMatchCall;
+        sOptions->sel_overworld[MENUITEM_OVERWORLD_BIKE_MUSIC]      = gSaveBlock2Ptr->optionsBikeMusic;
+        sOptions->sel_overworld[MENUITEM_OVERWORLD_SURF_MUSIC]      = gSaveBlock2Ptr->optionsSurfMusic;
+        sOptions->sel_overworld[MENUITEM_OVERWORLD_NPC_MUG]         = gSaveBlock2Ptr->optionsSuppressNPCMugshots;
+        sOptions->sel_overworld[MENUITEM_OVERWORLD_FOLLOWER_MUG]    = gSaveBlock2Ptr->optionsFollowerMugshots;
+        sOptions->sel_overworld[MENUITEM_OVERWORLD_MATCHCALL]       = gSaveBlock2Ptr->optionsDisableMatchCall;
 
         sOptions->sel_battle[MENUITEM_BATTLE_BATTLESCENE]       = gSaveBlock2Ptr->optionsBattleSceneOff;
         sOptions->sel_battle[MENUITEM_BATTLE_BATTLESTYLE]       = gSaveBlock2Ptr->optionsBattleStyle;
@@ -999,9 +1044,11 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsUnitSystem       = sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM];
     gSaveBlock2Ptr->optionsInterfaceColor   = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
 
-    gSaveBlock2Ptr->optionsBikeMusic        = sOptions->sel_overworld[MENUITEM_OVERWORLD_BIKE_MUSIC];
-    gSaveBlock2Ptr->optionsSurfMusic        = sOptions->sel_overworld[MENUITEM_OVERWORLD_SURF_MUSIC];
-    gSaveBlock2Ptr->optionsDisableMatchCall = sOptions->sel_overworld[MENUITEM_OVERWORLD_MATCHCALL];
+    gSaveBlock2Ptr->optionsBikeMusic            = sOptions->sel_overworld[MENUITEM_OVERWORLD_BIKE_MUSIC];
+    gSaveBlock2Ptr->optionsSurfMusic            = sOptions->sel_overworld[MENUITEM_OVERWORLD_SURF_MUSIC];
+    gSaveBlock2Ptr->optionsSuppressNPCMugshots  = sOptions->sel_overworld[MENUITEM_OVERWORLD_NPC_MUG];
+    gSaveBlock2Ptr->optionsFollowerMugshots     = sOptions->sel_overworld[MENUITEM_OVERWORLD_FOLLOWER_MUG];
+    gSaveBlock2Ptr->optionsDisableMatchCall     = sOptions->sel_overworld[MENUITEM_OVERWORLD_MATCHCALL];
 
     gSaveBlock2Ptr->optionsBattleSceneOff   = sOptions->sel_battle[MENUITEM_BATTLE_BATTLESCENE];
     gSaveBlock2Ptr->optionsBattleStyle      = sOptions->sel_battle[MENUITEM_BATTLE_BATTLESTYLE];
@@ -1403,6 +1450,31 @@ static void DrawChoices_SurfMusic(int selection, int y)
 
     DrawOptionMenuChoice(gText_BattleSceneOn, 104, y, styles[0], active);
     DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(1, gText_BattleSceneOff, 198), y, styles[1], active);
+}
+
+static void DrawChoices_MugshotsNPC(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_OVERWORLD_NPC_MUG);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_BattleSceneOn, 104, y, styles[0], active);
+    DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(1, gText_BattleSceneOff, 198), y, styles[1], active);
+}
+
+static void DrawChoices_MugshotsFollower(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_OVERWORLD_FOLLOWER_MUG);
+
+    if (selection == 0)
+        DrawOptionMenuChoice(COMPOUND_STRING("PLACEHOLDER"), 104, y, 1, active);
+    else if (selection < 2)
+    {
+        u8 textOn[] = _("POKéMON ONLY{0x77}{0x77}{0x77}{0x77}{0x77}");
+        DrawOptionMenuChoice(textOn, 104, y, 1, active);
+    }
+    else
+        DrawOptionMenuChoice(gText_BattleSceneOff, 104, y, 1, active);
 }
 
 

@@ -103,8 +103,7 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsDisableMatchCall = 0;    //tx_optionsPlus
     gSaveBlock2Ptr->optionsCurrentFont = 0;         //tx_optionsPlus
     gSaveBlock2Ptr->optionsSuppressNPCMugshots = FALSE;
-    gSaveBlock2Ptr->optionsFollowerMugshotPlaceholder = FALSE;
-    gSaveBlock2Ptr->optionsSuppressFollowerMugshots = FALSE;
+    gSaveBlock2Ptr->optionsFollowerMugshots = 0;
     gSaveBlock2Ptr->optionsOverworldCatchSuccessMultiplyer = FALSE;
     gSaveBlock2Ptr->optionsBikeMusic = FALSE;
     gSaveBlock2Ptr->optionsSurfMusic = FALSE;

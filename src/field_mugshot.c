@@ -212,13 +212,13 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
     RemoveFieldMugshot(retainDetails);
 
     if ((mugshotId >= NELEMS(gFieldMugshots)
-        && gSaveBlock2Ptr->optionsFollowerMugshotPlaceholder == TRUE && mugshotType == MUGSHOT_FOLLOWER))
+        && gSaveBlock2Ptr->optionsFollowerMugshots == MUGSHOT_FOLLOWER_PLACEHOLDER && mugshotType == MUGSHOT_FOLLOWER))
         mugshotId = MUGSHOT_SUBSTITUTE_DOLL;
 
     if (mugshotId >= NELEMS(gFieldMugshots)
         || FlagGet(FLAG_SUPPRESS_MUGSHOT)
         || (gSaveBlock2Ptr->optionsSuppressNPCMugshots == TRUE && mugshotType != MUGSHOT_FOLLOWER)
-        || (gSaveBlock2Ptr->optionsSuppressFollowerMugshots == TRUE && mugshotType == MUGSHOT_FOLLOWER))
+        || (gSaveBlock2Ptr->optionsFollowerMugshots == MUGSHOT_FOLLOWER_OFF && mugshotType == MUGSHOT_FOLLOWER))
             return;
 
     if ((gFieldMugshots[mugshotId][mugshotEmotion].gfx != NULL && gFieldMugshots[mugshotId][mugshotEmotion].pal != NULL))
@@ -241,7 +241,7 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
         sheet.data = gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][EMOTE_NORMAL].gfx;
         pal.data = gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][EMOTE_NORMAL].pal;
     }
-    else if (mugshotType == MUGSHOT_FOLLOWER && gSaveBlock2Ptr->optionsFollowerMugshotPlaceholder == TRUE)
+    else if (mugshotType == MUGSHOT_FOLLOWER && gSaveBlock2Ptr->optionsFollowerMugshots == MUGSHOT_FOLLOWER_PLACEHOLDER)
     {
         sheet.data = gFieldMugshots[MUGSHOT_SUBSTITUTE_DOLL][mugshotEmotion].gfx;
         pal.data = gFieldMugshots[MUGSHOT_SUBSTITUTE_DOLL][mugshotEmotion].pal;
