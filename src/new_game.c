@@ -44,6 +44,8 @@
 #include "berry_powder.h"
 #include "mystery_gift.h"
 #include "union_room_chat.h"
+#include "constants/battle.h"
+#include "constants/field_mugshots.h"
 #include "constants/items.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
@@ -96,17 +98,17 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsTitleScreenRandomise = FALSE;
     gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_MONO;
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
-    gSaveBlock2Ptr->optionsBattleScene = 0;
+    gSaveBlock2Ptr->optionsBattleScene = OPTIONS_BATTLE_SCENE_FULL_ANIMATION;
     gSaveBlock2Ptr->optionsUnitSystem = UNITS_METRIC;  //tx_optionsPlus
-    gSaveBlock2Ptr->optionsDisableMatchCall = 0;    //tx_optionsPlus
-    gSaveBlock2Ptr->optionsCurrentFont = 0;         //tx_optionsPlus
+    gSaveBlock2Ptr->optionsDisableMatchCall = FALSE;    //tx_optionsPlus
+    gSaveBlock2Ptr->optionsCurrentFont = FONT_SMALL;         //tx_optionsPlus
     gSaveBlock2Ptr->optionsSuppressNPCMugshots = FALSE;
-    gSaveBlock2Ptr->optionsFollowerMugshots = 0;
+    gSaveBlock2Ptr->optionsFollowerMugshots = MUGSHOT_FOLLOWER_PLACEHOLDER;
     gSaveBlock2Ptr->optionsOverworldCatchSuccessMultiplyer = FALSE;
     gSaveBlock2Ptr->optionsBikeMusic = FALSE;
     gSaveBlock2Ptr->optionsSurfMusic = FALSE;
-    gSaveBlock2Ptr->optionsWildBattleSpeed = 0;
-    gSaveBlock2Ptr->optionsTrainerBattleSpeed = 0;
+    gSaveBlock2Ptr->optionsWildBattleSpeed = OPTIONS_BATTLE_SPEED_NORMAL;
+    gSaveBlock2Ptr->optionsTrainerBattleSpeed = OPTIONS_BATTLE_SPEED_NORMAL;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
     gSaveBlock3Ptr->autoRun = FALSE;
     gSaveBlock3Ptr->autoBike = FALSE;
