@@ -1,7 +1,14 @@
 EventScript_DisplayPokedexHeader::
-    callnative ShowPokedexHeaderMessage
-    playfanfare MUS_RG_CAUGHT
-    delay 150
-    waitfanfare
-    callnative HidePokedexHeaderMessage
-    return
+	getseenmon VAR_0x8004
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_DisplayPokedexHeader_MainScript
+EventScript_DisplayPokedexHeader_Return:
+	return
+
+EventScript_DisplayPokedexHeader_MainScript:
+	callnative ShowPokedexHeaderMessage
+	playfanfare MUS_RG_CAUGHT
+	delay 150
+	waitfanfare
+	callnative HidePokedexHeaderMessage
+	goto EventScript_DisplayPokedexHeader_Return
