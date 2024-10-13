@@ -179,6 +179,7 @@ static int ProcessInput_Options_Four(int selection);
 static int ProcessInput_Options_Eleven(int selection);
 static int ProcessInput_Sound(int selection);
 static int ProcessInput_FrameType(int selection);
+static int ProcessInput_Interface(int selection);
 static const u8 *const OptionTextDescription(void);
 static const u8 *const OptionTextRight(u8 menuItem);
 static u8 MenuItemCount(void);
@@ -196,6 +197,7 @@ static void DrawChoices_BarSpeed(int selection, int y); //HP and EXP
 static void DrawChoices_UnitSystem(int selection, int y);
 static void DrawChoices_Font(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
+static void DrawChoices_Interface(int selection, int y);
 static void DrawChoices_MatchCall(int selection, int y);
 static void DrawChoices_BikeMusic(int selection, int y);
 static void DrawChoices_SurfMusic(int selection, int y);
@@ -245,7 +247,7 @@ struct // MENU_MAIN
     [MENUITEM_MAIN_SOUND]           = {DrawChoices_Sound,       ProcessInput_Sound},
     [MENUITEM_MAIN_BUTTONMODE]      = {DrawChoices_ButtonMode,  ProcessInput_Options_Three},
     [MENUITEM_MAIN_UNIT_SYSTEM]     = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
-    [MENUITEM_MAIN_FRAMETYPE]       = {DrawChoices_FrameType,   ProcessInput_FrameType},
+    [MENUITEM_MAIN_FRAMETYPE]       = {DrawChoices_Interface,   ProcessInput_Interface},
     [MENUITEM_MAIN_TITLE_SCREEN]    = {DrawChoices_TitleScreen, ProcessInput_Options_Two},
     [MENUITEM_MAIN_CANCEL]          = {NULL, NULL},
 };
@@ -295,7 +297,7 @@ static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
     [MENUITEM_MAIN_SOUND]           = gText_Sound,
     [MENUITEM_MAIN_BUTTONMODE]      = gText_ButtonMode,
     [MENUITEM_MAIN_UNIT_SYSTEM]     = sText_UnitSystem,
-    [MENUITEM_MAIN_FRAMETYPE]       = gText_Frame,
+    [MENUITEM_MAIN_FRAMETYPE]       = COMPOUND_STRING("INTERFACE"),
     [MENUITEM_MAIN_TITLE_SCREEN]    = sText_TitleScreen,
     [MENUITEM_MAIN_CANCEL]          = gText_OptionMenuSave,
 };
@@ -407,7 +409,7 @@ static const u8 sText_Desc_ButtonMode_LR[]      = _("On some screens the L and R
 static const u8 sText_Desc_ButtonMode_LA[]      = _("The L button acts as another A\nbutton for one-handed play.");
 static const u8 sText_Desc_UnitSystemImperial[] = _("Display weights and sizes in\npounds and inches.");
 static const u8 sText_Desc_UnitSystemMetric[]   = _("Display weights and sizes in\nkilograms and meters.");
-static const u8 sText_Desc_FrameType[]          = _("Choose the frame surrounding the\nwindows.");
+static const u8 sText_Desc_FrameType[]          = _("Choose the interface styling.");
 
 // Custom Descriptions
 static const u8 sText_Desc_BattleHPBar[]                = _("Choose how fast the HP BAR will get\ndrained in battles.");
@@ -1245,6 +1247,31 @@ static int ProcessInput_FrameType(int selection)
     return selection;
 }
 
+static int ProcessInput_Interface(int selection)
+{
+    if (JOY_NEW(DPAD_RIGHT))
+    {
+        if (selection < IKIGAI_INTERFACE_GYM_TYPE_COLOUR)
+            selection++;
+        else
+            selection = 0;
+
+        LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
+        LoadPalette(GetWindowFrameTilesPal(selection)->pal, 0x70, 0x20);
+    }
+    if (JOY_NEW(DPAD_LEFT))
+    {
+        if (selection != 0)
+            selection--;
+        else
+            selection = IKIGAI_INTERFACE_GYM_TYPE_COLOUR;
+
+        LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
+        LoadPalette(GetWindowFrameTilesPal(selection)->pal, 0x70, 0x20);
+    }
+    return selection;
+}
+
 // Draw Choices functions ****GENERIC****
 static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style, bool8 active)
 {
@@ -1422,6 +1449,31 @@ static void DrawChoices_FrameType(int selection, int y)
 
     DrawOptionMenuChoice(gText_FrameType, 104, y, 0, active);
     DrawOptionMenuChoice(text, 128, y, 1, active);
+}
+
+static void DrawChoices_Interface(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_MAIN_FRAMETYPE);
+
+    switch (selection)
+    {
+        default:
+        case IKIGAI_INTERFACE_GREEN:
+            DrawOptionMenuChoice(COMPOUND_STRING("TORNDADUS"), 104, y, 1, active);
+            break;
+        case IKIGAI_INTERFACE_BLUE:
+            DrawOptionMenuChoice(COMPOUND_STRING("THUNDURUS"), 104, y, 1, active);
+            break;
+        case IKIGAI_INTERFACE_ORANGE:
+            DrawOptionMenuChoice(COMPOUND_STRING("LANDORUS"), 104, y, 1, active);
+            break;
+        case IKIGAI_INTERFACE_PINK:
+            DrawOptionMenuChoice(COMPOUND_STRING("ENAMORUS"), 104, y, 1, active);
+            break;
+        case IKIGAI_INTERFACE_GYM_TYPE_COLOUR:
+            DrawOptionMenuChoice(COMPOUND_STRING("GYM TYPE"), 104, y, 1, active);
+            break;
+    }
 }
 
 static void DrawChoices_Font(int selection, int y)
