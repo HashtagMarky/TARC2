@@ -11,12 +11,14 @@
 #include "battle_setup.h"
 #include "battle_tv.h"
 #include "cable_club.h"
+#include "event_data.h"
 #include "event_object_movement.h"
 #include "dynamic_palettes.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "palette.h"
 #include "party_menu.h"
+#include "pokemon_animation.h"
 #include "recorded_battle.h"
 #include "string_util.h"
 #include "sound.h"
@@ -25,6 +27,7 @@
 #include "util.h"
 #include "text.h"
 #include "constants/abilities.h"
+#include "constants/battle.h"
 #include "constants/songs.h"
 
 static EWRAM_DATA u8 sLinkSendTaskId = 0;
@@ -44,6 +47,9 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId);
 static void Task_StartSendOutAnim(u8 taskId);
 static void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);
 static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite);
+static u8 GetBattleSpeedOption(void);
+static bool8 IsBattleImportant(void);
+static void MonFaintCelebration(u32 battler, u8 funcPart);
 
 void HandleLinkBattleSetup(void)
 {
@@ -2543,7 +2549,11 @@ void BtlController_HandleDrawTrainerPic(u32 battler, u32 trainerPicId, bool32 is
         gSprites[gBattlerSpriteIds[battler]].x2 = DISPLAY_WIDTH;
         gSprites[gBattlerSpriteIds[battler]].sSpeedX = -2;
     }
-    gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_TrainerSlideIn;
+
+    if (gSaveBlock2Ptr->optionsBattleScene == OPTIONS_BATTLE_SCENE_NO_INTRO)
+        gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_TrainerSpawn;
+    else
+        gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_TrainerSlideIn;
 
     gBattlerControllerFuncs[battler] = Controller_WaitForTrainerPic;
 }
@@ -2573,7 +2583,11 @@ void BtlController_HandleTrainerSlide(u32 battler, u32 trainerPicId)
         gSprites[gBattlerSpriteIds[battler]].x += 32;
         gSprites[gBattlerSpriteIds[battler]].sSpeedX = -2;
     }
-    gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_TrainerSlideIn;
+    
+    if (gSaveBlock2Ptr->optionsBattleScene == OPTIONS_BATTLE_SCENE_NO_INTRO)
+        gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_TrainerSpawn;
+    else
+        gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_TrainerSlideIn;
 
     gBattlerControllerFuncs[battler] = Controller_WaitForTrainerPic;
 }
@@ -2600,6 +2614,7 @@ void BtlController_HandleTrainerSlideBack(u32 battler, s16 data0, bool32 startAn
 
 void BtlController_HandleFaintAnimation(u32 battler)
 {
+    MonFaintCelebration(battler, 1);
     if (gBattleSpritesDataPtr->healthBoxesData[battler].animationState == 0)
     {
         if (gBattleSpritesDataPtr->battlerData[battler].behindSubstitute)
@@ -2630,6 +2645,7 @@ void BtlController_HandleFaintAnimation(u32 battler)
             // The player's sprite is removed in Controller_FaintPlayerMon. Controller_FaintOpponentMon only removes the healthbox once the sprite is removed by SpriteCB_FaintOpponentMon.
         }
     }
+    MonFaintCelebration(battler, 2);
 }
 
 #undef sSpeedX
@@ -3066,5 +3082,149 @@ void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE, bool32 up
 
         if (updateTvData)
             BattleTv_SetDataBasedOnAnimation(animationId);
+    }
+}
+
+// Battle Speed Up (Credit to Pokabbie)
+u32 Rogue_GetBattleSpeedScale(bool32 forHealthbar)
+{
+    u8 battleSpeedOption = GetBattleSpeedOption();
+
+    if (IsBattleImportant())
+        return 1;
+
+    // Hold L to slow down
+    if(JOY_HELD(L_BUTTON))
+        return 1;
+
+    // We want to speed up all anims until input selection starts
+    if(InBattleChoosingMoves())
+        gBattleStruct->hasBattleInputStarted = TRUE;
+
+    if(gBattleStruct->hasBattleInputStarted)
+    {
+        // Always run at 1x speed here
+        if(InBattleChoosingMoves())
+            return 1;
+/*
+        // When battle anims are turned off, it's a bit too hard to read text, so force running at normal speed
+        if(!forHealthbar && battleSpeedOption == OPTIONS_BATTLE_SPEED_DISABLED && InBattleRunningActions())
+            return 1;
+*/
+    }
+
+    // We don't need to speed up health bar anymore as that passively happens now
+    switch (battleSpeedOption)
+    {
+    case OPTIONS_BATTLE_SPEED_NORMAL:
+        return forHealthbar ? 1 : 1;
+
+    case OPTIONS_BATTLE_SPEED_2X:
+        return forHealthbar ? 1 : 2;
+
+    case OPTIONS_BATTLE_SPEED_3X:
+        return forHealthbar ? 1 : 3;
+
+    case OPTIONS_BATTLE_SPEED_4X:
+        return forHealthbar ? 1 : 4;
+/*
+    // Print text at a readable speed still
+    case OPTIONS_BATTLE_SPEED_DISABLED:
+        if(gBattleStruct->hasBattleInputStarted)
+            return forHealthbar ? 10 : 1;
+        else
+            return 4;
+*/
+    }
+
+    return 1;
+}
+
+static u8 GetBattleSpeedOption(void)
+{
+    if (IsBattleImportant())
+        return OPTIONS_BATTLE_SPEED_NORMAL;
+    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+        return gSaveBlock2Ptr->optionsTrainerBattleSpeed;
+    else
+        return gSaveBlock2Ptr->optionsWildBattleSpeed;
+}
+
+static bool8 IsBattleImportant(void)
+{
+    // First Battle will not be Sped Up
+    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+        return TRUE;
+
+    // Tutorial Battle will not be Sped Up
+    if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
+        return TRUE;
+
+    // Legendary Battles will not be Sped Up
+    if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)  
+        return TRUE;
+
+    // Battles against Roaming Pokémon will not be Sped Up
+    if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)  
+        return TRUE;
+
+    // If a Wild Pokémon in the party is shiny, battles will not be Sped Up
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+    {
+        for (int i = 0; i < PARTY_SIZE; i++)
+        {
+            if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) != SPECIES_NONE
+            && IsMonShiny(&gEnemyParty[i]))
+                return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+static void MonFaintCelebration(u32 battler, u8 funcPart)
+{
+    if (gSaveBlock2Ptr->optionsBattleScene != OPTIONS_BATTLE_SCENE_FULL_ANIMATION)
+        return;
+
+    if (funcPart == 1)
+    {
+        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[battler]);
+    }
+
+    if (funcPart == 2)
+    {
+        if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+        {
+            if (gBattleMons[BATTLE_OPPOSITE(battler)].species != SPECIES_NONE)
+            {
+                LaunchAnimationTaskForFrontSprite(&gSprites[gBattlerSpriteIds[BATTLE_OPPOSITE(battler)]], gSpeciesInfo[gBattleMons[BATTLE_OPPOSITE(battler)].species].frontAnimId);
+                PlayCry_Normal(gBattleMons[BATTLE_OPPOSITE(battler)].species, CRY_PRIORITY_NORMAL);
+                if (HasTwoFramesAnimation(gBattleMons[BATTLE_OPPOSITE(battler)].species))
+                    StartSpriteAnim(&gSprites[gBattlerSpriteIds[BATTLE_OPPOSITE(battler)]], 1);
+            }
+
+            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species != SPECIES_NONE)
+            {
+                LaunchAnimationTaskForFrontSprite(&gSprites[gBattlerSpriteIds[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))]], gSpeciesInfo[gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species].frontAnimId);
+                PlayCry_Normal(gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species, CRY_PRIORITY_NORMAL);
+                if (HasTwoFramesAnimation(gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species))
+                    StartSpriteAnim(&gSprites[gBattlerSpriteIds[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))]], 1);
+            }
+        }
+        else if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
+        {
+            if (gBattleMons[BATTLE_OPPOSITE(battler)].species != SPECIES_NONE)
+            {
+                LaunchAnimationTaskForBackSprite(&gSprites[gBattlerSpriteIds[BATTLE_OPPOSITE(battler)]], GetSpeciesBackAnimSet(gBattleMons[BATTLE_OPPOSITE(battler)].species));
+                PlayCry_Normal(gBattleMons[BATTLE_OPPOSITE(battler)].species, CRY_PRIORITY_NORMAL);
+            }
+
+            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species != SPECIES_NONE)
+            {
+                LaunchAnimationTaskForBackSprite(&gSprites[gBattlerSpriteIds[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))]], GetSpeciesBackAnimSet(gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species));
+                PlayCry_Normal(gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species, CRY_PRIORITY_NORMAL);
+            }
+        }
     }
 }

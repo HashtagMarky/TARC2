@@ -176,7 +176,7 @@
 #define STATUS3_YAWN_TURN(num)          (((num) << 11) & STATUS3_YAWN)
 #define STATUS3_IMPRISONED_OTHERS       (1 << 13)
 #define STATUS3_GRUDGE                  (1 << 14)
-#define STATUS3___UNUSED                (1 << 15)
+#define STATUS3_COMMANDER               (1 << 15)
 #define STATUS3_GASTRO_ACID             (1 << 16)
 #define STATUS3_EMBARGO                 (1 << 17)
 #define STATUS3_UNDERWATER              (1 << 18)
@@ -193,7 +193,8 @@
 #define STATUS3_LASER_FOCUS             (1 << 29)
 #define STATUS3_POWER_TRICK             (1 << 30)
 #define STATUS3_SKY_DROPPED             (1 << 31) // Target of Sky Drop
-#define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER | STATUS3_PHANTOM_FORCE)
+#define STATUS3_SEMI_INVULNERABLE_NO_COMMANDER  (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER | STATUS3_PHANTOM_FORCE) // Exception for Transform / Imposter
+#define STATUS3_SEMI_INVULNERABLE       (STATUS3_SEMI_INVULNERABLE_NO_COMMANDER | STATUS3_COMMANDER)
 
 #define STATUS4_ELECTRIFIED             (1 << 0)
 #define STATUS4_MUD_SPORT               (1 << 1)    // Only used if B_SPORT_TURNS < GEN_6
@@ -411,8 +412,9 @@
 #define MOVE_EFFECT_SECRET_POWER        77
 #define MOVE_EFFECT_PSYCHIC_NOISE       78
 #define MOVE_EFFECT_TERA_BLAST          79
+#define MOVE_EFFECT_ORDER_UP            80
 
-#define NUM_MOVE_EFFECTS                80
+#define NUM_MOVE_EFFECTS                81
 
 #define MOVE_EFFECT_AFFECTS_USER        0x2000
 #define MOVE_EFFECT_CERTAIN             0x4000
@@ -543,5 +545,19 @@
 #define STARTING_STATUS_WONDER_ROOM         7
 #define STARTING_STATUS_TAILWIND_PLAYER     8
 #define STARTING_STATUS_TAILWIND_OPPONENT   9
+
+// Battle Speed Up (Credit to Pokabbie)
+#define OPTIONS_BATTLE_SPEED_NORMAL     0
+#define OPTIONS_BATTLE_SPEED_2X         1
+#define OPTIONS_BATTLE_SPEED_3X         2
+#define OPTIONS_BATTLE_SPEED_4X         3
+#define OPTIONS_BATTLE_SPEED_COUNT      4
+
+// Battle Scene Animations
+#define OPTIONS_BATTLE_SCENE_FULL_ANIMATION     0
+#define OPTIONS_BATTLE_SCENE_LOW_ANIMATION      1
+#define OPTIONS_BATTLE_SCENE_NO_ANIMATION       2
+#define OPTIONS_BATTLE_SCENE_NO_INTRO           3
+#define OPTIONS_BATTLE_SCENE_COUNT              4
 
 #endif // GUARD_CONSTANTS_BATTLE_H

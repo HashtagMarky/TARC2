@@ -356,7 +356,7 @@ bool32 MoveRecordedBattleToSaveData(void)
     battleSave->lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     battleSave->frontierFacility = sFrontierFacility;
     battleSave->frontierBrainSymbol = sFrontierBrainSymbol;
-    battleSave->battleScene = gSaveBlock2Ptr->optionsBattleSceneOff;
+    battleSave->battleScene = gSaveBlock2Ptr->optionsBattleScene; // May need to change to OPTIONS_BATTLE_SCENE_FULL_ANIMATION (0) for posterity purposes
     battleSave->textSpeed = gSaveBlock2Ptr->optionsTextSpeed;
     battleSave->AI_scripts = sAI_Scripts;
 

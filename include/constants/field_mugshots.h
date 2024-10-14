@@ -13,6 +13,11 @@
 #define MUGSHOT_FOLLOWER    3
 #define MUGSHOT_TYPES       4
 
+// Follower Mugshot Settings
+#define MUGSHOT_FOLLOWER_PLACEHOLDER    0
+#define MUGSHOT_FOLLOWER_ON             1
+#define MUGSHOT_FOLLOWER_OFF            2
+
 // Mugshot IDs
 #define MUGSHOT_AUTO_GRAPHICS_ID            NUM_OBJ_EVENT_GFX
 #define MUGSHOT_KOLE                        OBJ_EVENT_GFX_BRENDAN_NORMAL

@@ -258,6 +258,8 @@ extern const u8 gText_BattleSceneOn[];
 extern const u8 gText_BattleSceneOff[];
 extern const u8 gText_BattleStyleShift[];
 extern const u8 gText_BattleStyleSet[];
+extern const u8 gText_UnitSystemMetric[];   //tx_optionsPlus
+extern const u8 gText_UnitSystemImperial[]; //tx_optionsPlus
 extern const u8 gText_SoundMono[];
 extern const u8 gText_SoundStereo[];
 extern const u8 gText_FrameTypeNumber[];
@@ -273,6 +275,11 @@ extern const u8 gText_BattleStyle[];
 extern const u8 gText_Sound[];
 extern const u8 gText_Frame[];
 extern const u8 gText_OptionMenuCancel[];
+extern const u8 gText_Font[];               //tx_optionsPlus
+extern const u8 gText_OptionFontCompact[];  //tx_optionsPlus
+extern const u8 gText_OptionFontSpread[];  //tx_optionsPlus
+extern const u8 gText_OptionMatchCalls[];   //tx_optionsPlus
+extern const u8 gText_OptionMenuSave[];
 extern const u8 gText_ButtonMode[];
 
 extern const u8 gText_MaleSymbol[];
@@ -846,6 +853,9 @@ extern const u8 gText_UsedVar2WildRepelled[];
 extern const u8 gText_BoxFull[];
 extern const u8 gText_WontHaveEffect[];
 extern const u8 gText_NextFusionMon[];
+extern const u8 gText_PlayedPokeFluteCatchy[];
+extern const u8 gText_PlayedPokeFlute[];
+extern const u8 gText_PokeFluteAwakenedMon[];
 
 extern const u8 gText_LevelSymbol[];
 extern const u8 gText_PkmnInfo[];

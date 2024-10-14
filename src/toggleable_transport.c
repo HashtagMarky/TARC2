@@ -263,8 +263,14 @@ bool8 CanSetAutoBike(void)
 void HandleRunning(u8 direction)
 {
     if (gSaveBlock3Ptr->autoRun == TRUE)
-        PlayerRun(direction);
+    {
+        if (ObjectMovingOnRockStairs(&gObjectEvents[gPlayerAvatar.objectEventId], direction))
+            PlayerRunSlow(direction);
+        else
+            PlayerRun(direction);
+
         gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
+    }
 }
 
 void HandleFastSurf(u8 direction)

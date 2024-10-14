@@ -128,10 +128,7 @@ static u32 GetHPEggCyclePercent(u32 partyIndex);
 static void CreatePartyMonIcons();
 static void DestroyMonIcons();
 
-static const u16 *ReturnMenuBgPalette(void);
-static const u16 *ReturnMenuBgGymPalette(void);
 static const struct SpritePalette *ReturnIconBoxPalette(void);
-static const struct SpritePalette *ReturnIconBoxGymPalette(void);
 
 
 //==========Background and Window Data==========//
@@ -215,12 +212,6 @@ static const u32 sIconBoxGfx[] = INCBIN_U32("graphics/ui_main_menu/icon_shadow.4
 static const u32 sMainBgTilemap[] = INCBIN_U32("graphics/ui_main_menu/main_tiles.bin.lz");
 static const u32 sMainBgTiles[] = INCBIN_U32("graphics/ui_main_menu/main_tiles.4bpp.lz");
 
-static const u16 sMainBgPalette[] = INCBIN_U16("graphics/ui_main_menu/main_tiles.gbapal");
-static const u16 sMainBgPaletteGreen[] = INCBIN_U16("graphics/ui_main_menu/main_tiles_green.gbapal");
-static const u16 sMainBgPaletteBlue[] = INCBIN_U16("graphics/ui_main_menu/main_tiles_blue.gbapal");
-static const u16 sMainBgPaletteOrange[] = INCBIN_U16("graphics/ui_main_menu/main_tiles_orange.gbapal");
-static const u16 sMainBgPalettePink[] = INCBIN_U16("graphics/ui_main_menu/main_tiles_pink.gbapal");
-
 
 //
 //  Sprite Data for Mugshots and Icon Shadows 
@@ -283,36 +274,6 @@ static const struct CompressedSpriteSheet sSpriteSheet_IconBox =
     .data = sIconBoxGfx,
     .size = 32*32*1/2,
     .tag = TAG_ICON_BOX,
-};
-
-static const struct SpritePalette sSpritePal_IconBox =
-{
-    .data = sMainBgPalette,
-    .tag = TAG_ICON_BOX
-};
-
-static const struct SpritePalette sSpritePal_IconBoxGreen =
-{
-    .data = sMainBgPaletteGreen,
-    .tag = TAG_ICON_BOX
-};
-
-static const struct SpritePalette sSpritePal_IconBoxBlue =
-{
-    .data = sMainBgPaletteBlue,
-    .tag = TAG_ICON_BOX
-};
-
-static const struct SpritePalette sSpritePal_IconBoxOrange =
-{
-    .data = sMainBgPaletteOrange,
-    .tag = TAG_ICON_BOX
-};
-
-static const struct SpritePalette sSpritePal_IconBoxPink =
-{
-    .data = sMainBgPalettePink,
-    .tag = TAG_ICON_BOX
 };
 
 static const union AnimCmd sSpriteAnim_IconBox0[] =
@@ -618,13 +579,13 @@ static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spr
         break;
     case 2:
         ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(2, sScrollBgTiles, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(2, IkigaiScrollingBgTiles, 0, 0, 0);
         sMainMenuDataPtr->gfxLoadState++;
         break;
     case 3:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(sScrollBgTilemap, sBg2TilemapBuffer);
+            LZDecompressWram(IkigaiScrollingBgTilemap_PalOne, sBg2TilemapBuffer);
             sMainMenuDataPtr->gfxLoadState++;
         }
         break;
@@ -636,7 +597,7 @@ static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spr
         LoadCompressedSpriteSheet(&sSpriteSheet_ProtagonistMugshot);
         LoadSpritePalette(&sSpritePal_ProtagonistMugshot);
         DynPal_LoadPaletteByTag(sDynPalPlayerMugshot, TAG_MUGSHOT);
-        LoadPalette(ReturnMenuBgPalette(), 0, 32);
+        LoadPalette(ReturnMenuUIPalette(), 0, 32);
         LoadPalette(ReturnScrollingBackgroundPalette(), 16, 32);
     }
         sMainMenuDataPtr->gfxLoadState++;
@@ -810,6 +771,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
     const u8 colorsTrainerText[3] = {0,  5,  2};
     u8 mapDisplayHeader[24];
     u8 *withoutPrefixPtr, *playTimePtr;
+    u8 yOffset = (gSaveBlock2Ptr->optionsCurrentFont == 0) ? 1 : 0;
     u16 dexCount = 0; u8 badgeCount = 0;
     u32 i = 0;
 
@@ -828,7 +790,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
     playTimePtr = ConvertIntToDecimalStringN(gStringVar4, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
     *playTimePtr = 0xF0;
     ConvertIntToDecimalStringN(playTimePtr + 1, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
-    AddTextPrinterParameterized4(WINDOW_HEADER, FONT_NORMAL, (104 - 12) + GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, (6*8)), 1, 0, 0, colorsGameText, TEXT_SKIP_DRAW, gStringVar4);
+    AddTextPrinterParameterized4(WINDOW_HEADER, FONT_NORMAL, (104 - 12) + GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, (6*8)), 1 + yOffset, 0, 0, colorsGameText, TEXT_SKIP_DRAW, gStringVar4);
 
     // Print Dex Numbers if You Have It
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
@@ -1008,66 +970,12 @@ static void Task_MainMenuMain(u8 taskId)
     }
 }
 
-static const u16 *ReturnMenuBgPalette(void)
-{
-    switch (gSaveBlock2Ptr->optionsInterfaceColor)
-    {
-        case IKIGAI_INTERFACE_GREEN:
-            return sMainBgPaletteGreen;
-        
-        case IKIGAI_INTERFACE_BLUE:
-            return sMainBgPaletteBlue;
-        
-        case IKIGAI_INTERFACE_ORANGE:
-            return sMainBgPaletteOrange;
-        
-        case IKIGAI_INTERFACE_PINK:
-            return sMainBgPalettePink;
-            
-        case IKIGAI_INTERFACE_GYM_TYPE_COLOUR:
-        default:
-            return ReturnMenuBgGymPalette();
-    }
-}
-
-static const u16 *ReturnMenuBgGymPalette(void)
-{
-    switch (gSaveBlock2Ptr->ikigaiGymType)
-    {
-        case TYPE_NONE:
-        default:
-            return sMainBgPalette;
-    }
-}
-
 static const struct SpritePalette *ReturnIconBoxPalette(void)
 {
-    switch (gSaveBlock2Ptr->optionsInterfaceColor)
-    {
-        case IKIGAI_INTERFACE_GREEN:
-            return &sSpritePal_IconBoxGreen;
-        
-        case IKIGAI_INTERFACE_BLUE:
-            return &sSpritePal_IconBoxBlue;
-        
-        case IKIGAI_INTERFACE_ORANGE:
-            return &sSpritePal_IconBoxOrange;
-        
-        case IKIGAI_INTERFACE_PINK:
-            return &sSpritePal_IconBoxPink;
-        
-        case IKIGAI_INTERFACE_GYM_TYPE_COLOUR:
-        default:
-            return ReturnIconBoxGymPalette();
-    }
-}
+    static struct SpritePalette palIconBox;
 
-static const struct SpritePalette *ReturnIconBoxGymPalette(void)
-{
-    switch (gSaveBlock2Ptr->ikigaiGymType)
-    {
-        case TYPE_NONE:
-        default:
-            return &sSpritePal_IconBox;
-    }
+    palIconBox.data = ReturnMenuUIPalette();
+    palIconBox.tag = TAG_ICON_BOX;
+
+    return &palIconBox;
 }

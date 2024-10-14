@@ -1217,7 +1217,7 @@ void Overworld_PlaySpecialMapMusic(void)
             music = gSaveBlock1Ptr->savedMusic;
         else if (GetCurrentMapType() == MAP_TYPE_UNDERWATER)
             music = MUS_UNDERWATER;
-        else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
+        else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && gSaveBlock2Ptr->optionsSurfMusic == FALSE)
             music = MUS_SURF;
     }
 
@@ -1245,14 +1245,16 @@ static void TransitionMapMusic(void)
         {
             if (currentMusic == MUS_UNDERWATER || currentMusic == MUS_SURF)
                 return;
-            if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
+            if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && gSaveBlock2Ptr->optionsSurfMusic == FALSE)
                 newMusic = MUS_SURF;
+            if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE) && gSaveBlock2Ptr->optionsBikeMusic == FALSE)
+                newMusic = MUS_CYCLING;
         }
         if (newMusic != currentMusic)
         {
-            if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
-                FadeOutAndFadeInNewMapMusic(newMusic, 4, 4);
-            else
+            // if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
+            //     FadeOutAndFadeInNewMapMusic(newMusic, 4, 4);
+            // else
                 FadeOutAndPlayNewMapMusic(newMusic, 8);
         }
     }
@@ -3313,7 +3315,7 @@ static void SpriteCB_LinkPlayer(struct Sprite *sprite)
 #define ITEM_TAG        0x2722 //same as money label
 
 bool8 GetSetItemObtained(u16 item, enum ItemObtainFlags caseId)
-{    
+{
 #if OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_FIRST_TIME
     u8 index = item / 8;
     u8 bit = item % 8;
@@ -3438,7 +3440,7 @@ void ScriptHideItemDescription(struct ScriptContext *ctx)
 static void ShowItemIconSprite(u16 item, bool8 firstTime, bool8 flash)
 {
     s16 x = 0, y = 0;
-    u8 iconSpriteId;   
+    u8 iconSpriteId;
     u8 spriteId2 = MAX_SPRITES;
 
     if (flash)

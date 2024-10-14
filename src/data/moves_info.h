@@ -4505,7 +4505,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_NORMAL,
         .accuracy = 0,
         .pp = 30,
-        .target = MOVE_TARGET_USER,
+        .target = B_UPDATED_MOVE_DATA >= GEN_5 ? MOVE_TARGET_SELECTED : MOVE_TARGET_USER,
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
         .zMove = { .effect = Z_EFFECT_RECOVER_HP },
@@ -19325,7 +19325,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "Boosts a user's stats\n"
             "depending on Tatsugiri."),
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_ORDER_UP
+        .effect = EFFECT_ORDER_UP,
         .power = 80,
         .type = TYPE_DRAGON,
         .accuracy = 100,
@@ -19335,6 +19335,11 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .mirrorMoveBanned = TRUE,
         .metronomeBanned = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_ORDER_UP,
+            .self = TRUE,
+            .chance = 100,
+        }),
         .battleAnimScript = gBattleAnimMove_OrderUp,
     },
 
