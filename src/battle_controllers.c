@@ -3188,11 +3188,15 @@ static void MonFaintCelebration(u32 battler, u8 funcPart)
     {
         if (GetBattlerSide(battler) == B_SIDE_PLAYER)
         {
-            LaunchAnimationTaskForFrontSprite(&gSprites[gBattlerSpriteIds[BATTLE_OPPOSITE(battler)]], gSpeciesInfo[gBattleMons[BATTLE_OPPOSITE(battler)].species].frontAnimId);
-            PlayCry_Normal(gBattleMons[BATTLE_OPPOSITE(battler)].species, CRY_PRIORITY_NORMAL);
-            if (HasTwoFramesAnimation(gBattleMons[BATTLE_OPPOSITE(battler)].species))
-            StartSpriteAnim(&gSprites[gBattlerSpriteIds[BATTLE_OPPOSITE(battler)]], 1);
-            if(gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+            if (gBattleMons[BATTLE_OPPOSITE(battler)].species != SPECIES_NONE)
+            {
+                LaunchAnimationTaskForFrontSprite(&gSprites[gBattlerSpriteIds[BATTLE_OPPOSITE(battler)]], gSpeciesInfo[gBattleMons[BATTLE_OPPOSITE(battler)].species].frontAnimId);
+                PlayCry_Normal(gBattleMons[BATTLE_OPPOSITE(battler)].species, CRY_PRIORITY_NORMAL);
+                if (HasTwoFramesAnimation(gBattleMons[BATTLE_OPPOSITE(battler)].species))
+                    StartSpriteAnim(&gSprites[gBattlerSpriteIds[BATTLE_OPPOSITE(battler)]], 1);
+            }
+
+            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species != SPECIES_NONE)
             {
                 LaunchAnimationTaskForFrontSprite(&gSprites[gBattlerSpriteIds[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))]], gSpeciesInfo[gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species].frontAnimId);
                 PlayCry_Normal(gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species, CRY_PRIORITY_NORMAL);
@@ -3202,13 +3206,17 @@ static void MonFaintCelebration(u32 battler, u8 funcPart)
         }
         else if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
         {
-            LaunchAnimationTaskForBackSprite(&gSprites[gBattlerSpriteIds[BATTLE_OPPOSITE(battler)]], GetSpeciesBackAnimSet(gBattleMons[BATTLE_OPPOSITE(battler)].species));
-            PlayCry_Normal(gBattleMons[BATTLE_OPPOSITE(battler)].species, CRY_PRIORITY_NORMAL);
-            if(gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+            if (gBattleMons[BATTLE_OPPOSITE(battler)].species != SPECIES_NONE)
+            {
+                LaunchAnimationTaskForBackSprite(&gSprites[gBattlerSpriteIds[BATTLE_OPPOSITE(battler)]], GetSpeciesBackAnimSet(gBattleMons[BATTLE_OPPOSITE(battler)].species));
+                PlayCry_Normal(gBattleMons[BATTLE_OPPOSITE(battler)].species, CRY_PRIORITY_NORMAL);
+            }
+
+            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species != SPECIES_NONE)
             {
                 LaunchAnimationTaskForBackSprite(&gSprites[gBattlerSpriteIds[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))]], GetSpeciesBackAnimSet(gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species));
                 PlayCry_Normal(gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species, CRY_PRIORITY_NORMAL);
             }
         }
-    }   
+    }
 }
