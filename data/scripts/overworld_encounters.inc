@@ -254,6 +254,7 @@ OverworldEncounters_EventScript_EncounterEnd::
 	compare VAR_RESULT, DIR_NORTH
 	goto_if_eq OverworldEncounters_EventScript_EncounterEnd_3
 OverworldEncounters_EventScript_EncounterEnd_1:
+	call EventScript_DisplayPokedexHeader
 	setvar VAR_0x8008, EMOTE_NORMAL
 	clearflag FLAG_SYS_OVERWORLD_ENCOUNTER_CAMERA
 	special ExitSafariMode
