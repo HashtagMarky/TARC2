@@ -2746,7 +2746,7 @@ static void SpriteCB_WildMonShowHealthbox(struct Sprite *sprite)
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[sprite->sBattler]);
         sprite->callback = SpriteCB_WildMonAnimate;
         StartSpriteAnimIfDifferent(sprite, 0);
-        if (gSaveBlock2Ptr->optionsBattleScene != OPTIONS_BATTLE_SCENE_NO_INTRO)
+        if (gSaveBlock2Ptr->optionsBattleScene == OPTIONS_BATTLE_SCENE_NO_INTRO)
             return;
 
         if (WILD_DOUBLE_BATTLE)
