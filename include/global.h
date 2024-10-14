@@ -593,6 +593,13 @@ struct SaveBlock2
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
+#include "characters.h"
+// can be accessed via SaveBlock2Ptr->Characters.friendship[characterId]
+struct Characters
+{
+    u8 friendship[CHARACTER_COUNT];
+};
+
 struct SecretBaseParty
 {
     u32 personality[PARTY_SIZE];
