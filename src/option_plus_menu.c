@@ -1593,7 +1593,7 @@ static void DrawChoices_MugshotsFollower(int selection, int y)
         DrawOptionMenuChoice(textOn, 104, y, 1, active);
     }
     else
-        DrawOptionMenuChoice(gText_BattleSceneOff, 104, y, 1, active);
+        DrawOptionMenuChoice(gText_BattleSceneOff, 104, y, 0, active);
 }
 
 static void DrawChoices_TitleScreen(int selection, int y)
