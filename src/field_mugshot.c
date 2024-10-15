@@ -260,7 +260,7 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
     {
         windowTask = CreateTask(Task_MugshotWindow, 0);
 
-        if (mugshotType == MUGSHOT_NPC || MUGSHOT_PLAYER)
+        if (mugshotType == MUGSHOT_NPC || mugshotType == MUGSHOT_PLAYER)
         {
             windowId = AddWindow(&sMugshotWindowNPC);
             x = MUGSHOT_NPC_X;
@@ -362,7 +362,7 @@ u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion)
     sFieldMugshotSpriteId = CreateSprite(&sFieldMugshotSprite_SpriteTemplate, 0, 0, 0);
     if (sFieldMugshotSpriteId == SPRITE_NONE)
     {
-        return NULL;
+        return SPRITE_NONE;
     }
     PreservePaletteInWeather(gSprites[sFieldMugshotSpriteId].oam.paletteNum + 0x10);
     return sFieldMugshotSpriteId;
