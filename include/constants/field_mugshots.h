@@ -9,9 +9,10 @@
 // Mugshot Types
 #define MUGSHOT_DEFINED     0
 #define MUGSHOT_NPC         1
-#define MUGSHOT_PMD         2
-#define MUGSHOT_FOLLOWER    3
-#define MUGSHOT_TYPES       4
+#define MUGSHOT_PLAYER      2
+#define MUGSHOT_PMD         3
+#define MUGSHOT_FOLLOWER    4
+#define MUGSHOT_TYPES       5
 
 // Follower Mugshot Settings
 #define MUGSHOT_FOLLOWER_PLACEHOLDER    0

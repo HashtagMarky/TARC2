@@ -206,6 +206,10 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
         y += 32;
     }
 
+    // If playerGender has a value set to female, otherwise male
+    if (mugshotType == MUGSHOT_PLAYER)
+        mugshotId = gSaveBlock2Ptr->playerGender ? MUGSHOT_ANKA : MUGSHOT_KOLE;
+
     struct CompressedSpriteSheet sheet = { .size=0x1000, .tag=TAG_MUGSHOT };
     struct SpritePalette pal = { .tag = sheet.tag };
 
@@ -215,7 +219,8 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
         && gSaveBlock2Ptr->optionsFollowerMugshots == MUGSHOT_FOLLOWER_PLACEHOLDER && mugshotType == MUGSHOT_FOLLOWER))
         mugshotId = MUGSHOT_SUBSTITUTE_DOLL;
 
-    if (mugshotId >= NELEMS(gFieldMugshots)
+    if (mugshotType == MUGSHOT_PLAYER) {} // so MUGSHOT_PLAYER does not get checked for following conditions
+    else if (mugshotId >= NELEMS(gFieldMugshots)
         || FlagGet(FLAG_SUPPRESS_MUGSHOT)
         || (gSaveBlock2Ptr->optionsSuppressNPCMugshots == TRUE && mugshotType != MUGSHOT_FOLLOWER)
         || (gSaveBlock2Ptr->optionsFollowerMugshots == MUGSHOT_FOLLOWER_OFF && mugshotType == MUGSHOT_FOLLOWER))
@@ -255,7 +260,7 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
     {
         windowTask = CreateTask(Task_MugshotWindow, 0);
 
-        if (mugshotType == MUGSHOT_NPC)
+        if (mugshotType == MUGSHOT_NPC || MUGSHOT_PLAYER)
         {
             windowId = AddWindow(&sMugshotWindowNPC);
             x = MUGSHOT_NPC_X;
