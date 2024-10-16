@@ -1,5 +1,5 @@
 #include "global.h"
-#include "ui_birch_case.h"
+#include "ui_samuel_case.h"
 #include "strings.h"
 #include "bg.h"
 #include "data.h"
@@ -153,10 +153,10 @@ static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
 //==========STATIC=DEFINES==========//
 static void BirchCaseRunSetup(void);
 static bool8 BirchCaseDoGfxSetup(void);
-static bool8 BirchCase_InitBgs(void);
+static bool8 SamuelCase_InitBgs(void);
 static void BirchCaseFadeAndBail(void);
 static bool8 BirchCaseLoadGraphics(void);
-static void BirchCase_InitWindows(void);
+static void SamuelCase_InitWindows(void);
 static void PrintTextToBottomBar(u8 textId);
 static void Task_BirchCaseWaitFadeIn(u8 taskId);
 static void Task_BirchCaseMain(u8 taskId);
@@ -205,16 +205,16 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
 //
 //  Graphics Pointers to Tilemaps, Tilesets, Spritesheets, Palettes
 //
-static const u32 sCaseTiles[]   = INCBIN_U32("graphics/ui_birch_case/case_tiles.4bpp.lz");
-static const u32 sCaseTilemap[] = INCBIN_U32("graphics/ui_birch_case/case_tiles.bin.lz");
-static const u16 sCasePalette[] = INCBIN_U16("graphics/ui_birch_case/case_tiles.gbapal");
+static const u32 sCaseTiles[]   = INCBIN_U32("graphics/ui_samuel_case/case_tiles.4bpp.lz");
+static const u32 sCaseTilemap[] = INCBIN_U32("graphics/ui_samuel_case/case_tiles.bin.lz");
+static const u16 sCasePalette[] = INCBIN_U16("graphics/ui_samuel_case/case_tiles.gbapal");
 
-static const u32 sTextBgTiles[]   = INCBIN_U32("graphics/ui_birch_case/text_bg_tiles.4bpp.lz");
-static const u32 sTextBgTilemap[] = INCBIN_U32("graphics/ui_birch_case/text_bg_tiles.bin.lz");
-static const u16 sTextBgPalette[] = INCBIN_U16("graphics/ui_birch_case/text_bg_tiles.gbapal");
+static const u32 sTextBgTiles[]   = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles.4bpp.lz");
+static const u32 sTextBgTilemap[] = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles.bin.lz");
+static const u16 sTextBgPalette[] = INCBIN_U16("graphics/ui_samuel_case/text_bg_tiles.gbapal");
 
-static const u32 sPokeballHand_Gfx[] = INCBIN_U32("graphics/ui_birch_case/pokeball_hand.4bpp.lz");
-static const u16 sPokeballHand_Pal[] = INCBIN_U16("graphics/ui_birch_case/pokeball_hand.gbapal");
+static const u32 sPokeballHand_Gfx[] = INCBIN_U32("graphics/ui_samuel_case/pokeball_hand.4bpp.lz");
+static const u16 sPokeballHand_Pal[] = INCBIN_U16("graphics/ui_samuel_case/pokeball_hand.gbapal");
 
 //
 //  Sprite Data for Pokeball Hand Sprite
@@ -465,7 +465,7 @@ static void BirchCase_GiveMon() // Function that calls the GiveMon function pull
     u8 *ivs = (u8 *) sStarterChoices[sBirchCaseDataPtr->handPosition].ivs;
     u16 *moves = (u16 *) sStarterChoices[sBirchCaseDataPtr->handPosition].moves;
     FlagSet(FLAG_SYS_POKEMON_GET);
-    gSpecialVar_Result = BirchCase_GiveMonParameterized(sStarterChoices[sBirchCaseDataPtr->handPosition].species, sStarterChoices[sBirchCaseDataPtr->handPosition].level, \
+    gSpecialVar_Result = SamuelCase_GiveMonParameterized(sStarterChoices[sBirchCaseDataPtr->handPosition].species, sStarterChoices[sBirchCaseDataPtr->handPosition].level, \
                 sStarterChoices[sBirchCaseDataPtr->handPosition].item, sStarterChoices[sBirchCaseDataPtr->handPosition].ball, \
                 sStarterChoices[sBirchCaseDataPtr->handPosition].nature, sStarterChoices[sBirchCaseDataPtr->handPosition].abilityNum, \
                 sStarterChoices[sBirchCaseDataPtr->handPosition].gender, evs, ivs, moves, \
@@ -475,18 +475,18 @@ static void BirchCase_GiveMon() // Function that calls the GiveMon function pull
 
 //==========FUNCTIONS==========//
 // UI loader template functions by Ghoulslash
-void Task_OpenBirchCase(u8 taskId)
+void Task_OpenSamuelCase(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        BirchCase_Init(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        SamuelCase_Init(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         DestroyTask(taskId);
     }
 }
 
 // This is our main initialization function if you want to call the menu from elsewhere
-void BirchCase_Init(MainCallback callback)
+void SamuelCase_Init(MainCallback callback)
 {
     u16 i = 0;
     if ((sBirchCaseDataPtr = AllocZeroed(sizeof(struct MenuResources))) == NULL)
@@ -554,7 +554,7 @@ static bool8 BirchCaseDoGfxSetup(void)
         gMain.state++;
         break;
     case 2:
-        if (BirchCase_InitBgs())
+        if (SamuelCase_InitBgs())
         {
             sBirchCaseDataPtr->gfxLoadState = 0;
             gMain.state++;
@@ -571,7 +571,7 @@ static bool8 BirchCaseDoGfxSetup(void)
         break;
     case 4:
         LoadMessageBoxAndBorderGfx();
-        BirchCase_InitWindows();
+        SamuelCase_InitWindows();
         gMain.state++;
         break;
     case 5:
@@ -645,7 +645,7 @@ static void Task_BirchCaseTurnOff(u8 taskId)
     }
 }
 
-static bool8 BirchCase_InitBgs(void) // Init the bgs and bg tilemap buffers and turn sprites on, also set the bgs to blend
+static bool8 SamuelCase_InitBgs(void) // Init the bgs and bg tilemap buffers and turn sprites on, also set the bgs to blend
 {
     ResetAllBgsCoordinates();
     sBg1TilemapBuffer = Alloc(0x800);
@@ -706,7 +706,7 @@ static bool8 BirchCaseLoadGraphics(void) // load tilesets, tilemaps, spritesheet
     return FALSE;
 }
 
-static void BirchCase_InitWindows(void)
+static void SamuelCase_InitWindows(void)
 {
     InitWindows(sMenuWindowTemplates);
     DeactivateAllTextPrinters();

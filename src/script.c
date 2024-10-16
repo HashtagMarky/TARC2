@@ -10,7 +10,7 @@
 #include "constants/map_scripts.h"
 #include "field_message_box.h"
 #include "trainer_see.h"
-#include "ui_birch_case.h"
+#include "ui_samuel_case.h"
 #include "task.h"
 #include "field_weather.h"
 
@@ -529,5 +529,5 @@ bool8 LoadOverworldPokemonObjectScript(void)
 void StartNewPokeballCaseUI(void)
 {
     FadeScreen(FADE_TO_BLACK, 0);
-    CreateTask(Task_OpenBirchCase, 0);
+    CreateTask(Task_OpenSamuelCase, 0);
 }

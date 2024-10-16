@@ -3,8 +3,8 @@
 
 #include "main.h"
 
-void Task_OpenBirchCase(u8 taskId);
-void BirchCase_Init(MainCallback callback);
+void Task_OpenSamuelCase(u8 taskId);
+void SamuelCase_Init(MainCallback callback);
 
 
 #endif // GUARD_UI_MENU_H

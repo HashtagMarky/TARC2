@@ -562,7 +562,7 @@ void Script_SetStatus1(struct ScriptContext *ctx)
     }
 }
 
-u32 BirchCase_GiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 nature, u8 abilityNum, u8 gender, u8 *evs, u8 *ivs, u16 *moves, bool8 ggMaxFactor, u8 teraType, bool8 isShinyExpansion)
+u32 SamuelCase_GiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 nature, u8 abilityNum, u8 gender, u8 *evs, u8 *ivs, u16 *moves, bool8 ggMaxFactor, u8 teraType, bool8 isShinyExpansion)
 {
     //
     //  This function is created by Lunos and Ghoulslash as part of the custom givemon script in Expansion. I had to port it and rename it so that - 
