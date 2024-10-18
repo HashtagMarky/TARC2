@@ -56,7 +56,7 @@ struct MenuResources
     MainCallback savedCallback;     // determines callback to run when we exit. e.g. where do we want to go after closing the menu
     u8 gfxLoadState;
     u16 monSpriteId;
-    u16 pokeballSpriteIds[9];
+    u16 pokeballSpriteIds[18];
     u16 handSpriteId;
     u16 handPosition;
     u16 selector_x;
@@ -100,15 +100,27 @@ struct SpriteCordsStruct {
 
 enum BallPositions
 {
-    BALL_TOP_FIRST,
-    BALL_TOP_SECOND,
-    BALL_TOP_THIRD,
-    BALL_TOP_FOURTH,
-    BALL_MIDDLE_FIRST,
-    BALL_MIDDLE_SECOND,
-    BALL_MIDDLE_THIRD,
-    BALL_BOTTOM_FIRST,
-    BALL_BOTTOM_SECOND,
+    BALL_FIRST_FIRST,
+    BALL_FIRST_SECOND,
+    BALL_FIRST_THIRD,
+    BALL_FIRST_FOURTH,
+    BALL_FIRST_FIFTH,
+    BALL_FIRST_SIXTH,
+
+    BALL_SECOND_FIRST,
+    BALL_SECOND_SECOND,
+    BALL_SECOND_THIRD,
+    BALL_SECOND_FOURTH,
+
+    BALL_THIRD_FIRST,
+    BALL_THIRD_SECOND,
+    BALL_THIRD_THIRD,
+    BALL_THIRD_FOURTH,
+
+    BALL_FOURTH_FIRST,
+    BALL_FOURTH_SECOND,
+    BALL_FOURTH_THIRD,
+    BALL_FOURTH_FOURTH,
 };
 
 struct MonChoiceData{ // This is the format used to define a mon, everything left out will default to 0 and be blank or use the in game defaults
@@ -130,19 +142,29 @@ struct MonChoiceData{ // This is the format used to define a mon, everything lef
 //
 //  Making Changes Here Changes The Options In The UI. This is where you define your mons
 //
-static const struct MonChoiceData sStarterChoices[9] = 
+static const struct MonChoiceData sStarterChoices[18] = 
 {
-    [BALL_TOP_FIRST]        = {SPECIES_MUDKIP, 5, ITEM_POTION, BALL_NET, NATURE_JOLLY, 1, MON_MALE, {255, 255, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {MOVE_FIRE_BLAST, MOVE_SHEER_COLD, MOVE_WATER_GUN, MOVE_THUNDER}, 0, 0, 0},
-    [BALL_TOP_SECOND]       = {SPECIES_TREECKO, 5},
-    [BALL_MIDDLE_FIRST]     = {SPECIES_TORCHIC, 5},
+    [BALL_FIRST_FIRST]          = {SPECIES_BIDOOF, 5, ITEM_POTION, BALL_NET, NATURE_JOLLY, 1, MON_MALE, {255, 255, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {MOVE_FIRE_BLAST, MOVE_SHEER_COLD, MOVE_WATER_GUN, MOVE_THUNDER}, 0, 0, 0},
+    [BALL_FIRST_SECOND]         = {SPECIES_MACHOP, 5},
+    [BALL_FIRST_THIRD]          = {SPECIES_STARLY, 5},
+    [BALL_FIRST_FOURTH]         = {SPECIES_EKANS, 5},
+    [BALL_FIRST_FIFTH]          = {SPECIES_SANDILE, 5},
+    [BALL_FIRST_SIXTH]          = {SPECIES_GEODUDE, 5},
 
-    [BALL_TOP_THIRD]        = {SPECIES_CHIKORITA, 5},
-    [BALL_TOP_FOURTH]       = {SPECIES_NONE, 5},
-    [BALL_MIDDLE_THIRD]     = {SPECIES_CYNDAQUIL, 5},
+    [BALL_SECOND_FIRST]         = {SPECIES_WURMPLE, 5},
+    [BALL_SECOND_SECOND]        = {SPECIES_GASTLY, 5},
+    [BALL_SECOND_THIRD]         = {SPECIES_ARON, 5},
+    [BALL_SECOND_FOURTH]        = {SPECIES_PONYTA, 5},
 
-    [BALL_MIDDLE_SECOND]    = {SPECIES_BULBASAUR, 5},
-    [BALL_BOTTOM_FIRST]     = {SPECIES_CHARMANDER, 5},
-    [BALL_BOTTOM_SECOND]    = {SPECIES_NONE, 5},
+    [BALL_THIRD_FIRST]          = {SPECIES_FINIZEN, 5},
+    [BALL_THIRD_SECOND]         = {SPECIES_BUDEW, 5},
+    [BALL_THIRD_THIRD]          = {SPECIES_PIKACHU, 5},
+    [BALL_THIRD_FOURTH]         = {SPECIES_ABRA, 5},
+
+    [BALL_FOURTH_FIRST]         = {SPECIES_SNOM, 5},
+    [BALL_FOURTH_SECOND]        = {SPECIES_DREEPY, 5},
+    [BALL_FOURTH_THIRD]         = {SPECIES_ABSOL, 5},
+    [BALL_FOURTH_FOURTH]        = {SPECIES_TINKATINK, 5},
 };
 
 //==========EWRAM==========//
@@ -283,36 +305,53 @@ static const struct SpriteTemplate sSpriteTemplate_PokeballHandMap =
 //
 //  This is the Callback for the Hand Cursor that Updates its sprite position when moved by the input control functions
 //
-#define TOP_ROW_Y 36
-#define MIDDLE_ROW_Y 58
-#define BOTTOM_ROW_Y 80
+#define FIRST_ROW_Y 36
+#define SECOND_ROW_Y 51
+#define THIRD_ROW_Y 66
+#define FOURTH_ROW_Y 80
 
-static const struct SpriteCordsStruct sBallSpriteCords[3][4] = {
-        {{40, TOP_ROW_Y}, {88, TOP_ROW_Y}, {152, TOP_ROW_Y}, {200, TOP_ROW_Y}},
-        {{64, MIDDLE_ROW_Y}, {120, MIDDLE_ROW_Y}, {176, MIDDLE_ROW_Y}},
-        {{96, BOTTOM_ROW_Y}, {144, BOTTOM_ROW_Y}},
+static const struct SpriteCordsStruct sBallSpriteCords[4][6] = {
+        {{40, FIRST_ROW_Y}, {72, FIRST_ROW_Y}, {104, FIRST_ROW_Y}, {136, FIRST_ROW_Y}, {168, FIRST_ROW_Y}, {180, FIRST_ROW_Y}},
+        {{48, SECOND_ROW_Y}, {96, SECOND_ROW_Y}, {144, SECOND_ROW_Y}, {192, SECOND_ROW_Y}},
+        {{56, THIRD_ROW_Y}, {88, THIRD_ROW_Y}, {152, THIRD_ROW_Y}, {184, THIRD_ROW_Y}},
+        {{48, FOURTH_ROW_Y}, {96, FOURTH_ROW_Y}, {144, FOURTH_ROW_Y}, {240, FOURTH_ROW_Y}},
 };
 
 static void CursorCallback(struct Sprite *sprite)
 {
-    struct SpriteCordsStruct current_position = {0,0};
-    if(sBirchCaseDataPtr->handPosition <= 3)
+    struct SpriteCordsStruct current_position = {0, 0};
+    
+    if (sBirchCaseDataPtr->handPosition < 6)
+    {
+        // First row (0 to 5)
         current_position = sBallSpriteCords[0][sBirchCaseDataPtr->handPosition];
-    else if(sBirchCaseDataPtr->handPosition <= 6)  
-        current_position = sBallSpriteCords[1][sBirchCaseDataPtr->handPosition - 4];
-    else
-        current_position = sBallSpriteCords[2][sBirchCaseDataPtr->handPosition - 7];
+    }
+    else if (sBirchCaseDataPtr->handPosition < 10)
+    {
+        // Second row (6 to 9)
+        current_position = sBallSpriteCords[1][sBirchCaseDataPtr->handPosition - 6];
+    }
+    else if (sBirchCaseDataPtr->handPosition < 14)
+    {
+        // Third row (10 to 13)
+        current_position = sBallSpriteCords[2][sBirchCaseDataPtr->handPosition - 10];
+    }
+    else if (sBirchCaseDataPtr->handPosition < 18)
+    {
+        // Fourth row (14 to 17)
+        current_position = sBallSpriteCords[3][sBirchCaseDataPtr->handPosition - 14];
+    }
 
     sprite->x = current_position.x;
     sprite->y = current_position.y - 6;
 
-    if(sBirchCaseDataPtr->movingSelector != TRUE)
+    if (sBirchCaseDataPtr->movingSelector != TRUE)
     {
-        if(sprite->data[5] <= 30)
+        if (sprite->data[5] <= 30)
         {
             sprite->y -= 1;
         }
-        else if(sprite->data[5] > 30 && sprite->data[5] < 60)
+        else if (sprite->data[5] > 30 && sprite->data[5] < 60)
         {
             sprite->y += 1;
         }
@@ -323,43 +362,48 @@ static void CursorCallback(struct Sprite *sprite)
         }
         sprite->data[5]++;
     }
-    
 }
 
-//
-//  Create The Hande Cursor Sprite
-//
 static void CreateHandSprite()
 {
     u16 i = 0;
     u16 x, y;
-    struct SpriteCordsStruct current_position = {0,0};
+    struct SpriteCordsStruct current_position = {0, 0};
 
-    for(i=0; i<9; i++)
+    for (i = 0; i < 18; i++)
     {
-        if(sStarterChoices[i].species == SPECIES_NONE) // Choose Non Empty Slot To Start In
+        if (sStarterChoices[i].species == SPECIES_NONE) // Skip empty slots
             continue;
-    
-        if(sBirchCaseDataPtr->handPosition <= 3)
+        
+        if (i < 6)
         {
-            current_position = sBallSpriteCords[0][sBirchCaseDataPtr->handPosition];
+            current_position = sBallSpriteCords[0][i];
+            sBirchCaseDataPtr->handPosition = i;
             break;
         }
-        else if(sBirchCaseDataPtr->handPosition <= 6)  
+        else if (i < 10)
         {
-            current_position = sBallSpriteCords[1][sBirchCaseDataPtr->handPosition - 4];
+            current_position = sBallSpriteCords[1][i - 6];
+            sBirchCaseDataPtr->handPosition = i;
             break;
         }
-        else
+        else if (i < 14)
         {
-            current_position = sBallSpriteCords[2][sBirchCaseDataPtr->handPosition - 7];
+            current_position = sBallSpriteCords[2][i - 10];
+            sBirchCaseDataPtr->handPosition = i;
+            break;
+        }
+        else if (i < 18)
+        {
+            current_position = sBallSpriteCords[3][i - 14];
+            sBirchCaseDataPtr->handPosition = i;
             break;
         }
     }
 
     x = current_position.x;
     y = current_position.y - 6;
-    sBirchCaseDataPtr->handPosition = i;
+
     if (sBirchCaseDataPtr->handSpriteId == SPRITE_NONE)
         sBirchCaseDataPtr->handSpriteId = CreateSpriteAtEnd(&sSpriteTemplate_PokeballHandMap, x, y, 0);
     gSprites[sBirchCaseDataPtr->handSpriteId].invisible = FALSE;
@@ -367,14 +411,12 @@ static void CreateHandSprite()
     StartSpriteAnim(&gSprites[sBirchCaseDataPtr->handSpriteId], 2);
     StartSpriteAnim(&gSprites[sBirchCaseDataPtr->pokeballSpriteIds[sBirchCaseDataPtr->handPosition]], 1);
     SampleUi_DrawMonIcon(sStarterChoices[sBirchCaseDataPtr->handPosition].species);
-    
-    return;
 }
 
 static void DestroyHandSprite()
 {
     u8 i = 0;
-    for(i = 0; i < 9; i++)
+    for(i = 0; i < 18; i++)
     {
         DestroySprite(&gSprites[sBirchCaseDataPtr->pokeballSpriteIds[i]]);
         sBirchCaseDataPtr->pokeballSpriteIds[i] = SPRITE_NONE;
@@ -388,41 +430,48 @@ static void CreatePokeballSprites()
 {
     u16 i = 0;
 
-    for(i=0; i<9; i++)
+    for (i = 0; i < 18; i++)
     {
         u16 x, y;
-        if(sStarterChoices[i].species == SPECIES_NONE)
+        if (sStarterChoices[i].species == SPECIES_NONE)
             continue;
 
-        if(i <= 3)
+        if (i < 6)
         {
+            // First row (0 to 5)
             x = sBallSpriteCords[0][i].x;
             y = sBallSpriteCords[0][i].y;
         }
-        else if(i <= 6)
+        else if (i < 10)
         {
-            
-            x = sBallSpriteCords[1][i - 4].x;
-            y = sBallSpriteCords[1][i - 4].y;
+            // Second row (6 to 9)
+            x = sBallSpriteCords[1][i - 6].x;
+            y = sBallSpriteCords[1][i - 6].y;
         }
-        else
+        else if (i < 14)
         {
-            x = sBallSpriteCords[2][i - 7].x;
-            y = sBallSpriteCords[2][i - 7].y;
+            // Third row (10 to 13)
+            x = sBallSpriteCords[2][i - 10].x;
+            y = sBallSpriteCords[2][i - 10].y;
         }
+        else if (i < 18)
+        {
+            // Fourth row (14 to 17)
+            x = sBallSpriteCords[3][i - 14].x;
+            y = sBallSpriteCords[3][i - 14].y;
+        }
+
         if (sBirchCaseDataPtr->pokeballSpriteIds[i] == SPRITE_NONE)
             sBirchCaseDataPtr->pokeballSpriteIds[i] = CreateSpriteAtEnd(&sSpriteTemplate_PokeballHandMap, x, y, 1);
         gSprites[sBirchCaseDataPtr->pokeballSpriteIds[i]].invisible = FALSE;
         StartSpriteAnim(&gSprites[sBirchCaseDataPtr->pokeballSpriteIds[i]], 0);
-
-    }   
-    return;
+    }
 }
 
 static void DestroyPokeballSprites()
 {
     u8 i = 0;
-    for(i = 0; i < 9; i++)
+    for (i = 0; i < 18; i++)
     {
         DestroySprite(&gSprites[sBirchCaseDataPtr->pokeballSpriteIds[i]]);
         sBirchCaseDataPtr->pokeballSpriteIds[i] = SPRITE_NONE;
@@ -872,118 +921,89 @@ static void Task_BirchCaseConfirmSelection(u8 taskId)
 static void Task_BirchCaseMain(u8 taskId)
 {
     u16 oldPosition = sBirchCaseDataPtr->handPosition;
-    if(JOY_NEW(DPAD_UP))
+    if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
-        if(sBirchCaseDataPtr->handPosition <= BALL_TOP_FOURTH) // top row move up
+        // Move up
+        switch (sBirchCaseDataPtr->handPosition)
         {
-            if(sBirchCaseDataPtr->handPosition < BALL_TOP_THIRD)
-                sBirchCaseDataPtr->handPosition = BALL_BOTTOM_FIRST;
-            else
-                sBirchCaseDataPtr->handPosition = BALL_BOTTOM_SECOND;
-        }
-        else if(sBirchCaseDataPtr->handPosition <= BALL_MIDDLE_THIRD)  // middle row move up
-        {
-            if(sBirchCaseDataPtr->handPosition == BALL_MIDDLE_FIRST)
-                sBirchCaseDataPtr->handPosition = BALL_TOP_FIRST;
-            else if (sBirchCaseDataPtr->handPosition == BALL_MIDDLE_SECOND)
-                sBirchCaseDataPtr->handPosition = BALL_TOP_SECOND;
-            else
-                sBirchCaseDataPtr->handPosition = BALL_TOP_THIRD;
-        }
-        else  // bottom row move up
-        {
-            sBirchCaseDataPtr->handPosition = BALL_MIDDLE_SECOND;
+            case 0: case 1: case 4: case 5: // Columns with 4 rows
+                sBirchCaseDataPtr->handPosition += 14; // Move to Row 4
+                break;
+            case 2: case 3: // Columns with only top row
+                sBirchCaseDataPtr->handPosition = sBirchCaseDataPtr->handPosition; // Stay in place
+                break;
+            case 6: case 7: case 8: case 9: // Row 2 to Row 1
+                sBirchCaseDataPtr->handPosition -= 6;
+                break;
+            case 10: case 11: case 12: case 13: // Row 3 to Row 2
+                sBirchCaseDataPtr->handPosition -= 4;
+                break;
+            case 14: case 15: case 16: case 17: // Row 4 to Row 3
+                sBirchCaseDataPtr->handPosition -= 4;
+                break;
         }
         ChangePositionUpdateSpriteAnims(oldPosition, taskId);
         return;
     }
-    if(JOY_NEW(DPAD_DOWN))
+    if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
-        if(sBirchCaseDataPtr->handPosition <= BALL_TOP_FOURTH) // top row move down
+        // Move down
+        switch (sBirchCaseDataPtr->handPosition)
         {
-            if(sBirchCaseDataPtr->handPosition < BALL_TOP_THIRD)
-                sBirchCaseDataPtr->handPosition = BALL_MIDDLE_FIRST;
-            else if(sBirchCaseDataPtr->handPosition == BALL_TOP_THIRD)
-                sBirchCaseDataPtr->handPosition = BALL_MIDDLE_SECOND;
-            else
-                sBirchCaseDataPtr->handPosition = BALL_MIDDLE_THIRD;
-        }
-        else if(sBirchCaseDataPtr->handPosition <= BALL_MIDDLE_THIRD)  // middle row move down
-        {
-            if(sBirchCaseDataPtr->handPosition < BALL_MIDDLE_SECOND)
-                sBirchCaseDataPtr->handPosition = BALL_BOTTOM_FIRST;
-            else
-                sBirchCaseDataPtr->handPosition = BALL_BOTTOM_SECOND;
-        }
-        else  // bottom row move down
-        {
-            if(sBirchCaseDataPtr->handPosition == BALL_BOTTOM_FIRST)
-                sBirchCaseDataPtr->handPosition = BALL_TOP_SECOND;
-            else
-                sBirchCaseDataPtr->handPosition = BALL_TOP_THIRD;
+            case 0: case 1: case 4: case 5: // Row 1 to Row 2
+                sBirchCaseDataPtr->handPosition += 6;
+                break;
+            case 2: case 3: // Columns with only top row
+                sBirchCaseDataPtr->handPosition = sBirchCaseDataPtr->handPosition; // Stay in place
+                break;
+            case 6: case 7: case 8: case 9: // Row 2 to Row 3
+                sBirchCaseDataPtr->handPosition += 4;
+                break;
+            case 10: case 11: case 12: case 13: // Row 3 to Row 4
+                sBirchCaseDataPtr->handPosition += 4;
+                break;
+            case 14: case 15: case 16: case 17: // Bottom row, no further down
+                sBirchCaseDataPtr->handPosition = sBirchCaseDataPtr->handPosition;
+                break;
         }
         ChangePositionUpdateSpriteAnims(oldPosition, taskId);
         return;
     }
-    if(JOY_NEW(DPAD_RIGHT))
+    if (JOY_NEW(DPAD_RIGHT))
     {
         PlaySE(SE_SELECT);
-        if(sBirchCaseDataPtr->handPosition <= BALL_TOP_FOURTH) // top row move down
+        // Move right
+        switch (sBirchCaseDataPtr->handPosition)
         {
-            if(sBirchCaseDataPtr->handPosition == BALL_TOP_FOURTH) // top row move down
-                sBirchCaseDataPtr->handPosition = BALL_TOP_FIRST;
-            else
-                sBirchCaseDataPtr->handPosition += 1;
-        }
-        else if(sBirchCaseDataPtr->handPosition <= BALL_MIDDLE_THIRD)  // middle row move down
-        {
-            if(sBirchCaseDataPtr->handPosition == BALL_MIDDLE_THIRD) // top row move down
-                sBirchCaseDataPtr->handPosition = BALL_MIDDLE_FIRST;
-            else
-                sBirchCaseDataPtr->handPosition += 1;
-        }
-        else  // bottom row move down
-        {
-            if(sBirchCaseDataPtr->handPosition == BALL_BOTTOM_SECOND) // top row move down
-                sBirchCaseDataPtr->handPosition = BALL_BOTTOM_FIRST;
-            else
-                sBirchCaseDataPtr->handPosition += 1;
+            case 5: sBirchCaseDataPtr->handPosition = 0; break; // Wrap around Row 1
+            case 9: sBirchCaseDataPtr->handPosition = 6; break; // Wrap around Row 2
+            case 13: sBirchCaseDataPtr->handPosition = 10; break; // Wrap around Row 3
+            case 17: sBirchCaseDataPtr->handPosition = 14; break; // Wrap around Row 4
+            default: sBirchCaseDataPtr->handPosition += 1; break; // Move right
         }
         ChangePositionUpdateSpriteAnims(oldPosition, taskId);
         return;
     }
-    if(JOY_NEW(DPAD_LEFT))
+    if (JOY_NEW(DPAD_LEFT))
     {
         PlaySE(SE_SELECT);
-        if(sBirchCaseDataPtr->handPosition <= BALL_TOP_FOURTH) // top row move down
+        // Move left
+        switch (sBirchCaseDataPtr->handPosition)
         {
-            if(sBirchCaseDataPtr->handPosition == BALL_TOP_FIRST) // top row move down
-                sBirchCaseDataPtr->handPosition = BALL_TOP_FOURTH;
-            else
-                sBirchCaseDataPtr->handPosition -= 1;
-        }
-        else if(sBirchCaseDataPtr->handPosition <= BALL_MIDDLE_THIRD)  // middle row move down
-        {
-            if(sBirchCaseDataPtr->handPosition == BALL_MIDDLE_FIRST) // top row move down
-                sBirchCaseDataPtr->handPosition = BALL_MIDDLE_THIRD;
-            else
-                sBirchCaseDataPtr->handPosition -= 1;
-        }
-        else  // bottom row move down
-        {
-            if(sBirchCaseDataPtr->handPosition == BALL_BOTTOM_FIRST) // top row move down
-                sBirchCaseDataPtr->handPosition = BALL_BOTTOM_SECOND;
-            else
-                sBirchCaseDataPtr->handPosition -= 1;
+            case 0: sBirchCaseDataPtr->handPosition = 5; break; // Wrap around Row 1
+            case 6: sBirchCaseDataPtr->handPosition = 9; break; // Wrap around Row 2
+            case 10: sBirchCaseDataPtr->handPosition = 13; break; // Wrap around Row 3
+            case 14: sBirchCaseDataPtr->handPosition = 17; break; // Wrap around Row 4
+            default: sBirchCaseDataPtr->handPosition -= 1; break; // Move left
         }
         ChangePositionUpdateSpriteAnims(oldPosition, taskId);
         return;
     }
-    if(JOY_NEW(A_BUTTON))
+    if (JOY_NEW(A_BUTTON))
     {
-        if(sStarterChoices[sBirchCaseDataPtr->handPosition].species != SPECIES_NONE) // If spot empty don't go to next control flow state
+        if (sStarterChoices[sBirchCaseDataPtr->handPosition].species != SPECIES_NONE) // If spot is not empty
         {
             PlaySE(SE_SELECT);
             PrintTextToBottomBar(CONFIRM_SELECTION);
@@ -997,7 +1017,3 @@ static void Task_BirchCaseMain(u8 taskId)
         }
     }
 }
-
-
-
-
