@@ -44,7 +44,7 @@
 #include "tv.h"
 
  /*
-    9 Starter Selection Birch Case
+    9 Starter Selection Samuel Case
 
     This UI was coded by Archie with Graphics by Mudskip.
 
@@ -146,20 +146,20 @@ static const struct MonChoiceData sStarterChoices[9] =
 };
 
 //==========EWRAM==========//
-static EWRAM_DATA struct MenuResources *sBirchCaseDataPtr = NULL;
+static EWRAM_DATA struct MenuResources *sSamuelCaseDataPtr = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
 
 //==========STATIC=DEFINES==========//
-static void BirchCaseRunSetup(void);
-static bool8 BirchCaseDoGfxSetup(void);
+static void SamuelCaseRunSetup(void);
+static bool8 SamuelCaseDoGfxSetup(void);
 static bool8 SamuelCase_InitBgs(void);
-static void BirchCaseFadeAndBail(void);
-static bool8 BirchCaseLoadGraphics(void);
+static void SamuelCaseFadeAndBail(void);
+static bool8 SamuelCaseLoadGraphics(void);
 static void SamuelCase_InitWindows(void);
 static void PrintTextToBottomBar(u8 textId);
-static void Task_BirchCaseWaitFadeIn(u8 taskId);
-static void Task_BirchCaseMain(u8 taskId);
+static void Task_SamuelCaseWaitFadeIn(u8 taskId);
+static void Task_SamuelCaseMain(u8 taskId);
 static void SampleUi_DrawMonIcon(u16 speciesId);
 static void Task_DelayedSpriteLoad(u8 taskId);
 
@@ -296,17 +296,17 @@ static const struct SpriteCordsStruct sBallSpriteCords[3][4] = {
 static void CursorCallback(struct Sprite *sprite)
 {
     struct SpriteCordsStruct current_position = {0,0};
-    if(sBirchCaseDataPtr->handPosition <= 3)
-        current_position = sBallSpriteCords[0][sBirchCaseDataPtr->handPosition];
-    else if(sBirchCaseDataPtr->handPosition <= 6)  
-        current_position = sBallSpriteCords[1][sBirchCaseDataPtr->handPosition - 4];
+    if(sSamuelCaseDataPtr->handPosition <= 3)
+        current_position = sBallSpriteCords[0][sSamuelCaseDataPtr->handPosition];
+    else if(sSamuelCaseDataPtr->handPosition <= 6)  
+        current_position = sBallSpriteCords[1][sSamuelCaseDataPtr->handPosition - 4];
     else
-        current_position = sBallSpriteCords[2][sBirchCaseDataPtr->handPosition - 7];
+        current_position = sBallSpriteCords[2][sSamuelCaseDataPtr->handPosition - 7];
 
     sprite->x = current_position.x;
     sprite->y = current_position.y - 6;
 
-    if(sBirchCaseDataPtr->movingSelector != TRUE)
+    if(sSamuelCaseDataPtr->movingSelector != TRUE)
     {
         if(sprite->data[5] <= 30)
         {
@@ -340,33 +340,33 @@ static void CreateHandSprite()
         if(sStarterChoices[i].species == SPECIES_NONE) // Choose Non Empty Slot To Start In
             continue;
     
-        if(sBirchCaseDataPtr->handPosition <= 3)
+        if(sSamuelCaseDataPtr->handPosition <= 3)
         {
-            current_position = sBallSpriteCords[0][sBirchCaseDataPtr->handPosition];
+            current_position = sBallSpriteCords[0][sSamuelCaseDataPtr->handPosition];
             break;
         }
-        else if(sBirchCaseDataPtr->handPosition <= 6)  
+        else if(sSamuelCaseDataPtr->handPosition <= 6)  
         {
-            current_position = sBallSpriteCords[1][sBirchCaseDataPtr->handPosition - 4];
+            current_position = sBallSpriteCords[1][sSamuelCaseDataPtr->handPosition - 4];
             break;
         }
         else
         {
-            current_position = sBallSpriteCords[2][sBirchCaseDataPtr->handPosition - 7];
+            current_position = sBallSpriteCords[2][sSamuelCaseDataPtr->handPosition - 7];
             break;
         }
     }
 
     x = current_position.x;
     y = current_position.y - 6;
-    sBirchCaseDataPtr->handPosition = i;
-    if (sBirchCaseDataPtr->handSpriteId == SPRITE_NONE)
-        sBirchCaseDataPtr->handSpriteId = CreateSpriteAtEnd(&sSpriteTemplate_PokeballHandMap, x, y, 0);
-    gSprites[sBirchCaseDataPtr->handSpriteId].invisible = FALSE;
-    gSprites[sBirchCaseDataPtr->handSpriteId].callback = CursorCallback;
-    StartSpriteAnim(&gSprites[sBirchCaseDataPtr->handSpriteId], 2);
-    StartSpriteAnim(&gSprites[sBirchCaseDataPtr->pokeballSpriteIds[sBirchCaseDataPtr->handPosition]], 1);
-    SampleUi_DrawMonIcon(sStarterChoices[sBirchCaseDataPtr->handPosition].species);
+    sSamuelCaseDataPtr->handPosition = i;
+    if (sSamuelCaseDataPtr->handSpriteId == SPRITE_NONE)
+        sSamuelCaseDataPtr->handSpriteId = CreateSpriteAtEnd(&sSpriteTemplate_PokeballHandMap, x, y, 0);
+    gSprites[sSamuelCaseDataPtr->handSpriteId].invisible = FALSE;
+    gSprites[sSamuelCaseDataPtr->handSpriteId].callback = CursorCallback;
+    StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->handSpriteId], 2);
+    StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->pokeballSpriteIds[sSamuelCaseDataPtr->handPosition]], 1);
+    SampleUi_DrawMonIcon(sStarterChoices[sSamuelCaseDataPtr->handPosition].species);
     
     return;
 }
@@ -376,8 +376,8 @@ static void DestroyHandSprite()
     u8 i = 0;
     for(i = 0; i < 9; i++)
     {
-        DestroySprite(&gSprites[sBirchCaseDataPtr->pokeballSpriteIds[i]]);
-        sBirchCaseDataPtr->pokeballSpriteIds[i] = SPRITE_NONE;
+        DestroySprite(&gSprites[sSamuelCaseDataPtr->pokeballSpriteIds[i]]);
+        sSamuelCaseDataPtr->pokeballSpriteIds[i] = SPRITE_NONE;
     }
 }
 
@@ -410,10 +410,10 @@ static void CreatePokeballSprites()
             x = sBallSpriteCords[2][i - 7].x;
             y = sBallSpriteCords[2][i - 7].y;
         }
-        if (sBirchCaseDataPtr->pokeballSpriteIds[i] == SPRITE_NONE)
-            sBirchCaseDataPtr->pokeballSpriteIds[i] = CreateSpriteAtEnd(&sSpriteTemplate_PokeballHandMap, x, y, 1);
-        gSprites[sBirchCaseDataPtr->pokeballSpriteIds[i]].invisible = FALSE;
-        StartSpriteAnim(&gSprites[sBirchCaseDataPtr->pokeballSpriteIds[i]], 0);
+        if (sSamuelCaseDataPtr->pokeballSpriteIds[i] == SPRITE_NONE)
+            sSamuelCaseDataPtr->pokeballSpriteIds[i] = CreateSpriteAtEnd(&sSpriteTemplate_PokeballHandMap, x, y, 1);
+        gSprites[sSamuelCaseDataPtr->pokeballSpriteIds[i]].invisible = FALSE;
+        StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->pokeballSpriteIds[i]], 0);
 
     }   
     return;
@@ -424,8 +424,8 @@ static void DestroyPokeballSprites()
     u8 i = 0;
     for(i = 0; i < 9; i++)
     {
-        DestroySprite(&gSprites[sBirchCaseDataPtr->pokeballSpriteIds[i]]);
-        sBirchCaseDataPtr->pokeballSpriteIds[i] = SPRITE_NONE;
+        DestroySprite(&gSprites[sSamuelCaseDataPtr->pokeballSpriteIds[i]]);
+        sSamuelCaseDataPtr->pokeballSpriteIds[i] = SPRITE_NONE;
     }
 }
 
@@ -438,39 +438,39 @@ static void DestroyPokeballSprites()
 #define TAG_MON_SPRITE 30003
 static void SampleUi_DrawMonIcon(u16 speciesId)
 {
-    sBirchCaseDataPtr->monSpriteId = CreateMonPicSprite_Affine(speciesId, 0, 0x8000, TRUE, MON_ICON_X, MON_ICON_Y, 5, TAG_NONE);
-    gSprites[sBirchCaseDataPtr->monSpriteId].oam.priority = 0;
+    sSamuelCaseDataPtr->monSpriteId = CreateMonPicSprite_Affine(speciesId, 0, 0x8000, TRUE, MON_ICON_X, MON_ICON_Y, 5, TAG_NONE);
+    gSprites[sSamuelCaseDataPtr->monSpriteId].oam.priority = 0;
 }
 
 static void ReloadNewPokemon(u8 taskId) // reload the pokeball after a 4 frame delay to prevent palette problems
 {
-    gSprites[sBirchCaseDataPtr->monSpriteId].invisible = TRUE;
-    FreeResourcesAndDestroySprite(&gSprites[sBirchCaseDataPtr->monSpriteId], sBirchCaseDataPtr->monSpriteId);
-    sBirchCaseDataPtr->movingSelector = TRUE;
+    gSprites[sSamuelCaseDataPtr->monSpriteId].invisible = TRUE;
+    FreeResourcesAndDestroySprite(&gSprites[sSamuelCaseDataPtr->monSpriteId], sSamuelCaseDataPtr->monSpriteId);
+    sSamuelCaseDataPtr->movingSelector = TRUE;
     gTasks[taskId].func = Task_DelayedSpriteLoad;
     gTasks[taskId].data[11] = 0;
 }
 
 static void ChangePositionUpdateSpriteAnims(u16 oldPosition, u8 taskId) // turn off Ball Shaking on old ball and start it on new ball, reload pokemon and text
 {
-    StartSpriteAnim(&gSprites[sBirchCaseDataPtr->pokeballSpriteIds[oldPosition]], 0);
-    StartSpriteAnim(&gSprites[sBirchCaseDataPtr->pokeballSpriteIds[sBirchCaseDataPtr->handPosition]], 1);
+    StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->pokeballSpriteIds[oldPosition]], 0);
+    StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->pokeballSpriteIds[sSamuelCaseDataPtr->handPosition]], 1);
     ReloadNewPokemon(taskId);
     PrintTextToBottomBar(CHOOSE_MON);
 }
 
-static void BirchCase_GiveMon() // Function that calls the GiveMon function pulled from Expansion by Lunos and Ghoulslash
+static void SamuelCase_GiveMon() // Function that calls the GiveMon function pulled from Expansion by Lunos and Ghoulslash
 {
-    u8 *evs = (u8 *) sStarterChoices[sBirchCaseDataPtr->handPosition].evs;
-    u8 *ivs = (u8 *) sStarterChoices[sBirchCaseDataPtr->handPosition].ivs;
-    u16 *moves = (u16 *) sStarterChoices[sBirchCaseDataPtr->handPosition].moves;
+    u8 *evs = (u8 *) sStarterChoices[sSamuelCaseDataPtr->handPosition].evs;
+    u8 *ivs = (u8 *) sStarterChoices[sSamuelCaseDataPtr->handPosition].ivs;
+    u16 *moves = (u16 *) sStarterChoices[sSamuelCaseDataPtr->handPosition].moves;
     FlagSet(FLAG_SYS_POKEMON_GET);
-    gSpecialVar_Result = SamuelCase_GiveMonParameterized(sStarterChoices[sBirchCaseDataPtr->handPosition].species, sStarterChoices[sBirchCaseDataPtr->handPosition].level, \
-                sStarterChoices[sBirchCaseDataPtr->handPosition].item, sStarterChoices[sBirchCaseDataPtr->handPosition].ball, \
-                sStarterChoices[sBirchCaseDataPtr->handPosition].nature, sStarterChoices[sBirchCaseDataPtr->handPosition].abilityNum, \
-                sStarterChoices[sBirchCaseDataPtr->handPosition].gender, evs, ivs, moves, \
-                sStarterChoices[sBirchCaseDataPtr->handPosition].ggMaxFactor, sStarterChoices[sBirchCaseDataPtr->handPosition].teraType,\
-                sStarterChoices[sBirchCaseDataPtr->handPosition].isShinyExpansion);
+    gSpecialVar_Result = SamuelCase_GiveMonParameterized(sStarterChoices[sSamuelCaseDataPtr->handPosition].species, sStarterChoices[sSamuelCaseDataPtr->handPosition].level, \
+                sStarterChoices[sSamuelCaseDataPtr->handPosition].item, sStarterChoices[sSamuelCaseDataPtr->handPosition].ball, \
+                sStarterChoices[sSamuelCaseDataPtr->handPosition].nature, sStarterChoices[sSamuelCaseDataPtr->handPosition].abilityNum, \
+                sStarterChoices[sSamuelCaseDataPtr->handPosition].gender, evs, ivs, moves, \
+                sStarterChoices[sSamuelCaseDataPtr->handPosition].ggMaxFactor, sStarterChoices[sSamuelCaseDataPtr->handPosition].teraType,\
+                sStarterChoices[sSamuelCaseDataPtr->handPosition].isShinyExpansion);
 }
 
 //==========FUNCTIONS==========//
@@ -489,36 +489,36 @@ void Task_OpenSamuelCase(u8 taskId)
 void SamuelCase_Init(MainCallback callback)
 {
     u16 i = 0;
-    if ((sBirchCaseDataPtr = AllocZeroed(sizeof(struct MenuResources))) == NULL)
+    if ((sSamuelCaseDataPtr = AllocZeroed(sizeof(struct MenuResources))) == NULL)
     {
         SetMainCallback2(callback);
         return;
     }
     
     // initialize stuff
-    sBirchCaseDataPtr->gfxLoadState = 0;
-    sBirchCaseDataPtr->savedCallback = callback;
+    sSamuelCaseDataPtr->gfxLoadState = 0;
+    sSamuelCaseDataPtr->savedCallback = callback;
 
-    sBirchCaseDataPtr->handSpriteId = SPRITE_NONE;
+    sSamuelCaseDataPtr->handSpriteId = SPRITE_NONE;
 
     for(i=0; i < 9; i++)
     {
-        sBirchCaseDataPtr->pokeballSpriteIds[i] = SPRITE_NONE;
+        sSamuelCaseDataPtr->pokeballSpriteIds[i] = SPRITE_NONE;
     }
     
-    SetMainCallback2(BirchCaseRunSetup);
+    SetMainCallback2(SamuelCaseRunSetup);
 }
 
-static void BirchCaseRunSetup(void)
+static void SamuelCaseRunSetup(void)
 {
     while (1)
     {
-        if (BirchCaseDoGfxSetup() == TRUE)
+        if (SamuelCaseDoGfxSetup() == TRUE)
             break;
     }
 }
 
-static void BirchCaseMainCB(void)
+static void SamuelCaseMainCB(void)
 {
     RunTasks();
     AnimateSprites();
@@ -527,14 +527,14 @@ static void BirchCaseMainCB(void)
     UpdatePaletteFade();
 }
 
-static void BirchCaseVBlankCB(void)
+static void SamuelCaseVBlankCB(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-static bool8 BirchCaseDoGfxSetup(void)
+static bool8 SamuelCaseDoGfxSetup(void)
 {
     switch (gMain.state)
     {
@@ -556,17 +556,17 @@ static bool8 BirchCaseDoGfxSetup(void)
     case 2:
         if (SamuelCase_InitBgs())
         {
-            sBirchCaseDataPtr->gfxLoadState = 0;
+            sSamuelCaseDataPtr->gfxLoadState = 0;
             gMain.state++;
         }
         else
         {
-            BirchCaseFadeAndBail();
+            SamuelCaseFadeAndBail();
             return TRUE;
         }
         break;
     case 3:
-        if (BirchCaseLoadGraphics() == TRUE)
+        if (SamuelCaseLoadGraphics() == TRUE)
             gMain.state++;
         break;
     case 4:
@@ -578,7 +578,7 @@ static bool8 BirchCaseDoGfxSetup(void)
         CreatePokeballSprites(); // Create Sprites and Print Text
         CreateHandSprite();
         PrintTextToBottomBar(CHOOSE_MON);
-        CreateTask(Task_BirchCaseWaitFadeIn, 0);
+        CreateTask(Task_SamuelCaseWaitFadeIn, 0);
         BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
         gMain.state++;
         break;
@@ -587,8 +587,8 @@ static bool8 BirchCaseDoGfxSetup(void)
         gMain.state++;
         break;
     default:
-        SetVBlankCallback(BirchCaseVBlankCB);
-        SetMainCallback2(BirchCaseMainCB);
+        SetVBlankCallback(SamuelCaseVBlankCB);
+        SetMainCallback2(SamuelCaseMainCB);
         return TRUE;
     }
     return FALSE;
@@ -600,47 +600,47 @@ static bool8 BirchCaseDoGfxSetup(void)
         Free(*ptr__);                  \
 })
 
-static void BirchCaseFreeResources(void)
+static void SamuelCaseFreeResources(void)
 {
-    try_free(sBirchCaseDataPtr);
+    try_free(sSamuelCaseDataPtr);
     try_free(sBg1TilemapBuffer);
     try_free(sBg2TilemapBuffer);
-    FreeResourcesAndDestroySprite(&gSprites[sBirchCaseDataPtr->monSpriteId], sBirchCaseDataPtr->monSpriteId);
+    FreeResourcesAndDestroySprite(&gSprites[sSamuelCaseDataPtr->monSpriteId], sSamuelCaseDataPtr->monSpriteId);
     DestroyPokeballSprites();
     DestroyHandSprite();
     FreeAllWindowBuffers();
 }
 
-static void Task_BirchCaseWaitFadeAndBail(u8 taskId)
+static void Task_SamuelCaseWaitFadeAndBail(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(sBirchCaseDataPtr->savedCallback);
-        BirchCaseFreeResources();
+        SetMainCallback2(sSamuelCaseDataPtr->savedCallback);
+        SamuelCaseFreeResources();
         DestroyTask(taskId);
     }
 }
 
-static void BirchCaseFadeAndBail(void)
+static void SamuelCaseFadeAndBail(void)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-    CreateTask(Task_BirchCaseWaitFadeAndBail, 0);
-    SetVBlankCallback(BirchCaseVBlankCB);
-    SetMainCallback2(BirchCaseMainCB);
+    CreateTask(Task_SamuelCaseWaitFadeAndBail, 0);
+    SetVBlankCallback(SamuelCaseVBlankCB);
+    SetMainCallback2(SamuelCaseMainCB);
 }
 
-static void Task_BirchCaseWaitFadeIn(u8 taskId)
+static void Task_SamuelCaseWaitFadeIn(u8 taskId)
 {
     if (!gPaletteFade.active)
-        gTasks[taskId].func = Task_BirchCaseMain;
+        gTasks[taskId].func = Task_SamuelCaseMain;
 }
 
-static void Task_BirchCaseTurnOff(u8 taskId)
+static void Task_SamuelCaseTurnOff(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(sBirchCaseDataPtr->savedCallback);
-        BirchCaseFreeResources();
+        SetMainCallback2(sSamuelCaseDataPtr->savedCallback);
+        SamuelCaseFreeResources();
         DestroyTask(taskId);
     }
 }
@@ -674,22 +674,22 @@ static bool8 SamuelCase_InitBgs(void) // Init the bgs and bg tilemap buffers and
     return TRUE;
 }
 
-static bool8 BirchCaseLoadGraphics(void) // load tilesets, tilemaps, spritesheets, and palettes
+static bool8 SamuelCaseLoadGraphics(void) // load tilesets, tilemaps, spritesheets, and palettes
 {
-    switch (sBirchCaseDataPtr->gfxLoadState)
+    switch (sSamuelCaseDataPtr->gfxLoadState)
     {
     case 0:
         ResetTempTileDataBuffers();
         DecompressAndCopyTileDataToVram(1, sCaseTiles, 0, 0, 0);
         DecompressAndCopyTileDataToVram(2, sTextBgTiles, 0, 0, 0);
-        sBirchCaseDataPtr->gfxLoadState++;
+        sSamuelCaseDataPtr->gfxLoadState++;
         break;
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
             LZDecompressWram(sCaseTilemap, sBg1TilemapBuffer);
             LZDecompressWram(sTextBgTilemap, sBg2TilemapBuffer);
-            sBirchCaseDataPtr->gfxLoadState++;
+            sSamuelCaseDataPtr->gfxLoadState++;
         }
         break;
     case 2:
@@ -697,10 +697,10 @@ static bool8 BirchCaseLoadGraphics(void) // load tilesets, tilemaps, spritesheet
         LoadSpritePalette(&sSpritePal_PokeballHand);
         LoadPalette(sCasePalette, 32, 32);
         LoadPalette(sTextBgPalette, 16, 16);
-        sBirchCaseDataPtr->gfxLoadState++;
+        sSamuelCaseDataPtr->gfxLoadState++;
         break;
     default:
-        sBirchCaseDataPtr->gfxLoadState = 0;
+        sSamuelCaseDataPtr->gfxLoadState = 0;
         return TRUE;
     }
     return FALSE;
@@ -736,7 +736,7 @@ static void PrintTextToBottomBar(u8 textId)
     u8 x = 1 + 4;
     u8 y = 1 + 18;
 
-    u16 species = sStarterChoices[sBirchCaseDataPtr->handPosition].species;
+    u16 species = sStarterChoices[sSamuelCaseDataPtr->handPosition].species;
     u16 dexNum = SpeciesToNationalPokedexNum(species);    
 
     FillWindowPixelBuffer(WINDOW_BOTTOM_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
@@ -758,7 +758,7 @@ static void PrintTextToBottomBar(u8 textId)
     } 
     AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x, y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, mainBarAlternatingText);
 
-    if(sStarterChoices[sBirchCaseDataPtr->handPosition].species == SPECIES_NONE)
+    if(sStarterChoices[sSamuelCaseDataPtr->handPosition].species == SPECIES_NONE)
     {
         PutWindowTilemap(WINDOW_BOTTOM_BAR);
         CopyWindowToVram(WINDOW_BOTTOM_BAR, 3);
@@ -806,10 +806,10 @@ static void Task_DelayedSpriteLoad(u8 taskId) // wait 4 frames after changing th
 {   
     if (gTasks[taskId].data[11] >= 4)
     {
-        if(sStarterChoices[sBirchCaseDataPtr->handPosition].species != SPECIES_NONE)
-            SampleUi_DrawMonIcon(sStarterChoices[sBirchCaseDataPtr->handPosition].species);
-        gTasks[taskId].func = Task_BirchCaseMain;
-        sBirchCaseDataPtr->movingSelector = FALSE;
+        if(sStarterChoices[sSamuelCaseDataPtr->handPosition].species != SPECIES_NONE)
+            SampleUi_DrawMonIcon(sStarterChoices[sSamuelCaseDataPtr->handPosition].species);
+        gTasks[taskId].func = Task_SamuelCaseMain;
+        sSamuelCaseDataPtr->movingSelector = FALSE;
         return;
     }
     else
@@ -822,15 +822,15 @@ static void Task_WaitForFadeAndOpenNamingScreen(u8 taskId)
 {   
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(sBirchCaseDataPtr->savedCallback);
-        BirchCaseFreeResources();
+        SetMainCallback2(sSamuelCaseDataPtr->savedCallback);
+        SamuelCaseFreeResources();
         DestroyTask(taskId);
         VarSet(VAR_0x8004, gPlayerPartyCount - 1);
         ChangePokemonNickname();
     }
 }
 
-static void Task_BirchCaseRecievedMon(u8 taskId)
+static void Task_SamuelCaseRecievedMon(u8 taskId)
 {
     if(JOY_NEW(A_BUTTON))
     {
@@ -843,57 +843,57 @@ static void Task_BirchCaseRecievedMon(u8 taskId)
     {
         PlaySE(SE_SELECT);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_BirchCaseTurnOff;
+        gTasks[taskId].func = Task_SamuelCaseTurnOff;
         return;
     }
 }
 
-static void Task_BirchCaseConfirmSelection(u8 taskId)
+static void Task_SamuelCaseConfirmSelection(u8 taskId)
 {
     if(JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         PrintTextToBottomBar(RECIEVED_MON);
-        BirchCase_GiveMon();
-        gTasks[taskId].func = Task_BirchCaseRecievedMon;
+        SamuelCase_GiveMon();
+        gTasks[taskId].func = Task_SamuelCaseRecievedMon;
         return;
     }
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         PrintTextToBottomBar(CHOOSE_MON);
-        gTasks[taskId].func = Task_BirchCaseMain;
+        gTasks[taskId].func = Task_SamuelCaseMain;
         return;
     }
 }
 
 
 /* Main Grid Based Movement Control Flow*/
-static void Task_BirchCaseMain(u8 taskId)
+static void Task_SamuelCaseMain(u8 taskId)
 {
-    u16 oldPosition = sBirchCaseDataPtr->handPosition;
+    u16 oldPosition = sSamuelCaseDataPtr->handPosition;
     if(JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
-        if(sBirchCaseDataPtr->handPosition <= BALL_TOP_FOURTH) // top row move up
+        if(sSamuelCaseDataPtr->handPosition <= BALL_TOP_FOURTH) // top row move up
         {
-            if(sBirchCaseDataPtr->handPosition < BALL_TOP_THIRD)
-                sBirchCaseDataPtr->handPosition = BALL_BOTTOM_FIRST;
+            if(sSamuelCaseDataPtr->handPosition < BALL_TOP_THIRD)
+                sSamuelCaseDataPtr->handPosition = BALL_BOTTOM_FIRST;
             else
-                sBirchCaseDataPtr->handPosition = BALL_BOTTOM_SECOND;
+                sSamuelCaseDataPtr->handPosition = BALL_BOTTOM_SECOND;
         }
-        else if(sBirchCaseDataPtr->handPosition <= BALL_MIDDLE_THIRD)  // middle row move up
+        else if(sSamuelCaseDataPtr->handPosition <= BALL_MIDDLE_THIRD)  // middle row move up
         {
-            if(sBirchCaseDataPtr->handPosition == BALL_MIDDLE_FIRST)
-                sBirchCaseDataPtr->handPosition = BALL_TOP_FIRST;
-            else if (sBirchCaseDataPtr->handPosition == BALL_MIDDLE_SECOND)
-                sBirchCaseDataPtr->handPosition = BALL_TOP_SECOND;
+            if(sSamuelCaseDataPtr->handPosition == BALL_MIDDLE_FIRST)
+                sSamuelCaseDataPtr->handPosition = BALL_TOP_FIRST;
+            else if (sSamuelCaseDataPtr->handPosition == BALL_MIDDLE_SECOND)
+                sSamuelCaseDataPtr->handPosition = BALL_TOP_SECOND;
             else
-                sBirchCaseDataPtr->handPosition = BALL_TOP_THIRD;
+                sSamuelCaseDataPtr->handPosition = BALL_TOP_THIRD;
         }
         else  // bottom row move up
         {
-            sBirchCaseDataPtr->handPosition = BALL_MIDDLE_SECOND;
+            sSamuelCaseDataPtr->handPosition = BALL_MIDDLE_SECOND;
         }
         ChangePositionUpdateSpriteAnims(oldPosition, taskId);
         return;
@@ -901,28 +901,28 @@ static void Task_BirchCaseMain(u8 taskId)
     if(JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
-        if(sBirchCaseDataPtr->handPosition <= BALL_TOP_FOURTH) // top row move down
+        if(sSamuelCaseDataPtr->handPosition <= BALL_TOP_FOURTH) // top row move down
         {
-            if(sBirchCaseDataPtr->handPosition < BALL_TOP_THIRD)
-                sBirchCaseDataPtr->handPosition = BALL_MIDDLE_FIRST;
-            else if(sBirchCaseDataPtr->handPosition == BALL_TOP_THIRD)
-                sBirchCaseDataPtr->handPosition = BALL_MIDDLE_SECOND;
+            if(sSamuelCaseDataPtr->handPosition < BALL_TOP_THIRD)
+                sSamuelCaseDataPtr->handPosition = BALL_MIDDLE_FIRST;
+            else if(sSamuelCaseDataPtr->handPosition == BALL_TOP_THIRD)
+                sSamuelCaseDataPtr->handPosition = BALL_MIDDLE_SECOND;
             else
-                sBirchCaseDataPtr->handPosition = BALL_MIDDLE_THIRD;
+                sSamuelCaseDataPtr->handPosition = BALL_MIDDLE_THIRD;
         }
-        else if(sBirchCaseDataPtr->handPosition <= BALL_MIDDLE_THIRD)  // middle row move down
+        else if(sSamuelCaseDataPtr->handPosition <= BALL_MIDDLE_THIRD)  // middle row move down
         {
-            if(sBirchCaseDataPtr->handPosition < BALL_MIDDLE_SECOND)
-                sBirchCaseDataPtr->handPosition = BALL_BOTTOM_FIRST;
+            if(sSamuelCaseDataPtr->handPosition < BALL_MIDDLE_SECOND)
+                sSamuelCaseDataPtr->handPosition = BALL_BOTTOM_FIRST;
             else
-                sBirchCaseDataPtr->handPosition = BALL_BOTTOM_SECOND;
+                sSamuelCaseDataPtr->handPosition = BALL_BOTTOM_SECOND;
         }
         else  // bottom row move down
         {
-            if(sBirchCaseDataPtr->handPosition == BALL_BOTTOM_FIRST)
-                sBirchCaseDataPtr->handPosition = BALL_TOP_SECOND;
+            if(sSamuelCaseDataPtr->handPosition == BALL_BOTTOM_FIRST)
+                sSamuelCaseDataPtr->handPosition = BALL_TOP_SECOND;
             else
-                sBirchCaseDataPtr->handPosition = BALL_TOP_THIRD;
+                sSamuelCaseDataPtr->handPosition = BALL_TOP_THIRD;
         }
         ChangePositionUpdateSpriteAnims(oldPosition, taskId);
         return;
@@ -930,26 +930,26 @@ static void Task_BirchCaseMain(u8 taskId)
     if(JOY_NEW(DPAD_RIGHT))
     {
         PlaySE(SE_SELECT);
-        if(sBirchCaseDataPtr->handPosition <= BALL_TOP_FOURTH) // top row move down
+        if(sSamuelCaseDataPtr->handPosition <= BALL_TOP_FOURTH) // top row move down
         {
-            if(sBirchCaseDataPtr->handPosition == BALL_TOP_FOURTH) // top row move down
-                sBirchCaseDataPtr->handPosition = BALL_TOP_FIRST;
+            if(sSamuelCaseDataPtr->handPosition == BALL_TOP_FOURTH) // top row move down
+                sSamuelCaseDataPtr->handPosition = BALL_TOP_FIRST;
             else
-                sBirchCaseDataPtr->handPosition += 1;
+                sSamuelCaseDataPtr->handPosition += 1;
         }
-        else if(sBirchCaseDataPtr->handPosition <= BALL_MIDDLE_THIRD)  // middle row move down
+        else if(sSamuelCaseDataPtr->handPosition <= BALL_MIDDLE_THIRD)  // middle row move down
         {
-            if(sBirchCaseDataPtr->handPosition == BALL_MIDDLE_THIRD) // top row move down
-                sBirchCaseDataPtr->handPosition = BALL_MIDDLE_FIRST;
+            if(sSamuelCaseDataPtr->handPosition == BALL_MIDDLE_THIRD) // top row move down
+                sSamuelCaseDataPtr->handPosition = BALL_MIDDLE_FIRST;
             else
-                sBirchCaseDataPtr->handPosition += 1;
+                sSamuelCaseDataPtr->handPosition += 1;
         }
         else  // bottom row move down
         {
-            if(sBirchCaseDataPtr->handPosition == BALL_BOTTOM_SECOND) // top row move down
-                sBirchCaseDataPtr->handPosition = BALL_BOTTOM_FIRST;
+            if(sSamuelCaseDataPtr->handPosition == BALL_BOTTOM_SECOND) // top row move down
+                sSamuelCaseDataPtr->handPosition = BALL_BOTTOM_FIRST;
             else
-                sBirchCaseDataPtr->handPosition += 1;
+                sSamuelCaseDataPtr->handPosition += 1;
         }
         ChangePositionUpdateSpriteAnims(oldPosition, taskId);
         return;
@@ -957,37 +957,37 @@ static void Task_BirchCaseMain(u8 taskId)
     if(JOY_NEW(DPAD_LEFT))
     {
         PlaySE(SE_SELECT);
-        if(sBirchCaseDataPtr->handPosition <= BALL_TOP_FOURTH) // top row move down
+        if(sSamuelCaseDataPtr->handPosition <= BALL_TOP_FOURTH) // top row move down
         {
-            if(sBirchCaseDataPtr->handPosition == BALL_TOP_FIRST) // top row move down
-                sBirchCaseDataPtr->handPosition = BALL_TOP_FOURTH;
+            if(sSamuelCaseDataPtr->handPosition == BALL_TOP_FIRST) // top row move down
+                sSamuelCaseDataPtr->handPosition = BALL_TOP_FOURTH;
             else
-                sBirchCaseDataPtr->handPosition -= 1;
+                sSamuelCaseDataPtr->handPosition -= 1;
         }
-        else if(sBirchCaseDataPtr->handPosition <= BALL_MIDDLE_THIRD)  // middle row move down
+        else if(sSamuelCaseDataPtr->handPosition <= BALL_MIDDLE_THIRD)  // middle row move down
         {
-            if(sBirchCaseDataPtr->handPosition == BALL_MIDDLE_FIRST) // top row move down
-                sBirchCaseDataPtr->handPosition = BALL_MIDDLE_THIRD;
+            if(sSamuelCaseDataPtr->handPosition == BALL_MIDDLE_FIRST) // top row move down
+                sSamuelCaseDataPtr->handPosition = BALL_MIDDLE_THIRD;
             else
-                sBirchCaseDataPtr->handPosition -= 1;
+                sSamuelCaseDataPtr->handPosition -= 1;
         }
         else  // bottom row move down
         {
-            if(sBirchCaseDataPtr->handPosition == BALL_BOTTOM_FIRST) // top row move down
-                sBirchCaseDataPtr->handPosition = BALL_BOTTOM_SECOND;
+            if(sSamuelCaseDataPtr->handPosition == BALL_BOTTOM_FIRST) // top row move down
+                sSamuelCaseDataPtr->handPosition = BALL_BOTTOM_SECOND;
             else
-                sBirchCaseDataPtr->handPosition -= 1;
+                sSamuelCaseDataPtr->handPosition -= 1;
         }
         ChangePositionUpdateSpriteAnims(oldPosition, taskId);
         return;
     }
     if(JOY_NEW(A_BUTTON))
     {
-        if(sStarterChoices[sBirchCaseDataPtr->handPosition].species != SPECIES_NONE) // If spot empty don't go to next control flow state
+        if(sStarterChoices[sSamuelCaseDataPtr->handPosition].species != SPECIES_NONE) // If spot empty don't go to next control flow state
         {
             PlaySE(SE_SELECT);
             PrintTextToBottomBar(CONFIRM_SELECTION);
-            gTasks[taskId].func = Task_BirchCaseConfirmSelection;
+            gTasks[taskId].func = Task_SamuelCaseConfirmSelection;
             return;
         }
         else
