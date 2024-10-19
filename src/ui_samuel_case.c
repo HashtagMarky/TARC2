@@ -130,7 +130,7 @@ struct MonChoiceData{ // This is the format used to define a mon, everything lef
 //
 //  Making Changes Here Changes The Options In The UI. This is where you define your mons
 //
-static const struct MonChoiceData sStarterChoices[9] = 
+static const struct MonChoiceData sStarterChoices_Page1[9] = 
 {
     [BALL_TOP_FIRST]        = {SPECIES_MUDKIP, 5, ITEM_POTION, BALL_NET, NATURE_JOLLY, 1, MON_MALE, {255, 255, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {MOVE_FIRE_BLAST, MOVE_SHEER_COLD, MOVE_WATER_GUN, MOVE_THUNDER}, 0, 0, 0},
     [BALL_TOP_SECOND]       = {SPECIES_TREECKO, 5},
@@ -145,10 +145,26 @@ static const struct MonChoiceData sStarterChoices[9] =
     [BALL_BOTTOM_SECOND]    = {SPECIES_NONE, 5},
 };
 
+static const struct MonChoiceData sStarterChoices_Page2[9] = 
+{
+    [BALL_TOP_FIRST]        = {SPECIES_PIPLUP, 5, ITEM_POTION, BALL_NET, NATURE_JOLLY, 1, MON_MALE, {255, 255, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {MOVE_FIRE_BLAST, MOVE_SHEER_COLD, MOVE_WATER_GUN, MOVE_THUNDER}, 0, 0, 0},
+    [BALL_TOP_SECOND]       = {SPECIES_TURTWIG, 5},
+    [BALL_MIDDLE_FIRST]     = {SPECIES_CHIMCHAR, 5},
+
+    [BALL_TOP_THIRD]        = {SPECIES_ROWLET, 5},
+    [BALL_TOP_FOURTH]       = {SPECIES_NONE, 5},
+    [BALL_MIDDLE_THIRD]     = {SPECIES_LITTEN, 5},
+
+    [BALL_MIDDLE_SECOND]    = {SPECIES_FROAKIE, 5},
+    [BALL_BOTTOM_FIRST]     = {SPECIES_FENNEKIN, 5},
+    [BALL_BOTTOM_SECOND]    = {SPECIES_NONE, 5},
+};
+
 //==========EWRAM==========//
 static EWRAM_DATA struct MenuResources *sSamuelCaseDataPtr = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
+static u8 sCasePageNum;
 
 //==========STATIC=DEFINES==========//
 static void SamuelCaseRunSetup(void);
@@ -162,6 +178,7 @@ static void Task_SamuelCaseWaitFadeIn(u8 taskId);
 static void Task_SamuelCaseMain(u8 taskId);
 static void SampleUi_DrawMonIcon(u16 speciesId);
 static void Task_DelayedSpriteLoad(u8 taskId);
+static const struct MonChoiceData* ReturnStartersByPage(void);
 
 //==========CONST=DATA==========//
 static const struct BgTemplate sMenuBgTemplates[] =
@@ -337,7 +354,7 @@ static void CreateHandSprite()
 
     for(i=0; i<9; i++)
     {
-        if(sStarterChoices[i].species == SPECIES_NONE) // Choose Non Empty Slot To Start In
+        if(ReturnStartersByPage()[i].species == SPECIES_NONE) // Choose Non Empty Slot To Start In
             continue;
     
         if(sSamuelCaseDataPtr->handPosition <= 3)
@@ -366,7 +383,7 @@ static void CreateHandSprite()
     gSprites[sSamuelCaseDataPtr->handSpriteId].callback = CursorCallback;
     StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->handSpriteId], 2);
     StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->pokeballSpriteIds[sSamuelCaseDataPtr->handPosition]], 1);
-    SampleUi_DrawMonIcon(sStarterChoices[sSamuelCaseDataPtr->handPosition].species);
+    SampleUi_DrawMonIcon(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species);
     
     return;
 }
@@ -391,7 +408,7 @@ static void CreatePokeballSprites()
     for(i=0; i<9; i++)
     {
         u16 x, y;
-        if(sStarterChoices[i].species == SPECIES_NONE)
+        if(ReturnStartersByPage()[i].species == SPECIES_NONE)
             continue;
 
         if(i <= 3)
@@ -461,16 +478,16 @@ static void ChangePositionUpdateSpriteAnims(u16 oldPosition, u8 taskId) // turn 
 
 static void SamuelCase_GiveMon() // Function that calls the GiveMon function pulled from Expansion by Lunos and Ghoulslash
 {
-    u8 *evs = (u8 *) sStarterChoices[sSamuelCaseDataPtr->handPosition].evs;
-    u8 *ivs = (u8 *) sStarterChoices[sSamuelCaseDataPtr->handPosition].ivs;
-    u16 *moves = (u16 *) sStarterChoices[sSamuelCaseDataPtr->handPosition].moves;
+    u8 *evs = (u8 *) ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].evs;
+    u8 *ivs = (u8 *) ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].ivs;
+    u16 *moves = (u16 *) ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].moves;
     FlagSet(FLAG_SYS_POKEMON_GET);
-    gSpecialVar_Result = SamuelCase_GiveMonParameterized(sStarterChoices[sSamuelCaseDataPtr->handPosition].species, sStarterChoices[sSamuelCaseDataPtr->handPosition].level, \
-                sStarterChoices[sSamuelCaseDataPtr->handPosition].item, sStarterChoices[sSamuelCaseDataPtr->handPosition].ball, \
-                sStarterChoices[sSamuelCaseDataPtr->handPosition].nature, sStarterChoices[sSamuelCaseDataPtr->handPosition].abilityNum, \
-                sStarterChoices[sSamuelCaseDataPtr->handPosition].gender, evs, ivs, moves, \
-                sStarterChoices[sSamuelCaseDataPtr->handPosition].ggMaxFactor, sStarterChoices[sSamuelCaseDataPtr->handPosition].teraType,\
-                sStarterChoices[sSamuelCaseDataPtr->handPosition].isShinyExpansion);
+    gSpecialVar_Result = SamuelCase_GiveMonParameterized(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species, ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].level, \
+                ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].item, ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].ball, \
+                ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].nature, ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].abilityNum, \
+                ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].gender, evs, ivs, moves, \
+                ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].ggMaxFactor, ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].teraType,\
+                ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].isShinyExpansion);
 }
 
 //==========FUNCTIONS==========//
@@ -500,6 +517,8 @@ void SamuelCase_Init(MainCallback callback)
     sSamuelCaseDataPtr->savedCallback = callback;
 
     sSamuelCaseDataPtr->handSpriteId = SPRITE_NONE;
+
+    sCasePageNum = 0;
 
     for(i=0; i < 9; i++)
     {
@@ -736,7 +755,7 @@ static void PrintTextToBottomBar(u8 textId)
     u8 x = 1 + 4;
     u8 y = 1 + 18;
 
-    u16 species = sStarterChoices[sSamuelCaseDataPtr->handPosition].species;
+    u16 species = ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species;
     u16 dexNum = SpeciesToNationalPokedexNum(species);    
 
     FillWindowPixelBuffer(WINDOW_BOTTOM_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
@@ -758,7 +777,7 @@ static void PrintTextToBottomBar(u8 textId)
     } 
     AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x, y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, mainBarAlternatingText);
 
-    if(sStarterChoices[sSamuelCaseDataPtr->handPosition].species == SPECIES_NONE)
+    if(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species == SPECIES_NONE)
     {
         PutWindowTilemap(WINDOW_BOTTOM_BAR);
         CopyWindowToVram(WINDOW_BOTTOM_BAR, 3);
@@ -806,8 +825,8 @@ static void Task_DelayedSpriteLoad(u8 taskId) // wait 4 frames after changing th
 {   
     if (gTasks[taskId].data[11] >= 4)
     {
-        if(sStarterChoices[sSamuelCaseDataPtr->handPosition].species != SPECIES_NONE)
-            SampleUi_DrawMonIcon(sStarterChoices[sSamuelCaseDataPtr->handPosition].species);
+        if(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species != SPECIES_NONE)
+            SampleUi_DrawMonIcon(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species);
         gTasks[taskId].func = Task_SamuelCaseMain;
         sSamuelCaseDataPtr->movingSelector = FALSE;
         return;
@@ -872,6 +891,12 @@ static void Task_SamuelCaseConfirmSelection(u8 taskId)
 static void Task_SamuelCaseMain(u8 taskId)
 {
     u16 oldPosition = sSamuelCaseDataPtr->handPosition;
+    if(JOY_NEW(L_BUTTON) || JOY_NEW(R_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sCasePageNum ^= 1;
+        ChangePositionUpdateSpriteAnims(oldPosition, taskId);
+    }
     if(JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
@@ -983,7 +1008,7 @@ static void Task_SamuelCaseMain(u8 taskId)
     }
     if(JOY_NEW(A_BUTTON))
     {
-        if(sStarterChoices[sSamuelCaseDataPtr->handPosition].species != SPECIES_NONE) // If spot empty don't go to next control flow state
+        if(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species != SPECIES_NONE) // If spot empty don't go to next control flow state
         {
             PlaySE(SE_SELECT);
             PrintTextToBottomBar(CONFIRM_SELECTION);
@@ -998,6 +1023,15 @@ static void Task_SamuelCaseMain(u8 taskId)
     }
 }
 
-
-
+static const struct MonChoiceData* ReturnStartersByPage(void)
+{
+    if (sCasePageNum == 0)
+    {
+        return sStarterChoices_Page1;
+    }
+    else
+    {
+        return sStarterChoices_Page2;
+    }
+}
 
