@@ -808,7 +808,7 @@ static void PrintTextToBottomBar(u8 textId)
         speciesTypeText = gTypesInfo[GetSpeciesPrimaryType(species)].name;
         StringCopy(gStringVar1, speciesTypeText);
         StringAppend(gStringVar1, COMPOUND_STRING(" Type"));
-        AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NARROW, x + 178 + GetStringCenterAlignXOffset(FONT_NARROW, gStringVar1, 52), y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar1);
+        AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, ReturnNarrowTextFont(), x + 178 + GetStringCenterAlignXOffset(ReturnNarrowTextFont(), gStringVar1, 52), y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar1);
     }
 
     PutWindowTilemap(WINDOW_BOTTOM_BAR);
