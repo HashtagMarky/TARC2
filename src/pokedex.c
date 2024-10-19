@@ -130,8 +130,8 @@ EWRAM_DATA u8 sMonIconSpriteId = 0;
 EWRAM_DATA u8 sMonIconSpriteId2 = 0;
 
 // This is written to, but never read.
-u8 gUnusedPokedexU8;
-void (*gPokedexVBlankCB)(void);
+COMMON_DATA u8 gUnusedPokedexU8 = 0;
+COMMON_DATA void (*gPokedexVBlankCB)(void) = NULL;
 
 struct SearchOptionText
 {

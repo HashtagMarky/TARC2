@@ -116,6 +116,12 @@ extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 extern const struct SpriteTemplate gAncientPowerRockSpriteTemplate[];
 
+enum {
+    COPYRIGHT_INITIALIZE,
+    COPYRIGHT_START_FADE = 140,
+    COPYRIGHT_START_INTRO,
+};
+
 #define TAG_VOLBEAT   1500
 #define TAG_TORCHIC   1501
 #define TAG_MANECTRIC 1502
@@ -180,8 +186,8 @@ static EWRAM_DATA u16 UNUSED sUnusedVar = 0;
 static EWRAM_DATA u16 sFlygonYOffset = 0;
 #endif
 
-u32 gIntroFrameCounter;
-struct GcmbStruct gMultibootProgramStruct;
+COMMON_DATA u32 gIntroFrameCounter = 0;
+COMMON_DATA struct GcmbStruct gMultibootProgramStruct = {0};
 
 #if SKIP_INTRO_AFTER_COPYRIGHT == FALSE
 static const u16 sIntroDrops_Pal[]            = INCBIN_U16("graphics/intro/scene_1/drops.gbapal");
@@ -1084,7 +1090,7 @@ static u8 SetUpCopyrightScreen(void)
 {
     switch (gMain.state)
     {
-    case 0:
+    case COPYRIGHT_INITIALIZE:
         SetVBlankCallback(NULL);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
@@ -1126,7 +1132,7 @@ static u8 SetUpCopyrightScreen(void)
             gMain.state = 140;
         #endif
         break;
-    case 140:
+    case COPYRIGHT_START_FADE:
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
         if (gMultibootProgramStruct.gcmb_field_2 != 1)
         {
@@ -1138,7 +1144,7 @@ static u8 SetUpCopyrightScreen(void)
             gMain.state++;
         }
         break;
-    case 141:
+    case COPYRIGHT_START_INTRO:
         if (UpdatePaletteFade())
             break;
 #if EXPANSION_INTRO == TRUE
