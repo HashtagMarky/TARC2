@@ -167,34 +167,49 @@ static const u16 sRandomSpeciesList[18][3] = {
 //
 //  Making Changes Here Changes The Options In The UI. This is where you define your mons
 //
-static const struct MonChoiceData sStarterChoices_Page1[9] = 
+static const struct MonChoiceData sStarterChoices_Page1_Male[9] = 
 {
-    [BALL_TOP_FIRST]        = {SPECIES_NONE, 5},
-    [BALL_TOP_SECOND]       = {SPECIES_NONE, 5},
-    [BALL_MIDDLE_FIRST]     = {SPECIES_NONE, 5},
+    [BALL_TOP_FIRST]        = {SPECIES_LILLIPUP, 5},
+    [BALL_TOP_SECOND]       = {SPECIES_MACHOP, 5},
+    [BALL_MIDDLE_FIRST]     = {SPECIES_ROOKIDEE, 5},
 
-    [BALL_TOP_THIRD]        = {SPECIES_PIKACHU, 5},
-    [BALL_TOP_FOURTH]       = {SPECIES_NONE, 5},
-    [BALL_MIDDLE_THIRD]     = {SPECIES_NONE, 5},
+    [BALL_TOP_THIRD]        = {SPECIES_NIDORAN_M, 5},
+    [BALL_TOP_FOURTH]       = {SPECIES_SANDILE, 5},
+    [BALL_MIDDLE_THIRD]     = {SPECIES_ROLYCOLY, 5},
 
-    [BALL_MIDDLE_SECOND]    = {SPECIES_NONE, 5},
-    [BALL_BOTTOM_FIRST]     = {SPECIES_NONE, 5},
-    [BALL_BOTTOM_SECOND]    = {SPECIES_NONE, 5},
+    [BALL_MIDDLE_SECOND]    = {SPECIES_GRUBBIN, 5},
+    [BALL_BOTTOM_FIRST]     = {SPECIES_DUSKULL, 5},
+    [BALL_BOTTOM_SECOND]    = {SPECIES_KLINK, 5},
+};
+
+static const struct MonChoiceData sStarterChoices_Page1_Female[9] = 
+{
+    [BALL_TOP_FIRST]        = {SPECIES_LILLIPUP, 5},
+    [BALL_TOP_SECOND]       = {SPECIES_MACHOP, 5},
+    [BALL_MIDDLE_FIRST]     = {SPECIES_ROOKIDEE, 5},
+
+    [BALL_TOP_THIRD]        = {SPECIES_NIDORAN_F, 5},
+    [BALL_TOP_FOURTH]       = {SPECIES_SANDILE, 5},
+    [BALL_MIDDLE_THIRD]     = {SPECIES_ROLYCOLY, 5},
+
+    [BALL_MIDDLE_SECOND]    = {SPECIES_GRUBBIN, 5},
+    [BALL_BOTTOM_FIRST]     = {SPECIES_DUSKULL, 5},
+    [BALL_BOTTOM_SECOND]    = {SPECIES_KLINK, 5},
 };
 
 static const struct MonChoiceData sStarterChoices_Page2[9] = 
 {
-    [BALL_TOP_FIRST]        = {SPECIES_NONE, 5},
-    [BALL_TOP_SECOND]       = {SPECIES_NONE, 5},
-    [BALL_MIDDLE_FIRST]     = {SPECIES_NONE, 5},
+    [BALL_TOP_FIRST]        = {SPECIES_MAGBY, 5},
+    [BALL_TOP_SECOND]       = {SPECIES_TYMPOLE, 5},
+    [BALL_MIDDLE_FIRST]     = {SPECIES_SEEDOT, 5},
 
-    [BALL_TOP_THIRD]        = {SPECIES_NONE, 5},
-    [BALL_TOP_FOURTH]       = {SPECIES_NONE, 5},
-    [BALL_MIDDLE_THIRD]     = {SPECIES_NONE, 5},
+    [BALL_TOP_THIRD]        = {SPECIES_SHINX, 5},
+    [BALL_TOP_FOURTH]       = {SPECIES_HATENNA, 5},
+    [BALL_MIDDLE_THIRD]     = {SPECIES_SWINUB, 5},
 
-    [BALL_MIDDLE_SECOND]    = {SPECIES_NONE, 5},
-    [BALL_BOTTOM_FIRST]     = {SPECIES_NONE, 5},
-    [BALL_BOTTOM_SECOND]    = {SPECIES_NONE, 5},
+    [BALL_MIDDLE_SECOND]    = {SPECIES_BAGON, 5},
+    [BALL_BOTTOM_FIRST]     = {SPECIES_IMPIDIMP, 5},
+    [BALL_BOTTOM_SECOND]    = {SPECIES_FLABEBE, 5},
 };
 
 //==========EWRAM==========//
@@ -202,6 +217,7 @@ static EWRAM_DATA struct MenuResources *sSamuelCaseDataPtr = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
 static u8 sCasePageNum;
+static u8 sMonShiny = FALSE;
 
 //==========STATIC=DEFINES==========//
 static void SamuelCaseRunSetup(void);
@@ -213,7 +229,7 @@ static void SamuelCase_InitWindows(void);
 static void PrintTextToBottomBar(u8 textId);
 static void Task_SamuelCaseWaitFadeIn(u8 taskId);
 static void Task_SamuelCaseMain(u8 taskId);
-static void SampleUi_DrawMonIcon(u16 speciesId, bool8 isShiny);
+static void SampleUi_DrawMonIcon(u16 speciesId);
 static void Task_DelayedSpriteLoad(u8 taskId);
 static const struct MonChoiceData* ReturnStartersByPage(void);
 static u16 GetRandomSpecies(void);
@@ -422,7 +438,7 @@ static void CreateHandSprite()
     gSprites[sSamuelCaseDataPtr->handSpriteId].callback = CursorCallback;
     StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->handSpriteId], 2);
     StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->pokeballSpriteIds[sSamuelCaseDataPtr->handPosition]], 1);
-    SampleUi_DrawMonIcon(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species, ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].isShinyExpansion);
+    SampleUi_DrawMonIcon(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species);
     
     return;
 }
@@ -492,12 +508,10 @@ static void DestroyPokeballSprites()
 #define MON_ICON_X     208
 #define MON_ICON_Y     104
 #define TAG_MON_SPRITE 30003
-static void SampleUi_DrawMonIcon(u16 speciesId, bool8 isShiny)
+static void SampleUi_DrawMonIcon(u16 speciesId)
 {
-    sSamuelCaseDataPtr->monSpriteId = CreateMonPicSprite_Affine(speciesId, isShiny, 0x8000, TRUE, MON_ICON_X, MON_ICON_Y, 5, TAG_NONE);
+    sSamuelCaseDataPtr->monSpriteId = CreateMonPicSprite_Affine(speciesId, sMonShiny, 0x8000, TRUE, MON_ICON_X, MON_ICON_Y, 5, TAG_NONE);
     gSprites[sSamuelCaseDataPtr->monSpriteId].oam.priority = 0;
-    if (isShiny)
-        PlaySE(SE_SHINY);
 }
 
 static void ReloadNewPokemon(u8 taskId) // reload the pokeball after a 4 frame delay to prevent palette problems
@@ -528,7 +542,7 @@ static void SamuelCase_GiveMon() // Function that calls the GiveMon function pul
                 ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].nature, ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].abilityNum, \
                 ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].gender, evs, ivs, moves, \
                 ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].ggMaxFactor, ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].teraType,\
-                ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].isShinyExpansion);
+                sMonShiny);
 }
 
 //==========FUNCTIONS==========//
@@ -560,8 +574,10 @@ void SamuelCase_Init(MainCallback callback)
     sSamuelCaseDataPtr->handSpriteId = SPRITE_NONE;
 
     sCasePageNum = PAGE_ONE;
-    RandomiseMonChoiceData(sStarterChoices_Page1, ARRAY_COUNT(sStarterChoices_Page1));
-    RandomiseMonChoiceData(sStarterChoices_Page2, ARRAY_COUNT(sStarterChoices_Page2));
+    if (Random() < SHINY_ODDS)
+        sMonShiny = TRUE;
+    // RandomiseMonChoiceData(sStarterChoices_Page1_Male, ARRAY_COUNT(sStarterChoices_Page1_Male));
+    // RandomiseMonChoiceData(sStarterChoices_Page2, ARRAY_COUNT(sStarterChoices_Page2));
 
     for(i=0; i < 9; i++)
     {
@@ -639,6 +655,8 @@ static bool8 SamuelCaseDoGfxSetup(void)
     case 5:
         CreatePokeballSprites(); // Create Sprites and Print Text
         CreateHandSprite();
+        if (sMonShiny)
+            PlaySE(SE_SHINY);
         PrintTextToBottomBar(CHOOSE_MON);
         CreateTask(Task_SamuelCaseWaitFadeIn, 0);
         BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
@@ -863,7 +881,7 @@ static void Task_DelayedSpriteLoad(u8 taskId) // wait 4 frames after changing th
     if (gTasks[taskId].data[11] >= 4)
     {
         if(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species != SPECIES_NONE)
-            SampleUi_DrawMonIcon(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species, ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].isShinyExpansion);
+            SampleUi_DrawMonIcon(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species);
         gTasks[taskId].func = Task_SamuelCaseMain;
         sSamuelCaseDataPtr->movingSelector = FALSE;
         return;
@@ -1064,7 +1082,7 @@ static const struct MonChoiceData* ReturnStartersByPage(void)
 {
     if (sCasePageNum == 0)
     {
-        return sStarterChoices_Page1;
+        return (gSaveBlock2Ptr->playerGender == MALE) ? sStarterChoices_Page1_Male : sStarterChoices_Page1_Female;
     }
     else
     {
