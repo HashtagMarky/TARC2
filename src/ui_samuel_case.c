@@ -2,6 +2,7 @@
 #include "ui_samuel_case.h"
 #include "strings.h"
 #include "bg.h"
+#include "battle_main.h"
 #include "data.h"
 #include "decompress.h"
 #include "event_data.h"
@@ -75,6 +76,13 @@ enum TextIds
     CHOOSE_MON,
     CONFIRM_SELECTION,
     RECIEVED_MON,
+};
+
+enum PageNumbers
+{
+    PAGE_ONE,
+    PAGE_TWO,
+    PAGE_COUNT,
 };
 
 enum Colors
@@ -743,14 +751,15 @@ static void SamuelCase_InitWindows(void)
 //
 //  Text Printing Function
 //
-static const u8 sText_ChooseMon[] = _("Release a Pokémon!");
+static const u8 sText_RevealR[] = _("{R_BUTTON} Reveal More");
+static const u8 sText_RevealL[] = _("{L_BUTTON} Reveal More");
 static const u8 sText_AreYouSure[] = _("Are you sure?    {A_BUTTON} Yes  {B_BUTTON} No");
 static const u8 sText_RecievedMon[] = _("Give your Pokémon a Nickname?   {A_BUTTON} Yes  {B_BUTTON} No");
 static void PrintTextToBottomBar(u8 textId)
 {
-    u8 speciesNameArray[16];
+    u8 speciesCategoryArray[16];
     const u8 *mainBarAlternatingText;
-    const u8 * speciesCategoryText;
+    const u8 * speciesTypeText;
 
     u8 x = 1 + 4;
     u8 y = 1 + 18;
@@ -762,17 +771,15 @@ static void PrintTextToBottomBar(u8 textId)
 
     switch(textId)
     {
+        default:
         case 0:
-            mainBarAlternatingText = sText_ChooseMon;
+            mainBarAlternatingText = (sCasePageNum == PAGE_ONE) ? sText_RevealR : sText_RevealL;
             break;
         case 1:
             mainBarAlternatingText = sText_AreYouSure;
             break;
         case 2:
             mainBarAlternatingText = sText_RecievedMon;
-            break;
-        default:
-            mainBarAlternatingText = sText_ChooseMon;
             break;
     } 
     AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x, y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, mainBarAlternatingText);
@@ -785,28 +792,23 @@ static void PrintTextToBottomBar(u8 textId)
     }
     
 
-    StringCopy(gStringVar1, &gText_NumberClear01[0]);
-    ConvertIntToDecimalStringN(gStringVar2, dexNum, STR_CONV_MODE_LEADING_ZEROS, 3);
-    StringAppend(gStringVar1, gStringVar2);
-    AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar1);
+    // StringCopy(gStringVar1, &gText_NumberClear01[0]);
+    // ConvertIntToDecimalStringN(gStringVar2, dexNum, STR_CONV_MODE_LEADING_ZEROS, 3);
+    // StringAppend(gStringVar1, gStringVar2);
+    AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 19, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("The"));
 
-    AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 32, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gText_Dash);
+    // AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 32, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gText_Dash);
 
-#ifdef POKEMON_EXPANSION
-    StringCopy(&speciesNameArray[0], GetSpeciesName(species));
-#else
-    StringCopy(&speciesNameArray[0], &gSpeciesNames[species][0]);
-#endif
-    AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 40, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, &speciesNameArray[0]);
+    StringCopy(&speciesCategoryArray[0], GetSpeciesCategory(species));
+    StringAppend(&speciesCategoryArray[0], COMPOUND_STRING(" Pokémon"));
+    AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 40, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, &speciesCategoryArray[0]);
 
     if(textId != 2)
     {
-#ifdef POKEMON_EXPANSION
-        speciesCategoryText = GetSpeciesCategory(species);
-#else
-        speciesCategoryText = GetPokedexCategoryName(dexNum);
-#endif
-        AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NARROW, x + 178 + GetStringCenterAlignXOffset(FONT_NARROW, speciesCategoryText, 52), y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, speciesCategoryText);
+        speciesTypeText = gTypesInfo[GetSpeciesPrimaryType(species)].name;
+        StringCopy(gStringVar1, speciesTypeText);
+        StringAppend(gStringVar1, COMPOUND_STRING(" Type"));
+        AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NARROW, x + 178 + GetStringCenterAlignXOffset(FONT_NARROW, gStringVar1, 52), y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar1);
     }
 
     PutWindowTilemap(WINDOW_BOTTOM_BAR);
@@ -891,7 +893,7 @@ static void Task_SamuelCaseConfirmSelection(u8 taskId)
 static void Task_SamuelCaseMain(u8 taskId)
 {
     u16 oldPosition = sSamuelCaseDataPtr->handPosition;
-    if(JOY_NEW(L_BUTTON) || JOY_NEW(R_BUTTON))
+    if ((JOY_NEW(R_BUTTON) && sCasePageNum == PAGE_ONE) || (JOY_NEW(L_BUTTON) && sCasePageNum == PAGE_TWO))
     {
         PlaySE(SE_SELECT);
         sCasePageNum ^= 1;

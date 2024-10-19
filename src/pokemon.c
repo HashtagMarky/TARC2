@@ -3562,6 +3562,18 @@ u16 GetSpeciesWeight(u16 species)
     return gSpeciesInfo[SanitizeSpeciesId(species)].weight;
 }
 
+u8 GetSpeciesPrimaryType(u16 species)
+{
+    species = SanitizeSpeciesId(species);
+    return gSpeciesInfo[species].types[0];
+}
+
+u8 GetSpeciesSecondaryType(u16 species)
+{
+    species = SanitizeSpeciesId(species);
+    return gSpeciesInfo[species].types[1];
+}
+
 const struct LevelUpMove *GetSpeciesLevelUpLearnset(u16 species)
 {
     const struct LevelUpMove *learnset = gSpeciesInfo[SanitizeSpeciesId(species)].levelUpLearnset;
