@@ -699,5 +699,10 @@ u32 SamuelCase_GiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8
         break;
     }
 
+    // Ikigai Settings
+    VarSet(VAR_STARTER_MON, species);
+    gSaveBlock2Ptr->ikigaiGymType = GetSpeciesPrimaryType(species);
+    gSaveBlock2Ptr->optionsInterfaceColor = IKIGAI_INTERFACE_GYM_TYPE_COLOUR;
+
     return sentToPc;
 }
