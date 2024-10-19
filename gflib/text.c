@@ -2304,3 +2304,11 @@ u8 *WrapFontIdToFit(u8 *start, u8 *end, u32 fontId, u32 width)
         return end;
     }
 }
+
+u8 ReturnNarrowTextFont(void)
+{
+    if (gSaveBlock2Ptr->optionsCurrentFont == 0)
+        return FONT_SHORT_NARROW;
+    else
+        return FONT_NARROW;
+}

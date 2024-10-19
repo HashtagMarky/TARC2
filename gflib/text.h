@@ -166,6 +166,7 @@ u8 GetKeypadIconHeight(u8 keypadIconId);
 void SetDefaultFontsPointer(void);
 u8 GetFontAttribute(u8 fontId, u8 attributeId);
 u8 GetMenuCursorDimensionByFont(u8 fontId, u8 whichDimension);
+u8 ReturnNarrowTextFont(void);
 
 // braille.c
 u16 FontFunc_Braille(struct TextPrinter *textPrinter);
