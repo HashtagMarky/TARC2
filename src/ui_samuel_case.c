@@ -22,6 +22,7 @@
 #include "menu_helpers.h"
 #include "palette.h"
 #include "party_menu.h"
+#include "random.h"
 #include "scanline_effect.h"
 #include "script.h"
 #include "sound.h"
@@ -41,6 +42,7 @@
 #include "script_pokemon_util.h"
 #include "pokeball.h"
 #include "constants/moves.h"
+#include "constants/pokemon.h"
 #include "naming_screen.h"
 #include "tv.h"
 
@@ -84,6 +86,11 @@ enum PageNumbers
     PAGE_TWO,
     PAGE_COUNT,
 };
+
+// Type offsets exist as type defines do not run 1 - 18
+#define TYPE_OFFSET_1               1 // Used for types before TYPE_MYSTERY
+#define TYPE_OFFSET_2               2 // Used for types after TYPE_MYSTERY
+#define TYPE_OFFSET(type, offset)   ((type) - (offset))
 
 enum Colors
 {
@@ -135,36 +142,58 @@ struct MonChoiceData{ // This is the format used to define a mon, everything lef
     bool8 isShinyExpansion; // only work in Expansion set to 0 otherwise or leave blank
 };
 
+// Species Lists to be Randomly Chosen
+static const u16 sRandomSpeciesList[18][3] = {
+    [TYPE_OFFSET(TYPE_NORMAL, TYPE_OFFSET_1)]    = {SPECIES_EEVEE, SPECIES_SNORLAX, SPECIES_MEOWTH},
+    [TYPE_OFFSET(TYPE_FIGHTING, TYPE_OFFSET_1)]  = {SPECIES_MACHOP, SPECIES_HITMONLEE, SPECIES_LUCARIO},
+    [TYPE_OFFSET(TYPE_FLYING, TYPE_OFFSET_1)]    = {SPECIES_PIDGEY, SPECIES_SPEAROW, SPECIES_STARLY},
+    [TYPE_OFFSET(TYPE_POISON, TYPE_OFFSET_1)]    = {SPECIES_EKANS, SPECIES_GRIMER, SPECIES_KOFFING},
+    [TYPE_OFFSET(TYPE_GROUND, TYPE_OFFSET_1)]    = {SPECIES_SANDSHREW, SPECIES_DIGLETT, SPECIES_PHANPY},
+    [TYPE_OFFSET(TYPE_ROCK, TYPE_OFFSET_1)]      = {SPECIES_GEODUDE, SPECIES_ONIX, SPECIES_RHYHORN},
+    [TYPE_OFFSET(TYPE_BUG, TYPE_OFFSET_1)]       = {SPECIES_CATERPIE, SPECIES_WEEDLE, SPECIES_SCYTHER},
+    [TYPE_OFFSET(TYPE_GHOST, TYPE_OFFSET_1)]     = {SPECIES_GASTLY, SPECIES_HAUNTER, SPECIES_DUSKULL},
+    [TYPE_OFFSET(TYPE_STEEL, TYPE_OFFSET_1)]     = {SPECIES_MAGNEMITE, SPECIES_SKARMORY, SPECIES_STEELIX},
+    [TYPE_OFFSET(TYPE_FIRE, TYPE_OFFSET_2)]      = {SPECIES_CHARMANDER, SPECIES_CYNDAQUIL, SPECIES_TORCHIC},
+    [TYPE_OFFSET(TYPE_WATER, TYPE_OFFSET_2)]     = {SPECIES_SQUIRTLE, SPECIES_TOTODILE, SPECIES_MUDKIP},
+    [TYPE_OFFSET(TYPE_GRASS, TYPE_OFFSET_2)]     = {SPECIES_BULBASAUR, SPECIES_CHIKORITA, SPECIES_TREECKO},
+    [TYPE_OFFSET(TYPE_ELECTRIC, TYPE_OFFSET_2)]  = {SPECIES_PIKACHU, SPECIES_RAICHU, SPECIES_ELECTABUZZ},
+    [TYPE_OFFSET(TYPE_PSYCHIC, TYPE_OFFSET_2)]   = {SPECIES_ABRA, SPECIES_RALTS, SPECIES_SPOINK},
+    [TYPE_OFFSET(TYPE_ICE, TYPE_OFFSET_2)]       = {SPECIES_SWINUB, SPECIES_SNEASEL, SPECIES_GLACEON},
+    [TYPE_OFFSET(TYPE_DRAGON, TYPE_OFFSET_2)]    = {SPECIES_DRATINI, SPECIES_BAGON, SPECIES_GIBLE},
+    [TYPE_OFFSET(TYPE_DARK, TYPE_OFFSET_2)]      = {SPECIES_UMBREON, SPECIES_MURKROW, SPECIES_HOUNDOOM},
+    [TYPE_OFFSET(TYPE_FAIRY, TYPE_OFFSET_2)]     = {SPECIES_JIGGLYPUFF, SPECIES_CLEFAIRY, SPECIES_SYLVEON},
+};
+
 //
 //  Making Changes Here Changes The Options In The UI. This is where you define your mons
 //
 static const struct MonChoiceData sStarterChoices_Page1[9] = 
 {
-    [BALL_TOP_FIRST]        = {SPECIES_MUDKIP, 5, ITEM_POTION, BALL_NET, NATURE_JOLLY, 1, MON_MALE, {255, 255, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {MOVE_FIRE_BLAST, MOVE_SHEER_COLD, MOVE_WATER_GUN, MOVE_THUNDER}, 0, 0, TRUE},
-    [BALL_TOP_SECOND]       = {SPECIES_TREECKO, 5},
-    [BALL_MIDDLE_FIRST]     = {SPECIES_TORCHIC, 5},
+    [BALL_TOP_FIRST]        = {SPECIES_NONE, 5},
+    [BALL_TOP_SECOND]       = {SPECIES_NONE, 5},
+    [BALL_MIDDLE_FIRST]     = {SPECIES_NONE, 5},
 
-    [BALL_TOP_THIRD]        = {SPECIES_CHIKORITA, 5},
+    [BALL_TOP_THIRD]        = {SPECIES_PIKACHU, 5},
     [BALL_TOP_FOURTH]       = {SPECIES_NONE, 5},
-    [BALL_MIDDLE_THIRD]     = {SPECIES_CYNDAQUIL, 5},
+    [BALL_MIDDLE_THIRD]     = {SPECIES_NONE, 5},
 
-    [BALL_MIDDLE_SECOND]    = {SPECIES_BULBASAUR, 5},
-    [BALL_BOTTOM_FIRST]     = {SPECIES_CHARMANDER, 5},
+    [BALL_MIDDLE_SECOND]    = {SPECIES_NONE, 5},
+    [BALL_BOTTOM_FIRST]     = {SPECIES_NONE, 5},
     [BALL_BOTTOM_SECOND]    = {SPECIES_NONE, 5},
 };
 
 static const struct MonChoiceData sStarterChoices_Page2[9] = 
 {
-    [BALL_TOP_FIRST]        = {SPECIES_PIPLUP, 5, ITEM_POTION, BALL_NET, NATURE_JOLLY, 1, MON_MALE, {255, 255, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {MOVE_FIRE_BLAST, MOVE_SHEER_COLD, MOVE_WATER_GUN, MOVE_THUNDER}, 0, 0, 0},
-    [BALL_TOP_SECOND]       = {SPECIES_TURTWIG, 5},
-    [BALL_MIDDLE_FIRST]     = {SPECIES_CHIMCHAR, 5},
+    [BALL_TOP_FIRST]        = {SPECIES_NONE, 5},
+    [BALL_TOP_SECOND]       = {SPECIES_NONE, 5},
+    [BALL_MIDDLE_FIRST]     = {SPECIES_NONE, 5},
 
-    [BALL_TOP_THIRD]        = {SPECIES_ROWLET, 5},
+    [BALL_TOP_THIRD]        = {SPECIES_NONE, 5},
     [BALL_TOP_FOURTH]       = {SPECIES_NONE, 5},
-    [BALL_MIDDLE_THIRD]     = {SPECIES_LITTEN, 5},
+    [BALL_MIDDLE_THIRD]     = {SPECIES_NONE, 5},
 
-    [BALL_MIDDLE_SECOND]    = {SPECIES_FROAKIE, 5},
-    [BALL_BOTTOM_FIRST]     = {SPECIES_FENNEKIN, 5},
+    [BALL_MIDDLE_SECOND]    = {SPECIES_NONE, 5},
+    [BALL_BOTTOM_FIRST]     = {SPECIES_NONE, 5},
     [BALL_BOTTOM_SECOND]    = {SPECIES_NONE, 5},
 };
 
@@ -187,6 +216,8 @@ static void Task_SamuelCaseMain(u8 taskId);
 static void SampleUi_DrawMonIcon(u16 speciesId, bool8 isShiny);
 static void Task_DelayedSpriteLoad(u8 taskId);
 static const struct MonChoiceData* ReturnStartersByPage(void);
+static u16 GetRandomSpecies(void);
+static void RandomiseMonChoiceData(const struct MonChoiceData *monChoiceDataArray, size_t count);
 
 //==========CONST=DATA==========//
 static const struct BgTemplate sMenuBgTemplates[] =
@@ -465,6 +496,8 @@ static void SampleUi_DrawMonIcon(u16 speciesId, bool8 isShiny)
 {
     sSamuelCaseDataPtr->monSpriteId = CreateMonPicSprite_Affine(speciesId, isShiny, 0x8000, TRUE, MON_ICON_X, MON_ICON_Y, 5, TAG_NONE);
     gSprites[sSamuelCaseDataPtr->monSpriteId].oam.priority = 0;
+    if (isShiny)
+        PlaySE(SE_SHINY);
 }
 
 static void ReloadNewPokemon(u8 taskId) // reload the pokeball after a 4 frame delay to prevent palette problems
@@ -526,7 +559,9 @@ void SamuelCase_Init(MainCallback callback)
 
     sSamuelCaseDataPtr->handSpriteId = SPRITE_NONE;
 
-    sCasePageNum = 0;
+    sCasePageNum = PAGE_ONE;
+    RandomiseMonChoiceData(sStarterChoices_Page1, ARRAY_COUNT(sStarterChoices_Page1));
+    RandomiseMonChoiceData(sStarterChoices_Page2, ARRAY_COUNT(sStarterChoices_Page2));
 
     for(i=0; i < 9; i++)
     {
@@ -751,8 +786,8 @@ static void SamuelCase_InitWindows(void)
 //
 //  Text Printing Function
 //
-static const u8 sText_RevealR[] = _("{R_BUTTON} Reveal More");
-static const u8 sText_RevealL[] = _("{L_BUTTON} Reveal More");
+static const u8 sText_RevealR[] = _("{R_BUTTON} Slide Briefase");
+static const u8 sText_RevealL[] = _("{L_BUTTON} Slide Briefase");
 static const u8 sText_AreYouSure[] = _("Are you sure?    {A_BUTTON} Yes  {B_BUTTON} No");
 static const u8 sText_RecievedMon[] = _("Give your Pokémon a Nickname?   {A_BUTTON} Yes  {B_BUTTON} No");
 static void PrintTextToBottomBar(u8 textId)
@@ -765,7 +800,7 @@ static void PrintTextToBottomBar(u8 textId)
     u8 y = 1 + 18;
 
     u16 species = ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species;
-    u16 dexNum = SpeciesToNationalPokedexNum(species);    
+    // u16 dexNum = SpeciesToNationalPokedexNum(species);    
 
     FillWindowPixelBuffer(WINDOW_BOTTOM_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
@@ -808,7 +843,7 @@ static void PrintTextToBottomBar(u8 textId)
         speciesTypeText = gTypesInfo[GetSpeciesPrimaryType(species)].name;
         StringCopy(gStringVar1, speciesTypeText);
         StringAppend(gStringVar1, COMPOUND_STRING(" Type"));
-        AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, ReturnNarrowTextFont(), x + 178 + GetStringCenterAlignXOffset(ReturnNarrowTextFont(), gStringVar1, 52), y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar1);
+        AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, ReturnNarrowTextFont(), x + 169 + GetStringRightAlignXOffset(ReturnNarrowTextFont(), gStringVar1, 52), y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar1);
     }
 
     PutWindowTilemap(WINDOW_BOTTOM_BAR);
@@ -895,7 +930,7 @@ static void Task_SamuelCaseMain(u8 taskId)
     u16 oldPosition = sSamuelCaseDataPtr->handPosition;
     if ((JOY_NEW(R_BUTTON) && sCasePageNum == PAGE_ONE) || (JOY_NEW(L_BUTTON) && sCasePageNum == PAGE_TWO))
     {
-        PlaySE(SE_SELECT);
+        PlaySE(SE_BALL_TRAY_ENTER);
         sCasePageNum ^= 1;
         ChangePositionUpdateSpriteAnims(oldPosition, taskId);
     }
@@ -1037,3 +1072,31 @@ static const struct MonChoiceData* ReturnStartersByPage(void)
     }
 }
 
+static u16 GetRandomSpecies(void)
+{
+    // Choose a random type from the sRandomSpeciesList
+    u16 typeIndex = Random() % ARRAY_COUNT(sRandomSpeciesList);
+    
+    // Get the number of species in the selected type's list
+    u16 speciesCount = ARRAY_COUNT(sRandomSpeciesList[typeIndex]);
+    
+    // Choose a random species from the selected type's list
+    u16 speciesIndex = Random() % speciesCount;
+    
+    // Return the selected species
+    return sRandomSpeciesList[typeIndex][speciesIndex];
+}
+
+static void RandomiseMonChoiceData(const struct MonChoiceData *monChoiceDataArray, size_t count)
+{
+    bool8 isShiny = (Random() < SHINY_ODDS) ? TRUE : FALSE;
+
+    for (size_t i = 0; i < count; i++)
+    {
+        if (monChoiceDataArray[i].species == SPECIES_NONE)
+        {
+            //monChoiceDataArray[i].species = GetRandomSpecies();
+        }
+        //monChoiceDataArray[i].isShinyExpansion = isShiny;
+    }
+}
