@@ -116,11 +116,16 @@ extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 extern const struct SpriteTemplate gAncientPowerRockSpriteTemplate[];
 
+/*
 enum {
     COPYRIGHT_INITIALIZE,
     COPYRIGHT_START_FADE = 140,
     COPYRIGHT_START_INTRO,
 };
+Previous enum did not work as of RHH Upcoming merge on 19/10/2024 */
+#define COPYRIGHT_INITIALIZE    0
+#define COPYRIGHT_START_FADE    140
+#define COPYRIGHT_START_INTRO   141
 
 #define TAG_VOLBEAT   1500
 #define TAG_TORCHIC   1501
@@ -1090,7 +1095,7 @@ static u8 SetUpCopyrightScreen(void)
 {
     switch (gMain.state)
     {
-    case COPYRIGHT_INITIALIZE:
+    case 0:
         SetVBlankCallback(NULL);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
@@ -1132,7 +1137,7 @@ static u8 SetUpCopyrightScreen(void)
             gMain.state = 140;
         #endif
         break;
-    case COPYRIGHT_START_FADE:
+    case 140:
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
         if (gMultibootProgramStruct.gcmb_field_2 != 1)
         {
@@ -1144,7 +1149,7 @@ static u8 SetUpCopyrightScreen(void)
             gMain.state++;
         }
         break;
-    case COPYRIGHT_START_INTRO:
+    case 141:
         if (UpdatePaletteFade())
             break;
 #if EXPANSION_INTRO == TRUE
