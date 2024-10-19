@@ -692,7 +692,6 @@ u32 SamuelCase_GiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8
     {
     case MON_GIVEN_TO_PARTY:
     case MON_GIVEN_TO_PC:
-        GetSetPokedexFlag(nationalDexNum, FLAG_SET_SEEN);
         GetSetPokedexFlag(nationalDexNum, FLAG_SET_CAUGHT);
         break;
     case MON_CANT_GIVE:

@@ -581,6 +581,12 @@ void SamuelCase_Init(MainCallback callback)
 
     for(i=0; i < 9; i++)
     {
+        (gSaveBlock2Ptr->playerGender == MALE) ? GetSetPokedexFlag(SpeciesToNationalPokedexNum(sStarterChoices_Page1_Male[i].species), FLAG_SET_SEEN) : GetSetPokedexFlag(SpeciesToNationalPokedexNum(sStarterChoices_Page1_Female[i].species), FLAG_SET_SEEN);
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(sStarterChoices_Page2[i].species), FLAG_SET_SEEN);
+    }
+
+    for(i=0; i < 9; i++)
+    {
         sSamuelCaseDataPtr->pokeballSpriteIds[i] = SPRITE_NONE;
     }
     
