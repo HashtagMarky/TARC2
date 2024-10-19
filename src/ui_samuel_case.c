@@ -140,7 +140,7 @@ struct MonChoiceData{ // This is the format used to define a mon, everything lef
 //
 static const struct MonChoiceData sStarterChoices_Page1[9] = 
 {
-    [BALL_TOP_FIRST]        = {SPECIES_MUDKIP, 5, ITEM_POTION, BALL_NET, NATURE_JOLLY, 1, MON_MALE, {255, 255, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {MOVE_FIRE_BLAST, MOVE_SHEER_COLD, MOVE_WATER_GUN, MOVE_THUNDER}, 0, 0, 0},
+    [BALL_TOP_FIRST]        = {SPECIES_MUDKIP, 5, ITEM_POTION, BALL_NET, NATURE_JOLLY, 1, MON_MALE, {255, 255, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {MOVE_FIRE_BLAST, MOVE_SHEER_COLD, MOVE_WATER_GUN, MOVE_THUNDER}, 0, 0, TRUE},
     [BALL_TOP_SECOND]       = {SPECIES_TREECKO, 5},
     [BALL_MIDDLE_FIRST]     = {SPECIES_TORCHIC, 5},
 
@@ -184,7 +184,7 @@ static void SamuelCase_InitWindows(void);
 static void PrintTextToBottomBar(u8 textId);
 static void Task_SamuelCaseWaitFadeIn(u8 taskId);
 static void Task_SamuelCaseMain(u8 taskId);
-static void SampleUi_DrawMonIcon(u16 speciesId);
+static void SampleUi_DrawMonIcon(u16 speciesId, bool8 isShiny);
 static void Task_DelayedSpriteLoad(u8 taskId);
 static const struct MonChoiceData* ReturnStartersByPage(void);
 
@@ -391,7 +391,7 @@ static void CreateHandSprite()
     gSprites[sSamuelCaseDataPtr->handSpriteId].callback = CursorCallback;
     StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->handSpriteId], 2);
     StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->pokeballSpriteIds[sSamuelCaseDataPtr->handPosition]], 1);
-    SampleUi_DrawMonIcon(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species);
+    SampleUi_DrawMonIcon(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species, ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].isShinyExpansion);
     
     return;
 }
@@ -461,9 +461,9 @@ static void DestroyPokeballSprites()
 #define MON_ICON_X     208
 #define MON_ICON_Y     104
 #define TAG_MON_SPRITE 30003
-static void SampleUi_DrawMonIcon(u16 speciesId)
+static void SampleUi_DrawMonIcon(u16 speciesId, bool8 isShiny)
 {
-    sSamuelCaseDataPtr->monSpriteId = CreateMonPicSprite_Affine(speciesId, 0, 0x8000, TRUE, MON_ICON_X, MON_ICON_Y, 5, TAG_NONE);
+    sSamuelCaseDataPtr->monSpriteId = CreateMonPicSprite_Affine(speciesId, isShiny, 0x8000, TRUE, MON_ICON_X, MON_ICON_Y, 5, TAG_NONE);
     gSprites[sSamuelCaseDataPtr->monSpriteId].oam.priority = 0;
 }
 
@@ -828,7 +828,7 @@ static void Task_DelayedSpriteLoad(u8 taskId) // wait 4 frames after changing th
     if (gTasks[taskId].data[11] >= 4)
     {
         if(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species != SPECIES_NONE)
-            SampleUi_DrawMonIcon(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species);
+            SampleUi_DrawMonIcon(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species, ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].isShinyExpansion);
         gTasks[taskId].func = Task_SamuelCaseMain;
         sSamuelCaseDataPtr->movingSelector = FALSE;
         return;
