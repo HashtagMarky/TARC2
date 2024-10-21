@@ -810,8 +810,8 @@ static void SamuelCase_InitWindows(void)
 //
 //  Text Printing Function
 //
-static const u8 sText_RevealR[] = _("{R_BUTTON} Slide Briefase");
-static const u8 sText_RevealL[] = _("{L_BUTTON} Slide Briefase");
+static const u8 sText_RevealR[] = _("{R_BUTTON} Slide Briefcase");
+static const u8 sText_RevealL[] = _("{L_BUTTON} Slide Briefcase");
 static const u8 sText_AreYouSure[] = _("Are you sure?    {A_BUTTON} Yes  {B_BUTTON} No");
 static const u8 sText_RecievedMon[] = _("Give your Pokémon a Nickname?   {A_BUTTON} Yes  {B_BUTTON} No");
 static void PrintTextToBottomBar(u8 textId)
