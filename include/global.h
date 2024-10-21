@@ -598,6 +598,7 @@ extern struct SaveBlock2 *gSaveBlock2Ptr;
 struct Characters
 {
     u8 friendship[CHARACTER_COUNT];
+    u8 conversed[ROUND_BITS_TO_BYTES(CHARACTER_COUNT)];
 };
 
 struct SecretBaseParty
