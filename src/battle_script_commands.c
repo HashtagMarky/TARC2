@@ -14,6 +14,7 @@
 #include "random.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
+#include "battle_damage_numbers.h"
 #include "text.h"
 #include "sound.h"
 #include "pokedex.h"
@@ -2435,6 +2436,10 @@ static void Cmd_datahpupdate(void)
     if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) || (gHitMarker & HITMARKER_PASSIVE_DAMAGE))
     {
         battler = GetBattlerForBattleScript(cmd->battler);
+
+        if (!DN_CONFIG_ONLY_ATTACK_DAMAGE)
+			ShowDamageNumbers(battler);
+        
         if (DoesSubstituteBlockMove(gBattlerAttacker, battler, gCurrentMove) && gDisableStructs[battler].substituteHP && !(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE))
         {
             if (gDisableStructs[battler].substituteHP >= gBattleMoveDamage)
@@ -7826,6 +7831,9 @@ static void Cmd_hitanimation(void)
     }
     else if (!(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE) || !(DoesSubstituteBlockMove(gBattlerAttacker, battler, gCurrentMove)) || gDisableStructs[battler].substituteHP == 0)
     {
+        if(DN_CONFIG_ONLY_ATTACK_DAMAGE)
+			ShowDamageNumbers(battler);
+        
         BtlController_EmitHitAnimation(battler, BUFFER_A);
         MarkBattlerForControllerExec(battler);
         gBattlescriptCurrInstr = cmd->nextInstr;
