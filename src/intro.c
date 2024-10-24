@@ -116,17 +116,13 @@ extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 extern const struct SpriteTemplate gAncientPowerRockSpriteTemplate[];
 
-/*
+// Previous enum did not work as of RHH Upcoming merge on 19/10/2024, updated 24/10/2024 */
 enum {
     COPYRIGHT_INITIALIZE,
     COPYRIGHT_EMULATOR_BLEND,
     COPYRIGHT_START_FADE = 140,
     COPYRIGHT_START_INTRO,
 };
-Previous enum did not work as of RHH Upcoming merge on 19/10/2024 */
-#define COPYRIGHT_INITIALIZE    0
-#define COPYRIGHT_START_FADE    140
-#define COPYRIGHT_START_INTRO   141
 
 #define TAG_VOLBEAT   1500
 #define TAG_TORCHIC   1501
@@ -1127,7 +1123,7 @@ static u8 SetUpCopyrightScreen(void)
         GameCubeMultiBoot_Init(&gMultibootProgramStruct);
     // REG_DISPCNT needs to be overwritten the second time, because otherwise the intro won't show up on VBA 1.7.2 and John GBA Lite emulators.
     // The REG_DISPCNT overwrite is NOT needed in m-GBA, No$GBA, VBA 1.8.0, My Boy and Pizza Boy GBA emulators.
-    case COPYRIGHT_EMULATOR_BLEND:
+    case 1:
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
     default:
         UpdatePaletteFade();
