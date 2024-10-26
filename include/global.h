@@ -568,8 +568,9 @@ struct SaveBlock2
              u16 optionsSurfMusic:1; // whether or not surf music is played
              u16 optionsWildBattleSpeed:2; // speed of wild battles
              u16 optionsTrainerBattleSpeed:2; // speed of trainer battles
+             u16 optionsDamageNumbers:2; // whether damage numbers are shown
              u16 regionMapZoom:1; // whether the map is zoomed in
-             //u16 padding1:11;
+             //u16 padding1:9;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 filler_90[0x8];
     /*0x98*/ struct Time localTimeOffset;

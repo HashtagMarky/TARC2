@@ -60,6 +60,7 @@ enum
     MENUITEM_BATTLE_WILD_SPEED,
     MENUITEM_BATTLE_TRAINER_SPEED,
     MENUITEM_BATTLE_BATTLESCENE,
+    MENUITEM_BATTLE_DAMAGE_NUMBERS,
     MENUITEM_BATTLE_CANCEL,
     MENUITEM_BATTLE_COUNT,
 };
@@ -206,6 +207,7 @@ static void DrawChoices_SurfMusic(int selection, int y);
 static void DrawChoices_MugshotsNPC(int selection, int y);
 static void DrawChoices_MugshotsFollower(int selection, int y);
 static void DrawChoices_TitleScreen(int selection, int y);
+static void DrawChoices_DamageNumbers(int selection, int y);
 static void DrawBgWindowFrames(void);
 
 // EWRAM vars
@@ -278,6 +280,7 @@ struct // MENU_BATTLE
     [MENUITEM_BATTLE_BATTLESTYLE]   = {DrawChoices_BattleStyle, ProcessInput_Options_Two},
     [MENUITEM_BATTLE_WILD_SPEED]    = {DrawChoices_BattleSpeed, ProcessInput_Options_Four},
     [MENUITEM_BATTLE_TRAINER_SPEED] = {DrawChoices_BattleSpeed, ProcessInput_Options_Four},
+    [MENUITEM_BATTLE_DAMAGE_NUMBERS]= {DrawChoices_DamageNumbers, ProcessInput_Options_Three},
     [MENUITEM_BATTLE_CANCEL]        = {NULL, NULL},
 };
 
@@ -333,6 +336,7 @@ static const u8 *const sOptionMenuItemsNamesBattle_Compact[MENUITEM_BATTLE_COUNT
     [MENUITEM_BATTLE_BATTLESTYLE]   = gText_BattleStyle,
     [MENUITEM_BATTLE_WILD_SPEED]    = sText_WildSpeed_Compact,
     [MENUITEM_BATTLE_TRAINER_SPEED] = sText_TrainerSpeed,
+    [MENUITEM_BATTLE_DAMAGE_NUMBERS]= COMPOUND_STRING("DAMAGE NUMBERS"),
     [MENUITEM_BATTLE_CANCEL]        = gText_OptionMenuSave,
 };
 
@@ -342,6 +346,7 @@ static const u8 *const sOptionMenuItemsNamesBattle_Spread[MENUITEM_BATTLE_COUNT]
     [MENUITEM_BATTLE_BATTLESTYLE]   = gText_BattleStyle,
     [MENUITEM_BATTLE_WILD_SPEED]    = sText_WildSpeed_Spread,
     [MENUITEM_BATTLE_TRAINER_SPEED] = sText_TrainerSpeed,
+    [MENUITEM_BATTLE_DAMAGE_NUMBERS]= COMPOUND_STRING("DAMAGE NUMBERS"),
     [MENUITEM_BATTLE_CANCEL]        = gText_OptionMenuSave,
 };
 
@@ -411,6 +416,7 @@ static bool8 CheckConditions(int selection)
         case MENUITEM_BATTLE_BATTLESTYLE:   return TRUE;
         case MENUITEM_BATTLE_WILD_SPEED:    return TRUE;
         case MENUITEM_BATTLE_TRAINER_SPEED: return TRUE;
+        case MENUITEM_BATTLE_DAMAGE_NUMBERS:return TRUE;
         case MENUITEM_BATTLE_CANCEL:        return TRUE;
         case MENUITEM_BATTLE_COUNT:         return TRUE;
         }
@@ -455,6 +461,7 @@ static const u8 sText_Desc_MugshotFollowerOn[]          = _("Show mugshot of fol
 static const u8 sText_Desc_MugshotFollowerOff[]         = _("Hide following POKéMON mugshots.");
 static const u8 sText_Desc_TitleScreenMatch[]           = _("Title screen legendary matches choice\nof interface, if available.");
 static const u8 sText_Desc_TitleScreenRandom[]          = _("Title screen legendary is randomised.");
+static const u8 sText_Desc_DamageNumbers[]              = _("Whether damage numbers are shown in\nbattle and when they appear.");
 
 // Disabled Descriptions
 static const u8 sText_Desc_Disabled_Textspeed[]     = _("Only active if xyz.");
@@ -490,6 +497,7 @@ static const u8 *const sOptionMenuItemDescriptionsBattle[MENUITEM_BATTLE_COUNT][
     [MENUITEM_BATTLE_BATTLESTYLE]   = {sText_Desc_BattleStyle_Shift,    sText_Desc_BattleStyle_Set,     sText_Empty,                    sText_Empty},
     [MENUITEM_BATTLE_WILD_SPEED]    = {sText_Desc_WildSpeed,            sText_Empty,                    sText_Empty,                    sText_Empty},
     [MENUITEM_BATTLE_TRAINER_SPEED] = {sText_Desc_TrainerSpeed,         sText_Empty,                    sText_Empty,                    sText_Empty},
+    [MENUITEM_BATTLE_DAMAGE_NUMBERS]= {sText_Desc_DamageNumbers,        sText_Empty,                    sText_Empty,                    sText_Empty},
     [MENUITEM_BATTLE_CANCEL]        = {sText_Desc_Save,                 sText_Empty,                    sText_Empty,                    sText_Empty},
 };
 
@@ -522,6 +530,7 @@ static const u8 *const sOptionMenuItemDescriptionsDisabledBattle[MENUITEM_BATTLE
     [MENUITEM_BATTLE_BATTLESTYLE]   = sText_Empty,
     [MENUITEM_BATTLE_WILD_SPEED]    = sText_Empty,
     [MENUITEM_BATTLE_TRAINER_SPEED] = sText_Empty,
+    [MENUITEM_BATTLE_DAMAGE_NUMBERS]= sText_Empty,
     [MENUITEM_BATTLE_CANCEL]        = sText_Empty,
 };
 
@@ -549,7 +558,7 @@ static const u8 *const OptionTextDescription(void)
         if (!CheckConditions(menuItem))
             return sOptionMenuItemDescriptionsDisabledMain[menuItem]; // Maybe Edit
         selection = sOptions->sel_battle[menuItem];
-        if (menuItem == MENUITEM_BATTLE_WILD_SPEED || menuItem == MENUITEM_BATTLE_TRAINER_SPEED)
+        if (menuItem == MENUITEM_BATTLE_WILD_SPEED || menuItem == MENUITEM_BATTLE_TRAINER_SPEED || MENUITEM_BATTLE_DAMAGE_NUMBERS)
             selection = 0;
         return sOptionMenuItemDescriptionsBattle[menuItem][selection];
     }
@@ -862,6 +871,7 @@ void CB2_InitOptionPlusMenu(void)
         sOptions->sel_battle[MENUITEM_BATTLE_BATTLESTYLE]       = gSaveBlock2Ptr->optionsBattleStyle;
         sOptions->sel_battle[MENUITEM_BATTLE_WILD_SPEED]        = gSaveBlock2Ptr->optionsWildBattleSpeed;
         sOptions->sel_battle[MENUITEM_BATTLE_TRAINER_SPEED]     = gSaveBlock2Ptr->optionsTrainerBattleSpeed;
+        sOptions->sel_battle[MENUITEM_BATTLE_DAMAGE_NUMBERS]    = gSaveBlock2Ptr->optionsDamageNumbers;
 
         sOptions->submenu = MENU_MAIN;
 
@@ -1094,6 +1104,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsBattleStyle          = sOptions->sel_battle[MENUITEM_BATTLE_BATTLESTYLE];
     gSaveBlock2Ptr->optionsWildBattleSpeed      = sOptions->sel_battle[MENUITEM_BATTLE_WILD_SPEED];
     gSaveBlock2Ptr->optionsTrainerBattleSpeed   = sOptions->sel_battle[MENUITEM_BATTLE_TRAINER_SPEED];
+    gSaveBlock2Ptr->optionsDamageNumbers        = sOptions->sel_battle[MENUITEM_BATTLE_DAMAGE_NUMBERS];
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
@@ -1606,6 +1617,27 @@ static void DrawChoices_TitleScreen(int selection, int y)
         DrawOptionMenuChoice(COMPOUND_STRING("MATCH INTERFACE"), 104, y, styles[0], active);
     else
         DrawOptionMenuChoice(COMPOUND_STRING("RANDOMISE LEGEND"), 104, y, 1, active);
+}
+
+static void DrawChoices_DamageNumbers(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_BATTLE_DAMAGE_NUMBERS);
+
+    switch (selection)
+    {
+    default:
+    case 0:
+        DrawOptionMenuChoice(gText_BattleSceneOff, 104, y, 1, active);
+        break;
+    
+    case 1:
+        DrawOptionMenuChoice(COMPOUND_STRING("ATTACK DAMAGE ONLY{0x77}{0x77}{0x77}{0x77}{0x77}"), 104, y, 1, active);
+        break;
+    
+    case 2:
+        DrawOptionMenuChoice(COMPOUND_STRING("ALL DAMAGE"), 104, y, 1, active);
+        break;
+    }
 }
 
 

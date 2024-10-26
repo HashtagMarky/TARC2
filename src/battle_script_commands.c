@@ -2437,7 +2437,7 @@ static void Cmd_datahpupdate(void)
     {
         battler = GetBattlerForBattleScript(cmd->battler);
 
-        if (!DN_CONFIG_ONLY_ATTACK_DAMAGE)
+        if (gSaveBlock2Ptr->optionsDamageNumbers == 2)
 			ShowDamageNumbers(battler);
         
         if (DoesSubstituteBlockMove(gBattlerAttacker, battler, gCurrentMove) && gDisableStructs[battler].substituteHP && !(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE))
@@ -7831,7 +7831,7 @@ static void Cmd_hitanimation(void)
     }
     else if (!(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE) || !(DoesSubstituteBlockMove(gBattlerAttacker, battler, gCurrentMove)) || gDisableStructs[battler].substituteHP == 0)
     {
-        if(DN_CONFIG_ONLY_ATTACK_DAMAGE)
+        if (gSaveBlock2Ptr->optionsDamageNumbers == 1)
 			ShowDamageNumbers(battler);
         
         BtlController_EmitHitAnimation(battler, BUFFER_A);
