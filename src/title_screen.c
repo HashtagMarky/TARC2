@@ -22,6 +22,7 @@
 #include "graphics.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "save.h"
 
 enum {
     TAG_VERSION = 1000,
@@ -1125,7 +1126,8 @@ static void UpdateLegendaryMarkingColor(u8 frameNum)
 static u8 ChooseIkigaiLegendary(void)
 {
     if (gSaveBlock2Ptr->optionsTitleScreenRandomise == TRUE
-    || gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_GYM_TYPE_COLOUR)
+    || gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_GYM_TYPE_COLOUR
+    || gSaveFileStatus != SAVE_STATUS_OK)
         return Random() % IKIGAI_DEFAULT_INTERFACE_COUNT;
 
     return gSaveBlock2Ptr->optionsInterfaceColor;
