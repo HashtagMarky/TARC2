@@ -63,8 +63,8 @@ static const struct SpritePalette sDynPalPartAPresets[] = {
 
 // *MODIFY*
 static const struct SpritePalette sDynPalPartBPresets[] = {
-    {sDynPal_Part_HairBlack, 0x1305},
-    {sDynPal_Part_HairBrown, 0x1306},
+    {sDynPal_Part_HairBrown, 0x1305},
+    {sDynPal_Part_HairBlack, 0x1306},
     {sDynPal_Part_HairBlonde, 0x1307},
     {sDynPal_Part_HairGinger, 0x1308},
     {sDynPal_Part_HairRed, 0x1309},
@@ -78,12 +78,12 @@ static const struct SpritePalette sDynPalPartBPresets[] = {
 
 // *MODIFY*
 static const struct SpritePalette sDynPalPartCPresets[] = {
-    {sDynPal_Part_ClothesGreen, 0x1310},
-    {sDynPal_Part_ClothesBlue, 0x1311},
-    {sDynPal_Part_ClothesOrange, 0x1312},
-    {sDynPal_Part_ClothesPink, 0x1313},
-    {sDynPal_Part_ClothesWhite, 0x1314},
-    {sDynPal_Part_ClothesBlack, 0x1315}
+    {sDynPal_Part_ClothesBlack, 0x1310},
+    {sDynPal_Part_ClothesWhite, 0x1311},
+    {sDynPal_Part_ClothesGreen, 0x1312},
+    {sDynPal_Part_ClothesBlue, 0x1313},
+    {sDynPal_Part_ClothesOrange, 0x1314},
+    {sDynPal_Part_ClothesPink, 0x1315}
 };
 
 // *MODIFY*
@@ -106,8 +106,8 @@ static const struct ListMenuItem sListItems_DynPal_PartATones[] = {
 };
 static const struct ListMenuItem sListItems_DynPal_PartBTones[] = {
     {COMPOUND_STRING("HAIR TYPE"), LIST_HEADER},
-    {COMPOUND_STRING("BLACK"), 0},
-    {COMPOUND_STRING("BROWN"), 1},
+    {COMPOUND_STRING("BROWN"), 0},
+    {COMPOUND_STRING("BLACK"), 1},
     {COMPOUND_STRING("BLONDE"), 2},
     {COMPOUND_STRING("GINGER"), 3},
     {COMPOUND_STRING("RED"), 4},
@@ -120,12 +120,12 @@ static const struct ListMenuItem sListItems_DynPal_PartBTones[] = {
 };
 static const struct ListMenuItem sListItems_DynPal_PartCTones[] = {
     {COMPOUND_STRING("CLOTHING"), LIST_HEADER},
-    {COMPOUND_STRING("GREEN"), 0},
-    {COMPOUND_STRING("BLUE"), 1},
-    {COMPOUND_STRING("ORANGE"), 2},
-    {COMPOUND_STRING("PINK"), 3},
-    {COMPOUND_STRING("WHITE"), 4},
-    {COMPOUND_STRING("BLACK"), 5}
+    {COMPOUND_STRING("BLACK"), 0},
+    {COMPOUND_STRING("WHITE"), 1},
+    {COMPOUND_STRING("GREEN"), 2},
+    {COMPOUND_STRING("BLUE"), 3},
+    {COMPOUND_STRING("ORANGE"), 4},
+    {COMPOUND_STRING("PINK"), 5}
 };
 
 // Dynamic palette definitions are split into 3 groups of 5, starting from palette index 1.
@@ -188,6 +188,7 @@ void DynPal_InitAllDynamicPalettes()
 #define PART_C_NUMBER_OF_COLOURS 5
 #define BASE_INDEX_START 13
 #define BASE_NUMBER_OF_COLOURS 3
+#define IKIAGI_CLOTHES_OFFSET 2
 
 static void DynPal_InitOverworld(u16* dest, const u16* partAPalData, const u16* partBPalData, const u16* partCPalData, int groupOffset)
 {
@@ -260,8 +261,8 @@ void DynPal_LoadIntroToneIndices(bool8 introReload, u8 loadCycle)
     // Randomises clothes when reloading only, if not clothes match the message box.
     if (!introReload)
     {
-        koleClothes = gSaveBlock2Ptr->optionsInterfaceColor;
-        ankaClothes = gSaveBlock2Ptr->optionsInterfaceColor;
+        koleClothes = gSaveBlock2Ptr->optionsInterfaceColor + IKIAGI_CLOTHES_OFFSET;
+        ankaClothes = gSaveBlock2Ptr->optionsInterfaceColor + IKIAGI_CLOTHES_OFFSET;
     }
     else
     {
