@@ -217,6 +217,7 @@ static void CancelToss(u8);
 static void ConfirmSell(u8);
 static void CancelSell(u8);
 static void Task_FadeAndCloseBagMenuIfMulch(u8 taskId);
+static void CheckVariableRod(void);
 
 static const u8 sMenuText_OldTech[] = _("Old {FONT_NARROWER}Tech.");
 static const u8 sMenuText_GoodTech[] = _("Good {FONT_NARROWER}Tech.");
@@ -1674,27 +1675,7 @@ static void OpenContextMenu(u8 taskId)
                     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
                         gBagMenu->contextMenuItemsBuffer[0] = ACTION_WALK;
                 }
-                if (gSpecialVar_ItemId == ITEM_VARIABLE_ROD)
-                {
-                    if (OW_FLAG_VARIABLE_ROD_SUPER_TECHNIQUE != 0 && FlagGet(OW_FLAG_VARIABLE_ROD_SUPER_TECHNIQUE))
-                    {
-                        gBagMenu->contextMenuItemsPtr = gBagMenu->contextMenuItemsBuffer;
-                        gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_SuperVariableRod);
-                        memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_SuperVariableRod, sizeof(sContextMenuItems_SuperVariableRod));
-                    }
-                    else if (OW_FLAG_VARIABLE_ROD_GOOD_TECHNIQUE != 0 && FlagGet(OW_FLAG_VARIABLE_ROD_GOOD_TECHNIQUE))
-                    {
-                        gBagMenu->contextMenuItemsPtr = gBagMenu->contextMenuItemsBuffer;
-                        gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_GoodVariableRod);
-                        memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_GoodVariableRod, sizeof(sContextMenuItems_GoodVariableRod));
-                    }
-                    else
-                    {
-                        gBagMenu->contextMenuItemsPtr = gBagMenu->contextMenuItemsBuffer;
-                        gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_OldVariableRod);
-                        memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_OldVariableRod, sizeof(sContextMenuItems_OldVariableRod));
-                    }
-                }
+                CheckVariableRod();
                 break;
             case BALLS_POCKET:
                 gBagMenu->contextMenuItemsPtr = sContextMenuItems_BallsPocket;
@@ -1878,22 +1859,19 @@ static void ItemMenu_UseOutOfBattle(u8 taskId)
 
 static void ItemMenu_UseOutOfBattle_VariableOldRod(u8 taskId)
 {
-    if (OW_VAR_VARIABLE_ROD_USE_TECHNIQUE != 0)
-        VarSet(OW_VAR_VARIABLE_ROD_USE_TECHNIQUE, OLD_ROD);
+    gSaveBlock1Ptr->variableRod = OLD_ROD;
     ItemMenu_UseOutOfBattle(taskId);
 }
 
 static void ItemMenu_UseOutOfBattle_VariableGoodRod(u8 taskId)
 {
-    if (OW_VAR_VARIABLE_ROD_USE_TECHNIQUE != 0)
-        VarSet(OW_VAR_VARIABLE_ROD_USE_TECHNIQUE, GOOD_ROD);
+    gSaveBlock1Ptr->variableRod = GOOD_ROD;
     ItemMenu_UseOutOfBattle(taskId);
 }
 
 static void ItemMenu_UseOutOfBattle_VariableSuperRod(u8 taskId)
 {
-    if (OW_VAR_VARIABLE_ROD_USE_TECHNIQUE != 0)
-        VarSet(OW_VAR_VARIABLE_ROD_USE_TECHNIQUE, SUPER_ROD);
+    gSaveBlock1Ptr->variableRod = SUPER_ROD;
     ItemMenu_UseOutOfBattle(taskId);
 }
 
@@ -2700,5 +2678,30 @@ static void PrintTMHMMoveData(u16 itemId)
         BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, gStringVar1, 7, 36, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
 
         CopyWindowToVram(WIN_TMHM_INFO, COPYWIN_GFX);
+    }
+}
+
+static void CheckVariableRod(void)
+{
+    if (gSpecialVar_ItemId == ITEM_VARIABLE_ROD)
+    {
+        if (OW_FLAG_VARIABLE_ROD_SUPER_TECHNIQUE != 0 && FlagGet(OW_FLAG_VARIABLE_ROD_SUPER_TECHNIQUE))
+        {
+            gBagMenu->contextMenuItemsPtr = gBagMenu->contextMenuItemsBuffer;
+            gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_SuperVariableRod);
+            memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_SuperVariableRod, sizeof(sContextMenuItems_SuperVariableRod));
+        }
+        else if (OW_FLAG_VARIABLE_ROD_GOOD_TECHNIQUE != 0 && FlagGet(OW_FLAG_VARIABLE_ROD_GOOD_TECHNIQUE))
+        {
+            gBagMenu->contextMenuItemsPtr = gBagMenu->contextMenuItemsBuffer;
+            gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_GoodVariableRod);
+            memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_GoodVariableRod, sizeof(sContextMenuItems_GoodVariableRod));
+        }
+        else
+        {
+            gBagMenu->contextMenuItemsPtr = gBagMenu->contextMenuItemsBuffer;
+            gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_OldVariableRod);
+            memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_OldVariableRod, sizeof(sContextMenuItems_OldVariableRod));
+        }
     }
 }

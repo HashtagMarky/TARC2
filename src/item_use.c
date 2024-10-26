@@ -317,7 +317,7 @@ static void ItemUseOnFieldCB_Rod(u8 taskId)
 
 void ItemUseOutOfBattle_VariableRod(u8 taskId)
 {
-    if (CanFish() == TRUE && OW_VAR_VARIABLE_ROD_USE_TECHNIQUE != 0)
+    if (CanFish() == TRUE)
     {
         sItemUseOnFieldCB = ItemUseOnFieldCB_VariableRod;
         SetUpItemUseOnFieldCallback(taskId);
@@ -328,11 +328,11 @@ void ItemUseOutOfBattle_VariableRod(u8 taskId)
 
 static void ItemUseOnFieldCB_VariableRod(u8 taskId)
 {
-    switch (VarGet(OW_VAR_VARIABLE_ROD_USE_TECHNIQUE))
+    switch (gSaveBlock1Ptr->variableRod)
     {
     case SUPER_ROD:
     case GOOD_ROD:
-        StartFishing(VarGet(OW_VAR_VARIABLE_ROD_USE_TECHNIQUE));
+        StartFishing(gSaveBlock1Ptr->variableRod);
         break;
     
     case OLD_ROD:

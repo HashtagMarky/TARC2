@@ -1001,7 +1001,10 @@
 // HOPO BERRY
 // LEGEND PLATE
 
-#define ITEMS_COUNT 828
+// Ikigai New Items
+#define ITEM_VARIABLE_ROD 828
+
+#define ITEMS_COUNT 829
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations

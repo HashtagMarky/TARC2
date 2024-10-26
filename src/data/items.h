@@ -12241,6 +12241,22 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_SuperRod,
     },
 
+    [ITEM_VARIABLE_ROD] =
+    {
+        .name = _("Fishing Rod"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A fishing rod\n"
+            "used for catching\n"
+            "wild Pokémon."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_VariableRod,
+        .iconPic = gItemIcon_SuperRod,
+        .iconPalette = gItemIconPalette_SuperRod,
+    },
+
     [ITEM_DOWSING_MACHINE] =
     {
         .name = _("Dowsing Machine"),
