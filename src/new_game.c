@@ -109,6 +109,7 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsSurfMusic = FALSE;
     gSaveBlock2Ptr->optionsWildBattleSpeed = OPTIONS_BATTLE_SPEED_NORMAL;
     gSaveBlock2Ptr->optionsTrainerBattleSpeed = OPTIONS_BATTLE_SPEED_NORMAL;
+    gSaveBlock2Ptr->optionsDamageNumbers = FALSE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
     gSaveBlock3Ptr->autoRun = FALSE;
     gSaveBlock3Ptr->autoBike = FALSE;
