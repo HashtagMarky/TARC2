@@ -4992,6 +4992,10 @@ static void Task_HandleStatsScreenInput(u8 taskId)
 
         FillWindowPixelBuffer(WIN_STATS_ABILITIES, PIXEL_FILL(0));
         PrintStatsScreen_Abilities(taskId);
+        
+        FillWindowPixelBuffer(WIN_STATS_MOVES_TOP, PIXEL_FILL(0));
+        PrintStatsScreen_DestroyMoveItemIcon(taskId);
+        PrintStatsScreen_Moves_Top(taskId);
     }
     if (JOY_NEW(B_BUTTON))
     {
