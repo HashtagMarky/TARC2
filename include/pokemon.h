@@ -789,6 +789,7 @@ u16 GetSpeciesHeight(u16 species);
 u16 GetSpeciesWeight(u16 species);
 u8 GetSpeciesPrimaryType(u16 species);
 u8 GetSpeciesSecondaryType(u16 species);
+bool8 CheckSpeciesOfType(u16 species, u8 type);
 const struct LevelUpMove *GetSpeciesLevelUpLearnset(u16 species);
 const u16 *GetSpeciesTeachableLearnset(u16 species);
 const u16 *GetSpeciesEggMoves(u16 species);

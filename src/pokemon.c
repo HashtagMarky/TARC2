@@ -3574,6 +3574,14 @@ u8 GetSpeciesSecondaryType(u16 species)
     return gSpeciesInfo[species].types[1];
 }
 
+bool8 CheckSpeciesOfType(u16 species, u8 type)
+{
+    if (type == GetSpeciesPrimaryType(species) || type == GetSpeciesSecondaryType(species))
+        return TRUE;
+    
+    return FALSE;
+}
+
 const struct LevelUpMove *GetSpeciesLevelUpLearnset(u16 species)
 {
     const struct LevelUpMove *learnset = gSpeciesInfo[SanitizeSpeciesId(species)].levelUpLearnset;
