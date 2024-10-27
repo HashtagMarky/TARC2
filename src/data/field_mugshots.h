@@ -13,6 +13,13 @@ static const u16 sFieldMugshotPal_Brendan[] = INCBIN_U16("graphics/field_mugshot
 static const u32 sFieldMugshotGfx_May[] = INCBIN_U32("graphics/field_mugshots/people/may/may.4bpp.lz");
 static const u16 sFieldMugshotPal_May[] = INCBIN_U16("graphics/field_mugshots/people/may/may.gbapal");
 
+// Samuel
+static const u32 sFieldMugshotGfx_SamuelNormal[] = INCBIN_U32("graphics/field_mugshots/people/samuel/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_SamuelHappy[] = INCBIN_U32("graphics/field_mugshots/people/samuel/happy.4bpp.lz");
+
+static const u16 sFieldMugshotPal_SamuelNormal[] = INCBIN_U16("graphics/field_mugshots/people/samuel/normal.gbapal");
+static const u16 sFieldMugshotPal_SamuelHappy[] = INCBIN_U16("graphics/field_mugshots/people/samuel/happy.gbapal");
+
 // Substitute Doll (SPECIES_NONE)
 static const u32 sFieldMugshotGfx_SubstituteDollNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/substitute_doll/normal.4bpp.lz");
 // static const u32 sFieldMugshotGfx_SubstituteDollNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/substitute_doll/normal_shiny.4bpp.lz");
@@ -1054,6 +1061,21 @@ const struct MugshotGfx gFieldMugshots[][EMOTE_COUNT] =
         {
             .gfx = sFieldMugshotGfx_AnkaHappy,
             .pal = sFieldMugshotPal_Protagonist,
+        },
+    },
+
+    [MUGSHOT_SAMUEL] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_SamuelNormal,
+            .pal = sFieldMugshotPal_SamuelNormal,
+        },
+
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_SamuelHappy,
+            .pal = sFieldMugshotPal_SamuelHappy,
         },
     },
 

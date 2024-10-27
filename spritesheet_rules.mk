@@ -636,6 +636,9 @@ $(PROTAGOBJEVENTGFXDIR)/anka_walking.4bpp: %.4bpp: %.png
 $(PROTAGOBJEVENTGFXDIR)/anka_running.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
+$(OBJEVENTGFXDIR)/people/samuel.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
 
 
 $(FLDEFFGFXDIR)/arrow.4bpp: %.4bpp: %.png

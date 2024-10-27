@@ -454,3 +454,6 @@ const u16 gObjectEventPal_BeastBall[] = INCBIN_U16("graphics/object_events/pics/
 const u16 gObjectEventPal_StrangeBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_strange.gbapal");
 #endif //ITEM_STRANGE_BALL
 #endif //OW_FOLLOWERS_POKEBALLS
+
+const u32 gObjectEventPic_Samuel[] = INCBIN_U32("graphics/object_events/pics/people/samuel.4bpp");
+const u16 gObjectEventPalette_Samuel[] = INCBIN_U16("graphics/object_events/pics/people/samuel.gbapal");
