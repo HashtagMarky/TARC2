@@ -1931,6 +1931,21 @@
 	.2byte \localId
 	.endm
 
+	@ Plays the voice of the given character. Voice line is any VOICE_LINE* constant.
+	@ You can use waitvoiceline to block script execution until the voice finishes.
+	.macro playvoiceline voice:req, voiceLine:req, voiceVolume=CRY_VOLUME, bgVolume=85
+	.byte 0xea
+	.2byte \voice
+	.byte \voiceLine
+	.byte \voiceVolume
+	.2byte \bgVolume
+	.endm
+
+	@ Blocks script execution until voice line finishes.
+	.macro waitvoiceline
+	waitmoncry
+	.endm
+
 @ Supplementary
 
 	.macro goto_if_unset flag:req, dest:req

@@ -45,4 +45,16 @@
 #define CRY_VOLUME    120
 #define CRY_VOLUME_RS 125
 
+enum Voices
+{
+    VOICE_NARRATER,
+    VOICE_COUNT,
+};
+
+enum VoiceLines
+{
+    VOICELINE_GREETING,
+    VOICELINE_COUNT,
+};
+
 #endif // GUARD_CONSTANTS_SOUND_H
