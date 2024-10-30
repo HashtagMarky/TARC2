@@ -18,6 +18,7 @@ struct CharacterInfo
     u8 name[PLAYER_NAME_LENGTH + 1];
     u8 pronouns;
     bool8 isMainCharacter;
+    u8 voice;
 
     // Basic Details
     u16 partnerPokemon;
