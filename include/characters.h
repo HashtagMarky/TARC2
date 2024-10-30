@@ -6,7 +6,11 @@ enum // Up to 256 Character IDs
     CHARACTER_JILL,
     CHARACTER_COUNT,
 };
-
+/*
+#define CHAR_OBJ(name)
+#define CHAR_MUGSHOT(name)
+#define CHAR_PARTNET(name)
+*/
 struct CharacterInfo
 {
     // Character Identification
@@ -33,6 +37,8 @@ struct CharacterInfo
     u16 morningMapId;  // Map they prefer to go to in the morning
     u16 afternoonMapId;// Map they prefer to go to in the afternoon
     u16 eveningMapId;  // Map they prefer to go to in the evening
+    u16 homeMapSec;
+    u16 homeMapId;
 
     // Friendship & Social Interactions
     u8 baseFriendship;
