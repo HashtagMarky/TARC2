@@ -1359,3 +1359,7 @@ static const struct SpriteFrameImage sPicTable_RubySapphireMay[] = {
 static const struct SpriteFrameImage sPicTable_Samuel[] = {
     overworld_ascending_frames(gObjectEventPic_Samuel, 2, 4),
 };
+
+static const struct SpriteFrameImage sPicTable_Lauren[] = {
+    overworld_ascending_frames(gObjectEventPic_Lauren, 2, 4),
+};

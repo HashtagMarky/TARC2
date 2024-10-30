@@ -457,3 +457,5 @@ const u16 gObjectEventPal_StrangeBall[] = INCBIN_U16("graphics/object_events/pic
 
 const u32 gObjectEventPic_Samuel[] = INCBIN_U32("graphics/object_events/pics/people/samuel.4bpp");
 const u16 gObjectEventPalette_Samuel[] = INCBIN_U16("graphics/object_events/pics/people/samuel.gbapal");
+const u32 gObjectEventPic_Lauren[] = INCBIN_U32("graphics/object_events/pics/people/lauren.4bpp");
+const u16 gObjectEventPalette_Lauren[] = INCBIN_U16("graphics/object_events/pics/people/lauren.gbapal");
