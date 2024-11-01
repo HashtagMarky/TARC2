@@ -298,7 +298,7 @@ static const u32 sPokedexPlusHGSS_ScreenSearchNational_Tilemap[] = INCBIN_U32("g
 
 #define SCROLLING_MON_X 146
 #define HGSS_DECAPPED FALSE
-#define HGSS_DARK_MODE FALSE
+#define HGSS_DARK_MODE TRUE
 #define HGSS_HIDE_UNSEEN_EVOLUTION_NAMES FALSE
 
 // For scrolling search parameter
@@ -1191,6 +1191,12 @@ static const struct CompressedSpriteSheet sInterfaceSpriteSheet[] =
 static const struct SpritePalette sInterfaceSpritePalette[] =
 {
     {sPokedexPlusHGSS_Default_Pal, TAG_DEX_INTERFACE},
+    {0}
+};
+
+static const struct SpritePalette sInterfaceSpritePalette_Dark[] =
+{
+    {sPokedexPlusHGSS_Default_dark_Pal, TAG_DEX_INTERFACE},
     {0}
 };
 
@@ -2429,7 +2435,10 @@ static bool8 LoadPokedexListPage(u8 page)
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 8;
         LoadCompressedSpriteSheet(&sInterfaceSpriteSheet[HGSS_DECAPPED]);
-        LoadSpritePalettes(sInterfaceSpritePalette);
+        if (!HGSS_DARK_MODE)
+            LoadSpritePalettes(sInterfaceSpritePalette);
+        else
+            LoadSpritePalettes(sInterfaceSpritePalette_Dark);
         LoadSpritePalettes(sStatBarSpritePal);
         CreateInterfaceSprites(page);
         gMain.state++;
@@ -7807,7 +7816,10 @@ static void Task_LoadSearchMenu(u8 taskId)
         break;
     case 1:
         LoadCompressedSpriteSheet(&sInterfaceSpriteSheet[HGSS_DECAPPED]);
-        LoadSpritePalettes(sInterfaceSpritePalette);
+        if (!HGSS_DARK_MODE)
+            LoadSpritePalettes(sInterfaceSpritePalette);
+        else
+            LoadSpritePalettes(sInterfaceSpritePalette_Dark);
         LoadSpritePalettes(sStatBarSpritePal);
         CreateSearchParameterScrollArrows(taskId);
         for (i = 0; i < NUM_TASK_DATA; i++)
