@@ -1900,20 +1900,20 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Artist = {
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanNormal = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN,
-    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
+    .paletteTag = OBJ_EVENT_PAL_TAG_RIVAL_BRENDAN,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
     .width = 16,
     .height = 32,
-    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .paletteSlot = 0,
     .shadowSize = SHADOW_SIZE_M,
     .inanimate = FALSE,
     .compressed = FALSE,
     .tracks = TRACKS_FOOT,
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
-    .anims = sAnimTable_BrendanMayNormal,
-    .images = sPicTable_KoleNormal,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_Brendan,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
@@ -1995,20 +1995,20 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanFieldM
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayNormal = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
-    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
+    .paletteTag = OBJ_EVENT_PAL_TAG_RIVAL_MAY,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
     .width = 16,
     .height = 32,
-    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .paletteSlot = 0,
     .shadowSize = SHADOW_SIZE_M,
     .inanimate = FALSE,
     .compressed = FALSE,
     .tracks = TRACKS_FOOT,
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
-    .anims = sAnimTable_BrendanMayNormal,
-    .images = sPicTable_AnkaNormal,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_May,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 

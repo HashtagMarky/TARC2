@@ -811,6 +811,12 @@ $(FRLGOBJEVENTGFXDIR)/woman_5.4bpp: %.4bpp: %.png
 $(FRLGOBJEVENTGFXDIR)/youngster.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
+$(FRLGOBJEVENTGFXDIR)/brendan.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(FRLGOBJEVENTGFXDIR)/may.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
 
 $(OBJEVENTGFXDIR)/pokemon_old/azumarill.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2

@@ -1,10 +1,13 @@
 const u32 gObjectEventPic_KoleNormalRunning[] = INCBIN_U32("graphics/protagonist_sprites/kole_walking.4bpp", "graphics/protagonist_sprites/kole_running.4bpp");
-const u16 gObjectEventPal_Brendan[] = INCBIN_U16("graphics/object_events/palettes/brendan.gbapal");
 #if RSE(OW_OBJECT_EVENT_STYLE)
+const u32 gObjectEventPic_Brendan[] = INCBIN_U32("graphics/object_events/pics/people/brendan/walking.4bpp");
+const u16 gObjectEventPal_Brendan[] = INCBIN_U16("graphics/object_events/palettes/brendan.gbapal");
 const u32 gObjectEventPic_RubySapphireBrendanNormal[] = INCBIN_U32("graphics/object_events/pics/people/ruby_sapphire_brendan/walking.4bpp");
 const u32 gObjectEventPic_RubySapphireBrendanRunning[] = INCBIN_U32("graphics/object_events/pics/people/ruby_sapphire_brendan/running.4bpp");
 const u16 gObjectEventPal_RubySapphireBrendan[] = INCBIN_U16("graphics/object_events/palettes/ruby_sapphire_brendan.gbapal");
 #elif FRLG(OW_OBJECT_EVENT_STYLE)
+const u32 gObjectEventPic_Brendan[] = INCBIN_U32("graphics/object_events/pics/people/frlg_hyo/brendan.4bpp");
+const u16 gObjectEventPal_Brendan[] = INCBIN_U16("graphics/object_events/pics/people/frlg_hyo/brendan.gbapal");
 const u32 gObjectEventPic_RubySapphireBrendanNormal[] = INCBIN_U32("graphics/object_events/pics/people/frlg_hyo/ruby_sapphire_brendan/walking.4bpp");
 const u32 gObjectEventPic_RubySapphireBrendanRunning[] = INCBIN_U32("graphics/object_events/pics/people/frlg_hyo/ruby_sapphire_brendan/running.4bpp");
 const u16 gObjectEventPal_RubySapphireBrendan[] = INCBIN_U16("graphics/object_events/pics/people/frlg_hyo/ruby_sapphire_brendan/ruby_sapphire_brendan.gbapal");
@@ -38,13 +41,16 @@ const u32 gObjectEventPic_BrendanUnderwater[] = INCBIN_U32("graphics/object_even
 const u32 gObjectEventPic_MayUnderwater[] = INCBIN_U32("graphics/object_events/pics/people/may/underwater.4bpp");
 const u16 gObjectEventPal_PlayerUnderwater[] = INCBIN_U16("graphics/object_events/palettes/player_underwater.gbapal");
 const u32 gObjectEventPic_AnkaNormalRunning[] = INCBIN_U32("graphics/protagonist_sprites/anka_walking.4bpp", "graphics/protagonist_sprites/anka_running.4bpp");
-const u16 gObjectEventPal_May[] = INCBIN_U16("graphics/object_events/palettes/may.gbapal");
 const u16 gObjectEventPal_MayReflection[] = INCBIN_U16("graphics/object_events/palettes/may_reflection.gbapal");
 #if RSE(OW_OBJECT_EVENT_STYLE)
+const u32 gObjectEventPic_May[] = INCBIN_U32("graphics/object_events/pics/people/may/walking.4bpp");
+const u16 gObjectEventPal_May[] = INCBIN_U16("graphics/object_events/palettes/may.gbapal");
 const u32 gObjectEventPic_RubySapphireMayNormal[] = INCBIN_U32("graphics/object_events/pics/people/ruby_sapphire_may/walking.4bpp");
 const u32 gObjectEventPic_RubySapphireMayRunning[] = INCBIN_U32("graphics/object_events/pics/people/ruby_sapphire_may/running.4bpp");
 const u16 gObjectEventPal_RubySapphireMay[] = INCBIN_U16("graphics/object_events/palettes/ruby_sapphire_may.gbapal");
 #elif FRLG(OW_OBJECT_EVENT_STYLE)
+const u32 gObjectEventPic_May[] = INCBIN_U32("graphics/object_events/pics/people/frlg_hyo/may.4bpp");
+const u16 gObjectEventPal_May[] = INCBIN_U16("graphics/object_events/pics/people/frlg_hyo/may.gbapal");
 const u32 gObjectEventPic_RubySapphireMayNormal[] = INCBIN_U32("graphics/object_events/pics/people/frlg_hyo/ruby_sapphire_may/walking.4bpp");
 const u32 gObjectEventPic_RubySapphireMayRunning[] = INCBIN_U32("graphics/object_events/pics/people/frlg_hyo/ruby_sapphire_may/running.4bpp");
 const u16 gObjectEventPal_RubySapphireMay[] = INCBIN_U16("graphics/object_events/pics/people/frlg_hyo/ruby_sapphire_may/ruby_sapphire_may.gbapal");
