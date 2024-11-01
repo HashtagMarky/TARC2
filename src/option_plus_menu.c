@@ -1383,7 +1383,7 @@ static void ReDrawAll(void)
 // Process Input functions ****SPECIFIC****
 static const u8 sText_Faster[] = _("FASTER");
 static const u8 sText_Instant[] = _("INSTANT");
-static const u8 *const sTextSpeedStrings[] = {gText_TextSpeedSlow, gText_TextSpeedMid, gText_TextSpeedFast, sText_Faster};
+static const u8 *const sTextSpeedStrings[] = {gText_TextSpeedSlow, gText_TextSpeedMid, gText_TextSpeedFast, sText_Instant};
 static void DrawChoices_TextSpeed(int selection, int y)
 {
     bool8 active = CheckConditions(MENUITEM_MAIN_TEXTSPEED);
