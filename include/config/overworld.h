@@ -115,4 +115,7 @@
 #define OW_FLAG_VARIABLE_ROD_GOOD_TECHNIQUE     FLAG_RECEIVED_GOOD_ROD     // If this flag is set, the game will unlock the 'good fishing technique'.
 #define OW_FLAG_VARIABLE_ROD_SUPER_TECHNIQUE    FLAG_RECEIVED_SUPER_ROD    // If this flag is set, the game will unlock the 'super fishing technique'.
 
+// Overworld Object Event
+#define OW_OBJECT_EVENT_STYLE   VERSION_FIRE_RED
+
 #endif // GUARD_CONFIG_OVERWORLD_H

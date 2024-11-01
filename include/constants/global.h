@@ -28,6 +28,11 @@
 
 #define NUM_VERSIONS 15
 
+#define RSE(version)  ((version) == VERSION_SAPPHIRE || (version) == VERSION_RUBY || (version) == VERSION_EMERALD)
+#define FRLG(version) ((version) == VERSION_FIRE_RED || (version) == VERSION_LEAF_GREEN)
+#define HGSS(version) ((version) == VERSION_HEART_GOLD || (version) == VERSION_SOUL_SILVER)
+#define DPPT(version) ((version) == VERSION_DIAMOND || (version) == VERSION_PEARL || (version) == VERSION_PLATINUM)
+
 #define LANGUAGE_JAPANESE 1
 #define LANGUAGE_ENGLISH  2
 #define LANGUAGE_FRENCH   3
