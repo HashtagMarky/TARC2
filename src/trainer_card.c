@@ -25,6 +25,7 @@
 #include "graphics.h"
 #include "pokemon_icon.h"
 #include "trainer_pokemon_sprites.h"
+#include "field_mugshot.h"
 #include "contest_util.h"
 #include "constants/songs.h"
 #include "constants/game_stat.h"
@@ -32,6 +33,7 @@
 #include "constants/rgb.h"
 #include "constants/trainers.h"
 #include "constants/union_room.h"
+#include "constants/field_mugshots.h"
 
 enum {
     WIN_MSG,
@@ -132,6 +134,7 @@ static void PrintIdOnCard(void);
 static void PrintMoneyOnCard(void);
 static void PrintPokedexOnCard(void);
 static void PrintProfilePhraseOnCard(void);
+static void PrintEmotePromptOnCard(void);
 static bool8 PrintAllOnCardBack(void);
 static void PrintNameOnCardBack(void);
 static void PrintHofDebutTimeOnCard(void);
@@ -246,14 +249,14 @@ static const struct WindowTemplate sTrainerCardWindowTemplates[] =
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 28,
-        .height = 18,
+        .height = 19,
         .paletteNum = 15,
         .baseBlock = 0x1,
     },
     [WIN_TRAINER_PIC] = {
         .bg = 3,
         .tilemapLeft = 19,
-        .tilemapTop = 5,
+        .tilemapTop = 6,
         .width = 9,
         .height = 10,
         .paletteNum = 8,
@@ -283,6 +286,7 @@ static const u16 *const sKantoTrainerCardPals[] =
 static const u8 sTrainerCardTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 static const u8 sTrainerCardStatColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED};
 static const u8 sTimeColonInvisibleTextColors[6] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_TRANSPARENT};
+static const u8 sTrainerCardPromptTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
 
 static const u8 sTrainerPicOffset[2][GENDER_COUNT][2] =
 {
@@ -460,6 +464,39 @@ static void Task_TrainerCard(u8 taskId)
                 BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, sData->blendColor);
                 sData->mainState = STATE_CLOSE_CARD;
             }
+        }
+        else if (JOY_NEW(START_BUTTON) && !(sData->isLink))
+        {
+            switch (gSaveBlock2Ptr->playerEmote)
+            {
+            default:
+            case EMOTE_NORMAL:
+            case EMOTE_ANGRY:
+            case EMOTE_CRYING:
+            case EMOTE_DETERMINED:
+            case EMOTE_DIZZY:
+            case EMOTE_INSPIRED:
+            case EMOTE_JOYOUS:
+            case EMOTE_PAIN:
+            case EMOTE_SAD:
+            case EMOTE_SHOUTING:
+            case EMOTE_SIGH:
+            case EMOTE_STUNNED:
+            case EMOTE_SURPRISED:
+            case EMOTE_TEARY:
+            case EMOTE_WORRIED:
+                PlaySE(SE_RG_HELP_OPEN);
+                gSaveBlock2Ptr->playerEmote = EMOTE_HAPPY;
+                break;
+            
+            case EMOTE_HAPPY:
+                PlaySE(SE_RG_HELP_CLOSE);
+                gSaveBlock2Ptr->playerEmote = EMOTE_NORMAL;
+                break;
+            }
+            FillWindowPixelBuffer(WIN_TRAINER_PIC, PIXEL_FILL(0));
+            CreateTrainerCardTrainerPic();
+            DrawTrainerCardWindow(WIN_TRAINER_PIC);
         }
         break;
     case STATE_WAIT_FLIP_TO_BACK:
@@ -939,6 +976,7 @@ static bool8 PrintAllOnCardFront(void)
         break;
     case 5:
         PrintProfilePhraseOnCard();
+        PrintEmotePromptOnCard();
         break;
     default:
         sData->printState = 0;
@@ -1159,6 +1197,12 @@ static void PrintProfilePhraseOnCard(void)
         AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, 8, yOffsetsLine2[sData->isHoenn], sTrainerCardTextColors, TEXT_SKIP_DRAW, sData->easyChatProfile[2]);
         AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, GetStringWidth(FONT_NORMAL, sData->easyChatProfile[2], 0) + 14, yOffsetsLine2[sData->isHoenn], sTrainerCardTextColors, TEXT_SKIP_DRAW, sData->easyChatProfile[3]);
     }
+}
+
+static void PrintEmotePromptOnCard(void)
+{
+    if (!sData->isLink)
+        AddTextPrinterParameterized4(WIN_CARD_TEXT, FONT_NORMAL, 163, 137, 0, 0, sTrainerCardPromptTextColors, TEXT_SKIP_DRAW, COMPOUND_STRING("{START_BUTTON} EMOTE"));
 }
 
 static void BufferNameForCardBack(void)
@@ -1892,11 +1936,19 @@ static void CreateTrainerCardTrainerPic(void)
     }
     else
     {
+        CreatePlayerMugshotTrainerCardSprite(sData->trainerCard.gender,
+                    gSaveBlock2Ptr->playerEmote,
+                    sTrainerPicOffset[sData->isHoenn][sData->trainerCard.gender][0],
+                    sTrainerPicOffset[sData->isHoenn][sData->trainerCard.gender][1],
+                    8,
+                    WIN_TRAINER_PIC);
+/*
         CreateTrainerCardTrainerPicSprite(FacilityClassToPicIndex(sTrainerPicFacilityClass[sData->cardType][sData->trainerCard.gender]),
                     TRUE,
                     sTrainerPicOffset[sData->isHoenn][sData->trainerCard.gender][0],
                     sTrainerPicOffset[sData->isHoenn][sData->trainerCard.gender][1],
                     8,
                     WIN_TRAINER_PIC);
+*/
     }
 }

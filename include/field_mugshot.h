@@ -12,6 +12,7 @@ u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion);
 void RemoveFieldMugshot(bool8 retainDetails);
 void RemoveFieldMugshotAndWindow(void);
 u8 GetFieldMugshotSpriteId(void);
+u16 CreatePlayerMugshotTrainerCardSprite(u8 gender, u8 mugshotEmotion, u16 destX, u16 destY, u8 paletteSlot, u8 windowId);
 u8 IsFieldMugshotActive(void);
 void SetMugshotDetails(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y, u8 windowType);
 void SetFieldMugshotSpriteId(u32 value);

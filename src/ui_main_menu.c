@@ -229,7 +229,7 @@ static struct CompressedSpriteSheet sSpriteSheet_ProtagonistMugshot;
 static void CreateProtagonistMugshotSpriteSheets()
 {
     u16 mugshotId = (gSaveBlock2Ptr->playerGender == MALE) ? MUGSHOT_KOLE : MUGSHOT_ANKA;
-    sSpriteSheet_ProtagonistMugshot.data = gFieldMugshots[mugshotId][EMOTE_NORMAL].gfx;
+    sSpriteSheet_ProtagonistMugshot.data = gFieldMugshots[mugshotId][gSaveBlock2Ptr->playerEmote].gfx;
     sSpriteSheet_ProtagonistMugshot.size = 64 * 64 * 1 / 2;
     sSpriteSheet_ProtagonistMugshot.tag = TAG_MUGSHOT;
 }

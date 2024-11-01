@@ -2,6 +2,8 @@
 #include "gba/defines.h"
 #include "data.h"
 #include "decompress.h"
+#include "malloc.h"
+#include "palette.h"
 #include "dynamic_palettes.h"
 #include "sprite.h"
 #include "script.h"
@@ -366,6 +368,39 @@ u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion)
     }
     PreservePaletteInWeather(gSprites[sFieldMugshotSpriteId].oam.paletteNum + 0x10);
     return sFieldMugshotSpriteId;
+}
+
+u16 CreatePlayerMugshotTrainerCardSprite(u8 gender, u8 mugshotEmotion, u16 destX, u16 destY, u8 paletteSlot, u8 windowId)
+{
+    u16 mugshotId;
+    u8 *mugshotBuffer;
+    const u32 *mugshotGfx;
+    const u16 *mugshotPal;
+
+    mugshotId = (gender == MALE) ? MUGSHOT_KOLE : MUGSHOT_ANKA;
+
+    mugshotBuffer = Alloc(TRAINER_PIC_SIZE * MAX_TRAINER_PIC_FRAMES);
+    if (mugshotBuffer == NULL)
+        return 0xFFFF;
+
+    if (mugshotId >= NELEMS(gFieldMugshots) || mugshotEmotion >= EMOTE_COUNT)
+    {
+        Free(mugshotBuffer);
+        return 0xFFFF;
+    }
+
+    mugshotGfx = gFieldMugshots[mugshotId][mugshotEmotion].gfx;
+    mugshotPal = gFieldMugshots[mugshotId][mugshotEmotion].pal;
+
+    LZ77UnCompWram(mugshotGfx, mugshotBuffer);
+
+    BlitBitmapRectToWindow(windowId, mugshotBuffer, 0, 0, TRAINER_PIC_WIDTH, TRAINER_PIC_HEIGHT, destX, destY, TRAINER_PIC_WIDTH, TRAINER_PIC_HEIGHT);
+
+    LoadPalette(mugshotPal, BG_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
+
+    Free(mugshotBuffer);
+
+    return 0;
 }
 
 void SetFieldMugshotSpriteId(u32 value)
