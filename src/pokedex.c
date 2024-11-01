@@ -6002,3 +6002,48 @@ static void DestroyMonIconSprite(void)
         sMonIconSpriteId2 = MAX_SPRITES;  // Reset to avoid reusing an invalid sprite ID
     }
 }
+
+u16 GetEligiblePokedexCount(u8 caseID)
+{
+    u16 count = 0;
+    u16 i;
+
+    for (i = 0; i < NUM_SPECIES; i++)
+    {
+        if (GetSpeciesFormTable(i) == NULL)
+        {
+            if (CheckSpeciesOfType(i, gSaveBlock2Ptr->ikigaiGymType))
+            {
+                switch (caseID)
+                {
+                case FLAG_GET_SEEN:
+                    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(i), FLAG_GET_SEEN))
+                        count++;
+                    break;
+                case FLAG_GET_CAUGHT:
+                    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(i), FLAG_GET_CAUGHT))
+                        count++;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            if (i == GET_BASE_SPECIES_ID(i) && CheckSpeciesOfType(i, gSaveBlock2Ptr->ikigaiGymType))
+            {
+                switch (caseID)
+                {
+                case FLAG_GET_SEEN:
+                    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(i), FLAG_GET_SEEN))
+                        count++;
+                    break;
+                case FLAG_GET_CAUGHT:
+                    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(i), FLAG_GET_CAUGHT))
+                        count++;
+                    break;
+                }
+            }
+        }
+    }
+    return count;
+}
