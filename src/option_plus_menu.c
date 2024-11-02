@@ -280,7 +280,7 @@ struct // MENU_BATTLE
     [MENUITEM_BATTLE_BATTLESTYLE]   = {DrawChoices_BattleStyle, ProcessInput_Options_Two},
     [MENUITEM_BATTLE_WILD_SPEED]    = {DrawChoices_BattleSpeed, ProcessInput_Options_Four},
     [MENUITEM_BATTLE_TRAINER_SPEED] = {DrawChoices_BattleSpeed, ProcessInput_Options_Four},
-    [MENUITEM_BATTLE_DAMAGE_NUMBERS]= {DrawChoices_DamageNumbers, ProcessInput_Options_Three},
+    [MENUITEM_BATTLE_DAMAGE_NUMBERS] = {DrawChoices_DamageNumbers, ProcessInput_Options_Three},
     [MENUITEM_BATTLE_CANCEL]        = {NULL, NULL},
 };
 
@@ -336,7 +336,7 @@ static const u8 *const sOptionMenuItemsNamesBattle_Compact[MENUITEM_BATTLE_COUNT
     [MENUITEM_BATTLE_BATTLESTYLE]   = gText_BattleStyle,
     [MENUITEM_BATTLE_WILD_SPEED]    = sText_WildSpeed_Compact,
     [MENUITEM_BATTLE_TRAINER_SPEED] = sText_TrainerSpeed,
-    [MENUITEM_BATTLE_DAMAGE_NUMBERS]= COMPOUND_STRING("DAMAGE NUMBERS"),
+    [MENUITEM_BATTLE_DAMAGE_NUMBERS] = COMPOUND_STRING("DAMAGE NUMBERS"),
     [MENUITEM_BATTLE_CANCEL]        = gText_OptionMenuSave,
 };
 
@@ -346,7 +346,7 @@ static const u8 *const sOptionMenuItemsNamesBattle_Spread[MENUITEM_BATTLE_COUNT]
     [MENUITEM_BATTLE_BATTLESTYLE]   = gText_BattleStyle,
     [MENUITEM_BATTLE_WILD_SPEED]    = sText_WildSpeed_Spread,
     [MENUITEM_BATTLE_TRAINER_SPEED] = sText_TrainerSpeed,
-    [MENUITEM_BATTLE_DAMAGE_NUMBERS]= COMPOUND_STRING("DAMAGE NUMBERS"),
+    [MENUITEM_BATTLE_DAMAGE_NUMBERS] = COMPOUND_STRING("DAMAGE NUMBERS"),
     [MENUITEM_BATTLE_CANCEL]        = gText_OptionMenuSave,
 };
 
@@ -416,7 +416,7 @@ static bool8 CheckConditions(int selection)
         case MENUITEM_BATTLE_BATTLESTYLE:   return TRUE;
         case MENUITEM_BATTLE_WILD_SPEED:    return TRUE;
         case MENUITEM_BATTLE_TRAINER_SPEED: return TRUE;
-        case MENUITEM_BATTLE_DAMAGE_NUMBERS:return TRUE;
+        case MENUITEM_BATTLE_DAMAGE_NUMBERS: return TRUE;
         case MENUITEM_BATTLE_CANCEL:        return TRUE;
         case MENUITEM_BATTLE_COUNT:         return TRUE;
         }
@@ -497,7 +497,7 @@ static const u8 *const sOptionMenuItemDescriptionsBattle[MENUITEM_BATTLE_COUNT][
     [MENUITEM_BATTLE_BATTLESTYLE]   = {sText_Desc_BattleStyle_Shift,    sText_Desc_BattleStyle_Set,     sText_Empty,                    sText_Empty},
     [MENUITEM_BATTLE_WILD_SPEED]    = {sText_Desc_WildSpeed,            sText_Empty,                    sText_Empty,                    sText_Empty},
     [MENUITEM_BATTLE_TRAINER_SPEED] = {sText_Desc_TrainerSpeed,         sText_Empty,                    sText_Empty,                    sText_Empty},
-    [MENUITEM_BATTLE_DAMAGE_NUMBERS]= {sText_Desc_DamageNumbers,        sText_Empty,                    sText_Empty,                    sText_Empty},
+    [MENUITEM_BATTLE_DAMAGE_NUMBERS] = {sText_Desc_DamageNumbers,        sText_Empty,                    sText_Empty,                    sText_Empty},
     [MENUITEM_BATTLE_CANCEL]        = {sText_Desc_Save,                 sText_Empty,                    sText_Empty,                    sText_Empty},
 };
 
@@ -530,7 +530,7 @@ static const u8 *const sOptionMenuItemDescriptionsDisabledBattle[MENUITEM_BATTLE
     [MENUITEM_BATTLE_BATTLESTYLE]   = sText_Empty,
     [MENUITEM_BATTLE_WILD_SPEED]    = sText_Empty,
     [MENUITEM_BATTLE_TRAINER_SPEED] = sText_Empty,
-    [MENUITEM_BATTLE_DAMAGE_NUMBERS]= sText_Empty,
+    [MENUITEM_BATTLE_DAMAGE_NUMBERS] = sText_Empty,
     [MENUITEM_BATTLE_CANCEL]        = sText_Empty,
 };
 
@@ -538,6 +538,19 @@ static const u8 *const OptionTextDescription(void)
 {
     u8 menuItem = sOptions->menuCursor[sOptions->submenu];
     u8 selection;
+
+    if (sOptions->submenu == MENU_MAIN && menuItem >= MENUITEM_MAIN_COUNT)
+    {
+        menuItem = MENUITEM_MAIN_CANCEL;
+    }
+    else if (sOptions->submenu == MENU_OVERWORLD && menuItem >= MENUITEM_OVERWORLD_COUNT)
+    {
+        menuItem = MENUITEM_OVERWORLD_CANCEL;
+    }
+    else if (sOptions->submenu == MENU_BATTLE && menuItem >= MENUITEM_BATTLE_COUNT)
+    {
+        menuItem = MENUITEM_BATTLE_CANCEL;
+    }
 
     switch (sOptions->submenu)
     {
@@ -551,14 +564,14 @@ static const u8 *const OptionTextDescription(void)
         return sOptionMenuItemDescriptionsMain[menuItem][selection];
     case MENU_OVERWORLD:
         if (!CheckConditions(menuItem))
-            return sOptionMenuItemDescriptionsDisabledMain[menuItem]; // Maybe Edit
+            return sOptionMenuItemDescriptionsDisabledOverworld[menuItem];
         selection = sOptions->sel_overworld[menuItem];
         return sOptionMenuItemDescriptionsOverworld[menuItem][selection];
     case MENU_BATTLE:
         if (!CheckConditions(menuItem))
-            return sOptionMenuItemDescriptionsDisabledMain[menuItem]; // Maybe Edit
+            return sOptionMenuItemDescriptionsDisabledBattle[menuItem];
         selection = sOptions->sel_battle[menuItem];
-        if (menuItem == MENUITEM_BATTLE_WILD_SPEED || menuItem == MENUITEM_BATTLE_TRAINER_SPEED || MENUITEM_BATTLE_DAMAGE_NUMBERS)
+        if (menuItem == MENUITEM_BATTLE_WILD_SPEED || menuItem == MENUITEM_BATTLE_TRAINER_SPEED || menuItem == MENUITEM_BATTLE_DAMAGE_NUMBERS)
             selection = 0;
         return sOptionMenuItemDescriptionsBattle[menuItem][selection];
     }
@@ -1466,7 +1479,7 @@ static void DrawChoices_BattleSpeed(int selection, int y)
     bool8 active = CheckConditions(MENUITEM_BATTLE_TRAINER_SPEED);
 
     if (selection == 0)
-        DrawOptionMenuChoice(sText_Normal, 104, y, 1, active);
+        DrawOptionMenuChoice(sText_Normal, 104, y, 0, active);
     else
     {
         u8 textMultipler[] = _("x1{0x77}{0x77}{0x77}{0x77}{0x77}");
@@ -1627,7 +1640,7 @@ static void DrawChoices_DamageNumbers(int selection, int y)
     {
     default:
     case 0:
-        DrawOptionMenuChoice(gText_BattleSceneOff, 104, y, 1, active);
+        DrawOptionMenuChoice(gText_BattleSceneOff, 104, y, 0, active);
         break;
     
     case 1:
