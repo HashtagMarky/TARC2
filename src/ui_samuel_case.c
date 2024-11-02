@@ -51,6 +51,8 @@
 
     This UI was coded by Archie with Graphics by Mudskip.
 
+    HashtagMarky: Text printing could should be redone.
+
  */
  
 //==========DEFINES==========//
@@ -286,7 +288,8 @@ static const u32 sCaseTilemapRight[] = INCBIN_U32("graphics/ui_samuel_case/case_
 static const u16 sCasePalette[] = INCBIN_U16("graphics/ui_samuel_case/case_tiles.gbapal");
 
 static const u32 sTextBgTiles[]   = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles.4bpp.lz");
-static const u32 sTextBgTilemap[] = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles.bin.lz");
+static const u32 sTextBgTilemapLeft[] = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles_left.bin.lz");
+static const u32 sTextBgTilemapRight[] = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles_right.bin.lz");
 static const u16 sTextBgPalette[] = INCBIN_U16("graphics/ui_samuel_case/text_bg_tiles.gbapal");
 
 static const u32 sPokeballHand_Gfx[] = INCBIN_U32("graphics/ui_samuel_case/pokeball_hand.4bpp.lz");
@@ -515,12 +518,15 @@ static void DestroyPokeballSprites()
 //
 //  Draw The Pokemon Sprites
 //
-#define MON_ICON_X     208
+#define MON_ICON_X_PAGE_ONE     208
+#define MON_ICON_X_PAGE_TWO     32
 #define MON_ICON_Y     104
 #define TAG_MON_SPRITE 30003
 static void SampleUi_DrawMonIcon(u16 speciesId)
 {
-    sSamuelCaseDataPtr->monSpriteId = CreateMonPicSprite_Affine(speciesId, sMonShiny, 0x8000, TRUE, MON_ICON_X, MON_ICON_Y, 5, TAG_NONE);
+    u8 x = sCasePageNum ? MON_ICON_X_PAGE_ONE : MON_ICON_X_PAGE_TWO;
+    
+    sSamuelCaseDataPtr->monSpriteId = CreateMonPicSprite_Affine(speciesId, sMonShiny, 0x8000, TRUE, x, MON_ICON_Y, 5, TAG_NONE);
     gSprites[sSamuelCaseDataPtr->monSpriteId].oam.priority = 0;
 }
 
@@ -784,7 +790,7 @@ static bool8 SamuelCaseLoadGraphics(void) // load tilesets, tilemaps, spriteshee
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
             LZDecompressWram(sCaseTilemapLeft, sBg1TilemapBuffer);
-            LZDecompressWram(sTextBgTilemap, sBg2TilemapBuffer);
+            LZDecompressWram(sTextBgTilemapLeft, sBg2TilemapBuffer);
             sSamuelCaseDataPtr->gfxLoadState++;
         }
         break;
@@ -820,7 +826,7 @@ static void SamuelCase_InitWindows(void)
 //
 //  Text Printing Function
 //
-static const u8 sText_RevealR[] = _("{R_BUTTON} Slide Briefcase");
+static const u8 sText_RevealR[] = _("              Slide Briefcase {R_BUTTON}");
 static const u8 sText_RevealL[] = _("{L_BUTTON} Slide Briefcase");
 static const u8 sText_AreYouSure[] = _("Are you sure?    {A_BUTTON} Yes  {B_BUTTON} No");
 static const u8 sText_RecievedMon[] = _("Give your Pokémon a Nickname?   {A_BUTTON} Yes  {B_BUTTON} No");
@@ -850,8 +856,11 @@ static void PrintTextToBottomBar(u8 textId)
         case 2:
             mainBarAlternatingText = sText_RecievedMon;
             break;
-    } 
-    AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x, y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, mainBarAlternatingText);
+    }
+    if (sCasePageNum == PAGE_ONE && mainBarAlternatingText != sText_RecievedMon)
+        AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 83, y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, mainBarAlternatingText);
+    else
+        AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 2, y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, mainBarAlternatingText);
 
     if(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species == SPECIES_NONE)
     {
@@ -864,20 +873,33 @@ static void PrintTextToBottomBar(u8 textId)
     // StringCopy(gStringVar1, &gText_NumberClear01[0]);
     // ConvertIntToDecimalStringN(gStringVar2, dexNum, STR_CONV_MODE_LEADING_ZEROS, 3);
     // StringAppend(gStringVar1, gStringVar2);
-    AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 19, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("The"));
+    if (sCasePageNum == PAGE_TWO)
+        AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 21, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("The"));
 
     // AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 32, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gText_Dash);
 
     StringCopy(&speciesCategoryArray[0], GetSpeciesCategory(species));
     StringAppend(&speciesCategoryArray[0], COMPOUND_STRING(" Pokémon"));
-    AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 40, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, &speciesCategoryArray[0]);
+    if (sCasePageNum == PAGE_ONE)
+    {
+        StringCopy(gStringVar2, COMPOUND_STRING("The "));
+        StringAppend(gStringVar2, &speciesCategoryArray[0]);
+        AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, GetStringRightAlignXOffset(FONT_NORMAL, gStringVar2, 228), 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
+    }
+    else
+    {
+        AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 42, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, &speciesCategoryArray[0]);
+    }
 
     if(textId != 2)
     {
         speciesTypeText = gTypesInfo[GetSpeciesPrimaryType(species)].name;
         StringCopy(gStringVar1, speciesTypeText);
         StringAppend(gStringVar1, COMPOUND_STRING(" Type"));
-        AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, ReturnNarrowTextFont(), x + 169 + GetStringRightAlignXOffset(ReturnNarrowTextFont(), gStringVar1, 52), y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar1);
+        if (sCasePageNum == PAGE_ONE)
+            AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, ReturnNarrowTextFont(), x + 4, y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar1);
+        else
+            AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, ReturnNarrowTextFont(), x + 169 + GetStringRightAlignXOffset(ReturnNarrowTextFont(), gStringVar1, 52), y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar1);
     }
 
     PutWindowTilemap(WINDOW_BOTTOM_BAR);
@@ -1146,22 +1168,23 @@ static void Task_WaitFadeOutAndChangeGraphics(u8 taskId)
     {
         sCasePageNum ^= 1;
         if (sCasePageNum == PAGE_ONE)
+        {
             LZDecompressWram(sCaseTilemapLeft, sBg1TilemapBuffer);
+            LZDecompressWram(sTextBgTilemapLeft, sBg2TilemapBuffer);
+        }
         else
+        {
             LZDecompressWram(sCaseTilemapRight, sBg1TilemapBuffer);
-
+            LZDecompressWram(sTextBgTilemapRight, sBg2TilemapBuffer);
+        }
         ScheduleBgCopyTilemapToVram(1);
+        ScheduleBgCopyTilemapToVram(2);
         DestroyPokeballSprites();
         CreatePokeballSprites();
+        ChangePositionUpdateSpriteAnims(sSamuelCaseDataPtr->handPosition, FindTaskIdByFunc(Task_SamuelCaseMain));
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         DestroyTask(taskId);
     }
-}
-
-static void Task_ReloadSpriteAfterGraphicsChange(u8 taskId)
-{
-    ChangePositionUpdateSpriteAnims(sSamuelCaseDataPtr->handPosition, taskId);
-    DestroyTask(taskId);
 }
 
 static const struct SpriteCordsStruct (*ReturnBallPositionByPage(void))[4]
