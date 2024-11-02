@@ -461,8 +461,8 @@ static void DestroyHandSprite()
     u8 i = 0;
     for(i = 0; i < 9; i++)
     {
-        DestroySprite(&gSprites[sSamuelCaseDataPtr->pokeballSpriteIds[i]]);
-        sSamuelCaseDataPtr->pokeballSpriteIds[i] = SPRITE_NONE;
+        DestroySprite(&gSprites[sSamuelCaseDataPtr->handSpriteId]);
+        sSamuelCaseDataPtr->handSpriteId = SPRITE_NONE;
     }
 }
 
