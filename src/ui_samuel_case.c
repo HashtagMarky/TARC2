@@ -232,8 +232,11 @@ static void Task_SamuelCaseMain(u8 taskId);
 static void SampleUi_DrawMonIcon(u16 speciesId);
 static void Task_DelayedSpriteLoad(u8 taskId);
 static const struct MonChoiceData* ReturnStartersByPage(void);
+static const struct SpriteCordsStruct (*ReturnBallPositionByPage(void))[4];
 static u16 GetRandomSpecies(void);
 static void RandomiseMonChoiceData(const struct MonChoiceData *monChoiceDataArray, size_t count);
+static void SamuelCaseChangeGraphics(void);
+static void Task_WaitFadeOutAndChangeGraphics(u8 taskId);
 
 //==========CONST=DATA==========//
 static const struct BgTemplate sMenuBgTemplates[] =
@@ -278,7 +281,8 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
 //  Graphics Pointers to Tilemaps, Tilesets, Spritesheets, Palettes
 //
 static const u32 sCaseTiles[]   = INCBIN_U32("graphics/ui_samuel_case/case_tiles.4bpp.lz");
-static const u32 sCaseTilemap[] = INCBIN_U32("graphics/ui_samuel_case/case_tiles.bin.lz");
+static const u32 sCaseTilemapLeft[] = INCBIN_U32("graphics/ui_samuel_case/case_tiles_left.bin.lz");
+static const u32 sCaseTilemapRight[] = INCBIN_U32("graphics/ui_samuel_case/case_tiles_right.bin.lz");
 static const u16 sCasePalette[] = INCBIN_U16("graphics/ui_samuel_case/case_tiles.gbapal");
 
 static const u32 sTextBgTiles[]   = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles.4bpp.lz");
@@ -355,25 +359,31 @@ static const struct SpriteTemplate sSpriteTemplate_PokeballHandMap =
 //
 //  This is the Callback for the Hand Cursor that Updates its sprite position when moved by the input control functions
 //
-#define TOP_ROW_Y 36
-#define MIDDLE_ROW_Y 58
-#define BOTTOM_ROW_Y 80
+#define TOP_ROW_Y 35
+#define MIDDLE_ROW_Y 67
+#define BOTTOM_ROW_Y 94
 
-static const struct SpriteCordsStruct sBallSpriteCords[3][4] = {
-        {{40, TOP_ROW_Y}, {88, TOP_ROW_Y}, {152, TOP_ROW_Y}, {200, TOP_ROW_Y}},
-        {{64, MIDDLE_ROW_Y}, {120, MIDDLE_ROW_Y}, {176, MIDDLE_ROW_Y}},
-        {{96, BOTTOM_ROW_Y}, {144, BOTTOM_ROW_Y}},
+static const struct SpriteCordsStruct sBallSpriteCords_Page1[3][4] = {
+        {{55, TOP_ROW_Y}, {103, TOP_ROW_Y}, {167, TOP_ROW_Y}, {215, TOP_ROW_Y}},
+        {{79, MIDDLE_ROW_Y}, {135, MIDDLE_ROW_Y}, {191, MIDDLE_ROW_Y}},
+        {{103, BOTTOM_ROW_Y}, {167, BOTTOM_ROW_Y}},
+};
+
+static const struct SpriteCordsStruct sBallSpriteCords_Page2[3][4] = {
+        {{25, TOP_ROW_Y}, {73, TOP_ROW_Y}, {137, TOP_ROW_Y}, {185, TOP_ROW_Y}},
+        {{49, MIDDLE_ROW_Y}, {105, MIDDLE_ROW_Y}, {161, MIDDLE_ROW_Y}},
+        {{73, BOTTOM_ROW_Y}, {137, BOTTOM_ROW_Y}},
 };
 
 static void CursorCallback(struct Sprite *sprite)
 {
     struct SpriteCordsStruct current_position = {0,0};
     if(sSamuelCaseDataPtr->handPosition <= 3)
-        current_position = sBallSpriteCords[0][sSamuelCaseDataPtr->handPosition];
+        current_position = ReturnBallPositionByPage()[0][sSamuelCaseDataPtr->handPosition];
     else if(sSamuelCaseDataPtr->handPosition <= 6)  
-        current_position = sBallSpriteCords[1][sSamuelCaseDataPtr->handPosition - 4];
+        current_position = ReturnBallPositionByPage()[1][sSamuelCaseDataPtr->handPosition - 4];
     else
-        current_position = sBallSpriteCords[2][sSamuelCaseDataPtr->handPosition - 7];
+        current_position = ReturnBallPositionByPage()[2][sSamuelCaseDataPtr->handPosition - 7];
 
     sprite->x = current_position.x;
     sprite->y = current_position.y - 6;
@@ -414,17 +424,17 @@ static void CreateHandSprite()
     
         if(sSamuelCaseDataPtr->handPosition <= 3)
         {
-            current_position = sBallSpriteCords[0][sSamuelCaseDataPtr->handPosition];
+            current_position = ReturnBallPositionByPage()[0][sSamuelCaseDataPtr->handPosition];
             break;
         }
         else if(sSamuelCaseDataPtr->handPosition <= 6)  
         {
-            current_position = sBallSpriteCords[1][sSamuelCaseDataPtr->handPosition - 4];
+            current_position = ReturnBallPositionByPage()[1][sSamuelCaseDataPtr->handPosition - 4];
             break;
         }
         else
         {
-            current_position = sBallSpriteCords[2][sSamuelCaseDataPtr->handPosition - 7];
+            current_position = ReturnBallPositionByPage()[2][sSamuelCaseDataPtr->handPosition - 7];
             break;
         }
     }
@@ -468,19 +478,19 @@ static void CreatePokeballSprites()
 
         if(i <= 3)
         {
-            x = sBallSpriteCords[0][i].x;
-            y = sBallSpriteCords[0][i].y;
+            x = ReturnBallPositionByPage()[0][i].x;
+            y = ReturnBallPositionByPage()[0][i].y;
         }
         else if(i <= 6)
         {
             
-            x = sBallSpriteCords[1][i - 4].x;
-            y = sBallSpriteCords[1][i - 4].y;
+            x = ReturnBallPositionByPage()[1][i - 4].x;
+            y = ReturnBallPositionByPage()[1][i - 4].y;
         }
         else
         {
-            x = sBallSpriteCords[2][i - 7].x;
-            y = sBallSpriteCords[2][i - 7].y;
+            x = ReturnBallPositionByPage()[2][i - 7].x;
+            y = ReturnBallPositionByPage()[2][i - 7].y;
         }
         if (sSamuelCaseDataPtr->pokeballSpriteIds[i] == SPRITE_NONE)
             sSamuelCaseDataPtr->pokeballSpriteIds[i] = CreateSpriteAtEnd(&sSpriteTemplate_PokeballHandMap, x, y, 1);
@@ -773,7 +783,7 @@ static bool8 SamuelCaseLoadGraphics(void) // load tilesets, tilemaps, spriteshee
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(sCaseTilemap, sBg1TilemapBuffer);
+            LZDecompressWram(sCaseTilemapLeft, sBg1TilemapBuffer);
             LZDecompressWram(sTextBgTilemap, sBg2TilemapBuffer);
             sSamuelCaseDataPtr->gfxLoadState++;
         }
@@ -955,8 +965,7 @@ static void Task_SamuelCaseMain(u8 taskId)
     if ((JOY_NEW(R_BUTTON) && sCasePageNum == PAGE_ONE) || (JOY_NEW(L_BUTTON) && sCasePageNum == PAGE_TWO))
     {
         PlaySE(SE_BALL_TRAY_ENTER);
-        sCasePageNum ^= 1;
-        ChangePositionUpdateSpriteAnims(oldPosition, taskId);
+        SamuelCaseChangeGraphics();
     }
     if(JOY_NEW(DPAD_UP))
     {
@@ -1086,7 +1095,7 @@ static void Task_SamuelCaseMain(u8 taskId)
 
 static const struct MonChoiceData* ReturnStartersByPage(void)
 {
-    if (sCasePageNum == 0)
+    if (sCasePageNum == PAGE_ONE)
     {
         return (gSaveBlock2Ptr->playerGender == MALE) ? sStarterChoices_Page1_Male : sStarterChoices_Page1_Female;
     }
@@ -1122,5 +1131,47 @@ static void RandomiseMonChoiceData(const struct MonChoiceData *monChoiceDataArra
             //monChoiceDataArray[i].species = GetRandomSpecies();
         }
         //monChoiceDataArray[i].isShinyExpansion = isShiny;
+    }
+}
+
+static void SamuelCaseChangeGraphics(void)
+{
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    CreateTask(Task_WaitFadeOutAndChangeGraphics, 0);
+}
+
+static void Task_WaitFadeOutAndChangeGraphics(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        sCasePageNum ^= 1;
+        if (sCasePageNum == PAGE_ONE)
+            LZDecompressWram(sCaseTilemapLeft, sBg1TilemapBuffer);
+        else
+            LZDecompressWram(sCaseTilemapRight, sBg1TilemapBuffer);
+
+        ScheduleBgCopyTilemapToVram(1);
+        DestroyPokeballSprites();
+        CreatePokeballSprites();
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        DestroyTask(taskId);
+    }
+}
+
+static void Task_ReloadSpriteAfterGraphicsChange(u8 taskId)
+{
+    ChangePositionUpdateSpriteAnims(sSamuelCaseDataPtr->handPosition, taskId);
+    DestroyTask(taskId);
+}
+
+static const struct SpriteCordsStruct (*ReturnBallPositionByPage(void))[4]
+{
+    if (sCasePageNum == PAGE_ONE)
+    {
+        return sBallSpriteCords_Page1;
+    }
+    else
+    {
+        return sBallSpriteCords_Page2;
     }
 }
