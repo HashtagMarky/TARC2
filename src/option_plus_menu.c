@@ -675,18 +675,21 @@ static void DrawLeftSideOptionText(int selection, int y)
 {
     u8 color_yellow[3];
     u8 color_gray[3];
+    const u16 *selectedColorPal = ReturnMenuUIPalette();
+    u16 selectedTextColor = selectedColorPal[1];
 
     color_yellow[0] = TEXT_COLOR_TRANSPARENT;
     color_yellow[1] = TEXT_COLOR_WHITE;
     color_yellow[2] = TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG;
     color_gray[0] = TEXT_COLOR_TRANSPARENT;
-    color_gray[1] = TEXT_COLOR_WHITE;
-    color_gray[2] = TEXT_COLOR_OPTIONS_GRAY_SHADOW;
+    color_gray[1] = TEXT_COLOR_OPTIONS_ORANGE_SHADOW;
+    color_gray[2] = TEXT_COLOR_OPTIONS_GRAY_FG;
 
     if (CheckConditions(selection))
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_yellow, TEXT_SKIP_DRAW, OptionTextRight(selection));
     else
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_gray, TEXT_SKIP_DRAW, OptionTextRight(selection));
+        LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_gray[1], sizeof(selectedTextColor));
 }
 
 static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen, bool8 active)
@@ -708,22 +711,29 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
     else
     {
         color_red[0]    = TEXT_COLOR_TRANSPARENT;
-        color_red[1]    = TEXT_COLOR_OPTIONS_WHITE;
-        color_red[2]    = TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG;
+        color_red[1]    = TEXT_COLOR_OPTIONS_ORANGE_FG;
+        color_red[2]    = TEXT_COLOR_OPTIONS_GRAY_FG;
         color_gray[0]   = TEXT_COLOR_TRANSPARENT;
-        color_gray[1]   = TEXT_COLOR_OPTIONS_WHITE;
-        color_gray[2]   = TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG;
+        color_gray[1]   = TEXT_COLOR_OPTIONS_ORANGE_FG;
+        color_gray[2]   = TEXT_COLOR_OPTIONS_GRAY_FG;
     }
 
 
     if (choosen)
     {
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, x, y, 0, 0, color_gray, TEXT_SKIP_DRAW, text);
+        if (!active)
+        {
+            LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_gray[1], sizeof(selectedTextColor));
+        }
     }
     else
     {
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, x, y, 0, 0, color_red, TEXT_SKIP_DRAW, text);
-        LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_red[1], sizeof(selectedTextColor));
+        if (active)
+        {
+            LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_red[1], sizeof(selectedTextColor));
+        }
     }
 }
 
