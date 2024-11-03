@@ -968,6 +968,7 @@ static void Task_TitleScreenPhase2(u8 taskId)
         CreatePressStartBanner(START_BANNER_X, START_BANNER_Y);
         CreateCopyrightBanner(START_COPYRIGHT_X, START_COPYRIGHT_Y);
         CreateSprite(&sIkigaiVersionSpriteTemplate, IKIGAI_VERSION_NUMBER_X, IKIGAI_VERSION_NUMBER_Y, 0);
+        PlayVoiceLine(VOICE_NARRATER, VOICELINE_GREETING, 0xFF, 194);
         gTasks[taskId].tBg1Y = 0;
         gTasks[taskId].func = Task_TitleScreenPhase3;
     }

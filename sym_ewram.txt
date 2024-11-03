@@ -158,3 +158,4 @@
 	.include "src/ui_main_menu.o"
 	.include "src/ikigai_scrolling_background.o"
 	.include "src/option_plus_menu.o"
+	.include "src/ui_samuel_case.o"

@@ -21,8 +21,10 @@
 
 // Mugshot IDs
 #define MUGSHOT_AUTO_GRAPHICS_ID            NUM_OBJ_EVENT_GFX
-#define MUGSHOT_KOLE                        OBJ_EVENT_GFX_BRENDAN_NORMAL
-#define MUGSHOT_ANKA                        OBJ_EVENT_GFX_MAY_NORMAL
+#define MUGSHOT_KOLE                        OBJ_EVENT_GFX_KOLE_NORMAL
+#define MUGSHOT_ANKA                        OBJ_EVENT_GFX_ANKA_NORMAL
+#define MUGSHOT_SAMUEL                      OBJ_EVENT_GFX_SAMUEL
+#define MUGSHOT_LAUREN                      OBJ_EVENT_GFX_LAUREN
 #define MUGSHOT_SUBSTITUTE_DOLL             OBJ_EVENT_GFX_SPECIES(NONE)
 #define MUGSHOT_BULBASAUR                   OBJ_EVENT_GFX_SPECIES(BULBASAUR)
 #define MUGSHOT_BULBASAUR_SHINY             OBJ_EVENT_GFX_SPECIES_SHINY(BULBASAUR)

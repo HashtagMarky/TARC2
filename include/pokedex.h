@@ -20,5 +20,6 @@ u8* ConvertMonHeightToString(u32 height);
 u8* ConvertMonWeightToString(u32 weight);
 void ShowPokedexHeaderMessage(void);
 void HidePokedexHeaderMessage(void);
+u16 GetEligiblePokedexCount(u8 caseID);
 
 #endif // GUARD_POKEDEX_H

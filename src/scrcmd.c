@@ -2591,3 +2591,14 @@ bool8 Scrcmd_getobjectfacingdirection(struct ScriptContext *ctx)
 
     return FALSE;
 }
+
+bool8 ScrCmd_playvoiceline(struct ScriptContext *ctx)
+{
+    u16 voice = VarGet(ScriptReadHalfword(ctx));
+    u8 voiceLine = ScriptReadByte(ctx);
+    u8 voiceVolume = ScriptReadByte(ctx);
+    u16 bgVolume = VarGet(ScriptReadHalfword(ctx));
+
+    PlayVoiceLine(voice, voiceLine, voiceVolume, bgVolume);
+    return FALSE;
+}
