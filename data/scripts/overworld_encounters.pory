@@ -100,8 +100,8 @@ script OverworldEncounters_EventScript_Fight
 
 script OverworldEncounters_EventScript_ThrowBall
 {
-    setvar(VAR_0x8007, FIRST_BALL)
-    while (var(VAR_0x8007) <= LAST_BALL)
+    setvar(VAR_0x8007, ITEM_POKE_BALL)
+    while (var(VAR_0x8007) <= ITEM_CHERISH_BALL)
     {
         checkitem(VAR_0x8007)
         if (var(VAR_RESULT) == TRUE)
@@ -110,6 +110,12 @@ script OverworldEncounters_EventScript_ThrowBall
             dynmultipush("{FONT_NARROW}{STR_VAR_1}", VAR_0x8007)
         }
         addvar(VAR_0x8007, 1)
+    }
+    checkitem(ITEM_STRANGE_BALL)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        bufferitemname(STR_VAR_1, ITEM_STRANGE_BALL)
+        dynmultipush("{FONT_NARROW}{STR_VAR_1}", ITEM_STRANGE_BALL)
     }
     message(format("What type of {FONT_NARROWER}{POKE}BALL {FONT_NORMAL}will {PLAYER} use?"))
     waitmessage

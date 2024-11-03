@@ -120,37 +120,46 @@ OverworldEncounters_EventScript_Fight_5:
 
 
 OverworldEncounters_EventScript_ThrowBall::
-	setvar VAR_0x8007, FIRST_BALL
+	setvar VAR_0x8007, ITEM_POKE_BALL
 OverworldEncounters_EventScript_ThrowBall_2:
-	compare VAR_0x8007, LAST_BALL
+	compare VAR_0x8007, ITEM_CHERISH_BALL
 	goto_if_le OverworldEncounters_EventScript_ThrowBall_3
+	checkitem ITEM_STRANGE_BALL
+	compare VAR_RESULT, TRUE
+	goto_if_eq OverworldEncounters_EventScript_ThrowBall_6
+OverworldEncounters_EventScript_ThrowBall_5:
 	message OverworldEncounters_EventScript_ThrowBall_Text_1
 	waitmessage
 	dynmultistack 0, 0, FALSE, 3, TRUE, 0, DYN_MULTICHOICE_CB_SHOW_ITEM
 	compare VAR_RESULT, MULTI_B_PRESSED
-	goto_if_eq OverworldEncounters_EventScript_ThrowBall_6
+	goto_if_eq OverworldEncounters_EventScript_ThrowBall_12
 	copyvar VAR_0x8007, VAR_RESULT
 	removeitem VAR_0x8007, 1
 	goto OverworldEncounters_EventScript_CatchAttempt
-OverworldEncounters_EventScript_ThrowBall_5:
+OverworldEncounters_EventScript_ThrowBall_11:
 	end
 
 OverworldEncounters_EventScript_ThrowBall_3:
 	checkitem VAR_0x8007
 	compare VAR_RESULT, TRUE
-	goto_if_eq OverworldEncounters_EventScript_ThrowBall_10
-OverworldEncounters_EventScript_ThrowBall_9:
+	goto_if_eq OverworldEncounters_EventScript_ThrowBall_9
+OverworldEncounters_EventScript_ThrowBall_8:
 	addvar VAR_0x8007, 1
 	goto OverworldEncounters_EventScript_ThrowBall_2
 
 OverworldEncounters_EventScript_ThrowBall_6:
-	goto OverworldEncounters_EventScript_Encounter
+	bufferitemname STR_VAR_1, ITEM_STRANGE_BALL
+	dynmultipush OverworldEncounters_EventScript_ThrowBall_Text_0, ITEM_STRANGE_BALL
 	goto OverworldEncounters_EventScript_ThrowBall_5
 
-OverworldEncounters_EventScript_ThrowBall_10:
+OverworldEncounters_EventScript_ThrowBall_9:
 	bufferitemname STR_VAR_1, VAR_0x8007
 	dynmultipush OverworldEncounters_EventScript_ThrowBall_Text_0, VAR_0x8007
-	goto OverworldEncounters_EventScript_ThrowBall_9
+	goto OverworldEncounters_EventScript_ThrowBall_8
+
+OverworldEncounters_EventScript_ThrowBall_12:
+	goto OverworldEncounters_EventScript_Encounter
+	goto OverworldEncounters_EventScript_ThrowBall_11
 
 
 OverworldEncounters_EventScript_Approach::
