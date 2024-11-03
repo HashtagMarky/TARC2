@@ -295,7 +295,7 @@ static const u8 sText_PkmnPreventsPoisoningWith[] = _("{B_EFF_NAME_WITH_PREFIX}'
 static const u8 sText_PkmnPreventsConfusionWith[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY} prevents confusion!"); //not in gen 5+, ability popup
 static const u8 sText_PkmnRaisedFirePowerWith[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY} raised the power of Fire-type moves!"); //not in gen 5+, ability popup
 static const u8 sText_PkmnAnchorsItselfWith[] = _("{B_DEF_NAME_WITH_PREFIX} anchors itself with {B_DEF_ABILITY}!"); //not in gen 5+, ability popup
-static const u8 sText_PkmnCutsAttackWith[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY} cuts {B_DEF_NAME_WITH_PREFIX2}'s attack!"); //not in gen 5+, ability popup
+static const u8 sText_PkmnCutsAttackWith[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY} cuts {B_DEF_NAME_WITH_PREFIX2}'s Attack!"); //not in gen 5+, ability popup
 static const u8 sText_PkmnPreventsStatLossWith[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY} prevents stat loss!"); //not in gen 5+, ability popup
 static const u8 sText_PkmnHurtsWith[] = _("{B_ATK_NAME_WITH_PREFIX} was hurt by {B_DEF_NAME_WITH_PREFIX2}'s {B_BUFF1}!");
 static const u8 sText_PkmnTraced[] = _("It traced {B_BUFF1}'s {B_BUFF2}!");
@@ -767,19 +767,19 @@ static const u8 sText_HealBlockedNoMore[] = _("{B_ATK_NAME_WITH_PREFIX} is cured
 static const u8 sText_AttackerBecameFullyCharged[] = _("{B_ATK_NAME_WITH_PREFIX} became fully charged due to its bond with its trainer!\p");
 static const u8 sText_AttackerBecameAshSpecies[] = _("{B_ATK_NAME_WITH_PREFIX} became Ash-Greninja!\p");
 static const u8 sText_ExtremelyHarshSunlight[] = _("The sunlight turned extremely harsh!");
-static const u8 sText_ExtremeSunlightFaded[] = _("The extremely harsh sunlight faded!{PAUSE 64}");
+static const u8 sText_ExtremeSunlightFaded[] = _("The extremely harsh sunlight faded!");
 static const u8 sText_MoveEvaporatedInTheHarshSunlight[] = _("The Water-type attack evaporated in the extremely harsh sunlight!");
 static const u8 sText_ExtremelyHarshSunlightWasNotLessened[] = _("The extremely harsh sunlight was not lessened at all!");
 static const u8 sText_HeavyRain[] = _("A heavy rain began to fall!");
-static const u8 sText_HeavyRainLifted[] = _("The heavy rain has lifted!{PAUSE 64}");
+static const u8 sText_HeavyRainLifted[] = _("The heavy rain has lifted!");
 static const u8 sText_MoveFizzledOutInTheHeavyRain[] = _("The Fire-type attack fizzled out in the heavy rain!");
 static const u8 sText_NoReliefFromHeavyRain[] = _("There is no relief from this heavy rain!");
 static const u8 sText_MysteriousAirCurrent[] = _("Mysterious strong winds are protecting Flying-type Pokémon!");
-static const u8 sText_StrongWindsDissipated[] = _("The mysterious strong winds have dissipated!{PAUSE 64}");
+static const u8 sText_StrongWindsDissipated[] = _("The mysterious strong winds have dissipated!");
 static const u8 sText_MysteriousAirCurrentBlowsOn[] = _("The mysterious strong winds blow on regardless!");
-static const u8 sText_AttackWeakenedByStrongWinds[] = _("The mysterious strong winds weakened the attack!!");
+static const u8 sText_AttackWeakenedByStrongWinds[] = _("The mysterious strong winds weakened the attack!");
 static const u8 sText_StuffCheeksCantSelect[] = _("It can't use the move because it doesn't have a Berry!\p");
-static const u8 sText_PkmnRevertedToPrimal[] = _("{B_ATK_NAME_WITH_PREFIX}’s Primal Reversion! It reverted to its primal state!");
+static const u8 sText_PkmnRevertedToPrimal[] = _("{B_ATK_NAME_WITH_PREFIX}'s Primal Reversion! It reverted to its primal state!");
 static const u8 sText_ButPokemonCantUseTheMove[] = _("But {B_ATK_NAME_WITH_PREFIX2} can't use the move!");
 static const u8 sText_ButHoopaCantUseIt[] = _("But {B_ATK_NAME_WITH_PREFIX2} can't use it the way it is now!");
 static const u8 sText_BrokeThroughProtection[] = _("It broke through {B_DEF_NAME_WITH_PREFIX2}'s protection!");
@@ -3097,7 +3097,7 @@ u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src)
     u32 dstID = BattleStringExpandPlaceholders(src, gDisplayedStringBattle, sizeof(gDisplayedStringBattle));
     for (j = 1;; j++)
     {
-        strWidth = GetStringLineWidth(0, gDisplayedStringBattle, 0, j, sizeof(gDisplayedStringBattle), TRUE);
+        strWidth = GetStringLineWidth(0, gDisplayedStringBattle, 0, j, sizeof(gDisplayedStringBattle));
         if (strWidth == 0)
             break;
     }
@@ -3164,7 +3164,7 @@ static void GetBattlerNick(u32 battler, u8 *dst)
     }                                                                   \
     GetBattlerNick(battler, text);                                      \
     toCpy = text;                                                       \
-    dstWidth = GetStringLineWidth(fontId, dst, letterSpacing, lineNum, dstSize, FALSE);
+    dstWidth = GetStringLineWidth(fontId, dst, letterSpacing, lineNum, dstSize);
 
 #define HANDLE_NICKNAME_STRING_LOWERCASE(battler)                       \
     if (GetBattlerSide(battler) != B_SIDE_PLAYER)                       \
@@ -3182,7 +3182,7 @@ static void GetBattlerNick(u32 battler, u8 *dst)
     }                                                                   \
     GetBattlerNick(battler, text);                                      \
     toCpy = text;                                                       \
-    dstWidth = GetStringLineWidth(fontId, dst, letterSpacing, lineNum, dstSize, FALSE);
+    dstWidth = GetStringLineWidth(fontId, dst, letterSpacing, lineNum, dstSize);
 
 static const u8 *BattleStringGetOpponentNameByTrainerId(u16 trainerId, u8 *text, u8 multiplayerId, u8 battler)
 {
@@ -3357,7 +3357,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
     while (*src != EOS)
     {
         toCpy = NULL;
-        dstWidth = GetStringLineWidth(fontId, dst, letterSpacing, lineNum, dstSize, FALSE);
+        dstWidth = GetStringLineWidth(fontId, dst, letterSpacing, lineNum, dstSize);
 
         if (*src == PLACEHOLDER_BEGIN)
         {
@@ -3749,12 +3749,12 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
 
             if (toCpy != NULL)
             {
-                toCpyWidth = GetStringLineWidth(fontId, toCpy, letterSpacing, 1, dstSize, FALSE);
+                toCpyWidth = GetStringLineWidth(fontId, toCpy, letterSpacing, 1, dstSize);
 
                 if (dstWidth + toCpyWidth > BATTLE_MSG_MAX_WIDTH)
                 {
                     dst[lastValidSkip] = lineNum == 1 ? CHAR_NEWLINE : CHAR_PROMPT_SCROLL;
-                    dstWidth = GetStringLineWidth(fontId, dst, letterSpacing, lineNum, dstSize, FALSE);
+                    dstWidth = GetStringLineWidth(fontId, dst, letterSpacing, lineNum, dstSize);
                     lineNum++;
                 }
                 while (*toCpy != EOS)
@@ -3776,7 +3776,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
         }
         else
         {
-            toCpyWidth = GetGlyphWidth(dst[dstID + 1], FALSE, fontId);
+            toCpyWidth = GetGlyphWidth(*src, FALSE, fontId);
             dst[dstID] = *src;
             if (dstWidth + toCpyWidth > BATTLE_MSG_MAX_WIDTH)
             {
