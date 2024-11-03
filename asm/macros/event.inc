@@ -2321,3 +2321,14 @@
 	.macro togglefakertc
 	callnative Script_ToggleFakeRtc
 	.endm
+
+	@ Start the S.S. Anne Cutscene, with the localId specified.
+	.macro ssannedeparturecutcene localId:req
+	lockall
+	setvar VAR_0x8004, \localId
+	fadenewbgm MUS_RG_SURF
+	delay 50
+	special DoSSAnneDepartureCutscene
+	waitstate
+	removeobject \localId
+	.endm

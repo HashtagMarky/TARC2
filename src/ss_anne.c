@@ -1,5 +1,6 @@
 #include "global.h"
 #include "task.h"
+#include "event_data.h"
 #include "event_object_movement.h"
 #include "script.h"
 #include "sound.h"
@@ -9,8 +10,6 @@
 
 #define SPRITE_TAG_WAKE  4000
 #define SPRITE_TAG_SMOKE 4001
-
-#define LOCALID_SS_ANNE  1
 
 static void Task_SSAnneInit(u8 taskId);
 static void Task_SSAnneRun(u8 taskId);
@@ -116,7 +115,7 @@ static void Task_SSAnneRun(u8 taskId)
         data[1] = 0;
         CreateSmokeSprite();
     }
-    TryGetObjectEventIdByLocalIdAndMap(LOCALID_SS_ANNE, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
+    TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_0x8004, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     boatObject = &gObjectEvents[objectEventId];
     if (gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 < -190)
     {
@@ -150,7 +149,7 @@ static void CreateWakeBehindBoat(void)
     u16 x;
     u8 spriteId;
 
-    TryGetObjectEventIdByLocalIdAndMap(LOCALID_SS_ANNE, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
+    TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_0x8004, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     boatObject = &gObjectEvents[objectEventId];
     x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 144;
     spriteId = CreateSprite(&sWakeSpriteTemplate, x, 109, 0xFF);
@@ -164,7 +163,7 @@ static void WakeSpriteCallback(struct Sprite *sprite)
     struct ObjectEvent * boatObject;
     u16 x;
 
-    TryGetObjectEventIdByLocalIdAndMap(LOCALID_SS_ANNE, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
+    TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_0x8004, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     boatObject = &gObjectEvents[objectEventId];
     x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 144;
     sprite->x = x;
@@ -182,7 +181,7 @@ static void CreateSmokeSprite(void)
     u16 x;
     u8 spriteId;
 
-    TryGetObjectEventIdByLocalIdAndMap(LOCALID_SS_ANNE, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
+    TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_0x8004, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     boatObject = &gObjectEvents[objectEventId];
     x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 121;
     if ((s16)x >= -32)
