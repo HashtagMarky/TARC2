@@ -118,7 +118,7 @@ static void Task_SSAnneRun(u8 taskId)
     }
     TryGetObjectEventIdByLocalIdAndMap(LOCALID_SS_ANNE, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     boatObject = &gObjectEvents[objectEventId];
-    if (gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 < -120)
+    if (gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 < -190)
     {
         PlaySE(SE_RG_SS_ANNE_HORN);
         gTasks[taskId].func = Task_SSAnneFinish;
@@ -152,7 +152,7 @@ static void CreateWakeBehindBoat(void)
 
     TryGetObjectEventIdByLocalIdAndMap(LOCALID_SS_ANNE, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     boatObject = &gObjectEvents[objectEventId];
-    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 80;
+    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 144;
     spriteId = CreateSprite(&sWakeSpriteTemplate, x, 109, 0xFF);
     gSprites[spriteId].oam.priority = 2;
     gSprites[spriteId].oam.paletteNum = 1;
@@ -166,7 +166,7 @@ static void WakeSpriteCallback(struct Sprite *sprite)
 
     TryGetObjectEventIdByLocalIdAndMap(LOCALID_SS_ANNE, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     boatObject = &gObjectEvents[objectEventId];
-    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 80;
+    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 144;
     sprite->x = x;
     if (sprite->data[0] / 6 < 22)
         sprite->data[0]++;
@@ -184,7 +184,7 @@ static void CreateSmokeSprite(void)
 
     TryGetObjectEventIdByLocalIdAndMap(LOCALID_SS_ANNE, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     boatObject = &gObjectEvents[objectEventId];
-    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 49;
+    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 121;
     if ((s16)x >= -32)
     {
         spriteId = CreateSprite(&sSmokeSpriteTemplate, x, 78, 8);
