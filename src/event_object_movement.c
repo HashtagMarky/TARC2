@@ -519,12 +519,14 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Lugia,                 OBJ_EVENT_PAL_TAG_LUGIA},
     {gObjectEventPal_RubySapphireBrendan,   OBJ_EVENT_PAL_TAG_RS_BRENDAN},
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
+    
+    {gObjectEventPal_SSAnne,                OBJ_EVENT_PAL_TAG_RG_SS_ANNE},
+    
     {gObjectEventPal_Brendan,               OBJ_EVENT_PAL_TAG_RIVAL_BRENDAN},
     {gObjectEventPal_May,                   OBJ_EVENT_PAL_TAG_RIVAL_MAY},
 
     {gObjectEventPalette_Samuel,            OBJ_EVENT_PAL_TAG_SAMUEL},
     {gObjectEventPalette_Lauren,            OBJ_EVENT_PAL_TAG_LAUREN},
-    
 #if OW_FOLLOWERS_POKEBALLS
     {gObjectEventPal_MasterBall,            OBJ_EVENT_PAL_TAG_BALL_MASTER},
     {gObjectEventPal_UltraBall,             OBJ_EVENT_PAL_TAG_BALL_ULTRA},
@@ -9293,6 +9295,10 @@ static void UpdateObjectEventOffscreen(struct ObjectEvent *objectEvent, struct S
 
     if ((s16)y >= DISPLAY_HEIGHT + 16 || (s16)y2 < -16)
         objectEvent->offScreen = TRUE;
+
+    if (objectEvent->graphicsId == OBJ_EVENT_GFX_RG_SS_ANNE)
+        objectEvent->offScreen = FALSE;
+
 }
 
 static void UpdateObjectEventSpriteVisibility(struct ObjectEvent *objectEvent, struct Sprite *sprite)

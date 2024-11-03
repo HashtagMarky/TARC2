@@ -604,6 +604,9 @@ const u16 gObjectEventPal_StrangeBall[] = INCBIN_U16("graphics/object_events/pic
 #endif //ITEM_STRANGE_BALL
 #endif //OW_FOLLOWERS_POKEBALLS
 
+const u16 gObjectEventPal_SSAnne[] = INCBIN_U16("graphics/object_events/palettes/ss_anne.gbapal");
+const u16 gObjectEventPic_SSAnne[] = INCBIN_U16("graphics/object_events/pics/misc/ss_anne.4bpp");
+
 const u32 gObjectEventPic_Samuel[] = INCBIN_U32("graphics/object_events/pics/people/samuel.4bpp");
 const u16 gObjectEventPalette_Samuel[] = INCBIN_U16("graphics/object_events/pics/people/samuel.gbapal");
 const u32 gObjectEventPic_Lauren[] = INCBIN_U32("graphics/object_events/pics/people/lauren.4bpp");
