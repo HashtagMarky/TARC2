@@ -1,0 +1,45 @@
+{
+  "id": "MAP_VYRATON_OUTDOORS_HARBOUR",
+  "name": "VyratonOutdoors_Harbour",
+  "layout": "LAYOUT_VYRATON_HARBOUR",
+  "music": "MUS_PETALBURG",
+  "region_map_section": "MAPSEC_VYRATON",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_CITY",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_ROUTE104",
+      "offset": -50,
+      "direction": "left"
+    },
+    {
+      "map": "MAP_ROUTE102",
+      "offset": 10,
+      "direction": "right"
+    }
+  ],
+  "object_events": [
+
+  ],
+  "warp_events": [
+    {
+      "x": 20,
+      "y": 16,
+      "elevation": 0,
+      "dest_map": "MAP_PETALBURG_CITY_POKEMON_CENTER_1F",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+
+  ]
+}

@@ -4410,6 +4410,26 @@
       "secondary_tileset": "gTileset_MysteryEventsHouse",
       "border_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/border.bin",
       "blockdata_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/map.bin"
+    },
+    {
+      "id": "LAYOUT_VYRATON_HARBOUR",
+      "name": "Vyraton_Harbour_Layout",
+      "width": 30,
+      "height": 30,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/VyratonOutdoors_Harbour/border.bin",
+      "blockdata_filepath": "data/layouts/VyratonOutdoors_Harbour/map.bin"
+    },
+    {
+      "id": "LAYOUT_VYRATON_MAYOR_OFFICE",
+      "name": "Vyraton_MayorsOffice_Layout",
+      "width": 30,
+      "height": 30,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/VyratonIndoors_MayorsOffice/border.bin",
+      "blockdata_filepath": "data/layouts/VyratonIndoors_MayorsOffice/map.bin"
     }
   ]
 }
