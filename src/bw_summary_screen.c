@@ -52,6 +52,7 @@
 #include "constants/songs.h"
 
 #if BW_SUMMARY_SCREEN == TRUE
+/*
 enum BWPSSPage
 {
     PSS_PAGE_INFO,
@@ -60,7 +61,7 @@ enum BWPSSPage
     PSS_PAGE_CONTEST_MOVES,
     PSS_PAGE_COUNT
 };
-
+*/
 enum BWPSSEffect
 {
     PSS_EFFECT_BATTLE,
