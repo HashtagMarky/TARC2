@@ -4417,7 +4417,7 @@
       "width": 30,
       "height": 30,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
+      "secondary_tileset": "gTileset_Slateport",
       "border_filepath": "data/layouts/VyratonOutdoors_Harbour/border.bin",
       "blockdata_filepath": "data/layouts/VyratonOutdoors_Harbour/map.bin"
     },
