@@ -160,7 +160,7 @@ static void CreateWakeBehindBoat(void)
 
     TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_0x8004, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     boatObject = &gObjectEvents[objectEventId];
-    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 144;
+    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 128;
     spriteId = CreateSprite(&sWakeSpriteTemplate, x, 109, 0xFF);
     gSprites[spriteId].oam.priority = 2;
 }
@@ -173,7 +173,7 @@ static void WakeSpriteCallback(struct Sprite *sprite)
 
     TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_0x8004, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     boatObject = &gObjectEvents[objectEventId];
-    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 144;
+    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 128;
     sprite->x = x;
     if (sprite->data[0] / 6 < 22)
         sprite->data[0]++;
@@ -191,7 +191,7 @@ static void CreateSmokeSprite(void)
 
     TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_0x8004, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     boatObject = &gObjectEvents[objectEventId];
-    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 121;
+    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 105;
     if ((s16)x >= -32)
         spriteId = CreateSprite(&sSmokeSpriteTemplate, x, 78, 8);
 }

@@ -2898,32 +2898,32 @@ static const struct SubspriteTable sOamTables_48x48[] = {
 
 static const struct Subsprite sOamTable_128x64_0[] = {
     {
-        .x = -32,
-        .y = -16,
+        .x = -64,
+        .y = -32,
         .shape = SPRITE_SHAPE(64x32),
         .size = SPRITE_SIZE(64x32),
         .tileOffset = 0,
         .priority = 2
     },
     {
-        .x = 32,
-        .y = -16,
+        .x = 0,
+        .y = -32,
         .shape = SPRITE_SHAPE(64x32),
         .size = SPRITE_SIZE(64x32),
         .tileOffset = 32,
         .priority = 2
     },
     {
-        .x = -32,
-        .y = 16,
+        .x = -64,
+        .y = 0,
         .shape = SPRITE_SHAPE(64x32),
         .size = SPRITE_SIZE(64x32),
         .tileOffset = 64,
         .priority = 2
     },
     {
-        .x = 32,
-        .y = 16,
+        .x = 0,
+        .y = 0,
         .shape = SPRITE_SHAPE(64x32),
         .size = SPRITE_SIZE(64x32),
         .tileOffset = 96,
@@ -2933,32 +2933,32 @@ static const struct Subsprite sOamTable_128x64_0[] = {
 
 static const struct Subsprite sOamTable_128x64_1[] = {
     {
-        .x = -32,
-        .y = -16,
+        .x = -64,
+        .y = -32,
         .shape = SPRITE_SHAPE(64x32),
         .size = SPRITE_SIZE(64x32),
         .tileOffset = 0,
         .priority = 1
     },
     {
-        .x = 32,
-        .y = -16,
+        .x = 0,
+        .y = -32,
         .shape = SPRITE_SHAPE(64x32),
         .size = SPRITE_SIZE(64x32),
         .tileOffset = 32,
         .priority = 1
     },
     {
-        .x = -32,
-        .y = 16,
+        .x = -64,
+        .y = 0,
         .shape = SPRITE_SHAPE(64x32),
         .size = SPRITE_SIZE(64x32),
         .tileOffset = 64,
         .priority = 1
     },
     {
-        .x = 32,
-        .y = 16,
+        .x = 0,
+        .y = 0,
         .shape = SPRITE_SHAPE(64x32),
         .size = SPRITE_SIZE(64x32),
         .tileOffset = 96,
@@ -2968,32 +2968,32 @@ static const struct Subsprite sOamTable_128x64_1[] = {
 
 static const struct Subsprite sOamTable_128x64_2[] = {
     {
-        .x = -32,
-        .y = -16,
+        .x = -64,
+        .y = -32,
         .shape = SPRITE_SHAPE(64x32),
         .size = SPRITE_SIZE(64x32),
         .tileOffset = 0,
         .priority = 1
     },
     {
-        .x = 32,
-        .y = -16,
+        .x = 0,
+        .y = -32,
         .shape = SPRITE_SHAPE(64x32),
         .size = SPRITE_SIZE(64x32),
         .tileOffset = 32,
         .priority = 1
     },
     {
-        .x = -32,
-        .y = 16,
+        .x = -64,
+        .y = 0,
         .shape = SPRITE_SHAPE(64x32),
         .size = SPRITE_SIZE(64x32),
         .tileOffset = 64,
         .priority = 2
     },
     {
-        .x = 32,
-        .y = 16,
+        .x = 0,
+        .y = 0,
         .shape = SPRITE_SHAPE(64x32),
         .size = SPRITE_SIZE(64x32),
         .tileOffset = 96,
