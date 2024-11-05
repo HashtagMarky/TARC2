@@ -51,6 +51,8 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+#include "ikigai_scrolling_background.h"
+
 #if BW_SUMMARY_SCREEN == TRUE
 /*
 enum BWPSSPage
@@ -373,6 +375,7 @@ static void BufferAndPrintStats_HandleState(u8);
 static void SetFriendshipSprite(void);
 static void TrySetInfoPageIcons(void);
 static void RunMonAnimTimer(void);
+static void UpdateScrollingBackgroundPal(void);
 
 // const rom data
 
@@ -1738,8 +1741,7 @@ static void VBlank(void)
     TransferPlttBuffer();
     if (BW_SUMMARY_SCROLLING_BG)
     {
-        ChangeBgX(3, 64, BG_COORD_ADD);
-        ChangeBgY(3, 64, BG_COORD_ADD);
+        StartScrollingBackground(3, BG_COORD_SUB);
     }
     if (BW_SUMMARY_MON_IDLE_ANIMS && !sMonSummaryScreen->summary.isEgg)
     {
@@ -2005,6 +2007,7 @@ static bool8 DecompressGraphics(void)
         break;
     case 8:
         LoadCompressedPalette(sSummaryScreen_Pal_BW, BG_PLTT_ID(0), 8 * PLTT_SIZE_4BPP);
+        UpdateScrollingBackgroundPal();
         LoadPalette(&sSummaryScreen_PPTextPalette_BW, BG_PLTT_ID(8) + 1, PLTT_SIZEOF(16 - 1));
         sMonSummaryScreen->switchCounter++;
         break;
@@ -5332,6 +5335,19 @@ static void FormatTextByWidth(u8 *result, s32 maxWidth, u8 fontId, const u8 *str
             ptr++;
         // now ptr is the next EOS char
     }
+}
+
+static void UpdateScrollingBackgroundPal(void)
+{
+    const u16 *ikigaiScrollingBgPal = ReturnScrollingBackgroundPalette();
+    u16 colorDark = ikigaiScrollingBgPal[1];
+    u16 colorMedium = ikigaiScrollingBgPal[2];
+    u16 colorLight = ikigaiScrollingBgPal[3];
+
+    LoadPalette(&colorDark, BG_PLTT_ID(0) + 14, sizeof(colorDark));
+    LoadPalette(&colorMedium, BG_PLTT_ID(0) + 13, sizeof(colorMedium));
+    LoadPalette(&colorLight, BG_PLTT_ID(0) + 11, sizeof(colorLight));
+
 }
 
 #endif
