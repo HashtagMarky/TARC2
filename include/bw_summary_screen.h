@@ -34,6 +34,7 @@
 #define BW_SUMMARY_SHOW_CONTEST_MOVES               TRUE                // show the contest moves page
 
 #define B_EXPANDED_MOVE_NAMES                       TRUE                // Removed in expansion, always set to TRUE
+#define BW_DEOKISHISU_ABILITY_DESCRIPTIONS          TRUE                // Use reformatted ability descriptions by Deokishisu
 
 /* Info for users
 

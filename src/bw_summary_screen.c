@@ -52,6 +52,7 @@
 #include "constants/songs.h"
 
 #include "ikigai_scrolling_background.h"
+#include "data/b_summary_screen.h"
 
 #if BW_SUMMARY_SCREEN == TRUE
 /*
@@ -3889,7 +3890,10 @@ static void PrintMonAbilityName(void)
 static void PrintMonAbilityDescription(void)
 {
     u16 ability = GetAbilityBySpecies(sMonSummaryScreen->summary.species, sMonSummaryScreen->summary.abilityNum);
-    PrintTextOnWindow_BW_Font(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_ABILITY), gAbilitiesInfo[ability].description, 4, 15, 0, 0);
+    if (BW_DEOKISHISU_ABILITY_DESCRIPTIONS == TRUE && sDeokishisuAbilitiesInfo[ability].description != NULL)
+        PrintTextOnWindow_BW_Font(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_ABILITY), sDeokishisuAbilitiesInfo[ability].description, 4, 15, 0, 0);
+    else
+        PrintTextOnWindow_BW_Font(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_ABILITY), gAbilitiesInfo[ability].description, 4, 15, 0, 0);
 }
 
 static void BufferMonTrainerMemo(void)
