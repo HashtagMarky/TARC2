@@ -634,7 +634,7 @@ static const u8 sText_TopBar_Battle[]           = _("BATTLE");
 static const u8 sText_TopBar_Battle_Left[]      = _("{L_BUTTON}OVERWORLD");
 static void DrawTopBarText(void)
 {
-    const u8 color[3] = { 0, TEXT_COLOR_WHITE, TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG };
+    const u8 color[3] = { 0, TEXT_COLOR_WHITE, TEXT_COLOR_OPTIONS_GRAY_FG };
 
     FillWindowPixelBuffer(WIN_TOPBAR, PIXEL_FILL(0));
     switch (sOptions->submenu)
@@ -705,7 +705,8 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
     u8 color_red[3];
     u8 color_gray[3];
     const u16 *selectedColorPal = ReturnMenuUIPalette();
-    u16 selectedTextColor = selectedColorPal[2];
+    u16 selectedTextColor = selectedColorPal[1];
+    u16 selectedShadowColor = selectedColorPal[2];
 
     if (active)
     {
@@ -733,6 +734,7 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
         if (!active)
         {
             LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_gray[1], sizeof(selectedTextColor));
+            LoadPalette(&selectedShadowColor, OPTIONS_TEXT_OFFSET + color_gray[2], sizeof(selectedShadowColor));
         }
     }
     else
@@ -741,6 +743,7 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
         if (active)
         {
             LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_red[1], sizeof(selectedTextColor));
+            LoadPalette(&selectedShadowColor, OPTIONS_TEXT_OFFSET + color_red[2], sizeof(selectedShadowColor));
         }
     }
 }
