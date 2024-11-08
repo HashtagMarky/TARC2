@@ -37,6 +37,7 @@ enum
     MENUITEM_MAIN_BUTTONMODE,
     MENUITEM_MAIN_SOUND,
     MENUITEM_MAIN_UNIT_SYSTEM,
+    MENUITEM_MAIN_CLOCK_MODE,
     MENUITEM_MAIN_FRAMETYPE,
     MENUITEM_MAIN_TITLE_SCREEN,
     MENUITEM_MAIN_CANCEL,
@@ -198,6 +199,7 @@ static void DrawChoices_ButtonMode(int selection, int y);
 static void DrawChoices_BarSpeed(int selection, int y); //HP and EXP
 static void DrawChoices_BattleSpeed(int selection, int y);
 static void DrawChoices_UnitSystem(int selection, int y);
+static void DrawChoices_ClockMode(int selection, int y);
 static void DrawChoices_Font(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_Interface(int selection, int y);
@@ -251,6 +253,7 @@ struct // MENU_MAIN
     [MENUITEM_MAIN_SOUND]           = {DrawChoices_Sound,       ProcessInput_Sound},
     [MENUITEM_MAIN_BUTTONMODE]      = {DrawChoices_ButtonMode,  ProcessInput_Options_Three},
     [MENUITEM_MAIN_UNIT_SYSTEM]     = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
+    [MENUITEM_MAIN_CLOCK_MODE]      = {DrawChoices_ClockMode,   ProcessInput_Options_Two},
     [MENUITEM_MAIN_FRAMETYPE]       = {DrawChoices_Interface,   ProcessInput_Interface},
     [MENUITEM_MAIN_TITLE_SCREEN]    = {DrawChoices_TitleScreen, ProcessInput_Options_Two},
     [MENUITEM_MAIN_CANCEL]          = {NULL, NULL},
@@ -305,6 +308,7 @@ static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
     [MENUITEM_MAIN_SOUND]           = gText_Sound,
     [MENUITEM_MAIN_BUTTONMODE]      = gText_ButtonMode,
     [MENUITEM_MAIN_UNIT_SYSTEM]     = sText_UnitSystem,
+    [MENUITEM_MAIN_CLOCK_MODE]      = COMPOUND_STRING("CLOCK MODE"),
     [MENUITEM_MAIN_FRAMETYPE]       = COMPOUND_STRING("INTERFACE"),
     [MENUITEM_MAIN_TITLE_SCREEN]    = sText_TitleScreen,
     [MENUITEM_MAIN_CANCEL]          = gText_OptionMenuSave,
@@ -394,6 +398,7 @@ static bool8 CheckConditions(int selection)
         case MENUITEM_MAIN_SOUND:           return TRUE;
         case MENUITEM_MAIN_BUTTONMODE:      return TRUE;
         case MENUITEM_MAIN_UNIT_SYSTEM:     return TRUE;
+        case MENUITEM_MAIN_CLOCK_MODE:      return TRUE;
         case MENUITEM_MAIN_FRAMETYPE:       return TRUE;
         case MENUITEM_MAIN_TITLE_SCREEN:    return TRUE;
         case MENUITEM_MAIN_CANCEL:          return TRUE;
@@ -462,6 +467,7 @@ static const u8 sText_Desc_MugshotFollowerOff[]         = _("Hide following POKÃ
 static const u8 sText_Desc_TitleScreenMatch[]           = _("Title screen legendary matches choice\nof interface, if available.");
 static const u8 sText_Desc_TitleScreenRandom[]          = _("Title screen legendary is randomised.");
 static const u8 sText_Desc_DamageNumbers[]              = _("Whether damage numbers are shown in\nbattle and when they appear.");
+static const u8 sText_Desc_ClockMode[]                  = _("Choose which mode of clock is used.");
 
 // Disabled Descriptions
 static const u8 sText_Desc_Disabled_Textspeed[]     = _("Only active if xyz.");
@@ -476,6 +482,7 @@ static const u8 *const sOptionMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
     [MENUITEM_MAIN_SOUND]           = {sText_Desc_SoundMono,            sText_Desc_SoundStereo,         sText_Empty},
     [MENUITEM_MAIN_BUTTONMODE]      = {sText_Desc_ButtonMode,           sText_Desc_ButtonMode_LR,       sText_Desc_ButtonMode_LA},
     [MENUITEM_MAIN_UNIT_SYSTEM]     = {sText_Desc_UnitSystemImperial,   sText_Desc_UnitSystemMetric,    sText_Empty},
+    [MENUITEM_MAIN_CLOCK_MODE]      = {sText_Desc_ClockMode,            sText_Empty,                    sText_Empty},
     [MENUITEM_MAIN_FRAMETYPE]       = {sText_Desc_FrameType,            sText_Empty,                    sText_Empty},
     [MENUITEM_MAIN_TITLE_SCREEN]    = {sText_Desc_TitleScreenMatch,     sText_Desc_TitleScreenRandom,   sText_Empty},
     [MENUITEM_MAIN_CANCEL]          = {sText_Desc_Save,                 sText_Empty,                    sText_Empty},
@@ -508,6 +515,7 @@ static const u8 *const sOptionMenuItemDescriptionsDisabledMain[MENUITEM_MAIN_COU
     [MENUITEM_MAIN_SOUND]           = sText_Empty,
     [MENUITEM_MAIN_BUTTONMODE]      = sText_Empty,
     [MENUITEM_MAIN_UNIT_SYSTEM]     = sText_Empty,
+    [MENUITEM_MAIN_CLOCK_MODE]      = sText_Empty,
     [MENUITEM_MAIN_FRAMETYPE]       = sText_Empty,
     [MENUITEM_MAIN_TITLE_SCREEN]    = sText_Empty,
     [MENUITEM_MAIN_CANCEL]          = sText_Empty,
@@ -559,7 +567,7 @@ static const u8 *const OptionTextDescription(void)
         if (!CheckConditions(menuItem))
             return sOptionMenuItemDescriptionsDisabledMain[menuItem];
         selection = sOptions->sel[menuItem];
-        if (menuItem == MENUITEM_MAIN_TEXTSPEED || menuItem == MENUITEM_MAIN_FRAMETYPE)
+        if (menuItem == MENUITEM_MAIN_TEXTSPEED || menuItem == MENUITEM_MAIN_FRAMETYPE || menuItem == MENUITEM_MAIN_CLOCK_MODE)
             selection = 0;
         return sOptionMenuItemDescriptionsMain[menuItem][selection];
     case MENU_OVERWORLD:
@@ -881,6 +889,7 @@ void CB2_InitOptionPlusMenu(void)
         sOptions->sel[MENUITEM_MAIN_SOUND]                      = gSaveBlock2Ptr->optionsSound;
         sOptions->sel[MENUITEM_MAIN_BUTTONMODE]                 = gSaveBlock2Ptr->optionsButtonMode;
         sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM]                = gSaveBlock2Ptr->optionsUnitSystem;
+        sOptions->sel[MENUITEM_MAIN_CLOCK_MODE]                 = gSaveBlock2Ptr->optionsClockMode;
         sOptions->sel[MENUITEM_MAIN_FRAMETYPE]                  = gSaveBlock2Ptr->optionsInterfaceColor;
         sOptions->sel[MENUITEM_MAIN_TITLE_SCREEN]               = gSaveBlock2Ptr->optionsTitleScreenRandomise;
         
@@ -1114,6 +1123,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsSound                    = sOptions->sel[MENUITEM_MAIN_SOUND];
     gSaveBlock2Ptr->optionsButtonMode               = sOptions->sel[MENUITEM_MAIN_BUTTONMODE];
     gSaveBlock2Ptr->optionsUnitSystem               = sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM];
+    gSaveBlock2Ptr->optionsClockMode                = sOptions->sel[MENUITEM_MAIN_CLOCK_MODE];
     gSaveBlock2Ptr->optionsInterfaceColor           = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
     gSaveBlock2Ptr->optionsTitleScreenRandomise     = sOptions->sel[MENUITEM_MAIN_TITLE_SCREEN];
 
@@ -1506,6 +1516,20 @@ static void DrawChoices_UnitSystem(int selection, int y)
 
     DrawOptionMenuChoice(gText_UnitSystemMetric, 104, y, styles[1], active);
     DrawOptionMenuChoice(gText_UnitSystemImperial, GetStringRightAlignXOffset(1, gText_UnitSystemImperial, 198), y, styles[0], active);
+}
+
+static void DrawChoices_ClockMode(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_MAIN_CLOCK_MODE);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    if (selection == 0)
+        DrawOptionMenuChoice(COMPOUND_STRING("12"), 104, y, 1, active);
+    else
+        DrawOptionMenuChoice(COMPOUND_STRING("24"), 104, y, 1, active);
+
+    DrawOptionMenuChoice(COMPOUND_STRING("HOUR"), 119, y, 0, active);
 }
 
 static void DrawChoices_FrameType(int selection, int y)
