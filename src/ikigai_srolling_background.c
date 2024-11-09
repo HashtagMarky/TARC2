@@ -21,14 +21,11 @@ static const u16 IkigaiMainUIPal_Orange[] = INCBIN_U16("graphics/ikigai_scrollin
 static const u16 IkigaiMainUIPal_Pink[] = INCBIN_U16("graphics/ikigai_scrolling_background/main_tiles_pink.gbapal");
 
 #define SCROLLING_SPEED         64
-#define SCROLL_X_DIRECTION      1
-#define SCROLL_Y_DIRECTION      -1
-// Positive Direction is RIGHT/DOWN
 
-void StartScrollingBackground(u8 background, u8 op)
+void StartIkigaiScrollingBackground(u8 background)
 {
-    ChangeBgX(background, SCROLLING_SPEED * SCROLL_X_DIRECTION, op);
-    ChangeBgY(background, SCROLLING_SPEED * SCROLL_Y_DIRECTION, op);
+    ChangeBgX(background, SCROLLING_SPEED, BG_COORD_SUB);
+    ChangeBgY(background, SCROLLING_SPEED, BG_COORD_ADD);
 }
 
 const u16 *ReturnScrollingBackgroundPalette(void)

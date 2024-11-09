@@ -370,7 +370,7 @@ static void MainMenu_VBlankCB(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    StartScrollingBackground(2, BG_COORD_SUB);
+    StartIkigaiScrollingBackground(2);
 }
 
 //

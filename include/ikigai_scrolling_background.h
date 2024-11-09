@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-void StartScrollingBackground(u8 background, u8 op);
+void StartIkigaiScrollingBackground(u8 background);
 extern const u16 *ReturnScrollingBackgroundPalette(void);
 extern const u16 *ReturnScrollingBackgroundGymPalette(void);
 extern const u16 *ReturnMenuUIPalette(void);

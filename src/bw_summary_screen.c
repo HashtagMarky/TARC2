@@ -1742,7 +1742,7 @@ static void VBlank(void)
     TransferPlttBuffer();
     if (BW_SUMMARY_SCROLLING_BG)
     {
-        StartScrollingBackground(3, BG_COORD_SUB);
+        StartIkigaiScrollingBackground(3);
     }
     if (BW_SUMMARY_MON_IDLE_ANIMS && !sMonSummaryScreen->summary.isEgg)
     {

@@ -622,7 +622,7 @@ static void VBlankCB(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    StartScrollingBackground(3, BG_COORD_SUB);
+    StartIkigaiScrollingBackground(3);
 }
 
 static const u8 sText_TopBar_Main[]             = _("GENERAL");
