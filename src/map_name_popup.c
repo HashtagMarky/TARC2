@@ -23,6 +23,8 @@
 #include "config/general.h"
 #include "config/overworld.h"
 
+#include "ikigai_scrolling_background.h"
+
 // enums
 enum MapPopUp_Themes
 {
@@ -43,6 +45,7 @@ enum MapPopUp_Themes_BW
 static void Task_MapNamePopUpWindow(u8 taskId);
 static void ShowMapNamePopUpWindow(void);
 static void LoadMapNamePopUpWindowBg(void);
+static void LoadIkigaiMapPopupPal(void);
 
 // EWRAM
 EWRAM_DATA u8 gPopupTaskId = 0;
@@ -632,6 +635,7 @@ static void LoadMapNamePopUpWindowBg(void)
                 else
                     LoadPalette(sMapPopUpTilesPalette_BW_Black, BG_PLTT_ID(14), sizeof(sMapPopUpTilesPalette_BW_Black));
 
+                LoadIkigaiMapPopupPal();
                 CopyToWindowPixelBuffer(popupWindowId, sMapPopUpTilesPrimary_BW, sizeof(sMapPopUpTilesPrimary_BW), 0);
                 CopyToWindowPixelBuffer(secondaryPopUpWindowId, sMapPopUpTilesSecondary_BW, sizeof(sMapPopUpTilesSecondary_BW), 0);
                 break;
@@ -652,4 +656,26 @@ static void LoadMapNamePopUpWindowBg(void)
             LoadPalette(sMapPopUp_PaletteTable[popUpThemeId], BG_PLTT_ID(14), sizeof(sMapPopUp_PaletteTable[0]));
         BlitBitmapToWindow(popupWindowId, sMapPopUp_Table[popUpThemeId], 0, 0, 80, 24);
     }
+}
+
+static void LoadIkigaiMapPopupPal(void)
+{
+    const u16 *ikigaiScrollingBgPal = ReturnScrollingBackgroundPalette();
+    const u16 *ikigaiMenuUIPal = ReturnMenuUIPalette();
+    u16 colorDarkest = ikigaiScrollingBgPal[2];
+    u16 colorDark = ikigaiMenuUIPal[1];
+    u16 colorMedium = ikigaiMenuUIPal[2];
+    u16 colorLight = ikigaiMenuUIPal[3];
+    u16 colorLightest = ikigaiMenuUIPal[4];
+
+    LoadPalette(&colorDarkest, BG_PLTT_ID(14) + 0, sizeof(colorDarkest));
+    LoadPalette(&colorDarkest, BG_PLTT_ID(14) + 1, sizeof(colorDarkest));
+    LoadPalette(&colorDarkest, BG_PLTT_ID(14) + 4, sizeof(colorDarkest));
+    LoadPalette(&colorDarkest, BG_PLTT_ID(14) + 14, sizeof(colorDarkest));
+    LoadPalette(&colorDarkest, BG_PLTT_ID(14) + 15, sizeof(colorDarkest));
+
+    LoadPalette(&colorDark, BG_PLTT_ID(14) + 10, sizeof(colorDark));
+    LoadPalette(&colorMedium, BG_PLTT_ID(14) + 11, sizeof(colorMedium));
+    LoadPalette(&colorLight, BG_PLTT_ID(14) + 12, sizeof(colorLight));
+    LoadPalette(&colorLightest, BG_PLTT_ID(14) + 13, sizeof(colorLightest));
 }
