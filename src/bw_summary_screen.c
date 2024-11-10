@@ -376,7 +376,8 @@ static void BufferAndPrintStats_HandleState(u8);
 static void SetFriendshipSprite(void);
 static void TrySetInfoPageIcons(void);
 static void RunMonAnimTimer(void);
-static void UpdateScrollingBackgroundPal(void);
+static void UpdateIkigaiBackgroundPal(void);
+static const struct SpritePalette *ReturnMoveSelectorPalette(void);
 
 // const rom data
 
@@ -1476,12 +1477,6 @@ static const struct CompressedSpriteSheet sMoveSelectorSpriteSheet =
     .tag = TAG_MOVE_SELECTOR
 };
 
-static const struct CompressedSpritePalette sMoveSelectorSpritePal =
-{
-    .data = sSummaryMoveSelect_Pal_BW,
-    .tag = TAG_MOVE_SELECTOR
-};
-
 static const struct SpriteTemplate sMoveSelectorSpriteTemplate =
 {
     .tileTag = TAG_MOVE_SELECTOR,
@@ -2008,7 +2003,7 @@ static bool8 DecompressGraphics(void)
         break;
     case 8:
         LoadCompressedPalette(sSummaryScreen_Pal_BW, BG_PLTT_ID(0), 8 * PLTT_SIZE_4BPP);
-        UpdateScrollingBackgroundPal();
+        UpdateIkigaiBackgroundPal();
         LoadPalette(&sSummaryScreen_PPTextPalette_BW, BG_PLTT_ID(8) + 1, PLTT_SIZEOF(16 - 1));
         sMonSummaryScreen->switchCounter++;
         break;
@@ -2037,7 +2032,7 @@ static bool8 DecompressGraphics(void)
         sMonSummaryScreen->switchCounter++;
         break;
     case 15:
-        LoadCompressedSpritePalette(&sMoveSelectorSpritePal);
+        LoadSpritePalette(ReturnMoveSelectorPalette());
         sMonSummaryScreen->switchCounter++;
         break;
     case 16:
@@ -5341,7 +5336,7 @@ static void FormatTextByWidth(u8 *result, s32 maxWidth, u8 fontId, const u8 *str
     }
 }
 
-static void UpdateScrollingBackgroundPal(void)
+static void UpdateIkigaiBackgroundPal(void)
 {
     const u16 *ikigaiScrollingBgPal = ReturnScrollingBackgroundPalette();
     u16 colorDark = ikigaiScrollingBgPal[1];
@@ -5352,6 +5347,22 @@ static void UpdateScrollingBackgroundPal(void)
     LoadPalette(&colorMedium, BG_PLTT_ID(0) + 13, sizeof(colorMedium));
     LoadPalette(&colorLight, BG_PLTT_ID(0) + 11, sizeof(colorLight));
 
+    const u16 *ikigaiMenuUIPal = ReturnMenuUIPalette();
+    u16 colorDarker = ikigaiMenuUIPal[2];
+    u16 colorLighter = ikigaiMenuUIPal[4];
+
+    LoadPalette(&colorDarker, BG_PLTT_ID(0) + 9, sizeof(colorDarker));
+    LoadPalette(&colorLighter, BG_PLTT_ID(0) + 5, sizeof(colorLighter));
+}
+
+static const struct SpritePalette *ReturnMoveSelectorPalette(void)
+{
+    static struct SpritePalette palMoveSelector;
+
+    palMoveSelector.data = ReturnMenuUIPalette();
+    palMoveSelector.tag = TAG_MOVE_SELECTOR;
+
+    return &palMoveSelector;
 }
 
 #endif
