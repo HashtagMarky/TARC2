@@ -6047,14 +6047,3 @@ u16 GetEligiblePokedexCount(u8 caseID)
     }
     return count;
 }
-
-u16 GetBaseStatTotal(u16 species)
-{
-    species = SanitizeSpeciesId(species);
-    return gSpeciesInfo[species].baseHP
-        + gSpeciesInfo[species].baseAttack
-        + gSpeciesInfo[species].baseDefense
-        + gSpeciesInfo[species].baseSpeed
-        + gSpeciesInfo[species].baseSpAttack
-        + gSpeciesInfo[species].baseSpDefense;
-}

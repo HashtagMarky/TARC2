@@ -1,6 +1,7 @@
 	.align 2
 gCryTable::
 .if (P_CRIES_GENERIC == TRUE && P_CRIES_ENABLED == FALSE)
+	cry Cry_Generic_Smallest
 	cry Cry_Generic_Small
 	cry Cry_Generic_Medium
 	cry Cry_Generic_Large
@@ -2436,6 +2437,7 @@ gCryTable::
 	.align 2
 gCryTable_Reverse::
 .if (P_CRIES_GENERIC == TRUE && P_CRIES_ENABLED == FALSE)
+	cry_reverse Cry_Generic_Smallest
 	cry_reverse Cry_Generic_Small
 	cry_reverse Cry_Generic_Medium
 	cry_reverse Cry_Generic_Large

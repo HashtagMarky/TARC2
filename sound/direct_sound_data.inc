@@ -388,6 +388,10 @@ DirectSoundWaveData_unknown_17::
 
 .if (P_CRIES_GENERIC == TRUE && P_CRIES_ENABLED == FALSE)
 	.align 2
+Cry_Generic_Smallest::
+	.incbin "sound/direct_sound_samples/cries/caterpie.bin"
+
+	.align 2
 Cry_Generic_Small::
 	.incbin "sound/direct_sound_samples/cries/machop.bin"
 

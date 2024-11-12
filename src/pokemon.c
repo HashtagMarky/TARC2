@@ -7047,7 +7047,11 @@ u16 GetCryIdBySpecies(u16 species)
 {
     species = SanitizeSpeciesId(species);
     #if (P_CRIES_GENERIC && P_CRIES_ENABLED == FALSE)
-        if (GetBaseStatTotal(species) <= BST_SMALL)
+        if (GetBaseStatTotal(species) <= BST_TINY)
+        {
+            return CRY_GENERIC_SMALLEST;
+        }
+        else if (GetBaseStatTotal(species) <= BST_SMALL)
         {
             return CRY_GENERIC_SMALL;
         }
@@ -7144,4 +7148,15 @@ u32 CheckDynamicMoveType(struct Pokemon *mon, u32 move, u32 battler)
     if (moveType != TYPE_NONE)
         return moveType;
     return gMovesInfo[move].type;
+}
+
+u16 GetBaseStatTotal(u16 species)
+{
+    species = SanitizeSpeciesId(species);
+    return gSpeciesInfo[species].baseHP
+        + gSpeciesInfo[species].baseAttack
+        + gSpeciesInfo[species].baseDefense
+        + gSpeciesInfo[species].baseSpeed
+        + gSpeciesInfo[species].baseSpAttack
+        + gSpeciesInfo[species].baseSpDefense;
 }
