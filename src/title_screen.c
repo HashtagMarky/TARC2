@@ -25,6 +25,9 @@
 #include "save.h"
 #include "sound_check_menu.h"
 
+#define MUS_TITLE_SCREEN MUS_HG_VS_HO_OH
+#define IKIGAI_GREETING_VOICE TRUE
+
 enum {
     TAG_VERSION = 1000,
     TAG_PRESS_START_COPYRIGHT,
@@ -866,7 +869,7 @@ void CB2_InitTitleScreen(void)
                                     | DISPCNT_OBJ_ON
                                     | DISPCNT_WIN0_ON
                                     | DISPCNT_OBJWIN_ON);
-        m4aSongNumStart(MUS_TITLE);
+        m4aSongNumStart(MUS_TITLE_SCREEN);
         gMain.state = 5;
         break;
     case 5:
@@ -930,7 +933,7 @@ static void Task_TitleScreenPhase1(u8 taskId)
         spriteId = CreateSprite(&sVersionBannerRightSpriteTemplate, VERSION_BANNER_RIGHT_X, VERSION_BANNER_Y, 0);
         gSprites[spriteId].sParentTaskId = taskId;
 
-        gTasks[taskId].tCounter = 144;
+        gTasks[taskId].tCounter = 168;
         gTasks[taskId].func = Task_TitleScreenPhase2;
     }
 }
@@ -971,7 +974,8 @@ static void Task_TitleScreenPhase2(u8 taskId)
         CreatePressStartBanner(START_BANNER_X, START_BANNER_Y);
         CreateCopyrightBanner(START_COPYRIGHT_X, START_COPYRIGHT_Y);
         CreateSprite(&sIkigaiVersionSpriteTemplate, IKIGAI_VERSION_NUMBER_X, IKIGAI_VERSION_NUMBER_Y, 0);
-        PlayVoiceLine(VOICE_NARRATER, VOICELINE_GREETING, 0xFF, 194);
+        if (IKIGAI_GREETING_VOICE)
+            PlayVoiceLine(VOICE_NARRATER, VOICELINE_GREETING, 0xFF, 194);
         gTasks[taskId].tBg1Y = 0;
         gTasks[taskId].func = Task_TitleScreenPhase3;
     }
