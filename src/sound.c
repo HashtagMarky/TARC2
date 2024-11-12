@@ -503,6 +503,8 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     case CRY_MODE_WEAK:
         pitch = 15000;
         break;
+    case CRY_MODE_RHH_INTRO:
+        break;
     }
 
     SetPokemonCryVolume(volume);
