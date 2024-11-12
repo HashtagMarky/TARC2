@@ -21,5 +21,6 @@ u8* ConvertMonWeightToString(u32 weight);
 void ShowPokedexHeaderMessage(void);
 void HidePokedexHeaderMessage(void);
 u16 GetEligiblePokedexCount(u8 caseID);
+u16 GetBaseStatTotal(u16 species);
 
 #endif // GUARD_POKEDEX_H

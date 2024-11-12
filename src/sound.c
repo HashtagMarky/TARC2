@@ -514,6 +514,14 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     SetPokemonCryChorus(chorus);
     SetPokemonCryPriority(priority);
 
+    #if (P_CRIES_GENERIC && P_CRIES_ENABLED == FALSE)
+    if (mode == CRY_MODE_RHH_INTRO)
+    {
+        gMPlay_PokemonCry = SetPokemonCryTone(reverse ? &gCryTable_Reverse[CRY_RHH_INTRO - 1] : &gCryTable[CRY_RHH_INTRO - 1]);
+        return;
+    }
+    #endif //(P_CRIES_GENERIC && P_CRIES_ENABLED == FALSE)
+
     species = GetCryIdBySpecies(species);
     if (species != CRY_NONE)
     {

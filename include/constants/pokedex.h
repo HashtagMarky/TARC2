@@ -1341,4 +1341,8 @@ enum
     FLAG_SET_CAUGHT
 };
 
+#define BST_SMALL   400
+#define BST_MEDIUM  500
+#define BST_LARGE   600
+
 #endif // GUARD_CONSTANTS_POKEDEX_H
