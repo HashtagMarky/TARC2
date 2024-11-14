@@ -8,6 +8,7 @@
 #include "constants/cries.h"
 #include "constants/songs.h"
 #include "task.h"
+#include <math.h>
 
 struct Fanfare
 {
@@ -34,6 +35,11 @@ extern struct ToneData *const gVoiceLineTable[];
 static void Task_Fanfare(u8 taskId);
 static void CreateFanfareTask(void);
 static void RestoreBGMVolumeAfterPokemonCry(void);
+static u16 GetSpeciesCryMultiplier(u16 species);
+static u16 GetSpeciesCryMultiplier_Type(u16 species, u16 minMultiplier, u16 maxMultiplier);
+static u16 GetSpeciesCryMultiplier_Height(u16 species, u16 minMultiplier, u16 maxMultiplier);
+static u16 GetSpeciesCryMultiplier_Weight(u16 species, u16 minMultiplier, u16 maxMultiplier);
+static u16 GetSpeciesCryMultiplier_EggGroup(u16 species, u16 minMultiplier, u16 maxMultiplier);
 
 static const struct Fanfare sFanfares[] = {
     [FANFARE_LEVEL_UP]                 = { MUS_LEVEL_UP                ,  80 },
@@ -522,6 +528,14 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
         gMPlay_PokemonCry = SetPokemonCryTone(reverse ? &gCryTable_Reverse[CRY_RHH_INTRO - 1] : &gCryTable[CRY_RHH_INTRO - 1]);
         return;
     }
+    
+    SetPokemonCryVolume((volume * GetSpeciesCryMultiplier(species)) / 1000);
+    SetPokemonCryPanpot((pan * GetSpeciesCryMultiplier(species)) / 1000);
+    SetPokemonCryPitch((pitch * GetSpeciesCryMultiplier(species)) / 1000);
+    SetPokemonCryLength((length * GetSpeciesCryMultiplier(species)) / 1000);
+    SetPokemonCryRelease((release * GetSpeciesCryMultiplier(species)) / 1000);
+    SetPokemonCryChorus((chorus * GetSpeciesCryMultiplier(species)) / 1000);
+    SetPokemonCryPriority((priority * GetSpeciesCryMultiplier(species)) / 1000);
     #endif //(P_CRIES_GENERIC && P_CRIES_ENABLED == FALSE)
 
     species = GetCryIdBySpecies(species);
@@ -685,4 +699,114 @@ void PlayVoiceLine(u16 voice, u8 voiceLine, u8 voiceVolume, u16 bgVolume)
 
     gPokemonCryBGMDuckingCounter = 2;
     RestoreBGMVolumeAfterPokemonCry();
+}
+
+static u16 GetSpeciesCryMultiplier(u16 species)
+{
+    // Min and Max sclaed multipliers, corresponding to a maximum of a 15% variation.
+    u16 minMultiplier = 850;  // Corresponds to 0.85x or 85%
+    u16 maxMultiplier = 1150; // Corresponds to 1.15x or 115%
+
+    u16 effectType = GetSpeciesCryMultiplier_Type(species, minMultiplier, maxMultiplier);
+    u16 effectHeight = GetSpeciesCryMultiplier_Height(species, minMultiplier, maxMultiplier);
+    u16 effectWeight = 2000 - GetSpeciesCryMultiplier_Weight(species, minMultiplier, maxMultiplier);
+    u16 effectEggGroup = GetSpeciesCryMultiplier_EggGroup(species, minMultiplier, maxMultiplier);
+
+    // Average of effects (still in fixed-point)
+    u16 multiplier = (effectHeight * 4 / 16) + (effectWeight * 8 / 16) + (effectType * 2 / 16) + (effectEggGroup * 2 / 16);
+
+    // Capping of effects
+    multiplier = (multiplier < minMultiplier) ? minMultiplier : ((multiplier > maxMultiplier) ? maxMultiplier : multiplier);
+
+    // DebugPrintf("\n%S:\nType Multiplier: %d\nHeight Multiplier: %d\nWeight Multiplier: %d\nEgg Group Multiplier: %d\nTotal Multiplier: %d", gSpeciesInfo[species].speciesName, effectType, effectHeight, effectWeight, effectEggGroup, multiplier);
+    return multiplier;
+}
+
+static u16 GetSpeciesCryMultiplier_Type(u16 species, u16 minMultiplier, u16 maxMultiplier)
+{
+    /////////////////////////////  Formula  /////////////////////////////
+    //                                                                 //
+    //      (max - min)                         (max - min)            //
+    //    --------------- * (type1 + type2) + --------------- + min    //
+    //         2 * 21                              2 * 21              //
+    //                                                                 //
+    /////////////////////////////////////////////////////////////////////
+
+    u16 multiplier = (((maxMultiplier - minMultiplier) / (2 * NUMBER_OF_MON_TYPES))
+                * gSpeciesInfo[species].types[0] + gSpeciesInfo[species].types[1])
+                + ((maxMultiplier - minMultiplier) / (2 * NUMBER_OF_MON_TYPES))
+                + minMultiplier;
+    
+    return multiplier;
+}
+
+// Functions to approximate the square root of a number using the Newton-Raphson method
+float ApproximateSquareRoot(float x)
+{
+    if (x <= 0) return 0; // Ensure no negative inputs or zero, returns 0 for edge cases
+
+    float guess = x / 2.0; // Initial guess
+    for (int i = 0; i < 5; i++) // Iterate a few times for better approximation
+    {
+        guess = (guess + x / guess) / 2.0;
+    }
+    return guess;
+}
+
+static u16 GetSpeciesCryMultiplier_Height(u16 species, u16 minMultiplier, u16 maxMultiplier)
+{
+    u16 minHeight = GetSpeciesHeight(SPECIES_JOLTIK);
+    u16 maxHeight = GetSpeciesHeight(SPECIES_ETERNATUS);
+    u16 speciesHeight = GetSpeciesHeight(species);
+
+    // Normalise and apply square root approximation for scaling
+    float normalisedHeight = (float)(speciesHeight - minHeight) / (maxHeight - minHeight);
+    float adjustedHeight = ApproximateSquareRoot(normalisedHeight);
+
+    // Clamp to ensure values between 0 and 1
+    if (adjustedHeight < 0) adjustedHeight = 0;
+    if (adjustedHeight > 1) adjustedHeight = 1;
+
+    // Map to multiplier range
+    u16 multiplier = minMultiplier + (u16)((maxMultiplier - minMultiplier) * adjustedHeight);
+
+    return multiplier;
+}
+
+static u16 GetSpeciesCryMultiplier_Weight(u16 species, u16 minMultiplier, u16 maxMultiplier)
+{
+    u16 minWeight = GetSpeciesWeight(SPECIES_GASTLY);
+    u16 maxWeight = GetSpeciesWeight(SPECIES_COSMOEM);
+    u16 speciesWeight = GetSpeciesWeight(species);
+
+    // Normalise and apply square root approximation for scaling
+    float normalisedWeight = (float)(speciesWeight - minWeight) / (maxWeight - minWeight);
+    float adjustedWeight = ApproximateSquareRoot(normalisedWeight);
+
+    // Clamp to ensure values between 0 and 1
+    if (adjustedWeight < 0) adjustedWeight = 0;
+    if (adjustedWeight > 1) adjustedWeight = 1;
+
+    // Map to multiplier range
+    u16 multiplier = minMultiplier + (u16)((maxMultiplier - minMultiplier) * adjustedWeight);
+
+    return multiplier;
+}
+
+static u16 GetSpeciesCryMultiplier_EggGroup(u16 species, u16 minMultiplier, u16 maxMultiplier)
+{
+    ////////////////////////////  Formula  ////////////////////////////
+    //                                                               //
+    //      (max - min)                       (max - min)            //
+    //    --------------- * (egg1 + egg2) + --------------- + min    //
+    //         2 * 16                            2 * 16              //
+    //                                                               //
+    ///////////////////////////////////////////////////////////////////
+
+    u16 multiplier = (((maxMultiplier - minMultiplier) / (2 * (EGG_GROUP_NO_EGGS_DISCOVERED + 1)))
+                * gSpeciesInfo[species].eggGroups[0] + gSpeciesInfo[species].eggGroups[1])
+                + ((maxMultiplier - minMultiplier) / (2 * (EGG_GROUP_NO_EGGS_DISCOVERED + 1)))
+                + minMultiplier;
+    
+    return multiplier;
 }
