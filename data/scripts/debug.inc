@@ -455,3 +455,8 @@ Debug_EventScript_EWRAMCounters::
 Debug_EventScript_EWRAMCounters_Text::
 	.string "Follower Steps: {STR_VAR_1}.\n"
 	.string "Fishing Chain: {STR_VAR_2}.$"
+
+Debug_EventScript_Ikigai_Introduction::
+	clearflag FLAG_HIDE_VYRATON_HARBOR_SS_PATHFINDER
+	warp MAP_VYRATON_OUTDOORS_HARBOUR, 15, 24
+	return
