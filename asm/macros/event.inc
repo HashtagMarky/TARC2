@@ -2511,7 +2511,7 @@
 	setvar VAR_0x8004, \localId
 	fadenewbgm MUS_RG_SURF
 	delay 50
-	special DoSSAnneDepartureCutscene
+	callnative DoSSAnneDepartureCutscene
 	waitstate
 	removeobject \localId
 	.endm
