@@ -2,8 +2,8 @@ extern const struct CharacterInfo gCharacterInfo[];
 
 enum // Up to 256 Character IDs
 {
-    CHARACTER_JACK,
-    CHARACTER_JILL,
+    CHARACTER_SAMUEL,
+    CHARACTER_LAUREN,
     CHARACTER_COUNT,
 };
 /*

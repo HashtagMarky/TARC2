@@ -19,6 +19,7 @@
 #include "constants/trainer_hill.h"
 #include "constants/items.h"
 #include "config/save.h"
+#include "characters.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -227,6 +228,7 @@ struct SaveBlock3
 #if OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_FIRST_TIME
     u8 itemFlags[ITEM_FLAGS_COUNT];
 #endif
+    struct Characters;
 };
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;
@@ -593,8 +595,6 @@ struct SaveBlock2
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
-#include "characters.h"
-// can be accessed via SaveBlock2Ptr->Characters.friendship[characterId]
 struct Characters
 {
     u8 friendship[CHARACTER_COUNT];
