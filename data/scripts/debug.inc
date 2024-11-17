@@ -458,5 +458,6 @@ Debug_EventScript_EWRAMCounters_Text::
 
 Debug_EventScript_Ikigai_Introduction::
 	clearflag FLAG_HIDE_VYRATON_HARBOR_SS_PATHFINDER
+	setvar VAR_IKIGAI_INTRO_STATE, 0
 	warp MAP_VYRATON_OUTDOORS_HARBOUR, 15, 24
 	return

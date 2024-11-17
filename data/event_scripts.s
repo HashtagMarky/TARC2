@@ -1159,4 +1159,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/scripts/pokedex.inc"
 
 	.include "data/maps/VyratonOutdoors_Harbour/scripts.inc"
+	.include "data/maps/VyratonOutdoors_Harbour/text.inc"
 	.include "data/maps/VyratonIndoors_MayorsOffice/scripts.inc"

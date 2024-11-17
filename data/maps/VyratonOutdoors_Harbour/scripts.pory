@@ -1,0 +1,41 @@
+mapscripts VyratonOutdoors_Harbour_MapScripts
+{
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        VAR_IKIGAI_INTRO_STATE, 0: VyratonOutdoors_Harbour_EventScript_ShipLeave
+    ]
+}
+
+const LOCALID_SS_ANNE = 1
+const LOCALID_Samuel = 2
+
+script VyratonOutdoors_Harbour_EventScript_ShipLeave
+{
+    addvar(VAR_IKIGAI_INTRO_STATE, 1)
+    playse(SE_RG_SS_ANNE_HORN)
+    applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Samuel_BeginEntrance)
+    turnplayer(DIR_NORTH)
+    emote(LOCALID_Samuel, EMOTE_EXCLAM, SE_PIN)
+    applymoveplayer(VyratonOutdoors_Harbour_Player_BeginExit, FALSE)
+    applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Samuel_ContinueEntrance)
+
+    ssannedeparturecutcene(1)
+}
+
+movement VyratonOutdoors_Harbour_Samuel_BeginEntrance
+{
+    walk_down * 3
+}
+
+movement VyratonOutdoors_Harbour_Player_BeginExit
+{
+    delay_16 * 2
+    delay_8
+    face_left
+}
+
+movement VyratonOutdoors_Harbour_Samuel_ContinueEntrance
+{
+    walk_down * 3
+    face_right
+}

@@ -2509,7 +2509,7 @@
 	.macro ssannedeparturecutcene localId:req
 	lockall
 	setvar VAR_0x8004, \localId
-	fadenewbgm MUS_RG_SURF
+	fadenewbgm MUS_DP_LAKE
 	delay 50
 	callnative DoSSAnneDepartureCutscene
 	waitstate
