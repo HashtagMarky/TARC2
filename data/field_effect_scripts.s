@@ -79,6 +79,9 @@ gFieldEffectScriptPointers::
 	.4byte gFieldEffectScript_TracksSlither             @ FLDEFF_TRACKS_SLITHER
 	.4byte gFieldEffectScript_TracksBug                 @ FLDEFF_TRACKS_BUG
 	.4byte gFieldEffectScript_TracksSpot                @ FLDEFF_TRACKS_SPOT
+	.4byte gFieldEffectScript_SmilingIcon               @ FLDEFF_SMILING_ICON
+	.4byte gFieldEffectScript_TalkingIcon               @ FLDEFF_TALKING_ICON
+	.4byte gFieldEffectScript_ThinkingIcon              @ FLDEFF_THINKING_ICON
 
 gFieldEffectScript_ExclamationMarkIcon1::
 	field_eff_callnative FldEff_ExclamationMarkIcon
@@ -268,6 +271,18 @@ gFieldEffectScript_PokeballTrail::
 
 gFieldEffectScript_HeartIcon::
 	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_HeartIcon
+	field_eff_end
+
+gFieldEffectScript_SmilingIcon::
+	field_eff_callnative FldEff_SmilingIcon
+	field_eff_end
+
+gFieldEffectScript_TalkingIcon::
+	field_eff_callnative FldEff_TalkingIcon
+	field_eff_end
+
+gFieldEffectScript_ThinkingIcon::
+	field_eff_callnative FldEff_ThinkingIcon
 	field_eff_end
 
 gFieldEffectScript_Nop47::

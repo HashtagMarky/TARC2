@@ -13,6 +13,18 @@ Common_Movement_Heart:
 	emote_heart
 	step_end
 
+Common_Movement_Smiling:
+	emote_smiling
+	step_end
+
+Common_Movement_Talking:
+	emote_talking
+	step_end
+
+Common_Movement_Thinking:
+	emote_thinking
+	step_end
+
 Common_Movement_DoubleExclamationMark:
 	emote_double_exclamation_mark
 	step_end

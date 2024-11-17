@@ -75,6 +75,9 @@
 #define FLDEFF_TRACKS_SLITHER            70
 #define FLDEFF_TRACKS_SPOT               71
 #define FLDEFF_TRACKS_BUG                72
+#define FLDEFF_SMILING_ICON              73
+#define FLDEFF_TALKING_ICON              74
+#define FLDEFF_THINKING_ICON             75
 
 #define FLDEFFOBJ_SHADOW_S              0
 #define FLDEFFOBJ_SHADOW_M              1

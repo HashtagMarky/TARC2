@@ -64,6 +64,9 @@ EWRAM_DATA u8 gApproachingTrainerId = 0;
 static const u8 sEmotion_ExclamationMarkGfx[] = INCBIN_U8("graphics/field_effects/pics/emotion_exclamation.4bpp");
 static const u8 sEmotion_QuestionMarkGfx[] = INCBIN_U8("graphics/field_effects/pics/emotion_question.4bpp");
 static const u8 sEmotion_HeartGfx[] = INCBIN_U8("graphics/field_effects/pics/emotion_heart.4bpp");
+static const u8 sEmotion_SmilingGfx[] = INCBIN_U8("graphics/field_effects/pics/emotion_smiling.4bpp");
+static const u8 sEmotion_TalkingGfx[] = INCBIN_U8("graphics/field_effects/pics/emotion_talking.4bpp");
+static const u8 sEmotion_ThinkingGfx[] = INCBIN_U8("graphics/field_effects/pics/emotion_thinking.4bpp");
 static const u8 sEmotion_DoubleExclamationMarkGfx[] = INCBIN_U8("graphics/field_effects/pics/emotion_double_exclamation.4bpp");
 static const u8 sEmotion_XGfx[] = INCBIN_U8("graphics/field_effects/pics/emote_x.4bpp");
 // HGSS emote graphics ripped by Lemon on The Spriters Resource: https://www.spriters-resource.com/ds_dsi/pokemonheartgoldsoulsilver/sheet/30497/
@@ -158,6 +161,30 @@ static const struct SpriteFrameImage sSpriteImageTable_HeartIcon[] =
     {
         .data = sEmotion_HeartGfx,
         .size = sizeof(sEmotion_HeartGfx)
+    }
+};
+
+static const struct SpriteFrameImage sSpriteImageTable_SmilingIcon[] =
+{
+    {
+        .data = sEmotion_SmilingGfx,
+        .size = sizeof(sEmotion_SmilingGfx)
+    }
+};
+
+static const struct SpriteFrameImage sSpriteImageTable_TalkingIcon[] =
+{
+    {
+        .data = sEmotion_TalkingGfx,
+        .size = sizeof(sEmotion_TalkingGfx)
+    }
+};
+
+static const struct SpriteFrameImage sSpriteImageTable_ThinkingIcon[] =
+{
+    {
+        .data = sEmotion_ThinkingGfx,
+        .size = sizeof(sEmotion_ThinkingGfx)
     }
 };
 
@@ -341,6 +368,39 @@ static const struct SpriteTemplate sSpriteTemplate_HeartIcon =
     .oam = &sOamData_Icons,
     .anims = sSpriteAnimTable_Icons,
     .images = sSpriteImageTable_HeartIcon,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_TrainerIcons
+};
+
+static const struct SpriteTemplate sSpriteTemplate_SmilingIcon =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
+    .oam = &sOamData_Icons,
+    .anims = sSpriteAnimTable_Icons,
+    .images = sSpriteImageTable_SmilingIcon,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_TrainerIcons
+};
+
+static const struct SpriteTemplate sSpriteTemplate_TalkingIcon =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
+    .oam = &sOamData_Icons,
+    .anims = sSpriteAnimTable_Icons,
+    .images = sSpriteImageTable_TalkingIcon,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_TrainerIcons
+};
+
+static const struct SpriteTemplate sSpriteTemplate_ThinkingIcon =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
+    .oam = &sOamData_Icons,
+    .anims = sSpriteAnimTable_Icons,
+    .images = sSpriteImageTable_ThinkingIcon,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_TrainerIcons
 };
@@ -948,6 +1008,44 @@ u8 FldEff_HeartIcon(void)
     return 0;
 }
 
+u8 FldEff_SmilingIcon(void)
+{
+    u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_SmilingIcon, 0, 0, 0x52);
+
+    if (spriteId != MAX_SPRITES)
+    {
+        SetIconSpriteData(&gSprites[spriteId], FLDEFF_SMILING_ICON, 0);
+        UpdateSpritePaletteByTemplate(&sSpriteTemplate_HeartIcon, &gSprites[spriteId]);
+    }
+
+    return 0;
+}
+
+u8 FldEff_TalkingIcon(void)
+{
+    u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_TalkingIcon, 0, 0, 0x52);
+
+    if (spriteId != MAX_SPRITES)
+    {
+        SetIconSpriteData(&gSprites[spriteId], FLDEFF_TALKING_ICON, 0);
+        UpdateSpritePaletteByTemplate(&sSpriteTemplate_HeartIcon, &gSprites[spriteId]);
+    }
+
+    return 0;
+}
+
+u8 FldEff_ThinkingIcon(void)
+{
+    u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_ThinkingIcon, 0, 0, 0x52);
+
+    if (spriteId != MAX_SPRITES)
+    {
+        SetIconSpriteData(&gSprites[spriteId], FLDEFF_THINKING_ICON, 0);
+        UpdateSpritePaletteByTemplate(&sSpriteTemplate_HeartIcon, &gSprites[spriteId]);
+    }
+
+    return 0;
+}
 
 u8 FldEff_DoubleExclMarkIcon(void)
 {
