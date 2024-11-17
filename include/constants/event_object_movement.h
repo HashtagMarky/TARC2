@@ -353,4 +353,14 @@
 #define COPY_MOVE_EMPTY_1        9
 #define COPY_MOVE_EMPTY_2       10
 
+// Emotes for Deokishisu's emote macro
+#define EMOTE_EXCLAM        0
+#define EMOTE_QUESTION      1
+#define EMOTE_HEART         2
+#define EMOTE_SMILE         3
+#define EMOTE_TALK          4
+#define EMOTE_THINK         5
+#define EMOTE_DEXCLAM       6
+#define EMOTE_X             7
+
 #endif // GUARD_CONSTANTS_EVENT_OBJECT_MOVEMENT_H

@@ -2515,3 +2515,125 @@
 	waitstate
 	removeobject \localId
 	.endm
+
+@ Deokishisu's Supplementary Macros
+
+	@ applymovement with waitmovement built-in.
+	@ If wait is not provided, waitmovement \localid is emitted.
+	@ If wait has a value, the emitted waitmovement will have that value.
+	@ i.e. if wait is 7, waitmovement 7 will be emitted.
+	@ If you don't want a waitmovement emitted, use applymovement instead.
+	.macro applymove localid:req, movements:req, wait, map
+	applymovement \localid, \movements, \map
+	.ifb \wait
+		waitmovement \localid
+	.else
+		waitmovement \wait
+	.endif
+	.endm
+
+	@ applymovement with OBJ_EVENT_ID_PLAYER as the localid and a built-in waitmovement
+	@ OBJ_EVENT_ID_PLAYER. By default, waitmovement OBJ_EVENT_ID_PLAYER is provided,
+	@ but can be omitted by passing FALSE.
+	.macro applymoveplayer movements:req, wait=TRUE, map
+	applymovement OBJ_EVENT_ID_PLAYER, \movements, \map
+	.if \wait
+		waitmovement OBJ_EVENT_ID_PLAYER
+	.endif
+	.endm
+
+	@ Calls Common_Movement_WalkInPlaceFaster(Up/Down/Left/Right) for provided localid.
+	@ By default, waitmovement \localid is provided, but can be omitted by passing FALSE.
+	.macro stepinplace localid:req, direction:req, wait=TRUE
+	.if \direction == DIR_NORTH
+		applymovement \localid, Common_Movement_WalkInPlaceFasterUp
+		.if \wait
+			waitmovement \localid
+		.endif
+	.elseif \direction == DIR_SOUTH
+		applymovement \localid, Common_Movement_WalkInPlaceFasterDown
+		.if \wait
+			waitmovement \localid
+		.endif
+	.elseif \direction == DIR_WEST
+		applymovement \localid, Common_Movement_WalkInPlaceFasterLeft
+		.if \wait
+			waitmovement \localid
+		.endif
+	.elseif \direction == DIR_EAST
+		applymovement \localid, Common_Movement_WalkInPlaceFasterRight
+		.if \wait
+			waitmovement \localid
+		.endif
+	.endif
+	.endm
+
+	@ Does Common_Movement_WalkInPlaceFaster(Up/Down/Left/Right) for the player.
+	@ By default, waitmovement \localid is provided, but can be omitted by passing FALSE.
+	.macro stepinplaceplayer direction:req, wait=TRUE
+	.if \direction == DIR_NORTH
+		applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+		.if \wait
+			waitmovement OBJ_EVENT_ID_PLAYER
+		.endif
+	.elseif \direction == DIR_SOUTH
+		applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+		.if \wait
+			waitmovement OBJ_EVENT_ID_PLAYER
+		.endif
+	.elseif \direction == DIR_WEST
+		applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+		.if \wait
+			waitmovement OBJ_EVENT_ID_PLAYER
+		.endif
+	.elseif \direction == DIR_EAST
+		applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+		.if \wait
+			waitmovement OBJ_EVENT_ID_PLAYER
+		.endif
+	.endif
+	.endm
+
+	@ alias of turnobject with OBJ_EVENT_ID_PLAYER as the localid argument
+	.macro turnplayer direction:req
+	turnobject OBJ_EVENT_ID_PLAYER, \direction
+	.endm
+
+	@ This replicates the most common emote structure in the game, which is:
+	@ -----
+	@ playse SE_PIN
+	@ applymovement LOCALID, Common_Movement_ExclamationMark @ (or others)
+	@ waitmovement 0
+	@ applymovement LOCALID, Common_Movement_Delay48
+	@ waitmovement 0
+	@ -----
+	@ If emote is not provided, then it will do an exclamation mark emote.
+	@ Other params include:
+	@ EMOTE_EXCLAM, EMOTE_QUESTION, EMOTE_HEART, EMOTE_SMILE, EMOTE_TALK,
+	@ EMOTE_THINK, EMOTE_DEXCLAM or EMOTE_X. Invalid entries default
+	@ to the exclamation mark emote.
+	.macro emote localid:req, emote=EMOTE_EXCLAM, sound, wait=TRUE
+	playse \sound
+	.if \emote == EMOTE_QUESTION
+		applymovement \localid, Common_Movement_QuestionMark
+	.elseif \emote == EMOTE_HEART
+		applymovement \localid, Common_Movement_Heart
+	.elseif \emote == EMOTE_SMILE
+		applymovement \localid, Common_Movement_Smiling
+	.elseif \emote == EMOTE_TALK
+		applymovement \localid, Common_Movement_Talking
+	.elseif \emote == EMOTE_THINK
+		applymovement \localid, Common_Movement_Thinking
+	.elseif \emote == EMOTE_DEXCLAM
+		applymovement \localid, Common_Movement_DoubleExclamationMark
+	.elseif \emote == EMOTE_X
+		applymovement \localid, Common_Movement_EmoteX
+	.else
+		applymovement \localid, Common_Movement_ExclamationMark
+	.endif
+	.if \wait
+		waitmovement \localid
+		applymovement \localid, Common_Movement_Delay48
+		waitmovement \localid
+	.endif
+	.endm
