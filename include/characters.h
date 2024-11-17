@@ -1,5 +1,3 @@
-extern const struct CharacterInfo gCharacterInfo[];
-
 enum // Up to 256 Character IDs
 {
     CHARACTER_SAMUEL,
@@ -76,3 +74,5 @@ struct InventoryItem
     u8 itemQuantity;           // Quantity of the item
     u8 itemChance;         // Whether the item is a key item
 };
+
+extern const struct CharacterInfo gCharacterInfo[];

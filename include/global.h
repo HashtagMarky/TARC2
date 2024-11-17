@@ -19,7 +19,6 @@
 #include "constants/trainer_hill.h"
 #include "constants/items.h"
 #include "config/save.h"
-#include "characters.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -209,6 +208,13 @@ struct Time
     /*0x04*/ s8 seconds;
 };
 
+#include "characters.h"
+struct CharacterData
+{
+    u8 friendship[CHARACTER_COUNT];
+    u8 conversed[ROUND_BITS_TO_BYTES(CHARACTER_COUNT)];
+};
+
 #include "constants/items.h"
 #define ITEM_FLAGS_COUNT ((ITEMS_COUNT / 8) + ((ITEMS_COUNT % 8) ? 1 : 0))
 
@@ -228,7 +234,7 @@ struct SaveBlock3
 #if OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_FIRST_TIME
     u8 itemFlags[ITEM_FLAGS_COUNT];
 #endif
-    struct Characters;
+    struct CharacterData characters;
 };
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;
@@ -594,12 +600,6 @@ struct SaveBlock2
 }; // sizeof=0xF2C
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
-
-struct Characters
-{
-    u8 friendship[CHARACTER_COUNT];
-    u8 conversed[ROUND_BITS_TO_BYTES(CHARACTER_COUNT)];
-};
 
 struct SecretBaseParty
 {
