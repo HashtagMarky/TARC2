@@ -2,40 +2,63 @@ mapscripts VyratonOutdoors_Harbour_MapScripts
 {
     MAP_SCRIPT_ON_FRAME_TABLE
     [
-        VAR_IKIGAI_INTRO_STATE, 0: VyratonOutdoors_Harbour_EventScript_ShipLeave
+        VAR_IKIGAI_INTRO_STATE, 0: VyratonOutdoors_Harbour_EventScript_IkigaiIntro
     ]
 }
 
 const LOCALID_SS_ANNE = 1
 const LOCALID_Samuel = 2
 
-script VyratonOutdoors_Harbour_EventScript_ShipLeave
+script VyratonOutdoors_Harbour_EventScript_IkigaiIntro
+{
+    call(VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Setup)
+    call(VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet)
+    call(VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures)
+}
+
+script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Setup
+{
+    setflag(FLAG_HIDE_MAP_NAME_POPUP)
+    setflag(FLAG_SUPPRESS_MUGSHOT)
+    setselectedobjectevent(LOCALID_Samuel)
+}
+
+script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet
 {
     addvar(VAR_IKIGAI_INTRO_STATE, 1)
     playse(SE_RG_SS_ANNE_HORN)
     applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Samuel_BeginEntrance)
     turnplayer(DIR_NORTH)
     emote(LOCALID_Samuel, EMOTE_EXCLAM, SE_PIN)
-    applymoveplayer(VyratonOutdoors_Harbour_Player_BeginExit, FALSE)
+    applymoveplayer(VyratonOutdoors_Harbour_Player_MeetSamuel, FALSE)
     applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Samuel_ContinueEntrance)
+    mnmbox(VyratonOutdoors_Harbour_Text_WelcomeToVyraton, nameKnown=FALSE)
+    turnplayer(DIR_SOUTH)
+    turnobject(LOCALID_Samuel, DIR_SOUTH)
+}
 
+script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures
+{
     ssannedeparturecutcene(1)
+    turnplayer(DIR_WEST)
+    mnmbox(VyratonOutdoors_Harbour_Text_HeadToOffice)
 }
 
 movement VyratonOutdoors_Harbour_Samuel_BeginEntrance
 {
-    walk_down * 3
+    walk_down * 4
 }
 
-movement VyratonOutdoors_Harbour_Player_BeginExit
+movement VyratonOutdoors_Harbour_Player_MeetSamuel
 {
     delay_16 * 2
     delay_8
+    // delay_2
     face_left
 }
 
 movement VyratonOutdoors_Harbour_Samuel_ContinueEntrance
 {
-    walk_down * 3
+    walk_down * 2
     face_right
 }

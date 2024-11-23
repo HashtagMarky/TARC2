@@ -1,0 +1,36 @@
+text VyratonOutdoors_Harbour_Text_WelcomeToVyraton
+{
+    format("
+        Hello there, you must be {PLAYER}!\n
+        Welcome to our humble town, Vyraton!\l
+        I'm so very glad you're here.\p
+        It's me, Samuel, we spoke earlier on.\n
+        I'm the mayor around here.\p
+
+        {SPEAKER_NAME NAME_AUTO}I can't tell you how much this town\n
+        has been anticipating your arrival.\l
+        Around here, things have been…\p
+        Well, let's just say that we could most\n
+        certainly use someone like you!\l
+        Ah, but where are my manners?\p
+        You've only just arrived and I'm\n
+        already rambling, you must be tired.\l
+        And we already have a lot to discuss.\p
+
+        Before we head to my office in the\n
+        town hall, why don't we watch\l
+        the S.S. Pathfinder's departure?\p
+
+        It's meant to bring good luck to all\n
+        journeys that begin on it.\l
+        And as always, it's truly majestic…")
+}
+
+text VyratonOutdoors_Harbour_Text_HeadToOffice
+{
+    format("
+        I will never get bored of that view…\n
+        {PAUSE 30}Come on, {PLAYER}. Let's head off.\p
+        It's just a short walk, but we should\n
+        make a move before it gets too late.")
+}
