@@ -15,14 +15,12 @@ text VyratonOutdoors_Harbour_Text_WelcomeToVyraton
         Ah, but where are my manners?\p
         You've only just arrived and I'm\n
         already rambling, you must be tired.\l
-        And we already have a lot to discuss.\p
+        And we already have a lot to discuss…\p
 
-        Before we head to my office in the\n
-        town hall, why don't we watch\l
-        the S.S. Pathfinder's departure?\p
-
-        It's meant to bring good luck to all\n
-        journeys that begin on it.\l
+        But before we make our way to my\n
+        office, let's stay for the departure.\p
+        The S.S. Pathfinder is meant to bring\n
+        good luck to all who journey on it.\l
         And as always, it's truly majestic…")
 }
 
