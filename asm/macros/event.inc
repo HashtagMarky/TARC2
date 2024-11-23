@@ -2603,9 +2603,9 @@
 	@ -----
 	@ playse SE_PIN
 	@ applymovement LOCALID, Common_Movement_ExclamationMark @ (or others)
-	@ waitmovement 0
+	@ waitmovement LOCALID
 	@ applymovement LOCALID, Common_Movement_Delay48
-	@ waitmovement 0
+	@ waitmovement LOCALID
 	@ -----
 	@ If emote is not provided, then it will do an exclamation mark emote.
 	@ Other params include:
