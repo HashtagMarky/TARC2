@@ -59,7 +59,7 @@ static void UpdateStairsMovement(s16, s16, s16*, s16*, s16*);
 static void Task_StairWarp(u8);
 static void ForceStairsMovement(u32, s16*, s16*);
 
-static void Task_ExitShip(u8);
+static void Task_ExitSouthernDoor(u8);
 static bool8 CheckIsWarpFromShip(s16 x, s16 y);
 
 // data[0] is used universally by tasks in this file as a state for switches
@@ -286,8 +286,8 @@ static void SetUpWarpExitTask(void)
     else
         func = Task_ExitNonDoor;
 
-    if (CheckIsWarpFromShip(x, y))
-        func = Task_ExitShip;
+    if (CheckIsWarpFromShip(x, y) || MetatileBehavior_IsSouthernDoor(behavior))
+        func = Task_ExitSouthernDoor;
 
     gExitStairsMovementDisabled = FALSE;
     CreateTask(func, 10);
@@ -424,7 +424,7 @@ static void Task_ExitNonAnimDoor(u8 taskId)
     }
 }
 
-static void Task_ExitShip(u8 taskId)
+static void Task_ExitSouthernDoor(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     s16 *x = &task->data[2];
