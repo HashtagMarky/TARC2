@@ -461,4 +461,5 @@ Debug_EventScript_Ikigai_Introduction::
 	setflag FLAG_HIDE_MAP_NAME_POPUP
 	setvar VAR_IKIGAI_INTRO_STATE, 0
 	warp MAP_VYRATON_OUTDOORS_HARBOUR, 15, 25
+	waitstate
 	return
