@@ -59,6 +59,9 @@ static void UpdateStairsMovement(s16, s16, s16*, s16*, s16*);
 static void Task_StairWarp(u8);
 static void ForceStairsMovement(u32, s16*, s16*);
 
+static void Task_ExitShip(u8);
+static bool8 CheckIsWarpFromShip(s16 x, s16 y);
+
 // data[0] is used universally by tasks in this file as a state for switches
 #define tState       data[0]
 
@@ -283,6 +286,9 @@ static void SetUpWarpExitTask(void)
     else
         func = Task_ExitNonDoor;
 
+    if (CheckIsWarpFromShip(x, y))
+        func = Task_ExitShip;
+
     gExitStairsMovementDisabled = FALSE;
     CreateTask(func, 10);
 }
@@ -401,6 +407,44 @@ static void Task_ExitNonAnimDoor(u8 taskId)
             SetPlayerVisibility(TRUE);
             objEventId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
             ObjectEventSetHeldMovement(&gObjectEvents[objEventId], GetWalkNormalMovementAction(GetPlayerFacingDirection()));
+            task->tState = 2;
+        }
+        break;
+    case 2:
+        if (IsPlayerStandingStill())
+        {
+            UnfreezeObjectEvents();
+            task->tState = 3;
+        }
+        break;
+    case 3:
+        UnlockPlayerFieldControls();
+        DestroyTask(taskId);
+        break;
+    }
+}
+
+static void Task_ExitShip(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    s16 *x = &task->data[2];
+    s16 *y = &task->data[3];
+
+    switch (task->tState)
+    {
+    case 0:
+        SetPlayerVisibility(FALSE);
+        FreezeObjectEvents();
+        PlayerGetDestCoords(x, y);
+        task->tState = 1;
+        break;
+    case 1:
+        if (WaitForWeatherFadeIn())
+        {
+            u8 objEventId;
+            SetPlayerVisibility(TRUE);
+            objEventId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
+            ObjectEventSetHeldMovement(&gObjectEvents[objEventId], MOVEMENT_ACTION_WALK_NORMAL_UP);
             task->tState = 2;
         }
         break;
@@ -1632,5 +1676,13 @@ bool32 IsDirectionalStairWarpMetatileBehavior(u16 metatileBehavior, u8 playerDir
         if (MetatileBehavior_IsDirectionalDownRightStairWarp(metatileBehavior))
             return TRUE;
     }
+    return FALSE;
+}
+
+static bool8 CheckIsWarpFromShip(s16 x, s16 y)
+{
+    if (gObjectEvents[GetObjectEventIdByXY(x, y + 2)].graphicsId == OBJ_EVENT_GFX_RG_SS_ANNE)
+        return TRUE;
+
     return FALSE;
 }
