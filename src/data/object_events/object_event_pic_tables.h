@@ -402,6 +402,10 @@ static const struct SpriteFrameImage sPicTable_BirchsBag[] = {
     obj_frame_tiles(gObjectEventPic_BirchsBag),
 };
 
+static const struct SpriteFrameImage sPicTable_SamuelBriefcase[] = {
+    obj_frame_tiles(gObjectEventPic_SamuelBriefcase),
+};
+
 static const struct SpriteFrameImage sPicTable_EnemyZigzagoon[] = {
     overworld_ascending_frames(gObjectEventPic_EnemyZigzagoon, 4, 4),
 };

@@ -611,3 +611,6 @@ const u32 gObjectEventPic_Samuel[] = INCBIN_U32("graphics/object_events/pics/peo
 const u16 gObjectEventPalette_Samuel[] = INCBIN_U16("graphics/object_events/pics/people/samuel.gbapal");
 const u32 gObjectEventPic_Lauren[] = INCBIN_U32("graphics/object_events/pics/people/lauren.4bpp");
 const u16 gObjectEventPalette_Lauren[] = INCBIN_U16("graphics/object_events/pics/people/lauren.gbapal");
+
+const u32 gObjectEventPic_SamuelBriefcase[] = INCBIN_U32("graphics/object_events/pics/misc/samuel_briefcase.4bpp");
+const u16 gObjectEventPalette_SamuelBriefcase[] = INCBIN_U16("graphics/object_events/pics/misc/samuel_briefcase.gbapal");

@@ -98,7 +98,7 @@
 #define OBJ_EVENT_GFX_TRUCK                       94
 #define OBJ_EVENT_GFX_VIGOROTH_CARRYING_BOX       95
 #define OBJ_EVENT_GFX_VIGOROTH_FACING_AWAY        96
-#define OBJ_EVENT_GFX_BIRCHS_BAG                  97
+#define OBJ_EVENT_GFX_SAMUEL_BRIEFCASE            97
 #define OBJ_EVENT_GFX_ZIGZAGOON_1                 98
 #define OBJ_EVENT_GFX_ARTIST                      99
 #define OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL       100
@@ -427,6 +427,7 @@
 
 #define OBJ_EVENT_PAL_TAG_SAMUEL                  0x116B
 #define OBJ_EVENT_PAL_TAG_LAUREN                  0x116C
+#define OBJ_EVENT_PAL_TAG_SAMUEL_BRIEFACSE        0x116D
 
 // Used as a placeholder follower graphic
 #define OBJ_EVENT_PAL_TAG_SUBSTITUTE              0x7611
