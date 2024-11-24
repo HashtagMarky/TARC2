@@ -1,0 +1,88 @@
+mapscripts VyratonIndoors_MayorsOffice_MapScripts
+{
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        VAR_IKIGAI_INTRO_STATE, 1: VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro
+    ]
+}
+
+const LOCALID_Samuel = 1
+const LOCALID_Starter = 2
+
+script VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_DontLeave
+{
+    message(VyratonIndoors_MayorsOffice_Text_ShouldReturn)
+    emote(OBJ_EVENT_ID_PLAYER, EMOTE_THINK, FALSE)
+    waitmessage
+	waitbuttonpress
+    closemessage
+    applymoveplayer(Common_Movement_WalkUp)
+}
+
+script VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro
+{
+    setvar(VAR_IKIGAI_INTRO_STATE, 2)
+    setselectedobjectevent(LOCALID_Samuel)
+
+    call(VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_EnterOffice)
+}
+
+script VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_EnterOffice
+{
+    applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_Entrance)
+    mnmbox(VyratonIndoors_MayorsOffice_Text_KickStart)
+}
+
+script VyratonIndoors_MayorsOffice_EventScript_Samuel
+{
+    switch (var(VAR_IKIGAI_INTRO_STATE))
+    {
+        case 2: call(VyratonIndoors_MayorsOffice_EventScript_Samuel_OpenBriefcase)
+    }
+}
+
+script VyratonIndoors_MayorsOffice_EventScript_Samuel_OpenBriefcase
+{
+    mnmbox(VyratonIndoors_MayorsOffice_Text_CrackOpen)
+}
+
+script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase
+{
+    switch (var(VAR_IKIGAI_INTRO_STATE))
+    {
+        case 2: call(VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase)
+    }
+}
+
+script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase
+{
+    if (specialvar(VAR_RESULT, GetPlayerFacingDirection) == DIR_WEST)
+    {
+        applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase)
+        turnplayer(DIR_NORTH)
+    }
+    callnative(StartNewPokeballCaseUI)
+    turnplayer(DIR_NORTH)
+    waitstate
+    playmoncry(VAR_STARTER_MON, CRY_MODE_NORMAL)
+    addobject(LOCALID_Starter)
+    applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase, FALSE)
+    applymove(LOCALID_Starter, VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase)
+    turnplayer(DIR_NORTH)
+}
+
+
+movement VyratonIndoors_MayorsOffice_Movement_Player_Entrance
+{
+    walk_up
+    walk_left
+    walk_up * 3
+    walk_right
+    face_up
+}
+
+movement VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase
+{
+    walk_down
+    walk_left
+}

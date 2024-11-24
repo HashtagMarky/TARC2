@@ -28,6 +28,8 @@
 #include "constants/items.h"
 #include "constants/battle_frontier.h"
 
+#include "constants/event_objects.h"
+
 static void CB2_ReturnFromChooseHalfParty(void);
 static void CB2_ReturnFromChooseBattleFrontierParty(void);
 static void HealPlayerBoxes(void);
@@ -700,6 +702,10 @@ u32 SamuelCase_GiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8
 
     // Ikigai Settings
     VarSet(VAR_STARTER_MON, species);
+    if (!isShinyExpansion)
+        VarSet(VAR_OBJ_GFX_ID_0, species + OBJ_EVENT_GFX_SPECIES(NONE));
+    else
+        VarSet(VAR_OBJ_GFX_ID_0, species + OBJ_EVENT_GFX_SPECIES_SHINY(NONE));
     gSaveBlock2Ptr->ikigaiGymType = GetSpeciesPrimaryType(species);
     gSaveBlock2Ptr->optionsInterfaceColor = IKIGAI_INTERFACE_GYM_TYPE_COLOUR;
 

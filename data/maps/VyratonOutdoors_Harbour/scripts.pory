@@ -11,27 +11,22 @@ const LOCALID_Samuel = 2
 
 script VyratonOutdoors_Harbour_EventScript_IkigaiIntro
 {
-    call(VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Setup)
+    setvar(VAR_IKIGAI_INTRO_STATE, 1)
+    setflag(FLAG_SUPPRESS_MUGSHOT)
+    setselectedobjectevent(LOCALID_Samuel)
+
     call(VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet)
     call(VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures)
 }
 
-script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Setup
-{
-    setflag(FLAG_HIDE_MAP_NAME_POPUP)
-    setflag(FLAG_SUPPRESS_MUGSHOT)
-    setselectedobjectevent(LOCALID_Samuel)
-}
-
 script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet
 {
-    addvar(VAR_IKIGAI_INTRO_STATE, 1)
     playse(SE_RG_SS_ANNE_HORN)
-    applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Samuel_BeginEntrance)
+    applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_BeginEntrance)
     turnplayer(DIR_NORTH)
-    emote(LOCALID_Samuel, EMOTE_EXCLAM, SE_PIN)
-    applymoveplayer(VyratonOutdoors_Harbour_Player_MeetSamuel, FALSE)
-    applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Samuel_ContinueEntrance)
+    emote(LOCALID_Samuel, EMOTE_EXCLAM)
+    applymoveplayer(VyratonOutdoors_Harbour_Movement_Player_MeetSamuel, FALSE)
+    applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_ContinueEntrance)
     mnmbox(VyratonOutdoors_Harbour_Text_WelcomeToVyraton, nameKnown=FALSE)
     turnplayer(DIR_SOUTH)
     turnobject(LOCALID_Samuel, DIR_SOUTH)
@@ -42,18 +37,18 @@ script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures
     ssannedeparturecutcene(LOCALID_SS_PATHFINDER)
     turnplayer(DIR_WEST)
     mnmbox(VyratonOutdoors_Harbour_Text_HeadToOffice)
-    applymoveplayer(VyratonOutdoors_Harbour_Player_Exit, FALSE)
-    applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Samuel_Exit)
+    applymoveplayer(VyratonOutdoors_Harbour_Movement_Player_Exit, FALSE)
+    applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_Exit)
     warp(MAP_VYRATON_INDOORS_MAYORS_OFFICE, 4, 9)
     waitstate
 }
 
-movement VyratonOutdoors_Harbour_Samuel_BeginEntrance
+movement VyratonOutdoors_Harbour_Movement_Samuel_BeginEntrance
 {
     walk_down * 4
 }
 
-movement VyratonOutdoors_Harbour_Player_MeetSamuel
+movement VyratonOutdoors_Harbour_Movement_Player_MeetSamuel
 {
     delay_16 * 2
     delay_8
@@ -61,20 +56,20 @@ movement VyratonOutdoors_Harbour_Player_MeetSamuel
     face_left
 }
 
-movement VyratonOutdoors_Harbour_Samuel_ContinueEntrance
+movement VyratonOutdoors_Harbour_Movement_Samuel_ContinueEntrance
 {
     walk_down * 2
     face_right
 }
 
-movement VyratonOutdoors_Harbour_Samuel_Exit
+movement VyratonOutdoors_Harbour_Movement_Samuel_Exit
 {
     walk_up
     walk_right
     walk_up
 }
 
-movement VyratonOutdoors_Harbour_Player_Exit
+movement VyratonOutdoors_Harbour_Movement_Player_Exit
 {
     delay_16 * 2
     walk_up

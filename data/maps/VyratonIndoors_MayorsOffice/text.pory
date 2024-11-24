@@ -1,0 +1,29 @@
+text VyratonIndoors_MayorsOffice_Text_ShouldReturn
+{
+    format("
+        I should probably stay a little bit\n
+        longer, there's more to finish up…")
+}
+
+text VyratonIndoors_MayorsOffice_Text_KickStart
+{
+    format("
+        Well {PLAYER}, we should kick start\n
+        business before it gets too late.\p
+        I know you were unsure when I asked,\n
+        so I brought some options for you.\p
+        {PLAYER}… {PAUSE 40}It's time to claim a type\n
+        for the Vyraton Town Pokémon Gym!\p
+        I have for you, in my briefcase, a\n
+        whopping eighteen different choices.\l
+        Decide how to mold your gym's future!")
+}
+
+text VyratonIndoors_MayorsOffice_Text_CrackOpen
+{
+    format("
+        Now {PLAYER}, don't get shy on me!\n
+        You have eighteen different choices…\p
+        Crack open the briefcase, it's time\n
+        for you to mold your gym's future!")
+}

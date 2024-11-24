@@ -23,6 +23,6 @@ VyratonOutdoors_Harbour_Text_WelcomeToVyraton::
 VyratonOutdoors_Harbour_Text_HeadToOffice::
 # 27 "data//maps/VyratonOutdoors_Harbour/text.pory"
 	.string "I will never get bored of that view…\n"
-	.string "{PAUSE 30}Come on, {PLAYER}. Let's head off.\p"
+	.string "{PAUSE 40}Come on, {PLAYER}. Let's head off.\p"
 	.string "It's just a short walk, but we should\n"
 	.string "make a move before it gets too late.$"
