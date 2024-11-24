@@ -6,7 +6,7 @@ mapscripts VyratonOutdoors_Harbour_MapScripts
     ]
 }
 
-const LOCALID_SS_ANNE = 1
+const LOCALID_SS_PATHFINDER = 1
 const LOCALID_Samuel = 2
 
 script VyratonOutdoors_Harbour_EventScript_IkigaiIntro
@@ -39,9 +39,13 @@ script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet
 
 script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures
 {
-    ssannedeparturecutcene(1)
+    ssannedeparturecutcene(LOCALID_SS_PATHFINDER)
     turnplayer(DIR_WEST)
     mnmbox(VyratonOutdoors_Harbour_Text_HeadToOffice)
+    applymoveplayer(VyratonOutdoors_Harbour_Player_Exit, FALSE)
+    applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Samuel_Exit)
+    warp(MAP_VYRATON_INDOORS_MAYORS_OFFICE, 4, 9)
+    waitstate
 }
 
 movement VyratonOutdoors_Harbour_Samuel_BeginEntrance
@@ -61,4 +65,17 @@ movement VyratonOutdoors_Harbour_Samuel_ContinueEntrance
 {
     walk_down * 2
     face_right
+}
+
+movement VyratonOutdoors_Harbour_Samuel_Exit
+{
+    walk_up
+    walk_right
+    walk_up
+}
+
+movement VyratonOutdoors_Harbour_Player_Exit
+{
+    delay_16 * 2
+    walk_up
 }
