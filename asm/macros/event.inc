@@ -2613,7 +2613,27 @@
 	@ EMOTE_THINK, EMOTE_DEXCLAM or EMOTE_X. Invalid entries default
 	@ to the exclamation mark emote.
 	.macro emote localid:req, emote=EMOTE_EXCLAM, sound, wait=TRUE
-	playse \sound
+	.ifnb \sound
+		playse \sound
+	.else
+		.if \emote == EMOTE_QUESTION
+			playse SE_BALL_BOUNCE_3
+		.elseif \emote == EMOTE_HEART
+			playse SE_M_ATTRACT
+		.elseif \emote == EMOTE_SMILE
+			playse SE_M_TAIL_WHIP
+		.elseif \emote == EMOTE_TALK
+			playse SE_BALL_TRADE
+		.elseif \emote == EMOTE_THINK
+			playse SE_BALL
+		.elseif \emote == EMOTE_DEXCLAM
+			playse SE_SUCCESS
+		.elseif \emote == EMOTE_X
+			playse SE_FAILURE
+		.else
+			playse SE_PIN
+		.endif
+	.endif
 	.if \emote == EMOTE_QUESTION
 		applymovement \localid, Common_Movement_QuestionMark
 	.elseif \emote == EMOTE_HEART
