@@ -218,10 +218,15 @@ bool8 ScrCmd_setspeaker(struct ScriptContext *ctx)
     const u8 *name = (const u8 *)ScriptReadWord(ctx);
     bool8 isAuto = ScriptReadByte(ctx);
     bool8 isKnown = ScriptReadByte(ctx);
+    bool8 isPlayer = ScriptReadByte(ctx);
 
     if (!isKnown)
     {
         SetSpeakerAuto(NAME_UNKNOWN);
+    }
+    else if (isPlayer)
+    {
+        SetSpeakerName(gSaveBlock2Ptr->playerName);
     }
     else if (isAuto)
     {

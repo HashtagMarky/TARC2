@@ -1886,15 +1886,17 @@
 	.endm
 
 	@ Sets the text of the name box in the next-shown message box.
-	.macro speakername text=NULL, auto=TRUE, known=TRUE
+	.macro speakername text=NULL, auto=TRUE, known=TRUE, player=FALSE
 	.byte 0xe5
 	.if \text != NULL
 		\auto = FALSE
 		\known = TRUE
+		\player = FALSE
 	.endif
 	.4byte \text
 	.byte \auto
 	.byte \known
+	.byte \player
 	.endm
 
 	@ spawn a windowed mugshot in the overworld above a message box
