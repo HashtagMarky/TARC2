@@ -2506,9 +2506,13 @@ bool8 ScrCmd_createfieldmugshot(struct ScriptContext *ctx)
     s16 y = VarGet(ScriptReadHalfword(ctx));
 
     if (mugshotId == MUGSHOT_AUTO_GRAPHICS_ID)
+    {
         mugshotId = gObjectEvents[gSelectedObjectEvent].graphicsId;
         if (gObjectEvents[gSelectedObjectEvent].shiny)
+        {
             mugshotId += SPECIES_SHINY_TAG;
+        }
+    }
 
     CreateFieldMugshot(mugshotType, mugshotId, mugshotEmotion, x, y, FALSE);
     return FALSE;
