@@ -117,7 +117,7 @@ script OverworldEncounters_EventScript_ThrowBall
         bufferitemname(STR_VAR_1, ITEM_STRANGE_BALL)
         dynmultipush("{FONT_NARROW}{STR_VAR_1}", ITEM_STRANGE_BALL)
     }
-    message(format("What type of {FONT_NARROWER}{POKE}BALL {FONT_NORMAL}will {PLAYER} use?"))
+    message(format("What {FONT_NARROWER}{POKE}BALL {FONT_NORMAL}will {PLAYER} use?"))
     waitmessage
     dynmultistack(0, 0, FALSE, 3, TRUE, 0, DYN_MULTICHOICE_CB_SHOW_ITEM)
     if (var(VAR_RESULT) == MULTI_B_PRESSED)
