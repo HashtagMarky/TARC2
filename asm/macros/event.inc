@@ -2117,6 +2117,23 @@
 	.endif
 	.endm
 
+	@ Buffers the given text and calls the relevant emote, name and mugshot script.
+	.macro playerbox text:req, emoteMovement, emoteMugshot
+	lock
+	.ifnb \emoteMugshot
+		createfieldmugshot MUGSHOT_PLAYER, emotion=\emoteMugshot
+	.endif
+	speakername player=TRUE, auto=FALSE, known=TRUE
+	message \text
+	.ifnb \emoteMovement
+		emote OBJ_EVENT_ID_PLAYER, \emoteMovement
+	.endif
+	waitmessage
+	waitbuttonpress
+	closemessage
+	release
+	.endm
+
 	@ Gives 'amount' of the specified 'item' to the player and prints a message with fanfare.
 	@ If the player doesn't have space for all the items then as many are added as possible, the
 	@ message indicates there is no room, and VAR_RESULT is set to FALSE.
