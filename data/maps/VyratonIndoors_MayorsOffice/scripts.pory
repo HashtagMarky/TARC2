@@ -11,11 +11,7 @@ const LOCALID_Starter = 2
 
 script VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_DontLeave
 {
-    message(VyratonIndoors_MayorsOffice_Text_ShouldReturn)
-    emote(OBJ_EVENT_ID_PLAYER, EMOTE_THINK, FALSE)
-    waitmessage
-	waitbuttonpress
-    closemessage
+    playerbox(VyratonIndoors_MayorsOffice_Text_ShouldReturn, EMOTE_THINK)
     applymoveplayer(Common_Movement_WalkUp)
 }
 
