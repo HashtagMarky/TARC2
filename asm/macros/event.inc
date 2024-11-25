@@ -2617,7 +2617,7 @@
 		playse \sound
 	.else
 		.if \emote == EMOTE_QUESTION
-			playse SE_BALL_BOUNCE_3
+			playse SE_BALL_BOUNCE_1
 		.elseif \emote == EMOTE_HEART
 			playse SE_M_ATTRACT
 		.elseif \emote == EMOTE_SMILE
