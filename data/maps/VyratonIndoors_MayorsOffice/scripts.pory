@@ -44,9 +44,14 @@ script VyratonIndoors_MayorsOffice_EventScript_Samuel_OpenBriefcase
 
 script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase
 {
-    switch (var(VAR_IKIGAI_INTRO_STATE))
+    if (flag(FLAG_SYS_POKEMON_GET))
     {
-        case 2: call(VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase)
+        call(VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_MeetPartner)
+    }
+    else
+    {
+        call(VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase)
+        call(VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex)
     }
 }
 
@@ -58,13 +63,25 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase
         turnplayer(DIR_NORTH)
     }
     callnative(StartNewPokeballCaseUI)
-    turnplayer(DIR_NORTH)
+    setflag(FLAG_SYS_POKEMON_GET)
     waitstate
     playmoncry(VAR_STARTER_MON, CRY_MODE_NORMAL)
     addobject(LOCALID_Starter)
     applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase, FALSE)
     applymove(LOCALID_Starter, VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase)
     turnplayer(DIR_NORTH)
+}
+
+script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex
+{
+    setflag(FLAG_SYS_POKEDEX_GET)
+	setflag(FLAG_SYS_NATIONAL_DEX)
+	special(EnableNationalPokedex)
+}
+
+script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_MeetPartner
+{
+
 }
 
 
