@@ -1,3 +1,15 @@
+EventScript_DisplayPokedexSpeciesName::
+	getseenmon VAR_0x8004
+	compare VAR_RESULT, TRUE
+	goto_if_eq EventScript_DisplayPokedexSpeciesName_SetKnown
+	speakername known=FALSE
+EventScript_DisplayPokedexSpeciesName_End:
+	return
+
+EventScript_DisplayPokedexSpeciesName_SetKnown:
+	speakername known=TRUE
+	goto EventScript_DisplayPokedexSpeciesName_End
+
 EventScript_DisplayPokedexHeader::
 	getseenmon VAR_0x8004
 	compare VAR_RESULT, FALSE

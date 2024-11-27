@@ -2121,6 +2121,7 @@
 	.endif
 	.if \PMD == TRUE
 		special GetOverworldMonSpecies
+		call EventScript_DisplayPokedexSpeciesName
 		playmoncry VAR_0x8004, CRY_MODE_NORMAL
 	.endif
 	message \text
