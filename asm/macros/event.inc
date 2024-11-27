@@ -2107,14 +2107,30 @@
 
 	@ Buffers the given text and calls the relevant message, name and mugshot script (see gStdScripts).
 	.macro mnmbox text:req, PMD=FALSE, mugshotEmotion=EMOTE_NORMAL, nameKnown=TRUE
-	loadword 0, \text
-	setvar VAR_0x8002, \mugshotEmotion
-	setvar VAR_0x8003, \nameKnown
+	lock
+	faceplayer
 	.if \PMD == TRUE
-		callstd MSGBOX_PKMN_MUG
+		createfieldmugshot MUGSHOT_PMD, emotion=\mugshotEmotion
 	.else
-		callstd MSGBOX_NPC_MUG
+		createfieldmugshot MUGSHOT_NPC, emotion=\mugshotEmotion
 	.endif
+	.if \nameKnown == TRUE
+		speakername known=TRUE
+	.else
+		speakername known=FALSE
+	.endif
+	.if \PMD == TRUE
+		special GetOverworldMonSpecies
+		playmoncry VAR_0x8004, CRY_MODE_NORMAL
+	.endif
+	message \text
+	waitmessage
+	waitbuttonpress
+	waitmoncry
+	.if \PMD == TRUE
+		call EventScript_DisplayPokedexHeader
+	.endif
+	release
 	.endm
 
 	@ Buffers the given text and calls the relevant emote, name and mugshot script.

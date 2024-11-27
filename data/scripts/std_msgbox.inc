@@ -47,39 +47,3 @@ Common_EventScript_SaveGame::
 	special SaveGame
 	waitstate
 	return
-
-Std_MsgboxMugshotNPC::
-	lock
-	faceplayer
-	createfieldmugshot MUGSHOT_NPC, emotion=VAR_0x8002
-	call_if_eq VAR_0x8003, TRUE, SetKnownName
-	call_if_ne VAR_0x8003, TRUE, SetUnknownName
-	message NULL
-	waitmessage
-	waitbuttonpress
-	release
-	return
-
-Std_MsgboxMugshotPokemon::
-	lock
-	faceplayer
-	createfieldmugshot MUGSHOT_PMD, emotion=VAR_0x8002
-	call_if_eq VAR_0x8003, TRUE, SetKnownName
-	call_if_ne VAR_0x8003, TRUE, SetUnknownName
-	special GetOverworldMonSpecies
-	playmoncry VAR_0x8004, CRY_MODE_NORMAL
-	message NULL
-	waitmessage
-	waitbuttonpress
-	waitmoncry
-	call EventScript_DisplayPokedexHeader
-	release
-	return
-
-SetKnownName:
-	speakername known=TRUE
-	return
-
-SetUnknownName:
-	speakername known=FALSE
-	return
