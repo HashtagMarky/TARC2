@@ -14,105 +14,103 @@ VyratonOutdoors_Harbour_EventScript_IkigaiIntro::
 	setvar VAR_IKIGAI_INTRO_STATE, 1
 # 15 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	setflag FLAG_SUPPRESS_MUGSHOT
-# 16 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	setselectedobjectevent 2
-# 18 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 17 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	call VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet
-# 19 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 18 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	call VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures
 	return
 
 
 VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet::
-# 24 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 23 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	playse SE_RG_SS_ANNE_HORN
-# 25 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 24 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	applymove 2, VyratonOutdoors_Harbour_Movement_Samuel_BeginEntrance
-# 26 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 25 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	turnplayer DIR_NORTH
-# 27 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 26 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	emote 2, EMOTE_EXCLAM
-# 28 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 27 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	applymoveplayer VyratonOutdoors_Harbour_Movement_Player_MeetSamuel, FALSE
-# 29 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 28 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	applymove 2, VyratonOutdoors_Harbour_Movement_Samuel_ContinueEntrance
+# 29 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+	mnmbox VyratonOutdoors_Harbour_Text_WelcomeToVyraton, nameKnown = FALSE, localId = 2
 # 30 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	mnmbox VyratonOutdoors_Harbour_Text_WelcomeToVyraton, nameKnown = FALSE
-# 31 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	turnplayer DIR_SOUTH
-# 32 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 31 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	turnobject 2, DIR_SOUTH
 	return
 
 
 VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures::
-# 37 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 36 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	ssannedeparturecutcene 1
-# 38 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 37 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	turnplayer DIR_WEST
-# 39 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 38 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	mnmbox VyratonOutdoors_Harbour_Text_HeadToOffice
-# 40 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 39 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	applymoveplayer VyratonOutdoors_Harbour_Movement_Player_Exit, FALSE
-# 41 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 40 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	applymove 2, VyratonOutdoors_Harbour_Movement_Samuel_Exit
-# 42 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 41 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	warp MAP_VYRATON_INDOORS_MAYORS_OFFICE, 4, 9
-# 43 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 42 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	waitstate
 	return
 
 
-# 46 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 45 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 VyratonOutdoors_Harbour_Movement_Samuel_BeginEntrance:
-# 48 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 47 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_down
-# 48 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 47 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_down
-# 48 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 47 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_down
-# 48 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 47 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_down
 	step_end
 
-# 51 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 50 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 VyratonOutdoors_Harbour_Movement_Player_MeetSamuel:
-# 53 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 52 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+	delay_16
+# 52 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	delay_16
 # 53 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	delay_16
-# 54 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	delay_8
-# 56 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 55 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	face_left
 	step_end
 
-# 59 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 58 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 VyratonOutdoors_Harbour_Movement_Samuel_ContinueEntrance:
-# 61 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 60 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+	walk_down
+# 60 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_down
 # 61 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	walk_down
-# 62 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	face_right
 	step_end
 
-# 65 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 64 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 VyratonOutdoors_Harbour_Movement_Samuel_Exit:
-# 67 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 66 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_up
-# 68 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 67 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_right
-# 69 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 68 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_up
 	step_end
 
-# 72 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 71 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 VyratonOutdoors_Harbour_Movement_Player_Exit:
-# 74 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 73 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+	delay_16
+# 73 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	delay_16
 # 74 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	delay_16
-# 75 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_up
 	step_end

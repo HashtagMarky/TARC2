@@ -2106,8 +2106,11 @@
 	.endm
 
 	@ Buffers the given text and calls the relevant message, name and mugshot script (see gStdScripts).
-	.macro mnmbox text:req, PMD=FALSE, mugshotEmotion=EMOTE_NORMAL, nameKnown=TRUE
+	.macro mnmbox text:req, PMD=FALSE, mugshotEmotion=EMOTE_NORMAL, nameKnown=TRUE, localId
 	lock
+	.ifnb \localId
+		setselectedobjectevent \localId
+	.endif
 	faceplayer
 	.if \PMD == TRUE
 		createfieldmugshot MUGSHOT_PMD, emotion=\mugshotEmotion
