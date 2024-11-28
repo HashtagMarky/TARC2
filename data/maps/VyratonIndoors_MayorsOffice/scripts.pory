@@ -107,19 +107,44 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_MeetPartner
 script VyratonIndoors_MayorsOffice_EventScript_StarterMon
 {
     clearflag(FLAG_SUPPRESS_MUGSHOT)
+    call(VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon)
+    setflag(FLAG_SUPPRESS_MUGSHOT)
+    call(VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter)
+}
 
+script VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon
+{
     bufferpartymonnick(STR_VAR_1, 0)
     special(GetOverworldMonSpecies)
     callnative(ClearPokedexFlags)
     callnative(ShowPokedexHeaderMessage)
-    playfanfare(MUS_DP_DEX_RATING)
-    mnmbox(VyratonIndoors_MayorsOffice_Text_DeterminedMon, TRUE, EMOTE_DETERMINED)
-    waitfanfare
-    callnative(HidePokedexHeaderMessage)
+    playfanfare(MUS_HG_RECEIVE_POKEMON)
+    faceplayer
+    createfieldmugshot(MUGSHOT_PMD, emotion=EMOTE_DETERMINED)
+    special(GetOverworldMonSpecies)
+    call(EventScript_DisplayPokedexSpeciesName)
+    playmoncry(VAR_0x8004, CRY_MODE_NORMAL)
+    message(VyratonIndoors_MayorsOffice_Text_DeterminedMon)
     setseenmon(VAR_0x8004)
     setcaughtmon(VAR_0x8004)
+    waitmessage
+    waitbuttonpress
+    waitfanfare
+    closemessage
+}
 
-    setflag(FLAG_SUPPRESS_MUGSHOT)
+script VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter
+{
+    turnobject(LOCALID_Starter, DIR_NORTH)
+    if (specialvar(VAR_RESULT, GetPlayerFacingDirection) == DIR_WEST)
+    {
+        applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_One)
+    }
+    elif (specialvar(VAR_RESULT, GetPlayerFacingDirection) == DIR_SOUTH)
+    {
+        applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_Two)
+    }
+    turnplayer(DIR_NORTH)
 }
 
 
@@ -136,4 +161,17 @@ movement VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase
 {
     walk_down
     walk_left
+}
+
+movement VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_One
+{
+    walk_up
+    walk_left * 2
+    walk_down
+}
+
+movement VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_Two
+{
+    walk_left
+    walk_down
 }
