@@ -17,6 +17,10 @@
 #include "dynamic_placeholder_text_util.h"
 #include "fonts.h"
 
+#include "event_data.h"
+#include "overworld.h"
+#include "sound.h"
+
 static u16 RenderText(struct TextPrinter *);
 static u32 RenderFont(struct TextPrinter *);
 static u16 FontFunc_Small(struct TextPrinter *);
@@ -1307,6 +1311,24 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             case EXT_CTRL_CODE_HIDE_POKEDEX_HEADER:
                 HidePokedexHeaderMessage();
                 return RENDER_REPEAT;
+            case EXT_CTRL_CODE_SHOW_ITEM_HEADER:
+                ShowItemDescription(gSpecialVar_0x8000);
+                return RENDER_REPEAT;
+            case EXT_CTRL_CODE_HIDE_ITEM_HEADER:
+                HideItemDescription(gSpecialVar_0x8000);
+                return RENDER_REPEAT;
+            case EXT_CTRL_CODE_PLAY_FANFARE:
+                m4aMPlayStop(&gMPlayInfo_BGM);
+                currChar = *textPrinter->printerTemplate.currentChar;
+                textPrinter->printerTemplate.currentChar++;
+                currChar |= (*textPrinter->printerTemplate.currentChar << 8);
+                textPrinter->printerTemplate.currentChar++;
+                PlaySE(currChar);
+                return RENDER_REPEAT;
+            case EXT_CTRL_CODE_WAIT_FANFARE:
+                textPrinter->delayCounter = 20;
+                textPrinter->state = RENDER_STATE_WAIT_FANFARE;
+                return RENDER_REPEAT;
             }
             break;
         case CHAR_PROMPT_CLEAR:
@@ -1455,6 +1477,20 @@ static u16 RenderText(struct TextPrinter *textPrinter)
         else
             textPrinter->state = RENDER_STATE_HANDLE_CHAR;
         return RENDER_UPDATE;
+    case RENDER_STATE_WAIT_FANFARE:
+        if (!IsSEPlaying())
+        {
+            if (textPrinter->delayCounter != 0)
+            {
+                textPrinter->delayCounter--;
+            }
+            else
+            {
+                textPrinter->state = RENDER_STATE_HANDLE_CHAR;
+                m4aMPlayContinue(&gMPlayInfo_BGM);
+            }
+        }
+        return RENDER_UPDATE;
     }
 
     return RENDER_FINISH;
@@ -1501,6 +1537,7 @@ static u32 UNUSED GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 lett
             case EXT_CTRL_CODE_SPEAKER_NAME:
             case EXT_CTRL_CODE_PLAY_BGM:
             case EXT_CTRL_CODE_PLAY_SE:
+            case EXT_CTRL_CODE_PLAY_FANFARE:
                 ++strPos;
             case EXT_CTRL_CODE_COLOR:
             case EXT_CTRL_CODE_HIGHLIGHT:
@@ -1520,6 +1557,7 @@ static u32 UNUSED GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 lett
             case EXT_CTRL_CODE_RESET_FONT:
             case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
             case EXT_CTRL_CODE_WAIT_SE:
+            case EXT_CTRL_CODE_WAIT_FANFARE:
             case EXT_CTRL_CODE_FILL_WINDOW:
             case EXT_CTRL_CODE_JPN:
             case EXT_CTRL_CODE_ENG:
@@ -1654,6 +1692,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                 ++str;
             case EXT_CTRL_CODE_PLAY_BGM:
             case EXT_CTRL_CODE_PLAY_SE:
+            case EXT_CTRL_CODE_PLAY_FANFARE:
                 ++str;
             case EXT_CTRL_CODE_COLOR:
             case EXT_CTRL_CODE_HIGHLIGHT:
@@ -1695,6 +1734,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             case EXT_CTRL_CODE_RESET_FONT:
             case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
             case EXT_CTRL_CODE_WAIT_SE:
+            case EXT_CTRL_CODE_WAIT_FANFARE:
             case EXT_CTRL_CODE_FILL_WINDOW:
             default:
                 break;
@@ -1822,6 +1862,7 @@ u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
                 break;
             case EXT_CTRL_CODE_PLAY_BGM:
             case EXT_CTRL_CODE_PLAY_SE:
+            case EXT_CTRL_CODE_PLAY_FANFARE:
                 ++strPos;
             case EXT_CTRL_CODE_PALETTE:
             case EXT_CTRL_CODE_PAUSE:
@@ -1837,6 +1878,7 @@ u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
             case EXT_CTRL_CODE_RESET_FONT:
             case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
             case EXT_CTRL_CODE_WAIT_SE:
+            case EXT_CTRL_CODE_WAIT_FANFARE:
             case EXT_CTRL_CODE_FILL_WINDOW:
             case EXT_CTRL_CODE_JPN:
             case EXT_CTRL_CODE_ENG:

@@ -389,6 +389,7 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
             case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
                 *dest++ = *src++;
             case EXT_CTRL_CODE_PLAY_BGM:
+            case EXT_CTRL_CODE_PLAY_FANFARE:
                 *dest++ = *src++;
             default:
                 *dest++ = *src++;
@@ -712,6 +713,10 @@ u8 GetExtCtrlCodeLength(u8 code)
         [EXT_CTRL_CODE_SPEAKER_NAME]           = 2,
         [EXT_CTRL_CODE_SHOW_POKEDEX_HEADER]    = 1,
         [EXT_CTRL_CODE_HIDE_POKEDEX_HEADER]    = 1,
+        [EXT_CTRL_CODE_SHOW_ITEM_HEADER]       = 1,
+        [EXT_CTRL_CODE_HIDE_ITEM_HEADER]       = 1,
+        [EXT_CTRL_CODE_PLAY_FANFARE]           = 3,
+        [EXT_CTRL_CODE_WAIT_FANFARE]           = 1,
     };
 
     u8 length = 0;

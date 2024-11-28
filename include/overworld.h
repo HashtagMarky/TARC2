@@ -163,5 +163,7 @@ enum ItemObtainFlags
     FLAG_SET_ITEM_OBTAINED,
 };
 bool8 GetSetItemObtained(u16 item, enum ItemObtainFlags caseId);
+void ShowItemDescription(u16 item);
+void HideItemDescription(u16 item);
 
 #endif // GUARD_OVERWORLD_H
