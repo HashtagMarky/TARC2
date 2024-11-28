@@ -43,8 +43,8 @@ text VyratonIndoors_MayorsOffice_Text_MeetNicknamedMon
         Oh! I should give you one more thing.\p
         I'm sure you're familiar with it,\n
         just as all seasoned trainers are…\l
-        I present you with… {PAUSE 40}{PAUSE_MUSIC}{PLAY_SE MUS_HG_OBTAIN_KEY_ITEM}a Pokédex!{PAUSE 175}\p
-        {RESUME_MUSIC}It's a wonderful tool that will help\n
+        I present you with…{PAUSE 40}{PLAY_FANFARE MUS_HG_OBTAIN_KEY_ITEM}{SHOW_ITEM_HEADER} a Pokédex!{WAIT_FANFARE}\p
+        {HIDE_ITEM_HEADER}It's a wonderful tool that will help\n
         you learn more about your partner,\l
         and every other Pokémon you meet.\p
         Why don't you try and see what it\n
@@ -67,8 +67,8 @@ text VyratonIndoors_MayorsOffice_Text_MeetNonNicknamedMon
         Oh! I should give you one more thing.\p
         I'm sure you're familiar with it,\n
         just as all seasoned trainers are…\l
-        I present you with… {PAUSE 40}a Pokédex!\p
-        It's a wonderful tool that will help\n
+        I present you with…{PAUSE 40}{PLAY_FANFARE MUS_HG_OBTAIN_KEY_ITEM}{SHOW_ITEM_HEADER} a Pokédex!{WAIT_FANFARE}\p
+        {HIDE_ITEM_HEADER}It's a wonderful tool that will help\n
         you learn more about your partner,\l
         and every other Pokémon you meet.\p
         Why don't you try and see what it\n

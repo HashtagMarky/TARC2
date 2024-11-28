@@ -1745,6 +1745,9 @@ extern const u32 gItemIconPalette_SwapSnack[];
 extern const u32 gItemIcon_TwiceSpicedRadish[];
 extern const u32 gItemIconPalette_TwiceSpicedRadish[];
 
+extern const u32 gItemIcon_Pokedex[];
+extern const u32 gItemIconPalette_Pokedex[];
+
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];
 

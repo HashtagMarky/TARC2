@@ -14110,4 +14110,20 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_PokeshiDoll,
         .iconPalette = gItemIconPalette_PokeshiDoll,
     },
+
+    [ITEM_POKEDEX] =
+    {
+        .name = _("Pokédex"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A high-tech tool\n"
+            "that notes Pokémon\n"
+            "you meet or catch."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_Pokedex,
+        .iconPalette = gItemIconPalette_Pokedex,
+    },
 };

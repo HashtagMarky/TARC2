@@ -999,8 +999,9 @@
 
 // Ikigai New Items
 #define ITEM_VARIABLE_ROD 829
+#define ITEM_POKEDEX 830
 
-#define ITEMS_COUNT 830
+#define ITEMS_COUNT 831
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations

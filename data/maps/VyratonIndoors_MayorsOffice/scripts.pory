@@ -47,6 +47,7 @@ script VyratonIndoors_MayorsOffice_EventScript_Samuel_OpenBriefcase
 
 script VyratonIndoors_MayorsOffice_EventScript_Samuel_GoMeetMon
 {
+    bufferpartymonnick(STR_VAR_1, 0)
     mnmbox(VyratonIndoors_MayorsOffice_Text_GoMeetMon)
 }
 
@@ -87,6 +88,7 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex
 	special(EnableNationalPokedex)
 
     bufferpartymonnick(STR_VAR_1, 0)
+    setvar(VAR_0x8000, ITEM_POKEDEX)
     if (specialvar(VAR_RESULT, IsLeadMonNicknamedOrNotEnglish) == TRUE)
     {
         mnmbox(VyratonIndoors_MayorsOffice_Text_MeetNicknamedMon, localId=LOCALID_Samuel)
