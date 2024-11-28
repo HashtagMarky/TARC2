@@ -19,7 +19,7 @@ EventScript_DisplayPokedexHeader_Return:
 
 EventScript_DisplayPokedexHeader_MainScript:
 	callnative ShowPokedexHeaderMessage
-	playfanfare MUS_RG_CAUGHT
+	playfanfare MUS_DP_DEX_RATING
 	delay 150
 	waitfanfare
 	callnative HidePokedexHeaderMessage

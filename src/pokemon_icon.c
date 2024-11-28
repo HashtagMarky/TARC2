@@ -283,6 +283,12 @@ void SpriteCB_MonIcon(struct Sprite *sprite)
     UpdateMonIconFrame(sprite);
 }
 
+void SpriteCB_MonIcon_FlippedHorizontal(struct Sprite *sprite)
+{
+    UpdateMonIconFrame(sprite);
+    sprite->hFlip = TRUE;
+}
+
 const u8 *GetMonIconTiles(u16 species, u32 personality)
 {
     const u8 *iconSprite;

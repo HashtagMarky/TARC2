@@ -22,6 +22,7 @@ u8 UpdateMonIconFrame(struct Sprite *sprite);
 void LoadMonIconPalette(u16 species);
 void LoadMonIconPalettePersonality(u16 species, u32 personality);
 void SpriteCB_MonIcon(struct Sprite *sprite);
+void SpriteCB_MonIcon_FlippedHorizontal(struct Sprite *sprite);
 void SetPartyHPBarSprite(struct Sprite *sprite, u8 animNum);
 u8 GetMonIconPaletteIndexFromSpecies(u16 species);
 

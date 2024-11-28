@@ -5948,7 +5948,7 @@ static void ShowMonIconSprite(u16 species, bool8 firstTime, bool8 flash)
     }
 
     // Create the Pokémon icon sprite
-    sMonIconSpriteId = CreateMonIconNoPersonality(species, SpriteCB_MonIcon, PKMN_ICON_X - 20, PKMN_ICON_Y - 18, 0);
+    sMonIconSpriteId = CreateMonIconNoPersonality(species, SpriteCB_MonIcon_FlippedHorizontal, PKMN_ICON_X - 20, PKMN_ICON_Y - 18, 0);
     
     if (sMonIconSpriteId != MAX_SPRITES)
     {
