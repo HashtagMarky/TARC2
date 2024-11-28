@@ -34,8 +34,7 @@ script OverworldEncounters_EventScript_Encounter
     {
         message(format("{PLAYER} caught a wild {STR_VAR_1} off-guard!\p The wild {STR_VAR_1} is panicking…\n What will {PLAYER} do?"))
     }
-    specialvar(VAR_RESULT, GetPlayerFacingDirection)
-    if (var(VAR_RESULT) == DIR_NORTH && flag(FLAG_SYS_OVERWORLD_ENCOUNTER_CAMERA) == FALSE)
+    if (specialvar(VAR_RESULT, GetPlayerFacingDirection) == DIR_NORTH && flag(FLAG_SYS_OVERWORLD_ENCOUNTER_CAMERA) == FALSE)
     {
         special(SpawnCameraObject)
         setflag(FLAG_SAFE_FOLLOWER_MOVEMENT)
@@ -47,13 +46,11 @@ script OverworldEncounters_EventScript_Encounter
     }
     waitmessage
     dynmultipush("{FONT_NARROW}FIGHT", 0)
-    specialvar(VAR_RESULT, HasAtLeastOnePokeBall)
-    if (var(VAR_RESULT) == TRUE)
+    if (specialvar(VAR_RESULT, HasAtLeastOnePokeBall) == TRUE)
     {
         dynmultipush("{FONT_NARROWER}{POKE}BALL", 1)
     }
-    checkitem(ITEM_POKEBLOCK_CASE)
-    if (var(VAR_RESULT) == TRUE)
+    if (checkitem(ITEM_POKEBLOCK_CASE) == TRUE)
     {
         dynmultipush("{FONT_NARROW}APPROACH", 2)
     }
@@ -103,16 +100,14 @@ script OverworldEncounters_EventScript_ThrowBall
     setvar(VAR_0x8007, ITEM_POKE_BALL)
     while (var(VAR_0x8007) <= ITEM_CHERISH_BALL)
     {
-        checkitem(VAR_0x8007)
-        if (var(VAR_RESULT) == TRUE)
+        if (checkitem(VAR_0x8007) == TRUE)
         {
             bufferitemname(STR_VAR_1, VAR_0x8007)
             dynmultipush("{FONT_NARROW}{STR_VAR_1}", VAR_0x8007)
         }
         addvar(VAR_0x8007, 1)
     }
-    checkitem(ITEM_STRANGE_BALL)
-    if (var(VAR_RESULT) == TRUE)
+    if (checkitem(ITEM_STRANGE_BALL) == TRUE)
     {
         bufferitemname(STR_VAR_1, ITEM_STRANGE_BALL)
         dynmultipush("{FONT_NARROW}{STR_VAR_1}", ITEM_STRANGE_BALL)
@@ -173,8 +168,7 @@ script OverworldEncounters_EventScript_CatchAttempt
 
 script OverworldEncounters_EventScript_RunAway
 {
-    specialvar(VAR_RESULT, OverworldTrappedInBattle)
-    if (var(VAR_RESULT) == BATTLE_RUN_SUCCESS)
+    if (specialvar(VAR_RESULT, OverworldTrappedInBattle) == BATTLE_RUN_SUCCESS)
     {
         message(format("{PLAYER} got away from the\n wild {STR_VAR_1}!"))
         waitmessage
@@ -195,8 +189,7 @@ script OverworldEncounters_EventScript_RunAway
 
 script OverworldEncounters_EventScript_EncounterEscapeAttempt
 {
-    specialvar(VAR_RESULT, WillOverworldEncounterRun)
-    if (var(VAR_RESULT) == TRUE)
+    if (specialvar(VAR_RESULT, WillOverworldEncounterRun) == TRUE)
     {
         goto(OverworldEncounters_EventScript_EncounterEscape)
     }
@@ -229,8 +222,7 @@ script OverworldEncounters_EventScript_EncounterEnd
     closemessage
     applymovement(VAR_LAST_TALKED, Common_Movement_FaceAwayPlayer)
     waitmovement(VAR_LAST_TALKED)
-    specialvar(VAR_RESULT, GetPlayerFacingDirection)
-    if (var(VAR_RESULT) == DIR_NORTH && flag(FLAG_SYS_OVERWORLD_ENCOUNTER_CAMERA) == TRUE)
+    if (specialvar(VAR_RESULT, GetPlayerFacingDirection) == DIR_NORTH && flag(FLAG_SYS_OVERWORLD_ENCOUNTER_CAMERA) == TRUE)
     {
         special(SpawnCameraObject)
         setflag(FLAG_SAFE_FOLLOWER_MOVEMENT)
