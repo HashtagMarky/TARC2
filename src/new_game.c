@@ -96,7 +96,7 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->playerEmote = EMOTE_NORMAL;
     gSaveBlock2Ptr->ikigaiGymType = TYPE_NONE;
     gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FASTER;
-    gSaveBlock2Ptr->optionsTitleScreenRandomise = FALSE;
+    gSaveBlock2Ptr->optionsTitleScreenRandomise = TRUE;
     gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_MONO;
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
     gSaveBlock2Ptr->optionsBattleScene = OPTIONS_BATTLE_SCENE_FULL_ANIMATION;
