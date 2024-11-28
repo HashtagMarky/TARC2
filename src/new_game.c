@@ -119,7 +119,7 @@ static void SetDefaultOptions(void)
     gSaveBlock3Ptr->fastSurf = FALSE;
 }
 
-static void ClearPokedexFlags(void)
+void ClearPokedexFlags(void)
 {
     gUnusedPokedexU8 = 0;
     memset(&gSaveBlock1Ptr->dexCaught, 0, sizeof(gSaveBlock1Ptr->dexCaught));

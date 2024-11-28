@@ -27,3 +27,77 @@ text VyratonIndoors_MayorsOffice_Text_CrackOpen
         Crack open the briefcase, it's time\n
         for you to mold your gym's future!")
 }
+
+text VyratonIndoors_MayorsOffice_Text_MeetNicknamedMon
+{
+    format("
+        Wow, what a choice {PLAYER}!\n
+        {STR_VAR_1} is a wonderful name!\p
+        Your new partner looks thrilled to\n
+        embark on this journey with you.\p
+        They say that all great comraderies\n
+        must be built upon a strong bond,\l
+        and I can see that you have one.\p
+        Make sure you take care of each\n
+        other and nothing will topple you!\l
+        Oh! I should give you one more thing.\p
+        I'm sure you're familiar with it,\n
+        just as all seasoned trainers are…\l
+        I present you with… {PAUSE 40}a Pokédex!\p
+        It's a wonderful tool that will help\n
+        you learn more about your partner,\l
+        and every other Pokémon you meet.\p
+        Why don't you try and see what it\n
+        says about {STR_VAR_1}.\l
+        I'm sure you'll find it fascinating!")
+}
+
+text VyratonIndoors_MayorsOffice_Text_MeetNonNicknamedMon
+{
+    format("
+        Wow, what a choice {PLAYER}!\n
+        A worthy selection for you!\p
+        {STR_VAR_1} looks thrilled to\n
+        embark on this journey with you.\p
+        They say that all great comraderies\n
+        must be built upon a strong bond,\l
+        and I can see that you have one.\p
+        Make sure you take care of each\n
+        other and nothing will topple you!\l
+        Oh! I should give you one more thing.\p
+        I'm sure you're familiar with it,\n
+        just as all seasoned trainers are…\l
+        I present you with… {PAUSE 40}a Pokédex!\p
+        It's a wonderful tool that will help\n
+        you learn more about your partner,\l
+        and every other Pokémon you meet.\p
+        Why don't you try and see what it\n
+        says about {STR_VAR_1}.\l
+        I'm sure you'll find it fascinating!")
+}
+
+text VyratonIndoors_MayorsOffice_Text_ExtremelySet
+{
+    format("
+        Oh no {PLAYER}, I don't think that\n
+        {STR_VAR_1} would appreciate it if\l
+        you changed your mind so quickly.\p
+        They seem extremely set on being the\n
+        partner to the gym leader of Vyraton.\p
+        Why don't you go and meet them, I'm\n
+        sure that you'll feel the same way.")
+}
+
+text VyratonIndoors_MayorsOffice_Text_GoMeetMon
+{
+    format("
+        Go for it {PLAYER}, go ahead and\n
+        see what {STR_VAR_1} has to say!")
+}
+
+text VyratonIndoors_MayorsOffice_Text_DeterminedMon
+{
+    format("
+        {STR_VAR_1} looks at you with a\n
+        burning desire to prove themselves!")
+}

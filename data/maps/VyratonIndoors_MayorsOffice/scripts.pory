@@ -30,15 +30,24 @@ script VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_EnterOffice
 
 script VyratonIndoors_MayorsOffice_EventScript_Samuel
 {
-    switch (var(VAR_IKIGAI_INTRO_STATE))
+    if (flag(FLAG_SYS_POKEDEX_GET))
     {
-        case 2: call(VyratonIndoors_MayorsOffice_EventScript_Samuel_OpenBriefcase)
+        call(VyratonIndoors_MayorsOffice_EventScript_Samuel_GoMeetMon)
+    }
+    else
+    {
+        call(VyratonIndoors_MayorsOffice_EventScript_Samuel_OpenBriefcase)
     }
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_Samuel_OpenBriefcase
 {
     mnmbox(VyratonIndoors_MayorsOffice_Text_CrackOpen)
+}
+
+script VyratonIndoors_MayorsOffice_EventScript_Samuel_GoMeetMon
+{
+    mnmbox(VyratonIndoors_MayorsOffice_Text_GoMeetMon)
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase
@@ -76,11 +85,41 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex
     setflag(FLAG_SYS_POKEDEX_GET)
 	setflag(FLAG_SYS_NATIONAL_DEX)
 	special(EnableNationalPokedex)
+
+    bufferpartymonnick(STR_VAR_1, 0)
+    if (specialvar(VAR_RESULT, IsLeadMonNicknamedOrNotEnglish) == TRUE)
+    {
+        mnmbox(VyratonIndoors_MayorsOffice_Text_MeetNicknamedMon, localId=LOCALID_Samuel)
+    }
+    else
+    {
+        mnmbox(VyratonIndoors_MayorsOffice_Text_MeetNonNicknamedMon, localId=LOCALID_Samuel)
+    }
+    turnplayer(DIR_EAST)
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_MeetPartner
 {
+    bufferpartymonnick(STR_VAR_1, 0)
+    mnmbox(VyratonIndoors_MayorsOffice_Text_ExtremelySet, localId=LOCALID_Samuel)
+}
 
+script VyratonIndoors_MayorsOffice_EventScript_StarterMon
+{
+    clearflag(FLAG_SUPPRESS_MUGSHOT)
+
+    bufferpartymonnick(STR_VAR_1, 0)
+    special(GetOverworldMonSpecies)
+    callnative(ClearPokedexFlags)
+    callnative(ShowPokedexHeaderMessage)
+    playfanfare(MUS_DP_DEX_RATING)
+    mnmbox(VyratonIndoors_MayorsOffice_Text_DeterminedMon, TRUE, EMOTE_DETERMINED)
+    waitfanfare
+    callnative(HidePokedexHeaderMessage)
+    setseenmon(VAR_0x8004)
+    setcaughtmon(VAR_0x8004)
+
+    setflag(FLAG_SUPPRESS_MUGSHOT)
 }
 
 
