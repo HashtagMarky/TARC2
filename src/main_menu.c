@@ -1352,7 +1352,7 @@ static void Task_NewGameSamuelSpeech_Init(u8 taskId)
     gTasks[taskId].tPlayerSpriteId = SPRITE_NONE;
     gTasks[taskId].data[3] = 0xFF;
     gTasks[taskId].tTimer = 40;
-    PlayBGM(MUS_ROUTE122);
+    PlayBGM(MUS_DP_HALL_OF_FAME);
     ShowBg(0);
     ShowBg(1);
 }
@@ -1398,7 +1398,7 @@ void CB2_NewGameSamuelSpeech_FromNewMainMenu(void)
     FreeAllSpritePalettes();
     ResetAllPicSprites();
     AddSamuelSpeechObjects(taskId);
-    PlayBGM(MUS_ROUTE122);
+    PlayBGM(MUS_DP_HALL_OF_FAME);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     SetGpuReg(REG_OFFSET_WIN0H, 0);
     SetGpuReg(REG_OFFSET_WIN0V, 0);
