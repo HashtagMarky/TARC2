@@ -13,5 +13,460 @@ script VyratonOutdoors_Harbour_EventScript_SSPathfinder_Departure
 
 script VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers
 {
+    call(VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetPassengers)
+    call(VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SpawnPassengers)
+    playse(SE_RG_SS_ANNE_HORN)
+    random(6)
+    switch (var(VAR_RESULT))
+    {
+        case 0: call(VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetOne)
+        case 1: call(VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetTwo)
+        case 2: call(VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetThree)
+        case 3: call(VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetFour)
+        case 4: call(VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetFive)
+        case 5: call(VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetSix)
+    }
+    waitse
+    call(VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_DespawnPassengers)
+}
 
+script VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetPassengers
+{
+    random(6)
+    copyvar(VAR_OBJ_GFX_ID_0, VAR_RESULT)
+    addvar(VAR_OBJ_GFX_ID_0, 15)
+
+    random(5)
+    copyvar(VAR_OBJ_GFX_ID_1, VAR_RESULT)
+    addvar(VAR_OBJ_GFX_ID_1, 23)
+
+    random(5)
+    copyvar(VAR_OBJ_GFX_ID_2, VAR_RESULT)
+    addvar(VAR_OBJ_GFX_ID_2, 31)
+
+    random(5)
+    copyvar(VAR_OBJ_GFX_ID_3, VAR_RESULT)
+    addvar(VAR_OBJ_GFX_ID_3, 44)
+
+    random(6)
+    copyvar(VAR_OBJ_GFX_ID_4, VAR_RESULT)
+    addvar(VAR_OBJ_GFX_ID_4, 15)
+
+    random(5)
+    copyvar(VAR_OBJ_GFX_ID_5, VAR_RESULT)
+    addvar(VAR_OBJ_GFX_ID_5, 23)
+}
+
+script VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SpawnPassengers
+{
+    addobject(LOCALID_PASSENGER_1)
+    addobject(LOCALID_PASSENGER_2)
+    addobject(LOCALID_PASSENGER_3)
+    addobject(LOCALID_PASSENGER_4)
+    addobject(LOCALID_PASSENGER_5)
+    addobject(LOCALID_PASSENGER_6)
+}
+
+script VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_DespawnPassengers
+{
+    removeobject(LOCALID_PASSENGER_1)
+    removeobject(LOCALID_PASSENGER_2)
+    removeobject(LOCALID_PASSENGER_3)
+    removeobject(LOCALID_PASSENGER_4)
+    removeobject(LOCALID_PASSENGER_5)
+    removeobject(LOCALID_PASSENGER_6)
+}
+
+script VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetOne
+{
+    applymovement(LOCALID_PASSENGER_1, VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerOne)
+    applymovement(LOCALID_PASSENGER_2, VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerTwo)
+    applymovement(LOCALID_PASSENGER_3, VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerThree)
+    applymovement(LOCALID_PASSENGER_4, VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerFour)
+    applymovement(LOCALID_PASSENGER_5, VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerFive)
+    applymovement(LOCALID_PASSENGER_6, VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerSix)
+}
+
+script VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetTwo
+{
+    applymovement(LOCALID_PASSENGER_1, VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerOne)
+    applymovement(LOCALID_PASSENGER_2, VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerTwo)
+    applymovement(LOCALID_PASSENGER_3, VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerThree)
+    applymovement(LOCALID_PASSENGER_4, VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerFour)
+    applymovement(LOCALID_PASSENGER_5, VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerFive)
+    applymovement(LOCALID_PASSENGER_6, VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerSix)
+}
+
+script VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetThree
+{
+    applymovement(LOCALID_PASSENGER_1, VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerOne)
+    applymovement(LOCALID_PASSENGER_2, VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerTwo)
+    applymovement(LOCALID_PASSENGER_3, VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerThree)
+    applymovement(LOCALID_PASSENGER_4, VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerFour)
+    applymovement(LOCALID_PASSENGER_5, VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerFive)
+    applymovement(LOCALID_PASSENGER_6, VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerSix)
+}
+
+script VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetFour
+{
+    applymovement(LOCALID_PASSENGER_1, VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerOne)
+    applymovement(LOCALID_PASSENGER_2, VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerTwo)
+    applymovement(LOCALID_PASSENGER_3, VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerThree)
+    applymovement(LOCALID_PASSENGER_4, VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerFour)
+    applymovement(LOCALID_PASSENGER_5, VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerFive)
+    applymovement(LOCALID_PASSENGER_6, VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerSix)
+}
+
+script VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetFive
+{
+    applymovement(LOCALID_PASSENGER_1, VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerOne)
+    applymovement(LOCALID_PASSENGER_2, VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerTwo)
+    applymovement(LOCALID_PASSENGER_3, VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerThree)
+    applymovement(LOCALID_PASSENGER_4, VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerFour)
+    applymovement(LOCALID_PASSENGER_5, VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerFive)
+    applymovement(LOCALID_PASSENGER_6, VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerSix)
+}
+
+script VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetSix
+{
+    applymovement(LOCALID_PASSENGER_1, VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerOne)
+    applymovement(LOCALID_PASSENGER_2, VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerTwo)
+    applymovement(LOCALID_PASSENGER_3, VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerThree)
+    applymovement(LOCALID_PASSENGER_4, VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerFour)
+    applymovement(LOCALID_PASSENGER_5, VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerFive)
+    applymovement(LOCALID_PASSENGER_6, VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerSix)
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerOne
+{
+    delay_4
+    walk_up * 2
+    walk_right
+    walk_up * 5
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerTwo
+{
+    delay_2
+    walk_up * 7
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerThree
+{
+    delay_8 * 2
+    delay_4
+    delay_2
+    walk_up * 3
+    walk_left
+    walk_up * 4
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerFour
+{
+    delay_8 * 2
+    delay_4
+    delay_2
+    walk_up * 2
+    walk_left
+    walk_up * 5
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerFive
+{
+    delay_16 * 2
+    delay_8
+    delay_4
+    walk_up * 2
+    walk_right * 2
+    walk_up * 5
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerSix
+{
+    delay_16 * 2
+    delay_8
+    delay_2
+    walk_up * 3
+    walk_left
+    walk_up * 4
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerOne
+{
+    delay_2
+    walk_up * 3
+    walk_left
+    walk_up * 4
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerTwo
+{
+    delay_4
+    walk_up * 5
+    walk_right * 2
+    walk_up * 2
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerThree
+{
+    delay_8 * 2
+    delay_4
+    delay_2
+    walk_up * 4
+    walk_right
+    walk_up * 3
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerFour
+{
+    delay_8 * 2
+    delay_4
+    delay_4
+    walk_up * 5
+    walk_left * 2
+    walk_up * 2
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerFive
+{
+    delay_16 * 2
+    delay_8
+    delay_2
+    walk_up * 6
+    walk_left
+    walk_up * 3
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerSix
+{
+    delay_16 * 2
+    delay_8
+    delay_2
+    walk_up * 3
+    walk_right * 2
+    walk_up * 4
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerOne
+{
+    delay_4
+    walk_up * 4
+    walk_right * 2
+    walk_up * 3
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerTwo
+{
+    delay_2
+    walk_up * 2
+    walk_left
+    walk_up * 6
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerThree
+{
+    delay_8 * 2
+    delay_4
+    delay_4
+    walk_up * 4
+    walk_right
+    walk_up * 3
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerFour
+{
+    delay_8 * 2
+    delay_4
+    delay_4
+    walk_up * 3
+    walk_left * 2
+    walk_up * 5
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerFive
+{
+    delay_16 * 2
+    delay_8
+    delay_4
+    walk_up * 5
+    walk_right
+    walk_up * 4
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerSix
+{
+    delay_16 * 2
+    delay_8
+    delay_2
+    walk_up * 6
+    walk_left
+    walk_up * 3
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerOne
+{
+    delay_4
+    walk_up * 2
+    walk_right
+    walk_up * 6
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerTwo
+{
+    delay_2
+    walk_up * 5
+    walk_left
+    walk_up * 3
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerThree
+{
+    delay_8 * 2
+    delay_4
+    delay_2
+    walk_up * 4
+    walk_left
+    walk_up * 4
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerFour
+{
+    delay_8 * 2
+    delay_4
+    delay_4
+    walk_up * 5
+    walk_right
+    walk_up * 2
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerFive
+{
+    delay_16 * 2
+    delay_8
+    delay_2
+    walk_up * 6
+    walk_left
+    walk_up * 3
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerSix
+{
+    delay_16 * 2
+    delay_8
+    delay_4
+    walk_up * 3
+    walk_right * 2
+    walk_up * 5
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerOne
+{
+    delay_2
+    walk_up * 5
+    walk_left
+    walk_up * 3
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerTwo
+{
+    delay_4
+    walk_up * 4
+    walk_right * 2
+    walk_up * 3
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerThree
+{
+    delay_8 * 2
+    delay_4
+    delay_2
+    walk_up * 6
+    walk_left
+    walk_up * 2
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerFour
+{
+    delay_8 * 2
+    delay_4
+    delay_4
+    walk_up * 3
+    walk_right * 2
+    walk_up * 4
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerFive
+{
+    delay_16 * 2
+    delay_8
+    delay_4
+    walk_up * 4
+    walk_left
+    walk_up * 5
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerSix
+{
+    delay_16 * 2
+    delay_8
+    delay_4
+    walk_up * 5
+    walk_right
+    walk_up * 4
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerOne
+{
+    delay_4
+    walk_up * 3
+    walk_right
+    walk_up * 5
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerTwo
+{
+    delay_2
+    walk_up * 6
+    walk_left
+    walk_up * 2
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerThree
+{
+    delay_8 * 2
+    delay_4
+    delay_2
+    walk_up * 5
+    walk_right * 2
+    walk_up * 2
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerFour
+{
+    delay_8 * 2
+    delay_4
+    delay_4
+    walk_up * 6
+    walk_left
+    walk_up * 3
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerFive
+{
+    delay_16 * 2
+    delay_8
+    delay_4
+    walk_up * 5
+    walk_right
+    walk_up * 4
+}
+
+movement VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerSix
+{
+    delay_16 * 2
+    delay_8
+    delay_2
+    walk_up * 4
+    walk_left
+    walk_up * 5
 }

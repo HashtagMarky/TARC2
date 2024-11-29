@@ -25,7 +25,6 @@ script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Disembarkment
 
 script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet
 {
-    playse(SE_RG_SS_ANNE_HORN)
     applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_BeginEntrance)
     turnplayer(DIR_NORTH)
     emote(LOCALID_Samuel, EMOTE_EXCLAM)
