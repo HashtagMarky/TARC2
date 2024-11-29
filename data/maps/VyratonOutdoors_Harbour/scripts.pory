@@ -25,9 +25,16 @@ script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Disembarkment
 
 script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet
 {
+    speakername(known=FALSE)
+    msgbox(VyratonOutdoors_Harbour_Text_ExcuseMe, MSGBOX_DEFAULT)
+    closemessage
+    addobject(LOCALID_Grandfather)
+    applymovement(LOCALID_Grandfather, VyratonOutdoors_Harbour_Movement_Grandfather_Exit)
+    applymoveplayer(VyratonOutdoors_Harbour_Movement_Player_MoveOutOfWay, FALSE)
     applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_BeginEntrance)
-    turnplayer(DIR_NORTH)
+    turnobject(LOCALID_Samuel, DIR_NORTH)
     emote(LOCALID_Samuel, EMOTE_EXCLAM)
+    delay(40)
     applymoveplayer(VyratonOutdoors_Harbour_Movement_Player_MeetSamuel, FALSE)
     applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_ContinueEntrance)
     mnmbox(VyratonOutdoors_Harbour_Text_WelcomeToVyraton, nameKnown=FALSE, localId=LOCALID_Samuel)
@@ -44,7 +51,26 @@ script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures
     applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_Exit)
     warp(MAP_VYRATON_INDOORS_MAYORS_OFFICE, 4, 9)
     setflag(FLAG_HIDE_VYRATON_HARBOR_SAMUEL)
+    setflag(FLAG_HIDE_VYRATON_HARBOR_GRANDFATHER)
     waitstate
+}
+
+movement VyratonOutdoors_Harbour_Movement_Grandfather_Exit
+{
+    delay_2
+    delay_16
+    walk_up * 7
+}
+
+movement VyratonOutdoors_Harbour_Movement_Player_MoveOutOfWay
+{
+    face_left
+    lock_facing_direction
+    walk_right
+    unlock_facing_direction
+    delay_16 * 2
+    walk_left
+    face_up
 }
 
 movement VyratonOutdoors_Harbour_Movement_Samuel_BeginEntrance
