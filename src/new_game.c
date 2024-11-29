@@ -49,11 +49,14 @@
 #include "constants/items.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
+extern const u8 EventScript_ResetIkigaiMapFlags[];
 
 static void ClearFrontierRecord(void);
 static void WarpToTruck(void);
 static void ResetMiniGamesRecords(void);
 static void ResetItemFlags(void);
+
+static void WarpToPier(void);
 
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
 EWRAM_DATA bool8 gEnableContestDebugging = FALSE;
@@ -151,6 +154,14 @@ static void WarpToTruck(void)
     WarpIntoMap();
 }
 
+static void WarpToPier(void)
+{
+    FlagSet(FLAG_HIDE_MAP_NAME_POPUP);
+    FlagSet(FLAG_SUPPRESS_MUGSHOT);
+    SetWarpDestination(MAP_GROUP(VYRATON_OUTDOORS_HARBOUR), MAP_NUM(VYRATON_OUTDOORS_HARBOUR), WARP_ID_NONE, 15, 25);
+    WarpIntoMap();
+}
+
 void Sav2_ClearSetDefault(void)
 {
     ClearSav2();
@@ -214,8 +225,10 @@ void NewGameInitData(void)
     InitDewfordTrend();
     ResetFanClub();
     ResetLotteryCorner();
-    WarpToTruck();
+    // WarpToTruck();
+    WarpToPier();
     RunScriptImmediately(EventScript_ResetAllMapFlags);
+    RunScriptImmediately(EventScript_ResetIkigaiMapFlags);
     ResetMiniGamesRecords();
     InitUnionRoomChatRegisteredTexts();
     InitLilycoveLady();

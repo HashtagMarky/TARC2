@@ -6,16 +6,21 @@ mapscripts VyratonOutdoors_Harbour_MapScripts
     ]
 }
 
-const LOCALID_SS_PATHFINDER = 1
-const LOCALID_Samuel = 2
+const LOCALID_Samuel        = 2
+const LOCALID_Grandfather   = 9
 
 script VyratonOutdoors_Harbour_EventScript_IkigaiIntro
 {
     setvar(VAR_IKIGAI_INTRO_STATE, 1)
-    setflag(FLAG_SUPPRESS_MUGSHOT)
 
+    call(VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Disembarkment)
     call(VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet)
     call(VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures)
+}
+
+script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Disembarkment
+{
+    call(VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers)
 }
 
 script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet
@@ -33,12 +38,13 @@ script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet
 
 script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures
 {
-    ssannedeparturecutcene(LOCALID_SS_PATHFINDER)
+    call(VyratonOutdoors_Harbour_EventScript_SSPathfinder_Departure)
     turnplayer(DIR_WEST)
     mnmbox(VyratonOutdoors_Harbour_Text_HeadToOffice)
     applymoveplayer(VyratonOutdoors_Harbour_Movement_Player_Exit, FALSE)
     applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_Exit)
     warp(MAP_VYRATON_INDOORS_MAYORS_OFFICE, 4, 9)
+    setflag(FLAG_HIDE_VYRATON_HARBOR_SAMUEL)
     waitstate
 }
 

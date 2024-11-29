@@ -1,0 +1,17 @@
+const LOCALID_SS_PATHFINDER = 1
+const LOCALID_PASSENGER_1   = 3
+const LOCALID_PASSENGER_2   = 4
+const LOCALID_PASSENGER_3   = 5
+const LOCALID_PASSENGER_4   = 6
+const LOCALID_PASSENGER_5   = 7
+const LOCALID_PASSENGER_6   = 8
+
+script VyratonOutdoors_Harbour_EventScript_SSPathfinder_Departure
+{
+    ssannedeparturecutcene(LOCALID_SS_PATHFINDER)
+}
+
+script VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers
+{
+
+}

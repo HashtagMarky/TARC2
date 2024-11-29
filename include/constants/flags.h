@@ -893,8 +893,8 @@
 #define FLAG_HIDE_BATTLE_FRONTIER_SUDOWOODO                         0x34A
 #define FLAG_HIDE_ROUTE_111_ROCK_SMASH_TIP_GUY                      0x34B
 #define FLAG_HIDE_RUSTBORO_CITY_SCIENTIST                           0x34C
-#define FLAG_HIDE_SLATEPORT_CITY_HARBOR_AQUA_GRUNT                  0x34D
-#define FLAG_HIDE_SLATEPORT_CITY_HARBOR_ARCHIE                      0x34E
+#define FLAG_HIDE_VYRATON_HARBOR_GRANDFATHER                        0x34D
+#define FLAG_HIDE_VYRATON_HARBOR_SAMUEL                             0x34E
 #define FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD                           0x34F
 #define FLAG_HIDE_SLATEPORT_CITY_HARBOR_SUBMARINE_SHADOW            0x350
 #define FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_PICHU_DOLL          0x351
@@ -953,7 +953,7 @@
 #define FLAG_HIDE_ROUTE_120_GABBY_AND_TY_2                          0x386
 #define FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2                          0x387
 #define FLAG_HIDE_ROUTE_118_GABBY_AND_TY_3                          0x388
-#define FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS                     0x389
+#define FLAG_HIDE_VYRATON_HARBOR_PASSENGERS                         0x389
 #define FLAG_HIDE_ROUTE_104_WHITE_HERB_FLORIST                      0x38A
 #define FLAG_HIDE_FALLARBOR_AZURILL                                 0x38B
 #define FLAG_HIDE_LILYCOVE_HARBOR_FERRY_ATTENDANT                   0x38C
