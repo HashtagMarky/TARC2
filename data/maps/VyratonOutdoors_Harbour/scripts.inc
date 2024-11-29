@@ -77,7 +77,7 @@ VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures::
 # 53 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	setflag FLAG_HIDE_VYRATON_HARBOR_SAMUEL
 # 54 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	setflag FLAG_HIDE_VYRATON_HARBOR_GRANDFATHER
+	setflag FLAG_HIDE_VYRATON_HARBOR_GRANDPARENT
 # 55 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	waitstate
 	return
