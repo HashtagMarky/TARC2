@@ -33,7 +33,7 @@ script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet
     applymoveplayer(VyratonOutdoors_Harbour_Movement_Player_MoveOutOfWay, FALSE)
     applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_BeginEntrance)
     turnobject(LOCALID_Samuel, DIR_NORTH)
-    emote(LOCALID_Samuel, EMOTE_EXCLAM)
+    emote(LOCALID_Samuel, EMOTE_QUESTION)
     delay(40)
     applymoveplayer(VyratonOutdoors_Harbour_Movement_Player_MeetSamuel, FALSE)
     applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_ContinueEntrance)
@@ -76,6 +76,7 @@ movement VyratonOutdoors_Harbour_Movement_Player_MoveOutOfWay
 movement VyratonOutdoors_Harbour_Movement_Samuel_BeginEntrance
 {
     walk_down * 4
+    delay_8
 }
 
 movement VyratonOutdoors_Harbour_Movement_Player_MeetSamuel

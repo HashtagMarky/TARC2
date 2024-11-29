@@ -73,7 +73,7 @@ VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetPassenge
 # 37 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	addvar VAR_OBJ_GFX_ID_0, 15
 # 39 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	random 5
+	random 4
 # 40 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	copyvar VAR_OBJ_GFX_ID_1, VAR_RESULT
 # 41 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
@@ -101,7 +101,7 @@ VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetPassenge
 # 56 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	copyvar VAR_OBJ_GFX_ID_5, VAR_RESULT
 # 57 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	addvar VAR_OBJ_GFX_ID_5, 23
+	addvar VAR_OBJ_GFX_ID_5, 31
 	return
 
 
