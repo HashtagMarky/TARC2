@@ -30,5 +30,5 @@ text VyratonOutdoors_Harbour_Text_HeadToOffice
         I will never get bored of that view…\n
         {PAUSE 40}Come on, {PLAYER}. Let's head off.\p
         It's just a short walk, but we should\n
-        make a move before it gets too late.")
+        make a move before it gets dark.")
 }

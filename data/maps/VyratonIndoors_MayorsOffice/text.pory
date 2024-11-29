@@ -9,7 +9,7 @@ text VyratonIndoors_MayorsOffice_Text_KickStart
 {
     format("
         Well {PLAYER}, we should kick start\n
-        business before it gets too late.\p
+        business so we don't finish too late.\p
         I know you were unsure when I asked,\n
         so I brought some options for you.\p
         {PLAYER}… {PAUSE 40}It's time to claim a type\n

@@ -6,7 +6,7 @@ VyratonIndoors_MayorsOffice_Text_ShouldReturn::
 VyratonIndoors_MayorsOffice_Text_KickStart::
 # 8 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
 	.string "Well {PLAYER}, we should kick start\n"
-	.string "business before it gets too late.\p"
+	.string "business so we don't finish too late.\p"
 	.string "I know you were unsure when I asked,\n"
 	.string "so I brought some options for you.\p"
 	.string "{PLAYER}… {PAUSE 40}It's time to claim a type\n"
