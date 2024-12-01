@@ -2,9 +2,11 @@
 #include "task.h"
 #include "event_data.h"
 #include "event_object_movement.h"
+#include "random.h"
 #include "script.h"
 #include "sound.h"
 #include "constants/songs.h"
+#include "constants/vars.h"
 
 // Tasks governing the ship's departure after you've gotten HM01 CUT
 
@@ -202,4 +204,25 @@ static void SmokeSpriteCallback(struct Sprite *sprite)
     sprite->x2 = sprite->data[0] / 4;
     if (sprite->animEnded)
         DestroySprite(sprite);
+}
+
+void SSPathfinder_SetPassengers(void)
+{
+    VarSet(VAR_OBJ_GFX_ID_0, (Random() % 6) + 15);
+
+    VarSet(VAR_OBJ_GFX_ID_1, (Random() % 6) + 15);
+    do {
+        VarSet(VAR_OBJ_GFX_ID_1, (Random() % 6) + 15);
+    } while (VarGet(VAR_OBJ_GFX_ID_1) == VarGet(VAR_OBJ_GFX_ID_0));
+
+    VarSet(VAR_OBJ_GFX_ID_2, (Random() % 4) + 23);
+
+    VarSet(VAR_OBJ_GFX_ID_3, (Random() % 5) + 31);
+
+    VarSet(VAR_OBJ_GFX_ID_4, (Random() % 5) + 31);
+    do {
+        VarSet(VAR_OBJ_GFX_ID_4, (Random() % 5) + 31);
+    } while (VarGet(VAR_OBJ_GFX_ID_4) == VarGet(VAR_OBJ_GFX_ID_3));
+
+    VarSet(VAR_OBJ_GFX_ID_5, (Random() % 5) + 44);
 }

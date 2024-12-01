@@ -13,7 +13,7 @@ script VyratonOutdoors_Harbour_EventScript_SSPathfinder_Departure
 
 script VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers
 {
-    call(VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetPassengers)
+    callnative(SSPathfinder_SetPassengers)
     call(VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SpawnPassengers)
     playse(SE_RG_SS_ANNE_HORN)
     random(6)
@@ -28,33 +28,6 @@ script VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers
     }
     waitse
     call(VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_DespawnPassengers)
-}
-
-script VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetPassengers
-{
-    random(6)
-    copyvar(VAR_OBJ_GFX_ID_0, VAR_RESULT)
-    addvar(VAR_OBJ_GFX_ID_0, 15)
-
-    random(4)
-    copyvar(VAR_OBJ_GFX_ID_1, VAR_RESULT)
-    addvar(VAR_OBJ_GFX_ID_1, 23)
-
-    random(5)
-    copyvar(VAR_OBJ_GFX_ID_2, VAR_RESULT)
-    addvar(VAR_OBJ_GFX_ID_2, 31)
-
-    random(5)
-    copyvar(VAR_OBJ_GFX_ID_3, VAR_RESULT)
-    addvar(VAR_OBJ_GFX_ID_3, 44)
-
-    random(6)
-    copyvar(VAR_OBJ_GFX_ID_4, VAR_RESULT)
-    addvar(VAR_OBJ_GFX_ID_4, 15)
-
-    random(5)
-    copyvar(VAR_OBJ_GFX_ID_5, VAR_RESULT)
-    addvar(VAR_OBJ_GFX_ID_5, 31)
 }
 
 script VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SpawnPassengers
@@ -223,6 +196,7 @@ movement VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerFour
     delay_4
     delay_4
     walk_up * 5
+    walk_in_place_left
     walk_left * 2
     walk_up * 2
 }
@@ -251,7 +225,7 @@ movement VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerOne
 {
     delay_4
     walk_up * 4
-    walk_right * 2
+    walk_left * 2
     walk_up * 3
 }
 
@@ -279,7 +253,9 @@ movement VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerFour
     delay_4
     delay_4
     walk_up * 3
-    walk_left * 2
+    walk_left
+    walk_in_place_left
+    walk_left
     walk_up * 5
 }
 
@@ -299,7 +275,7 @@ movement VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerSix
     delay_8
     delay_2
     walk_up * 6
-    walk_left
+    walk_right
     walk_up * 3
 }
 
@@ -308,7 +284,11 @@ movement VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerOne
     delay_4
     walk_up * 2
     walk_right
-    walk_up * 6
+    walk_up * 2
+    walk_in_place_up
+    walk_up
+    walk_right
+    walk_up * 3
 }
 
 movement VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerTwo
@@ -427,7 +407,7 @@ movement VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerTwo
 {
     delay_2
     walk_up * 6
-    walk_left
+    walk_right
     walk_up * 2
 }
 
@@ -457,6 +437,7 @@ movement VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerFive
     delay_8
     delay_4
     walk_up * 5
+    walk_in_place_right
     walk_right
     walk_up * 4
 }

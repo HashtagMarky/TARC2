@@ -6,7 +6,7 @@ VyratonOutdoors_Harbour_EventScript_SSPathfinder_Departure::
 
 VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers::
 # 16 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	call VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetPassengers
+	callnative SSPathfinder_SetPassengers
 # 17 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	call VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SpawnPassengers
 # 18 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
@@ -65,452 +65,486 @@ VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_8:
 	goto VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_1
 
 
-VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetPassengers::
-# 35 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	random 6
-# 36 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	copyvar VAR_OBJ_GFX_ID_0, VAR_RESULT
-# 37 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	addvar VAR_OBJ_GFX_ID_0, 15
-# 39 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	random 4
-# 40 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	copyvar VAR_OBJ_GFX_ID_1, VAR_RESULT
-# 41 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	addvar VAR_OBJ_GFX_ID_1, 23
-# 43 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	random 5
-# 44 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	copyvar VAR_OBJ_GFX_ID_2, VAR_RESULT
-# 45 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	addvar VAR_OBJ_GFX_ID_2, 31
-# 47 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	random 5
-# 48 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	copyvar VAR_OBJ_GFX_ID_3, VAR_RESULT
-# 49 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	addvar VAR_OBJ_GFX_ID_3, 44
-# 51 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	random 6
-# 52 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	copyvar VAR_OBJ_GFX_ID_4, VAR_RESULT
-# 53 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	addvar VAR_OBJ_GFX_ID_4, 15
-# 55 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	random 5
-# 56 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	copyvar VAR_OBJ_GFX_ID_5, VAR_RESULT
-# 57 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	addvar VAR_OBJ_GFX_ID_5, 31
-	return
-
-
 VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SpawnPassengers::
-# 62 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 35 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	addobject 3
-# 63 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 36 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	addobject 4
-# 64 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 37 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	addobject 5
-# 65 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 38 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	addobject 6
-# 66 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 39 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	addobject 7
-# 67 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 40 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	addobject 8
 	return
 
 
 VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_DespawnPassengers::
-# 72 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 45 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	removeobject 3
-# 73 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 46 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	removeobject 4
-# 74 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 47 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	removeobject 5
-# 75 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 48 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	removeobject 6
-# 76 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 49 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	removeobject 7
-# 77 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 50 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	removeobject 8
 	return
 
 
 VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetOne::
-# 82 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 55 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 3, VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerOne
-# 83 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 56 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 4, VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerTwo
-# 84 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 57 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 5, VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerThree
-# 85 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 58 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 6, VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerFour
-# 86 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 59 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 7, VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerFive
-# 87 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 60 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 8, VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerSix
 	return
 
 
 VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetTwo::
-# 92 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 65 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 3, VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerOne
-# 93 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 66 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 4, VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerTwo
-# 94 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 67 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 5, VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerThree
-# 95 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 68 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 6, VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerFour
-# 96 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 69 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 7, VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerFive
-# 97 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 70 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 8, VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerSix
 	return
 
 
 VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetThree::
-# 102 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 75 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 3, VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerOne
-# 103 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 76 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 4, VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerTwo
-# 104 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 77 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 5, VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerThree
-# 105 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 78 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 6, VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerFour
-# 106 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 79 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 7, VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerFive
-# 107 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 80 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 8, VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerSix
 	return
 
 
 VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetFour::
-# 112 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 85 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 3, VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerOne
-# 113 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 86 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 4, VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerTwo
-# 114 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 87 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 5, VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerThree
-# 115 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 88 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 6, VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerFour
-# 116 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 89 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 7, VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerFive
-# 117 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 90 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 8, VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerSix
 	return
 
 
 VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetFive::
-# 122 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 95 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 3, VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerOne
-# 123 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 96 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 4, VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerTwo
-# 124 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 97 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 5, VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerThree
-# 125 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 98 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 6, VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerFour
-# 126 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 99 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 7, VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerFive
-# 127 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 100 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 8, VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerSix
 	return
 
 
 VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers_SetSix::
-# 132 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 105 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 3, VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerOne
-# 133 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 106 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 4, VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerTwo
-# 134 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 107 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 5, VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerThree
-# 135 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 108 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 6, VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerFour
-# 136 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 109 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 7, VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerFive
-# 137 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 110 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	applymovement 8, VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerSix
 	return
 
 
-# 140 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 113 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerOne:
-# 142 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 115 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_4
-# 143 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 116 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 116 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 117 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_right
+# 118 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 118 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 118 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 118 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 118 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+	step_end
+
+# 121 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerTwo:
+# 123 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_2
+# 124 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 124 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 124 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 124 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 124 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 124 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 124 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+	step_end
+
+# 127 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerThree:
+# 129 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 129 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 130 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_4
+# 131 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_2
+# 132 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 132 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 132 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 133 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_left
+# 134 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 134 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 134 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 134 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+	step_end
+
+# 137 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerFour:
+# 139 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 139 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 140 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_4
+# 141 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_2
+# 142 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 142 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 143 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_left
+# 144 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 144 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_right
-# 145 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 145 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 144 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 145 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 144 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 145 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 145 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 144 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 	step_end
 
-# 148 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerTwo:
+# 147 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerFive:
+# 149 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_16
+# 149 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_16
 # 150 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_2
+	delay_8
 # 151 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_4
+# 152 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 151 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 152 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 151 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 151 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 151 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 151 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 151 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-	step_end
-
+# 153 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_right
+# 153 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_right
 # 154 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerThree:
-# 156 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
-# 156 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
-# 157 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
-# 158 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_2
-# 159 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 159 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 154 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 159 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 154 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 160 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_left
-# 161 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 154 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 161 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 161 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 161 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 154 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 	step_end
 
-# 164 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerFour:
-# 166 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 157 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerSix:
+# 159 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_16
+# 159 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_16
+# 160 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_8
-# 166 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
-# 167 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
-# 168 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 161 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_2
-# 169 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 162 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
+# 162 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 162 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 163 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_left
+# 164 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 164 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 164 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 164 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+	step_end
+
+# 167 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerOne:
 # 169 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_2
+# 170 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 170 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 170 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 171 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_left
-# 171 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 172 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 171 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 172 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 171 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 172 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 171 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 171 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 172 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 	step_end
 
-# 174 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerFive:
-# 176 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_16
-# 176 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_16
+# 175 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerTwo:
 # 177 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
-# 178 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_4
-# 179 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 178 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 178 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 178 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 178 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 178 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 179 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 180 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_right
+# 179 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_right
 # 180 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_right
-# 181 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 181 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 181 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 181 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 181 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 180 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 	step_end
 
-# 184 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetOne_PassangerSix:
-# 186 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_16
-# 186 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_16
-# 187 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 183 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerThree:
+# 185 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_8
-# 188 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 185 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 186 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_4
+# 187 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_2
-# 189 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 188 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 188 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 188 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 188 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 189 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 189 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_right
+# 190 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 190 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_left
-# 191 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 191 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 191 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 191 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 190 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 	step_end
 
-# 194 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerOne:
+# 193 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerFour:
+# 195 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 195 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
 # 196 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_2
+	delay_4
 # 197 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 197 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 197 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_4
+# 198 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 198 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 198 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 198 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 198 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 199 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_in_place_left
+# 200 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_left
-# 199 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 200 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_left
+# 201 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 199 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 199 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 199 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 201 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 	step_end
 
-# 202 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerTwo:
 # 204 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
-# 205 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 205 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 205 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 205 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 205 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 206 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_right
-# 206 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_right
-# 207 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 207 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-	step_end
-
-# 210 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerThree:
-# 212 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
-# 212 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
-# 213 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
-# 214 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_2
-# 215 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 215 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 215 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 215 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 216 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_right
-# 217 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 217 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 217 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-	step_end
-
-# 220 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerFour:
-# 222 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
-# 222 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
-# 223 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
-# 224 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
-# 225 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 225 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 225 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 225 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 225 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 226 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_left
-# 226 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_left
-# 227 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 227 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-	step_end
-
-# 230 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerFive:
-# 232 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 206 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_16
-# 232 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 206 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_16
-# 233 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 207 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_8
+# 208 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_2
+# 209 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 209 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 209 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 209 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 209 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 209 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 210 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_left
+# 211 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 211 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 211 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+	step_end
+
+# 214 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerSix:
+# 216 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_16
+# 216 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_16
+# 217 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 218 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_2
+# 219 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 219 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 219 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 220 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_right
+# 220 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_right
+# 221 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 221 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 221 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 221 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+	step_end
+
+# 224 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerOne:
+# 226 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_4
+# 227 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 227 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 227 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 227 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 228 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_left
+# 228 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_left
+# 229 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 229 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 229 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+	step_end
+
+# 232 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerTwo:
 # 234 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_2
-# 235 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 235 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 235 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 235 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
 # 235 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 235 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
@@ -523,18 +557,26 @@ VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerFive:
 	walk_up
 # 237 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
+# 237 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 237 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 237 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
 	step_end
 
 # 240 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerSix:
+VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerThree:
 # 242 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_16
-# 242 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_16
-# 243 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_8
+# 242 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 243 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_4
 # 244 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_2
+	delay_4
+# 245 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
 # 245 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 245 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
@@ -543,10 +585,6 @@ VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerSix:
 	walk_up
 # 246 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_right
-# 246 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_right
-# 247 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
 # 247 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 247 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
@@ -556,205 +594,195 @@ VyratonOutdoors_Harbour_Movement_PassengerSetTwo_PassangerSix:
 	step_end
 
 # 250 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerOne:
-# 252 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
-# 253 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 253 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 253 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 253 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 254 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_right
-# 254 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_right
-# 255 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 255 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 255 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-	step_end
-
-# 258 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerTwo:
-# 260 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_2
-# 261 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 261 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 262 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_left
-# 263 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 263 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 263 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 263 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 263 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 263 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-	step_end
-
-# 266 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerThree:
-# 268 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
-# 268 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
-# 269 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
-# 270 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
-# 271 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 271 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 271 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 271 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 272 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_right
-# 273 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 273 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 273 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-	step_end
-
-# 276 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerFour:
-# 278 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 252 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_8
-# 278 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 252 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_8
-# 279 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 253 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_4
-# 280 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 254 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_4
-# 281 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 255 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 281 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 255 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 281 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 255 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 282 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 256 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_left
-# 282 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 257 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_in_place_left
+# 258 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_left
-# 283 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 259 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 283 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 259 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 283 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 259 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 283 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 259 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 283 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 259 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 	step_end
 
-# 286 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 262 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerFive:
-# 288 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 264 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_16
-# 288 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 264 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_16
-# 289 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 265 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_8
-# 290 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 266 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_4
-# 291 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 267 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 291 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 267 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 291 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 267 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 291 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 267 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 291 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 267 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 292 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 268 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_right
-# 293 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 269 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 293 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 269 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 293 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 269 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 293 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 269 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 	step_end
 
-# 296 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 272 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 VyratonOutdoors_Harbour_Movement_PassengerSetThree_PassangerSix:
-# 298 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 274 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_16
-# 298 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 274 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_16
-# 299 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 275 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_8
-# 300 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 276 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_2
-# 301 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 277 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 301 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 277 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 301 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 277 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 301 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 277 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 301 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 277 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 301 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 277 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 302 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_left
-# 303 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 303 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 303 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-	step_end
-
-# 306 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerOne:
-# 308 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
-# 309 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 309 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 310 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 278 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_right
-# 311 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 279 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 311 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 279 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 311 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 311 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 311 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 311 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 279 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 	step_end
 
-# 314 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 282 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerOne:
+# 284 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_4
+# 285 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 285 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 286 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_right
+# 287 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 287 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 288 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_in_place_up
+# 289 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 290 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_right
+# 291 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 291 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 291 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+	step_end
+
+# 294 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerTwo:
-# 316 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 296 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_2
+# 297 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 297 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 297 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 297 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 297 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 298 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_left
+# 299 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 299 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 299 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+	step_end
+
+# 302 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerThree:
+# 304 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 304 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 305 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_4
+# 306 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_2
+# 307 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 307 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 307 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 307 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 308 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_left
+# 309 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 309 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 309 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 309 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+	step_end
+
+# 312 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerFour:
+# 314 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 314 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 315 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_4
+# 316 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_4
 # 317 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 317 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
@@ -766,9 +794,7 @@ VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerTwo:
 # 317 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 318 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_left
-# 319 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
+	walk_right
 # 319 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 319 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
@@ -776,15 +802,19 @@ VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerTwo:
 	step_end
 
 # 322 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerThree:
+VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerFive:
 # 324 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
+	delay_16
 # 324 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
+	delay_16
 # 325 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
+	delay_8
 # 326 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_2
+# 327 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 327 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
 # 327 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 327 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
@@ -801,18 +831,16 @@ VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerThree:
 	walk_up
 # 329 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 329 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
 	step_end
 
 # 332 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerFour:
+VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerSix:
 # 334 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
+	delay_16
 # 334 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
+	delay_16
 # 335 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
+	delay_8
 # 336 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_4
 # 337 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
@@ -821,12 +849,16 @@ VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerFour:
 	walk_up
 # 337 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 337 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 337 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
 # 338 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_right
+# 338 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_right
+# 339 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 339 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 339 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
 # 339 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 339 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
@@ -834,95 +866,91 @@ VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerFour:
 	step_end
 
 # 342 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerFive:
-# 344 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_16
-# 344 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_16
-# 345 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
-# 346 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_2
-# 347 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 347 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 347 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 347 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 347 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 347 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 348 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_left
-# 349 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 349 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 349 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-	step_end
-
-# 352 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetFour_PassangerSix:
-# 354 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_16
-# 354 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_16
-# 355 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
-# 356 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
-# 357 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 357 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 357 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 358 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_right
-# 358 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_right
-# 359 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 359 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 359 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 359 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 359 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-	step_end
-
-# 362 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerOne:
-# 364 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 344 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_2
-# 365 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 345 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 365 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 345 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 365 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 345 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 365 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 345 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 365 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 345 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 366 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 346 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_left
-# 367 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 347 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 367 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 347 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 367 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 347 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 	step_end
 
-# 370 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 350 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerTwo:
+# 352 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_4
+# 353 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 353 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 353 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 353 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 354 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_right
+# 354 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_right
+# 355 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 355 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 355 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+	step_end
+
+# 358 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerThree:
+# 360 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 360 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 361 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_4
+# 362 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_2
+# 363 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 363 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 363 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 363 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 363 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 363 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 364 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_left
+# 365 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 365 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+	step_end
+
+# 368 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerFour:
+# 370 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 370 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 371 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_4
 # 372 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_4
 # 373 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
@@ -931,12 +959,12 @@ VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerTwo:
 	walk_up
 # 373 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 373 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 374 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_right
+# 374 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_right
+# 375 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 374 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_right
-# 374 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_right
 # 375 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 375 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
@@ -946,19 +974,15 @@ VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerTwo:
 	step_end
 
 # 378 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerThree:
+VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerFive:
 # 380 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
+	delay_16
 # 380 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
+	delay_16
 # 381 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
+	delay_8
 # 382 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_2
-# 383 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 383 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
+	delay_4
 # 383 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 383 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
@@ -973,16 +997,22 @@ VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerThree:
 	walk_up
 # 385 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
+# 385 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 385 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 385 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
 	step_end
 
 # 388 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerFour:
+VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerSix:
 # 390 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
+	delay_16
 # 390 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
+	delay_16
 # 391 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
+	delay_8
 # 392 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_4
 # 393 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
@@ -991,8 +1021,10 @@ VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerFour:
 	walk_up
 # 393 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 394 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_right
+# 393 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 393 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
 # 394 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_right
 # 395 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
@@ -1006,97 +1038,93 @@ VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerFour:
 	step_end
 
 # 398 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerFive:
-# 400 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_16
-# 400 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_16
-# 401 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
-# 402 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
-# 403 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 403 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 403 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 403 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 404 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_left
-# 405 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 405 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 405 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 405 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 405 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-	step_end
-
-# 408 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetFive_PassangerSix:
-# 410 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_16
-# 410 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_16
-# 411 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
-# 412 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
-# 413 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 413 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 413 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 413 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 413 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 414 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_right
-# 415 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 415 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 415 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 415 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-	step_end
-
-# 418 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerOne:
-# 420 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 400 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_4
-# 421 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 401 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 421 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 401 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 421 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 401 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 422 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 402 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_right
-# 423 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 403 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 423 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 403 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 423 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 403 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 423 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 403 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 423 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 403 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 	step_end
 
-# 426 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 406 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerTwo:
-# 428 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 408 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	delay_2
+# 409 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 409 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 409 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 409 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 409 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 409 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 410 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_right
+# 411 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 411 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+	step_end
+
+# 414 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerThree:
+# 416 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 416 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 417 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_4
+# 418 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_2
+# 419 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 419 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 419 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 419 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 419 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 420 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_right
+# 420 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_right
+# 421 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 421 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+	step_end
+
+# 424 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerFour:
+# 426 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 426 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_8
+# 427 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_4
+# 428 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_4
 # 429 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 429 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
@@ -1115,18 +1143,20 @@ VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerTwo:
 	walk_up
 # 431 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
+# 431 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
 	step_end
 
 # 434 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerThree:
+VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerFive:
 # 436 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
+	delay_16
 # 436 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
+	delay_16
 # 437 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
+	delay_8
 # 438 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_2
+	delay_4
 # 439 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 439 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
@@ -1138,107 +1168,47 @@ VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerThree:
 # 439 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 440 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_right
-# 440 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_right
+	walk_in_place_right
 # 441 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_right
+# 442 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 441 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 442 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 442 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 442 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 	step_end
 
-# 444 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerFour:
-# 446 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
-# 446 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
+# 445 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerSix:
 # 447 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
+	delay_16
+# 447 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_16
 # 448 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
+	delay_8
 # 449 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 449 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 449 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 449 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 449 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 449 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	delay_2
+# 450 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 # 450 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 450 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 450 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+	walk_up
+# 451 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_left
-# 451 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 452 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 451 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 452 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 451 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 452 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-	step_end
-
-# 454 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerFive:
-# 456 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_16
-# 456 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_16
-# 457 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
-# 458 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_4
-# 459 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 452 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
-# 459 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 459 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 459 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 459 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 460 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_right
-# 461 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 461 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 461 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 461 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-	step_end
-
-# 464 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-VyratonOutdoors_Harbour_Movement_PassengerSetSix_PassangerSix:
-# 466 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_16
-# 466 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_16
-# 467 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_8
-# 468 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	delay_2
-# 469 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 469 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 469 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 469 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 470 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_left
-# 471 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 471 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 471 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 471 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
-	walk_up
-# 471 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
+# 452 "data//maps/VyratonOutdoors_Harbour/ss_pathfinder.pory"
 	walk_up
 	step_end
