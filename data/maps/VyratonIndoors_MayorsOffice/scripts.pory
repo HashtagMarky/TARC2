@@ -8,6 +8,7 @@ mapscripts VyratonIndoors_MayorsOffice_MapScripts
 
 const LOCALID_Samuel = 1
 const LOCALID_Starter = 2
+const LOCALID_Thomas = 4
 
 script VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_DontLeave
 {
@@ -97,6 +98,8 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex
     {
         mnmbox(VyratonIndoors_MayorsOffice_Text_MeetNonNicknamedMon, localId=LOCALID_Samuel)
     }
+    call(VyratonIndoors_MayorsOffice_EventScript_MeetThomas)
+    call(VyratonIndoors_MayorsOffice_EventScript_Samuel_ReceivePokdex)
     turnplayer(DIR_EAST)
 }
 
@@ -149,6 +152,38 @@ script VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter
     turnplayer(DIR_NORTH)
 }
 
+script VyratonIndoors_MayorsOffice_EventScript_MeetThomas
+{
+    fadenewbgm(MUS_HG_POKEWALKER)
+    delay(120)
+    emote(LOCALID_Samuel, EMOTE_EXCLAM, wait=FALSE)
+    turnplayer(DIR_SOUTH)
+    addobject(LOCALID_Thomas)
+    applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_WatchThomasEntrance, FALSE)
+    applymove(LOCALID_Thomas, VyratonIndoors_MayorsOffice_Movement_Thomas_Entrance)
+    turnobject(LOCALID_Samuel, DIR_WEST)
+    speakername(known=FALSE)
+    msgbox(VyratonIndoors_MayorsOffice_Text_YouForgotThis, MSGBOX_DEFAULT)
+    closemessage
+    turnobject(LOCALID_Thomas, DIR_SOUTH)
+    emote(LOCALID_Thomas, EMOTE_QUESTION)
+    turnobject(LOCALID_Samuel, DIR_SOUTH)
+    speakername(known=FALSE)
+    msgbox(VyratonIndoors_MayorsOffice_Text_IsThisThem, MSGBOX_DEFAULT)
+    closemessage
+    applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_WatchThomasExit, FALSE)
+    applymove(LOCALID_Thomas, VyratonIndoors_MayorsOffice_Movement_Thomas_Exit)
+    removeobject(LOCALID_Thomas)
+    fadedefaultbgm
+    delay(120)
+    turnplayer(DIR_NORTH)
+}
+
+script VyratonIndoors_MayorsOffice_EventScript_Samuel_ReceivePokdex
+{
+    mnmbox(VyratonIndoors_MayorsOffice_Text_GivePokedex)
+}
+
 
 movement VyratonIndoors_MayorsOffice_Movement_Player_Entrance
 {
@@ -176,4 +211,45 @@ movement VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_Two
 {
     walk_left
     walk_down
+}
+
+movement VyratonIndoors_MayorsOffice_Movement_Thomas_Entrance
+{
+    delay_16
+    walk_up
+    walk_left
+    walk_up * 5
+    face_right
+}
+
+movement VyratonIndoors_MayorsOffice_Movement_Thomas_Exit
+{
+    walk_down * 5
+    walk_right
+    walk_down
+    delay_16
+    set_invisible
+}
+
+movement VyratonIndoors_MayorsOffice_Movement_Player_WatchThomasEntrance
+{
+    emote_exclamation_mark
+    delay_16 * 5
+    delay_8
+    face_left
+    delay_2
+    delay_4
+    delay_8
+    face_up
+}
+
+movement VyratonIndoors_MayorsOffice_Movement_Player_WatchThomasExit
+{
+    delay_16
+    delay_8
+    face_left
+    delay_2
+    delay_4
+    delay_8
+    face_down
 }

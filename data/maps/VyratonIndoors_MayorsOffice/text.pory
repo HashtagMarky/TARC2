@@ -16,7 +16,7 @@ text VyratonIndoors_MayorsOffice_Text_KickStart
         for the Vyraton Town Pokémon Gym!\p
         I have for you, in my briefcase, a\n
         whopping eighteen different choices.\l
-        Decide how to mold your gym's future!")
+        Pick one and mold your gym's future!")
 }
 
 text VyratonIndoors_MayorsOffice_Text_CrackOpen
@@ -39,17 +39,9 @@ text VyratonIndoors_MayorsOffice_Text_MeetNicknamedMon
         must be built upon a strong bond,\l
         and I can see that you have one.\p
         Make sure you take care of each\n
-        other and nothing will topple you!\l
-        Oh! I should give you one more thing.\p
-        I'm sure you're familiar with it,\n
-        just as all seasoned trainers are…\l
-        I present you with…{PAUSE 40}{PLAY_FANFARE MUS_HG_OBTAIN_KEY_ITEM}{SHOW_ITEM_HEADER} a Pokédex!{WAIT_FANFARE}\p
-        {HIDE_ITEM_HEADER}It's a wonderful tool that will help\n
-        you learn more about your partner,\l
-        and every other Pokémon you meet.\p
-        Why don't you try and see what it\n
-        says about {STR_VAR_1}.\l
-        I'm sure you'll find it fascinating!")
+        other and nothing will topple you!\p
+        Now, I should have one more thing\n
+        for you, if I can just find it…")
 }
 
 text VyratonIndoors_MayorsOffice_Text_MeetNonNicknamedMon
@@ -63,10 +55,49 @@ text VyratonIndoors_MayorsOffice_Text_MeetNonNicknamedMon
         must be built upon a strong bond,\l
         and I can see that you have one.\p
         Make sure you take care of each\n
-        other and nothing will topple you!\l
-        Oh! I should give you one more thing.\p
-        I'm sure you're familiar with it,\n
-        just as all seasoned trainers are…\l
+        other and nothing will topple you!\p
+        Now, I should have one more thing\n
+        for you, if I can just find it…")
+}
+
+text VyratonIndoors_MayorsOffice_Text_YouForgotThis
+{
+    format("
+        Evening mate, I knew you'd forget\n
+        this when you stopped by earlier.\l
+        Far too excitable for your own good!\p
+        One whiff of more battles around here\n
+        and you forget which way is up.")
+}
+
+text VyratonIndoors_MayorsOffice_Text_IsThisThem
+{
+    format("
+        Woah… {PAUSE 40}Is this them?\n
+        {PAUSE 40}The to-be Vyraton Gym Leader?\l
+        I'm pleased to meet you, {PLAYER}!\p
+        Look, I'd love to stay around but I've\n
+        got my hands full at the moment.\l
+        Good luck, I know you'll do us proud!")
+}
+
+text VyratonIndoors_MayorsOffice_Text_GivePokedex
+{
+    format("
+        Well, well, well, that was Thomas.\n
+        And what a blur he is!\p
+        Doesn't even introduce himself\n
+        before he dashes off again.\p
+        I'm sure he'll have some time for you\n
+        tomorrow, but he works tirelessly.\p
+        He's a local professor with a focus\n
+        on breeding and hatching Pokémon.\l
+        He's also my best friend.\p
+        We're very lucky to have him here in\n
+        Vyraton. Anyway, as was saying…\l
+        I have something else for you!\p
+        I'm sure you'll be familiar with\n
+        this, as all seasoned trainers are…\l
         I present you with…{PAUSE 40}{PLAY_FANFARE MUS_HG_OBTAIN_KEY_ITEM}{SHOW_ITEM_HEADER} a Pokédex!{WAIT_FANFARE}\p
         {HIDE_ITEM_HEADER}It's a wonderful tool that will help\n
         you learn more about your partner,\l

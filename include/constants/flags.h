@@ -885,7 +885,7 @@
 #define FLAG_HIDE_ROUTE_128_STEVEN                                  0x342
 #define FLAG_HIDE_SLATEPORT_CITY_GABBY_AND_TY                       0x343
 #define FLAG_HIDE_BATTLE_FRONTIER_RECEPTION_GATE_SCOTT              0x344
-#define FLAG_HIDE_ROUTE_110_BIRCH                                   0x345
+#define FLAG_HIDE_MAYORS_OFFICE_THOMAS                              0x345
 #define FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA     0x346
 #define FLAG_HIDE_SOOTOPOLIS_CITY_MAN_1                             0x347
 #define FLAG_HIDE_SLATEPORT_CITY_CAPTAIN_STERN                      0x348
