@@ -20,6 +20,9 @@ static void CreateWakeBehindBoat(void);
 static void WakeSpriteCallback(struct Sprite *sprite);
 static void CreateSmokeSprite(void);
 static void SmokeSpriteCallback(struct Sprite *sprite);
+static void CreateWakeBehindBoat_SSPathfinder(void);
+static void WakeSpriteCallback_SSPathfinder(struct Sprite *sprite);
+static void SmokeSpriteCallback_SSPathfinder(struct Sprite *sprite);
 
 static const u16 sWakeTiles[] = INCBIN_U16("graphics/ss_anne/wake.4bpp");
 static const u16 sSmokeTiles[] = INCBIN_U16("graphics/ss_anne/smoke.4bpp");
@@ -60,6 +63,16 @@ static const struct SpriteTemplate sWakeSpriteTemplate = {
     WakeSpriteCallback
 };
 
+static const struct SpriteTemplate sWakeSpriteTemplate_SSPathfinder = {
+    SPRITE_TAG_WAKE,
+    SPRITE_TAG_WAKE,
+    &sWakeOamData,
+    sWakeAnimTable,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    WakeSpriteCallback_SSPathfinder
+};
+
 static const union AnimCmd sSmokeAnim[] = {
     ANIMCMD_FRAME( 0, 10),
     ANIMCMD_FRAME( 4, 20),
@@ -85,6 +98,16 @@ static const struct SpriteTemplate sSmokeSpriteTemplate = {
     NULL,
     gDummySpriteAffineAnimTable,
     SmokeSpriteCallback
+};
+
+static const struct SpriteTemplate sSmokeSpriteTemplate_SSPathfinder = {
+    SPRITE_TAG_SMOKE,
+    SPRITE_TAG_SMOKE,
+    &sSmokeOamData,
+    sSmokeAnimTable,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    SmokeSpriteCallback_SSPathfinder
 };
 
 void DoSSAnneDepartureCutscene(void)
@@ -151,6 +174,14 @@ static void Task_SSAnneFinish(u8 taskId)
         DestroyTask(taskId);
         ScriptContext_Enable();
     }
+}
+
+void DoSSPathfinderCutscene(void)
+{
+    LoadSpriteSheets(sSpriteSheets);
+    LoadSpritePalette(&sWakePalette);
+    LoadSpritePalette(&sSmokePalette);
+    CreateWakeBehindBoat_SSPathfinder();
 }
 
 static void CreateWakeBehindBoat(void)
@@ -225,4 +256,45 @@ void SSPathfinder_SetPassengers(void)
     } while (VarGet(VAR_OBJ_GFX_ID_4) == VarGet(VAR_OBJ_GFX_ID_3));
 
     VarSet(VAR_OBJ_GFX_ID_5, (Random() % 5) + 44);
+}
+
+static void CreateWakeBehindBoat_SSPathfinder(void)
+{
+    u8 objectEventId;
+    struct ObjectEvent *boatObject;
+    u16 x;
+    u8 spriteId;
+
+    TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_0x8004, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
+    boatObject = &gObjectEvents[objectEventId];
+    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 72;
+    spriteId = CreateSprite(&sWakeSpriteTemplate_SSPathfinder, x, 77, 0xFF); // Decreased y by 16
+    gSprites[spriteId].oam.priority = 2;
+    gSprites[spriteId].x2 = 0; // Set to final position, no movement
+}
+
+static void WakeSpriteCallback_SSPathfinder(struct Sprite *sprite)
+{
+    if (sprite->x + sprite->x2 < -18)
+        DestroySprite(sprite);
+}
+
+void CreateSmokeSprite_SSPathfinder(void)
+{
+    u8 objectEventId;
+    struct ObjectEvent *boatObject;
+    u16 x;
+    u8 spriteId;
+
+    TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_0x8004, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
+    boatObject = &gObjectEvents[objectEventId];
+    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 25;
+    if ((s16)x >= -32)
+        spriteId = CreateSprite(&sSmokeSpriteTemplate_SSPathfinder, x, 46, 8); // Decreased y by 16
+}
+
+static void SmokeSpriteCallback_SSPathfinder(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+        DestroySprite(sprite);
 }

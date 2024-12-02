@@ -19,6 +19,8 @@
 #include "constants/songs.h"
 #include "constants/metatile_labels.h"
 
+#include "ss_anne.h"
+
 // Most of the boxes in the moving truck are map tiles, with the
 // exception of three boxes that are map events that jostle around
 // while the truck is driving. In addition, their sprite's placement
@@ -185,6 +187,7 @@ static void Task_Truck3(u8 taskId)
 #define tTimer   data[1]
 #define tTaskId1 data[2]
 #define tTaskId2 data[3]
+#define tSmokeTimer data[4]
 
 static void Task_HandleTruckSequence(u8 taskId)
 {
@@ -275,6 +278,94 @@ void EndTruckSequence(u8 taskId)
         SetObjectEventSpritePosByLocalIdAndMap(LOCALID_TRUCK_BOX_TOP,      gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, BOX1_X_OFFSET, BOX1_Y_OFFSET);
         SetObjectEventSpritePosByLocalIdAndMap(LOCALID_TRUCK_BOX_BOTTOM_L, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, BOX2_X_OFFSET, BOX2_Y_OFFSET);
         SetObjectEventSpritePosByLocalIdAndMap(LOCALID_TRUCK_BOX_BOTTOM_R, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, BOX3_X_OFFSET, BOX3_Y_OFFSET);
+    }
+}
+
+static void Task_HandleSSPathfinderSequence(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u8 objectEventId;
+    struct ObjectEvent *boatObject;
+    s16 x;
+
+    switch (tState)
+    {
+    case 0:
+        tTimer++;
+        if (tTimer == 90)
+        {
+            tTimer = 0;
+            tState = 1;
+            PlaySE(SE_THUNDERSTORM);
+        }
+        break;
+    case 1:
+        tTimer++;
+        if (tTimer == 150)
+        {
+            DoSSPathfinderCutscene();
+            FadeInFromBlack();
+            tTimer = 0;
+            tSmokeTimer = 0;
+            tState = 2;
+        }
+        break;
+    case 2:
+        tTimer++;
+        tSmokeTimer++;
+        if (tSmokeTimer == 100)
+        {
+        //  CreateSmokeSprite_SSPathfinder();
+            tSmokeTimer = 0;
+        }
+
+        TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_0x8004, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
+        boatObject = &gObjectEvents[objectEventId];
+
+    //  if (gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 < -100)
+        if (!gPaletteFade.active && tTimer > 500)
+        {
+            tTimer = 0;
+            tState = 3;
+        }
+        break;
+    case 3:
+        tTimer = 0;
+        tState = 4;
+        break;
+    case 4:
+        tTimer++;
+        if (tTimer == 90)
+        {
+            tTimer = 0;
+            tState = 5;
+        }
+        break;
+    case 5:
+        tTimer++;
+        if (tTimer == 120)
+        {
+            DrawWholeMapView();
+            DestroyTask(taskId);
+        }
+        break;
+    }
+}
+
+void ExecuteSSPathfinderSequence(void)
+{
+    gObjectEvents[gPlayerAvatar.objectEventId].invisible = TRUE;
+    DrawWholeMapView();
+    LockPlayerFieldControls();
+    CpuFastFill(0, gPlttBufferFaded, PLTT_SIZE);
+    CreateTask(Task_HandleSSPathfinderSequence, 0xA);
+}
+
+void EndSSPathfinderSequence(u8 taskId)
+{
+    if (!FuncIsActiveTask(Task_HandleSSPathfinderSequence))
+    {
+        
     }
 }
 
