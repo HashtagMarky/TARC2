@@ -64,6 +64,7 @@ static void QueueAnimTiles_Lavaridge_Lava(u16);
 static void QueueAnimTiles_EverGrande_Flowers(u16, u8);
 static void QueueAnimTiles_Pacifidlog_LogBridges(u8);
 static void QueueAnimTiles_Pacifidlog_WaterCurrents(u8);
+static void QueueAnimTiles_Pacifidlog_WaterCurrents_IncreasedSpeed(u8);
 static void QueueAnimTiles_Sootopolis_StormyWater(u16);
 static void QueueAnimTiles_Underwater_Seaweed(u8);
 static void QueueAnimTiles_Cave_Lava(u16);
@@ -202,6 +203,12 @@ const u16 *const gTilesetAnims_Pacifidlog_WaterCurrents[] = {
     gTilesetAnims_Pacifidlog_WaterCurrents_Frame5,
     gTilesetAnims_Pacifidlog_WaterCurrents_Frame6,
     gTilesetAnims_Pacifidlog_WaterCurrents_Frame7
+};
+
+const u16 *const gTilesetAnims_Pacifidlog_WaterCurrents_IncreasedSpeed[] = {
+    gTilesetAnims_Pacifidlog_WaterCurrents_Frame4,
+    gTilesetAnims_Pacifidlog_WaterCurrents_Frame5,
+    gTilesetAnims_Pacifidlog_WaterCurrents_Frame6
 };
 
 const u16 gTilesetAnims_Mauville_Flower1_Frame0[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/flower_1/0.4bpp");
@@ -921,8 +928,9 @@ static void TilesetAnim_Pacifidlog(u16 timer)
 {
     if (timer % 16 == 0)
         QueueAnimTiles_Pacifidlog_LogBridges(timer / 16);
-    if (timer % 16 == 1)
-        QueueAnimTiles_Pacifidlog_WaterCurrents(timer / 16);
+    if (timer % 6 == 1)
+    //  QueueAnimTiles_Pacifidlog_WaterCurrents(timer / 16);
+        QueueAnimTiles_Pacifidlog_WaterCurrents_IncreasedSpeed(timer / 6);
 }
 
 static void TilesetAnim_Sootopolis(u16 timer)
@@ -986,6 +994,12 @@ static void QueueAnimTiles_Pacifidlog_WaterCurrents(u8 timer)
 {
     u8 i = timer % ARRAY_COUNT(gTilesetAnims_Pacifidlog_WaterCurrents);
     AppendTilesetAnimToBuffer(gTilesetAnims_Pacifidlog_WaterCurrents[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 496)), 8 * TILE_SIZE_4BPP);
+}
+
+static void QueueAnimTiles_Pacifidlog_WaterCurrents_IncreasedSpeed(u8 timer)
+{
+    u8 i = timer % ARRAY_COUNT(gTilesetAnims_Pacifidlog_WaterCurrents_IncreasedSpeed);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Pacifidlog_WaterCurrents_IncreasedSpeed[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 496)), 8 * TILE_SIZE_4BPP);
 }
 
 static void QueueAnimTiles_Mauville_Flowers(u16 timer_div, u8 timer_mod)
