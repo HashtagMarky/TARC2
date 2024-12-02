@@ -92,7 +92,7 @@ VyratonIndoors_MayorsOffice_Text_GivePokedex::
 	.string "I'm sure you'll find it fascinating!$"
 
 VyratonIndoors_MayorsOffice_Text_ExtremelySet::
-# 110 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
+# 111 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
 	.string "Oh no {PLAYER}, I don't think that\n"
 	.string "{STR_VAR_1} would appreciate it if\l"
 	.string "you changed your mind so quickly.\p"
@@ -102,11 +102,38 @@ VyratonIndoors_MayorsOffice_Text_ExtremelySet::
 	.string "sure that you'll feel the same way.$"
 
 VyratonIndoors_MayorsOffice_Text_GoMeetMon::
-# 122 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
+# 123 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
 	.string "Go for it {PLAYER}, go ahead and\n"
 	.string "see what {STR_VAR_1} has to say!$"
 
 VyratonIndoors_MayorsOffice_Text_DeterminedMon::
-# 129 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
+# 130 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
 	.string "{STR_VAR_1} looks at you with a\n"
 	.string "burning desire to prove themselves!$"
+
+VyratonIndoors_MayorsOffice_Text_OtherImportantThings::
+# 137 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
+	.string "So you've registered {STR_VAR_1}\n"
+	.string "in the Pokédex. Incredible, isn't it?\p"
+	.string "It's a treasure trove of knowledge\n"
+	.string "that will grow with every encounter.\l"
+	.string "It'll be one of your greatest tools!\p"
+	.string "You can use it to learn more about\n"
+	.string "evolutions, movesets, locations and\l"
+	.string "even type matchups mid-battle!\p"
+	.string "Anyway, let's talk about a few\n"
+	.string "other important things.\p"
+	.string "You'll be receiving a weekly salary\n"
+	.string "for your efforts here in Vyraton.\p"
+	.string "We want to make sure you can focus\n"
+	.string "on battling without worry, afterall.\p"
+	.string "To start you off, though, I sent you\n"
+	.string "a little extra as a joining bonus.\p"
+	.string "It'll cover the fare for your trip,\n"
+	.string "plus there's some extra in there too.\l"
+	.string "But more on that in a few moments…\p"
+	.string "There's one more person I'd like for\n"
+	.string "you to meet before this night is up.\l"
+	.string "Then I'll show you to your new home.\p"
+	.string "Come on, {PLAYER}, let's get going.\n"
+	.string "{PAUSE 40}Let's go see Vyraton!$"

@@ -96,6 +96,7 @@ text VyratonIndoors_MayorsOffice_Text_GivePokedex
         We're very lucky to have him here in\n
         Vyraton. Anyway, as was saying…\l
         I have something else for you!\p
+
         I'm sure you'll be familiar with\n
         this, as all seasoned trainers are…\l
         I present you with…{PAUSE 40}{PLAY_FANFARE MUS_HG_OBTAIN_KEY_ITEM}{SHOW_ITEM_HEADER} a Pokédex!{WAIT_FANFARE}\p
@@ -132,3 +133,45 @@ text VyratonIndoors_MayorsOffice_Text_DeterminedMon
         {STR_VAR_1} looks at you with a\n
         burning desire to prove themselves!")
 }
+
+text VyratonIndoors_MayorsOffice_Text_OtherImportantThings
+{
+    format("
+        So you've registered {STR_VAR_1}\n
+        in the Pokédex. Incredible, isn't it?\p
+        It's a treasure trove of knowledge\n
+        that will grow with every encounter.\l
+        It'll be one of your greatest tools!\p
+        You can use it to learn more about\n
+        evolutions, movesets, locations and\l
+        even type matchups mid-battle!\p
+        Anyway, let's talk about a few\n
+        other important things.\p
+
+        You'll be receiving a weekly salary\n
+        for your efforts here in Vyraton.\p
+        We want to make sure you can focus\n
+        on battling without worry, afterall.\p
+        To start you off, though, I sent you\n
+        a little extra as a joining bonus.\p
+        It'll cover the fare for your trip,\n
+        plus there's some extra in there too.\l
+        But more on that in a few moments…\p
+        
+        There's one more person I'd like for\n
+        you to meet before this night is up.\l
+        Then I'll show you to your new home.\p
+        Come on, {PLAYER}, let's get going.\n
+        {PAUSE 40}Let's go see Vyraton!")
+}
+
+//        Finally, I have one more gift for you.\n
+//        {PAUSE 40}{PLAY_FANFARE MUS_HG_OBTAIN_KEY_ITEM}{SHOW_ITEM_HEADER}A Technical Machine!{WAIT_FANFARE}\p
+//        {HIDE_ITEM_HEADER}
+//        Technical Machines, or TMs, allow you\n
+//        to teach a move to a Pokémon on the fly.\l
+//        This one contains the move Return.\p
+//        It's power grows with the experiences\n
+//        you share with your Pokémon.\p
+//        Use it wisely, and it'll be a symbol of\n
+//        the ties between you and your team.\p

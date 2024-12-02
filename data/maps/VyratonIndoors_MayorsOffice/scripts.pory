@@ -119,6 +119,7 @@ script VyratonIndoors_MayorsOffice_EventScript_StarterMon
     call(VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon)
     setflag(FLAG_SUPPRESS_MUGSHOT)
     call(VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter)
+    call(VyratonIndoors_MayorsOffice_EventScript_StarterMon_OtherImportantThings)
     end
 }
 
@@ -141,6 +142,7 @@ script VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon
     waitbuttonpress
     waitfanfare
     closemessage
+    delay(40)
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter
@@ -157,10 +159,17 @@ script VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter
     turnplayer(DIR_NORTH)
 }
 
+script VyratonIndoors_MayorsOffice_EventScript_StarterMon_OtherImportantThings
+{
+    // setvar(VAR_0x8000, ITEM_TM_RETURN)
+    bufferpartymonnick(STR_VAR_1, 0)
+    mnmbox(VyratonIndoors_MayorsOffice_Text_OtherImportantThings, localId=LOCALID_Samuel)
+}
+
 script VyratonIndoors_MayorsOffice_EventScript_MeetThomas
 {
     fadenewbgm(MUS_HG_POKEWALKER)
-    delay(120)
+    delay(60)
     emote(LOCALID_Samuel, EMOTE_EXCLAM, wait=FALSE)
     turnplayer(DIR_SOUTH)
     addobject(LOCALID_Thomas)
@@ -180,7 +189,7 @@ script VyratonIndoors_MayorsOffice_EventScript_MeetThomas
     applymove(LOCALID_Thomas, VyratonIndoors_MayorsOffice_Movement_Thomas_Exit)
     removeobject(LOCALID_Thomas)
     fadedefaultbgm
-    delay(120)
+    delay(60)
     turnplayer(DIR_NORTH)
 }
 
