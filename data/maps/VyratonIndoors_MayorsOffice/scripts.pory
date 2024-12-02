@@ -14,6 +14,7 @@ script VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_DontLeave
 {
     playerbox(VyratonIndoors_MayorsOffice_Text_ShouldReturn, EMOTE_THINK)
     applymoveplayer(Common_Movement_WalkUp)
+    end
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro
@@ -27,6 +28,7 @@ script VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_EnterOffice
 {
     applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_Entrance)
     mnmbox(VyratonIndoors_MayorsOffice_Text_KickStart, localId=LOCALID_Samuel)
+    end
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_Samuel
@@ -39,6 +41,7 @@ script VyratonIndoors_MayorsOffice_EventScript_Samuel
     {
         call(VyratonIndoors_MayorsOffice_EventScript_Samuel_OpenBriefcase)
     }
+    end
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_Samuel_OpenBriefcase
@@ -63,6 +66,7 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase
         call(VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase)
         call(VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex)
     }
+    end
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase
@@ -115,6 +119,7 @@ script VyratonIndoors_MayorsOffice_EventScript_StarterMon
     call(VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon)
     setflag(FLAG_SUPPRESS_MUGSHOT)
     call(VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter)
+    end
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon

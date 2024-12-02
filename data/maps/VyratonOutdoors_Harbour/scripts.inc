@@ -58,125 +58,127 @@ VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet::
 	turnplayer DIR_SOUTH
 # 42 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	turnobject 2, DIR_SOUTH
+# 43 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+	removeobject 9
 	return
 
 
 VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures::
-# 47 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	call VyratonOutdoors_Harbour_EventScript_SSPathfinder_Departure
 # 48 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	turnplayer DIR_WEST
+	call VyratonOutdoors_Harbour_EventScript_SSPathfinder_Departure
 # 49 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	mnmbox VyratonOutdoors_Harbour_Text_HeadToOffice
+	turnplayer DIR_WEST
 # 50 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	applymoveplayer VyratonOutdoors_Harbour_Movement_Player_Exit, FALSE
+	mnmbox VyratonOutdoors_Harbour_Text_HeadToOffice
 # 51 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	applymove 2, VyratonOutdoors_Harbour_Movement_Samuel_Exit
+	applymoveplayer VyratonOutdoors_Harbour_Movement_Player_Exit, FALSE
 # 52 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	warp MAP_VYRATON_INDOORS_MAYORS_OFFICE, 4, 9
+	applymove 2, VyratonOutdoors_Harbour_Movement_Samuel_Exit
 # 53 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	setflag FLAG_HIDE_VYRATON_HARBOR_SAMUEL
+	warp MAP_VYRATON_INDOORS_MAYORS_OFFICE, 4, 9
 # 54 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	setflag FLAG_HIDE_VYRATON_HARBOR_GRANDPARENT
+	setflag FLAG_HIDE_VYRATON_HARBOR_SAMUEL
 # 55 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+	setflag FLAG_HIDE_VYRATON_HARBOR_GRANDPARENT
+# 56 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	waitstate
-	return
+	end
 
 
-# 58 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-VyratonOutdoors_Harbour_Movement_Grandparent_Exit:
 # 60 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+VyratonOutdoors_Harbour_Movement_Grandparent_Exit:
+# 62 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	delay_2
-# 61 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 63 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	delay_16
-# 62 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 64 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_up
-# 62 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 64 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_up
-# 62 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 64 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_up
-# 62 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 64 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_up
-# 62 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 64 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_up
-# 62 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 64 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_up
-# 62 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 64 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_up
 	step_end
 
-# 65 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-VyratonOutdoors_Harbour_Movement_Player_MoveOutOfWay:
 # 67 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	face_left
-# 68 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	lock_facing_direction
+VyratonOutdoors_Harbour_Movement_Player_MoveOutOfWay:
 # 69 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	walk_right
+	face_left
 # 70 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	unlock_facing_direction
+	lock_facing_direction
 # 71 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	delay_16
-# 71 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	delay_16
+	walk_right
 # 72 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	walk_left
+	unlock_facing_direction
 # 73 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+	delay_16
+# 73 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+	delay_16
+# 74 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+	walk_left
+# 75 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	face_up
 	step_end
 
-# 76 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 78 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 VyratonOutdoors_Harbour_Movement_Samuel_BeginEntrance:
-# 78 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 80 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_down
-# 78 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 80 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_down
-# 78 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 80 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_down
-# 78 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 80 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_down
-# 79 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 81 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	delay_8
 	step_end
 
-# 82 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 84 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 VyratonOutdoors_Harbour_Movement_Player_MeetSamuel:
-# 84 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 86 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	delay_16
-# 84 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 86 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	delay_16
-# 85 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	delay_8
 # 87 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+	delay_8
+# 89 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	face_left
 	step_end
 
-# 90 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 92 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 VyratonOutdoors_Harbour_Movement_Samuel_ContinueEntrance:
-# 92 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 94 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_down
-# 92 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 94 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_down
-# 93 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 95 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	face_right
 	step_end
 
-# 96 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-VyratonOutdoors_Harbour_Movement_Samuel_Exit:
 # 98 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	walk_up
-# 99 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	walk_right
+VyratonOutdoors_Harbour_Movement_Samuel_Exit:
 # 100 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+	walk_up
+# 101 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+	walk_right
+# 102 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_up
 	step_end
 
-# 103 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 105 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 VyratonOutdoors_Harbour_Movement_Player_Exit:
-# 105 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 107 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	delay_16
-# 105 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 107 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	delay_16
-# 106 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
+# 108 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	walk_up
 	step_end

@@ -40,6 +40,7 @@ script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet
     mnmbox(VyratonOutdoors_Harbour_Text_WelcomeToVyraton, nameKnown=FALSE, localId=LOCALID_Samuel)
     turnplayer(DIR_SOUTH)
     turnobject(LOCALID_Samuel, DIR_SOUTH)
+    removeobject(LOCALID_Grandparent)
 }
 
 script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures
@@ -53,6 +54,7 @@ script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures
     setflag(FLAG_HIDE_VYRATON_HARBOR_SAMUEL)
     setflag(FLAG_HIDE_VYRATON_HARBOR_GRANDPARENT)
     waitstate
+    end
 }
 
 movement VyratonOutdoors_Harbour_Movement_Grandparent_Exit
