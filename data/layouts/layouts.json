@@ -4422,6 +4422,26 @@
       "blockdata_filepath": "data/layouts/VyratonOutdoors_Harbour/map.bin"
     },
     {
+      "id": "LAYOUT_VYRATON_OUTDOORS_OCEAN_WEST",
+      "name": "VyratonOutdoors_Ocean_Layout",
+      "width": 9,
+      "height": 4,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Pacifidlog",
+      "border_filepath": "data/layouts/VyratonOutdoors_Ocean/border.bin",
+      "blockdata_filepath": "data/layouts/VyratonOutdoors_Ocean/map.bin"
+    },
+    {
+      "id": "LAYOUT_VYRATON_OUTDOORS_OCEAN_EAST",
+      "name": "VyratonOutdoors_Ocean_LayoutEast",
+      "width": 9,
+      "height": 4,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Pacifidlog",
+      "border_filepath": "data/layouts/VyratonOutdoors_Ocean/border_east.bin",
+      "blockdata_filepath": "data/layouts/VyratonOutdoors_Ocean/map_east.bin"
+    },
+    {
       "id": "LAYOUT_VYRATON_MAYOR_OFFICE",
       "name": "Vyraton_MayorsOffice_Layout",
       "width": 10,
