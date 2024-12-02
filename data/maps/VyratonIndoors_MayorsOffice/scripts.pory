@@ -2,7 +2,7 @@ mapscripts VyratonIndoors_MayorsOffice_MapScripts
 {
     MAP_SCRIPT_ON_FRAME_TABLE
     [
-        VAR_IKIGAI_INTRO_STATE, 1: VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro
+        VAR_IKIGAI_INTRO_STATE, 3: VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro
     ]
 }
 
@@ -19,7 +19,7 @@ script VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_DontLeave
 
 script VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro
 {
-    setvar(VAR_IKIGAI_INTRO_STATE, 2)
+    setvar(VAR_IKIGAI_INTRO_STATE, 4)
 
     call(VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_EnterOffice)
 }

@@ -313,17 +313,18 @@ static void Task_HandleSSPathfinderSequence(u8 taskId)
     case 2:
         tTimer++;
         tSmokeTimer++;
+        /*
         if (tSmokeTimer == 100)
         {
-        //  CreateSmokeSprite_SSPathfinder();
+            CreateSmokeSprite_SSPathfinder();
             tSmokeTimer = 0;
         }
-
+        */
         TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_0x8004, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
         boatObject = &gObjectEvents[objectEventId];
 
     //  if (gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 < -100)
-        if (!gPaletteFade.active && tTimer > 500)
+        if (!gPaletteFade.active && tTimer > 100)
         {
             tTimer = 0;
             tState = 3;
@@ -335,18 +336,16 @@ static void Task_HandleSSPathfinderSequence(u8 taskId)
         break;
     case 4:
         tTimer++;
-        if (tTimer == 90)
-        {
-            tTimer = 0;
-            tState = 5;
-        }
+        tTimer = 0;
+        tState = 5;
         break;
     case 5:
         tTimer++;
-        if (tTimer == 120)
+        if (tTimer == 60)
         {
             DrawWholeMapView();
             DestroyTask(taskId);
+            UnlockPlayerFieldControls();
         }
         break;
     }

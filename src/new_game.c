@@ -158,7 +158,6 @@ static void WarpToPier(void)
 {
     FlagSet(FLAG_HIDE_MAP_NAME_POPUP);
     FlagSet(FLAG_SUPPRESS_MUGSHOT);
-    gSpecialVar_0x8004 = 1;
     SetWarpDestination(MAP_GROUP(VYRATON_OUTDOORS_OCEAN), MAP_NUM(VYRATON_OUTDOORS_OCEAN), WARP_ID_NONE, 4, 2);
     WarpIntoMap();
 }

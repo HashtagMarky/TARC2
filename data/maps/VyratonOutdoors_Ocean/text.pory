@@ -1,0 +1,8 @@
+text VyratonOutdoors_Ocean_Text_PleasePrepare
+{
+    format("
+        Attention passengers.\n
+        We are nearing our destination.\p
+        Please gather your belongings\n
+        and prepare to disembark shortly.")
+}

@@ -5,13 +5,13 @@ VyratonOutdoors_Harbour_MapScripts::
 
 VyratonOutdoors_Harbour_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
 # 5 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	map_script_2 VAR_IKIGAI_INTRO_STATE, 0, VyratonOutdoors_Harbour_EventScript_IkigaiIntro
+	map_script_2 VAR_IKIGAI_INTRO_STATE, 2, VyratonOutdoors_Harbour_EventScript_IkigaiIntro
 	.2byte 0
 
 
 VyratonOutdoors_Harbour_EventScript_IkigaiIntro::
 # 14 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	setvar VAR_IKIGAI_INTRO_STATE, 1
+	setvar VAR_IKIGAI_INTRO_STATE, 3
 # 16 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	call VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Disembarkment
 # 17 "data//maps/VyratonOutdoors_Harbour/scripts.pory"

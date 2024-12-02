@@ -1,0 +1,22 @@
+mapscripts VyratonOutdoors_Ocean_MapScripts
+{
+    MAP_SCRIPT_ON_RESUME
+    {
+        setstepcallback(STEP_CB_SS_PATHFINDER)
+    }
+
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        VAR_IKIGAI_INTRO_STATE, 0: VyratonOutdoors_Ocean_MapScripts_WarpIkigaiIntro
+    ]
+}
+
+script VyratonOutdoors_Ocean_MapScripts_WarpIkigaiIntro
+{
+    setvar(VAR_IKIGAI_INTRO_STATE, 1)
+    msgbox(VyratonOutdoors_Ocean_Text_PleasePrepare, MSGBOX_DEFAULT)
+    closemessage
+    playse(SE_RG_SS_ANNE_HORN)
+    waitse
+    warpsilent(MAP_VYRATON_OUTDOORS_HARBOUR, 15, 25)
+}

@@ -5,7 +5,7 @@ VyratonIndoors_MayorsOffice_MapScripts::
 
 VyratonIndoors_MayorsOffice_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
 # 5 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	map_script_2 VAR_IKIGAI_INTRO_STATE, 1, VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro
+	map_script_2 VAR_IKIGAI_INTRO_STATE, 3, VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro
 	.2byte 0
 
 
@@ -19,7 +19,7 @@ VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_DontLeave::
 
 VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro::
 # 22 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	setvar VAR_IKIGAI_INTRO_STATE, 2
+	setvar VAR_IKIGAI_INTRO_STATE, 4
 # 24 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	call VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_EnterOffice
 	return
