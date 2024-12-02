@@ -628,6 +628,7 @@
     "VyratonOutdoors_Harbour"
   ],
   "gMapGroup_VyratonIndoors": [
+    "VyratonIndoors_SSPathfinder",
     "VyratonIndoors_MayorsOffice"
   ]
 }

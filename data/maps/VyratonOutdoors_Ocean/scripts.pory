@@ -18,5 +18,5 @@ script VyratonOutdoors_Ocean_MapScripts_WarpIkigaiIntro
     closemessage
     playse(SE_RG_SS_ANNE_HORN)
     waitse
-    warpsilent(MAP_VYRATON_OUTDOORS_HARBOUR, 15, 25)
+    warpsilent(MAP_VYRATON_INDOORS_SSPATHFINDER, 4, 4)
 }

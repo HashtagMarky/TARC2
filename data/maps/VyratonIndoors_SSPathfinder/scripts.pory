@@ -1,0 +1,13 @@
+mapscripts VyratonIndoors_SSPathfinder_MapScripts
+{
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        VAR_IKIGAI_INTRO_STATE, 1: VyratonIndoors_SSPathfinder_EventScript_MeetGrandparent
+    ]
+}
+
+script VyratonIndoors_SSPathfinder_EventScript_MeetGrandparent
+{
+    setvar(VAR_IKIGAI_INTRO_STATE, 2)
+    setdynamicwarp(MAP_VYRATON_OUTDOORS_HARBOUR, 15, 25)
+}

@@ -28,6 +28,6 @@ VyratonOutdoors_Ocean_MapScripts_WarpIkigaiIntro::
 # 20 "data//maps/VyratonOutdoors_Ocean/scripts.pory"
 	waitse
 # 21 "data//maps/VyratonOutdoors_Ocean/scripts.pory"
-	warpsilent MAP_VYRATON_OUTDOORS_HARBOUR, 15, 25
+	warpsilent MAP_VYRATON_INDOORS_SSPATHFINDER, 4, 4
 	return
 

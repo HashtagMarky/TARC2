@@ -4450,6 +4450,16 @@
       "secondary_tileset": "gTileset_PokemonSchool",
       "border_filepath": "data/layouts/VyratonIndoors_MayorsOffice/border.bin",
       "blockdata_filepath": "data/layouts/VyratonIndoors_MayorsOffice/map.bin"
+    },
+    {
+      "id": "LAYOUT_VYRATON_INDOORS_SSPATHFINDER",
+      "name": "VyratonIndoors_SSPathfinder_Layout",
+      "width": 9,
+      "height": 8,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_InsideShip",
+      "border_filepath": "data/layouts/VyratonIndoors_SSPathfinder/border.bin",
+      "blockdata_filepath": "data/layouts/VyratonIndoors_SSPathfinder/map.bin"
     }
   ]
 }
