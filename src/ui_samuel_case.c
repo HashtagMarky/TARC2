@@ -1025,7 +1025,7 @@ static void Task_SamuelCaseConfirmSelection(u8 taskId)
 static void Task_SamuelCaseMain(u8 taskId)
 {
     u16 oldPosition = sSamuelCaseDataPtr->handPosition;
-    if ((JOY_NEW(R_BUTTON) && sCasePageNum == PAGE_ONE) || (JOY_NEW(L_BUTTON) && sCasePageNum == PAGE_TWO))
+    if (((JOY_NEW(R_BUTTON) && sCasePageNum == PAGE_ONE) || (JOY_NEW(L_BUTTON) && sCasePageNum == PAGE_TWO)) && !gPaletteFade.active)
     {
         PlaySE(SE_BALL_TRAY_ENTER);
         SamuelCaseChangeGraphics();
