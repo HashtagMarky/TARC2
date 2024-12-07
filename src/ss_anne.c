@@ -5,6 +5,7 @@
 #include "random.h"
 #include "script.h"
 #include "sound.h"
+#include "ss_anne.h"
 #include "constants/songs.h"
 #include "constants/vars.h"
 
@@ -107,7 +108,7 @@ static const struct SpriteTemplate sSmokeSpriteTemplate_SSPathfinder = {
     sSmokeAnimTable,
     NULL,
     gDummySpriteAffineAnimTable,
-    SmokeSpriteCallback_SSPathfinder
+    SmokeSpriteCallback
 };
 
 void DoSSAnneDepartureCutscene(void)
@@ -176,13 +177,34 @@ static void Task_SSAnneFinish(u8 taskId)
     }
 }
 
+#define tTimer   data[0]
+static void Task_CreateSmokeSprite(u8 taskId)
+{
+    gTasks[taskId].tTimer++;
+    
+    if (gTasks[taskId].tTimer == 70)
+    {
+        gTasks[taskId].tTimer = 0;
+        CreateSmokeSprite_SSPathfinder();
+    }
+}
+
+void DestroySSPathfinderSmokeTask(void)
+{
+    DestroyTask(FindTaskIdByFunc(Task_CreateSmokeSprite));
+}
+
 void DoSSPathfinderCutscene(void)
 {
+    u8 taskId;
     LoadSpriteSheets(sSpriteSheets);
     LoadSpritePalette(&sWakePalette);
     LoadSpritePalette(&sSmokePalette);
     CreateWakeBehindBoat_SSPathfinder();
+    taskId = CreateTask(Task_CreateSmokeSprite, 0);
+    gTasks[taskId].tTimer = 69;
 }
+#undef tTimer
 
 static void CreateWakeBehindBoat(void)
 {
