@@ -284,10 +284,6 @@
 // Whether Object Event is an OW pokemon
 #define IS_OW_MON_OBJ(obj) ((obj)->graphicsId >= OBJ_EVENT_GFX_MON_BASE)
 
-// Used to call specific Character Object Events
-#define OBJ_EVENT_GFX_CHARACTER(name)           gCharactersInfo[CHARACTER_##name].overworldGraphicsId
-#define OBJ_EVENT_GFX_CHARACTER_PARTNER(name)   gCharactersInfo[CHARACTER_##name].partnerPokemon + OBJ_EVENT_GFX_MON_BASE
-
 #define SHADOW_SIZE_S       0
 #define SHADOW_SIZE_M       1
 #define SHADOW_SIZE_L       2
