@@ -208,6 +208,13 @@ struct Time
     /*0x04*/ s8 seconds;
 };
 
+#include "characters.h"
+struct CharacterData
+{
+    u8 friendship[CHARACTER_COUNT];
+    u8 conversed[ROUND_BITS_TO_BYTES(CHARACTER_COUNT)];
+};
+
 #include "constants/items.h"
 #define ITEM_FLAGS_COUNT ((ITEMS_COUNT / 8) + ((ITEMS_COUNT % 8) ? 1 : 0))
 
@@ -227,6 +234,7 @@ struct SaveBlock3
 #if OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_FIRST_TIME
     u8 itemFlags[ITEM_FLAGS_COUNT];
 #endif
+    struct CharacterData characters;
 };
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;
