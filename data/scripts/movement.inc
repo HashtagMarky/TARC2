@@ -129,3 +129,9 @@ Common_Movement_WalkUp2::
 	walk_up
 	walk_up
 	step_end
+
+Common_Movement_DoorEntrance::
+	set_visible
+    delay_16
+    walk_down
+	step_end
