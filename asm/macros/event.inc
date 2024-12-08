@@ -2106,7 +2106,7 @@
 	.endm
 
 	@ Buffers the given text and calls the relevant message, name and mugshot script (see gStdScripts).
-	.macro mnmbox text:req, PMD=FALSE, mugshotEmotion=EMOTE_NORMAL, nameKnown=TRUE, localId
+	.macro mnmbox text:req, PMD=FALSE, mugshotEmotion=EMOTE_NORMAL, nameKnown=TRUE, localId, remain
 	lock
 	.ifnb \localId
 		setselectedobjectevent \localId
@@ -2134,7 +2134,9 @@
 	.if \PMD == TRUE
 		call EventScript_DisplayPokedexHeader
 	.endif
-	release
+	.ifb \remain
+		release
+	.endif
 	.endm
 
 	@ Buffers the given text and calls the relevant emote, name and mugshot script.
