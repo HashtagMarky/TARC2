@@ -1,0 +1,72 @@
+text VyratonIndoors_SSPathfinder_Text_IntroduceCaptain
+{
+    format("
+        Where d'you think you're goin'?\n
+        {PAUSE 60}Hold on, forgot did you?\p
+        Everybody aboard this vessel gets a\n
+        wee visit from the captain, giving\l
+        out some advice for your travels.\p
+        Come on, now, we've got a little bit of
+        time before the S.S. Pathfinder docks.\l
+        May I come in?")
+}
+
+text VyratonIndoors_SSPathfinder_Text_WhatBringsYou
+{
+    format("
+        Titchy room this, more than a slight\n
+        smaller than my own. My name's Skip.\p
+        {SPEAKER_NAME NAME_AUTO}With a name like that, I figured that\n
+        I might as well take to the high seas.\l
+        Been doing it a long time now…\p
+        After Vyraton, a new camptain of\n
+        the S.S. Pathfinder will be named.\l
+        I'll be moving ashore myself.\p
+        Time to live with my granddaughters,\n
+        they've been after me for years.\p
+        
+        I see you also have a ticket to the\n
+        tiny place there yourself.\l
+        What brings you to it?")
+}
+
+text VyratonIndoors_SSPathfinder_Text_WhatBringsYou_FreshStart
+{
+    format("
+        You want a fresh start?")
+}
+
+text VyratonIndoors_SSPathfinder_Text_WhatBringsYou_NewChallenge
+{
+    format("
+        You want a new challenge?")
+}
+
+text VyratonIndoors_SSPathfinder_Text_WhatBringsYou_Business
+{
+    format("
+        You're just going for business?")
+}
+
+text VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice
+{
+    format("
+        {STR_VAR_1}\n
+        A fine reason to enjoy Vyraton!\p
+        
+        Let me give you some advice that in
+        fact came from my girls over there.\l
+        They told me “Words are powerful”.\p
+        Think on that, the words you say,\n
+        the words you hear and believe.\p
+        They shape the way the world see\n
+        you, and the way you see it.\l
+        Carry that forward with you.\p
+        You'll have many an opportunity to\n
+        choose your words wisely, you know.\p
+        Will you be {COLOR LIGHT_BLUE}inspiring{COLOR DARK_GRAY},
+        {COLOR LIGHT_GREEN}humble{COLOR DARK_GRAY},\n
+        {COLOR LIGHT_RED}dominant{COLOR DARK_GRAY}
+        or maybe even {COLOR LIGHT_GRAY}cynical{COLOR DARK_GRAY}?\l
+        It's up to you, my friend.")
+}
