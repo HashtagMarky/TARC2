@@ -120,7 +120,7 @@ VyratonIndoors_MayorsOffice_Text_OtherImportantThings::
 	.string "It'll be one of your greatest tools!\p"
 	.string "You can use it to learn more about\n"
 	.string "evolutions, movesets, locations and\l"
-	.string "even type matchups mid-battle!\p"
+	.string "even your opponents mid-battle!\p"
 	.string "Anyway, let's talk about a few\n"
 	.string "other important things.\p"
 	.string "You'll be receiving a weekly salary\n"
