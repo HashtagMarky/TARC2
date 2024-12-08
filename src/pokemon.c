@@ -62,7 +62,6 @@
 #include "constants/union_room.h"
 #include "constants/weather.h"
 #include "wild_encounter.h"
-#include "data/speaker_names.h"
 
 #define FRIENDSHIP_EVO_THRESHOLD ((P_FRIENDSHIP_EVO_THRESHOLD >= GEN_8) ? 160 : 220)
 
@@ -3551,7 +3550,7 @@ const u8 *GetSpeciesName(u16 species)
 {
     species = SanitizeSpeciesId(species);
     if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
-        return gSpeakerNamesText[NAME_UNKNOWN];
+        return gIkigaiCharactersInfo[CHARACTER_DEFAULT].name;
     if (gSpeciesInfo[species].speciesName[0] == 0)
         return gSpeciesInfo[SPECIES_NONE].speciesName;
     return gSpeciesInfo[species].speciesName;

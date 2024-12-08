@@ -208,8 +208,8 @@ struct Time
     /*0x04*/ s8 seconds;
 };
 
-#include "characters.h"
-struct CharacterData
+#include "ikigai_characters.h"
+struct IkigaiCharacterData
 {
     u8 friendship[CHARACTER_COUNT];
     u8 conversed[ROUND_BITS_TO_BYTES(CHARACTER_COUNT)];
@@ -234,7 +234,7 @@ struct SaveBlock3
 #if OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_FIRST_TIME
     u8 itemFlags[ITEM_FLAGS_COUNT];
 #endif
-    struct CharacterData characters;
+    struct IkigaiCharacterData characters;
 };
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;

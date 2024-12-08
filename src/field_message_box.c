@@ -13,7 +13,8 @@
 #include "text_window.h"
 #include "constants/event_objects.h"
 #include "constants/species.h"
-#include "data/speaker_names.h"
+
+#include "ikigai_characters.h"
 
 static EWRAM_DATA u8 sFieldMessageBoxMode = 0;
 EWRAM_DATA u8 gWalkAwayFromSignpostTimer = 0;
@@ -247,6 +248,8 @@ void SetSpeakerName(const u8* name)
 
 void SetSpeakerAuto(u16 graphicsId)
 {
+    u8 character = ReturnCharacterFromObjectGraphicsId(graphicsId);
+
     if (graphicsId > OBJ_EVENT_GFX_SPECIES(NONE) && graphicsId < OBJ_EVENT_GFX_SPECIES(EGG))
     {
         gSpeakerName = GetSpeciesName(graphicsId - OBJ_EVENT_GFX_SPECIES(NONE));
@@ -255,13 +258,9 @@ void SetSpeakerAuto(u16 graphicsId)
     {
         gSpeakerName = GetSpeciesName(graphicsId - OBJ_EVENT_GFX_SPECIES_SHINY(NONE));
     }
-    else if (graphicsId < NELEMS(gSpeakerNamesText))
-    {
-        gSpeakerName = gSpeakerNamesText[graphicsId];
-    }
     else
     {
-        gSpeakerName = NULL;
+        gSpeakerName = gIkigaiCharactersInfo[character].name;
     }
 }
 

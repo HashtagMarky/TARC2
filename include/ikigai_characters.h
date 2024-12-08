@@ -1,7 +1,12 @@
+#ifndef GUARD_IKIGAI_CHARACTERS_H
+#define GUARD_IKIGAI_CHARACTERS_H
+
 enum // Up to 256 Character IDs
 {
+    CHARACTER_DEFAULT,
     CHARACTER_SAMUEL,
     CHARACTER_LAUREN,
+    CHARACTER_THOMAS,
     CHARACTER_COUNT,
 };
 /*
@@ -9,7 +14,7 @@ enum // Up to 256 Character IDs
 #define CHAR_MUGSHOT(name)
 #define CHAR_PARTNET(name)
 */
-struct CharacterInfo
+struct IkigaiCharacterInfo
 {
     // Character Identification
     u8 charcterId;
@@ -75,4 +80,8 @@ struct InventoryItem
     u8 itemChance;         // Whether the item is a key item
 };
 
-extern const struct CharacterInfo gCharacterInfo[];
+extern const struct IkigaiCharacterInfo gIkigaiCharactersInfo[];
+
+u8 ReturnCharacterFromObjectGraphicsId(u16 graphicsId);
+
+#endif // GUARD_IKIGAI_CHARACTERS_H
