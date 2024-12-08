@@ -2,7 +2,7 @@ text VyratonOutdoors_Harbour_Text_ExcuseMe
 {
     format("
         If you'll please excuse an old heart…\n
-        {PAUSE 60}Ah… Let us both have a good evening…")
+        {PAUSE 60}And may we both have a good evening…")
 }
 
 text VyratonOutdoors_Harbour_Text_WelcomeToVyraton

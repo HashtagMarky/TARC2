@@ -1,7 +1,7 @@
 VyratonOutdoors_Harbour_Text_ExcuseMe::
 # 1 "data//maps/VyratonOutdoors_Harbour/text.pory"
 	.string "If you'll please excuse an old heart…\n"
-	.string "{PAUSE 60}Ah… Let us both have a good evening…$"
+	.string "{PAUSE 60}And may we both have a good evening…$"
 
 VyratonOutdoors_Harbour_Text_WelcomeToVyraton::
 # 8 "data//maps/VyratonOutdoors_Harbour/text.pory"
