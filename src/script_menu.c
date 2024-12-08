@@ -26,6 +26,7 @@
 
 #include "constants/field_mugshots.h"
 #include "field_mugshot.h"
+#include "ikigai_characters.h"
 
 struct DynamicListMenuEventArgs
 {
@@ -73,6 +74,9 @@ static void MultichoiceDynamicEventShowItem_OnDestroy(struct DynamicListMenuEven
 static void MultichoiceDynamicEventShowPMD_OnInit(struct DynamicListMenuEventArgs *eventArgs);
 static void MultichoiceDynamicEventShowPMD_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
 static void MultichoiceDynamicEventShowPMD_OnDestroy(struct DynamicListMenuEventArgs *eventArgs);
+static void MultichoiceDynamicEventShowDialogue_OnInit(struct DynamicListMenuEventArgs *eventArgs);
+static void MultichoiceDynamicEventShowDialogue_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
+static void MultichoiceDynamicEventShowDialogue_OnDestroy(struct DynamicListMenuEventArgs *eventArgs);
 
 static const struct DynamicListMenuEventCollection sDynamicListMenuEventCollections[] =
 {
@@ -93,7 +97,15 @@ static const struct DynamicListMenuEventCollection sDynamicListMenuEventCollecti
         .OnInit = MultichoiceDynamicEventShowPMD_OnInit,
         .OnSelectionChanged = MultichoiceDynamicEventShowPMD_OnSelectionChanged,
         .OnDestroy = MultichoiceDynamicEventShowPMD_OnDestroy
+    },
+    /*
+    [DYN_MULTICHOICE_CB_DIALOGUE] =
+    {
+        .OnInit = MultichoiceDynamicEventShowDialogue_OnInit,
+        .OnSelectionChanged = MultichoiceDynamicEventShowDialogue_OnSelectionChanged,
+        .OnDestroy = MultichoiceDynamicEventShowDialogue_OnDestroy
     }
+    */
 };
 
 static const struct ListMenuTemplate sScriptableListMenuTemplate =
@@ -258,6 +270,51 @@ static void MultichoiceDynamicEventShowPMD_OnDestroy(struct DynamicListMenuEvent
         FreeSpriteTilesByTag(TAG_MUGSHOT);
         FreeSpritePaletteByTag(TAG_MUGSHOT);
         DestroySprite(&gSprites[sPMDSpriteId]);
+    }
+}
+
+static void MultichoiceDynamicEventShowDialogue_OnInit(struct DynamicListMenuEventArgs *eventArgs)
+{
+    struct WindowTemplate *template = &gWindows[eventArgs->windowId].window;
+    u32 baseBlock = template->baseBlock + template->width * template->height;
+    struct WindowTemplate auxTemplate = CreateWindowTemplate(0, template->tilemapLeft + template->width + 2, template->tilemapTop, 4, 4, 15, baseBlock);
+    u32 auxWindowId = AddWindow(&auxTemplate);
+    SetStandardWindowBorderStyle(auxWindowId, FALSE);
+    FillWindowPixelBuffer(auxWindowId, 0x11);
+    CopyWindowToVram(auxWindowId, COPYWIN_FULL);
+    sAuxWindowId = auxWindowId;
+    sItemSpriteId = MAX_SPRITES;
+}
+
+static void MultichoiceDynamicEventShowDialogue_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs)
+{
+    struct WindowTemplate *template = &gWindows[eventArgs->windowId].window;
+    u32 x = template->tilemapLeft * 8 + template->width * 8 + 36;
+    u32 y = template->tilemapTop * 8 + 20;
+
+    if (sItemSpriteId != MAX_SPRITES)
+    {
+        FreeSpriteTilesByTag(TAG_CB_ITEM_ICON);
+        FreeSpritePaletteByTag(TAG_CB_ITEM_ICON);
+        DestroySprite(&gSprites[sItemSpriteId]);
+    }
+
+    sItemSpriteId = CreateDialogueIconSprite(eventArgs->selectedItem);
+    gSprites[sItemSpriteId].oam.priority = 0;
+    gSprites[sItemSpriteId].x = x;
+    gSprites[sItemSpriteId].y = y;
+}
+
+static void MultichoiceDynamicEventShowDialogue_OnDestroy(struct DynamicListMenuEventArgs *eventArgs)
+{
+    ClearStdWindowAndFrame(sAuxWindowId, TRUE);
+    RemoveWindow(sAuxWindowId);
+
+    if (sItemSpriteId != MAX_SPRITES)
+    {
+        FreeSpriteTilesByTag(TAG_CB_ITEM_ICON);
+        FreeSpritePaletteByTag(TAG_CB_ITEM_ICON);
+        DestroySprite(&gSprites[sItemSpriteId]);
     }
 }
 

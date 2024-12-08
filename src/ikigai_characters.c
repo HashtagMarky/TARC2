@@ -1,15 +1,47 @@
 #include "global.h"
 #include "gba/gba.h"
 #include "main.h"
-#include "event_data.h"
+#include "malloc.h"
 #include "ikigai_characters.h"
 #include "data/ikigai_characters.h"
+#include "event_data.h"
+#include "sprite.h"
+#include "decompress.h"
+#include "field_weather.h"
+
+static const u32 sCharacteristicIcon_Neutral[] = INCBIN_U32("graphics/dialogue_icons/neutral.4bpp.lz");
+static const u16 sCharacteristicPal_Neutral[] = INCBIN_U16("graphics/dialogue_icons/neutral.gbapal");
+static const u32 sCharacteristicIcon_Inspired[] = INCBIN_U32("graphics/dialogue_icons/inspired.4bpp.lz");
+static const u16 sCharacteristicPal_Inspired[] = INCBIN_U16("graphics/dialogue_icons/inspired.gbapal");
+static const u32 sCharacteristicIcon_Humble[] = INCBIN_U32("graphics/dialogue_icons/humble.4bpp.lz");
+static const u16 sCharacteristicPal_Humble[] = INCBIN_U16("graphics/dialogue_icons/humble.gbapal");
+static const u32 sCharacteristicIcon_Dominant[] = INCBIN_U32("graphics/dialogue_icons/dominant.4bpp.lz");
+static const u16 sCharacteristicPal_Dominant[] = INCBIN_U16("graphics/dialogue_icons/dominant.gbapal");
+static const u32 sCharacteristicIcon_Cynical[] = INCBIN_U32("graphics/dialogue_icons/cynical.4bpp.lz");
+static const u16 sCharacteristicPal_Cynical[] = INCBIN_U16("graphics/dialogue_icons/cynical.gbapal");
+
+static const struct OamData sCharacteristic_Oam = {
+    .size = SPRITE_SIZE(32x32),
+    .shape = SPRITE_SHAPE(32x32),
+    .priority = 0,
+};
+
+static const struct SpriteTemplate sDialogueIconSprite_SpriteTemplate = {
+    .tileTag = TAG_CHARACTER_DIALOGUE_ICON,
+    .paletteTag = TAG_CHARACTER_DIALOGUE_ICON,
+    .oam = &sCharacteristic_Oam,
+    .callback = SpriteCallbackDummy,
+    .anims = gDummySpriteAnimTable,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
 
 struct DialogueCharacteristics
 {
     const u8 *name;
     s8 kindnessEffect;
     s8 strengthEffect;
+    const u32 *iconImage;
+    const u16 *iconPal;
 };
 
 static const struct DialogueCharacteristics sDialogueCharacteristics[CHARACTERISTIC_COUNT] =
@@ -19,30 +51,40 @@ static const struct DialogueCharacteristics sDialogueCharacteristics[CHARACTERIS
         .name = COMPOUND_STRING("Neutral"),
         .kindnessEffect = 0,
         .strengthEffect = 0,
+        .iconImage = sCharacteristicIcon_Neutral,
+        .iconPal = sCharacteristicPal_Neutral
     },
-    [CHARACTERISTIC_INSPIRING] =
+    [CHARACTERISTIC_INSPIRED] =
     {
-        .name = COMPOUND_STRING("Inspiring"),
+        .name = COMPOUND_STRING("Inspired"),
         .kindnessEffect = 1,
         .strengthEffect = 1,
+        .iconImage = sCharacteristicIcon_Inspired,
+        .iconPal = sCharacteristicPal_Inspired
     },
     [CHARACTERISTIC_HUMBLE] =
     {
         .name = COMPOUND_STRING("Humble"),
         .kindnessEffect = 1,
         .strengthEffect = -1,
+        .iconImage = sCharacteristicIcon_Humble,
+        .iconPal = sCharacteristicPal_Humble
     },
-    [CHARACTERISTIC_DOMINATING] =
+    [CHARACTERISTIC_DOMINAT] =
     {
-        .name = COMPOUND_STRING("Dominating"),
+        .name = COMPOUND_STRING("Dominant"),
         .kindnessEffect = -1,
         .strengthEffect = 1,
+        .iconImage = sCharacteristicIcon_Dominant,
+        .iconPal = sCharacteristicPal_Dominant
     },
     [CHARACTERISTIC_CYNICAL] =
     {
         .name = COMPOUND_STRING("Cynical"),
         .kindnessEffect = -1,
         .strengthEffect = -1,
+        .iconImage = sCharacteristicIcon_Cynical,
+        .iconPal = sCharacteristicPal_Cynical
     },
 };
 
@@ -91,12 +133,50 @@ void IkigaiCharacter_HandleDialogue(void)
     if (character == CHARACTER_DEFAULT)
         return;
 
-    if (GetSetConversedFlag(character, FALSE))
-        GetSetConversedFlag(character, TRUE);
-
     if (gSpecialVar_Result >= NELEMS(sDialogueCharacteristics))
         gSpecialVar_Result = CHARACTERISTIC_NEUTRAL;
 
-    gSaveBlock3Ptr->characters.opinionKindness[character] += sDialogueCharacteristics[gSpecialVar_Result].kindnessEffect;
-    gSaveBlock3Ptr->characters.opinionStrength[character] += sDialogueCharacteristics[gSpecialVar_Result].strengthEffect;
+    if (GetSetConversedFlag(character, FALSE))
+    {
+        gSaveBlock3Ptr->characters.opinionKindness[character] += sDialogueCharacteristics[gSpecialVar_Result].kindnessEffect;
+        gSaveBlock3Ptr->characters.opinionStrength[character] += sDialogueCharacteristics[gSpecialVar_Result].strengthEffect;
+        GetSetConversedFlag(character, TRUE);
+    }
+}
+
+u8 CreateDialogueIconSprite(u8 characteristicIndex)
+{
+    u8 spriteId;
+
+    struct CompressedSpriteSheet sheet = { .size = 0x1000, .tag = TAG_CHARACTER_DIALOGUE_ICON };
+    struct SpritePalette pal = { .tag = TAG_CHARACTER_DIALOGUE_ICON };
+    struct SpriteTemplate *spriteTemplate;
+
+    if (characteristicIndex >= CHARACTERISTIC_COUNT)
+        return SPRITE_NONE;
+
+    sheet.data = sDialogueCharacteristics[characteristicIndex].iconImage;
+    pal.data = sDialogueCharacteristics[characteristicIndex].iconPal;
+
+    LoadCompressedSpriteSheet(&sheet);
+    LoadSpritePalette(&pal);
+
+    spriteTemplate = Alloc(sizeof(*spriteTemplate));
+    if (spriteTemplate == NULL)
+        return SPRITE_NONE;
+
+    CpuCopy16(&sDialogueIconSprite_SpriteTemplate, spriteTemplate, sizeof(*spriteTemplate));
+    spriteTemplate->tileTag = TAG_CHARACTER_DIALOGUE_ICON;
+    spriteTemplate->paletteTag = TAG_CHARACTER_DIALOGUE_ICON;
+
+    spriteId = CreateSprite(spriteTemplate, 0, 0, 0);
+
+    Free(spriteTemplate);
+
+    if (spriteId == SPRITE_NONE)
+        return SPRITE_NONE;
+
+    PreservePaletteInWeather(gSprites[spriteId].oam.paletteNum + 0x10);
+
+    return spriteId;
 }

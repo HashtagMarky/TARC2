@@ -46,11 +46,11 @@ IkigaiCharacterBox_Talk::
 # 31 "data//scripts/ikigai_characters.pory"
 	dynmultipush IkigaiCharacterBox_Talk_Text_1, CHARACTERISTIC_NEUTRAL
 # 32 "data//scripts/ikigai_characters.pory"
-	dynmultipush IkigaiCharacterBox_Talk_Text_2, CHARACTERISTIC_INSPIRING
+	dynmultipush IkigaiCharacterBox_Talk_Text_2, CHARACTERISTIC_INSPIRED
 # 33 "data//scripts/ikigai_characters.pory"
 	dynmultipush IkigaiCharacterBox_Talk_Text_3, CHARACTERISTIC_HUMBLE
 # 34 "data//scripts/ikigai_characters.pory"
-	dynmultipush IkigaiCharacterBox_Talk_Text_4, CHARACTERISTIC_DOMINATING
+	dynmultipush IkigaiCharacterBox_Talk_Text_4, CHARACTERISTIC_DOMINAT
 # 35 "data//scripts/ikigai_characters.pory"
 	dynmultipush IkigaiCharacterBox_Talk_Text_5, CHARACTERISTIC_CYNICAL
 # 36 "data//scripts/ikigai_characters.pory"

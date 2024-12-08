@@ -29,9 +29,9 @@ script IkigaiCharacterBox_Talk
 {
     mnmbox("What response will you\ngive to me?")
     dynmultipush("Neutral", CHARACTERISTIC_NEUTRAL)
-    dynmultipush("Inspiring", CHARACTERISTIC_INSPIRING)
+    dynmultipush("Inspiring", CHARACTERISTIC_INSPIRED)
     dynmultipush("Humble", CHARACTERISTIC_HUMBLE)
-    dynmultipush("Dominating", CHARACTERISTIC_DOMINATING)
+    dynmultipush("Dominating", CHARACTERISTIC_DOMINAT)
     dynmultipush("Cynical", CHARACTERISTIC_CYNICAL)
     dynmultistack(0, 0, FALSE, 3, TRUE, 0, DYN_MULTICHOICE_CB_DIALOGUE)
     callnative(IkigaiCharacter_HandleDialogue)

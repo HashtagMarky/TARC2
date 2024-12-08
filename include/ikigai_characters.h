@@ -1,6 +1,7 @@
 #ifndef GUARD_IKIGAI_CHARACTERS_H
 #define GUARD_IKIGAI_CHARACTERS_H
 
+#define TAG_CHARACTER_DIALOGUE_ICON 4001
 /*
 #define CHAR_OBJ(name)
 #define CHAR_MUGSHOT(name)
@@ -78,5 +79,6 @@ u8 ReturnCharacterFromObjectGraphicsId(u16 graphicsId);
 s8 GetSetConversedFlag(u8 character, bool8 setFlag);
 void ClearConversedDailyFlags(void);
 void IkigaiCharacter_HandleDialogue(void);
+u8 CreateDialogueIconSprite(u8 characteristicIndex);
 
 #endif // GUARD_IKIGAI_CHARACTERS_H
