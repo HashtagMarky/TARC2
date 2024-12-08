@@ -37,7 +37,7 @@ VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet::
 # 31 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	addobject 9
 # 32 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	applymovement 9, VyratonOutdoors_Harbour_Movement_Grandparent_Exit
+	applymovement 9, VyratonOutdoors_Harbour_Movement_Captain_Exit
 # 33 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	applymoveplayer VyratonOutdoors_Harbour_Movement_Player_MoveOutOfWay, FALSE
 # 34 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
@@ -79,14 +79,14 @@ VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures::
 # 54 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	setflag FLAG_HIDE_VYRATON_HARBOR_SAMUEL
 # 55 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-	setflag FLAG_HIDE_VYRATON_HARBOR_GRANDPARENT
+	setflag FLAG_HIDE_VYRATON_HARBOR_CAPTAIN
 # 56 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	waitstate
 	end
 
 
 # 60 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
-VyratonOutdoors_Harbour_Movement_Grandparent_Exit:
+VyratonOutdoors_Harbour_Movement_Captain_Exit:
 # 62 "data//maps/VyratonOutdoors_Harbour/scripts.pory"
 	delay_2
 # 63 "data//maps/VyratonOutdoors_Harbour/scripts.pory"

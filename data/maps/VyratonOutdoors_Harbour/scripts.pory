@@ -7,7 +7,7 @@ mapscripts VyratonOutdoors_Harbour_MapScripts
 }
 
 const LOCALID_Samuel        = 2
-const LOCALID_Grandparent   = 9
+const LOCALID_Captain       = 9
 
 script VyratonOutdoors_Harbour_EventScript_IkigaiIntro
 {
@@ -28,8 +28,8 @@ script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet
     speakername(known=FALSE)
     msgbox(VyratonOutdoors_Harbour_Text_ExcuseMe, MSGBOX_DEFAULT)
     closemessage
-    addobject(LOCALID_Grandparent)
-    applymovement(LOCALID_Grandparent, VyratonOutdoors_Harbour_Movement_Grandparent_Exit)
+    addobject(LOCALID_Captain)
+    applymovement(LOCALID_Captain, VyratonOutdoors_Harbour_Movement_Captain_Exit)
     applymoveplayer(VyratonOutdoors_Harbour_Movement_Player_MoveOutOfWay, FALSE)
     applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_BeginEntrance)
     turnobject(LOCALID_Samuel, DIR_NORTH)
@@ -40,7 +40,7 @@ script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet
     mnmbox(VyratonOutdoors_Harbour_Text_WelcomeToVyraton, nameKnown=FALSE, localId=LOCALID_Samuel)
     turnplayer(DIR_SOUTH)
     turnobject(LOCALID_Samuel, DIR_SOUTH)
-    removeobject(LOCALID_Grandparent)
+    removeobject(LOCALID_Captain)
 }
 
 script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures
@@ -52,12 +52,12 @@ script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures
     applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_Exit)
     warp(MAP_VYRATON_INDOORS_MAYORS_OFFICE, 4, 9)
     setflag(FLAG_HIDE_VYRATON_HARBOR_SAMUEL)
-    setflag(FLAG_HIDE_VYRATON_HARBOR_GRANDPARENT)
+    setflag(FLAG_HIDE_VYRATON_HARBOR_CAPTAIN)
     waitstate
     end
 }
 
-movement VyratonOutdoors_Harbour_Movement_Grandparent_Exit
+movement VyratonOutdoors_Harbour_Movement_Captain_Exit
 {
     delay_2
     delay_16

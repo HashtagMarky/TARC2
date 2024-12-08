@@ -893,7 +893,7 @@
 #define FLAG_HIDE_BATTLE_FRONTIER_SUDOWOODO                         0x34A
 #define FLAG_HIDE_ROUTE_111_ROCK_SMASH_TIP_GUY                      0x34B
 #define FLAG_HIDE_RUSTBORO_CITY_SCIENTIST                           0x34C
-#define FLAG_HIDE_VYRATON_HARBOR_GRANDPARENT                        0x34D
+#define FLAG_HIDE_VYRATON_HARBOR_CAPTAIN                            0x34D
 #define FLAG_HIDE_VYRATON_HARBOR_SAMUEL                             0x34E
 #define FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD                           0x34F
 #define FLAG_HIDE_SLATEPORT_CITY_HARBOR_SUBMARINE_SHADOW            0x350
