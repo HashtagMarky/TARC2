@@ -2555,6 +2555,16 @@
 	removeobject \localId
 	.endm
 
+	@ Create the Character Dialogue Box with a Character.
+	.macro charbox localId
+	lock
+	.ifnb \localId
+		setselectedobjectevent \localId
+	.endif
+	call IkigaiCharacterBox_InitialDialogue
+	releaseall
+	.endm
+
 @ Deokishisu's Supplementary Macros
 
 	@ applymovement with waitmovement built-in.

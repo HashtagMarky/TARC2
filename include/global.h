@@ -208,10 +208,11 @@ struct Time
     /*0x04*/ s8 seconds;
 };
 
-#include "ikigai_characters.h"
+#include "constants/ikigai_characters.h"
 struct IkigaiCharacterData
 {
-    u8 friendship[CHARACTER_COUNT];
+    s8 opinionKindness[CHARACTER_COUNT];
+    s8 opinionStrength[CHARACTER_COUNT];
     u8 conversed[ROUND_BITS_TO_BYTES(CHARACTER_COUNT)];
 };
 

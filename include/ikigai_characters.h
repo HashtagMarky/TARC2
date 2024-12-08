@@ -1,14 +1,6 @@
 #ifndef GUARD_IKIGAI_CHARACTERS_H
 #define GUARD_IKIGAI_CHARACTERS_H
 
-enum // Up to 256 Character IDs
-{
-    CHARACTER_DEFAULT,
-    CHARACTER_SAMUEL,
-    CHARACTER_LAUREN,
-    CHARACTER_THOMAS,
-    CHARACTER_COUNT,
-};
 /*
 #define CHAR_OBJ(name)
 #define CHAR_MUGSHOT(name)
@@ -83,5 +75,8 @@ struct InventoryItem
 extern const struct IkigaiCharacterInfo gIkigaiCharactersInfo[];
 
 u8 ReturnCharacterFromObjectGraphicsId(u16 graphicsId);
+s8 GetSetConversedFlag(u8 character, bool8 setFlag);
+void ClearConversedDailyFlags(void);
+void IkigaiCharacter_HandleDialogue(void);
 
 #endif // GUARD_IKIGAI_CHARACTERS_H

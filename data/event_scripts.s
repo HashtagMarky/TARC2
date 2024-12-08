@@ -58,6 +58,7 @@
 #include "constants/vars.h"
 #include "constants/weather.h"
 #include "constants/field_mugshots.h"
+#include "constants/ikigai_characters.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -1155,6 +1156,7 @@ EventScript_VsSeekerChargingDone::
 	.include "data/scripts/toggleable_transport.inc"
 	.include "data/scripts/overworld_encounters.inc"
 	.include "data/scripts/pokedex.inc"
+	.include "data/scripts/ikigai_characters.inc"
 
 	.include "data/maps/VyratonOutdoors_Ocean/scripts.inc"
 	.include "data/maps/VyratonOutdoors_Ocean/text.inc"
