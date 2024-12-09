@@ -2657,7 +2657,9 @@
 	@ to the exclamation mark emote.
 	.macro emote localid:req, emote=EMOTE_EXCLAM, sound, wait=TRUE
 	.ifnb \sound
-		playse \sound
+		.if \sound != FALSE
+			playse \sound
+		.endif
 	.else
 		.if \emote == EMOTE_QUESTION
 			playse SE_BALL_BOUNCE_1
