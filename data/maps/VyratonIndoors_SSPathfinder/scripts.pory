@@ -32,6 +32,21 @@ script VyratonIndoors_SSPathfinder_EventScript_MeetCaptain
     call(VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue)
     emote(OBJ_EVENT_ID_PLAYER, EMOTE_TALK)
     mnmbox(VyratonIndoors_SSPathfinder_Text_SocialMedia)
+    playse(SE_RG_SS_ANNE_HORN)
+    emote(LOCALID_Captain, EMOTE_EXCLAM, FALSE, FALSE)
+    emote(OBJ_EVENT_ID_PLAYER, EMOTE_EXCLAM, FALSE, FALSE)
+    waitse
+    mnmbox(VyratonIndoors_SSPathfinder_Text_SoundOfDocking)
+    applymove(LOCALID_Captain, Common_Movement_WalkUp)
+    opendoor(4, 1)
+    playse(SE_DOOR)
+    waitdooranim
+    applymove(LOCALID_Captain, Common_Movement_DoorExit)
+    closedoor(4, 1)
+    waitdooranim
+    removeobject(LOCALID_Captain)
+    releaseall
+    end
 }
 
 script VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue
@@ -51,10 +66,10 @@ script VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue
 script VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue
 {
     dynmultichoice(0, 0, TRUE, 1, 0, DYN_MULTICHOICE_CB_NONE,
-        "I'll make the most of your advice!",
-        "I need all the help I can get.",
-        "I don't care, I'll handle myself.",
-        "Sure, like that means anything…")
+        "{COLOR BLUE}I'll make the most of your advice!{COLOR DARK_GRAY}",
+        "{COLOR GREEN}I need all the help I can get.{COLOR DARK_GRAY}",
+        "{COLOR RED}I don't care, I'll handle myself.{COLOR DARK_GRAY}",
+        "{COLOR LIGHT_BLUE}Sure, like that means anything…{COLOR DARK_GRAY}")
     switch (var(VAR_RESULT))
     {
         case 0: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Inspired)

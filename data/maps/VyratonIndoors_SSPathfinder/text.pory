@@ -2,7 +2,7 @@ text VyratonIndoors_SSPathfinder_Text_IntroduceCaptain
 {
     format("
         Where d'ye think yer goin'?\n
-        {PAUSE 60}Hold on, forgot did ye?\p
+        {PAUSE 60}Hold oan, forgot did ye?\p
         Every soul aboard this vessel gets a\n
         wee visit from the captain, giving\l
         out some advice fer yer travels.\p
@@ -21,7 +21,7 @@ text VyratonIndoors_SSPathfinder_Text_WhatBringsYou
         Been doing it a long time noo…\p
         After Vyraton, a new captain of\n
         the S.S. Pathfinder will be named.\l
-        I'll be movin' ashore maself.\p
+        Ah'll be movin' ashore maself.\p
         Time tae bide near ma granddaughters,\n
         they've been after me fer years.\p
         
@@ -57,9 +57,9 @@ text VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice
         Let me give ye some advice that in
         fact came from ma girls o'er there.\l
         They telt me “Words are powerful”.\p
-        Think on that, the words ye say,\n
+        Think oan that, the words ye say,\n
         the words ye hear and believe.\p
-        They shape the way the world see\n
+        They'll shape the way the world see\n
         ye, and the way ye see it.\l
         Carry that forward with ye.\p
         Ye'll have many an opportunity tae\n
@@ -80,15 +80,17 @@ text VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Inspired
 text VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Humble
 {
     format("
-        Aye, that's the mark o' wisdom, to heed\n
-        what's offered and learn as ye go.")
+        Aye, a mark o' wisdom that, tae heed\n
+        what's offered and learn as ye go.\l
+        Dinnae worry, ye'll be grand.")
 }
 
 text VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Dominant
 {
     format("
         Ye got spirit, let's hope it's strong\n
-        'nuff tae weather the storm ye make.")
+        'nuff tae weather the storm ye make.\l
+        {COLOR LIGHT_GRAY}{SHADOW WHITE}{FONT_SMALL}Even if ye come across a wee crass.{RESET_FONT}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}")
 }
 
 text VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Cynical
@@ -101,7 +103,33 @@ text VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Cynical
 text VyratonIndoors_SSPathfinder_Text_SocialMedia
 {
     format("     
-        {STR_VAR_1}")
+        {STR_VAR_1}\p
+        An' that brings me tae this fancy-like\n
+        thing. The kids call it PokéSphere.\l
+        I reckon it's a sort of social caper.\p
+        No for me, mind ye, but it's what ma\n
+        granddaughters used tae pester me.\l
+        It's oan the PokéNav ye see.\p
+        Aye, a word can flee faster than\n
+        a gale at sea, blisterin' oan by.\p
+        A tale can shape how folk see ye,\n
+        letting them in before ye've even\l
+        the chance tae shake their hand.\p
+        If ye wonderin' what the folk think,\n
+        just have a gander at PokéSphere.
+        It'll all be up tae ye, ma friend.\n
+        Be mindful of that, eh?")
 }
 
-// It's up tae ye, ma friend.
+text VyratonIndoors_SSPathfinder_Text_SoundOfDocking
+{
+    format("
+        And there's the sound o' us dockin',\n
+        seems yer journey's just startin'.\l
+        Ah'll see ye in Vyraton, aye?\p
+        If ye come across ma granddaughters,\n
+        be sure ye treat them kindly, eh?\l
+        They're the light o' ma life, they are.\p
+        It's been a real pleasure meetin' ye,\n
+        wishin' ye fair winds and fairer luck.")
+}
