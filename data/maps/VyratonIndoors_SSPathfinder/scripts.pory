@@ -1,10 +1,4 @@
-mapscripts VyratonIndoors_SSPathfinder_MapScripts
-{
-    MAP_SCRIPT_ON_FRAME_TABLE
-    [
-        VAR_IKIGAI_INTRO_STATE, 1: VyratonIndoors_SSPathfinder_IkigaiIntroSetup
-    ]
-}
+mapscripts VyratonIndoors_SSPathfinder_MapScripts {}
 
 const LOCALID_Captain = 1
 
@@ -16,6 +10,7 @@ script VyratonIndoors_SSPathfinder_IkigaiIntroSetup
 
 script VyratonIndoors_SSPathfinder_EventScript_MeetCaptain
 {
+    call(VyratonIndoors_SSPathfinder_IkigaiIntroSetup)
     setvar(VAR_TEMP_0, 1)
     turnplayer(DIR_NORTH)
     opendoor(4, 1)
