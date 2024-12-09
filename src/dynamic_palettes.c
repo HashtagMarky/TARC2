@@ -159,9 +159,9 @@ static void DynPal_ReloadPlayerPaletteForMenu(u16 paletteTag, u8 partATone, u8 p
 // Fill all dynamic palettes with data according to indices in Save Block
 void DynPal_InitAllDynamicPalettes()
 {
-    const u16* partAPalData = sDynPalPartAPresets[min(gSaveBlock3Ptr->dynPalSkinTone, COUNT_PART_A_TONES)].data;
-    const u16* partBPalData = sDynPalPartBPresets[min(gSaveBlock3Ptr->dynPalHairTone, COUNT_PART_B_TONES)].data;
-    const u16* partCPalData = sDynPalPartCPresets[min(gSaveBlock3Ptr->dynPalClothesTone, COUNT_PART_C_TONES)].data;
+    const u16* partAPalData = sDynPalPartAPresets[min(gSaveBlock2Ptr->dynPalSkinTone, COUNT_PART_A_TONES)].data;
+    const u16* partBPalData = sDynPalPartBPresets[min(gSaveBlock2Ptr->dynPalHairTone, COUNT_PART_B_TONES)].data;
+    const u16* partCPalData = sDynPalPartCPresets[min(gSaveBlock2Ptr->dynPalClothesTone, COUNT_PART_C_TONES)].data;
 
     // Player Normal
     DynPal_InitOverworld(sDynPalPlayerOverworld, partAPalData, partBPalData, partCPalData, DYNPAL_COLOR_GROUP_NORMAL);
@@ -305,19 +305,19 @@ void DynPal_LoadIntroToneIndices(bool8 introReload, u8 loadCycle)
             noKoleReload = 1;
 
             // Skin Randomisation
-            while ((gSaveBlock3Ptr->dynPalSkinTone <= 1 && ankaSkin <= 1) || (gSaveBlock3Ptr->dynPalSkinTone >= 2 && ankaSkin >= 2))
+            while ((gSaveBlock2Ptr->dynPalSkinTone <= 1 && ankaSkin <= 1) || (gSaveBlock2Ptr->dynPalSkinTone >= 2 && ankaSkin >= 2))
             {
                 ankaSkin = Random() % COUNT_PART_A_TONES;
             }
 
             // Hair Randomisation
-            while (gSaveBlock3Ptr->dynPalHairTone == ankaHair)
+            while (gSaveBlock2Ptr->dynPalHairTone == ankaHair)
             {
                 ankaHair = Random() % COUNT_PART_B_TONES;
             }
 
             // Clothes Randomisation
-            while (gSaveBlock3Ptr->dynPalClothesTone == ankaClothes)
+            while (gSaveBlock2Ptr->dynPalClothesTone == ankaClothes)
             {
                 ankaClothes = Random() % COUNT_PART_C_TONES;
             }
@@ -327,19 +327,19 @@ void DynPal_LoadIntroToneIndices(bool8 introReload, u8 loadCycle)
             noAnkaReload = 1;
 
             // Skin Randomisation
-            while ((gSaveBlock3Ptr->dynPalSkinTone <= 1 && koleSkin <= 1) || (gSaveBlock3Ptr->dynPalSkinTone >= 2 && koleSkin >= 2))
+            while ((gSaveBlock2Ptr->dynPalSkinTone <= 1 && koleSkin <= 1) || (gSaveBlock2Ptr->dynPalSkinTone >= 2 && koleSkin >= 2))
             {
                 koleSkin = Random() % COUNT_PART_A_TONES;
             }
 
             // Hair Randomisation
-            while (gSaveBlock3Ptr->dynPalHairTone == koleHair)
+            while (gSaveBlock2Ptr->dynPalHairTone == koleHair)
             {
                 koleHair = Random() % COUNT_PART_B_TONES;
             }
 
             // Clothes Randomisation
-            while (gSaveBlock3Ptr->dynPalClothesTone == koleClothes)
+            while (gSaveBlock2Ptr->dynPalClothesTone == koleClothes)
             {
                 koleClothes = Random() % COUNT_PART_C_TONES;
             }
@@ -389,15 +389,15 @@ static void DynPal_SetToneIndices(u8 partATone, u8 partBTone, u8 partCTone)
 {
     if (partATone != 0xFF)
     {
-        gSaveBlock3Ptr->dynPalSkinTone = partATone % COUNT_PART_A_TONES;
+        gSaveBlock2Ptr->dynPalSkinTone = partATone % COUNT_PART_A_TONES;
     }
     if (partBTone != 0xFF)
     {
-        gSaveBlock3Ptr->dynPalHairTone = partBTone % COUNT_PART_B_TONES;
+        gSaveBlock2Ptr->dynPalHairTone = partBTone % COUNT_PART_B_TONES;
     }
     if (partCTone != 0xFF)
     {
-        gSaveBlock3Ptr->dynPalClothesTone = partCTone % COUNT_PART_C_TONES;
+        gSaveBlock2Ptr->dynPalClothesTone = partCTone % COUNT_PART_C_TONES;
     }
 }
 
