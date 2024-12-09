@@ -34,16 +34,38 @@ script VyratonIndoors_SSPathfinder_EventScript_MeetCaptain
     emote(OBJ_EVENT_ID_PLAYER, EMOTE_TALK)
     mnmbox(VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice, waitbuttonpress=TRUE, remain=TRUE)
     emote(LOCALID_Captain, EMOTE_QUESTION)
+    call(VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue)
+    emote(OBJ_EVENT_ID_PLAYER, EMOTE_TALK)
+    mnmbox(VyratonIndoors_SSPathfinder_Text_SocialMedia)
 }
 
 script VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue
 {
-    dynmultichoice(0, 0, TRUE, 1, 0, DYN_MULTICHOICE_CB_NONE, "I wanted a fresh start.", "I'm moving for a new challenge.", "I'm going for business.")
+    dynmultichoice(0, 0, TRUE, 1, 0, DYN_MULTICHOICE_CB_NONE,
+        "I wanted a fresh start.",
+        "I'm moving for a new challenge.",
+        "I'm going for business.")
     switch (var(VAR_RESULT))
     {
         case 0: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_FreshStart)
         case 1: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_NewChallenge)
         case 2: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_Business)
+    }
+}
+
+script VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue
+{
+    dynmultichoice(0, 0, TRUE, 1, 0, DYN_MULTICHOICE_CB_NONE,
+        "I'll make the most of your advice!",
+        "I need all the help I can get.",
+        "I don't care, I'll handle myself.",
+        "Sure, like that means anything…")
+    switch (var(VAR_RESULT))
+    {
+        case 0: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Inspired)
+        case 1: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Humble)
+        case 2: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Dominant)
+        case 3: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Cynical)
     }
 }
 

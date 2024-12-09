@@ -70,4 +70,38 @@ text VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice
         or maybe even {COLOR LIGHT_BLUE}cynical{COLOR DARK_GRAY}?")
 }
 
+text VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Inspired
+{
+    format("
+        Spoken like a true sailor! I'm sure\n
+        the winds'll guide ye well and true.")
+}
+
+text VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Humble
+{
+    format("
+        Aye, that's the mark o' wisdom, to heed\n
+        what's offered and learn as ye go.")
+}
+
+text VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Dominant
+{
+    format("
+        Ye got spirit, let's hope it's strong\n
+        'nuff tae weather the storm ye make.")
+}
+
+text VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Cynical
+{
+    format("
+        Ach! Ye'll ne'er steer true if ye're\n
+        already sinkin' in yer mind.")
+}
+
+text VyratonIndoors_SSPathfinder_Text_SocialMedia
+{
+    format("     
+        {STR_VAR_1}")
+}
+
 // It's up tae ye, ma friend.

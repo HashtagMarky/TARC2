@@ -53,3 +53,27 @@ VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice::
 	.string "choose yer words wisely, ye know.\p"
 	.string "Will ye be {COLOR BLUE}inspiring{COLOR DARK_GRAY}, {COLOR GREEN}humble{COLOR DARK_GRAY},\n"
 	.string "{COLOR RED}dominant{COLOR DARK_GRAY} or maybe even {COLOR LIGHT_BLUE}cynical{COLOR DARK_GRAY}?$"
+
+VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Inspired::
+# 73 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
+	.string "Spoken like a true sailor! I'm sure\n"
+	.string "the winds'll guide ye well and true.$"
+
+VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Humble::
+# 80 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
+	.string "Aye, that's the mark o' wisdom, to heed\n"
+	.string "what's offered and learn as ye go.$"
+
+VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Dominant::
+# 87 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
+	.string "Ye got spirit, let's hope it's strong\n"
+	.string "'nuff tae weather the storm ye make.$"
+
+VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Cynical::
+# 94 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
+	.string "Ach! Ye'll ne'er steer true if ye're\n"
+	.string "already sinkin' in yer mind.$"
+
+VyratonIndoors_SSPathfinder_Text_SocialMedia::
+# 101 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
+	.string "{STR_VAR_1}$"
