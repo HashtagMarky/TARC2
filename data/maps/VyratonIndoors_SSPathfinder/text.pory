@@ -67,6 +67,7 @@ text VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice
         Will ye be {COLOR BLUE}inspiring{COLOR DARK_GRAY},
         {COLOR GREEN}humble{COLOR DARK_GRAY},\n
         {COLOR RED}dominant{COLOR DARK_GRAY}
-        or maybe even {COLOR LIGHT_GRAY}{SHADOW DARK_GRAY}cynical{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}?\l
-        It's up tae ye, ma friend.")
+        or maybe even {COLOR LIGHT_BLUE}cynical{COLOR DARK_GRAY}?")
 }
+
+// It's up tae ye, ma friend.

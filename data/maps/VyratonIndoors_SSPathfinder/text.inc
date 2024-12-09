@@ -52,5 +52,4 @@ VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice::
 	.string "Ye'll have many an opportunity tae\n"
 	.string "choose yer words wisely, ye know.\p"
 	.string "Will ye be {COLOR BLUE}inspiring{COLOR DARK_GRAY}, {COLOR GREEN}humble{COLOR DARK_GRAY},\n"
-	.string "{COLOR RED}dominant{COLOR DARK_GRAY} or maybe even {COLOR LIGHT_GRAY}{SHADOW DARK_GRAY}cynical{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}?\l"
-	.string "It's up tae ye, ma friend.$"
+	.string "{COLOR RED}dominant{COLOR DARK_GRAY} or maybe even {COLOR LIGHT_BLUE}cynical{COLOR DARK_GRAY}?$"
