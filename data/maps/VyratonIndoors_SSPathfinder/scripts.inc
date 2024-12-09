@@ -108,6 +108,22 @@ VyratonIndoors_SSPathfinder_Movement_Captain_FollowIn:
 	delay_16
 # 64 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	delay_2
+# 65 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+	delay_16
+# 66 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+	face_left
+# 67 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+	delay_16
+# 67 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+	delay_16
+# 68 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+	face_right
+# 69 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+	delay_16
+# 69 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+	delay_16
+# 70 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+	face_down
 	step_end
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_0:

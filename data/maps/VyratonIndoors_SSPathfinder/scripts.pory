@@ -62,4 +62,10 @@ movement VyratonIndoors_SSPathfinder_Movement_Captain_FollowIn
     walk_down
     delay_16
     delay_2
+    delay_16
+    face_left
+    delay_16 * 2
+    face_right
+    delay_16 * 2
+    face_down
 }
