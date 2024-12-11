@@ -11,8 +11,9 @@ VyratonIndoors_SSPathfinder_Text_IntroduceCaptain::
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou::
 # 14 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
-	.string "Titchy room this, a fair slight\n"
-	.string "smaller than me own. Ma name's Skip.\p"
+	.string "Titchy room this is, 'tis a fair\n"
+	.string "slight smaller than me own.\l"
+	.string "Name's Skip by the wae.\p"
 	.string "{SPEAKER_NAME NAME_AUTO}With a name like that, I figured that\n"
 	.string "I mae as well take tae the high seas.\l"
 	.string "Been doing it a long time noo…\p"
@@ -26,19 +27,19 @@ VyratonIndoors_SSPathfinder_Text_WhatBringsYou::
 	.string "Whit's brought ye tae it?$"
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_FreshStart::
-# 33 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
+# 34 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
 	.string "Yer after a fresh start?$"
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_NewChallenge::
-# 39 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
+# 40 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
 	.string "Ye looki' fer a new challenge?$"
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_Business::
-# 45 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
+# 46 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
 	.string "Yer just gaun fer business?$"
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice::
-# 51 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
+# 52 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
 	.string "{STR_VAR_1}\n"
 	.string "A grand reason tae enjoy Vyraton!\p"
 	.string "Let me give ye some advice that in\n"
@@ -46,8 +47,8 @@ VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice::
 	.string "They telt me “Words are powerful”.\p"
 	.string "Think oan that, the words ye say,\n"
 	.string "the words ye hear and believe.\p"
-	.string "They'll shape the way the world see\n"
-	.string "ye, and the way ye see it.\l"
+	.string "They'll shape the wae the world see\n"
+	.string "ye, and the wae ye see it.\l"
 	.string "Carry that forward with ye.\p"
 	.string "Ye'll have many an opportunity tae\n"
 	.string "choose yer words wisely, ye know.\p"
@@ -55,32 +56,32 @@ VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice::
 	.string "{COLOR RED}dominant{COLOR DARK_GRAY} or maybe even {COLOR LIGHT_BLUE}cynical{COLOR DARK_GRAY}?$"
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Inspired::
-# 73 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
+# 74 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
 	.string "Spoken like a true sailor! I'm sure\n"
 	.string "the winds'll guide ye well and true.$"
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Humble::
-# 80 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
+# 81 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
 	.string "Aye, a mark o' wisdom that, tae heed\n"
 	.string "what's offered and learn as ye go.\l"
 	.string "Dinnae worry, ye'll be grand.$"
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Dominant::
-# 88 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
+# 89 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
 	.string "Ye got spirit, let's hope it's strong\n"
 	.string "'nuff tae weather the storm ye make.\l"
 	.string "{COLOR LIGHT_GRAY}{SHADOW WHITE}{FONT_SMALL}Even if ye come across a wee crass.{RESET_FONT}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}$"
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Cynical::
-# 96 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
+# 97 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
 	.string "Ach! Ye'll ne'er steer true if ye're\n"
 	.string "already sinkin' in yer mind.$"
 
 VyratonIndoors_SSPathfinder_Text_SocialMedia::
-# 103 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
+# 104 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
 	.string "{STR_VAR_1}\p"
 	.string "An' that brings me tae this fancy-like\n"
-	.string "thing. The kids call it PokéSphere.\l"
+	.string "thing, the kids call it PokéSphere.\l"
 	.string "I reckon it's a sort of social caper.\p"
 	.string "No for me, mind ye, but it's what ma\n"
 	.string "granddaughters used tae pester me.\l"
@@ -96,7 +97,7 @@ VyratonIndoors_SSPathfinder_Text_SocialMedia::
 	.string "Be mindful of that, eh?$"
 
 VyratonIndoors_SSPathfinder_Text_SoundOfDocking::
-# 124 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
+# 125 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
 	.string "And there's the sound o' us dockin',\n"
 	.string "seems yer journey's just startin'.\l"
 	.string "Ah'll see ye in Vyraton, aye?\p"

@@ -14,8 +14,9 @@ text VyratonIndoors_SSPathfinder_Text_IntroduceCaptain
 text VyratonIndoors_SSPathfinder_Text_WhatBringsYou
 {
     format("
-        Titchy room this, a fair slight\n
-        smaller than me own. Ma name's Skip.\p
+        Titchy room this is, 'tis a fair\n
+        slight smaller than me own.\l
+        Name's Skip by the wae.\p
         {SPEAKER_NAME NAME_AUTO}With a name like that, I figured that\n
         I mae as well take tae the high seas.\l
         Been doing it a long time noo…\p
@@ -59,8 +60,8 @@ text VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice
         They telt me “Words are powerful”.\p
         Think oan that, the words ye say,\n
         the words ye hear and believe.\p
-        They'll shape the way the world see\n
-        ye, and the way ye see it.\l
+        They'll shape the wae the world see\n
+        ye, and the wae ye see it.\l
         Carry that forward with ye.\p
         Ye'll have many an opportunity tae\n
         choose yer words wisely, ye know.\p
@@ -105,7 +106,7 @@ text VyratonIndoors_SSPathfinder_Text_SocialMedia
     format("     
         {STR_VAR_1}\p
         An' that brings me tae this fancy-like\n
-        thing. The kids call it PokéSphere.\l
+        thing, the kids call it PokéSphere.\l
         I reckon it's a sort of social caper.\p
         No for me, mind ye, but it's what ma\n
         granddaughters used tae pester me.\l
