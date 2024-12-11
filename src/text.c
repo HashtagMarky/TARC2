@@ -1186,6 +1186,12 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             case EXT_CTRL_CODE_RESET_FONT:
                 subStruct->fontId = textPrinter->printerTemplate.fontId;
                 return RENDER_REPEAT;
+            case EXT_CTRL_CODE_FONT_GET_NARROW:
+                subStruct->fontId = ReturnNarrowTextFont();
+                return RENDER_REPEAT;
+            case EXT_CTRL_CODE_FONT_GET_NARROWER:
+                subStruct->fontId = ReturnNarrowerTextFont();
+                return RENDER_REPEAT;
             case EXT_CTRL_CODE_PAUSE:
                 textPrinter->delayCounter = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
@@ -1712,6 +1718,20 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                 if (letterSpacing == -1)
                     localLetterSpacing = GetFontAttribute(*str, FONTATTR_LETTER_SPACING);
                 break;
+            case EXT_CTRL_CODE_FONT_GET_NARROW:
+                func = GetFontWidthFunc(ReturnNarrowTextFont());
+                if (func == NULL)
+                    return 0;
+                if (letterSpacing == -1)
+                    localLetterSpacing = GetFontAttribute(ReturnNarrowTextFont(), FONTATTR_LETTER_SPACING);
+                break;
+            case EXT_CTRL_CODE_FONT_GET_NARROWER:
+                func = GetFontWidthFunc(ReturnNarrowerTextFont());
+                if (func == NULL)
+                    return 0;
+                if (letterSpacing == -1)
+                    localLetterSpacing = GetFontAttribute(ReturnNarrowTextFont(), FONTATTR_LETTER_SPACING);
+                break;
             case EXT_CTRL_CODE_CLEAR:
                 glyphWidth = *++str;
                 lineWidth += glyphWidth;
@@ -1882,6 +1902,8 @@ u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
                 ++strPos;
                 break;
             case EXT_CTRL_CODE_RESET_FONT:
+            case EXT_CTRL_CODE_FONT_GET_NARROW:
+            case EXT_CTRL_CODE_FONT_GET_NARROWER:
             case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
             case EXT_CTRL_CODE_WAIT_SE:
             case EXT_CTRL_CODE_WAIT_FANFARE:
@@ -2438,4 +2460,12 @@ u8 ReturnNarrowTextFont(void)
         return FONT_SHORT_NARROW;
     else
         return FONT_NARROW;
+}
+
+u8 ReturnNarrowerTextFont(void)
+{
+    if (gSaveBlock2Ptr->optionsCurrentFont == 0)
+        return FONT_SHORT_NARROW;
+    else
+        return FONT_NARROWER;
 }
