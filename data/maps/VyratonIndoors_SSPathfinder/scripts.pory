@@ -37,7 +37,7 @@ script VyratonIndoors_SSPathfinder_EventScript_MeetCaptain
     emote(OBJ_EVENT_ID_PLAYER, EMOTE_EXCLAM, FALSE, FALSE)
     waitse
     mnmbox(VyratonIndoors_SSPathfinder_Text_SoundOfDocking)
-    applymove(LOCALID_Captain, Common_Movement_WalkUp)
+    applymove(LOCALID_Captain, Common_Movement_WalkUp2) // applymove(LOCALID_Captain, Common_Movement_WalkUp)
     opendoor(4, 1)
     playse(SE_DOOR)
     waitdooranim
@@ -51,10 +51,10 @@ script VyratonIndoors_SSPathfinder_EventScript_MeetCaptain
 
 script VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue
 {
-    dynmultichoice(0, 0, TRUE, 1, 0, DYN_MULTICHOICE_CB_NONE,
+    dynmultichoice(0, 0, TRUE, 2, 0, DYN_MULTICHOICE_CB_NONE,
         "I wanted a fresh start.",
-        "I'm moving for a new challenge.",
-        "I'm going for business.")
+        "I'm moving for a new challenge.")
+    //  "I'm going for business.") // Old Option
     switch (var(VAR_RESULT))
     {
         case 0: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_FreshStart)
@@ -65,7 +65,7 @@ script VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue
 
 script VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue
 {
-    dynmultichoice(0, 0, TRUE, 1, 0, DYN_MULTICHOICE_CB_NONE,
+    dynmultichoice(0, 0, TRUE, 2, 0, DYN_MULTICHOICE_CB_NONE,
         "{COLOR BLUE}I'll make the most of your advice!{COLOR DARK_GRAY}",
         "{COLOR GREEN}I need all the help I can get.{COLOR DARK_GRAY}",
         "{COLOR RED}I don't care, I'll handle myself.{COLOR DARK_GRAY}",
@@ -95,7 +95,7 @@ movement VyratonIndoors_SSPathfinder_Movement_Player_LeadIn
 movement VyratonIndoors_SSPathfinder_Movement_Captain_FollowIn
 {
     walk_down
-    delay_16
+    walk_down // delay_16
     delay_2
     delay_16
     face_left

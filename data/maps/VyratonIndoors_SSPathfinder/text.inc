@@ -27,7 +27,7 @@ VyratonIndoors_SSPathfinder_Text_WhatBringsYou::
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_FreshStart::
 # 33 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
-	.string "Ye after a fresh start?$"
+	.string "Yer after a fresh start?$"
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_NewChallenge::
 # 39 "data//maps/VyratonIndoors_SSPathfinder/text.pory"

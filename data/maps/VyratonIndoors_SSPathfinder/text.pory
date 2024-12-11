@@ -33,7 +33,7 @@ text VyratonIndoors_SSPathfinder_Text_WhatBringsYou
 text VyratonIndoors_SSPathfinder_Text_WhatBringsYou_FreshStart
 {
     format("
-        Ye after a fresh start?")
+        Yer after a fresh start?")
 }
 
 text VyratonIndoors_SSPathfinder_Text_WhatBringsYou_NewChallenge

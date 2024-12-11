@@ -66,7 +66,7 @@ VyratonIndoors_SSPathfinder_EventScript_MeetCaptain::
 # 39 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	mnmbox VyratonIndoors_SSPathfinder_Text_SoundOfDocking
 # 40 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	applymove 1, Common_Movement_WalkUp
+	applymove 1, Common_Movement_WalkUp2
 # 41 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	opendoor 4, 1
 # 42 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
@@ -88,7 +88,7 @@ VyratonIndoors_SSPathfinder_EventScript_MeetCaptain::
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue::
 # 54 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	dynmultichoice 0, 0, TRUE, 1, 0, DYN_MULTICHOICE_CB_NONE, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_0, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_2
+	dynmultichoice 0, 0, TRUE, 2, 0, DYN_MULTICHOICE_CB_NONE, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_0, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_1
 # 58 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	switch VAR_RESULT
 # 60 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
@@ -117,7 +117,7 @@ VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_4:
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue::
 # 68 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	dynmultichoice 0, 0, TRUE, 1, 0, DYN_MULTICHOICE_CB_NONE, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_0, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_2, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_3
+	dynmultichoice 0, 0, TRUE, 2, 0, DYN_MULTICHOICE_CB_NONE, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_0, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_2, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_3
 # 73 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	switch VAR_RESULT
 # 75 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
@@ -176,7 +176,7 @@ VyratonIndoors_SSPathfinder_Movement_Captain_FollowIn:
 # 97 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	walk_down
 # 98 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	delay_16
+	walk_down
 # 99 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	delay_2
 # 100 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
@@ -204,10 +204,6 @@ VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_0:
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_1:
 # 56 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	.string "I'm moving for a new challenge.$"
-
-VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_2:
-# 57 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	.string "I'm going for business.$"
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_0:
 # 69 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
