@@ -207,16 +207,16 @@ VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_1:
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_0:
 # 69 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	.string "{COLOR BLUE}I'll make the most of your advice!{COLOR DARK_GRAY}$"
+	.string "{COLOR BLUE}{FONT_GET_NARROW}I'll make the most of your advice!$"
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_1:
 # 70 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	.string "{COLOR GREEN}I need all the help I can get.{COLOR DARK_GRAY}$"
+	.string "{COLOR GREEN}{FONT_GET_NARROW}I need all the help I can get.$"
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_2:
 # 71 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	.string "{COLOR RED}I don't care, I'll handle myself.{COLOR DARK_GRAY}$"
+	.string "{COLOR RED}{FONT_GET_NARROW}I don't care, I'll handle myself.$"
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_3:
 # 72 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	.string "{COLOR LIGHT_BLUE}Sure, like that means anything…{COLOR DARK_GRAY}$"
+	.string "{COLOR LIGHT_BLUE}{FONT_GET_NARROW}Sure, like that means anything…$"
