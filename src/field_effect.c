@@ -3065,7 +3065,7 @@ u8 FldEff_UseSurf(void)
     if (gSaveBlock2Ptr->optionsSurfMusic == FALSE)
     {
         Overworld_ClearSavedMusic();
-        Overworld_ChangeMusicTo(MUS_SURF);
+        Overworld_ChangeMusicTo(MUS_HG_SS_AQUA);
     }
     
     return FALSE;

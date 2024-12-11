@@ -56,7 +56,7 @@ static void WarpToTruck(void);
 static void ResetMiniGamesRecords(void);
 static void ResetItemFlags(void);
 
-static void WarpToPier(void);
+static void WarpToShip(void);
 
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
 EWRAM_DATA bool8 gEnableContestDebugging = FALSE;
@@ -154,7 +154,7 @@ static void WarpToTruck(void)
     WarpIntoMap();
 }
 
-static void WarpToPier(void)
+static void WarpToShip(void)
 {
     FlagSet(FLAG_HIDE_MAP_NAME_POPUP);
     FlagSet(FLAG_SUPPRESS_MUGSHOT);
@@ -226,7 +226,7 @@ void NewGameInitData(void)
     ResetFanClub();
     ResetLotteryCorner();
     // WarpToTruck();
-    WarpToPier();
+    WarpToShip();
     RunScriptImmediately(EventScript_ResetAllMapFlags);
     RunScriptImmediately(EventScript_ResetIkigaiMapFlags);
     ResetMiniGamesRecords();

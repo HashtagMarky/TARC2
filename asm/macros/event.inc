@@ -2106,7 +2106,7 @@
 	.endm
 
 	@ Buffers the given text and calls the relevant message, name and mugshot script (see gStdScripts).
-	.macro mnmbox text:req, PMD=FALSE, mugshotEmotion=EMOTE_NORMAL, nameKnown=TRUE, localId
+	.macro mnmbox text:req, PMD=FALSE, mugshotEmotion=EMOTE_NORMAL, nameKnown=TRUE, localId, waitbuttonpress, remain
 	lock
 	.ifnb \localId
 		setselectedobjectevent \localId
@@ -2129,12 +2129,16 @@
 	.endif
 	message \text
 	waitmessage
-	waitbuttonpress
+	.ifb \waitbuttonpress
+		waitbuttonpress
+	.endif
 	waitmoncry
 	.if \PMD == TRUE
 		call EventScript_DisplayPokedexHeader
 	.endif
-	release
+	.ifb \remain
+		release
+	.endif
 	.endm
 
 	@ Buffers the given text and calls the relevant emote, name and mugshot script.
@@ -2663,7 +2667,9 @@
 	@ to the exclamation mark emote.
 	.macro emote localid:req, emote=EMOTE_EXCLAM, sound, wait=TRUE
 	.ifnb \sound
-		playse \sound
+		.if \sound != FALSE
+			playse \sound
+		.endif
 	.else
 		.if \emote == EMOTE_QUESTION
 			playse SE_BALL_BOUNCE_1
@@ -2704,5 +2710,6 @@
 		waitmovement \localid
 		applymovement \localid, Common_Movement_Delay48
 		waitmovement \localid
+		delay 20
 	.endif
 	.endm

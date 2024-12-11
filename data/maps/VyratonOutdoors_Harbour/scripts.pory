@@ -1,5 +1,12 @@
 mapscripts VyratonOutdoors_Harbour_MapScripts
 {
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        if (var(VAR_IKIGAI_INTRO_STATE) == 2)
+        {
+            setflag(FLAG_HIDE_MAP_NAME_POPUP)
+        }
+    }
     MAP_SCRIPT_ON_FRAME_TABLE
     [
         VAR_IKIGAI_INTRO_STATE, 2: VyratonOutdoors_Harbour_EventScript_IkigaiIntro
@@ -7,7 +14,7 @@ mapscripts VyratonOutdoors_Harbour_MapScripts
 }
 
 const LOCALID_Samuel        = 2
-const LOCALID_Grandparent   = 9
+const LOCALID_Captain       = 9
 
 script VyratonOutdoors_Harbour_EventScript_IkigaiIntro
 {
@@ -28,19 +35,18 @@ script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet
     speakername(known=FALSE)
     msgbox(VyratonOutdoors_Harbour_Text_ExcuseMe, MSGBOX_DEFAULT)
     closemessage
-    addobject(LOCALID_Grandparent)
-    applymovement(LOCALID_Grandparent, VyratonOutdoors_Harbour_Movement_Grandparent_Exit)
+    addobject(LOCALID_Captain)
+    applymovement(LOCALID_Captain, VyratonOutdoors_Harbour_Movement_Captain_Exit)
     applymoveplayer(VyratonOutdoors_Harbour_Movement_Player_MoveOutOfWay, FALSE)
     applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_BeginEntrance)
     turnobject(LOCALID_Samuel, DIR_NORTH)
     emote(LOCALID_Samuel, EMOTE_QUESTION)
-    delay(40)
     applymoveplayer(VyratonOutdoors_Harbour_Movement_Player_MeetSamuel, FALSE)
     applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_ContinueEntrance)
     mnmbox(VyratonOutdoors_Harbour_Text_WelcomeToVyraton, nameKnown=FALSE, localId=LOCALID_Samuel)
     turnplayer(DIR_SOUTH)
     turnobject(LOCALID_Samuel, DIR_SOUTH)
-    removeobject(LOCALID_Grandparent)
+    removeobject(LOCALID_Captain)
 }
 
 script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures
@@ -52,12 +58,12 @@ script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures
     applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_Exit)
     warp(MAP_VYRATON_INDOORS_MAYORS_OFFICE, 4, 9)
     setflag(FLAG_HIDE_VYRATON_HARBOR_SAMUEL)
-    setflag(FLAG_HIDE_VYRATON_HARBOR_GRANDPARENT)
+    setflag(FLAG_HIDE_VYRATON_HARBOR_CAPTAIN)
     waitstate
     end
 }
 
-movement VyratonOutdoors_Harbour_Movement_Grandparent_Exit
+movement VyratonOutdoors_Harbour_Movement_Captain_Exit
 {
     delay_2
     delay_16

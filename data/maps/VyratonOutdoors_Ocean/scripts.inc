@@ -28,7 +28,7 @@ VyratonOutdoors_Ocean_MapScripts_WarpIkigaiIntro::
 # 20 "data//maps/VyratonOutdoors_Ocean/scripts.pory"
 	waitse
 # 21 "data//maps/VyratonOutdoors_Ocean/scripts.pory"
-	warpsilent MAP_VYRATON_INDOORS_SSPATHFINDER, 4, 4
+	warpsilent MAP_VYRATON_INDOORS_SSPATHFINDER, 4, 5
 # 22 "data//maps/VyratonOutdoors_Ocean/scripts.pory"
 	callnative DestroySSPathfinderSmokeTask
 # 23 "data//maps/VyratonOutdoors_Ocean/scripts.pory"

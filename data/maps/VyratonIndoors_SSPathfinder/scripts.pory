@@ -1,13 +1,106 @@
-mapscripts VyratonIndoors_SSPathfinder_MapScripts
-{
-    MAP_SCRIPT_ON_FRAME_TABLE
-    [
-        VAR_IKIGAI_INTRO_STATE, 1: VyratonIndoors_SSPathfinder_EventScript_MeetGrandparent
-    ]
-}
+mapscripts VyratonIndoors_SSPathfinder_MapScripts {}
 
-script VyratonIndoors_SSPathfinder_EventScript_MeetGrandparent
+const LOCALID_Captain = 1
+
+script VyratonIndoors_SSPathfinder_IkigaiIntroSetup
 {
     setvar(VAR_IKIGAI_INTRO_STATE, 2)
     setdynamicwarp(MAP_VYRATON_OUTDOORS_HARBOUR, 15, 25)
+}
+
+script VyratonIndoors_SSPathfinder_EventScript_MeetCaptain
+{
+    call(VyratonIndoors_SSPathfinder_IkigaiIntroSetup)
+    setvar(VAR_TEMP_0, 1)
+    turnplayer(DIR_NORTH)
+    opendoor(4, 1)
+    playse(SE_DOOR)
+    waitdooranim
+    applymoveplayer(VyratonIndoors_SSPathfinder_Movement_Player_NoExit, FALSE)
+    applymove(LOCALID_Captain, Common_Movement_DoorEntrance)
+    closedoor(4, 1)
+    waitdooranim
+    mnmbox(VyratonIndoors_SSPathfinder_Text_IntroduceCaptain, nameKnown=FALSE, localId=LOCALID_Captain)
+    applymoveplayer(VyratonIndoors_SSPathfinder_Movement_Player_LeadIn, FALSE)
+    applymove(LOCALID_Captain, VyratonIndoors_SSPathfinder_Movement_Captain_FollowIn)
+    mnmbox(VyratonIndoors_SSPathfinder_Text_WhatBringsYou, nameKnown=FALSE, waitbuttonpress=TRUE, remain=TRUE)
+    emote(LOCALID_Captain, EMOTE_QUESTION)
+    call(VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue)
+    emote(OBJ_EVENT_ID_PLAYER, EMOTE_TALK)
+    mnmbox(VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice, waitbuttonpress=TRUE, remain=TRUE)
+    emote(LOCALID_Captain, EMOTE_QUESTION)
+    call(VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue)
+    emote(OBJ_EVENT_ID_PLAYER, EMOTE_TALK)
+    mnmbox(VyratonIndoors_SSPathfinder_Text_SocialMedia)
+    playse(SE_RG_SS_ANNE_HORN)
+    emote(LOCALID_Captain, EMOTE_EXCLAM, FALSE, FALSE)
+    emote(OBJ_EVENT_ID_PLAYER, EMOTE_EXCLAM, FALSE, FALSE)
+    waitse
+    mnmbox(VyratonIndoors_SSPathfinder_Text_SoundOfDocking)
+    applymove(LOCALID_Captain, Common_Movement_WalkUp2) // applymove(LOCALID_Captain, Common_Movement_WalkUp)
+    opendoor(4, 1)
+    playse(SE_DOOR)
+    waitdooranim
+    applymove(LOCALID_Captain, Common_Movement_DoorExit)
+    closedoor(4, 1)
+    waitdooranim
+    removeobject(LOCALID_Captain)
+    releaseall
+    end
+}
+
+script VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue
+{
+    dynmultichoice(0, 0, TRUE, 2, 0, DYN_MULTICHOICE_CB_NONE,
+        "I wanted a fresh start.",
+        "I'm moving for a new challenge.")
+    //  "I'm going for business.") // Old Option
+    switch (var(VAR_RESULT))
+    {
+        case 0: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_FreshStart)
+        case 1: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_NewChallenge)
+        case 2: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_Business)
+    }
+}
+
+script VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue
+{
+    dynmultichoice(0, 0, TRUE, 2, 0, DYN_MULTICHOICE_CB_NONE,
+        "{COLOR BLUE}I'll make the most of your advice!{COLOR DARK_GRAY}",
+        "{COLOR GREEN}I need all the help I can get.{COLOR DARK_GRAY}",
+        "{COLOR RED}I don't care, I'll handle myself.{COLOR DARK_GRAY}",
+        "{COLOR LIGHT_BLUE}Sure, like that means anything…{COLOR DARK_GRAY}")
+    switch (var(VAR_RESULT))
+    {
+        case 0: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Inspired)
+        case 1: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Humble)
+        case 2: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Dominant)
+        case 3: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Cynical)
+    }
+}
+
+movement VyratonIndoors_SSPathfinder_Movement_Player_NoExit
+{
+    lock_facing_direction
+    walk_down
+    unlock_facing_direction
+}
+
+movement VyratonIndoors_SSPathfinder_Movement_Player_LeadIn
+{
+    walk_down * 2
+    face_up
+}
+
+movement VyratonIndoors_SSPathfinder_Movement_Captain_FollowIn
+{
+    walk_down
+    walk_down // delay_16
+    delay_2
+    delay_16
+    face_left
+    delay_16 * 2
+    face_right
+    delay_16 * 2
+    face_down
 }

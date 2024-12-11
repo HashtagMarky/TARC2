@@ -38,4 +38,11 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_THOMAS,
     },
+
+    [CHARACTER_CAPTAIN] =
+    {
+        .name = _("SKIP"),
+
+        .overworldGraphicsId = OBJ_EVENT_GFX_CAPTAIN,
+    },
 };

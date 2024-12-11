@@ -2,7 +2,7 @@
   "id": "MAP_VYRATON_OUTDOORS_HARBOUR",
   "name": "VyratonOutdoors_Harbour",
   "layout": "LAYOUT_VYRATON_HARBOUR",
-  "music": "MUS_LILYCOVE",
+  "music": "MUS_HG_SURF",
   "region_map_section": "MAPSEC_VYRATON",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -119,7 +119,7 @@
       "flag": "FLAG_HIDE_VYRATON_HARBOR_PASSENGERS"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_CAPTAIN",
       "x": 15,
       "y": 25,
       "elevation": 0,
@@ -129,7 +129,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_HIDE_VYRATON_HARBOR_GRANDPARENT"
+      "flag": "FLAG_HIDE_VYRATON_HARBOR_CAPTAIN"
     }
   ],
   "warp_events": [
@@ -140,5 +140,6 @@
   ],
   "bg_events": [
 
-  ]
+  ],
+  "musicNight": "MUS_DP_SURF"
 }
