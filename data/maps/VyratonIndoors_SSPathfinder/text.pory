@@ -15,7 +15,7 @@ text VyratonIndoors_SSPathfinder_Text_WhatBringsYou
 {
     format("
         Titchy room this is, 'tis a fair\n
-        slight smaller than me own.\l
+        slight smaller than mae own.\l
         Name's Skip by the wae.\p
         {SPEAKER_NAME NAME_AUTO}With a name like that, I figured that\n
         I mae as well take tae the high seas.\l

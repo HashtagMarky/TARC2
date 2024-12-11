@@ -451,27 +451,27 @@ OverworldEncounters_EventScript_Encounter_Text_1:
 
 OverworldEncounters_EventScript_Encounter_Text_2:
 # 48 "data//scripts/overworld_encounters.pory"
-	.string "{FONT_NARROW}FIGHT$"
+	.string "{FONT_GET_NARROW}FIGHT$"
 
 OverworldEncounters_EventScript_Encounter_Text_3:
 # 51 "data//scripts/overworld_encounters.pory"
-	.string "{FONT_NARROWER}{POKE}BALL$"
+	.string "{FONT_GET_NARROWER}{POKE}BALL$"
 
 OverworldEncounters_EventScript_Encounter_Text_4:
 # 55 "data//scripts/overworld_encounters.pory"
-	.string "{FONT_NARROW}APPROACH$"
+	.string "{FONT_GET_NARROW}APPROACH$"
 
 OverworldEncounters_EventScript_Encounter_Text_5:
 # 57 "data//scripts/overworld_encounters.pory"
-	.string "{FONT_NARROW}RUN$"
+	.string "{FONT_GET_NARROW}RUN$"
 
 OverworldEncounters_EventScript_ThrowBall_Text_0:
 # 106 "data//scripts/overworld_encounters.pory"
-	.string "{FONT_NARROW}{STR_VAR_1}$"
+	.string "{FONT_GET_NARROW}{STR_VAR_1}$"
 
 OverworldEncounters_EventScript_ThrowBall_Text_1:
 # 115 "data//scripts/overworld_encounters.pory"
-	.string "What {FONT_NARROWER}{POKE}BALL {FONT_NORMAL}will {PLAYER} use?$"
+	.string "What {FONT_GET_NARROWER}{POKE}BALL {FONT_NORMAL}will {PLAYER} use?$"
 
 OverworldEncounters_EventScript_CatchAttempt_Text_0:
 # 144 "data//scripts/overworld_encounters.pory"

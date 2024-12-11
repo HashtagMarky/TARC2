@@ -379,6 +379,8 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
             switch (c)
             {
             case EXT_CTRL_CODE_RESET_FONT:
+            case EXT_CTRL_CODE_FONT_GET_NARROW:
+            case EXT_CTRL_CODE_FONT_GET_NARROWER:
             case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
             case EXT_CTRL_CODE_FILL_WINDOW:
             case EXT_CTRL_CODE_JPN:
@@ -717,6 +719,8 @@ u8 GetExtCtrlCodeLength(u8 code)
         [EXT_CTRL_CODE_HIDE_ITEM_HEADER]       = 1,
         [EXT_CTRL_CODE_PLAY_FANFARE]           = 3,
         [EXT_CTRL_CODE_WAIT_FANFARE]           = 1,
+        [EXT_CTRL_CODE_FONT_GET_NARROW]        = 1,
+        [EXT_CTRL_CODE_FONT_GET_NARROWER]      = 1,
     };
 
     u8 length = 0;

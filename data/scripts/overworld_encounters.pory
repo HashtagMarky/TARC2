@@ -45,16 +45,16 @@ script OverworldEncounters_EventScript_Encounter
         special(RemoveCameraObject)
     }
     waitmessage
-    dynmultipush("{FONT_NARROW}FIGHT", 0)
+    dynmultipush("{FONT_GET_NARROW}FIGHT", 0)
     if (specialvar(VAR_RESULT, HasAtLeastOnePokeBall) == TRUE)
     {
-        dynmultipush("{FONT_NARROWER}{POKE}BALL", 1)
+        dynmultipush("{FONT_GET_NARROWER}{POKE}BALL", 1)
     }
     if (checkitem(ITEM_POKEBLOCK_CASE) == TRUE)
     {
-        dynmultipush("{FONT_NARROW}APPROACH", 2)
+        dynmultipush("{FONT_GET_NARROW}APPROACH", 2)
     }
-    dynmultipush("{FONT_NARROW}RUN", 3)
+    dynmultipush("{FONT_GET_NARROW}RUN", 3)
     dynmultistack(0, 0, TRUE, 4, TRUE, 0, DYN_MULTICHOICE_CB_SHOW_PMD)
     switch (var(VAR_RESULT))
     {
@@ -103,16 +103,16 @@ script OverworldEncounters_EventScript_ThrowBall
         if (checkitem(VAR_0x8007) == TRUE)
         {
             bufferitemname(STR_VAR_1, VAR_0x8007)
-            dynmultipush("{FONT_NARROW}{STR_VAR_1}", VAR_0x8007)
+            dynmultipush("{FONT_GET_NARROW}{STR_VAR_1}", VAR_0x8007)
         }
         addvar(VAR_0x8007, 1)
     }
     if (checkitem(ITEM_STRANGE_BALL) == TRUE)
     {
         bufferitemname(STR_VAR_1, ITEM_STRANGE_BALL)
-        dynmultipush("{FONT_NARROW}{STR_VAR_1}", ITEM_STRANGE_BALL)
+        dynmultipush("{FONT_GET_NARROW}{STR_VAR_1}", ITEM_STRANGE_BALL)
     }
-    message(format("What {FONT_NARROWER}{POKE}BALL {FONT_NORMAL}will {PLAYER} use?"))
+    message(format("What {FONT_GET_NARROWER}{POKE}BALL {FONT_NORMAL}will {PLAYER} use?"))
     waitmessage
     dynmultistack(0, 0, FALSE, 3, TRUE, 0, DYN_MULTICHOICE_CB_SHOW_ITEM)
     if (var(VAR_RESULT) == MULTI_B_PRESSED)

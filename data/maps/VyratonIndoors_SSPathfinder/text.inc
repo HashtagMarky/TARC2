@@ -12,7 +12,7 @@ VyratonIndoors_SSPathfinder_Text_IntroduceCaptain::
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou::
 # 14 "data//maps/VyratonIndoors_SSPathfinder/text.pory"
 	.string "Titchy room this is, 'tis a fair\n"
-	.string "slight smaller than me own.\l"
+	.string "slight smaller than mae own.\l"
 	.string "Name's Skip by the wae.\p"
 	.string "{SPEAKER_NAME NAME_AUTO}With a name like that, I figured that\n"
 	.string "I mae as well take tae the high seas.\l"

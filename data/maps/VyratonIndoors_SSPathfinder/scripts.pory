@@ -66,10 +66,10 @@ script VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue
 script VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue
 {
     dynmultichoice(0, 0, TRUE, 2, 0, DYN_MULTICHOICE_CB_NONE,
-        "{COLOR BLUE}I'll make the most of your advice!{COLOR DARK_GRAY}",
-        "{COLOR GREEN}I need all the help I can get.{COLOR DARK_GRAY}",
-        "{COLOR RED}I don't care, I'll handle myself.{COLOR DARK_GRAY}",
-        "{COLOR LIGHT_BLUE}Sure, like that means anything…{COLOR DARK_GRAY}")
+        "{COLOR BLUE}{FONT_GET_NARROW}I'll make the most of your advice!",
+        "{COLOR GREEN}{FONT_GET_NARROW}I need all the help I can get.",
+        "{COLOR RED}{FONT_GET_NARROW}I don't care, I'll handle myself.",
+        "{COLOR LIGHT_BLUE}{FONT_GET_NARROW}Sure, like that means anything…")
     switch (var(VAR_RESULT))
     {
         case 0: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Inspired)

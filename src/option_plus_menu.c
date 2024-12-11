@@ -288,18 +288,13 @@ struct // MENU_BATTLE
 };
 
 // Menu left side option names text
-static const u8 sText_WildSpeed_Compact[]   = _("{FONT_SHORT_NARROW}WILD BATTLE SPEED{FONT_NORMAL}");
-static const u8 sText_WildSpeed_Spread[]    = _("{FONT_NARROW}WILD BATTLE SPEED{FONT_NORMAL}");
-static const u8 sText_TrainerSpeed[]        = _("SHOWDOWN SPEED{FONT_NORMAL}");
-static const u8 sText_TrainerSpeed_Compact[] = _("{FONT_SHORT_NARROW}SHOWDOWN SPEED{FONT_NORMAL}");
-static const u8 sText_TrainerSpeed_Spread[] = _("{FONT_NARROW}SHOWDOWN SPEED{FONT_NORMAL}");
+static const u8 sText_WildSpeed[]           = _("{FONT_GET_NARROW}WILD BATTLE SPEED{FONT_NORMAL}");
+static const u8 sText_TrainerSpeed[]        = _("{FONT_GET_NARROW}SHOWDOWN SPEED{FONT_NORMAL}");
 static const u8 sText_UnitSystem[]          = _("UNIT SYSTEM");
 static const u8 sText_BikeMusic[]           = _("BIKE MUSIC");
 static const u8 sText_SurfMusic[]           = _("SURF MUSIC");
-static const u8 sText_MugshotNPC_Compact[]  = _("{FONT_SHORT_NARROW}NPC MUGSHOTS{FONT_NORMAL}");
-static const u8 sText_MugshotNPC_Spread[]   = _("{FONT_NARROW}NPC MUGSHOTS{FONT_NORMAL}");
-static const u8 sText_MugshotFollower_Compact[] = _("{FONT_SHORT_NARROW}FOLLOWER MUGSHOTS{FONT_NORMAL}");
-static const u8 sText_MugshotFollower_Spread[]  = _("{FONT_NARROW}FOLLOWER MUGSHOTS{FONT_NORMAL}");
+static const u8 sText_MugshotNPC[]          = _("{FONT_GET_NARROW}NPC MUGSHOTS{FONT_NORMAL}");
+static const u8 sText_MugshotFollower[]     = _("{FONT_GET_NARROW}FOLLOWER MUGSHOTS{FONT_NORMAL}");
 static const u8 sText_TitleScreen[]         = _("TITLE SCREEN");
 static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 {
@@ -314,41 +309,21 @@ static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
     [MENUITEM_MAIN_CANCEL]          = gText_OptionMenuSave,
 };
 
-static const u8 *const sOptionMenuItemsNamesOverworld_Compact[MENUITEM_OVERWORLD_COUNT] =
+static const u8 *const sOptionMenuItemsNamesOverworld[MENUITEM_OVERWORLD_COUNT] =
 {
     [MENUITEM_OVERWORLD_BIKE_MUSIC]     = sText_BikeMusic,
     [MENUITEM_OVERWORLD_SURF_MUSIC]     = sText_SurfMusic,
-    [MENUITEM_OVERWORLD_NPC_MUG]        = sText_MugshotNPC_Compact,
-    [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = sText_MugshotFollower_Compact,
-    [MENUITEM_OVERWORLD_MATCHCALL]      = gText_OptionMatchCalls,
+    [MENUITEM_OVERWORLD_NPC_MUG]        = sText_MugshotNPC,
+    [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = sText_MugshotFollower,
+    [MENUITEM_OVERWORLD_MATCHCALL]      = COMPOUND_STRING("{FONT_GET_NARROW}OVERWORLD CALLS"),
     [MENUITEM_OVERWORLD_CANCEL]         = gText_OptionMenuSave,
 };
 
-static const u8 *const sOptionMenuItemsNamesOverworld_Spread[MENUITEM_OVERWORLD_COUNT] =
-{
-    [MENUITEM_OVERWORLD_BIKE_MUSIC]     = sText_BikeMusic,
-    [MENUITEM_OVERWORLD_SURF_MUSIC]     = sText_SurfMusic,
-    [MENUITEM_OVERWORLD_NPC_MUG]        = sText_MugshotNPC_Spread,
-    [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = sText_MugshotFollower_Spread,
-    [MENUITEM_OVERWORLD_MATCHCALL]      = gText_OptionMatchCalls,
-    [MENUITEM_OVERWORLD_CANCEL]         = gText_OptionMenuSave,
-};
-
-static const u8 *const sOptionMenuItemsNamesBattle_Compact[MENUITEM_BATTLE_COUNT] =
+static const u8 *const sOptionMenuItemsNamesBattle[MENUITEM_BATTLE_COUNT] =
 {
     [MENUITEM_BATTLE_BATTLESCENE]   = gText_BattleScene,
     [MENUITEM_BATTLE_BATTLESTYLE]   = gText_BattleStyle,
-    [MENUITEM_BATTLE_WILD_SPEED]    = sText_WildSpeed_Compact,
-    [MENUITEM_BATTLE_TRAINER_SPEED] = sText_TrainerSpeed,
-    [MENUITEM_BATTLE_DAMAGE_NUMBERS] = COMPOUND_STRING("DAMAGE NUMBERS"),
-    [MENUITEM_BATTLE_CANCEL]        = gText_OptionMenuSave,
-};
-
-static const u8 *const sOptionMenuItemsNamesBattle_Spread[MENUITEM_BATTLE_COUNT] =
-{
-    [MENUITEM_BATTLE_BATTLESCENE]   = gText_BattleScene,
-    [MENUITEM_BATTLE_BATTLESTYLE]   = gText_BattleStyle,
-    [MENUITEM_BATTLE_WILD_SPEED]    = sText_WildSpeed_Spread,
+    [MENUITEM_BATTLE_WILD_SPEED]    = sText_WildSpeed,
     [MENUITEM_BATTLE_TRAINER_SPEED] = sText_TrainerSpeed,
     [MENUITEM_BATTLE_DAMAGE_NUMBERS] = COMPOUND_STRING("DAMAGE NUMBERS"),
     [MENUITEM_BATTLE_CANCEL]        = gText_OptionMenuSave,
@@ -359,28 +334,8 @@ static const u8 *const OptionTextRight(u8 menuItem)
     switch (sOptions->submenu)
     {
     case MENU_MAIN:         return sOptionMenuItemsNamesMain[menuItem];
-    case MENU_OVERWORLD:
-    {
-        if (gSaveBlock2Ptr->optionsCurrentFont == 0)
-        {
-            return sOptionMenuItemsNamesOverworld_Compact[menuItem];
-        }
-        else
-        {
-            return sOptionMenuItemsNamesOverworld_Spread[menuItem];
-        }
-    }
-    case MENU_BATTLE:
-    {
-        if (gSaveBlock2Ptr->optionsCurrentFont == 0)
-        {
-            return sOptionMenuItemsNamesBattle_Compact[menuItem];
-        }
-        else
-        {
-            return sOptionMenuItemsNamesBattle_Spread[menuItem];
-        }
-    }
+    case MENU_OVERWORLD:    return sOptionMenuItemsNamesOverworld[menuItem];
+    case MENU_BATTLE:       return sOptionMenuItemsNamesBattle[menuItem];
     }
     return sOptionMenuItemsNamesMain[menuItem];
 }
