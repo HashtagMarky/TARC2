@@ -33,7 +33,7 @@ script IkigaiCharacterBox_Talk
     dynmultipush("Neutral", CHARACTERISTIC_NEUTRAL)
     dynmultipush("Inspiring", CHARACTERISTIC_INSPIRED)
     dynmultipush("Humble", CHARACTERISTIC_HUMBLE)
-    dynmultipush("Dominating", CHARACTERISTIC_DOMINAT)
+    dynmultipush("Dominating", CHARACTERISTIC_DOMINANT)
     dynmultipush("Cynical", CHARACTERISTIC_CYNICAL)
     dynmultistack(0, 0, FALSE, 3, TRUE, 0, DYN_MULTICHOICE_CB_DIALOGUE)
     callnative(IkigaiCharacter_HandleDialogue)

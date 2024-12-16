@@ -2577,7 +2577,7 @@
 		dialoguemultipush CHARACTERISTIC_HUMBLE, \humble
 	.endif
 	.ifnb \dominant
-		dialoguemultipush CHARACTERISTIC_DOMINAT, \dominant
+		dialoguemultipush CHARACTERISTIC_DOMINANT, \dominant
 	.endif
 	.ifnb \cynical
 		dialoguemultipush CHARACTERISTIC_CYNICAL, \cynical

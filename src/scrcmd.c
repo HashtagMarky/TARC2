@@ -1531,7 +1531,7 @@ bool8 ScrCmd_dialoguemultipush(struct ScriptContext *ctx)
                 StringCopy(nameListItem, COMPOUND_STRING("{COLOR GREEN}{FONT_GET_NARROW}"));
                 break;
 
-            case CHARACTERISTIC_DOMINAT:
+            case CHARACTERISTIC_DOMINANT:
                 StringCopy(nameListItem, COMPOUND_STRING("{COLOR RED}{FONT_GET_NARROW}"));
                 break;
 

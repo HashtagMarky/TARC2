@@ -54,7 +54,7 @@ IkigaiCharacterBox_Talk::
 # 35 "data//scripts/ikigai_characters.pory"
 	dynmultipush IkigaiCharacterBox_Talk_Text_3, CHARACTERISTIC_HUMBLE
 # 36 "data//scripts/ikigai_characters.pory"
-	dynmultipush IkigaiCharacterBox_Talk_Text_4, CHARACTERISTIC_DOMINAT
+	dynmultipush IkigaiCharacterBox_Talk_Text_4, CHARACTERISTIC_DOMINANT
 # 37 "data//scripts/ikigai_characters.pory"
 	dynmultipush IkigaiCharacterBox_Talk_Text_5, CHARACTERISTIC_CYNICAL
 # 38 "data//scripts/ikigai_characters.pory"

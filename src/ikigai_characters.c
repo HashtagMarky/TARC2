@@ -70,7 +70,7 @@ static const struct DialogueCharacteristics sDialogueCharacteristics[CHARACTERIS
         .iconImage = sCharacteristicIcon_Humble,
         .iconPal = sCharacteristicPal_Humble
     },
-    [CHARACTERISTIC_DOMINAT] =
+    [CHARACTERISTIC_DOMINANT] =
     {
         .name = COMPOUND_STRING("Dominant"),
         .kindnessEffect = -1,
