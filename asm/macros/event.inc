@@ -2559,6 +2559,31 @@
 	removeobject \localId
 	.endm
 
+	@ Create a multichoice window for player dialogue options.
+	.macro dialoguechoice inspiring, humble, dominant, cynical
+	.ifnb \inspiring
+	.ifnb \humble
+	.ifnb \dominant
+	.ifnb \cynical
+        .ifnb \inspiring
+			dynmultipush \inspiring, CHARACTERISTIC_INSPIRED
+		.endif
+        .ifnb \humble
+			dynmultipush \humble, CHARACTERISTIC_HUMBLE
+		.endif
+        .ifnb \dominant
+			dynmultipush \dominant, CHARACTERISTIC_DOMINAT
+		.endif
+        .ifnb \cynical
+			dynmultipush \cynical, CHARACTERISTIC_CYNICAL
+		.endif
+		dynmultistack 0, 0, TRUE, 2, TRUE, 0, DYN_MULTICHOICE_CB_DIALOGUE
+    .endif
+    .endif
+    .endif
+    .endif
+	.endm
+
 	@ Create the Character Dialogue Box with a Character.
 	.macro charbox localId
 	lock
