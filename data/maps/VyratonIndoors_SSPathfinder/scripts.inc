@@ -88,9 +88,9 @@ VyratonIndoors_SSPathfinder_EventScript_MeetCaptain::
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue::
 # 54 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	dynmultipush VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_0, CHARACTERISTIC_NEUTRAL
+	dialoguemultipush VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_0, CHARACTERISTIC_NEUTRAL
 # 55 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	dynmultipush VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_1, CHARACTERISTIC_NEUTRAL
+	dialoguemultipush VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_1, CHARACTERISTIC_NEUTRAL
 # 57 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	dialoguechoice
 # 58 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
@@ -211,16 +211,16 @@ VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_1:
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_0:
 # 69 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	.string "{COLOR BLUE}{FONT_GET_NARROW}I'll make the most of your advice!$"
+	.string "I'll make the most of your advice!$"
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_1:
 # 70 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	.string "{COLOR GREEN}{FONT_GET_NARROW}I need all the help I can get.$"
+	.string "I need all the help I can get.$"
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_2:
 # 71 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	.string "{COLOR RED}{FONT_GET_NARROW}I don't care, I'll handle myself.$"
+	.string "I don't care, I'll handle myself.$"
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_3:
 # 72 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	.string "{COLOR LIGHT_BLUE}{FONT_GET_NARROW}Sure, like that means anything…$"
+	.string "Sure, like that means anything…$"

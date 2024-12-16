@@ -1504,6 +1504,53 @@ bool8 ScrCmd_dynmultipush(struct ScriptContext *ctx)
     return FALSE;
 }
 
+bool8 ScrCmd_dialoguemultipush(struct ScriptContext *ctx)
+{
+    u8 *nameBuffer = Alloc(100);
+    const u8 *name = (const u8*) ScriptReadWord(ctx);
+    u32 id = VarGet(ScriptReadHalfword(ctx));
+    struct ListMenuItem item;
+    StringExpandPlaceholders(nameBuffer, name);
+
+    switch (id)
+    {
+        case CHARACTERISTIC_INSPIRED:
+            StringCopy(gStringVar4, COMPOUND_STRING("{COLOR BLUE}{FONT_GET_NARROW}"));
+            StringAppend(gStringVar4, nameBuffer);
+            StringCopy(nameBuffer, gStringVar4);
+            break;
+    
+        case CHARACTERISTIC_HUMBLE:
+            StringCopy(gStringVar4, COMPOUND_STRING("{COLOR GREEN}{FONT_GET_NARROW}"));
+            StringAppend(gStringVar4, nameBuffer);
+            StringCopy(nameBuffer, gStringVar4);
+            break;
+    
+        case CHARACTERISTIC_DOMINAT:
+            StringCopy(gStringVar4, COMPOUND_STRING("{COLOR RED}{FONT_GET_NARROW}"));
+            StringAppend(gStringVar4, nameBuffer);
+            StringCopy(nameBuffer, gStringVar4);
+            break;
+    
+        case CHARACTERISTIC_CYNICAL:
+            StringCopy(gStringVar4, COMPOUND_STRING("{COLOR LIGHT_BLUE}{FONT_GET_NARROW}"));
+            StringAppend(gStringVar4, nameBuffer);
+            StringCopy(nameBuffer, gStringVar4);
+            break;
+    
+        case CHARACTERISTIC_NEUTRAL:
+        default:
+            StringCopy(gStringVar4, COMPOUND_STRING("{FONT_GET_NARROW}"));
+            StringAppend(gStringVar4, nameBuffer);
+            StringCopy(nameBuffer, gStringVar4);
+            break;
+    }
+    item.name = nameBuffer;
+    item.id = id;
+    MultichoiceDynamic_PushElement(item);
+    return FALSE;
+}
+
 bool8 ScrCmd_multichoice(struct ScriptContext *ctx)
 {
     u8 left = ScriptReadByte(ctx);

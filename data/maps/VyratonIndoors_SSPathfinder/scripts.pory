@@ -51,9 +51,9 @@ script VyratonIndoors_SSPathfinder_EventScript_MeetCaptain
 
 script VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue
 {
-    dynmultipush("I wanted a fresh start.", CHARACTERISTIC_NEUTRAL)
-    dynmultipush("I'm moving for a new challenge.", CHARACTERISTIC_NEUTRAL)
-    // dynmultipush("I'm going for business.", CHARACTERISTIC_NEUTRAL) // Old Option
+    dialoguemultipush("I wanted a fresh start.", CHARACTERISTIC_NEUTRAL)
+    dialoguemultipush("I'm moving for a new challenge.", CHARACTERISTIC_NEUTRAL)
+    // dialoguemultipush("I'm going for business.", CHARACTERISTIC_NEUTRAL) // Old Option
     dialoguechoice
     switch (var(VAR_RESULT))
     {
@@ -66,10 +66,10 @@ script VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue
 script VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue
 {
     dialoguechoice(
-        "{COLOR BLUE}{FONT_GET_NARROW}I'll make the most of your advice!",
-        "{COLOR GREEN}{FONT_GET_NARROW}I need all the help I can get.",
-        "{COLOR RED}{FONT_GET_NARROW}I don't care, I'll handle myself.",
-        "{COLOR LIGHT_BLUE}{FONT_GET_NARROW}Sure, like that means anything…")
+        "I'll make the most of your advice!",
+        "I need all the help I can get.",
+        "I don't care, I'll handle myself.",
+        "Sure, like that means anything…")
     switch (var(VAR_RESULT))
     {
         case 0: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Inspired)
