@@ -51,10 +51,10 @@ script VyratonIndoors_SSPathfinder_EventScript_MeetCaptain
 
 script VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue
 {
-    dynmultichoice(0, 0, TRUE, 2, 0, DYN_MULTICHOICE_CB_NONE,
-        "I wanted a fresh start.",
-        "I'm moving for a new challenge.")
-    //  "I'm going for business.") // Old Option
+    dynmultipush("I wanted a fresh start.", CHARACTERISTIC_NEUTRAL)
+    dynmultipush("I'm moving for a new challenge.", CHARACTERISTIC_NEUTRAL)
+    // dynmultipush("I'm going for business.", CHARACTERISTIC_NEUTRAL) // Old Option
+    dialoguechoice
     switch (var(VAR_RESULT))
     {
         case 0: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_FreshStart)

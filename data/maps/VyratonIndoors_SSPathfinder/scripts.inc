@@ -88,7 +88,11 @@ VyratonIndoors_SSPathfinder_EventScript_MeetCaptain::
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue::
 # 54 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	dynmultichoice 0, 0, TRUE, 2, 0, DYN_MULTICHOICE_CB_NONE, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_0, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_1
+	dynmultipush VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_0, CHARACTERISTIC_NEUTRAL
+# 55 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+	dynmultipush VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_1, CHARACTERISTIC_NEUTRAL
+# 57 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+	dialoguechoice
 # 58 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	switch VAR_RESULT
 # 60 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
@@ -198,11 +202,11 @@ VyratonIndoors_SSPathfinder_Movement_Captain_FollowIn:
 	step_end
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_0:
-# 55 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 54 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	.string "I wanted a fresh start.$"
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_1:
-# 56 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 55 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	.string "I'm moving for a new challenge.$"
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_0:
