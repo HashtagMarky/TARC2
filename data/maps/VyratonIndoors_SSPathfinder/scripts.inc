@@ -88,139 +88,137 @@ VyratonIndoors_SSPathfinder_EventScript_MeetCaptain::
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue::
 # 54 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	dialoguemultipush VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_0, CHARACTERISTIC_NEUTRAL
-# 55 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	dialoguemultipush VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_1, CHARACTERISTIC_NEUTRAL
-# 57 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	dialoguechoice
+	dialoguemultipush CHARACTERISTIC_NEUTRAL, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_0, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_1
 # 58 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+	dialoguechoice
+# 59 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	switch VAR_RESULT
-# 60 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	case 0, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_2
 # 61 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	case 1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_3
+	case 0, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_2
 # 62 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+	case 1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_3
+# 63 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	case 2, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_4
 	return
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_2:
-# 60 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 61 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	bufferstring STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_FreshStart
 	return
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_3:
-# 61 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 62 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	bufferstring STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_NewChallenge
 	return
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_4:
-# 62 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 63 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	bufferstring STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_Business
 	return
 
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue::
-# 68 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 69 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	dialoguechoice VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_0, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_2, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_3
-# 73 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 74 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	switch VAR_RESULT
-# 75 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	case 0, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_2
 # 76 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	case 1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_3
+	case 0, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_2
 # 77 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	case 2, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_4
+	case 1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_3
 # 78 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+	case 2, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_4
+# 79 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	case 3, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_5
 	return
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_2:
-# 75 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 76 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	bufferstring STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Inspired
 	return
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_3:
-# 76 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 77 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	bufferstring STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Humble
 	return
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_4:
-# 77 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 78 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	bufferstring STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Dominant
 	return
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_5:
-# 78 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 79 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	bufferstring STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Cynical
 	return
 
 
-# 82 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 83 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 VyratonIndoors_SSPathfinder_Movement_Player_NoExit:
-# 84 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	lock_facing_direction
 # 85 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	walk_down
+	lock_facing_direction
 # 86 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+	walk_down
+# 87 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	unlock_facing_direction
 	step_end
 
-# 89 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 90 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 VyratonIndoors_SSPathfinder_Movement_Player_LeadIn:
-# 91 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	walk_down
-# 91 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 92 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	walk_down
 # 92 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+	walk_down
+# 93 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	face_up
 	step_end
 
-# 95 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 96 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 VyratonIndoors_SSPathfinder_Movement_Captain_FollowIn:
-# 97 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	walk_down
 # 98 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	walk_down
 # 99 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	delay_2
+	walk_down
 # 100 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	delay_16
+	delay_2
 # 101 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	face_left
-# 102 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	delay_16
 # 102 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+	face_left
+# 103 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	delay_16
 # 103 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	face_right
-# 104 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	delay_16
 # 104 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+	face_right
+# 105 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	delay_16
 # 105 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+	delay_16
+# 106 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	face_down
 	step_end
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_0:
-# 54 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 55 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	.string "I wanted a fresh start.$"
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_1:
-# 55 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 56 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	.string "I'm moving for a new challenge.$"
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_0:
-# 69 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 70 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	.string "I'll make the most of your advice!$"
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_1:
-# 70 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 71 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	.string "I need all the help I can get.$"
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_2:
-# 71 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 72 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	.string "I don't care, I'll handle myself.$"
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_3:
-# 72 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
+# 73 "data//maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	.string "Sure, like that means anything…$"

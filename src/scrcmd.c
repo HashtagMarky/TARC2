@@ -1506,48 +1506,53 @@ bool8 ScrCmd_dynmultipush(struct ScriptContext *ctx)
 
 bool8 ScrCmd_dialoguemultipush(struct ScriptContext *ctx)
 {
-    u8 *nameBuffer = Alloc(100);
-    const u8 *name = (const u8*) ScriptReadWord(ctx);
-    u32 id = VarGet(ScriptReadHalfword(ctx));
-    struct ListMenuItem item;
-    StringExpandPlaceholders(nameBuffer, name);
+    u32 characteristic = VarGet(ScriptReadHalfword(ctx));
+    u32 argc = ScriptReadByte(ctx);
+    if (argc == 0)
+        return FALSE;
 
-    switch (id)
+    u32 i;
+    struct ListMenuItem item;
+
+    for (i = 0; i < argc; i++)
     {
-        case CHARACTERISTIC_INSPIRED:
-            StringCopy(gStringVar4, COMPOUND_STRING("{COLOR BLUE}{FONT_GET_NARROW}"));
-            StringAppend(gStringVar4, nameBuffer);
-            StringCopy(nameBuffer, gStringVar4);
-            break;
-    
-        case CHARACTERISTIC_HUMBLE:
-            StringCopy(gStringVar4, COMPOUND_STRING("{COLOR GREEN}{FONT_GET_NARROW}"));
-            StringAppend(gStringVar4, nameBuffer);
-            StringCopy(nameBuffer, gStringVar4);
-            break;
-    
-        case CHARACTERISTIC_DOMINAT:
-            StringCopy(gStringVar4, COMPOUND_STRING("{COLOR RED}{FONT_GET_NARROW}"));
-            StringAppend(gStringVar4, nameBuffer);
-            StringCopy(nameBuffer, gStringVar4);
-            break;
-    
-        case CHARACTERISTIC_CYNICAL:
-            StringCopy(gStringVar4, COMPOUND_STRING("{COLOR LIGHT_BLUE}{FONT_GET_NARROW}"));
-            StringAppend(gStringVar4, nameBuffer);
-            StringCopy(nameBuffer, gStringVar4);
-            break;
-    
-        case CHARACTERISTIC_NEUTRAL:
-        default:
-            StringCopy(gStringVar4, COMPOUND_STRING("{FONT_GET_NARROW}"));
-            StringAppend(gStringVar4, nameBuffer);
-            StringCopy(nameBuffer, gStringVar4);
-            break;
+        u8 *nameBuffer = Alloc(100);
+        u8 *nameListItem = Alloc(100);
+        const u8 *name = (const u8 *)ScriptReadWord(ctx);
+        StringExpandPlaceholders(nameBuffer, name);
+
+        switch (characteristic)
+        {
+            case CHARACTERISTIC_INSPIRED:
+                StringCopy(nameListItem, COMPOUND_STRING("{COLOR BLUE}{FONT_GET_NARROW}"));
+                break;
+
+            case CHARACTERISTIC_HUMBLE:
+                StringCopy(nameListItem, COMPOUND_STRING("{COLOR GREEN}{FONT_GET_NARROW}"));
+                break;
+
+            case CHARACTERISTIC_DOMINAT:
+                StringCopy(nameListItem, COMPOUND_STRING("{COLOR RED}{FONT_GET_NARROW}"));
+                break;
+
+            case CHARACTERISTIC_CYNICAL:
+                StringCopy(nameListItem, COMPOUND_STRING("{COLOR LIGHT_BLUE}{FONT_GET_NARROW}"));
+                break;
+
+            case CHARACTERISTIC_NEUTRAL:
+            default:
+                StringCopy(nameListItem, COMPOUND_STRING("{FONT_GET_NARROW}"));
+                break;
+        }
+
+        StringAppend(nameListItem, nameBuffer);
+
+        item.name = nameListItem;
+        item.id = characteristic;
+
+        MultichoiceDynamic_PushElement(item);
     }
-    item.name = nameBuffer;
-    item.id = id;
-    MultichoiceDynamic_PushElement(item);
+
     return FALSE;
 }
 

@@ -2559,25 +2559,28 @@
 	removeobject \localId
 	.endm
 
-	.macro dialoguemultipush name:req, id:req
-	.byte 0xeb
-	.4byte \name
-	.2byte \id
-	.endm
+	.macro dialoguemultipush characteristic:req text:vararg
+    .byte 0xeb
+    .2byte \characteristic
+    .byte (.Ldialoguemultipush_\@_2 - .Ldialoguemultipush_\@_1) / 4
+.Ldialoguemultipush_\@_1:
+    .4byte \text
+.Ldialoguemultipush_\@_2:
+    .endm
 
 	@ Create a multichoice window for player dialogue options.
 	.macro dialoguechoice inspiring, humble, dominant, cynical
 	.ifnb \inspiring
-		dialoguemultipush \inspiring, CHARACTERISTIC_INSPIRED
+		dialoguemultipush CHARACTERISTIC_INSPIRED, \inspiring
 	.endif
 	.ifnb \humble
-		dialoguemultipush \humble, CHARACTERISTIC_HUMBLE
+		dialoguemultipush CHARACTERISTIC_HUMBLE, \humble
 	.endif
 	.ifnb \dominant
-		dialoguemultipush \dominant, CHARACTERISTIC_DOMINAT
+		dialoguemultipush CHARACTERISTIC_DOMINAT, \dominant
 	.endif
 	.ifnb \cynical
-		dialoguemultipush \cynical, CHARACTERISTIC_CYNICAL
+		dialoguemultipush CHARACTERISTIC_CYNICAL, \cynical
 	.endif
 	_dynmultichoice 0, 0, TRUE, 2, TRUE, -1, DYN_MULTICHOICE_CB_DIALOGUE, NULL
 	.endm
