@@ -98,14 +98,13 @@ static const struct DynamicListMenuEventCollection sDynamicListMenuEventCollecti
         .OnSelectionChanged = MultichoiceDynamicEventShowPMD_OnSelectionChanged,
         .OnDestroy = MultichoiceDynamicEventShowPMD_OnDestroy
     },
-    /*
+    
     [DYN_MULTICHOICE_CB_DIALOGUE] =
     {
         .OnInit = MultichoiceDynamicEventShowDialogue_OnInit,
         .OnSelectionChanged = MultichoiceDynamicEventShowDialogue_OnSelectionChanged,
         .OnDestroy = MultichoiceDynamicEventShowDialogue_OnDestroy
     }
-    */
 };
 
 static const struct ListMenuTemplate sScriptableListMenuTemplate =
@@ -289,13 +288,13 @@ static void MultichoiceDynamicEventShowDialogue_OnInit(struct DynamicListMenuEve
 static void MultichoiceDynamicEventShowDialogue_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs)
 {
     struct WindowTemplate *template = &gWindows[eventArgs->windowId].window;
-    u32 x = template->tilemapLeft * 8 + template->width * 8 + 36;
-    u32 y = template->tilemapTop * 8 + 20;
+    u32 x = template->tilemapLeft * 8 + template->width * 8 + 36 - 4;
+    u32 y = template->tilemapTop * 8 + 20 - 4;
 
     if (sItemSpriteId != MAX_SPRITES)
     {
-        FreeSpriteTilesByTag(TAG_CB_ITEM_ICON);
-        FreeSpritePaletteByTag(TAG_CB_ITEM_ICON);
+        FreeSpriteTilesByTag(TAG_CHARACTER_DIALOGUE_ICON);
+        FreeSpritePaletteByTag(TAG_CHARACTER_DIALOGUE_ICON);
         DestroySprite(&gSprites[sItemSpriteId]);
     }
 
@@ -312,8 +311,8 @@ static void MultichoiceDynamicEventShowDialogue_OnDestroy(struct DynamicListMenu
 
     if (sItemSpriteId != MAX_SPRITES)
     {
-        FreeSpriteTilesByTag(TAG_CB_ITEM_ICON);
-        FreeSpritePaletteByTag(TAG_CB_ITEM_ICON);
+        FreeSpriteTilesByTag(TAG_CHARACTER_DIALOGUE_ICON);
+        FreeSpritePaletteByTag(TAG_CHARACTER_DIALOGUE_ICON);
         DestroySprite(&gSprites[sItemSpriteId]);
     }
 }
