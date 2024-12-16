@@ -59,6 +59,7 @@ static void WindowFunc_ClearDialogWindowAndFrame(u8, u8, u8, u8, u8, u8);
 static void WindowFunc_DrawDialogFrameWithCustomTileAndPalette(u8, u8, u8, u8, u8, u8);
 static void WindowFunc_ClearDialogWindowAndFrameNullPalette(u8, u8, u8, u8, u8, u8);
 static void WindowFunc_DrawStdFrameWithCustomTileAndPalette(u8, u8, u8, u8, u8, u8);
+static void WindowFunc_DrawStdFrameWithCustomTileAndPalette_RightExtension(u8, u8, u8, u8, u8, u8);
 static void WindowFunc_ClearStdWindowAndFrameToTransparent(u8, u8, u8, u8, u8, u8);
 static void task_free_buf_after_copying_tile_data_to_vram(u8 taskId);
 
@@ -545,6 +546,11 @@ void SetStandardWindowBorderStyle(u8 windowId, bool8 copyToVram)
     DrawStdFrameWithCustomTileAndPalette(windowId, copyToVram, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM);
 }
 
+void SetStandardWindowBorderStyle_RightExtension(u8 windowId, bool8 copyToVram)
+{
+    DrawStdFrameWithCustomTileAndPalette_RightExtension(windowId, copyToVram, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM);
+}
+
 void LoadMessageBoxAndFrameGfx(u8 windowId, bool8 copyToVram)
 {
     LoadMessageBoxGfx(windowId, DLG_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(DLG_WINDOW_PALETTE_NUM));
@@ -764,6 +770,17 @@ void DrawStdFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 bas
         CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
+void DrawStdFrameWithCustomTileAndPalette_RightExtension(u8 windowId, bool8 copyToVram, u16 baseTileNum, u8 paletteNum)
+{
+    sTileNum = baseTileNum;
+    sPaletteNum = paletteNum;
+    CallWindowFunction(windowId, WindowFunc_DrawStdFrameWithCustomTileAndPalette_RightExtension);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
+    PutWindowTilemap(windowId);
+    if (copyToVram == TRUE)
+        CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+
 // Never used.
 void DrawStdFrameWithCustomTile(u8 windowId, bool8 copyToVram, u16 baseTileNum)
 {
@@ -815,6 +832,66 @@ static void WindowFunc_DrawStdFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLef
                             sPaletteNum);
     FillBgTilemapBufferRect(bg,
                             sTileNum + 6,
+                            tilemapLeft - 1,
+                            tilemapTop + height,
+                            1,
+                            1,
+                            sPaletteNum);
+    FillBgTilemapBufferRect(bg,
+                            sTileNum + 7,
+                            tilemapLeft,
+                            tilemapTop + height,
+                            width,
+                            1,
+                            sPaletteNum);
+    FillBgTilemapBufferRect(bg,
+                            sTileNum + 8,
+                            tilemapLeft + width,
+                            tilemapTop + height,
+                            1,
+                            1,
+                            sPaletteNum);
+}
+
+static void WindowFunc_DrawStdFrameWithCustomTileAndPalette_RightExtension(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
+{
+    FillBgTilemapBufferRect(bg,
+                            sTileNum + 1,
+                            tilemapLeft - 1,
+                            tilemapTop - 1,
+                            1,
+                            1,
+                            sPaletteNum);
+    FillBgTilemapBufferRect(bg,
+                            sTileNum + 1,
+                            tilemapLeft,
+                            tilemapTop - 1,
+                            width,
+                            1,
+                            sPaletteNum);
+    FillBgTilemapBufferRect(bg,
+                            sTileNum + 2,
+                            tilemapLeft + width,
+                            tilemapTop - 1,
+                            1,
+                            1,
+                            sPaletteNum);
+    FillBgTilemapBufferRect(bg,
+                            sTileNum + 4,
+                            tilemapLeft - 1,
+                            tilemapTop,
+                            1,
+                            height,
+                            sPaletteNum);
+    FillBgTilemapBufferRect(bg,
+                            sTileNum + 5,
+                            tilemapLeft + width,
+                            tilemapTop,
+                            1,
+                            height,
+                            sPaletteNum);
+    FillBgTilemapBufferRect(bg,
+                            sTileNum + 7,
                             tilemapLeft - 1,
                             tilemapTop + height,
                             1,

@@ -276,9 +276,9 @@ static void MultichoiceDynamicEventShowDialogue_OnInit(struct DynamicListMenuEve
 {
     struct WindowTemplate *template = &gWindows[eventArgs->windowId].window;
     u32 baseBlock = template->baseBlock + template->width * template->height;
-    struct WindowTemplate auxTemplate = CreateWindowTemplate(0, template->tilemapLeft + template->width + 2, template->tilemapTop, 4, 4, 15, baseBlock);
+    struct WindowTemplate auxTemplate = CreateWindowTemplate(0, template->tilemapLeft + template->width + 1, template->tilemapTop, 4, 4, 15, baseBlock);
     u32 auxWindowId = AddWindow(&auxTemplate);
-    SetStandardWindowBorderStyle(auxWindowId, FALSE);
+    SetStandardWindowBorderStyle_RightExtension(auxWindowId, FALSE);
     FillWindowPixelBuffer(auxWindowId, 0x11);
     CopyWindowToVram(auxWindowId, COPYWIN_FULL);
     sAuxWindowId = auxWindowId;
@@ -288,7 +288,7 @@ static void MultichoiceDynamicEventShowDialogue_OnInit(struct DynamicListMenuEve
 static void MultichoiceDynamicEventShowDialogue_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs)
 {
     struct WindowTemplate *template = &gWindows[eventArgs->windowId].window;
-    u32 x = template->tilemapLeft * 8 + template->width * 8 + 36 - 4;
+    u32 x = template->tilemapLeft * 8 + template->width * 8 + 36 - 4 - 8;
     u32 y = template->tilemapTop * 8 + 20 - 4;
 
     if (sItemSpriteId != MAX_SPRITES)
