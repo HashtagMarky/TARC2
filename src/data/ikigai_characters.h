@@ -1,6 +1,7 @@
 #include "global.h"
 #include "constants/event_objects.h"
 #include "constants/field_mugshots.h"
+#include "constants/pokemon.h"
 #include "constants/species.h"
 
 const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
@@ -15,8 +16,9 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
     [CHARACTER_SAMUEL] =
     {
         .name = _("SAMUEL"),
-
         .partnerPokemon = SPECIES_INFERNAPE,
+        .favouriteColour = BODY_COLOR_BLUE,
+        .favouriteType = TYPE_FIRE,
 
         .overworldGraphicsId = OBJ_EVENT_GFX_SAMUEL,
         .mugshotId = MUGSHOT_SAMUEL,
@@ -25,8 +27,8 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
     [CHARACTER_LAUREN] =
     {
         .name = _("LAUREN"),
-
         .partnerPokemon = SPECIES_LIEPARD,
+        .favouriteColour = BODY_COLOR_YELLOW,
 
         .overworldGraphicsId = OBJ_EVENT_GFX_LAUREN,
         .mugshotId = MUGSHOT_LAUREN,
