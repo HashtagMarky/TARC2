@@ -4,6 +4,7 @@ script IkigaiCharacterBox_InitialDialogue
     dynmultipush("Talk", DIALOGUE_OPTION_TALK)
     dynmultipush("Quests", DIALOGUE_OPTION_QUESTS)
     dynmultipush("Battle", DIALOGUE_OPTION_BATTLE)
+    dynmultipush("Gift", DIALOGUE_OPTION_GIFT)
     dynmultipush("Goodbye", DIALOGUE_OPTION_GOODBYE)
     dynmultistack(0, 0, FALSE, 3, TRUE, 0, DYN_MULTICHOICE_CB_NONE)
     switch (var(VAR_RESULT))
@@ -11,6 +12,7 @@ script IkigaiCharacterBox_InitialDialogue
         case DIALOGUE_OPTION_TALK:
         case DIALOGUE_OPTION_QUESTS:
         case DIALOGUE_OPTION_BATTLE:
+        case DIALOGUE_OPTION_GIFT:
             goto(IkigaiCharacterBox_Talk)
         case DIALOGUE_OPTION_GOODBYE:
         default:
