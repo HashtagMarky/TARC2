@@ -19,6 +19,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .partnerPokemon = SPECIES_INFERNAPE,
         .favouriteColour = BODY_COLOR_BLUE,
         .favouriteType = TYPE_FIRE,
+        .personality = CHARACTERISTIC_INSPIRED,
 
         .overworldGraphicsId = OBJ_EVENT_GFX_SAMUEL,
         .mugshotId = MUGSHOT_SAMUEL,
@@ -29,6 +30,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .name = _("LAUREN"),
         .partnerPokemon = SPECIES_LIEPARD,
         .favouriteColour = BODY_COLOR_YELLOW,
+        .personality = CHARACTERISTIC_CYNICAL,
 
         .overworldGraphicsId = OBJ_EVENT_GFX_LAUREN,
         .mugshotId = MUGSHOT_LAUREN,

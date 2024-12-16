@@ -8,6 +8,7 @@
 #include "sprite.h"
 #include "decompress.h"
 #include "field_weather.h"
+#include "random.h"
 
 static const u32 sCharacteristicIcon_Neutral[] = INCBIN_U32("graphics/dialogue_icons/neutral.4bpp.lz");
 static const u16 sCharacteristicPal_Neutral[] = INCBIN_U16("graphics/dialogue_icons/neutral.gbapal");
@@ -138,8 +139,26 @@ void IkigaiCharacter_HandleDialogue(void)
 
     if (GetSetConversedFlag(character, FALSE))
     {
-        gSaveBlock3Ptr->characters.opinionKindness[character] += sDialogueCharacteristics[gSpecialVar_Result].kindnessEffect;
-        gSaveBlock3Ptr->characters.opinionStrength[character] += sDialogueCharacteristics[gSpecialVar_Result].strengthEffect;
+        s8 opinionKindness = sDialogueCharacteristics[gSpecialVar_Result].kindnessEffect;
+        s8 opinionStrength = sDialogueCharacteristics[gSpecialVar_Result].strengthEffect;
+
+        if (gSpecialVar_Result == gIkigaiCharactersInfo[character].personality)
+        {
+            u8 opinionMultiplier = Random() % 2;
+
+            if (opinionKindness < 0)
+                opinionKindness *= (opinionMultiplier - 1);
+            else
+                opinionKindness *= (opinionMultiplier + 1);
+
+            if (opinionStrength < 0)
+                opinionStrength *= (opinionMultiplier - 1);
+            else
+                opinionStrength *= (opinionMultiplier + 1);
+        }
+ 
+        gSaveBlock3Ptr->characters.opinionKindness[character] += opinionKindness;
+        gSaveBlock3Ptr->characters.opinionStrength[character] += opinionStrength;
         GetSetConversedFlag(character, TRUE);
     }
 }
