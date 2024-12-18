@@ -88,7 +88,7 @@ VyratonIndoors_SSPathfinder_EventScript_MeetCaptain::
 
 VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue::
 # 54 "data/maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	dialoguemultipush CHARACTERISTIC_NEUTRAL, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_0, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_1
+	dialoguemultipush ATTITUDE_NEUTRAL, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_0, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_1
 # 57 "data/maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	dialoguechoice
 # 58 "data/maps/VyratonIndoors_SSPathfinder/scripts.pory"
@@ -126,13 +126,13 @@ VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue::
 # 74 "data/maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	switch VAR_RESULT
 # 76 "data/maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	case CHARACTERISTIC_INSPIRED, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_2
+	case ATTITUDE_INSPIRED, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_2
 # 77 "data/maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	case CHARACTERISTIC_HUMBLE, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_3
+	case ATTITUDE_HUMBLE, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_3
 # 78 "data/maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	case CHARACTERISTIC_DOMINANT, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_4
+	case ATTITUDE_DOMINANT, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_4
 # 79 "data/maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	case CHARACTERISTIC_CYNICAL, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_5
+	case ATTITUDE_CYNICAL, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_5
 	return
 
 VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_2:

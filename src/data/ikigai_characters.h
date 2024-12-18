@@ -13,37 +13,37 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .overworldGraphicsId = NUM_OBJ_EVENT_GFX,
     },
 
-    [CHARACTER_SAMUEL] =
+    [MAIN_CHARACTER_SAMUEL] =
     {
         .name = _("SAMUEL"),
         .partnerPokemon = SPECIES_INFERNAPE,
         .favouriteColour = BODY_COLOR_BLUE,
         .favouriteType = TYPE_FIRE,
-        .personality = CHARACTERISTIC_INSPIRED,
+        .personality = ATTITUDE_INSPIRED,
 
         .overworldGraphicsId = OBJ_EVENT_GFX_SAMUEL,
         .mugshotId = MUGSHOT_SAMUEL,
     },
 
-    [CHARACTER_LAUREN] =
+    [MAIN_CHARACTER_LAUREN] =
     {
         .name = _("LAUREN"),
         .partnerPokemon = SPECIES_LIEPARD,
         .favouriteColour = BODY_COLOR_YELLOW,
-        .personality = CHARACTERISTIC_CYNICAL,
+        .personality = ATTITUDE_CYNICAL,
 
         .overworldGraphicsId = OBJ_EVENT_GFX_LAUREN,
         .mugshotId = MUGSHOT_LAUREN,
     },
 
-    [CHARACTER_THOMAS] =
+    [MAIN_CHARACTER_THOMAS] =
     {
         .name = _("THOMAS"),
 
         .overworldGraphicsId = OBJ_EVENT_GFX_THOMAS,
     },
 
-    [CHARACTER_CAPTAIN] =
+    [MAIN_CHARACTER_CAPTAIN] =
     {
         .name = _("SKIP"),
 

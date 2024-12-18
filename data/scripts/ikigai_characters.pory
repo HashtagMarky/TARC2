@@ -30,11 +30,11 @@ script IkigaiCharacterBox_Goodbye
 script IkigaiCharacterBox_Talk
 {
     mnmbox("What response will you\ngive to me?")
-    dynmultipush("Neutral", CHARACTERISTIC_NEUTRAL)
-    dynmultipush("Inspiring", CHARACTERISTIC_INSPIRED)
-    dynmultipush("Humble", CHARACTERISTIC_HUMBLE)
-    dynmultipush("Dominating", CHARACTERISTIC_DOMINANT)
-    dynmultipush("Cynical", CHARACTERISTIC_CYNICAL)
+    dynmultipush("Neutral", ATTITUDE_NEUTRAL)
+    dynmultipush("Inspiring", ATTITUDE_INSPIRED)
+    dynmultipush("Humble", ATTITUDE_HUMBLE)
+    dynmultipush("Dominating", ATTITUDE_DOMINANT)
+    dynmultipush("Cynical", ATTITUDE_CYNICAL)
     dynmultistack(0, 0, FALSE, 3, TRUE, 0, DYN_MULTICHOICE_CB_DIALOGUE)
     callnative(IkigaiCharacter_HandleDialogue)
 }

@@ -45,9 +45,9 @@ struct DialogueCharacteristics
     const u16 *iconPal;
 };
 
-static const struct DialogueCharacteristics sDialogueCharacteristics[CHARACTERISTIC_COUNT] =
+static const struct DialogueCharacteristics sDialogueCharacteristics[ATTITUDE_COUNT] =
 {
-    [CHARACTERISTIC_NEUTRAL] =
+    [ATTITUDE_NEUTRAL] =
     {
         .name = COMPOUND_STRING("Neutral"),
         .kindnessEffect = 0,
@@ -55,7 +55,7 @@ static const struct DialogueCharacteristics sDialogueCharacteristics[CHARACTERIS
         .iconImage = sCharacteristicIcon_Neutral,
         .iconPal = sCharacteristicPal_Neutral
     },
-    [CHARACTERISTIC_INSPIRED] =
+    [ATTITUDE_INSPIRED] =
     {
         .name = COMPOUND_STRING("Inspired"),
         .kindnessEffect = 1,
@@ -63,7 +63,7 @@ static const struct DialogueCharacteristics sDialogueCharacteristics[CHARACTERIS
         .iconImage = sCharacteristicIcon_Inspired,
         .iconPal = sCharacteristicPal_Inspired
     },
-    [CHARACTERISTIC_HUMBLE] =
+    [ATTITUDE_HUMBLE] =
     {
         .name = COMPOUND_STRING("Humble"),
         .kindnessEffect = 1,
@@ -71,7 +71,7 @@ static const struct DialogueCharacteristics sDialogueCharacteristics[CHARACTERIS
         .iconImage = sCharacteristicIcon_Humble,
         .iconPal = sCharacteristicPal_Humble
     },
-    [CHARACTERISTIC_DOMINANT] =
+    [ATTITUDE_DOMINANT] =
     {
         .name = COMPOUND_STRING("Dominant"),
         .kindnessEffect = -1,
@@ -79,7 +79,7 @@ static const struct DialogueCharacteristics sDialogueCharacteristics[CHARACTERIS
         .iconImage = sCharacteristicIcon_Dominant,
         .iconPal = sCharacteristicPal_Dominant
     },
-    [CHARACTERISTIC_CYNICAL] =
+    [ATTITUDE_CYNICAL] =
     {
         .name = COMPOUND_STRING("Cynical"),
         .kindnessEffect = -1,
@@ -93,7 +93,7 @@ u8 ReturnCharacterFromObjectGraphicsId(u16 graphicsId)
 {
     u8 i;
 
-    for (i = 0; i < CHARACTER_COUNT; i++)
+    for (i = 0; i < MAIN_CHARACTER_COUNT; i++)
     {
         if (graphicsId == gIkigaiCharactersInfo[i].overworldGraphicsId)
             return i;
@@ -107,7 +107,7 @@ s8 GetSetConversedFlag(u8 character, bool8 setFlag)
     u32 index, bit, mask;
     s8 retVal = 0;
 
-    if (character >= CHARACTER_COUNT)
+    if (character >= MAIN_CHARACTER_COUNT)
         return retVal;
 
     index = character / 8;
@@ -135,7 +135,7 @@ void IkigaiCharacter_HandleDialogue(void)
         return;
 
     if (gSpecialVar_Result >= NELEMS(sDialogueCharacteristics))
-        gSpecialVar_Result = CHARACTERISTIC_NEUTRAL;
+        gSpecialVar_Result = ATTITUDE_NEUTRAL;
 
     if (GetSetConversedFlag(character, FALSE))
     {
@@ -171,7 +171,7 @@ u8 CreateDialogueIconSprite(u8 characteristicIndex)
     struct SpritePalette pal = { .tag = TAG_CHARACTER_DIALOGUE_ICON };
     struct SpriteTemplate *spriteTemplate;
 
-    if (characteristicIndex >= CHARACTERISTIC_COUNT)
+    if (characteristicIndex >= ATTITUDE_COUNT)
         return SPRITE_NONE;
 
     sheet.data = sDialogueCharacteristics[characteristicIndex].iconImage;

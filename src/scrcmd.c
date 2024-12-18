@@ -1523,23 +1523,23 @@ bool8 ScrCmd_dialoguemultipush(struct ScriptContext *ctx)
 
         switch (characteristic)
         {
-            case CHARACTERISTIC_INSPIRED:
+            case ATTITUDE_INSPIRED:
                 StringCopy(nameListItem, COMPOUND_STRING("{COLOR BLUE}{FONT_GET_NARROW}"));
                 break;
 
-            case CHARACTERISTIC_HUMBLE:
+            case ATTITUDE_HUMBLE:
                 StringCopy(nameListItem, COMPOUND_STRING("{COLOR GREEN}{FONT_GET_NARROW}"));
                 break;
 
-            case CHARACTERISTIC_DOMINANT:
+            case ATTITUDE_DOMINANT:
                 StringCopy(nameListItem, COMPOUND_STRING("{COLOR RED}{FONT_GET_NARROW}"));
                 break;
 
-            case CHARACTERISTIC_CYNICAL:
+            case ATTITUDE_CYNICAL:
                 StringCopy(nameListItem, COMPOUND_STRING("{COLOR LIGHT_BLUE}{FONT_GET_NARROW}"));
                 break;
 
-            case CHARACTERISTIC_NEUTRAL:
+            case ATTITUDE_NEUTRAL:
             default:
                 StringCopy(nameListItem, COMPOUND_STRING("{FONT_GET_NARROW}"));
                 break;

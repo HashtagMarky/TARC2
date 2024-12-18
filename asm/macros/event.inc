@@ -2571,16 +2571,16 @@
 	@ Create a multichoice window for player dialogue options.
 	.macro dialoguechoice inspiring, humble, dominant, cynical
 	.ifnb \inspiring
-		dialoguemultipush CHARACTERISTIC_INSPIRED, \inspiring
+		dialoguemultipush ATTITUDE_INSPIRED, \inspiring
 	.endif
 	.ifnb \humble
-		dialoguemultipush CHARACTERISTIC_HUMBLE, \humble
+		dialoguemultipush ATTITUDE_HUMBLE, \humble
 	.endif
 	.ifnb \dominant
-		dialoguemultipush CHARACTERISTIC_DOMINANT, \dominant
+		dialoguemultipush ATTITUDE_DOMINANT, \dominant
 	.endif
 	.ifnb \cynical
-		dialoguemultipush CHARACTERISTIC_CYNICAL, \cynical
+		dialoguemultipush ATTITUDE_CYNICAL, \cynical
 	.endif
 	_dynmultichoice 0, 0, TRUE, 2, TRUE, -1, DYN_MULTICHOICE_CB_DIALOGUE, NULL
 	.endm

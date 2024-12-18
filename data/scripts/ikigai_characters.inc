@@ -48,15 +48,15 @@ IkigaiCharacterBox_Talk::
 # 32 "data//scripts/ikigai_characters.pory"
 	mnmbox IkigaiCharacterBox_Talk_Text_0
 # 33 "data//scripts/ikigai_characters.pory"
-	dynmultipush IkigaiCharacterBox_Talk_Text_1, CHARACTERISTIC_NEUTRAL
+	dynmultipush IkigaiCharacterBox_Talk_Text_1, ATTITUDE_NEUTRAL
 # 34 "data//scripts/ikigai_characters.pory"
-	dynmultipush IkigaiCharacterBox_Talk_Text_2, CHARACTERISTIC_INSPIRED
+	dynmultipush IkigaiCharacterBox_Talk_Text_2, ATTITUDE_INSPIRED
 # 35 "data//scripts/ikigai_characters.pory"
-	dynmultipush IkigaiCharacterBox_Talk_Text_3, CHARACTERISTIC_HUMBLE
+	dynmultipush IkigaiCharacterBox_Talk_Text_3, ATTITUDE_HUMBLE
 # 36 "data//scripts/ikigai_characters.pory"
-	dynmultipush IkigaiCharacterBox_Talk_Text_4, CHARACTERISTIC_DOMINANT
+	dynmultipush IkigaiCharacterBox_Talk_Text_4, ATTITUDE_DOMINANT
 # 37 "data//scripts/ikigai_characters.pory"
-	dynmultipush IkigaiCharacterBox_Talk_Text_5, CHARACTERISTIC_CYNICAL
+	dynmultipush IkigaiCharacterBox_Talk_Text_5, ATTITUDE_CYNICAL
 # 38 "data//scripts/ikigai_characters.pory"
 	dynmultistack 0, 0, FALSE, 3, TRUE, 0, DYN_MULTICHOICE_CB_DIALOGUE
 # 39 "data//scripts/ikigai_characters.pory"

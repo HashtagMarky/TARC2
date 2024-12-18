@@ -211,9 +211,9 @@ struct Time
 #include "constants/ikigai_characters.h"
 struct IkigaiCharacterData
 {
-    s8 opinionKindness[CHARACTER_COUNT];
-    s8 opinionStrength[CHARACTER_COUNT];
-    u8 conversed[ROUND_BITS_TO_BYTES(CHARACTER_COUNT)];
+    s8 opinionKindness[MAIN_CHARACTER_COUNT];
+    s8 opinionStrength[MAIN_CHARACTER_COUNT];
+    u8 conversed[ROUND_BITS_TO_BYTES(MAIN_CHARACTER_COUNT)];
 };
 
 #include "constants/items.h"
