@@ -93,7 +93,7 @@ u8 ReturnCharacterFromObjectGraphicsId(u16 graphicsId)
 {
     u8 i;
 
-    for (i = 0; i < MAIN_CHARACTER_COUNT; i++)
+    for (i = 0; i < CHARACTER_COUNT_TOTAL; i++)
     {
         if (graphicsId == gIkigaiCharactersInfo[i].overworldGraphicsId)
             return i;
@@ -131,7 +131,7 @@ void IkigaiCharacter_HandleDialogue(void)
 {
     u8 character = ReturnCharacterFromObjectGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
 
-    if (character == CHARACTER_DEFAULT)
+    if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)
         return;
 
     if (gSpecialVar_Result >= NELEMS(sDialogueCharacteristics))

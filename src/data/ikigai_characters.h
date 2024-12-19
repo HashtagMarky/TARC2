@@ -49,4 +49,13 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_CAPTAIN,
     },
+
+    [SIDE_CHARACTER_N] =
+    {
+        .name = _("N"),
+        .partnerPokemon = SPECIES_ZOROARK,
+        .personality = ATTITUDE_HUMBLE,
+
+        .overworldGraphicsId = OBJ_EVENT_GFX_N,
+    }
 };
