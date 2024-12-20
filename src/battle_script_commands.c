@@ -8179,6 +8179,9 @@ static void Cmd_hitanimation(void)
              || !(DoesSubstituteBlockMove(gBattlerAttacker, battler, gCurrentMove))
              || gDisableStructs[battler].substituteHP == 0)
             {
+                if (gSaveBlock2Ptr->optionsDamageNumbers == 1)
+			        ShowDamageNumbers(battler);
+                
                 BtlController_EmitHitAnimation(battler, BUFFER_A);
                 MarkBattlerForControllerExec(battler);
             }
@@ -8198,7 +8201,7 @@ static void Cmd_hitanimation(void)
              || gDisableStructs[battlerDef].substituteHP == 0)
             {
                 if (gSaveBlock2Ptr->optionsDamageNumbers == 1)
-			        ShowDamageNumbers(battler);
+			        ShowDamageNumbers(battlerDef);
                 
                 BtlController_EmitHitAnimation(battlerDef, BUFFER_A);
                 MarkBattlerForControllerExec(battlerDef);

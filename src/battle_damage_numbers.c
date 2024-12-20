@@ -87,15 +87,15 @@ static void CreateDamageNumberSprite(u32 number, u32 numPrinted, u8 battler, u8 
 
 static u8 GetDamageNumberPalette(void)
 {
-	if (gBattleMoveDamage < 0)
+	if (gBattleStruct->moveDamage[gBattlerTarget] < 0)
 	{
 		return 1; // healing - green
 	}
-	else if (DN_CONFIG_EFFECTIVENESS_PALETTE && gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE)
+	else if (DN_CONFIG_EFFECTIVENESS_PALETTE && gBattleStruct->moveResultFlags[gBattlerTarget] & MOVE_RESULT_SUPER_EFFECTIVE)
 	{
 		return 2; // super effective - orange	
 	}
-	else if (DN_CONFIG_EFFECTIVENESS_PALETTE && gMoveResultFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
+	else if (DN_CONFIG_EFFECTIVENESS_PALETTE && gBattleStruct->moveResultFlags[gBattlerTarget] & MOVE_RESULT_NOT_VERY_EFFECTIVE)
 	{
 		return 3; // not very effective - gray	
 	}
@@ -116,7 +116,7 @@ void ShowDamageNumbers(u8 battler)
 	LoadSpritePalette(&sDamageNumSpritePalette_Normal);
 	palette = GetDamageNumberPalette();
 	
-	damage = (gBattleMoveDamage < 10000) ? gBattleMoveDamage : 9999; // damage is capped at 10,000 anyway so just assume 4 digits
+	damage = (gBattleStruct->moveDamage[gBattlerTarget] < 10000) ? gBattleStruct->moveDamage[gBattlerTarget] : 9999; // damage is capped at 10,000 anyway so just assume 4 digits
 	
 		DebugPrintf("%d", damage);
 	if (damage < 0)
