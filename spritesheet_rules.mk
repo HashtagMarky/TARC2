@@ -1061,9 +1061,6 @@ $(OBJEVENTGFXDIR)/people/captain.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/people/n.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(OBJEVENTGFXDIR)/people/n_animation.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -mwidth 2 -mheight 4
-
 
 
 $(FLDEFFGFXDIR)/arrow.4bpp: %.4bpp: %.png
