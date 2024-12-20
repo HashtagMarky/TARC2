@@ -4397,8 +4397,8 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
         if (JOY_NEW(DPAD_UP))
         {
             gTasks[taskId].tInput += sPowersOfTen[gTasks[taskId].tDigit];
-            if (gTasks[taskId].tInput > 999)
-                gTasks[taskId].tInput = 999;
+            if (gTasks[taskId].tInput > END_MUS)
+                gTasks[taskId].tInput = END_MUS;
         }
         if (JOY_NEW(DPAD_DOWN))
         {
@@ -4419,8 +4419,8 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
 
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
         u32 bgmId = gTasks[taskId].tInput-START_MUS;
-        if (bgmId >= 900) {
-            bgmId = 0;
+        if (bgmId >= END_MUS) {
+            bgmId = MUS_DUMMY;
         }
         StringCopyPadded(gStringVar1, sBGMNames[bgmId], CHAR_SPACE, 35);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
