@@ -223,6 +223,12 @@ static const u8 sMenuText_OldTech[] = _("Old {FONT_NARROWER}Tech.");
 static const u8 sMenuText_GoodTech[] = _("Good {FONT_NARROWER}Tech.");
 static const u8 sMenuText_SuperTech[] = _("Super {FONT_NARROWER}Tech.");
 
+static const u8 sText_Var1CantBeHeldHere[] = _("The {STR_VAR_1} can't be held\nhere.");
+static const u8 sText_DepositHowManyVar1[] = _("Deposit how many\n{STR_VAR_1}?");
+static const u8 sText_DepositedVar2Var1s[] = _("Deposited {STR_VAR_2}\n{STR_VAR_1}.");
+static const u8 sText_NoRoomForItems[] = _("There's no room to\nstore items.");
+static const u8 sText_CantStoreImportantItems[] = _("Important items\ncan't be stored in\nthe PC!");
+
 static const struct BgTemplate sBgTemplates_ItemMenu[] =
 {
     {
@@ -277,23 +283,23 @@ static const struct ListMenuTemplate sItemListMenu =
 };
 
 static const struct MenuAction sItemMenuActions[] = {
-    [ACTION_USE]               = {gMenuText_Use,      {ItemMenu_UseOutOfBattle}},
-    [ACTION_TOSS]              = {gMenuText_Toss,     {ItemMenu_Toss}},
-    [ACTION_REGISTER]          = {gMenuText_Register, {ItemMenu_Register}},
-    [ACTION_GIVE]              = {gMenuText_Give,     {ItemMenu_Give}},
-    [ACTION_CANCEL]            = {gText_Cancel2,      {ItemMenu_Cancel}},
-    [ACTION_BATTLE_USE]        = {gMenuText_Use,      {ItemMenu_UseInBattle}},
-    [ACTION_CHECK]             = {gMenuText_Check,    {ItemMenu_UseOutOfBattle}},
-    [ACTION_WALK]              = {gMenuText_Walk,     {ItemMenu_UseOutOfBattle}},
-    [ACTION_DESELECT]          = {gMenuText_Deselect, {ItemMenu_Register}},
-    [ACTION_CHECK_TAG]         = {gMenuText_CheckTag, {ItemMenu_CheckTag}},
-    [ACTION_CONFIRM]           = {gMenuText_Confirm,  {Task_FadeAndCloseBagMenu}},
-    [ACTION_SHOW]              = {gMenuText_Show,     {ItemMenu_Show}},
-    [ACTION_GIVE_FAVOR_LADY]   = {gMenuText_Give2,    {ItemMenu_GiveFavorLady}},
-    [ACTION_CONFIRM_QUIZ_LADY] = {gMenuText_Confirm,  {ItemMenu_ConfirmQuizLady}},
-    [ACTION_OLD_TECHNIQUE]     = {sMenuText_OldTech,  {ItemMenu_UseOutOfBattle_VariableOldRod}},
-    [ACTION_GOOD_TECHNIQUE]    = {sMenuText_GoodTech, {ItemMenu_UseOutOfBattle_VariableGoodRod}},
-    [ACTION_SUPER_TECHNIQUE]   = {sMenuText_SuperTech,{ItemMenu_UseOutOfBattle_VariableSuperRod}},
+    [ACTION_USE]               = {gMenuText_Use,                {ItemMenu_UseOutOfBattle}},
+    [ACTION_TOSS]              = {gMenuText_Toss,               {ItemMenu_Toss}},
+    [ACTION_REGISTER]          = {gMenuText_Register,           {ItemMenu_Register}},
+    [ACTION_GIVE]              = {gMenuText_Give,               {ItemMenu_Give}},
+    [ACTION_CANCEL]            = {gText_Cancel2,                {ItemMenu_Cancel}},
+    [ACTION_BATTLE_USE]        = {gMenuText_Use,                {ItemMenu_UseInBattle}},
+    [ACTION_CHECK]             = {COMPOUND_STRING("CHECK"),     {ItemMenu_UseOutOfBattle}},
+    [ACTION_WALK]              = {COMPOUND_STRING("WALK"),      {ItemMenu_UseOutOfBattle}},
+    [ACTION_DESELECT]          = {COMPOUND_STRING("DESELECT"),  {ItemMenu_Register}},
+    [ACTION_CHECK_TAG]         = {COMPOUND_STRING("CHECK TAG"), {ItemMenu_CheckTag}},
+    [ACTION_CONFIRM]           = {gMenuText_Confirm,            {Task_FadeAndCloseBagMenu}},
+    [ACTION_SHOW]              = {COMPOUND_STRING("SHOW"),      {ItemMenu_Show}},
+    [ACTION_GIVE_FAVOR_LADY]   = {gMenuText_Give2,              {ItemMenu_GiveFavorLady}},
+    [ACTION_CONFIRM_QUIZ_LADY] = {gMenuText_Confirm,            {ItemMenu_ConfirmQuizLady}},
+    [ACTION_OLD_TECHNIQUE]     = {sMenuText_OldTech,            {ItemMenu_UseOutOfBattle_VariableOldRod}},
+    [ACTION_GOOD_TECHNIQUE]    = {sMenuText_GoodTech,           {ItemMenu_UseOutOfBattle_VariableGoodRod}},
+    [ACTION_SUPER_TECHNIQUE]   = {sMenuText_SuperTech,          {ItemMenu_UseOutOfBattle_VariableSuperRod}},
     [ACTION_DUMMY]             = {gText_EmptyString2, {NULL}}
 };
 
@@ -940,7 +946,7 @@ static void GetItemName(u8 *dest, u16 itemId)
     {
     case TMHM_POCKET:
         end = StringCopy(gStringVar2, GetMoveName(ItemIdToBattleMoveId(itemId)));
-        PrependFontIdToFit(gStringVar2, end, FONT_NARROW, 73);
+        PrependFontIdToFit(gStringVar2, end, FONT_NARROW, 61);
         if (itemId >= ITEM_HM01)
         {
             // Get HM number
@@ -957,7 +963,7 @@ static void GetItemName(u8 *dest, u16 itemId)
     case BERRIES_POCKET:
         ConvertIntToDecimalStringN(gStringVar1, itemId - FIRST_BERRY_INDEX + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
         end = CopyItemName(itemId, gStringVar2);
-        PrependFontIdToFit(gStringVar2, end, FONT_NARROW, 73);
+        PrependFontIdToFit(gStringVar2, end, FONT_NARROW, 61);
         StringExpandPlaceholders(dest, gText_NumberItem_TMBerry);
         break;
     default:
@@ -2087,7 +2093,7 @@ static void Task_ItemContext_GiveToParty(u8 taskId)
     else if (!IsHoldingItemAllowed(gSpecialVar_ItemId))
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
-        StringExpandPlaceholders(gStringVar4, gText_Var1CantBeHeldHere);
+        StringExpandPlaceholders(gStringVar4, sText_Var1CantBeHeldHere);
         DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, HandleErrorMessage);
     }
     else if (gBagPosition.pocket != KEYITEMS_POCKET && !ItemId_GetImportance(gSpecialVar_ItemId))
@@ -2285,7 +2291,7 @@ static void Task_ItemContext_Deposit(u8 taskId)
     {
         u8 *end = CopyItemNameHandlePlural(gSpecialVar_ItemId, gStringVar1, 2);
         WrapFontIdToFit(gStringVar1, end, FONT_NORMAL, WindowWidthPx(WIN_DESCRIPTION) - 10 - 6);
-        StringExpandPlaceholders(gStringVar4, gText_DepositHowManyVar1);
+        StringExpandPlaceholders(gStringVar4, sText_DepositHowManyVar1);
         FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
         BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar4, 3, 1, 0, 0, 0, COLORID_NORMAL);
         AddItemQuantityWindow(ITEMWIN_QUANTITY);
@@ -2325,7 +2331,7 @@ static void TryDepositItem(u8 taskId)
     if (ItemId_GetImportance(gSpecialVar_ItemId))
     {
         // Can't deposit important items
-        BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gText_CantStoreImportantItems, 3, 1, 0, 0, 0, COLORID_NORMAL);
+        BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, sText_CantStoreImportantItems, 3, 1, 0, 0, 0, COLORID_NORMAL);
         gTasks[taskId].func = WaitDepositErrorMessage;
     }
     else if (AddPCItem(gSpecialVar_ItemId, tItemCount) == TRUE)
@@ -2334,14 +2340,14 @@ static void TryDepositItem(u8 taskId)
         u8 *end = CopyItemNameHandlePlural(gSpecialVar_ItemId, gStringVar1, tItemCount);
         WrapFontIdToFit(gStringVar1, end, FONT_NORMAL, WindowWidthPx(WIN_DESCRIPTION) - 10 - 6);
         ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
-        StringExpandPlaceholders(gStringVar4, gText_DepositedVar2Var1s);
+        StringExpandPlaceholders(gStringVar4, sText_DepositedVar2Var1s);
         BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar4, 3, 1, 0, 0, 0, COLORID_NORMAL);
         gTasks[taskId].func = Task_RemoveItemFromBag;
     }
     else
     {
         // No room to deposit
-        BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gText_NoRoomForItems, 3, 1, 0, 0, 0, COLORID_NORMAL);
+        BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, sText_NoRoomForItems, 3, 1, 0, 0, 0, COLORID_NORMAL);
         gTasks[taskId].func = WaitDepositErrorMessage;
     }
 }
