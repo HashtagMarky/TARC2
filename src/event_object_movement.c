@@ -11150,3 +11150,21 @@ bool8 MovementActionFunc_RunSlow_Step1(struct ObjectEvent *objectEvent, struct S
     }
     return FALSE;
 }
+
+bool8 MovementAction_N_Shrug_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    StartSpriteAnimInDirection(objectEvent, sprite, DIR_SOUTH, ANIM_N_SHRUG);
+    return FALSE;
+}
+
+bool8 MovementAction_N_Headshake_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    StartSpriteAnimInDirection(objectEvent, sprite, DIR_SOUTH, ANIM_N_HEADSHAKE);
+    return FALSE;
+}
+
+bool8 MovementAction_N_Pose_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    StartSpriteAnimInDirection(objectEvent, sprite, DIR_SOUTH, ANIM_N_POSE);
+    return FALSE;
+}

@@ -168,6 +168,10 @@
 	create_movement_action emote_double_exclamation_mark, MOVEMENT_ACTION_EMOTE_DOUBLE_EXCL_MARK
 	create_movement_action emote_x, MOVEMENT_ACTION_EMOTE_X
 
+	create_movement_action n_shrug, MOVEMENT_ACTION_N_SHRUG
+	create_movement_action n_headshake, MOVEMENT_ACTION_N_HEADSHAKE
+	create_movement_action n_pose, MOVEMENT_ACTION_N_POSE
+
 	create_movement_action exit_pokeball, MOVEMENT_ACTION_EXIT_POKEBALL
 	create_movement_action enter_pokeball, MOVEMENT_ACTION_ENTER_POKEBALL
 	create_movement_action step_end, MOVEMENT_ACTION_STEP_END
