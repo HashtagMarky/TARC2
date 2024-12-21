@@ -248,7 +248,7 @@ void SetSpeakerName(const u8* name)
 
 void SetSpeakerAuto(u16 graphicsId)
 {
-    u8 character = ReturnCharacterFromObjectGraphicsId(graphicsId);
+    u8 character = ReturnIkigaiCharacter_ObjectEventGraphicsId(graphicsId);
 
     if (graphicsId > OBJ_EVENT_GFX_SPECIES(NONE) && graphicsId < OBJ_EVENT_GFX_SPECIES(EGG))
     {

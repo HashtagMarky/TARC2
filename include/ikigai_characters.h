@@ -75,9 +75,9 @@ struct InventoryItem
 
 extern const struct IkigaiCharacterInfo gIkigaiCharactersInfo[];
 
-u8 ReturnCharacterFromObjectGraphicsId(u16 graphicsId);
-s8 GetSetConversedFlag(u8 character, bool8 setFlag);
-void ClearConversedDailyFlags(void);
+u8 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId);
+s8 IkigaiCharacter_GetSetConversedFlag(u8 character, bool8 setFlag);
+void IkigaiCharacter_ClearConversedFlags(void);
 void IkigaiCharacter_HandleDialogue(void);
 s8 IkigaiCharacter_AverageKindness(void);
 s8 IkigaiCharacter_AverageStrength(void);

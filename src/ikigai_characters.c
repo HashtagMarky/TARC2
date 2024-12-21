@@ -89,7 +89,7 @@ static const struct DialogueCharacteristics sDialogueCharacteristics[ATTITUDE_CO
     },
 };
 
-u8 ReturnCharacterFromObjectGraphicsId(u16 graphicsId)
+u8 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId)
 {
     u8 character;
 
@@ -102,7 +102,7 @@ u8 ReturnCharacterFromObjectGraphicsId(u16 graphicsId)
     return CHARACTER_DEFAULT;
 }
 
-s8 GetSetConversedFlag(u8 character, bool8 setFlag)
+s8 IkigaiCharacter_GetSetConversedFlag(u8 character, bool8 setFlag)
 {
     u32 index, bit, mask;
     s8 retVal = 0;
@@ -122,14 +122,14 @@ s8 GetSetConversedFlag(u8 character, bool8 setFlag)
     return retVal;
 }
 
-void ClearConversedDailyFlags(void)
+void IkigaiCharacter_ClearConversedFlags(void)
 {
     memset(gSaveBlock3Ptr->characters.conversed, 0, sizeof(gSaveBlock3Ptr->characters.conversed));
 }
 
 void IkigaiCharacter_HandleDialogue(void)
 {
-    u8 character = ReturnCharacterFromObjectGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
+    u8 character = ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
 
     if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)
         return;
@@ -137,7 +137,7 @@ void IkigaiCharacter_HandleDialogue(void)
     if (gSpecialVar_Result >= NELEMS(sDialogueCharacteristics))
         gSpecialVar_Result = ATTITUDE_NEUTRAL;
 
-    if (GetSetConversedFlag(character, FALSE))
+    if (IkigaiCharacter_GetSetConversedFlag(character, FALSE))
     {
         s8 opinionKindness = sDialogueCharacteristics[gSpecialVar_Result].kindnessEffect;
         s8 opinionStrength = sDialogueCharacteristics[gSpecialVar_Result].strengthEffect;
@@ -159,11 +159,11 @@ void IkigaiCharacter_HandleDialogue(void)
  
         gSaveBlock3Ptr->characters.opinionKindness[character] += opinionKindness;
         gSaveBlock3Ptr->characters.opinionStrength[character] += opinionStrength;
-        GetSetConversedFlag(character, TRUE);
+        IkigaiCharacter_GetSetConversedFlag(character, TRUE);
     }
 }
 
-s8 IkigaiCharacter_AverageKindness(void)
+s8 IkigaiCharacter_GetAverageKindness(void)
 {
     s32 opinionKindness;
     u8 character;
@@ -177,7 +177,7 @@ s8 IkigaiCharacter_AverageKindness(void)
 
 }
 
-s8 IkigaiCharacter_AverageStrength(void)
+s8 IkigaiCharacter_GetAverageStrength(void)
 {
     s32 opinionStrength;
     u8 character;
