@@ -127,6 +127,41 @@ void IkigaiCharacter_ClearConversedFlags(void)
     memset(gSaveBlock3Ptr->characters.conversed, 0, sizeof(gSaveBlock3Ptr->characters.conversed));
 }
 
+bool8 IkigaiCharacter_ReturnOpinionDecay(character)
+{
+    if (character > CHARACTER_COUNT_TOTAL)
+        return FALSE; 
+
+    if ((Random() % 100) < gIkigaiCharactersInfo[character].opinionDecayChance)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void IkigaiCharacter_CharacterOpinionDecay_NonConverse(void)
+{
+    u8 character;
+
+    for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
+    {
+        if (IkigaiCharacter_ReturnOpinionDecay(character) && IkigaiCharacter_GetSetConversedFlag(character, FALSE))
+        {
+            if (gSaveBlock3Ptr->characters.opinionKindness[character] > ATTITUDE_NEUTRAL_BUFFER)
+                gSaveBlock3Ptr->characters.opinionKindness[character]--;
+            else if (gSaveBlock3Ptr->characters.opinionKindness[character] < ATTITUDE_NEUTRAL_BUFFER)
+                gSaveBlock3Ptr->characters.opinionKindness[character]++;
+        }
+
+        if (IkigaiCharacter_ReturnOpinionDecay(character) && IkigaiCharacter_GetSetConversedFlag(character, FALSE))
+        {
+            if (gSaveBlock3Ptr->characters.opinionStrength[character] > ATTITUDE_NEUTRAL_BUFFER)
+                gSaveBlock3Ptr->characters.opinionStrength[character]--;
+            else if (gSaveBlock3Ptr->characters.opinionStrength[character] < ATTITUDE_NEUTRAL_BUFFER)
+                gSaveBlock3Ptr->characters.opinionStrength[character]++;
+        }
+    }
+}
+
 void IkigaiCharacter_HandleDialogue(void)
 {
     u8 character = ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);

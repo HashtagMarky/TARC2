@@ -40,7 +40,7 @@ struct IkigaiCharacterInfo
     // Friendship & Social Interactions
     s8 baseOpinionKindness;
     s8 baseOpinionStrength;
-    u8 friendshipDecayRate;
+    u8 opinionDecayChance;    // Percentage chance of an opinion decaying
     // char** likes;          // Array of items, locations, or weather preferences
     // char** dislikes;       // Array of items, locations, or weather dislikes
     // char** uniqueDialogue; // Unique dialogue lines for the character
@@ -78,6 +78,8 @@ extern const struct IkigaiCharacterInfo gIkigaiCharactersInfo[];
 u8 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId);
 s8 IkigaiCharacter_GetSetConversedFlag(u8 character, bool8 setFlag);
 void IkigaiCharacter_ClearConversedFlags(void);
+bool8 IkigaiCharacter_ReturnOpinionDecay(character);
+void IkigaiCharacter_CharacterOpinionDecay_NonConverse(void);
 void IkigaiCharacter_HandleDialogue(void);
 s8 IkigaiCharacter_AverageKindness(void);
 s8 IkigaiCharacter_AverageStrength(void);
