@@ -38,8 +38,8 @@ struct IkigaiCharacterInfo
     u16 homeMapId;
 
     // Friendship & Social Interactions
-    u8 baseFriendship;
-    u8 friendshipGrowthRate;
+    s8 baseOpinionKindness;
+    s8 baseOpinionStrength;
     u8 friendshipDecayRate;
     // char** likes;          // Array of items, locations, or weather preferences
     // char** dislikes;       // Array of items, locations, or weather dislikes
