@@ -89,17 +89,77 @@ static const struct DialogueCharacteristics sDialogueCharacteristics[ATTITUDE_CO
     },
 };
 
-u8 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId)
+u8 IkigaiCharacter_GetPlayerAttitude(void)
+{
+    s8 opinionKindness = IkigaiCharacter_GetAverageKindness();
+    s8 opinionStrength = IkigaiCharacter_GetAverageStrength();
+
+    if (opinionKindness > ATTITUDE_NEUTRAL_BUFFER)
+    {
+        if (opinionStrength > ATTITUDE_NEUTRAL_BUFFER)
+            return ATTITUDE_INSPIRED;
+
+        if (opinionStrength < - ATTITUDE_NEUTRAL_BUFFER)
+            return ATTITUDE_HUMBLE;
+    }
+
+    if (opinionKindness < - ATTITUDE_NEUTRAL_BUFFER)
+    {
+        if (opinionStrength > ATTITUDE_NEUTRAL_BUFFER)
+            return ATTITUDE_DOMINANT;
+
+        if (opinionStrength < - ATTITUDE_NEUTRAL_BUFFER)
+            return ATTITUDE_CYNICAL;
+    }
+
+    return ATTITUDE_NEUTRAL;
+}
+
+void IkigaiCharacter_SetDefaultOpinion(character)
+{
+    if (character > MAIN_CHARACTER_COUNT)
+        return;
+    
+    gSaveBlock3Ptr->characters.opinionKindness[character] = gIkigaiCharactersInfo[character].baseOpinionKindness;
+    gSaveBlock3Ptr->characters.opinionStrength[character] = gIkigaiCharactersInfo[character].baseOpinionStrength;
+}
+
+void IkigaiCharacter_SetAllCharacterDefaultOpinion(void)
 {
     u8 character;
 
-    for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
+    for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
     {
-        if (graphicsId == gIkigaiCharactersInfo[character].overworldGraphicsId)
-            return character;
+        IkigaiCharacter_SetDefaultOpinion(character);
+    }
+}
+
+s8 IkigaiCharacter_GetAverageKindness(void)
+{
+    s32 opinionKindness;
+    u8 character;
+
+    for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
+    {
+        opinionKindness += gSaveBlock3Ptr->characters.opinionKindness[character];
     }
 
-    return CHARACTER_DEFAULT;
+    return (opinionKindness / MAIN_CHARACTER_COUNT);
+
+}
+
+s8 IkigaiCharacter_GetAverageStrength(void)
+{
+    s32 opinionStrength;
+    u8 character;
+
+    for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
+    {
+        opinionStrength += gSaveBlock3Ptr->characters.opinionStrength[character];
+    }
+
+    return (opinionStrength / MAIN_CHARACTER_COUNT);
+
 }
 
 s8 IkigaiCharacter_GetSetConversedFlag(u8 character, bool8 setFlag)
@@ -162,25 +222,6 @@ void IkigaiCharacter_CharacterOpinionDecay_NonConverse(void)
     }
 }
 
-void IkigaiCharacter_SetDefaultOpinion(character)
-{
-    if (character > MAIN_CHARACTER_COUNT)
-        return;
-    
-    gSaveBlock3Ptr->characters.opinionKindness[character] = gIkigaiCharactersInfo[character].baseOpinionKindness;
-    gSaveBlock3Ptr->characters.opinionStrength[character] = gIkigaiCharactersInfo[character].baseOpinionStrength;
-}
-
-void IkigaiCharacter_SetAllCharacterDefaultOpinion(void)
-{
-    u8 character;
-
-    for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
-    {
-        IkigaiCharacter_SetDefaultOpinion(character);
-    }
-}
-
 void IkigaiCharacter_HandleDialogue(void)
 {
     u8 character = ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
@@ -217,58 +258,17 @@ void IkigaiCharacter_HandleDialogue(void)
     }
 }
 
-s8 IkigaiCharacter_GetAverageKindness(void)
+u8 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId)
 {
-    s32 opinionKindness;
     u8 character;
 
-    for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
+    for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
     {
-        opinionKindness += gSaveBlock3Ptr->characters.opinionKindness[character];
+        if (graphicsId == gIkigaiCharactersInfo[character].overworldGraphicsId)
+            return character;
     }
 
-    return (opinionKindness / MAIN_CHARACTER_COUNT);
-
-}
-
-s8 IkigaiCharacter_GetAverageStrength(void)
-{
-    s32 opinionStrength;
-    u8 character;
-
-    for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
-    {
-        opinionStrength += gSaveBlock3Ptr->characters.opinionStrength[character];
-    }
-
-    return (opinionStrength / MAIN_CHARACTER_COUNT);
-
-}
-
-u8 IkigaiCharacter_GetPlayerAttitude(void)
-{
-    s8 opinionKindness = IkigaiCharacter_GetAverageKindness();
-    s8 opinionStrength = IkigaiCharacter_GetAverageStrength();
-
-    if (opinionKindness > ATTITUDE_NEUTRAL_BUFFER)
-    {
-        if (opinionStrength > ATTITUDE_NEUTRAL_BUFFER)
-            return ATTITUDE_INSPIRED;
-
-        if (opinionStrength < - ATTITUDE_NEUTRAL_BUFFER)
-            return ATTITUDE_HUMBLE;
-    }
-
-    if (opinionKindness < - ATTITUDE_NEUTRAL_BUFFER)
-    {
-        if (opinionStrength > ATTITUDE_NEUTRAL_BUFFER)
-            return ATTITUDE_DOMINANT;
-
-        if (opinionStrength < - ATTITUDE_NEUTRAL_BUFFER)
-            return ATTITUDE_CYNICAL;
-    }
-
-    return ATTITUDE_NEUTRAL;
+    return CHARACTER_DEFAULT;
 }
 
 u8 CreateDialogueIconSprite(u8 characteristicIndex)
