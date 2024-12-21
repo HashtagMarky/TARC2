@@ -162,6 +162,25 @@ void IkigaiCharacter_CharacterOpinionDecay_NonConverse(void)
     }
 }
 
+void IkigaiCharacter_SetDefaultOpinion(character)
+{
+    if (character > MAIN_CHARACTER_COUNT)
+        return;
+    
+    gSaveBlock3Ptr->characters.opinionKindness[character] = gIkigaiCharactersInfo[character].baseOpinionKindness;
+    gSaveBlock3Ptr->characters.opinionStrength[character] = gIkigaiCharactersInfo[character].baseOpinionStrength;
+}
+
+void IkigaiCharacter_SetAllCharacterDefaultOpinion(void)
+{
+    u8 character;
+
+    for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
+    {
+        IkigaiCharacter_SetDefaultOpinion(character);
+    }
+}
+
 void IkigaiCharacter_HandleDialogue(void)
 {
     u8 character = ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
