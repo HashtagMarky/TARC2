@@ -204,7 +204,7 @@ void IkigaiCharacter_CharacterOpinionDecay_NonConverse(void)
 
     for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
     {
-        if (IkigaiCharacter_ReturnOpinionDecay(character) && IkigaiCharacter_GetSetConversedFlag(character, FALSE))
+        if (IkigaiCharacter_ReturnOpinionDecay(character) && !IkigaiCharacter_GetSetConversedFlag(character, FALSE))
         {
             if (gSaveBlock3Ptr->characters.opinionKindness[character] > ATTITUDE_NEUTRAL_BUFFER)
                 gSaveBlock3Ptr->characters.opinionKindness[character]--;
@@ -212,7 +212,7 @@ void IkigaiCharacter_CharacterOpinionDecay_NonConverse(void)
                 gSaveBlock3Ptr->characters.opinionKindness[character]++;
         }
 
-        if (IkigaiCharacter_ReturnOpinionDecay(character) && IkigaiCharacter_GetSetConversedFlag(character, FALSE))
+        if (IkigaiCharacter_ReturnOpinionDecay(character) && !IkigaiCharacter_GetSetConversedFlag(character, FALSE))
         {
             if (gSaveBlock3Ptr->characters.opinionStrength[character] > ATTITUDE_NEUTRAL_BUFFER)
                 gSaveBlock3Ptr->characters.opinionStrength[character]--;
@@ -232,7 +232,7 @@ void IkigaiCharacter_HandleDialogue(void)
     if (gSpecialVar_Result >= NELEMS(sDialogueCharacteristics))
         gSpecialVar_Result = ATTITUDE_NEUTRAL;
 
-    if (IkigaiCharacter_GetSetConversedFlag(character, FALSE))
+    if (!IkigaiCharacter_GetSetConversedFlag(character, FALSE))
     {
         s8 opinionKindness = sDialogueCharacteristics[gSpecialVar_Result].kindnessEffect;
         s8 opinionStrength = sDialogueCharacteristics[gSpecialVar_Result].strengthEffect;
