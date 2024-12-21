@@ -2106,7 +2106,7 @@
 	.endm
 
 	@ Buffers the given text and calls the relevant message, name and mugshot script (see gStdScripts).
-	.macro mnmbox text:req, PMD=FALSE, mugshotEmotion=EMOTE_NORMAL, nameKnown=TRUE, localId, waitbuttonpress, remain
+	.macro mnmbox text:req, PMD=FALSE, mugshotEmotion=EMOTE_NORMAL, nameKnown=TRUE, localId, waitbuttonpress=TRUE, remain=FALSE
 	lock
 	.ifnb \localId
 		setselectedobjectevent \localId
@@ -2129,14 +2129,14 @@
 	.endif
 	message \text
 	waitmessage
-	.ifb \waitbuttonpress
+	.if \waitbuttonpress == TRUE
 		waitbuttonpress
 	.endif
-	waitmoncry
 	.if \PMD == TRUE
+		waitmoncry
 		call EventScript_DisplayPokedexHeader
 	.endif
-	.ifb \remain
+	.if \remain == FALSE
 		release
 	.endif
 	.endm
