@@ -91,12 +91,12 @@ static const struct DialogueCharacteristics sDialogueCharacteristics[ATTITUDE_CO
 
 u8 ReturnCharacterFromObjectGraphicsId(u16 graphicsId)
 {
-    u8 i;
+    u8 character;
 
-    for (i = 0; i < CHARACTER_COUNT_TOTAL; i++)
+    for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
     {
-        if (graphicsId == gIkigaiCharactersInfo[i].overworldGraphicsId)
-            return i;
+        if (graphicsId == gIkigaiCharactersInfo[character].overworldGraphicsId)
+            return character;
     }
 
     return CHARACTER_DEFAULT;
@@ -161,6 +161,34 @@ void IkigaiCharacter_HandleDialogue(void)
         gSaveBlock3Ptr->characters.opinionStrength[character] += opinionStrength;
         GetSetConversedFlag(character, TRUE);
     }
+}
+
+s8 IkigaiCharacter_AverageKindness(void)
+{
+    s32 opinionKindness;
+    u8 character;
+
+    for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
+    {
+        opinionKindness += gSaveBlock3Ptr->characters.opinionKindness[character];
+    }
+
+    return (opinionKindness / MAIN_CHARACTER_COUNT);
+
+}
+
+s8 IkigaiCharacter_AverageStrength(void)
+{
+    s32 opinionStrength;
+    u8 character;
+
+    for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
+    {
+        opinionStrength += gSaveBlock3Ptr->characters.opinionStrength[character];
+    }
+
+    return (opinionStrength / MAIN_CHARACTER_COUNT);
+
 }
 
 u8 CreateDialogueIconSprite(u8 characteristicIndex)

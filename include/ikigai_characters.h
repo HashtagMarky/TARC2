@@ -79,6 +79,8 @@ u8 ReturnCharacterFromObjectGraphicsId(u16 graphicsId);
 s8 GetSetConversedFlag(u8 character, bool8 setFlag);
 void ClearConversedDailyFlags(void);
 void IkigaiCharacter_HandleDialogue(void);
+s8 IkigaiCharacter_AverageKindness(void);
+s8 IkigaiCharacter_AverageStrength(void);
 u8 CreateDialogueIconSprite(u8 characteristicIndex);
 
 #endif // GUARD_IKIGAI_CHARACTERS_H
