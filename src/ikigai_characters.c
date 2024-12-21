@@ -9,6 +9,7 @@
 #include "decompress.h"
 #include "field_weather.h"
 #include "random.h"
+#include "script_menu.h"
 
 static const u32 sCharacteristicIcon_Neutral[] = INCBIN_U32("graphics/dialogue_icons/neutral.4bpp.lz");
 static const u16 sCharacteristicPal_Neutral[] = INCBIN_U16("graphics/dialogue_icons/neutral.gbapal");
@@ -198,27 +199,33 @@ bool8 IkigaiCharacter_ReturnOpinionDecay(u8 character)
         return FALSE;
 }
 
-void IkigaiCharacter_CharacterOpinionDecay_NonConverse(void)
+void IkigaiCharacter_OpinionDecay(u8 character)
+{
+    if (IkigaiCharacter_ReturnOpinionDecay(character))
+    {
+        if (gSaveBlock3Ptr->characters.opinionKindness[character] > ATTITUDE_NEUTRAL_BUFFER)
+            gSaveBlock3Ptr->characters.opinionKindness[character]--;
+        else if (gSaveBlock3Ptr->characters.opinionKindness[character] < ATTITUDE_NEUTRAL_BUFFER)
+            gSaveBlock3Ptr->characters.opinionKindness[character]++;
+    }
+
+    if (IkigaiCharacter_ReturnOpinionDecay(character))
+    {
+        if (gSaveBlock3Ptr->characters.opinionStrength[character] > ATTITUDE_NEUTRAL_BUFFER)
+            gSaveBlock3Ptr->characters.opinionStrength[character]--;
+        else if (gSaveBlock3Ptr->characters.opinionStrength[character] < ATTITUDE_NEUTRAL_BUFFER)
+            gSaveBlock3Ptr->characters.opinionStrength[character]++;
+    }
+}
+
+void IkigaiCharacter_AllOpinionDecay_NonConverse(void)
 {
     u8 character;
 
     for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
     {
-        if (IkigaiCharacter_ReturnOpinionDecay(character) && !IkigaiCharacter_GetSetConversedFlag(character, FALSE))
-        {
-            if (gSaveBlock3Ptr->characters.opinionKindness[character] > ATTITUDE_NEUTRAL_BUFFER)
-                gSaveBlock3Ptr->characters.opinionKindness[character]--;
-            else if (gSaveBlock3Ptr->characters.opinionKindness[character] < ATTITUDE_NEUTRAL_BUFFER)
-                gSaveBlock3Ptr->characters.opinionKindness[character]++;
-        }
-
-        if (IkigaiCharacter_ReturnOpinionDecay(character) && !IkigaiCharacter_GetSetConversedFlag(character, FALSE))
-        {
-            if (gSaveBlock3Ptr->characters.opinionStrength[character] > ATTITUDE_NEUTRAL_BUFFER)
-                gSaveBlock3Ptr->characters.opinionStrength[character]--;
-            else if (gSaveBlock3Ptr->characters.opinionStrength[character] < ATTITUDE_NEUTRAL_BUFFER)
-                gSaveBlock3Ptr->characters.opinionStrength[character]++;
-        }
+        if (!IkigaiCharacter_GetSetConversedFlag(character, FALSE))
+            IkigaiCharacter_OpinionDecay(character);
     }
 }
 
