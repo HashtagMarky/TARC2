@@ -236,6 +236,12 @@ void IkigaiCharacter_HandleDialogue(void)
     if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)
         return;
 
+    if (gSpecialVar_Result == MULTI_B_PRESSED && !IkigaiCharacter_GetSetConversedFlag(character, FALSE))
+    {
+        IkigaiCharacter_OpinionDecay(character);
+        return;
+    }
+
     if (gSpecialVar_Result >= NELEMS(sDialogueCharacteristics))
         gSpecialVar_Result = ATTITUDE_NEUTRAL;
 

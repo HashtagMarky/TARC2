@@ -2569,7 +2569,7 @@
     .endm
 
 	@ Create a multichoice window for player dialogue options.
-	.macro dialoguechoice inspiring, humble, dominant, cynical
+	.macro dialoguechoice inspiring, humble, dominant, cynical, bPress=TRUE
 	.ifnb \inspiring
 		dialoguemultipush ATTITUDE_INSPIRED, \inspiring
 	.endif
@@ -2582,7 +2582,7 @@
 	.ifnb \cynical
 		dialoguemultipush ATTITUDE_CYNICAL, \cynical
 	.endif
-	_dynmultichoice 0, 0, TRUE, 2, TRUE, -1, DYN_MULTICHOICE_CB_DIALOGUE, NULL
+	_dynmultichoice 0, 0, \bPress, 2, TRUE, -1, DYN_MULTICHOICE_CB_DIALOGUE, NULL
 	.endm
 
 	@ Create the Character Dialogue Box with a Character.
