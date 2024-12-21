@@ -1,6 +1,6 @@
 IkigaiCharacterBox_InitialDialogue::
 # 3 "data//scripts/ikigai_characters.pory"
-	mnmbox IkigaiCharacterBox_InitialDialogue_Text_0, remain = TRUE
+	mnmbox IkigaiCharacterBox_InitialDialogue_Text_0, waitbuttonpress = FALSE, remain = TRUE
 # 4 "data//scripts/ikigai_characters.pory"
 	dynmultipush IkigaiCharacterBox_InitialDialogue_Text_1, DIALOGUE_OPTION_TALK
 # 5 "data//scripts/ikigai_characters.pory"
@@ -46,7 +46,7 @@ IkigaiCharacterBox_Goodbye::
 
 IkigaiCharacterBox_Talk::
 # 32 "data//scripts/ikigai_characters.pory"
-	mnmbox IkigaiCharacterBox_Talk_Text_0, remain = TRUE
+	mnmbox IkigaiCharacterBox_Talk_Text_0, waitbuttonpress = FALSE, remain = TRUE
 # 33 "data//scripts/ikigai_characters.pory"
 	dialoguemultipush ATTITUDE_NEUTRAL, IkigaiCharacterBox_Talk_Text_1
 # 35 "data//scripts/ikigai_characters.pory"
@@ -54,6 +54,8 @@ IkigaiCharacterBox_Talk::
 # 36 "data//scripts/ikigai_characters.pory"
 	callnative IkigaiCharacter_HandleDialogue
 # 37 "data//scripts/ikigai_characters.pory"
+	emote OBJ_EVENT_ID_PLAYER, EMOTE_TALK
+# 38 "data//scripts/ikigai_characters.pory"
 	releaseall
 	return
 

@@ -1,6 +1,6 @@
 script IkigaiCharacterBox_InitialDialogue
 {
-    mnmbox("Hello there, {PLAYER}.", remain=TRUE)
+    mnmbox("Hello there, {PLAYER}.", waitbuttonpress=FALSE, remain=TRUE)
     dynmultipush("Talk", DIALOGUE_OPTION_TALK)
     dynmultipush("Quests", DIALOGUE_OPTION_QUESTS)
     dynmultipush("Battle", DIALOGUE_OPTION_BATTLE)
@@ -29,10 +29,11 @@ script IkigaiCharacterBox_Goodbye
 
 script IkigaiCharacterBox_Talk
 {
-    mnmbox("What response will you\ngive to me?" waitbuttonpress=TRUE, remain=TRUE)
+    mnmbox("What response will you\ngive to me?", waitbuttonpress=FALSE, remain=TRUE)
     dialoguemultipush(ATTITUDE_NEUTRAL,
         "Neutral")
     dialoguechoice("Inspiring", "Humble", "Dominant", "Cynical")
     callnative(IkigaiCharacter_HandleDialogue)
+    emote(OBJ_EVENT_ID_PLAYER, EMOTE_TALK)
     releaseall
 }
