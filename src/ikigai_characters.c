@@ -115,7 +115,7 @@ u8 IkigaiCharacter_GetPlayerAttitude(void)
     return ATTITUDE_NEUTRAL;
 }
 
-void IkigaiCharacter_SetDefaultOpinion(character)
+void IkigaiCharacter_SetDefaultOpinion(u8 character)
 {
     if (character > MAIN_CHARACTER_COUNT)
         return;
@@ -136,7 +136,7 @@ void IkigaiCharacter_SetAllCharacterDefaultOpinion(void)
 
 s8 IkigaiCharacter_GetAverageKindness(void)
 {
-    s32 opinionKindness;
+    s32 opinionKindness = 0;
     u8 character;
 
     for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
@@ -150,7 +150,7 @@ s8 IkigaiCharacter_GetAverageKindness(void)
 
 s8 IkigaiCharacter_GetAverageStrength(void)
 {
-    s32 opinionStrength;
+    s32 opinionStrength = 0;
     u8 character;
 
     for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
@@ -187,7 +187,7 @@ void IkigaiCharacter_ClearConversedFlags(void)
     memset(gSaveBlock3Ptr->characters.conversed, 0, sizeof(gSaveBlock3Ptr->characters.conversed));
 }
 
-bool8 IkigaiCharacter_ReturnOpinionDecay(character)
+bool8 IkigaiCharacter_ReturnOpinionDecay(u8 character)
 {
     if (character > CHARACTER_COUNT_TOTAL)
         return FALSE; 
