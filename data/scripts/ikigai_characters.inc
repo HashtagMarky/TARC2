@@ -1,6 +1,6 @@
 IkigaiCharacterBox_InitialDialogue::
 # 3 "data//scripts/ikigai_characters.pory"
-	mnmbox IkigaiCharacterBox_InitialDialogue_Text_0
+	mnmbox IkigaiCharacterBox_InitialDialogue_Text_0, remain = TRUE
 # 4 "data//scripts/ikigai_characters.pory"
 	dynmultipush IkigaiCharacterBox_InitialDialogue_Text_1, DIALOGUE_OPTION_TALK
 # 5 "data//scripts/ikigai_characters.pory"
@@ -46,21 +46,15 @@ IkigaiCharacterBox_Goodbye::
 
 IkigaiCharacterBox_Talk::
 # 32 "data//scripts/ikigai_characters.pory"
-	mnmbox IkigaiCharacterBox_Talk_Text_0
+	mnmbox IkigaiCharacterBox_Talk_Text_0, remain = TRUE
 # 33 "data//scripts/ikigai_characters.pory"
-	dynmultipush IkigaiCharacterBox_Talk_Text_1, ATTITUDE_NEUTRAL
-# 34 "data//scripts/ikigai_characters.pory"
-	dynmultipush IkigaiCharacterBox_Talk_Text_2, ATTITUDE_INSPIRED
+	dialoguemultipush ATTITUDE_NEUTRAL, IkigaiCharacterBox_Talk_Text_1
 # 35 "data//scripts/ikigai_characters.pory"
-	dynmultipush IkigaiCharacterBox_Talk_Text_3, ATTITUDE_HUMBLE
+	dialoguechoice IkigaiCharacterBox_Talk_Text_2, IkigaiCharacterBox_Talk_Text_3, IkigaiCharacterBox_Talk_Text_4, IkigaiCharacterBox_Talk_Text_5
 # 36 "data//scripts/ikigai_characters.pory"
-	dynmultipush IkigaiCharacterBox_Talk_Text_4, ATTITUDE_DOMINANT
-# 37 "data//scripts/ikigai_characters.pory"
-	dynmultipush IkigaiCharacterBox_Talk_Text_5, ATTITUDE_CYNICAL
-# 38 "data//scripts/ikigai_characters.pory"
-	dynmultistack 0, 0, FALSE, 3, TRUE, 0, DYN_MULTICHOICE_CB_DIALOGUE
-# 39 "data//scripts/ikigai_characters.pory"
 	callnative IkigaiCharacter_HandleDialogue
+# 37 "data//scripts/ikigai_characters.pory"
+	releaseall
 	return
 
 
@@ -93,11 +87,11 @@ IkigaiCharacterBox_Talk_Text_0:
 	.string "What response will you\ngive to me?$"
 
 IkigaiCharacterBox_Talk_Text_1:
-# 33 "data//scripts/ikigai_characters.pory"
+# 34 "data//scripts/ikigai_characters.pory"
 	.string "Neutral$"
 
 IkigaiCharacterBox_Talk_Text_2:
-# 34 "data//scripts/ikigai_characters.pory"
+# 35 "data//scripts/ikigai_characters.pory"
 	.string "Inspiring$"
 
 IkigaiCharacterBox_Talk_Text_3:
@@ -105,9 +99,9 @@ IkigaiCharacterBox_Talk_Text_3:
 	.string "Humble$"
 
 IkigaiCharacterBox_Talk_Text_4:
-# 36 "data//scripts/ikigai_characters.pory"
-	.string "Dominating$"
+# 35 "data//scripts/ikigai_characters.pory"
+	.string "Dominant$"
 
 IkigaiCharacterBox_Talk_Text_5:
-# 37 "data//scripts/ikigai_characters.pory"
+# 35 "data//scripts/ikigai_characters.pory"
 	.string "Cynical$"
