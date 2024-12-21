@@ -16,6 +16,7 @@ enum AttitudeId
     ATTITUDE_DOMINANT,
     ATTITUDE_CYNICAL,
     ATTITUDE_COUNT,
+    ATTITUDE_NEUTRAL_BUFFER = 20,
 };
 
 enum CharacterId

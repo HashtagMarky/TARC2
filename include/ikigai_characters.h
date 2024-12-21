@@ -81,6 +81,7 @@ void IkigaiCharacter_ClearConversedFlags(void);
 void IkigaiCharacter_HandleDialogue(void);
 s8 IkigaiCharacter_AverageKindness(void);
 s8 IkigaiCharacter_AverageStrength(void);
+u8 IkigaiCharacter_GetPlayerAttitude(void);
 u8 CreateDialogueIconSprite(u8 characteristicIndex);
 
 #endif // GUARD_IKIGAI_CHARACTERS_H

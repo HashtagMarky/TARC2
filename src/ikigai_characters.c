@@ -191,6 +191,32 @@ s8 IkigaiCharacter_GetAverageStrength(void)
 
 }
 
+u8 IkigaiCharacter_GetPlayerAttitude(void)
+{
+    s8 opinionKindness = IkigaiCharacter_GetAverageKindness();
+    s8 opinionStrength = IkigaiCharacter_GetAverageStrength();
+
+    if (opinionKindness > ATTITUDE_NEUTRAL_BUFFER)
+    {
+        if (opinionStrength > ATTITUDE_NEUTRAL_BUFFER)
+            return ATTITUDE_INSPIRED;
+
+        if (opinionStrength < - ATTITUDE_NEUTRAL_BUFFER)
+            return ATTITUDE_HUMBLE;
+    }
+
+    if (opinionKindness < - ATTITUDE_NEUTRAL_BUFFER)
+    {
+        if (opinionStrength > ATTITUDE_NEUTRAL_BUFFER)
+            return ATTITUDE_DOMINANT;
+
+        if (opinionStrength < - ATTITUDE_NEUTRAL_BUFFER)
+            return ATTITUDE_CYNICAL;
+    }
+
+    return ATTITUDE_NEUTRAL;
+}
+
 u8 CreateDialogueIconSprite(u8 characteristicIndex)
 {
     u8 spriteId;
