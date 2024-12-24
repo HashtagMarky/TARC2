@@ -201,6 +201,9 @@ bool8 IkigaiCharacter_ReturnOpinionDecay(u8 character)
 
 void IkigaiCharacter_OpinionDecay(u8 character)
 {
+    if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)
+        return;
+    
     if (IkigaiCharacter_ReturnOpinionDecay(character))
     {
         if (gSaveBlock3Ptr->characters.opinionKindness[character] > ATTITUDE_NEUTRAL_BUFFER)
