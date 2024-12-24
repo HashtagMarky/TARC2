@@ -41,6 +41,7 @@ struct IkigaiCharacterInfo
     s8 baseOpinionKindness;
     s8 baseOpinionStrength;
     u8 opinionDecayChance;    // Percentage chance of an opinion decaying
+    u16 flagRomantic;
     // char** likes;          // Array of items, locations, or weather preferences
     // char** dislikes;       // Array of items, locations, or weather dislikes
     // char** uniqueDialogue; // Unique dialogue lines for the character
@@ -82,6 +83,13 @@ s8 IkigaiCharacter_GetAverageKindness(void);
 s8 IkigaiCharacter_GetAverageStrength(void);
 s8 IkigaiCharacter_GetSetConversedFlag(u8 character, bool8 setFlag);
 void IkigaiCharacter_ClearConversedFlags(void);
+void IkigaiCharacter_SetRomanticFlag(u8 character);
+void IkigaiCharacter_ToggleRomanticFlag(u8 character);
+void IkigaiCharacter_ClearRomanticFlag(u8 character);
+bool8 IkigaiCharacter_GetRomanticFlag(u8 character);
+void IkigaiCharacter_SetRomanticFlag_Exclusive(u8 character);
+void IkigaiCharacter_ClearRomanticFlag_Amicable(u8 character);
+void IkigaiCharacter_ClearRomanticFlag_Hostile(u8 character);
 bool8 IkigaiCharacter_ReturnOpinionDecay(u8 character);
 void IkigaiCharacter_OpinionDecay(u8 character);
 void IkigaiCharacter_AllOpinionDecay_NonConverse(void);

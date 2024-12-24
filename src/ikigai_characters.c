@@ -188,6 +188,51 @@ void IkigaiCharacter_ClearConversedFlags(void)
     memset(gSaveBlock3Ptr->characters.conversed, 0, sizeof(gSaveBlock3Ptr->characters.conversed));
 }
 
+void IkigaiCharacter_SetRomanticFlag(u8 character)
+{
+    FlagSet(gIkigaiCharactersInfo[character].flagRomantic);
+}
+
+void IkigaiCharacter_ToggleRomanticFlag(u8 character)
+{
+    FlagToggle(gIkigaiCharactersInfo[character].flagRomantic);
+}
+
+void IkigaiCharacter_ClearRomanticFlag(u8 character)
+{
+    FlagClear(gIkigaiCharactersInfo[character].flagRomantic);
+}
+
+bool8 IkigaiCharacter_GetRomanticFlag(u8 character)
+{
+    return FlagGet(gIkigaiCharactersInfo[character].flagRomantic);
+}
+
+void IkigaiCharacter_SetRomanticFlag_Exclusive(u8 character)
+{
+    u8 i;
+
+    for (i = CHARACTER_DEFAULT + 1; i < CHARACTER_COUNT_TOTAL; i++)
+    {
+        if (i == character)
+            IkigaiCharacter_SetRomanticFlag(character);
+        else
+            IkigaiCharacter_ClearRomanticFlag(character);
+    }
+}
+
+void IkigaiCharacter_ClearRomanticFlag_Amicable(u8 character)
+{
+    FlagClear(gIkigaiCharactersInfo[character].flagRomantic);
+}
+
+void IkigaiCharacter_ClearRomanticFlag_Hostile(u8 character)
+{
+    FlagClear(gIkigaiCharactersInfo[character].flagRomantic);
+    if (character > CHARACTER_DEFAULT && character < MAIN_CHARACTER_COUNT)
+        gSaveBlock3Ptr->characters.opinionKindness[character] = - ATTITUDE_NEUTRAL_BUFFER;
+}
+
 bool8 IkigaiCharacter_ReturnOpinionDecay(u8 character)
 {
     if (character > CHARACTER_COUNT_TOTAL)
