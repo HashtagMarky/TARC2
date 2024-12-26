@@ -323,6 +323,11 @@ tidycheck:
 tidydebug:
 	rm -rf $(DEBUG_OBJ_DIR_NAME)
 
+boot:
+	@$(MAKE)
+	@if pgrep -x "mGBA" > /dev/null; then pkill -x "mGBA"; fi
+	@/Applications/mGBA.app/Contents/MacOS/mGBA $(ROM) > /dev/null 2>&1 &
+
 # Other rules
 include graphics_file_rules.mk
 include map_data_rules.mk
