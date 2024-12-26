@@ -73,7 +73,7 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase
 {
     if (specialvar(VAR_RESULT, GetPlayerFacingDirection) == DIR_WEST)
     {
-        applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase)
+        applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_GoToBriefcase)
         turnplayer(DIR_NORTH)
     }
     callnative(StartNewPokeballCaseUI)
@@ -82,7 +82,7 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase
     playmoncry(VAR_STARTER_MON, CRY_MODE_NORMAL)
     addobject(LOCALID_Starter)
     applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase, FALSE)
-    applymove(LOCALID_Starter, VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase)
+    applymove(LOCALID_Starter, VyratonIndoors_MayorsOffice_Movement_Starter_ReturnFromBriefcase)
     turnplayer(DIR_NORTH)
 }
 
@@ -208,8 +208,22 @@ movement VyratonIndoors_MayorsOffice_Movement_Player_Entrance
     face_up
 }
 
+movement VyratonIndoors_MayorsOffice_Movement_Player_GoToBriefcase
+{
+    walk_down
+    walk_left
+}
+
 movement VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase
 {
+    delay_16
+    walk_down
+    walk_left
+}
+
+movement VyratonIndoors_MayorsOffice_Movement_Starter_ReturnFromBriefcase
+{
+    exit_pokeball
     walk_down
     walk_left
 }
