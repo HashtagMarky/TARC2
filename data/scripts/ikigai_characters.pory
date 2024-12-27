@@ -23,7 +23,7 @@ script IkigaiCharacterBox_InitialDialogue
 script IkigaiCharacterBox_Goodbye
 {
     closemessage
-    releaseall
+    release
     end
 }
 
@@ -35,5 +35,11 @@ script IkigaiCharacterBox_Talk
     dialoguechoice("Inspiring", "Humble", "Dominant", "Cynical")
     callnative(IkigaiCharacter_HandleDialogue)
     emote(OBJ_EVENT_ID_PLAYER, EMOTE_TALK)
-    releaseall
+    release
+}
+
+script IkigaiCharacterBox_GetOpinion
+{
+    callnative(IkigaiCharacterDebug_CharacterOpinions)
+    msgbox("{STR_VAR_1}", MSGBOX_DEFAULT)
 }

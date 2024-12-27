@@ -10,6 +10,7 @@
 #include "field_weather.h"
 #include "random.h"
 #include "script_menu.h"
+#include "string_util.h"
 
 static const u32 sCharacteristicIcon_Neutral[] = INCBIN_U32("graphics/dialogue_icons/neutral.4bpp.lz");
 static const u16 sCharacteristicPal_Neutral[] = INCBIN_U16("graphics/dialogue_icons/neutral.gbapal");
@@ -145,7 +146,7 @@ s8 IkigaiCharacter_GetAverageKindness(void)
         opinionKindness += gSaveBlock3Ptr->characters.opinionKindness[character];
     }
 
-    return (opinionKindness / MAIN_CHARACTER_COUNT - 1);
+    return (opinionKindness / (MAIN_CHARACTER_COUNT - 1));
 
 }
 
@@ -159,7 +160,7 @@ s8 IkigaiCharacter_GetAverageStrength(void)
         opinionStrength += gSaveBlock3Ptr->characters.opinionStrength[character];
     }
 
-    return (opinionStrength / MAIN_CHARACTER_COUNT - 1);
+    return (opinionStrength / (MAIN_CHARACTER_COUNT - 1));
 
 }
 
@@ -367,4 +368,39 @@ u8 CreateDialogueIconSprite(u8 characteristicIndex)
     PreservePaletteInWeather(gSprites[spriteId].oam.paletteNum + 0x10);
 
     return spriteId;
+}
+
+void IkigaiCharacterDebug_CharacterOpinions(void)
+{
+    u8 character = ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
+    u8 string[3];
+    s8 opinionKindness = gSaveBlock3Ptr->characters.opinionKindness[character];
+    s8 opinionStrength = gSaveBlock3Ptr->characters.opinionStrength[character];
+
+    if (character > MAIN_CHARACTER_COUNT)
+    {
+        opinionKindness = IkigaiCharacter_GetAverageKindness();
+        opinionStrength = IkigaiCharacter_GetAverageStrength();
+    }
+
+
+    StringCopy(gStringVar1, gIkigaiCharactersInfo[character].name);
+    StringAppend(gStringVar1, COMPOUND_STRING("'s Kindness Opinion: "));
+    if (opinionKindness < 0)
+    {
+        opinionKindness *= -1;
+        StringAppend(gStringVar1, COMPOUND_STRING("-"));
+    }
+    ConvertIntToDecimalStringN(string, opinionKindness, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringAppend(gStringVar1, string);
+    StringAppend(gStringVar1, COMPOUND_STRING("\n"));
+    StringAppend(gStringVar1, gIkigaiCharactersInfo[character].name);
+    StringAppend(gStringVar1, COMPOUND_STRING("'s Strength Opinion: "));
+    if (opinionStrength < 0)
+    {
+        opinionStrength *= -1;
+        StringAppend(gStringVar1, COMPOUND_STRING("-"));
+    }
+    ConvertIntToDecimalStringN(string, opinionStrength, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringAppend(gStringVar1, string);
 }
