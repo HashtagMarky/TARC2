@@ -2106,8 +2106,10 @@
 	.endm
 
 	@ Buffers the given text and calls the relevant message, name and mugshot script (see gStdScripts).
-	.macro mnmbox text:req, PMD=FALSE, mugshotEmotion=EMOTE_NORMAL, nameKnown=TRUE, localId, waitbuttonpress=TRUE, remain=FALSE
-	lock
+	.macro mnmbox text:req, PMD=FALSE, mugshotEmotion=EMOTE_NORMAL, nameKnown=TRUE, localId, lock=FALSE, waitbuttonpress=TRUE, remain=FALSE
+	.if \lock == TRUE
+		lock
+	.endif
 	.ifnb \localId
 		setselectedobjectevent \localId
 	.endif
