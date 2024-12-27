@@ -2,6 +2,8 @@ script IkigaiCharacterBox_InitialDialogue
 {
     mnmbox("Hello there, {PLAYER}.", waitbuttonpress=FALSE, remain=TRUE)
     dynmultipush("Talk", DIALOGUE_OPTION_TALK)
+    dynmultipush("Opinion", DIALOGUE_DEBUG_OPTION_OPINION)
+    dynmultipush("Romance", DIALOGUE_DEBUG_OPTION_ROMANCE)
     dynmultipush("Quests", DIALOGUE_OPTION_QUESTS)
     dynmultipush("Battle", DIALOGUE_OPTION_BATTLE)
     dynmultipush("Gift", DIALOGUE_OPTION_GIFT)
@@ -14,6 +16,9 @@ script IkigaiCharacterBox_InitialDialogue
         case DIALOGUE_OPTION_BATTLE:
         case DIALOGUE_OPTION_GIFT:
             goto(IkigaiCharacterBox_Talk)
+        case DIALOGUE_DEBUG_OPTION_OPINION:
+        case DIALOGUE_DEBUG_OPTION_ROMANCE:
+            goto(IkigaiCharacterBox_GetOpinion)
         case DIALOGUE_OPTION_GOODBYE:
         default:
             goto(IkigaiCharacterBox_Goodbye)
