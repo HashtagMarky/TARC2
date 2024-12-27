@@ -2597,6 +2597,11 @@
 	releaseall
 	.endm
 
+	@ Release Object Events
+	.macro releaseobjects
+	callnative(ScriptMovement_UnfreezeObjectEvents)
+	.endm
+
 @ Deokishisu's Supplementary Macros
 
 	@ applymovement with waitmovement built-in.
