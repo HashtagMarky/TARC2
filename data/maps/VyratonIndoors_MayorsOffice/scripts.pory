@@ -41,6 +41,7 @@ script VyratonIndoors_MayorsOffice_EventScript_Samuel
     {
         call(VyratonIndoors_MayorsOffice_EventScript_Samuel_OpenBriefcase)
     }
+    applymove(LOCALID_Samuel, Common_Movement_FaceOriginalDirection)
     end
 }
 
@@ -66,6 +67,7 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase
         call(VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase)
         call(VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex)
     }
+    applymove(LOCALID_Samuel, Common_Movement_FaceOriginalDirection)
     end
 }
 
@@ -84,6 +86,7 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase
     applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase, FALSE)
     applymove(LOCALID_Starter, VyratonIndoors_MayorsOffice_Movement_Starter_ReturnFromBriefcase)
     turnplayer(DIR_NORTH)
+    releaseselect(LOCALID_Starter)
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex
@@ -96,11 +99,11 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex
     setvar(VAR_0x8000, ITEM_POKEDEX)
     if (specialvar(VAR_RESULT, IsLeadMonNicknamedOrNotEnglish) == TRUE)
     {
-        mnmbox(VyratonIndoors_MayorsOffice_Text_MeetNicknamedMon, localId=LOCALID_Samuel)
+        mnmbox(VyratonIndoors_MayorsOffice_Text_MeetNicknamedMon, localId=LOCALID_Samuel, lock=FALSE)
     }
     else
     {
-        mnmbox(VyratonIndoors_MayorsOffice_Text_MeetNonNicknamedMon, localId=LOCALID_Samuel)
+        mnmbox(VyratonIndoors_MayorsOffice_Text_MeetNonNicknamedMon, localId=LOCALID_Samuel, lock=FALSE)
     }
     call(VyratonIndoors_MayorsOffice_EventScript_MeetThomas)
     call(VyratonIndoors_MayorsOffice_EventScript_Samuel_ReceivePokdex)
@@ -136,7 +139,7 @@ script VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon
     call(EventScript_DisplayPokedexSpeciesName)
     playmoncry(VAR_0x8004, CRY_MODE_NORMAL)
     message(VyratonIndoors_MayorsOffice_Text_DeterminedMon)
-    setseenmon(VAR_0x8004)
+    callnative(SetIkigaiStarterPokedexFlags)
     setcaughtmon(VAR_0x8004)
     waitmessage
     waitbuttonpress
@@ -147,7 +150,8 @@ script VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon
 
 script VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter
 {
-    turnobject(LOCALID_Starter, DIR_NORTH)
+    applymove(LOCALID_Starter, Common_Movement_FaceUp)
+    releaseselect(LOCALID_Starter)
     if (specialvar(VAR_RESULT, GetPlayerFacingDirection) == DIR_WEST)
     {
         applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_One)
@@ -195,7 +199,7 @@ script VyratonIndoors_MayorsOffice_EventScript_MeetThomas
 
 script VyratonIndoors_MayorsOffice_EventScript_Samuel_ReceivePokdex
 {
-    mnmbox(VyratonIndoors_MayorsOffice_Text_GivePokedex)
+    mnmbox(VyratonIndoors_MayorsOffice_Text_GivePokedex, lock=FALSE)
 }
 
 

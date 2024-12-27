@@ -636,11 +636,7 @@ void SamuelCase_Init(MainCallback callback)
     // RandomiseMonChoiceData(sStarterChoices_Page1_Male, ARRAY_COUNT(sStarterChoices_Page1_Male));
     // RandomiseMonChoiceData(sStarterChoices_Page2, ARRAY_COUNT(sStarterChoices_Page2));
 
-    for(i=0; i < 9; i++)
-    {
-        (gSaveBlock2Ptr->playerGender == MALE) ? GetSetPokedexFlag(SpeciesToNationalPokedexNum(sStarterChoices_Page1_Male[i].species), FLAG_SET_SEEN) : GetSetPokedexFlag(SpeciesToNationalPokedexNum(sStarterChoices_Page1_Female[i].species), FLAG_SET_SEEN);
-        GetSetPokedexFlag(SpeciesToNationalPokedexNum(sStarterChoices_Page2[i].species), FLAG_SET_SEEN);
-    }
+    SetIkigaiStarterPokedexFlags();
 
     for(i=0; i < 9; i++)
     {
@@ -1237,5 +1233,15 @@ static const struct SpriteCordsStruct (*ReturnBallPositionByPage(void))[4]
     else
     {
         return sBallSpriteCords_Page2;
+    }
+}
+
+void SetIkigaiStarterPokedexFlags(void)
+{
+    u16 i;
+    for(i=0; i < 9; i++)
+    {
+        (gSaveBlock2Ptr->playerGender == MALE) ? GetSetPokedexFlag(SpeciesToNationalPokedexNum(sStarterChoices_Page1_Male[i].species), FLAG_SET_SEEN) : GetSetPokedexFlag(SpeciesToNationalPokedexNum(sStarterChoices_Page1_Female[i].species), FLAG_SET_SEEN);
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(sStarterChoices_Page2[i].species), FLAG_SET_SEEN);
     }
 }

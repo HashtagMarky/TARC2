@@ -43,7 +43,7 @@ script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet
     emote(LOCALID_Samuel, EMOTE_QUESTION)
     applymoveplayer(VyratonOutdoors_Harbour_Movement_Player_MeetSamuel, FALSE)
     applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_ContinueEntrance)
-    mnmbox(VyratonOutdoors_Harbour_Text_WelcomeToVyraton, nameKnown=FALSE, localId=LOCALID_Samuel)
+    mnmbox(VyratonOutdoors_Harbour_Text_WelcomeToVyraton, nameKnown=FALSE, localId=LOCALID_Samuel, lock=TRUE)
     turnplayer(DIR_SOUTH)
     turnobject(LOCALID_Samuel, DIR_SOUTH)
     removeobject(LOCALID_Captain)

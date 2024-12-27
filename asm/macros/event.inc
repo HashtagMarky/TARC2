@@ -2597,6 +2597,12 @@
 	releaseall
 	.endm
 
+	@ Release the Select Object Event
+	.macro releaseselect localId:req
+	setselectedobjectevent \localId
+	release
+	.endm
+
 @ Deokishisu's Supplementary Macros
 
 	@ applymovement with waitmovement built-in.
