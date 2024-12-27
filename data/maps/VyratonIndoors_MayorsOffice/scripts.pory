@@ -86,7 +86,7 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase
     applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase, FALSE)
     applymove(LOCALID_Starter, VyratonIndoors_MayorsOffice_Movement_Starter_ReturnFromBriefcase)
     turnplayer(DIR_NORTH)
-    releaseselect(LOCALID_Starter)
+    release
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex
@@ -151,7 +151,7 @@ script VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon
 script VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter
 {
     applymove(LOCALID_Starter, Common_Movement_FaceUp)
-    releaseselect(LOCALID_Starter)
+    release
     if (specialvar(VAR_RESULT, GetPlayerFacingDirection) == DIR_WEST)
     {
         applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_One)
