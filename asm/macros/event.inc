@@ -2597,6 +2597,62 @@
 	releaseall
 	.endm
 
+	@ Sets Ikigai Character Romantic Flag
+	.macro setromanticflag localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_SetRomanticFlag
+	.endm
+
+	@ Toggles Ikigai Character Romantic Flag
+	.macro toggleromanticflag localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_ToggleRomanticFlag
+	.endm
+
+	@ Clears Ikigai Character Romantic Flag
+	.macro clearromanticflag localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_ClearRomanticFlag
+	.endm
+
+	@ Gets Ikigai Character Romantic Flag
+	.macro getromanticflag localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_GetRomanticFlag
+	.endm
+
+	@ Sets Ikigai Character Romantic Flag Exclusively
+	.macro setromanticflagexclusive localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_SetRomanticFlag_Exclusive
+	.endm
+
+	@ Clears Ikigai Character Romantic Flag Amicably
+	.macro clearromanticflagamicable localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_ClearRomanticFlag_Amicable
+	.endm
+
+	@ Clears Ikigai Character Romantic Flag Hostilely
+	.macro clearromanticflaghostile localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_ClearRomanticFlag_Hostile
+	.endm
+
 @ Deokishisu's Supplementary Macros
 
 	@ applymovement with waitmovement built-in.

@@ -234,6 +234,55 @@ void IkigaiCharacter_ClearRomanticFlag_Hostile(u8 character)
         gSaveBlock3Ptr->characters.opinionKindness[character] = - ATTITUDE_NEUTRAL_BUFFER;
 }
 
+void ScrCmd_IkigaiCharacter_SetRomanticFlag(void)
+{
+    IkigaiCharacter_SetRomanticFlag(
+        ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId)
+    );
+}
+
+void ScrCmd_IkigaiCharacter_ToggleRomanticFlag(void)
+{
+    IkigaiCharacter_ToggleRomanticFlag(
+        ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId)
+    );
+}
+
+void ScrCmd_IkigaiCharacter_ClearRomanticFlag(void)
+{
+    IkigaiCharacter_ClearRomanticFlag(
+        ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId)
+    );
+}
+
+bool8 ScrCmd_IkigaiCharacter_GetRomanticFlag(void)
+{
+    gSpecialVar_Result = IkigaiCharacter_GetRomanticFlag(
+        ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId)
+    );
+}
+
+void ScrCmd_IkigaiCharacter_SetRomanticFlag_Exclusive(void)
+{
+    IkigaiCharacter_SetRomanticFlag_Exclusive(
+        ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId)
+    );
+}
+
+void ScrCmd_IkigaiCharacter_ClearRomanticFlag_Amicable(void)
+{
+    IkigaiCharacter_ClearRomanticFlag_Amicable(
+        ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId)
+    );
+}
+
+void ScrCmd_IkigaiCharacter_ClearRomanticFlag_Hostile(void)
+{
+    IkigaiCharacter_ClearRomanticFlag_Hostile(
+        ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId)
+    );
+}
+
 bool8 IkigaiCharacter_ReturnOpinionDecay(u8 character)
 {
     if (character > CHARACTER_COUNT_TOTAL)
