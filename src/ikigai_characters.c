@@ -255,53 +255,86 @@ void IkigaiCharacter_ClearRomanticFlag_Hostile(u8 character)
         gSaveBlock3Ptr->characters.opinionKindness[character] = - ATTITUDE_NEUTRAL_BUFFER;
 }
 
+u8 IkigaiCharacter_CheckRelationships(void)
+{
+    if (IkigaiCharacter_IsPlayerSingleOrMonogamous())
+        return ReturnIkigaiCharacter_RomanceFlag_Exclusive();
+        
+    else
+        return CHARACTER_COUNT_TOTAL;
+}
+
+bool8 IkigaiCharacter_IsPlayerSingleOrMonogamous(void)
+{
+    u8 character;
+    u8 relationships = RELATIONSHIP_SINGLE;
+
+    for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
+    {
+        if (gIkigaiCharactersInfo[character].flagRomantic != 0 
+            && FlagGet(gIkigaiCharactersInfo[character].flagRomantic))
+        {
+            relationships++;
+            if (relationships > RELATIONSHIP_MONOGOMOUS)
+                return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
 void ScrCmd_IkigaiCharacter_SetRomanticFlag(void)
 {
     IkigaiCharacter_SetRomanticFlag(
-        ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId)
+        ReturnIkigaiCharacter_SelectedObject()
     );
 }
 
 void ScrCmd_IkigaiCharacter_ToggleRomanticFlag(void)
 {
     IkigaiCharacter_ToggleRomanticFlag(
-        ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId)
+        ReturnIkigaiCharacter_SelectedObject()
     );
 }
 
 void ScrCmd_IkigaiCharacter_ClearRomanticFlag(void)
 {
     IkigaiCharacter_ClearRomanticFlag(
-        ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId)
+        ReturnIkigaiCharacter_SelectedObject()
     );
 }
 
 bool8 ScrCmd_IkigaiCharacter_GetRomanticFlag(void)
 {
     gSpecialVar_Result = IkigaiCharacter_GetRomanticFlag(
-        ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId)
+        ReturnIkigaiCharacter_SelectedObject()
     );
 }
 
 void ScrCmd_IkigaiCharacter_SetRomanticFlag_Exclusive(void)
 {
     IkigaiCharacter_SetRomanticFlag_Exclusive(
-        ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId)
+        ReturnIkigaiCharacter_SelectedObject()
     );
 }
 
 void ScrCmd_IkigaiCharacter_ClearRomanticFlag_Amicable(void)
 {
     IkigaiCharacter_ClearRomanticFlag_Amicable(
-        ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId)
+        ReturnIkigaiCharacter_SelectedObject()
     );
 }
 
 void ScrCmd_IkigaiCharacter_ClearRomanticFlag_Hostile(void)
 {
     IkigaiCharacter_ClearRomanticFlag_Hostile(
-        ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId)
+        ReturnIkigaiCharacter_SelectedObject()
     );
+}
+
+void ScrCmd_IkigaiCharacter_CheckRelationships(void)
+{
+    gSpecialVar_Result = IkigaiCharacter_CheckRelationships();
 }
 
 bool8 IkigaiCharacter_ReturnOpinionDecay(u8 character)
@@ -350,7 +383,7 @@ void IkigaiCharacter_AllOpinionDecay_NonConverse(void)
 
 void IkigaiCharacter_HandleDialogue(void)
 {
-    u8 character = ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
+    u8 character = ReturnIkigaiCharacter_SelectedObject();
 
     if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)
         return;
@@ -403,6 +436,27 @@ u8 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId)
     return CHARACTER_DEFAULT;
 }
 
+u8 ReturnIkigaiCharacter_SelectedObject(void)
+{
+    ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
+}
+
+u8 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void)
+{
+    u8 character;
+
+    for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
+    {
+        if (gIkigaiCharactersInfo[character].flagRomantic != 0 
+            && FlagGet(gIkigaiCharactersInfo[character].flagRomantic))
+        {
+            return character;
+        }
+    }
+
+    return CHARACTER_DEFAULT;
+}
+
 u8 CreateDialogueIconSprite(u8 characteristicIndex)
 {
     u8 spriteId;
@@ -442,7 +496,7 @@ u8 CreateDialogueIconSprite(u8 characteristicIndex)
 
 void IkigaiCharacterDebug_CharacterOpinions(void)
 {
-    u8 character = ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
+    u8 character = ReturnIkigaiCharacter_SelectedObject();
     u8 string[3];
     s8 opinionKindness = gSaveBlock3Ptr->characters.opinionKindness[character];
     s8 opinionStrength = gSaveBlock3Ptr->characters.opinionStrength[character];
@@ -473,4 +527,8 @@ void IkigaiCharacterDebug_CharacterOpinions(void)
     }
     ConvertIntToDecimalStringN(string, opinionStrength, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringAppend(gStringVar1, string);
+    if (character > MAIN_CHARACTER_COUNT)
+    {
+        StringAppend(gStringVar1, COMPOUND_STRING("\pI am a side character, I get my\nopinion from the PokéSphere."));
+    }
 }

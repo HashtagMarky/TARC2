@@ -2597,6 +2597,15 @@
 	releaseall
 	.endm
 
+	@ Checks Character Being Spoken
+	@ Sets Character to VAR_RESULT
+	.macro checkcharacter localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_ReturnIkigaiCharacter_SelectedObject
+	.endm
+
 	@ Sets Ikigai Character Romantic Flag
 	.macro setromanticflag localId
 	.ifnb \localId
@@ -2622,6 +2631,7 @@
 	.endm
 
 	@ Gets Ikigai Character Romantic Flag
+	@ Sets result to VAR_RESULT
 	.macro getromanticflag localId
 	.ifnb \localId
 	setselectedobjectevent \localId
@@ -2651,6 +2661,18 @@
 	setselectedobjectevent \localId
 	.endif
 	callnative ScrCmd_IkigaiCharacter_ClearRomanticFlag_Hostile
+	.endm
+
+	@ Checks Player Romantic Status
+	@ Sets Character to VAR_0x8004
+	@ Sets 
+	.macro checkrelationships localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	checkcharacter
+	copyvar VAR_0x8004, VAR_RESULT 
+	callnative ScrCmd_IkigaiCharacter_CheckRelationships
 	.endm
 
 @ Deokishisu's Supplementary Macros

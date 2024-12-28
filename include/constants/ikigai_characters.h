@@ -21,6 +21,13 @@ enum AttitudeId
     ATTITUDE_NEUTRAL_BUFFER = 20,
 };
 
+enum RelationshipTypes
+{
+    RELATIONSHIP_SINGLE,
+    RELATIONSHIP_MONOGOMOUS,
+    RELATIONSHIP_POLYAMOROUS,
+};
+
 enum CharacterId
 {
     CHARACTER_DEFAULT,
