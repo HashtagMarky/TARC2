@@ -2,8 +2,8 @@ script IkigaiCharacterBox_InitialDialogue
 {
     mnmbox("Hello there, {PLAYER}.", waitbuttonpress=FALSE, remain=TRUE)
     dynmultipush("Talk", DIALOGUE_OPTION_TALK)
-    dynmultipush("Opinion", DIALOGUE_DEBUG_OPTION_OPINION)
-    dynmultipush("Romance", DIALOGUE_DEBUG_OPTION_ROMANCE)
+    dynmultipush("Opinion", DIALOGUE_OPTION_OPINION)
+    dynmultipush("Romance", DIALOGUE_OPTION_ROMANCE)
     dynmultipush("Quests", DIALOGUE_OPTION_QUESTS)
     dynmultipush("Battle", DIALOGUE_OPTION_BATTLE)
     dynmultipush("Gift", DIALOGUE_OPTION_GIFT)
@@ -12,13 +12,15 @@ script IkigaiCharacterBox_InitialDialogue
     switch (var(VAR_RESULT))
     {
         case DIALOGUE_OPTION_TALK:
+            goto(IkigaiCharacterBox_Talk)
+        case DIALOGUE_OPTION_OPINION:
+            goto(IkigaiCharacterBox_Debug_GetOpinion)
+        case DIALOGUE_OPTION_ROMANCE:
+            goto(IkigaiCharacterBox_RomanceMenu)
         case DIALOGUE_OPTION_QUESTS:
         case DIALOGUE_OPTION_BATTLE:
         case DIALOGUE_OPTION_GIFT:
             goto(IkigaiCharacterBox_Talk)
-        case DIALOGUE_DEBUG_OPTION_OPINION:
-        case DIALOGUE_DEBUG_OPTION_ROMANCE:
-            goto(IkigaiCharacterBox_GetOpinion)
         case DIALOGUE_OPTION_GOODBYE:
         default:
             goto(IkigaiCharacterBox_Goodbye)
@@ -43,8 +45,72 @@ script IkigaiCharacterBox_Talk
     release
 }
 
-script IkigaiCharacterBox_GetOpinion
+script IkigaiCharacterBox_Debug_GetOpinion
 {
     callnative(IkigaiCharacterDebug_CharacterOpinions)
     msgbox("{STR_VAR_1}", MSGBOX_DEFAULT)
+}
+
+const SET_CLEAR_ROMANCE = 0
+const ROMANCE_EXCLUSIVE = 1
+const CHECK_ROMANCE     = 2
+
+script IkigaiCharacterBox_RomanceMenu
+{
+    getromanticflag
+    if (var(VAR_RESULT) == TRUE)
+    {
+        dynmultipush("End Romance", SET_CLEAR_ROMANCE)
+    }
+    else
+    {
+        dynmultipush("Start Romance", SET_CLEAR_ROMANCE)
+    }
+    dynmultipush("Set Exclusive Romance", ROMANCE_EXCLUSIVE)
+    dynmultipush("Check Romance", CHECK_ROMANCE)
+    dynmultistack(0, 0, TRUE, 3, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+
+    switch (var(VAR_RESULT))
+    {
+        case SET_CLEAR_ROMANCE:
+            toggleromanticflag
+            getromanticflag
+            if (var(VAR_RESULT) == TRUE)
+            {
+                mnmbox("You're so sweet, {PLAYER}.")
+            }
+            else
+            {
+                mnmbox("That's a shame, {PLAYER}.")
+            }
+            end
+        case ROMANCE_EXCLUSIVE:
+            setromanticflagexclusive
+            mnmbox("You're the sweetest, nobody compares\nto you {PLAYER}.")
+            end
+        case CHECK_ROMANCE:
+        default:
+            checkrelationships
+            if (var(VAR_RESULT) == CHARACTER_DEFAULT)
+            {
+                mnmbox("It seems you're single,\n{PLAYER}.")
+            }
+            elif (var(VAR_RESULT) == CHARACTER_COUNT_TOTAL)
+            {
+                mnmbox("It seems you're in multiple\nrelationships, {PLAYER}.")
+            }
+            else
+            {
+                checkcharacter
+                if (var(VAR_RESULT) == (var(VAR_0x8004)))
+                {
+                    mnmbox("We are in an exclusive relationship.")
+                }
+                else
+                {
+                    buffercharactername
+                    mnmbox("You are in an exclusive relationship\nwith {STR_VAR_1}.")
+                }
+            }
+    }
 }
