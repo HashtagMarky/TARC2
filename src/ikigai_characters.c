@@ -231,9 +231,9 @@ void IkigaiCharacter_SetRomanticFlag_Exclusive(u8 character)
     for (i = CHARACTER_DEFAULT + 1; i < CHARACTER_COUNT_TOTAL; i++)
     {
         if (i == character)
-            IkigaiCharacter_SetRomanticFlag(character);
+            IkigaiCharacter_SetRomanticFlag(i);
         else
-            IkigaiCharacter_ClearRomanticFlag(character);
+            IkigaiCharacter_ClearRomanticFlag(i);
     }
 }
 
@@ -304,7 +304,7 @@ void ScrCmd_IkigaiCharacter_ClearRomanticFlag(void)
     );
 }
 
-bool8 ScrCmd_IkigaiCharacter_GetRomanticFlag(void)
+void ScrCmd_IkigaiCharacter_GetRomanticFlag(void)
 {
     gSpecialVar_Result = IkigaiCharacter_GetRomanticFlag(
         ReturnIkigaiCharacter_SelectedObject()
@@ -443,7 +443,12 @@ u8 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId)
 
 u8 ReturnIkigaiCharacter_SelectedObject(void)
 {
-    ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
+    return ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
+}
+
+void ScrCmd_ReturnIkigaiCharacter_SelectedObject(void)
+{
+    gSpecialVar_Result = ReturnIkigaiCharacter_SelectedObject();
 }
 
 u8 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void)
@@ -499,7 +504,7 @@ u8 CreateDialogueIconSprite(u8 characteristicIndex)
     return spriteId;
 }
 
-void IkigaiCharacterDebug_CharacterOpinions(void)
+void IkigaiCharacter_CharacterOpinions(void)
 {
     u8 character = ReturnIkigaiCharacter_SelectedObject();
     u8 string[3];

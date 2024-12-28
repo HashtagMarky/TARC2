@@ -23,6 +23,10 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_SAMUEL,
         .mugshotId = MUGSHOT_SAMUEL,
+
+        .baseOpinionKindness = 20,
+        .baseOpinionStrength = 25,
+        .opinionDecayChance = 0,
     },
 
     [MAIN_CHARACTER_LAUREN] =
@@ -34,6 +38,10 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_LAUREN,
         .mugshotId = MUGSHOT_LAUREN,
+
+        .baseOpinionKindness = 15,
+        .baseOpinionStrength = 20,
+        .opinionDecayChance = 10,
     },
 
     [MAIN_CHARACTER_THOMAS] =
@@ -41,6 +49,10 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .name = _("THOMAS"),
 
         .overworldGraphicsId = OBJ_EVENT_GFX_THOMAS,
+
+        .baseOpinionKindness = 20,
+        .baseOpinionStrength = 25,
+        .opinionDecayChance = 5,
     },
 
     [MAIN_CHARACTER_CAPTAIN] =
@@ -48,6 +60,10 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .name = _("SKIP"),
 
         .overworldGraphicsId = OBJ_EVENT_GFX_CAPTAIN,
+
+        .baseOpinionKindness = 0,
+        .baseOpinionStrength = 0,
+        .opinionDecayChance = 20,
     },
 
     [SIDE_CHARACTER_N] =

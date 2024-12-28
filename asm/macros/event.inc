@@ -2672,14 +2672,14 @@
 	.endm
 
 	@ Checks Player Romantic Status
-	@ Sets Character to VAR_0x8004
-	@ Sets Relationship Status to VAR_RESULT
+	@ Stores Character being spoken to in VAR_0x8004
+	@ Stores Relationship Status in VAR_RESULT
 	.macro checkrelationships localId
 	.ifnb \localId
 	setselectedobjectevent \localId
 	.endif
 	checkcharacter
-	copyvar VAR_0x8004, VAR_RESULT 
+	copyvar VAR_0x8004, VAR_RESULT
 	callnative ScrCmd_IkigaiCharacter_CheckRelationships
 	.endm
 
