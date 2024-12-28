@@ -66,7 +66,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .opinionDecayChance = 20,
     },
 
-    [SIDE_CHARACTER_N] =
+    [SPECIAL_CHARACTER_N] =
     {
         .name = _("N"),
         .partnerPokemon = SPECIES_ZOROARK,

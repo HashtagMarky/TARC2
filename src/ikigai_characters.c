@@ -428,6 +428,45 @@ void IkigaiCharacter_HandleDialogue(void)
     }
 }
 
+void IkigaiCharacter_CharacterOpinions(void)
+{
+    u8 character = ReturnIkigaiCharacter_SelectedObject();
+    u8 string[3];
+    s8 opinionKindness = gSaveBlock3Ptr->characters.opinionKindness[character];
+    s8 opinionStrength = gSaveBlock3Ptr->characters.opinionStrength[character];
+
+    if (character > MAIN_CHARACTER_COUNT)
+    {
+        opinionKindness = IkigaiCharacter_GetAverageKindness();
+        opinionStrength = IkigaiCharacter_GetAverageStrength();
+    }
+
+
+    StringCopy(gStringVar1, gIkigaiCharactersInfo[character].name);
+    StringAppend(gStringVar1, COMPOUND_STRING("'s Kindness Opinion: "));
+    if (opinionKindness < 0)
+    {
+        opinionKindness *= -1;
+        StringAppend(gStringVar1, COMPOUND_STRING("-"));
+    }
+    ConvertIntToDecimalStringN(string, opinionKindness, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringAppend(gStringVar1, string);
+    StringAppend(gStringVar1, COMPOUND_STRING("\n"));
+    StringAppend(gStringVar1, gIkigaiCharactersInfo[character].name);
+    StringAppend(gStringVar1, COMPOUND_STRING("'s Strength Opinion: "));
+    if (opinionStrength < 0)
+    {
+        opinionStrength *= -1;
+        StringAppend(gStringVar1, COMPOUND_STRING("-"));
+    }
+    ConvertIntToDecimalStringN(string, opinionStrength, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringAppend(gStringVar1, string);
+    if (character > MAIN_CHARACTER_COUNT)
+    {
+        StringAppend(gStringVar1, COMPOUND_STRING("\pI am a special character, I get my\nopinion from the PokéSphere."));
+    }
+}
+
 u8 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId)
 {
     u8 character;
@@ -502,43 +541,4 @@ u8 CreateDialogueIconSprite(u8 characteristicIndex)
     PreservePaletteInWeather(gSprites[spriteId].oam.paletteNum + 0x10);
 
     return spriteId;
-}
-
-void IkigaiCharacter_CharacterOpinions(void)
-{
-    u8 character = ReturnIkigaiCharacter_SelectedObject();
-    u8 string[3];
-    s8 opinionKindness = gSaveBlock3Ptr->characters.opinionKindness[character];
-    s8 opinionStrength = gSaveBlock3Ptr->characters.opinionStrength[character];
-
-    if (character > MAIN_CHARACTER_COUNT)
-    {
-        opinionKindness = IkigaiCharacter_GetAverageKindness();
-        opinionStrength = IkigaiCharacter_GetAverageStrength();
-    }
-
-
-    StringCopy(gStringVar1, gIkigaiCharactersInfo[character].name);
-    StringAppend(gStringVar1, COMPOUND_STRING("'s Kindness Opinion: "));
-    if (opinionKindness < 0)
-    {
-        opinionKindness *= -1;
-        StringAppend(gStringVar1, COMPOUND_STRING("-"));
-    }
-    ConvertIntToDecimalStringN(string, opinionKindness, STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringAppend(gStringVar1, string);
-    StringAppend(gStringVar1, COMPOUND_STRING("\n"));
-    StringAppend(gStringVar1, gIkigaiCharactersInfo[character].name);
-    StringAppend(gStringVar1, COMPOUND_STRING("'s Strength Opinion: "));
-    if (opinionStrength < 0)
-    {
-        opinionStrength *= -1;
-        StringAppend(gStringVar1, COMPOUND_STRING("-"));
-    }
-    ConvertIntToDecimalStringN(string, opinionStrength, STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringAppend(gStringVar1, string);
-    if (character > MAIN_CHARACTER_COUNT)
-    {
-        StringAppend(gStringVar1, COMPOUND_STRING("\pI am a side character, I get my\nopinion from the PokéSphere."));
-    }
 }

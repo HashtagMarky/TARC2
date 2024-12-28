@@ -102,7 +102,6 @@ script IkigaiCharacterBox_RomanceMenu
             }
             else
             {
-                callnative(IkigaiCharacterDebug_ExclusiveRelationship)
                 if (var(VAR_RESULT) == VAR_0x8004)
                 {
                     mnmbox("We are in an exclusive relationship.")
