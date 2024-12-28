@@ -191,26 +191,41 @@ void IkigaiCharacter_ClearConversedFlags(void)
 
 void IkigaiCharacter_SetRomanticFlag(u8 character)
 {
+    if (gIkigaiCharactersInfo[character].flagRomantic == 0)
+        return;
+    
     FlagSet(gIkigaiCharactersInfo[character].flagRomantic);
 }
 
 void IkigaiCharacter_ToggleRomanticFlag(u8 character)
 {
+    if (gIkigaiCharactersInfo[character].flagRomantic == 0)
+        return;
+
     FlagToggle(gIkigaiCharactersInfo[character].flagRomantic);
 }
 
 void IkigaiCharacter_ClearRomanticFlag(u8 character)
 {
+    if (gIkigaiCharactersInfo[character].flagRomantic == 0)
+        return;
+
     FlagClear(gIkigaiCharactersInfo[character].flagRomantic);
 }
 
 bool8 IkigaiCharacter_GetRomanticFlag(u8 character)
 {
+    if (gIkigaiCharactersInfo[character].flagRomantic == 0)
+        return FALSE;
+
     return FlagGet(gIkigaiCharactersInfo[character].flagRomantic);
 }
 
 void IkigaiCharacter_SetRomanticFlag_Exclusive(u8 character)
 {
+    if (gIkigaiCharactersInfo[character].flagRomantic == 0)
+        return;
+
     u8 i;
 
     for (i = CHARACTER_DEFAULT + 1; i < CHARACTER_COUNT_TOTAL; i++)
@@ -224,11 +239,17 @@ void IkigaiCharacter_SetRomanticFlag_Exclusive(u8 character)
 
 void IkigaiCharacter_ClearRomanticFlag_Amicable(u8 character)
 {
+    if (gIkigaiCharactersInfo[character].flagRomantic == 0)
+        return;
+
     FlagClear(gIkigaiCharactersInfo[character].flagRomantic);
 }
 
 void IkigaiCharacter_ClearRomanticFlag_Hostile(u8 character)
 {
+    if (gIkigaiCharactersInfo[character].flagRomantic == 0)
+        return;
+
     FlagClear(gIkigaiCharactersInfo[character].flagRomantic);
     if (character > CHARACTER_DEFAULT && character < MAIN_CHARACTER_COUNT)
         gSaveBlock3Ptr->characters.opinionKindness[character] = - ATTITUDE_NEUTRAL_BUFFER;
