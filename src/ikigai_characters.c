@@ -337,6 +337,11 @@ void ScrCmd_IkigaiCharacter_CheckRelationships(void)
     gSpecialVar_Result = IkigaiCharacter_CheckRelationships();
 }
 
+void ScrCmd_IkigaiCharacter_BurfferName(void)
+{
+    StringCopy(gStringVar1, gIkigaiCharactersInfo[gSpecialVar_Result].name);
+}
+
 bool8 IkigaiCharacter_ReturnOpinionDecay(u8 character)
 {
     if (character > CHARACTER_COUNT_TOTAL)

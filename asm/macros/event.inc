@@ -2606,6 +2606,14 @@
 	callnative ScrCmd_ReturnIkigaiCharacter_SelectedObject
 	.endm
 
+	@ Buffers Character name stored in VAR_0x8004 to STR_VAR_1
+	.macro buffercharactername localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_BurfferName
+	.endm
+
 	@ Sets Ikigai Character Romantic Flag
 	.macro setromanticflag localId
 	.ifnb \localId
@@ -2665,7 +2673,7 @@
 
 	@ Checks Player Romantic Status
 	@ Sets Character to VAR_0x8004
-	@ Sets 
+	@ Sets Relationship Status to VAR_RESULT
 	.macro checkrelationships localId
 	.ifnb \localId
 	setselectedobjectevent \localId
