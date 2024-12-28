@@ -95,11 +95,12 @@ bool8 IkigaiCharacter_IsPlayerSingleOrMonogamous(void);
 bool8 IkigaiCharacter_ReturnOpinionDecay(u8 character);
 void IkigaiCharacter_OpinionDecay(u8 character);
 void IkigaiCharacter_AllOpinionDecay_NonConverse(void);
-void IkigaiCharacter_HandleDialogue(void);
+void IkigaiCharacter_HandleDialogue_Attitudes(void);
 void IkigaiCharacter_CharacterOpinions(void);
 u8 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId);
 u8 ReturnIkigaiCharacter_SelectedObject(void);
 u8 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void);
-u8 CreateDialogueIconSprite(u8 characteristicIndex);
+u8 CreateDialogueIconSprite(u8 attitudeIndex);
+u8 CreateAttitudeIconSprite(u8 attitudeIndex);
 
 #endif // GUARD_IKIGAI_CHARACTERS_H

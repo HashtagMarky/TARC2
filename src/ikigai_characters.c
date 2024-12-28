@@ -47,7 +47,7 @@ struct DialogueCharacteristics
     const u16 *iconPal;
 };
 
-static const struct DialogueCharacteristics sDialogueCharacteristics[ATTITUDE_COUNT] =
+static const struct DialogueCharacteristics sDialogueAttitudes[ATTITUDE_COUNT] =
 {
     [ATTITUDE_NEUTRAL] =
     {
@@ -386,7 +386,7 @@ void IkigaiCharacter_AllOpinionDecay_NonConverse(void)
     }
 }
 
-void IkigaiCharacter_HandleDialogue(void)
+void IkigaiCharacter_HandleDialogue_Attitudes(void)
 {
     u8 character = ReturnIkigaiCharacter_SelectedObject();
 
@@ -399,13 +399,13 @@ void IkigaiCharacter_HandleDialogue(void)
         return;
     }
 
-    if (gSpecialVar_Result >= NELEMS(sDialogueCharacteristics))
+    if (gSpecialVar_Result >= NELEMS(sDialogueAttitudes))
         gSpecialVar_Result = ATTITUDE_NEUTRAL;
 
     if (!IkigaiCharacter_GetSetConversedFlag(character, FALSE))
     {
-        s8 opinionKindness = sDialogueCharacteristics[gSpecialVar_Result].kindnessEffect;
-        s8 opinionStrength = sDialogueCharacteristics[gSpecialVar_Result].strengthEffect;
+        s8 opinionKindness = sDialogueAttitudes[gSpecialVar_Result].kindnessEffect;
+        s8 opinionStrength = sDialogueAttitudes[gSpecialVar_Result].strengthEffect;
 
         if (gSpecialVar_Result == gIkigaiCharactersInfo[character].personality)
         {
@@ -506,7 +506,7 @@ u8 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void)
     return CHARACTER_DEFAULT;
 }
 
-u8 CreateDialogueIconSprite(u8 characteristicIndex)
+u8 CreateAttitudeIconSprite(u8 attitudeIndex)
 {
     u8 spriteId;
 
@@ -514,11 +514,11 @@ u8 CreateDialogueIconSprite(u8 characteristicIndex)
     struct SpritePalette pal = { .tag = TAG_CHARACTER_DIALOGUE_ICON };
     struct SpriteTemplate *spriteTemplate;
 
-    if (characteristicIndex >= ATTITUDE_COUNT)
-        return SPRITE_NONE;
+    if (attitudeIndex >= ATTITUDE_COUNT)
+        attitudeIndex = ATTITUDE_NEUTRAL;
 
-    sheet.data = sDialogueCharacteristics[characteristicIndex].iconImage;
-    pal.data = sDialogueCharacteristics[characteristicIndex].iconPal;
+    sheet.data = sDialogueAttitudes[attitudeIndex].iconImage;
+    pal.data = sDialogueAttitudes[attitudeIndex].iconPal;
 
     LoadCompressedSpriteSheet(&sheet);
     LoadSpritePalette(&pal);

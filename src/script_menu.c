@@ -298,7 +298,7 @@ static void MultichoiceDynamicEventShowDialogue_OnSelectionChanged(struct Dynami
         DestroySprite(&gSprites[sItemSpriteId]);
     }
 
-    sItemSpriteId = CreateDialogueIconSprite(eventArgs->selectedItem);
+    sItemSpriteId = CreateAttitudeIconSprite(eventArgs->selectedItem);
     gSprites[sItemSpriteId].oam.priority = 0;
     gSprites[sItemSpriteId].x = x;
     gSprites[sItemSpriteId].y = y;

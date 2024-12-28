@@ -40,7 +40,7 @@ script IkigaiCharacterBox_Talk
     dialoguemultipush(ATTITUDE_NEUTRAL,
         "Neutral")
     dialoguechoice("Inspiring", "Humble", "Dominant", "Cynical")
-    callnative(IkigaiCharacter_HandleDialogue)
+    callnative(IkigaiCharacter_HandleDialogue_Attitudes)
     emote(OBJ_EVENT_ID_PLAYER, EMOTE_TALK)
     release
 }
