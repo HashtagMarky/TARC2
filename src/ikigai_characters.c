@@ -38,7 +38,7 @@ static const struct SpriteTemplate sDialogueIconSprite_SpriteTemplate = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-struct DialogueCharacteristics
+struct DialogueOptions
 {
     const u8 *name;
     s8 kindnessEffect;
@@ -47,7 +47,7 @@ struct DialogueCharacteristics
     const u16 *iconPal;
 };
 
-static const struct DialogueCharacteristics sDialogueAttitudes[ATTITUDE_COUNT] =
+static const struct DialogueOptions sDialogueAttitudes[ATTITUDE_COUNT] =
 {
     [ATTITUDE_NEUTRAL] =
     {
