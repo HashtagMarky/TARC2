@@ -12,18 +12,18 @@
 #include "script_menu.h"
 #include "string_util.h"
 
-static const u32 sCharacteristicIcon_Neutral[] = INCBIN_U32("graphics/dialogue_icons/neutral.4bpp.lz");
-static const u16 sCharacteristicPal_Neutral[] = INCBIN_U16("graphics/dialogue_icons/neutral.gbapal");
-static const u32 sCharacteristicIcon_Inspired[] = INCBIN_U32("graphics/dialogue_icons/inspired.4bpp.lz");
-static const u16 sCharacteristicPal_Inspired[] = INCBIN_U16("graphics/dialogue_icons/inspired.gbapal");
-static const u32 sCharacteristicIcon_Humble[] = INCBIN_U32("graphics/dialogue_icons/humble.4bpp.lz");
-static const u16 sCharacteristicPal_Humble[] = INCBIN_U16("graphics/dialogue_icons/humble.gbapal");
-static const u32 sCharacteristicIcon_Dominant[] = INCBIN_U32("graphics/dialogue_icons/dominant.4bpp.lz");
-static const u16 sCharacteristicPal_Dominant[] = INCBIN_U16("graphics/dialogue_icons/dominant.gbapal");
-static const u32 sCharacteristicIcon_Cynical[] = INCBIN_U32("graphics/dialogue_icons/cynical.4bpp.lz");
-static const u16 sCharacteristicPal_Cynical[] = INCBIN_U16("graphics/dialogue_icons/cynical.gbapal");
+static const u32 sCharacteristicDialogueIcon_Neutral[] = INCBIN_U32("graphics/dialogue_icons/neutral.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Neutral[] = INCBIN_U16("graphics/dialogue_icons/neutral.gbapal");
+static const u32 sCharacteristicDialogueIcon_Inspired[] = INCBIN_U32("graphics/dialogue_icons/inspired.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Inspired[] = INCBIN_U16("graphics/dialogue_icons/inspired.gbapal");
+static const u32 sCharacteristicDialogueIcon_Humble[] = INCBIN_U32("graphics/dialogue_icons/humble.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Humble[] = INCBIN_U16("graphics/dialogue_icons/humble.gbapal");
+static const u32 sCharacteristicDialogueIcon_Dominant[] = INCBIN_U32("graphics/dialogue_icons/dominant.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Dominant[] = INCBIN_U16("graphics/dialogue_icons/dominant.gbapal");
+static const u32 sCharacteristicDialogueIcon_Cynical[] = INCBIN_U32("graphics/dialogue_icons/cynical.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Cynical[] = INCBIN_U16("graphics/dialogue_icons/cynical.gbapal");
 
-static const struct OamData sCharacteristic_Oam = {
+static const struct OamData sCharacteristicDialogue_Oam = {
     .size = SPRITE_SIZE(32x32),
     .shape = SPRITE_SHAPE(32x32),
     .priority = 0,
@@ -32,7 +32,7 @@ static const struct OamData sCharacteristic_Oam = {
 static const struct SpriteTemplate sDialogueIconSprite_SpriteTemplate = {
     .tileTag = TAG_CHARACTER_DIALOGUE_ICON,
     .paletteTag = TAG_CHARACTER_DIALOGUE_ICON,
-    .oam = &sCharacteristic_Oam,
+    .oam = &sCharacteristicDialogue_Oam,
     .callback = SpriteCallbackDummy,
     .anims = gDummySpriteAnimTable,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -47,6 +47,35 @@ struct DialogueOptions
     const u16 *iconPal;
 };
 
+static const struct DialogueOptions sDialogueOptions[ATTITUDE_COUNT] =
+{
+    [DIALOGUE_OPTION_TALK] =
+    {
+        .iconImage = sCharacteristicDialogueIcon_Neutral,
+        .iconPal = sCharacteristicDialoguePal_Neutral
+    },
+    [ATTITUDE_INSPIRED] =
+    {
+        .iconImage = sCharacteristicDialogueIcon_Inspired,
+        .iconPal = sCharacteristicDialoguePal_Inspired
+    },
+    [ATTITUDE_HUMBLE] =
+    {
+        .iconImage = sCharacteristicDialogueIcon_Humble,
+        .iconPal = sCharacteristicDialoguePal_Humble
+    },
+    [ATTITUDE_DOMINANT] =
+    {
+        .iconImage = sCharacteristicDialogueIcon_Dominant,
+        .iconPal = sCharacteristicDialoguePal_Dominant
+    },
+    [ATTITUDE_CYNICAL] =
+    {
+        .iconImage = sCharacteristicDialogueIcon_Cynical,
+        .iconPal = sCharacteristicDialoguePal_Cynical
+    },
+};
+
 static const struct DialogueOptions sDialogueAttitudes[ATTITUDE_COUNT] =
 {
     [ATTITUDE_NEUTRAL] =
@@ -54,40 +83,40 @@ static const struct DialogueOptions sDialogueAttitudes[ATTITUDE_COUNT] =
         .name = COMPOUND_STRING("Neutral"),
         .kindnessEffect = 0,
         .strengthEffect = 0,
-        .iconImage = sCharacteristicIcon_Neutral,
-        .iconPal = sCharacteristicPal_Neutral
+        .iconImage = sCharacteristicDialogueIcon_Neutral,
+        .iconPal = sCharacteristicDialoguePal_Neutral
     },
     [ATTITUDE_INSPIRED] =
     {
         .name = COMPOUND_STRING("Inspired"),
         .kindnessEffect = 1,
         .strengthEffect = 1,
-        .iconImage = sCharacteristicIcon_Inspired,
-        .iconPal = sCharacteristicPal_Inspired
+        .iconImage = sCharacteristicDialogueIcon_Inspired,
+        .iconPal = sCharacteristicDialoguePal_Inspired
     },
     [ATTITUDE_HUMBLE] =
     {
         .name = COMPOUND_STRING("Humble"),
         .kindnessEffect = 1,
         .strengthEffect = -1,
-        .iconImage = sCharacteristicIcon_Humble,
-        .iconPal = sCharacteristicPal_Humble
+        .iconImage = sCharacteristicDialogueIcon_Humble,
+        .iconPal = sCharacteristicDialoguePal_Humble
     },
     [ATTITUDE_DOMINANT] =
     {
         .name = COMPOUND_STRING("Dominant"),
         .kindnessEffect = -1,
         .strengthEffect = 1,
-        .iconImage = sCharacteristicIcon_Dominant,
-        .iconPal = sCharacteristicPal_Dominant
+        .iconImage = sCharacteristicDialogueIcon_Dominant,
+        .iconPal = sCharacteristicDialoguePal_Dominant
     },
     [ATTITUDE_CYNICAL] =
     {
         .name = COMPOUND_STRING("Cynical"),
         .kindnessEffect = -1,
         .strengthEffect = -1,
-        .iconImage = sCharacteristicIcon_Cynical,
-        .iconPal = sCharacteristicPal_Cynical
+        .iconImage = sCharacteristicDialogueIcon_Cynical,
+        .iconPal = sCharacteristicDialoguePal_Cynical
     },
 };
 
