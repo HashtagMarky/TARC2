@@ -30,8 +30,7 @@ script IkigaiCharacterBox_InitialDialogue
 
 script IkigaiCharacterBox_Goodbye
 {
-    closemessage
-    release
+    mnmbox("Goodbye.")
     end
 }
 
@@ -45,7 +44,7 @@ script IkigaiCharacterBox_Talk
     emote(OBJ_EVENT_ID_PLAYER, EMOTE_TALK)
     if (var(VAR_RESULT) == MULTI_B_PRESSED)
     {
-        goto(IkigaiCharacterBox_InitialDialogue)
+        goto(IkigaiCharacterBox_Goodbye)
     }
     release
 }
@@ -54,6 +53,7 @@ script IkigaiCharacterBox_Debug_GetOpinion
 {
     callnative(IkigaiCharacter_CharacterOpinions)
     msgbox("{STR_VAR_1}", MSGBOX_DEFAULT)
+    closemessage
     end
 }
 
