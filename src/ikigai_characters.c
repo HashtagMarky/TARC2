@@ -12,8 +12,8 @@
 #include "script_menu.h"
 #include "string_util.h"
 
-static s8 ClampedOpinionDelta(s8 opinionCurrent, s8 opinionDelta);
-static s32 GetRelationshipBonus(u8 character, bool8 opinionType);
+static s32 ClampedOpinionDelta(s32 opinionCurrent, s32 opinionDelta);
+static s32 GetRelationshipBonus(u32 character, bool32 opinionType);
 
 static const u32 sCharacteristicDialogueIcon_Talk[] = INCBIN_U32("graphics/dialogue_icons/talk.4bpp.lz");
 static const u16 sCharacteristicDialoguePal_Talk[] = INCBIN_U16("graphics/dialogue_icons/talk.gbapal");
@@ -148,7 +148,7 @@ static const struct DialogueOptions sDialogueAttitudes[ATTITUDE_COUNT] =
     },
 };
 
-static s8 ClampedOpinionDelta(s8 opinionCurrent, s8 opinionDelta)
+static s32 ClampedOpinionDelta(s32 opinionCurrent, s32 opinionDelta)
 {
     if (opinionCurrent > 127 - opinionDelta)
         return 127 - opinionCurrent;
@@ -158,10 +158,10 @@ static s8 ClampedOpinionDelta(s8 opinionCurrent, s8 opinionDelta)
         return opinionDelta;
 }
 
-u8 IkigaiCharacter_GetPlayerAttitude(void)
+u32 IkigaiCharacter_GetPlayerAttitude(void)
 {
-    s8 opinionKindness = IkigaiCharacter_GetAverageKindness();
-    s8 opinionStrength = IkigaiCharacter_GetAverageStrength();
+    s32 opinionKindness = IkigaiCharacter_GetAverageKindness();
+    s32 opinionStrength = IkigaiCharacter_GetAverageStrength();
 
     if (opinionKindness > OPINION_NEUTRAL_BUFFER)
     {
@@ -184,7 +184,7 @@ u8 IkigaiCharacter_GetPlayerAttitude(void)
     return ATTITUDE_NEUTRAL;
 }
 
-void IkigaiCharacter_SetDefaultOpinion(u8 character)
+void IkigaiCharacter_SetDefaultOpinion(u32 character)
 {
     if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)
         return;
@@ -195,7 +195,7 @@ void IkigaiCharacter_SetDefaultOpinion(u8 character)
 
 void IkigaiCharacter_SetAllCharacterDefaultOpinion(void)
 {
-    u8 character;
+    u32 character;
 
     for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
     {
@@ -203,9 +203,9 @@ void IkigaiCharacter_SetAllCharacterDefaultOpinion(void)
     }
 }
 
-static s32 GetRelationshipBonus(u8 character, bool8 opinionType)
+static s32 GetRelationshipBonus(u32 character, bool32 opinionType)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i == MAX_RELATIONSHIPS; i++)
     {
@@ -229,9 +229,9 @@ static s32 GetRelationshipBonus(u8 character, bool8 opinionType)
     return 0;
 }
 
-s8 IkigaiCharacter_GetKindness(u8 character)
+s32 IkigaiCharacter_GetKindness(u32 character)
 {
-    s8 kindnessCharacter = gSaveBlock3Ptr->characters.opinionKindness[character];
+    s32 kindnessCharacter = gSaveBlock3Ptr->characters.opinionKindness[character];
     s32 kindnessAdded = 0;
 
     kindnessAdded += GetRelationshipBonus(character, OPINION_TYPE_KINDNESS);
@@ -239,9 +239,9 @@ s8 IkigaiCharacter_GetKindness(u8 character)
     return kindnessCharacter + ClampedOpinionDelta(kindnessCharacter, kindnessAdded);
 }
 
-s8 IkigaiCharacter_GetStrength(u8 character)
+s32 IkigaiCharacter_GetStrength(u32 character)
 {
-    s8 strengthCharacter = gSaveBlock3Ptr->characters.opinionStrength[character];
+    s32 strengthCharacter = gSaveBlock3Ptr->characters.opinionStrength[character];
     s32 strengthAdded = 0;
 
     strengthAdded += GetRelationshipBonus(character, OPINION_TYPE_STRENGTH);
@@ -249,10 +249,10 @@ s8 IkigaiCharacter_GetStrength(u8 character)
     return strengthCharacter + ClampedOpinionDelta(strengthCharacter, strengthAdded);
 }
 
-s8 IkigaiCharacter_GetAverageKindness(void)
+s32 IkigaiCharacter_GetAverageKindness(void)
 {
     s32 opinionKindness = 0;
-    u8 character;
+    u32 character;
 
     for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
     {
@@ -262,10 +262,10 @@ s8 IkigaiCharacter_GetAverageKindness(void)
     return (opinionKindness / (MAIN_CHARACTER_COUNT - 1));
 }
 
-s8 IkigaiCharacter_GetAverageStrength(void)
+s32 IkigaiCharacter_GetAverageStrength(void)
 {
     s32 opinionStrength = 0;
-    u8 character;
+    u32 character;
 
     for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
     {
@@ -275,10 +275,10 @@ s8 IkigaiCharacter_GetAverageStrength(void)
     return (opinionStrength / (MAIN_CHARACTER_COUNT - 1));
 }
 
-s8 IkigaiCharacter_GetSetConversedFlag(u8 character, bool8 setFlag)
+s32 IkigaiCharacter_GetSetConversedFlag(u32 character, bool32 setFlag)
 {
     u32 index, bit, mask;
-    s8 retVal = 0;
+    s32 retVal = 0;
 
     if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)
         return retVal;
@@ -300,7 +300,7 @@ void IkigaiCharacter_ClearConversedFlags(void)
     memset(gSaveBlock3Ptr->characters.conversed, 0, sizeof(gSaveBlock3Ptr->characters.conversed));
 }
 
-void IkigaiCharacter_SetRomanticFlag(u8 character)
+void IkigaiCharacter_SetRomanticFlag(u32 character)
 {
     if (gIkigaiCharactersInfo[character].flagRomantic == 0)
         return;
@@ -308,7 +308,7 @@ void IkigaiCharacter_SetRomanticFlag(u8 character)
     FlagSet(gIkigaiCharactersInfo[character].flagRomantic);
 }
 
-void IkigaiCharacter_ToggleRomanticFlag(u8 character)
+void IkigaiCharacter_ToggleRomanticFlag(u32 character)
 {
     if (gIkigaiCharactersInfo[character].flagRomantic == 0)
         return;
@@ -316,7 +316,7 @@ void IkigaiCharacter_ToggleRomanticFlag(u8 character)
     FlagToggle(gIkigaiCharactersInfo[character].flagRomantic);
 }
 
-void IkigaiCharacter_ClearRomanticFlag(u8 character)
+void IkigaiCharacter_ClearRomanticFlag(u32 character)
 {
     if (gIkigaiCharactersInfo[character].flagRomantic == 0)
         return;
@@ -324,7 +324,7 @@ void IkigaiCharacter_ClearRomanticFlag(u8 character)
     FlagClear(gIkigaiCharactersInfo[character].flagRomantic);
 }
 
-bool8 IkigaiCharacter_GetRomanticFlag(u8 character)
+bool32 IkigaiCharacter_GetRomanticFlag(u32 character)
 {
     if (gIkigaiCharactersInfo[character].flagRomantic == 0)
         return FALSE;
@@ -332,12 +332,12 @@ bool8 IkigaiCharacter_GetRomanticFlag(u8 character)
     return FlagGet(gIkigaiCharactersInfo[character].flagRomantic);
 }
 
-void IkigaiCharacter_SetRomanticFlag_Exclusive(u8 character)
+void IkigaiCharacter_SetRomanticFlag_Exclusive(u32 character)
 {
     if (gIkigaiCharactersInfo[character].flagRomantic == 0)
         return;
 
-    u8 i;
+    u32 i;
 
     for (i = CHARACTER_DEFAULT + 1; i < CHARACTER_COUNT_TOTAL; i++)
     {
@@ -348,7 +348,7 @@ void IkigaiCharacter_SetRomanticFlag_Exclusive(u8 character)
     }
 }
 
-void IkigaiCharacter_ClearRomanticFlag_Amicable(u8 character)
+void IkigaiCharacter_ClearRomanticFlag_Amicable(u32 character)
 {
     if (gIkigaiCharactersInfo[character].flagRomantic == 0)
         return;
@@ -356,7 +356,7 @@ void IkigaiCharacter_ClearRomanticFlag_Amicable(u8 character)
     FlagClear(gIkigaiCharactersInfo[character].flagRomantic);
 }
 
-void IkigaiCharacter_ClearRomanticFlag_Hostile(u8 character)
+void IkigaiCharacter_ClearRomanticFlag_Hostile(u32 character)
 {
     if (gIkigaiCharactersInfo[character].flagRomantic == 0)
         return;
@@ -366,7 +366,7 @@ void IkigaiCharacter_ClearRomanticFlag_Hostile(u8 character)
         gSaveBlock3Ptr->characters.opinionKindness[character] = - OPINION_NEUTRAL_BUFFER;
 }
 
-u8 IkigaiCharacter_CheckRelationships(void)
+u32 IkigaiCharacter_CheckRelationships(void)
 {
     if (IkigaiCharacter_IsPlayerSingleOrMonogamous())
         return ReturnIkigaiCharacter_RomanceFlag_Exclusive();
@@ -375,10 +375,10 @@ u8 IkigaiCharacter_CheckRelationships(void)
         return CHARACTER_COUNT_TOTAL;
 }
 
-bool8 IkigaiCharacter_IsPlayerSingleOrMonogamous(void)
+bool32 IkigaiCharacter_IsPlayerSingleOrMonogamous(void)
 {
-    u8 character;
-    u8 relationships = RELATIONSHIP_SINGLE;
+    u32 character;
+    u32 relationships = RELATIONSHIP_SINGLE;
 
     for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
     {
@@ -453,7 +453,7 @@ void ScrCmd_IkigaiCharacter_BurfferName(void)
     StringCopy(gStringVar1, gIkigaiCharactersInfo[gSpecialVar_Result].name);
 }
 
-bool8 IkigaiCharacter_ReturnOpinionDecay(u8 character)
+bool32 IkigaiCharacter_ReturnOpinionDecay(u32 character)
 {
     if (character > CHARACTER_COUNT_TOTAL)
         return FALSE; 
@@ -464,10 +464,10 @@ bool8 IkigaiCharacter_ReturnOpinionDecay(u8 character)
         return FALSE;
 }
 
-void IkigaiCharacter_OpinionDecay(u8 character)
+void IkigaiCharacter_OpinionDecay(u32 character)
 {
-    s8 opinionKindness = gSaveBlock3Ptr->characters.opinionKindness[character];
-    s8 opinionStrength = gSaveBlock3Ptr->characters.opinionStrength[character];
+    s32 opinionKindness = gSaveBlock3Ptr->characters.opinionKindness[character];
+    s32 opinionStrength = gSaveBlock3Ptr->characters.opinionStrength[character];
 
     if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)
         return;
@@ -491,7 +491,7 @@ void IkigaiCharacter_OpinionDecay(u8 character)
 
 void IkigaiCharacter_AllOpinionDecay_NonConverse(void)
 {
-    u8 character;
+    u32 character;
 
     for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
     {
@@ -502,7 +502,7 @@ void IkigaiCharacter_AllOpinionDecay_NonConverse(void)
 
 void IkigaiCharacter_HandleDialogue_Attitudes(void)
 {
-    u8 character = ReturnIkigaiCharacter_SelectedObject();
+    u32 character = ReturnIkigaiCharacter_SelectedObject();
 
     if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)
         return;
@@ -518,12 +518,12 @@ void IkigaiCharacter_HandleDialogue_Attitudes(void)
 
     if (!IkigaiCharacter_GetSetConversedFlag(character, FALSE))
     {
-        s8 opinionKindness = sDialogueAttitudes[gSpecialVar_Result].kindnessEffect;
-        s8 opinionStrength = sDialogueAttitudes[gSpecialVar_Result].strengthEffect;
+        s32 opinionKindness = sDialogueAttitudes[gSpecialVar_Result].kindnessEffect;
+        s32 opinionStrength = sDialogueAttitudes[gSpecialVar_Result].strengthEffect;
 
         if (gSpecialVar_Result == gIkigaiCharactersInfo[character].personality)
         {
-            u8 opinionMultiplier = Random() % 2;
+            u32 opinionMultiplier = Random() % 2;
 
             if (opinionKindness < 0)
                 opinionKindness *= (opinionMultiplier - 1);
@@ -544,10 +544,10 @@ void IkigaiCharacter_HandleDialogue_Attitudes(void)
 
 void IkigaiCharacter_CharacterOpinions(void)
 {
-    u8 character = ReturnIkigaiCharacter_SelectedObject();
+    u32 character = ReturnIkigaiCharacter_SelectedObject();
+    s32 opinionKindness = IkigaiCharacter_GetKindness(character);
+    s32 opinionStrength = IkigaiCharacter_GetStrength(character);
     u8 string[3];
-    s8 opinionKindness = IkigaiCharacter_GetKindness(character);
-    s8 opinionStrength = IkigaiCharacter_GetStrength(character);
 
     if (character > MAIN_CHARACTER_COUNT)
     {
@@ -581,9 +581,9 @@ void IkigaiCharacter_CharacterOpinions(void)
     }
 }
 
-u8 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId)
+u32 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId)
 {
-    u8 character;
+    u32 character;
 
     for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
     {
@@ -594,7 +594,7 @@ u8 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId)
     return CHARACTER_DEFAULT;
 }
 
-u8 ReturnIkigaiCharacter_SelectedObject(void)
+u32 ReturnIkigaiCharacter_SelectedObject(void)
 {
     return ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
 }
@@ -604,9 +604,9 @@ void ScrCmd_ReturnIkigaiCharacter_SelectedObject(void)
     gSpecialVar_Result = ReturnIkigaiCharacter_SelectedObject();
 }
 
-u8 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void)
+u32 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void)
 {
-    u8 character;
+    u32 character;
 
     for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
     {
@@ -620,7 +620,7 @@ u8 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void)
     return CHARACTER_DEFAULT;
 }
 
-u8 CreateDialogueOptionIconSprite(u8 dialogueIndex)
+u8 CreateDialogueOptionIconSprite(u32 dialogueIndex)
 {
     u8 spriteId;
 
@@ -657,7 +657,7 @@ u8 CreateDialogueOptionIconSprite(u8 dialogueIndex)
     return spriteId;
 }
 
-u8 CreateAttitudeIconSprite(u8 attitudeIndex)
+u8 CreateAttitudeIconSprite(u32 attitudeIndex)
 {
     u8 spriteId;
 

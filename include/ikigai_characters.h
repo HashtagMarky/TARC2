@@ -76,33 +76,33 @@ struct IkigaiCharacterInfo
 
 extern const struct IkigaiCharacterInfo gIkigaiCharactersInfo[];
 
-u8 IkigaiCharacter_GetPlayerAttitude(void);
-void IkigaiCharacter_SetDefaultOpinion(u8 character);
+u32 IkigaiCharacter_GetPlayerAttitude(void);
+void IkigaiCharacter_SetDefaultOpinion(u32 character);
 void IkigaiCharacter_SetAllCharacterDefaultOpinion(void);
-s8 IkigaiCharacter_GetKindness(u8 character);
-s8 IkigaiCharacter_GetStrength(u8 character);
-s8 IkigaiCharacter_GetAverageKindness(void);
-s8 IkigaiCharacter_GetAverageStrength(void);
-s8 IkigaiCharacter_GetSetConversedFlag(u8 character, bool8 setFlag);
+s32 IkigaiCharacter_GetKindness(u32 character);
+s32 IkigaiCharacter_GetStrength(u32 character);
+s32 IkigaiCharacter_GetAverageKindness(void);
+s32 IkigaiCharacter_GetAverageStrength(void);
+s32 IkigaiCharacter_GetSetConversedFlag(u32 character, bool32 setFlag);
 void IkigaiCharacter_ClearConversedFlags(void);
-void IkigaiCharacter_SetRomanticFlag(u8 character);
-void IkigaiCharacter_ToggleRomanticFlag(u8 character);
-void IkigaiCharacter_ClearRomanticFlag(u8 character);
-bool8 IkigaiCharacter_GetRomanticFlag(u8 character);
-void IkigaiCharacter_SetRomanticFlag_Exclusive(u8 character);
-void IkigaiCharacter_ClearRomanticFlag_Amicable(u8 character);
-void IkigaiCharacter_ClearRomanticFlag_Hostile(u8 character);
-u8 IkigaiCharacter_CheckRelationships(void);
-bool8 IkigaiCharacter_IsPlayerSingleOrMonogamous(void);
-bool8 IkigaiCharacter_ReturnOpinionDecay(u8 character);
-void IkigaiCharacter_OpinionDecay(u8 character);
+void IkigaiCharacter_SetRomanticFlag(u32 character);
+void IkigaiCharacter_ToggleRomanticFlag(u32 character);
+void IkigaiCharacter_ClearRomanticFlag(u32 character);
+bool32 IkigaiCharacter_GetRomanticFlag(u32 character);
+void IkigaiCharacter_SetRomanticFlag_Exclusive(u32 character);
+void IkigaiCharacter_ClearRomanticFlag_Amicable(u32 character);
+void IkigaiCharacter_ClearRomanticFlag_Hostile(u32 character);
+u32 IkigaiCharacter_CheckRelationships(void);
+bool32 IkigaiCharacter_IsPlayerSingleOrMonogamous(void);
+bool32 IkigaiCharacter_ReturnOpinionDecay(u32 character);
+void IkigaiCharacter_OpinionDecay(u32 character);
 void IkigaiCharacter_AllOpinionDecay_NonConverse(void);
 void IkigaiCharacter_HandleDialogue_Attitudes(void);
 void IkigaiCharacter_CharacterOpinions(void);
-u8 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId);
-u8 ReturnIkigaiCharacter_SelectedObject(void);
-u8 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void);
-u8 CreateDialogueOptionIconSprite(u8 attitudeIndex);
-u8 CreateAttitudeIconSprite(u8 attitudeIndex);
+u32 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId);
+u32 ReturnIkigaiCharacter_SelectedObject(void);
+u32 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void);
+u8 CreateDialogueOptionIconSprite(u32 attitudeIndex);
+u8 CreateAttitudeIconSprite(u32 attitudeIndex);
 
 #endif // GUARD_IKIGAI_CHARACTERS_H
