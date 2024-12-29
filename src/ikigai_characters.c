@@ -14,6 +14,7 @@
 
 static s32 ClampedOpinionDelta(s32 opinionCurrent, s32 opinionDelta);
 static s32 IkigaiCharacterOpinionBonus_Relationship(u32 character, bool32 opinionType);
+static s32 IkigaiCharacterOpinionBonus_PartnerPokemon(u32 character, bool32 opinionType);
 
 static const u32 sCharacteristicDialogueIcon_Talk[] = INCBIN_U32("graphics/dialogue_icons/talk.4bpp.lz");
 static const u16 sCharacteristicDialoguePal_Talk[] = INCBIN_U16("graphics/dialogue_icons/talk.gbapal");
@@ -516,7 +517,7 @@ void IkigaiCharacter_HandleDialogue_Attitudes(void)
     }
 }
 
-void IkigaiCharacter_CharacterOpinions(void)
+void DEBUG_IkigaiCharacter_CharacterOpinions(void)
 {
     u32 character = ReturnIkigaiCharacter_SelectedObject();
     s32 opinionKindness = IkigaiCharacter_GetKindness(character);

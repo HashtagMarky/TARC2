@@ -1,7 +1,11 @@
 script IkigaiCharacterBox_InitialDialogue
+ // Move Dynamic Multipush (Maybe Dynamic Multistack) into C.
+ // This allows for more flexible controls of whether certain options are available,
+ // based of flags defined in array, time of day, map, quest status, opinion levels etc.
+ // Store strings in String Variables, taken from character arrays.
 {
     mnmbox("Hello there, {PLAYER}.", waitbuttonpress=FALSE, remain=TRUE)
-    //callnative(ReplaceFieldMessageWithFrame)
+    // callnative(ReplaceFieldMessageWithFrame) // Potential Function for Musghot Window blended into Message Box
     dynmultipush("Talk", DIALOGUE_OPTION_TALK)
     dynmultipush("Opinion", DIALOGUE_OPTION_OPINION)
     dynmultipush("Romance", DIALOGUE_OPTION_ROMANCE)
@@ -51,7 +55,7 @@ script IkigaiCharacterBox_Talk
 
 script IkigaiCharacterBox_Debug_GetOpinion
 {
-    callnative(IkigaiCharacter_CharacterOpinions)
+    callnative(DEBUG_IkigaiCharacter_CharacterOpinions)
     msgbox("{STR_VAR_1}", MSGBOX_DEFAULT)
     closemessage
     end
