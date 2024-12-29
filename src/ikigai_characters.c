@@ -11,6 +11,21 @@
 #include "random.h"
 #include "script_menu.h"
 #include "string_util.h"
+static const u32 sCharacteristicDialogueIcon_Talk[] = INCBIN_U32("graphics/dialogue_icons/talk.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Talk[] = INCBIN_U16("graphics/dialogue_icons/talk.gbapal");
+static const u32 sCharacteristicDialogueIcon_Opinion[] = INCBIN_U32("graphics/dialogue_icons/opinion.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Opinion[] = INCBIN_U16("graphics/dialogue_icons/opinion.gbapal");
+static const u32 sCharacteristicDialogueIcon_Romance[] = INCBIN_U32("graphics/dialogue_icons/romance.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Romance[] = INCBIN_U16("graphics/dialogue_icons/romance.gbapal");
+static const u32 sCharacteristicDialogueIcon_Quest[] = INCBIN_U32("graphics/dialogue_icons/quest.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Quest[] = INCBIN_U16("graphics/dialogue_icons/quest.gbapal");
+static const u32 sCharacteristicDialogueIcon_Battle[] = INCBIN_U32("graphics/dialogue_icons/battle.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Battle[] = INCBIN_U16("graphics/dialogue_icons/battle.gbapal");
+static const u32 sCharacteristicDialogueIcon_Gift[] = INCBIN_U32("graphics/dialogue_icons/gift.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Gift[] = INCBIN_U16("graphics/dialogue_icons/gift.gbapal");
+static const u32 sCharacteristicDialogueIcon_Goodbye[] = INCBIN_U32("graphics/dialogue_icons/goodbye.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Goodbye[] = INCBIN_U16("graphics/dialogue_icons/goodbye.gbapal");
+
 
 static const u32 sCharacteristicDialogueIcon_Neutral[] = INCBIN_U32("graphics/dialogue_icons/neutral.4bpp.lz");
 static const u16 sCharacteristicDialoguePal_Neutral[] = INCBIN_U16("graphics/dialogue_icons/neutral.gbapal");
@@ -47,32 +62,42 @@ struct DialogueOptions
     const u16 *iconPal;
 };
 
-static const struct DialogueOptions sDialogueOptions[ATTITUDE_COUNT] =
+static const struct DialogueOptions sDialogueOptions[DIALOGUE_OPTION_COUNT] =
 {
     [DIALOGUE_OPTION_TALK] =
     {
-        .iconImage = sCharacteristicDialogueIcon_Neutral,
-        .iconPal = sCharacteristicDialoguePal_Neutral
+        .iconImage = sCharacteristicDialogueIcon_Talk,
+        .iconPal = sCharacteristicDialoguePal_Talk
     },
-    [ATTITUDE_INSPIRED] =
+    [DIALOGUE_OPTION_OPINION] =
     {
-        .iconImage = sCharacteristicDialogueIcon_Inspired,
-        .iconPal = sCharacteristicDialoguePal_Inspired
+        .iconImage = sCharacteristicDialogueIcon_Opinion,
+        .iconPal = sCharacteristicDialoguePal_Opinion
     },
-    [ATTITUDE_HUMBLE] =
+    [DIALOGUE_OPTION_ROMANCE] =
     {
-        .iconImage = sCharacteristicDialogueIcon_Humble,
-        .iconPal = sCharacteristicDialoguePal_Humble
+        .iconImage = sCharacteristicDialogueIcon_Romance,
+        .iconPal = sCharacteristicDialoguePal_Romance
     },
-    [ATTITUDE_DOMINANT] =
+    [DIALOGUE_OPTION_QUESTS] =
     {
-        .iconImage = sCharacteristicDialogueIcon_Dominant,
-        .iconPal = sCharacteristicDialoguePal_Dominant
+        .iconImage = sCharacteristicDialogueIcon_Quest,
+        .iconPal = sCharacteristicDialoguePal_Quest
     },
-    [ATTITUDE_CYNICAL] =
+    [DIALOGUE_OPTION_BATTLE] =
     {
-        .iconImage = sCharacteristicDialogueIcon_Cynical,
-        .iconPal = sCharacteristicDialoguePal_Cynical
+        .iconImage = sCharacteristicDialogueIcon_Battle,
+        .iconPal = sCharacteristicDialoguePal_Battle
+    },
+    [DIALOGUE_OPTION_GIFT] =
+    {
+        .iconImage = sCharacteristicDialogueIcon_Gift,
+        .iconPal = sCharacteristicDialoguePal_Gift
+    },
+    [DIALOGUE_OPTION_GOODBYE] =
+    {
+        .iconImage = sCharacteristicDialogueIcon_Goodbye,
+        .iconPal = sCharacteristicDialoguePal_Goodbye
     },
 };
 
@@ -533,6 +558,43 @@ u8 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void)
     }
 
     return CHARACTER_DEFAULT;
+}
+
+u8 CreateDialogueOptionIconSprite(u8 dialogueIndex)
+{
+    u8 spriteId;
+
+    struct CompressedSpriteSheet sheet = { .size = 0x1000, .tag = TAG_CHARACTER_DIALOGUE_ICON };
+    struct SpritePalette pal = { .tag = TAG_CHARACTER_DIALOGUE_ICON };
+    struct SpriteTemplate *spriteTemplate;
+
+    if (dialogueIndex >= DIALOGUE_OPTION_COUNT)
+        dialogueIndex = DIALOGUE_OPTION_TALK;
+
+    sheet.data = sDialogueOptions[dialogueIndex].iconImage;
+    pal.data = sDialogueOptions[dialogueIndex].iconPal;
+
+    LoadCompressedSpriteSheet(&sheet);
+    LoadSpritePalette(&pal);
+
+    spriteTemplate = Alloc(sizeof(*spriteTemplate));
+    if (spriteTemplate == NULL)
+        return SPRITE_NONE;
+
+    CpuCopy16(&sDialogueIconSprite_SpriteTemplate, spriteTemplate, sizeof(*spriteTemplate));
+    spriteTemplate->tileTag = TAG_CHARACTER_DIALOGUE_ICON;
+    spriteTemplate->paletteTag = TAG_CHARACTER_DIALOGUE_ICON;
+
+    spriteId = CreateSprite(spriteTemplate, 0, 0, 0);
+
+    Free(spriteTemplate);
+
+    if (spriteId == SPRITE_NONE)
+        return SPRITE_NONE;
+
+    PreservePaletteInWeather(gSprites[spriteId].oam.paletteNum + 0x10);
+
+    return spriteId;
 }
 
 u8 CreateAttitudeIconSprite(u8 attitudeIndex)

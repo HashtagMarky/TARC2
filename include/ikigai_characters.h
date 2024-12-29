@@ -100,7 +100,7 @@ void IkigaiCharacter_CharacterOpinions(void);
 u8 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId);
 u8 ReturnIkigaiCharacter_SelectedObject(void);
 u8 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void);
-u8 CreateDialogueIconSprite(u8 attitudeIndex);
+u8 CreateDialogueOptionIconSprite(u8 attitudeIndex);
 u8 CreateAttitudeIconSprite(u8 attitudeIndex);
 
 #endif // GUARD_IKIGAI_CHARACTERS_H

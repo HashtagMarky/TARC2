@@ -2584,7 +2584,7 @@
 	.ifnb \cynical
 		dialoguemultipush ATTITUDE_CYNICAL, \cynical
 	.endif
-	_dynmultichoice 0, 0, \bPress, 2, TRUE, -1, DYN_MULTICHOICE_CB_DIALOGUE, NULL
+	_dynmultichoice 0, 0, \bPress, 2, TRUE, -1, DYN_MULTICHOICE_CB_DIALOGUE_ATTITUDES, NULL
 	.endm
 
 	@ Create the Character Dialogue Box with a Character.
