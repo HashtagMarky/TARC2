@@ -190,6 +190,20 @@ void IkigaiCharacter_SetAllCharacterDefaultOpinion(void)
     }
 }
 
+s8 IkigaiCharacter_GetKindness(u8 character)
+{
+    s8 opinionKindness = gSaveBlock3Ptr->characters.opinionKindness[character];
+
+    return opinionKindness;
+}
+
+s8 IkigaiCharacter_GetStrength(u8 character)
+{
+    s8 opinionStrength = gSaveBlock3Ptr->characters.opinionStrength[character];
+
+    return opinionStrength;
+}
+
 s8 IkigaiCharacter_GetAverageKindness(void)
 {
     s32 opinionKindness = 0;
@@ -197,11 +211,10 @@ s8 IkigaiCharacter_GetAverageKindness(void)
 
     for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
     {
-        opinionKindness += gSaveBlock3Ptr->characters.opinionKindness[character];
+        opinionKindness += IkigaiCharacter_GetKindness(character);
     }
 
     return (opinionKindness / (MAIN_CHARACTER_COUNT - 1));
-
 }
 
 s8 IkigaiCharacter_GetAverageStrength(void)
@@ -211,11 +224,10 @@ s8 IkigaiCharacter_GetAverageStrength(void)
 
     for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
     {
-        opinionStrength += gSaveBlock3Ptr->characters.opinionStrength[character];
+        opinionStrength += IkigaiCharacter_GetStrength(character);
     }
 
     return (opinionStrength / (MAIN_CHARACTER_COUNT - 1));
-
 }
 
 s8 IkigaiCharacter_GetSetConversedFlag(u8 character, bool8 setFlag)
@@ -486,8 +498,8 @@ void IkigaiCharacter_CharacterOpinions(void)
 {
     u8 character = ReturnIkigaiCharacter_SelectedObject();
     u8 string[3];
-    s8 opinionKindness = gSaveBlock3Ptr->characters.opinionKindness[character];
-    s8 opinionStrength = gSaveBlock3Ptr->characters.opinionStrength[character];
+    s8 opinionKindness = IkigaiCharacter_GetKindness(character);
+    s8 opinionStrength = IkigaiCharacter_GetStrength(character);
 
     if (character > MAIN_CHARACTER_COUNT)
     {

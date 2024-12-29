@@ -79,6 +79,8 @@ extern const struct IkigaiCharacterInfo gIkigaiCharactersInfo[];
 u8 IkigaiCharacter_GetPlayerAttitude(void);
 void IkigaiCharacter_SetDefaultOpinion(u8 character);
 void IkigaiCharacter_SetAllCharacterDefaultOpinion(void);
+s8 IkigaiCharacter_GetKindness(u8 character);
+s8 IkigaiCharacter_GetStrength(u8 character);
 s8 IkigaiCharacter_GetAverageKindness(void);
 s8 IkigaiCharacter_GetAverageStrength(void);
 s8 IkigaiCharacter_GetSetConversedFlag(u8 character, bool8 setFlag);
