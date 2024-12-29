@@ -76,9 +76,6 @@ struct InventoryItem
 
 extern const struct IkigaiCharacterInfo gIkigaiCharactersInfo[];
 
-void SpriteCB_TwoFrameIcon(struct Sprite *sprite);
-u8 UpdateTwoFrameIcon(struct Sprite *sprite);
-
 u8 IkigaiCharacter_GetPlayerAttitude(void);
 void IkigaiCharacter_SetDefaultOpinion(u8 character);
 void IkigaiCharacter_SetAllCharacterDefaultOpinion(void);

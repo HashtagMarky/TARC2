@@ -11,8 +11,6 @@
 #include "random.h"
 #include "script_menu.h"
 #include "string_util.h"
-#include "pokemon_icon.h"
-
 static const u32 sCharacteristicDialogueIcon_Talk[] = INCBIN_U32("graphics/dialogue_icons/talk.4bpp.lz");
 static const u16 sCharacteristicDialoguePal_Talk[] = INCBIN_U16("graphics/dialogue_icons/talk.gbapal");
 static const u32 sCharacteristicDialogueIcon_Opinion[] = INCBIN_U32("graphics/dialogue_icons/opinion.4bpp.lz");
@@ -23,10 +21,11 @@ static const u32 sCharacteristicDialogueIcon_Quest[] = INCBIN_U32("graphics/dial
 static const u16 sCharacteristicDialoguePal_Quest[] = INCBIN_U16("graphics/dialogue_icons/quest.gbapal");
 static const u32 sCharacteristicDialogueIcon_Battle[] = INCBIN_U32("graphics/dialogue_icons/battle.4bpp.lz");
 static const u16 sCharacteristicDialoguePal_Battle[] = INCBIN_U16("graphics/dialogue_icons/battle.gbapal");
-static const u32 sCharacteristicDialogueIcon_Gift[] = INCBIN_U32("graphics/dialogue_icons/gift2.4bpp.lz");
-static const u16 sCharacteristicDialoguePal_Gift[] = INCBIN_U16("graphics/dialogue_icons/gift2.gbapal");
+static const u32 sCharacteristicDialogueIcon_Gift[] = INCBIN_U32("graphics/dialogue_icons/gift.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Gift[] = INCBIN_U16("graphics/dialogue_icons/gift.gbapal");
 static const u32 sCharacteristicDialogueIcon_Goodbye[] = INCBIN_U32("graphics/dialogue_icons/goodbye.4bpp.lz");
 static const u16 sCharacteristicDialoguePal_Goodbye[] = INCBIN_U16("graphics/dialogue_icons/goodbye.gbapal");
+
 
 static const u32 sCharacteristicDialogueIcon_Neutral[] = INCBIN_U32("graphics/dialogue_icons/neutral.4bpp.lz");
 static const u16 sCharacteristicDialoguePal_Neutral[] = INCBIN_U16("graphics/dialogue_icons/neutral.gbapal");
@@ -40,119 +39,18 @@ static const u32 sCharacteristicDialogueIcon_Cynical[] = INCBIN_U32("graphics/di
 static const u16 sCharacteristicDialoguePal_Cynical[] = INCBIN_U16("graphics/dialogue_icons/cynical.gbapal");
 
 static const struct OamData sCharacteristicDialogue_Oam = {
-    .y = 0,
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_NORMAL,
-    .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(32x32),
-    .x = 0,
     .size = SPRITE_SIZE(32x32),
-    .tileNum = 0,
-    .priority = 1,
-    .paletteNum = 0,
+    .shape = SPRITE_SHAPE(32x32),
+    .priority = 0,
 };
-
-static const union AnimCmd sAnim_0[] =
-{
-    ANIMCMD_FRAME(0, 6),
-    ANIMCMD_FRAME(1, 6),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnim_1[] =
-{
-    ANIMCMD_FRAME(0, 8),
-    ANIMCMD_FRAME(1, 8),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnim_2[] =
-{
-    ANIMCMD_FRAME(0, 14),
-    ANIMCMD_FRAME(1, 14),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnim_3[] =
-{
-    ANIMCMD_FRAME(0, 22),
-    ANIMCMD_FRAME(1, 22),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnim_4[] =
-{
-    ANIMCMD_FRAME(0, 29),
-    ANIMCMD_FRAME(0, 29), // frame 0 is repeated
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd *const sDialogueIconAnims[] =
-{
-    sAnim_0,
-    sAnim_1,
-    sAnim_2,
-    sAnim_3,
-    sAnim_4,
-};
-
-static const union AffineAnimCmd sAffineAnim_0[] =
-{
-    AFFINEANIMCMD_FRAME(0, 0, 0, 10),
-    AFFINEANIMCMD_END,
-};
-
-static const union AffineAnimCmd sAffineAnim_1[] =
-{
-    AFFINEANIMCMD_FRAME(-2, -2, 0, 122),
-    AFFINEANIMCMD_END,
-};
-
-static const union AffineAnimCmd *const sDialogueIconAffineAnims[] =
-{
-    sAffineAnim_0,
-    sAffineAnim_1,
-};
-
-void SpriteCB_TwoFrameIcon(struct Sprite *sprite)
-{
-    UpdateTwoFrameIcon(sprite);
-}
-
-u8 UpdateTwoFrameIcon(struct Sprite *sprite)
-{
-    u8 result = 0;
-
-    if (sprite->animDelayCounter == 0) // Check if delay timer has expired
-    {
-        // Calculate the frame offset (0 for the top frame, 1024 bytes for the bottom frame)
-        s16 frameOffset = (sprite->animCmdIndex % 2) * 1024; // Alternates between 0 and 1024
-
-        // Copy the appropriate frame
-        RequestSpriteCopy(
-            (u8 *)sprite->images + frameOffset,
-            (u8 *)(OBJ_VRAM0 + sprite->oam.tileNum * TILE_SIZE_4BPP),
-            1024); // Each frame is 32x32 = 1024 bytes
-
-        // Update delay and frame index
-        sprite->animDelayCounter = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.duration & 0xFF;
-        sprite->animCmdIndex++; // Move to the next frame
-        result = sprite->animCmdIndex;
-    }
-    else
-    {
-        sprite->animDelayCounter--; // Decrement delay counter
-    }
-    return result;
-}
 
 static const struct SpriteTemplate sDialogueIconSprite_SpriteTemplate = {
     .tileTag = TAG_CHARACTER_DIALOGUE_ICON,
     .paletteTag = TAG_CHARACTER_DIALOGUE_ICON,
     .oam = &sCharacteristicDialogue_Oam,
-    .callback = SpriteCB_MonIcon,
-    .anims = sDialogueIconAnims,
-    .affineAnims = sDialogueIconAffineAnims,
+    .callback = SpriteCallbackDummy,
+    .anims = gDummySpriteAnimTable,
+    .affineAnims = gDummySpriteAffineAnimTable,
 };
 
 struct DialogueOptions
