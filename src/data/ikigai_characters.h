@@ -27,6 +27,13 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .baseOpinionKindness = 20,
         .baseOpinionStrength = 25,
         .opinionDecayChance = 0,
+        .relationships =
+        {
+            {
+                .characterId = MAIN_CHARACTER_LAUREN,
+                .affinity = RELATIONSHIP_EXTREMELY_POSITIVE,
+            },
+        },
     },
 
     [MAIN_CHARACTER_LAUREN] =
@@ -42,6 +49,18 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .baseOpinionKindness = 15,
         .baseOpinionStrength = 20,
         .opinionDecayChance = 10,
+        .relationships =
+        {
+            {
+                .characterId = MAIN_CHARACTER_SAMUEL,
+                .affinity = RELATIONSHIP_EXTREMELY_POSITIVE,
+            },
+            
+            {
+                .characterId = MAIN_CHARACTER_THOMAS,
+                .affinity = RELATIONSHIP_VERY_POSITIVE,
+            },
+        },
     },
 
     [MAIN_CHARACTER_THOMAS] =
@@ -53,6 +72,13 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .baseOpinionKindness = 20,
         .baseOpinionStrength = 25,
         .opinionDecayChance = 5,
+        .relationships =
+        {
+            {
+                .characterId = MAIN_CHARACTER_SAMUEL,
+                .affinity = RELATIONSHIP_VERY_POSITIVE,
+            },
+        },
     },
 
     [MAIN_CHARACTER_CAPTAIN] =

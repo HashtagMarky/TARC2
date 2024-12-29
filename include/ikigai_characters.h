@@ -2,11 +2,26 @@
 #define GUARD_IKIGAI_CHARACTERS_H
 
 #define TAG_CHARACTER_DIALOGUE_ICON 4001
+#define MAX_RELATIONSHIPS 5
+
 /*
 #define CHAR_OBJ(name)
 #define CHAR_MUGSHOT(name)
 #define CHAR_PARTNET(name)
 */
+
+struct Relationship {
+    u8 characterId;
+    s8 affinity;
+};
+
+struct InventoryItem
+{
+    u16 itemId;             // Unique identifier for the item
+    u8 itemQuantity;           // Quantity of the item
+    u8 itemChance;         // Whether the item is a key item
+};
+
 struct IkigaiCharacterInfo
 {
     // Character Identification
@@ -47,7 +62,7 @@ struct IkigaiCharacterInfo
     // char** uniqueDialogue; // Unique dialogue lines for the character
 
     // Relationships
-    struct Relationship* relationships;  // Array of relationships with other characters
+    struct Relationship relationships[MAX_RELATIONSHIPS];  // Array of relationships with other characters
 
     // Quests & Events
     // int* questIds;         // Array of quest IDs that involve this character
@@ -58,20 +73,6 @@ struct IkigaiCharacterInfo
     // Battle Information
     u8 trainerPartyCount;
     u16 trainerParty;
-};
-
-struct Relationship
-{
-    u8 characterId;             // ID of the related character
-    s8 affinity;                // Affinity level, representing the strength of the relationship
-    bool8 isDynamic;            // Whether the relationship changes over time or with events
-};
-
-struct InventoryItem
-{
-    u16 itemId;             // Unique identifier for the item
-    u8 itemQuantity;           // Quantity of the item
-    u8 itemChance;         // Whether the item is a key item
 };
 
 extern const struct IkigaiCharacterInfo gIkigaiCharactersInfo[];
