@@ -31,7 +31,6 @@
 #include "window.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "field_mugshot.h"
 
 enum
 {
@@ -5891,7 +5890,6 @@ static void ClearSearchParameterBoxText(void)
 void ShowPokedexHeaderMessage(void)
 {
     struct WindowTemplate template;
-    struct MugshotDetails mugshotDetails = GetMugshotDetails();
     u16 species = gSpecialVar_0x8004;
     u8 textY = 0;
     bool8 handleFlash = FALSE;
@@ -5900,11 +5898,6 @@ void ShowPokedexHeaderMessage(void)
         return;
 
     HidePokedexHeaderMessage();
-    while (REG_VCOUNT >= 160);          // Wait until VBlank starts
-    while (REG_VCOUNT < 160);           // Wait until VBlank ends
-    if (IsFieldMugshotActive() && (mugshotDetails.mugshotType == MUGSHOT_NPC || mugshotDetails.mugshotType == MUGSHOT_PLAYER))
-        RemoveFieldMugshotAndWindow();
-    
     gActivePokedexHeader = TRUE;
     
     GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_SEEN);
