@@ -150,21 +150,21 @@ u8 IkigaiCharacter_GetPlayerAttitude(void)
     s8 opinionKindness = IkigaiCharacter_GetAverageKindness();
     s8 opinionStrength = IkigaiCharacter_GetAverageStrength();
 
-    if (opinionKindness > ATTITUDE_NEUTRAL_BUFFER)
+    if (opinionKindness > OPINION_NEUTRAL_BUFFER)
     {
-        if (opinionStrength > ATTITUDE_NEUTRAL_BUFFER)
+        if (opinionStrength > OPINION_NEUTRAL_BUFFER)
             return ATTITUDE_INSPIRED;
 
-        if (opinionStrength < - ATTITUDE_NEUTRAL_BUFFER)
+        if (opinionStrength < - OPINION_NEUTRAL_BUFFER)
             return ATTITUDE_HUMBLE;
     }
 
-    if (opinionKindness < - ATTITUDE_NEUTRAL_BUFFER)
+    if (opinionKindness < - OPINION_NEUTRAL_BUFFER)
     {
-        if (opinionStrength > ATTITUDE_NEUTRAL_BUFFER)
+        if (opinionStrength > OPINION_NEUTRAL_BUFFER)
             return ATTITUDE_DOMINANT;
 
-        if (opinionStrength < - ATTITUDE_NEUTRAL_BUFFER)
+        if (opinionStrength < - OPINION_NEUTRAL_BUFFER)
             return ATTITUDE_CYNICAL;
     }
 
@@ -318,7 +318,7 @@ void IkigaiCharacter_ClearRomanticFlag_Hostile(u8 character)
 
     FlagClear(gIkigaiCharactersInfo[character].flagRomantic);
     if (character > CHARACTER_DEFAULT && character < MAIN_CHARACTER_COUNT)
-        gSaveBlock3Ptr->characters.opinionKindness[character] = - ATTITUDE_NEUTRAL_BUFFER;
+        gSaveBlock3Ptr->characters.opinionKindness[character] = - OPINION_NEUTRAL_BUFFER;
 }
 
 u8 IkigaiCharacter_CheckRelationships(void)
@@ -426,17 +426,17 @@ void IkigaiCharacter_OpinionDecay(u8 character)
     
     if (IkigaiCharacter_ReturnOpinionDecay(character))
     {
-        if (gSaveBlock3Ptr->characters.opinionKindness[character] > ATTITUDE_NEUTRAL_BUFFER)
+        if (gSaveBlock3Ptr->characters.opinionKindness[character] > OPINION_NEUTRAL_BUFFER)
             gSaveBlock3Ptr->characters.opinionKindness[character]--;
-        else if (gSaveBlock3Ptr->characters.opinionKindness[character] < ATTITUDE_NEUTRAL_BUFFER)
+        else if (gSaveBlock3Ptr->characters.opinionKindness[character] < OPINION_NEUTRAL_BUFFER)
             gSaveBlock3Ptr->characters.opinionKindness[character]++;
     }
 
     if (IkigaiCharacter_ReturnOpinionDecay(character))
     {
-        if (gSaveBlock3Ptr->characters.opinionStrength[character] > ATTITUDE_NEUTRAL_BUFFER)
+        if (gSaveBlock3Ptr->characters.opinionStrength[character] > OPINION_NEUTRAL_BUFFER)
             gSaveBlock3Ptr->characters.opinionStrength[character]--;
-        else if (gSaveBlock3Ptr->characters.opinionStrength[character] < ATTITUDE_NEUTRAL_BUFFER)
+        else if (gSaveBlock3Ptr->characters.opinionStrength[character] < OPINION_NEUTRAL_BUFFER)
             gSaveBlock3Ptr->characters.opinionStrength[character]++;
     }
 }
