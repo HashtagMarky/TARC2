@@ -1,4 +1,8 @@
-#define OPINION_NEUTRAL_BUFFER 20
+#define OPINION_TYPE_KINDNESS               0
+#define OPINION_TYPE_STRENGTH               1
+#define RELATIONSHIP_AFFINITY_MULTIPLIER    3
+#define MAX_RELATIONSHIPS                   5
+#define OPINION_NEUTRAL_BUFFER              20
 
 enum DialogueOption
 {

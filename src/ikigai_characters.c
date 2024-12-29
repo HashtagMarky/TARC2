@@ -11,6 +11,10 @@
 #include "random.h"
 #include "script_menu.h"
 #include "string_util.h"
+
+static s8 ClampedOpinionDelta(s8 opinionCurrent, s8 opinionDelta);
+static s32 GetRelationshipBonus(u8 character, bool8 opinionType);
+
 static const u32 sCharacteristicDialogueIcon_Talk[] = INCBIN_U32("graphics/dialogue_icons/talk.4bpp.lz");
 static const u16 sCharacteristicDialoguePal_Talk[] = INCBIN_U16("graphics/dialogue_icons/talk.gbapal");
 static const u32 sCharacteristicDialogueIcon_Opinion[] = INCBIN_U32("graphics/dialogue_icons/opinion.4bpp.lz");
@@ -25,7 +29,6 @@ static const u32 sCharacteristicDialogueIcon_Gift[] = INCBIN_U32("graphics/dialo
 static const u16 sCharacteristicDialoguePal_Gift[] = INCBIN_U16("graphics/dialogue_icons/gift.gbapal");
 static const u32 sCharacteristicDialogueIcon_Goodbye[] = INCBIN_U32("graphics/dialogue_icons/goodbye.4bpp.lz");
 static const u16 sCharacteristicDialoguePal_Goodbye[] = INCBIN_U16("graphics/dialogue_icons/goodbye.gbapal");
-
 
 static const u32 sCharacteristicDialogueIcon_Neutral[] = INCBIN_U32("graphics/dialogue_icons/neutral.4bpp.lz");
 static const u16 sCharacteristicDialoguePal_Neutral[] = INCBIN_U16("graphics/dialogue_icons/neutral.gbapal");
@@ -145,6 +148,16 @@ static const struct DialogueOptions sDialogueAttitudes[ATTITUDE_COUNT] =
     },
 };
 
+static s8 ClampedOpinionDelta(s8 opinionCurrent, s8 opinionDelta)
+{
+    if (opinionCurrent > 127 - opinionDelta)
+        return 127 - opinionCurrent;
+    else if (opinionCurrent < -128 - opinionDelta)
+        return -128 - opinionCurrent;
+    else
+        return opinionDelta;
+}
+
 u8 IkigaiCharacter_GetPlayerAttitude(void)
 {
     s8 opinionKindness = IkigaiCharacter_GetAverageKindness();
@@ -190,18 +203,50 @@ void IkigaiCharacter_SetAllCharacterDefaultOpinion(void)
     }
 }
 
+static s32 GetRelationshipBonus(u8 character, bool8 opinionType)
+{
+    u8 i;
+
+    for (i = 0; i == MAX_RELATIONSHIPS; i++)
+    {
+        if (opinionType == OPINION_TYPE_KINDNESS &&
+            gSaveBlock3Ptr->characters.opinionKindness[
+                gIkigaiCharactersInfo[character].relationships[i].characterId
+            ] >= gIkigaiCharactersInfo[character].relationships[i].affinity * RELATIONSHIP_AFFINITY_MULTIPLIER)
+        {
+            return gIkigaiCharactersInfo[character].relationships[i].affinity;
+        }
+
+        else if (opinionType == OPINION_TYPE_STRENGTH &&
+            gSaveBlock3Ptr->characters.opinionKindness[
+                gIkigaiCharactersInfo[character].relationships[i].characterId
+            ] >= gIkigaiCharactersInfo[character].relationships[i].affinity * RELATIONSHIP_AFFINITY_MULTIPLIER)
+        {
+            return gIkigaiCharactersInfo[character].relationships[i].affinity;
+        }
+    }
+
+    return 0;
+}
+
 s8 IkigaiCharacter_GetKindness(u8 character)
 {
-    s8 opinionKindness = gSaveBlock3Ptr->characters.opinionKindness[character];
+    s8 kindnessCharacter = gSaveBlock3Ptr->characters.opinionKindness[character];
+    s32 kindnessAdded = 0;
 
-    return opinionKindness;
+    kindnessAdded += GetRelationshipBonus(character, OPINION_TYPE_KINDNESS);
+
+    return kindnessCharacter + ClampedOpinionDelta(kindnessCharacter, kindnessAdded);
 }
 
 s8 IkigaiCharacter_GetStrength(u8 character)
 {
-    s8 opinionStrength = gSaveBlock3Ptr->characters.opinionStrength[character];
+    s8 strengthCharacter = gSaveBlock3Ptr->characters.opinionStrength[character];
+    s32 strengthAdded = 0;
 
-    return opinionStrength;
+    strengthAdded += GetRelationshipBonus(character, OPINION_TYPE_STRENGTH);
+
+    return strengthCharacter + ClampedOpinionDelta(strengthCharacter, strengthAdded);
 }
 
 s8 IkigaiCharacter_GetAverageKindness(void)
