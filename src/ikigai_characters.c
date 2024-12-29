@@ -466,23 +466,26 @@ bool8 IkigaiCharacter_ReturnOpinionDecay(u8 character)
 
 void IkigaiCharacter_OpinionDecay(u8 character)
 {
+    s8 opinionKindness = gSaveBlock3Ptr->characters.opinionKindness[character];
+    s8 opinionStrength = gSaveBlock3Ptr->characters.opinionStrength[character];
+
     if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)
         return;
     
     if (IkigaiCharacter_ReturnOpinionDecay(character))
     {
-        if (gSaveBlock3Ptr->characters.opinionKindness[character] > OPINION_NEUTRAL_BUFFER)
-            gSaveBlock3Ptr->characters.opinionKindness[character]--;
-        else if (gSaveBlock3Ptr->characters.opinionKindness[character] < OPINION_NEUTRAL_BUFFER)
-            gSaveBlock3Ptr->characters.opinionKindness[character]++;
+        if (opinionKindness > OPINION_NEUTRAL_BUFFER)
+            gSaveBlock3Ptr->characters.opinionKindness[character] - ClampedOpinionDelta(opinionKindness, -1);
+        else if (opinionKindness < OPINION_NEUTRAL_BUFFER)
+            gSaveBlock3Ptr->characters.opinionKindness[character] + ClampedOpinionDelta(opinionKindness, 1);
     }
 
     if (IkigaiCharacter_ReturnOpinionDecay(character))
     {
-        if (gSaveBlock3Ptr->characters.opinionStrength[character] > OPINION_NEUTRAL_BUFFER)
-            gSaveBlock3Ptr->characters.opinionStrength[character]--;
-        else if (gSaveBlock3Ptr->characters.opinionStrength[character] < OPINION_NEUTRAL_BUFFER)
-            gSaveBlock3Ptr->characters.opinionStrength[character]++;
+        if (opinionStrength > OPINION_NEUTRAL_BUFFER)
+            gSaveBlock3Ptr->characters.opinionStrength[character] - ClampedOpinionDelta(opinionStrength, -1);
+        else if (opinionStrength < OPINION_NEUTRAL_BUFFER)
+            gSaveBlock3Ptr->characters.opinionStrength[character] + ClampedOpinionDelta(opinionStrength, 1);
     }
 }
 
@@ -533,8 +536,8 @@ void IkigaiCharacter_HandleDialogue_Attitudes(void)
                 opinionStrength *= (opinionMultiplier + 1);
         }
  
-        gSaveBlock3Ptr->characters.opinionKindness[character] += opinionKindness;
-        gSaveBlock3Ptr->characters.opinionStrength[character] += opinionStrength;
+        gSaveBlock3Ptr->characters.opinionKindness[character] + ClampedOpinionDelta(gSaveBlock3Ptr->characters.opinionKindness[character], opinionKindness);
+        gSaveBlock3Ptr->characters.opinionStrength[character] + ClampedOpinionDelta(gSaveBlock3Ptr->characters.opinionStrength[character], opinionStrength);
         IkigaiCharacter_GetSetConversedFlag(character, TRUE);
     }
 }
