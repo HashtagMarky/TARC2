@@ -73,6 +73,7 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#include "field_mugshot.h"
 
 struct CableClubPlayer
 {
@@ -3399,6 +3400,12 @@ void ScriptShowItemDescription(struct ScriptContext *ctx)
     u8 textY;
     u8 *dst;
     bool8 handleFlash = FALSE;
+    struct MugshotDetails mugshotDetails = GetMugshotDetails();
+
+    while (REG_VCOUNT >= 160);          // Wait until VBlank starts
+    while (REG_VCOUNT < 160);           // Wait until VBlank ends
+    if (IsFieldMugshotActive() && (mugshotDetails.mugshotType == MUGSHOT_NPC || mugshotDetails.mugshotType == MUGSHOT_PLAYER))
+        RemoveFieldMugshotAndWindow();
 
     if (GetFlashLevel() > 0 || InBattlePyramid_())
         handleFlash = TRUE;
@@ -3452,6 +3459,12 @@ void ShowItemDescription(u16 item)
     u8 textY;
     u8 *dst;
     bool8 handleFlash = FALSE;
+    struct MugshotDetails mugshotDetails = GetMugshotDetails();
+
+    while (REG_VCOUNT >= 160);          // Wait until VBlank starts
+    while (REG_VCOUNT < 160);           // Wait until VBlank ends
+    if (IsFieldMugshotActive() && (mugshotDetails.mugshotType == MUGSHOT_NPC || mugshotDetails.mugshotType == MUGSHOT_PLAYER))
+        RemoveFieldMugshotAndWindow();
 
     if (ItemId_GetPocket(item) == POCKET_BERRIES)
         headerType = 1;
