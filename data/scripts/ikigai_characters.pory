@@ -1,6 +1,7 @@
 script IkigaiCharacterBox_InitialDialogue
 {
     mnmbox("Hello there, {PLAYER}.", waitbuttonpress=FALSE, remain=TRUE)
+    //callnative(ReplaceFieldMessageWithFrame)
     dynmultipush("Talk", DIALOGUE_OPTION_TALK)
     dynmultipush("Opinion", DIALOGUE_OPTION_OPINION)
     dynmultipush("Romance", DIALOGUE_OPTION_ROMANCE)

@@ -258,7 +258,7 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
         return;
     }
     
-    if (mugshotType != MUGSHOT_DEFINED)
+    if (mugshotType != MUGSHOT_DEFINED && mugshotType != MUGSHOT_NPC && mugshotType != MUGSHOT_PLAYER)
     {
         windowTask = CreateTask(Task_MugshotWindow, 0);
 
