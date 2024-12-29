@@ -39,9 +39,13 @@ script IkigaiCharacterBox_Talk
     mnmbox("What response will you\ngive to me?", waitbuttonpress=FALSE, remain=TRUE)
     dialoguemultipush(ATTITUDE_NEUTRAL,
         "Neutral")
-    dialoguechoice("Inspiring", "Humble", "Dominant", "Cynical")
+    dialoguechoice("Inspiring", "Humble", "Dominant", "Cynical", bPress=FALSE)
     callnative(IkigaiCharacter_HandleDialogue_Attitudes)
     emote(OBJ_EVENT_ID_PLAYER, EMOTE_TALK)
+    if (var(VAR_RESULT) == MULTI_B_PRESSED)
+    {
+        goto(IkigaiCharacterBox_InitialDialogue)
+    }
     release
 }
 
