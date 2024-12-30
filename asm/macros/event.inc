@@ -2568,40 +2568,42 @@
 	waitstate
 	.endm
 
-	.macro dialoguemultipush characteristic:req text:vararg
-    .byte 0xeb
-    .2byte \characteristic
-    .byte (.Ldialoguemultipush_\@_2 - .Ldialoguemultipush_\@_1) / 4
-.Ldialoguemultipush_\@_1:
-    .4byte \text
-.Ldialoguemultipush_\@_2:
-    .endm
-
-	@ Create a multichoice window for player dialogue options.
-	.macro dialoguechoice inspiring, humble, dominant, cynical, bPress=TRUE
-	.ifnb \inspiring
-		dialoguemultipush ATTITUDE_INSPIRED, \inspiring
-	.endif
-	.ifnb \humble
-		dialoguemultipush ATTITUDE_HUMBLE, \humble
-	.endif
-	.ifnb \dominant
-		dialoguemultipush ATTITUDE_DOMINANT, \dominant
-	.endif
-	.ifnb \cynical
-		dialoguemultipush ATTITUDE_CYNICAL, \cynical
-	.endif
-	_dynmultichoice 0, 0, \bPress, 2, TRUE, -1, DYN_MULTICHOICE_CB_DIALOGUE_ATTITUDES, NULL
-	.endm
-
 	@ Create the Character Dialogue Box with a Character.
-	.macro charbox localId
-	lock
+	.macro characterdialogue localId
 	.ifnb \localId
 		setselectedobjectevent \localId
 	.endif
 	call IkigaiCharacterBox_InitialDialogue
-	releaseall
+	.endm
+
+	@ Pushes attitude options to be chosen.
+	.macro attitudemultipush characteristic:req text:vararg
+    .byte 0xeb
+    .2byte \characteristic
+    .byte (.Lattitudemultipush_\@_2 - .Lattitudemultipush_\@_1) / 4
+.Lattitudemultipush_\@_1:
+    .4byte \text
+.Lattitudemultipush_\@_2:
+    .endm
+
+	@ Create a multichoice window for player attitude options.
+	.macro attitudechoice inspiring, humble, dominant, cynical, neutral, bPress=TRUE
+	.ifnb \inspiring
+		attitudemultipush ATTITUDE_INSPIRED, \inspiring
+	.endif
+	.ifnb \humble
+		attitudemultipush ATTITUDE_HUMBLE, \humble
+	.endif
+	.ifnb \dominant
+		attitudemultipush ATTITUDE_DOMINANT, \dominant
+	.endif
+	.ifnb \cynical
+		attitudemultipush ATTITUDE_CYNICAL, \cynical
+	.endif
+	.ifnb \neutral
+		attitudemultipush ATTITUDE_NEUTRAL, \neutral
+	.endif
+	_dynmultichoice 0, 0, \bPress, 2, TRUE, -1, DYN_MULTICHOICE_CB_DIALOGUE_ATTITUDES, NULL
 	.endm
 
 	@ Checks Character Being Spoken
