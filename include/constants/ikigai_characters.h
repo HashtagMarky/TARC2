@@ -4,7 +4,7 @@
 #define MAX_RELATIONSHIPS                   5
 #define OPINION_POSITIVE                    5
 #define OPINION_VERY_POSITIVE               10
-#define OPINION_EXTRENEKY_POSITIVE          20
+#define OPINION_EXTREMELY_POSITIVE          20
 #define OPINION_NEUTRAL_BUFFER              20
 
 enum DialogueOption
