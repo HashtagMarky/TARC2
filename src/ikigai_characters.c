@@ -456,17 +456,17 @@ void IkigaiCharacter_OpinionDecay(u32 character)
     if (IkigaiCharacter_ReturnOpinionDecay(character))
     {
         if (opinionKindness > OPINION_NEUTRAL_BUFFER)
-            gSaveBlock3Ptr->characters.opinionKindness[character] - ClampedOpinionDelta(opinionKindness, -1);
+            gSaveBlock3Ptr->characters.opinionKindness[character] -= ClampedOpinionDelta(opinionKindness, -1);
         else if (opinionKindness < OPINION_NEUTRAL_BUFFER)
-            gSaveBlock3Ptr->characters.opinionKindness[character] + ClampedOpinionDelta(opinionKindness, 1);
+            gSaveBlock3Ptr->characters.opinionKindness[character] += ClampedOpinionDelta(opinionKindness, 1);
     }
 
     if (IkigaiCharacter_ReturnOpinionDecay(character))
     {
         if (opinionStrength > OPINION_NEUTRAL_BUFFER)
-            gSaveBlock3Ptr->characters.opinionStrength[character] - ClampedOpinionDelta(opinionStrength, -1);
+            gSaveBlock3Ptr->characters.opinionStrength[character] -= ClampedOpinionDelta(opinionStrength, -1);
         else if (opinionStrength < OPINION_NEUTRAL_BUFFER)
-            gSaveBlock3Ptr->characters.opinionStrength[character] + ClampedOpinionDelta(opinionStrength, 1);
+            gSaveBlock3Ptr->characters.opinionStrength[character] += ClampedOpinionDelta(opinionStrength, 1);
     }
 }
 
@@ -517,8 +517,8 @@ void IkigaiCharacter_HandleDialogue_Attitudes(void)
                 opinionStrength *= (opinionMultiplier + 1);
         }
  
-        gSaveBlock3Ptr->characters.opinionKindness[character] + ClampedOpinionDelta(gSaveBlock3Ptr->characters.opinionKindness[character], opinionKindness);
-        gSaveBlock3Ptr->characters.opinionStrength[character] + ClampedOpinionDelta(gSaveBlock3Ptr->characters.opinionStrength[character], opinionStrength);
+        gSaveBlock3Ptr->characters.opinionKindness[character] += ClampedOpinionDelta(gSaveBlock3Ptr->characters.opinionKindness[character], opinionKindness);
+        gSaveBlock3Ptr->characters.opinionStrength[character] += ClampedOpinionDelta(gSaveBlock3Ptr->characters.opinionStrength[character], opinionStrength);
         IkigaiCharacter_GetSetConversedFlag(character, TRUE);
     }
 }
