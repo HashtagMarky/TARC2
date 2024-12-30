@@ -97,6 +97,25 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .name = _("N"),
         .partnerPokemon = SPECIES_ZOROARK,
         .personality = ATTITUDE_HUMBLE,
+        .poses =
+        {
+            [POSE_INSPIRED] =
+            {
+                .movement = IkigaiCharacter_Movement_N_Pose,
+            },
+            [POSE_HUMBLE] =
+            {
+                .movement = IkigaiCharacter_Movement_N_Shrug,
+            },
+            [POSE_DOMINANT] =
+            {
+                .movement = IkigaiCharacter_Movement_N_Shrug,
+            },
+            [POSE_CYNICAL] =
+            {
+                .movement = IkigaiCharacter_Movement_N_Headshake,
+            },
+        },
 
         .overworldGraphicsId = OBJ_EVENT_GFX_N,
     }

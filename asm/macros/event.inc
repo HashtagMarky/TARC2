@@ -2576,6 +2576,22 @@
 	call IkigaiCharacterBox_InitialDialogue
 	.endm
 
+	@ Starts a characters default emote based on personality.
+	.macro charemotedefault
+	callnative IkigaiCharacter_DefaultEmote
+	waitmovement 0
+	.endm
+
+	@ Starts a characters response emote based on value stored in VAR_RESULT.
+	@ VAR_RESULT can be set by passing a value for attitude.
+	.macro charemoteresult, attitude
+	.ifnb \attitude
+		setvar VAR_RESULT, \attitude
+	.endif
+	callnative IkigaiCharacter_ResponseEmote
+	waitmovement 0
+	.endm
+
 	@ Pushes attitude options to be chosen.
 	.macro attitudemultipush characteristic:req text:vararg
     .byte 0xeb

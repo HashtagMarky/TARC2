@@ -1158,6 +1158,7 @@ EventScript_VsSeekerChargingDone::
 	.include "data/scripts/pokedex.inc"
 	
 	.include "data/scripts/ikigai_characters/scripts.inc"
+	.include "data/scripts/ikigai_characters/n.inc"
 
 	.include "data/maps/VyratonOutdoors_Ocean/scripts.inc"
 	.include "data/maps/VyratonOutdoors_Ocean/text.inc"

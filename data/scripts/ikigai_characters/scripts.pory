@@ -4,6 +4,7 @@ script IkigaiCharacterBox_InitialDialogue
  // based of flags defined in array, time of day, map, quest status, opinion levels etc.
  // Store strings in String Variables, taken from character arrays.
 {
+    charemotedefault
     mnmbox("Hello there, {NICKNAME}.", waitbuttonpress=FALSE, remain=TRUE)
     // callnative(ReplaceFieldMessageWithFrame) // Potential Function for Musghot Window blended into Message Box
     dynmultipush("Talk", DIALOGUE_OPTION_TALK)
@@ -34,7 +35,10 @@ script IkigaiCharacterBox_InitialDialogue
 
 script IkigaiCharacterBox_Goodbye
 {
-    mnmbox("Goodbye.")
+    mnmbox("Goodbye.", waitbuttonpress=FALSE, remain=TRUE)
+    charemotedefault
+    waitbuttonpress
+    release
     end
 }
 
@@ -48,6 +52,7 @@ script IkigaiCharacterBox_Talk
     {
         goto(IkigaiCharacterBox_Goodbye)
     }
+    charemoteresult
     release
 }
 

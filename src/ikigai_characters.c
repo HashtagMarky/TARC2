@@ -11,6 +11,10 @@
 #include "random.h"
 #include "script_menu.h"
 #include "string_util.h"
+#include "event_object_movement.h"
+#include "script_movement.h"
+#include "script.h"
+#include "global.fieldmap.h"
 
 static s32 ClampedOpinionDelta(s32 opinionCurrent, s32 opinionDelta);
 static s32 IkigaiCharacterOpinionBonus_Relationship(u32 character, bool32 opinionType);
@@ -576,6 +580,58 @@ bool32 IkigaiCharacter_NicknameInsteadOfName(u32 character)
     }
 
     return FALSE;
+}
+
+void IkigaiCharacter_MovementEmote(u8 localId, const u8 *movement)
+{
+    if (movement == NULL)
+        return;
+
+    gObjectEvents[GetObjectEventIdByLocalId(localId)].directionOverwrite = DIR_NONE;
+    ScriptMovement_StartObjectMovementScript(
+        localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, movement
+    );
+    SetMovingNpcId(gObjectEvents[gSelectedObjectEvent].localId);
+}
+
+u32 IkigaiCharacter_GetPoseFromAttitude(u32 attitude)
+{
+    u32 pose;
+
+    if (attitude == ATTITUDE_NEUTRAL)
+        pose = Random() % 4;
+    else
+        pose = attitude - 1;
+
+    return pose;
+}
+
+const u8 *IkigaiCharacter_GetMovementFromAttitude(u32 character, u32 attitude)
+{
+    if (attitude >= ATTITUDE_COUNT)
+        return NULL;
+
+    return gIkigaiCharactersInfo[character].poses[IkigaiCharacter_GetPoseFromAttitude(attitude)].movement;
+}
+
+void IkigaiCharacter_DefaultEmote(void)
+{
+    u32 character = ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
+    
+    IkigaiCharacter_MovementEmote(
+        gObjectEvents[gSelectedObjectEvent].localId,
+        IkigaiCharacter_GetMovementFromAttitude(character, gIkigaiCharactersInfo[character].personality)
+    );
+}
+
+void IkigaiCharacter_ResponseEmote(void)
+{
+    u32 character = ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
+    
+    IkigaiCharacter_MovementEmote(
+        gObjectEvents[gSelectedObjectEvent].localId,
+        IkigaiCharacter_GetMovementFromAttitude(character, gSpecialVar_Result)
+    );
 }
 
 u32 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId)

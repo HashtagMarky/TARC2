@@ -9,6 +9,10 @@
 #define CHAR_PARTNET(name)
 */
 
+struct Poses {
+    const u8 *movement;
+};
+
 struct Relationship {
     u8 characterId;
     s8 affinity;
@@ -29,6 +33,7 @@ struct IkigaiCharacterInfo
     u8 pronouns;
     bool8 isMainCharacter;
     u8 voice;
+    struct Poses poses[POSE_COUNT];
 
     // Basic Details
     u16 partnerPokemon;
@@ -101,10 +106,19 @@ void IkigaiCharacter_HandleDialogue_Attitudes(void);
 void DEBUG_IkigaiCharacter_CharacterOpinions(void);
 void SetDefaultPlayerNickname(void);
 bool32 IkigaiCharacter_NicknameInsteadOfName(u32 character);
+void IkigaiCharacter_MovementEmote(u8 localId, const u8 *movement);
+u32 IkigaiCharacter_GetPoseFromAttitude(u32 attitude);
+const u8 *IkigaiCharacter_GetMovementFromAttitude(u32 character, u32 attitude);
+void IkigaiCharacter_DefaultEmote(void);
+void IkigaiCharacter_ResponseEmote(void);
 u32 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId);
 u32 ReturnIkigaiCharacter_SelectedObject(void);
 u32 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void);
 u8 CreateDialogueOptionIconSprite(u32 attitudeIndex);
 u8 CreateAttitudeIconSprite(u32 attitudeIndex);
+
+extern const u8 IkigaiCharacter_Movement_N_Shrug[];
+extern const u8 IkigaiCharacter_Movement_N_Headshake[];
+extern const u8 IkigaiCharacter_Movement_N_Pose[];
 
 #endif // GUARD_IKIGAI_CHARACTERS_H
