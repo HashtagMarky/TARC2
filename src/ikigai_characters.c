@@ -556,6 +556,22 @@ void DEBUG_IkigaiCharacter_CharacterOpinions(void)
     }
 }
 
+void SetDefaultPlayerNickname(void)
+{
+    StringCopy(gSaveBlock3Ptr->characters.playerNickname, gSaveBlock2Ptr->playerName);
+}
+
+bool32 IkigaiCharacter_NicknameInsteadOfName(u32 character)
+{
+    if (StringCompare(gSaveBlock3Ptr->characters.playerNickname, gSaveBlock2Ptr->playerName)
+        && (IkigaiCharacter_GetRomanticFlag(character) || IkigaiCharacter_GetKindness(character) > OPINION_NEUTRAL_BUFFER * 2))
+    {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
 u32 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId)
 {
     u32 character;

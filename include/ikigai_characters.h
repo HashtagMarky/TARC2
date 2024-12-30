@@ -99,6 +99,8 @@ void IkigaiCharacter_OpinionDecay(u32 character);
 void IkigaiCharacter_AllOpinionDecay_NonConverse(void);
 void IkigaiCharacter_HandleDialogue_Attitudes(void);
 void DEBUG_IkigaiCharacter_CharacterOpinions(void);
+void SetDefaultPlayerNickname(void);
+bool32 IkigaiCharacter_NicknameInsteadOfName(u32 character);
 u32 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId);
 u32 ReturnIkigaiCharacter_SelectedObject(void);
 u32 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void);

@@ -267,6 +267,7 @@
 #define PLACEHOLDER_ID_STRING_VAR_3  0x4
 #define PLACEHOLDER_ID_KUN           0x5
 #define PLACEHOLDER_ID_RIVAL         0x6
+#define PLACEHOLDER_ID_NICKNAME      0x6
 #define PLACEHOLDER_ID_VERSION       0x7
 #define PLACEHOLDER_ID_AQUA          0x8
 #define PLACEHOLDER_ID_MAGMA         0x9

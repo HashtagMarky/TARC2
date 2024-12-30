@@ -242,6 +242,7 @@ void NewGameInitData(void)
     ResetContestLinkResults();
     ResetItemFlags();
     IkigaiCharacter_SetAllCharacterDefaultOpinion();
+    SetDefaultPlayerNickname();
 }
 
 static void ResetMiniGamesRecords(void)

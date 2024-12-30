@@ -4,7 +4,7 @@ script IkigaiCharacterBox_InitialDialogue
  // based of flags defined in array, time of day, map, quest status, opinion levels etc.
  // Store strings in String Variables, taken from character arrays.
 {
-    mnmbox("Hello there, {PLAYER}.", waitbuttonpress=FALSE, remain=TRUE)
+    mnmbox("Hello there, {NICKNAME}.", waitbuttonpress=FALSE, remain=TRUE)
     // callnative(ReplaceFieldMessageWithFrame) // Potential Function for Musghot Window blended into Message Box
     dynmultipush("Talk", DIALOGUE_OPTION_TALK)
     dynmultipush("Opinion", DIALOGUE_OPTION_OPINION)
@@ -87,27 +87,27 @@ script IkigaiCharacterBox_RomanceMenu
             getromanticflag
             if (var(VAR_RESULT) == TRUE)
             {
-                mnmbox("You're so sweet, {PLAYER}.")
+                mnmbox("You're so sweet, {NICKNAME}.")
             }
             else
             {
-                mnmbox("That's a shame, {PLAYER}.")
+                mnmbox("That's a shame, {NICKNAME}.")
             }
             end
         case ROMANCE_EXCLUSIVE:
             setromanticflagexclusive
-            mnmbox("You're the sweetest, nobody compares\nto you {PLAYER}.")
+            mnmbox("You're the sweetest, nobody compares\nto you {NICKNAME}.")
             end
         case CHECK_ROMANCE:
         default:
             checkrelationships
             if (var(VAR_RESULT) == CHARACTER_DEFAULT)
             {
-                mnmbox("It seems you're single, {PLAYER}.")
+                mnmbox("It seems you're single, {NICKNAME}.")
             }
             elif (var(VAR_RESULT) == CHARACTER_COUNT_TOTAL)
             {
-                mnmbox("It seems you're in multiple\nrelationships, {PLAYER}.")
+                mnmbox("It seems you're in multiple\nrelationships, {NICKNAME}.")
             }
             else
             {

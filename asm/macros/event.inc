@@ -2561,6 +2561,13 @@
 	removeobject \localId
 	.endm
 
+	@ Starts Player Nicknaming Screen
+	.macro nicknameplayer
+	fadescreen FADE_TO_BLACK
+	callnative DoPlayerNicknamingScreen
+	waitstate
+	.endm
+
 	.macro dialoguemultipush characteristic:req text:vararg
     .byte 0xeb
     .2byte \characteristic
