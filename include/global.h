@@ -582,10 +582,10 @@ struct SaveBlock2
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 playerEmote:4;
              u8 paddingPE:4;
-             u8 dynPalSkinTone;
+    /*0x91*/ u8 dynPalSkinTone;
              u8 dynPalHairTone;
              u8 dynPalClothesTone;
-    /*0x91*/ u8 filler_90[0x4];
+    /*0x94*/ u8 filler_94[0x4];
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
     /*0xA8*/ u32 gcnLinkFlags; // Read by Pokémon Colosseum/XD
