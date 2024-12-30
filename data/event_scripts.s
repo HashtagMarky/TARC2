@@ -1156,7 +1156,8 @@ EventScript_VsSeekerChargingDone::
 	.include "data/scripts/toggleable_transport.inc"
 	.include "data/scripts/overworld_encounters.inc"
 	.include "data/scripts/pokedex.inc"
-	.include "data/scripts/ikigai_characters.inc"
+	
+	.include "data/scripts/ikigai_characters/scripts.inc"
 
 	.include "data/maps/VyratonOutdoors_Ocean/scripts.inc"
 	.include "data/maps/VyratonOutdoors_Ocean/text.inc"
