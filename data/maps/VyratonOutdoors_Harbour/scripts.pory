@@ -90,8 +90,6 @@ movement VyratonOutdoors_Harbour_Movement_Samuel_BeginEntrance
 movement VyratonOutdoors_Harbour_Movement_Player_MeetSamuel
 {
     delay_16 * 2
-    delay_8
-    // delay_2
     face_left
 }
 
