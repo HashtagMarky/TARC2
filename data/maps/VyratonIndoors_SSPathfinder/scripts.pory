@@ -12,7 +12,7 @@ script VyratonIndoors_SSPathfinder_EventScript_MeetCaptain
 {
     call(VyratonIndoors_SSPathfinder_IkigaiIntroSetup)
     setvar(VAR_TEMP_0, 1)
-    turnplayer(DIR_NORTH)
+    playerface(DIR_NORTH)
     opendoor(4, 1)
     playse(SE_DOOR)
     waitdooranim

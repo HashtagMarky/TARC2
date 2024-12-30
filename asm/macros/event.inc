@@ -2827,3 +2827,57 @@
 		delay 20
 	.endif
 	.endm
+
+@ End of @ Deokishisu's Supplementary Macros
+
+	@ Calls Common_Movement_Face(Up/Down/Left/Right) for provided localid.
+	@ By default, waitmovement \localid is provided, but can be omitted by passing FALSE.
+	.macro objectface localid:req, direction:req, wait=TRUE
+	.if \direction == DIR_NORTH
+		applymovement \localid, Common_Movement_FaceUp
+		.if \wait
+			waitmovement \localid
+		.endif
+	.elseif \direction == DIR_SOUTH
+		applymovement \localid, Common_Movement_FaceDown
+		.if \wait
+			waitmovement \localid
+		.endif
+	.elseif \direction == DIR_WEST
+		applymovement \localid, Common_Movement_FaceLeft
+		.if \wait
+			waitmovement \localid
+		.endif
+	.elseif \direction == DIR_EAST
+		applymovement \localid, Common_Movement_FaceRight
+		.if \wait
+			waitmovement \localid
+		.endif
+	.endif
+	.endm
+
+	@ Does Common_Movement_Face(Up/Down/Left/Right) for the player.
+	@ By default, waitmovement \localid is provided, but can be omitted by passing FALSE.
+	.macro playerface direction:req, wait=TRUE
+	.if \direction == DIR_NORTH
+		applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+		.if \wait
+			waitmovement OBJ_EVENT_ID_PLAYER
+		.endif
+	.elseif \direction == DIR_SOUTH
+		applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
+		.if \wait
+			waitmovement OBJ_EVENT_ID_PLAYER
+		.endif
+	.elseif \direction == DIR_WEST
+		applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
+		.if \wait
+			waitmovement OBJ_EVENT_ID_PLAYER
+		.endif
+	.elseif \direction == DIR_EAST
+		applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
+		.if \wait
+			waitmovement OBJ_EVENT_ID_PLAYER
+		.endif
+	.endif
+	.endm
