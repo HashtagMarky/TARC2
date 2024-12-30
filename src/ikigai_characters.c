@@ -15,10 +15,14 @@
 #include "script_movement.h"
 #include "script.h"
 #include "global.fieldmap.h"
+#include "fpmath.h"
+#include "battle_util.h"
 
 static s32 ClampedOpinionDelta(s32 opinionCurrent, s32 opinionDelta);
 static s32 IkigaiCharacterOpinionBonus_Relationship(u32 character, bool32 opinionType);
 static s32 IkigaiCharacterOpinionBonus_PartnerPokemon(u32 character, bool32 opinionType);
+static s32 IkigaiCharacterOpinionBonus_StarterPokemon(u32 character, bool32 opinionType);
+static uq4_12_t GetGymTypeEffectiveness(u16 species, bool32 speciesAtk);
 
 static const u32 sCharacteristicDialogueIcon_Talk[] = INCBIN_U32("graphics/dialogue_icons/talk.4bpp.lz");
 static const u16 sCharacteristicDialoguePal_Talk[] = INCBIN_U16("graphics/dialogue_icons/talk.gbapal");
@@ -217,6 +221,8 @@ s32 IkigaiCharacter_GetKindness(u32 character)
     s32 kindnessAdded = 0;
 
     kindnessAdded += IkigaiCharacterOpinionBonus_Relationship(character, OPINION_TYPE_KINDNESS);
+    kindnessAdded += IkigaiCharacterOpinionBonus_PartnerPokemon(character, OPINION_TYPE_KINDNESS);
+    kindnessAdded += IkigaiCharacterOpinionBonus_StarterPokemon(character, OPINION_TYPE_KINDNESS);
 
     return kindnessCharacter + ClampedOpinionDelta(kindnessCharacter, kindnessAdded);
 }
@@ -230,6 +236,8 @@ s32 IkigaiCharacter_GetStrength(u32 character)
     s32 strengthAdded = 0;
 
     strengthAdded += IkigaiCharacterOpinionBonus_Relationship(character, OPINION_TYPE_STRENGTH);
+    strengthAdded += IkigaiCharacterOpinionBonus_PartnerPokemon(character, OPINION_TYPE_STRENGTH);
+    strengthAdded += IkigaiCharacterOpinionBonus_StarterPokemon(character, OPINION_TYPE_STRENGTH);
 
     return strengthCharacter + ClampedOpinionDelta(strengthCharacter, strengthAdded);
 }
@@ -700,6 +708,100 @@ static s32 IkigaiCharacterOpinionBonus_Relationship(u32 character, bool32 opinio
     }
 
     return 0;
+}
+
+static s32 IkigaiCharacterOpinionBonus_PartnerPokemon(u32 character, bool32 opinionType)
+{
+    u32 species = gIkigaiCharactersInfo[character].partnerPokemon;
+    u32 bonusPartner = 0;
+
+    if (opinionType == OPINION_TYPE_KINDNESS)
+    {
+        if (gSpeciesInfo[species].types[0] == gSaveBlock2Ptr->ikigaiGymType)
+            bonusPartner += OPINION_VERY_POSITIVE;
+        else if (gSpeciesInfo[species].types[1] == gSaveBlock2Ptr->ikigaiGymType)
+            bonusPartner += OPINION_POSITIVE;
+    }
+    else if (opinionType == OPINION_TYPE_STRENGTH)
+    {
+        uq4_12_t typeEffectiveness = GetGymTypeEffectiveness(species, TRUE);
+
+        if (typeEffectiveness == 4.0)
+            bonusPartner += OPINION_VERY_POSITIVE;
+        else if (typeEffectiveness == 2.0)
+            bonusPartner += OPINION_POSITIVE;
+    }
+
+    return bonusPartner;
+}
+
+static s32 IkigaiCharacterOpinionBonus_StarterPokemon(u32 character, bool32 opinionType)
+{
+    u32 starter = VarGet(VAR_STARTER_MON);
+    u32 species = gIkigaiCharactersInfo[character].partnerPokemon;
+    u32 bonusStarter = 0;
+
+    if (opinionType == OPINION_TYPE_KINDNESS)
+    {
+        if (gSpeciesInfo[starter].bodyColor == gIkigaiCharactersInfo[character].favouriteColour)
+            bonusStarter += OPINION_POSITIVE;
+            
+        if (gSpeciesInfo[starter].types[0] == gIkigaiCharactersInfo[character].favouriteType)
+            bonusStarter += OPINION_POSITIVE;
+        else if (gSpeciesInfo[starter].types[1] == gIkigaiCharactersInfo[character].favouriteType)
+            bonusStarter += OPINION_POSITIVE;
+    }
+    else if (opinionType == OPINION_TYPE_STRENGTH)
+    {
+        uq4_12_t typeEffectiveness = GetGymTypeEffectiveness(species, FALSE);
+
+        if (typeEffectiveness == 0.25)
+            bonusStarter += OPINION_VERY_POSITIVE;
+        else if (typeEffectiveness == 0.50)
+            bonusStarter += OPINION_POSITIVE;
+    }
+
+    return bonusStarter;
+}
+
+static uq4_12_t GetGymTypeEffectiveness(u16 species, bool32 speciesAtk)
+{
+    uq4_12_t modifier[3] = { UQ_4_12(1.0), UQ_4_12(1.0), UQ_4_12(1.0) };
+    u8 typeIkigaiGym = gSaveBlock2Ptr->ikigaiGymType;
+    u8 typeSpeciesPrimary = gSpeciesInfo[species].types[0];
+    u8 typeSpeciesSecondary = gSpeciesInfo[species].types[1];
+
+    if (typeIkigaiGym == TYPE_NONE
+    ||  typeIkigaiGym == TYPE_MYSTERY
+    ||  typeIkigaiGym == TYPE_STELLAR
+    ||  typeIkigaiGym >= NUMBER_OF_MON_TYPES)
+        return modifier[0];
+
+    if (typeSpeciesPrimary == TYPE_NONE
+    ||  typeSpeciesPrimary == TYPE_MYSTERY
+    ||  typeSpeciesPrimary == TYPE_STELLAR
+    ||  typeSpeciesPrimary >= NUMBER_OF_MON_TYPES)
+        return modifier[0];
+
+    if (typeSpeciesSecondary == TYPE_NONE
+    ||  typeSpeciesSecondary == TYPE_MYSTERY
+    ||  typeSpeciesSecondary == TYPE_STELLAR
+    ||  typeSpeciesSecondary >= NUMBER_OF_MON_TYPES)
+        return modifier[0];
+
+    if (speciesAtk == TRUE)
+    {
+        modifier[1] = GetTypeModifier(typeIkigaiGym, typeSpeciesPrimary);
+        modifier[2] = (typeSpeciesSecondary != typeSpeciesPrimary) ? GetTypeModifier(typeIkigaiGym, typeSpeciesSecondary) : UQ_4_12(1.0);
+    }
+    else
+    {
+        modifier[1] = GetTypeModifier(typeSpeciesPrimary, typeIkigaiGym);
+        modifier[2] = (typeSpeciesSecondary != typeSpeciesPrimary) ? GetTypeModifier(typeSpeciesSecondary, typeIkigaiGym) : UQ_4_12(1.0);
+    }
+
+    modifier[0] = uq4_12_multiply(modifier[1], modifier[2]);
+    return modifier[0];
 }
 
 u8 CreateDialogueOptionIconSprite(u32 dialogueIndex)
