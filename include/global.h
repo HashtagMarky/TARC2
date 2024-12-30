@@ -211,6 +211,7 @@ struct Time
 #include "constants/ikigai_characters.h"
 struct IkigaiCharacterData
 {
+    u8 playerNickname[PLAYER_NAME_LENGTH + 1];
     s8 opinionKindness[MAIN_CHARACTER_COUNT];
     s8 opinionStrength[MAIN_CHARACTER_COUNT];
     u8 conversed[ROUND_BITS_TO_BYTES(MAIN_CHARACTER_COUNT)];
