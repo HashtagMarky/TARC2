@@ -206,6 +206,9 @@ void IkigaiCharacter_SetAllCharacterDefaultOpinion(void)
 
 s32 IkigaiCharacter_GetKindness(u32 character)
 {
+    if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)
+        return 0;
+     
     s32 kindnessCharacter = gSaveBlock3Ptr->characters.opinionKindness[character];
     s32 kindnessAdded = 0;
 
@@ -216,6 +219,9 @@ s32 IkigaiCharacter_GetKindness(u32 character)
 
 s32 IkigaiCharacter_GetStrength(u32 character)
 {
+    if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)
+        return 0;
+     
     s32 strengthCharacter = gSaveBlock3Ptr->characters.opinionStrength[character];
     s32 strengthAdded = 0;
 
