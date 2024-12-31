@@ -15,6 +15,7 @@ struct Poses {
 
 struct Relationship {
     u8 characterId;
+    const u8 *title;
     s8 affinity;
 };
 
