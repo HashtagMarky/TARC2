@@ -366,6 +366,9 @@ SECTIONS {
         src/ikigai_scrolling_background.o(.text);
         src/ui_samuel_case.o(.text);
         src/sound_check_menu.o(.text);
+        src/sample_ui_start_here.o(.text);
+        src/sample_ui_sliding_panel.o(.text);
+        src/sample_ui_blank_template.o(.text);
     } > ROM =0
 
     script_data :
@@ -740,6 +743,9 @@ SECTIONS {
         src/ikigai_scrolling_background.o(.rodata);
         src/ui_samuel_case.o(.rodata);
         src/sound_check_menu.o(.rodata);
+        src/sample_ui_start_here.o(.rodata);
+        src/sample_ui_sliding_panel.o(.rodata);
+        src/sample_ui_blank_template.o(.rodata);
     } > ROM =0
 
     song_data :
