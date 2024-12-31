@@ -7,7 +7,7 @@
 #include "bg.h"
 #include "text_window.h"
 #include "window.h"
-#include "characters.h"
+#include "constants/characters.h"
 #include "palette.h"
 #include "task.h"
 #include "overworld.h"
@@ -378,7 +378,7 @@ static void Task_SampleUiWaitFadeAndBail(u8 taskId);
 static void Task_SampleUiWaitFadeAndExitGracefully(u8 taskId);
 
 // Sample UI helper functions
-void SampleUi_Init(MainCallback callback);
+static void SampleUi_Init(MainCallback callback);
 static void SampleUi_ResetGpuRegsAndBgs(void);
 static bool8 SampleUi_InitBgs(void);
 static void SampleUi_FadeAndBail(void);
@@ -886,7 +886,7 @@ static bool8 SampleUi_LoadGraphics(void)
          * Copy the message box palette into BG palette buffer, slot 15. Our window is set to use palette 15 and our
          * text color constants are defined assuming we are indexing into this palette.
          */
-        LoadPalette(gMessageBox_Pal, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         sSampleUiState->loadState++;
     default:
         sSampleUiState->loadState = 0;

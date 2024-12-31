@@ -378,7 +378,7 @@ static void Task_SampleUiWaitFadeAndBail(u8 taskId);
 static void Task_SampleUiWaitFadeAndExitGracefully(u8 taskId);
 
 // Sample UI helper functions
-void SampleUi_Init(MainCallback callback);
+static void SampleUi_Init(MainCallback callback);
 static void SampleUi_ResetGpuRegsAndBgs(void);
 static bool8 SampleUi_InitBgs(void);
 static void SampleUi_FadeAndBail(void);
@@ -390,7 +390,7 @@ static void SampleUi_DrawMonIcon(u16 dexNum);
 static void SampleUi_FreeResources(void);
 
 // Declared in sample_ui.h
-void Task_OpenSampleUi_StartHere(u8 taskId)
+void Task_OpenPokesphere(u8 taskId)
 {
     /*
      * We are still in the overworld callback, so wait until the palette fade is finished (i.e. the screen is entirely

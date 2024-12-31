@@ -7,7 +7,7 @@
 #include "bg.h"
 #include "text_window.h"
 #include "window.h"
-#include "characters.h"
+#include "constants/characters.h"
 #include "palette.h"
 #include "task.h"
 #include "overworld.h"
@@ -332,7 +332,7 @@ static bool8 SampleUi_LoadGraphics(void)
         break;
     case 2:
         LoadPalette(sSampleUiPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-        LoadPalette(gMessageBox_Pal, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         sSampleUiState->loadState++;
     default:
         sSampleUiState->loadState = 0;
