@@ -56,3 +56,10 @@ enum CharacterId
     SPECIAL_CHARACTER_N,
     CHARACTER_COUNT_TOTAL,
 };
+
+enum RomanceOptions // Temporary (Moved From Poryscript but will formalise)
+{
+    SET_CLEAR_ROMANCE,
+    ROMANCE_EXCLUSIVE,
+    CHECK_ROMANCE,
+};

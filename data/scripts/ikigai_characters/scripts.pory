@@ -64,10 +64,6 @@ script IkigaiCharacterBox_Debug_GetOpinion
     end
 }
 
-const SET_CLEAR_ROMANCE = 0
-const ROMANCE_EXCLUSIVE = 1
-const CHECK_ROMANCE     = 2
-
 script IkigaiCharacterBox_RomanceMenu
 {
     getromanticflag
