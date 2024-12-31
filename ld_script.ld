@@ -360,7 +360,6 @@ SECTIONS {
         src/international_string_util.o(.text);
         src/pokemon_sprite_visualizer.o(.text);
         src/expansion_intro.o(.text);
-		src/social_media.o(.text);
 		src/toggleable_transport.o(.text);
         src/ui_main_menu.o(.text);
         src/ikigai_scrolling_background.o(.text);
@@ -734,7 +733,6 @@ SECTIONS {
         data/sound_data.o(.rodata);
         src/pokemon_sprite_visualizer.o(.rodata);
         src/expansion_intro.o(.rodata);
-		src/social_media.o(.rodata);
 		src/toggleable_transport.o(.rodata);
         src/ui_main_menu.o(.rodata);
         src/ikigai_scrolling_background.o(.rodata);
