@@ -4,6 +4,7 @@
 #include "constants/pokemon.h"
 #include "constants/species.h"
 
+// Ikigai Character Data
 const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 {
     [CHARACTER_DEFAULT] =
@@ -123,4 +124,124 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_N,
     }
+};
+
+// Dialogue Option Icons
+static const u32 sCharacteristicDialogueIcon_Talk[] = INCBIN_U32("graphics/dialogue_icons/talk.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Talk[] = INCBIN_U16("graphics/dialogue_icons/talk.gbapal");
+static const u32 sCharacteristicDialogueIcon_Opinion[] = INCBIN_U32("graphics/dialogue_icons/opinion.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Opinion[] = INCBIN_U16("graphics/dialogue_icons/opinion.gbapal");
+static const u32 sCharacteristicDialogueIcon_Romance[] = INCBIN_U32("graphics/dialogue_icons/romance.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Romance[] = INCBIN_U16("graphics/dialogue_icons/romance.gbapal");
+static const u32 sCharacteristicDialogueIcon_Quest[] = INCBIN_U32("graphics/dialogue_icons/quest.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Quest[] = INCBIN_U16("graphics/dialogue_icons/quest.gbapal");
+static const u32 sCharacteristicDialogueIcon_Battle[] = INCBIN_U32("graphics/dialogue_icons/battle.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Battle[] = INCBIN_U16("graphics/dialogue_icons/battle.gbapal");
+static const u32 sCharacteristicDialogueIcon_Gift[] = INCBIN_U32("graphics/dialogue_icons/gift.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Gift[] = INCBIN_U16("graphics/dialogue_icons/gift.gbapal");
+static const u32 sCharacteristicDialogueIcon_Goodbye[] = INCBIN_U32("graphics/dialogue_icons/goodbye.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Goodbye[] = INCBIN_U16("graphics/dialogue_icons/goodbye.gbapal");
+
+// Dialogue Attitude Icons
+static const u32 sCharacteristicDialogueIcon_Neutral[] = INCBIN_U32("graphics/dialogue_icons/neutral.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Neutral[] = INCBIN_U16("graphics/dialogue_icons/neutral.gbapal");
+static const u32 sCharacteristicDialogueIcon_Inspired[] = INCBIN_U32("graphics/dialogue_icons/inspired.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Inspired[] = INCBIN_U16("graphics/dialogue_icons/inspired.gbapal");
+static const u32 sCharacteristicDialogueIcon_Humble[] = INCBIN_U32("graphics/dialogue_icons/humble.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Humble[] = INCBIN_U16("graphics/dialogue_icons/humble.gbapal");
+static const u32 sCharacteristicDialogueIcon_Dominant[] = INCBIN_U32("graphics/dialogue_icons/dominant.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Dominant[] = INCBIN_U16("graphics/dialogue_icons/dominant.gbapal");
+static const u32 sCharacteristicDialogueIcon_Cynical[] = INCBIN_U32("graphics/dialogue_icons/cynical.4bpp.lz");
+static const u16 sCharacteristicDialoguePal_Cynical[] = INCBIN_U16("graphics/dialogue_icons/cynical.gbapal");
+
+// Dialogue Options Data
+const struct DialogueOptions gDialogueOptions[DIALOGUE_OPTION_COUNT] =
+{
+    [DIALOGUE_OPTION_TALK] =
+    {
+        .name = COMPOUND_STRING("Talk"),
+        .iconImage = sCharacteristicDialogueIcon_Talk,
+        .iconPal = sCharacteristicDialoguePal_Talk
+    },
+    [DIALOGUE_OPTION_OPINION] =
+    {
+        .name = COMPOUND_STRING("Opinion"),
+        .iconImage = sCharacteristicDialogueIcon_Opinion,
+        .iconPal = sCharacteristicDialoguePal_Opinion
+    },
+    [DIALOGUE_OPTION_ROMANCE] =
+    {
+        .name = COMPOUND_STRING("Romance"),
+        .iconImage = sCharacteristicDialogueIcon_Romance,
+        .iconPal = sCharacteristicDialoguePal_Romance
+    },
+    [DIALOGUE_OPTION_QUESTS] =
+    {
+        .name = COMPOUND_STRING("Quests"),
+        .iconImage = sCharacteristicDialogueIcon_Quest,
+        .iconPal = sCharacteristicDialoguePal_Quest
+    },
+    [DIALOGUE_OPTION_BATTLE] =
+    {
+        .name = COMPOUND_STRING("Battle"),
+        .iconImage = sCharacteristicDialogueIcon_Battle,
+        .iconPal = sCharacteristicDialoguePal_Battle
+    },
+    [DIALOGUE_OPTION_GIFT] =
+    {
+        .name = COMPOUND_STRING("Gift"),
+        .iconImage = sCharacteristicDialogueIcon_Gift,
+        .iconPal = sCharacteristicDialoguePal_Gift
+    },
+    [DIALOGUE_OPTION_GOODBYE] =
+    {
+        .name = COMPOUND_STRING("Goodbye"),
+        .iconImage = sCharacteristicDialogueIcon_Goodbye,
+        .iconPal = sCharacteristicDialoguePal_Goodbye
+    },
+};
+
+// Dialogue Attitudes Data
+const struct DialogueOptions gDialogueAttitudes[ATTITUDE_COUNT] =
+{
+    [ATTITUDE_NEUTRAL] =
+    {
+        .name = COMPOUND_STRING("Neutral"),
+        .kindnessEffect = 0,
+        .strengthEffect = 0,
+        .iconImage = sCharacteristicDialogueIcon_Neutral,
+        .iconPal = sCharacteristicDialoguePal_Neutral
+    },
+    [ATTITUDE_INSPIRED] =
+    {
+        .name = COMPOUND_STRING("Inspired"),
+        .kindnessEffect = 1,
+        .strengthEffect = 1,
+        .iconImage = sCharacteristicDialogueIcon_Inspired,
+        .iconPal = sCharacteristicDialoguePal_Inspired
+    },
+    [ATTITUDE_HUMBLE] =
+    {
+        .name = COMPOUND_STRING("Humble"),
+        .kindnessEffect = 1,
+        .strengthEffect = -1,
+        .iconImage = sCharacteristicDialogueIcon_Humble,
+        .iconPal = sCharacteristicDialoguePal_Humble
+    },
+    [ATTITUDE_DOMINANT] =
+    {
+        .name = COMPOUND_STRING("Dominant"),
+        .kindnessEffect = -1,
+        .strengthEffect = 1,
+        .iconImage = sCharacteristicDialogueIcon_Dominant,
+        .iconPal = sCharacteristicDialoguePal_Dominant
+    },
+    [ATTITUDE_CYNICAL] =
+    {
+        .name = COMPOUND_STRING("Cynical"),
+        .kindnessEffect = -1,
+        .strengthEffect = -1,
+        .iconImage = sCharacteristicDialogueIcon_Cynical,
+        .iconPal = sCharacteristicDialoguePal_Cynical
+    },
 };

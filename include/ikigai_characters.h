@@ -80,7 +80,18 @@ struct IkigaiCharacterInfo
     u16 trainerParty;
 };
 
+struct DialogueOptions
+{
+    const u8 *name;
+    s8 kindnessEffect;
+    s8 strengthEffect;
+    const u32 *iconImage;
+    const u16 *iconPal;
+};
+
 extern const struct IkigaiCharacterInfo gIkigaiCharactersInfo[];
+extern const struct DialogueOptions gDialogueOptions[];
+extern const struct DialogueOptions gDialogueAttitudes[];
 
 u32 IkigaiCharacter_GetPlayerAttitude(void);
 void IkigaiCharacter_SetDefaultOpinion(u32 character);

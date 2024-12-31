@@ -24,32 +24,6 @@ static s32 IkigaiCharacterOpinionBonus_PartnerPokemon(u32 character, bool32 opin
 static s32 IkigaiCharacterOpinionBonus_StarterPokemon(u32 character, bool32 opinionType);
 static uq4_12_t GetGymTypeEffectiveness(u16 species, bool32 speciesAtk);
 
-static const u32 sCharacteristicDialogueIcon_Talk[] = INCBIN_U32("graphics/dialogue_icons/talk.4bpp.lz");
-static const u16 sCharacteristicDialoguePal_Talk[] = INCBIN_U16("graphics/dialogue_icons/talk.gbapal");
-static const u32 sCharacteristicDialogueIcon_Opinion[] = INCBIN_U32("graphics/dialogue_icons/opinion.4bpp.lz");
-static const u16 sCharacteristicDialoguePal_Opinion[] = INCBIN_U16("graphics/dialogue_icons/opinion.gbapal");
-static const u32 sCharacteristicDialogueIcon_Romance[] = INCBIN_U32("graphics/dialogue_icons/romance.4bpp.lz");
-static const u16 sCharacteristicDialoguePal_Romance[] = INCBIN_U16("graphics/dialogue_icons/romance.gbapal");
-static const u32 sCharacteristicDialogueIcon_Quest[] = INCBIN_U32("graphics/dialogue_icons/quest.4bpp.lz");
-static const u16 sCharacteristicDialoguePal_Quest[] = INCBIN_U16("graphics/dialogue_icons/quest.gbapal");
-static const u32 sCharacteristicDialogueIcon_Battle[] = INCBIN_U32("graphics/dialogue_icons/battle.4bpp.lz");
-static const u16 sCharacteristicDialoguePal_Battle[] = INCBIN_U16("graphics/dialogue_icons/battle.gbapal");
-static const u32 sCharacteristicDialogueIcon_Gift[] = INCBIN_U32("graphics/dialogue_icons/gift.4bpp.lz");
-static const u16 sCharacteristicDialoguePal_Gift[] = INCBIN_U16("graphics/dialogue_icons/gift.gbapal");
-static const u32 sCharacteristicDialogueIcon_Goodbye[] = INCBIN_U32("graphics/dialogue_icons/goodbye.4bpp.lz");
-static const u16 sCharacteristicDialoguePal_Goodbye[] = INCBIN_U16("graphics/dialogue_icons/goodbye.gbapal");
-
-static const u32 sCharacteristicDialogueIcon_Neutral[] = INCBIN_U32("graphics/dialogue_icons/neutral.4bpp.lz");
-static const u16 sCharacteristicDialoguePal_Neutral[] = INCBIN_U16("graphics/dialogue_icons/neutral.gbapal");
-static const u32 sCharacteristicDialogueIcon_Inspired[] = INCBIN_U32("graphics/dialogue_icons/inspired.4bpp.lz");
-static const u16 sCharacteristicDialoguePal_Inspired[] = INCBIN_U16("graphics/dialogue_icons/inspired.gbapal");
-static const u32 sCharacteristicDialogueIcon_Humble[] = INCBIN_U32("graphics/dialogue_icons/humble.4bpp.lz");
-static const u16 sCharacteristicDialoguePal_Humble[] = INCBIN_U16("graphics/dialogue_icons/humble.gbapal");
-static const u32 sCharacteristicDialogueIcon_Dominant[] = INCBIN_U32("graphics/dialogue_icons/dominant.4bpp.lz");
-static const u16 sCharacteristicDialoguePal_Dominant[] = INCBIN_U16("graphics/dialogue_icons/dominant.gbapal");
-static const u32 sCharacteristicDialogueIcon_Cynical[] = INCBIN_U32("graphics/dialogue_icons/cynical.4bpp.lz");
-static const u16 sCharacteristicDialoguePal_Cynical[] = INCBIN_U16("graphics/dialogue_icons/cynical.gbapal");
-
 static const struct OamData sCharacteristicDialogue_Oam = {
     .size = SPRITE_SIZE(32x32),
     .shape = SPRITE_SHAPE(32x32),
@@ -63,105 +37,6 @@ static const struct SpriteTemplate sDialogueIconSprite_SpriteTemplate = {
     .callback = SpriteCallbackDummy,
     .anims = gDummySpriteAnimTable,
     .affineAnims = gDummySpriteAffineAnimTable,
-};
-
-struct DialogueOptions
-{
-    const u8 *name;
-    s8 kindnessEffect;
-    s8 strengthEffect;
-    const u32 *iconImage;
-    const u16 *iconPal;
-};
-
-static const struct DialogueOptions sDialogueOptions[DIALOGUE_OPTION_COUNT] =
-{
-    [DIALOGUE_OPTION_TALK] =
-    {
-        .name = COMPOUND_STRING("Talk"),
-        .iconImage = sCharacteristicDialogueIcon_Talk,
-        .iconPal = sCharacteristicDialoguePal_Talk
-    },
-    [DIALOGUE_OPTION_OPINION] =
-    {
-        .name = COMPOUND_STRING("Opinion"),
-        .iconImage = sCharacteristicDialogueIcon_Opinion,
-        .iconPal = sCharacteristicDialoguePal_Opinion
-    },
-    [DIALOGUE_OPTION_ROMANCE] =
-    {
-        .name = COMPOUND_STRING("Romance"),
-        .iconImage = sCharacteristicDialogueIcon_Romance,
-        .iconPal = sCharacteristicDialoguePal_Romance
-    },
-    [DIALOGUE_OPTION_QUESTS] =
-    {
-        .name = COMPOUND_STRING("Quests"),
-        .iconImage = sCharacteristicDialogueIcon_Quest,
-        .iconPal = sCharacteristicDialoguePal_Quest
-    },
-    [DIALOGUE_OPTION_BATTLE] =
-    {
-        .name = COMPOUND_STRING("Battle"),
-        .iconImage = sCharacteristicDialogueIcon_Battle,
-        .iconPal = sCharacteristicDialoguePal_Battle
-    },
-    [DIALOGUE_OPTION_GIFT] =
-    {
-        .name = COMPOUND_STRING("Gift"),
-        .iconImage = sCharacteristicDialogueIcon_Gift,
-        .iconPal = sCharacteristicDialoguePal_Gift
-    },
-    [DIALOGUE_OPTION_GOODBYE] =
-    {
-        .name = COMPOUND_STRING("Goodbye"),
-        .iconImage = sCharacteristicDialogueIcon_Goodbye,
-        .iconPal = sCharacteristicDialoguePal_Goodbye
-    },
-};
-
-static const struct DialogueOptions sDialogueAttitudes[ATTITUDE_COUNT] =
-{
-    [ATTITUDE_NEUTRAL] =
-    {
-        .name = COMPOUND_STRING("Neutral"),
-        .kindnessEffect = 0,
-        .strengthEffect = 0,
-        .iconImage = sCharacteristicDialogueIcon_Neutral,
-        .iconPal = sCharacteristicDialoguePal_Neutral
-    },
-    [ATTITUDE_INSPIRED] =
-    {
-        .name = COMPOUND_STRING("Inspired"),
-        .kindnessEffect = 1,
-        .strengthEffect = 1,
-        .iconImage = sCharacteristicDialogueIcon_Inspired,
-        .iconPal = sCharacteristicDialoguePal_Inspired
-    },
-    [ATTITUDE_HUMBLE] =
-    {
-        .name = COMPOUND_STRING("Humble"),
-        .kindnessEffect = 1,
-        .strengthEffect = -1,
-        .iconImage = sCharacteristicDialogueIcon_Humble,
-        .iconPal = sCharacteristicDialoguePal_Humble
-    },
-    [ATTITUDE_DOMINANT] =
-    {
-        .name = COMPOUND_STRING("Dominant"),
-        .kindnessEffect = -1,
-        .strengthEffect = 1,
-        .iconImage = sCharacteristicDialogueIcon_Dominant,
-        .iconPal = sCharacteristicDialoguePal_Dominant
-    },
-    [ATTITUDE_CYNICAL] =
-    {
-        .name = COMPOUND_STRING("Cynical"),
-        .kindnessEffect = -1,
-        .strengthEffect = -1,
-        .iconImage = sCharacteristicDialogueIcon_Cynical,
-        .iconPal = sCharacteristicDialoguePal_Cynical
-    },
 };
 
 static s32 ClampedOpinionDelta(s32 opinionCurrent, s32 opinionDelta)
@@ -516,13 +391,13 @@ void IkigaiCharacter_HandleDialogue_Attitudes(void)
         return;
     }
 
-    if (gSpecialVar_Result >= NELEMS(sDialogueAttitudes))
+    if (gSpecialVar_Result >= NELEMS(gDialogueAttitudes))
         gSpecialVar_Result = ATTITUDE_NEUTRAL;
 
     if (!IkigaiCharacter_GetSetConversedFlag(character, FALSE))
     {
-        s32 opinionKindness = sDialogueAttitudes[gSpecialVar_Result].kindnessEffect;
-        s32 opinionStrength = sDialogueAttitudes[gSpecialVar_Result].strengthEffect;
+        s32 opinionKindness = gDialogueAttitudes[gSpecialVar_Result].kindnessEffect;
+        s32 opinionStrength = gDialogueAttitudes[gSpecialVar_Result].strengthEffect;
 
         if (gSpecialVar_Result == gIkigaiCharactersInfo[character].personality)
         {
@@ -847,8 +722,8 @@ u8 CreateDialogueOptionIconSprite(u32 dialogueIndex)
     if (dialogueIndex >= DIALOGUE_OPTION_COUNT)
         dialogueIndex = DIALOGUE_OPTION_TALK;
 
-    sheet.data = sDialogueOptions[dialogueIndex].iconImage;
-    pal.data = sDialogueOptions[dialogueIndex].iconPal;
+    sheet.data = gDialogueOptions[dialogueIndex].iconImage;
+    pal.data = gDialogueOptions[dialogueIndex].iconPal;
 
     LoadCompressedSpriteSheet(&sheet);
     LoadSpritePalette(&pal);
@@ -884,8 +759,8 @@ u8 CreateAttitudeIconSprite(u32 attitudeIndex)
     if (attitudeIndex >= ATTITUDE_COUNT)
         attitudeIndex = ATTITUDE_NEUTRAL;
 
-    sheet.data = sDialogueAttitudes[attitudeIndex].iconImage;
-    pal.data = sDialogueAttitudes[attitudeIndex].iconPal;
+    sheet.data = gDialogueAttitudes[attitudeIndex].iconImage;
+    pal.data = gDialogueAttitudes[attitudeIndex].iconPal;
 
     LoadCompressedSpriteSheet(&sheet);
     LoadSpritePalette(&pal);
