@@ -359,7 +359,10 @@ static void BuildNormalStartMenu(void)
     
     AddStartMenuAction(MENU_ACTION_POKESPHERE);
 
-    AddStartMenuAction(MENU_ACTION_SAMPLE_UI);
+    if (DEBUG_ACTIVE)
+    {
+        AddStartMenuAction(MENU_ACTION_SAMPLE_UI);
+    }
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
