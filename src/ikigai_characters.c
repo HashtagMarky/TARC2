@@ -773,6 +773,22 @@ static s32 IkigaiCharacterOpinionBonus_StarterPokemon(u32 character, bool32 opin
     return bonusStarter;
 }
 
+// static s32 IkigaiCharacterOpinionBonus_Player(u32 character, bool32 opinionType)
+// {
+//     u32 bonusPlayerAttitude = 0;
+
+//     if (opinionType == OPINION_TYPE_KINDNESS)
+//     {
+//         Attitude Matching Personality
+//     }
+//     else if (opinionType == OPINION_TYPE_STRENGTH)
+//     {
+//         Gym Wins
+//     }
+
+//     return bonusPlayerAttitude;
+// }
+
 static uq4_12_t GetGymTypeEffectiveness(u16 species, bool32 speciesAtk)
 {
     uq4_12_t modifier[3] = { UQ_4_12(1.0), UQ_4_12(1.0), UQ_4_12(1.0) };
