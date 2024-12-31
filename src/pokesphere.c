@@ -34,15 +34,37 @@ struct SampleUiState
     MainCallback savedCallback;
     u8 loadState;
     u8 mode;
+    u8 characterId;
+    u8 characterMugshotSpriteId;
+    u8 partnerId;
+    u8 partnerIconSpriteId;
 };
 
 enum WindowIds
 {
-    WINDOW_0
+    WIN_UI_CONTROLS,
+    WIN_CHRACTER_NAME,
+    WIN_CHRACTER_RELATIONSHIPS,
+    WIN_CHRACTER_PROFILE,
 };
+
+enum Modes
+{
+    MODE_PROFILE,
+    MODE_POSTS,
+    MODE_COUNT,
+};
+
+#define CHARACTER_MUGSHOT_X     16
+#define CHARACTER_MUGSHOT_Y     16
 
 static EWRAM_DATA struct SampleUiState *sSampleUiState = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
+
+static const u8 *const sModeNames[MODE_COUNT] = {
+    [MODE_PROFILE]      = COMPOUND_STRING("Profile:"),
+    [MODE_POSTS]        = COMPOUND_STRING("Posts:"),
+};
 
 static const struct BgTemplate sSampleUiBgTemplates[] =
 {
@@ -62,15 +84,45 @@ static const struct BgTemplate sSampleUiBgTemplates[] =
 
 static const struct WindowTemplate sSampleUiWindowTemplates[] =
 {
-    [WINDOW_0] =
+    [WIN_UI_CONTROLS] =
     {
         .bg = 0,
-        .tilemapLeft = 14,
-        .tilemapTop = 0,
-        .width = 16,
-        .height = 10,
+        .tilemapLeft = 20,
+        .tilemapTop = 1,
+        .width = 9,
+        .height = 5,
         .paletteNum = 15,
         .baseBlock = 1
+    },
+    [WIN_CHRACTER_NAME] =
+    {
+        .bg = 0,
+        .tilemapLeft = 13,
+        .tilemapTop = 2,
+        .width = 6,
+        .height = 3,
+        .paletteNum = 15,
+        .baseBlock = 1 + (9 * 5)
+    },
+    [WIN_CHRACTER_RELATIONSHIPS] =
+    {
+        .bg = 0,
+        .tilemapLeft = 20,
+        .tilemapTop = 8,
+        .width = 8,
+        .height = 12,
+        .paletteNum = 15,
+        .baseBlock = 46 + (3 * 6)
+    },
+    [WIN_CHRACTER_PROFILE] =
+    {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 13,
+        .width = 17,
+        .height = 6,
+        .paletteNum = 15,
+        .baseBlock = 64 + (8 * 11)
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -84,12 +136,18 @@ static const u16 sSampleUiPalette[] = INCBIN_U16("graphics/pokesphere/00.gbapal"
 enum FontColor
 {
     FONT_WHITE,
-    FONT_RED
+    FONT_GRAY,
+    FONT_RED,
+    FONT_GREEN,
+    FONT_BLUE,
 };
 static const u8 sSampleUiWindowFontColors[][3] =
 {
     [FONT_WHITE]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY},
+    [FONT_GRAY]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY},
     [FONT_RED]    = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED,        TEXT_COLOR_LIGHT_GRAY},
+    [FONT_GREEN]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_GREEN,      TEXT_COLOR_LIGHT_GRAY},
+    [FONT_BLUE]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_BLUE,       TEXT_COLOR_LIGHT_GRAY},
 };
 
 // Callbacks for the sample UI
@@ -110,7 +168,7 @@ static bool8 SampleUi_InitBgs(void);
 static void SampleUi_FadeAndBail(void);
 static bool8 SampleUi_LoadGraphics(void);
 static void SampleUi_InitWindows(void);
-static void SampleUi_PrintUiSampleWindowText(void);
+static void PokeSphere_PrintUIControls(void);
 static void SampleUi_FreeResources(void);
 
 // Declared in sample_ui.h
@@ -210,7 +268,7 @@ static void SampleUi_SetupCB(void)
         gMain.state++;
         break;
     case 5:
-        SampleUi_PrintUiSampleWindowText();
+        PokeSphere_PrintUIControls();
         CreateTask(Task_SampleUiWaitFadeIn, 0);
         gMain.state++;
         break;
@@ -258,6 +316,10 @@ static void Task_SampleUiMainInput(u8 taskId)
         gTasks[taskId].func = Task_SampleUiWaitFadeAndExitGracefully;
     }
     if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+    }
+    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
         PlaySE(SE_SELECT);
     }
@@ -346,23 +408,26 @@ static void SampleUi_InitWindows(void)
     InitWindows(sSampleUiWindowTemplates);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
-    FillWindowPixelBuffer(WINDOW_0, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    PutWindowTilemap(WINDOW_0);
-    CopyWindowToVram(WINDOW_0, 3);
+    FillWindowPixelBuffer(WIN_UI_CONTROLS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    PutWindowTilemap(WIN_UI_CONTROLS);
+    CopyWindowToVram(WIN_UI_CONTROLS, 3);
 }
 
-static const u8 sText_Text1[] = _("Hello, world!");
-static const u8 sText_Text2[] = _("Press {A_BUTTON} to make a sound!");
-static void SampleUi_PrintUiSampleWindowText(void)
+static void PokeSphere_PrintUIControls(void)
 {
-    FillWindowPixelBuffer(WINDOW_0, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WIN_UI_CONTROLS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    AddTextPrinterParameterized4(WINDOW_0, FONT_NORMAL, 0, 3, 0, 0,
-        sSampleUiWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_Text1);
-    AddTextPrinterParameterized4(WINDOW_0, FONT_SMALL, 0, 15, 0, 0,
-        sSampleUiWindowFontColors[FONT_RED], TEXT_SKIP_DRAW, sText_Text2);
+    AddTextPrinterParameterized4(WIN_UI_CONTROLS, FONT_SMALL_NARROWER, 5, 1, 0, 0,
+        sSampleUiWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
+        COMPOUND_STRING("{DPAD_LEFTRIGHT} Change Profile"));
+    AddTextPrinterParameterized4(WIN_UI_CONTROLS, FONT_SMALL_NARROWER, 5, 12, 0, 0,
+        sSampleUiWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
+        COMPOUND_STRING("{A_BUTTON} Change View"));
+    AddTextPrinterParameterized4(WIN_UI_CONTROLS, FONT_SMALL_NARROWER, 5, 23, 0, 0,
+        sSampleUiWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
+        COMPOUND_STRING("{B_BUTTON} Exit"));
 
-    CopyWindowToVram(WINDOW_0, COPYWIN_GFX);
+    CopyWindowToVram(WIN_UI_CONTROLS, COPYWIN_GFX);
 }
 
 static void SampleUi_FreeResources(void)
