@@ -86,6 +86,7 @@ void IkigaiCharacter_SetDefaultOpinion(u32 character);
 void IkigaiCharacter_SetAllCharacterDefaultOpinion(void);
 s32 IkigaiCharacter_GetKindness(u32 character);
 s32 IkigaiCharacter_GetStrength(u32 character);
+s32 IkigaiCharacter_GetOpinionBonus(u32 character, u32 opinionType);
 s32 IkigaiCharacter_GetAverageKindness(void);
 s32 IkigaiCharacter_GetAverageStrength(void);
 s32 IkigaiCharacter_GetSetConversedFlag(u32 character, bool32 setFlag);

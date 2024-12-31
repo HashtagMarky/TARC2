@@ -218,11 +218,7 @@ s32 IkigaiCharacter_GetKindness(u32 character)
         return 0;
      
     s32 kindnessCharacter = gSaveBlock3Ptr->characters.opinionKindness[character];
-    s32 kindnessAdded = 0;
-
-    kindnessAdded += IkigaiCharacterOpinionBonus_Relationship(character, OPINION_TYPE_KINDNESS);
-    kindnessAdded += IkigaiCharacterOpinionBonus_PartnerPokemon(character, OPINION_TYPE_KINDNESS);
-    kindnessAdded += IkigaiCharacterOpinionBonus_StarterPokemon(character, OPINION_TYPE_KINDNESS);
+    s32 kindnessAdded = IkigaiCharacter_GetOpinionBonus(character, OPINION_TYPE_KINDNESS);
 
     return kindnessCharacter + ClampedOpinionDelta(kindnessCharacter, kindnessAdded);
 }
@@ -233,13 +229,20 @@ s32 IkigaiCharacter_GetStrength(u32 character)
         return 0;
      
     s32 strengthCharacter = gSaveBlock3Ptr->characters.opinionStrength[character];
-    s32 strengthAdded = 0;
-
-    strengthAdded += IkigaiCharacterOpinionBonus_Relationship(character, OPINION_TYPE_STRENGTH);
-    strengthAdded += IkigaiCharacterOpinionBonus_PartnerPokemon(character, OPINION_TYPE_STRENGTH);
-    strengthAdded += IkigaiCharacterOpinionBonus_StarterPokemon(character, OPINION_TYPE_STRENGTH);
+    s32 strengthAdded = IkigaiCharacter_GetOpinionBonus(character, OPINION_TYPE_STRENGTH);
 
     return strengthCharacter + ClampedOpinionDelta(strengthCharacter, strengthAdded);
+}
+
+s32 IkigaiCharacter_GetOpinionBonus(u32 character, u32 opinionType)
+{
+    s32 opinionBonus = 0;
+
+    opinionBonus += IkigaiCharacterOpinionBonus_Relationship(character, opinionType);
+    opinionBonus += IkigaiCharacterOpinionBonus_PartnerPokemon(character, opinionType);
+    opinionBonus += IkigaiCharacterOpinionBonus_StarterPokemon(character, opinionType);
+
+    return opinionBonus;
 }
 
 s32 IkigaiCharacter_GetAverageKindness(void)
@@ -544,10 +547,16 @@ void DEBUG_IkigaiCharacter_CharacterOpinions(void)
 
     if (character > MAIN_CHARACTER_COUNT)
     {
-        opinionKindness = IkigaiCharacter_GetAverageKindness();
-        opinionStrength = IkigaiCharacter_GetAverageStrength();
-    }
+        s8 addedKindess, addedStrength;
 
+        opinionKindness = IkigaiCharacter_GetAverageKindness();
+        addedKindess = IkigaiCharacter_GetOpinionBonus(character, OPINION_TYPE_KINDNESS);
+        opinionKindness += ClampedOpinionDelta(opinionKindness, addedKindess);
+
+        opinionStrength = IkigaiCharacter_GetAverageStrength();
+        addedStrength = IkigaiCharacter_GetOpinionBonus(character, OPINION_TYPE_STRENGTH);
+        opinionStrength += ClampedOpinionDelta(opinionStrength, addedStrength);
+    }
 
     StringCopy(gStringVar1, gIkigaiCharactersInfo[character].name);
     StringAppend(gStringVar1, COMPOUND_STRING("'s Kindness Opinion: "));
