@@ -78,36 +78,43 @@ static const struct DialogueOptions sDialogueOptions[DIALOGUE_OPTION_COUNT] =
 {
     [DIALOGUE_OPTION_TALK] =
     {
+        .name = COMPOUND_STRING("Talk"),
         .iconImage = sCharacteristicDialogueIcon_Talk,
         .iconPal = sCharacteristicDialoguePal_Talk
     },
     [DIALOGUE_OPTION_OPINION] =
     {
+        .name = COMPOUND_STRING("Opinion"),
         .iconImage = sCharacteristicDialogueIcon_Opinion,
         .iconPal = sCharacteristicDialoguePal_Opinion
     },
     [DIALOGUE_OPTION_ROMANCE] =
     {
+        .name = COMPOUND_STRING("Romance"),
         .iconImage = sCharacteristicDialogueIcon_Romance,
         .iconPal = sCharacteristicDialoguePal_Romance
     },
     [DIALOGUE_OPTION_QUESTS] =
     {
+        .name = COMPOUND_STRING("Quests"),
         .iconImage = sCharacteristicDialogueIcon_Quest,
         .iconPal = sCharacteristicDialoguePal_Quest
     },
     [DIALOGUE_OPTION_BATTLE] =
     {
+        .name = COMPOUND_STRING("Battle"),
         .iconImage = sCharacteristicDialogueIcon_Battle,
         .iconPal = sCharacteristicDialoguePal_Battle
     },
     [DIALOGUE_OPTION_GIFT] =
     {
+        .name = COMPOUND_STRING("Gift"),
         .iconImage = sCharacteristicDialogueIcon_Gift,
         .iconPal = sCharacteristicDialoguePal_Gift
     },
     [DIALOGUE_OPTION_GOODBYE] =
     {
+        .name = COMPOUND_STRING("Goodbye"),
         .iconImage = sCharacteristicDialogueIcon_Goodbye,
         .iconPal = sCharacteristicDialoguePal_Goodbye
     },
