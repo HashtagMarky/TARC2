@@ -114,7 +114,7 @@ static const struct WindowTemplate sPokeSphereWindowTemplates[] =
     {
         .bg = 0,
         .tilemapLeft = 20,
-        .tilemapTop = 8,
+        .tilemapTop = 7,
         .width = 8,
         .height = 12,
         .paletteNum = 15,
@@ -188,6 +188,7 @@ static void PokeSphere_DrawCharacterMusghot(u32 character);
 static void PokeSphere_DrawPartnerMonIcon(u32 character);
 static void PokeSphere_PrintUIControls(void);
 static void PokeSphere_PrintNames(void);
+static void PokeSphere_PrintRelationships(void);
 static void PokeSphere_FreeResources(void);
 
 // Declared in sample_ui.h
@@ -294,6 +295,7 @@ static void PokeSphere_SetupCB(void)
         // PokeSphere_DrawCharacterMusghot(sPokeSphereState->characterId);
         PokeSphere_PrintUIControls();
         PokeSphere_PrintNames();
+        PokeSphere_PrintRelationships();
         CreateTask(Task_PokeSphereWaitFadeIn, 0);
         gMain.state++;
         break;
@@ -436,12 +438,15 @@ static void PokeSphere_InitWindows(void)
     
     FillWindowPixelBuffer(WIN_UI_CONTROLS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     FillWindowPixelBuffer(WIN_CHARACTER_NAME, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WIN_CHARACTER_RELATIONSHIPS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     PutWindowTilemap(WIN_UI_CONTROLS);
     PutWindowTilemap(WIN_CHARACTER_NAME);
+    PutWindowTilemap(WIN_CHARACTER_RELATIONSHIPS);
     
     CopyWindowToVram(WIN_UI_CONTROLS, COPYWIN_FULL);
     CopyWindowToVram(WIN_CHARACTER_NAME, COPYWIN_FULL);
+    CopyWindowToVram(WIN_CHARACTER_RELATIONSHIPS, COPYWIN_FULL);
 }
 
 static void PokeSphere_PrintUIControls(void)
@@ -485,6 +490,68 @@ static void PokeSphere_PrintNames(void)
     );
 
     CopyWindowToVram(WIN_CHARACTER_NAME, COPYWIN_GFX);
+}
+
+static void PokeSphere_PrintRelationships(void)
+{
+    u8 x, relationship;
+    u8 y, i = 0;
+    const u8 *title;
+
+    FillWindowPixelBuffer(WIN_CHARACTER_RELATIONSHIPS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+
+    x = GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
+        COMPOUND_STRING("Tagged Profiles"),
+        64
+    );
+    AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS, FONT_SMALL_NARROWER, x, 2, 0, 0,
+        sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
+        COMPOUND_STRING("Tagged Profiles")
+    );
+
+    y = 5;
+    for (i = 0; i < MAX_RELATIONSHIPS; i++)
+    {
+        relationship = gIkigaiCharactersInfo[sPokeSphereState->characterId].relationships[i].characterId;
+        title = gIkigaiCharactersInfo[sPokeSphereState->characterId].relationships[i].title;
+
+        if (relationship != CHARACTER_DEFAULT)
+        {
+            y += 11;
+            x = GetStringRightAlignXOffset(FONT_SMALL_NARROWER,
+                gIkigaiCharactersInfo[relationship].name,
+                64
+            );
+            AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS, FONT_SMALL_NARROWER, x - 5, y, 0, 0,
+                sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
+                gIkigaiCharactersInfo[relationship].name
+            );
+            y += 11;
+            x = GetStringRightAlignXOffset(FONT_SMALL_NARROWER,
+                title,
+                64
+            );
+            AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS, FONT_SMALL_NARROWER, x - 5, y, 0, 0,
+                sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
+                title
+            );
+            y += 3;
+        }
+    }
+    // AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS, FONT_SMALL_NARROWER, 5, 12, 0, 0,
+    //     sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
+    //     COMPOUND_STRING("{A_BUTTON} Change View")
+    // );
+    // x = GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
+    //     COMPOUND_STRING("Tagged Profiles"),
+    //     64
+    // );
+    // AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS, FONT_SMALL_NARROWER, 5, 23, 0, 0,
+    //     sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
+    //     COMPOUND_STRING("{B_BUTTON} Exit")
+    // );
+
+    CopyWindowToVram(WIN_CHARACTER_RELATIONSHIPS, COPYWIN_GFX);
 }
 
 static void PokeSphere_DrawCharacterMusghot(u32 character)
