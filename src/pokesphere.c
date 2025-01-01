@@ -184,8 +184,8 @@ static bool8 PokeSphere_InitBgs(void);
 static void PokeSphere_FadeAndBail(void);
 static bool8 PokeSphere_LoadGraphics(void);
 static void PokeSphere_InitWindows(void);
-static void PokeSphere_DrawCharacterMusghot(u32 character);
-static void PokeSphere_DrawPartnerMonIcon(u32 character);
+static void PokeSphere_DrawCharacterMusghot(void);
+static void PokeSphere_DrawPartnerMonIcon(void);
 static void PokeSphere_PrintUIControls(void);
 static void PokeSphere_PrintNames(void);
 static void PokeSphere_PrintRelationships(void);
@@ -291,8 +291,8 @@ static void PokeSphere_SetupCB(void)
         sPokeSphereState->characterId = MAIN_CHARACTER_SAMUEL;
         // FreeMonIconPalettes();
         // LoadMonIconPalettes();
-        // PokeSphere_DrawPartnerMonIcon(sPokeSphereState->characterId);
-        // PokeSphere_DrawCharacterMusghot(sPokeSphereState->characterId);
+        // PokeSphere_DrawPartnerMonIcon();
+        // PokeSphere_DrawCharacterMusghot(void);
         PokeSphere_PrintUIControls();
         PokeSphere_PrintNames();
         PokeSphere_PrintRelationships();
@@ -554,8 +554,9 @@ static void PokeSphere_PrintRelationships(void)
     CopyWindowToVram(WIN_CHARACTER_RELATIONSHIPS, COPYWIN_GFX);
 }
 
-static void PokeSphere_DrawCharacterMusghot(u32 character)
+static void PokeSphere_DrawCharacterMusghot(void)
 {
+    u32 character = sPokeSphereState->characterId;
     u16 mughsotId = gIkigaiCharactersInfo[character].mugshotId;
     u8 mugshotEmotion = 0;
     u8 windowColour = TEXT_COLOR_TRANSPARENT;
@@ -586,9 +587,11 @@ static void PokeSphere_DrawCharacterMusghot(u32 character)
     gSprites[sPokeSphereState->characterMugshotSpriteId].y = CHARACTER_MUGSHOT_Y;
 }
 
-static void PokeSphere_DrawPartnerMonIcon(u32 character)
+static void PokeSphere_DrawPartnerMonIcon(void)
 {
+    u32 character = sPokeSphereState->characterId;
     u16 speciesId = gIkigaiCharactersInfo[character].partnerPokemon;
+
     sPokeSphereState->partnerIconSpriteId = CreateMonIcon(speciesId, SpriteCB_MonIcon, CHARACTER_PARTNER_X, CHARACTER_PARTNER_Y, 4, 0);
     gSprites[sPokeSphereState->partnerIconSpriteId].oam.priority = 0;
 }
