@@ -573,7 +573,7 @@ static void PokeSphere_PrintRelationships(void)
         stringBuffer,
         64
     );
-    AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS_POSTS, FONT_SMALL_NARROWER, x, 2, 0, 0,
+    AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS_POSTS, FONT_SMALL_NARROWER, x, 1, 0, 0,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
         stringBuffer
     );
@@ -623,12 +623,12 @@ static void PokeSphere_PrintPosts(void)
         stringBuffer,
         64
     );
-    AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS_POSTS, FONT_SMALL_NARROWER, x, 2, 0, 0,
+    AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS_POSTS, FONT_SMALL_NARROWER, x, 1, 0, 0,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
         stringBuffer
     );
 
-    y = 14;
+    y = 12;
     for (i = 0; i < OB_FUNCTION_COUNT; i++)
     {
         bonus = gOpinionBonusFunction[i].function(sPokeSphereState->characterId, OPINION_TYPE_KINDNESS);
@@ -636,9 +636,9 @@ static void PokeSphere_PrintPosts(void)
         if (1 != 0)
         {
             AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS_POSTS, FONT_SMALL_NARROWER, 5, y, 0, 1,
-                sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW, gOpinionBonusFunction[i].stringStrength
+                sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW, gOpinionBonusFunction[i].stringKindness
             );
-            y += 19;
+            y += 20;
         }
     }
     
