@@ -34,7 +34,6 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .baseOpinionKindness = 20,
         .baseOpinionStrength = 25,
         .opinionDecayChance = 0,
-        .flagRomantic = FLAG_TEMP_1,
         .relationships =
         {
             {
@@ -68,7 +67,6 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .baseOpinionKindness = 15,
         .baseOpinionStrength = 20,
         .opinionDecayChance = 10,
-        .flagRomantic = FLAG_TEMP_2,
         .relationships =
         {
             {
@@ -91,7 +89,6 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .baseOpinionKindness = 20,
         .baseOpinionStrength = 25,
         .opinionDecayChance = 5,
-        .flagRomantic = FLAG_TEMP_3,
         .relationships =
         {
             {
@@ -115,7 +112,6 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .baseOpinionKindness = 0,
         .baseOpinionStrength = 0,
         .opinionDecayChance = 20,
-        .flagRomantic = FLAG_TEMP_4,
     },
 
     [SPECIAL_CHARACTER_N] =
