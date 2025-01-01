@@ -641,6 +641,12 @@ static void PokeSphere_PrintPosts(void)
     s8 opinionKindness = IkigaiCharacter_GetKindness(character);
     s8 opinionStrength = IkigaiCharacter_GetStrength(character);
 
+    if (character > MAIN_CHARACTER_COUNT)
+    {
+        opinionKindness = IkigaiCharacter_GetKindness_Special(character);
+        opinionStrength = IkigaiCharacter_GetStrength_Special(character);
+    }
+
     FillWindowPixelBuffer(WIN_CHARACTER_PROFILE, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     StringCopy(string, COMPOUND_STRING("Posts"));

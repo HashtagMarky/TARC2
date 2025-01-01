@@ -116,6 +116,32 @@ s32 IkigaiCharacter_GetStrength(u32 character)
     return strengthCharacter + ClampedOpinionDelta(strengthCharacter, strengthAdded);
 }
 
+s32 IkigaiCharacter_GetKindness_Special(u32 character)
+{
+    if (character <= MAIN_CHARACTER_COUNT && character == CHARACTER_COUNT_TOTAL)
+    {
+        return 0;
+    }
+
+    s32 opinionKindness = IkigaiCharacter_GetAverageKindness();
+    s32 kindnessAdded = IkigaiCharacter_GetOpinionBonus(character, OPINION_TYPE_KINDNESS);
+
+    return opinionKindness + ClampedOpinionDelta(opinionKindness, kindnessAdded);
+}
+
+s32 IkigaiCharacter_GetStrength_Special(u32 character)
+{
+    if (character <= MAIN_CHARACTER_COUNT && character == CHARACTER_COUNT_TOTAL)
+    {
+        return 0;
+    }
+
+    s32 opinionStrength = IkigaiCharacter_GetAverageStrength();
+    s32 strengthAdded = IkigaiCharacter_GetOpinionBonus(character, OPINION_TYPE_STRENGTH);
+
+    return opinionStrength + ClampedOpinionDelta(opinionStrength, strengthAdded);
+}
+
 s32 IkigaiCharacter_GetOpinionBonus(u32 character, u32 opinionType)
 {
     s32 opinionBonus = 0;
