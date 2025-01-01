@@ -667,7 +667,7 @@ static void PokeSphere_PrintPosts(void)
         bonus = gOpinionBonusFunction[funcIndex].function(sPokeSphereState->characterId, isKindness);
 
         // Print the associated text if the bonus is non-zero
-        if (1 != 0)
+        if (bonus != 0)
         {
             const u8 *textToPrint = isKindness
                 ? gOpinionBonusFunction[funcIndex].stringKindness
