@@ -541,24 +541,25 @@ static void PokeSphere_PrintRelationships(void)
 {
     u8 x, relationship;
     u8 y, i = 0;
-    const u8 *title;
+    const u8 *stringBuffer;
 
     FillWindowPixelBuffer(WIN_CHARACTER_RELATIONSHIPS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
+    stringBuffer = COMPOUND_STRING("Tagged Profiles");
     x = GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
-        COMPOUND_STRING("Tagged Profiles"),
+        stringBuffer,
         64
     );
     AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS, FONT_SMALL_NARROWER, x, 2, 0, 0,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
-        COMPOUND_STRING("Tagged Profiles")
+        stringBuffer
     );
 
     y = 5;
     for (i = 0; i < MAX_RELATIONSHIPS; i++)
     {
         relationship = gIkigaiCharactersInfo[sPokeSphereState->characterId].relationships[i].characterId;
-        title = gIkigaiCharactersInfo[sPokeSphereState->characterId].relationships[i].title;
+        stringBuffer = gIkigaiCharactersInfo[sPokeSphereState->characterId].relationships[i].title;
 
         if (relationship != CHARACTER_DEFAULT)
         {
@@ -573,12 +574,12 @@ static void PokeSphere_PrintRelationships(void)
             );
             y += 11;
             x = GetStringRightAlignXOffset(FONT_SMALL_NARROWER,
-                title,
+                stringBuffer,
                 64
             );
             AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS, FONT_SMALL_NARROWER, x - 5, y, 0, 0,
                 sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
-                title
+                stringBuffer
             );
             y += 3;
         }
@@ -589,20 +590,24 @@ static void PokeSphere_PrintRelationships(void)
 
 static void PokeSphere_Profile(void)
 {
+    const u8 *stringBuffer = COMPOUND_STRING("Highlights");
+
     FillWindowPixelBuffer(WIN_CHARACTER_PROFILE, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     AddTextPrinterParameterized4(WIN_CHARACTER_PROFILE, FONT_SMALL_NARROWER,
         GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
-                COMPOUND_STRING("Highlights"),
+                stringBuffer,
                 136
         ),
         1, 0, 0,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
-        COMPOUND_STRING("Highlights"));
+        stringBuffer
+    );
 
     AddTextPrinterParameterized4(WIN_CHARACTER_PROFILE, FONT_SMALL_NARROWER, 5, 13, 0, 1,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
-        gIkigaiCharactersInfo[sPokeSphereState->characterId].highlights);
+        gIkigaiCharactersInfo[sPokeSphereState->characterId].highlights
+    );
 
     CopyWindowToVram(WIN_CHARACTER_PROFILE, COPYWIN_GFX);
 }
