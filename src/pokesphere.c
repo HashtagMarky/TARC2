@@ -131,7 +131,7 @@ static const u32 sSampleUiTiles[] = INCBIN_U32("graphics/pokesphere/tiles.4bpp.l
 
 static const u32 sSampleUiTilemap[] = INCBIN_U32("graphics/pokesphere/tilemap.bin.lz");
 
-static const u16 sSampleUiPalette[] = INCBIN_U16("graphics/pokesphere/00.gbapal");
+static const u16 sSampleUiPalette[] = INCBIN_U16("graphics/pokesphere/tiles.gbapal");
 
 enum FontColor
 {
