@@ -191,6 +191,7 @@ static void PokeSphere_ReloadText(void);
 static void PokeSphere_PrintNames(void);
 static void PokeSphere_PrintRelationships(void);
 static void PokeSphere_PrintProfile(void);
+static void PokeSphere_PrintPosts(void);
 static void PokeSphere_FreeResources(void);
 
 // Declared in sample_ui.h
@@ -386,6 +387,15 @@ static void Task_PokeSphereMainInput(u8 taskId)
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
+        if (sPokeSphereState->mode == MODE_COUNT - 1)
+        {
+            sPokeSphereState->mode = MODE_PROFILE;
+        }
+        else
+        {
+            sPokeSphereState->mode++;
+        }
+        PokeSphere_ReloadText();
     }
 }
 
@@ -508,8 +518,18 @@ static void PokeSphere_PrintUIControls(void)
 
 static void PokeSphere_ReloadText(void)
 {
-    PokeSphere_PrintRelationships();
-    PokeSphere_PrintProfile();
+    switch (sPokeSphereState->mode)
+    {
+    case MODE_POSTS:
+        PokeSphere_PrintPosts();
+        break;
+
+    case MODE_PROFILE:
+    default:
+        PokeSphere_PrintRelationships();
+        PokeSphere_PrintProfile();
+        break;
+    }
 }
 
 static void PokeSphere_PrintNames(void)
@@ -608,6 +628,68 @@ static void PokeSphere_PrintProfile(void)
     AddTextPrinterParameterized4(WIN_CHARACTER_PROFILE, FONT_SMALL_NARROWER, 5, 13, 0, 1,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
         gIkigaiCharactersInfo[sPokeSphereState->characterId].highlights
+    );
+
+    CopyWindowToVram(WIN_CHARACTER_PROFILE, COPYWIN_GFX);
+}
+
+static void PokeSphere_PrintPosts(void)
+{
+    u8 string[100];
+    u8 opinion[3];
+    u32 character = sPokeSphereState->characterId;
+    s8 opinionKindness = IkigaiCharacter_GetKindness(character);
+    s8 opinionStrength = IkigaiCharacter_GetStrength(character);
+
+    FillWindowPixelBuffer(WIN_CHARACTER_PROFILE, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+
+    StringCopy(string, COMPOUND_STRING("Posts"));
+    AddTextPrinterParameterized4(WIN_CHARACTER_PROFILE, FONT_SMALL_NARROWER,
+        GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
+                string,
+                136
+        ),
+        1, 0, 0,
+        sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
+        string
+    );
+
+    StringCopy(string, COMPOUND_STRING("Here's what I think about "));
+    if (IkigaiCharacter_NicknameInsteadOfName(character))
+    {
+        StringAppend(string, gSaveBlock3Ptr->characters.playerNickname);
+    }
+    else
+    {
+        StringAppend(string, gSaveBlock2Ptr->playerName);
+    }
+    StringAppend(string, COMPOUND_STRING(
+        ".\nI rate his kindness "
+    ));
+    if (opinionKindness < 0)
+    {
+        opinionKindness *= -1;
+        StringAppend(string, COMPOUND_STRING("-"));
+    }
+    ConvertIntToDecimalStringN(opinion, opinionKindness, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringAppend(string, opinion);
+    StringAppend(string, COMPOUND_STRING(
+        ".\nI rate his strength "
+    ));
+    if (opinionStrength < 0)
+    {
+        opinionStrength *= -1;
+        StringAppend(gStringVar1, COMPOUND_STRING("-"));
+    }
+    ConvertIntToDecimalStringN(opinion, opinionStrength, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringAppend(string, opinion);
+    StringAppend(string, COMPOUND_STRING(
+        "."
+    ));
+
+    AddTextPrinterParameterized4(WIN_CHARACTER_PROFILE, FONT_SMALL_NARROWER, 5, 13, 0, 1,
+        sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
+        string
     );
 
     CopyWindowToVram(WIN_CHARACTER_PROFILE, COPYWIN_GFX);
