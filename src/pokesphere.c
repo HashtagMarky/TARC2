@@ -546,7 +546,7 @@ static void PokeSphere_DrawCharacterMusghot(void)
 {
     u32 character = sPokeSphereState->characterId;
     u16 mughsotId = gIkigaiCharactersInfo[character].mugshotId;
-    u8 mugshotEmotion = 0;
+    u8 mugshotEmotion = EMOTE_NORMAL;
     u8 windowColour = TEXT_COLOR_TRANSPARENT;
 
     switch (gIkigaiCharactersInfo[character].personality)
