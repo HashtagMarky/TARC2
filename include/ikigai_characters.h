@@ -90,9 +90,17 @@ struct DialogueOptions
     const u16 *iconPal;
 };
 
+struct OpinionBonusFunctions
+{
+    const u8 *stringKindness;
+    const u8 *stringStrength;
+    s32 (*function)(u32 character, bool32 opinionType);
+};
+
 extern const struct IkigaiCharacterInfo gIkigaiCharactersInfo[];
 extern const struct DialogueOptions gDialogueOptions[];
 extern const struct DialogueOptions gDialogueAttitudes[];
+extern const struct OpinionBonusFunctions gOpinionBonusFunction[];
 
 u32 IkigaiCharacter_GetPlayerAttitude(void);
 void IkigaiCharacter_SetDefaultOpinion(u32 character);
@@ -130,6 +138,9 @@ void IkigaiCharacter_ResponseEmote(void);
 u32 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId);
 u32 ReturnIkigaiCharacter_SelectedObject(void);
 u32 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void);
+s32 IkigaiCharacterOpinionBonus_Relationship(u32 character, bool32 opinionType);
+s32 IkigaiCharacterOpinionBonus_PartnerPokemon(u32 character, bool32 opinionType);
+s32 IkigaiCharacterOpinionBonus_StarterPokemon(u32 character, bool32 opinionType);
 u8 CreateDialogueOptionIconSprite(u32 attitudeIndex);
 u8 CreateAttitudeIconSprite(u32 attitudeIndex);
 

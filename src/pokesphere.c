@@ -614,7 +614,7 @@ static void PokeSphere_PrintRelationships(void)
 static void PokeSphere_PrintPosts(void)
 {
     const u8 *stringBuffer = COMPOUND_STRING("Latest Posts");
-    u8 x;
+    u8 x, y, i;
     bool32 bonus;
 
     FillWindowPixelBuffer(WIN_CHARACTER_RELATIONSHIPS_POSTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
@@ -628,7 +628,19 @@ static void PokeSphere_PrintPosts(void)
         stringBuffer
     );
 
-    
+    y = 14;
+    for (i = 0; i < OB_FUNCTION_COUNT; i++)
+    {
+        bonus = gOpinionBonusFunction[i].function(sPokeSphereState->characterId, OPINION_TYPE_KINDNESS);
+
+        if (1 != 0)
+        {
+            AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS_POSTS, FONT_SMALL_NARROWER, 5, y, 0, 1,
+                sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW, gOpinionBonusFunction[i].stringStrength
+            );
+            y += 19;
+        }
+    }
     
     CopyWindowToVram(WIN_CHARACTER_RELATIONSHIPS_POSTS, COPYWIN_GFX);
 }

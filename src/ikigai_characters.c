@@ -19,9 +19,6 @@
 #include "battle_util.h"
 
 static s32 ClampedOpinionDelta(s32 opinionCurrent, s32 opinionDelta);
-static s32 IkigaiCharacterOpinionBonus_Relationship(u32 character, bool32 opinionType);
-static s32 IkigaiCharacterOpinionBonus_PartnerPokemon(u32 character, bool32 opinionType);
-static s32 IkigaiCharacterOpinionBonus_StarterPokemon(u32 character, bool32 opinionType);
 static uq4_12_t GetGymTypeEffectiveness(u16 species, bool32 speciesAtk);
 
 static const struct OamData sCharacteristicDialogue_Oam = {
@@ -598,7 +595,7 @@ u32 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void)
     return CHARACTER_DEFAULT;
 }
 
-static s32 IkigaiCharacterOpinionBonus_Relationship(u32 character, bool32 opinionType)
+s32 IkigaiCharacterOpinionBonus_Relationship(u32 character, bool32 opinionType)
 {
     u32 relationshipCharacter;
     u32 relationshipAffinity;
@@ -627,7 +624,7 @@ static s32 IkigaiCharacterOpinionBonus_Relationship(u32 character, bool32 opinio
     return 0;
 }
 
-static s32 IkigaiCharacterOpinionBonus_PartnerPokemon(u32 character, bool32 opinionType)
+s32 IkigaiCharacterOpinionBonus_PartnerPokemon(u32 character, bool32 opinionType)
 {
     u32 species = gIkigaiCharactersInfo[character].partnerPokemon;
     u32 bonusPartner = 0;
@@ -652,7 +649,7 @@ static s32 IkigaiCharacterOpinionBonus_PartnerPokemon(u32 character, bool32 opin
     return bonusPartner;
 }
 
-static s32 IkigaiCharacterOpinionBonus_StarterPokemon(u32 character, bool32 opinionType)
+s32 IkigaiCharacterOpinionBonus_StarterPokemon(u32 character, bool32 opinionType)
 {
     u32 starter = VarGet(VAR_STARTER_MON);
     u32 species = gIkigaiCharactersInfo[character].partnerPokemon;

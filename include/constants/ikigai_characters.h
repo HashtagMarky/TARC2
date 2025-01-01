@@ -63,3 +63,11 @@ enum RomanceOptions // Temporary (Moved From Poryscript but will formalise)
     ROMANCE_EXCLUSIVE,
     CHECK_ROMANCE,
 };
+
+enum OpinionBonusFunctionIds
+{
+    OB_FUNCTION_RELATIONSHIP,
+    OB_FUNCTION_PARTNER_POKEMON,
+    OB_FUNCTION_STARTER_POKEMON,
+    OB_FUNCTION_COUNT,
+};

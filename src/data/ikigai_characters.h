@@ -269,3 +269,26 @@ const struct DialogueOptions gDialogueAttitudes[ATTITUDE_COUNT] =
         .iconPal = sCharacteristicDialoguePal_Cynical
     },
 };
+
+// Opinion Bonus Functions
+const struct OpinionBonusFunctions gOpinionBonusFunction[OB_FUNCTION_COUNT] =
+{
+    [OB_FUNCTION_RELATIONSHIP] =
+    {
+        .stringKindness = COMPOUND_STRING("I like\nyour friends."),
+        .stringStrength = COMPOUND_STRING("My friends\nlike you."),
+        .function = IkigaiCharacterOpinionBonus_Relationship,
+    },
+    [OB_FUNCTION_PARTNER_POKEMON] =
+    {
+        .stringKindness = COMPOUND_STRING("You like\nmy partner."),
+        .stringStrength = COMPOUND_STRING("Your gym\nis strong."),
+        .function = IkigaiCharacterOpinionBonus_PartnerPokemon,
+    },
+    [OB_FUNCTION_STARTER_POKEMON] =
+    {
+        .stringKindness = COMPOUND_STRING("I like\nyour partner."),
+        .stringStrength = COMPOUND_STRING("Your partner\nis strong."),
+        .function = IkigaiCharacterOpinionBonus_StarterPokemon,
+    },
+};
