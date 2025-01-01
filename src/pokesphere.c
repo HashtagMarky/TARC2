@@ -29,6 +29,7 @@
 #include "pokedex.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
+#include "random.h"
 
 #include "field_mugshot.h"
 #include "ikigai_characters.h"
@@ -617,6 +618,32 @@ static void PokeSphere_PrintPosts(void)
     u8 x, y, i;
     bool32 bonus;
 
+    // Define a struct to hold function index and type (kindness/strength)
+    typedef struct
+    {
+        u8 index;
+        bool32 isKindness; // TRUE for kindness, FALSE for strength
+    } OpinionEntry;
+
+    OpinionEntry entries[OB_FUNCTION_COUNT * 2]; // Double the size for both types
+    u8 totalEntries = 0;
+
+    // Fill the entries array with indices for both kindness and strength
+    for (i = 0; i < OB_FUNCTION_COUNT; i++)
+    {
+        entries[totalEntries++] = (OpinionEntry){ .index = i, .isKindness = TRUE };
+        entries[totalEntries++] = (OpinionEntry){ .index = i, .isKindness = FALSE };
+    }
+
+    // Shuffle the entries array
+    for (i = totalEntries - 1; i > 0; i--)
+    {
+        u8 j = Random() % (i + 1); // Random index
+        OpinionEntry temp = entries[i];
+        entries[i] = entries[j];
+        entries[j] = temp;
+    }
+
     FillWindowPixelBuffer(WIN_CHARACTER_RELATIONSHIPS_POSTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     x = GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
@@ -629,19 +656,30 @@ static void PokeSphere_PrintPosts(void)
     );
 
     y = 12;
-    for (i = 0; i < OB_FUNCTION_COUNT; i++)
-    {
-        bonus = gOpinionBonusFunction[i].function(sPokeSphereState->characterId, OPINION_TYPE_KINDNESS);
 
-        if (1 != 0)
+    // Iterate through the shuffled entries
+    for (i = 0; i < 3; i++)
+    {
+        u8 funcIndex = entries[i].index;
+        bool32 isKindness = entries[i].isKindness;
+
+        // Call the appropriate function based on the entry type
+        bonus = gOpinionBonusFunction[funcIndex].function(sPokeSphereState->characterId, isKindness);
+
+        // Print the associated text if the bonus is non-zero
+        if (bonus != 0)
         {
+            const u8 *textToPrint = isKindness
+                ? gOpinionBonusFunction[funcIndex].stringKindness
+                : gOpinionBonusFunction[funcIndex].stringStrength;
+
             AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS_POSTS, FONT_SMALL_NARROWER, 5, y, 0, 1,
-                sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW, gOpinionBonusFunction[i].stringKindness
+                sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW, textToPrint
             );
             y += 20;
         }
     }
-    
+
     CopyWindowToVram(WIN_CHARACTER_RELATIONSHIPS_POSTS, COPYWIN_GFX);
 }
 
