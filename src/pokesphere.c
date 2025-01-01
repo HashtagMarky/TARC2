@@ -28,6 +28,7 @@
 #include "data.h"
 #include "pokedex.h"
 #include "gpu_regs.h"
+#include "international_string_util.h"
 
 #include "field_mugshot.h"
 #include "ikigai_characters.h"
@@ -186,6 +187,7 @@ static void PokeSphere_InitWindows(void);
 static void PokeSphere_DrawCharacterMusghot(u32 character);
 static void PokeSphere_DrawPartnerMonIcon(u32 character);
 static void PokeSphere_PrintUIControls(void);
+static void PokeSphere_PrintNames(void);
 static void PokeSphere_FreeResources(void);
 
 // Declared in sample_ui.h
@@ -291,6 +293,7 @@ static void PokeSphere_SetupCB(void)
         // PokeSphere_DrawPartnerMonIcon(sPokeSphereState->characterId);
         // PokeSphere_DrawCharacterMusghot(sPokeSphereState->characterId);
         PokeSphere_PrintUIControls();
+        PokeSphere_PrintNames();
         CreateTask(Task_PokeSphereWaitFadeIn, 0);
         gMain.state++;
         break;
@@ -430,9 +433,15 @@ static void PokeSphere_InitWindows(void)
     InitWindows(sPokeSphereWindowTemplates);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
+    
     FillWindowPixelBuffer(WIN_UI_CONTROLS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WIN_CHRACTER_NAME, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+
     PutWindowTilemap(WIN_UI_CONTROLS);
-    CopyWindowToVram(WIN_UI_CONTROLS, 3);
+    PutWindowTilemap(WIN_CHRACTER_NAME);
+    
+    CopyWindowToVram(WIN_UI_CONTROLS, COPYWIN_FULL);
+    CopyWindowToVram(WIN_CHRACTER_NAME, COPYWIN_FULL);
 }
 
 static void PokeSphere_PrintUIControls(void)
@@ -450,6 +459,32 @@ static void PokeSphere_PrintUIControls(void)
         COMPOUND_STRING("{B_BUTTON} Exit"));
 
     CopyWindowToVram(WIN_UI_CONTROLS, COPYWIN_GFX);
+}
+
+static void PokeSphere_PrintNames(void)
+{   
+    u8 x;
+
+    FillWindowPixelBuffer(WIN_CHRACTER_NAME, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+
+    x = GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
+        gIkigaiCharactersInfo[sPokeSphereState->characterId].name,
+        48
+    );
+    AddTextPrinterParameterized4(WIN_CHRACTER_NAME, FONT_SMALL_NARROWER, x, 0, 0, 0,
+        sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
+        gIkigaiCharactersInfo[sPokeSphereState->characterId].name
+    );
+    x = GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
+        gSpeciesInfo[gIkigaiCharactersInfo[sPokeSphereState->characterId].partnerPokemon].speciesName,
+        48
+    );
+    AddTextPrinterParameterized4(WIN_CHRACTER_NAME, FONT_SMALL_NARROWER, x, 9, 0, 0,
+        sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
+        gSpeciesInfo[gIkigaiCharactersInfo[sPokeSphereState->characterId].partnerPokemon].speciesName
+    );
+
+    CopyWindowToVram(WIN_CHRACTER_NAME, COPYWIN_GFX);
 }
 
 static void PokeSphere_DrawCharacterMusghot(u32 character)
