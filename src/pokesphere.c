@@ -189,7 +189,7 @@ static void PokeSphere_DrawPartnerMonIcon(void);
 static void PokeSphere_PrintUIControls(void);
 static void PokeSphere_PrintNames(void);
 static void PokeSphere_PrintRelationships(void);
-static void PokeSphere_Profile(void);
+static void PokeSphere_PrintProfile(void);
 static void PokeSphere_FreeResources(void);
 
 // Declared in sample_ui.h
@@ -297,7 +297,7 @@ static void PokeSphere_SetupCB(void)
         PokeSphere_PrintUIControls();
         PokeSphere_PrintNames();
         PokeSphere_PrintRelationships();
-        PokeSphere_Profile();
+        PokeSphere_PrintProfile();
         CreateTask(Task_PokeSphereWaitFadeIn, 0);
         gMain.state++;
         break;
@@ -356,7 +356,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
         }
         PokeSphere_PrintNames();
         PokeSphere_PrintRelationships();
-        PokeSphere_Profile();
+        PokeSphere_PrintProfile();
     }
     if (JOY_REPEAT(DPAD_LEFT))
     {
@@ -376,7 +376,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
         }
         PokeSphere_PrintNames();
         PokeSphere_PrintRelationships();
-        PokeSphere_Profile();
+        PokeSphere_PrintProfile();
     }
     if (JOY_NEW(B_BUTTON))
     {
@@ -588,7 +588,7 @@ static void PokeSphere_PrintRelationships(void)
     CopyWindowToVram(WIN_CHARACTER_RELATIONSHIPS, COPYWIN_GFX);
 }
 
-static void PokeSphere_Profile(void)
+static void PokeSphere_PrintProfile(void)
 {
     const u8 *stringBuffer = COMPOUND_STRING("Highlights");
 
