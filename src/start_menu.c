@@ -1510,7 +1510,7 @@ void AppendToList(u8 *list, u8 *pos, u8 newEntry)
 
 static bool8 StartMenuPokesphereCallback(void)
 {
-    CreateTask(Task_OpenPokesphere, 0);
+    CreateTask(Task_OpenPokeSphere, 0);
     return TRUE;
 }
 
