@@ -29,7 +29,7 @@
 #include "pokedex.h"
 #include "gpu_regs.h"
 
-struct SampleUiState
+struct PokeSphereState
 {
     MainCallback savedCallback;
     u8 loadState;
@@ -58,7 +58,7 @@ enum Modes
 #define CHARACTER_MUGSHOT_X     16
 #define CHARACTER_MUGSHOT_Y     16
 
-static EWRAM_DATA struct SampleUiState *sSampleUiState = NULL;
+static EWRAM_DATA struct PokeSphereState *sPokeSphereState = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 
 static const u8 *const sModeNames[MODE_COUNT] = {
@@ -66,7 +66,7 @@ static const u8 *const sModeNames[MODE_COUNT] = {
     [MODE_POSTS]        = COMPOUND_STRING("Posts:"),
 };
 
-static const struct BgTemplate sSampleUiBgTemplates[] =
+static const struct BgTemplate sPokeSphereBgTemplates[] =
 {
     {
         .bg = 0,
@@ -82,7 +82,7 @@ static const struct BgTemplate sSampleUiBgTemplates[] =
     }
 };
 
-static const struct WindowTemplate sSampleUiWindowTemplates[] =
+static const struct WindowTemplate sPokeSphereWindowTemplates[] =
 {
     [WIN_UI_CONTROLS] =
     {
@@ -127,11 +127,11 @@ static const struct WindowTemplate sSampleUiWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u32 sSampleUiTiles[] = INCBIN_U32("graphics/pokesphere/tiles.4bpp.lz");
+static const u32 sPokeSphereTiles[] = INCBIN_U32("graphics/pokesphere/tiles.4bpp.lz");
 
-static const u32 sSampleUiTilemap[] = INCBIN_U32("graphics/pokesphere/tilemap.bin.lz");
+static const u32 sPokeSphereTilemap[] = INCBIN_U32("graphics/pokesphere/tilemap.bin.lz");
 
-static const u16 sSampleUiPalette[] = INCBIN_U16("graphics/pokesphere/tiles.gbapal");
+static const u16 sPokeSpherePalette[] = INCBIN_U16("graphics/pokesphere/tiles.gbapal");
 
 enum FontColor
 {
@@ -141,7 +141,7 @@ enum FontColor
     FONT_GREEN,
     FONT_BLUE,
 };
-static const u8 sSampleUiWindowFontColors[][3] =
+static const u8 sPokeSphereWindowFontColors[][3] =
 {
     [FONT_WHITE]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY},
     [FONT_GRAY]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY},
@@ -151,54 +151,54 @@ static const u8 sSampleUiWindowFontColors[][3] =
 };
 
 // Callbacks for the sample UI
-static void SampleUi_SetupCB(void);
-static void SampleUi_MainCB(void);
-static void SampleUi_VBlankCB(void);
+static void PokeSphere_SetupCB(void);
+static void PokeSphere_MainCB(void);
+static void PokeSphere_VBlankCB(void);
 
 // Sample UI tasks
-static void Task_SampleUiWaitFadeIn(u8 taskId);
-static void Task_SampleUiMainInput(u8 taskId);
-static void Task_SampleUiWaitFadeAndBail(u8 taskId);
-static void Task_SampleUiWaitFadeAndExitGracefully(u8 taskId);
+static void Task_PokeSphereWaitFadeIn(u8 taskId);
+static void Task_PokeSphereMainInput(u8 taskId);
+static void Task_PokeSphereWaitFadeAndBail(u8 taskId);
+static void Task_PokeSphereWaitFadeAndExitGracefully(u8 taskId);
 
 // Sample UI helper functions
-static void SampleUi_Init(MainCallback callback);
-static void SampleUi_ResetGpuRegsAndBgs(void);
-static bool8 SampleUi_InitBgs(void);
-static void SampleUi_FadeAndBail(void);
-static bool8 SampleUi_LoadGraphics(void);
-static void SampleUi_InitWindows(void);
+static void PokeSphere_Init(MainCallback callback);
+static void PokeSphere_ResetGpuRegsAndBgs(void);
+static bool8 PokeSphere_InitBgs(void);
+static void PokeSphere_FadeAndBail(void);
+static bool8 PokeSphere_LoadGraphics(void);
+static void PokeSphere_InitWindows(void);
 static void PokeSphere_PrintUIControls(void);
-static void SampleUi_FreeResources(void);
+static void PokeSphere_FreeResources(void);
 
 // Declared in sample_ui.h
-void Task_OpenPokesphere(u8 taskId)
+void Task_OpenPokeSphere(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        SampleUi_Init(CB2_ReturnToFieldWithOpenMenu);
+        PokeSphere_Init(CB2_ReturnToFieldWithOpenMenu);
         DestroyTask(taskId);
     }
 }
 
-static void SampleUi_Init(MainCallback callback)
+static void PokeSphere_Init(MainCallback callback)
 {
-    sSampleUiState = AllocZeroed(sizeof(struct SampleUiState));
-    if (sSampleUiState == NULL)
+    sPokeSphereState = AllocZeroed(sizeof(struct PokeSphereState));
+    if (sPokeSphereState == NULL)
     {
         SetMainCallback2(callback);
         return;
     }
 
-    sSampleUiState->loadState = 0;
-    sSampleUiState->savedCallback = callback;
+    sPokeSphereState->loadState = 0;
+    sPokeSphereState->savedCallback = callback;
 
-    SetMainCallback2(SampleUi_SetupCB);
+    SetMainCallback2(PokeSphere_SetupCB);
 }
 
 // Credit: Jaizu, pret
-static void SampleUi_ResetGpuRegsAndBgs(void)
+static void PokeSphere_ResetGpuRegsAndBgs(void)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON);
@@ -227,12 +227,12 @@ static void SampleUi_ResetGpuRegsAndBgs(void)
     CpuFill32(0, (void *)OAM, OAM_SIZE);
 }
 
-static void SampleUi_SetupCB(void)
+static void PokeSphere_SetupCB(void)
 {
     switch (gMain.state)
     {
     case 0:
-        SampleUi_ResetGpuRegsAndBgs();
+        PokeSphere_ResetGpuRegsAndBgs();
         SetVBlankHBlankCallbacksToNull();
         ClearScheduledBgCopiesToVram();
         gMain.state++;
@@ -246,30 +246,30 @@ static void SampleUi_SetupCB(void)
         gMain.state++;
         break;
     case 2:
-        if (SampleUi_InitBgs())
+        if (PokeSphere_InitBgs())
         {
-            sSampleUiState->loadState = 0;
+            sPokeSphereState->loadState = 0;
             gMain.state++;
         }
         else
         {
-            SampleUi_FadeAndBail();
+            PokeSphere_FadeAndBail();
             return;
         }
         break;
     case 3:
-        if (SampleUi_LoadGraphics() == TRUE)
+        if (PokeSphere_LoadGraphics() == TRUE)
         {
             gMain.state++;
         }
         break;
     case 4:
-        SampleUi_InitWindows();
+        PokeSphere_InitWindows();
         gMain.state++;
         break;
     case 5:
         PokeSphere_PrintUIControls();
-        CreateTask(Task_SampleUiWaitFadeIn, 0);
+        CreateTask(Task_PokeSphereWaitFadeIn, 0);
         gMain.state++;
         break;
     case 6:
@@ -277,13 +277,13 @@ static void SampleUi_SetupCB(void)
         gMain.state++;
         break;
     case 7:
-        SetVBlankCallback(SampleUi_VBlankCB);
-        SetMainCallback2(SampleUi_MainCB);
+        SetVBlankCallback(PokeSphere_VBlankCB);
+        SetMainCallback2(PokeSphere_MainCB);
         break;
     }
 }
 
-static void SampleUi_MainCB(void)
+static void PokeSphere_MainCB(void)
 {
     RunTasks();
     AnimateSprites();
@@ -292,28 +292,28 @@ static void SampleUi_MainCB(void)
     UpdatePaletteFade();
 }
 
-static void SampleUi_VBlankCB(void)
+static void PokeSphere_VBlankCB(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-static void Task_SampleUiWaitFadeIn(u8 taskId)
+static void Task_PokeSphereWaitFadeIn(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        gTasks[taskId].func = Task_SampleUiMainInput;
+        gTasks[taskId].func = Task_PokeSphereMainInput;
     }
 }
 
-static void Task_SampleUiMainInput(u8 taskId)
+static void Task_PokeSphereMainInput(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_PC_OFF);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_SampleUiWaitFadeAndExitGracefully;
+        gTasks[taskId].func = Task_PokeSphereWaitFadeAndExitGracefully;
     }
     if (JOY_NEW(A_BUTTON))
     {
@@ -325,27 +325,27 @@ static void Task_SampleUiMainInput(u8 taskId)
     }
 }
 
-static void Task_SampleUiWaitFadeAndBail(u8 taskId)
+static void Task_PokeSphereWaitFadeAndBail(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(sSampleUiState->savedCallback);
-        SampleUi_FreeResources();
+        SetMainCallback2(sPokeSphereState->savedCallback);
+        PokeSphere_FreeResources();
         DestroyTask(taskId);
     }
 }
 
-static void Task_SampleUiWaitFadeAndExitGracefully(u8 taskId)
+static void Task_PokeSphereWaitFadeAndExitGracefully(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(sSampleUiState->savedCallback);
-        SampleUi_FreeResources();
+        SetMainCallback2(sPokeSphereState->savedCallback);
+        PokeSphere_FreeResources();
         DestroyTask(taskId);
     }
 }
 #define TILEMAP_BUFFER_SIZE (1024 * 2)
-static bool8 SampleUi_InitBgs(void)
+static bool8 PokeSphere_InitBgs(void)
 {
     ResetAllBgsCoordinates();
 
@@ -356,7 +356,7 @@ static bool8 SampleUi_InitBgs(void)
     }
 
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, sSampleUiBgTemplates, NELEMS(sSampleUiBgTemplates));
+    InitBgsFromTemplates(0, sPokeSphereBgTemplates, NELEMS(sPokeSphereBgTemplates));
 
     SetBgTilemapBuffer(1, sBg1TilemapBuffer);
     ScheduleBgCopyTilemapToVram(1);
@@ -368,44 +368,44 @@ static bool8 SampleUi_InitBgs(void)
 }
 #undef TILEMAP_BUFFER_SIZE
 
-static void SampleUi_FadeAndBail(void)
+static void PokeSphere_FadeAndBail(void)
 {
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-    CreateTask(Task_SampleUiWaitFadeAndBail, 0);
-    SetVBlankCallback(SampleUi_VBlankCB);
-    SetMainCallback2(SampleUi_MainCB);
+    CreateTask(Task_PokeSphereWaitFadeAndBail, 0);
+    SetVBlankCallback(PokeSphere_VBlankCB);
+    SetMainCallback2(PokeSphere_MainCB);
 }
 
-static bool8 SampleUi_LoadGraphics(void)
+static bool8 PokeSphere_LoadGraphics(void)
 {
-    switch (sSampleUiState->loadState)
+    switch (sPokeSphereState->loadState)
     {
     case 0:
         ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(1, sSampleUiTiles, 0, 0, 0);
-        sSampleUiState->loadState++;
+        DecompressAndCopyTileDataToVram(1, sPokeSphereTiles, 0, 0, 0);
+        sPokeSphereState->loadState++;
         break;
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(sSampleUiTilemap, sBg1TilemapBuffer);
-            sSampleUiState->loadState++;
+            LZDecompressWram(sPokeSphereTilemap, sBg1TilemapBuffer);
+            sPokeSphereState->loadState++;
         }
         break;
     case 2:
-        LoadPalette(sSampleUiPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+        LoadPalette(sPokeSpherePalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
         LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
-        sSampleUiState->loadState++;
+        sPokeSphereState->loadState++;
     default:
-        sSampleUiState->loadState = 0;
+        sPokeSphereState->loadState = 0;
         return TRUE;
     }
     return FALSE;
 }
 
-static void SampleUi_InitWindows(void)
+static void PokeSphere_InitWindows(void)
 {
-    InitWindows(sSampleUiWindowTemplates);
+    InitWindows(sPokeSphereWindowTemplates);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
     FillWindowPixelBuffer(WIN_UI_CONTROLS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
@@ -418,23 +418,23 @@ static void PokeSphere_PrintUIControls(void)
     FillWindowPixelBuffer(WIN_UI_CONTROLS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     AddTextPrinterParameterized4(WIN_UI_CONTROLS, FONT_SMALL_NARROWER, 5, 1, 0, 0,
-        sSampleUiWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
+        sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
         COMPOUND_STRING("{DPAD_LEFTRIGHT} Change Profile"));
     AddTextPrinterParameterized4(WIN_UI_CONTROLS, FONT_SMALL_NARROWER, 5, 12, 0, 0,
-        sSampleUiWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
+        sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
         COMPOUND_STRING("{A_BUTTON} Change View"));
     AddTextPrinterParameterized4(WIN_UI_CONTROLS, FONT_SMALL_NARROWER, 5, 23, 0, 0,
-        sSampleUiWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
+        sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
         COMPOUND_STRING("{B_BUTTON} Exit"));
 
     CopyWindowToVram(WIN_UI_CONTROLS, COPYWIN_GFX);
 }
 
-static void SampleUi_FreeResources(void)
+static void PokeSphere_FreeResources(void)
 {
-    if (sSampleUiState != NULL)
+    if (sPokeSphereState != NULL)
     {
-        Free(sSampleUiState);
+        Free(sPokeSphereState);
     }
     if (sBg1TilemapBuffer != NULL)
     {
