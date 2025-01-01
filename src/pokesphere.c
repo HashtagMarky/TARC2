@@ -187,6 +187,7 @@ static void PokeSphere_InitWindows(void);
 static void PokeSphere_DrawCharacterMusghot(void);
 static void PokeSphere_DrawPartnerMonIcon(void);
 static void PokeSphere_PrintUIControls(void);
+static void PokeSphere_ReloadText(void);
 static void PokeSphere_PrintNames(void);
 static void PokeSphere_PrintRelationships(void);
 static void PokeSphere_PrintProfile(void);
@@ -355,8 +356,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
             sPokeSphereState->characterId++;
         }
         PokeSphere_PrintNames();
-        PokeSphere_PrintRelationships();
-        PokeSphere_PrintProfile();
+        PokeSphere_ReloadText();
     }
     if (JOY_REPEAT(DPAD_LEFT))
     {
@@ -375,8 +375,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
             sPokeSphereState->characterId--;
         }
         PokeSphere_PrintNames();
-        PokeSphere_PrintRelationships();
-        PokeSphere_PrintProfile();
+        PokeSphere_ReloadText();
     }
     if (JOY_NEW(B_BUTTON))
     {
@@ -509,6 +508,12 @@ static void PokeSphere_PrintUIControls(void)
         COMPOUND_STRING("{B_BUTTON} Exit"));
 
     CopyWindowToVram(WIN_UI_CONTROLS, COPYWIN_GFX);
+}
+
+static void PokeSphere_ReloadText(void)
+{
+    PokeSphere_PrintRelationships();
+    PokeSphere_PrintProfile();
 }
 
 static void PokeSphere_PrintNames(void)
