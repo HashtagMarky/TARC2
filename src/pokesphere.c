@@ -48,7 +48,7 @@ enum WindowIds
     WIN_UI_CONTROLS,
     WIN_CHARACTER_NAME,
     WIN_CHARACTER_RELATIONSHIPS,
-    WIN_CHARACTER_PROFILE_POSTS,
+    WIN_CHARACTER_PROFILE_OPINION,
     WIN_CHARACTER_MUGSHOT,
 };
 
@@ -120,7 +120,7 @@ static const struct WindowTemplate sPokeSphereWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 46 + (3 * 6)
     },
-    [WIN_CHARACTER_PROFILE_POSTS] =
+    [WIN_CHARACTER_PROFILE_OPINION] =
     {
         .bg = 0,
         .tilemapLeft = 2,
@@ -191,7 +191,7 @@ static void PokeSphere_ReloadText(void);
 static void PokeSphere_PrintNames(void);
 static void PokeSphere_PrintRelationships(void);
 static void PokeSphere_PrintProfile(void);
-static void PokeSphere_PrintPosts(void);
+static void PokeSphere_PrintOpinion(void);
 static void PokeSphere_FreeResources(void);
 
 // Declared in sample_ui.h
@@ -486,17 +486,17 @@ static void PokeSphere_InitWindows(void)
     FillWindowPixelBuffer(WIN_UI_CONTROLS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     FillWindowPixelBuffer(WIN_CHARACTER_NAME, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     FillWindowPixelBuffer(WIN_CHARACTER_RELATIONSHIPS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    FillWindowPixelBuffer(WIN_CHARACTER_PROFILE_POSTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WIN_CHARACTER_PROFILE_OPINION, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     PutWindowTilemap(WIN_UI_CONTROLS);
     PutWindowTilemap(WIN_CHARACTER_NAME);
     PutWindowTilemap(WIN_CHARACTER_RELATIONSHIPS);
-    PutWindowTilemap(WIN_CHARACTER_PROFILE_POSTS);
+    PutWindowTilemap(WIN_CHARACTER_PROFILE_OPINION);
     
     CopyWindowToVram(WIN_UI_CONTROLS, COPYWIN_FULL);
     CopyWindowToVram(WIN_CHARACTER_NAME, COPYWIN_FULL);
     CopyWindowToVram(WIN_CHARACTER_RELATIONSHIPS, COPYWIN_FULL);
-    CopyWindowToVram(WIN_CHARACTER_PROFILE_POSTS, COPYWIN_FULL);
+    CopyWindowToVram(WIN_CHARACTER_PROFILE_OPINION, COPYWIN_FULL);
 }
 
 static void PokeSphere_PrintUIControls(void)
@@ -521,7 +521,7 @@ static void PokeSphere_ReloadText(void)
     switch (sPokeSphereState->mode)
     {
     case MODE_POSTS:
-        PokeSphere_PrintPosts();
+        PokeSphere_PrintOpinion();
         break;
 
     case MODE_PROFILE:
@@ -613,9 +613,9 @@ static void PokeSphere_PrintProfile(void)
 {
     const u8 *stringBuffer = COMPOUND_STRING("Highlights");
 
-    FillWindowPixelBuffer(WIN_CHARACTER_PROFILE_POSTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WIN_CHARACTER_PROFILE_OPINION, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    AddTextPrinterParameterized4(WIN_CHARACTER_PROFILE_POSTS, FONT_SMALL_NARROWER,
+    AddTextPrinterParameterized4(WIN_CHARACTER_PROFILE_OPINION, FONT_SMALL_NARROWER,
         GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
                 stringBuffer,
                 136
@@ -625,15 +625,15 @@ static void PokeSphere_PrintProfile(void)
         stringBuffer
     );
 
-    AddTextPrinterParameterized4(WIN_CHARACTER_PROFILE_POSTS, FONT_SMALL_NARROWER, 5, 13, 0, 1,
+    AddTextPrinterParameterized4(WIN_CHARACTER_PROFILE_OPINION, FONT_SMALL_NARROWER, 5, 13, 0, 1,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
         gIkigaiCharactersInfo[sPokeSphereState->characterId].highlights
     );
 
-    CopyWindowToVram(WIN_CHARACTER_PROFILE_POSTS, COPYWIN_GFX);
+    CopyWindowToVram(WIN_CHARACTER_PROFILE_OPINION, COPYWIN_GFX);
 }
 
-static void PokeSphere_PrintPosts(void)
+static void PokeSphere_PrintOpinion(void)
 {
     u8 string[100];
     u8 opinion[3];
@@ -647,10 +647,10 @@ static void PokeSphere_PrintPosts(void)
         opinionStrength = IkigaiCharacter_GetStrength_Special(character);
     }
 
-    FillWindowPixelBuffer(WIN_CHARACTER_PROFILE_POSTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WIN_CHARACTER_PROFILE_OPINION, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    StringCopy(string, COMPOUND_STRING("Posts"));
-    AddTextPrinterParameterized4(WIN_CHARACTER_PROFILE_POSTS, FONT_SMALL_NARROWER,
+    StringCopy(string, COMPOUND_STRING("Vyraton Gym Leader Opinion"));
+    AddTextPrinterParameterized4(WIN_CHARACTER_PROFILE_OPINION, FONT_SMALL_NARROWER,
         GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
                 string,
                 136
@@ -693,12 +693,12 @@ static void PokeSphere_PrintPosts(void)
         "."
     ));
 
-    AddTextPrinterParameterized4(WIN_CHARACTER_PROFILE_POSTS, FONT_SMALL_NARROWER, 5, 13, 0, 1,
+    AddTextPrinterParameterized4(WIN_CHARACTER_PROFILE_OPINION, FONT_SMALL_NARROWER, 5, 13, 0, 1,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
         string
     );
 
-    CopyWindowToVram(WIN_CHARACTER_PROFILE_POSTS, COPYWIN_GFX);
+    CopyWindowToVram(WIN_CHARACTER_PROFILE_OPINION, COPYWIN_GFX);
 }
 
 static void PokeSphere_DrawCharacterMusghot(void)
