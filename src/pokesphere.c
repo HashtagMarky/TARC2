@@ -29,6 +29,9 @@
 #include "pokedex.h"
 #include "gpu_regs.h"
 
+#include "field_mugshot.h"
+#include "ikigai_characters.h"
+
 struct PokeSphereState
 {
     MainCallback savedCallback;
@@ -36,7 +39,6 @@ struct PokeSphereState
     u8 mode;
     u8 characterId;
     u8 characterMugshotSpriteId;
-    u8 partnerId;
     u8 partnerIconSpriteId;
 };
 
@@ -46,6 +48,7 @@ enum WindowIds
     WIN_CHRACTER_NAME,
     WIN_CHRACTER_RELATIONSHIPS,
     WIN_CHRACTER_PROFILE,
+    WIN_CHRACTER_MUGSHOT,
 };
 
 enum Modes
@@ -55,8 +58,10 @@ enum Modes
     MODE_COUNT,
 };
 
-#define CHARACTER_MUGSHOT_X     16
-#define CHARACTER_MUGSHOT_Y     16
+#define CHARACTER_MUGSHOT_X     19
+#define CHARACTER_MUGSHOT_Y     19
+#define CHARACTER_PARTNER_X     80
+#define CHARACTER_PARTNER_Y     50
 
 static EWRAM_DATA struct PokeSphereState *sPokeSphereState = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
@@ -124,6 +129,16 @@ static const struct WindowTemplate sPokeSphereWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 64 + (8 * 11)
     },
+    [WIN_CHRACTER_MUGSHOT] =
+    {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 13,
+        .width = 17,
+        .height = 6,
+        .paletteNum = 15,
+        .baseBlock = 152 + (17 * 6)
+    },
     DUMMY_WIN_TEMPLATE
 };
 
@@ -168,6 +183,8 @@ static bool8 PokeSphere_InitBgs(void);
 static void PokeSphere_FadeAndBail(void);
 static bool8 PokeSphere_LoadGraphics(void);
 static void PokeSphere_InitWindows(void);
+static void PokeSphere_DrawCharacterMusghot(u32 character);
+static void PokeSphere_DrawPartnerMonIcon(u32 character);
 static void PokeSphere_PrintUIControls(void);
 static void PokeSphere_FreeResources(void);
 
@@ -268,6 +285,11 @@ static void PokeSphere_SetupCB(void)
         gMain.state++;
         break;
     case 5:
+        sPokeSphereState->characterId = MAIN_CHARACTER_SAMUEL;
+        // FreeMonIconPalettes();
+        // LoadMonIconPalettes();
+        // PokeSphere_DrawPartnerMonIcon(sPokeSphereState->characterId);
+        // PokeSphere_DrawCharacterMusghot(sPokeSphereState->characterId);
         PokeSphere_PrintUIControls();
         CreateTask(Task_PokeSphereWaitFadeIn, 0);
         gMain.state++;
@@ -428,6 +450,45 @@ static void PokeSphere_PrintUIControls(void)
         COMPOUND_STRING("{B_BUTTON} Exit"));
 
     CopyWindowToVram(WIN_UI_CONTROLS, COPYWIN_GFX);
+}
+
+static void PokeSphere_DrawCharacterMusghot(u32 character)
+{
+    u16 mughsotId = gIkigaiCharactersInfo[character].mugshotId;
+    u8 mugshotEmotion = 0;
+    u8 windowColour = TEXT_COLOR_TRANSPARENT;
+
+    switch (gIkigaiCharactersInfo[character].personality)
+    {
+    case ATTITUDE_CYNICAL:
+        windowColour = TEXT_COLOR_LIGHT_BLUE;
+        break;
+        
+    case ATTITUDE_DOMINANT:
+        windowColour = TEXT_COLOR_RED;
+        break;
+        
+    case ATTITUDE_HUMBLE:
+        windowColour = TEXT_COLOR_GREEN;
+        break;
+        
+    case ATTITUDE_INSPIRED:
+        windowColour = TEXT_COLOR_BLUE;
+        break;
+    }
+    FillWindowPixelBuffer(WIN_CHRACTER_MUGSHOT, PIXEL_FILL(windowColour));
+
+    sPokeSphereState->characterMugshotSpriteId = CreateFieldMugshotSprite(mughsotId, mugshotEmotion);
+    gSprites[sPokeSphereState->characterMugshotSpriteId].oam.priority = 0;
+    gSprites[sPokeSphereState->characterMugshotSpriteId].x = CHARACTER_MUGSHOT_X;
+    gSprites[sPokeSphereState->characterMugshotSpriteId].y = CHARACTER_MUGSHOT_Y;
+}
+
+static void PokeSphere_DrawPartnerMonIcon(u32 character)
+{
+    u16 speciesId = gIkigaiCharactersInfo[character].partnerPokemon;
+    sPokeSphereState->partnerIconSpriteId = CreateMonIcon(speciesId, SpriteCB_MonIcon, CHARACTER_PARTNER_X, CHARACTER_PARTNER_Y, 4, 0);
+    gSprites[sPokeSphereState->partnerIconSpriteId].oam.priority = 0;
 }
 
 static void PokeSphere_FreeResources(void)
