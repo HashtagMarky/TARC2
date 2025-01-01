@@ -2,7 +2,7 @@
 #define OPINION_TYPE_STRENGTH               1
 #define RELATIONSHIP_AFFINITY_MULTIPLIER    3
 #define MAX_RELATIONSHIPS                   3
-#define MAX_PRINTED_RELATIONSHIPS           4
+#define MAX_POSTS                           3
 #define OPINION_POSITIVE                    5
 #define OPINION_VERY_POSITIVE               10
 #define OPINION_EXTREMELY_POSITIVE          20

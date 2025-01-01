@@ -574,7 +574,7 @@ static void PokeSphere_PrintRelationships(void)
         stringBuffer,
         64
     );
-    AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS_POSTS, FONT_SMALL_NARROWER, x, 1, 0, 0,
+    AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS_POSTS, FONT_SMALL_NARROWER, x, 2, 0, 0,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
         stringBuffer
     );
@@ -650,15 +650,15 @@ static void PokeSphere_PrintPosts(void)
         stringBuffer,
         64
     );
-    AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS_POSTS, FONT_SMALL_NARROWER, x, 1, 0, 0,
+    AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS_POSTS, FONT_SMALL_NARROWER, x, 2, 0, 0,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
         stringBuffer
     );
 
-    y = 12;
+    y = 17;
 
     // Iterate through the shuffled entries
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < MAX_POSTS; i++)
     {
         u8 funcIndex = entries[i].index;
         bool32 isKindness = entries[i].isKindness;
@@ -667,7 +667,7 @@ static void PokeSphere_PrintPosts(void)
         bonus = gOpinionBonusFunction[funcIndex].function(sPokeSphereState->characterId, isKindness);
 
         // Print the associated text if the bonus is non-zero
-        if (bonus != 0)
+        if (1 != 0)
         {
             const u8 *textToPrint = isKindness
                 ? gOpinionBonusFunction[funcIndex].stringKindness
@@ -676,7 +676,7 @@ static void PokeSphere_PrintPosts(void)
             AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS_POSTS, FONT_SMALL_NARROWER, 5, y, 0, 1,
                 sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW, textToPrint
             );
-            y += 20;
+            y += 25;
         }
     }
 
