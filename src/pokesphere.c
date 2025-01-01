@@ -387,10 +387,6 @@ static void Task_PokeSphereMainInput(u8 taskId)
     {
         PlaySE(SE_SELECT);
     }
-    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
-    {
-        PlaySE(SE_SELECT);
-    }
 }
 
 static void Task_PokeSphereWaitFadeAndBail(u8 taskId)
