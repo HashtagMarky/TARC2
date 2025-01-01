@@ -32,6 +32,7 @@ struct IkigaiCharacterInfo
     u8 charcterId;
     u8 name[PLAYER_NAME_LENGTH + 1];
     u8 pronouns;
+    const u8 *highlights;
     bool8 isMainCharacter;
     u8 voice;
     struct Poses poses[POSE_COUNT];

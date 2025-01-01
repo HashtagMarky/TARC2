@@ -18,6 +18,12 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
     {
         .name = _("SAMUEL"),
         .partnerPokemon = SPECIES_INFERNAPE,
+        .highlights = COMPOUND_STRING(
+            "The Mayor of Vyraton and an avid\n"
+            "battler. One of the sponsors of\n"
+            "the Vyraton Pokemon Gym."
+        ),
+
         .favouriteColour = BODY_COLOR_BLUE,
         .favouriteType = TYPE_FIRE,
         .personality = ATTITUDE_INSPIRED,
@@ -28,6 +34,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .baseOpinionKindness = 20,
         .baseOpinionStrength = 25,
         .opinionDecayChance = 0,
+        .flagRomantic = FLAG_TEMP_1,
         .relationships =
         {
             {
@@ -47,6 +54,10 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
     [MAIN_CHARACTER_LAUREN] =
     {
         .name = _("LAUREN"),
+        .highlights = COMPOUND_STRING(
+            "The owner of Selenic Spirit."
+        ),
+
         .partnerPokemon = SPECIES_LIEPARD,
         .favouriteColour = BODY_COLOR_YELLOW,
         .personality = ATTITUDE_CYNICAL,
@@ -57,6 +68,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .baseOpinionKindness = 15,
         .baseOpinionStrength = 20,
         .opinionDecayChance = 10,
+        .flagRomantic = FLAG_TEMP_2,
         .relationships =
         {
             {
@@ -70,12 +82,16 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
     [MAIN_CHARACTER_THOMAS] =
     {
         .name = _("THOMAS"),
+        .highlights = COMPOUND_STRING(
+            "A local Pokémon Professor."
+        ),
 
         .overworldGraphicsId = OBJ_EVENT_GFX_THOMAS,
 
         .baseOpinionKindness = 20,
         .baseOpinionStrength = 25,
         .opinionDecayChance = 5,
+        .flagRomantic = FLAG_TEMP_3,
         .relationships =
         {
             {
@@ -89,17 +105,28 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
     [MAIN_CHARACTER_CAPTAIN] =
     {
         .name = _("SKIP"),
+        .highlights = COMPOUND_STRING(
+            "The retired captain of the\n"
+            "S.S. Pathfinder."
+        ),
 
         .overworldGraphicsId = OBJ_EVENT_GFX_CAPTAIN,
 
         .baseOpinionKindness = 0,
         .baseOpinionStrength = 0,
         .opinionDecayChance = 20,
+        .flagRomantic = FLAG_TEMP_4,
     },
 
     [SPECIAL_CHARACTER_N] =
     {
         .name = _("N"),
+        .highlights = COMPOUND_STRING(
+            "A champion of Pokémon freedom\n"
+            "and questioning the ethics of\n"
+            "human-Pokémon bonds."
+        ),
+
         .partnerPokemon = SPECIES_ZOROARK,
         .personality = ATTITUDE_HUMBLE,
         .poses =
@@ -123,6 +150,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         },
 
         .overworldGraphicsId = OBJ_EVENT_GFX_N,
+
     }
 };
 
