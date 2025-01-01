@@ -538,19 +538,7 @@ static void PokeSphere_PrintRelationships(void)
             y += 3;
         }
     }
-    // AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS, FONT_SMALL_NARROWER, 5, 12, 0, 0,
-    //     sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
-    //     COMPOUND_STRING("{A_BUTTON} Change View")
-    // );
-    // x = GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
-    //     COMPOUND_STRING("Tagged Profiles"),
-    //     64
-    // );
-    // AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS, FONT_SMALL_NARROWER, 5, 23, 0, 0,
-    //     sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
-    //     COMPOUND_STRING("{B_BUTTON} Exit")
-    // );
-
+    
     CopyWindowToVram(WIN_CHARACTER_RELATIONSHIPS, COPYWIN_GFX);
 }
 
