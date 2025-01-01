@@ -694,6 +694,11 @@ s32 IkigaiCharacterOpinionBonus_StarterPokemon(u32 character, bool32 opinionType
 //     return bonusPlayerAttitude;
 // }
 
+// static s32 IkigaiCharacterOpinionBonus_Player(u32 character, bool32 opinionType)
+// {
+//     if (IkigaiCharacter_GetRomanticFlag)
+// }
+
 static uq4_12_t GetGymTypeEffectiveness(u16 species, bool32 speciesAtk)
 {
     uq4_12_t modifier[3] = { UQ_4_12(1.0), UQ_4_12(1.0), UQ_4_12(1.0) };
