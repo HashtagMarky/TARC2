@@ -46,10 +46,10 @@ struct PokeSphereState
 enum WindowIds
 {
     WIN_UI_CONTROLS,
-    WIN_CHRACTER_NAME,
-    WIN_CHRACTER_RELATIONSHIPS,
-    WIN_CHRACTER_PROFILE,
-    WIN_CHRACTER_MUGSHOT,
+    WIN_CHARACTER_NAME,
+    WIN_CHARACTER_RELATIONSHIPS,
+    WIN_CHARACTER_PROFILE,
+    WIN_CHARACTER_MUGSHOT,
 };
 
 enum Modes
@@ -100,7 +100,7 @@ static const struct WindowTemplate sPokeSphereWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 1
     },
-    [WIN_CHRACTER_NAME] =
+    [WIN_CHARACTER_NAME] =
     {
         .bg = 0,
         .tilemapLeft = 13,
@@ -110,7 +110,7 @@ static const struct WindowTemplate sPokeSphereWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 1 + (9 * 5)
     },
-    [WIN_CHRACTER_RELATIONSHIPS] =
+    [WIN_CHARACTER_RELATIONSHIPS] =
     {
         .bg = 0,
         .tilemapLeft = 20,
@@ -120,7 +120,7 @@ static const struct WindowTemplate sPokeSphereWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 46 + (3 * 6)
     },
-    [WIN_CHRACTER_PROFILE] =
+    [WIN_CHARACTER_PROFILE] =
     {
         .bg = 0,
         .tilemapLeft = 2,
@@ -130,7 +130,7 @@ static const struct WindowTemplate sPokeSphereWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 64 + (8 * 11)
     },
-    [WIN_CHRACTER_MUGSHOT] =
+    [WIN_CHARACTER_MUGSHOT] =
     {
         .bg = 0,
         .tilemapLeft = 2,
@@ -435,13 +435,13 @@ static void PokeSphere_InitWindows(void)
     ScheduleBgCopyTilemapToVram(0);
     
     FillWindowPixelBuffer(WIN_UI_CONTROLS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    FillWindowPixelBuffer(WIN_CHRACTER_NAME, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WIN_CHARACTER_NAME, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     PutWindowTilemap(WIN_UI_CONTROLS);
-    PutWindowTilemap(WIN_CHRACTER_NAME);
+    PutWindowTilemap(WIN_CHARACTER_NAME);
     
     CopyWindowToVram(WIN_UI_CONTROLS, COPYWIN_FULL);
-    CopyWindowToVram(WIN_CHRACTER_NAME, COPYWIN_FULL);
+    CopyWindowToVram(WIN_CHARACTER_NAME, COPYWIN_FULL);
 }
 
 static void PokeSphere_PrintUIControls(void)
@@ -465,13 +465,13 @@ static void PokeSphere_PrintNames(void)
 {   
     u8 x;
 
-    FillWindowPixelBuffer(WIN_CHRACTER_NAME, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WIN_CHARACTER_NAME, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     x = GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
         gIkigaiCharactersInfo[sPokeSphereState->characterId].name,
         48
     );
-    AddTextPrinterParameterized4(WIN_CHRACTER_NAME, FONT_SMALL_NARROWER, x, 0, 0, 0,
+    AddTextPrinterParameterized4(WIN_CHARACTER_NAME, FONT_SMALL_NARROWER, x, 0, 0, 0,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
         gIkigaiCharactersInfo[sPokeSphereState->characterId].name
     );
@@ -479,12 +479,12 @@ static void PokeSphere_PrintNames(void)
         gSpeciesInfo[gIkigaiCharactersInfo[sPokeSphereState->characterId].partnerPokemon].speciesName,
         48
     );
-    AddTextPrinterParameterized4(WIN_CHRACTER_NAME, FONT_SMALL_NARROWER, x, 9, 0, 0,
+    AddTextPrinterParameterized4(WIN_CHARACTER_NAME, FONT_SMALL_NARROWER, x, 9, 0, 0,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
         gSpeciesInfo[gIkigaiCharactersInfo[sPokeSphereState->characterId].partnerPokemon].speciesName
     );
 
-    CopyWindowToVram(WIN_CHRACTER_NAME, COPYWIN_GFX);
+    CopyWindowToVram(WIN_CHARACTER_NAME, COPYWIN_GFX);
 }
 
 static void PokeSphere_DrawCharacterMusghot(u32 character)
@@ -511,7 +511,7 @@ static void PokeSphere_DrawCharacterMusghot(u32 character)
         windowColour = TEXT_COLOR_BLUE;
         break;
     }
-    FillWindowPixelBuffer(WIN_CHRACTER_MUGSHOT, PIXEL_FILL(windowColour));
+    FillWindowPixelBuffer(WIN_CHARACTER_MUGSHOT, PIXEL_FILL(windowColour));
 
     sPokeSphereState->characterMugshotSpriteId = CreateFieldMugshotSprite(mughsotId, mugshotEmotion);
     gSprites[sPokeSphereState->characterMugshotSpriteId].oam.priority = 0;
