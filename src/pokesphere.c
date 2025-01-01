@@ -338,6 +338,46 @@ static void Task_PokeSphereWaitFadeIn(u8 taskId)
 
 static void Task_PokeSphereMainInput(u8 taskId)
 {
+    if (JOY_REPEAT(DPAD_RIGHT))
+    {
+        PlaySE(SE_SELECT);
+        if (sPokeSphereState->characterId == MAIN_CHARACTER_COUNT - 1)
+        {
+            sPokeSphereState->characterId++;
+            sPokeSphereState->characterId++;
+        }
+        else if (sPokeSphereState->characterId == CHARACTER_COUNT_TOTAL - 1)
+        {
+            sPokeSphereState->characterId = CHARACTER_DEFAULT + 1;
+        }
+        else
+        {
+            sPokeSphereState->characterId++;
+        }
+        PokeSphere_PrintNames();
+        PokeSphere_PrintRelationships();
+        PokeSphere_Profile();
+    }
+    if (JOY_REPEAT(DPAD_LEFT))
+    {
+        PlaySE(SE_SELECT);
+        if (sPokeSphereState->characterId == CHARACTER_DEFAULT + 1)
+        {
+            sPokeSphereState->characterId = CHARACTER_COUNT_TOTAL - 1;
+        }
+        else if (sPokeSphereState->characterId == MAIN_CHARACTER_COUNT + 1)
+        {
+            sPokeSphereState->characterId--;
+            sPokeSphereState->characterId--;
+        }
+        else
+        {
+            sPokeSphereState->characterId--;
+        }
+        PokeSphere_PrintNames();
+        PokeSphere_PrintRelationships();
+        PokeSphere_Profile();
+    }
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_PC_OFF);
