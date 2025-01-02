@@ -615,7 +615,7 @@ static void PokeSphere_PrintRelationships(void)
 static void PokeSphere_PrintPosts(void)
 {
     const u8 *stringBuffer = COMPOUND_STRING("Latest Posts");
-    u8 x, y, i;
+    u8 x, y, i, printed;
     bool32 bonus;
 
     // Define a struct to hold function index and type (kindness/strength)
@@ -656,10 +656,14 @@ static void PokeSphere_PrintPosts(void)
     );
 
     y = 17;
+    printed = 0;
 
     // Iterate through the shuffled entries
-    for (i = 0; i < MAX_POSTS; i++)
+    for (i = 0; i < totalEntries; i++)
     {
+        if (printed == MAX_POSTS)
+            break;
+        
         u8 funcIndex = entries[i].index;
         bool32 isKindness = entries[i].isKindness;
 
@@ -677,6 +681,7 @@ static void PokeSphere_PrintPosts(void)
                 sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW, textToPrint
             );
             y += 25;
+            printed++;
         }
     }
 
@@ -744,7 +749,7 @@ static void PokeSphere_PrintOpinion(void)
         StringAppend(string, gSaveBlock2Ptr->playerName);
     }
     StringAppend(string, COMPOUND_STRING(
-        ".\nI rate his kindness "
+        ".\nI rate their kindness "
     ));
     if (opinionKindness < 0)
     {
@@ -754,7 +759,7 @@ static void PokeSphere_PrintOpinion(void)
     ConvertIntToDecimalStringN(opinion, opinionKindness, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringAppend(string, opinion);
     StringAppend(string, COMPOUND_STRING(
-        ".\nI rate his strength "
+        ".\nI rate their strength "
     ));
     if (opinionStrength < 0)
     {
