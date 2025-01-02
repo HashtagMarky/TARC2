@@ -59,7 +59,7 @@ script IkigaiCharacterBox_Talk
 script IkigaiCharacterBox_Debug_GetOpinion
 {
     callnative(DEBUG_IkigaiCharacter_CharacterOpinions)
-    msgbox("{STR_VAR_1}", MSGBOX_DEFAULT)
+    msgbox("{STR_VAR_1}{STR_VAR_2}", MSGBOX_DEFAULT)
     closemessage
     end
 }

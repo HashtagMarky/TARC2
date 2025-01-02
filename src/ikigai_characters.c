@@ -482,9 +482,16 @@ void DEBUG_IkigaiCharacter_CharacterOpinions(void)
     }
     ConvertIntToDecimalStringN(string, opinionStrength, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringAppend(gStringVar1, string);
+    StringCopy(gStringVar2, COMPOUND_STRING("\pIncludes Kindness Bonus of: "));
+    ConvertIntToDecimalStringN(string, IkigaiCharacter_GetOpinionBonus(character, OPINION_TYPE_KINDNESS), STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringAppend(gStringVar2, string);
+    StringAppend(gStringVar2, COMPOUND_STRING(",\nIncludes Strength Bonus of: "));
+    ConvertIntToDecimalStringN(string, IkigaiCharacter_GetOpinionBonus(character, OPINION_TYPE_STRENGTH), STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringAppend(gStringVar2, string);
+    StringAppend(gStringVar2, COMPOUND_STRING("."));
     if (character > MAIN_CHARACTER_COUNT)
     {
-        StringAppend(gStringVar1, COMPOUND_STRING("\pI am a special character, I get my\nopinion from the PokéSphere."));
+        StringAppend(gStringVar2, COMPOUND_STRING("\pI am a special character, I get my\nopinion from the PokéSphere."));
     }
 }
 
