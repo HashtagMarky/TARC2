@@ -76,7 +76,7 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase
     if (specialvar(VAR_RESULT, GetPlayerFacingDirection) == DIR_WEST)
     {
         applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_GoToBriefcase)
-        turnplayer(DIR_NORTH)
+        playerface(DIR_NORTH)
     }
     callnative(StartNewPokeballCaseUI)
     setflag(FLAG_SYS_POKEMON_GET)
@@ -85,8 +85,7 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase
     addobject(LOCALID_Starter)
     applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase, FALSE)
     applymove(LOCALID_Starter, VyratonIndoors_MayorsOffice_Movement_Starter_ReturnFromBriefcase)
-    turnplayer(DIR_NORTH)
-    releaseobjects
+    playerface(DIR_NORTH)
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex
@@ -107,7 +106,7 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex
     }
     call(VyratonIndoors_MayorsOffice_EventScript_MeetThomas)
     call(VyratonIndoors_MayorsOffice_EventScript_Samuel_ReceivePokdex)
-    turnplayer(DIR_EAST)
+    playerface(DIR_EAST)
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_MeetPartner
@@ -160,7 +159,7 @@ script VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter
     {
         applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_Two)
     }
-    turnplayer(DIR_NORTH)
+    playerface(DIR_NORTH)
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_StarterMon_OtherImportantThings
@@ -175,7 +174,7 @@ script VyratonIndoors_MayorsOffice_EventScript_MeetThomas
     fadenewbgm(MUS_HG_POKEWALKER)
     delay(60)
     emote(LOCALID_Samuel, EMOTE_EXCLAM, wait=FALSE)
-    turnplayer(DIR_SOUTH)
+    playerface(DIR_SOUTH)
     addobject(LOCALID_Thomas)
     applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_WatchThomasEntrance, FALSE)
     applymove(LOCALID_Thomas, VyratonIndoors_MayorsOffice_Movement_Thomas_Entrance)
@@ -194,7 +193,7 @@ script VyratonIndoors_MayorsOffice_EventScript_MeetThomas
     removeobject(LOCALID_Thomas)
     fadedefaultbgm
     delay(60)
-    turnplayer(DIR_NORTH)
+    playerface(DIR_NORTH)
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_Samuel_ReceivePokdex

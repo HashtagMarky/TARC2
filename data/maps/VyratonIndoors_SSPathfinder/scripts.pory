@@ -12,7 +12,7 @@ script VyratonIndoors_SSPathfinder_EventScript_MeetCaptain
 {
     call(VyratonIndoors_SSPathfinder_IkigaiIntroSetup)
     setvar(VAR_TEMP_0, 1)
-    turnplayer(DIR_NORTH)
+    playerface(DIR_NORTH)
     opendoor(4, 1)
     playse(SE_DOOR)
     waitdooranim
@@ -52,10 +52,10 @@ script VyratonIndoors_SSPathfinder_EventScript_MeetCaptain
 
 script VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue
 { // Made redundant as all options with the same characteristic outputs the same value.
-    dialoguemultipush(ATTITUDE_NEUTRAL,
+    attitudemultipush(ATTITUDE_NEUTRAL,
         "I wanted a fresh start.",
         "I'm moving for a new challenge.")
-    dialoguechoice
+    attitudechoice
     switch (var(VAR_RESULT))
     {
         case 0: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_FreshStart)
@@ -67,7 +67,7 @@ script VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue
 
 script VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue
 {
-    dialoguechoice(
+    attitudechoice(
         "I'll make the most of your advice!",
         "I need all the help I can get.",
         "I don't care, I'll handle myself.",

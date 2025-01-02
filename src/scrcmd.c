@@ -1504,7 +1504,7 @@ bool8 ScrCmd_dynmultipush(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_dialoguemultipush(struct ScriptContext *ctx)
+bool8 ScrCmd_attitudemultipush(struct ScriptContext *ctx)
 {
     u32 characteristic = VarGet(ScriptReadHalfword(ctx));
     u32 argc = ScriptReadByte(ctx);

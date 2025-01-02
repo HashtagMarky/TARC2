@@ -1739,11 +1739,12 @@ static void DrawMonTextEntryBox(void)
 
 static void (*const sDrawTextEntryBoxFuncs[])(void) =
 {
-    [NAMING_SCREEN_PLAYER]     = DrawNormalTextEntryBox,
-    [NAMING_SCREEN_BOX]        = DrawNormalTextEntryBox,
-    [NAMING_SCREEN_CAUGHT_MON] = DrawMonTextEntryBox,
-    [NAMING_SCREEN_NICKNAME]   = DrawMonTextEntryBox,
-    [NAMING_SCREEN_WALDA]      = DrawNormalTextEntryBox,
+    [NAMING_SCREEN_PLAYER]              = DrawNormalTextEntryBox,
+    [NAMING_SCREEN_BOX]                 = DrawNormalTextEntryBox,
+    [NAMING_SCREEN_CAUGHT_MON]          = DrawMonTextEntryBox,
+    [NAMING_SCREEN_NICKNAME]            = DrawMonTextEntryBox,
+    [NAMING_SCREEN_WALDA]               = DrawNormalTextEntryBox,
+    [NAMING_SCREEN_PLAYER_NICKNAME]     = DrawNormalTextEntryBox,
 };
 
 static void DrawTextEntryBox(void)
@@ -2145,14 +2146,25 @@ static const struct NamingScreenTemplate sWaldaWordsScreenTemplate =
     .unused = 11,
     .title = gText_TellHimTheWords,
 };
+static const struct NamingScreenTemplate sPlayerNicknamingScreenTemplate =
+{
+    .copyExistingString = TRUE,
+    .maxChars = PLAYER_NAME_LENGTH,
+    .iconFunction = 1,
+    .addGenderIcon = FALSE,
+    .initialPage = KBPAGE_LETTERS_UPPER,
+    .unused = 35,
+    .title = COMPOUND_STRING("YOUR NICKNAME?"),
+};
 
 static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
 {
-    [NAMING_SCREEN_PLAYER]     = &sPlayerNamingScreenTemplate,
-    [NAMING_SCREEN_BOX]        = &sPCBoxNamingTemplate,
-    [NAMING_SCREEN_CAUGHT_MON] = &sMonNamingScreenTemplate,
-    [NAMING_SCREEN_NICKNAME]   = &sMonNamingScreenTemplate,
-    [NAMING_SCREEN_WALDA]      = &sWaldaWordsScreenTemplate,
+    [NAMING_SCREEN_PLAYER]              = &sPlayerNamingScreenTemplate,
+    [NAMING_SCREEN_BOX]                 = &sPCBoxNamingTemplate,
+    [NAMING_SCREEN_CAUGHT_MON]          = &sMonNamingScreenTemplate,
+    [NAMING_SCREEN_NICKNAME]            = &sMonNamingScreenTemplate,
+    [NAMING_SCREEN_WALDA]               = &sWaldaWordsScreenTemplate,
+    [NAMING_SCREEN_PLAYER_NICKNAME]     = &sPlayerNicknamingScreenTemplate,
 };
 
 static const struct OamData sOam_8x8 =
@@ -2602,5 +2614,10 @@ static const struct SpritePalette sSpritePalettes[] =
     {gNamingScreenMenu_Pal[4], PALTAG_OK_BUTTON},
     {}
 };
+
+void DoPlayerNicknamingScreen(void)
+{
+    DoNamingScreen(NAMING_SCREEN_PLAYER_NICKNAME, gSaveBlock3Ptr->characters.playerNickname, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldContinueScript);
+}
 
 

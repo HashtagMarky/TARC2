@@ -43,8 +43,8 @@ script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet
     emote(LOCALID_Samuel, EMOTE_QUESTION)
     applymoveplayer(VyratonOutdoors_Harbour_Movement_Player_MeetSamuel, FALSE)
     applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_ContinueEntrance)
-    mnmbox(VyratonOutdoors_Harbour_Text_WelcomeToVyraton, nameKnown=FALSE, localId=LOCALID_Samuel, lock=TRUE)
-    turnplayer(DIR_SOUTH)
+    mnmbox(VyratonOutdoors_Harbour_Text_WelcomeToVyraton, nameKnown=FALSE, localId=LOCALID_Samuel)
+    playerface(DIR_SOUTH)
     turnobject(LOCALID_Samuel, DIR_SOUTH)
     removeobject(LOCALID_Captain)
 }
@@ -52,7 +52,7 @@ script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet
 script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures
 {
     call(VyratonOutdoors_Harbour_EventScript_SSPathfinder_Departure)
-    turnplayer(DIR_WEST)
+    playerface(DIR_WEST)
     mnmbox(VyratonOutdoors_Harbour_Text_HeadToOffice)
     applymoveplayer(VyratonOutdoors_Harbour_Movement_Player_Exit, FALSE)
     applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_Exit)
@@ -90,8 +90,6 @@ movement VyratonOutdoors_Harbour_Movement_Samuel_BeginEntrance
 movement VyratonOutdoors_Harbour_Movement_Player_MeetSamuel
 {
     delay_16 * 2
-    delay_8
-    // delay_2
     face_left
 }
 

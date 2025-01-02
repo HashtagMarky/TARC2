@@ -47,6 +47,7 @@
 #include "constants/battle.h"
 #include "constants/field_mugshots.h"
 #include "constants/items.h"
+#include "ikigai_characters.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 extern const u8 EventScript_ResetIkigaiMapFlags[];
@@ -240,6 +241,8 @@ void NewGameInitData(void)
     ResetTrainerHillResults();
     ResetContestLinkResults();
     ResetItemFlags();
+    IkigaiCharacter_SetAllCharacterDefaultOpinion();
+    SetDefaultPlayerNickname();
 }
 
 static void ResetMiniGamesRecords(void)
