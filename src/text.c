@@ -289,6 +289,7 @@ static const struct FontInfo sFontInfos[] =
     [FONT_BW_SUMMARY_SCREEN] = {
         .fontFunction = FontFunc_BW_Summary_Screen,
         .maxLetterWidth = 6,
+        .maxLetterHeight = 14,
         .letterSpacing = 0,
         .lineSpacing = 0,
         .fgColor = 2,
