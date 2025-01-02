@@ -451,6 +451,13 @@ void InstallCameraPanAheadCallback(void)
     sVerticalCameraPan = 32;
 }
 
+void InstallCameraPanAheadCallback_RevertBikePanAhead(void) // IKIGAI see if this breaks anything (02/01/2025)
+{
+    sFieldCameraPanningCallback = CameraPanningCB_PanAhead;
+    sBikeCameraPanFlag = FALSE;
+    sHorizontalCameraPan = 0;
+}
+
 void UpdateCameraPanning(void)
 {
     if (sFieldCameraPanningCallback != NULL)
@@ -466,7 +473,15 @@ static void CameraPanningCB_PanAhead(void)
 
     if (gUnusedBikeCameraAheadPanback == FALSE)
     {
-        InstallCameraPanAheadCallback();
+        if (sVerticalCameraPan < 32)
+        {
+            sVerticalCameraPan += 2;
+        }
+        else if (sVerticalCameraPan > 32)
+        {
+            sVerticalCameraPan -= 2;
+        }
+        InstallCameraPanAheadCallback_RevertBikePanAhead();
     }
     else
     {

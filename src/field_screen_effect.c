@@ -1686,3 +1686,68 @@ static bool8 CheckIsWarpFromShip(s16 x, s16 y)
 
     return FALSE;
 }
+
+static void Task_DoDoorScript(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    u8 objEventId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
+    s16 *x = &task->data[2];
+    s16 *y = &task->data[3];
+
+    switch (task->tState)
+    {
+    case 0: //open door
+        FreezeObjectEvents();
+        PlayerGetDestCoords(x, y);
+        PlaySE(GetDoorSoundEffect(*x, *y - 1));
+        task->data[1] = FieldAnimateDoorOpen(*x, *y - 1);
+        task->tState++;
+        break;
+    case 1: //wait for door to open, then walk into door
+        if (task->data[1] < 0 || gTasks[task->data[1]].isActive != TRUE)
+        {
+            ObjectEventClearHeldMovementIfActive(&gObjectEvents[objEventId]);
+            ObjectEventSetHeldMovement(&gObjectEvents[objEventId], MOVEMENT_ACTION_WALK_NORMAL_UP);
+            task->tState++;
+        }
+        break;
+    case 2: //wait for movement, then close door
+        if (IsPlayerStandingStill())
+        {
+            task->data[1] = FieldAnimateDoorClose(*x, *y - 1);
+            ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objEventId]);
+            SetPlayerVisibility(FALSE);
+            task->tState++;
+        }
+        break;
+    case 3: //wait for door to close, then start script
+        if (task->data[1] < 0 || gTasks[task->data[1]].isActive != TRUE)
+        {
+            ScriptContext_Enable();
+            task->tState++;
+        }
+	break;
+    case 4: //wait for script to complete, then open door
+        if(ScriptContext_IsEnabled() == FALSE)
+        {
+            LockPlayerFieldControls();
+            task->data[1] = FieldAnimateDoorOpen(*x, *y - 1);
+            task->tState++;
+        }
+	    break;
+    case 5: //wait for door to reopen, then exit
+        if (task->data[1] < 0 || gTasks[task->data[1]].isActive != TRUE)
+	    {
+            task->tState = 0;
+	        task->func = Task_ExitDoor;
+	    }
+        break;
+    }
+}
+
+void DoDoorScript(void)
+{
+    LockPlayerFieldControls();
+    ScriptContext_Stop();
+    CreateTask(Task_DoDoorScript, 10);
+}

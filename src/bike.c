@@ -1006,6 +1006,7 @@ void GetOnOffBike(u8 transitionFlags)
     }
     else
     {
+        gUnusedBikeCameraAheadPanback = gSaveBlock2Ptr->optionsBikeCamera;
         SetPlayerAvatarTransitionFlags(transitionFlags);
         if (gSaveBlock2Ptr->optionsBikeMusic == FALSE)
         {

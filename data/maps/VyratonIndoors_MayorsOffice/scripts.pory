@@ -41,6 +41,7 @@ script VyratonIndoors_MayorsOffice_EventScript_Samuel
     {
         call(VyratonIndoors_MayorsOffice_EventScript_Samuel_OpenBriefcase)
     }
+    applymove(LOCALID_Samuel, Common_Movement_FaceOriginalDirection)
     end
 }
 
@@ -66,6 +67,7 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase
         call(VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase)
         call(VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex)
     }
+    applymove(LOCALID_Samuel, Common_Movement_FaceOriginalDirection)
     end
 }
 
@@ -73,8 +75,8 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase
 {
     if (specialvar(VAR_RESULT, GetPlayerFacingDirection) == DIR_WEST)
     {
-        applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase)
-        turnplayer(DIR_NORTH)
+        applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_GoToBriefcase)
+        playerface(DIR_NORTH)
     }
     callnative(StartNewPokeballCaseUI)
     setflag(FLAG_SYS_POKEMON_GET)
@@ -82,8 +84,8 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase
     playmoncry(VAR_STARTER_MON, CRY_MODE_NORMAL)
     addobject(LOCALID_Starter)
     applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase, FALSE)
-    applymove(LOCALID_Starter, VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase)
-    turnplayer(DIR_NORTH)
+    applymove(LOCALID_Starter, VyratonIndoors_MayorsOffice_Movement_Starter_ReturnFromBriefcase)
+    playerface(DIR_NORTH)
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex
@@ -96,15 +98,15 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex
     setvar(VAR_0x8000, ITEM_POKEDEX)
     if (specialvar(VAR_RESULT, IsLeadMonNicknamedOrNotEnglish) == TRUE)
     {
-        mnmbox(VyratonIndoors_MayorsOffice_Text_MeetNicknamedMon, localId=LOCALID_Samuel)
+        mnmbox(VyratonIndoors_MayorsOffice_Text_MeetNicknamedMon, localId=LOCALID_Samuel, lock=FALSE)
     }
     else
     {
-        mnmbox(VyratonIndoors_MayorsOffice_Text_MeetNonNicknamedMon, localId=LOCALID_Samuel)
+        mnmbox(VyratonIndoors_MayorsOffice_Text_MeetNonNicknamedMon, localId=LOCALID_Samuel, lock=FALSE)
     }
     call(VyratonIndoors_MayorsOffice_EventScript_MeetThomas)
     call(VyratonIndoors_MayorsOffice_EventScript_Samuel_ReceivePokdex)
-    turnplayer(DIR_EAST)
+    playerface(DIR_EAST)
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_MeetPartner
@@ -136,7 +138,7 @@ script VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon
     call(EventScript_DisplayPokedexSpeciesName)
     playmoncry(VAR_0x8004, CRY_MODE_NORMAL)
     message(VyratonIndoors_MayorsOffice_Text_DeterminedMon)
-    setseenmon(VAR_0x8004)
+    callnative(SetIkigaiStarterPokedexFlags)
     setcaughtmon(VAR_0x8004)
     waitmessage
     waitbuttonpress
@@ -147,7 +149,8 @@ script VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon
 
 script VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter
 {
-    turnobject(LOCALID_Starter, DIR_NORTH)
+    applymove(LOCALID_Starter, Common_Movement_FaceUp)
+    releaseobjects
     if (specialvar(VAR_RESULT, GetPlayerFacingDirection) == DIR_WEST)
     {
         applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_One)
@@ -156,7 +159,7 @@ script VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter
     {
         applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_Two)
     }
-    turnplayer(DIR_NORTH)
+    playerface(DIR_NORTH)
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_StarterMon_OtherImportantThings
@@ -171,7 +174,7 @@ script VyratonIndoors_MayorsOffice_EventScript_MeetThomas
     fadenewbgm(MUS_HG_POKEWALKER)
     delay(60)
     emote(LOCALID_Samuel, EMOTE_EXCLAM, wait=FALSE)
-    turnplayer(DIR_SOUTH)
+    playerface(DIR_SOUTH)
     addobject(LOCALID_Thomas)
     applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_WatchThomasEntrance, FALSE)
     applymove(LOCALID_Thomas, VyratonIndoors_MayorsOffice_Movement_Thomas_Entrance)
@@ -190,12 +193,12 @@ script VyratonIndoors_MayorsOffice_EventScript_MeetThomas
     removeobject(LOCALID_Thomas)
     fadedefaultbgm
     delay(60)
-    turnplayer(DIR_NORTH)
+    playerface(DIR_NORTH)
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_Samuel_ReceivePokdex
 {
-    mnmbox(VyratonIndoors_MayorsOffice_Text_GivePokedex)
+    mnmbox(VyratonIndoors_MayorsOffice_Text_GivePokedex, lock=FALSE)
 }
 
 
@@ -208,8 +211,22 @@ movement VyratonIndoors_MayorsOffice_Movement_Player_Entrance
     face_up
 }
 
+movement VyratonIndoors_MayorsOffice_Movement_Player_GoToBriefcase
+{
+    walk_down
+    walk_left
+}
+
 movement VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase
 {
+    delay_16
+    walk_down
+    walk_left
+}
+
+movement VyratonIndoors_MayorsOffice_Movement_Starter_ReturnFromBriefcase
+{
+    exit_pokeball
     walk_down
     walk_left
 }

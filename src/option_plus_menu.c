@@ -46,6 +46,7 @@ enum
 
 enum
 {
+    MENUITEM_OVERWORLD_BIKE_CAMERA,
     MENUITEM_OVERWORLD_BIKE_MUSIC,
     MENUITEM_OVERWORLD_SURF_MUSIC,
     MENUITEM_OVERWORLD_NPC_MUG,
@@ -204,6 +205,7 @@ static void DrawChoices_Font(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_Interface(int selection, int y);
 static void DrawChoices_MatchCall(int selection, int y);
+static void DrawChoices_BikeCamera(int selection, int y);
 static void DrawChoices_BikeMusic(int selection, int y);
 static void DrawChoices_SurfMusic(int selection, int y);
 static void DrawChoices_MugshotsNPC(int selection, int y);
@@ -265,6 +267,7 @@ struct // MENU_OVERWORLD
     int (*processInput)(int selection);
 } static const sItemFunctionsOverworld[MENUITEM_OVERWORLD_COUNT] =
 {
+    [MENUITEM_OVERWORLD_BIKE_CAMERA]    = {DrawChoices_BikeCamera,          ProcessInput_Options_Two},
     [MENUITEM_OVERWORLD_BIKE_MUSIC]     = {DrawChoices_BikeMusic,           ProcessInput_Options_Two},
     [MENUITEM_OVERWORLD_SURF_MUSIC]     = {DrawChoices_SurfMusic,           ProcessInput_Options_Two},
     [MENUITEM_OVERWORLD_NPC_MUG]        = {DrawChoices_MugshotsNPC,         ProcessInput_Options_Two},
@@ -311,6 +314,7 @@ static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 
 static const u8 *const sOptionMenuItemsNamesOverworld[MENUITEM_OVERWORLD_COUNT] =
 {
+    [MENUITEM_OVERWORLD_BIKE_CAMERA]    = COMPOUND_STRING("BIKE CAMERA"),
     [MENUITEM_OVERWORLD_BIKE_MUSIC]     = sText_BikeMusic,
     [MENUITEM_OVERWORLD_SURF_MUSIC]     = sText_SurfMusic,
     [MENUITEM_OVERWORLD_NPC_MUG]        = sText_MugshotNPC,
@@ -362,6 +366,7 @@ static bool8 CheckConditions(int selection)
     case MENU_OVERWORLD:
         switch (selection)
         {
+        case MENUITEM_OVERWORLD_BIKE_CAMERA:    return TRUE;
         case MENUITEM_OVERWORLD_BIKE_MUSIC:     return TRUE;
         case MENUITEM_OVERWORLD_SURF_MUSIC:     return TRUE;
         case MENUITEM_OVERWORLD_NPC_MUG:        return TRUE;
@@ -408,6 +413,8 @@ static const u8 sText_Desc_WildSpeed[]                  = _("Choose the speed of
 static const u8 sText_Desc_TrainerSpeed[]               = _("Choose the speed of trainer battles.\nImportant battles are not included.");
 static const u8 sText_Desc_SurfOff[]                    = _("Disables the SURF theme\nwhen using SURF.");
 static const u8 sText_Desc_SurfOn[]                     = _("Enables the SURF theme\nwhen using SURF.");
+static const u8 sText_Desc_BikeCameraOff[]              = _("Enables dynamic camera panning\nwhen next using the BIKE.");
+static const u8 sText_Desc_BikeCameraOn[]               = _("Disables dynamic camera panning\nwhen next using the BIKE.");
 static const u8 sText_Desc_BikeOff[]                    = _("Disables the BIKE theme when\nusing the BIKE.");
 static const u8 sText_Desc_BikeOn[]                     = _("Enables the BIKE theme when\nusing the BIKE.");
 static const u8 sText_Desc_FontTypeCompact[]            = _("Printed text uses a font\nwhich is more compact.");
@@ -445,6 +452,7 @@ static const u8 *const sOptionMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
 
 static const u8 *const sOptionMenuItemDescriptionsOverworld[MENUITEM_OVERWORLD_COUNT][3] =
 {
+    [MENUITEM_OVERWORLD_BIKE_CAMERA]    = {sText_Desc_BikeCameraOff,                sText_Desc_BikeCameraOff,       sText_Empty},
     [MENUITEM_OVERWORLD_BIKE_MUSIC]     = {sText_Desc_BikeOn,                       sText_Desc_BikeOff,             sText_Empty},
     [MENUITEM_OVERWORLD_SURF_MUSIC]     = {sText_Desc_SurfOn,                       sText_Desc_SurfOff,             sText_Empty},
     [MENUITEM_OVERWORLD_NPC_MUG]        = {sText_Desc_MugshotNPCOn,                 sText_Desc_MugshotNPCOff,       sText_Empty},
@@ -479,6 +487,7 @@ static const u8 *const sOptionMenuItemDescriptionsDisabledMain[MENUITEM_MAIN_COU
 // Disabled Overworld
 static const u8 *const sOptionMenuItemDescriptionsDisabledOverworld[MENUITEM_OVERWORLD_COUNT] =
 {
+    [MENUITEM_OVERWORLD_BIKE_CAMERA]    = sText_Empty,
     [MENUITEM_OVERWORLD_BIKE_MUSIC]     = sText_Empty,
     [MENUITEM_OVERWORLD_SURF_MUSIC]     = sText_Empty,
     [MENUITEM_OVERWORLD_NPC_MUG]        = sText_Empty,
@@ -851,6 +860,7 @@ void CB2_InitOptionPlusMenu(void)
         sOptions->sel[MENUITEM_MAIN_FRAMETYPE]                  = gSaveBlock2Ptr->optionsInterfaceColor;
         sOptions->sel[MENUITEM_MAIN_TITLE_SCREEN]               = gSaveBlock2Ptr->optionsTitleScreenRandomise;
         
+        sOptions->sel_overworld[MENUITEM_OVERWORLD_BIKE_CAMERA]     = gSaveBlock2Ptr->optionsBikeCamera;
         sOptions->sel_overworld[MENUITEM_OVERWORLD_BIKE_MUSIC]      = gSaveBlock2Ptr->optionsBikeMusic;
         sOptions->sel_overworld[MENUITEM_OVERWORLD_SURF_MUSIC]      = gSaveBlock2Ptr->optionsSurfMusic;
         sOptions->sel_overworld[MENUITEM_OVERWORLD_NPC_MUG]         = gSaveBlock2Ptr->optionsSuppressNPCMugshots;
@@ -1085,6 +1095,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsInterfaceColor           = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
     gSaveBlock2Ptr->optionsTitleScreenRandomise     = sOptions->sel[MENUITEM_MAIN_TITLE_SCREEN];
 
+    gSaveBlock2Ptr->optionsBikeCamera           = sOptions->sel_overworld[MENUITEM_OVERWORLD_BIKE_CAMERA];
     gSaveBlock2Ptr->optionsBikeMusic            = sOptions->sel_overworld[MENUITEM_OVERWORLD_BIKE_MUSIC];
     gSaveBlock2Ptr->optionsSurfMusic            = sOptions->sel_overworld[MENUITEM_OVERWORLD_SURF_MUSIC];
     gSaveBlock2Ptr->optionsSuppressNPCMugshots  = sOptions->sel_overworld[MENUITEM_OVERWORLD_NPC_MUG];
@@ -1565,6 +1576,16 @@ static void DrawChoices_MatchCall(int selection, int y)
 
     DrawOptionMenuChoice(gText_BattleSceneOn, 104, y, styles[0], active);
     DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(1, gText_BattleSceneOff, 198), y, styles[1], active);
+}
+
+static void DrawChoices_BikeCamera(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_OVERWORLD_BIKE_CAMERA);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(COMPOUND_STRING("STATIC"), 104, y, styles[0], active);
+    DrawOptionMenuChoice(COMPOUND_STRING("DYNAMIC"), GetStringRightAlignXOffset(1, COMPOUND_STRING("DYNAMIC"), 198), y, styles[1], active);
 }
 
 static void DrawChoices_BikeMusic(int selection, int y)

@@ -530,6 +530,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPalette_SamuelBriefcase,   OBJ_EVENT_PAL_TAG_SAMUEL_BRIEFACSE},
     {gObjectEventPalette_Thomas,            OBJ_EVENT_PAL_TAG_THOMAS},
     {gObjectEventPalette_Captain,           OBJ_EVENT_PAL_TAG_CAPTAIN},
+    {gObjectEventPalette_N,                 OBJ_EVENT_PAL_TAG_N},
 #if OW_FOLLOWERS_POKEBALLS
     {gObjectEventPal_MasterBall,            OBJ_EVENT_PAL_TAG_BALL_MASTER},
     {gObjectEventPal_UltraBall,             OBJ_EVENT_PAL_TAG_BALL_ULTRA},
@@ -7396,7 +7397,7 @@ static u8 LoadFillColorPalette(u16 color, u16 paletteTag, struct Sprite *sprite)
 static void ObjectEventSetPokeballGfx(struct ObjectEvent *objEvent)
 {
     #if OW_FOLLOWERS_POKEBALLS
-    enum PokeBall ball = BALL_STRANGE;
+    enum PokeBall ball = BALL_POKE; // Changed default from Strange Ball
     if (objEvent->localId == OBJ_EVENT_ID_FOLLOWER)
     {
         struct Pokemon *mon = GetFirstLiveMon();
@@ -11147,5 +11148,23 @@ bool8 MovementActionFunc_RunSlow_Step1(struct ObjectEvent *objectEvent, struct S
         sprite->sActionFuncId = 2;
         return TRUE;
     }
+    return FALSE;
+}
+
+bool8 MovementAction_N_Shrug_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    StartSpriteAnimInDirection(objectEvent, sprite, DIR_SOUTH, ANIM_N_SHRUG);
+    return FALSE;
+}
+
+bool8 MovementAction_N_Headshake_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    StartSpriteAnimInDirection(objectEvent, sprite, DIR_SOUTH, ANIM_N_HEADSHAKE);
+    return FALSE;
+}
+
+bool8 MovementAction_N_Pose_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    StartSpriteAnimInDirection(objectEvent, sprite, DIR_SOUTH, ANIM_N_POSE);
     return FALSE;
 }

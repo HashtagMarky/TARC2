@@ -5,6 +5,7 @@
 
 void Task_OpenSamuelCase(u8 taskId);
 void SamuelCase_Init(MainCallback callback);
+void SetIkigaiStarterPokedexFlags(void);
 
 
 #endif // GUARD_UI_MENU_H

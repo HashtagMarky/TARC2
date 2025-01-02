@@ -360,12 +360,15 @@ SECTIONS {
         src/international_string_util.o(.text);
         src/pokemon_sprite_visualizer.o(.text);
         src/expansion_intro.o(.text);
-		src/social_media.o(.text);
+		src/pokesphere.o(.text);
 		src/toggleable_transport.o(.text);
         src/ui_main_menu.o(.text);
         src/ikigai_scrolling_background.o(.text);
         src/ui_samuel_case.o(.text);
         src/sound_check_menu.o(.text);
+        src/sample_ui_start_here.o(.text);
+        src/sample_ui_sliding_panel.o(.text);
+        src/sample_ui_blank_template.o(.text);
     } > ROM =0
 
     script_data :
@@ -734,12 +737,15 @@ SECTIONS {
         data/sound_data.o(.rodata);
         src/pokemon_sprite_visualizer.o(.rodata);
         src/expansion_intro.o(.rodata);
-		src/social_media.o(.rodata);
+		src/pokesphere.o(.rodata);
 		src/toggleable_transport.o(.rodata);
         src/ui_main_menu.o(.rodata);
         src/ikigai_scrolling_background.o(.rodata);
         src/ui_samuel_case.o(.rodata);
         src/sound_check_menu.o(.rodata);
+        src/sample_ui_start_here.o(.rodata);
+        src/sample_ui_sliding_panel.o(.rodata);
+        src/sample_ui_blank_template.o(.rodata);
     } > ROM =0
 
     song_data :

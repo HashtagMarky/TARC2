@@ -26,6 +26,7 @@
 
 #include "constants/field_mugshots.h"
 #include "field_mugshot.h"
+#include "ikigai_characters.h"
 
 struct DynamicListMenuEventArgs
 {
@@ -73,6 +74,12 @@ static void MultichoiceDynamicEventShowItem_OnDestroy(struct DynamicListMenuEven
 static void MultichoiceDynamicEventShowPMD_OnInit(struct DynamicListMenuEventArgs *eventArgs);
 static void MultichoiceDynamicEventShowPMD_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
 static void MultichoiceDynamicEventShowPMD_OnDestroy(struct DynamicListMenuEventArgs *eventArgs);
+static void MultichoiceDynamicEventShowDialogueAttitudes_OnInit(struct DynamicListMenuEventArgs *eventArgs);
+static void MultichoiceDynamicEventShowDialogueAttitudes_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
+static void MultichoiceDynamicEventShowDialogueAttitudes_OnDestroy(struct DynamicListMenuEventArgs *eventArgs);
+static void MultichoiceDynamicEventShowDialogueOptions_OnInit(struct DynamicListMenuEventArgs *eventArgs);
+static void MultichoiceDynamicEventShowDialogueOptions_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
+static void MultichoiceDynamicEventShowDialogueOptions_OnDestroy(struct DynamicListMenuEventArgs *eventArgs);
 
 static const struct DynamicListMenuEventCollection sDynamicListMenuEventCollections[] =
 {
@@ -93,6 +100,20 @@ static const struct DynamicListMenuEventCollection sDynamicListMenuEventCollecti
         .OnInit = MultichoiceDynamicEventShowPMD_OnInit,
         .OnSelectionChanged = MultichoiceDynamicEventShowPMD_OnSelectionChanged,
         .OnDestroy = MultichoiceDynamicEventShowPMD_OnDestroy
+    },
+    
+    [DYN_MULTICHOICE_CB_DIALOGUE_OPTIONS] =
+    {
+        .OnInit = MultichoiceDynamicEventShowDialogueOptions_OnInit,
+        .OnSelectionChanged = MultichoiceDynamicEventShowDialogueOptions_OnSelectionChanged,
+        .OnDestroy = MultichoiceDynamicEventShowDialogueOptions_OnDestroy
+    },
+    
+    [DYN_MULTICHOICE_CB_DIALOGUE_ATTITUDES] =
+    {
+        .OnInit = MultichoiceDynamicEventShowDialogueAttitudes_OnInit,
+        .OnSelectionChanged = MultichoiceDynamicEventShowDialogueAttitudes_OnSelectionChanged,
+        .OnDestroy = MultichoiceDynamicEventShowDialogueAttitudes_OnDestroy
     }
 };
 
@@ -258,6 +279,96 @@ static void MultichoiceDynamicEventShowPMD_OnDestroy(struct DynamicListMenuEvent
         FreeSpriteTilesByTag(TAG_MUGSHOT);
         FreeSpritePaletteByTag(TAG_MUGSHOT);
         DestroySprite(&gSprites[sPMDSpriteId]);
+    }
+}
+
+static void MultichoiceDynamicEventShowDialogueOptions_OnInit(struct DynamicListMenuEventArgs *eventArgs)
+{
+    struct WindowTemplate *template = &gWindows[eventArgs->windowId].window;
+    u32 baseBlock = template->baseBlock + template->width * template->height;
+    struct WindowTemplate auxTemplate = CreateWindowTemplate(0, template->tilemapLeft + template->width, template->tilemapTop, 4, 4, 15, baseBlock);
+    u32 auxWindowId = AddWindow(&auxTemplate);
+    SetStandardWindowBorderStyle_RightExtension(auxWindowId, FALSE);
+    FillWindowPixelBuffer(auxWindowId, 0x11);
+    CopyWindowToVram(auxWindowId, COPYWIN_FULL);
+    sAuxWindowId = auxWindowId;
+    sItemSpriteId = MAX_SPRITES;
+}
+
+static void MultichoiceDynamicEventShowDialogueOptions_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs)
+{
+    struct WindowTemplate *template = &gWindows[eventArgs->windowId].window;
+    u32 x = template->tilemapLeft * 8 + template->width * 8 + 36 - 4 - 8 - 8;
+    u32 y = template->tilemapTop * 8 + 20 - 4;
+
+    if (sItemSpriteId != MAX_SPRITES)
+    {
+        FreeSpriteTilesByTag(TAG_CHARACTER_DIALOGUE_ICON);
+        FreeSpritePaletteByTag(TAG_CHARACTER_DIALOGUE_ICON);
+        DestroySprite(&gSprites[sItemSpriteId]);
+    }
+
+    sItemSpriteId = CreateDialogueOptionIconSprite(eventArgs->selectedItem);
+    gSprites[sItemSpriteId].oam.priority = 0;
+    gSprites[sItemSpriteId].x = x;
+    gSprites[sItemSpriteId].y = y;
+}
+
+static void MultichoiceDynamicEventShowDialogueOptions_OnDestroy(struct DynamicListMenuEventArgs *eventArgs)
+{
+    ClearStdWindowAndFrame(sAuxWindowId, TRUE);
+    RemoveWindow(sAuxWindowId);
+
+    if (sItemSpriteId != MAX_SPRITES)
+    {
+        FreeSpriteTilesByTag(TAG_CHARACTER_DIALOGUE_ICON);
+        FreeSpritePaletteByTag(TAG_CHARACTER_DIALOGUE_ICON);
+        DestroySprite(&gSprites[sItemSpriteId]);
+    }
+}
+
+static void MultichoiceDynamicEventShowDialogueAttitudes_OnInit(struct DynamicListMenuEventArgs *eventArgs)
+{
+    struct WindowTemplate *template = &gWindows[eventArgs->windowId].window;
+    u32 baseBlock = template->baseBlock + template->width * template->height;
+    struct WindowTemplate auxTemplate = CreateWindowTemplate(0, template->tilemapLeft + template->width + 1, template->tilemapTop, 4, 4, 15, baseBlock);
+    u32 auxWindowId = AddWindow(&auxTemplate);
+    SetStandardWindowBorderStyle_RightExtension(auxWindowId, FALSE);
+    FillWindowPixelBuffer(auxWindowId, 0x11);
+    CopyWindowToVram(auxWindowId, COPYWIN_FULL);
+    sAuxWindowId = auxWindowId;
+    sItemSpriteId = MAX_SPRITES;
+}
+
+static void MultichoiceDynamicEventShowDialogueAttitudes_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs)
+{
+    struct WindowTemplate *template = &gWindows[eventArgs->windowId].window;
+    u32 x = template->tilemapLeft * 8 + template->width * 8 + 36 - 4 - 8;
+    u32 y = template->tilemapTop * 8 + 20 - 4;
+
+    if (sItemSpriteId != MAX_SPRITES)
+    {
+        FreeSpriteTilesByTag(TAG_CHARACTER_DIALOGUE_ICON);
+        FreeSpritePaletteByTag(TAG_CHARACTER_DIALOGUE_ICON);
+        DestroySprite(&gSprites[sItemSpriteId]);
+    }
+
+    sItemSpriteId = CreateAttitudeIconSprite(eventArgs->selectedItem);
+    gSprites[sItemSpriteId].oam.priority = 0;
+    gSprites[sItemSpriteId].x = x;
+    gSprites[sItemSpriteId].y = y;
+}
+
+static void MultichoiceDynamicEventShowDialogueAttitudes_OnDestroy(struct DynamicListMenuEventArgs *eventArgs)
+{
+    ClearStdWindowAndFrame(sAuxWindowId, TRUE);
+    RemoveWindow(sAuxWindowId);
+
+    if (sItemSpriteId != MAX_SPRITES)
+    {
+        FreeSpriteTilesByTag(TAG_CHARACTER_DIALOGUE_ICON);
+        FreeSpritePaletteByTag(TAG_CHARACTER_DIALOGUE_ICON);
+        DestroySprite(&gSprites[sItemSpriteId]);
     }
 }
 

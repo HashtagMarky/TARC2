@@ -208,11 +208,13 @@ struct Time
     /*0x04*/ s8 seconds;
 };
 
-#include "ikigai_characters.h"
+#include "constants/ikigai_characters.h"
 struct IkigaiCharacterData
 {
-    u8 friendship[CHARACTER_COUNT];
-    u8 conversed[ROUND_BITS_TO_BYTES(CHARACTER_COUNT)];
+    u8 playerNickname[PLAYER_NAME_LENGTH + 1];
+    s8 opinionKindness[MAIN_CHARACTER_COUNT];
+    s8 opinionStrength[MAIN_CHARACTER_COUNT];
+    u8 conversed[ROUND_BITS_TO_BYTES(MAIN_CHARACTER_COUNT)];
 };
 
 #include "constants/items.h"
@@ -569,6 +571,7 @@ struct SaveBlock2
              u16 optionsSuppressNPCMugshots:1; // whether NPC Mugshots are disabled
              u16 optionsFollowerMugshots:2; // whether Follower Mugshots/Placeholders are disabled
              u16 optionsOverworldCatchSuccessMultiplyer:1; // whether or not a x1 or x2 multiplier is used in Overworld Capture Odds
+             u16 optionsBikeCamera:1; // whether or a dynamic camera is used on the bike
              u16 optionsBikeMusic:1; // whether or not bike music is played
              u16 optionsSurfMusic:1; // whether or not surf music is played
              u16 optionsWildBattleSpeed:2; // speed of wild battles
@@ -576,14 +579,14 @@ struct SaveBlock2
              u16 optionsDamageNumbers:2; // whether damage numbers are shown
              u16 optionsClockMode:1; // whether 12 or 24 hour clock is used.
              u16 regionMapZoom:1; // whether the map is zoomed in
-             //u16 padding1:8;
+             //u16 padding1:7;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 playerEmote:4;
              u8 paddingPE:4;
-             u8 dynPalSkinTone;
+    /*0x91*/ u8 dynPalSkinTone;
              u8 dynPalHairTone;
              u8 dynPalClothesTone;
-    /*0x91*/ u8 filler_90[0x4];
+    /*0x94*/ u8 filler_94[0x4];
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
     /*0xA8*/ u32 gcnLinkFlags; // Read by Pokémon Colosseum/XD

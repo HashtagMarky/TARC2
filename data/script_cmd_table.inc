@@ -235,6 +235,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_dowildsafaribattle				@ 0xe8
 	.4byte ScrCmd_setselectedobjectevent			@ 0xe9
 	.4byte ScrCmd_playvoiceline						@ 0xea
+	.4byte ScrCmd_attitudemultipush					@ 0xeb
 
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

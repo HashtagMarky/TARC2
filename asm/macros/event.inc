@@ -2106,8 +2106,10 @@
 	.endm
 
 	@ Buffers the given text and calls the relevant message, name and mugshot script (see gStdScripts).
-	.macro mnmbox text:req, PMD=FALSE, mugshotEmotion=EMOTE_NORMAL, nameKnown=TRUE, localId, waitbuttonpress, remain
-	lock
+	.macro mnmbox text:req, PMD=FALSE, mugshotEmotion=EMOTE_NORMAL, nameKnown=TRUE, localId, lock=FALSE, waitbuttonpress=TRUE, remain=FALSE
+	.if \lock == TRUE
+		lock
+	.endif
 	.ifnb \localId
 		setselectedobjectevent \localId
 	.endif
@@ -2129,14 +2131,14 @@
 	.endif
 	message \text
 	waitmessage
-	.ifb \waitbuttonpress
+	.if \waitbuttonpress == TRUE
 		waitbuttonpress
 	.endif
-	waitmoncry
 	.if \PMD == TRUE
+		waitmoncry
 		call EventScript_DisplayPokedexHeader
 	.endif
-	.ifb \remain
+	.if \remain == FALSE
 		release
 	.endif
 	.endm
@@ -2559,6 +2561,160 @@
 	removeobject \localId
 	.endm
 
+	@ Starts Player Nicknaming Screen
+	.macro nicknameplayer
+	fadescreen FADE_TO_BLACK
+	callnative DoPlayerNicknamingScreen
+	waitstate
+	.endm
+
+	@ Create the Character Dialogue Box with a Character.
+	.macro characterdialogue localId
+	.ifnb \localId
+		setselectedobjectevent \localId
+	.endif
+	call IkigaiCharacterBox_InitialDialogue
+	.endm
+
+	@ Starts a characters default emote based on personality.
+	@ Uses VAR_0x8000 in order to determine if waitmovement is needed.
+	.macro charemotedefault
+	callnative IkigaiCharacter_DefaultEmote
+	call_if_eq VAR_0x8000, TRUE, Common_Movement_Waitmovement
+	.endm
+
+	@ Starts a characters response emote based on value stored in VAR_RESULT.
+	@ VAR_RESULT can be set by passing a value for attitude.
+	@ Uses VAR_0x8000 in order to determine if waitmovement is needed.
+	.macro charemoteresult, attitude
+	.ifnb \attitude
+		setvar VAR_RESULT, \attitude
+	.endif
+	callnative IkigaiCharacter_ResponseEmote
+	call_if_eq VAR_0x8000, TRUE, Common_Movement_Waitmovement
+	.endm
+
+	@ Pushes attitude options to be chosen.
+	.macro attitudemultipush characteristic:req text:vararg
+    .byte 0xeb
+    .2byte \characteristic
+    .byte (.Lattitudemultipush_\@_2 - .Lattitudemultipush_\@_1) / 4
+.Lattitudemultipush_\@_1:
+    .4byte \text
+.Lattitudemultipush_\@_2:
+    .endm
+
+	@ Create a multichoice window for player attitude options.
+	.macro attitudechoice inspiring, humble, dominant, cynical, neutral, bPress=TRUE
+	.ifnb \inspiring
+		attitudemultipush ATTITUDE_INSPIRED, \inspiring
+	.endif
+	.ifnb \humble
+		attitudemultipush ATTITUDE_HUMBLE, \humble
+	.endif
+	.ifnb \dominant
+		attitudemultipush ATTITUDE_DOMINANT, \dominant
+	.endif
+	.ifnb \cynical
+		attitudemultipush ATTITUDE_CYNICAL, \cynical
+	.endif
+	.ifnb \neutral
+		attitudemultipush ATTITUDE_NEUTRAL, \neutral
+	.endif
+	_dynmultichoice 0, 0, \bPress, 2, TRUE, -1, DYN_MULTICHOICE_CB_DIALOGUE_ATTITUDES, NULL
+	.endm
+
+	@ Checks Character Being Spoken
+	@ Sets Character to VAR_RESULT
+	.macro checkcharacter localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_ReturnIkigaiCharacter_SelectedObject
+	.endm
+
+	@ Buffers Character name stored in VAR_0x8004 to STR_VAR_1
+	.macro buffercharactername localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_BurfferName
+	.endm
+
+	@ Sets Ikigai Character Romantic Flag
+	.macro setromanticflag localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_SetRomanticFlag
+	.endm
+
+	@ Toggles Ikigai Character Romantic Flag
+	.macro toggleromanticflag localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_ToggleRomanticFlag
+	.endm
+
+	@ Clears Ikigai Character Romantic Flag
+	.macro clearromanticflag localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_ClearRomanticFlag
+	.endm
+
+	@ Gets Ikigai Character Romantic Flag
+	@ Sets result to VAR_RESULT
+	.macro getromanticflag localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_GetRomanticFlag
+	.endm
+
+	@ Sets Ikigai Character Romantic Flag Exclusively
+	.macro setromanticflagexclusive localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_SetRomanticFlag_Exclusive
+	.endm
+
+	@ Clears Ikigai Character Romantic Flag Amicably
+	.macro clearromanticflagamicable localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_ClearRomanticFlag_Amicable
+	.endm
+
+	@ Clears Ikigai Character Romantic Flag Hostilely
+	.macro clearromanticflaghostile localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_ClearRomanticFlag_Hostile
+	.endm
+
+	@ Checks Player Romantic Status
+	@ Stores Character being spoken to in VAR_0x8004
+	@ Stores Relationship Status in VAR_RESULT
+	.macro checkrelationships localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	checkcharacter
+	copyvar VAR_0x8004, VAR_RESULT
+	callnative ScrCmd_IkigaiCharacter_CheckRelationships
+	.endm
+
+	@ Release Object Events
+	.macro releaseobjects
+	callnative(ScriptMovement_UnfreezeObjectEvents)
+	.endm
+
 @ Deokishisu's Supplementary Macros
 
 	@ applymovement with waitmovement built-in.
@@ -2701,5 +2857,59 @@
 		applymovement \localid, Common_Movement_Delay48
 		waitmovement \localid
 		delay 20
+	.endif
+	.endm
+
+@ End of @ Deokishisu's Supplementary Macros
+
+	@ Calls Common_Movement_Face(Up/Down/Left/Right) for provided localid.
+	@ By default, waitmovement \localid is provided, but can be omitted by passing FALSE.
+	.macro objectface localid:req, direction:req, wait=TRUE
+	.if \direction == DIR_NORTH
+		applymovement \localid, Common_Movement_FaceUp
+		.if \wait
+			waitmovement \localid
+		.endif
+	.elseif \direction == DIR_SOUTH
+		applymovement \localid, Common_Movement_FaceDown
+		.if \wait
+			waitmovement \localid
+		.endif
+	.elseif \direction == DIR_WEST
+		applymovement \localid, Common_Movement_FaceLeft
+		.if \wait
+			waitmovement \localid
+		.endif
+	.elseif \direction == DIR_EAST
+		applymovement \localid, Common_Movement_FaceRight
+		.if \wait
+			waitmovement \localid
+		.endif
+	.endif
+	.endm
+
+	@ Does Common_Movement_Face(Up/Down/Left/Right) for the player.
+	@ By default, waitmovement \localid is provided, but can be omitted by passing FALSE.
+	.macro playerface direction:req, wait=TRUE
+	.if \direction == DIR_NORTH
+		applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+		.if \wait
+			waitmovement OBJ_EVENT_ID_PLAYER
+		.endif
+	.elseif \direction == DIR_SOUTH
+		applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
+		.if \wait
+			waitmovement OBJ_EVENT_ID_PLAYER
+		.endif
+	.elseif \direction == DIR_WEST
+		applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
+		.if \wait
+			waitmovement OBJ_EVENT_ID_PLAYER
+		.endif
+	.elseif \direction == DIR_EAST
+		applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
+		.if \wait
+			waitmovement OBJ_EVENT_ID_PLAYER
+		.endif
 	.endif
 	.endm

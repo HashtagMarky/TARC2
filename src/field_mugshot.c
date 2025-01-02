@@ -36,7 +36,7 @@ static const struct WindowTemplate sMugshotWindowNPC =
     .width = 8,
     .height = 8,
     .paletteNum = 15,
-    .baseBlock = 110,
+    .baseBlock = 220,
 };
 
 static const struct WindowTemplate sMugshotWindowPokemon =
@@ -47,7 +47,7 @@ static const struct WindowTemplate sMugshotWindowPokemon =
     .width = 5,
     .height = 5,
     .paletteNum = 15,
-    .baseBlock = 110,
+    .baseBlock = 220,
 };
 
 static void SpriteCB_FieldMugshot(struct Sprite *s);
@@ -258,7 +258,7 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
         return;
     }
     
-    if (mugshotType != MUGSHOT_DEFINED)
+    if (mugshotType != MUGSHOT_DEFINED && mugshotType != MUGSHOT_NPC && mugshotType != MUGSHOT_PLAYER)
     {
         windowTask = CreateTask(Task_MugshotWindow, 0);
 

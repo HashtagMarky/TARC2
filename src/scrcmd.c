@@ -1504,6 +1504,58 @@ bool8 ScrCmd_dynmultipush(struct ScriptContext *ctx)
     return FALSE;
 }
 
+bool8 ScrCmd_attitudemultipush(struct ScriptContext *ctx)
+{
+    u32 characteristic = VarGet(ScriptReadHalfword(ctx));
+    u32 argc = ScriptReadByte(ctx);
+    if (argc == 0)
+        return FALSE;
+
+    u32 i;
+    struct ListMenuItem item;
+
+    for (i = 0; i < argc; i++)
+    {
+        u8 *nameBuffer = Alloc(100);
+        u8 *nameListItem = Alloc(100);
+        const u8 *name = (const u8 *)ScriptReadWord(ctx);
+        StringExpandPlaceholders(nameBuffer, name);
+
+        switch (characteristic)
+        {
+            case ATTITUDE_INSPIRED:
+                StringCopy(nameListItem, COMPOUND_STRING("{COLOR BLUE}{FONT_GET_NARROW}"));
+                break;
+
+            case ATTITUDE_HUMBLE:
+                StringCopy(nameListItem, COMPOUND_STRING("{COLOR GREEN}{FONT_GET_NARROW}"));
+                break;
+
+            case ATTITUDE_DOMINANT:
+                StringCopy(nameListItem, COMPOUND_STRING("{COLOR RED}{FONT_GET_NARROW}"));
+                break;
+
+            case ATTITUDE_CYNICAL:
+                StringCopy(nameListItem, COMPOUND_STRING("{COLOR LIGHT_BLUE}{FONT_GET_NARROW}"));
+                break;
+
+            case ATTITUDE_NEUTRAL:
+            default:
+                StringCopy(nameListItem, COMPOUND_STRING("{FONT_GET_NARROW}"));
+                break;
+        }
+
+        StringAppend(nameListItem, nameBuffer);
+
+        item.name = nameListItem;
+        item.id = characteristic;
+
+        MultichoiceDynamic_PushElement(item);
+    }
+
+    return FALSE;
+}
+
 bool8 ScrCmd_multichoice(struct ScriptContext *ctx)
 {
     u8 left = ScriptReadByte(ctx);
@@ -2522,7 +2574,7 @@ bool8 ScrCmd_setselectedobjectevent(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
 
-    gSelectedObjectEvent = localId;
+    gSelectedObjectEvent = GetObjectEventIdByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
     return FALSE;
 }
 

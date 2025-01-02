@@ -94,6 +94,7 @@ enum UtilDebugMenu
     DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK,
     DEBUG_UTIL_MENU_ITEM_WATCHCREDITS,
     DEBUG_UTIL_MENU_ITEM_PLAYER_NAME,
+    DEBUG_UTIL_MENU_ITEM_PLAYER_NICKNAME,
     DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER,
     DEBUG_UTIL_MENU_ITEM_PLAYER_ID,
     DEBUG_UTIL_MENU_PLAYER_DYNPALS,
@@ -373,6 +374,7 @@ static void DebugAction_Util_CheckWallClock(u8 taskId);
 static void DebugAction_Util_SetWallClock(u8 taskId);
 static void DebugAction_Util_WatchCredits(u8 taskId);
 static void DebugAction_Util_Player_Name(u8 taskId);
+static void DebugAction_Util_Player_Nickname(u8 taskId);
 static void DebugAction_Util_Player_Gender(u8 taskId);
 static void DebugAction_Util_Player_Id(u8 taskId);
 static void DebugAction_Util_PlayerDynPals(u8 taskId);
@@ -538,6 +540,7 @@ static const u8 sDebugText_Util_CheckWallClock[] =           _("Check wall clock
 static const u8 sDebugText_Util_SetWallClock[] =             _("Set wall clock…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Util_WatchCredits[] =             _("Watch credits…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Util_Player_Name[] =              _("Player name");
+static const u8 sDebugText_Util_Player_Nickname[] =          _("Player nickname");
 static const u8 sDebugText_Util_Player_Gender[] =            _("Toggle gender");
 static const u8 sDebugText_Util_Player_Id[] =                _("New Trainer ID");
 static const u8 sDebugText_Util_DynPals[]=                   _("Player DynPal Menu");
@@ -730,6 +733,7 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]    = {sDebugText_Util_SetWallClock,     DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK},
     [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]    = {sDebugText_Util_WatchCredits,     DEBUG_UTIL_MENU_ITEM_WATCHCREDITS},
     [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]     = {sDebugText_Util_Player_Name,      DEBUG_UTIL_MENU_ITEM_PLAYER_NAME},
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_NICKNAME] = {sDebugText_Util_Player_Nickname,  DEBUG_UTIL_MENU_ITEM_PLAYER_NICKNAME},
     [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]   = {sDebugText_Util_Player_Gender,    DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER},
     [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]       = {sDebugText_Util_Player_Id,        DEBUG_UTIL_MENU_ITEM_PLAYER_ID},
     [DEBUG_UTIL_MENU_PLAYER_DYNPALS]       = {sDebugText_Util_DynPals,          DEBUG_UTIL_MENU_PLAYER_DYNPALS},
@@ -903,6 +907,7 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]    = DebugAction_Util_SetWallClock,
     [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]    = DebugAction_Util_WatchCredits,
     [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]     = DebugAction_Util_Player_Name,
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_NICKNAME] = DebugAction_Util_Player_Nickname,
     [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]   = DebugAction_Util_Player_Gender,
     [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]       = DebugAction_Util_Player_Id,
     [DEBUG_UTIL_MENU_PLAYER_DYNPALS]       = DebugAction_Util_PlayerDynPals,
@@ -2338,6 +2343,11 @@ static void DebugAction_Util_WatchCredits(u8 taskId)
 static void DebugAction_Util_Player_Name(u8 taskId)
 {
     DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldContinueScript);
+}
+
+static void DebugAction_Util_Player_Nickname(u8 taskId)
+{
+    DoNamingScreen(NAMING_SCREEN_PLAYER_NICKNAME, gSaveBlock3Ptr->characters.playerNickname, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldContinueScript);
 }
 
 static void DebugAction_Util_Player_Gender(u8 taskId)
