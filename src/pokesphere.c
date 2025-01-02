@@ -658,6 +658,17 @@ static void PokeSphere_PrintPosts(void)
     y = 17;
     printed = 0;
 
+    if (IkigaiCharacter_GetRomanticFlag(sPokeSphereState->characterId))
+    {
+        AddTextPrinterParameterized4(WIN_CHARACTER_RELATIONSHIPS_POSTS, FONT_SMALL_NARROWER, 5, y, 0, 1,
+                sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW, COMPOUND_STRING(
+                    "We have a very\nclose bond."
+                )
+        );
+        y += 25;
+        printed++;
+    }
+
     // Iterate through the shuffled entries
     for (i = 0; i < totalEntries; i++)
     {
