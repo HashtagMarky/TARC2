@@ -506,6 +506,7 @@ bool32 IkigaiCharacter_NicknameInsteadOfName(u32 character)
 
 void IkigaiCharacter_MovementEmote(u8 localId, const u8 *movement)
 {
+    gSpecialVar_0x8000 = FALSE;
     if (movement == NULL)
         return;
 
@@ -514,6 +515,7 @@ void IkigaiCharacter_MovementEmote(u8 localId, const u8 *movement)
         localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, movement
     );
     SetMovingNpcId(gObjectEvents[gSelectedObjectEvent].localId);
+    gSpecialVar_0x8000 = TRUE;
 }
 
 u32 IkigaiCharacter_GetPoseFromAttitude(u32 attitude)

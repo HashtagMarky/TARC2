@@ -153,3 +153,7 @@ Common_Movement_DoorExit::
     delay_16
 	set_invisible
 	step_end
+
+Common_Movement_Waitmovement::
+    waitmovement 0
+	return

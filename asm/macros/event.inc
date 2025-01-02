@@ -2577,19 +2577,21 @@
 	.endm
 
 	@ Starts a characters default emote based on personality.
+	@ Uses VAR_0x8000 in order to determine if waitmovement is needed.
 	.macro charemotedefault
 	callnative IkigaiCharacter_DefaultEmote
-	waitmovement 0
+	call_if_eq VAR_0x8000, TRUE, Common_Movement_Waitmovement
 	.endm
 
 	@ Starts a characters response emote based on value stored in VAR_RESULT.
 	@ VAR_RESULT can be set by passing a value for attitude.
+	@ Uses VAR_0x8000 in order to determine if waitmovement is needed.
 	.macro charemoteresult, attitude
 	.ifnb \attitude
 		setvar VAR_RESULT, \attitude
 	.endif
 	callnative IkigaiCharacter_ResponseEmote
-	waitmovement 0
+	call_if_eq VAR_0x8000, TRUE, Common_Movement_Waitmovement
 	.endm
 
 	@ Pushes attitude options to be chosen.
