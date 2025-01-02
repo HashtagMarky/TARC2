@@ -606,31 +606,34 @@ u32 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void)
 
 s32 IkigaiCharacterOpinionBonus_Relationship(u32 character, bool32 opinionType)
 {
-    u32 relationshipCharacter;
-    u32 relationshipAffinity;
-    u32 i;
+    u32 relationshipCharacter, relationshipAffinity, relationshipBonus, i;
+
+    relationshipBonus = 0;
 
     for (i = 0; i < MAX_RELATIONSHIPS; i++)
     {
         relationshipCharacter = gIkigaiCharactersInfo[character].relationships[i].characterId;
         relationshipAffinity = gIkigaiCharactersInfo[character].relationships[i].affinity;
 
-        if (opinionType == OPINION_TYPE_KINDNESS &&
+        if (relationshipCharacter == CHARACTER_DEFAULT || relationshipCharacter >= MAIN_CHARACTER_COUNT)
+        {}
+
+        else if (opinionType == OPINION_TYPE_KINDNESS &&
             gSaveBlock3Ptr->characters.opinionKindness[relationshipCharacter]>=
             relationshipAffinity * RELATIONSHIP_AFFINITY_MULTIPLIER)
         {
-            return relationshipAffinity;
+            relationshipBonus += relationshipAffinity;
         }
 
         else if (opinionType == OPINION_TYPE_STRENGTH &&
             gSaveBlock3Ptr->characters.opinionStrength[relationshipCharacter] >=
             relationshipAffinity * RELATIONSHIP_AFFINITY_MULTIPLIER)
         {
-            return relationshipAffinity;
+            relationshipBonus += relationshipAffinity;
         }
     }
 
-    return 0;
+    return relationshipBonus;
 }
 
 s32 IkigaiCharacterOpinionBonus_PartnerPokemon(u32 character, bool32 opinionType)
