@@ -35,9 +35,8 @@ script IkigaiCharacterBox_InitialDialogue
 
 script IkigaiCharacterBox_Goodbye
 {
-    mnmbox("Goodbye.", waitbuttonpress=FALSE, remain=TRUE)
+    mnmbox("Goodbye.")
     charemotedefault
-    waitbuttonpress
     release
     end
 }
