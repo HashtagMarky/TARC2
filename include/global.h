@@ -570,6 +570,7 @@ struct SaveBlock2
              u16 optionsSuppressNPCMugshots:1; // whether NPC Mugshots are disabled
              u16 optionsFollowerMugshots:2; // whether Follower Mugshots/Placeholders are disabled
              u16 optionsOverworldCatchSuccessMultiplyer:1; // whether or not a x1 or x2 multiplier is used in Overworld Capture Odds
+             u16 optionsBikeCamera:1; // whether or a dynamic camera is used on the bike
              u16 optionsBikeMusic:1; // whether or not bike music is played
              u16 optionsSurfMusic:1; // whether or not surf music is played
              u16 optionsWildBattleSpeed:2; // speed of wild battles
@@ -577,7 +578,7 @@ struct SaveBlock2
              u16 optionsDamageNumbers:2; // whether damage numbers are shown
              u16 optionsClockMode:1; // whether 12 or 24 hour clock is used.
              u16 regionMapZoom:1; // whether the map is zoomed in
-             //u16 padding1:8;
+             //u16 padding1:7;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 playerEmote:4;
              u8 paddingPE:4;
