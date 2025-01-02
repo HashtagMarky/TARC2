@@ -1,0 +1,144 @@
+VyratonIndoors_SSPathfinder_MapScripts::
+	.byte 0
+
+
+VyratonIndoors_SSPathfinder_IkigaiIntroSetup::
+	setvar VAR_IKIGAI_INTRO_STATE, 2
+	setdynamicwarp MAP_VYRATON_OUTDOORS_HARBOUR, 15, 25
+	return
+
+
+VyratonIndoors_SSPathfinder_EventScript_MeetCaptain::
+	call VyratonIndoors_SSPathfinder_IkigaiIntroSetup
+	setvar VAR_TEMP_0, 1
+	playerface DIR_NORTH
+	opendoor 4, 1
+	playse SE_DOOR
+	waitdooranim
+	applymoveplayer VyratonIndoors_SSPathfinder_Movement_Player_NoExit, FALSE
+	applymove 1, Common_Movement_DoorEntrance
+	emote 1, EMOTE_QUESTION, wait = FALSE
+	closedoor 4, 1
+	waitdooranim
+	mnmbox VyratonIndoors_SSPathfinder_Text_IntroduceCaptain, nameKnown = FALSE, localId = 1
+	applymoveplayer VyratonIndoors_SSPathfinder_Movement_Player_LeadIn, FALSE
+	applymove 1, VyratonIndoors_SSPathfinder_Movement_Captain_FollowIn
+	mnmbox VyratonIndoors_SSPathfinder_Text_WhatBringsYou, nameKnown = FALSE, waitbuttonpress = FALSE, remain = TRUE
+	emote 1, EMOTE_QUESTION
+	call VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue
+	emote OBJ_EVENT_ID_PLAYER, EMOTE_TALK
+	mnmbox VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice, waitbuttonpress = FALSE, remain = TRUE
+	emote 1, EMOTE_QUESTION
+	call VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue
+	emote OBJ_EVENT_ID_PLAYER, EMOTE_TALK
+	mnmbox VyratonIndoors_SSPathfinder_Text_SocialMedia
+	playse SE_RG_SS_ANNE_HORN
+	emote 1, EMOTE_EXCLAM, FALSE, FALSE
+	emote OBJ_EVENT_ID_PLAYER, EMOTE_EXCLAM, FALSE, FALSE
+	waitse
+	mnmbox VyratonIndoors_SSPathfinder_Text_SoundOfDocking
+	applymove 1, Common_Movement_WalkUp2
+	opendoor 4, 1
+	playse SE_DOOR
+	waitdooranim
+	applymove 1, Common_Movement_DoorExit
+	closedoor 4, 1
+	waitdooranim
+	removeobject 1
+	releaseall
+	end
+
+
+VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue::
+	attitudemultipush ATTITUDE_NEUTRAL, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_0, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_1
+	attitudechoice
+	switch VAR_RESULT
+	case 0, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_3
+	case 1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_4
+	case 2, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_5
+VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_1:
+	bufferstring STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_WhateverItMayBe
+	return
+
+VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_3:
+	bufferstring STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_FreshStart
+	goto VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_1
+
+VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_4:
+	bufferstring STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_NewChallenge
+	goto VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_1
+
+VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_5:
+	bufferstring STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_Business
+	goto VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_1
+
+
+VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue::
+	attitudechoice VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_0, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_2, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_3
+	switch VAR_RESULT
+	case ATTITUDE_INSPIRED, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_2
+	case ATTITUDE_HUMBLE, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_3
+	case ATTITUDE_DOMINANT, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_4
+	case ATTITUDE_CYNICAL, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_5
+	return
+
+VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_2:
+	bufferstring STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Inspired
+	return
+
+VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_3:
+	bufferstring STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Humble
+	return
+
+VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_4:
+	bufferstring STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Dominant
+	return
+
+VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_5:
+	bufferstring STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Cynical
+	return
+
+
+VyratonIndoors_SSPathfinder_Movement_Player_NoExit:
+	lock_facing_direction
+	walk_down
+	unlock_facing_direction
+	step_end
+
+VyratonIndoors_SSPathfinder_Movement_Player_LeadIn:
+	walk_down
+	walk_down
+	face_up
+	step_end
+
+VyratonIndoors_SSPathfinder_Movement_Captain_FollowIn:
+	walk_down
+	walk_down
+	delay_2
+	delay_16
+	face_left
+	delay_16
+	delay_16
+	face_right
+	delay_16
+	delay_16
+	face_down
+	step_end
+
+VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_0:
+	.string "I wanted a fresh start.$"
+
+VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue_Text_1:
+	.string "I'm moving for a new challenge.$"
+
+VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_0:
+	.string "I'll make the most of your advice!$"
+
+VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_1:
+	.string "I need all the help I can get.$"
+
+VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_2:
+	.string "I don't care, I'll handle myself.$"
+
+VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue_Text_3:
+	.string "Sure, like that means anything…$"

@@ -1,0 +1,289 @@
+VyratonIndoors_MayorsOffice_MapScripts::
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, VyratonIndoors_MayorsOffice_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
+	.byte 0
+
+VyratonIndoors_MayorsOffice_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+	map_script_2 VAR_IKIGAI_INTRO_STATE, 3, VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro
+	.2byte 0
+
+
+VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_DontLeave::
+	playerbox VyratonIndoors_MayorsOffice_Text_ShouldReturn, EMOTE_THINK
+	applymoveplayer Common_Movement_WalkUp
+	end
+
+
+VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro::
+	setvar VAR_IKIGAI_INTRO_STATE, 4
+	call VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_EnterOffice
+	return
+
+
+VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_EnterOffice::
+	applymoveplayer VyratonIndoors_MayorsOffice_Movement_Player_Entrance
+	mnmbox VyratonIndoors_MayorsOffice_Text_KickStart, localId = 1
+	end
+
+
+VyratonIndoors_MayorsOffice_EventScript_Samuel::
+	goto_if_set FLAG_SYS_POKEDEX_GET, VyratonIndoors_MayorsOffice_EventScript_Samuel_2
+	call VyratonIndoors_MayorsOffice_EventScript_Samuel_OpenBriefcase
+VyratonIndoors_MayorsOffice_EventScript_Samuel_1:
+	applymove 1, Common_Movement_FaceOriginalDirection
+	end
+
+VyratonIndoors_MayorsOffice_EventScript_Samuel_2:
+	call VyratonIndoors_MayorsOffice_EventScript_Samuel_GoMeetMon
+	goto VyratonIndoors_MayorsOffice_EventScript_Samuel_1
+
+
+VyratonIndoors_MayorsOffice_EventScript_Samuel_OpenBriefcase::
+	mnmbox VyratonIndoors_MayorsOffice_Text_CrackOpen
+	return
+
+
+VyratonIndoors_MayorsOffice_EventScript_Samuel_GoMeetMon::
+	bufferpartymonnick STR_VAR_1, 0
+	mnmbox VyratonIndoors_MayorsOffice_Text_GoMeetMon
+	return
+
+
+VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase::
+	goto_if_set FLAG_SYS_POKEMON_GET, VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_2
+	call VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase
+	call VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex
+VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_1:
+	applymove 1, Common_Movement_FaceOriginalDirection
+	end
+
+VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_2:
+	call VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_MeetPartner
+	goto VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_1
+
+
+VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase::
+	specialvar VAR_RESULT, GetPlayerFacingDirection
+	compare VAR_RESULT, DIR_WEST
+	goto_if_eq VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase_2
+VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase_1:
+	callnative StartNewPokeballCaseUI
+	setflag FLAG_SYS_POKEMON_GET
+	waitstate
+	playmoncry VAR_STARTER_MON, CRY_MODE_NORMAL
+	addobject 2
+	applymoveplayer VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase, FALSE
+	applymove 2, VyratonIndoors_MayorsOffice_Movement_Starter_ReturnFromBriefcase
+	playerface DIR_NORTH
+	return
+
+VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase_2:
+	applymoveplayer VyratonIndoors_MayorsOffice_Movement_Player_GoToBriefcase
+	playerface DIR_NORTH
+	goto VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase_1
+
+
+VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex::
+	setflag FLAG_SYS_POKEDEX_GET
+	setflag FLAG_SYS_NATIONAL_DEX
+	special EnableNationalPokedex
+	bufferpartymonnick STR_VAR_1, 0
+	setvar VAR_0x8000, ITEM_POKEDEX
+	specialvar VAR_RESULT, IsLeadMonNicknamedOrNotEnglish
+	compare VAR_RESULT, TRUE
+	goto_if_eq VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex_2
+	mnmbox VyratonIndoors_MayorsOffice_Text_MeetNonNicknamedMon, localId = 1, lock = FALSE
+VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex_1:
+	call VyratonIndoors_MayorsOffice_EventScript_MeetThomas
+	call VyratonIndoors_MayorsOffice_EventScript_Samuel_ReceivePokdex
+	playerface DIR_EAST
+	return
+
+VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex_2:
+	mnmbox VyratonIndoors_MayorsOffice_Text_MeetNicknamedMon, localId = 1, lock = FALSE
+	goto VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex_1
+
+
+VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_MeetPartner::
+	bufferpartymonnick STR_VAR_1, 0
+	mnmbox VyratonIndoors_MayorsOffice_Text_ExtremelySet, localId = 1
+	return
+
+
+VyratonIndoors_MayorsOffice_EventScript_StarterMon::
+	clearflag FLAG_SUPPRESS_MUGSHOT
+	call VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon
+	setflag FLAG_SUPPRESS_MUGSHOT
+	call VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter
+	call VyratonIndoors_MayorsOffice_EventScript_StarterMon_OtherImportantThings
+	end
+
+
+VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon::
+	bufferpartymonnick STR_VAR_1, 0
+	special GetOverworldMonSpecies
+	callnative ClearPokedexFlags
+	callnative ShowPokedexHeaderMessage
+	playfanfare MUS_HG_RECEIVE_POKEMON
+	faceplayer
+	createfieldmugshot MUGSHOT_PMD, emotion = EMOTE_DETERMINED
+	special GetOverworldMonSpecies
+	call EventScript_DisplayPokedexSpeciesName
+	playmoncry VAR_0x8004, CRY_MODE_NORMAL
+	message VyratonIndoors_MayorsOffice_Text_DeterminedMon
+	callnative SetIkigaiStarterPokedexFlags
+	setcaughtmon VAR_0x8004
+	waitmessage
+	waitbuttonpress
+	waitfanfare
+	closemessage
+	delay 40
+	return
+
+
+VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter::
+	applymove 2, Common_Movement_FaceUp
+	releaseobjects
+	specialvar VAR_RESULT, GetPlayerFacingDirection
+	compare VAR_RESULT, DIR_WEST
+	goto_if_eq VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter_2
+	specialvar VAR_RESULT, GetPlayerFacingDirection
+	compare VAR_RESULT, DIR_SOUTH
+	goto_if_eq VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter_3
+VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter_1:
+	playerface DIR_NORTH
+	return
+
+VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter_2:
+	applymoveplayer VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_One
+	goto VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter_1
+
+VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter_3:
+	applymoveplayer VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_Two
+	goto VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter_1
+
+
+VyratonIndoors_MayorsOffice_EventScript_StarterMon_OtherImportantThings::
+	bufferpartymonnick STR_VAR_1, 0
+	mnmbox VyratonIndoors_MayorsOffice_Text_OtherImportantThings, localId = 1
+	return
+
+
+VyratonIndoors_MayorsOffice_EventScript_MeetThomas::
+	fadenewbgm MUS_HG_POKEWALKER
+	delay 60
+	emote 1, EMOTE_EXCLAM, wait = FALSE
+	playerface DIR_SOUTH
+	addobject 4
+	applymoveplayer VyratonIndoors_MayorsOffice_Movement_Player_WatchThomasEntrance, FALSE
+	applymove 4, VyratonIndoors_MayorsOffice_Movement_Thomas_Entrance
+	turnobject 1, DIR_WEST
+	speakername known = FALSE
+	msgbox VyratonIndoors_MayorsOffice_Text_YouForgotThis, MSGBOX_DEFAULT
+	closemessage
+	turnobject 4, DIR_SOUTH
+	emote 4, EMOTE_QUESTION
+	turnobject 1, DIR_SOUTH
+	speakername known = FALSE
+	msgbox VyratonIndoors_MayorsOffice_Text_IsThisThem, MSGBOX_DEFAULT
+	closemessage
+	applymoveplayer VyratonIndoors_MayorsOffice_Movement_Player_WatchThomasExit, FALSE
+	applymove 4, VyratonIndoors_MayorsOffice_Movement_Thomas_Exit
+	removeobject 4
+	fadedefaultbgm
+	delay 60
+	playerface DIR_NORTH
+	return
+
+
+VyratonIndoors_MayorsOffice_EventScript_Samuel_ReceivePokdex::
+	mnmbox VyratonIndoors_MayorsOffice_Text_GivePokedex, lock = FALSE
+	return
+
+
+VyratonIndoors_MayorsOffice_Movement_Player_Entrance:
+	walk_up
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	face_up
+	step_end
+
+VyratonIndoors_MayorsOffice_Movement_Player_GoToBriefcase:
+	walk_down
+	walk_left
+	step_end
+
+VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase:
+	delay_16
+	walk_down
+	walk_left
+	step_end
+
+VyratonIndoors_MayorsOffice_Movement_Starter_ReturnFromBriefcase:
+	exit_pokeball
+	walk_down
+	walk_left
+	step_end
+
+VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_One:
+	walk_up
+	walk_left
+	walk_left
+	walk_down
+	step_end
+
+VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_Two:
+	walk_left
+	walk_down
+	step_end
+
+VyratonIndoors_MayorsOffice_Movement_Thomas_Entrance:
+	delay_16
+	walk_up
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	face_right
+	step_end
+
+VyratonIndoors_MayorsOffice_Movement_Thomas_Exit:
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_down
+	delay_16
+	set_invisible
+	step_end
+
+VyratonIndoors_MayorsOffice_Movement_Player_WatchThomasEntrance:
+	emote_exclamation_mark
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_8
+	face_left
+	delay_2
+	delay_4
+	delay_8
+	face_up
+	step_end
+
+VyratonIndoors_MayorsOffice_Movement_Player_WatchThomasExit:
+	delay_16
+	delay_8
+	face_left
+	delay_2
+	delay_4
+	delay_8
+	face_down
+	step_end

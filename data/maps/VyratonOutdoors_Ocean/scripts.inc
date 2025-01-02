@@ -1,0 +1,25 @@
+VyratonOutdoors_Ocean_MapScripts::
+	map_script MAP_SCRIPT_ON_RESUME, VyratonOutdoors_Ocean_MapScripts_MAP_SCRIPT_ON_RESUME
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, VyratonOutdoors_Ocean_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
+	.byte 0
+
+VyratonOutdoors_Ocean_MapScripts_MAP_SCRIPT_ON_RESUME:
+	setstepcallback STEP_CB_SS_PATHFINDER
+	return
+
+VyratonOutdoors_Ocean_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+	map_script_2 VAR_IKIGAI_INTRO_STATE, 0, VyratonOutdoors_Ocean_MapScripts_WarpIkigaiIntro
+	.2byte 0
+
+
+VyratonOutdoors_Ocean_MapScripts_WarpIkigaiIntro::
+	setvar VAR_IKIGAI_INTRO_STATE, 1
+	msgbox VyratonOutdoors_Ocean_Text_PleasePrepare, MSGBOX_DEFAULT
+	closemessage
+	playse SE_RG_SS_ANNE_HORN
+	waitse
+	warpsilent MAP_VYRATON_INDOORS_SSPATHFINDER, 4, 5
+	callnative DestroySSPathfinderSmokeTask
+	waitstate
+	return
+

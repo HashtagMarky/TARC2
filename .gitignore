@@ -42,6 +42,3 @@ prefabs.json
 src/data/map_group_count.h
 tools/trainerproc/trainerproc
 tools/poryscript
-*data/scripts/*.inc
-*data/scripts/*/*.inc
-*data/maps/*/*.inc
