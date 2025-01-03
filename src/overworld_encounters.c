@@ -619,7 +619,7 @@ bool8 ScrCmd_SetObjectAsWildEncounter(struct ScriptContext *ctx)
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 encounterType = ScriptReadByte(ctx);
     // u32 encounterRate;
-    u16 headerId = ReturnCurrentMapWildMonHeaderId();
+    u16 headerId = GetCurrentMapWildMonHeaderId();
     u16 graphicsId = GetObjectEventGraphicsIdByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
     u16 variableOffset = (graphicsId >= OBJ_EVENT_GFX_VAR_0) ? graphicsId - OBJ_EVENT_GFX_VAR_0 : 0;
     u16 objectEventVariable = VAR_OBJ_GFX_ID_0 + variableOffset;
