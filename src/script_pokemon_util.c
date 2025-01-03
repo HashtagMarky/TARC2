@@ -690,8 +690,7 @@ u32 SamuelCase_GiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8
     SetMonData(&mon, MON_DATA_ABILITY_NUM, &abilityNum);
 
     // ball
-    if (ball >= POKEBALL_COUNT)
-        ball = ITEM_POKE_BALL;
+    ball = ITEM_POKE_BALL;
     SetMonData(&mon, MON_DATA_POKEBALL, &ball);
 
     // held item

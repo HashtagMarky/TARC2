@@ -1,0 +1,118 @@
+VyratonOutdoors_Harbour_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, VyratonOutdoors_Harbour_MapScripts_MAP_SCRIPT_ON_TRANSITION
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, VyratonOutdoors_Harbour_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
+	.byte 0
+
+VyratonOutdoors_Harbour_MapScripts_MAP_SCRIPT_ON_TRANSITION:
+	compare VAR_IKIGAI_INTRO_STATE, 2
+	goto_if_eq VyratonOutdoors_Harbour_MapScripts_MAP_SCRIPT_ON_TRANSITION_1
+	return
+
+VyratonOutdoors_Harbour_MapScripts_MAP_SCRIPT_ON_TRANSITION_1:
+	setflag FLAG_HIDE_MAP_NAME_POPUP
+	return
+
+VyratonOutdoors_Harbour_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+	map_script_2 VAR_IKIGAI_INTRO_STATE, 2, VyratonOutdoors_Harbour_EventScript_IkigaiIntro
+	.2byte 0
+
+
+VyratonOutdoors_Harbour_EventScript_IkigaiIntro::
+	setvar VAR_IKIGAI_INTRO_STATE, 3
+	call VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Disembarkment
+	call VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet
+	call VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures
+	return
+
+
+VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Disembarkment::
+	call VyratonOutdoors_Harbour_EventScript_SSPathfinder_DisembarkPassengers
+	return
+
+
+VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Meet::
+	speakername known = FALSE
+	msgbox VyratonOutdoors_Harbour_Text_ExcuseMe, MSGBOX_DEFAULT
+	closemessage
+	addobject 9
+	applymovement 9, VyratonOutdoors_Harbour_Movement_Captain_Exit
+	applymoveplayer VyratonOutdoors_Harbour_Movement_Player_MoveOutOfWay, FALSE
+	applymove 2, VyratonOutdoors_Harbour_Movement_Samuel_BeginEntrance
+	turnobject 2, DIR_NORTH
+	emote 2, EMOTE_QUESTION
+	applymoveplayer VyratonOutdoors_Harbour_Movement_Player_MeetSamuel, FALSE
+	applymove 2, VyratonOutdoors_Harbour_Movement_Samuel_ContinueEntrance
+	mnmbox VyratonOutdoors_Harbour_Text_WelcomeToVyraton, nameKnown = FALSE, localId = 2
+	playerface DIR_SOUTH
+	turnobject 2, DIR_SOUTH
+	removeobject 9
+	return
+
+
+VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures::
+	call VyratonOutdoors_Harbour_EventScript_SSPathfinder_Departure
+	playerface DIR_WEST
+	mnmbox VyratonOutdoors_Harbour_Text_HeadToOffice
+	applymoveplayer VyratonOutdoors_Harbour_Movement_Player_Exit, FALSE
+	applymove 2, VyratonOutdoors_Harbour_Movement_Samuel_Exit
+	warp MAP_VYRATON_INDOORS_MAYORS_OFFICE, 4, 9
+	setflag FLAG_HIDE_VYRATON_HARBOR_SAMUEL
+	setflag FLAG_HIDE_VYRATON_HARBOR_CAPTAIN
+	waitstate
+	end
+
+
+VyratonOutdoors_Harbour_Movement_Captain_Exit:
+	delay_2
+	delay_16
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
+VyratonOutdoors_Harbour_Movement_Player_MoveOutOfWay:
+	face_left
+	lock_facing_direction
+	walk_right
+	unlock_facing_direction
+	delay_16
+	delay_16
+	walk_left
+	face_up
+	step_end
+
+VyratonOutdoors_Harbour_Movement_Samuel_BeginEntrance:
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	delay_8
+	step_end
+
+VyratonOutdoors_Harbour_Movement_Player_MeetSamuel:
+	delay_16
+	delay_16
+	face_left
+	step_end
+
+VyratonOutdoors_Harbour_Movement_Samuel_ContinueEntrance:
+	walk_down
+	walk_down
+	face_right
+	step_end
+
+VyratonOutdoors_Harbour_Movement_Samuel_Exit:
+	walk_up
+	walk_right
+	walk_up
+	step_end
+
+VyratonOutdoors_Harbour_Movement_Player_Exit:
+	delay_16
+	delay_16
+	walk_up
+	step_end

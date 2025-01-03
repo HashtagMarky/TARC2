@@ -1,0 +1,30 @@
+VyratonOutdoors_Harbour_Text_ExcuseMe::
+	.string "If ye'll please excuse an old heart…\n"
+	.string "{PAUSE 60}And mae we both have a good evening…$"
+
+VyratonOutdoors_Harbour_Text_WelcomeToVyraton::
+	.string "Hello there, you must be {PLAYER}!\n"
+	.string "Welcome to our humble town, Vyraton!\l"
+	.string "I'm so very glad you're here.\p"
+	.string "It's me, Samuel, we spoke earlier on.\n"
+	.string "I'm the mayor around here.\p"
+	.string "{SPEAKER_NAME NAME_AUTO}I can't tell you how much this town\n"
+	.string "has been anticipating your arrival.\l"
+	.string "Around here, things have been…\p"
+	.string "Well, let's just say that we could most\n"
+	.string "certainly use someone like you!\l"
+	.string "Ah, but where are my manners?\p"
+	.string "You've only just arrived and I'm\n"
+	.string "already rambling, you must be tired.\l"
+	.string "And we already have a lot to discuss…\p"
+	.string "But before we make our way to my\n"
+	.string "office, let's stay for the departure.\p"
+	.string "The S.S. Pathfinder is meant to bring\n"
+	.string "good luck to all who journey on it.\l"
+	.string "And as always, it's truly majestic…$"
+
+VyratonOutdoors_Harbour_Text_HeadToOffice::
+	.string "I will never get bored of that view…\n"
+	.string "{PAUSE 40}Come on, {PLAYER}. Let's head off.\p"
+	.string "It's just a short walk, but we should\n"
+	.string "make a move before it gets dark.$"
