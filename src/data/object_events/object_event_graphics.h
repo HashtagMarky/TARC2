@@ -619,5 +619,8 @@ const u32 gObjectEventPic_N[] = INCBIN_U32("graphics/object_events/pics/people/n
 const u32 gObjectEventPic_N_Animation[] = INCBIN_U32("graphics/object_events/pics/people/n_animation.4bpp");
 const u16 gObjectEventPalette_N[] = INCBIN_U16("graphics/object_events/pics/people/n.gbapal");
 
+const u32 gObjectEventPic_Accordionist[] = INCBIN_U32("graphics/object_events/pics/people/accordionist.4bpp");
+const u16 gObjectEventPalette_Accordionist[] = INCBIN_U16("graphics/object_events/pics/people/accordionist.gbapal");
+
 const u32 gObjectEventPic_SamuelBriefcase[] = INCBIN_U32("graphics/object_events/pics/misc/samuel_briefcase.4bpp");
 const u16 gObjectEventPalette_SamuelBriefcase[] = INCBIN_U16("graphics/object_events/pics/misc/samuel_briefcase.gbapal");

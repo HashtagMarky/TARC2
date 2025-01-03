@@ -1400,3 +1400,7 @@ static const struct SpriteFrameImage sPicTable_N[] = {
     overworld_ascending_frames(gObjectEventPic_N, 2, 4),
     overworld_ascending_frames(gObjectEventPic_N_Animation, 2, 4),
 };
+
+static const struct SpriteFrameImage sPicTable_Accordionist[] = {
+    overworld_ascending_frames(gObjectEventPic_Accordionist, 4, 4),
+};

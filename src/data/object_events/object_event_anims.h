@@ -1187,6 +1187,17 @@ static const union AnimCmd sAnim_N_Pose[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnim_Accordionist[] =
+{
+    ANIMCMD_FRAME(1, 12),
+    ANIMCMD_FRAME(2, 12),
+    ANIMCMD_FRAME(3, 12),
+    ANIMCMD_FRAME(2, 12),
+    ANIMCMD_FRAME(1, 12),
+    ANIMCMD_FRAME(0, 12),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd *const sAnimTable_Inanimate[] = {
     [ANIM_STAY_STILL] = sAnim_StayStill,
 };
@@ -1388,6 +1399,29 @@ static const union AnimCmd *const sAnimTable_N[] = {
     [ANIM_N_SHRUG] = sAnim_N_Shrug,
     [ANIM_N_HEADSHAKE] = sAnim_N_Headshake,
     [ANIM_N_POSE] = sAnim_N_Pose,
+};
+
+static const union AnimCmd *const sAnimTable_Accordionist[] = {
+    [ANIM_STD_FACE_SOUTH] = sAnim_FaceNorth,
+    [ANIM_STD_FACE_NORTH] = sAnim_FaceNorth,
+    [ANIM_STD_FACE_WEST] = sAnim_FaceNorth,
+    [ANIM_STD_FACE_EAST] = sAnim_FaceNorth,
+    [ANIM_STD_GO_SOUTH] = sAnim_Accordionist,
+    [ANIM_STD_GO_NORTH] = sAnim_Accordionist,
+    [ANIM_STD_GO_WEST] = sAnim_Accordionist,
+    [ANIM_STD_GO_EAST] = sAnim_Accordionist,
+    [ANIM_STD_GO_FAST_SOUTH] = sAnim_Accordionist,
+    [ANIM_STD_GO_FAST_NORTH] = sAnim_Accordionist,
+    [ANIM_STD_GO_FAST_WEST] = sAnim_Accordionist,
+    [ANIM_STD_GO_FAST_EAST] = sAnim_Accordionist,
+    [ANIM_STD_GO_FASTER_SOUTH] = sAnim_Accordionist,
+    [ANIM_STD_GO_FASTER_NORTH] = sAnim_Accordionist,
+    [ANIM_STD_GO_FASTER_WEST] = sAnim_Accordionist,
+    [ANIM_STD_GO_FASTER_EAST] = sAnim_Accordionist,
+    [ANIM_STD_GO_FASTEST_SOUTH] = sAnim_Accordionist,
+    [ANIM_STD_GO_FASTEST_NORTH] = sAnim_Accordionist,
+    [ANIM_STD_GO_FASTEST_WEST] = sAnim_Accordionist,
+    [ANIM_STD_GO_FASTEST_EAST] = sAnim_Accordionist,
 };
 
 static const union AnimCmd sAnim_RayquazaCoiledAwake[] =
@@ -1684,6 +1718,10 @@ static const struct StepAnimTable sStepAnimTables[] = {
     },
     {
         .anims = sAnimTable_N,
+        .animPos = {1, 3, 0, 2},
+    },
+    {
+        .anims = sAnimTable_Accordionist,
         .animPos = {1, 3, 0, 2},
     },
     {},
