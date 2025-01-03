@@ -1213,8 +1213,18 @@ bool8 ScrCmd_setobjectmovementtype(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 movementType = ScriptReadByte(ctx);
+    bool8 transition = ScriptReadByte(ctx);
 
-    SetObjEventTemplateMovementType(localId, movementType);
+    if (transition)
+    {
+        SetObjEventTemplateMovementType(localId, movementType);
+    }
+    else
+    {
+        struct ObjectEvent *objEvent = &gObjectEvents[GetObjectEventIdByLocalId(localId)];
+        SetTrainerMovementType(objEvent, movementType);
+    }
+
     return FALSE;
 }
 

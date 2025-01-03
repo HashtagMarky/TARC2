@@ -838,10 +838,11 @@
 	.endm
 
 	@ Sets the movement type (MOVEMENT_TYPE_*) for an object's template.
-	.macro setobjectmovementtype localId:req, movementType:req
+	.macro setobjectmovementtype localId:req, movementType:req, transition=TRUE
 	.byte 0x65
 	.2byte \localId
 	.byte \movementType
+	.byte \transition
 	.endm
 
 	@ If a standard message box (or its text) is being drawn on-screen, this command blocks script execution until the
