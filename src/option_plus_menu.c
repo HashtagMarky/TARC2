@@ -20,6 +20,7 @@
 #include "decompress.h"
 #include "ikigai_scrolling_background.h"
 #include "constants/battle.h"
+#include "event_data.h"
 
 enum
 {
@@ -46,11 +47,15 @@ enum
 
 enum
 {
-    MENUITEM_OVERWORLD_BIKE_CAMERA,
-    MENUITEM_OVERWORLD_BIKE_MUSIC,
-    MENUITEM_OVERWORLD_SURF_MUSIC,
     MENUITEM_OVERWORLD_NPC_MUG,
     MENUITEM_OVERWORLD_FOLLOWER_MUG,
+    MENUITEM_OVERWORLD_AUTO_RUN,
+    MENUITEM_OVERWORLD_FAST_SURF,
+    MENUITEM_OVERWORLD_SURF_MUSIC,
+    MENUITEM_OVERWORLD_AUTO_BIKE,
+    MENUITEM_OVERWORLD_FAST_BIKE,
+    MENUITEM_OVERWORLD_BIKE_CAMERA,
+    MENUITEM_OVERWORLD_BIKE_MUSIC,
     MENUITEM_OVERWORLD_MATCHCALL,
     MENUITEM_OVERWORLD_CANCEL,
     MENUITEM_OVERWORLD_COUNT,
@@ -205,6 +210,10 @@ static void DrawChoices_Font(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_Interface(int selection, int y);
 static void DrawChoices_MatchCall(int selection, int y);
+static void DrawChoices_AutoRun(int selection, int y);
+static void DrawChoices_FastSurf(int selection, int y);
+static void DrawChoices_AutoBike(int selection, int y);
+static void DrawChoices_FastBike(int selection, int y);
 static void DrawChoices_BikeCamera(int selection, int y);
 static void DrawChoices_BikeMusic(int selection, int y);
 static void DrawChoices_SurfMusic(int selection, int y);
@@ -212,6 +221,9 @@ static void DrawChoices_MugshotsNPC(int selection, int y);
 static void DrawChoices_MugshotsFollower(int selection, int y);
 static void DrawChoices_TitleScreen(int selection, int y);
 static void DrawChoices_DamageNumbers(int selection, int y);
+static bool8 IsRunningUnlocked(void);
+static bool8 IsSurfingUnlocked(void);
+static bool8 IsBikingUnlocked(void);
 static void DrawBgWindowFrames(void);
 
 // EWRAM vars
@@ -267,6 +279,10 @@ struct // MENU_OVERWORLD
     int (*processInput)(int selection);
 } static const sItemFunctionsOverworld[MENUITEM_OVERWORLD_COUNT] =
 {
+    [MENUITEM_OVERWORLD_AUTO_RUN]       = {DrawChoices_AutoRun,             ProcessInput_Options_Two},
+    [MENUITEM_OVERWORLD_FAST_SURF]      = {DrawChoices_FastSurf,            ProcessInput_Options_Two},
+    [MENUITEM_OVERWORLD_AUTO_BIKE]      = {DrawChoices_AutoBike,            ProcessInput_Options_Two},
+    [MENUITEM_OVERWORLD_FAST_BIKE]      = {DrawChoices_FastBike,            ProcessInput_Options_Two},
     [MENUITEM_OVERWORLD_BIKE_CAMERA]    = {DrawChoices_BikeCamera,          ProcessInput_Options_Two},
     [MENUITEM_OVERWORLD_BIKE_MUSIC]     = {DrawChoices_BikeMusic,           ProcessInput_Options_Two},
     [MENUITEM_OVERWORLD_SURF_MUSIC]     = {DrawChoices_SurfMusic,           ProcessInput_Options_Two},
@@ -314,6 +330,10 @@ static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 
 static const u8 *const sOptionMenuItemsNamesOverworld[MENUITEM_OVERWORLD_COUNT] =
 {
+    [MENUITEM_OVERWORLD_AUTO_RUN]       = COMPOUND_STRING("AUTO RUN"),
+    [MENUITEM_OVERWORLD_FAST_SURF]      = COMPOUND_STRING("FAST SURF"),
+    [MENUITEM_OVERWORLD_AUTO_BIKE]      = COMPOUND_STRING("AUTO BIKE"),
+    [MENUITEM_OVERWORLD_FAST_BIKE]      = COMPOUND_STRING("FAST BIKE"),
     [MENUITEM_OVERWORLD_BIKE_CAMERA]    = COMPOUND_STRING("BIKE CAMERA"),
     [MENUITEM_OVERWORLD_BIKE_MUSIC]     = sText_BikeMusic,
     [MENUITEM_OVERWORLD_SURF_MUSIC]     = sText_SurfMusic,
@@ -366,9 +386,13 @@ static bool8 CheckConditions(int selection)
     case MENU_OVERWORLD:
         switch (selection)
         {
-        case MENUITEM_OVERWORLD_BIKE_CAMERA:    return TRUE;
-        case MENUITEM_OVERWORLD_BIKE_MUSIC:     return TRUE;
-        case MENUITEM_OVERWORLD_SURF_MUSIC:     return TRUE;
+        case MENUITEM_OVERWORLD_AUTO_RUN:       return IsRunningUnlocked();
+        case MENUITEM_OVERWORLD_FAST_SURF:      return IsSurfingUnlocked();
+        case MENUITEM_OVERWORLD_AUTO_BIKE:      return IsBikingUnlocked();
+        case MENUITEM_OVERWORLD_FAST_BIKE:      return IsBikingUnlocked();
+        case MENUITEM_OVERWORLD_BIKE_CAMERA:    return IsBikingUnlocked();
+        case MENUITEM_OVERWORLD_BIKE_MUSIC:     return IsBikingUnlocked();
+        case MENUITEM_OVERWORLD_SURF_MUSIC:     return IsSurfingUnlocked();
         case MENUITEM_OVERWORLD_NPC_MUG:        return TRUE;
         case MENUITEM_OVERWORLD_FOLLOWER_MUG:   return TRUE;
         case MENUITEM_OVERWORLD_MATCHCALL:      return TRUE;
@@ -413,8 +437,8 @@ static const u8 sText_Desc_WildSpeed[]                  = _("Choose the speed of
 static const u8 sText_Desc_TrainerSpeed[]               = _("Choose the speed of trainer battles.\nImportant battles are not included.");
 static const u8 sText_Desc_SurfOff[]                    = _("Disables the SURF theme\nwhen using SURF.");
 static const u8 sText_Desc_SurfOn[]                     = _("Enables the SURF theme\nwhen using SURF.");
-static const u8 sText_Desc_BikeCameraOff[]              = _("Enables dynamic camera panning\nwhen next using the BIKE.");
-static const u8 sText_Desc_BikeCameraOn[]               = _("Disables dynamic camera panning\nwhen next using the BIKE.");
+static const u8 sText_Desc_BikeCameraOn[]               = _("Enables dynamic camera panning\nwhen next using the BIKE.");
+static const u8 sText_Desc_BikeCameraOff[]              = _("Disables dynamic camera panning\nwhen next using the BIKE.");
 static const u8 sText_Desc_BikeOff[]                    = _("Disables the BIKE theme when\nusing the BIKE.");
 static const u8 sText_Desc_BikeOn[]                     = _("Enables the BIKE theme when\nusing the BIKE.");
 static const u8 sText_Desc_FontTypeCompact[]            = _("Printed text uses a font\nwhich is more compact.");
@@ -430,6 +454,11 @@ static const u8 sText_Desc_TitleScreenMatch[]           = _("Title screen legend
 static const u8 sText_Desc_TitleScreenRandom[]          = _("Title screen legendary is randomised.");
 static const u8 sText_Desc_DamageNumbers[]              = _("Whether damage numbers are shown in\nbattle and when they appear.");
 static const u8 sText_Desc_ClockMode[]                  = _("Choose which mode of clock is used.");
+static const u8 sText_Desc_AutoRun[]                    = _("Whether or not to run when in\nthe overworld.");
+static const u8 sText_Desc_FastSurf[]                   = _("Whether or not to surf at increased\nspeed in the overworld.");
+static const u8 sText_Desc_AutoBike[]                   = _("Whether or not to automatically\nmount a bike in the overworld.");
+static const u8 sText_Desc_FastBikeOn[]                 = _("When riding the bike, speed will\nbe prioritised.");
+static const u8 sText_Desc_FastBikeOff[]                = _("When riding the bike, technique will\nbe priritised.");
 
 // Disabled Descriptions
 static const u8 sText_Desc_Disabled_Textspeed[]     = _("Only active if xyz.");
@@ -452,7 +481,11 @@ static const u8 *const sOptionMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
 
 static const u8 *const sOptionMenuItemDescriptionsOverworld[MENUITEM_OVERWORLD_COUNT][3] =
 {
-    [MENUITEM_OVERWORLD_BIKE_CAMERA]    = {sText_Desc_BikeCameraOff,                sText_Desc_BikeCameraOff,       sText_Empty},
+    [MENUITEM_OVERWORLD_AUTO_RUN]       = {sText_Desc_AutoRun,                      sText_Empty,                    sText_Empty},
+    [MENUITEM_OVERWORLD_FAST_SURF]      = {sText_Desc_FastSurf,                     sText_Empty,                    sText_Empty},
+    [MENUITEM_OVERWORLD_AUTO_BIKE]      = {sText_Desc_AutoBike,                     sText_Empty,                    sText_Empty},
+    [MENUITEM_OVERWORLD_FAST_BIKE]      = {sText_Desc_FastBikeOn,                   sText_Desc_FastBikeOff,         sText_Empty},
+    [MENUITEM_OVERWORLD_BIKE_CAMERA]    = {sText_Desc_BikeCameraOn,                 sText_Desc_BikeCameraOff,       sText_Empty},
     [MENUITEM_OVERWORLD_BIKE_MUSIC]     = {sText_Desc_BikeOn,                       sText_Desc_BikeOff,             sText_Empty},
     [MENUITEM_OVERWORLD_SURF_MUSIC]     = {sText_Desc_SurfOn,                       sText_Desc_SurfOff,             sText_Empty},
     [MENUITEM_OVERWORLD_NPC_MUG]        = {sText_Desc_MugshotNPCOn,                 sText_Desc_MugshotNPCOff,       sText_Empty},
@@ -485,11 +518,18 @@ static const u8 *const sOptionMenuItemDescriptionsDisabledMain[MENUITEM_MAIN_COU
 };
 
 // Disabled Overworld
+static const u8 sText_RunningDisabled[] = _("Obtain the Running Shoes to\nuse this option.");
+static const u8 sText_SurfingDisabled[] = _("Obtain HM Surf to use this option.");
+static const u8 sText_BikingDisabled[] = _("Obtain the Bicycle to use this option.");
 static const u8 *const sOptionMenuItemDescriptionsDisabledOverworld[MENUITEM_OVERWORLD_COUNT] =
 {
-    [MENUITEM_OVERWORLD_BIKE_CAMERA]    = sText_Empty,
-    [MENUITEM_OVERWORLD_BIKE_MUSIC]     = sText_Empty,
-    [MENUITEM_OVERWORLD_SURF_MUSIC]     = sText_Empty,
+    [MENUITEM_OVERWORLD_AUTO_RUN]       = sText_RunningDisabled,
+    [MENUITEM_OVERWORLD_FAST_SURF]      = sText_SurfingDisabled,
+    [MENUITEM_OVERWORLD_AUTO_BIKE]      = sText_BikingDisabled,
+    [MENUITEM_OVERWORLD_FAST_BIKE]      = sText_BikingDisabled,
+    [MENUITEM_OVERWORLD_BIKE_CAMERA]    = sText_BikingDisabled,
+    [MENUITEM_OVERWORLD_BIKE_MUSIC]     = sText_BikingDisabled,
+    [MENUITEM_OVERWORLD_SURF_MUSIC]     = sText_SurfingDisabled,
     [MENUITEM_OVERWORLD_NPC_MUG]        = sText_Empty,
     [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = sText_Empty,
     [MENUITEM_OVERWORLD_MATCHCALL]      = sText_Empty,
@@ -538,6 +578,8 @@ static const u8 *const OptionTextDescription(void)
         if (!CheckConditions(menuItem))
             return sOptionMenuItemDescriptionsDisabledOverworld[menuItem];
         selection = sOptions->sel_overworld[menuItem];
+        if (menuItem == MENUITEM_OVERWORLD_AUTO_RUN || menuItem == MENUITEM_OVERWORLD_FAST_SURF || menuItem == MENUITEM_OVERWORLD_AUTO_BIKE)
+            selection = 0;
         return sOptionMenuItemDescriptionsOverworld[menuItem][selection];
     case MENU_BATTLE:
         if (!CheckConditions(menuItem))
@@ -860,6 +902,10 @@ void CB2_InitOptionPlusMenu(void)
         sOptions->sel[MENUITEM_MAIN_FRAMETYPE]                  = gSaveBlock2Ptr->optionsInterfaceColor;
         sOptions->sel[MENUITEM_MAIN_TITLE_SCREEN]               = gSaveBlock2Ptr->optionsTitleScreenRandomise;
         
+        sOptions->sel_overworld[MENUITEM_OVERWORLD_AUTO_RUN]        = gSaveBlock3Ptr->autoRun;
+        sOptions->sel_overworld[MENUITEM_OVERWORLD_FAST_SURF]       = gSaveBlock3Ptr->fastSurf;
+        sOptions->sel_overworld[MENUITEM_OVERWORLD_AUTO_BIKE]       = gSaveBlock3Ptr->autoBike;
+        sOptions->sel_overworld[MENUITEM_OVERWORLD_FAST_BIKE]       = gSaveBlock3Ptr->fastBike;
         sOptions->sel_overworld[MENUITEM_OVERWORLD_BIKE_CAMERA]     = gSaveBlock2Ptr->optionsBikeCamera;
         sOptions->sel_overworld[MENUITEM_OVERWORLD_BIKE_MUSIC]      = gSaveBlock2Ptr->optionsBikeMusic;
         sOptions->sel_overworld[MENUITEM_OVERWORLD_SURF_MUSIC]      = gSaveBlock2Ptr->optionsSurfMusic;
@@ -1095,6 +1141,10 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsInterfaceColor           = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
     gSaveBlock2Ptr->optionsTitleScreenRandomise     = sOptions->sel[MENUITEM_MAIN_TITLE_SCREEN];
 
+    gSaveBlock3Ptr->autoRun                     = sOptions->sel_overworld[MENUITEM_OVERWORLD_AUTO_RUN];
+    gSaveBlock3Ptr->fastSurf                    = sOptions->sel_overworld[MENUITEM_OVERWORLD_FAST_SURF];
+    gSaveBlock3Ptr->autoBike                    = sOptions->sel_overworld[MENUITEM_OVERWORLD_AUTO_BIKE];
+    gSaveBlock3Ptr->fastBike                    = sOptions->sel_overworld[MENUITEM_OVERWORLD_FAST_BIKE];
     gSaveBlock2Ptr->optionsBikeCamera           = sOptions->sel_overworld[MENUITEM_OVERWORLD_BIKE_CAMERA];
     gSaveBlock2Ptr->optionsBikeMusic            = sOptions->sel_overworld[MENUITEM_OVERWORLD_BIKE_MUSIC];
     gSaveBlock2Ptr->optionsSurfMusic            = sOptions->sel_overworld[MENUITEM_OVERWORLD_SURF_MUSIC];
@@ -1578,6 +1628,46 @@ static void DrawChoices_MatchCall(int selection, int y)
     DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(1, gText_BattleSceneOff, 198), y, styles[1], active);
 }
 
+static void DrawChoices_AutoRun(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_OVERWORLD_AUTO_RUN);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_BattleSceneOn, 104, y, styles[0], active);
+    DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(1, gText_BattleSceneOff, 198), y, styles[1], active);
+}
+
+static void DrawChoices_FastSurf(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_OVERWORLD_FAST_SURF);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_BattleSceneOn, 104, y, styles[0], active);
+    DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(1, gText_BattleSceneOff, 198), y, styles[1], active);
+}
+
+static void DrawChoices_AutoBike(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_OVERWORLD_AUTO_BIKE);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_BattleSceneOn, 104, y, styles[0], active);
+    DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(1, gText_BattleSceneOff, 198), y, styles[1], active);
+}
+
+static void DrawChoices_FastBike(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_OVERWORLD_FAST_BIKE);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_BattleSceneOn, 104, y, styles[0], active);
+    DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(1, gText_BattleSceneOff, 198), y, styles[1], active);
+}
+
 static void DrawChoices_BikeCamera(int selection, int y)
 {
     bool8 active = CheckConditions(MENUITEM_OVERWORLD_BIKE_CAMERA);
@@ -1666,6 +1756,19 @@ static void DrawChoices_DamageNumbers(int selection, int y)
     }
 }
 
+// Option Enabled Functions ****SPECIFIC****
+static bool8 IsRunningUnlocked(void)
+{
+    return FlagGet(FLAG_SYS_B_DASH);
+}
+static bool8 IsSurfingUnlocked(void)
+{
+    return FlagGet(FLAG_RECEIVED_HM_SURF);
+}
+static bool8 IsBikingUnlocked(void)
+{
+    return FlagGet(FLAG_RECEIVED_BIKE);
+}
 
 // Background tilemap
 #define TILE_TOP_CORNER_L 0x1A2 // 418

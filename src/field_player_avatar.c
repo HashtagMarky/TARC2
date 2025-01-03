@@ -690,7 +690,7 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
         return;
     }
 
-    if ((/*heldKeys & B_BUTTON ||*/ gSaveBlock3Ptr->autoRun) && FlagGet(FLAG_SYS_B_DASH)
+    if ((/*heldKeys & B_BUTTON ||*/ gSaveBlock3Ptr->autoRun) && FlagGet(FLAG_SYS_B_DASH) && !FlagGet(FLAG_SYS_DEXNAV_SEARCH)
      && IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) == 0)
     {
         HandleRunning(direction);
