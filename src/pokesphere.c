@@ -157,14 +157,16 @@ enum FontColor
     FONT_RED,
     FONT_GREEN,
     FONT_BLUE,
+    FONT_LIGHT_BLUE,
 };
 static const u8 sPokeSphereWindowFontColors[][3] =
 {
-    [FONT_WHITE]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY},
-    [FONT_GRAY]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY},
-    [FONT_RED]    = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED,        TEXT_COLOR_LIGHT_GRAY},
-    [FONT_GREEN]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_GREEN,      TEXT_COLOR_LIGHT_GRAY},
-    [FONT_BLUE]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_BLUE,       TEXT_COLOR_LIGHT_GRAY},
+    [FONT_WHITE]        = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY},
+    [FONT_GRAY]         = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY},
+    [FONT_RED]          = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED,        TEXT_COLOR_LIGHT_GRAY},
+    [FONT_GREEN]        = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_GREEN,      TEXT_COLOR_LIGHT_GRAY},
+    [FONT_BLUE]         = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_BLUE,       TEXT_COLOR_LIGHT_GRAY},
+    [FONT_LIGHT_BLUE]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_BLUE, TEXT_COLOR_LIGHT_GRAY},
 };
 
 // Callbacks for the sample UI
@@ -545,24 +547,45 @@ static void PokeSphere_ReloadText(void)
 static void PokeSphere_PrintNames(void)
 {   
     u8 x;
+    u32 character = sPokeSphereState->characterId;
+    u32 textColour = FONT_GRAY;
+
+    switch (gIkigaiCharactersInfo[character].personality)
+    {
+    case ATTITUDE_CYNICAL:
+        textColour = FONT_LIGHT_BLUE;
+        break;
+        
+    case ATTITUDE_DOMINANT:
+        textColour = FONT_RED;
+        break;
+        
+    case ATTITUDE_HUMBLE:
+        textColour = FONT_GREEN;
+        break;
+        
+    case ATTITUDE_INSPIRED:
+        textColour = FONT_BLUE;
+        break;
+    }
 
     FillWindowPixelBuffer(WIN_CHARACTER_NAME, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     x = GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
-        gIkigaiCharactersInfo[sPokeSphereState->characterId].name,
+        gIkigaiCharactersInfo[character].name,
         48
     );
     AddTextPrinterParameterized4(WIN_CHARACTER_NAME, FONT_SMALL_NARROWER, x, 0, 0, 0,
-        sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
-        gIkigaiCharactersInfo[sPokeSphereState->characterId].name
+        sPokeSphereWindowFontColors[textColour], TEXT_SKIP_DRAW,
+        gIkigaiCharactersInfo[character].name
     );
     x = GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
-        gSpeciesInfo[gIkigaiCharactersInfo[sPokeSphereState->characterId].partnerPokemon].speciesName,
+        gSpeciesInfo[gIkigaiCharactersInfo[character].partnerPokemon].speciesName,
         48
     );
     AddTextPrinterParameterized4(WIN_CHARACTER_NAME, FONT_SMALL_NARROWER, x, 9, 0, 0,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
-        gSpeciesInfo[gIkigaiCharactersInfo[sPokeSphereState->characterId].partnerPokemon].speciesName
+        gSpeciesInfo[gIkigaiCharactersInfo[character].partnerPokemon].speciesName
     );
 
     CopyWindowToVram(WIN_CHARACTER_NAME, COPYWIN_GFX);
@@ -803,27 +826,8 @@ static void PokeSphere_DrawCharacterMusghot(void)
     u32 character = sPokeSphereState->characterId;
     u32 mughsotId = gIkigaiCharactersInfo[character].mugshotId;
     u32 mugshotEmotion = gIkigaiCharactersInfo[character].defaultEmotion;
-    u32 windowColour = TEXT_COLOR_TRANSPARENT;
-
-    switch (gIkigaiCharactersInfo[character].personality)
-    {
-    case ATTITUDE_CYNICAL:
-        windowColour = TEXT_COLOR_LIGHT_BLUE;
-        break;
-        
-    case ATTITUDE_DOMINANT:
-        windowColour = TEXT_COLOR_RED;
-        break;
-        
-    case ATTITUDE_HUMBLE:
-        windowColour = TEXT_COLOR_GREEN;
-        break;
-        
-    case ATTITUDE_INSPIRED:
-        windowColour = TEXT_COLOR_BLUE;
-        break;
-    }
-    FillWindowPixelBuffer(WIN_CHARACTER_MUGSHOT, PIXEL_FILL(windowColour));
+    
+    FillWindowPixelBuffer(WIN_CHARACTER_MUGSHOT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     sPokeSphereState->characterMugshotSpriteId = CreateFieldMugshotSprite(mughsotId, mugshotEmotion, FALSE, 1);
     gSprites[sPokeSphereState->characterMugshotSpriteId].oam.priority = 0;
