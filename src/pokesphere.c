@@ -41,7 +41,7 @@ struct PokeSphereState
     u8 mode;
     u8 characterId;
     u8 characterMugshotSpriteId;
-    u8 partnerIconSpriteId;
+    u8 partnerMugshotSpriteId;
 };
 
 enum WindowIds
@@ -62,8 +62,8 @@ enum Modes
 
 #define CHARACTER_MUGSHOT_X     19
 #define CHARACTER_MUGSHOT_Y     19
-#define CHARACTER_PARTNER_X     80
-#define CHARACTER_PARTNER_Y     50
+#define CHARACTER_PARTNER_X     116
+#define CHARACTER_PARTNER_Y     60
 
 static EWRAM_DATA struct PokeSphereState *sPokeSphereState = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
@@ -186,9 +186,10 @@ static void PokeSphere_FadeAndBail(void);
 static bool8 PokeSphere_LoadGraphics(void);
 static void PokeSphere_InitWindows(void);
 static void PokeSphere_DrawCharacterMusghot(void);
-static void PokeSphere_DrawPartnerMonIcon(void);
+static void PokeSphere_DrawPartnerMugshot(void);
 static void PokeSphere_PrintUIControls(void);
 static void PokeSphere_ReloadText(void);
+static void PokeSphere_ReloadProfile(void);
 static void PokeSphere_PrintNames(void);
 static void PokeSphere_PrintRelationships(void);
 static void PokeSphere_PrintPosts(void);
@@ -225,8 +226,7 @@ static void PokeSphere_Init(MainCallback callback)
 // Credit: Jaizu, pret
 static void PokeSphere_ResetGpuRegsAndBgs(void)
 {
-    SetGpuReg(REG_OFFSET_DISPCNT, 0);
-    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     SetGpuReg(REG_OFFSET_BG3CNT, 0);
     SetGpuReg(REG_OFFSET_BG2CNT, 0);
     SetGpuReg(REG_OFFSET_BG1CNT, 0);
@@ -294,10 +294,8 @@ static void PokeSphere_SetupCB(void)
         break;
     case 5:
         sPokeSphereState->characterId = MAIN_CHARACTER_SAMUEL;
-        // FreeMonIconPalettes();
-        // LoadMonIconPalettes();
-        // PokeSphere_DrawPartnerMonIcon();
-        // PokeSphere_DrawCharacterMusghot(void);
+        // PokeSphere_DrawCharacterMusghot();
+        PokeSphere_DrawPartnerMugshot();
         PokeSphere_PrintUIControls();
         PokeSphere_PrintNames();
         PokeSphere_PrintRelationships();
@@ -358,7 +356,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
         {
             sPokeSphereState->characterId++;
         }
-        PokeSphere_PrintNames();
+        PokeSphere_ReloadProfile();
         PokeSphere_ReloadText();
     }
     if (JOY_REPEAT(DPAD_LEFT))
@@ -377,7 +375,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
         {
             sPokeSphereState->characterId--;
         }
-        PokeSphere_PrintNames();
+        PokeSphere_ReloadProfile();
         PokeSphere_ReloadText();
     }
     if (JOY_NEW(B_BUTTON))
@@ -516,6 +514,15 @@ static void PokeSphere_PrintUIControls(void)
         COMPOUND_STRING("{B_BUTTON} Exit"));
 
     CopyWindowToVram(WIN_UI_CONTROLS, COPYWIN_GFX);
+}
+
+static void PokeSphere_ReloadProfile(void)
+{
+    DestroySprite(&gSprites[sPokeSphereState->characterMugshotSpriteId]);
+    // PokeSphere_DrawCharacterMusghot();
+    DestroySprite(&gSprites[sPokeSphereState->partnerMugshotSpriteId]);
+    PokeSphere_DrawPartnerMugshot();
+    PokeSphere_PrintNames();
 }
 
 static void PokeSphere_ReloadText(void)
@@ -824,13 +831,16 @@ static void PokeSphere_DrawCharacterMusghot(void)
     gSprites[sPokeSphereState->characterMugshotSpriteId].y = CHARACTER_MUGSHOT_Y;
 }
 
-static void PokeSphere_DrawPartnerMonIcon(void)
+static void PokeSphere_DrawPartnerMugshot(void)
 {
     u32 character = sPokeSphereState->characterId;
-    u16 speciesId = gIkigaiCharactersInfo[character].partnerPokemon;
-
-    sPokeSphereState->partnerIconSpriteId = CreateMonIcon(speciesId, SpriteCB_MonIcon, CHARACTER_PARTNER_X, CHARACTER_PARTNER_Y, 4, 0);
-    gSprites[sPokeSphereState->partnerIconSpriteId].oam.priority = 0;
+    u32 speciesId = gIkigaiCharactersInfo[character].partnerPokemon;
+    u32 mugshotEmotion = gIkigaiCharactersInfo[character].defaultEmotion;
+    
+    sPokeSphereState->partnerMugshotSpriteId = CreateFieldMugshotSprite(speciesId, mugshotEmotion);
+    gSprites[sPokeSphereState->partnerMugshotSpriteId].oam.priority = 0;
+    gSprites[sPokeSphereState->partnerMugshotSpriteId].x = CHARACTER_PARTNER_X;
+    gSprites[sPokeSphereState->partnerMugshotSpriteId].y = CHARACTER_PARTNER_Y;
 }
 
 static void PokeSphere_FreeResources(void)

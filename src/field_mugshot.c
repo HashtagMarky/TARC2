@@ -356,8 +356,10 @@ u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion)
         pal.data = gFieldMugshots[MUGSHOT_SUBSTITUTE_DOLL][mugshotEmotion].pal;
     }
 
-    LoadCompressedSpriteSheet(&sheet);
     LoadSpritePalette(&pal);
+    while (REG_VCOUNT >= 160);          // Wait until VBlank starts
+    while (REG_VCOUNT < 160);           // Wait until VBlank ends
+    LoadCompressedSpriteSheet(&sheet);
     if (mugshotId == MUGSHOT_KOLE || mugshotId == MUGSHOT_ANKA)
         DynPal_LoadPaletteByTag(sDynPalPlayerMugshot, TAG_MUGSHOT);
 
