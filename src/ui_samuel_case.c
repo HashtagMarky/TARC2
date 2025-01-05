@@ -869,7 +869,7 @@ static const u8 sText_AreYouSure[] = _("Are you sure?    {A_BUTTON} Yes  {B_BUTT
 static const u8 sText_RecievedMon[] = _("Give your Pokémon a Nickname?   {A_BUTTON} Yes  {B_BUTTON} No");
 static void PrintTextToBottomBar(u8 textId)
 {
-    u8 speciesCategoryArray[16];
+    u8 speciesCategoryArray[64];
     const u8 *mainBarAlternatingText;
     const u8 * speciesTypeText;
 
