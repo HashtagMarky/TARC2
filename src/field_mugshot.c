@@ -316,16 +316,28 @@ u8 IsFieldMugshotActive(void)
     return sIsFieldMugshotActive;
 }
 
-u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion)
+u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion, bool8 typeMon, u8 mugshotNum)
 {
-    struct CompressedSpriteSheet sheet = { .size=0x1000, .tag=TAG_MUGSHOT };
+    u32 mugshotTag = TAG_MUGSHOT;
+    u8 spriteId;
+
+    mugshotTag += mugshotNum;
+
+    struct CompressedSpriteSheet sheet = { .size = 0x1000, .tag = mugshotTag };
     struct SpritePalette pal = { .tag = sheet.tag };
+    struct SpriteTemplate spriteTemplate = sFieldMugshotSprite_SpriteTemplate;
 
-    mugshotId += OBJ_EVENT_GFX_SPECIES(NONE);
-    if (gSpecialVar_0x8005 == 1)
-        mugshotId += SPECIES_SHINY_TAG;
+    spriteTemplate.tileTag = mugshotTag;
+    spriteTemplate.paletteTag = mugshotTag;
 
-    RemoveFieldMugshotAndWindow();
+    if (typeMon == TRUE)
+    {
+        mugshotId += OBJ_EVENT_GFX_SPECIES(NONE);
+        if (gSpecialVar_0x8005 == 1)
+        {
+            mugshotId += SPECIES_SHINY_TAG;
+        }
+    }
 
     if (mugshotId >= NELEMS(gFieldMugshots))
         mugshotId = MUGSHOT_SUBSTITUTE_DOLL;
@@ -360,16 +372,24 @@ u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion)
     while (REG_VCOUNT >= 160);          // Wait until VBlank starts
     while (REG_VCOUNT < 160);           // Wait until VBlank ends
     LoadCompressedSpriteSheet(&sheet);
-    if (mugshotId == MUGSHOT_KOLE || mugshotId == MUGSHOT_ANKA)
-        DynPal_LoadPaletteByTag(sDynPalPlayerMugshot, TAG_MUGSHOT);
 
-    sFieldMugshotSpriteId = CreateSprite(&sFieldMugshotSprite_SpriteTemplate, 0, 0, 0);
-    if (sFieldMugshotSpriteId == SPRITE_NONE)
+    if (mugshotId == MUGSHOT_KOLE || mugshotId == MUGSHOT_ANKA)
+        DynPal_LoadPaletteByTag(sDynPalPlayerMugshot, mugshotTag);
+
+    spriteId = CreateSprite(&spriteTemplate, 0, 0, 0);
+    if (spriteId == SPRITE_NONE)
     {
         return SPRITE_NONE;
     }
-    PreservePaletteInWeather(gSprites[sFieldMugshotSpriteId].oam.paletteNum + 0x10);
-    return sFieldMugshotSpriteId;
+    PreservePaletteInWeather(gSprites[spriteId].oam.paletteNum + 0x10);
+    return spriteId;
+}
+
+void DestroyFieldMugshotSprite(u8 sprite, u8 mugshotNum)
+{
+    DestroySprite(&gSprites[sprite]);
+    FreeSpritePaletteByTag(TAG_MUGSHOT + mugshotNum);
+    FreeSpriteTilesByTag(TAG_MUGSHOT + mugshotNum);
 }
 
 u16 CreatePlayerMugshotTrainerCardSprite(u8 gender, u8 mugshotEmotion, u16 destX, u16 destY, u8 paletteSlot, u8 windowId)

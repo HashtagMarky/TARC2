@@ -8,7 +8,8 @@ extern const u16 sFieldMugshotPal_Protagonist[];
 
 void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y, bool8 retainDetails);
 void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 shiny, bool8 emotePMD);
-u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion);
+u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion, bool8 typeMon, u8 mugshotNum);
+void DestroyFieldMugshotSprite(u8 sprite, u8 mugshotNum);
 void RemoveFieldMugshot(bool8 retainDetails);
 void RemoveFieldMugshotAndWindow(void);
 u8 GetFieldMugshotSpriteId(void);

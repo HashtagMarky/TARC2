@@ -60,8 +60,8 @@ enum Modes
     MODE_COUNT,
 };
 
-#define CHARACTER_MUGSHOT_X     19
-#define CHARACTER_MUGSHOT_Y     19
+#define CHARACTER_MUGSHOT_X     57
+#define CHARACTER_MUGSHOT_Y     59
 #define CHARACTER_PARTNER_X     116
 #define CHARACTER_PARTNER_Y     60
 
@@ -294,7 +294,7 @@ static void PokeSphere_SetupCB(void)
         break;
     case 5:
         sPokeSphereState->characterId = MAIN_CHARACTER_SAMUEL;
-        // PokeSphere_DrawCharacterMusghot();
+        PokeSphere_DrawCharacterMusghot();
         PokeSphere_DrawPartnerMugshot();
         PokeSphere_PrintUIControls();
         PokeSphere_PrintNames();
@@ -518,11 +518,11 @@ static void PokeSphere_PrintUIControls(void)
 
 static void PokeSphere_ReloadProfile(void)
 {
-    DestroySprite(&gSprites[sPokeSphereState->characterMugshotSpriteId]);
-    // PokeSphere_DrawCharacterMusghot();
-    DestroySprite(&gSprites[sPokeSphereState->partnerMugshotSpriteId]);
-    PokeSphere_DrawPartnerMugshot();
     PokeSphere_PrintNames();
+    DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, 1);
+    PokeSphere_DrawCharacterMusghot();
+    DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, 2);
+    PokeSphere_DrawPartnerMugshot();
 }
 
 static void PokeSphere_ReloadText(void)
@@ -801,9 +801,9 @@ static void PokeSphere_PrintOpinion(void)
 static void PokeSphere_DrawCharacterMusghot(void)
 {
     u32 character = sPokeSphereState->characterId;
-    u16 mughsotId = gIkigaiCharactersInfo[character].mugshotId;
-    u8 mugshotEmotion = EMOTE_NORMAL;
-    u8 windowColour = TEXT_COLOR_TRANSPARENT;
+    u32 mughsotId = gIkigaiCharactersInfo[character].mugshotId;
+    u32 mugshotEmotion = gIkigaiCharactersInfo[character].defaultEmotion;
+    u32 windowColour = TEXT_COLOR_TRANSPARENT;
 
     switch (gIkigaiCharactersInfo[character].personality)
     {
@@ -825,7 +825,7 @@ static void PokeSphere_DrawCharacterMusghot(void)
     }
     FillWindowPixelBuffer(WIN_CHARACTER_MUGSHOT, PIXEL_FILL(windowColour));
 
-    sPokeSphereState->characterMugshotSpriteId = CreateFieldMugshotSprite(mughsotId, mugshotEmotion);
+    sPokeSphereState->characterMugshotSpriteId = CreateFieldMugshotSprite(mughsotId, mugshotEmotion, FALSE, 1);
     gSprites[sPokeSphereState->characterMugshotSpriteId].oam.priority = 0;
     gSprites[sPokeSphereState->characterMugshotSpriteId].x = CHARACTER_MUGSHOT_X;
     gSprites[sPokeSphereState->characterMugshotSpriteId].y = CHARACTER_MUGSHOT_Y;
@@ -837,7 +837,7 @@ static void PokeSphere_DrawPartnerMugshot(void)
     u32 speciesId = gIkigaiCharactersInfo[character].partnerPokemon;
     u32 mugshotEmotion = gIkigaiCharactersInfo[character].defaultEmotion;
     
-    sPokeSphereState->partnerMugshotSpriteId = CreateFieldMugshotSprite(speciesId, mugshotEmotion);
+    sPokeSphereState->partnerMugshotSpriteId = CreateFieldMugshotSprite(speciesId, mugshotEmotion, TRUE, 2);
     gSprites[sPokeSphereState->partnerMugshotSpriteId].oam.priority = 0;
     gSprites[sPokeSphereState->partnerMugshotSpriteId].x = CHARACTER_PARTNER_X;
     gSprites[sPokeSphereState->partnerMugshotSpriteId].y = CHARACTER_PARTNER_Y;
