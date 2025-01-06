@@ -26,7 +26,13 @@
 #define MUGSHOT_SAMUEL                      OBJ_EVENT_GFX_SAMUEL
 #define MUGSHOT_LAUREN                      OBJ_EVENT_GFX_LAUREN
 #define MUGSHOT_THOMAS                      OBJ_EVENT_GFX_THOMAS
+#define MUGSHOT_HANNAH                      OBJ_EVENT_GFX_HANNAH
+#define MUGSHOT_KATIE                       OBJ_EVENT_GFX_KATIE
+#define MUGSHOT_LOUIS                       OBJ_EVENT_GFX_LOUIS
+#define MUGSHOT_GEORGIA                     OBJ_EVENT_GFX_GEORGIA
 #define MUGSHOT_CAPTAIN                     OBJ_EVENT_GFX_CAPTAIN
+#define MUGSHOT_STEVEN                      OBJ_EVENT_GFX_STEVEN_NEW
+#define MUGSHOT_CYNTHIA                     OBJ_EVENT_GFX_CYNTHIA
 #define MUGSHOT_N                           OBJ_EVENT_GFX_N
 #define MUGSHOT_SUBSTITUTE_DOLL             OBJ_EVENT_GFX_SPECIES(NONE)
 #define MUGSHOT_BULBASAUR                   OBJ_EVENT_GFX_SPECIES(BULBASAUR)

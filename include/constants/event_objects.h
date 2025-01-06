@@ -248,13 +248,19 @@
 #define OBJ_EVENT_GFX_SAMUEL                     242
 #define OBJ_EVENT_GFX_LAUREN                     243
 #define OBJ_EVENT_GFX_THOMAS                     244
-#define OBJ_EVENT_GFX_CAPTAIN                    245
-#define OBJ_EVENT_GFX_N                          246
+#define OBJ_EVENT_GFX_HANNAH                     245
+#define OBJ_EVENT_GFX_KATIE                      246
+#define OBJ_EVENT_GFX_LOUIS                      247
+#define OBJ_EVENT_GFX_GEORGIA                    248
+#define OBJ_EVENT_GFX_CAPTAIN                    249
+#define OBJ_EVENT_GFX_STEVEN_NEW                 250
+#define OBJ_EVENT_GFX_CYNTHIA                    251
+#define OBJ_EVENT_GFX_N                          252
 
 // NOTE: The maximum amount of object events has been expanded from 255 to 65535.
 // Since dynamic graphics ids still require at least 16 free values, the actual limit
 // is 65519, but even considering follower Pokémon, this should be more than enough :)
-#define NUM_OBJ_EVENT_GFX                        247
+#define NUM_OBJ_EVENT_GFX                        253
 
 
 // These are dynamic object gfx ids.

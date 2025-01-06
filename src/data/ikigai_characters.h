@@ -79,6 +79,12 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
                 .title = COMPOUND_STRING("Spouse"),
                 .affinity = OPINION_EXTREMELY_POSITIVE,
             },
+            
+            {
+                .characterId = MAIN_CHARACTER_KATIE,
+                .title = COMPOUND_STRING("Best-Friend"),
+                .affinity = OPINION_EXTREMELY_POSITIVE,
+            },
         },
     },
 
@@ -106,9 +112,163 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
+                .characterId = MAIN_CHARACTER_HANNAH,
+                .title = COMPOUND_STRING("Spouse"),
+                .affinity = OPINION_EXTREMELY_POSITIVE,
+            },
+            
+            {
                 .characterId = MAIN_CHARACTER_SAMUEL,
                 .title = COMPOUND_STRING("Best-Friend"),
                 .affinity = OPINION_VERY_POSITIVE,
+            },
+        },
+    },
+
+    [MAIN_CHARACTER_HANNAH] =
+    {
+        .name = _("HANNAH"),
+        .highlights = COMPOUND_STRING(
+            "An up and coming influencer who\n"
+            "works with her cousin, showing her\n"
+            "love and proficiency in performing."
+        ),
+
+        .partnerPokemon = SPECIES_AMOONGUSS,
+        .favouriteType = TYPE_POISON,
+        //.favouriteColour = ,
+        .personality = ATTITUDE_HUMBLE,
+
+        .overworldGraphicsId = OBJ_EVENT_GFX_HANNAH,
+        .mugshotId = MUGSHOT_HANNAH,
+        //.defaultEmotion = ,
+
+        //.baseOpinionKindness = ,
+        //.baseOpinionStrength = ,
+        //.opinionDecayChance = ,
+        .relationships =
+        {
+            {
+                .characterId = MAIN_CHARACTER_THOMAS,
+                .title = COMPOUND_STRING("Spouse"),
+                .affinity = OPINION_EXTREMELY_POSITIVE,
+            },
+
+            {
+                .characterId = MAIN_CHARACTER_GEORGIA,
+                .title = COMPOUND_STRING("Cousin"),
+                .affinity = OPINION_VERY_POSITIVE,
+            },
+
+            {
+                .characterId = MAIN_CHARACTER_CAPTAIN,
+                .title = COMPOUND_STRING("Grandfather"),
+                .affinity = OPINION_POSITIVE,
+            },
+        },
+    },
+
+    [MAIN_CHARACTER_KATIE] =
+    {
+        .name = _("KATIE"),
+        .highlights = COMPOUND_STRING(
+            "A kind-spirited teacher who hasn't\n"
+            "ever said no to helping a friend,\n"
+            "or even a foe, in need."
+        ),
+
+        .partnerPokemon = SPECIES_RIBOMBEE,
+        .favouriteType = TYPE_BUG,
+        //.favouriteColour = ,
+        .personality = ATTITUDE_INSPIRED,
+
+        //.overworldGraphicsId = ,
+        .mugshotId = MUGSHOT_KATIE,
+        .defaultEmotion = OBJ_EVENT_GFX_KATIE,
+
+        //.baseOpinionKindness = ,
+        //.baseOpinionStrength = ,
+        //.opinionDecayChance = ,
+        .relationships =
+        {
+            {
+                .characterId = MAIN_CHARACTER_LOUIS,
+                .title = COMPOUND_STRING("Spouse"),
+                .affinity = OPINION_EXTREMELY_POSITIVE,
+            },
+            
+            {
+                .characterId = MAIN_CHARACTER_LAUREN,
+                .title = COMPOUND_STRING("Best-Friend"),
+                .affinity = OPINION_EXTREMELY_POSITIVE,
+            },
+        },
+    },
+
+    [MAIN_CHARACTER_LOUIS] =
+    {
+        .name = _("LOUIS"),
+        .highlights = COMPOUND_STRING(
+            "The gruff head of a construction\n"
+            "company. Whilst not very talkative,\n"
+            "he can show extreme compassion."
+        ),
+
+        .partnerPokemon = SPECIES_CONKELDURR,
+        .favouriteType = TYPE_FIGHTING,
+        //.favouriteColour = ,
+        .personality = ATTITUDE_CYNICAL,
+
+        //.overworldGraphicsId = ,
+        .mugshotId = MUGSHOT_LOUIS,
+        .defaultEmotion = OBJ_EVENT_GFX_LOUIS,
+
+        //.baseOpinionKindness = ,
+        //.baseOpinionStrength = ,
+        //.opinionDecayChance = ,
+        .relationships =
+        {
+            {
+                .characterId = MAIN_CHARACTER_KATIE,
+                .title = COMPOUND_STRING("Spouse"),
+                .affinity = OPINION_VERY_POSITIVE,
+            },
+        },
+    },
+
+    [MAIN_CHARACTER_GEORGIA] =
+    {
+        .name = _("GEORGIA"),
+        .highlights = COMPOUND_STRING(
+            "A trailblazing performer who\n"
+            "thrives in the spotlight, and is\n"
+            "passionate about singing."
+        ),
+
+        .partnerPokemon = SPECIES_WHIMSICOTT,
+        .favouriteType = TYPE_FAIRY,
+        //.favouriteColour = ,
+        .personality = ATTITUDE_HUMBLE,
+
+        .overworldGraphicsId = OBJ_EVENT_GFX_GEORGIA,
+        .mugshotId = MUGSHOT_GEORGIA,
+        //.defaultEmotion = ,
+
+        //.baseOpinionKindness = ,
+        //.baseOpinionStrength = ,
+        //.opinionDecayChance = ,
+        .relationships =
+        {
+            {
+                .characterId = MAIN_CHARACTER_HANNAH,
+                .title = COMPOUND_STRING("Cousin"),
+                .affinity = OPINION_VERY_POSITIVE,
+            },
+
+            {
+                .characterId = MAIN_CHARACTER_CAPTAIN,
+                .title = COMPOUND_STRING("Grandfather"),
+                .affinity = OPINION_POSITIVE,
             },
         },
     },
@@ -134,6 +294,78 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .baseOpinionKindness = 0,
         .baseOpinionStrength = 0,
         .opinionDecayChance = 20,
+        .relationships =
+        {
+            {
+                .characterId = MAIN_CHARACTER_HANNAH,
+                .title = COMPOUND_STRING("Granddaughter"),
+                .affinity = OPINION_VERY_POSITIVE,
+            },
+
+            {
+                .characterId = MAIN_CHARACTER_GEORGIA,
+                .title = COMPOUND_STRING("Granddaughter"),
+                .affinity = OPINION_VERY_POSITIVE,
+            },
+        }
+    },
+
+    [SPECIAL_CHARACTER_STEVEN] =
+    {
+        .name = _("STEVEN"),
+        .highlights = COMPOUND_STRING(
+            "A once Pokémon Champion who had\n"
+            "a career change, in archaeolgy he\n"
+            "focuses on his love of rare stones."
+        ),
+
+        .partnerPokemon = SPECIES_METAGROSS,
+        .favouriteType = TYPE_STEEL,
+        .favouriteColour = BODY_COLOR_PURPLE,
+
+        .personality = ATTITUDE_HUMBLE,
+
+        .overworldGraphicsId = OBJ_EVENT_GFX_STEVEN_NEW,
+        .mugshotId = MUGSHOT_STEVEN,
+        .defaultEmotion = EMOTE_SPECIAL,
+
+        .relationships =
+        {
+            {
+                .characterId = MAIN_CHARACTER_LAUREN,
+                .title = COMPOUND_STRING("Colleague"),
+                .affinity = OPINION_VERY_POSITIVE,
+            },
+        }
+    },
+
+    [SPECIAL_CHARACTER_CYNTHIA] =
+    {
+        .name = _("CYNTHIA"),
+        .highlights = COMPOUND_STRING(
+            "A renowned Pokémon Champion known\n"
+            "for her mastery of strategy and\n"
+            "deep knowledge of Pokemon history."
+        ),
+
+        .partnerPokemon = SPECIES_GARCHOMP,
+        .favouriteType = TYPE_GROUND,
+        .favouriteColour = BODY_COLOR_BLACK,
+
+        .personality = ATTITUDE_DOMINANT,
+
+        .overworldGraphicsId = OBJ_EVENT_GFX_CYNTHIA,
+        .mugshotId = MUGSHOT_CYNTHIA,
+        .defaultEmotion = EMOTE_SPECIAL,
+
+        .relationships =
+        {
+            {
+                .characterId = MAIN_CHARACTER_SAMUEL,
+                .title = COMPOUND_STRING("Colleague"),
+                .affinity = OPINION_VERY_POSITIVE,
+            },
+        }
     },
 
     [SPECIAL_CHARACTER_N] =
@@ -173,7 +405,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .overworldGraphicsId = OBJ_EVENT_GFX_N,
         .mugshotId = MUGSHOT_N,
         .defaultEmotion = EMOTE_SPECIAL,
-    }
+    },
 };
 
 // Dialogue Option Icons
