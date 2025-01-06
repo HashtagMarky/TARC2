@@ -641,6 +641,11 @@ s32 IkigaiCharacterOpinionBonus_PartnerPokemon(u32 character, bool32 opinionType
     u32 species = gIkigaiCharactersInfo[character].partnerPokemon;
     u32 bonusPartner = 0;
 
+    if (gSaveBlock2Ptr->ikigaiGymType)
+    {
+        return bonusPartner;
+    }
+
     if (opinionType == OPINION_TYPE_KINDNESS)
     {
         if (gSpeciesInfo[species].types[0] == gSaveBlock2Ptr->ikigaiGymType)
@@ -666,6 +671,11 @@ s32 IkigaiCharacterOpinionBonus_StarterPokemon(u32 character, bool32 opinionType
     u32 starter = VarGet(VAR_STARTER_MON);
     u32 species = gIkigaiCharactersInfo[character].partnerPokemon;
     u32 bonusStarter = 0;
+
+    if (gSaveBlock2Ptr->ikigaiGymType)
+    {
+        return bonusStarter;
+    }
 
     if (opinionType == OPINION_TYPE_KINDNESS)
     {
