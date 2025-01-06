@@ -19,9 +19,9 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .name = _("SAMUEL"),
         .partnerPokemon = SPECIES_INFERNAPE,
         .highlights = COMPOUND_STRING(
-            "The Mayor of Vyraton and an avid\n"
-            "battler. One of the sponsors of\n"
-            "the Vyraton Pokemon Gym."
+            "Mayor of Vyraton and an avid fan\n"
+            "of Pokémon battles. The sponsor\n"
+            "of the Vyraton Gym."
         ),
 
         .favouriteColour = BODY_COLOR_BLUE,
@@ -30,6 +30,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_SAMUEL,
         .mugshotId = MUGSHOT_SAMUEL,
+        .defaultEmotion = EMOTE_DETERMINED,
 
         .baseOpinionKindness = 20,
         .baseOpinionStrength = 25,
@@ -54,15 +55,19 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
     {
         .name = _("LAUREN"),
         .highlights = COMPOUND_STRING(
-            "The owner of Selenic Spirit."
+            "A devoted collector of rare stones\n"
+            "and owner of Selenic Spirit, where\n"
+            "they are showcased and marketed."
         ),
 
-        .partnerPokemon = SPECIES_LIEPARD,
+        .partnerPokemon = SPECIES_ESPURR,
+        .favouriteType = TYPE_PSYCHIC,
         .favouriteColour = BODY_COLOR_YELLOW,
         .personality = ATTITUDE_CYNICAL,
 
         .overworldGraphicsId = OBJ_EVENT_GFX_LAUREN,
         .mugshotId = MUGSHOT_LAUREN,
+        .defaultEmotion = EMOTE_WORRIED,
 
         .baseOpinionKindness = 15,
         .baseOpinionStrength = 20,
@@ -81,10 +86,19 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
     {
         .name = _("THOMAS"),
         .highlights = COMPOUND_STRING(
-            "A local Pokémon Professor."
+            "A Pokémon Professor with expertise\n"
+            "in Pokémon breeding, and leads the\n"
+            "research at Vyraton Laboratory."
         ),
 
+        .partnerPokemon = SPECIES_ROCKRUFF,
+        .favouriteType = TYPE_ROCK,
+        .favouriteColour = BODY_COLOR_RED,
+        .personality = ATTITUDE_DOMINANT,
+
         .overworldGraphicsId = OBJ_EVENT_GFX_THOMAS,
+        .mugshotId = MUGSHOT_THOMAS,
+        .defaultEmotion = EMOTE_JOYOUS,
 
         .baseOpinionKindness = 20,
         .baseOpinionStrength = 25,
@@ -103,11 +117,19 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
     {
         .name = _("SKIP"),
         .highlights = COMPOUND_STRING(
-            "The retired captain of the\n"
-            "S.S. Pathfinder."
+            "The still revered, but now retired\n"
+            "captain of the S.S. Pathfinder, who\n"
+            "now enjoys a less busy life."
         ),
 
+        .partnerPokemon = SPECIES_RELICANTH,
+        .favouriteType = TYPE_WATER,
+        .favouriteColour = BODY_COLOR_GREEN,
+        .personality = ATTITUDE_CYNICAL,
+
         .overworldGraphicsId = OBJ_EVENT_GFX_CAPTAIN,
+        .mugshotId = MUGSHOT_CAPTAIN,
+        .defaultEmotion = EMOTE_STUNNED,
 
         .baseOpinionKindness = 0,
         .baseOpinionStrength = 0,
@@ -118,12 +140,15 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
     {
         .name = _("N"),
         .highlights = COMPOUND_STRING(
-            "A champion of Pokémon freedom\n"
+            "An advocate of Pokémon freedom\n"
             "and questioning the ethics of\n"
             "human-Pokémon bonds."
         ),
 
         .partnerPokemon = SPECIES_ZOROARK,
+        .favouriteType = TYPE_DARK,
+        .favouriteColour = BODY_COLOR_GRAY,
+
         .personality = ATTITUDE_HUMBLE,
         .poses =
         {
@@ -146,7 +171,8 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         },
 
         .overworldGraphicsId = OBJ_EVENT_GFX_N,
-
+        .mugshotId = MUGSHOT_N,
+        .defaultEmotion = EMOTE_SPECIAL,
     }
 };
 
