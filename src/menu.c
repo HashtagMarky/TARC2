@@ -86,6 +86,7 @@ static const u8 sTextSpeedFrameDelays[] =
     [OPTIONS_TEXT_SPEED_INSTANT] = 1
 };
 
+#include "field_message_box.h"
 static const struct WindowTemplate sStandardTextBox_WindowTemplates[] =
 {
     {
@@ -97,10 +98,10 @@ static const struct WindowTemplate sStandardTextBox_WindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 0x194
     },
-    {
+    [WIN_NAME_PLATE] = {
         .bg = 0,
         .tilemapLeft = 2,
-        .tilemapTop = 12,
+        .tilemapTop = 13,
         .width = DLW_WIN_PLATE_SIZE,
         .height = 2,
         .paletteNum = 15,
@@ -511,14 +512,14 @@ static void WindowFunc_DrawNamePlate(u8 bg, u8 l, u8 t, u8 w, u8 h, u8 pal)
 
     //! middle
     FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 15,                 l - 1,  t,     1,      1, platePal);
-    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(DLG_WINDOW_BASE_TILE_NUM + 15), l - 1,  t + 1, 1,      1, platePal);
-    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(DLG_WINDOW_BASE_TILE_NUM + 19), plateR, t,     1,      1, platePal);
+    FillBgTilemapBufferRect(bg, BG_TILE_H_FLIP(DLG_WINDOW_BASE_TILE_NUM + 19), l - 1,  t + 1, 1,      1, platePal);
+    FillBgTilemapBufferRect(bg, BG_TILE_H_FLIP(DLG_WINDOW_BASE_TILE_NUM + 15), plateR, t,     1,      1, platePal);
     FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 19,                 plateR, t + 1, 1,      1, platePal);
 
     //! bottom
-    FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 17,                 l - 1,  plateD, 1,      1, platePal);
-    FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 18,                 l,      plateD, plateW, 1, platePal);
-    FillBgTilemapBufferRect(bg, BG_TILE_H_FLIP(DLG_WINDOW_BASE_TILE_NUM + 17), plateR, plateD, 1,      1, platePal);
+    // FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 17,                 l - 1,  plateD, 1,      1, platePal);
+    // FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 18,                 l,      plateD, plateW, 1, platePal);
+    // FillBgTilemapBufferRect(bg, BG_TILE_H_FLIP(DLG_WINDOW_BASE_TILE_NUM + 17), plateR, plateD, 1,      1, platePal);
 }
 
 int GetDialogFramePlateWidth(void)
@@ -528,7 +529,7 @@ int GetDialogFramePlateWidth(void)
 
 void FillDialogFramePlate(void)
 {
-    FillWindowPixelBuffer(1, PIXEL_FILL(TEXT_COLOR_WHITE));
+    FillWindowPixelBuffer(WIN_NAME_PLATE, PIXEL_FILL(TEXT_COLOR_WHITE));
 }
 
 static void WindowFunc_ClearStdWindowAndFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)

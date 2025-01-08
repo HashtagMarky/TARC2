@@ -53,7 +53,7 @@ static void Task_DrawFieldMessage(u8 taskId)
             DrawDialogueFrame(0, TRUE);
             if (gSpeakerName != NULL && !FlagGet(FLAG_SUPPRESS_SPEAKER_NAME))
             {
-                DrawNamePlate(1, FALSE);
+                DrawNamePlate(WIN_NAME_PLATE, FALSE);
             }
             task->tState++;
            break;
@@ -156,9 +156,9 @@ static void ExpandStringAndStartDrawFieldMessage(const u8 *str, bool32 allowSkip
             StringExpandPlaceholders(&gNamePlateBuffer[0], gSpeakerName);
         }
         FillDialogFramePlate();
-        AddTextPrinterParameterized2(1, FONT_SMALL, gNamePlateBuffer, 0, NULL, 2, 0, 3);
-        PutWindowTilemap(1);
-        CopyWindowToVram(1, COPYWIN_FULL);
+        AddTextPrinterParameterized2(WIN_NAME_PLATE, FONT_SMALL, gNamePlateBuffer, 0, NULL, 2, 0, 3);
+        PutWindowTilemap(WIN_NAME_PLATE);
+        CopyWindowToVram(WIN_NAME_PLATE, COPYWIN_FULL);
     }
     StringExpandPlaceholders(gStringVar4, str);
     AddTextPrinterForMessage(allowSkippingDelayWithButtonPress);
@@ -282,6 +282,6 @@ void ReprintSpeakerName(void)
             StringExpandPlaceholders(&gNamePlateBuffer[0], gSpeakerName);
         }
         FillDialogFramePlate();
-        AddTextPrinterParameterized2(1, FONT_SMALL, gNamePlateBuffer, 0, NULL, 2, 0, 3);
+        AddTextPrinterParameterized2(WIN_NAME_PLATE, FONT_SMALL, gNamePlateBuffer, 0, NULL, 2, 0, 3);
     }
 }
