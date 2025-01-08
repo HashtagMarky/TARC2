@@ -15,6 +15,7 @@
 #include "constants/species.h"
 
 #include "ikigai_characters.h"
+#include "international_string_util.h"
 
 static EWRAM_DATA u8 sFieldMessageBoxMode = 0;
 EWRAM_DATA u8 gWalkAwayFromSignpostTimer = 0;
@@ -138,6 +139,24 @@ bool8 ShowFieldMessageFromBuffer(void)
 
 extern void FillDialogFramePlate();
 extern int GetDialogFramePlateWidth();
+enum FontColor
+{
+    FONT_WHITE,
+    FONT_GRAY,
+    FONT_RED,
+    FONT_GREEN,
+    FONT_BLUE,
+    FONT_LIGHT_BLUE,
+};
+static const u8 sFontColorTable[][3] =
+{
+    [FONT_WHITE]        = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY},
+    [FONT_GRAY]         = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY},
+    [FONT_RED]          = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED,        TEXT_COLOR_LIGHT_GRAY},
+    [FONT_GREEN]        = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_GREEN,      TEXT_COLOR_LIGHT_GRAY},
+    [FONT_BLUE]         = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_BLUE,       TEXT_COLOR_LIGHT_GRAY},
+    [FONT_LIGHT_BLUE]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_BLUE, TEXT_COLOR_LIGHT_GRAY},
+};
 static void ExpandStringAndStartDrawFieldMessage(const u8 *str, bool32 allowSkippingDelayWithButtonPress)
 {
     if (gSpeakerName != NULL && !FlagGet(FLAG_SUPPRESS_SPEAKER_NAME))
@@ -156,7 +175,8 @@ static void ExpandStringAndStartDrawFieldMessage(const u8 *str, bool32 allowSkip
             StringExpandPlaceholders(&gNamePlateBuffer[0], gSpeakerName);
         }
         FillDialogFramePlate();
-        AddTextPrinterParameterized2(WIN_NAME_PLATE, FONT_SMALL, gNamePlateBuffer, 0, NULL, 2, 0, 3);
+        AddTextPrinterParameterized4(WIN_NAME_PLATE, FONT_SMALL, 0, 0, 0, 0,
+            sFontColorTable[FONT_GRAY], TEXT_SKIP_DRAW, gNamePlateBuffer);
         PutWindowTilemap(WIN_NAME_PLATE);
         CopyWindowToVram(WIN_NAME_PLATE, COPYWIN_FULL);
     }
@@ -282,6 +302,7 @@ void ReprintSpeakerName(void)
             StringExpandPlaceholders(&gNamePlateBuffer[0], gSpeakerName);
         }
         FillDialogFramePlate();
-        AddTextPrinterParameterized2(WIN_NAME_PLATE, FONT_SMALL, gNamePlateBuffer, 0, NULL, 2, 0, 3);
+        AddTextPrinterParameterized4(WIN_NAME_PLATE, FONT_SMALL, 0, 0, 0, 0,
+            sFontColorTable[FONT_GRAY], TEXT_SKIP_DRAW, gNamePlateBuffer);
     }
 }
