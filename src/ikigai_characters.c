@@ -641,7 +641,7 @@ s32 IkigaiCharacterOpinionBonus_PartnerPokemon(u32 character, bool32 opinionType
     u32 species = gIkigaiCharactersInfo[character].partnerPokemon;
     u32 bonusPartner = 0;
 
-    if (gSaveBlock2Ptr->ikigaiGymType)
+    if (gSaveBlock2Ptr->ikigaiGymType == TYPE_NONE)
     {
         return bonusPartner;
     }
@@ -672,7 +672,7 @@ s32 IkigaiCharacterOpinionBonus_StarterPokemon(u32 character, bool32 opinionType
     u32 species = gIkigaiCharactersInfo[character].partnerPokemon;
     u32 bonusStarter = 0;
 
-    if (gSaveBlock2Ptr->ikigaiGymType)
+    if (gSaveBlock2Ptr->ikigaiGymType == TYPE_NONE)
     {
         return bonusStarter;
     }
