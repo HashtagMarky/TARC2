@@ -17,6 +17,7 @@
 #include "global.fieldmap.h"
 #include "fpmath.h"
 #include "battle_util.h"
+#include "field_message_box.h"
 
 static s32 ClampedOpinionDelta(s32 opinionCurrent, s32 opinionDelta);
 static uq4_12_t GetGymTypeEffectiveness(u16 species, bool32 speciesAtk);
@@ -759,6 +760,35 @@ static uq4_12_t GetGymTypeEffectiveness(u16 species, bool32 speciesAtk)
 
     modifier[0] = uq4_12_multiply(modifier[1], modifier[2]);
     return modifier[0];
+}
+
+u8 IkigaiCharacter_ReturnMessageBoxPersonalityPalette(u32 character)
+{
+    u32 textColour = 2;
+
+    switch (gIkigaiCharactersInfo[character].personality)
+    {
+    case ATTITUDE_CYNICAL:
+        textColour = 9;
+        break;
+        
+    case ATTITUDE_DOMINANT:
+        textColour = 4;
+        break;
+        
+    case ATTITUDE_HUMBLE:
+        textColour = 6;
+        break;
+        
+    case ATTITUDE_INSPIRED:
+        textColour = 8;
+        break;
+    }
+
+    if (gSpeakerName == gIkigaiCharactersInfo[CHARACTER_DEFAULT].name)
+        textColour = 2;
+
+    return textColour;
 }
 
 u8 CreateDialogueOptionIconSprite(u32 dialogueIndex)

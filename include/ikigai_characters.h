@@ -141,6 +141,7 @@ u32 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void);
 s32 IkigaiCharacterOpinionBonus_Relationship(u32 character, bool32 opinionType);
 s32 IkigaiCharacterOpinionBonus_PartnerPokemon(u32 character, bool32 opinionType);
 s32 IkigaiCharacterOpinionBonus_StarterPokemon(u32 character, bool32 opinionType);
+u8 IkigaiCharacter_ReturnMessageBoxPersonalityPalette(u32 character);
 u8 CreateDialogueOptionIconSprite(u32 attitudeIndex);
 u8 CreateAttitudeIconSprite(u32 attitudeIndex);
 
