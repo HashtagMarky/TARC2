@@ -345,7 +345,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .highlights = COMPOUND_STRING(
             "A renowned Pokémon Champion known\n"
             "for her mastery of strategy and\n"
-            "deep knowledge of Pokemon history."
+            "deep knowledge of Pokémon history."
         ),
 
         .partnerPokemon = SPECIES_GARCHOMP,
