@@ -15,7 +15,7 @@
 #include "constants/species.h"
 
 #include "ikigai_characters.h"
-#include "international_string_util.h"
+#include "text.h"
 
 static EWRAM_DATA u8 sFieldMessageBoxMode = 0;
 EWRAM_DATA u8 gWalkAwayFromSignpostTimer = 0;
@@ -159,6 +159,10 @@ static const u8 sFontColorTable[][3] =
 };
 static void ExpandStringAndStartDrawFieldMessage(const u8 *str, bool32 allowSkippingDelayWithButtonPress)
 {
+    u8 fgColor = IkigaiCharacter_ReturnMessageBoxPersonalityPalette(
+        ReturnIkigaiCharacter_SelectedObject()
+    );
+
     if (gSpeakerName != NULL && !FlagGet(FLAG_SUPPRESS_SPEAKER_NAME))
     {
         int strLen = GetStringWidth(FONT_SMALL, gSpeakerName, -1);
@@ -175,8 +179,7 @@ static void ExpandStringAndStartDrawFieldMessage(const u8 *str, bool32 allowSkip
             StringExpandPlaceholders(&gNamePlateBuffer[0], gSpeakerName);
         }
         FillDialogFramePlate();
-        AddTextPrinterParameterized4(WIN_NAME_PLATE, FONT_SMALL, 0, 0, 0, 0,
-            sFontColorTable[FONT_GRAY], TEXT_SKIP_DRAW, gNamePlateBuffer);
+        AddTextPrinterParameterizedNamePlate(WIN_NAME_PLATE, FONT_SMALL, gNamePlateBuffer, 0, NULL, fgColor, 0, 3);
         PutWindowTilemap(WIN_NAME_PLATE);
         CopyWindowToVram(WIN_NAME_PLATE, COPYWIN_FULL);
     }
@@ -288,6 +291,11 @@ void ReprintSpeakerName(void)
 {
     if (gSpeakerName != NULL)
     {
+        u8 colorBackup[3];
+        u8 fgColor = IkigaiCharacter_ReturnMessageBoxPersonalityPalette(
+            ReturnIkigaiCharacter_SelectedObject()
+        );
+
         int strLen = GetStringWidth(FONT_SMALL, gSpeakerName, -1);
         if (strLen > 0)
         {
@@ -302,7 +310,8 @@ void ReprintSpeakerName(void)
             StringExpandPlaceholders(&gNamePlateBuffer[0], gSpeakerName);
         }
         FillDialogFramePlate();
-        AddTextPrinterParameterized4(WIN_NAME_PLATE, FONT_SMALL, 0, 0, 0, 0,
-            sFontColorTable[FONT_GRAY], TEXT_SKIP_DRAW, gNamePlateBuffer);
+        SaveTextColors(&colorBackup[0], &colorBackup[1], &colorBackup[2]);
+        AddTextPrinterParameterizedNamePlate(WIN_NAME_PLATE, FONT_SMALL, gNamePlateBuffer, 0, NULL, fgColor, 0, 3);
+        RestoreTextColors(&colorBackup[0], &colorBackup[1], &colorBackup[2]);
     }
 }

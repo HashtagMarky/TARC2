@@ -208,6 +208,28 @@ u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed
     return AddTextPrinter(&printer, speed, callback);
 }
 
+u16 AddTextPrinterParameterizedNamePlate(u8 windowId, u8 fontId, const u8 *str, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16), u8 fgColor, u8 bgColor, u8 shadowColor)
+{
+    struct TextPrinterTemplate printer;
+
+    printer.currentChar = str;
+    printer.windowId = windowId;
+    printer.fontId = fontId;
+    printer.x = 0;
+    printer.y = 0;
+    printer.currentX = 0;
+    printer.currentY = 0;
+    printer.letterSpacing = 0;
+    printer.lineSpacing = 0;
+    printer.unk = 0;
+    printer.fgColor = fgColor;
+    printer.bgColor = bgColor;
+    printer.shadowColor = shadowColor;
+
+    gTextFlags.useAlternateDownArrow = 0;
+    return AddTextPrinter(&printer, speed, callback);
+}
+
 void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress)
 {
     void (*callback)(struct TextPrinterTemplate *, u16) = NULL;

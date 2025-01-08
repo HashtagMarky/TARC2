@@ -761,6 +761,35 @@ static uq4_12_t GetGymTypeEffectiveness(u16 species, bool32 speciesAtk)
     return modifier[0];
 }
 
+u8 IkigaiCharacter_ReturnMessageBoxPersonalityPalette(u32 character)
+{
+    u32 textColour = 2;
+
+    switch (gIkigaiCharactersInfo[character].personality)
+    {
+    case ATTITUDE_CYNICAL:
+        textColour = 9;
+        break;
+        
+    case ATTITUDE_DOMINANT:
+        textColour = 4;
+        break;
+        
+    case ATTITUDE_HUMBLE:
+        textColour = 6;
+        break;
+        
+    case ATTITUDE_INSPIRED:
+        textColour = 8;
+        break;
+    }
+
+    if (gSpeakerName == gIkigaiCharactersInfo[CHARACTER_DEFAULT].name)
+        textColour = 2;
+
+    return textColour;
+}
+
 u8 CreateDialogueOptionIconSprite(u32 dialogueIndex)
 {
     u8 spriteId;
