@@ -217,6 +217,9 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
 
     RemoveFieldMugshot(retainDetails);
 
+    if (mugshotEmotion >= EMOTE_COUNT)
+        mugshotEmotion = EMOTE_NORMAL;
+
     if ((mugshotId >= NELEMS(gFieldMugshots)
         && gSaveBlock2Ptr->optionsFollowerMugshots == MUGSHOT_FOLLOWER_PLACEHOLDER && mugshotType == MUGSHOT_FOLLOWER))
         mugshotId = MUGSHOT_SUBSTITUTE_DOLL;
@@ -338,6 +341,9 @@ u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion, bool8 typeMon, u8 
             mugshotId += SPECIES_SHINY_TAG;
         }
     }
+
+    if (mugshotEmotion >= EMOTE_COUNT)
+        mugshotEmotion = EMOTE_NORMAL;
 
     if (mugshotId >= NELEMS(gFieldMugshots))
         mugshotId = MUGSHOT_SUBSTITUTE_DOLL;

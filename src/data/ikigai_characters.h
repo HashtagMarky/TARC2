@@ -30,7 +30,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_SAMUEL,
         .mugshotId = MUGSHOT_SAMUEL,
-        .defaultEmotion = EMOTE_DETERMINED,
+        .defaultEmotion = EMOTE_HAPPY,
 
         .baseOpinionKindness = 20,
         .baseOpinionStrength = 25,
@@ -141,7 +141,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_HANNAH,
         .mugshotId = MUGSHOT_HANNAH,
-        //.defaultEmotion = ,
+        .defaultEmotion = EMOTE_INSPIRED,
 
         //.baseOpinionKindness = ,
         //.baseOpinionStrength = ,
@@ -182,9 +182,9 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         //.favouriteColour = ,
         .personality = ATTITUDE_INSPIRED,
 
-        //.overworldGraphicsId = ,
+        .overworldGraphicsId = OBJ_EVENT_GFX_KATIE,
         .mugshotId = MUGSHOT_KATIE,
-        .defaultEmotion = OBJ_EVENT_GFX_KATIE,
+        .defaultEmotion = EMOTE_HAPPY,
 
         //.baseOpinionKindness = ,
         //.baseOpinionStrength = ,
@@ -214,14 +214,14 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
             "he can show extreme compassion."
         ),
 
-        .partnerPokemon = SPECIES_CONKELDURR,
+        .partnerPokemon = SPECIES_GURDURR,
         .favouriteType = TYPE_FIGHTING,
         //.favouriteColour = ,
         .personality = ATTITUDE_CYNICAL,
 
-        //.overworldGraphicsId = ,
+        .overworldGraphicsId = OBJ_EVENT_GFX_LOUIS,
         .mugshotId = MUGSHOT_LOUIS,
-        .defaultEmotion = OBJ_EVENT_GFX_LOUIS,
+        .defaultEmotion = EMOTE_DETERMINED,
 
         //.baseOpinionKindness = ,
         //.baseOpinionStrength = ,
@@ -252,7 +252,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_GEORGIA,
         .mugshotId = MUGSHOT_GEORGIA,
-        //.defaultEmotion = ,
+        .defaultEmotion = EMOTE_SHOUTING,
 
         //.baseOpinionKindness = ,
         //.baseOpinionStrength = ,
