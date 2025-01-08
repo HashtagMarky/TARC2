@@ -17,6 +17,7 @@
 #include "global.fieldmap.h"
 #include "fpmath.h"
 #include "battle_util.h"
+#include "field_message_box.h"
 
 static s32 ClampedOpinionDelta(s32 opinionCurrent, s32 opinionDelta);
 static uq4_12_t GetGymTypeEffectiveness(u16 species, bool32 speciesAtk);
