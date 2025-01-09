@@ -5,8 +5,6 @@
 #include "rtc.h"
 #include "fake_rtc.h"
 #include "event_data.h"
-#include "overworld.h"
-#include "sound.h"
 
 struct Time *FakeRtc_GetCurrentTime(void)
 {
@@ -39,7 +37,6 @@ void FakeRtc_TickTimeForward(void)
 
 void FakeRtc_AdvanceTimeBy(u32 hours, u32 minutes, u32 seconds)
 {
-    u16 music = GetCurrLocationDefaultMusic();
     struct Time* time = FakeRtc_GetCurrentTime();
     seconds += time->seconds;
     minutes += time->minutes;
@@ -66,9 +63,6 @@ void FakeRtc_AdvanceTimeBy(u32 hours, u32 minutes, u32 seconds)
     time->seconds = seconds;
     time->minutes = minutes;
     time->hours = hours;
-
-    if (GetCurrentMapMusic() != music)
-        FadeOutAndPlayNewMapMusic(music, 16);
 }
 
 void FakeRtc_ManuallySetTime(u32 hour, u32 minute, u32 second)
