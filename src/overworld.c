@@ -369,13 +369,14 @@ struct DynamicMusicData
 {
     u16 trackBits:12;
     u16 fadeSpeed:4;
+    bool8 volumeMax;
 };
 static void Task_UpdateMovementDynamicMusicWait(u8 taskId);
 static const struct DynamicMusicData sDynamicMusicData[] =
 {
     // [MUS_ACREN_FOREST_DAY] = {0b000000000001, 7},
     // [MUS_ACREN_FOREST_NIGHT] = {0b111111111101, 7},
-    [MUS_LITTLEROOT] = {0b000110111001},
+    [MUS_LITTLEROOT] = {0b000110111001, 7, TRUE},
 };
 
 // code
@@ -3597,6 +3598,7 @@ void HideItemDescription(u16 item)
 // BSBob Movement Dynamic Music
 #define tOrigMapId data[0]
 #define tWaitForFly data[1]
+#define tStartMaxVolume data[2]
 void UpdateMovementDynamicMusic(void)
 {
     u8 taskId;
@@ -3611,6 +3613,7 @@ void UpdateMovementDynamicMusic(void)
         
     
     gMapMusicVolume = 0;
+    gTasks[taskId].tStartMaxVolume = FALSE;
     gTasks[taskId].tOrigMapId = (gSaveBlock1Ptr->location.mapGroup << 8) | (gSaveBlock1Ptr->location.mapNum);
 }
 void Task_UpdateMovementDynamicMusic(u8 taskId)
@@ -3619,6 +3622,13 @@ void Task_UpdateMovementDynamicMusic(u8 taskId)
     u16 currentMapId = (gSaveBlock1Ptr->location.mapGroup << 8) | (gSaveBlock1Ptr->location.mapNum);
     u16 trackBits = sDynamicMusicData[GetCurrentMapMusic()].trackBits;
     u16 fadeSpeed = sDynamicMusicData[GetCurrentMapMusic()].fadeSpeed + 1;
+    bool8 volumeMax = sDynamicMusicData[GetCurrentMapMusic()].volumeMax;
+
+    if (volumeMax == TRUE && gTasks[taskId].tStartMaxVolume == FALSE)
+    {
+        gMapMusicVolume = 256;
+        gTasks[taskId].tStartMaxVolume = TRUE;
+    }
     
     if (currentMapId != task->tOrigMapId)
     {
@@ -3661,4 +3671,5 @@ static void Task_UpdateMovementDynamicMusicWait(u8 taskId)
 }
 #undef tOrigMapId
 #undef tWaitForFly
+#undef tStartMaxVolume
 
