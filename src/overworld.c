@@ -375,9 +375,13 @@ struct DynamicMusicData
 static void Task_UpdateMovementDynamicMusicWait(u8 taskId);
 static const struct DynamicMusicData sDynamicMusicData[] =
 {
-    // [MUS_ACREN_FOREST_DAY] = {0b000000000001, 7},
-    // [MUS_ACREN_FOREST_NIGHT] = {0b111111111101, 7},
-    [MUS_LITTLEROOT] = {0b000110111001, 7, 0, TRUE},
+    [MUS_LITTLEROOT] =
+    {
+        .trackBits = 0b000110111001,
+        .fadeSpeed = 7,
+        .fadeStart = 0,
+        .volumeMax = FALSE
+    },
 };
 
 // code
