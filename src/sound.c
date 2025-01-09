@@ -10,8 +10,6 @@
 #include "task.h"
 #include <math.h>
 
-#include "overworld.h"
-
 struct Fanfare
 {
     u16 songNum;
@@ -22,6 +20,7 @@ EWRAM_DATA struct MusicPlayerInfo* gMPlay_PokemonCry = NULL;
 EWRAM_DATA u8 gPokemonCryBGMDuckingCounter = 0;
 
 // BSBob Movement Dynamic Music
+#include "movement_dynamic_music.h"
 EWRAM_DATA s16 gMapMusicVolume = 0;
 
 static u16 sCurrentMapMusic;
@@ -357,7 +356,7 @@ void FadeOutBGM(u8 speed)
     // BSBob Movement Dynamic Music
     // m4aMPlayFadeOut(&gMPlayInfo_BGM, speed);
     if (FindTaskIdByFunc(Task_UpdateMovementDynamicMusic) != TASK_NONE)
-       m4aMPlayFadeOutFromVol(&gMPlayInfo_BGM, speed, gMapMusicVolume);
+        m4aMPlayFadeOutFromVol(&gMPlayInfo_BGM, speed, gMapMusicVolume);
     else
         m4aMPlayFadeOut(&gMPlayInfo_BGM, speed);
 }

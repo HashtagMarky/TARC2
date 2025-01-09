@@ -3,9 +3,6 @@
 
 #include "constants/sound.h"
 
-// BSBob Movement Dynamic Music
-extern s16 gMapMusicVolume;
-
 void InitMapMusic(void);
 void MapMusicMain(void);
 void ResetMapMusic(void);
