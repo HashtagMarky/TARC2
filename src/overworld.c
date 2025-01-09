@@ -375,7 +375,7 @@ static const struct DynamicMusicData sDynamicMusicData[] =
 {
     // [MUS_ACREN_FOREST_DAY] = {0b000000000001, 7},
     // [MUS_ACREN_FOREST_NIGHT] = {0b111111111101, 7},
-    [MUS_LITTLEROOT] = {0b000011010110},
+    [MUS_LITTLEROOT] = {0b000110111001},
 };
 
 // code
