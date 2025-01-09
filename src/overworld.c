@@ -3623,6 +3623,7 @@ void Task_UpdateMovementDynamicMusic(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     u16 currentMapId = (gSaveBlock1Ptr->location.mapGroup << 8) | (gSaveBlock1Ptr->location.mapNum);
+    u16 currentMusic = GetCurrentMapMusic();
     u16 trackBits = sDynamicMusicData[GetCurrentMapMusic()].trackBits;
     u16 fadeSpeed = sDynamicMusicData[GetCurrentMapMusic()].fadeSpeed + 1;
     u16 fadeStart = sDynamicMusicData[GetCurrentMapMusic()].fadeStart;
@@ -3640,7 +3641,8 @@ void Task_UpdateMovementDynamicMusic(u8 taskId)
         gTasks[taskId].tStartMaxVolume = TRUE;
     }
     
-    if (currentMapId != task->tOrigMapId)
+    if (currentMapId != task->tOrigMapId
+        && GetCurrLocationDefaultMusic() != currentMusic)
     {
         m4aMPlayFadeOutFromVol(&gMPlayInfo_BGM, 8, gMapMusicVolume);
         DestroyTask(taskId);
