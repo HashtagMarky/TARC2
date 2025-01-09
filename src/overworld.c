@@ -74,6 +74,8 @@
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
 
+#include "constants/field_effects.h"
+
 struct CableClubPlayer
 {
     u8 playerId;
@@ -360,6 +362,20 @@ static void (*const sMovementStatusHandler[])(struct LinkPlayerObjectEvent *, st
     MovementStatusHandler_EnterFreeMode,
     // TRUE:
     MovementStatusHandler_TryAdvanceScript,
+};
+
+// BSBob Movement Dynamic Music
+struct DynamicMusicData
+{
+    u16 trackBits:12;
+    u16 fadeSpeed:4;
+};
+static void Task_UpdateMovementDynamicMusicWait(u8 taskId);
+static const struct DynamicMusicData sDynamicMusicData[] =
+{
+    // [MUS_ACREN_FOREST_DAY] = {0b000000000001, 7},
+    // [MUS_ACREN_FOREST_NIGHT] = {0b111111111101, 7},
+    [MUS_LITTLEROOT] = {0b000011010110},
 };
 
 // code
@@ -3578,4 +3594,71 @@ void HideItemDescription(u16 item)
 }
 #endif // OW_SHOW_ITEM_DESCRIPTIONS
 
+// BSBob Movement Dynamic Music
+#define tOrigMapId data[0]
+#define tWaitForFly data[1]
+void UpdateMovementDynamicMusic(void)
+{
+    u8 taskId;
+    if (FindTaskIdByFunc(Task_UpdateMovementDynamicMusicWait) != TASK_NONE || FindTaskIdByFunc(Task_UpdateMovementDynamicMusic) != TASK_NONE)
+        return;
+    taskId = CreateTask(Task_UpdateMovementDynamicMusicWait, 64);
+    
+    if (FieldEffectActiveListContains(FLDEFF_FLY_IN) || FieldEffectActiveListContains(FLDEFF_USE_FLY))
+        gTasks[taskId].tWaitForFly = TRUE;
+    else
+        gTasks[taskId].tWaitForFly = FALSE;
+        
+    
+    gMapMusicVolume = 0;
+    gTasks[taskId].tOrigMapId = (gSaveBlock1Ptr->location.mapGroup << 8) | (gSaveBlock1Ptr->location.mapNum);
+}
+void Task_UpdateMovementDynamicMusic(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    u16 currentMapId = (gSaveBlock1Ptr->location.mapGroup << 8) | (gSaveBlock1Ptr->location.mapNum);
+    u16 trackBits = sDynamicMusicData[GetCurrentMapMusic()].trackBits;
+    u16 fadeSpeed = sDynamicMusicData[GetCurrentMapMusic()].fadeSpeed + 1;
+    
+    if (currentMapId != task->tOrigMapId)
+    {
+        m4aMPlayFadeOutFromVol(&gMPlayInfo_BGM, 8, gMapMusicVolume);
+        DestroyTask(taskId);
+        return;
+    }
+    if (gPlayerAvatar.runningState == NOT_MOVING)
+    {
+        gMapMusicVolume -= fadeSpeed;
+        if (gMapMusicVolume <= 0)
+            gMapMusicVolume = 0;
+    }
+    else if (gPlayerAvatar.runningState == MOVING)
+    {
+        gMapMusicVolume += fadeSpeed;
+        if (gMapMusicVolume >= 256)
+            gMapMusicVolume = 256;
+    }
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, (u16)gMapMusicVolume);
+}
+static void Task_UpdateMovementDynamicMusicWait(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    u16 trackBits = sDynamicMusicData[GetCurrentMapMusic()].trackBits;
+    switch (task->tWaitForFly)
+    {
+    case TRUE:
+        if (!FieldEffectActiveListContains(FLDEFF_FLY_IN))
+        {
+            task->func = Task_UpdateMovementDynamicMusic;
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0);
+        }
+        break;
+    case FALSE:
+        if (BGMusicStopped())
+            task->func = Task_UpdateMovementDynamicMusic;
+        break;
+    }
+}
+#undef tOrigMapId
+#undef tWaitForFly
 

@@ -1758,3 +1758,21 @@ void SetPokemonCryPriority(u8 val)
 {
     gPokemonCrySong.priority = val;
 }
+
+// BSBob Movement Dynamic Music
+void MPlayFadeOutFromVol(struct MusicPlayerInfo *mplayInfo, u16 speed, u16 volume)
+{
+    if (mplayInfo->ident == ID_NUMBER)
+    {
+        mplayInfo->ident++;
+        mplayInfo->fadeOC = speed;
+        mplayInfo->fadeOI = speed;
+        mplayInfo->fadeOV = ((volume / 4) << FADE_VOL_SHIFT);
+        mplayInfo->ident = ID_NUMBER;
+    }
+}
+
+void m4aMPlayFadeOutFromVol(struct MusicPlayerInfo *mplayInfo, u16 speed, u16 volume)
+{
+    MPlayFadeOutFromVol(mplayInfo, speed, volume);
+}

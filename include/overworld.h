@@ -156,6 +156,10 @@ bool32 Overworld_SendKeysToLinkIsRunning(void);
 bool32 IsSendingKeysOverCable(void);
 void ClearLinkPlayerObjectEvents(void);
 
+// BSBob Movement Dynamic Music
+void UpdateMovementDynamicMusic(void);
+void Task_UpdateMovementDynamicMusic(u8 taskId);
+
 // Item Description Headers
 enum ItemObtainFlags
 {
