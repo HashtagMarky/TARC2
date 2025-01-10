@@ -1,10 +1,12 @@
 #include "global.h"
 #include "dynamic_music.h"
 #include "constants/dynamic_music.h"
+#include "event_data.h"
 #include "global.fieldmap.h"
 #include "m4a.h"
 #include "sound.h"
 #include "constants/event_objects.h"
+#include "constants/flags.h"
 #include "constants/songs.h"
 
 static const struct DynamicMusicData sInstrumentDynamicMusicData[] =
@@ -16,6 +18,7 @@ static const struct DynamicMusicData sInstrumentDynamicMusicData[] =
             [INSTRUMENT_ACCORDIAN] =
             {
                 .trackBits = 0b000011010110,
+                .flagInstrument = FLAG_TEMP_1,
             },
 
             [INSTRUMENT_ALL] =
@@ -42,21 +45,42 @@ static u8 GetInstrumentFromMusician(void)
     }
 }
 
+void DynamicMusic_RemoveInstrument(u32 instrument)
+{
+    u8 volumeMin = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].volumeMinSixteenth * 16;
+    u16 trackBits = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].trackBits;
+    
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, volumeMin);
+}
+
+void DynamicMusic_RemoveAllInstrument(void)
+{
+    u8 instrument = INSTRUMENT_ALL;
+    u8 volumeMin = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].volumeMinSixteenth * 16;
+    u16 trackBits = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].trackBits;
+    
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, volumeMin);
+}
+
+void DynamicMusic_RemoveAllInstrumentNotPlaying(void)
+{
+    for (u8 instrument = 0; instrument < INSTRUMENT_ALL; instrument++)
+    {
+        u16 flag = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].flagInstrument;
+
+        if (flag != 0 && !FlagGet(flag))
+        {
+            DynamicMusic_RemoveInstrument(instrument);
+        }
+    }
+}
+
 void DynamicMusic_RestoreInstrument(void)
 {
     u8 instrument = GetInstrumentFromMusician();
     u16 trackBits = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].trackBits;
     
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0x100);
-}
-
-void DynamicMusic_RemoveAllInstrument(void)
-{
-    u8 instrument = INSTRUMENT_ALL;
-    u8 volumeMin = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].volumeMin;
-    u16 trackBits = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].trackBits;
-    
-    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, volumeMin);
 }
 
 void DynamicMusic_RestoreAllInstrument(void)

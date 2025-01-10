@@ -14,10 +14,9 @@ struct BackgroundMusicData
 
 struct InstrumentMusicData
 {
-    u8 volumeMin:4;
-    u8 fadeStart;
     u16 trackBits:12;
-    u16 fadeSpeed:4;
+    u16 volumeMinSixteenth:4;
+    u16 flagInstrument;
 };
 
 struct DynamicMusicData
