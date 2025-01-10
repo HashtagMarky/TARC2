@@ -27,6 +27,8 @@ struct DynamicMusicData
 
 void MPlayFadeOutFromVol(struct MusicPlayerInfo *mplayInfo, u16 speed, u16 volume);
 void m4aMPlayFadeOutFromVol(struct MusicPlayerInfo *mplayInfo, u16 speed, u16 volume);
+void MPlayFadeOutTrackBitsFromVol(struct MusicPlayerInfo *mplayInfo, u16 speed, u16 trackBits, u16 volume);
+void m4aMPlayFadeOutTrackBitsFromVol(struct MusicPlayerInfo *mplayInfo, u16 speed, u16 trackBits, u16 volume);
 void UpdateMovementDynamicMusic(void);
 void Task_UpdateMovementDynamicMusic(u8 taskId);
 
