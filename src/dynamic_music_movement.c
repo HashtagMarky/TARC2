@@ -83,16 +83,16 @@ void Task_UpdateMovementDynamicMusic(u8 taskId)
     u16 fadeStart = sMovementDynamicMusicData[GetCurrentMapMusic()].fadeStart;
     bool8 volumeMax = sMovementDynamicMusicData[GetCurrentMapMusic()].volumeMax;
 
-    if (gTasks[taskId].tFadeStartTimer < fadeStart)
+    if (task->tFadeStartTimer < fadeStart)
     {
-        gTasks[taskId].tFadeStartTimer++;
+        task->tFadeStartTimer++;
         return;
     }
 
-    if (volumeMax == TRUE && gTasks[taskId].tStartMaxVolume == FALSE)
+    if (volumeMax == TRUE && task->tStartMaxVolume == FALSE)
     {
         gMapMusicVolume = 256;
-        gTasks[taskId].tStartMaxVolume = TRUE;
+        task->tStartMaxVolume = TRUE;
     }
     
     if (currentMapId != task->tOrigMapId
