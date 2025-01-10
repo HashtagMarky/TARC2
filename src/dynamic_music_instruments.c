@@ -1,8 +1,10 @@
 #include "global.h"
 #include "dynamic_music.h"
 #include "constants/dynamic_music.h"
+#include "global.fieldmap.h"
 #include "m4a.h"
 #include "sound.h"
+#include "constants/event_objects.h"
 #include "constants/songs.h"
 
 static const struct DynamicMusicData sInstrumentDynamicMusicData[] =
@@ -23,6 +25,30 @@ static const struct DynamicMusicData sInstrumentDynamicMusicData[] =
         }
     },
 };
+
+static u8 GetInstrumentFromMusician(void)
+{
+    u16 graphicsId = gObjectEvents[gSelectedObjectEvent].graphicsId;
+
+    switch (graphicsId)
+    {
+    case OBJ_EVENT_GFX_ACCORDIONIST:
+        return INSTRUMENT_ACCORDIAN;
+        break;
+    
+    default:
+        return INSTRUMENT_COUNT;
+        break;
+    }
+}
+
+void DynamicMusic_RestoreInstrument(void)
+{
+    u8 instrument = GetInstrumentFromMusician();
+    u16 trackBits = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].trackBits;
+    
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0x100);
+}
 
 void LittlerootRemoveMainMelody(void)
 {
