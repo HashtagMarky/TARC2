@@ -3583,35 +3583,35 @@ void HideItemDescription(u16 item)
 static void TryUpdateOverworldDayNightMusic(void)
 {
     u16 music = GetCurrLocationDefaultMusic();
+    const struct MapHeader *mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+
+    if ((GetCurrentMapMusic() != mapHeader->music
+        && GetCurrentMapMusic() != mapHeader->musicNight)
+        || GetCurrentMapMusic() == MUS_DUMMY
+        || gPaletteFade.active)
+        return;
     
 
     // Only checks for music change on the hour of time
     // of day, to reduce number of checks. If gPaletteFade
     // is active during this period it may be skipped.
-    // However, this does not cause music to skip unless
-    // warping while this check is passed.
 
     // RtcCalcLocalTime();
-    // if (!gPaletteFade.active
-    //     && gLocalTime.seconds == 0
-    //     && gLocalTime.minutes == 0
+    // if (music != GetCurrentMapMusic()
     //     && (gLocalTime.hours == MORNING_HOUR_BEGIN
     //     || gLocalTime.hours == DAY_HOUR_BEGIN
     //     || gLocalTime.hours == EVENING_HOUR_BEGIN
-    //     || gLocalTime.hours == NIGHT_HOUR_BEGIN)
-    //     && music != GetCurrentMapMusic())
+    //     || gLocalTime.hours == NIGHT_HOUR_BEGIN))
+    //     && gLocalTime.seconds == 0
+    //     && gLocalTime.minutes == 0
     // {
     //     FadeOutAndPlayNewMapMusic(music, 16);
     // }
 
 
     // Checks everytime function is called.
-    // Fixes issues when waerping by not updating
-    // when music is MUS_DUMMY.
 
-    if (!gPaletteFade.active
-        && GetCurrentMapMusic() != MUS_DUMMY
-        && GetCurrentMapMusic() != music)
+    if (GetCurrentMapMusic() != music)
     {
         FadeOutAndPlayNewMapMusic(music, 16);
     }
