@@ -25,10 +25,13 @@ static const struct DynamicMusicData sMovementDynamicMusicData[] =
 {
     [MUS_LITTLEROOT] =
     {
-        .volumeMax = FALSE,
-        .fadeStart = 0,
-        .trackBitsBackground = 0b000110111001,
-        .fadeSpeed = 7,
+        .musicBackground =
+        {
+            .volumeMax = FALSE,
+            .fadeStart = 0,
+            .trackBits = 0b000110111001,
+            .fadeSpeed = 7,
+        },
     },
 };
 
@@ -79,10 +82,10 @@ void Task_UpdateMovementDynamicMusic(u8 taskId)
     struct Task *task = &gTasks[taskId];
     u16 currentMapId = (gSaveBlock1Ptr->location.mapGroup << 8) | (gSaveBlock1Ptr->location.mapNum);
     u16 currentMusic = GetCurrentMapMusic();
-    u16 trackBits = sMovementDynamicMusicData[GetCurrentMapMusic()].trackBitsBackground;
-    u16 fadeSpeed = sMovementDynamicMusicData[GetCurrentMapMusic()].fadeSpeed + 1;
-    u16 fadeStart = sMovementDynamicMusicData[GetCurrentMapMusic()].fadeStart;
-    bool8 volumeMax = sMovementDynamicMusicData[GetCurrentMapMusic()].volumeMax;
+    u16 trackBits = sMovementDynamicMusicData[GetCurrentMapMusic()].musicBackground.trackBits;
+    u16 fadeSpeed = sMovementDynamicMusicData[GetCurrentMapMusic()].musicBackground.fadeSpeed + 1;
+    u16 fadeStart = sMovementDynamicMusicData[GetCurrentMapMusic()].musicBackground.fadeStart;
+    bool8 volumeMax = sMovementDynamicMusicData[GetCurrentMapMusic()].musicBackground.volumeMax;
 
     if (task->tFadeStartTimer < fadeStart)
     {
@@ -121,7 +124,7 @@ void Task_UpdateMovementDynamicMusic(u8 taskId)
 static void Task_UpdateMovementDynamicMusicWait(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    u16 trackBits = sMovementDynamicMusicData[GetCurrentMapMusic()].trackBitsBackground;
+    u16 trackBits = sMovementDynamicMusicData[GetCurrentMapMusic()].musicBackground.trackBits;
     switch (task->tWaitForFly)
     {
     case TRUE:

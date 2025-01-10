@@ -4,6 +4,7 @@
 enum DynamicMusicInstruments
 {
     INSTRUMENT_ACCORDIAN,
+    INSTRUMENT_ALL,
     INSTRUMENT_COUNT,
 };
 
