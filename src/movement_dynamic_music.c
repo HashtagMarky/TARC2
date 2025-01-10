@@ -1,4 +1,4 @@
-// BSBob's Movement Dynamic Music.
+// Kurausukun's Movement Dynamic Music.
 // See comments in movement_dynamic_music.h
 
 

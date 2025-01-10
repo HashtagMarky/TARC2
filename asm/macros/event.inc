@@ -2922,7 +2922,7 @@
 	.endif
 	.endm
 
-	@ Enables BSBob's Dynamic Movement Music on a map.
+	@ Enables Kurausukun's Dynamic Movement Music on a map.
 	@ This must be called in an ON_RESUME mapscript, for all maps where
 	@ it is used, even if warping from a map witht the same music.
 	.macro dynamicmovementmusic
