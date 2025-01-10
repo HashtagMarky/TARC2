@@ -47,6 +47,11 @@ static u8 GetInstrumentFromMusician(void)
 
 void DynamicMusic_RemoveInstrument(u32 instrument)
 {
+    if (instrument == INSTRUMENT_COUNT)
+    {
+        return;
+    }
+
     u8 volumeMin = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].volumeMinSixteenth * 16;
     u16 trackBits = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].trackBits;
     
@@ -75,9 +80,13 @@ void DynamicMusic_RemoveAllInstrumentNotPlaying(void)
     }
 }
 
-void DynamicMusic_RestoreInstrument(void)
+void DynamicMusic_RestoreInstrument(u32 instrument)
 {
-    u8 instrument = GetInstrumentFromMusician();
+    if (instrument == INSTRUMENT_COUNT)
+    {
+        return;
+    }
+
     u16 trackBits = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].trackBits;
     
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0x100);
@@ -85,7 +94,37 @@ void DynamicMusic_RestoreInstrument(void)
 
 void DynamicMusic_RestoreAllInstrument(void)
 {
-    m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
+    u8 instrument = INSTRUMENT_ALL;
+    u16 trackBits = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].trackBits;
+    
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0x100);
+}
+
+void DynamicMusic_RestoreAllInstrumentNotPlaying(void)
+{
+    for (u8 instrument = 0; instrument < INSTRUMENT_ALL; instrument++)
+    {
+        u16 flag = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].flagInstrument;
+
+        if (flag != 0 && FlagGet(flag))
+        {
+            DynamicMusic_RestoreInstrument(instrument);
+        }
+    }
+}
+
+void ScrCmd_DynamicMusic_RemoveInstrument(void)
+{
+    DynamicMusic_RemoveInstrument(
+        GetInstrumentFromMusician()
+    );
+}
+
+void ScrCmd_DynamicMusic_RestoreInstrument(void)
+{
+    DynamicMusic_RestoreInstrument(
+        GetInstrumentFromMusician()
+    );
 }
 
 void LittlerootOnlyMainMelody(void)
