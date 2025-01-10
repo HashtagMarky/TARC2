@@ -166,10 +166,3 @@ void ScrCmd_DynamicMusic_PlayOnlyInstrument(void)
         GetInstrumentFromMusician()
     );
 }
-
-void LittlerootOnlyMainMelody(void)
-{
-    u16 trackBits = (1 << 1) | (1 << 2) | (1 << 4);
-    
-    m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL - trackBits, 0);
-}
