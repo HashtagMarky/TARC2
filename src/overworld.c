@@ -3591,25 +3591,29 @@ static void TryUpdateOverworldDayNightMusic(void)
     // However, this does not cause music to skip unless
     // warping while this check is passed.
 
-    RtcCalcLocalTime();
-    if (!gPaletteFade.active
-        && gLocalTime.seconds == 0
-        && gLocalTime.minutes == 0
-        && (gLocalTime.hours == MORNING_HOUR_BEGIN
-        || gLocalTime.hours == DAY_HOUR_BEGIN
-        || gLocalTime.hours == EVENING_HOUR_BEGIN
-        || gLocalTime.hours == NIGHT_HOUR_BEGIN)
-        && music != GetCurrentMapMusic())
-    {
-        FadeOutAndPlayNewMapMusic(music, 16);
-    }
-
-
-    // Checks everytime function is called.
-
-    // if (!gPaletteFade.active && music != GetCurrentMapMusic())
+    // RtcCalcLocalTime();
+    // if (!gPaletteFade.active
+    //     && gLocalTime.seconds == 0
+    //     && gLocalTime.minutes == 0
+    //     && (gLocalTime.hours == MORNING_HOUR_BEGIN
+    //     || gLocalTime.hours == DAY_HOUR_BEGIN
+    //     || gLocalTime.hours == EVENING_HOUR_BEGIN
+    //     || gLocalTime.hours == NIGHT_HOUR_BEGIN)
+    //     && music != GetCurrentMapMusic())
     // {
     //     FadeOutAndPlayNewMapMusic(music, 16);
     // }
+
+
+    // Checks everytime function is called.
+    // Fixes issues when waerping by not updating
+    // when music is MUS_DUMMY.
+
+    if (!gPaletteFade.active
+        && GetCurrentMapMusic() != MUS_DUMMY
+        && GetCurrentMapMusic() != music)
+    {
+        FadeOutAndPlayNewMapMusic(music, 16);
+    }
 }
 
