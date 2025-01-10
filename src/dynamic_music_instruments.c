@@ -87,6 +87,7 @@ static u8 GetInstrumentFromMusician(void)
     }
 }
 
+// Remove Instruments
 void DynamicMusic_RemoveInstrument(u32 instrument)
 {
     if (instrument == INSTRUMENT_COUNT)
@@ -122,6 +123,19 @@ void DynamicMusic_RemoveAllInstrument(void)
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, volumeMin);
 }
 
+void ScrCmd_DynamicMusic_RemoveInstrument(void)
+{
+    DynamicMusic_RemoveInstrument(
+        GetInstrumentFromMusician()
+    );
+}
+
+void ScrCmd_DynamicMusic_RemoveAllInstrumentNotPlaying(void)
+{
+    DynamicMusic_RemoveAllInstrumentNotPlaying();
+}
+
+// Restore Instruments
 void DynamicMusic_RestoreInstrument(u32 instrument)
 {
     if (instrument == INSTRUMENT_COUNT)
@@ -155,6 +169,19 @@ void DynamicMusic_RestoreAllInstrumentPlaying(void)
     }
 }
 
+void ScrCmd_DynamicMusic_RestoreInstrument(void)
+{
+    DynamicMusic_RestoreInstrument(
+        GetInstrumentFromMusician()
+    );
+}
+
+void ScrCmd_DynamicMusic_RestoreAllInstrumentPlaying(void)
+{
+    DynamicMusic_RestoreAllInstrumentPlaying();
+}
+
+// Play Only Instruments
 void DynamicMusic_PlayOnlyInstrument(u32 instrument)
 {
     if (instrument == INSTRUMENT_COUNT)
@@ -201,33 +228,9 @@ void DynamicMusic_PlayOnlyInstrumentPlaying(void)
     }
 }
 
-void ScrCmd_DynamicMusic_RemoveInstrument(void)
-{
-    DynamicMusic_RemoveInstrument(
-        GetInstrumentFromMusician()
-    );
-}
-
-void ScrCmd_DynamicMusic_RestoreInstrument(void)
-{
-    DynamicMusic_RestoreInstrument(
-        GetInstrumentFromMusician()
-    );
-}
-
 void ScrCmd_DynamicMusic_PlayOnlyInstrument(void)
 {
     DynamicMusic_PlayOnlyInstrument(
         GetInstrumentFromMusician()
     );
-}
-
-void ScrCmd_DynamicMusic_RemoveAllInstrumentNotPlaying(void)
-{
-    DynamicMusic_RemoveAllInstrumentNotPlaying();
-}
-
-void ScrCmd_DynamicMusic_RestoreAllInstrumentPlaying(void)
-{
-    DynamicMusic_RestoreAllInstrumentPlaying();
 }
