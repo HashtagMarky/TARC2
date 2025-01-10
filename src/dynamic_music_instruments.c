@@ -113,6 +113,39 @@ void DynamicMusic_RestoreAllInstrumentNotPlaying(void)
     }
 }
 
+void DynamicMusic_PlayOnlyInstrument(u32 instrument)
+{
+    if (instrument == INSTRUMENT_COUNT)
+    {
+        return;
+    }
+
+    u16 trackBits = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].trackBits;
+    
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, ~trackBits, 0);
+}
+
+void DynamicMusic_PlayOnlyAllInstrument(void)
+{
+    u8 instrument = INSTRUMENT_ALL;
+    u16 trackBits = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].trackBits;
+    
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, ~trackBits, 0);
+}
+
+void DynamicMusic_PlayOnlyInstrumentNotPlaying(void)
+{
+    for (u8 instrument = 0; instrument < INSTRUMENT_ALL; instrument++)
+    {
+        u16 flag = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].flagInstrument;
+
+        if (flag != 0 && FlagGet(flag))
+        {
+            DynamicMusic_RestoreInstrument(instrument);
+        }
+    }
+}
+
 void ScrCmd_DynamicMusic_RemoveInstrument(void)
 {
     DynamicMusic_RemoveInstrument(
@@ -123,6 +156,13 @@ void ScrCmd_DynamicMusic_RemoveInstrument(void)
 void ScrCmd_DynamicMusic_RestoreInstrument(void)
 {
     DynamicMusic_RestoreInstrument(
+        GetInstrumentFromMusician()
+    );
+}
+
+void ScrCmd_DynamicMusic_PlayOnlyInstrument(void)
+{
+    DynamicMusic_PlayOnlyInstrument(
         GetInstrumentFromMusician()
     );
 }
