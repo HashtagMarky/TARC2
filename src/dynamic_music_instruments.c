@@ -50,15 +50,16 @@ void DynamicMusic_RestoreInstrument(void)
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0x100);
 }
 
-void LittlerootRemoveMainMelody(void)
+void DynamicMusic_RemoveAllInstrument(void)
 {
     u8 instrument = INSTRUMENT_ALL;
+    u8 volumeMin = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].volumeMin;
     u16 trackBits = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].trackBits;
     
-    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0);
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, volumeMin);
 }
 
-void LittlerootRestoreMainMelody(void)
+void DynamicMusic_RestoreAllInstrument(void)
 {
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
 }
