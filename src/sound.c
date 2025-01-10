@@ -20,7 +20,7 @@ EWRAM_DATA struct MusicPlayerInfo* gMPlay_PokemonCry = NULL;
 EWRAM_DATA u8 gPokemonCryBGMDuckingCounter = 0;
 
 // Kurausukun's Movement Dynamic Music
-#include "dynamic_music_movement.h"
+#include "dynamic_music.h"
 EWRAM_DATA s16 gMapMusicVolume = 0;
 
 static u16 sCurrentMapMusic;

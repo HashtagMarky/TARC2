@@ -1,9 +1,16 @@
 // Kurausukun's Movement Dynamic Music.
-// See comments in dynamic_music_movement.h
+// Minor edits made by HashtagMarky.
+
+// Full credit must go to Kurausukun for this feature, allowing for music to change
+// dynamically as the player character moves. Minor changes made include adding
+// a start timer for music fading, control of whether the music starts at maximum
+// or minimum volume, smoother tranitioning between maps of the same music.
+// Again, the original work is NOT my own, but be found here:
+// https://github.com/Kurausukun/pokeemerald/tree/dyn_mus
 
 
 #include "global.h"
-#include "dynamic_music_movement.h"
+#include "dynamic_music.h"
 #include "field_effect.h"
 #include "m4a.h"
 #include "overworld.h"
@@ -12,15 +19,7 @@
 #include "constants/field_effects.h"
 #include "constants/songs.h"
 
-struct DynamicMusicData
-{
-    u16 trackBits:12;
-    u16 fadeSpeed:4;
-    u8 fadeStart;
-    bool8 volumeMax;
-};
-
-static const struct DynamicMusicData sDynamicMusicData[] =
+static const struct DynamicMusicData sMovementDynamicMusicData[] =
 {
     [MUS_LITTLEROOT] =
     {
@@ -78,10 +77,10 @@ void Task_UpdateMovementDynamicMusic(u8 taskId)
     struct Task *task = &gTasks[taskId];
     u16 currentMapId = (gSaveBlock1Ptr->location.mapGroup << 8) | (gSaveBlock1Ptr->location.mapNum);
     u16 currentMusic = GetCurrentMapMusic();
-    u16 trackBits = sDynamicMusicData[GetCurrentMapMusic()].trackBits;
-    u16 fadeSpeed = sDynamicMusicData[GetCurrentMapMusic()].fadeSpeed + 1;
-    u16 fadeStart = sDynamicMusicData[GetCurrentMapMusic()].fadeStart;
-    bool8 volumeMax = sDynamicMusicData[GetCurrentMapMusic()].volumeMax;
+    u16 trackBits = sMovementDynamicMusicData[GetCurrentMapMusic()].trackBits;
+    u16 fadeSpeed = sMovementDynamicMusicData[GetCurrentMapMusic()].fadeSpeed + 1;
+    u16 fadeStart = sMovementDynamicMusicData[GetCurrentMapMusic()].fadeStart;
+    bool8 volumeMax = sMovementDynamicMusicData[GetCurrentMapMusic()].volumeMax;
 
     if (gTasks[taskId].tFadeStartTimer < fadeStart)
     {
@@ -120,7 +119,7 @@ void Task_UpdateMovementDynamicMusic(u8 taskId)
 static void Task_UpdateMovementDynamicMusicWait(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    u16 trackBits = sDynamicMusicData[GetCurrentMapMusic()].trackBits;
+    u16 trackBits = sMovementDynamicMusicData[GetCurrentMapMusic()].trackBits;
     switch (task->tWaitForFly)
     {
     case TRUE:
