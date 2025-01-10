@@ -68,9 +68,9 @@ void UpdateMovementDynamicMusic(void)
         
     
     gMapMusicVolume = 0;
+    gTasks[taskId].tOrigMapId = (gSaveBlock1Ptr->location.mapGroup << 8) | (gSaveBlock1Ptr->location.mapNum);
     gTasks[taskId].tStartMaxVolume = FALSE;
     gTasks[taskId].tFadeStartTimer = 0;
-    gTasks[taskId].tOrigMapId = (gSaveBlock1Ptr->location.mapGroup << 8) | (gSaveBlock1Ptr->location.mapNum);
 }
 
 void Task_UpdateMovementDynamicMusic(u8 taskId)
