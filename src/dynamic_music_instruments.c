@@ -221,3 +221,13 @@ void ScrCmd_DynamicMusic_PlayOnlyInstrument(void)
         GetInstrumentFromMusician()
     );
 }
+
+void ScrCmd_DynamicMusic_RemoveAllInstrumentNotPlaying(void)
+{
+    DynamicMusic_RemoveAllInstrumentNotPlaying();
+}
+
+void ScrCmd_DynamicMusic_RestoreAllInstrumentPlaying(void)
+{
+    DynamicMusic_RestoreAllInstrumentPlaying();
+}
