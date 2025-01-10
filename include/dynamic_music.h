@@ -5,10 +5,12 @@
 
 struct DynamicMusicData
 {
-    u16 trackBits:12;
-    u16 fadeSpeed:4;
-    u8 fadeStart;
     bool8 volumeMax;
+    u8 fadeStart;
+    u16 instrument:4;
+    u16 trackBitsIntrument:12;
+    u16 trackBitsBackground:12;
+    u16 fadeSpeed:4;
 };
 
 void MPlayFadeOutFromVol(struct MusicPlayerInfo *mplayInfo, u16 speed, u16 volume);
