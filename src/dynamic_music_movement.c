@@ -12,6 +12,7 @@
 #include "global.h"
 #include "dynamic_music.h"
 #include "field_effect.h"
+#include "global.fieldmap.h"
 #include "m4a.h"
 #include "overworld.h"
 #include "sound.h"
