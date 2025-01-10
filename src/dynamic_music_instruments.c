@@ -101,6 +101,15 @@ void DynamicMusic_RemoveInstrument(u32 instrument)
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, volumeMin);
 }
 
+void DynamicMusic_RemoveAllInstrument(void)
+{
+    u8 instrument = INSTRUMENT_ALL;
+    u8 volumeMin = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].volumeMinSixteenth * 16;
+    u16 trackBits = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].trackBits;
+    
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, volumeMin);
+}
+
 void DynamicMusic_RemoveAllInstrumentNotPlaying(void)
 {
     for (u8 instrument = 0; instrument < INSTRUMENT_ALL; instrument++)
@@ -112,15 +121,6 @@ void DynamicMusic_RemoveAllInstrumentNotPlaying(void)
             DynamicMusic_RemoveInstrument(instrument);
         }
     }
-}
-
-void DynamicMusic_RemoveAllInstrument(void)
-{
-    u8 instrument = INSTRUMENT_ALL;
-    u8 volumeMin = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].volumeMinSixteenth * 16;
-    u16 trackBits = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].trackBits;
-    
-    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, volumeMin);
 }
 
 void ScrCmd_DynamicMusic_RemoveInstrument(void)
