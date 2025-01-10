@@ -1,5 +1,5 @@
-#ifndef GUARD_MOVEMENT_DYNAMIC_MUSIC_H
-#define GUARD_MOVEMENT_DYNAMIC_MUSIC_H
+#ifndef GUARD_DYNAMIC_MUSIC_MOVEMENT_H
+#define GUARD_DYNAMIC_MUSIC_MOVEMENT_H
 
 
 // Kurausukun's Movement Dynamic Music.
@@ -22,4 +22,4 @@ void Task_UpdateMovementDynamicMusic(u8 taskId);
 
 extern s16 gMapMusicVolume;
 
-#endif // GUARD_MOVEMENT_DYNAMIC_MUSIC_H
+#endif // GUARD_DYNAMIC_MUSIC_MOVEMENT_H

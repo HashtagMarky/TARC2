@@ -1,9 +1,9 @@
 // Kurausukun's Movement Dynamic Music.
-// See comments in movement_dynamic_music.h
+// See comments in dynamic_music_movement.h
 
 
 #include "global.h"
-#include "movement_dynamic_music.h"
+#include "dynamic_music_movement.h"
 #include "field_effect.h"
 #include "m4a.h"
 #include "overworld.h"
