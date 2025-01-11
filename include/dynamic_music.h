@@ -30,6 +30,7 @@ void MPlayFadeOutFromVol(struct MusicPlayerInfo *mplayInfo, u16 speed, u16 volum
 void m4aMPlayFadeOutFromVol(struct MusicPlayerInfo *mplayInfo, u16 speed, u16 volume);
 void UpdateMovementDynamicMusic(void);
 void Task_UpdateMovementDynamicMusic(u8 taskId);
+void Task_UpdateMovementDynamicMusicWait(u8 taskId);
 
 // Instruments
 void MPlayFadeOutTrackBitsFromVol(struct MusicPlayerInfo *mplayInfo, u16 speed, u16 trackBits, u16 volume);
@@ -42,7 +43,7 @@ void DynamicMusic_RestoreAllInstrument(void);
 void DynamicMusic_RestoreAllInstrumentPlaying(void);
 void DynamicMusic_PlayOnlyInstrument(u32 instrument);
 void DynamicMusic_PlayOnlyAllInstrument(void);
-void DynamicMusic_PlayOnlyInstrumentNotPlaying(void);
+void UNUSED DynamicMusic_PlayOnlyInstrumentNotPlaying(void);
 void DynamicMusic_PlayOnlyInstrumentPlaying(void);
 
 extern s16 gMapMusicVolume;

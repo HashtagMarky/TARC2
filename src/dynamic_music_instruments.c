@@ -123,7 +123,7 @@ void DynamicMusic_RemoveAllInstrumentNotPlaying(void)
     }
 }
 
-void ScrCmd_DynamicMusic_RemoveInstrument(void)
+void ScrCmd_DynamicMusic_RemoveMusicianInstrument(void)
 {
     DynamicMusic_RemoveInstrument(
         GetInstrumentFromMusician()
@@ -169,7 +169,7 @@ void DynamicMusic_RestoreAllInstrumentPlaying(void)
     }
 }
 
-void ScrCmd_DynamicMusic_RestoreInstrument(void)
+void ScrCmd_DynamicMusic_RestoreMusicianInstrument(void)
 {
     DynamicMusic_RestoreInstrument(
         GetInstrumentFromMusician()
@@ -202,7 +202,7 @@ void DynamicMusic_PlayOnlyAllInstrument(void)
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, ~trackBits, 0);
 }
 
-void DynamicMusic_PlayOnlyInstrumentNotPlaying(void)
+void UNUSED DynamicMusic_PlayOnlyInstrumentNotPlaying(void)
 {
     for (u8 instrument = 0; instrument < INSTRUMENT_ALL; instrument++)
     {
@@ -217,6 +217,7 @@ void DynamicMusic_PlayOnlyInstrumentNotPlaying(void)
 
 void DynamicMusic_PlayOnlyInstrumentPlaying(void)
 {
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0);
     for (u8 instrument = 0; instrument < INSTRUMENT_ALL; instrument++)
     {
         u16 flag = sInstrumentDynamicMusicData[GetCurrentMapMusic()].musicInstrument[instrument].flagInstrument;
@@ -228,7 +229,7 @@ void DynamicMusic_PlayOnlyInstrumentPlaying(void)
     }
 }
 
-void ScrCmd_DynamicMusic_PlayOnlyInstrument(void)
+void ScrCmd_DynamicMusic_PlayOnlyMusicianInstrument(void)
 {
     DynamicMusic_PlayOnlyInstrument(
         GetInstrumentFromMusician()

@@ -35,8 +35,6 @@ static const struct DynamicMusicData sMovementDynamicMusicData[] =
     },
 };
 
-static void Task_UpdateMovementDynamicMusicWait(u8 taskId);
-
 void MPlayFadeOutFromVol(struct MusicPlayerInfo *mplayInfo, u16 speed, u16 volume)
 {
     if (mplayInfo->ident == ID_NUMBER)
@@ -121,7 +119,7 @@ void Task_UpdateMovementDynamicMusic(u8 taskId)
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, (u16)gMapMusicVolume);
 }
 
-static void Task_UpdateMovementDynamicMusicWait(u8 taskId)
+void Task_UpdateMovementDynamicMusicWait(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     u16 trackBits = sMovementDynamicMusicData[GetCurrentMapMusic()].musicBackground.trackBits;
