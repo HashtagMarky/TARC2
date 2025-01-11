@@ -255,6 +255,7 @@ enum DynamicMusicDebugMenu
     DEBUG_DYNAMIC_MUSIC_MENU_FLUTE,
     DEBUG_DYNAMIC_MUSIC_MENU_ALL_INSTRUMENTS,
     DEBUG_DYNAMIC_MUSIC_MENU_PLAYING_INSTRUMENTS,
+    DEBUG_DYNAMIC_MUSIC_MENU_TRACKS,
     DEBUG_DYNAMIC_MUSIC_MENU_MOVEMENT_MUSIC,
 };
 
@@ -263,6 +264,29 @@ enum DynamicMusicInstrumentDebugMenu
     DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_REMOVE,
     DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_RESTORE,
     DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_PLAY_ONLY,
+};
+
+enum DynamicMusicTrackListDebugMenu
+{
+    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_00,
+    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_01,
+    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_02,
+    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_03,
+    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_04,
+    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_05,
+    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_06,
+    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_07,
+    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_08,
+    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_09,
+    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_10,
+    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_11,
+};
+
+enum DynamicMusicTracksDebugMenu
+{
+    DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_REMOVE,
+    DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_RESTORE,
+    DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_PLAY_ONLY,
 };
 
 // *******************************
@@ -343,6 +367,7 @@ static EWRAM_DATA struct DebugBattleData *sDebugBattleData = NULL;
 EWRAM_DATA bool8 gIsDebugBattle = FALSE;
 EWRAM_DATA u32 gDebugAIFlags = 0;
 EWRAM_DATA u8 sInstrument = 0;
+EWRAM_DATA u8 sTrackNum = 0;
 
 // *******************************
 // Define functions
@@ -374,6 +399,7 @@ static void DebugAction_OpenGiveMenu(u8 taskId);
 static void DebugAction_OpenSoundMenu(u8 taskId);
 static void DebugAction_OpenDynamicMusicMenu(u8 taskId);
 static void DebugAction_OpenDynamicMusicInstrumentMenu(u8 taskId);
+static void DebugAction_OpenDynamicMusicIsolateTrackMenu(u8 taskId);
 
 static void DebugTask_HandleMenuInput_Main(u8 taskId);
 static void DebugTask_HandleMenuInput_Utilities(u8 taskId);
@@ -388,6 +414,8 @@ static void DebugTask_HandleMenuInput_Sound(u8 taskId);
 static void DebugTask_HandleMenuInput_BerryFunctions(u8 taskId);
 static void DebugTask_HandleMenuInput_DynamicMusic(u8 taskId);
 static void DebugTask_HandleMenuInput_DynamicMusicInstruments(u8 taskId);
+static void DebugTask_HandleMenuInput_DynamicMusicIsolateTracksList(u8 taskId);
+static void DebugTask_HandleMenuInput_DynamicMusicIsolateTracksFuncs(u8 taskId);
 
 static void DebugAction_Util_Fly(u8 taskId);
 static void DebugAction_Util_Warp_Warp(u8 taskId);
@@ -491,6 +519,10 @@ static void DebugAction_BerryFunctions_Weeds(u8 taskId);
 static void DebugAction_DynamicMusic_InstrumentRemove(u8 taskId);
 static void DebugAction_DynamicMusic_InstrumentRestore(u8 taskId);
 static void DebugAction_DynamicMusic_InstrumentPlayOnly(u8 taskId);
+static void DebugAction_DynamicMusic_OpenTrackFuncMenu(u8 taskid);
+static void DebugAction_DynamicMusic_TrackRemove(u8 taskId);
+static void DebugAction_DynamicMusic_TrackRestore(u8 taskId);
+static void DebugAction_DynamicMusic_TrackPlayOnly(u8 taskId);
 static void DebugAction_DynamicMusic_Movement(u8 taskId);
 static u32 DebugAction_DynamicMusic_ReturnInstrumentFromMenuItem(u32 input);
 static void DynamicMusicInstrumentMenu_BufferInstrument(u32 input);
@@ -719,10 +751,23 @@ static const u8 sDebugText_DynamicMusic_Whistle[] =                 _("Whistle�
 static const u8 sDebugText_DynamicMusic_Flute[] =                   _("Flute…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_DynamicMusic_AllInstruments[] =          _("All Instruments…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_DynamicMusic_PlayingInstruments[] =      _("Playing Instruments…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_DynamicMusic_IsolateTracks[] =           _("Isolate Tracks…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_DynamicMusic_MovementMusic[] =           _("Dynamic Movement Music");
-static const u8 sDebugText_DynamicMusic_Instrument_Remove[] =       _("Remove {STR_VAR_1}");
-static const u8 sDebugText_DynamicMusic_Instrument_Restore[] =      _("Restore {STR_VAR_1}");
-static const u8 sDebugText_DynamicMusic_Instrument_PlayOnly[] =     _("Play Only {STR_VAR_1}");
+static const u8 sDebugText_DynamicMusic_Instrument_Remove[] =       _("Remove");
+static const u8 sDebugText_DynamicMusic_Instrument_Restore[] =      _("Restore");
+static const u8 sDebugText_DynamicMusic_Instrument_PlayOnly[] =     _("Play Only");
+static const u8 sDebugText_DynamicMusic_Instrument_Track00[] =      _("Track 00…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_DynamicMusic_Instrument_Track01[] =      _("Track 01…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_DynamicMusic_Instrument_Track02[] =      _("Track 02…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_DynamicMusic_Instrument_Track03[] =      _("Track 03…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_DynamicMusic_Instrument_Track04[] =      _("Track 04…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_DynamicMusic_Instrument_Track05[] =      _("Track 05…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_DynamicMusic_Instrument_Track06[] =      _("Track 06…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_DynamicMusic_Instrument_Track07[] =      _("Track 07…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_DynamicMusic_Instrument_Track08[] =      _("Track 08…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_DynamicMusic_Instrument_Track09[] =      _("Track 09…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_DynamicMusic_Instrument_Track10[] =      _("Track 10…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_DynamicMusic_Instrument_Track11[] =      _("Track 11…{CLEAR_TO 110}{RIGHT_ARROW}");
 
 static const u8 sDebugText_Digit_1[] =        _("{LEFT_ARROW}+1{RIGHT_ARROW}        ");
 static const u8 sDebugText_Digit_10[] =       _("{LEFT_ARROW}+10{RIGHT_ARROW}       ");
@@ -944,15 +989,40 @@ static const struct ListMenuItem sDebugMenu_Items_DynamicMusic[] =
     [DEBUG_DYNAMIC_MUSIC_MENU_FLUTE]                = {sDebugText_DynamicMusic_Flute,               DEBUG_DYNAMIC_MUSIC_MENU_FLUTE},
     [DEBUG_DYNAMIC_MUSIC_MENU_ALL_INSTRUMENTS]      = {sDebugText_DynamicMusic_AllInstruments,      DEBUG_DYNAMIC_MUSIC_MENU_ALL_INSTRUMENTS},
     [DEBUG_DYNAMIC_MUSIC_MENU_PLAYING_INSTRUMENTS]  = {sDebugText_DynamicMusic_PlayingInstruments,  DEBUG_DYNAMIC_MUSIC_MENU_PLAYING_INSTRUMENTS},
+    [DEBUG_DYNAMIC_MUSIC_MENU_TRACKS]               = {sDebugText_DynamicMusic_IsolateTracks,       DEBUG_DYNAMIC_MUSIC_MENU_TRACKS},
     [DEBUG_DYNAMIC_MUSIC_MENU_MOVEMENT_MUSIC]       = {sDebugText_DynamicMusic_MovementMusic,       DEBUG_DYNAMIC_MUSIC_MENU_MOVEMENT_MUSIC},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_DynamicMusic_Instruments[] =
 {
-    [DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_REMOVE]    = {sDebugText_DynamicMusic_Instrument_Remove,   DEBUG_DYNAMIC_MUSIC_MENU_ACCORDIAN},
-    [DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_RESTORE]   = {sDebugText_DynamicMusic_Instrument_Restore,  DEBUG_DYNAMIC_MUSIC_MENU_KEYTAR},
-    [DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_PLAY_ONLY] = {sDebugText_DynamicMusic_Instrument_PlayOnly, DEBUG_DYNAMIC_MUSIC_MENU_ERHU},
+    [DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_REMOVE]    = {sDebugText_DynamicMusic_Instrument_Remove,   DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_REMOVE},
+    [DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_RESTORE]   = {sDebugText_DynamicMusic_Instrument_Restore,  DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_RESTORE},
+    [DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_PLAY_ONLY] = {sDebugText_DynamicMusic_Instrument_PlayOnly, DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_PLAY_ONLY},
 };
+
+static const struct ListMenuItem sDebugMenu_Items_DynamicMusic_TrackList[] =
+{
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_00]        = {sDebugText_DynamicMusic_Instrument_Track00,  DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_00},
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_01]        = {sDebugText_DynamicMusic_Instrument_Track01,  DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_01},
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_02]        = {sDebugText_DynamicMusic_Instrument_Track02,  DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_02},
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_03]        = {sDebugText_DynamicMusic_Instrument_Track03,  DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_03},
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_04]        = {sDebugText_DynamicMusic_Instrument_Track04,  DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_04},
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_05]        = {sDebugText_DynamicMusic_Instrument_Track05,  DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_05},
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_06]        = {sDebugText_DynamicMusic_Instrument_Track06,  DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_06},
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_07]        = {sDebugText_DynamicMusic_Instrument_Track07,  DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_07},
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_08]        = {sDebugText_DynamicMusic_Instrument_Track08,  DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_08},
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_09]        = {sDebugText_DynamicMusic_Instrument_Track09,  DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_09},
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_10]        = {sDebugText_DynamicMusic_Instrument_Track10,  DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_10},
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_11]        = {sDebugText_DynamicMusic_Instrument_Track11,  DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_11},
+};
+
+static const struct ListMenuItem sDebugMenu_Items_DynamicMusic_IsolateTracks[] =
+{
+    [DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_REMOVE]        = {sDebugText_DynamicMusic_Instrument_Remove,   DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_REMOVE},
+    [DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_RESTORE]       = {sDebugText_DynamicMusic_Instrument_Restore,  DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_RESTORE},
+    [DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_PLAY_ONLY]     = {sDebugText_DynamicMusic_Instrument_PlayOnly, DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_PLAY_ONLY},
+};
+
 
 // *******************************
 // Menu Actions
@@ -1093,6 +1163,7 @@ static void (*const sDebugMenu_Actions_DynamicMusic[])(u8) =
     [DEBUG_DYNAMIC_MUSIC_MENU_FLUTE]                = DebugAction_OpenDynamicMusicInstrumentMenu,
     [DEBUG_DYNAMIC_MUSIC_MENU_ALL_INSTRUMENTS]      = DebugAction_OpenDynamicMusicInstrumentMenu,
     [DEBUG_DYNAMIC_MUSIC_MENU_PLAYING_INSTRUMENTS]  = DebugAction_OpenDynamicMusicInstrumentMenu,
+    [DEBUG_DYNAMIC_MUSIC_MENU_TRACKS]               = DebugAction_OpenDynamicMusicIsolateTrackMenu,
     [DEBUG_DYNAMIC_MUSIC_MENU_MOVEMENT_MUSIC]       = DebugAction_DynamicMusic_Movement,
 };
 
@@ -1101,6 +1172,29 @@ static void (*const sDebugMenu_Actions_DynamicMusic_Instruments[])(u8) =
     [DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_REMOVE]    = DebugAction_DynamicMusic_InstrumentRemove,
     [DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_RESTORE]   = DebugAction_DynamicMusic_InstrumentRestore,
     [DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_PLAY_ONLY] = DebugAction_DynamicMusic_InstrumentPlayOnly,
+};
+
+static void (*const sDebugMenu_Actions_DynamicMusic_TrackList[])(u8) =
+{
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_00]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_01]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_02]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_03]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_04]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_05]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_06]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_07]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_08]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_09]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_10]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_11]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
+};
+
+static void (*const sDebugMenu_Actions_DynamicMusic_Tracks[])(u8) =
+{
+    [DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_REMOVE]        = DebugAction_DynamicMusic_TrackRemove,
+    [DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_RESTORE]       = DebugAction_DynamicMusic_TrackRestore,
+    [DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_PLAY_ONLY]     = DebugAction_DynamicMusic_TrackPlayOnly,
 };
 
 // *******************************
@@ -1265,6 +1359,20 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_DynamicMusic_Instru
     .items = sDebugMenu_Items_DynamicMusic_Instruments,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_DynamicMusic_Instruments),
+};
+
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_DynamicMusic_IsolateTracksList =
+{
+    .items = sDebugMenu_Items_DynamicMusic_TrackList,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_DynamicMusic_TrackList),
+};
+
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_DynamicMusic_IsolateTracksFunc =
+{
+    .items = sDebugMenu_Items_DynamicMusic_IsolateTracks,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_DynamicMusic_IsolateTracks),
 };
 
 // *******************************
@@ -2016,6 +2124,47 @@ static void DebugTask_HandleMenuInput_DynamicMusicInstruments(u8 taskId)
     }
 }
 
+static void DebugTask_HandleMenuInput_DynamicMusicIsolateTracksList(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Actions_DynamicMusic_TrackList[input]) != NULL)
+        {
+            sTrackNum = input;
+            func(taskId);
+        }
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_DynamicMusic, sDebugMenu_ListTemplate_DynamicMusic);
+    }
+}
+
+static void DebugTask_HandleMenuInput_DynamicMusicIsolateTracksFuncs(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Actions_DynamicMusic_Tracks[input]) != NULL)
+            func(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_DynamicMusicIsolateTracksList, sDebugMenu_ListTemplate_DynamicMusic_IsolateTracksList);
+    }
+}
+
 // *******************************
 // Open sub-menus
 static void DebugAction_OpenUtilitiesMenu(u8 taskId)
@@ -2077,6 +2226,18 @@ static void DebugAction_OpenDynamicMusicInstrumentMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_DynamicMusicInstruments, sDebugMenu_ListTemplate_DynamicMusic_Instruments);
+}
+
+static void DebugAction_OpenDynamicMusicIsolateTrackMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_DynamicMusicIsolateTracksList, sDebugMenu_ListTemplate_DynamicMusic_IsolateTracksList);
+}
+
+static void DebugAction_DynamicMusic_OpenTrackFuncMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_DynamicMusicIsolateTracksFuncs, sDebugMenu_ListTemplate_DynamicMusic_IsolateTracksFunc);
 }
 
 // *******************************
@@ -5735,6 +5896,31 @@ static void DebugAction_DynamicMusic_InstrumentPlayOnly(u8 taskId)
     ScriptContext_Enable();
 }
 
+static void DebugAction_DynamicMusic_TrackRemove(u8 taskId)
+{
+    u16 trackBits = 1 << sTrackNum;
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0);
+    Debug_DestroyMenu_Full(taskId);
+    ScriptContext_Enable();
+}
+
+static void DebugAction_DynamicMusic_TrackRestore(u8 taskId)
+{
+    u16 trackBits = 1 << sTrackNum;
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0x100);
+    Debug_DestroyMenu_Full(taskId);
+    ScriptContext_Enable();
+}
+
+static void DebugAction_DynamicMusic_TrackPlayOnly(u8 taskId)
+{
+    u16 trackBits = 1 << sTrackNum;
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0);
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0x100);
+    Debug_DestroyMenu_Full(taskId);
+    ScriptContext_Enable();
+}
+
 static void DebugAction_DynamicMusic_Movement(u8 taskId)
 {
     if (FindTaskIdByFunc(Task_UpdateMovementDynamicMusicWait) == TASK_NONE
@@ -5838,6 +6024,9 @@ static u32 DebugAction_DynamicMusic_ReturnInstrumentFromMenuItem(u32 input)
     
     if (input == DEBUG_DYNAMIC_MUSIC_MENU_PLAYING_INSTRUMENTS)
         return INSTRUMENT_COUNT + 1;
+
+    if (input == DEBUG_DYNAMIC_MUSIC_MENU_TRACKS)
+        return INSTRUMENT_COUNT + 2;
     
     return INSTRUMENT_COUNT;
 }
