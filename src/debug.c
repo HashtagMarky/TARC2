@@ -268,6 +268,7 @@ enum DynamicMusicInstrumentDebugMenu
 
 enum DynamicMusicTrackListDebugMenu
 {
+    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_ALL,
     DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_00,
     DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_01,
     DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_02,
@@ -756,6 +757,7 @@ static const u8 sDebugText_DynamicMusic_MovementMusic[] =           _("Dynamic M
 static const u8 sDebugText_DynamicMusic_Instrument_Remove[] =       _("Remove");
 static const u8 sDebugText_DynamicMusic_Instrument_Restore[] =      _("Restore");
 static const u8 sDebugText_DynamicMusic_Instrument_PlayOnly[] =     _("Play Only");
+static const u8 sDebugText_DynamicMusic_Instrument_TrackAll[] =     _("All Tracks…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_DynamicMusic_Instrument_Track00[] =      _("Track 00…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_DynamicMusic_Instrument_Track01[] =      _("Track 01…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_DynamicMusic_Instrument_Track02[] =      _("Track 02…{CLEAR_TO 110}{RIGHT_ARROW}");
@@ -1002,6 +1004,7 @@ static const struct ListMenuItem sDebugMenu_Items_DynamicMusic_Instruments[] =
 
 static const struct ListMenuItem sDebugMenu_Items_DynamicMusic_TrackList[] =
 {
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_ALL]       = {sDebugText_DynamicMusic_Instrument_TrackAll, DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_ALL},
     [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_00]        = {sDebugText_DynamicMusic_Instrument_Track00,  DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_00},
     [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_01]        = {sDebugText_DynamicMusic_Instrument_Track01,  DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_01},
     [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_02]        = {sDebugText_DynamicMusic_Instrument_Track02,  DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_02},
@@ -1176,6 +1179,7 @@ static void (*const sDebugMenu_Actions_DynamicMusic_Instruments[])(u8) =
 
 static void (*const sDebugMenu_Actions_DynamicMusic_TrackList[])(u8) =
 {
+    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_ALL]       = DebugAction_DynamicMusic_OpenTrackFuncMenu,
     [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_00]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
     [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_01]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
     [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_02]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
@@ -5898,7 +5902,9 @@ static void DebugAction_DynamicMusic_InstrumentPlayOnly(u8 taskId)
 
 static void DebugAction_DynamicMusic_TrackRemove(u8 taskId)
 {
-    u16 trackBits = 1 << sTrackNum;
+    u16 trackBits = 1 << (sTrackNum - 1);
+    if (sTrackNum == 0)
+        trackBits = TRACKS_ALL;
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0);
     // Debug_DestroyMenu_Full(taskId);
     // ScriptContext_Enable();
@@ -5906,7 +5912,9 @@ static void DebugAction_DynamicMusic_TrackRemove(u8 taskId)
 
 static void DebugAction_DynamicMusic_TrackRestore(u8 taskId)
 {
-    u16 trackBits = 1 << sTrackNum;
+    u16 trackBits = 1 << (sTrackNum - 1);
+    if (sTrackNum == 0)
+        trackBits = TRACKS_ALL;
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0x100);
     // Debug_DestroyMenu_Full(taskId);
     // ScriptContext_Enable();
@@ -5914,7 +5922,9 @@ static void DebugAction_DynamicMusic_TrackRestore(u8 taskId)
 
 static void DebugAction_DynamicMusic_TrackPlayOnly(u8 taskId)
 {
-    u16 trackBits = 1 << sTrackNum;
+    u16 trackBits = 1 << (sTrackNum - 1);
+    if (sTrackNum == 0)
+        trackBits = TRACKS_ALL;
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0);
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0x100);
     // Debug_DestroyMenu_Full(taskId);
