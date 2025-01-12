@@ -27,6 +27,41 @@ static const struct DynamicMusicData sInstrumentDynamicMusicData[] =
             }
         }
     },
+
+    [MUS_HG_AZALEA] =
+    {
+        .musicInstrument =
+        {
+            [INSTRUMENT_ACCORDIAN] =
+            {
+                .trackBits = 0b000000000000,
+            },
+            [INSTRUMENT_KEYTAR] =
+            {
+                .trackBits = 0b001000100000,
+            },
+            [INSTRUMENT_ERHU] =
+            {
+                .trackBits = 0b000000001100,
+            },
+            [INSTRUMENT_GUITAR] =
+            {
+                .trackBits = 0b000000000000,
+            },
+            [INSTRUMENT_WHISTLE] =
+            {
+                .trackBits = 0b000010000000,
+            },
+            [INSTRUMENT_FLUTE] =
+            {
+                .trackBits = 0b110000000001,
+            },
+            [INSTRUMENT_ALL] =
+            {
+                .trackBits = 0b111010101101,
+            },
+        }
+    }
 };
 
 void MPlayFadeOutTrackBitsFromVol(struct MusicPlayerInfo *mplayInfo, u16 speed, u16 trackBits, u16 volume)
