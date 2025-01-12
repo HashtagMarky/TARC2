@@ -70,6 +70,8 @@
 
 #include "dynamic_music.h"
 
+#define FLAG_DEBUG_SOUND_OVERWORLD_PLAY TRUE
+
 // *******************************
 enum DebugMenu
 {
@@ -4801,7 +4803,10 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     {
         m4aSongNumStop(gTasks[taskId].tCurrentSong);
         gTasks[taskId].tCurrentSong = gTasks[taskId].tInput;
-        m4aSongNumStart(gTasks[taskId].tInput);
+        if (FLAG_DEBUG_SOUND_OVERWORLD_PLAY)
+            Overworld_ChangeMusicTo(gTasks[taskId].tInput);
+        else
+            m4aSongNumStart(gTasks[taskId].tInput);
     }
     else if (JOY_NEW(B_BUTTON))
     {
