@@ -49,6 +49,7 @@
 #include "constants/map_groups.h"
 #include "constants/items.h"
 #include "ikigai_characters.h"
+#include "constants/field_specials.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 extern const u8 EventScript_ResetIkigaiMapFlags[];
@@ -114,6 +115,7 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsOverworldCatchSuccessMultiplyer = FALSE;
     gSaveBlock2Ptr->optionsBikeMusic = FALSE;
     gSaveBlock2Ptr->optionsSurfMusic = FALSE;
+    gSaveBlock2Ptr->optionsOverworldSpeed = OPTIONS_OVERWORLD_SPEED_NORMAL;
     gSaveBlock2Ptr->optionsWildBattleSpeed = OPTIONS_BATTLE_SPEED_NORMAL;
     gSaveBlock2Ptr->optionsTrainerBattleSpeed = OPTIONS_BATTLE_SPEED_NORMAL;
     gSaveBlock2Ptr->optionsClockMode = FALSE;

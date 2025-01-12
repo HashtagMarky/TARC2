@@ -1583,10 +1583,10 @@ void CB2_Overworld(void)
         SetVBlankCallback(NULL);
     OverworldBasic();
 
-    // for (u8 loops = 0; loops < (gSaveBlock2Ptr->optionsSound + 1); loops++)
-    // {
+    for (u8 loops = 0; loops < (gSaveBlock2Ptr->optionsOverworldSpeed * 2); loops++)
+    {
         OverworldBasicSpeedup();
-    // }
+    }
 
     if (fading)
     {
