@@ -1557,6 +1557,19 @@ static void OverworldBasic(void)
     DoScheduledBgTilemapCopiesToVram();
 }
 
+static void OverworldBasicSpeedup(void)
+{
+    ScriptContext_RunScript();
+    // RunTasks();
+    AnimateSprites();
+    CameraUpdate();
+    UpdateCameraPanning();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+    UpdateTilesetAnimations();
+    DoScheduledBgTilemapCopiesToVram();
+}
+
 // This CB2 is used when starting
 void CB2_OverworldBasic(void)
 {
@@ -1569,6 +1582,12 @@ void CB2_Overworld(void)
     if (fading)
         SetVBlankCallback(NULL);
     OverworldBasic();
+
+    for (u8 loops = 0; loops < gSaveBlock2Ptr->optionsSound + 1; loops++)
+    {
+        OverworldBasicSpeedup();
+    }
+
     if (fading)
     {
         SetFieldVBlankCallback();
