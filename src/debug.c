@@ -5936,6 +5936,7 @@ static void DebugAction_DynamicMusic_Movement(u8 taskId)
     if (FindTaskIdByFunc(Task_UpdateMovementDynamicMusicWait) == TASK_NONE
         && FindTaskIdByFunc(Task_UpdateMovementDynamicMusic) == TASK_NONE)
     {
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
         UpdateMovementDynamicMusic();
         Debug_DestroyMenu_Full(taskId);
         ScriptContext_Enable();
