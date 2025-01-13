@@ -1534,7 +1534,7 @@ static void DrawChoices_BattleSpeed(int selection, int y)
         DrawOptionMenuChoice(sText_Normal, 104, y, 0, active);
     else
     {
-        u8 textMultipler[] = _("x1{0x77}{0x77}{0x77}{0x77}{0x77}");
+        u8 textMultipler[] = _("x1 SPEED{0x77}{0x77}{0x77}{0x77}{0x77}");
         textMultipler[1] = CHAR_1 + selection;
         DrawOptionMenuChoice(textMultipler, 104, y, 1, active);
     }
@@ -1777,7 +1777,7 @@ static void DrawChoices_OverworldSpeed(int selection, int y)
         DrawOptionMenuChoice(sText_Normal, 104, y, 0, active);
     else
     {
-        u8 textMultipler[] = _("x1{0x77}{0x77}{0x77}{0x77}{0x77}");
+        u8 textMultipler[] = _("x1 SPEED{0x77}{0x77}{0x77}{0x77}{0x77}");
         textMultipler[1] = CHAR_1 + OverworldSpeedupAdditionalIterations(selection);
         DrawOptionMenuChoice(textMultipler, 104, y, 1, active);
     }
