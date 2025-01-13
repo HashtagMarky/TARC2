@@ -249,7 +249,7 @@ enum BerryFunctionsMenu
 
 enum DynamicMusicDebugMenu
 {
-    DEBUG_DYNAMIC_MUSIC_MENU_ACCORDIAN,
+    DEBUG_DYNAMIC_MUSIC_MENU_ACCORDION,
     DEBUG_DYNAMIC_MUSIC_MENU_KEYTAR,
     DEBUG_DYNAMIC_MUSIC_MENU_ERHU,
     DEBUG_DYNAMIC_MUSIC_MENU_GUITAR,
@@ -746,7 +746,7 @@ static const u8 sDebugText_BerryFunctions_NextStage[] = _("Grow map trees");
 static const u8 sDebugText_BerryFunctions_Pests[] =     _("Give map trees pests");
 static const u8 sDebugText_BerryFunctions_Weeds[] =     _("Give map trees weeds");
 // Dynamic Music Menu
-static const u8 sDebugText_DynamicMusic_Accordian[] =               _("Accordian…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_DynamicMusic_Accordion[] =               _("Accordion…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_DynamicMusic_Keytar[] =                  _("Keytar…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_DynamicMusic_Erhu[] =                    _("Erhu…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_DynamicMusic_Guitar[] =                  _("Guitar…{CLEAR_TO 110}{RIGHT_ARROW}");
@@ -985,7 +985,7 @@ static const struct ListMenuItem sDebugMenu_Items_BerryFunctions[] =
 
 static const struct ListMenuItem sDebugMenu_Items_DynamicMusic[] =
 {
-    [DEBUG_DYNAMIC_MUSIC_MENU_ACCORDIAN]            = {sDebugText_DynamicMusic_Accordian,           DEBUG_DYNAMIC_MUSIC_MENU_ACCORDIAN},
+    [DEBUG_DYNAMIC_MUSIC_MENU_ACCORDION]            = {sDebugText_DynamicMusic_Accordion,           DEBUG_DYNAMIC_MUSIC_MENU_ACCORDION},
     [DEBUG_DYNAMIC_MUSIC_MENU_KEYTAR]               = {sDebugText_DynamicMusic_Keytar,              DEBUG_DYNAMIC_MUSIC_MENU_KEYTAR},
     [DEBUG_DYNAMIC_MUSIC_MENU_ERHU]                 = {sDebugText_DynamicMusic_Erhu,                DEBUG_DYNAMIC_MUSIC_MENU_ERHU},
     [DEBUG_DYNAMIC_MUSIC_MENU_GUITAR]               = {sDebugText_DynamicMusic_Guitar,              DEBUG_DYNAMIC_MUSIC_MENU_GUITAR},
@@ -1160,7 +1160,7 @@ static void (*const sDebugMenu_Actions_BerryFunctions[])(u8) =
 
 static void (*const sDebugMenu_Actions_DynamicMusic[])(u8) =
 {
-    [DEBUG_DYNAMIC_MUSIC_MENU_ACCORDIAN]            = DebugAction_OpenDynamicMusicInstrumentMenu,
+    [DEBUG_DYNAMIC_MUSIC_MENU_ACCORDION]            = DebugAction_OpenDynamicMusicInstrumentMenu,
     [DEBUG_DYNAMIC_MUSIC_MENU_KEYTAR]               = DebugAction_OpenDynamicMusicInstrumentMenu,
     [DEBUG_DYNAMIC_MUSIC_MENU_ERHU]                 = DebugAction_OpenDynamicMusicInstrumentMenu,
     [DEBUG_DYNAMIC_MUSIC_MENU_GUITAR]               = DebugAction_OpenDynamicMusicInstrumentMenu,
@@ -6017,8 +6017,8 @@ static void DebugAction_Util_CheckEWRAMCounters(u8 taskId)
 
 static u32 DebugAction_DynamicMusic_ReturnInstrumentFromMenuItem(u32 input)
 {
-    if (input == DEBUG_DYNAMIC_MUSIC_MENU_ACCORDIAN)
-        return INSTRUMENT_ACCORDIAN;
+    if (input == DEBUG_DYNAMIC_MUSIC_MENU_ACCORDION)
+        return INSTRUMENT_ACCORDION;
     
     if (input == DEBUG_DYNAMIC_MUSIC_MENU_KEYTAR)
         return INSTRUMENT_KEYTAR;
@@ -6051,8 +6051,8 @@ static void DynamicMusicInstrumentMenu_BufferInstrument(u32 input)
 {
     switch (input)
     {
-    case DEBUG_DYNAMIC_MUSIC_MENU_ACCORDIAN:
-        StringCopy(gStringVar1, COMPOUND_STRING("Accordian"));
+    case DEBUG_DYNAMIC_MUSIC_MENU_ACCORDION:
+        StringCopy(gStringVar1, COMPOUND_STRING("Accordion"));
         break;
     
     case DEBUG_DYNAMIC_MUSIC_MENU_KEYTAR:

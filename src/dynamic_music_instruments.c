@@ -15,7 +15,7 @@ static const struct DynamicMusicData sInstrumentDynamicMusicData[] =
     {
         .musicInstrument =
         {
-            [INSTRUMENT_ACCORDIAN] =
+            [INSTRUMENT_ACCORDION] =
             {
                 .trackBits = 0b000011010110,
                 .flagInstrument = FLAG_TEMP_1,
@@ -32,7 +32,7 @@ static const struct DynamicMusicData sInstrumentDynamicMusicData[] =
     {
         .musicInstrument =
         {
-            [INSTRUMENT_ACCORDIAN] =
+            [INSTRUMENT_ACCORDION] =
             {
                 .trackBits = 0b000000000000,
             },
@@ -113,7 +113,7 @@ static u8 GetInstrumentFromMusician(void)
     switch (graphicsId)
     {
     case OBJ_EVENT_GFX_ACCORDIONIST:
-        return INSTRUMENT_ACCORDIAN;
+        return INSTRUMENT_ACCORDION;
         break;
     
     default:
