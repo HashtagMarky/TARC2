@@ -1189,12 +1189,12 @@ static const union AnimCmd sAnim_N_Pose[] =
 
 static const union AnimCmd sAnim_Accordionist[] =
 {
-    ANIMCMD_FRAME(1, 12),
-    ANIMCMD_FRAME(2, 12),
-    ANIMCMD_FRAME(3, 12),
-    ANIMCMD_FRAME(2, 12),
-    ANIMCMD_FRAME(1, 12),
-    ANIMCMD_FRAME(0, 12),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(0, 8),
     ANIMCMD_END,
 };
 
