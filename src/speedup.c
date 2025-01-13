@@ -42,17 +42,17 @@ u32 Rogue_GetBattleSpeedScale(bool32 forHealthbar)
     // We don't need to speed up health bar anymore as that passively happens now
     switch (battleSpeedOption)
     {
-    case OPTIONS_SPEEDUP_1X:
-        return forHealthbar ? (OPTIONS_SPEEDUP_1X_EXTRA_ITERATIONS + 1) : (OPTIONS_SPEEDUP_1X_EXTRA_ITERATIONS + 1);
+    case OPTIONS_SPEEDUP_NORMAL:
+        return forHealthbar ? (OPTIONS_SPEEDUP_NORMAL_EXTRA_ITERATIONS + 1) : (OPTIONS_SPEEDUP_NORMAL_EXTRA_ITERATIONS + 1);
 
     case OPTIONS_SPEEDUP_2X:
-        return forHealthbar ? (OPTIONS_SPEEDUP_1X_EXTRA_ITERATIONS + 1) : (OPTIONS_SPEEDUP_2X_EXTRA_ITERATIONS + 1);
+        return forHealthbar ? (OPTIONS_SPEEDUP_NORMAL_EXTRA_ITERATIONS + 1) : (OPTIONS_SPEEDUP_2X_EXTRA_ITERATIONS + 1);
 
     case OPTIONS_SPEEDUP_4X:
-        return forHealthbar ? (OPTIONS_SPEEDUP_1X_EXTRA_ITERATIONS + 1) : (OPTIONS_SPEEDUP_4X_EXTRA_ITERATIONS + 1);
+        return forHealthbar ? (OPTIONS_SPEEDUP_NORMAL_EXTRA_ITERATIONS + 1) : (OPTIONS_SPEEDUP_4X_EXTRA_ITERATIONS + 1);
 
     case OPTIONS_SPEEDUP_8X:
-        return forHealthbar ? (OPTIONS_SPEEDUP_1X_EXTRA_ITERATIONS + 1) : (OPTIONS_SPEEDUP_8X_EXTRA_ITERATIONS + 1);
+        return forHealthbar ? (OPTIONS_SPEEDUP_NORMAL_EXTRA_ITERATIONS + 1) : (OPTIONS_SPEEDUP_8X_EXTRA_ITERATIONS + 1);
 /*
     // Print text at a readable speed still
     case OPTIONS_BATTLE_SPEED_DISABLED:
@@ -69,7 +69,7 @@ u32 Rogue_GetBattleSpeedScale(bool32 forHealthbar)
 static u8 GetBattleSpeedOption(void)
 {
     if (IsBattleImportant())
-        return OPTIONS_SPEEDUP_1X;
+        return OPTIONS_SPEEDUP_NORMAL;
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
         return gSaveBlock2Ptr->optionsTrainerBattleSpeed;
     else
@@ -115,8 +115,8 @@ u8 Speedup_AdditionalIterations(u8 speed)
     case OPTIONS_SPEEDUP_8X: return OPTIONS_SPEEDUP_8X_EXTRA_ITERATIONS;
     case OPTIONS_SPEEDUP_4X: return OPTIONS_SPEEDUP_4X_EXTRA_ITERATIONS;
     case OPTIONS_SPEEDUP_2X: return OPTIONS_SPEEDUP_2X_EXTRA_ITERATIONS;
-    case OPTIONS_SPEEDUP_1X: return OPTIONS_SPEEDUP_1X_EXTRA_ITERATIONS;
-    default: return OPTIONS_SPEEDUP_1X_EXTRA_ITERATIONS;
+    case OPTIONS_SPEEDUP_NORMAL: return OPTIONS_SPEEDUP_NORMAL_EXTRA_ITERATIONS;
+    default: return OPTIONS_SPEEDUP_NORMAL_EXTRA_ITERATIONS;
     }
 }
 

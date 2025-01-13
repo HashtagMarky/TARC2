@@ -3,12 +3,12 @@
 
 #include "gba/gba.h"
 
-#define OPTIONS_SPEEDUP_1X                          0
+#define OPTIONS_SPEEDUP_NORMAL                      0
 #define OPTIONS_SPEEDUP_2X                          1
 #define OPTIONS_SPEEDUP_4X                          2
 #define OPTIONS_SPEEDUP_8X                          3
 #define OPTIONS_SPEEDUP_MULTIPLIERS                 4
-#define OPTIONS_SPEEDUP_1X_EXTRA_ITERATIONS         0
+#define OPTIONS_SPEEDUP_NORMAL_EXTRA_ITERATIONS     0
 #define OPTIONS_SPEEDUP_2X_EXTRA_ITERATIONS         1
 #define OPTIONS_SPEEDUP_4X_EXTRA_ITERATIONS         3
 #define OPTIONS_SPEEDUP_8X_EXTRA_ITERATIONS         7

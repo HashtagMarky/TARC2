@@ -115,9 +115,9 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsOverworldCatchSuccessMultiplyer = FALSE;
     gSaveBlock2Ptr->optionsBikeMusic = FALSE;
     gSaveBlock2Ptr->optionsSurfMusic = FALSE;
-    gSaveBlock2Ptr->optionsOverworldSpeed = OPTIONS_SPEEDUP_1X;
-    gSaveBlock2Ptr->optionsWildBattleSpeed = OPTIONS_SPEEDUP_1X;
-    gSaveBlock2Ptr->optionsTrainerBattleSpeed = OPTIONS_SPEEDUP_1X;
+    gSaveBlock2Ptr->optionsOverworldSpeed = OPTIONS_SPEEDUP_NORMAL;
+    gSaveBlock2Ptr->optionsWildBattleSpeed = OPTIONS_SPEEDUP_NORMAL;
+    gSaveBlock2Ptr->optionsTrainerBattleSpeed = OPTIONS_SPEEDUP_NORMAL;
     gSaveBlock2Ptr->optionsClockMode = FALSE;
     gSaveBlock2Ptr->optionsDamageNumbers = FALSE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
