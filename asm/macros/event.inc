@@ -2928,3 +2928,9 @@
 	.macro dynamicmusicmovememnt
 	callnative UpdateMovementDynamicMusic
 	.endm
+
+	@ Enables Dynamic Instrument Music, and sets a musician to start playing.
+	.macro dynamicmusicmusician
+	callnative ScrCmd_DynamicMusic_RestoreMusicianInstrument
+	setobjectmovementtype VAR_LAST_TALKED, MOVEMENT_TYPE_WALK_IN_PLACE_DOWN, FALSE
+	.endm
