@@ -619,6 +619,19 @@ const u32 gObjectEventPic_N[] = INCBIN_U32("graphics/object_events/pics/people/n
 const u32 gObjectEventPic_N_Animation[] = INCBIN_U32("graphics/object_events/pics/people/n_animation.4bpp");
 const u16 gObjectEventPalette_N[] = INCBIN_U16("graphics/object_events/pics/people/n.gbapal");
 
+const u32 gObjectEventPic_Accordionist[] = INCBIN_U32("graphics/object_events/pics/people/accordionist.4bpp");
+const u16 gObjectEventPalette_Accordionist[] = INCBIN_U16("graphics/object_events/pics/people/accordionist.gbapal");
+const u32 gObjectEventPic_Keytarist[] = INCBIN_U32("graphics/object_events/pics/people/keytarist.4bpp");
+const u16 gObjectEventPalette_Keytarist[] = INCBIN_U16("graphics/object_events/pics/people/keytarist.gbapal");
+const u32 gObjectEventPic_Erhuist[] = INCBIN_U32("graphics/object_events/pics/people/erhuist.4bpp");
+const u16 gObjectEventPalette_Erhuist[] = INCBIN_U16("graphics/object_events/pics/people/erhuist.gbapal");
+// const u32 gObjectEventPic_Guitarist[] = INCBIN_U32("graphics/object_events/pics/people/guitarist.4bpp");
+// const u16 gObjectEventPalette_Guitarist[] = INCBIN_U16("graphics/object_events/pics/people/guitarist.gbapal");
+const u32 gObjectEventPic_Whistler[] = INCBIN_U32("graphics/object_events/pics/people/whistler.4bpp");
+const u16 gObjectEventPalette_Whistler[] = INCBIN_U16("graphics/object_events/pics/people/whistler.gbapal");
+const u32 gObjectEventPic_Flutist[] = INCBIN_U32("graphics/object_events/pics/people/flutist.4bpp");
+const u16 gObjectEventPalette_Flutist[] = INCBIN_U16("graphics/object_events/pics/people/flutist.gbapal");
+
 const u32 gObjectEventPic_SamuelBriefcase[] = INCBIN_U32("graphics/object_events/pics/misc/samuel_briefcase.4bpp");
 const u16 gObjectEventPalette_SamuelBriefcase[] = INCBIN_U16("graphics/object_events/pics/misc/samuel_briefcase.gbapal");
 

@@ -838,10 +838,11 @@
 	.endm
 
 	@ Sets the movement type (MOVEMENT_TYPE_*) for an object's template.
-	.macro setobjectmovementtype localId:req, movementType:req
+	.macro setobjectmovementtype localId:req, movementType:req, transition=TRUE
 	.byte 0x65
 	.2byte \localId
 	.byte \movementType
+	.byte \transition
 	.endm
 
 	@ If a standard message box (or its text) is being drawn on-screen, this command blocks script execution until the
@@ -2919,4 +2920,11 @@
 			waitmovement OBJ_EVENT_ID_PLAYER
 		.endif
 	.endif
+	.endm
+
+	@ Enables Kurausukun's Dynamic Movement Music on a map.
+	@ This must be called in an ON_RESUME mapscript, for all maps where
+	@ it is used, even if warping from a map witht the same music.
+	.macro dynamicmusicmovememnt
+	callnative UpdateMovementDynamicMusic
 	.endm

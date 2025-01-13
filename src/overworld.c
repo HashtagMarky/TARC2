@@ -178,6 +178,7 @@ static void TransitionMapMusic(void);
 static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *, u16, u8);
 static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *, u8, u16, u8);
 static u16 GetCenterScreenMetatileBehavior(void);
+static void TryUpdateOverworldDayNightMusic(void);
 
 static void *sUnusedOverworldCallback;
 static u8 sPlayerLinkStates[MAX_LINK_PLAYERS];
@@ -1555,6 +1556,7 @@ static void OverworldBasic(void)
     UpdatePaletteFade();
     UpdateTilesetAnimations();
     DoScheduledBgTilemapCopiesToVram();
+    TryUpdateOverworldDayNightMusic();
 }
 
 // This CB2 is used when starting
@@ -3581,4 +3583,40 @@ void HideItemDescription(u16 item)
 }
 #endif // OW_SHOW_ITEM_DESCRIPTIONS
 
+static void TryUpdateOverworldDayNightMusic(void)
+{
+    u16 music = GetCurrLocationDefaultMusic();
+    const struct MapHeader *mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+
+    if ((GetCurrentMapMusic() != mapHeader->music
+        && GetCurrentMapMusic() != mapHeader->musicNight)
+        || GetCurrentMapMusic() == MUS_DUMMY
+        || gPaletteFade.active)
+        return;
+    
+
+    // Only checks for music change on the hour of time
+    // of day, to reduce number of checks. If gPaletteFade
+    // is active during this period it may be skipped.
+
+    // RtcCalcLocalTime();
+    // if (music != GetCurrentMapMusic()
+    //     && (gLocalTime.hours == MORNING_HOUR_BEGIN
+    //     || gLocalTime.hours == DAY_HOUR_BEGIN
+    //     || gLocalTime.hours == EVENING_HOUR_BEGIN
+    //     || gLocalTime.hours == NIGHT_HOUR_BEGIN))
+    //     && gLocalTime.seconds == 0
+    //     && gLocalTime.minutes == 0
+    // {
+    //     FadeOutAndPlayNewMapMusic(music, 16);
+    // }
+
+
+    // Checks everytime function is called.
+
+    if (GetCurrentMapMusic() != music)
+    {
+        FadeOutAndPlayNewMapMusic(music, 16);
+    }
+}
 

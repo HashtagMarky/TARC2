@@ -19,6 +19,10 @@ struct Fanfare
 EWRAM_DATA struct MusicPlayerInfo* gMPlay_PokemonCry = NULL;
 EWRAM_DATA u8 gPokemonCryBGMDuckingCounter = 0;
 
+// Kurausukun's Movement Dynamic Music
+#include "dynamic_music.h"
+EWRAM_DATA s16 gMapMusicVolume = 0;
+
 static u16 sCurrentMapMusic;
 static u16 sNextMapMusic;
 static u8 sMapMusicState;
@@ -349,7 +353,12 @@ void FadeInBGM(u8 speed)
 
 void FadeOutBGM(u8 speed)
 {
-    m4aMPlayFadeOut(&gMPlayInfo_BGM, speed);
+    // Kurausukun's Movement Dynamic Music
+    // m4aMPlayFadeOut(&gMPlayInfo_BGM, speed);
+    if (FindTaskIdByFunc(Task_UpdateMovementDynamicMusic) != TASK_NONE)
+        m4aMPlayFadeOutFromVol(&gMPlayInfo_BGM, speed, gMapMusicVolume);
+    else
+        m4aMPlayFadeOut(&gMPlayInfo_BGM, speed);
 }
 
 bool8 IsBGMStopped(void)
