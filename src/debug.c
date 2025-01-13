@@ -2704,9 +2704,7 @@ static void DebugAction_Util_Player_Id(u8 taskId)
 
 static void DebugAction_Util_PlayerDynPals(u8 taskId)
 {
-    Debug_DestroyMenu_Full(taskId);
-    LockPlayerFieldControls();
-    ScriptContext_SetupScript(Debug_OpenDynPalMenu);
+    Debug_DestroyMenu_Full_Script(taskId, Debug_OpenDynPalMenu);
 }
 
 static void DebugAction_Util_CheatStart(u8 taskId)
