@@ -75,6 +75,8 @@
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
 
+#include "speedup.h"
+
 struct CableClubPlayer
 {
     u8 playerId;
@@ -1557,31 +1559,6 @@ static void OverworldBasic(void)
     DoScheduledBgTilemapCopiesToVram();
 }
 
-static void OverworldBasicSpeedup(void)
-{
-    // ScriptContext_RunScript();
-    // RunTasks();
-    AnimateSprites();
-    CameraUpdate();
-    UpdateCameraPanning();
-    // BuildOamBuffer();
-    // UpdatePaletteFade();
-    // UpdateTilesetAnimations();
-    // DoScheduledBgTilemapCopiesToVram();
-}
-
-u8 OverworldSpeedupAdditionalIterations(u8 speed)
-{
-    switch (speed)
-    {
-    case OPTIONS_OVERWORLD_SPEED_8X: return OPTIONS_OVERWORLD_SPEED_8X_EXTRA_ITERATIONS;
-    case OPTIONS_OVERWORLD_SPEED_4X: return OPTIONS_OVERWORLD_SPEED_4X_EXTRA_ITERATIONS;
-    case OPTIONS_OVERWORLD_SPEED_2X: return OPTIONS_OVERWORLD_SPEED_2X_EXTRA_ITERATIONS;
-    case OPTIONS_OVERWORLD_SPEED_1X: return OPTIONS_OVERWORLD_SPEED_1X_EXTRA_ITERATIONS;
-    default: return OPTIONS_OVERWORLD_SPEED_1X_EXTRA_ITERATIONS;
-    }
-}
-
 // This CB2 is used when starting
 void CB2_OverworldBasic(void)
 {
@@ -1595,9 +1572,11 @@ void CB2_Overworld(void)
         SetVBlankCallback(NULL);
     OverworldBasic();
 
-    for (u8 loops = 0; loops < OverworldSpeedupAdditionalIterations(gSaveBlock2Ptr->optionsOverworldSpeed); loops++)
+    for (u8 loops = 0; loops < Speedup_AdditionalIterations(gSaveBlock2Ptr->optionsOverworldSpeed); loops++)
     {
-        OverworldBasicSpeedup();
+        AnimateSprites();
+        CameraUpdate();
+        UpdateCameraPanning();
     }
 
     if (fading)

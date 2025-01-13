@@ -21,7 +21,7 @@
 #include "ikigai_scrolling_background.h"
 #include "constants/battle.h"
 #include "event_data.h"
-#include "overworld.h"
+#include "speedup.h"
 
 enum
 {
@@ -205,7 +205,7 @@ static void DrawChoices_BattleStyle(int selection, int y);
 static void DrawChoices_Sound(int selection, int y);
 static void DrawChoices_ButtonMode(int selection, int y);
 static void DrawChoices_BarSpeed(int selection, int y); //HP and EXP
-static void DrawChoices_BattleSpeed(int selection, int y);
+static void DrawChoices_Speedup(int selection, int y);
 static void DrawChoices_UnitSystem(int selection, int y);
 static void DrawChoices_ClockMode(int selection, int y);
 static void DrawChoices_Font(int selection, int y);
@@ -223,7 +223,6 @@ static void DrawChoices_MugshotsNPC(int selection, int y);
 static void DrawChoices_MugshotsFollower(int selection, int y);
 static void DrawChoices_TitleScreen(int selection, int y);
 static void DrawChoices_DamageNumbers(int selection, int y);
-static void DrawChoices_OverworldSpeed(int selection, int y);
 static bool8 IsRunningUnlocked(void);
 static bool8 IsSurfingUnlocked(void);
 static bool8 IsBikingUnlocked(void);
@@ -292,7 +291,7 @@ struct // MENU_OVERWORLD
     [MENUITEM_OVERWORLD_NPC_MUG]        = {DrawChoices_MugshotsNPC,         ProcessInput_Options_Two},
     [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = {DrawChoices_MugshotsFollower,    ProcessInput_Options_Three},
     [MENUITEM_OVERWORLD_MATCHCALL]      = {DrawChoices_MatchCall,           ProcessInput_Options_Two},
-    [MENUITEM_OVERWORLD_SPEED]          = {DrawChoices_OverworldSpeed,      ProcessInput_Options_Four},
+    [MENUITEM_OVERWORLD_SPEED]          = {DrawChoices_Speedup,             ProcessInput_Options_Four},
     [MENUITEM_OVERWORLD_CANCEL]         = {NULL, NULL},
 };
 
@@ -304,8 +303,8 @@ struct // MENU_BATTLE
 { 
     [MENUITEM_BATTLE_BATTLESCENE]   = {DrawChoices_BattleScene, ProcessInput_Options_Four},
     [MENUITEM_BATTLE_BATTLESTYLE]   = {DrawChoices_BattleStyle, ProcessInput_Options_Two},
-    [MENUITEM_BATTLE_WILD_SPEED]    = {DrawChoices_BattleSpeed, ProcessInput_Options_Four},
-    [MENUITEM_BATTLE_TRAINER_SPEED] = {DrawChoices_BattleSpeed, ProcessInput_Options_Four},
+    [MENUITEM_BATTLE_WILD_SPEED]    = {DrawChoices_Speedup,     ProcessInput_Options_Four},
+    [MENUITEM_BATTLE_TRAINER_SPEED] = {DrawChoices_Speedup,     ProcessInput_Options_Four},
     [MENUITEM_BATTLE_DAMAGE_NUMBERS] = {DrawChoices_DamageNumbers, ProcessInput_Options_Three},
     [MENUITEM_BATTLE_CANCEL]        = {NULL, NULL},
 };
@@ -1526,16 +1525,16 @@ static void DrawChoices_BarSpeed(int selection, int y) //HP and EXP
         DrawOptionMenuChoice(sText_Instant, 104, y, 1, active);
 }
 */
-static void DrawChoices_BattleSpeed(int selection, int y) 
+static void DrawChoices_Speedup(int selection, int y) 
 {
-    bool8 active = CheckConditions(MENUITEM_BATTLE_TRAINER_SPEED);
+    bool8 active = TRUE;
 
     if (selection == 0)
         DrawOptionMenuChoice(sText_Normal, 104, y, 0, active);
     else
     {
         u8 textMultipler[] = _("x1 SPEED{0x77}{0x77}{0x77}{0x77}{0x77}");
-        textMultipler[1] = CHAR_1 + selection;
+        textMultipler[1] = CHAR_1 + Speedup_AdditionalIterations(selection);
         DrawOptionMenuChoice(textMultipler, 104, y, 1, active);
     }
 }
@@ -1766,20 +1765,6 @@ static void DrawChoices_DamageNumbers(int selection, int y)
     case 2:
         DrawOptionMenuChoice(COMPOUND_STRING("ALL DAMAGE"), 104, y, 1, active);
         break;
-    }
-}
-
-static void DrawChoices_OverworldSpeed(int selection, int y)
-{
-    bool8 active = CheckConditions(MENUITEM_BATTLE_TRAINER_SPEED);
-
-    if (selection == 0)
-        DrawOptionMenuChoice(sText_Normal, 104, y, 0, active);
-    else
-    {
-        u8 textMultipler[] = _("x1 SPEED{0x77}{0x77}{0x77}{0x77}{0x77}");
-        textMultipler[1] = CHAR_1 + OverworldSpeedupAdditionalIterations(selection);
-        DrawOptionMenuChoice(textMultipler, 104, y, 1, active);
     }
 }
 
