@@ -1198,6 +1198,50 @@ static const union AnimCmd sAnim_Accordionist[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnim_Keytarist[] =
+{
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Erhuist[] =
+{
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_END,
+};
+
+// static const union AnimCmd sAnim_Guitarist[] =
+// {
+//     ANIMCMD_FRAME(0, 8),
+//     ANIMCMD_FRAME(1, 8),
+//     ANIMCMD_FRAME(2, 8),
+//     ANIMCMD_FRAME(3, 8),
+//     ANIMCMD_FRAME(2, 8),
+//     ANIMCMD_FRAME(1, 8),
+//     ANIMCMD_END,
+// };
+
+static const union AnimCmd sAnim_Whistler[] =
+{
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd sAnim_Flutist[] =
 {
     ANIMCMD_FRAME(0, 8),
@@ -1433,6 +1477,98 @@ static const union AnimCmd *const sAnimTable_Accordionist[] = {
     [ANIM_STD_GO_FASTEST_NORTH] = sAnim_Accordionist,
     [ANIM_STD_GO_FASTEST_WEST] = sAnim_Accordionist,
     [ANIM_STD_GO_FASTEST_EAST] = sAnim_Accordionist,
+};
+
+static const union AnimCmd *const sAnimTable_Keytarist[] = {
+    [ANIM_STD_FACE_SOUTH] = sAnim_FaceSouth,
+    [ANIM_STD_FACE_NORTH] = sAnim_FaceSouth,
+    [ANIM_STD_FACE_WEST] = sAnim_FaceSouth,
+    [ANIM_STD_FACE_EAST] = sAnim_FaceSouth,
+    [ANIM_STD_GO_SOUTH] = sAnim_Keytarist,
+    [ANIM_STD_GO_NORTH] = sAnim_Keytarist,
+    [ANIM_STD_GO_WEST] = sAnim_Keytarist,
+    [ANIM_STD_GO_EAST] = sAnim_Keytarist,
+    [ANIM_STD_GO_FAST_SOUTH] = sAnim_Keytarist,
+    [ANIM_STD_GO_FAST_NORTH] = sAnim_Keytarist,
+    [ANIM_STD_GO_FAST_WEST] = sAnim_Keytarist,
+    [ANIM_STD_GO_FAST_EAST] = sAnim_Keytarist,
+    [ANIM_STD_GO_FASTER_SOUTH] = sAnim_Keytarist,
+    [ANIM_STD_GO_FASTER_NORTH] = sAnim_Keytarist,
+    [ANIM_STD_GO_FASTER_WEST] = sAnim_Keytarist,
+    [ANIM_STD_GO_FASTER_EAST] = sAnim_Keytarist,
+    [ANIM_STD_GO_FASTEST_SOUTH] = sAnim_Keytarist,
+    [ANIM_STD_GO_FASTEST_NORTH] = sAnim_Keytarist,
+    [ANIM_STD_GO_FASTEST_WEST] = sAnim_Keytarist,
+    [ANIM_STD_GO_FASTEST_EAST] = sAnim_Keytarist,
+};
+
+static const union AnimCmd *const sAnimTable_Erhuist[] = {
+    [ANIM_STD_FACE_SOUTH] = sAnim_FaceSouth,
+    [ANIM_STD_FACE_NORTH] = sAnim_FaceSouth,
+    [ANIM_STD_FACE_WEST] = sAnim_FaceSouth,
+    [ANIM_STD_FACE_EAST] = sAnim_FaceSouth,
+    [ANIM_STD_GO_SOUTH] = sAnim_Erhuist,
+    [ANIM_STD_GO_NORTH] = sAnim_Erhuist,
+    [ANIM_STD_GO_WEST] = sAnim_Erhuist,
+    [ANIM_STD_GO_EAST] = sAnim_Erhuist,
+    [ANIM_STD_GO_FAST_SOUTH] = sAnim_Erhuist,
+    [ANIM_STD_GO_FAST_NORTH] = sAnim_Erhuist,
+    [ANIM_STD_GO_FAST_WEST] = sAnim_Erhuist,
+    [ANIM_STD_GO_FAST_EAST] = sAnim_Erhuist,
+    [ANIM_STD_GO_FASTER_SOUTH] = sAnim_Erhuist,
+    [ANIM_STD_GO_FASTER_NORTH] = sAnim_Erhuist,
+    [ANIM_STD_GO_FASTER_WEST] = sAnim_Erhuist,
+    [ANIM_STD_GO_FASTER_EAST] = sAnim_Erhuist,
+    [ANIM_STD_GO_FASTEST_SOUTH] = sAnim_Erhuist,
+    [ANIM_STD_GO_FASTEST_NORTH] = sAnim_Erhuist,
+    [ANIM_STD_GO_FASTEST_WEST] = sAnim_Erhuist,
+    [ANIM_STD_GO_FASTEST_EAST] = sAnim_Erhuist,
+};
+
+// static const union AnimCmd *const sAnimTable_Guitarist[] = {
+//     [ANIM_STD_FACE_SOUTH] = sAnim_FaceSouth,
+//     [ANIM_STD_FACE_NORTH] = sAnim_FaceSouth,
+//     [ANIM_STD_FACE_WEST] = sAnim_FaceSouth,
+//     [ANIM_STD_FACE_EAST] = sAnim_FaceSouth,
+//     [ANIM_STD_GO_SOUTH] = sAnim_Guitarist,
+//     [ANIM_STD_GO_NORTH] = sAnim_Guitarist,
+//     [ANIM_STD_GO_WEST] = sAnim_Guitarist,
+//     [ANIM_STD_GO_EAST] = sAnim_Guitarist,
+//     [ANIM_STD_GO_FAST_SOUTH] = sAnim_Guitarist,
+//     [ANIM_STD_GO_FAST_NORTH] = sAnim_Guitarist,
+//     [ANIM_STD_GO_FAST_WEST] = sAnim_Guitarist,
+//     [ANIM_STD_GO_FAST_EAST] = sAnim_Guitarist,
+//     [ANIM_STD_GO_FASTER_SOUTH] = sAnim_Guitarist,
+//     [ANIM_STD_GO_FASTER_NORTH] = sAnim_Guitarist,
+//     [ANIM_STD_GO_FASTER_WEST] = sAnim_Guitarist,
+//     [ANIM_STD_GO_FASTER_EAST] = sAnim_Guitarist,
+//     [ANIM_STD_GO_FASTEST_SOUTH] = sAnim_Guitarist,
+//     [ANIM_STD_GO_FASTEST_NORTH] = sAnim_Guitarist,
+//     [ANIM_STD_GO_FASTEST_WEST] = sAnim_Guitarist,
+//     [ANIM_STD_GO_FASTEST_EAST] = sAnim_Guitarist,
+// };
+
+static const union AnimCmd *const sAnimTable_Whistler[] = {
+    [ANIM_STD_FACE_SOUTH] = sAnim_FaceSouth,
+    [ANIM_STD_FACE_NORTH] = sAnim_FaceSouth,
+    [ANIM_STD_FACE_WEST] = sAnim_FaceSouth,
+    [ANIM_STD_FACE_EAST] = sAnim_FaceSouth,
+    [ANIM_STD_GO_SOUTH] = sAnim_Whistler,
+    [ANIM_STD_GO_NORTH] = sAnim_Whistler,
+    [ANIM_STD_GO_WEST] = sAnim_Whistler,
+    [ANIM_STD_GO_EAST] = sAnim_Whistler,
+    [ANIM_STD_GO_FAST_SOUTH] = sAnim_Whistler,
+    [ANIM_STD_GO_FAST_NORTH] = sAnim_Whistler,
+    [ANIM_STD_GO_FAST_WEST] = sAnim_Whistler,
+    [ANIM_STD_GO_FAST_EAST] = sAnim_Whistler,
+    [ANIM_STD_GO_FASTER_SOUTH] = sAnim_Whistler,
+    [ANIM_STD_GO_FASTER_NORTH] = sAnim_Whistler,
+    [ANIM_STD_GO_FASTER_WEST] = sAnim_Whistler,
+    [ANIM_STD_GO_FASTER_EAST] = sAnim_Whistler,
+    [ANIM_STD_GO_FASTEST_SOUTH] = sAnim_Whistler,
+    [ANIM_STD_GO_FASTEST_NORTH] = sAnim_Whistler,
+    [ANIM_STD_GO_FASTEST_WEST] = sAnim_Whistler,
+    [ANIM_STD_GO_FASTEST_EAST] = sAnim_Whistler,
 };
 
 static const union AnimCmd *const sAnimTable_Flutist[] = {
@@ -1756,6 +1892,22 @@ static const struct StepAnimTable sStepAnimTables[] = {
     },
     {
         .anims = sAnimTable_Accordionist,
+        .animPos = {1, 3, 0, 2},
+    },
+    {
+        .anims = sAnimTable_Keytarist,
+        .animPos = {1, 3, 0, 2},
+    },
+    {
+        .anims = sAnimTable_Erhuist,
+        .animPos = {1, 3, 0, 2},
+    },
+    // {
+    //     .anims = sAnimTable_Guitarist,
+    //     .animPos = {1, 3, 0, 2},
+    // },
+    {
+        .anims = sAnimTable_Whistler,
         .animPos = {1, 3, 0, 2},
     },
     {

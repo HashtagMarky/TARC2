@@ -256,6 +256,10 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Thomas;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Captain;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_N;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Accordionist;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Keytarist;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Erhuist;
+// extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Guitarist;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Whistler;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Flutist;
 
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
@@ -507,6 +511,10 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_CAPTAIN] =                  &gObjectEventGraphicsInfo_Captain,
     [OBJ_EVENT_GFX_N] =                        &gObjectEventGraphicsInfo_N,
     [OBJ_EVENT_GFX_ACCORDIONIST] =             &gObjectEventGraphicsInfo_Accordionist,
+    [OBJ_EVENT_GFX_KEYTARIST] =                &gObjectEventGraphicsInfo_Keytarist,
+    [OBJ_EVENT_GFX_ERHUIST] =                  &gObjectEventGraphicsInfo_Erhuist,
+    // [OBJ_EVENT_GFX_GUITARIST] =                &gObjectEventGraphicsInfo_Guitarist,
+    [OBJ_EVENT_GFX_WHISTLER] =                 &gObjectEventGraphicsInfo_Whistler,
     [OBJ_EVENT_GFX_FLUTIST] =                  &gObjectEventGraphicsInfo_Flutist,
 };
 
