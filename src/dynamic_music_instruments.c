@@ -116,6 +116,26 @@ static u8 GetInstrumentFromMusician(void)
         return INSTRUMENT_ACCORDION;
         break;
     
+    case OBJ_EVENT_GFX_KEYTARIST:
+        return INSTRUMENT_KEYTAR;
+        break;
+    
+    case OBJ_EVENT_GFX_ERHUIST:
+        return INSTRUMENT_ERHU;
+        break;
+    
+    case OBJ_EVENT_GFX_GUITARIST:
+        return INSTRUMENT_GUITAR;
+        break;
+    
+    case OBJ_EVENT_GFX_WHISTLER:
+        return INSTRUMENT_WHISTLE;
+        break;
+    
+    case OBJ_EVENT_GFX_FLUTIST:
+        return INSTRUMENT_FLUTE;
+        break;
+    
     default:
         return INSTRUMENT_COUNT;
         break;
