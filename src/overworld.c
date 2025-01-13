@@ -75,6 +75,8 @@
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
 
+#include "speedup.h"
+
 struct CableClubPlayer
 {
     u8 playerId;
@@ -1571,6 +1573,14 @@ void CB2_Overworld(void)
     if (fading)
         SetVBlankCallback(NULL);
     OverworldBasic();
+
+    for (u8 loops = 0; loops < Speedup_AdditionalIterations(gSaveBlock2Ptr->optionsOverworldSpeed); loops++)
+    {
+        AnimateSprites();
+        CameraUpdate();
+        UpdateCameraPanning();
+    }
+
     if (fading)
     {
         SetFieldVBlankCallback();

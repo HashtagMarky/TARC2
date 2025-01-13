@@ -21,6 +21,7 @@
 #include "ikigai_scrolling_background.h"
 #include "constants/battle.h"
 #include "event_data.h"
+#include "speedup.h"
 
 enum
 {
@@ -47,6 +48,7 @@ enum
 
 enum
 {
+    MENUITEM_OVERWORLD_SPEED,
     MENUITEM_OVERWORLD_NPC_MUG,
     MENUITEM_OVERWORLD_FOLLOWER_MUG,
     MENUITEM_OVERWORLD_AUTO_RUN,
@@ -203,7 +205,7 @@ static void DrawChoices_BattleStyle(int selection, int y);
 static void DrawChoices_Sound(int selection, int y);
 static void DrawChoices_ButtonMode(int selection, int y);
 static void DrawChoices_BarSpeed(int selection, int y); //HP and EXP
-static void DrawChoices_BattleSpeed(int selection, int y);
+static void DrawChoices_Speedup(int selection, int y);
 static void DrawChoices_UnitSystem(int selection, int y);
 static void DrawChoices_ClockMode(int selection, int y);
 static void DrawChoices_Font(int selection, int y);
@@ -289,6 +291,7 @@ struct // MENU_OVERWORLD
     [MENUITEM_OVERWORLD_NPC_MUG]        = {DrawChoices_MugshotsNPC,         ProcessInput_Options_Two},
     [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = {DrawChoices_MugshotsFollower,    ProcessInput_Options_Three},
     [MENUITEM_OVERWORLD_MATCHCALL]      = {DrawChoices_MatchCall,           ProcessInput_Options_Two},
+    [MENUITEM_OVERWORLD_SPEED]          = {DrawChoices_Speedup,             ProcessInput_Options_Four},
     [MENUITEM_OVERWORLD_CANCEL]         = {NULL, NULL},
 };
 
@@ -300,8 +303,8 @@ struct // MENU_BATTLE
 { 
     [MENUITEM_BATTLE_BATTLESCENE]   = {DrawChoices_BattleScene, ProcessInput_Options_Four},
     [MENUITEM_BATTLE_BATTLESTYLE]   = {DrawChoices_BattleStyle, ProcessInput_Options_Two},
-    [MENUITEM_BATTLE_WILD_SPEED]    = {DrawChoices_BattleSpeed, ProcessInput_Options_Four},
-    [MENUITEM_BATTLE_TRAINER_SPEED] = {DrawChoices_BattleSpeed, ProcessInput_Options_Four},
+    [MENUITEM_BATTLE_WILD_SPEED]    = {DrawChoices_Speedup,     ProcessInput_Options_Four},
+    [MENUITEM_BATTLE_TRAINER_SPEED] = {DrawChoices_Speedup,     ProcessInput_Options_Four},
     [MENUITEM_BATTLE_DAMAGE_NUMBERS] = {DrawChoices_DamageNumbers, ProcessInput_Options_Three},
     [MENUITEM_BATTLE_CANCEL]        = {NULL, NULL},
 };
@@ -315,6 +318,7 @@ static const u8 sText_SurfMusic[]           = _("SURF MUSIC");
 static const u8 sText_MugshotNPC[]          = _("{FONT_GET_NARROW}NPC MUGSHOTS{FONT_NORMAL}");
 static const u8 sText_MugshotFollower[]     = _("{FONT_GET_NARROW}FOLLOWER MUGSHOTS{FONT_NORMAL}");
 static const u8 sText_TitleScreen[]         = _("TITLE SCREEN");
+static const u8 sText_OverworldSpeed[]      = _("{FONT_GET_NARROW}OVERWORLD SPEED");
 static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 {
     [MENUITEM_MAIN_TEXTSPEED]       = gText_TextSpeed,
@@ -338,6 +342,7 @@ static const u8 *const sOptionMenuItemsNamesOverworld[MENUITEM_OVERWORLD_COUNT] 
     [MENUITEM_OVERWORLD_BIKE_MUSIC]     = sText_BikeMusic,
     [MENUITEM_OVERWORLD_SURF_MUSIC]     = sText_SurfMusic,
     [MENUITEM_OVERWORLD_NPC_MUG]        = sText_MugshotNPC,
+    [MENUITEM_OVERWORLD_SPEED]          = sText_OverworldSpeed,
     [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = sText_MugshotFollower,
     [MENUITEM_OVERWORLD_MATCHCALL]      = COMPOUND_STRING("{FONT_GET_NARROW}OVERWORLD CALLS"),
     [MENUITEM_OVERWORLD_CANCEL]         = gText_OptionMenuSave,
@@ -397,6 +402,7 @@ static bool8 CheckConditions(int selection)
         case MENUITEM_OVERWORLD_FOLLOWER_MUG:   return TRUE;
         case MENUITEM_OVERWORLD_MATCHCALL:      return TRUE;
         case MENUITEM_OVERWORLD_CANCEL:         return TRUE;
+        case MENUITEM_OVERWORLD_SPEED:          return TRUE;
         }
     case MENU_BATTLE:
         switch(selection)
@@ -459,6 +465,7 @@ static const u8 sText_Desc_FastSurf[]                   = _("Whether or not to s
 static const u8 sText_Desc_AutoBike[]                   = _("Whether or not to automatically\nmount a bike in the overworld.");
 static const u8 sText_Desc_FastBikeOn[]                 = _("When riding the bike, speed will\nbe prioritised.");
 static const u8 sText_Desc_FastBikeOff[]                = _("When riding the bike, technique will\nbe priritised.");
+static const u8 sText_Desx_OverworldSpeed[]             = _("Choose the speed of animations\nin the overworld.");
 
 // Disabled Descriptions
 static const u8 sText_Desc_Disabled_Textspeed[]     = _("Only active if xyz.");
@@ -491,6 +498,7 @@ static const u8 *const sOptionMenuItemDescriptionsOverworld[MENUITEM_OVERWORLD_C
     [MENUITEM_OVERWORLD_NPC_MUG]        = {sText_Desc_MugshotNPCOn,                 sText_Desc_MugshotNPCOff,       sText_Empty},
     [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = {sText_Desc_MugshotFollowerPlaceholder,   sText_Desc_MugshotFollowerOn,   sText_Desc_MugshotFollowerOff},
     [MENUITEM_OVERWORLD_MATCHCALL]      = {sText_Desc_OverworldCallsOn,             sText_Desc_OverworldCallsOff,   sText_Empty},
+    [MENUITEM_OVERWORLD_SPEED]          = {sText_Desx_OverworldSpeed,               sText_Empty,                    sText_Empty},
     [MENUITEM_OVERWORLD_CANCEL]         = {sText_Desc_Save,                         sText_Empty,                    sText_Empty},
 };
 
@@ -533,6 +541,7 @@ static const u8 *const sOptionMenuItemDescriptionsDisabledOverworld[MENUITEM_OVE
     [MENUITEM_OVERWORLD_NPC_MUG]        = sText_Empty,
     [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = sText_Empty,
     [MENUITEM_OVERWORLD_MATCHCALL]      = sText_Empty,
+    [MENUITEM_OVERWORLD_SPEED]          = sText_Empty,
     [MENUITEM_OVERWORLD_CANCEL]         = sText_Empty,
 };
 
@@ -578,7 +587,7 @@ static const u8 *const OptionTextDescription(void)
         if (!CheckConditions(menuItem))
             return sOptionMenuItemDescriptionsDisabledOverworld[menuItem];
         selection = sOptions->sel_overworld[menuItem];
-        if (menuItem == MENUITEM_OVERWORLD_AUTO_RUN || menuItem == MENUITEM_OVERWORLD_FAST_SURF || menuItem == MENUITEM_OVERWORLD_AUTO_BIKE)
+        if (menuItem == MENUITEM_OVERWORLD_AUTO_RUN || menuItem == MENUITEM_OVERWORLD_FAST_SURF || menuItem == MENUITEM_OVERWORLD_AUTO_BIKE || menuItem == MENUITEM_OVERWORLD_SPEED)
             selection = 0;
         return sOptionMenuItemDescriptionsOverworld[menuItem][selection];
     case MENU_BATTLE:
@@ -912,6 +921,8 @@ void CB2_InitOptionPlusMenu(void)
         sOptions->sel_overworld[MENUITEM_OVERWORLD_NPC_MUG]         = gSaveBlock2Ptr->optionsSuppressNPCMugshots;
         sOptions->sel_overworld[MENUITEM_OVERWORLD_FOLLOWER_MUG]    = gSaveBlock2Ptr->optionsFollowerMugshots;
         sOptions->sel_overworld[MENUITEM_OVERWORLD_MATCHCALL]       = gSaveBlock2Ptr->optionsDisableMatchCall;
+        sOptions->sel_overworld[MENUITEM_OVERWORLD_SPEED]           = gSaveBlock2Ptr->optionsOverworldSpeed;
+        
 
         sOptions->sel_battle[MENUITEM_BATTLE_BATTLESCENE]       = gSaveBlock2Ptr->optionsBattleScene;
         sOptions->sel_battle[MENUITEM_BATTLE_BATTLESTYLE]       = gSaveBlock2Ptr->optionsBattleStyle;
@@ -1151,6 +1162,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsSuppressNPCMugshots  = sOptions->sel_overworld[MENUITEM_OVERWORLD_NPC_MUG];
     gSaveBlock2Ptr->optionsFollowerMugshots     = sOptions->sel_overworld[MENUITEM_OVERWORLD_FOLLOWER_MUG];
     gSaveBlock2Ptr->optionsDisableMatchCall     = sOptions->sel_overworld[MENUITEM_OVERWORLD_MATCHCALL];
+    gSaveBlock2Ptr->optionsOverworldSpeed       = sOptions->sel_overworld[MENUITEM_OVERWORLD_SPEED];
 
     gSaveBlock2Ptr->optionsBattleScene          = sOptions->sel_battle[MENUITEM_BATTLE_BATTLESCENE];
     gSaveBlock2Ptr->optionsBattleStyle          = sOptions->sel_battle[MENUITEM_BATTLE_BATTLESTYLE];
@@ -1513,16 +1525,16 @@ static void DrawChoices_BarSpeed(int selection, int y) //HP and EXP
         DrawOptionMenuChoice(sText_Instant, 104, y, 1, active);
 }
 */
-static void DrawChoices_BattleSpeed(int selection, int y) 
+static void DrawChoices_Speedup(int selection, int y) 
 {
-    bool8 active = CheckConditions(MENUITEM_BATTLE_TRAINER_SPEED);
+    bool8 active = TRUE;
 
     if (selection == 0)
         DrawOptionMenuChoice(sText_Normal, 104, y, 0, active);
     else
     {
-        u8 textMultipler[] = _("x1{0x77}{0x77}{0x77}{0x77}{0x77}");
-        textMultipler[1] = CHAR_1 + selection;
+        u8 textMultipler[] = _("x1 SPEED{0x77}{0x77}{0x77}{0x77}{0x77}");
+        textMultipler[1] = CHAR_1 + Speedup_AdditionalIterations(selection);
         DrawOptionMenuChoice(textMultipler, 104, y, 1, active);
     }
 }

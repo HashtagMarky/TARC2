@@ -580,10 +580,11 @@ struct SaveBlock2
              u16 optionsSurfMusic:1; // whether or not surf music is played
              u16 optionsWildBattleSpeed:2; // speed of wild battles
              u16 optionsTrainerBattleSpeed:2; // speed of trainer battles
+             u16 optionsOverworldSpeed:2; // speedup of the overworld
              u16 optionsDamageNumbers:2; // whether damage numbers are shown
              u16 optionsClockMode:1; // whether 12 or 24 hour clock is used.
              u16 regionMapZoom:1; // whether the map is zoomed in
-             //u16 padding1:7;
+             //u16 padding1:5;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 playerEmote:4;
              u8 paddingPE:4;

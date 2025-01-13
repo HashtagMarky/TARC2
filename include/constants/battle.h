@@ -568,13 +568,6 @@ enum StartingStatus
     STARTING_STATUS_SWAMP_OPPONENT,
 };
 
-// Battle Speed Up (Credit to Pokabbie)
-#define OPTIONS_BATTLE_SPEED_NORMAL     0
-#define OPTIONS_BATTLE_SPEED_2X         1
-#define OPTIONS_BATTLE_SPEED_3X         2
-#define OPTIONS_BATTLE_SPEED_4X         3
-#define OPTIONS_BATTLE_SPEED_COUNT      4
-
 // Battle Scene Animations
 #define OPTIONS_BATTLE_SCENE_FULL_ANIMATION     0
 #define OPTIONS_BATTLE_SCENE_LOW_ANIMATION      1
