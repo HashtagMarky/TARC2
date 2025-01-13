@@ -1067,6 +1067,9 @@ $(OBJEVENTGFXDIR)/people/n_animation.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/people/accordionist.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
+$(OBJEVENTGFXDIR)/people/flutist.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
 
 
 $(FLDEFFGFXDIR)/arrow.4bpp: %.4bpp: %.png

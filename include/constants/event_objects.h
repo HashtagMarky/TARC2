@@ -251,11 +251,12 @@
 #define OBJ_EVENT_GFX_CAPTAIN                    245
 #define OBJ_EVENT_GFX_N                          246
 #define OBJ_EVENT_GFX_ACCORDIONIST               247
+#define OBJ_EVENT_GFX_FLUTIST                    248
 
 // NOTE: The maximum amount of object events has been expanded from 255 to 65535.
 // Since dynamic graphics ids still require at least 16 free values, the actual limit
 // is 65519, but even considering follower Pokémon, this should be more than enough :)
-#define NUM_OBJ_EVENT_GFX                        248
+#define NUM_OBJ_EVENT_GFX                        249
 
 
 // These are dynamic object gfx ids.
@@ -436,6 +437,7 @@
 #define OBJ_EVENT_PAL_TAG_CAPTAIN                 0x116F
 #define OBJ_EVENT_PAL_TAG_N                       0x1170
 #define OBJ_EVENT_PAL_TAG_ACCORDIONIST            0x1171
+#define OBJ_EVENT_PAL_TAG_FLUTIST                 0x1172
 
 // Used as a placeholder follower graphic
 #define OBJ_EVENT_PAL_TAG_SUBSTITUTE              0x7611
