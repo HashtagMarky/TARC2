@@ -1,10 +1,12 @@
 #include "speedup.h"
 #include "global.h"
 #include "gba/gba.h"
+#include "event_data.h"
 #include "main.h"
 #include "battle.h"
 #include "pokemon.h"
 #include "constants/species.h"
+#include "constants/flags.h"
 #include "constants/global.h"
 
 
@@ -108,8 +110,16 @@ static bool8 IsBattleImportant(void)
     return FALSE;
 }
 
-u8 Speedup_AdditionalIterations(u8 speed)
+u8 Speedup_AdditionalIterations(u8 speed, bool8 overworld)
 {
+    if (overworld
+        && (JOY_HELD(R_BUTTON)
+        || FlagGet(FLAG_PREVENT_OVERWORLD_SPEEDUP)
+        || FlagGet(FLAG_SYS_DEXNAV_SEARCH)))
+    {
+        return OPTIONS_SPEEDUP_NORMAL_EXTRA_ITERATIONS;
+    }
+
     switch (speed)
     {
     case OPTIONS_SPEEDUP_8X: return OPTIONS_SPEEDUP_8X_EXTRA_ITERATIONS;

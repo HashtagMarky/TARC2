@@ -1574,7 +1574,7 @@ void CB2_Overworld(void)
         SetVBlankCallback(NULL);
     OverworldBasic();
 
-    for (u8 loops = 0; loops < Speedup_AdditionalIterations(gSaveBlock2Ptr->optionsOverworldSpeed); loops++)
+    for (u8 loops = 0; loops < Speedup_AdditionalIterations(gSaveBlock2Ptr->optionsOverworldSpeed, TRUE); loops++)
     {
         AnimateSprites();
         CameraUpdate();

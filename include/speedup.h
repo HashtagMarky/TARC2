@@ -16,6 +16,6 @@
 // Battle Speed Up (Credit to Pokabbie)
 u32 Rogue_GetBattleSpeedScale(bool32 forHealthbar);
 
-u8 Speedup_AdditionalIterations(u8 speed);
+u8 Speedup_AdditionalIterations(u8 speed, bool8 overworld);
 
 #endif // GUARD_SPEEDUP_H

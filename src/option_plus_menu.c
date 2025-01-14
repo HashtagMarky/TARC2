@@ -1534,7 +1534,7 @@ static void DrawChoices_Speedup(int selection, int y)
     else
     {
         u8 textMultipler[] = _("x1 SPEED{0x77}{0x77}{0x77}{0x77}{0x77}");
-        textMultipler[1] = CHAR_1 + Speedup_AdditionalIterations(selection);
+        textMultipler[1] = CHAR_1 + Speedup_AdditionalIterations(selection, FALSE);
         DrawOptionMenuChoice(textMultipler, 104, y, 1, active);
     }
 }
