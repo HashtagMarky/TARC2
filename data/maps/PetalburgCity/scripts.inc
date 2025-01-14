@@ -765,3 +765,64 @@ PetalburgCity_Text_ImLookingForTalentedTrainers:
 	.string "I'm roaming the land in search of\n"
 	.string "talented TRAINERS.\p"
 	.string "I'm sorry to have taken your time.$"
+
+PetalburgCity_Scripts_Accordion::
+	msgbox PetalburgCity_Text_Accordion, MSGBOX_DEFAULT
+	closemessage
+	release
+	dynamicmusicmusician
+	end
+
+PetalburgCity_Text_Accordion:
+	.string "Hey there, do you like music?\n"
+	.string "I lead the PETALBURG CITY BAND!\p"
+	.string "Go and find the rest of us, and\n"
+	.string "we'll play this town a song!$"
+
+PetalburgCity_Scripts_Beatbox::
+	msgbox PetalburgCity_Text_Beatbox, MSGBOX_YESNO
+	closemessage
+	release
+	dynamicmusicmusician
+	end
+
+PetalburgCity_Text_Beatbox:
+	.string "Boots an' cats, an' boots an' cats…\n"
+	.string "I'm the PETALBURG CITY BEATBOXER!\l"
+	.string "Want me to throw in some heat?$"
+
+PetalburgCity_Scripts_Keytar::
+	msgbox PetalburgCity_Text_Keytar, MSGBOX_YESNO
+	closemessage
+	release
+	dynamicmusicmusician
+	end
+
+PetalburgCity_Text_Keytar:
+	.string "I want to jam, it's in my bones!\n"
+	.string "I'm the PETALBURG CITY KEYTARIST!\l"
+	.string "Want me to grind some keys?$"
+
+PetalburgCity_Scripts_Flute::
+	msgbox PetalburgCity_Text_Flute, MSGBOX_YESNO
+	closemessage
+	release
+	dynamicmusicmusician
+	end
+
+PetalburgCity_Text_Flute:
+	.string "I may like peace and serenity, but I\n"
+	.string "am still the PETALBURG CITY FLUTIST.\l"
+	.string "Want to hear what I can do?$"
+
+PetalburgCity_Scripts_Erhu::
+	msgbox PetalburgCity_Text_Erhu, MSGBOX_YESNO
+	closemessage
+	release
+	dynamicmusicmusician
+	end
+
+PetalburgCity_Text_Erhu:
+	.string "They say flowers blossom just to,\n"
+	.string "hear the PETALBURG CITY ERHUIST.\l"
+	.string "Want to see them grow?$"
