@@ -229,7 +229,7 @@ PetalburgCity_EventScript_GymSign::
 	end
 
 PetalburgCity_EventScript_CutsceneOne::
-	callnative CreateCutsceneTask
+	startcutscene 1
 	message PetalburgCity_Text_CutsceneTextOne
 	waitmessage
 	waitbuttonpress
@@ -247,14 +247,39 @@ PetalburgCity_EventScript_CutsceneOneEnd::
 	closemessage
 	end
 
+PetalburgCity_EventScript_CutsceneTwo::
+	startcutscene 2
+	message PetalburgCity_Text_CutsceneTextTwo
+	waitmessage
+	waitbuttonpress
+	closemessage
+	callnative DestroyCutsceneTask
+	end
+
+PetalburgCity_EventScript_CutsceneTwoEnd::
+	closemessage
+	fadescreen FADE_TO_BLACK
+	msgbox PetalburgCity_Text_CutsceneSkipping, MSGBOX_DEFAULT
+	closemessage
+	fadescreen FADE_FROM_BLACK
+	msgbox PetalburgCity_Text_CutsceneSkippedTwo, MSGBOX_DEFAULT
+	closemessage
+	end
+
 PetalburgCity_Text_CutsceneTextOne::
 	.string "This is a long cutscene.\nBeginning countdown.\l10\l9\l8\l7\l6\l5\l4\l3\l2\l1\lEnd of cutscene.$"
+
+PetalburgCity_Text_CutsceneTextTwo::
+	.string "This is a very long cutscene.\nBeginning countdown.\l20\l19\l18\l17\l16\l15\l14\l13\l12\l11\l10\l9\l8\l7\l6\l5\l4\l3\l2\l1\lEnd of cutscene.$"
 
 PetalburgCity_Text_CutsceneSkipping:
 	.string "Skipping Cutscene$"
 
 PetalburgCity_Text_CutsceneSkippedOne:
-	.string "Skipped Cutscene$"
+	.string "Skipped Cutscene One$"
+
+PetalburgCity_Text_CutsceneSkippedTwo:
+	.string "Skipped Cutscene Two$"
 
 PetalburgCity_EventScript_CitySign::
 	msgbox PetalburgCity_Text_CitySign, MSGBOX_SIGN

@@ -11,10 +11,12 @@ struct cutscene
 
 extern const u8 PetalburgCity_EventScript_CutsceneOne[];
 extern const u8 PetalburgCity_EventScript_CutsceneOneEnd[];
+extern const u8 PetalburgCity_EventScript_CutsceneTwoEnd[];
 
 const struct cutscene sCutsceneScripts[] =
 {
-    [1] = {PetalburgCity_EventScript_CutsceneOneEnd}
+    [1] = {PetalburgCity_EventScript_CutsceneOneEnd},
+    [2] = {PetalburgCity_EventScript_CutsceneTwoEnd}
 };
 #define tCutscene data[0]
 static void Task_CutsceneTask(u8 taskId)
@@ -27,10 +29,10 @@ static void Task_CutsceneTask(u8 taskId)
     }
 }
 
-void CreateCutsceneTask(void)
+void CreateCutsceneTask(struct ScriptContext *ctx)
 {
+    u32 cutscene = ScriptReadByte(ctx);
     u8 taskId = CreateTask(Task_CutsceneTask, 64);
-    u8 cutscene = 1;
     gTasks[taskId].tCutscene = cutscene;
 }
 

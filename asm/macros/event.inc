@@ -2934,3 +2934,9 @@
 	callnative ScrCmd_DynamicMusic_RestoreMusicianInstrument
 	setobjectmovementtype VAR_LAST_TALKED, MOVEMENT_TYPE_WALK_IN_PLACE_DOWN, FALSE
 	.endm
+
+	@ Starts the given cutscene which can be skipped if seen before.
+	.macro startcutscene scene:req
+	callnative CreateCutsceneTask
+	.byte \scene
+	.endm
