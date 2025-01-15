@@ -531,3 +531,63 @@ void StartNewPokeballCaseUI(void)
     FadeScreen(FADE_TO_BLACK, 0);
     CreateTask(Task_OpenSamuelCase, 0);
 }
+
+
+// #define SCRIPT_CMD_END    0x02 // end command
+// #define SCRIPT_CMD_RETURN 0x03 // return command
+
+// // Function to calculate the size of a script dynamically
+// size_t GetScriptSize(const u8 *script)
+// {
+//     size_t size = 0;
+
+//     // Iterate through the script until an end or return command is found
+//     while (TRUE)
+//     {
+//         u8 cmd = script[size];
+//         size++;
+
+//         // Check if the command is a terminating command
+//         if (cmd == SCRIPT_CMD_END || cmd == SCRIPT_CMD_RETURN)
+//         {
+//             break;
+//         }
+//     }
+
+//     return size; // Return the total size including the terminal command
+// }
+// extern const u8 PetalburgCity_EventScript_CutsceneOne[];
+// extern const u8 PetalburgCity_EventScript_CutsceneOneEnd[];
+// static bool8 IsScriptActiveGlobal(const u8 *script)
+// {
+//     const u8 *scriptStart = script;
+//     const u8 *scriptEnd = script + GetScriptSize(script);
+
+//     return sGlobalScriptContext.scriptPtr >= scriptStart && sGlobalScriptContext.scriptPtr < scriptEnd;
+// }
+// static bool8 IsScriptActiveImmediate(const u8 *script)
+// {
+//     const u8 *scriptStart = script;
+//     const u8 *scriptEnd = script + GetScriptSize(script);
+
+//     return sImmediateScriptContext.scriptPtr >= scriptStart && sImmediateScriptContext.scriptPtr < scriptEnd;
+// }
+// void Script_CheckIfStatement(void)
+// {
+//     if (IsScriptActiveGlobal(PetalburgCity_EventScript_CutsceneOne))
+//     {
+//         DebugPrintf("Global - True");
+//     }
+//     else
+//     {
+//         DebugPrintf("Global - False");
+//     }
+//     if (IsScriptActiveImmediate(PetalburgCity_EventScript_CutsceneOne))
+//     {
+//         DebugPrintf("Immediate - True");
+//     }
+//     else
+//     {
+//         DebugPrintf("Immediate - False");
+//     }
+// }

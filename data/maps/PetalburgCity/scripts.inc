@@ -228,6 +228,34 @@ PetalburgCity_EventScript_GymSign::
 	msgbox PetalburgCity_Text_GymSign, MSGBOX_SIGN
 	end
 
+PetalburgCity_EventScript_CutsceneOne::
+	callnative CreateCutsceneTask
+	message PetalburgCity_Text_CutsceneTextOne
+	waitmessage
+	waitbuttonpress
+	closemessage
+	callnative DestroyCutsceneTask
+	end
+
+PetalburgCity_EventScript_CutsceneOneEnd::
+	closemessage
+	fadescreen FADE_TO_BLACK
+	msgbox PetalburgCity_Text_CutsceneSkipping, MSGBOX_DEFAULT
+	closemessage
+	fadescreen FADE_FROM_BLACK
+	msgbox PetalburgCity_Text_CutsceneSkippedOne, MSGBOX_DEFAULT
+	closemessage
+	end
+
+PetalburgCity_Text_CutsceneTextOne::
+	.string "This is a long cutscene.\nBeginning countdown.\l10\l9\l8\l7\l6\l5\l4\l3\l2\l1\lEnd of cutscene.$"
+
+PetalburgCity_Text_CutsceneSkipping:
+	.string "Skipping Cutscene$"
+
+PetalburgCity_Text_CutsceneSkippedOne:
+	.string "Skipped Cutscene$"
+
 PetalburgCity_EventScript_CitySign::
 	msgbox PetalburgCity_Text_CitySign, MSGBOX_SIGN
 	end
