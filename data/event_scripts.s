@@ -59,6 +59,7 @@
 #include "constants/weather.h"
 #include "constants/field_mugshots.h"
 #include "constants/ikigai_characters.h"
+#include "constants/cutscene.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"

@@ -1,23 +1,14 @@
 #include "global.h"
 #include "gba/gba.h"
+#include "cutscene.h"
+#include "constants/cutscene.h"
+#include "data/cutscene.h"
+#include "main.h"
 #include "script.h"
 #include "task.h"
-#include "main.h"
-
-struct cutscene
-{
-    const u8 *scriptCutscene;
-};
 
 extern const u8 PetalburgCity_EventScript_CutsceneOne[];
-extern const u8 PetalburgCity_EventScript_CutsceneOneEnd[];
-extern const u8 PetalburgCity_EventScript_CutsceneTwoEnd[];
 
-const struct cutscene sCutsceneScripts[] =
-{
-    [1] = {PetalburgCity_EventScript_CutsceneOneEnd},
-    [2] = {PetalburgCity_EventScript_CutsceneTwoEnd}
-};
 #define tCutscene data[0]
 static void Task_CutsceneTask(u8 taskId)
 {
@@ -25,7 +16,7 @@ static void Task_CutsceneTask(u8 taskId)
     if (JOY_NEW(START_BUTTON))
     {
         DebugPrintf("Button Pressed");
-        ScriptContext_SetupScript(sCutsceneScripts[cutscene].scriptCutscene);
+        ScriptContext_SetupScript(sCutsceneSkipScripts[cutscene].scriptCutsceneSkips);
     }
 }
 

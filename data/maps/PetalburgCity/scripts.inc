@@ -229,7 +229,7 @@ PetalburgCity_EventScript_GymSign::
 	end
 
 PetalburgCity_EventScript_CutsceneOne::
-	startcutscene 1
+	startcutscene PETALBURG_TEST_ONE
 	message PetalburgCity_Text_CutsceneTextOne
 	waitmessage
 	waitbuttonpress
@@ -248,7 +248,7 @@ PetalburgCity_EventScript_CutsceneOneEnd::
 	end
 
 PetalburgCity_EventScript_CutsceneTwo::
-	startcutscene 2
+	startcutscene PETALBURG_TEST_TWO
 	message PetalburgCity_Text_CutsceneTextTwo
 	waitmessage
 	waitbuttonpress
