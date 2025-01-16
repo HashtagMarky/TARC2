@@ -3,6 +3,7 @@
 #include "cutscene.h"
 #include "constants/cutscene.h"
 #include "data/cutscene.h"
+#include "event_data.h"
 #include "main.h"
 #include "script.h"
 #include "sprite.h"
@@ -100,12 +101,28 @@ void EndSkippableCutscene(void)
 
 static bool32 TaskHelper_SkippableCutscene_CheckCutsceneFlag(u32 cutscene)
 {
-    return TRUE;
+    if (CUTSCENE_FLAG_TRACKING)
+    {
+        if (sCutsceneSkipScripts[cutscene].flag != 0
+            && FlagGet(sCutsceneSkipScripts[cutscene].flag))
+        {
+            return TRUE;
+        }
+    }
+    else
+    {
+
+    }
+    
+    return FALSE;
 }
 
 static void TaskHelper_SkippableCutscene_SetCutsceneFlag(u32 cutscene)
 {
-    
+    if (sCutsceneSkipScripts[cutscene].flag != 0)
+    {
+        FlagSet(sCutsceneSkipScripts[cutscene].flag);
+    }
 }
 #undef tCutscene
 #undef tSpriteId
