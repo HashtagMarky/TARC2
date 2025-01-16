@@ -2940,3 +2940,8 @@
 	callnative CreateCutsceneTask
 	.byte \scene
 	.endm
+
+	@ Ends any active cutscene, settings its seen flag.
+	.macro endcutscene
+	callnative DestroyCutsceneTask
+	.endm

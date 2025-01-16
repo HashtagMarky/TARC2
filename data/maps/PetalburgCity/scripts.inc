@@ -234,7 +234,7 @@ PetalburgCity_EventScript_CutsceneOne::
 	waitmessage
 	waitbuttonpress
 	closemessage
-	callnative DestroyCutsceneTask
+	endcutscene
 	end
 
 PetalburgCity_EventScript_CutsceneOneEnd::
@@ -253,7 +253,7 @@ PetalburgCity_EventScript_CutsceneTwo::
 	waitmessage
 	waitbuttonpress
 	closemessage
-	callnative DestroyCutsceneTask
+	endcutscene
 	end
 
 PetalburgCity_EventScript_CutsceneTwoEnd::
