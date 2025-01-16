@@ -145,17 +145,16 @@ Debug_OpenDynPalMenu::
 	end
 
 Debug_EventScript_Script_1::
-	callnative CreateCutsceneTask
+	callnative StartSkippableCutscene
 	release
 	end
 
 Debug_EventScript_Script_2::
-	callnative CheckCutsceneTask
 	release
 	end
 
 Debug_EventScript_Script_3::
-	callnative DestroyCutsceneTask
+	callnative EndSkippableCutscene
 	release
 	end
 

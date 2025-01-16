@@ -2937,11 +2937,11 @@
 
 	@ Starts the given cutscene which can be skipped if seen before.
 	.macro startcutscene scene:req
-	callnative CreateCutsceneTask
+	callnative StartSkippableCutscene
 	.byte \scene
 	.endm
 
 	@ Ends any active cutscene, settings its seen flag.
 	.macro endcutscene
-	callnative DestroyCutsceneTask
+	callnative EndSkippableCutscene
 	.endm

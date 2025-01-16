@@ -6,6 +6,6 @@ struct CutscenesSkips
     const u8 *scriptCutsceneSkips;
 };
 
-void DestroyCutsceneTask(void);
+void EndSkippableCutscene(void);
 
 #endif // GUARD_CUTSCENE_H
