@@ -49,6 +49,7 @@ static const struct SpriteTemplate sCutsceneSkipButtonTemplate = {
 static void Task_SkippableCutscene(u8 taskId);
 static bool32 TaskHelper_SkippableCutscene_CheckCutsceneFlag(u32 cutscene);
 static void TaskHelper_SkippableCutscene_SetCutsceneFlag(u32 cutscene);
+static bool32 TaskHelper_SkippableCutscene_GetSetCutsceneFlagSaveStruct(u32 cutscene, bool32 setFlag);
 
 
 #define tCutscene data[0]
@@ -82,7 +83,7 @@ static void Task_SkippableCutscene(u8 taskId)
     u32 cutscene = gTasks[taskId].tCutscene;
     if (JOY_NEW(START_BUTTON))
     {
-        ScriptContext_SetupScript(sCutsceneSkipScripts[cutscene].scriptCutsceneSkips);
+        ScriptContext_SetupScript(sCutsceneSkipScripts[cutscene].scriptCutsceneSkipPtr);
         EndSkippableCutscene();
     }
 }
@@ -101,28 +102,54 @@ void EndSkippableCutscene(void)
 
 static bool32 TaskHelper_SkippableCutscene_CheckCutsceneFlag(u32 cutscene)
 {
-    if (CUTSCENE_FLAG_TRACKING)
+#if CUTSCENE_FLAG_TRACKING == TRUE
+    if (sCutsceneSkipScripts[cutscene].flag != 0
+        && FlagGet(sCutsceneSkipScripts[cutscene].flag))
     {
-        if (sCutsceneSkipScripts[cutscene].flag != 0
-            && FlagGet(sCutsceneSkipScripts[cutscene].flag))
-        {
-            return TRUE;
-        }
+        return TRUE;
     }
-    else
+#else
+    if (TaskHelper_SkippableCutscene_GetSetCutsceneFlagSaveStruct(cutscene, FALSE))
     {
-
+        return TRUE;
     }
+#endif
     
     return FALSE;
 }
 
 static void TaskHelper_SkippableCutscene_SetCutsceneFlag(u32 cutscene)
 {
+#if CUTSCENE_FLAG_TRACKING == TRUE
     if (sCutsceneSkipScripts[cutscene].flag != 0)
     {
         FlagSet(sCutsceneSkipScripts[cutscene].flag);
     }
+#else
+    TaskHelper_SkippableCutscene_GetSetCutsceneFlagSaveStruct(cutscene, TRUE);
+#endif
+}
+
+static bool32 TaskHelper_SkippableCutscene_GetSetCutsceneFlagSaveStruct(u32 cutscene, bool32 setFlag)
+{
+    u32 index, bit, mask;
+    s32 retVal = 0;
+
+#if CUTSCENE_FLAG_TRACKING == FALSE
+    if (cutscene >= CUTSCENE_COUNT)
+        return retVal;
+
+    index = cutscene / 8;
+    bit = cutscene % 8;
+    mask = 1 << bit;
+
+    if (setFlag)
+        gSaveBlock3Ptr->flagCutscenes[index] |= mask;
+    else
+        retVal = ((gSaveBlock3Ptr->flagCutscenes[index] & mask) != 0);
+#endif
+
+    return retVal;
 }
 #undef tCutscene
 #undef tSpriteId

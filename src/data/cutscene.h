@@ -14,7 +14,7 @@ const struct CutscenesSkips sCutsceneSkipScripts[] =
 {
     [PETALBURG_TEST_ONE] =
     {
-        .scriptCutsceneSkips = PetalburgCity_EventScript_CutsceneOneEnd,
+        .scriptCutsceneSkipPtr = PetalburgCity_EventScript_CutsceneOneEnd,
 #if CUTSCENE_FLAG_TRACKING == TRUE
         .flag = FLAG_TEMP_1,
 #endif
@@ -22,7 +22,7 @@ const struct CutscenesSkips sCutsceneSkipScripts[] =
 
     [PETALBURG_TEST_TWO] =
     {
-        .scriptCutsceneSkips = PetalburgCity_EventScript_CutsceneTwoEnd,
+        .scriptCutsceneSkipPtr = PetalburgCity_EventScript_CutsceneTwoEnd,
 #if CUTSCENE_FLAG_TRACKING == TRUE
         .flag = FLAG_TEMP_2,
 #endif

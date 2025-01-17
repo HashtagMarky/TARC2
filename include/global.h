@@ -20,6 +20,8 @@
 #include "constants/items.h"
 #include "config/save.h"
 
+#include "constants/cutscene.h"
+
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
 
@@ -238,6 +240,9 @@ struct SaveBlock3
     u8 dexNavSearchLevels[NUM_SPECIES];
 #endif
     u8 dexNavChain;
+#if CUTSCENE_FLAG_TRACKING == FALSE
+    u8 flagCutscenes[ROUND_BITS_TO_BYTES(CUTSCENE_COUNT)];
+#endif
 }; /* max size 1624 bytes */
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;
