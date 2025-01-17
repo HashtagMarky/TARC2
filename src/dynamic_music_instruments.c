@@ -4,6 +4,7 @@
 #include "event_data.h"
 #include "global.fieldmap.h"
 #include "m4a.h"
+#include "script.h"
 #include "sound.h"
 #include "constants/event_objects.h"
 #include "constants/flags.h"
@@ -183,11 +184,15 @@ void ScrCmd_DynamicMusic_RemoveMusicianInstrument(void)
     DynamicMusic_RemoveInstrument(
         GetInstrumentFromMusician()
     );
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 }
 
 void ScrCmd_DynamicMusic_RemoveAllInstrumentNotPlaying(void)
 {
     DynamicMusic_RemoveAllInstrumentNotPlaying();
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 }
 
 // Restore Instruments
@@ -229,11 +234,15 @@ void ScrCmd_DynamicMusic_RestoreMusicianInstrument(void)
     DynamicMusic_RestoreInstrument(
         GetInstrumentFromMusician()
     );
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 }
 
 void ScrCmd_DynamicMusic_RestoreAllInstrumentPlaying(void)
 {
     DynamicMusic_RestoreAllInstrumentPlaying();
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 }
 
 // Play Only Instruments
@@ -289,4 +298,6 @@ void ScrCmd_DynamicMusic_PlayOnlyMusicianInstrument(void)
     DynamicMusic_PlayOnlyInstrument(
         GetInstrumentFromMusician()
     );
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 }

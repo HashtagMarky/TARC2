@@ -16,6 +16,7 @@
 #include "global.fieldmap.h"
 #include "m4a.h"
 #include "overworld.h"
+#include "script.h"
 #include "sound.h"
 #include "task.h"
 #include "constants/field_effects.h"
@@ -84,6 +85,8 @@ void UpdateMovementDynamicMusic(void)
     gTasks[taskId].tOrigMapId = (gSaveBlock1Ptr->location.mapGroup << 8) | (gSaveBlock1Ptr->location.mapNum);
     gTasks[taskId].tStartMaxVolume = FALSE;
     gTasks[taskId].tFadeStartTimer = 0;
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 }
 
 void Task_UpdateMovementDynamicMusic(u8 taskId)

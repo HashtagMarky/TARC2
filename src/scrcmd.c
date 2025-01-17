@@ -1832,6 +1832,8 @@ bool8 ScrCmd_dynmultipush(struct ScriptContext *ctx)
 
 bool8 ScrCmd_attitudemultipush(struct ScriptContext *ctx)
 {
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+    
     u32 characteristic = VarGet(ScriptReadHalfword(ctx));
     u32 argc = ScriptReadByte(ctx);
     if (argc == 0)
@@ -2531,6 +2533,8 @@ bool8 ScrCmd_dowildbattle(struct ScriptContext *ctx)
 
 bool8 ScrCmd_dowildsafaribattle(struct ScriptContext *ctx)
 {
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+
     if (GetSafariZoneFlag())
         BeginSafariBattle();
     else if (sIsScriptedWildDouble == FALSE)
@@ -3083,11 +3087,16 @@ bool8 ScrCmd_createfieldmugshot(struct ScriptContext *ctx)
     }
 
     CreateFieldMugshot(mugshotType, mugshotId, mugshotEmotion, x, y, FALSE);
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+
     return FALSE;
 }
 
 bool8 ScrCmd_setselectedobjectevent(struct ScriptContext *ctx)
 {
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+    
     u16 localId = VarGet(ScriptReadHalfword(ctx));
 
     gSelectedObjectEvent = GetObjectEventIdByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);

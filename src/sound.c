@@ -693,6 +693,8 @@ bool8 IsSpecialSEPlaying(void)
 
 void PlayVoiceLine(u16 voice, u8 voiceLine, u8 voiceVolume, u16 bgVolume)
 {
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+    
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, bgVolume);
 
     SetPokemonCryVolume(voiceVolume);

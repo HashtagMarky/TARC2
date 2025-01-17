@@ -2618,6 +2618,8 @@ static const struct SpritePalette sSpritePalettes[] =
 void DoPlayerNicknamingScreen(void)
 {
     DoNamingScreen(NAMING_SCREEN_PLAYER_NICKNAME, gSaveBlock3Ptr->characters.playerNickname, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldContinueScript);
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
 }
 
 

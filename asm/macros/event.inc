@@ -1934,7 +1934,7 @@
 
 	@ destroys a mugshot in the overworld, if there is one
 	.macro removefieldmugshot
-	callnative RemoveFieldMugshotAndWindow
+	callnative RemoveFieldMugshotAndWindow, requests_effects=1
 	.endm
 
 	@ sets variable overworld object event to a Pokémon for a wild encounter
@@ -2579,7 +2579,7 @@
 	setvar VAR_0x8004, \localId
 	fadenewbgm MUS_DP_LAKE
 	delay 50
-	callnative DoSSAnneDepartureCutscene
+	callnative DoSSAnneDepartureCutscene, requests_effects=1
 	waitstate
 	removeobject \localId
 	.endm
@@ -2587,7 +2587,7 @@
 	@ Starts Player Nicknaming Screen
 	.macro nicknameplayer
 	fadescreen FADE_TO_BLACK
-	callnative DoPlayerNicknamingScreen
+	callnative DoPlayerNicknamingScreen, requests_effects=1
 	waitstate
 	.endm
 
@@ -2602,7 +2602,7 @@
 	@ Starts a characters default emote based on personality.
 	@ Uses VAR_0x8000 in order to determine if waitmovement is needed.
 	.macro charemotedefault
-	callnative IkigaiCharacter_DefaultEmote
+	callnative IkigaiCharacter_DefaultEmote, requests_effects=1
 	call_if_eq VAR_0x8000, TRUE, Common_Movement_Waitmovement
 	.endm
 
@@ -2613,7 +2613,7 @@
 	.ifnb \attitude
 		setvar VAR_RESULT, \attitude
 	.endif
-	callnative IkigaiCharacter_ResponseEmote
+	callnative IkigaiCharacter_ResponseEmote, requests_effects=1
 	call_if_eq VAR_0x8000, TRUE, Common_Movement_Waitmovement
 	.endm
 
@@ -2653,7 +2653,7 @@
 	.ifnb \localId
 	setselectedobjectevent \localId
 	.endif
-	callnative ScrCmd_ReturnIkigaiCharacter_SelectedObject
+	callnative ScrCmd_ReturnIkigaiCharacter_SelectedObject, requests_effects=1
 	.endm
 
 	@ Buffers Character name stored in VAR_0x8004 to STR_VAR_1
@@ -2661,7 +2661,7 @@
 	.ifnb \localId
 	setselectedobjectevent \localId
 	.endif
-	callnative ScrCmd_IkigaiCharacter_BurfferName
+	callnative ScrCmd_IkigaiCharacter_BurfferName, requests_effects=1
 	.endm
 
 	@ Sets Ikigai Character Romantic Flag
@@ -2669,7 +2669,7 @@
 	.ifnb \localId
 	setselectedobjectevent \localId
 	.endif
-	callnative ScrCmd_IkigaiCharacter_SetRomanticFlag
+	callnative ScrCmd_IkigaiCharacter_SetRomanticFlag, requests_effects=1
 	.endm
 
 	@ Toggles Ikigai Character Romantic Flag
@@ -2677,7 +2677,7 @@
 	.ifnb \localId
 	setselectedobjectevent \localId
 	.endif
-	callnative ScrCmd_IkigaiCharacter_ToggleRomanticFlag
+	callnative ScrCmd_IkigaiCharacter_ToggleRomanticFlag, requests_effects=1
 	.endm
 
 	@ Clears Ikigai Character Romantic Flag
@@ -2685,7 +2685,7 @@
 	.ifnb \localId
 	setselectedobjectevent \localId
 	.endif
-	callnative ScrCmd_IkigaiCharacter_ClearRomanticFlag
+	callnative ScrCmd_IkigaiCharacter_ClearRomanticFlag, requests_effects=1
 	.endm
 
 	@ Gets Ikigai Character Romantic Flag
@@ -2694,7 +2694,7 @@
 	.ifnb \localId
 	setselectedobjectevent \localId
 	.endif
-	callnative ScrCmd_IkigaiCharacter_GetRomanticFlag
+	callnative ScrCmd_IkigaiCharacter_GetRomanticFlag, requests_effects=1
 	.endm
 
 	@ Sets Ikigai Character Romantic Flag Exclusively
@@ -2702,7 +2702,7 @@
 	.ifnb \localId
 	setselectedobjectevent \localId
 	.endif
-	callnative ScrCmd_IkigaiCharacter_SetRomanticFlag_Exclusive
+	callnative ScrCmd_IkigaiCharacter_SetRomanticFlag_Exclusive, requests_effects=1
 	.endm
 
 	@ Clears Ikigai Character Romantic Flag Amicably
@@ -2710,7 +2710,7 @@
 	.ifnb \localId
 	setselectedobjectevent \localId
 	.endif
-	callnative ScrCmd_IkigaiCharacter_ClearRomanticFlag_Amicable
+	callnative ScrCmd_IkigaiCharacter_ClearRomanticFlag_Amicable, requests_effects=1
 	.endm
 
 	@ Clears Ikigai Character Romantic Flag Hostilely
@@ -2718,7 +2718,7 @@
 	.ifnb \localId
 	setselectedobjectevent \localId
 	.endif
-	callnative ScrCmd_IkigaiCharacter_ClearRomanticFlag_Hostile
+	callnative ScrCmd_IkigaiCharacter_ClearRomanticFlag_Hostile, requests_effects=1
 	.endm
 
 	@ Checks Player Romantic Status
@@ -2730,12 +2730,7 @@
 	.endif
 	checkcharacter
 	copyvar VAR_0x8004, VAR_RESULT
-	callnative ScrCmd_IkigaiCharacter_CheckRelationships
-	.endm
-
-	@ Release Object Events
-	.macro releaseobjects
-	callnative(ScriptMovement_UnfreezeObjectEvents)
+	callnative ScrCmd_IkigaiCharacter_CheckRelationships, requests_effects=1
 	.endm
 
 @ Deokishisu's Supplementary Macros
@@ -2941,12 +2936,12 @@
 	@ This must be called in an ON_RESUME mapscript, for all maps where
 	@ it is used, even if warping from a map witht the same music.
 	.macro dynamicmusicmovememnt
-	callnative UpdateMovementDynamicMusic
+	callnative UpdateMovementDynamicMusic, requests_effects=1
 	.endm
 
 	@ Enables Dynamic Instrument Music, and sets a musician to start playing.
 	.macro dynamicmusicmusician
-	callnative ScrCmd_DynamicMusic_RestoreMusicianInstrument
+	callnative ScrCmd_DynamicMusic_RestoreMusicianInstrument, requests_effects=1
 	setobjectmovementtype VAR_LAST_TALKED, MOVEMENT_TYPE_WALK_IN_PLACE_DOWN, FALSE
 	.endm
 

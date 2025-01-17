@@ -301,6 +301,8 @@ void ScrCmd_IkigaiCharacter_SetRomanticFlag(void)
     IkigaiCharacter_SetRomanticFlag(
         ReturnIkigaiCharacter_SelectedObject()
     );
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 }
 
 void ScrCmd_IkigaiCharacter_ToggleRomanticFlag(void)
@@ -308,6 +310,8 @@ void ScrCmd_IkigaiCharacter_ToggleRomanticFlag(void)
     IkigaiCharacter_ToggleRomanticFlag(
         ReturnIkigaiCharacter_SelectedObject()
     );
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 }
 
 void ScrCmd_IkigaiCharacter_ClearRomanticFlag(void)
@@ -315,6 +319,8 @@ void ScrCmd_IkigaiCharacter_ClearRomanticFlag(void)
     IkigaiCharacter_ClearRomanticFlag(
         ReturnIkigaiCharacter_SelectedObject()
     );
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 }
 
 void ScrCmd_IkigaiCharacter_GetRomanticFlag(void)
@@ -322,6 +328,8 @@ void ScrCmd_IkigaiCharacter_GetRomanticFlag(void)
     gSpecialVar_Result = IkigaiCharacter_GetRomanticFlag(
         ReturnIkigaiCharacter_SelectedObject()
     );
+
+    Script_RequestEffects(SCREFF_V1);
 }
 
 void ScrCmd_IkigaiCharacter_SetRomanticFlag_Exclusive(void)
@@ -329,6 +337,8 @@ void ScrCmd_IkigaiCharacter_SetRomanticFlag_Exclusive(void)
     IkigaiCharacter_SetRomanticFlag_Exclusive(
         ReturnIkigaiCharacter_SelectedObject()
     );
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 }
 
 void ScrCmd_IkigaiCharacter_ClearRomanticFlag_Amicable(void)
@@ -336,6 +346,8 @@ void ScrCmd_IkigaiCharacter_ClearRomanticFlag_Amicable(void)
     IkigaiCharacter_ClearRomanticFlag_Amicable(
         ReturnIkigaiCharacter_SelectedObject()
     );
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 }
 
 void ScrCmd_IkigaiCharacter_ClearRomanticFlag_Hostile(void)
@@ -343,16 +355,22 @@ void ScrCmd_IkigaiCharacter_ClearRomanticFlag_Hostile(void)
     IkigaiCharacter_ClearRomanticFlag_Hostile(
         ReturnIkigaiCharacter_SelectedObject()
     );
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 }
 
 void ScrCmd_IkigaiCharacter_CheckRelationships(void)
 {
     gSpecialVar_Result = IkigaiCharacter_CheckRelationships();
+
+    Script_RequestEffects(SCREFF_V1);
 }
 
 void ScrCmd_IkigaiCharacter_BurfferName(void)
 {
     StringCopy(gStringVar1, gIkigaiCharactersInfo[gSpecialVar_Result].name);
+
+    Script_RequestEffects(SCREFF_V1);
 }
 
 bool32 IkigaiCharacter_ReturnOpinionDecay(u32 character)
@@ -554,6 +572,8 @@ void IkigaiCharacter_DefaultEmote(void)
         gObjectEvents[gSelectedObjectEvent].localId,
         IkigaiCharacter_GetMovementFromAttitude(character, gIkigaiCharactersInfo[character].personality)
     );
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 }
 
 void IkigaiCharacter_ResponseEmote(void)
@@ -564,6 +584,8 @@ void IkigaiCharacter_ResponseEmote(void)
         gObjectEvents[gSelectedObjectEvent].localId,
         IkigaiCharacter_GetMovementFromAttitude(character, gSpecialVar_Result)
     );
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 }
 
 u32 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId)
@@ -587,6 +609,8 @@ u32 ReturnIkigaiCharacter_SelectedObject(void)
 void ScrCmd_ReturnIkigaiCharacter_SelectedObject(void)
 {
     gSpecialVar_Result = ReturnIkigaiCharacter_SelectedObject();
+
+    Script_RequestEffects(SCREFF_V1);
 }
 
 u32 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void)

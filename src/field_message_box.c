@@ -260,6 +260,8 @@ bool8 ScrCmd_setspeaker(struct ScriptContext *ctx)
     {
         SetSpeakerName(name);
     }
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
     
     return FALSE;
 }

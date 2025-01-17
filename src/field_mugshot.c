@@ -113,6 +113,8 @@ static void Task_MugshotWindow(u8 taskId) {}
 void RemoveFieldMugshotAndWindow(void)
 {
     RemoveFieldMugshot(FALSE);
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 }
 
 void RemoveFieldMugshot(bool8 retainDetails)

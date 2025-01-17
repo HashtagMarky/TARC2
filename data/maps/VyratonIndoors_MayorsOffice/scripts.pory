@@ -150,7 +150,6 @@ script VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon
 script VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter
 {
     applymove(LOCALID_Starter, Common_Movement_FaceUp)
-    releaseobjects
     if (specialvar(VAR_RESULT, GetPlayerFacingDirection) == DIR_WEST)
     {
         applymoveplayer(VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_One)
