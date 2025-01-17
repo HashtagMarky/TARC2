@@ -79,6 +79,9 @@ HEADLESSELF = $(ROM_NAME:.gba=-test-headless.elf)
 
 # Pick our active variables
 ROM := $(ROM_NAME)
+ifeq ($(TESTELF),$(MAKECMDGOALS))
+  TEST := 1
+endif
 ifeq ($(TEST), 0)
   OBJ_DIR := $(OBJ_DIR_NAME)
 else
@@ -86,9 +89,6 @@ else
 endif
 ifeq ($(DEBUG),1)
   OBJ_DIR := $(OBJ_DIR_NAME_DEBUG)
-endif
-ifeq ($(TESTELF),$(MAKECMDGOALS))
-  TEST := 1
 endif
 ELF := $(ROM:.gba=.elf)
 MAP := $(ROM:.gba=.map)
@@ -185,7 +185,7 @@ MAKEFLAGS += --no-print-directory
 # Delete files that weren't built properly
 .DELETE_ON_ERROR:
 
-RULES_NO_SCAN += libagbsyscall clean clean-assets tidy tidymodern tidycheck generated clean-generated $(TESTELF)
+RULES_NO_SCAN += libagbsyscall clean clean-assets tidy tidymodern tidycheck generated clean-generated
 .PHONY: all rom agbcc modern compare check debug release
 .PHONY: $(RULES_NO_SCAN)
 

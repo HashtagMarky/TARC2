@@ -50,6 +50,7 @@
 #include "constants/items.h"
 #include "ikigai_characters.h"
 #include "speedup.h"
+#include "difficulty.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 extern const u8 EventScript_ResetIkigaiMapFlags[];
@@ -244,6 +245,7 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
+    SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     ResetItemFlags();
     IkigaiCharacter_SetAllCharacterDefaultOpinion();
     SetDefaultPlayerNickname();

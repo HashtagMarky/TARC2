@@ -2,6 +2,7 @@
 #include "battle_setup.h"
 #include "event_data.h"
 #include "event_object_movement.h"
+#include "event_scripts.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
 #include "pokemon.h"
@@ -438,9 +439,16 @@ bool8 CheckForTrainersWantingBattle(void)
             continue;
 
         numTrainers = CheckTrainer(i);
-        if (numTrainers == 0xFF)    //run script
-            break;
-        
+        if (numTrainers == 0xFF) // non-trainerbatle script
+        {
+            u32 objectEventId = gApproachingTrainers[gNoOfApproachingTrainers - 1].objectEventId;
+            gSelectedObjectEvent = objectEventId;
+            gSpecialVar_LastTalked = gObjectEvents[objectEventId].localId;
+            ScriptContext_SetupScript(EventScript_ObjectApproachPlayer);
+            LockPlayerFieldControls();
+            return TRUE;
+        }
+
         if (numTrainers == 2)
             break;
 
@@ -494,15 +502,34 @@ bool8 CheckForTrainersWantingBattle(void)
 
 static u8 CheckTrainer(u8 objectEventId)
 {
-    const u8 *scriptPtr;
+    const u8 *scriptPtr, *trainerBattlePtr;
     u8 numTrainers = 1;
-    u8 approachDistance;
     u8 sightFlag = GetObjectEventTrainerSightFlagByObjectEventId(objectEventId);
 
+    u8 approachDistance = GetTrainerApproachDistance(&gObjectEvents[objectEventId]);
+    if (approachDistance == 0)
+        return 0;
+
     if (InTrainerHill() == TRUE)
-        scriptPtr = GetTrainerHillTrainerScript();
+    {
+        trainerBattlePtr = scriptPtr = GetTrainerHillTrainerScript();
+    }
     else
-        scriptPtr = GetObjectEventScriptPointerByObjectEventId(objectEventId);
+    {
+        trainerBattlePtr = scriptPtr = GetObjectEventScriptPointerByObjectEventId(objectEventId);
+        struct ScriptContext ctx;
+        if (RunScriptImmediatelyUntilEffect(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE | SCREFF_TRAINERBATTLE, scriptPtr, &ctx))
+        {
+            if (*ctx.scriptPtr == 0x5c) // trainerbattle
+                trainerBattlePtr = ctx.scriptPtr;
+            else
+                trainerBattlePtr = NULL;
+        }
+        else
+        {
+            return 0; // no effect
+        }
+    }
 
     if (InBattlePyramid())
     {
@@ -514,17 +541,21 @@ static u8 CheckTrainer(u8 objectEventId)
         if (GetHillTrainerFlag(objectEventId))
             return 0;
     }
-    else if (sightFlag < TRAINER_TYPE_POKEMON)
+    else if (trainerBattlePtr)
     {
-        if (GetTrainerFlagFromScriptPointer(scriptPtr))
+        if (GetTrainerFlagFromScriptPointer(trainerBattlePtr))
             return 0;
     }
-
-    approachDistance = GetTrainerApproachDistance(&gObjectEvents[objectEventId]);
-
-    if (approachDistance != 0)
+    else
     {
-        if (sightFlag == TRAINER_TYPE_POKEMON)
+        numTrainers = 0xFF;
+    }
+
+    if (trainerBattlePtr)
+    {
+        if (trainerBattlePtr[1] == TRAINER_BATTLE_DOUBLE
+         || trainerBattlePtr[1] == TRAINER_BATTLE_REMATCH_DOUBLE
+         || trainerBattlePtr[1] == TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE)
         {
             if (scriptPtr != NULL)
             {
@@ -547,17 +578,15 @@ static u8 CheckTrainer(u8 objectEventId)
                 numTrainers = 2;
             }
         }
-
-        gApproachingTrainers[gNoOfApproachingTrainers].objectEventId = objectEventId;
-        gApproachingTrainers[gNoOfApproachingTrainers].trainerScriptPtr = scriptPtr;
-        gApproachingTrainers[gNoOfApproachingTrainers].radius = approachDistance;
-        InitTrainerApproachTask(&gObjectEvents[objectEventId], approachDistance - 1);
-        gNoOfApproachingTrainers++;
-
-        return numTrainers;
     }
 
-    return 0;
+    gApproachingTrainers[gNoOfApproachingTrainers].objectEventId = objectEventId;
+    gApproachingTrainers[gNoOfApproachingTrainers].trainerScriptPtr = scriptPtr;
+    gApproachingTrainers[gNoOfApproachingTrainers].radius = approachDistance;
+    InitTrainerApproachTask(&gObjectEvents[objectEventId], approachDistance - 1);
+    gNoOfApproachingTrainers++;
+
+    return numTrainers;
 }
 
 static u8 GetTrainerApproachDistance(struct ObjectEvent *trainerObj)
