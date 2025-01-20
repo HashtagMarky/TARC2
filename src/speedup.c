@@ -114,7 +114,7 @@ u8 Speedup_AdditionalIterations(u8 speed, bool8 overworld)
 {
     if (overworld
         && (JOY_HELD(R_BUTTON)
-        || FlagGet(FLAG_PREVENT_OVERWORLD_SPEEDUP)
+        || FlagGet(FLAG_SUPPRESS_OVERWORLD_SPEEDUP)
         || FlagGet(FLAG_SYS_DEXNAV_SEARCH)))
     {
         return OPTIONS_SPEEDUP_NORMAL_EXTRA_ITERATIONS;
