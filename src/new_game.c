@@ -100,7 +100,7 @@ static void InitPlayerTrainerId(void)
 // L=A isnt set here for some reason.
 static void SetDefaultOptions(void)
 {
-    gSaveBlock2Ptr->playerEmote = EMOTE_NORMAL;
+    gSaveBlock2Ptr->playerEmote = EMOTE_HAPPY;
     gSaveBlock2Ptr->ikigaiGymType = TYPE_NONE;
     gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FASTER;
     gSaveBlock2Ptr->optionsTitleScreenRandomise = TRUE;
