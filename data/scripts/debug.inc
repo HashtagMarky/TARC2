@@ -139,10 +139,16 @@ Debug_EventScript_Text_DefensiveIVs:
 Debug_OpenDynPalMenu::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
 	waitmovement OBJ_EVENT_ID_PLAYER
+	createfieldmugshot MUGSHOT_PLAYER
+	message Debug_EventScript_Text_DynPal
 	special DynPal_ShowFullToneMenu
 	waitstate
+	closemessage
 	release
 	end
+
+Debug_EventScript_Text_DynPal:
+	.string "Choose a new set of palettes.$"
 
 Debug_EventScript_Script_1::
 	release

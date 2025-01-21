@@ -17,6 +17,8 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+#include "field_mugshot.h"
+#include "constants/field_mugshots.h"
 
 // *MODIFY*
 // Define all dynamic palettes here and in dynamic_palettes.h
@@ -760,35 +762,44 @@ static void DynPal_ReloadToneForMenuByType(int dynPalType, int tone)
 // Hot reload player palette - Main section should be identical to DynPal_InitOverworld, but split up between each tone
 static void DynPal_ReloadPlayerPaletteForMenu(u16 paletteTag, u8 partATone, u8 partBTone, u8 partCTone)
 {
-    u16 offset;
+    u16 offsetDefault;
+    u16 offsetMugshot = OBJ_PLTT_ID(IndexOfSpritePaletteTag(TAG_MUGSHOT));
     if (sDynPalMenu.isOverworld)
     {
         if (gSaveBlock2Ptr->playerGender == MALE)
-            offset = OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_BRENDAN));
+            offsetDefault = OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_BRENDAN));
         else
-            offset = OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_MAY));
+            offsetDefault = OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_MAY));
     }
     else
     {
-        offset = OBJ_PLTT_ID(IndexOfSpritePaletteTag(paletteTag));
+        offsetDefault = OBJ_PLTT_ID(IndexOfSpritePaletteTag(paletteTag));
     }
 
     if (partATone != 0xFF)
     {
         const u16* partAPalData = sDynPalPartAPresets[min(partATone, COUNT_PART_A_TONES)].data;
-        DynPal_CopySection(partAPalData, &gPlttBufferUnfaded[offset], 1, PART_A_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_A_NUMBER_OF_COLOURS);
+        DynPal_CopySection(partAPalData, &gPlttBufferUnfaded[offsetDefault], 1, PART_A_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_A_NUMBER_OF_COLOURS);
+        if (IsFieldMugshotActive())
+            DynPal_CopySection(partAPalData, &gPlttBufferUnfaded[offsetMugshot], 1, PART_A_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_A_NUMBER_OF_COLOURS);
     }
     if (partBTone != 0xFF)
     {
         const u16* partBPalData = sDynPalPartBPresets[min(partBTone, COUNT_PART_B_TONES)].data;
-        DynPal_CopySection(partBPalData, &gPlttBufferUnfaded[offset], 1, PART_B_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_B_NUMBER_OF_COLOURS);
+        DynPal_CopySection(partBPalData, &gPlttBufferUnfaded[offsetDefault], 1, PART_B_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_B_NUMBER_OF_COLOURS);
+        if (IsFieldMugshotActive())
+            DynPal_CopySection(partBPalData, &gPlttBufferUnfaded[offsetMugshot], 1, PART_B_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_B_NUMBER_OF_COLOURS);
     }
     if (partCTone != 0xFF)
     {
         const u16* partCPalData = sDynPalPartCPresets[min(partCTone, COUNT_PART_C_TONES)].data;
-        DynPal_CopySection(partCPalData, &gPlttBufferUnfaded[offset], 1, PART_C_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_C_NUMBER_OF_COLOURS);
+        DynPal_CopySection(partCPalData, &gPlttBufferUnfaded[offsetDefault], 1, PART_C_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_C_NUMBER_OF_COLOURS);
+        if (IsFieldMugshotActive())
+            DynPal_CopySection(partCPalData, &gPlttBufferUnfaded[offsetMugshot], 1, PART_C_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_C_NUMBER_OF_COLOURS);
     }
-    DynPal_CopySection(sDynPal_Base, &gPlttBufferUnfaded[offset], 1, BASE_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, BASE_NUMBER_OF_COLOURS);
+    DynPal_CopySection(sDynPal_Base, &gPlttBufferUnfaded[offsetDefault], 1, BASE_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, BASE_NUMBER_OF_COLOURS);
+    if (IsFieldMugshotActive())
+        DynPal_CopySection(sDynPal_Base, &gPlttBufferUnfaded[offsetMugshot], 1, BASE_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, BASE_NUMBER_OF_COLOURS);
 
     /*
     if (!sDynPalMenu.isOverworld)
@@ -797,7 +808,9 @@ static void DynPal_ReloadPlayerPaletteForMenu(u16 paletteTag, u8 partATone, u8 p
     }
     */
 
-    memcpy(&gPlttBufferFaded[offset], &gPlttBufferUnfaded[offset], PLTT_SIZE_4BPP);
+    memcpy(&gPlttBufferFaded[offsetDefault], &gPlttBufferUnfaded[offsetDefault], PLTT_SIZE_4BPP);
+    if (IsFieldMugshotActive())
+        memcpy(&gPlttBufferFaded[offsetMugshot], &gPlttBufferUnfaded[offsetMugshot], PLTT_SIZE_4BPP);
 }
 
 // SCRIPT SPECIAL WRAPPERS
