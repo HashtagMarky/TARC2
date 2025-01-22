@@ -139,7 +139,7 @@ Debug_EventScript_Text_DefensiveIVs:
 Debug_OpenDynPalMenu::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
 	waitmovement OBJ_EVENT_ID_PLAYER
-	createfieldmugshot MUGSHOT_PLAYER
+	createfieldmugshot MUGSHOT_PLAYER, emotion=EMOTE_HAPPY
 	message Debug_EventScript_Text_DynPal
 	special DynPal_ShowFullToneMenu
 	waitstate
