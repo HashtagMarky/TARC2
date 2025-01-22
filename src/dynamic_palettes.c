@@ -426,7 +426,7 @@ static const struct ListMenuTemplate sListTemplate_DynPal =
     .lettersSpacing = 1,
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
-    .fontId = FONT_NORMAL,
+    .fontId = FONT_SHORT,
     .cursorKind = CURSOR_BLACK_ARROW
 };
 
@@ -630,7 +630,14 @@ static void DynPal_MenuShow(u8 taskId)
 
     HideMapNamePopUpWindow();
     // Create window and menu templates
-    windowTemplate = CreateWindowTemplate(0, 2, 2, 9, (maxShownItems * 2), 15, 0x80);
+    u8 top = 2;
+    u8 height = (maxShownItems * 2);
+    if (gSaveBlock2Ptr->optionsCurrentFont == 0)
+    {
+        top++;
+        height--;
+    }
+    windowTemplate = CreateWindowTemplate(0, 2, top, 9, height, 15, 0x80);
     windowId = AddWindow(&windowTemplate);
     if (!sDynPalMenu.isOverworld)
     {
@@ -643,6 +650,7 @@ static void DynPal_MenuShow(u8 taskId)
     }
 
     gMultiuseListMenuTemplate = sListTemplate_DynPal;
+    gMultiuseListMenuTemplate.fontId = ReturnNormalTextFont();
     gMultiuseListMenuTemplate.items = menuItems;
     gMultiuseListMenuTemplate.totalItems = numItems;
     gMultiuseListMenuTemplate.maxShowed = maxShownItems;

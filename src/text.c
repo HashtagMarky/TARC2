@@ -2529,6 +2529,14 @@ u8 *WrapFontIdToFit(u8 *start, u8 *end, u32 fontId, u32 width)
     }
 }
 
+u8 ReturnNormalTextFont(void)
+{
+    if (gSaveBlock2Ptr->optionsCurrentFont == 0)
+        return FONT_SHORT;
+    else
+        return FONT_NORMAL;
+}
+
 u8 ReturnNarrowTextFont(void)
 {
     if (gSaveBlock2Ptr->optionsCurrentFont == 0)
