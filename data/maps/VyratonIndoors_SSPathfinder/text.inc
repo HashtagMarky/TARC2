@@ -87,8 +87,8 @@ VyratonIndoors_SSPathfinder_Text_SocialMedia::
 	.string "letting them in before ye've even\l"
 	.string "the chance tae shake their hand.\p"
 	.string "If ye wonderin' what the folk think,\n"
-	.string "just have a gander at PokéSphere. It'll\l"
-	.string "all be up tae ye, ma friend.\n"
+	.string "just have a gander at PokéSphere.\p"
+	.string "It'll all be up tae ye, ma friend.\n"
 	.string "Be mindful of that, eh?$"
 
 VyratonIndoors_SSPathfinder_Text_SoundOfDocking::

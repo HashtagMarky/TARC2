@@ -93,6 +93,7 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex
     setflag(FLAG_SYS_POKEDEX_GET)
 	setflag(FLAG_SYS_NATIONAL_DEX)
 	special(EnableNationalPokedex)
+    clearflag(FLAG_DONT_TRANSITION_MUSIC)
 
     bufferpartymonnick(STR_VAR_1, 0)
     setvar(VAR_0x8000, ITEM_POKEDEX)

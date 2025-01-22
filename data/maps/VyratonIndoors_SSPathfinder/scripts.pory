@@ -5,6 +5,7 @@ const LOCALID_Captain = 1
 script VyratonIndoors_SSPathfinder_IkigaiIntroSetup
 {
     setvar(VAR_IKIGAI_INTRO_STATE, 2)
+    setflag(FLAG_DONT_TRANSITION_MUSIC)
     setdynamicwarp(MAP_VYRATON_OUTDOORS_HARBOUR, 15, 25)
 }
 
