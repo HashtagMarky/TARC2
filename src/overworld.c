@@ -1225,6 +1225,9 @@ void Overworld_PlaySpecialMapMusic(void)
 {
     u16 music = GetCurrLocationDefaultMusic();
 
+    if (FlagGet(FLAG_DONT_TRANSITION_MUSIC))
+        return;
+
     if (music != MUS_ABNORMAL_WEATHER && music != MUS_NONE)
     {
         if (gSaveBlock1Ptr->savedMusic)
@@ -3601,6 +3604,7 @@ static void TryUpdateOverworldDayNightMusic(void)
     if ((GetCurrentMapMusic() != mapHeader->music
         && GetCurrentMapMusic() != mapHeader->musicNight)
         || GetCurrentMapMusic() == MUS_DUMMY
+        || FlagGet(FLAG_DONT_TRANSITION_MUSIC) == TRUE
         || gPaletteFade.active)
         return;
     
