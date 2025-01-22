@@ -821,17 +821,6 @@ static void PokeSphere_PrintOpinion(void)
     CopyWindowToVram(WIN_CHARACTER_PROFILE_OPINION, COPYWIN_GFX);
 }
 
-static const union AnimCmd sSpriteAnim_CharacterMugshot[] =
-{
-    ANIMCMD_FRAME(0, 32, .hFlip = TRUE),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd *const sSpriteAnimTable_CharacterMugshot[] =
-{
-    sSpriteAnim_CharacterMugshot,
-};
-
 static void PokeSphere_DrawCharacterMusghot(void)
 {
     u32 character = sPokeSphereState->characterId;
@@ -844,7 +833,7 @@ static void PokeSphere_DrawCharacterMusghot(void)
     gSprites[sPokeSphereState->characterMugshotSpriteId].oam.priority = 0;
     gSprites[sPokeSphereState->characterMugshotSpriteId].x = CHARACTER_MUGSHOT_X;
     gSprites[sPokeSphereState->characterMugshotSpriteId].y = CHARACTER_MUGSHOT_Y;
-    gSprites[sPokeSphereState->characterMugshotSpriteId].anims = sSpriteAnimTable_CharacterMugshot;
+    gSprites[sPokeSphereState->characterMugshotSpriteId].anims = gSpriteAnimTable_Mugshot_Flipped;
     StartSpriteAnim(&gSprites[sPokeSphereState->characterMugshotSpriteId], 0);
 }
 

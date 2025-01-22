@@ -89,6 +89,17 @@ static void SpriteCB_FieldMugshot(struct Sprite *s)
     }
 }
 
+static const union AnimCmd sSpriteAnim_Mugshot_Flipped[] =
+{
+    ANIMCMD_FRAME(0, 32, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd *const gSpriteAnimTable_Mugshot_Flipped[] =
+{
+    sSpriteAnim_Mugshot_Flipped,
+};
+
 struct MugshotDetails gActiveMugshotDetails;
 
 void SetMugshotDetails(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y, u8 windowType)

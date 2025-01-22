@@ -581,17 +581,6 @@ static void MainMenu_InitWindows(void) // Init Text Windows
 //
 //      Mugshot Functions
 //
-static const union AnimCmd sSpriteAnim_Mugshot[] =
-{
-    ANIMCMD_FRAME(0, 32, .hFlip = TRUE),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd *const sSpriteAnimTable_Mugshot[] =
-{
-    sSpriteAnim_Mugshot,
-};
-
 static void CreateMugshot()
 {
     u16 mugshotId = (gSaveBlock2Ptr->playerGender == MALE) ? MUGSHOT_KOLE : MUGSHOT_ANKA;
@@ -599,7 +588,7 @@ static void CreateMugshot()
     gSprites[sMainMenuDataPtr->mugshotSpriteId].x = 48;
     gSprites[sMainMenuDataPtr->mugshotSpriteId].y = 56;
     gSprites[sMainMenuDataPtr->mugshotSpriteId].subpriority = 1;
-    gSprites[sMainMenuDataPtr->mugshotSpriteId].anims = sSpriteAnimTable_Mugshot;
+    gSprites[sMainMenuDataPtr->mugshotSpriteId].anims = gSpriteAnimTable_Mugshot_Flipped;
     gSprites[sMainMenuDataPtr->mugshotSpriteId].invisible = FALSE;
     StartSpriteAnim(&gSprites[sMainMenuDataPtr->mugshotSpriteId], 0);
     gSprites[sMainMenuDataPtr->mugshotSpriteId].oam.priority = 0;
