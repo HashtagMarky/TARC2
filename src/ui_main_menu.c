@@ -242,7 +242,7 @@ static const struct SpritePalette sSpritePal_ProtagonistMugshot =
 
 static const union AnimCmd sSpriteAnim_Mugshot[] =
 {
-    ANIMCMD_FRAME(0, 32),
+    ANIMCMD_FRAME(0, 32, .hFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 
