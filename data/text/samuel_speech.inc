@@ -30,8 +30,7 @@ gText_Samuel_TellMeAboutYou::
 	.string "Tell me a bit about you.$"
 
 gText_Samuel_BoyOrGirl::
-	.string "Are you a boy?\n"
-	.string "Or are you a girl?$"
+	.string "Firstly, what do you look like?$"
 
 gText_Samuel_ForgottenName::
 	.string "I haven’t even asked for your name yet,\n"
