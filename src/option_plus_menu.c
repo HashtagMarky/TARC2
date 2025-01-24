@@ -49,6 +49,7 @@ enum
 enum
 {
     MENUITEM_OVERWORLD_SPEED,
+    MENUITEM_OVERWORLD_NPC_NAME_COLOUR,
     MENUITEM_OVERWORLD_NPC_MUG,
     MENUITEM_OVERWORLD_FOLLOWER_MUG,
     MENUITEM_OVERWORLD_AUTO_RUN,
@@ -206,6 +207,7 @@ static void DrawChoices_Sound(int selection, int y);
 static void DrawChoices_ButtonMode(int selection, int y);
 static void DrawChoices_BarSpeed(int selection, int y); //HP and EXP
 static void DrawChoices_Speedup(int selection, int y);
+static void DrawChoices_NameColour(int selection, int y);
 static void DrawChoices_UnitSystem(int selection, int y);
 static void DrawChoices_ClockMode(int selection, int y);
 static void DrawChoices_Font(int selection, int y);
@@ -292,6 +294,7 @@ struct // MENU_OVERWORLD
     [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = {DrawChoices_MugshotsFollower,    ProcessInput_Options_Three},
     [MENUITEM_OVERWORLD_MATCHCALL]      = {DrawChoices_MatchCall,           ProcessInput_Options_Two},
     [MENUITEM_OVERWORLD_SPEED]          = {DrawChoices_Speedup,             ProcessInput_Options_Four},
+    [MENUITEM_OVERWORLD_NPC_NAME_COLOUR]= {DrawChoices_NameColour,          ProcessInput_Options_Two},
     [MENUITEM_OVERWORLD_CANCEL]         = {NULL, NULL},
 };
 
@@ -343,6 +346,7 @@ static const u8 *const sOptionMenuItemsNamesOverworld[MENUITEM_OVERWORLD_COUNT] 
     [MENUITEM_OVERWORLD_SURF_MUSIC]     = sText_SurfMusic,
     [MENUITEM_OVERWORLD_NPC_MUG]        = sText_MugshotNPC,
     [MENUITEM_OVERWORLD_SPEED]          = sText_OverworldSpeed,
+    [MENUITEM_OVERWORLD_NPC_NAME_COLOUR]= COMPOUND_STRING("{FONT_GET_NARROW}NPC NAME COLOUR"),
     [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = sText_MugshotFollower,
     [MENUITEM_OVERWORLD_MATCHCALL]      = COMPOUND_STRING("{FONT_GET_NARROW}OVERWORLD CALLS"),
     [MENUITEM_OVERWORLD_CANCEL]         = gText_OptionMenuSave,
@@ -403,6 +407,7 @@ static bool8 CheckConditions(int selection)
         case MENUITEM_OVERWORLD_MATCHCALL:      return TRUE;
         case MENUITEM_OVERWORLD_CANCEL:         return TRUE;
         case MENUITEM_OVERWORLD_SPEED:          return TRUE;
+        case MENUITEM_OVERWORLD_NPC_NAME_COLOUR:return TRUE;
         }
     case MENU_BATTLE:
         switch(selection)
@@ -466,6 +471,7 @@ static const u8 sText_Desc_AutoBike[]                   = _("Whether or not to a
 static const u8 sText_Desc_FastBikeOn[]                 = _("When riding the bike, speed will\nbe prioritised.");
 static const u8 sText_Desc_FastBikeOff[]                = _("When riding the bike, technique will\nbe priritised.");
 static const u8 sText_Desx_OverworldSpeed[]             = _("Choose the speed of animations\nin the overworld.");
+static const u8 sText_Desc_NPCNames[]                   = _("Whether or not NPC names are are\ncoloured based on their personality.");
 
 // Disabled Descriptions
 static const u8 sText_Desc_Disabled_Textspeed[]     = _("Only active if xyz.");
@@ -499,6 +505,7 @@ static const u8 *const sOptionMenuItemDescriptionsOverworld[MENUITEM_OVERWORLD_C
     [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = {sText_Desc_MugshotFollowerPlaceholder,   sText_Desc_MugshotFollowerOn,   sText_Desc_MugshotFollowerOff},
     [MENUITEM_OVERWORLD_MATCHCALL]      = {sText_Desc_OverworldCallsOn,             sText_Desc_OverworldCallsOff,   sText_Empty},
     [MENUITEM_OVERWORLD_SPEED]          = {sText_Desx_OverworldSpeed,               sText_Empty,                    sText_Empty},
+    [MENUITEM_OVERWORLD_NPC_NAME_COLOUR]= {sText_Desc_NPCNames,                     sText_Empty,                    sText_Empty},
     [MENUITEM_OVERWORLD_CANCEL]         = {sText_Desc_Save,                         sText_Empty,                    sText_Empty},
 };
 
@@ -542,6 +549,7 @@ static const u8 *const sOptionMenuItemDescriptionsDisabledOverworld[MENUITEM_OVE
     [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = sText_Empty,
     [MENUITEM_OVERWORLD_MATCHCALL]      = sText_Empty,
     [MENUITEM_OVERWORLD_SPEED]          = sText_Empty,
+    [MENUITEM_OVERWORLD_NPC_NAME_COLOUR]= sText_Empty,
     [MENUITEM_OVERWORLD_CANCEL]         = sText_Empty,
 };
 
@@ -587,7 +595,7 @@ static const u8 *const OptionTextDescription(void)
         if (!CheckConditions(menuItem))
             return sOptionMenuItemDescriptionsDisabledOverworld[menuItem];
         selection = sOptions->sel_overworld[menuItem];
-        if (menuItem == MENUITEM_OVERWORLD_AUTO_RUN || menuItem == MENUITEM_OVERWORLD_FAST_SURF || menuItem == MENUITEM_OVERWORLD_AUTO_BIKE || menuItem == MENUITEM_OVERWORLD_SPEED)
+        if (menuItem == MENUITEM_OVERWORLD_AUTO_RUN || menuItem == MENUITEM_OVERWORLD_FAST_SURF || menuItem == MENUITEM_OVERWORLD_AUTO_BIKE || menuItem == MENUITEM_OVERWORLD_SPEED || menuItem == MENUITEM_OVERWORLD_NPC_NAME_COLOUR)
             selection = 0;
         return sOptionMenuItemDescriptionsOverworld[menuItem][selection];
     case MENU_BATTLE:
@@ -922,6 +930,7 @@ void CB2_InitOptionPlusMenu(void)
         sOptions->sel_overworld[MENUITEM_OVERWORLD_FOLLOWER_MUG]    = gSaveBlock2Ptr->optionsFollowerMugshots;
         sOptions->sel_overworld[MENUITEM_OVERWORLD_MATCHCALL]       = gSaveBlock2Ptr->optionsDisableMatchCall;
         sOptions->sel_overworld[MENUITEM_OVERWORLD_SPEED]           = gSaveBlock2Ptr->optionsOverworldSpeed;
+        sOptions->sel_overworld[MENUITEM_OVERWORLD_NPC_NAME_COLOUR] = gSaveBlock2Ptr->optionsNPCName;
         
 
         sOptions->sel_battle[MENUITEM_BATTLE_BATTLESCENE]       = gSaveBlock2Ptr->optionsBattleScene;
@@ -1163,6 +1172,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsFollowerMugshots     = sOptions->sel_overworld[MENUITEM_OVERWORLD_FOLLOWER_MUG];
     gSaveBlock2Ptr->optionsDisableMatchCall     = sOptions->sel_overworld[MENUITEM_OVERWORLD_MATCHCALL];
     gSaveBlock2Ptr->optionsOverworldSpeed       = sOptions->sel_overworld[MENUITEM_OVERWORLD_SPEED];
+    gSaveBlock2Ptr->optionsNPCName              = sOptions->sel_overworld[MENUITEM_OVERWORLD_NPC_NAME_COLOUR];
 
     gSaveBlock2Ptr->optionsBattleScene          = sOptions->sel_battle[MENUITEM_BATTLE_BATTLESCENE];
     gSaveBlock2Ptr->optionsBattleStyle          = sOptions->sel_battle[MENUITEM_BATTLE_BATTLESTYLE];
@@ -1537,6 +1547,17 @@ static void DrawChoices_Speedup(int selection, int y)
         textMultipler[1] = CHAR_1 + Speedup_AdditionalIterations(selection, FALSE);
         DrawOptionMenuChoice(textMultipler, 104, y, 1, active);
     }
+}
+
+static void DrawChoices_NameColour(int selection, int y)
+{
+    bool8 active = TRUE;
+
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(COMPOUND_STRING("{FONT_GET_NARROW}BLACK"), 104, y, styles[0], active);
+    DrawOptionMenuChoice(COMPOUND_STRING("{FONT_GET_NARROW}PERSONALITY"), GetStringRightAlignXOffset(1, COMPOUND_STRING("{FONT_GET_NARROW}PERSONALITY"), 198), y, styles[1], active);
 }
 
 static void DrawChoices_UnitSystem(int selection, int y)

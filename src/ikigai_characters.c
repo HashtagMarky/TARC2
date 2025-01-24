@@ -819,7 +819,7 @@ static uq4_12_t GetGymTypeEffectiveness(u16 species, bool32 speciesAtk)
     modifier[0] = uq4_12_multiply(modifier[1], modifier[2]);
     return modifier[0];
 }
-#define CHARACTER_NAME_TEXT_COLOUR FALSE
+#define CHARACTER_NAME_TEXT_COLOUR TRUE
 u8 IkigaiCharacter_ReturnMessageBoxPersonalityPalette(u32 character)
 {
     u32 textColour = 2;
@@ -846,10 +846,17 @@ u8 IkigaiCharacter_ReturnMessageBoxPersonalityPalette(u32 character)
     if (gSpeakerName == gIkigaiCharactersInfo[CHARACTER_DEFAULT].name)
         textColour = 2;
 
-    if (CHARACTER_NAME_TEXT_COLOUR)
-        return textColour;
-    else
+    if (CHARACTER_NAME_TEXT_COLOUR == FALSE
+        || IkigaiCharacter_GetMetFlag(character) == FALSE
+        || gSaveBlock2Ptr->optionsNPCName == FALSE
+        )
+    {
         return 2;
+    }
+    else
+    {
+        return textColour;
+    }
 }
 
 u8 CreateDialogueOptionIconSprite(u32 dialogueIndex)
