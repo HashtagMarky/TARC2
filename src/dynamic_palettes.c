@@ -668,8 +668,13 @@ static void DynPal_MenuShow(u8 taskId)
 
     if (numItems > maxShownItems)
     {
+        u8 firstPos = 12;
+        if (gSaveBlock2Ptr->optionsCurrentFont == 0)
+        {
+            firstPos += 8;
+        }
         gTasks[listTaskId].tDynpalScrollArrows = AddScrollIndicatorArrowPairParameterized(
-            SCROLL_ARROW_UP, 56, 12, 100, numItems - 1 - DYN_PAL_LIST_NAME, 2000, 100, &(sDynPalMenu.scrollOffset));
+            SCROLL_ARROW_UP, 56, firstPos, 100, numItems - 1 - DYN_PAL_LIST_NAME, 2000, 100, &(sDynPalMenu.scrollOffset));
     }
     else
     {
