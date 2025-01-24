@@ -1,8 +1,10 @@
 VyratonIndoors_MayorsOffice_Text_ShouldReturn::
+# 1 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
 	.string "I should probably stay a little bit\n"
 	.string "longer, there's more to finish up…$"
 
 VyratonIndoors_MayorsOffice_Text_KickStart::
+# 8 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
 	.string "Well {PLAYER}, we should kick start\n"
 	.string "business so we don't finish too late.\p"
 	.string "I know you were unsure when I asked,\n"
@@ -14,12 +16,14 @@ VyratonIndoors_MayorsOffice_Text_KickStart::
 	.string "Pick one and mold your gym's future!$"
 
 VyratonIndoors_MayorsOffice_Text_CrackOpen::
+# 22 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
 	.string "Now {PLAYER}, don't get shy on me!\n"
 	.string "You have eighteen different choices…\p"
 	.string "Crack open the briefcase, it's time\n"
 	.string "for you to mold your gym's future!$"
 
 VyratonIndoors_MayorsOffice_Text_MeetNicknamedMon::
+# 31 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
 	.string "Wow, what a choice {PLAYER}!\n"
 	.string "{STR_VAR_1} is a wonderful name!\p"
 	.string "Your new partner looks thrilled to\n"
@@ -33,6 +37,7 @@ VyratonIndoors_MayorsOffice_Text_MeetNicknamedMon::
 	.string "for you, if I can just find it…$"
 
 VyratonIndoors_MayorsOffice_Text_MeetNonNicknamedMon::
+# 47 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
 	.string "Wow, what a choice {PLAYER}!\n"
 	.string "A worthy selection for you!\p"
 	.string "{STR_VAR_1} looks thrilled to\n"
@@ -46,6 +51,7 @@ VyratonIndoors_MayorsOffice_Text_MeetNonNicknamedMon::
 	.string "for you, if I can just find it…$"
 
 VyratonIndoors_MayorsOffice_Text_YouForgotThis::
+# 63 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
 	.string "Evening mate, I knew you'd forget\n"
 	.string "this when you stopped by earlier.\l"
 	.string "Far too excitable for your own good!\p"
@@ -53,6 +59,7 @@ VyratonIndoors_MayorsOffice_Text_YouForgotThis::
 	.string "and you forget which way is up.$"
 
 VyratonIndoors_MayorsOffice_Text_IsThisThem::
+# 73 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
 	.string "Woah… {PAUSE 40}Is this them?\n"
 	.string "{PAUSE 40}The to-be Vyraton Gym Leader?\l"
 	.string "I'm pleased to meet you, {PLAYER}!\p"
@@ -61,6 +68,7 @@ VyratonIndoors_MayorsOffice_Text_IsThisThem::
 	.string "Good luck, I know you'll do us proud!$"
 
 VyratonIndoors_MayorsOffice_Text_GivePokedex::
+# 84 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
 	.string "Well, well, well, that was Thomas.\n"
 	.string "And what a blur he is!\p"
 	.string "Doesn't even introduce himself\n"
@@ -84,6 +92,7 @@ VyratonIndoors_MayorsOffice_Text_GivePokedex::
 	.string "I'm sure you'll find it fascinating!$"
 
 VyratonIndoors_MayorsOffice_Text_ExtremelySet::
+# 111 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
 	.string "Oh no {PLAYER}, I don't think that\n"
 	.string "{STR_VAR_1} would appreciate it if\l"
 	.string "you changed your mind so quickly.\p"
@@ -93,14 +102,17 @@ VyratonIndoors_MayorsOffice_Text_ExtremelySet::
 	.string "sure that you'll feel the same way.$"
 
 VyratonIndoors_MayorsOffice_Text_GoMeetMon::
+# 123 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
 	.string "Go for it {PLAYER}, go ahead and\n"
 	.string "see what {STR_VAR_1} has to say!$"
 
 VyratonIndoors_MayorsOffice_Text_DeterminedMon::
+# 130 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
 	.string "{STR_VAR_1} looks at you with a\n"
 	.string "burning desire to prove themselves!$"
 
 VyratonIndoors_MayorsOffice_Text_OtherImportantThings::
+# 137 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
 	.string "So you've registered {STR_VAR_1}\n"
 	.string "in the Pokédex. Incredible, isn't it?\p"
 	.string "It's a treasure trove of knowledge\n"

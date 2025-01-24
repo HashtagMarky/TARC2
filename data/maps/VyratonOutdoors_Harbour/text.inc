@@ -1,8 +1,10 @@
 VyratonOutdoors_Harbour_Text_ExcuseMe::
+# 1 "data//maps/VyratonOutdoors_Harbour/text.pory"
 	.string "If ye'll please excuse an old heart…\n"
 	.string "{PAUSE 60}And mae we both have a good evening…$"
 
 VyratonOutdoors_Harbour_Text_WelcomeToVyraton::
+# 8 "data//maps/VyratonOutdoors_Harbour/text.pory"
 	.string "Hello there, you must be {PLAYER}!\n"
 	.string "Welcome to our humble town, Vyraton!\l"
 	.string "I'm so very glad you're here.\p"
@@ -24,6 +26,7 @@ VyratonOutdoors_Harbour_Text_WelcomeToVyraton::
 	.string "And as always, it's truly majestic…$"
 
 VyratonOutdoors_Harbour_Text_HeadToOffice::
+# 34 "data//maps/VyratonOutdoors_Harbour/text.pory"
 	.string "I will never get bored of that view…\n"
 	.string "{PAUSE 40}Come on, {PLAYER}. Let's head off.\p"
 	.string "It's just a short walk, but we should\n"
