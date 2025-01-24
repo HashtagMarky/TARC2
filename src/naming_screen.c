@@ -2111,7 +2111,7 @@ static const struct NamingScreenTemplate sPlayerNamingScreenTemplate =
     .addGenderIcon = FALSE,
     .initialPage = KBPAGE_LETTERS_UPPER,
     .unused = 35,
-    .title = gText_YourName,
+    .title = COMPOUND_STRING("Your Name?"),
 };
 
 static const struct NamingScreenTemplate sPCBoxNamingTemplate =
@@ -2154,7 +2154,7 @@ static const struct NamingScreenTemplate sPlayerNicknamingScreenTemplate =
     .addGenderIcon = FALSE,
     .initialPage = KBPAGE_LETTERS_UPPER,
     .unused = 35,
-    .title = COMPOUND_STRING("YOUR NICKNAME?"),
+    .title = COMPOUND_STRING("Your Nickname?"),
 };
 
 static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =

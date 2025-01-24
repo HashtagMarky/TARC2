@@ -101,33 +101,33 @@ static const struct SpritePalette sDynPalPartCPresets[] = {
 // List text definitions for menu
 static const struct ListMenuItem sListItems_DynPal_PartATones[] = {
     {COMPOUND_STRING("SKIN TONE"), LIST_HEADER},
-    {COMPOUND_STRING("PALE"), 0},
-    {COMPOUND_STRING("LIGHT"), 1},
-    {COMPOUND_STRING("MEDIUM"), 2},
-    {COMPOUND_STRING("DARK"), 3}
+    {COMPOUND_STRING("Pale"), 0},
+    {COMPOUND_STRING("Light"), 1},
+    {COMPOUND_STRING("Medium"), 2},
+    {COMPOUND_STRING("Dark"), 3}
 };
 static const struct ListMenuItem sListItems_DynPal_PartBTones[] = {
     {COMPOUND_STRING("HAIR TYPE"), LIST_HEADER},
-    {COMPOUND_STRING("BROWN"), 0},
-    {COMPOUND_STRING("BLACK"), 1},
-    {COMPOUND_STRING("BLONDE"), 2},
-    {COMPOUND_STRING("GINGER"), 3},
-    {COMPOUND_STRING("RED"), 4},
-    {COMPOUND_STRING("BLUE"), 5},
-    {COMPOUND_STRING("GREEN"), 6},
-    {COMPOUND_STRING("PINK"), 7},
-    {COMPOUND_STRING("CYAN"), 8},
-    {COMPOUND_STRING("PURPLE"), 9},
-    {COMPOUND_STRING("SILVER"), 10}
+    {COMPOUND_STRING("Brown"), 0},
+    {COMPOUND_STRING("Black"), 1},
+    {COMPOUND_STRING("Blonde"), 2},
+    {COMPOUND_STRING("Ginger"), 3},
+    {COMPOUND_STRING("Red"), 4},
+    {COMPOUND_STRING("Blue"), 5},
+    {COMPOUND_STRING("Green"), 6},
+    {COMPOUND_STRING("Pink"), 7},
+    {COMPOUND_STRING("Cyan"), 8},
+    {COMPOUND_STRING("Purple"), 9},
+    {COMPOUND_STRING("Silver"), 10}
 };
 static const struct ListMenuItem sListItems_DynPal_PartCTones[] = {
     {COMPOUND_STRING("CLOTHING"), LIST_HEADER},
-    {COMPOUND_STRING("BLACK"), 0},
-    {COMPOUND_STRING("WHITE"), 1},
-    {COMPOUND_STRING("GREEN"), 2},
-    {COMPOUND_STRING("BLUE"), 3},
-    {COMPOUND_STRING("ORANGE"), 4},
-    {COMPOUND_STRING("PINK"), 5}
+    {COMPOUND_STRING("Black"), 0},
+    {COMPOUND_STRING("White"), 1},
+    {COMPOUND_STRING("Green"), 2},
+    {COMPOUND_STRING("Blue"), 3},
+    {COMPOUND_STRING("Orange"), 4},
+    {COMPOUND_STRING("Pink"), 5}
 };
 
 // Dynamic palette definitions are split into 3 groups of 5, starting from palette index 1.
