@@ -89,6 +89,17 @@ static void SpriteCB_FieldMugshot(struct Sprite *s)
     }
 }
 
+static const union AnimCmd sSpriteAnim_Mugshot_Flipped[] =
+{
+    ANIMCMD_FRAME(0, 32, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd *const gSpriteAnimTable_Mugshot_Flipped[] =
+{
+    sSpriteAnim_Mugshot_Flipped,
+};
+
 struct MugshotDetails gActiveMugshotDetails;
 
 void SetMugshotDetails(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y, u8 windowType)
@@ -427,6 +438,7 @@ u16 CreatePlayerMugshotTrainerCardSprite(u8 gender, u8 mugshotEmotion, u16 destX
     BlitBitmapRectToWindow(windowId, mugshotBuffer, 0, 0, TRAINER_PIC_WIDTH, TRAINER_PIC_HEIGHT, destX, destY, TRAINER_PIC_WIDTH, TRAINER_PIC_HEIGHT);
 
     LoadPalette(mugshotPal, BG_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
+    DynPal_LoadPaletteByOffset(sDynPalPlayerMugshot, BG_PLTT_ID(paletteSlot));
 
     Free(mugshotBuffer);
 

@@ -503,8 +503,8 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_PlayerShrink[] =
 };
 
 static const struct MenuAction sMenuActions_Gender[] = {
-    {COMPOUND_STRING("BOY"), {NULL}},
-    {COMPOUND_STRING("GIRL"), {NULL}}
+    {COMPOUND_STRING("Body A"), {NULL}},
+    {COMPOUND_STRING("Body B"), {NULL}}
 };
 
 static const u8 *const sMalePresetNames[] = {
@@ -554,8 +554,8 @@ static const u8 *const sFemalePresetNames[] = {
 };
 
 static const u8 *const sIkigaiPresetNames[] = {
-    COMPOUND_STRING("KOLE"),
-    COMPOUND_STRING("ANKA")
+    COMPOUND_STRING("Kole"),
+    COMPOUND_STRING("Anka")
 };
 
 // The number of male vs. female names is assumed to be the same.

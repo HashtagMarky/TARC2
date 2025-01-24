@@ -171,6 +171,7 @@ u8 GetKeypadIconHeight(u8 keypadIconId);
 void SetDefaultFontsPointer(void);
 u8 GetFontAttribute(u8 fontId, u8 attributeId);
 u8 GetMenuCursorDimensionByFont(u8 fontId, u8 whichDimension);
+u8 ReturnNormalTextFont(void);
 u8 ReturnNarrowTextFont(void);
 u8 ReturnNarrowerTextFont(void);
 

@@ -833,6 +833,8 @@ static void PokeSphere_DrawCharacterMusghot(void)
     gSprites[sPokeSphereState->characterMugshotSpriteId].oam.priority = 0;
     gSprites[sPokeSphereState->characterMugshotSpriteId].x = CHARACTER_MUGSHOT_X;
     gSprites[sPokeSphereState->characterMugshotSpriteId].y = CHARACTER_MUGSHOT_Y;
+    gSprites[sPokeSphereState->characterMugshotSpriteId].anims = gSpriteAnimTable_Mugshot_Flipped;
+    StartSpriteAnim(&gSprites[sPokeSphereState->characterMugshotSpriteId], 0);
 }
 
 static void PokeSphere_DrawPartnerMugshot(void)

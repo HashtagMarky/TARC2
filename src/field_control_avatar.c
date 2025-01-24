@@ -242,7 +242,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         return TRUE;
 
     if (VarGet(VAR_DEXNAV_SPECIES) == SPECIES_NONE && gPlayerAvatar.tileTransitionState == T_NOT_MOVING
-        && (gSaveBlock2Ptr->optionsOverworldSpeed == OPTIONS_SPEEDUP_NORMAL || FlagGet(FLAG_PREVENT_OVERWORLD_SPEEDUP)))
+        && (gSaveBlock2Ptr->optionsOverworldSpeed == OPTIONS_SPEEDUP_NORMAL || FlagGet(FLAG_SUPPRESS_OVERWORLD_SPEEDUP)))
     {
         if (input->pressedBandRButton && ToggleAutoBike())
             return TRUE;

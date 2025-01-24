@@ -17,6 +17,8 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+#include "field_mugshot.h"
+#include "constants/field_mugshots.h"
 
 // *MODIFY*
 // Define all dynamic palettes here and in dynamic_palettes.h
@@ -99,33 +101,33 @@ static const struct SpritePalette sDynPalPartCPresets[] = {
 // List text definitions for menu
 static const struct ListMenuItem sListItems_DynPal_PartATones[] = {
     {COMPOUND_STRING("SKIN TONE"), LIST_HEADER},
-    {COMPOUND_STRING("PALE"), 0},
-    {COMPOUND_STRING("LIGHT"), 1},
-    {COMPOUND_STRING("MEDIUM"), 2},
-    {COMPOUND_STRING("DARK"), 3}
+    {COMPOUND_STRING("Pale"), 0},
+    {COMPOUND_STRING("Light"), 1},
+    {COMPOUND_STRING("Medium"), 2},
+    {COMPOUND_STRING("Dark"), 3}
 };
 static const struct ListMenuItem sListItems_DynPal_PartBTones[] = {
     {COMPOUND_STRING("HAIR TYPE"), LIST_HEADER},
-    {COMPOUND_STRING("BROWN"), 0},
-    {COMPOUND_STRING("BLACK"), 1},
-    {COMPOUND_STRING("BLONDE"), 2},
-    {COMPOUND_STRING("GINGER"), 3},
-    {COMPOUND_STRING("RED"), 4},
-    {COMPOUND_STRING("BLUE"), 5},
-    {COMPOUND_STRING("GREEN"), 6},
-    {COMPOUND_STRING("PINK"), 7},
-    {COMPOUND_STRING("CYAN"), 8},
-    {COMPOUND_STRING("PURPLE"), 9},
-    {COMPOUND_STRING("SILVER"), 10}
+    {COMPOUND_STRING("Brown"), 0},
+    {COMPOUND_STRING("Black"), 1},
+    {COMPOUND_STRING("Blonde"), 2},
+    {COMPOUND_STRING("Ginger"), 3},
+    {COMPOUND_STRING("Red"), 4},
+    {COMPOUND_STRING("Blue"), 5},
+    {COMPOUND_STRING("Green"), 6},
+    {COMPOUND_STRING("Pink"), 7},
+    {COMPOUND_STRING("Cyan"), 8},
+    {COMPOUND_STRING("Purple"), 9},
+    {COMPOUND_STRING("Silver"), 10}
 };
 static const struct ListMenuItem sListItems_DynPal_PartCTones[] = {
     {COMPOUND_STRING("CLOTHING"), LIST_HEADER},
-    {COMPOUND_STRING("BLACK"), 0},
-    {COMPOUND_STRING("WHITE"), 1},
-    {COMPOUND_STRING("GREEN"), 2},
-    {COMPOUND_STRING("BLUE"), 3},
-    {COMPOUND_STRING("ORANGE"), 4},
-    {COMPOUND_STRING("PINK"), 5}
+    {COMPOUND_STRING("Black"), 0},
+    {COMPOUND_STRING("White"), 1},
+    {COMPOUND_STRING("Green"), 2},
+    {COMPOUND_STRING("Blue"), 3},
+    {COMPOUND_STRING("Orange"), 4},
+    {COMPOUND_STRING("Pink"), 5}
 };
 
 // Dynamic palette definitions are split into 3 groups of 5, starting from palette index 1.
@@ -424,7 +426,7 @@ static const struct ListMenuTemplate sListTemplate_DynPal =
     .lettersSpacing = 1,
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
-    .fontId = FONT_NORMAL,
+    .fontId = FONT_SHORT,
     .cursorKind = CURSOR_BLACK_ARROW
 };
 
@@ -628,7 +630,14 @@ static void DynPal_MenuShow(u8 taskId)
 
     HideMapNamePopUpWindow();
     // Create window and menu templates
-    windowTemplate = CreateWindowTemplate(0, 2, 2, 9, (maxShownItems * 2), 15, 0x80);
+    u8 top = 2;
+    u8 height = (maxShownItems * 2);
+    if (gSaveBlock2Ptr->optionsCurrentFont == 0)
+    {
+        top++;
+        height--;
+    }
+    windowTemplate = CreateWindowTemplate(0, 2, top, 9, height, 15, 0x80);
     windowId = AddWindow(&windowTemplate);
     if (!sDynPalMenu.isOverworld)
     {
@@ -641,6 +650,7 @@ static void DynPal_MenuShow(u8 taskId)
     }
 
     gMultiuseListMenuTemplate = sListTemplate_DynPal;
+    gMultiuseListMenuTemplate.fontId = ReturnNormalTextFont();
     gMultiuseListMenuTemplate.items = menuItems;
     gMultiuseListMenuTemplate.totalItems = numItems;
     gMultiuseListMenuTemplate.maxShowed = maxShownItems;
@@ -658,8 +668,13 @@ static void DynPal_MenuShow(u8 taskId)
 
     if (numItems > maxShownItems)
     {
+        u8 firstPos = 12;
+        if (gSaveBlock2Ptr->optionsCurrentFont == 0)
+        {
+            firstPos += 8;
+        }
         gTasks[listTaskId].tDynpalScrollArrows = AddScrollIndicatorArrowPairParameterized(
-            SCROLL_ARROW_UP, 56, 12, 100, numItems - 1 - DYN_PAL_LIST_NAME, 2000, 100, &(sDynPalMenu.scrollOffset));
+            SCROLL_ARROW_UP, 56, firstPos, 100, numItems - 1 - DYN_PAL_LIST_NAME, 2000, 100, &(sDynPalMenu.scrollOffset));
     }
     else
     {
@@ -760,35 +775,44 @@ static void DynPal_ReloadToneForMenuByType(int dynPalType, int tone)
 // Hot reload player palette - Main section should be identical to DynPal_InitOverworld, but split up between each tone
 static void DynPal_ReloadPlayerPaletteForMenu(u16 paletteTag, u8 partATone, u8 partBTone, u8 partCTone)
 {
-    u16 offset;
+    u16 offsetDefault;
+    u16 offsetMugshot = OBJ_PLTT_ID(IndexOfSpritePaletteTag(TAG_MUGSHOT));
     if (sDynPalMenu.isOverworld)
     {
         if (gSaveBlock2Ptr->playerGender == MALE)
-            offset = OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_BRENDAN));
+            offsetDefault = OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_BRENDAN));
         else
-            offset = OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_MAY));
+            offsetDefault = OBJ_PLTT_ID(IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_MAY));
     }
     else
     {
-        offset = OBJ_PLTT_ID(IndexOfSpritePaletteTag(paletteTag));
+        offsetDefault = OBJ_PLTT_ID(IndexOfSpritePaletteTag(paletteTag));
     }
 
     if (partATone != 0xFF)
     {
         const u16* partAPalData = sDynPalPartAPresets[min(partATone, COUNT_PART_A_TONES)].data;
-        DynPal_CopySection(partAPalData, &gPlttBufferUnfaded[offset], 1, PART_A_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_A_NUMBER_OF_COLOURS);
+        DynPal_CopySection(partAPalData, &gPlttBufferUnfaded[offsetDefault], 1, PART_A_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_A_NUMBER_OF_COLOURS);
+        if (IsFieldMugshotActive())
+            DynPal_CopySection(partAPalData, &gPlttBufferUnfaded[offsetMugshot], 1, PART_A_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_A_NUMBER_OF_COLOURS);
     }
     if (partBTone != 0xFF)
     {
         const u16* partBPalData = sDynPalPartBPresets[min(partBTone, COUNT_PART_B_TONES)].data;
-        DynPal_CopySection(partBPalData, &gPlttBufferUnfaded[offset], 1, PART_B_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_B_NUMBER_OF_COLOURS);
+        DynPal_CopySection(partBPalData, &gPlttBufferUnfaded[offsetDefault], 1, PART_B_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_B_NUMBER_OF_COLOURS);
+        if (IsFieldMugshotActive())
+            DynPal_CopySection(partBPalData, &gPlttBufferUnfaded[offsetMugshot], 1, PART_B_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_B_NUMBER_OF_COLOURS);
     }
     if (partCTone != 0xFF)
     {
         const u16* partCPalData = sDynPalPartCPresets[min(partCTone, COUNT_PART_C_TONES)].data;
-        DynPal_CopySection(partCPalData, &gPlttBufferUnfaded[offset], 1, PART_C_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_C_NUMBER_OF_COLOURS);
+        DynPal_CopySection(partCPalData, &gPlttBufferUnfaded[offsetDefault], 1, PART_C_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_C_NUMBER_OF_COLOURS);
+        if (IsFieldMugshotActive())
+            DynPal_CopySection(partCPalData, &gPlttBufferUnfaded[offsetMugshot], 1, PART_C_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, PART_C_NUMBER_OF_COLOURS);
     }
-    DynPal_CopySection(sDynPal_Base, &gPlttBufferUnfaded[offset], 1, BASE_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, BASE_NUMBER_OF_COLOURS);
+    DynPal_CopySection(sDynPal_Base, &gPlttBufferUnfaded[offsetDefault], 1, BASE_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, BASE_NUMBER_OF_COLOURS);
+    if (IsFieldMugshotActive())
+        DynPal_CopySection(sDynPal_Base, &gPlttBufferUnfaded[offsetMugshot], 1, BASE_INDEX_START, DYNPAL_COLOR_GROUP_NORMAL, BASE_NUMBER_OF_COLOURS);
 
     /*
     if (!sDynPalMenu.isOverworld)
@@ -797,7 +821,9 @@ static void DynPal_ReloadPlayerPaletteForMenu(u16 paletteTag, u8 partATone, u8 p
     }
     */
 
-    memcpy(&gPlttBufferFaded[offset], &gPlttBufferUnfaded[offset], PLTT_SIZE_4BPP);
+    memcpy(&gPlttBufferFaded[offsetDefault], &gPlttBufferUnfaded[offsetDefault], PLTT_SIZE_4BPP);
+    if (IsFieldMugshotActive())
+        memcpy(&gPlttBufferFaded[offsetMugshot], &gPlttBufferUnfaded[offsetMugshot], PLTT_SIZE_4BPP);
 }
 
 // SCRIPT SPECIAL WRAPPERS
