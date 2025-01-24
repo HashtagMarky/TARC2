@@ -296,6 +296,22 @@ bool32 IkigaiCharacter_IsPlayerSingleOrMonogamous(void)
     return TRUE;
 }
 
+void IkigaiCharacter_SetMetFlag(u32 character)
+{
+    if (gIkigaiCharactersInfo[character].flagMet == 0)
+        return;
+    
+    FlagSet(gIkigaiCharactersInfo[character].flagMet);
+}
+
+bool32 IkigaiCharacter_GetMetFlag(u32 character)
+{
+    if (gIkigaiCharactersInfo[character].flagMet == 0)
+        return FALSE;
+
+    return FlagGet(gIkigaiCharactersInfo[character].flagMet);
+}
+
 void ScrCmd_IkigaiCharacter_SetRomanticFlag(void)
 {
     IkigaiCharacter_SetRomanticFlag(
@@ -362,6 +378,24 @@ void ScrCmd_IkigaiCharacter_ClearRomanticFlag_Hostile(void)
 void ScrCmd_IkigaiCharacter_CheckRelationships(void)
 {
     gSpecialVar_Result = IkigaiCharacter_CheckRelationships();
+
+    Script_RequestEffects(SCREFF_V1);
+}
+
+void ScrCmd_IkigaiCharacter_SetMetFlag(void)
+{
+    IkigaiCharacter_SetMetFlag(
+        ReturnIkigaiCharacter_SelectedObject()
+    );
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+}
+
+void ScrCmd_IkigaiCharacter_GetMetFlag(void)
+{
+    gSpecialVar_Result = IkigaiCharacter_GetMetFlag(
+        ReturnIkigaiCharacter_SelectedObject()
+    );
 
     Script_RequestEffects(SCREFF_V1);
 }

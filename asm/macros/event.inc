@@ -2736,6 +2736,22 @@
 	callnative ScrCmd_IkigaiCharacter_CheckRelationships, requests_effects=1
 	.endm
 
+	@ Sets a Character Met Flag
+	.macro setmetflag
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_SetMetFlag, requests_effects=1
+	.endm
+
+	@ Checks if a Character has been met yet
+	.macro getmetflag localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_GetMetFlag, requests_effects=1
+	.endm
+
 @ Deokishisu's Supplementary Macros
 
 	@ applymovement with waitmovement built-in.
