@@ -1422,7 +1422,7 @@ static void Task_NewGameSamuelSpeech_WaitToShowSamuel(u8 taskId)
 {
     u8 spriteId;
     u8 spriteId2;
-    u8 y = 14;
+    u8 y = 15;
 
     if (gTasks[taskId].tTimer)
     {
@@ -1829,7 +1829,7 @@ static void Task_NewGameSamuelSpeech_SlidePlatformAway2(u8 taskId)
 static void Task_NewGameSamuelSpeech_ReshowSamuelCastform(u8 taskId)
 {
     u8 spriteId;
-    u8 y = 14;
+    u8 y = 15;
 
     if (gTasks[taskId].tIsDoneFadingSprites)
     {
@@ -2068,7 +2068,7 @@ static void AddSamuelSpeechObjects(u8 taskId)
     u8 brendanSpriteId;
     u8 maySpriteId;
     u8 x = 103;
-    u8 y = 60;
+    u8 y = 61;
 
     samuelSpriteIdTop = AddNewGameSamuelObjectTop(x, y, 1);
     gSprites[samuelSpriteIdTop].callback = SpriteCB_Null;
