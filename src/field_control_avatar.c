@@ -121,7 +121,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
                 input->pressedAButton = TRUE;
             if (newKeys & B_BUTTON)
                 input->pressedBButton = TRUE;
-            if (newKeys & R_BUTTON && !(heldKeys & B_BUTTON) && !FlagGet(FLAG_SYS_DEXNAV_SEARCH)) // Not Holding B Button as may cause Acro Bike freeze.
+            if (newKeys & R_BUTTON && !(heldKeys & B_BUTTON) && !FlagGet(DN_FLAG_SEARCHING)) // Not Holding B Button as may cause Acro Bike freeze.
                 input->pressedRButton = TRUE;
             if (((newKeys & B_BUTTON) && (newKeys & R_BUTTON)) || ((heldKeys & B_BUTTON) && (newKeys & R_BUTTON)) || ((newKeys & B_BUTTON) && (heldKeys & R_BUTTON)))
                 input->pressedBandRButton = TRUE;
@@ -241,7 +241,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (input->pressedRButton && TryStartDexNavSearch())
         return TRUE;
 
-    if (VarGet(VAR_DEXNAV_SPECIES) == SPECIES_NONE && gPlayerAvatar.tileTransitionState == T_NOT_MOVING
+    if (VarGet(DN_VAR_SPECIES) == SPECIES_NONE && gPlayerAvatar.tileTransitionState == T_NOT_MOVING
         && (gSaveBlock2Ptr->optionsOverworldSpeed == OPTIONS_SPEEDUP_NORMAL || FlagGet(FLAG_SUPPRESS_OVERWORLD_SPEEDUP)))
     {
         if (input->pressedBandRButton && ToggleAutoBike())
