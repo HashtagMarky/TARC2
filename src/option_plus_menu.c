@@ -405,9 +405,10 @@ static bool8 CheckConditions(int selection)
         case MENUITEM_OVERWORLD_NPC_MUG:        return TRUE;
         case MENUITEM_OVERWORLD_FOLLOWER_MUG:   return TRUE;
         case MENUITEM_OVERWORLD_MATCHCALL:      return TRUE;
-        case MENUITEM_OVERWORLD_CANCEL:         return TRUE;
         case MENUITEM_OVERWORLD_SPEED:          return TRUE;
         case MENUITEM_OVERWORLD_NPC_NAME_COLOUR:return TRUE;
+        case MENUITEM_OVERWORLD_CANCEL:         return TRUE;
+        case MENUITEM_OVERWORLD_COUNT:          return TRUE;
         }
     case MENU_BATTLE:
         switch(selection)
@@ -627,7 +628,7 @@ static u8 MenuItemCancel(void)
     case MENU_OVERWORLD: return MENUITEM_OVERWORLD_CANCEL;
     case MENU_BATTLE:    return MENUITEM_BATTLE_CANCEL;
     }
-    return MENUITEM_BATTLE_CANCEL; // Options Menu Changes
+    return MENUITEM_MAIN_CANCEL; // Options Menu Changes
 }
 
 // Main code
