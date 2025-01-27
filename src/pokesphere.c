@@ -55,6 +55,7 @@ enum WindowIds
 
 enum Modes
 {
+    MODE_EXPLORE,
     MODE_PROFILE,
     MODE_POSTS,
     MODE_COUNT,
@@ -69,6 +70,7 @@ static EWRAM_DATA struct PokeSphereState *sPokeSphereState = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 
 static const u8 *const sModeNames[MODE_COUNT] = {
+    [MODE_EXPLORE]      = COMPOUND_STRING("Explore:"),
     [MODE_PROFILE]      = COMPOUND_STRING("Profile:"),
     [MODE_POSTS]        = COMPOUND_STRING("Posts:"),
 };
@@ -146,7 +148,8 @@ static const struct WindowTemplate sPokeSphereWindowTemplates[] =
 
 static const u32 sPokeSphereTiles[] = INCBIN_U32("graphics/pokesphere/tiles.4bpp.lz");
 
-static const u32 sPokeSphereTilemap[] = INCBIN_U32("graphics/pokesphere/tilemap.bin.lz");
+static const u32 sPokeSphereTilemapExplore[] = INCBIN_U32("graphics/pokesphere/tilemap_explore.bin.lz");
+static const u32 sPokeSphereTilemapProfile[] = INCBIN_U32("graphics/pokesphere/tilemap_profile.bin.lz");
 
 static const u16 sPokeSpherePalette[] = INCBIN_U16("graphics/pokesphere/tiles.gbapal");
 
@@ -464,7 +467,7 @@ static bool8 PokeSphere_LoadGraphics(void)
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(sPokeSphereTilemap, sBg1TilemapBuffer);
+            LZDecompressWram(sPokeSphereTilemapProfile, sBg1TilemapBuffer);
             sPokeSphereState->loadState++;
         }
         break;
