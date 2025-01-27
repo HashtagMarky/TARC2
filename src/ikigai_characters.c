@@ -307,7 +307,7 @@ void IkigaiCharacter_SetMetFlag(u32 character)
 bool32 IkigaiCharacter_GetMetFlag(u32 character)
 {
     if (gIkigaiCharactersInfo[character].flagMet == 0)
-        return FALSE;
+        return TRUE;
 
     return FlagGet(gIkigaiCharactersInfo[character].flagMet);
 }
