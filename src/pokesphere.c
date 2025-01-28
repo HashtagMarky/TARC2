@@ -293,6 +293,8 @@ static void Task_PokeSphereWaitFadeIn(u8 taskId);
 static void Task_PokeSphereMainInput(u8 taskId);
 static void Task_PokeSphereWaitFadeAndBail(u8 taskId);
 static void Task_PokeSphereWaitFadeAndExitGracefully(u8 taskId);
+static void Task_PokeSphereWaitFadeOutAndChangeBackground(u8 taskId);
+static void Task_PokeSphereLoadSpritesAndTextAfterFade(u8 taskId);
 
 // Sample UI helper functions
 static void PokeSphere_Init(MainCallback callback);
@@ -301,6 +303,10 @@ static bool8 PokeSphere_InitBgs(void);
 static void PokeSphere_FadeAndBail(void);
 static bool8 PokeSphere_LoadGraphics(void);
 static void PokeSphere_InitWindows(void);
+static void PokeSphere_CreateExplorePage(void);
+static void PokeSphere_DestroyExplorePage(void);
+static void PokeSphere_CreateProfilePostPage(void);
+static void PokeSphere_DestroyProfilePostPage(void);
 static void PokeSphere_Explore_CreateObjectEvents(void);
 static void PokeSphere_Explore_DestroyObjectEvents(void);
 static void PokeSphere_Explore_CreateCursor(void);
@@ -415,14 +421,7 @@ static void PokeSphere_SetupCB(void)
     case 5:
         sPokeSphereState->characterId = CHARACTER_DEFAULT + 1;
         sPokeSphereState->exploreCursorPosition = X1_Y1;
-        // PokeSphere_DrawCharacterMusghot();
-        // PokeSphere_DrawPartnerMugshot();
-        // PokeSphere_PrintUIControls();
-        // PokeSphere_PrintNames();
-        // PokeSphere_PrintRelationships();
-        // PokeSphere_PrintProfile();
-        PokeSphere_Explore_CreateObjectEvents();
-        PokeSphere_Explore_CreateCursor();
+        PokeSphere_CreateExplorePage();
         CreateTask(Task_PokeSphereWaitFadeIn, 0);
         gMain.state++;
         break;
@@ -513,6 +512,21 @@ static void Task_PokeSphereMainInput(u8 taskId)
                 sPokeSphereState->exploreCursorPosition = X1_Y1;
             }
         }
+        if (JOY_NEW(A_BUTTON))
+        {
+            PlaySE(SE_SELECT);
+
+            sPokeSphereState->characterId = sPokeSphereState->characterId + sPokeSphereState->exploreCursorPosition;
+            sPokeSphereState->mode = MODE_PROFILE;
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            gTasks[taskId].func = Task_PokeSphereWaitFadeOutAndChangeBackground;
+        }
+        if (JOY_NEW(B_BUTTON))
+        {
+            PlaySE(SE_PC_OFF);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            gTasks[taskId].func = Task_PokeSphereWaitFadeAndExitGracefully;
+        }
     }
     else
     {
@@ -556,9 +570,10 @@ static void Task_PokeSphereMainInput(u8 taskId)
         }
         if (JOY_NEW(B_BUTTON))
         {
-            PlaySE(SE_PC_OFF);
+            PlaySE(SE_SELECT);
+            sPokeSphereState->mode = MODE_EXPLORE;
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            gTasks[taskId].func = Task_PokeSphereWaitFadeAndExitGracefully;
+            gTasks[taskId].func = Task_PokeSphereWaitFadeOutAndChangeBackground;
         }
         if (JOY_NEW(A_BUTTON))
         {
@@ -655,6 +670,52 @@ static bool8 PokeSphere_LoadGraphics(void)
     return FALSE;
 }
 
+#define tLoadSprites data[0]
+static void Task_PokeSphereWaitFadeOutAndChangeBackground(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        if (sPokeSphereState->mode == MODE_PROFILE || sPokeSphereState->mode == MODE_POSTS)
+        {
+            if (FreeTempTileDataBuffersIfPossible() != TRUE)
+            {
+                PokeSphere_DestroyExplorePage();
+                LZDecompressWram(sPokeSphereTilemapProfile, sBg1TilemapBuffer);
+            }
+        }
+        else if (sPokeSphereState->mode == MODE_EXPLORE)
+        {
+            if (FreeTempTileDataBuffersIfPossible() != TRUE)
+            {
+                PokeSphere_DestroyProfilePostPage();
+                LZDecompressWram(sPokeSphereTilemapExplore, sBg1TilemapBuffer);
+            }
+        }
+        ScheduleBgCopyTilemapToVram(1);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        gTasks[taskId].tLoadSprites = FALSE;
+        gTasks[taskId].func = Task_PokeSphereLoadSpritesAndTextAfterFade;
+    }
+}
+
+static void Task_PokeSphereLoadSpritesAndTextAfterFade(u8 taskId)
+{
+    if (gPaletteFade.active && gTasks[taskId].tLoadSprites == FALSE)
+    {
+        if (sPokeSphereState->mode == MODE_PROFILE || sPokeSphereState->mode == MODE_POSTS)
+        {
+            PokeSphere_CreateProfilePostPage();
+        }
+        else if (sPokeSphereState->mode == MODE_EXPLORE)
+        {
+            PokeSphere_CreateExplorePage();
+        }
+        gTasks[taskId].tLoadSprites = TRUE;
+    }
+    else
+        gTasks[taskId].func = Task_PokeSphereWaitFadeIn;
+}
+
 static void PokeSphere_InitWindows(void)
 {
     InitWindows(sPokeSphereWindowTemplates);
@@ -673,6 +734,38 @@ static void PokeSphere_InitWindows(void)
     
     CopyWindowToVram(WIN_UI_CONTROLS, COPYWIN_FULL);
     CopyWindowToVram(WIN_CHARACTER_NAME, COPYWIN_FULL);
+    CopyWindowToVram(WIN_CHARACTER_RELATIONSHIPS_POSTS, COPYWIN_FULL);
+    CopyWindowToVram(WIN_CHARACTER_PROFILE_OPINION, COPYWIN_FULL);
+}
+
+static void PokeSphere_CreateExplorePage(void)
+{
+    PokeSphere_Explore_CreateObjectEvents();
+    PokeSphere_Explore_CreateCursor();
+}
+
+static void PokeSphere_DestroyExplorePage(void)
+{
+    PokeSphere_Explore_DestroyObjectEvents();
+    PokeSphere_Explore_DestroyCursor();
+}
+
+static void PokeSphere_CreateProfilePostPage(void)
+{
+    PokeSphere_DrawCharacterMusghot();
+    PokeSphere_DrawPartnerMugshot();
+    PokeSphere_PrintUIControls();
+    PokeSphere_PrintNames();
+    PokeSphere_PrintRelationships();
+    PokeSphere_PrintProfile();
+}
+
+static void PokeSphere_DestroyProfilePostPage(void)
+{
+    DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, 1);
+    DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, 2);
+    FillWindowPixelBuffer(WIN_CHARACTER_RELATIONSHIPS_POSTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WIN_CHARACTER_PROFILE_OPINION, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     CopyWindowToVram(WIN_CHARACTER_RELATIONSHIPS_POSTS, COPYWIN_FULL);
     CopyWindowToVram(WIN_CHARACTER_PROFILE_OPINION, COPYWIN_FULL);
 }
@@ -698,8 +791,8 @@ static void PokeSphere_ReloadProfile(void)
 {
     PokeSphere_PrintNames();
     DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, 1);
-    PokeSphere_DrawCharacterMusghot();
     DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, 2);
+    PokeSphere_DrawCharacterMusghot();
     PokeSphere_DrawPartnerMugshot();
 }
 
@@ -713,9 +806,12 @@ static void PokeSphere_ReloadText(void)
         break;
 
     case MODE_PROFILE:
-    default:
         PokeSphere_PrintRelationships();
         PokeSphere_PrintProfile();
+        break;
+
+    case MODE_EXPLORE:
+    default:
         break;
     }
 }
