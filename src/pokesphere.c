@@ -58,8 +58,8 @@ struct PokeSphereState
     MainCallback savedCallback;
     u8 loadState;
     u8 mode;
+    u8 exploreOverworldSpriteId[COORDS_POS_COUNT];
     u8 characterId;
-    u8 characterOverworldSpriteId[COORDS_POS_COUNT];
     u8 characterMugshotSpriteId;
     u8 partnerMugshotSpriteId;
 };
@@ -244,8 +244,8 @@ static bool8 PokeSphere_InitBgs(void);
 static void PokeSphere_FadeAndBail(void);
 static bool8 PokeSphere_LoadGraphics(void);
 static void PokeSphere_InitWindows(void);
-static void PokeSphere_CreateObjectEvents(void);
-static void PokeSphere_DestroyObjectEvents(void);
+static void PokeSphere_Explore_CreateObjectEvents(void);
+static void PokeSphere_Explore_DestroyObjectEvents(void);
 static void PokeSphere_DrawCharacterMusghot(void);
 static void PokeSphere_DrawPartnerMugshot(void);
 static void PokeSphere_PrintUIControls(void);
@@ -354,14 +354,14 @@ static void PokeSphere_SetupCB(void)
         gMain.state++;
         break;
     case 5:
-        sPokeSphereState->characterId = MAIN_CHARACTER_SAMUEL;
+        sPokeSphereState->characterId = CHARACTER_DEFAULT + 1;
         // PokeSphere_DrawCharacterMusghot();
         // PokeSphere_DrawPartnerMugshot();
         // PokeSphere_PrintUIControls();
         // PokeSphere_PrintNames();
         // PokeSphere_PrintRelationships();
         // PokeSphere_PrintProfile();
-        PokeSphere_CreateObjectEvents();
+        PokeSphere_Explore_CreateObjectEvents();
         CreateTask(Task_PokeSphereWaitFadeIn, 0);
         gMain.state++;
         break;
@@ -407,14 +407,14 @@ static void Task_PokeSphereMainInput(u8 taskId)
         // if (JOY_REPEAT(DPAD_UP))
         // {
         //     sPokeSphereState->characterId = sPokeSphereState->characterId - 1;
-        //     PokeSphere_DestroyObjectEvents();
-        //     PokeSphere_CreateObjectEvents();
+        //     PokeSphere_Explore_DestroyObjectEvents();
+        //     PokeSphere_Explore_CreateObjectEvents();
         // }
         // if (JOY_REPEAT(DPAD_DOWN))
         // {
         //     sPokeSphereState->characterId = sPokeSphereState->characterId + 1;
-        //     PokeSphere_DestroyObjectEvents();
-        //     PokeSphere_CreateObjectEvents();
+        //     PokeSphere_Explore_DestroyObjectEvents();
+        //     PokeSphere_Explore_CreateObjectEvents();
         // }
     }
     else
@@ -623,7 +623,7 @@ static void PokeSphere_ReloadText(void)
     }
 }
 
-static void PokeSphere_CreateObjectEvents(void)
+static void PokeSphere_Explore_CreateObjectEvents(void)
 {
     u8 x, y, character = sPokeSphereState->characterId;
     for (u8 coord = 0; coord < COORDS_POS_COUNT; coord++)
@@ -631,20 +631,20 @@ static void PokeSphere_CreateObjectEvents(void)
         x = sExplorePageSpriteCords[coord].x;
         y = sExplorePageSpriteCords[coord].y;
         u16 objEvent = gIkigaiCharactersInfo[character/* + coord*/].overworldGraphicsId;
-        sPokeSphereState->characterOverworldSpriteId[coord] = CreateObjectGraphicsSprite(objEvent, SpriteCallbackDummy, x, y, 102);
+        sPokeSphereState->exploreOverworldSpriteId[coord] = CreateObjectGraphicsSprite(objEvent, SpriteCallbackDummy, x, y, 102);
     }
 }
 
-static void PokeSphere_DestroyObjectEvents(void)
+static void PokeSphere_Explore_DestroyObjectEvents(void)
 {
     u16 palTag;
     for (u8 coord = 0; coord < COORDS_POS_COUNT; coord++)
     {
-        DestroySprite(&gSprites[sPokeSphereState->characterOverworldSpriteId[coord]]);
-        FreeSpriteTiles(&gSprites[sPokeSphereState->characterOverworldSpriteId[coord]]);
-        FreeSpritePalette(&gSprites[sPokeSphereState->characterOverworldSpriteId[coord]]);
-        FreeSpriteOamMatrix(&gSprites[sPokeSphereState->characterOverworldSpriteId[coord]]);
-        DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterOverworldSpriteId[coord]]);
+        DestroySprite(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]]);
+        FreeSpriteTiles(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]]);
+        FreeSpritePalette(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]]);
+        FreeSpriteOamMatrix(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]]);
+        DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]]);
         ResetSpriteData();
     }
 }
