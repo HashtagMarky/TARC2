@@ -553,9 +553,10 @@ static u8 CheckTrainer(u8 objectEventId)
 
     if (trainerBattlePtr)
     {
-        if (trainerBattlePtr[1] == TRAINER_BATTLE_DOUBLE
-         || trainerBattlePtr[1] == TRAINER_BATTLE_REMATCH_DOUBLE
-         || trainerBattlePtr[1] == TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE)
+        TrainerBattleParameter *temp = (TrainerBattleParameter *)(trainerBattlePtr + 1);
+        if (temp->params.mode == TRAINER_BATTLE_DOUBLE
+            || temp->params.mode == TRAINER_BATTLE_REMATCH_DOUBLE
+            || temp->params.mode == TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE)
         {
             if (scriptPtr != NULL)
             {
