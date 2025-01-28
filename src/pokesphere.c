@@ -61,6 +61,7 @@ struct PokeSphereState
     u8 exploreOverworldSpriteId[COORDS_POS_COUNT];
     u8 exploreCursorSpriteId;
     u8 exploreCursorPosition;
+    u8 exploreCaracterStartId;
     u8 characterId;
     u8 characterMugshotSpriteId;
     u8 partnerMugshotSpriteId;
@@ -419,7 +420,7 @@ static void PokeSphere_SetupCB(void)
         gMain.state++;
         break;
     case 5:
-        sPokeSphereState->characterId = CHARACTER_DEFAULT + 1;
+        sPokeSphereState->exploreCaracterStartId = CHARACTER_DEFAULT + 1;
         sPokeSphereState->exploreCursorPosition = X1_Y1;
         PokeSphere_CreateExplorePage();
         CreateTask(Task_PokeSphereWaitFadeIn, 0);
@@ -472,7 +473,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
             }
             else
             {
-                // sPokeSphereState->characterId = sPokeSphereState->characterId - 1;
+                // sPokeSphereState->exploreCaracterStartId = sPokeSphereState->characterId - 1;
                 // PokeSphere_Explore_DestroyObjectEvents();
                 // PokeSphere_Explore_CreateObjectEvents();
             }
@@ -485,7 +486,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
             }
             else
             {
-                // sPokeSphereState->characterId = sPokeSphereState->characterId + 1;
+                // sPokeSphereState->exploreCaracterStartId = sPokeSphereState->characterId + 1;
                 // PokeSphere_Explore_DestroyObjectEvents();
                 // PokeSphere_Explore_CreateObjectEvents();
             }
@@ -516,7 +517,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
         {
             PlaySE(SE_SELECT);
 
-            sPokeSphereState->characterId = sPokeSphereState->characterId + sPokeSphereState->exploreCursorPosition;
+            sPokeSphereState->characterId = sPokeSphereState->exploreCaracterStartId + sPokeSphereState->exploreCursorPosition;
             sPokeSphereState->mode = MODE_PROFILE;
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             gTasks[taskId].func = Task_PokeSphereWaitFadeOutAndChangeBackground;
@@ -818,7 +819,7 @@ static void PokeSphere_ReloadText(void)
 
 static void PokeSphere_Explore_CreateObjectEvents(void)
 {
-    u8 x, y, character = sPokeSphereState->characterId;
+    u8 x, y, character = sPokeSphereState->exploreCaracterStartId;
     for (u8 coord = 0; coord < COORDS_POS_COUNT; coord++)
     {
         x = sExplorePageSpriteCords[coord].x;
