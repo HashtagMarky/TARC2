@@ -492,7 +492,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
             }
             else
             {
-                // sPokeSphereState->exploreCaracterStartId = sPokeSphereState->characterId - 1;
+                // sPokeSphereState->exploreCharacterStartId = sPokeSphereState->exploreCharacterStartId - COORDS_PER_ROW;
                 // PokeSphere_Explore_DestroyObjectEvents();
                 // PokeSphere_Explore_CreateObjectEvents();
             }
@@ -506,7 +506,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
             }
             else
             {
-                // sPokeSphereState->exploreCaracterStartId = sPokeSphereState->characterId + 1;
+                // sPokeSphereState->exploreCharacterStartId = sPokeSphereState->exploreCharacterStartId + COORDS_PER_ROW;
                 // PokeSphere_Explore_DestroyObjectEvents();
                 // PokeSphere_Explore_CreateObjectEvents();
             }
@@ -831,7 +831,7 @@ static void PokeSphere_ReloadText(void)
 
 static void PokeSphere_Explore_CreateObjectEvents(void)
 {
-    u8 x, y, character = sPokeSphereState->exploreCaracterStartId;
+    u8 x, y, character = sPokeSphereState->exploreCharacterStartId;
     for (u8 coord = 0; coord < COORDS_POS_COUNT; coord++)
     {
         x = sExplorePageSpriteCords[coord].x;
