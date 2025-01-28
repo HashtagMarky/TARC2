@@ -1880,7 +1880,7 @@
 
 	@ Sets the text of the name box in the next-shown message box.
 	.macro speakername text=NULL, auto=TRUE, known=TRUE, player=FALSE
-	.byte SCR_OP_SETSPEAKER
+	callnative ScrCmd_setspeaker
 	.if \text != NULL
 		\auto = FALSE
 		\known = TRUE
@@ -1894,7 +1894,7 @@
 
 	@ spawn a windowed mugshot in the overworld above a message box
 	.macro createfieldmugshot type:req, id=MUGSHOT_AUTO_GRAPHICS_ID, emotion=EMOTE_NORMAL, x=168, y=51
-	.byte SCR_OP_CREATEFIELDMUGSHOT
+	callnative ScrCmd_createfieldmugshot
 	.byte \type
 	.2byte \id
 	.2byte \emotion
@@ -1909,7 +1909,7 @@
 
 	@ sets variable overworld object event to a Pokémon for a wild encounter
 	.macro setobjectaswildencounter localId:req, encounterType=ENCOUNTER_LAND
-	.byte SCR_OP_SETOBJECTASWILDENCOUNTER
+	callnative ScrCmd_SetObjectAsWildEncounter
 	.2byte \localId
 	.byte \encounterType
 	release
@@ -1917,19 +1917,19 @@
 
 	@ starts a safari, normal or double battle
 	.macro dowildsafaribattle
-	.byte SCR_OP_DOWILDSAFARIBATTLE
+	callnative ScrCmd_dowildsafaribattle
 	.endm
 
 	@ sets localId stored in gSelectedObjectEvent
 	.macro setselectedobjectevent localId:req
-	.byte SCR_OP_SETSELECTEDOBJECTEVENT
+	callnative ScrCmd_setselectedobjectevent
 	.2byte \localId
 	.endm
 
 	@ Plays the voice of the given character. Voice line is any VOICE_LINE* constant.
 	@ You can use waitvoiceline to block script execution until the voice finishes.
 	.macro playvoiceline voice:req, voiceLine:req, voiceVolume=CRY_VOLUME, bgVolume=85
-	.byte SCR_OP_PLAYVOICELINE
+	callnative ScrCmd_playvoiceline
 	.2byte \voice
 	.byte \voiceLine
 	.byte \voiceVolume
@@ -2589,7 +2589,7 @@
 
 	@ Pushes attitude options to be chosen.
 	.macro attitudemultipush characteristic:req text:vararg
-    .byte SCR_OP_ATTITUDEMULTIPUSH
+    callnative ScrCmd_attitudemultipush
     .2byte \characteristic
     .byte (.Lattitudemultipush_\@_2 - .Lattitudemultipush_\@_1) / 4
 .Lattitudemultipush_\@_1:
@@ -2701,6 +2701,22 @@
 	checkcharacter
 	copyvar VAR_0x8004, VAR_RESULT
 	callnative ScrCmd_IkigaiCharacter_CheckRelationships, requests_effects=1
+	.endm
+
+	@ Sets a Character Met Flag
+	.macro setmetflag
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_SetMetFlag, requests_effects=1
+	.endm
+
+	@ Checks if a Character has been met yet
+	.macro getmetflag localId
+	.ifnb \localId
+	setselectedobjectevent \localId
+	.endif
+	callnative ScrCmd_IkigaiCharacter_GetMetFlag, requests_effects=1
 	.endm
 
 @ Deokishisu's Supplementary Macros

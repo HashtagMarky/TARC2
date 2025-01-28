@@ -62,6 +62,7 @@ struct IkigaiCharacterInfo
     s8 baseOpinionKindness;
     s8 baseOpinionStrength;
     u8 opinionDecayChance;    // Percentage chance of an opinion decaying
+    u16 flagMet;
     u16 flagRomantic;
     // char** likes;          // Array of items, locations, or weather preferences
     // char** dislikes;       // Array of items, locations, or weather dislikes
@@ -123,6 +124,8 @@ void IkigaiCharacter_ClearRomanticFlag_Amicable(u32 character);
 void IkigaiCharacter_ClearRomanticFlag_Hostile(u32 character);
 u32 IkigaiCharacter_CheckRelationships(void);
 bool32 IkigaiCharacter_IsPlayerSingleOrMonogamous(void);
+void IkigaiCharacter_SetMetFlag(u32 character);
+bool32 IkigaiCharacter_GetMetFlag(u32 character);
 bool32 IkigaiCharacter_ReturnOpinionDecay(u32 character);
 void IkigaiCharacter_OpinionDecay(u32 character);
 void IkigaiCharacter_AllOpinionDecay_NonConverse(void);

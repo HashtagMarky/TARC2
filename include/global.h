@@ -583,8 +583,9 @@ struct SaveBlock2
              u16 optionsOverworldSpeed:2; // speedup of the overworld
              u16 optionsDamageNumbers:2; // whether damage numbers are shown
              u16 optionsClockMode:1; // whether 12 or 24 hour clock is used.
+             u16 optionsNPCName:1; // whether NPC names are coloured by personality.
              u16 regionMapZoom:1; // whether the map is zoomed in
-             //u16 padding1:5;
+             //u16 padding1:4;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 playerEmote:4;
              u8 paddingPE:4;

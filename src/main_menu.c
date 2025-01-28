@@ -1422,7 +1422,7 @@ static void Task_NewGameSamuelSpeech_WaitToShowSamuel(u8 taskId)
 {
     u8 spriteId;
     u8 spriteId2;
-    u8 y = 14;
+    u8 y = 15;
 
     if (gTasks[taskId].tTimer)
     {
@@ -1431,12 +1431,12 @@ static void Task_NewGameSamuelSpeech_WaitToShowSamuel(u8 taskId)
     else
     {
         spriteId = gTasks[taskId].tSamuelSpriteIdTop;
-        gSprites[spriteId].x = 136;
+        gSprites[spriteId].x = 103;
         gSprites[spriteId].y = y;
         gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         spriteId2 = gTasks[taskId].tSamuelSpriteIdBottom;
-        gSprites[spriteId2].x = 136;
+        gSprites[spriteId2].x = 103;
         gSprites[spriteId2].y = y+64;
         gSprites[spriteId2].invisible = FALSE;
         gSprites[spriteId2].oam.objMode = ST_OAM_OBJ_BLEND;
@@ -1500,12 +1500,12 @@ static void Task_NewGameSamuelSpeechSub_InitPokeBall(u8 taskId)
 {
     u8 spriteId = gTasks[sSamuelSpeechMainTaskId].tCastformSpriteId;
 
-    gSprites[spriteId].x = 100;
+    gSprites[spriteId].x = 145;
     gSprites[spriteId].y = 69;
     gSprites[spriteId].invisible = FALSE;
     gSprites[spriteId].data[0] = 0;
 
-    CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, 129, 67, 0, 0, 32, PALETTES_BG, SPECIES_CASTFORM);
+    CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, 119, 67, 0, 0, 32, PALETTES_BG, SPECIES_CASTFORM);
     gTasks[taskId].func = Task_NewGameSamuelSpeechSub_WaitForCastform;
     gTasks[sSamuelSpeechMainTaskId].tTimer = 0;
 }
@@ -1829,24 +1829,24 @@ static void Task_NewGameSamuelSpeech_SlidePlatformAway2(u8 taskId)
 static void Task_NewGameSamuelSpeech_ReshowSamuelCastform(u8 taskId)
 {
     u8 spriteId;
-    u8 y = 14;
+    u8 y = 15;
 
     if (gTasks[taskId].tIsDoneFadingSprites)
     {
         gSprites[gTasks[taskId].tBrendanSpriteId].invisible = TRUE;
         gSprites[gTasks[taskId].tMaySpriteId].invisible = TRUE;
         spriteId = gTasks[taskId].tSamuelSpriteIdTop;
-        gSprites[spriteId].x = 136;
+        gSprites[spriteId].x = 103;
         gSprites[spriteId].y = y;
         gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         spriteId = gTasks[taskId].tSamuelSpriteIdBottomBriefcase;
-        gSprites[spriteId].x = 136;
+        gSprites[spriteId].x = 103;
         gSprites[spriteId].y = y+64;
         gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         spriteId = gTasks[taskId].tCastformSpriteId;
-        gSprites[spriteId].x = 100;
+        gSprites[spriteId].x = 145;
         gSprites[spriteId].y = 75;
         gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
@@ -2067,8 +2067,8 @@ static void AddSamuelSpeechObjects(u8 taskId)
     u8 castformSpriteId;
     u8 brendanSpriteId;
     u8 maySpriteId;
-    u8 x = 136;
-    u8 y = 60;
+    u8 x = 103;
+    u8 y = 61;
 
     samuelSpriteIdTop = AddNewGameSamuelObjectTop(x, y, 1);
     gSprites[samuelSpriteIdTop].callback = SpriteCB_Null;
@@ -2085,7 +2085,7 @@ static void AddSamuelSpeechObjects(u8 taskId)
     gSprites[samuelSpriteIdBottomBriefcase].oam.priority = 0;
     gSprites[samuelSpriteIdBottomBriefcase].invisible = TRUE;
     gTasks[taskId].tSamuelSpriteIdBottomBriefcase = samuelSpriteIdBottomBriefcase;
-    castformSpriteId = NewGameSamuelSpeech_CreateCastformSprite(100, 0x4B);
+    castformSpriteId = NewGameSamuelSpeech_CreateCastformSprite(145, 0x4B);
     gSprites[castformSpriteId].callback = SpriteCB_Null;
     gSprites[castformSpriteId].oam.priority = 0;
     gSprites[castformSpriteId].invisible = TRUE;

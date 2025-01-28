@@ -212,7 +212,6 @@ VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon::
 VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter::
 # 153 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	applymove 2, Common_Movement_FaceUp
-# 154 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	specialvar VAR_RESULT, GetPlayerFacingDirection
 # 0 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	compare VAR_RESULT, DIR_WEST
@@ -222,237 +221,237 @@ VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter::
 	compare VAR_RESULT, DIR_SOUTH
 	goto_if_eq VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter_3
 VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter_1:
-# 163 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 162 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	playerface DIR_NORTH
 	return
 
 VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter_2:
-# 157 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 156 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	applymoveplayer VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_One
 	goto VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter_1
 
 VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter_3:
-# 161 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 160 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	applymoveplayer VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_Two
 	goto VyratonIndoors_MayorsOffice_EventScript_StarterMon_MetStarter_1
 
 
 VyratonIndoors_MayorsOffice_EventScript_StarterMon_OtherImportantThings::
-# 169 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 168 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	bufferpartymonnick STR_VAR_1, 0
-# 170 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 169 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	mnmbox VyratonIndoors_MayorsOffice_Text_OtherImportantThings, localId = 1
 	return
 
 
 VyratonIndoors_MayorsOffice_EventScript_MeetThomas::
-# 175 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 174 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	fadenewbgm MUS_HG_POKEWALKER
+# 175 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	delay 60
 # 176 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	delay 60
-# 177 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	emote 1, EMOTE_EXCLAM, wait = FALSE
-# 178 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 177 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	playerface DIR_SOUTH
-# 179 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 178 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	addobject 4
-# 180 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 179 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	applymoveplayer VyratonIndoors_MayorsOffice_Movement_Player_WatchThomasEntrance, FALSE
-# 181 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 180 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	applymove 4, VyratonIndoors_MayorsOffice_Movement_Thomas_Entrance
-# 182 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 181 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	turnobject 1, DIR_WEST
+# 182 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	speakername known = FALSE
 # 183 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	speakername known = FALSE
-# 184 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	msgbox VyratonIndoors_MayorsOffice_Text_YouForgotThis, MSGBOX_DEFAULT
+# 184 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	closemessage
 # 185 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	closemessage
-# 186 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	turnobject 4, DIR_SOUTH
-# 187 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 186 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	emote 4, EMOTE_QUESTION
-# 188 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 187 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	turnobject 1, DIR_SOUTH
-# 189 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 188 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	speakername known = FALSE
-# 190 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 189 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	msgbox VyratonIndoors_MayorsOffice_Text_IsThisThem, MSGBOX_DEFAULT
-# 191 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 190 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	closemessage
-# 192 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 191 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	applymoveplayer VyratonIndoors_MayorsOffice_Movement_Player_WatchThomasExit, FALSE
-# 193 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 192 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	applymove 4, VyratonIndoors_MayorsOffice_Movement_Thomas_Exit
-# 194 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 193 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	removeobject 4
-# 195 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 194 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	fadedefaultbgm
-# 196 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 195 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	delay 60
-# 197 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 196 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	playerface DIR_NORTH
 	return
 
 
 VyratonIndoors_MayorsOffice_EventScript_Samuel_ReceivePokdex::
-# 202 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 201 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	mnmbox VyratonIndoors_MayorsOffice_Text_GivePokedex, lock = FALSE
 	return
 
 
-# 206 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 205 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 VyratonIndoors_MayorsOffice_Movement_Player_Entrance:
+# 207 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	walk_up
 # 208 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	walk_left
+# 209 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_up
 # 209 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	walk_left
-# 210 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	walk_up
+# 209 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_up
 # 210 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	walk_up
-# 210 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	walk_up
-# 211 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_right
-# 212 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 211 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	face_up
 	step_end
 
-# 215 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 214 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 VyratonIndoors_MayorsOffice_Movement_Player_GoToBriefcase:
+# 216 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	walk_down
 # 217 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	walk_down
-# 218 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_left
 	step_end
 
-# 221 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 220 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromBriefcase:
+# 222 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	delay_16
 # 223 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	delay_16
+	walk_down
 # 224 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	walk_down
-# 225 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_left
 	step_end
 
-# 228 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 227 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 VyratonIndoors_MayorsOffice_Movement_Starter_ReturnFromBriefcase:
-# 230 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 229 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	exit_pokeball
+# 230 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	walk_down
 # 231 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	walk_down
-# 232 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_left
 	step_end
 
-# 235 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 234 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_One:
-# 237 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 236 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_up
-# 238 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 237 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	walk_left
+# 237 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_left
 # 238 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	walk_left
-# 239 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_down
 	step_end
 
-# 242 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 241 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_Two:
-# 244 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 243 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_left
-# 245 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 244 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_down
 	step_end
 
-# 248 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 247 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 VyratonIndoors_MayorsOffice_Movement_Thomas_Entrance:
-# 250 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 249 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	delay_16
+# 250 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	walk_up
 # 251 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	walk_left
+# 252 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_up
 # 252 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	walk_left
-# 253 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	walk_up
+# 252 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	walk_up
+# 252 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	walk_up
+# 252 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_up
 # 253 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	walk_up
-# 253 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	walk_up
-# 253 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	walk_up
-# 253 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	walk_up
-# 254 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	face_right
 	step_end
 
-# 257 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 256 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 VyratonIndoors_MayorsOffice_Movement_Thomas_Exit:
-# 259 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 258 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	walk_down
+# 258 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	walk_down
+# 258 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	walk_down
+# 258 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	walk_down
+# 258 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_down
 # 259 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	walk_down
-# 259 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	walk_down
-# 259 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	walk_down
-# 259 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	walk_down
-# 260 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_right
-# 261 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 260 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_down
-# 262 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 261 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	delay_16
-# 263 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 262 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	set_invisible
 	step_end
 
-# 266 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 265 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 VyratonIndoors_MayorsOffice_Movement_Player_WatchThomasEntrance:
-# 268 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 267 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	emote_exclamation_mark
-# 269 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 268 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	delay_16
+# 268 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	delay_16
+# 268 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	delay_16
+# 268 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	delay_16
+# 268 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	delay_16
 # 269 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	delay_16
-# 269 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	delay_16
-# 269 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	delay_16
-# 269 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	delay_16
+	delay_8
 # 270 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	delay_8
-# 271 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	face_left
-# 272 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 271 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	delay_2
-# 273 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 272 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	delay_4
-# 274 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 273 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	delay_8
-# 275 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 274 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	face_up
 	step_end
 
-# 278 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 277 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 VyratonIndoors_MayorsOffice_Movement_Player_WatchThomasExit:
-# 280 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 279 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	delay_16
+# 280 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	delay_8
 # 281 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	delay_8
-# 282 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	face_left
-# 283 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 282 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	delay_2
-# 284 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 283 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	delay_4
-# 285 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 284 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	delay_8
-# 286 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
+# 285 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	face_down
 	step_end

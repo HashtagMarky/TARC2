@@ -251,13 +251,6 @@ gScriptCmdTable::
 	script_cmd_table_entry SCR_OP_BUFFERITEMNAMEPLURAL          ScrCmd_bufferitemnameplural,        requests_effects=1  @ 0xe2
 	script_cmd_table_entry SCR_OP_DYNMULTICHOICE                ScrCmd_dynmultichoice,              requests_effects=1  @ 0xe3
 	script_cmd_table_entry SCR_OP_DYNMULTIPUSH                  ScrCmd_dynmultipush,                requests_effects=1  @ 0xe4
-	script_cmd_table_entry SCR_OP_SETSPEAKER					ScrCmd_setspeaker, 					requests_effects=1  @ 0xe5
-	script_cmd_table_entry SCR_OP_CREATEFIELDMUGSHOT			ScrCmd_createfieldmugshot, 			requests_effects=1	@ 0xe6
-	script_cmd_table_entry SCR_OP_SETOBJECTASWILDENCOUNTER		ScrCmd_SetObjectAsWildEncounter, 	requests_effects=1	@ 0xe7
-	script_cmd_table_entry SCR_OP_DOWILDSAFARIBATTLE			ScrCmd_dowildsafaribattle, 			requests_effects=1	@ 0xe8
-	script_cmd_table_entry SCR_OP_SETSELECTEDOBJECTEVENT		ScrCmd_setselectedobjectevent, 		requests_effects=1	@ 0xe9
-	script_cmd_table_entry SCR_OP_PLAYVOICELINE					ScrCmd_playvoiceline, 				requests_effects=1	@ 0xea
-	script_cmd_table_entry SCR_OP_ATTITUDEMULTIPUSH				ScrCmd_attitudemultipush, 			requests_effects=1	@ 0xeb
 
 	.if ALLOCATE_SCRIPT_CMD_TABLE
 gScriptCmdTableEnd::

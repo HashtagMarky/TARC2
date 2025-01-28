@@ -16,7 +16,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
     [MAIN_CHARACTER_SAMUEL] =
     {
-        .name = _("SAMUEL"),
+        .name = _("Samuel"),
         .partnerPokemon = SPECIES_INFERNAPE,
         .highlights = COMPOUND_STRING(
             "Mayor of Vyraton and an avid fan\n"
@@ -53,7 +53,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
     [MAIN_CHARACTER_LAUREN] =
     {
-        .name = _("LAUREN"),
+        .name = _("Lauren"),
         .highlights = COMPOUND_STRING(
             "A devoted collector of rare stones\n"
             "and owner of Selenic Spirit, where\n"
@@ -90,7 +90,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
     [MAIN_CHARACTER_THOMAS] =
     {
-        .name = _("THOMAS"),
+        .name = _("Thomas"),
         .highlights = COMPOUND_STRING(
             "A Pokémon Professor with expertise\n"
             "in Pokémon breeding, and leads the\n"
@@ -127,7 +127,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
     [MAIN_CHARACTER_HANNAH] =
     {
-        .name = _("HANNAH"),
+        .name = _("Hannah"),
         .highlights = COMPOUND_STRING(
             "An up and coming influencer who\n"
             "works with her cousin, showing her\n"
@@ -170,7 +170,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
     [MAIN_CHARACTER_KATIE] =
     {
-        .name = _("KATIE"),
+        .name = _("Katie"),
         .highlights = COMPOUND_STRING(
             "A kind-spirited teacher who hasn't\n"
             "ever said no to helping a friend,\n"
@@ -207,7 +207,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
     [MAIN_CHARACTER_LOUIS] =
     {
-        .name = _("LOUIS"),
+        .name = _("Louis"),
         .highlights = COMPOUND_STRING(
             "The gruff head of a construction\n"
             "company. Whilst not very talkative,\n"
@@ -238,7 +238,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
     [MAIN_CHARACTER_GEORGIA] =
     {
-        .name = _("GEORGIA"),
+        .name = _("Georgia"),
         .highlights = COMPOUND_STRING(
             "A trailblazing performer who\n"
             "thrives in the spotlight, and is\n"
@@ -275,7 +275,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
     [MAIN_CHARACTER_CAPTAIN] =
     {
-        .name = _("SKIP"),
+        .name = _("Skip"),
         .highlights = COMPOUND_STRING(
             "The still revered, but now retired\n"
             "captain of the S.S. Pathfinder, who\n"
@@ -312,7 +312,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
     [SPECIAL_CHARACTER_STEVEN] =
     {
-        .name = _("STEVEN"),
+        .name = _("Steven"),
         .highlights = COMPOUND_STRING(
             "A once Pokémon Champion who had\n"
             "a career change, in archaeolgy he\n"
@@ -341,7 +341,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
     [SPECIAL_CHARACTER_CYNTHIA] =
     {
-        .name = _("CYNTHIA"),
+        .name = _("Cynthia"),
         .highlights = COMPOUND_STRING(
             "A renowned Pokémon Champion known\n"
             "for her mastery of strategy and\n"

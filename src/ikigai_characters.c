@@ -296,6 +296,22 @@ bool32 IkigaiCharacter_IsPlayerSingleOrMonogamous(void)
     return TRUE;
 }
 
+void IkigaiCharacter_SetMetFlag(u32 character)
+{
+    if (gIkigaiCharactersInfo[character].flagMet == 0)
+        return;
+    
+    FlagSet(gIkigaiCharactersInfo[character].flagMet);
+}
+
+bool32 IkigaiCharacter_GetMetFlag(u32 character)
+{
+    if (gIkigaiCharactersInfo[character].flagMet == 0)
+        return TRUE;
+
+    return FlagGet(gIkigaiCharactersInfo[character].flagMet);
+}
+
 void ScrCmd_IkigaiCharacter_SetRomanticFlag(void)
 {
     IkigaiCharacter_SetRomanticFlag(
@@ -362,6 +378,24 @@ void ScrCmd_IkigaiCharacter_ClearRomanticFlag_Hostile(void)
 void ScrCmd_IkigaiCharacter_CheckRelationships(void)
 {
     gSpecialVar_Result = IkigaiCharacter_CheckRelationships();
+
+    Script_RequestEffects(SCREFF_V1);
+}
+
+void ScrCmd_IkigaiCharacter_SetMetFlag(void)
+{
+    IkigaiCharacter_SetMetFlag(
+        ReturnIkigaiCharacter_SelectedObject()
+    );
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+}
+
+void ScrCmd_IkigaiCharacter_GetMetFlag(void)
+{
+    gSpecialVar_Result = IkigaiCharacter_GetMetFlag(
+        ReturnIkigaiCharacter_SelectedObject()
+    );
 
     Script_RequestEffects(SCREFF_V1);
 }
@@ -785,7 +819,7 @@ static uq4_12_t GetGymTypeEffectiveness(u16 species, bool32 speciesAtk)
     modifier[0] = uq4_12_multiply(modifier[1], modifier[2]);
     return modifier[0];
 }
-#define CHARACTER_NAME_TEXT_COLOUR FALSE
+#define CHARACTER_NAME_TEXT_COLOUR TRUE
 u8 IkigaiCharacter_ReturnMessageBoxPersonalityPalette(u32 character)
 {
     u32 textColour = 2;
@@ -812,10 +846,17 @@ u8 IkigaiCharacter_ReturnMessageBoxPersonalityPalette(u32 character)
     if (gSpeakerName == gIkigaiCharactersInfo[CHARACTER_DEFAULT].name)
         textColour = 2;
 
-    if (CHARACTER_NAME_TEXT_COLOUR)
-        return textColour;
-    else
+    if (CHARACTER_NAME_TEXT_COLOUR == FALSE
+        || IkigaiCharacter_GetMetFlag(character) == FALSE
+        || gSaveBlock2Ptr->optionsNPCName == FALSE
+        )
+    {
         return 2;
+    }
+    else
+    {
+        return textColour;
+    }
 }
 
 u8 CreateDialogueOptionIconSprite(u32 dialogueIndex)
