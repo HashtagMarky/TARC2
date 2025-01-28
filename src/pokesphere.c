@@ -48,6 +48,8 @@ enum ExploreProfilePositions
     COORDS_POS_COUNT,
 };
 
+#define COORDS_PER_ROW COORDS_POS_COUNT / 2
+
 struct SpriteCoordsStruct {
     u8 x;
     u8 y;
@@ -61,7 +63,7 @@ struct PokeSphereState
     u8 exploreOverworldSpriteId[COORDS_POS_COUNT];
     u8 exploreCursorSpriteId;
     u8 exploreCursorPosition;
-    u8 exploreCaracterStartId;
+    u8 exploreCharacterStartId;
     u8 characterId;
     u8 characterMugshotSpriteId;
     u8 partnerMugshotSpriteId;
@@ -420,7 +422,7 @@ static void PokeSphere_SetupCB(void)
         gMain.state++;
         break;
     case 5:
-        sPokeSphereState->exploreCaracterStartId = CHARACTER_DEFAULT + 1;
+        sPokeSphereState->exploreCharacterStartId = CHARACTER_DEFAULT + 1;
         sPokeSphereState->exploreCursorPosition = X1_Y1;
         PokeSphere_CreateExplorePage();
         CreateTask(Task_PokeSphereWaitFadeIn, 0);
@@ -465,11 +467,28 @@ static void Task_PokeSphereMainInput(u8 taskId)
 {
     if (sPokeSphereState->mode == MODE_EXPLORE)
     {
+        if (JOY_NEW(A_BUTTON))
+        {
+            PlaySE(SE_SELECT);
+
+            sPokeSphereState->characterId = sPokeSphereState->exploreCharacterStartId + sPokeSphereState->exploreCursorPosition;
+            sPokeSphereState->mode = MODE_PROFILE;
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            gTasks[taskId].func = Task_PokeSphereWaitFadeOutAndChangeBackground;
+        }
+
+        if (JOY_NEW(B_BUTTON))
+        {
+            PlaySE(SE_PC_OFF);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            gTasks[taskId].func = Task_PokeSphereWaitFadeAndExitGracefully;
+        }
+
         if (JOY_REPEAT(DPAD_UP))
         {
             if (sPokeSphereState->exploreCursorPosition >= X1_Y2)
             {
-                sPokeSphereState->exploreCursorPosition -= 4;
+                sPokeSphereState->exploreCursorPosition -= COORDS_PER_ROW;
             }
             else
             {
@@ -478,11 +497,12 @@ static void Task_PokeSphereMainInput(u8 taskId)
                 // PokeSphere_Explore_CreateObjectEvents();
             }
         }
+
         if (JOY_REPEAT(DPAD_DOWN))
         {
             if (sPokeSphereState->exploreCursorPosition < X1_Y2)
             {
-                sPokeSphereState->exploreCursorPosition += 4;
+                sPokeSphereState->exploreCursorPosition += COORDS_PER_ROW;
             }
             else
             {
@@ -491,6 +511,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
                 // PokeSphere_Explore_CreateObjectEvents();
             }
         }
+
         if (JOY_REPEAT(DPAD_LEFT))
         {
             if (sPokeSphereState->exploreCursorPosition > X1_Y1)
@@ -502,6 +523,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
                 sPokeSphereState->exploreCursorPosition = X4_Y2;
             }
         }
+
         if (JOY_REPEAT(DPAD_RIGHT))
         {
             if (sPokeSphereState->exploreCursorPosition < COORDS_POS_COUNT - 1)
@@ -513,43 +535,34 @@ static void Task_PokeSphereMainInput(u8 taskId)
                 sPokeSphereState->exploreCursorPosition = X1_Y1;
             }
         }
+    }
+
+
+    else if (sPokeSphereState->mode == MODE_PROFILE || sPokeSphereState->mode == MODE_POSTS)
+    {
         if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
 
-            sPokeSphereState->characterId = sPokeSphereState->exploreCaracterStartId + sPokeSphereState->exploreCursorPosition;
-            sPokeSphereState->mode = MODE_PROFILE;
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            gTasks[taskId].func = Task_PokeSphereWaitFadeOutAndChangeBackground;
-        }
-        if (JOY_NEW(B_BUTTON))
-        {
-            PlaySE(SE_PC_OFF);
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            gTasks[taskId].func = Task_PokeSphereWaitFadeAndExitGracefully;
-        }
-    }
-    else
-    {
-        if (JOY_REPEAT(DPAD_RIGHT))
-        {
-            PlaySE(SE_SELECT);
-            if (sPokeSphereState->characterId == MAIN_CHARACTER_COUNT - 1)
+            if (sPokeSphereState->mode == MODE_PROFILE)
             {
-                sPokeSphereState->characterId++;
-                sPokeSphereState->characterId++;
-            }
-            else if (sPokeSphereState->characterId == CHARACTER_COUNT_TOTAL - 1)
-            {
-                sPokeSphereState->characterId = CHARACTER_DEFAULT + 1;
+                sPokeSphereState->mode = MODE_POSTS;
             }
             else
             {
-                sPokeSphereState->characterId++;
+                sPokeSphereState->mode = MODE_PROFILE;
             }
-            PokeSphere_ReloadProfile();
             PokeSphere_ReloadText();
         }
+
+        if (JOY_NEW(B_BUTTON))
+        {
+            PlaySE(SE_SELECT);
+            sPokeSphereState->mode = MODE_EXPLORE;
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            gTasks[taskId].func = Task_PokeSphereWaitFadeOutAndChangeBackground;
+        }
+        
         if (JOY_REPEAT(DPAD_LEFT))
         {
             PlaySE(SE_SELECT);
@@ -569,25 +582,24 @@ static void Task_PokeSphereMainInput(u8 taskId)
             PokeSphere_ReloadProfile();
             PokeSphere_ReloadText();
         }
-        if (JOY_NEW(B_BUTTON))
-        {
-            PlaySE(SE_SELECT);
-            sPokeSphereState->mode = MODE_EXPLORE;
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            gTasks[taskId].func = Task_PokeSphereWaitFadeOutAndChangeBackground;
-        }
-        if (JOY_NEW(A_BUTTON))
-        {
-            PlaySE(SE_SELECT);
 
-            if (sPokeSphereState->mode == MODE_PROFILE)
+        if (JOY_REPEAT(DPAD_RIGHT))
+        {
+            PlaySE(SE_SELECT);
+            if (sPokeSphereState->characterId == MAIN_CHARACTER_COUNT - 1)
             {
-                sPokeSphereState->mode = MODE_POSTS;
+                sPokeSphereState->characterId++;
+                sPokeSphereState->characterId++;
+            }
+            else if (sPokeSphereState->characterId == CHARACTER_COUNT_TOTAL - 1)
+            {
+                sPokeSphereState->characterId = CHARACTER_DEFAULT + 1;
             }
             else
             {
-                sPokeSphereState->mode = MODE_PROFILE;
+                sPokeSphereState->characterId++;
             }
+            PokeSphere_ReloadProfile();
             PokeSphere_ReloadText();
         }
     }
