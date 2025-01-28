@@ -100,6 +100,9 @@ enum Modes
 #define ROW_Y1                  77
 #define ROW_Y2                  125
 
+#define CURSOR_X_OFFSET         4
+#define CURSOR_Y_OFFSET         3
+
 static EWRAM_DATA struct PokeSphereState *sPokeSphereState = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 
@@ -250,8 +253,8 @@ static void PokeSphereExploreCursorCallback(struct Sprite *sprite)
 {
     struct SpriteCoordsStruct position;
 
-    sprite->x = sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].x;
-    sprite->y = sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].y;
+    sprite->x = sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].x + CURSOR_X_OFFSET;
+    sprite->y = sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].y + CURSOR_Y_OFFSET;
 }
 
 static const struct SpriteTemplate sSpriteTemplate_PokeSphereExploreCursor =
@@ -857,9 +860,10 @@ static void PokeSphere_Explore_DestroyObjectEvents(void)
 
 static void PokeSphere_Explore_CreateCursor(void)
 {
+    LoadCompressedSpriteSheet(&sSpriteSheet_PokeSphereExploreCursor);
     sPokeSphereState->exploreCursorSpriteId = CreateSprite(&sSpriteTemplate_PokeSphereExploreCursor,
-        sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].x,
-        sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].y,
+        sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].x + CURSOR_X_OFFSET,
+        sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].y + CURSOR_Y_OFFSET,
         0
     );
     gSprites[sPokeSphereState->exploreCursorSpriteId].callback = PokeSphereExploreCursorCallback;
