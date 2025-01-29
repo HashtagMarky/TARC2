@@ -847,7 +847,6 @@ static void PokeSphere_Explore_CreateObjectEvents(void)
 
 static void PokeSphere_Explore_DestroyObjectEvents(void)
 {
-    u16 palTag;
     for (u8 coord = 0; coord < COORDS_POS_COUNT; coord++)
     {
         DestroySprite(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]]);
