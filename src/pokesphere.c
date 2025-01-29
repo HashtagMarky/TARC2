@@ -731,6 +731,7 @@ static void Task_PokeSphereLoadSpritesAndTextAfterFade(u8 taskId)
     else
         gTasks[taskId].func = Task_PokeSphereWaitFadeIn;
 }
+#undef tLoadSprites
 
 static void PokeSphere_InitWindows(void)
 {
