@@ -976,10 +976,11 @@ static void PokeSphere_PrintNames(void)
         if (character >= MAIN_CHARACTER_COUNT)
             character++;
 
-        if (character < CHARACTER_COUNT_TOTAL)
-            name = gIkigaiCharactersInfo[character].name;
-        else
+        if (!IkigaiCharacter_GetMetFlag(character)
+            || character >= CHARACTER_COUNT_TOTAL)
             name = gIkigaiCharactersInfo[CHARACTER_DEFAULT].name;
+        else
+            name = gIkigaiCharactersInfo[character].name;
         
         y = 4;
         textColour = FONT_GRAY;
