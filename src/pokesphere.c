@@ -533,25 +533,33 @@ static void Task_PokeSphereMainInput(u8 taskId)
 
         if (JOY_REPEAT(DPAD_LEFT))
         {
-            if (sPokeSphereState->exploreCursorPosition > X1_Y1)
+            if (sPokeSphereState->exploreCursorPosition == X1_Y1)
             {
-                sPokeSphereState->exploreCursorPosition--;
+                sPokeSphereState->exploreCursorPosition = X4_Y1;
+            }
+            else if (sPokeSphereState->exploreCursorPosition == X1_Y2)
+            {
+                sPokeSphereState->exploreCursorPosition = X4_Y2;
             }
             else
             {
-                sPokeSphereState->exploreCursorPosition = X4_Y2;
+                sPokeSphereState->exploreCursorPosition--;
             }
         }
 
         if (JOY_REPEAT(DPAD_RIGHT))
         {
-            if (sPokeSphereState->exploreCursorPosition < COORDS_POS_COUNT - 1)
+            if (sPokeSphereState->exploreCursorPosition == X4_Y1)
             {
-                sPokeSphereState->exploreCursorPosition++;
+                sPokeSphereState->exploreCursorPosition = X1_Y1;
+            }
+            else if (sPokeSphereState->exploreCursorPosition == X4_Y2)
+            {
+                sPokeSphereState->exploreCursorPosition = X1_Y2;
             }
             else
             {
-                sPokeSphereState->exploreCursorPosition = X1_Y1;
+                sPokeSphereState->exploreCursorPosition++;
             }
         }
     }
