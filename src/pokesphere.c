@@ -960,6 +960,9 @@ static void PokeSphere_Explore_DestroyObjectEvents(void)
 {
     for (u8 coord = 0; coord < COORDS_POS_COUNT; coord++)
     {
+        if (&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]] == &gSprites[sPokeSphereState->exploreCursorSpriteId])
+            break;
+        
         DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]]);
     }
 }
