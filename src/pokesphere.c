@@ -357,6 +357,7 @@ static void PokeSphere_DrawCharactermugshot(void);
 static void PokeSphere_DrawPartnerMugshot(void);
 static void PokeSphere_PrintUIControls(void);
 static void PokeSphere_ReloadText(void);
+static void PokeSphere_CycleCharacters(bool32 increment);
 static void PokeSphere_ReloadProfile(void);
 static void PokeSphere_PrintNames(void);
 static void PokeSphere_PrintRelationships(void);
@@ -638,40 +639,14 @@ static void Task_PokeSphereMainInput(u8 taskId)
         
         if (JOY_REPEAT(DPAD_LEFT))
         {
-            PlaySE(SE_SELECT);
-            if (sPokeSphereState->characterId == CHARACTER_DEFAULT + 1)
-            {
-                sPokeSphereState->characterId = CHARACTER_COUNT_TOTAL - 1;
-            }
-            else if (sPokeSphereState->characterId == MAIN_CHARACTER_COUNT + 1)
-            {
-                sPokeSphereState->characterId--;
-                sPokeSphereState->characterId--;
-            }
-            else
-            {
-                sPokeSphereState->characterId--;
-            }
+            PokeSphere_CycleCharacters(FALSE);
             PokeSphere_ReloadProfile();
             PokeSphere_ReloadText();
         }
 
         if (JOY_REPEAT(DPAD_RIGHT))
         {
-            PlaySE(SE_SELECT);
-            if (sPokeSphereState->characterId == MAIN_CHARACTER_COUNT - 1)
-            {
-                sPokeSphereState->characterId++;
-                sPokeSphereState->characterId++;
-            }
-            else if (sPokeSphereState->characterId == CHARACTER_COUNT_TOTAL - 1)
-            {
-                sPokeSphereState->characterId = CHARACTER_DEFAULT + 1;
-            }
-            else
-            {
-                sPokeSphereState->characterId++;
-            }
+            PokeSphere_CycleCharacters(TRUE);
             PokeSphere_ReloadProfile();
             PokeSphere_ReloadText();
         }
@@ -896,6 +871,45 @@ static void PokeSphere_PrintUIControls(void)
     );
 
     CopyWindowToVram(WIN_UI_CONTROLS, COPYWIN_GFX);
+}
+
+static void PokeSphere_CycleCharacters(bool32 increment)
+{
+    u8 initialCharacter = sPokeSphereState->characterId;
+    u8 characterNext = initialCharacter;
+
+    while (TRUE)
+    {
+        if (increment)
+            characterNext++;
+        else
+            characterNext--;
+
+        if (characterNext > CHARACTER_COUNT_TOTAL - 1)
+            characterNext = CHARACTER_DEFAULT + 1;
+        else if (characterNext < CHARACTER_DEFAULT + 1)
+            characterNext = CHARACTER_COUNT_TOTAL - 1;
+
+        if (characterNext == initialCharacter)
+        {
+            PlaySE(SE_BOO);
+            return;
+        }
+
+        if (characterNext == MAIN_CHARACTER_COUNT)
+        {
+            if (increment)
+                characterNext++;
+            else
+                characterNext--;
+        }
+
+        if (IkigaiCharacter_GetMetFlag(characterNext))
+            break;
+    }
+
+    sPokeSphereState->characterId = characterNext;
+    PlaySE(SE_SELECT);
 }
 
 static void PokeSphere_ReloadProfile(void)
