@@ -966,6 +966,7 @@ static void PokeSphere_Explore_DestroyObjectEvents(void)
 static void PokeSphere_Explore_CreateCursor(void)
 {
     LoadCompressedSpriteSheet(&sSpriteSheet_PokeSphereExploreCursor);
+    LoadSpritePalette(&sSpritePal_PokeSphereExploreCursor);
     sPokeSphereState->exploreCursorSpriteId = CreateSprite(&sSpriteTemplate_PokeSphereExploreCursor,
         sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].x + CURSOR_X_OFFSET,
         sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].y + CURSOR_Y_OFFSET,
