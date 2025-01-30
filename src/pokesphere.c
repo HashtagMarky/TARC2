@@ -472,12 +472,20 @@ static void Task_PokeSphereMainInput(u8 taskId)
     {
         if (JOY_NEW(A_BUTTON))
         {
-            PlaySE(SE_SELECT);
-
             sPokeSphereState->characterId = sPokeSphereState->exploreCharacterStartId + sPokeSphereState->exploreCursorPosition;
-            sPokeSphereState->mode = MODE_PROFILE;
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            gTasks[taskId].func = Task_PokeSphereWaitFadeOutAndChangeBackground;
+            
+            if (sPokeSphereState->characterId >= MAIN_CHARACTER_COUNT)
+            {
+                sPokeSphereState->characterId++;
+            }
+
+            if (sPokeSphereState->characterId < CHARACTER_COUNT_TOTAL)
+            {
+                sPokeSphereState->mode = MODE_PROFILE;
+                PlaySE(SE_SELECT);
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+                gTasks[taskId].func = Task_PokeSphereWaitFadeOutAndChangeBackground;
+            }
         }
 
         if (JOY_NEW(B_BUTTON))
@@ -493,11 +501,15 @@ static void Task_PokeSphereMainInput(u8 taskId)
             {
                 sPokeSphereState->exploreCursorPosition -= COORDS_PER_ROW;
             }
+            else if (sPokeSphereState->exploreCharacterStartId == CHARACTER_DEFAULT + 1)
+            {
+                // Do Nothing
+            } 
             else
             {
-                // sPokeSphereState->exploreCharacterStartId = sPokeSphereState->exploreCharacterStartId - COORDS_PER_ROW;
-                // PokeSphere_Explore_DestroyObjectEvents();
-                // PokeSphere_Explore_CreateObjectEvents();
+                sPokeSphereState->exploreCharacterStartId = sPokeSphereState->exploreCharacterStartId - COORDS_PER_ROW;
+                PokeSphere_Explore_DestroyObjectEvents();
+                PokeSphere_Explore_CreateObjectEvents();
             }
         }
 
@@ -507,11 +519,15 @@ static void Task_PokeSphereMainInput(u8 taskId)
             {
                 sPokeSphereState->exploreCursorPosition += COORDS_PER_ROW;
             }
+            else if (sPokeSphereState->exploreCharacterStartId >= CHARACTER_COUNT_TOTAL - COORDS_POS_COUNT - 1)
+            {
+                // Do Nothing
+            } 
             else
             {
-                // sPokeSphereState->exploreCharacterStartId = sPokeSphereState->exploreCharacterStartId + COORDS_PER_ROW;
-                // PokeSphere_Explore_DestroyObjectEvents();
-                // PokeSphere_Explore_CreateObjectEvents();
+                sPokeSphereState->exploreCharacterStartId = sPokeSphereState->exploreCharacterStartId + COORDS_PER_ROW;
+                PokeSphere_Explore_DestroyObjectEvents();
+                PokeSphere_Explore_CreateObjectEvents();
             }
         }
 
@@ -835,13 +851,23 @@ static void PokeSphere_ReloadText(void)
 
 static void PokeSphere_Explore_CreateObjectEvents(void)
 {
+    u16 objEvent;
     u8 x, y, character = sPokeSphereState->exploreCharacterStartId;
     for (u8 coord = 0; coord < COORDS_POS_COUNT; coord++)
     {
+        if (character + coord == MAIN_CHARACTER_COUNT)
+        {
+            character++;
+        }
+        else if (character + coord >= CHARACTER_COUNT_TOTAL)
+        {
+            break;
+        }
         x = sExplorePageSpriteCords[coord].x;
         y = sExplorePageSpriteCords[coord].y;
-        u16 objEvent = gIkigaiCharactersInfo[character/* + coord*/].overworldGraphicsId;
+        objEvent = gIkigaiCharactersInfo[character + coord].overworldGraphicsId;
         sPokeSphereState->exploreOverworldSpriteId[coord] = CreateObjectGraphicsSprite(objEvent, SpriteCallbackDummy, x, y, 102);
+        StartSpriteAnim(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]], ANIM_STD_GO_SOUTH);
     }
 }
 
@@ -849,12 +875,7 @@ static void PokeSphere_Explore_DestroyObjectEvents(void)
 {
     for (u8 coord = 0; coord < COORDS_POS_COUNT; coord++)
     {
-        DestroySprite(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]]);
-        FreeSpriteTiles(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]]);
-        FreeSpritePalette(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]]);
-        FreeSpriteOamMatrix(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]]);
         DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]]);
-        ResetSpriteData();
     }
 }
 
