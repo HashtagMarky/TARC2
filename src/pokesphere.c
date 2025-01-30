@@ -66,6 +66,7 @@ struct PokeSphereState
     u8 exploreCharacterStartId;
     u8 characterId;
     u8 characterMugshotSpriteId;
+    u8 characterHeartSpriteId;
     u8 partnerMugshotSpriteId;
 };
 
@@ -87,9 +88,12 @@ enum Modes
 };
 
 #define TAG_POKESPHERE_CURSOR   21212
+#define TAG_HEART_ICON          21213
 
 #define CHARACTER_MUGSHOT_X     57
 #define CHARACTER_MUGSHOT_Y     59
+#define CHARACTER_HEART_X       CHARACTER_MUGSHOT_X + 27
+#define CHARACTER_HEART_Y       CHARACTER_MUGSHOT_Y - 33
 #define CHARACTER_PARTNER_X     116
 #define CHARACTER_PARTNER_Y     60
 
@@ -211,12 +215,15 @@ static const struct WindowTemplate sPokeSphereWindowTemplates[] =
 };
 
 static const u32 sPokeSphereTiles[] = INCBIN_U32("graphics/pokesphere/tiles.4bpp.lz");
+static const u16 sPokeSpherePalette[] = INCBIN_U16("graphics/pokesphere/tiles.gbapal");
 
 static const u32 sPokeSphereTilemapExplore[] = INCBIN_U32("graphics/pokesphere/tilemap_explore.bin.lz");
 static const u32 sPokeSphereTilemapProfile[] = INCBIN_U32("graphics/pokesphere/tilemap_profile.bin.lz");
 
 static const u32 sPokeSphereExploreCursorGfx[] = INCBIN_U32("graphics/pokesphere/cursor.4bpp.lz");
 static const u16 sPokeSphereExploreCursorPal[] = INCBIN_U16("graphics/pokesphere/cursor.gbapal");
+static const u32 sPokeSphereHeartIconGfx[] = INCBIN_U32("graphics/pokesphere/heart.4bpp.lz");
+static const u16 sPokeSphereHeartIconPal[] = INCBIN_U16("graphics/pokesphere/heart.gbapal");
 
 static const struct OamData sOamData_PokeSphereExploreCursor =
 {
@@ -268,7 +275,36 @@ static const struct SpriteTemplate sSpriteTemplate_PokeSphereExploreCursor =
     .callback = SpriteCallbackDummy
 };
 
-static const u16 sPokeSpherePalette[] = INCBIN_U16("graphics/pokesphere/tiles.gbapal");
+static const struct OamData sOamData_PokeSphereHeartIcon =
+{
+    .size = SPRITE_SIZE(16x16),
+    .shape = SPRITE_SHAPE(32x32),
+    .priority = 1,
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_PokeSphereHeartIcon =
+{
+    .data = sPokeSphereHeartIconGfx,
+    .size = 32*32*4/2,
+    .tag = TAG_HEART_ICON,
+};
+
+static const struct SpritePalette sSpritePal_PokeSphereHeartIcon =
+{
+    .data = sPokeSphereHeartIconPal,
+    .tag = TAG_HEART_ICON
+};
+
+static const struct SpriteTemplate sSpriteTemplate_PokeSphereHeartIcon =
+{
+    .tileTag = TAG_HEART_ICON,
+    .paletteTag = TAG_HEART_ICON,
+    .oam = &sOamData_PokeSphereHeartIcon,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
 
 enum FontColor
 {
@@ -866,6 +902,7 @@ static void PokeSphere_ReloadProfile(void)
     PokeSphere_PrintNames();
     DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, 1);
     DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, 2);
+    DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterHeartSpriteId]);
     PokeSphere_DrawCharactermugshot();
     PokeSphere_DrawPartnerMugshot();
 }
@@ -1255,10 +1292,16 @@ static void PokeSphere_DrawCharactermugshot(void)
     gSprites[sPokeSphereState->characterMugshotSpriteId].anims = gSpriteAnimTable_Mugshot_Flipped;
     StartSpriteAnim(&gSprites[sPokeSphereState->characterMugshotSpriteId], 0);
 
-    // if (IkigaiCharacter_GetRomanticFlag(character))
-    // {
-    //     Create Heart Sprite and Animation
-    // }
+    if (IkigaiCharacter_GetRomanticFlag(character))
+    {
+        LoadCompressedSpriteSheet(&sSpriteSheet_PokeSphereHeartIcon);
+        LoadSpritePalette(&sSpritePal_PokeSphereHeartIcon);
+        sPokeSphereState->characterHeartSpriteId = CreateSprite(&sSpriteTemplate_PokeSphereHeartIcon,
+            CHARACTER_HEART_X,
+            CHARACTER_HEART_Y,
+            0
+        );
+    }
 }
 
 static void PokeSphere_DrawPartnerMugshot(void)
