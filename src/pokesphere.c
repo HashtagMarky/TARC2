@@ -479,11 +479,12 @@ static void Task_PokeSphereMainInput(u8 taskId)
                 sPokeSphereState->characterId++;
             }
 
-            if (!IkigaiCharacter_GetMetFlag(sPokeSphereState->characterId))
+            if (!IkigaiCharacter_GetMetFlag(sPokeSphereState->characterId)
+                || sPokeSphereState->characterId >= CHARACTER_COUNT_TOTAL)
             {
                 PlaySE(SE_BOO);
             }
-            else if (sPokeSphereState->characterId < CHARACTER_COUNT_TOTAL)
+            else
             {
                 sPokeSphereState->mode = MODE_PROFILE;
                 PlaySE(SE_SELECT);
