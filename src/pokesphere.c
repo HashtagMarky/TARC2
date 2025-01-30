@@ -479,7 +479,11 @@ static void Task_PokeSphereMainInput(u8 taskId)
                 sPokeSphereState->characterId++;
             }
 
-            if (sPokeSphereState->characterId < CHARACTER_COUNT_TOTAL)
+            if (!IkigaiCharacter_GetMetFlag(sPokeSphereState->characterId))
+            {
+                PlaySE(SE_BOO);
+            }
+            else if (sPokeSphereState->characterId < CHARACTER_COUNT_TOTAL)
             {
                 sPokeSphereState->mode = MODE_PROFILE;
                 PlaySE(SE_SELECT);
@@ -885,25 +889,31 @@ static void PokeSphere_ReloadText(void)
     }
 }
 
+#define PAL_LAST 15
 static void PokeSphere_Explore_CreateObjectEvents(void)
 {
     u16 objEvent;
-    u8 x, y, character = sPokeSphereState->exploreCharacterStartId;
+    u8 x, y, character, characterStart = sPokeSphereState->exploreCharacterStartId; 
     for (u8 coord = 0; coord < COORDS_POS_COUNT; coord++)
     {
-        if (character + coord == MAIN_CHARACTER_COUNT)
+        if (characterStart + coord == MAIN_CHARACTER_COUNT)
         {
-            character++;
+            characterStart++;
         }
-        else if (character + coord >= CHARACTER_COUNT_TOTAL)
+        else if (characterStart + coord >= CHARACTER_COUNT_TOTAL)
         {
             break;
         }
+        character = characterStart + coord;
         x = sExplorePageSpriteCords[coord].x;
         y = sExplorePageSpriteCords[coord].y;
-        objEvent = gIkigaiCharactersInfo[character + coord].overworldGraphicsId;
+        objEvent = gIkigaiCharactersInfo[character].overworldGraphicsId;
         sPokeSphereState->exploreOverworldSpriteId[coord] = CreateObjectGraphicsSprite(objEvent, SpriteCallbackDummy, x, y, 102);
-        StartSpriteAnim(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]], ANIM_STD_GO_SOUTH);
+
+        if (IkigaiCharacter_GetMetFlag(character))
+            StartSpriteAnim(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]], ANIM_STD_GO_SOUTH);
+        else
+            gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]].oam.paletteNum = PAL_LAST;
     }
 }
 
