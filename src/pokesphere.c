@@ -1242,6 +1242,11 @@ static void PokeSphere_DrawCharacterMusghot(void)
     gSprites[sPokeSphereState->characterMugshotSpriteId].y = CHARACTER_MUGSHOT_Y;
     gSprites[sPokeSphereState->characterMugshotSpriteId].anims = gSpriteAnimTable_Mugshot_Flipped;
     StartSpriteAnim(&gSprites[sPokeSphereState->characterMugshotSpriteId], 0);
+
+    // if (IkigaiCharacter_GetRomanticFlag(character))
+    // {
+    //     Create Heart Sprite and Animation
+    // }
 }
 
 static void PokeSphere_DrawPartnerMugshot(void)
