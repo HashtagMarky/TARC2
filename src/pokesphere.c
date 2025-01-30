@@ -853,6 +853,7 @@ static void PokeSphere_DestroyProfilePostPage(void)
 {
     DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, 1);
     DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, 2);
+    DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterHeartSpriteId]);
     FillWindowPixelBuffer(WIN_CHARACTER_RELATIONSHIPS_POSTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     FillWindowPixelBuffer(WIN_CHARACTER_PROFILE_OPINION, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     CopyWindowToVram(WIN_CHARACTER_RELATIONSHIPS_POSTS, COPYWIN_FULL);
