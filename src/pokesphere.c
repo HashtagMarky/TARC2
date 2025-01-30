@@ -92,8 +92,8 @@ enum Modes
 
 #define CHARACTER_MUGSHOT_X     57
 #define CHARACTER_MUGSHOT_Y     59
-#define CHARACTER_HEART_X       CHARACTER_MUGSHOT_X + 27
-#define CHARACTER_HEART_Y       CHARACTER_MUGSHOT_Y - 33
+#define CHARACTER_HEART_X       84
+#define CHARACTER_HEART_Y       26
 #define CHARACTER_PARTNER_X     116
 #define CHARACTER_PARTNER_Y     60
 
@@ -353,7 +353,7 @@ static void PokeSphere_Explore_CreateObjectEvents(void);
 static void PokeSphere_Explore_DestroyObjectEvents(void);
 static void PokeSphere_Explore_CreateCursor(void);
 static void PokeSphere_Explore_DestroyCursor(void);
-static void PokeSphere_DrawCharactermugshot(void);
+static void PokeSphere_DrawCharacterMugshot(void);
 static void PokeSphere_DrawPartnerMugshot(void);
 static void PokeSphere_PrintUIControls(void);
 static void PokeSphere_ReloadText(void);
@@ -816,7 +816,7 @@ static void PokeSphere_DestroyExplorePage(void)
 
 static void PokeSphere_CreateProfilePostPage(void)
 {
-    PokeSphere_DrawCharactermugshot();
+    PokeSphere_DrawCharacterMugshot();
     PokeSphere_DrawPartnerMugshot();
     PokeSphere_PrintUIControls();
     PokeSphere_PrintNames();
@@ -918,7 +918,7 @@ static void PokeSphere_ReloadProfile(void)
     DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, 1);
     DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, 2);
     DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterHeartSpriteId]);
-    PokeSphere_DrawCharactermugshot();
+    PokeSphere_DrawCharacterMugshot();
     PokeSphere_DrawPartnerMugshot();
 }
 
@@ -1296,15 +1296,15 @@ static void PokeSphere_PrintOpinion(void)
     CopyWindowToVram(WIN_CHARACTER_PROFILE_OPINION, COPYWIN_GFX);
 }
 
-static void PokeSphere_DrawCharactermugshot(void)
+static void PokeSphere_DrawCharacterMugshot(void)
 {
     u32 character = sPokeSphereState->characterId;
-    u32 mughsotId = gIkigaiCharactersInfo[character].mugshotId;
+    u32 mugshotId = gIkigaiCharactersInfo[character].mugshotId;
     u32 mugshotEmotion = gIkigaiCharactersInfo[character].defaultEmotion;
     
     FillWindowPixelBuffer(WIN_CHARACTER_MUGSHOT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    sPokeSphereState->characterMugshotSpriteId = CreateFieldMugshotSprite(mughsotId, mugshotEmotion, FALSE, 1);
+    sPokeSphereState->characterMugshotSpriteId = CreateFieldMugshotSprite(mugshotId, mugshotEmotion, FALSE, 1);
     gSprites[sPokeSphereState->characterMugshotSpriteId].oam.priority = 0;
     gSprites[sPokeSphereState->characterMugshotSpriteId].x = CHARACTER_MUGSHOT_X;
     gSprites[sPokeSphereState->characterMugshotSpriteId].y = CHARACTER_MUGSHOT_Y;
