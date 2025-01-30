@@ -562,6 +562,11 @@ static void Task_PokeSphereMainInput(u8 taskId)
                 sPokeSphereState->exploreCursorPosition++;
             }
         }
+
+        if (JOY_REPEAT(DPAD_ANY))
+        {
+            PokeSphere_PrintNames();
+        }
     }
 
 
@@ -783,6 +788,8 @@ static void PokeSphere_CreateExplorePage(void)
 {
     PokeSphere_Explore_CreateObjectEvents();
     PokeSphere_Explore_CreateCursor();
+    PokeSphere_PrintUIControls();
+    PokeSphere_PrintNames();
 }
 
 static void PokeSphere_DestroyExplorePage(void)
@@ -813,17 +820,38 @@ static void PokeSphere_DestroyProfilePostPage(void)
 
 static void PokeSphere_PrintUIControls(void)
 {
+    u8 textTop[20];
+    u8 textMiddle[20];
+    u8 textBottom[20];
+    u8 x = 5, y = 1;
+
+    if (sPokeSphereState->mode == MODE_EXPLORE)
+    {
+        StringCopy(textTop, COMPOUND_STRING("{DPAD_LEFTRIGHT} Explore Profiles"));
+        StringCopy(textMiddle, COMPOUND_STRING("{A_BUTTON} View Profile"));
+        StringCopy(textBottom, COMPOUND_STRING("{B_BUTTON} Exit"));
+    }
+    else if (sPokeSphereState->mode == MODE_PROFILE || sPokeSphereState->mode == MODE_POSTS)
+    {
+        StringCopy(textTop, COMPOUND_STRING("{DPAD_LEFTRIGHT} Change Profile"));
+        StringCopy(textMiddle, COMPOUND_STRING("{A_BUTTON} Change View"));
+        StringCopy(textBottom, COMPOUND_STRING("{B_BUTTON} Explore Profiles"));
+    }
+
     FillWindowPixelBuffer(WIN_UI_CONTROLS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    AddTextPrinterParameterized4(WIN_UI_CONTROLS, FONT_SMALL_NARROWER, 5, 1, 0, 0,
+    AddTextPrinterParameterized4(WIN_UI_CONTROLS, FONT_SMALL_NARROWER, x, y + (11 * 0), 0, 0,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
-        COMPOUND_STRING("{DPAD_LEFTRIGHT} Change Profile"));
-    AddTextPrinterParameterized4(WIN_UI_CONTROLS, FONT_SMALL_NARROWER, 5, 12, 0, 0,
+        textTop
+    );
+    AddTextPrinterParameterized4(WIN_UI_CONTROLS, FONT_SMALL_NARROWER, x, y + (11 * 1), 0, 0,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
-        COMPOUND_STRING("{A_BUTTON} Change View"));
-    AddTextPrinterParameterized4(WIN_UI_CONTROLS, FONT_SMALL_NARROWER, 5, 23, 0, 0,
+        textMiddle
+    );
+    AddTextPrinterParameterized4(WIN_UI_CONTROLS, FONT_SMALL_NARROWER, x, y + (11 * 2), 0, 0,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
-        COMPOUND_STRING("{B_BUTTON} Exit"));
+        textBottom
+    );
 
     CopyWindowToVram(WIN_UI_CONTROLS, COPYWIN_GFX);
 }
@@ -905,9 +933,10 @@ static void PokeSphere_Explore_DestroyCursor(void)
 
 static void PokeSphere_PrintNames(void)
 {   
-    u8 x;
+    u8 x, y = 0;
     u32 character = sPokeSphereState->characterId;
     u32 textColour = FONT_GRAY;
+    const u8 *name = gIkigaiCharactersInfo[character].name;
 
     switch (gIkigaiCharactersInfo[character].personality)
     {
@@ -930,22 +959,41 @@ static void PokeSphere_PrintNames(void)
 
     FillWindowPixelBuffer(WIN_CHARACTER_NAME, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
+    if (sPokeSphereState->mode == MODE_EXPLORE)
+    {
+        u8 character = sPokeSphereState->exploreCharacterStartId + sPokeSphereState->exploreCursorPosition;
+        if (character >= MAIN_CHARACTER_COUNT)
+            character++;
+
+        if (character < CHARACTER_COUNT_TOTAL)
+            name = gIkigaiCharactersInfo[character].name;
+        else
+            name = gIkigaiCharactersInfo[CHARACTER_DEFAULT].name;
+        
+        y = 4;
+        textColour = FONT_GRAY;
+    }
+
     x = GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
-        gIkigaiCharactersInfo[character].name,
+        name,
         48
     );
-    AddTextPrinterParameterized4(WIN_CHARACTER_NAME, FONT_SMALL_NARROWER, x, 0, 0, 0,
+    AddTextPrinterParameterized4(WIN_CHARACTER_NAME, FONT_SMALL_NARROWER, x, y, 0, 0,
         sPokeSphereWindowFontColors[textColour], TEXT_SKIP_DRAW,
-        gIkigaiCharactersInfo[character].name
+        name
     );
-    x = GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
-        gSpeciesInfo[gIkigaiCharactersInfo[character].partnerPokemon].speciesName,
-        48
-    );
-    AddTextPrinterParameterized4(WIN_CHARACTER_NAME, FONT_SMALL_NARROWER, x, 9, 0, 0,
-        sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
-        gSpeciesInfo[gIkigaiCharactersInfo[character].partnerPokemon].speciesName
-    );
+
+    if (sPokeSphereState->mode != MODE_EXPLORE)
+    {
+        x = GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
+            gSpeciesInfo[gIkigaiCharactersInfo[character].partnerPokemon].speciesName,
+            48
+        );
+        AddTextPrinterParameterized4(WIN_CHARACTER_NAME, FONT_SMALL_NARROWER, x, 9, 0, 0,
+            sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
+            gSpeciesInfo[gIkigaiCharactersInfo[character].partnerPokemon].speciesName
+        );
+    }
 
     CopyWindowToVram(WIN_CHARACTER_NAME, COPYWIN_GFX);
 }
