@@ -317,7 +317,7 @@ static void PokeSphere_Explore_CreateObjectEvents(void);
 static void PokeSphere_Explore_DestroyObjectEvents(void);
 static void PokeSphere_Explore_CreateCursor(void);
 static void PokeSphere_Explore_DestroyCursor(void);
-static void PokeSphere_DrawCharacterMusghot(void);
+static void PokeSphere_DrawCharactermugshot(void);
 static void PokeSphere_DrawPartnerMugshot(void);
 static void PokeSphere_PrintUIControls(void);
 static void PokeSphere_ReloadText(void);
@@ -805,7 +805,7 @@ static void PokeSphere_DestroyExplorePage(void)
 
 static void PokeSphere_CreateProfilePostPage(void)
 {
-    PokeSphere_DrawCharacterMusghot();
+    PokeSphere_DrawCharactermugshot();
     PokeSphere_DrawPartnerMugshot();
     PokeSphere_PrintUIControls();
     PokeSphere_PrintNames();
@@ -866,7 +866,7 @@ static void PokeSphere_ReloadProfile(void)
     PokeSphere_PrintNames();
     DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, 1);
     DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, 2);
-    PokeSphere_DrawCharacterMusghot();
+    PokeSphere_DrawCharactermugshot();
     PokeSphere_DrawPartnerMugshot();
 }
 
@@ -1240,7 +1240,7 @@ static void PokeSphere_PrintOpinion(void)
     CopyWindowToVram(WIN_CHARACTER_PROFILE_OPINION, COPYWIN_GFX);
 }
 
-static void PokeSphere_DrawCharacterMusghot(void)
+static void PokeSphere_DrawCharactermugshot(void)
 {
     u32 character = sPokeSphereState->characterId;
     u32 mughsotId = gIkigaiCharactersInfo[character].mugshotId;
