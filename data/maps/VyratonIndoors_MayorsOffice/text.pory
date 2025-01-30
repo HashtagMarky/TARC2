@@ -84,8 +84,8 @@ text VyratonIndoors_MayorsOffice_Text_IsThisThem
 text VyratonIndoors_MayorsOffice_Text_GivePokedex
 {
     format("
-        Well, well, well, that was Thomas.\n
-        And what a blur he is!\p
+        Well, well, well, that was something.\n
+        What a blur that fellow is!\p
         Doesn't even introduce himself\n
         before he dashes off again.\p
         I'm sure he'll have some time for you\n
