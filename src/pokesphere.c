@@ -278,7 +278,7 @@ static const struct SpriteTemplate sSpriteTemplate_PokeSphereExploreCursor =
 static const struct OamData sOamData_PokeSphereHeartIcon =
 {
     .size = SPRITE_SIZE(16x16),
-    .shape = SPRITE_SHAPE(32x32),
+    .shape = SPRITE_SHAPE(16x16),
     .priority = 1,
 };
 
