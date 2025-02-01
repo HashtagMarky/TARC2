@@ -64,10 +64,8 @@ static const u16 sFieldMugshotPal_GeorgiaHappy[] = INCBIN_U16("graphics/field_mu
 
 // Captain
 static const u32 sFieldMugshotGfx_CaptainNormal[] = INCBIN_U32("graphics/field_mugshots/people/captain/normal.4bpp.lz");
-static const u32 sFieldMugshotGfx_CaptainHappy[] = INCBIN_U32("graphics/field_mugshots/people/captain/happy.4bpp.lz");
 
 static const u16 sFieldMugshotPal_CaptainNormal[] = INCBIN_U16("graphics/field_mugshots/people/captain/normal.gbapal");
-static const u16 sFieldMugshotPal_CaptainHappy[] = INCBIN_U16("graphics/field_mugshots/people/captain/happy.gbapal");
 
 // Diego
 static const u32 sFieldMugshotGfx_DiegoNormal[] = INCBIN_U32("graphics/field_mugshots/people/diego/normal.4bpp.lz");
@@ -1923,12 +1921,6 @@ const struct MugshotGfx gFieldMugshots[][EMOTE_COUNT] =
         {
             .gfx = sFieldMugshotGfx_CaptainNormal,
             .pal = sFieldMugshotPal_CaptainNormal,
-        },
-
-        [EMOTE_HAPPY] =
-        {
-            .gfx = sFieldMugshotGfx_CaptainHappy,
-            .pal = sFieldMugshotPal_CaptainHappy,
         },
     },
 
