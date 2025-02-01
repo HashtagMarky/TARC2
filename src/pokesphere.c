@@ -67,6 +67,7 @@ struct PokeSphereState
     u8 characterId;
     u8 characterMugshotSpriteId;
     u8 characterHeartSpriteId;
+    u8 characterAttitudeSpriteId;
     u8 partnerMugshotSpriteId;
 };
 
@@ -89,11 +90,14 @@ enum Modes
 
 #define TAG_POKESPHERE_CURSOR   21212
 #define TAG_HEART_ICON          21213
+#define TAG_ATTITUDE_ICON       21214
 
 #define CHARACTER_MUGSHOT_X     57
 #define CHARACTER_MUGSHOT_Y     59
 #define CHARACTER_HEART_X       84
 #define CHARACTER_HEART_Y       26
+#define CHARACTER_ATTITUDE_X    28
+#define CHARACTER_ATTITUDE_Y    26
 #define CHARACTER_PARTNER_X     116
 #define CHARACTER_PARTNER_Y     60
 
@@ -222,8 +226,17 @@ static const u32 sPokeSphereTilemapProfile[] = INCBIN_U32("graphics/pokesphere/t
 
 static const u32 sPokeSphereExploreCursorGfx[] = INCBIN_U32("graphics/pokesphere/cursor.4bpp.lz");
 static const u16 sPokeSphereExploreCursorPal[] = INCBIN_U16("graphics/pokesphere/cursor.gbapal");
+
 static const u32 sPokeSphereHeartIconGfx[] = INCBIN_U32("graphics/pokesphere/heart.4bpp.lz");
 static const u16 sPokeSphereHeartIconPal[] = INCBIN_U16("graphics/pokesphere/heart.gbapal");
+static const u32 sPokeSphereInspiredIconGfx[] = INCBIN_U32("graphics/pokesphere/inspired.4bpp.lz");
+static const u16 sPokeSphereInspiredIconPal[] = INCBIN_U16("graphics/pokesphere/inspired.gbapal");
+static const u32 sPokeSphereHumbleIconGfx[] = INCBIN_U32("graphics/pokesphere/humble.4bpp.lz");
+static const u16 sPokeSphereHumbleIconPal[] = INCBIN_U16("graphics/pokesphere/humble.gbapal");
+static const u32 sPokeSphereDominantIconGfx[] = INCBIN_U32("graphics/pokesphere/dominant.4bpp.lz");
+static const u16 sPokeSphereDominantIconPal[] = INCBIN_U16("graphics/pokesphere/dominant.gbapal");
+static const u32 sPokeSphereCynicalIconGfx[] = INCBIN_U32("graphics/pokesphere/cynical.4bpp.lz");
+static const u16 sPokeSphereCynicalIconPal[] = INCBIN_U16("graphics/pokesphere/cynical.gbapal");
 
 static const struct OamData sOamData_PokeSphereExploreCursor =
 {
@@ -306,6 +319,127 @@ static const struct SpriteTemplate sSpriteTemplate_PokeSphereHeartIcon =
     .callback = SpriteCallbackDummy
 };
 
+static const struct OamData sOamData_PokeSphereAttitudeIcon =
+{
+    .size = SPRITE_SIZE(16x16),
+    .shape = SPRITE_SHAPE(16x16),
+    .priority = 1,
+};
+
+static const struct SpritePalette sSpritePal_PokeSphereInspiredIcon =
+{
+    .data = sPokeSphereInspiredIconPal,
+    .tag = TAG_ATTITUDE_ICON
+};
+
+static const struct SpritePalette sSpritePal_PokeSphereHumbleIcon =
+{
+    .data = sPokeSphereHumbleIconPal,
+    .tag = TAG_ATTITUDE_ICON
+};
+
+static const struct SpritePalette sSpritePal_PokeSphereDominantIcon =
+{
+    .data = sPokeSphereDominantIconPal,
+    .tag = TAG_ATTITUDE_ICON
+};
+
+static const struct SpritePalette sSpritePal_PokeSphereCynicalIcon =
+{
+    .data = sPokeSphereCynicalIconPal,
+    .tag = TAG_ATTITUDE_ICON
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_PokeSphereInspiredIcon =
+{
+    .data = sPokeSphereInspiredIconGfx,
+    .size = 5*32*32*4/2,
+    .tag = TAG_ATTITUDE_ICON,
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_PokeSphereHumbleIcon =
+{
+    .data = sPokeSphereHumbleIconGfx,
+    .size = 5*32*32*4/2,
+    .tag = TAG_ATTITUDE_ICON,
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_PokeSphereDominantIcon =
+{
+    .data = sPokeSphereDominantIconGfx,
+    .size = 5*32*32*4/2,
+    .tag = TAG_ATTITUDE_ICON,
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_PokeSphereCynicalIcon =
+{
+    .data = sPokeSphereCynicalIconGfx,
+    .size = 5*32*32*4/2,
+    .tag = TAG_ATTITUDE_ICON,
+};
+
+static const union AnimCmd sSpriteAnim_PokeSphereAttitudeIcon[] =
+{
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_FRAME(4, 16),
+    ANIMCMD_FRAME(8, 16),
+    ANIMCMD_FRAME(12, 16),
+    ANIMCMD_FRAME(16, 16),
+    ANIMCMD_FRAME(12, 16, .hFlip = TRUE),
+    ANIMCMD_FRAME(8, 16, .hFlip = TRUE),
+    ANIMCMD_FRAME(4, 16, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const sSpriteAnimTable_PokeSphereAttitudeIcon[] =
+{
+    sSpriteAnim_PokeSphereAttitudeIcon,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_PokeSphereInspiredIcon =
+{
+    .tileTag = TAG_ATTITUDE_ICON,
+    .paletteTag = TAG_ATTITUDE_ICON,
+    .oam = &sOamData_PokeSphereAttitudeIcon,
+    .anims = sSpriteAnimTable_PokeSphereAttitudeIcon,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteTemplate sSpriteTemplate_PokeSphereHumbleIcon =
+{
+    .tileTag = TAG_ATTITUDE_ICON,
+    .paletteTag = TAG_ATTITUDE_ICON,
+    .oam = &sOamData_PokeSphereAttitudeIcon,
+    .anims = sSpriteAnimTable_PokeSphereAttitudeIcon,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteTemplate sSpriteTemplate_PokeSphereDominantIcon =
+{
+    .tileTag = TAG_ATTITUDE_ICON,
+    .paletteTag = TAG_ATTITUDE_ICON,
+    .oam = &sOamData_PokeSphereAttitudeIcon,
+    .anims = sSpriteAnimTable_PokeSphereAttitudeIcon,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteTemplate sSpriteTemplate_PokeSphereAttitudeIcon =
+{
+    .tileTag = TAG_ATTITUDE_ICON,
+    .paletteTag = TAG_ATTITUDE_ICON,
+    .oam = &sOamData_PokeSphereAttitudeIcon,
+    .anims = sSpriteAnimTable_PokeSphereAttitudeIcon,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
 enum FontColor
 {
     FONT_WHITE,
@@ -354,6 +488,8 @@ static void PokeSphere_Explore_DestroyObjectEvents(void);
 static void PokeSphere_Explore_CreateCursor(void);
 static void PokeSphere_Explore_DestroyCursor(void);
 static void PokeSphere_DrawCharacterMugshot(void);
+static void PokeSphere_DrawCharacterAttitude(void);
+static void PokeSphere_DrawCharacterHeart(void);
 static void PokeSphere_DrawPartnerMugshot(void);
 static void PokeSphere_PrintUIControls(void);
 static void PokeSphere_ReloadText(void);
@@ -818,6 +954,8 @@ static void PokeSphere_CreateProfilePostPage(void)
 {
     PokeSphere_DrawCharacterMugshot();
     PokeSphere_DrawPartnerMugshot();
+    PokeSphere_DrawCharacterAttitude();
+    PokeSphere_DrawCharacterHeart();
     PokeSphere_PrintUIControls();
     PokeSphere_PrintNames();
     PokeSphere_PrintRelationships();
@@ -829,6 +967,7 @@ static void PokeSphere_DestroyProfilePostPage(void)
     DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, 1);
     DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, 2);
     DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterHeartSpriteId]);
+    DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterAttitudeSpriteId]);
     FillWindowPixelBuffer(WIN_CHARACTER_RELATIONSHIPS_POSTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     FillWindowPixelBuffer(WIN_CHARACTER_PROFILE_OPINION, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     CopyWindowToVram(WIN_CHARACTER_RELATIONSHIPS_POSTS, COPYWIN_FULL);
@@ -918,8 +1057,11 @@ static void PokeSphere_ReloadProfile(void)
     DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, 1);
     DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, 2);
     DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterHeartSpriteId]);
+    DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterAttitudeSpriteId]);
     PokeSphere_DrawCharacterMugshot();
     PokeSphere_DrawPartnerMugshot();
+    PokeSphere_DrawCharacterAttitude();
+    PokeSphere_DrawCharacterHeart();
 }
 
 static void PokeSphere_ReloadText(void)
@@ -1310,6 +1452,49 @@ static void PokeSphere_DrawCharacterMugshot(void)
     gSprites[sPokeSphereState->characterMugshotSpriteId].y = CHARACTER_MUGSHOT_Y;
     gSprites[sPokeSphereState->characterMugshotSpriteId].anims = gSpriteAnimTable_Mugshot_Flipped;
     StartSpriteAnim(&gSprites[sPokeSphereState->characterMugshotSpriteId], 0);
+}
+
+static void PokeSphere_DrawCharacterAttitude(void)
+{
+    u32 character = sPokeSphereState->characterId;
+
+    switch (IkigaiCharacter_GetPlayerAttitude_Character(character))
+    {
+    case ATTITUDE_INSPIRED:
+        LoadCompressedSpriteSheet(&sSpriteSheet_PokeSphereInspiredIcon);
+        LoadSpritePalette(&sSpritePal_PokeSphereInspiredIcon);
+        break;
+    
+    case ATTITUDE_HUMBLE:
+        LoadCompressedSpriteSheet(&sSpriteSheet_PokeSphereHumbleIcon);
+        LoadSpritePalette(&sSpritePal_PokeSphereHumbleIcon);
+        break;
+    
+    case ATTITUDE_DOMINANT:
+        LoadCompressedSpriteSheet(&sSpriteSheet_PokeSphereDominantIcon);
+        LoadSpritePalette(&sSpritePal_PokeSphereDominantIcon);
+        break;
+    
+    case ATTITUDE_CYNICAL:
+        LoadCompressedSpriteSheet(&sSpriteSheet_PokeSphereCynicalIcon);
+        LoadSpritePalette(&sSpritePal_PokeSphereCynicalIcon);
+        break;
+    }
+
+    if (IkigaiCharacter_GetPlayerAttitude_Character(character))
+    {
+        sPokeSphereState->characterAttitudeSpriteId = CreateSprite(&sSpriteTemplate_PokeSphereAttitudeIcon,
+            CHARACTER_ATTITUDE_X,
+            CHARACTER_ATTITUDE_Y,
+            0
+        );
+        StartSpriteAnim(&gSprites[sPokeSphereState->characterAttitudeSpriteId], 0);
+    }
+}
+
+static void PokeSphere_DrawCharacterHeart(void)
+{
+    u32 character = sPokeSphereState->characterId;
 
     if (IkigaiCharacter_GetRomanticFlag(character))
     {

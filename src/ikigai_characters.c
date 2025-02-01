@@ -73,6 +73,32 @@ u32 IkigaiCharacter_GetPlayerAttitude(void)
     return ATTITUDE_NEUTRAL;
 }
 
+u32 IkigaiCharacter_GetPlayerAttitude_Character(u32 character)
+{
+    s32 opinionKindness = IkigaiCharacter_GetKindness(character);
+    s32 opinionStrength = IkigaiCharacter_GetStrength(character);
+
+    if (opinionKindness > OPINION_NEUTRAL_BUFFER)
+    {
+        if (opinionStrength > OPINION_NEUTRAL_BUFFER)
+            return ATTITUDE_INSPIRED;
+
+        if (opinionStrength < - OPINION_NEUTRAL_BUFFER)
+            return ATTITUDE_HUMBLE;
+    }
+
+    if (opinionKindness < - OPINION_NEUTRAL_BUFFER)
+    {
+        if (opinionStrength > OPINION_NEUTRAL_BUFFER)
+            return ATTITUDE_DOMINANT;
+
+        if (opinionStrength < - OPINION_NEUTRAL_BUFFER)
+            return ATTITUDE_CYNICAL;
+    }
+
+    return ATTITUDE_NEUTRAL;
+}
+
 void IkigaiCharacter_SetDefaultOpinion(u32 character)
 {
     if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)

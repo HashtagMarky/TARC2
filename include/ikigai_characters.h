@@ -104,6 +104,7 @@ extern const struct DialogueOptions gDialogueAttitudes[];
 extern const struct OpinionBonusFunctions gOpinionBonusFunction[];
 
 u32 IkigaiCharacter_GetPlayerAttitude(void);
+u32 IkigaiCharacter_GetPlayerAttitude_Character(u32 character);
 void IkigaiCharacter_SetDefaultOpinion(u32 character);
 void IkigaiCharacter_SetAllCharacterDefaultOpinion(void);
 s32 IkigaiCharacter_GetKindness(u32 character);
