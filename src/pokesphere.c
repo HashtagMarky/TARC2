@@ -35,32 +35,43 @@
 #include "field_mugshot.h"
 #include "ikigai_characters.h"
 
+#define CHARACTER_OFFSET        1
+
 enum ExploreProfilePositions
 {
-    X1_Y1,
-    X2_Y1,
-    X3_Y1,
-    X4_Y1,
-    X1_Y2,
-    X2_Y2,
-    X3_Y2,
-    X4_Y2,
-    COORDS_POS_COUNT,
+    EXPLORE_COORDS_X1_Y1,
+    EXPLORE_COORDS_X2_Y1,
+    EXPLORE_COORDS_X3_Y1,
+    EXPLORE_COORDS_X4_Y1,
+    EXPLORE_COORDS_X1_Y2,
+    EXPLORE_COORDS_X2_Y2,
+    EXPLORE_COORDS_X3_Y2,
+    EXPLORE_COORDS_X4_Y2,
+    EXPLORE_COORDS_COUNT,
 };
-
-#define COORDS_PER_ROW COORDS_POS_COUNT / 2
 
 struct SpriteCoordsStruct {
     u8 x;
     u8 y;
 };
 
+#define EXPLORE_COORDS_PER_ROW  EXPLORE_COORDS_COUNT / 2
+
+#define EXPLORE_COORDS_X1       36
+#define EXPLORE_COORDS_X2       92
+#define EXPLORE_COORDS_X3       148
+#define EXPLORE_COORDS_X4       204
+#define EXPLORE_COORDS_Y1       77
+#define EXPLORE_COORDS_Y2       125
+#define EXPLORE_CURSOR_X_OFFSET 4
+#define EXPLORE_CURSOR_Y_OFFSET 3
+
 struct PokeSphereState
 {
     MainCallback savedCallback;
     u8 loadState;
     u8 mode;
-    u8 exploreOverworldSpriteId[COORDS_POS_COUNT];
+    u8 exploreOverworldSpriteId[EXPLORE_COORDS_COUNT];
     u8 exploreCursorSpriteId;
     u8 exploreCursorPosition;
     u8 exploreCharacterStartId;
@@ -88,29 +99,6 @@ enum Modes
     MODE_COUNT,
 };
 
-#define TAG_POKESPHERE_CURSOR   21212
-#define TAG_HEART_ICON          21213
-#define TAG_ATTITUDE_ICON       21214
-
-#define CHARACTER_MUGSHOT_X     57
-#define CHARACTER_MUGSHOT_Y     59
-#define CHARACTER_HEART_X       84
-#define CHARACTER_HEART_Y       26
-#define CHARACTER_ATTITUDE_X    28
-#define CHARACTER_ATTITUDE_Y    26
-#define CHARACTER_PARTNER_X     116
-#define CHARACTER_PARTNER_Y     60
-
-#define COLUMN_X1               36
-#define COLUMN_X2               92
-#define COLUMN_X3               148
-#define COLUMN_X4               204
-#define ROW_Y1                  77
-#define ROW_Y2                  125
-
-#define CURSOR_X_OFFSET         4
-#define CURSOR_Y_OFFSET         3
-
 static EWRAM_DATA struct PokeSphereState *sPokeSphereState = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 
@@ -120,30 +108,30 @@ static const u8 *const sModeNames[MODE_COUNT] = {
     [MODE_POSTS]        = COMPOUND_STRING("Posts:"),
 };
 
-static const struct SpriteCoordsStruct sExplorePageSpriteCords[COORDS_POS_COUNT] = {
-    [X1_Y1] = {
-        COLUMN_X1, ROW_Y1
+static const struct SpriteCoordsStruct sExplorePageSpriteCords[EXPLORE_COORDS_COUNT] = {
+    [EXPLORE_COORDS_X1_Y1] = {
+        EXPLORE_COORDS_X1, EXPLORE_COORDS_Y1
     },
-    [X2_Y1] = {
-        COLUMN_X2, ROW_Y1
+    [EXPLORE_COORDS_X2_Y1] = {
+        EXPLORE_COORDS_X2, EXPLORE_COORDS_Y1
     },
-    [X3_Y1] = {
-        COLUMN_X3, ROW_Y1
+    [EXPLORE_COORDS_X3_Y1] = {
+        EXPLORE_COORDS_X3, EXPLORE_COORDS_Y1
     },
-    [X4_Y1] = {
-        COLUMN_X4, ROW_Y1
+    [EXPLORE_COORDS_X4_Y1] = {
+        EXPLORE_COORDS_X4, EXPLORE_COORDS_Y1
     },
-    [X1_Y2] = {
-        COLUMN_X1, ROW_Y2
+    [EXPLORE_COORDS_X1_Y2] = {
+        EXPLORE_COORDS_X1, EXPLORE_COORDS_Y2
     },
-    [X2_Y2] = {
-        COLUMN_X2, ROW_Y2
+    [EXPLORE_COORDS_X2_Y2] = {
+        EXPLORE_COORDS_X2, EXPLORE_COORDS_Y2
     },
-    [X3_Y2] = {
-        COLUMN_X3, ROW_Y2
+    [EXPLORE_COORDS_X3_Y2] = {
+        EXPLORE_COORDS_X3, EXPLORE_COORDS_Y2
     },
-    [X4_Y2] = {
-        COLUMN_X4, ROW_Y2
+    [EXPLORE_COORDS_X4_Y2] = {
+        EXPLORE_COORDS_X4, EXPLORE_COORDS_Y2
     },
 };
 
@@ -238,6 +226,12 @@ static const u16 sPokeSphereDominantIconPal[] = INCBIN_U16("graphics/pokesphere/
 static const u32 sPokeSphereCynicalIconGfx[] = INCBIN_U32("graphics/pokesphere/cynical.4bpp.lz");
 static const u16 sPokeSphereCynicalIconPal[] = INCBIN_U16("graphics/pokesphere/cynical.gbapal");
 
+#define TAG_POKESPHERE_CURSOR   21212
+#define TAG_HEART_ICON          21213
+#define TAG_ATTITUDE_ICON       21214
+#define MUGSHOT_1               1
+#define MUGSHOT_2               2
+
 static const struct OamData sOamData_PokeSphereExploreCursor =
 {
     .size = SPRITE_SIZE(32x32),
@@ -273,8 +267,8 @@ static void PokeSphereExploreCursorCallback(struct Sprite *sprite)
 {
     struct SpriteCoordsStruct position;
 
-    sprite->x = sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].x + CURSOR_X_OFFSET;
-    sprite->y = sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].y + CURSOR_Y_OFFSET;
+    sprite->x = sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].x + EXPLORE_CURSOR_X_OFFSET;
+    sprite->y = sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].y + EXPLORE_CURSOR_Y_OFFSET;
 }
 
 static const struct SpriteTemplate sSpriteTemplate_PokeSphereExploreCursor =
@@ -440,6 +434,14 @@ static const struct SpriteTemplate sSpriteTemplate_PokeSphereAttitudeIcon =
     .callback = SpriteCallbackDummy
 };
 
+#define CHARACTER_MUGSHOT_X     57
+#define CHARACTER_MUGSHOT_Y     59
+#define CHARACTER_HEART_X       84
+#define CHARACTER_ATTITUDE_X    28
+#define CHARACTER_ICON_Y        26
+#define CHARACTER_PARTNER_X     116
+#define CHARACTER_PARTNER_Y     60
+
 enum FontColor
 {
     FONT_WHITE,
@@ -449,6 +451,7 @@ enum FontColor
     FONT_BLUE,
     FONT_LIGHT_BLUE,
 };
+
 static const u8 sPokeSphereWindowFontColors[][3] =
 {
     [FONT_WHITE]        = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY},
@@ -459,12 +462,12 @@ static const u8 sPokeSphereWindowFontColors[][3] =
     [FONT_LIGHT_BLUE]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_BLUE, TEXT_COLOR_LIGHT_GRAY},
 };
 
-// Callbacks for the sample UI
+// Callbacks for the PokeSphere
 static void PokeSphere_SetupCB(void);
 static void PokeSphere_MainCB(void);
 static void PokeSphere_VBlankCB(void);
 
-// Sample UI tasks
+// PokeSphere tasks
 static void Task_PokeSphereWaitFadeIn(u8 taskId);
 static void Task_PokeSphereMainInput(u8 taskId);
 static void Task_PokeSphereWaitFadeAndBail(u8 taskId);
@@ -472,7 +475,7 @@ static void Task_PokeSphereWaitFadeAndExitGracefully(u8 taskId);
 static void Task_PokeSphereWaitFadeOutAndChangeBackground(u8 taskId);
 static void Task_PokeSphereLoadSpritesAndTextAfterFade(u8 taskId);
 
-// Sample UI helper functions
+// PokeSphere helper functions
 static void PokeSphere_Init(MainCallback callback);
 static void PokeSphere_ResetGpuRegsAndBgs(void);
 static bool8 PokeSphere_InitBgs(void);
@@ -502,7 +505,7 @@ static void PokeSphere_PrintProfile(void);
 static void PokeSphere_PrintOpinion(void);
 static void PokeSphere_FreeResources(void);
 
-// Declared in sample_ui.h
+// Declared in pokesphere.h
 void Task_OpenPokeSphere(u8 taskId)
 {
     if (!gPaletteFade.active)
@@ -598,8 +601,8 @@ static void PokeSphere_SetupCB(void)
         gMain.state++;
         break;
     case 5:
-        sPokeSphereState->exploreCharacterStartId = CHARACTER_DEFAULT + 1;
-        sPokeSphereState->exploreCursorPosition = X1_Y1;
+        sPokeSphereState->exploreCharacterStartId = CHARACTER_FIRST;
+        sPokeSphereState->exploreCursorPosition = EXPLORE_COORDS_X1_Y1;
         PokeSphere_CreateExplorePage();
         CreateTask(Task_PokeSphereWaitFadeIn, 0);
         gMain.state++;
@@ -660,7 +663,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
             else
             {
                 sPokeSphereState->mode = MODE_PROFILE;
-                PlaySE(SE_SELECT);
+                PlaySE(SE_RG_BAG_POCKET);
                 BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
                 gTasks[taskId].func = Task_PokeSphereWaitFadeOutAndChangeBackground;
             }
@@ -668,77 +671,83 @@ static void Task_PokeSphereMainInput(u8 taskId)
 
         if (JOY_NEW(B_BUTTON))
         {
-            PlaySE(SE_PC_OFF);
+            PlaySE(SE_POKENAV_HANG_UP);
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             gTasks[taskId].func = Task_PokeSphereWaitFadeAndExitGracefully;
         }
 
         if (JOY_REPEAT(DPAD_UP))
         {
-            if (sPokeSphereState->exploreCursorPosition >= X1_Y2)
+            if (sPokeSphereState->exploreCursorPosition >= EXPLORE_COORDS_X1_Y2)
             {
-                sPokeSphereState->exploreCursorPosition -= COORDS_PER_ROW;
+                sPokeSphereState->exploreCursorPosition -= EXPLORE_COORDS_PER_ROW;
+                PlaySE(SE_BALL_TRAY_BALL);
             }
-            else if (sPokeSphereState->exploreCharacterStartId == CHARACTER_DEFAULT + 1)
+            else if (sPokeSphereState->exploreCharacterStartId == CHARACTER_FIRST)
             {
-                // Do Nothing
+                PlaySE(SE_BALL);
             } 
             else
             {
-                sPokeSphereState->exploreCharacterStartId = sPokeSphereState->exploreCharacterStartId - COORDS_PER_ROW;
+                sPokeSphereState->exploreCharacterStartId = sPokeSphereState->exploreCharacterStartId - EXPLORE_COORDS_PER_ROW;
                 PokeSphere_Explore_DestroyObjectEvents();
                 PokeSphere_Explore_CreateObjectEvents();
+                PlaySE(SE_BALL_TRAY_BALL);
             }
         }
 
         if (JOY_REPEAT(DPAD_DOWN))
         {
-            if (sPokeSphereState->exploreCursorPosition < X1_Y2)
+            if (sPokeSphereState->exploreCursorPosition < EXPLORE_COORDS_X1_Y2)
             {
-                sPokeSphereState->exploreCursorPosition += COORDS_PER_ROW;
+                sPokeSphereState->exploreCursorPosition += EXPLORE_COORDS_PER_ROW;
+                PlaySE(SE_BALL_TRAY_BALL);
             }
-            else if (sPokeSphereState->exploreCharacterStartId >= CHARACTER_COUNT_TOTAL - COORDS_POS_COUNT - 1)
+            else if (sPokeSphereState->exploreCharacterStartId >= CHARACTER_COUNT_TOTAL - EXPLORE_COORDS_COUNT - CHARACTER_OFFSET)
             {
-                // Do Nothing
+                PlaySE(SE_BALL);
             } 
             else
             {
-                sPokeSphereState->exploreCharacterStartId = sPokeSphereState->exploreCharacterStartId + COORDS_PER_ROW;
+                sPokeSphereState->exploreCharacterStartId = sPokeSphereState->exploreCharacterStartId + EXPLORE_COORDS_PER_ROW;
                 PokeSphere_Explore_DestroyObjectEvents();
                 PokeSphere_Explore_CreateObjectEvents();
+                PlaySE(SE_BALL_TRAY_BALL);
             }
         }
 
         if (JOY_REPEAT(DPAD_LEFT))
         {
-            if (sPokeSphereState->exploreCursorPosition == X1_Y1)
+            if (sPokeSphereState->exploreCursorPosition == EXPLORE_COORDS_X1_Y1)
             {
-                sPokeSphereState->exploreCursorPosition = X4_Y1;
+                sPokeSphereState->exploreCursorPosition = EXPLORE_COORDS_X4_Y1;
             }
-            else if (sPokeSphereState->exploreCursorPosition == X1_Y2)
+            else if (sPokeSphereState->exploreCursorPosition == EXPLORE_COORDS_X1_Y2)
             {
-                sPokeSphereState->exploreCursorPosition = X4_Y2;
+                sPokeSphereState->exploreCursorPosition = EXPLORE_COORDS_X4_Y2;
             }
             else
             {
                 sPokeSphereState->exploreCursorPosition--;
             }
+            PlaySE(SE_BALL_TRAY_BALL);
         }
 
         if (JOY_REPEAT(DPAD_RIGHT))
         {
-            if (sPokeSphereState->exploreCursorPosition == X4_Y1)
+            if (sPokeSphereState->exploreCursorPosition == EXPLORE_COORDS_X4_Y1)
             {
-                sPokeSphereState->exploreCursorPosition = X1_Y1;
+                sPokeSphereState->exploreCursorPosition = EXPLORE_COORDS_X1_Y1;
             }
-            else if (sPokeSphereState->exploreCursorPosition == X4_Y2)
+            else if (sPokeSphereState->exploreCursorPosition == EXPLORE_COORDS_X4_Y2)
             {
-                sPokeSphereState->exploreCursorPosition = X1_Y2;
+                sPokeSphereState->exploreCursorPosition = EXPLORE_COORDS_X1_Y2;
             }
             else
             {
                 sPokeSphereState->exploreCursorPosition++;
             }
+            PlaySE(SE_BALL_TRAY_BALL);
         }
 
         if (JOY_REPEAT(DPAD_ANY))
@@ -752,7 +761,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
     {
         if (JOY_NEW(A_BUTTON))
         {
-            PlaySE(SE_SELECT);
+            PlaySE(SE_RG_BAG_CURSOR);
 
             if (sPokeSphereState->mode == MODE_PROFILE)
             {
@@ -767,7 +776,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
 
         if (JOY_NEW(B_BUTTON))
         {
-            PlaySE(SE_SELECT);
+            PlaySE(SE_RG_BALL_CLICK);
             sPokeSphereState->mode = MODE_EXPLORE;
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             gTasks[taskId].func = Task_PokeSphereWaitFadeOutAndChangeBackground;
@@ -964,8 +973,8 @@ static void PokeSphere_CreateProfilePostPage(void)
 
 static void PokeSphere_DestroyProfilePostPage(void)
 {
-    DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, 1);
-    DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, 2);
+    DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, MUGSHOT_1);
+    DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, MUGSHOT_2);
     DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterHeartSpriteId]);
     DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterAttitudeSpriteId]);
     FillWindowPixelBuffer(WIN_CHARACTER_RELATIONSHIPS_POSTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
@@ -979,7 +988,7 @@ static void PokeSphere_PrintUIControls(void)
     u8 textTop[20];
     u8 textMiddle[20];
     u8 textBottom[20];
-    u8 x = 5, y = 1;
+    u8 x = 5, y = 1, yRow = 11;
 
     if (sPokeSphereState->mode == MODE_EXPLORE)
     {
@@ -996,15 +1005,15 @@ static void PokeSphere_PrintUIControls(void)
 
     FillWindowPixelBuffer(WIN_UI_CONTROLS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    AddTextPrinterParameterized4(WIN_UI_CONTROLS, FONT_SMALL_NARROWER, x, y + (11 * 0), 0, 0,
+    AddTextPrinterParameterized4(WIN_UI_CONTROLS, FONT_SMALL_NARROWER, x, y + (yRow * 0), 0, 0,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
         textTop
     );
-    AddTextPrinterParameterized4(WIN_UI_CONTROLS, FONT_SMALL_NARROWER, x, y + (11 * 1), 0, 0,
+    AddTextPrinterParameterized4(WIN_UI_CONTROLS, FONT_SMALL_NARROWER, x, y + (yRow * 1), 0, 0,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
         textMiddle
     );
-    AddTextPrinterParameterized4(WIN_UI_CONTROLS, FONT_SMALL_NARROWER, x, y + (11 * 2), 0, 0,
+    AddTextPrinterParameterized4(WIN_UI_CONTROLS, FONT_SMALL_NARROWER, x, y + (yRow * 2), 0, 0,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
         textBottom
     );
@@ -1024,14 +1033,14 @@ static void PokeSphere_CycleCharacters(bool32 increment)
         else
             characterNext--;
 
-        if (characterNext > CHARACTER_COUNT_TOTAL - 1)
-            characterNext = CHARACTER_DEFAULT + 1;
-        else if (characterNext < CHARACTER_DEFAULT + 1)
-            characterNext = CHARACTER_COUNT_TOTAL - 1;
+        if (characterNext > CHARACTER_LAST)
+            characterNext = CHARACTER_FIRST;
+        else if (characterNext < CHARACTER_FIRST)
+            characterNext = CHARACTER_LAST;
 
         if (characterNext == initialCharacter)
         {
-            PlaySE(SE_BOO);
+            PlaySE(SE_BALL);
             return;
         }
 
@@ -1048,14 +1057,14 @@ static void PokeSphere_CycleCharacters(bool32 increment)
     }
 
     sPokeSphereState->characterId = characterNext;
-    PlaySE(SE_SELECT);
+    PlaySE(SE_BALL_TRAY_BALL);
 }
 
 static void PokeSphere_ReloadProfile(void)
 {
     PokeSphere_PrintNames();
-    DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, 1);
-    DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, 2);
+    DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, MUGSHOT_1);
+    DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, MUGSHOT_2);
     DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterHeartSpriteId]);
     DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterAttitudeSpriteId]);
     PokeSphere_DrawCharacterMugshot();
@@ -1089,7 +1098,7 @@ static void PokeSphere_Explore_CreateObjectEvents(void)
 {
     u16 objEvent;
     u8 x, y, character, characterStart = sPokeSphereState->exploreCharacterStartId; 
-    for (u8 coord = 0; coord < COORDS_POS_COUNT; coord++)
+    for (u8 coord = 0; coord < EXPLORE_COORDS_COUNT; coord++)
     {
         if (characterStart + coord == MAIN_CHARACTER_COUNT)
         {
@@ -1114,7 +1123,7 @@ static void PokeSphere_Explore_CreateObjectEvents(void)
 
 static void PokeSphere_Explore_DestroyObjectEvents(void)
 {
-    for (u8 coord = 0; coord < COORDS_POS_COUNT; coord++)
+    for (u8 coord = 0; coord < EXPLORE_COORDS_COUNT; coord++)
     {
         if (&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]] == &gSprites[sPokeSphereState->exploreCursorSpriteId])
             break;
@@ -1128,8 +1137,8 @@ static void PokeSphere_Explore_CreateCursor(void)
     LoadCompressedSpriteSheet(&sSpriteSheet_PokeSphereExploreCursor);
     LoadSpritePalette(&sSpritePal_PokeSphereExploreCursor);
     sPokeSphereState->exploreCursorSpriteId = CreateSprite(&sSpriteTemplate_PokeSphereExploreCursor,
-        sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].x + CURSOR_X_OFFSET,
-        sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].y + CURSOR_Y_OFFSET,
+        sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].x + EXPLORE_CURSOR_X_OFFSET,
+        sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].y + EXPLORE_CURSOR_Y_OFFSET,
         0
     );
     gSprites[sPokeSphereState->exploreCursorSpriteId].callback = PokeSphereExploreCursorCallback;
@@ -1446,7 +1455,7 @@ static void PokeSphere_DrawCharacterMugshot(void)
     
     FillWindowPixelBuffer(WIN_CHARACTER_MUGSHOT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    sPokeSphereState->characterMugshotSpriteId = CreateFieldMugshotSprite(mugshotId, mugshotEmotion, FALSE, 1);
+    sPokeSphereState->characterMugshotSpriteId = CreateFieldMugshotSprite(mugshotId, mugshotEmotion, FALSE, MUGSHOT_1);
     gSprites[sPokeSphereState->characterMugshotSpriteId].oam.priority = 0;
     gSprites[sPokeSphereState->characterMugshotSpriteId].x = CHARACTER_MUGSHOT_X;
     gSprites[sPokeSphereState->characterMugshotSpriteId].y = CHARACTER_MUGSHOT_Y;
@@ -1485,7 +1494,7 @@ static void PokeSphere_DrawCharacterAttitude(void)
     {
         sPokeSphereState->characterAttitudeSpriteId = CreateSprite(&sSpriteTemplate_PokeSphereAttitudeIcon,
             CHARACTER_ATTITUDE_X,
-            CHARACTER_ATTITUDE_Y,
+            CHARACTER_ICON_Y,
             0
         );
         StartSpriteAnim(&gSprites[sPokeSphereState->characterAttitudeSpriteId], 0);
@@ -1502,7 +1511,7 @@ static void PokeSphere_DrawCharacterHeart(void)
         LoadSpritePalette(&sSpritePal_PokeSphereHeartIcon);
         sPokeSphereState->characterHeartSpriteId = CreateSprite(&sSpriteTemplate_PokeSphereHeartIcon,
             CHARACTER_HEART_X,
-            CHARACTER_HEART_Y,
+            CHARACTER_ICON_Y,
             0
         );
     }
@@ -1514,7 +1523,7 @@ static void PokeSphere_DrawPartnerMugshot(void)
     u32 speciesId = gIkigaiCharactersInfo[character].partnerPokemon;
     u32 mugshotEmotion = gIkigaiCharactersInfo[character].defaultEmotion;
     
-    sPokeSphereState->partnerMugshotSpriteId = CreateFieldMugshotSprite(speciesId, mugshotEmotion, TRUE, 2);
+    sPokeSphereState->partnerMugshotSpriteId = CreateFieldMugshotSprite(speciesId, mugshotEmotion, TRUE, MUGSHOT_2);
     gSprites[sPokeSphereState->partnerMugshotSpriteId].oam.priority = 0;
     gSprites[sPokeSphereState->partnerMugshotSpriteId].x = CHARACTER_PARTNER_X;
     gSprites[sPokeSphereState->partnerMugshotSpriteId].y = CHARACTER_PARTNER_Y;
