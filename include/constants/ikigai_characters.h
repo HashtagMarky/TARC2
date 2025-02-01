@@ -69,6 +69,9 @@ enum CharacterId
     CHARACTER_COUNT_TOTAL,
 };
 
+#define CHARACTER_FIRST     CHARACTER_DEFAULT + 1
+#define CHARACTER_LAST      CHARACTER_COUNT_TOTAL - 1
+
 enum RomanceOptions // Temporary (Moved From Poryscript but will formalise)
 {
     SET_CLEAR_ROMANCE,
