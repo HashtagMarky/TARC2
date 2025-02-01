@@ -310,6 +310,60 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         }
     },
 
+    [MAIN_CHARACTER_DIEGO] =
+    {
+        .name = _("Diego"),
+        .highlights = COMPOUND_STRING(
+            "A dedicated conservationist, known\n"
+            "for his efforts in protecting and\n"
+            "repopulating endangered Pokémon."
+        ),
+
+        .partnerPokemon = SPECIES_LAPRAS,
+        .favouriteType = TYPE_WATER,
+        .favouriteColour = BODY_COLOR_BLUE,
+        .personality = ATTITUDE_HUMBLE,
+
+        .overworldGraphicsId = OBJ_EVENT_GFX_DIEGO,
+        .mugshotId = MUGSHOT_DIEGO,
+        .defaultEmotion = EMOTE_INSPIRED,
+
+        .baseOpinionKindness = -10,
+        .baseOpinionStrength = 0,
+        .opinionDecayChance = 5,
+    },
+
+    [SPECIAL_CHARACTER_ASH] =
+    {
+        .name = _("Ash"),
+        .highlights = COMPOUND_STRING(
+            "A young but prolific battler, with\n"
+            "an ability to maximise every bit\n"
+            "of potential within his Pokémon."
+        ),
+
+        .partnerPokemon = SPECIES_PIKACHU,
+        .favouriteType = TYPE_STEEL,
+        .favouriteColour = BODY_COLOR_YELLOW,
+
+        .personality = ATTITUDE_INSPIRED,
+
+        .overworldGraphicsId = OBJ_EVENT_GFX_ASH,
+        .mugshotId = MUGSHOT_ASH,
+        .defaultEmotion = EMOTE_DETERMINED,
+
+        .relationships =
+        {
+            {
+                .characterId = MAIN_CHARACTER_LAUREN,
+                .title = COMPOUND_STRING("Colleague"),
+                .affinity = OPINION_VERY_POSITIVE,
+            },
+        },
+
+        .flagMet = FLAG_TEMP_1,
+    },
+
     [SPECIAL_CHARACTER_STEVEN] =
     {
         .name = _("Steven"),
