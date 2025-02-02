@@ -83,6 +83,12 @@ static const u32 sFieldMugshotGfx_CynthiaSpecial[] = INCBIN_U32("graphics/field_
 static const u16 sFieldMugshotPal_CynthiaSpecial[] = INCBIN_U16("graphics/field_mugshots/people/cynthia/special.gbapal");
 
 // N
+static const u32 sFieldMugshotGfx_NNormal[] = INCBIN_U32("graphics/field_mugshots/people/N/normal.4bpp.lz");
+static const u16 sFieldMugshotPal_NNormal[] = INCBIN_U16("graphics/field_mugshots/people/N/normal.gbapal");
+
+static const u32 sFieldMugshotGfx_NHappy[] = INCBIN_U32("graphics/field_mugshots/people/N/happy.4bpp.lz");
+static const u16 sFieldMugshotPal_NHappy[] = INCBIN_U16("graphics/field_mugshots/people/N/happy.gbapal");
+
 static const u32 sFieldMugshotGfx_NSpecial[] = INCBIN_U32("graphics/field_mugshots/people/N/special.4bpp.lz");
 static const u16 sFieldMugshotPal_NSpecial[] = INCBIN_U16("graphics/field_mugshots/people/N/special.gbapal");
 
@@ -1973,8 +1979,14 @@ const struct MugshotGfx gFieldMugshots[][EMOTE_COUNT] =
     {
         [EMOTE_NORMAL] =
         {
-            .gfx = sFieldMugshotGfx_NSpecial,
-            .pal = sFieldMugshotPal_NSpecial,
+            .gfx = sFieldMugshotGfx_NNormal,
+            .pal = sFieldMugshotPal_NNormal,
+        },
+
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_NHappy,
+            .pal = sFieldMugshotPal_NHappy,
         },
 
         [EMOTE_SPECIAL] =
