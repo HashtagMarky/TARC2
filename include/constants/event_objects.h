@@ -454,6 +454,7 @@
 #define OBJ_EVENT_PAL_TAG_GUITARIST               0x1174
 #define OBJ_EVENT_PAL_TAG_WHISTLER                0x1175
 #define OBJ_EVENT_PAL_TAG_FLUTIST                 0x1176
+#define OBJ_EVENT_PAL_TAG_CYNTHIA                 0x1177
 
 // Used as a placeholder follower graphic
 #define OBJ_EVENT_PAL_TAG_SUBSTITUTE              0x7611
