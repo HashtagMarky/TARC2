@@ -1241,7 +1241,7 @@ static void PokeSphere_PrintRelationships(void)
         relationship = gIkigaiCharactersInfo[sPokeSphereState->characterId].relationships[i].characterId;
         stringBuffer = gIkigaiCharactersInfo[sPokeSphereState->characterId].relationships[i].title;
 
-        if (relationship != CHARACTER_DEFAULT)
+        if (relationship != CHARACTER_DEFAULT && IkigaiCharacter_GetMetFlag(relationship))
         {
             y += 11;
             x = GetStringRightAlignXOffset(FONT_SMALL_NARROWER,
