@@ -352,15 +352,6 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .mugshotId = MUGSHOT_ASH,
         .defaultEmotion = EMOTE_DETERMINED,
 
-        .relationships =
-        {
-            {
-                .characterId = MAIN_CHARACTER_LAUREN,
-                .title = COMPOUND_STRING("Colleague"),
-                .affinity = OPINION_VERY_POSITIVE,
-            },
-        },
-
         .flagMet = FLAG_TEMP_1,
     },
 
