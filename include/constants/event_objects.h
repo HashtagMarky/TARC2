@@ -263,7 +263,7 @@
 #define OBJ_EVENT_GFX_WHISTLER                   257
 #define OBJ_EVENT_GFX_FLUTIST                    258
 #define OBJ_EVENT_GFX_DIEGO                      259
-#define OBJ_EVENT_GFX_ASH                        260
+#define OBJ_EVENT_GFX_ASH_KETCHUM                260
 
 // NOTE: The maximum amount of object events has been expanded from 255 to 65535.
 // Since dynamic graphics ids still require at least 16 free values, the actual limit
@@ -455,6 +455,7 @@
 #define OBJ_EVENT_PAL_TAG_WHISTLER                0x1175
 #define OBJ_EVENT_PAL_TAG_FLUTIST                 0x1176
 #define OBJ_EVENT_PAL_TAG_CYNTHIA                 0x1177
+#define OBJ_EVENT_PAL_TAG_ASH_KETCHUM             0x1178
 
 // Used as a placeholder follower graphic
 #define OBJ_EVENT_PAL_TAG_SUBSTITUTE              0x7611

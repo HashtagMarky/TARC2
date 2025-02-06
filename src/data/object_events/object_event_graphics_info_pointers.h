@@ -262,6 +262,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Erhuist;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Whistler;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Flutist;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Cynthia;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Ash;
 
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
     [OBJ_EVENT_GFX_KOLE_NORMAL] =              &gObjectEventGraphicsInfo_BrendanNormal,
@@ -518,6 +519,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_WHISTLER] =                 &gObjectEventGraphicsInfo_Whistler,
     [OBJ_EVENT_GFX_FLUTIST] =                  &gObjectEventGraphicsInfo_Flutist,
     [OBJ_EVENT_GFX_CYNTHIA] =                  &gObjectEventGraphicsInfo_Cynthia,
+    [OBJ_EVENT_GFX_ASH_KETCHUM] =              &gObjectEventGraphicsInfo_Ash,
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {

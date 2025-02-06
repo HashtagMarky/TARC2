@@ -348,7 +348,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .personality = ATTITUDE_INSPIRED,
 
-        .overworldGraphicsId = OBJ_EVENT_GFX_ASH,
+        .overworldGraphicsId = OBJ_EVENT_GFX_ASH_KETCHUM,
         .mugshotId = MUGSHOT_ASH,
         .defaultEmotion = EMOTE_DETERMINED,
 

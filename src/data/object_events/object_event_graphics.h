@@ -640,3 +640,6 @@ const u16 gFieldEffectObjectPalette_CaveDust[] = INCBIN_U16("graphics/field_effe
 
 const u32 gObjectEventPic_Cynthia[] = INCBIN_U32("graphics/object_events/pics/people/cynthia.4bpp");
 const u16 gObjectEventPalette_Cynthia[] = INCBIN_U16("graphics/object_events/pics/people/cynthia.gbapal");
+
+const u32 gObjectEventPic_AshKetchum[] = INCBIN_U32("graphics/object_events/pics/people/ash.4bpp");
+const u16 gObjectEventPalette_AshKetchum[] = INCBIN_U16("graphics/object_events/pics/people/ash.gbapal");

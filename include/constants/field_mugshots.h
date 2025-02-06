@@ -35,7 +35,7 @@
 #define MUGSHOT_STEVEN                      OBJ_EVENT_GFX_STEVEN_NEW
 #define MUGSHOT_CYNTHIA                     OBJ_EVENT_GFX_CYNTHIA
 #define MUGSHOT_N                           OBJ_EVENT_GFX_N
-#define MUGSHOT_ASH                         OBJ_EVENT_GFX_ASH
+#define MUGSHOT_ASH                         OBJ_EVENT_GFX_ASH_KETCHUM
 #define MUGSHOT_SUBSTITUTE_DOLL             OBJ_EVENT_GFX_SPECIES(NONE)
 #define MUGSHOT_BULBASAUR                   OBJ_EVENT_GFX_SPECIES(BULBASAUR)
 #define MUGSHOT_BULBASAUR_SHINY             OBJ_EVENT_GFX_SPECIES_SHINY(BULBASAUR)
