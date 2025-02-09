@@ -457,6 +457,7 @@
 #define OBJ_EVENT_PAL_TAG_CYNTHIA                 0x1177
 #define OBJ_EVENT_PAL_TAG_ASH_KETCHUM             0x1178
 #define OBJ_EVENT_PAL_TAG_STEVEN_GEN4             0x1179
+#define OBJ_EVENT_PAL_TAG_HANNAH                  0x117A
 
 // Used as a placeholder follower graphic
 #define OBJ_EVENT_PAL_TAG_SUBSTITUTE              0x7611
