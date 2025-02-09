@@ -370,7 +370,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .personality = ATTITUDE_HUMBLE,
 
-        .overworldGraphicsId = OBJ_EVENT_GFX_STEVEN_NEW,
+        .overworldGraphicsId = OBJ_EVENT_GFX_STEVEN_GEN4,
         .mugshotId = MUGSHOT_STEVEN,
         .defaultEmotion = EMOTE_SPECIAL,
 

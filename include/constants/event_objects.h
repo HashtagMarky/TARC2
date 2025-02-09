@@ -253,7 +253,7 @@
 #define OBJ_EVENT_GFX_LOUIS                      247
 #define OBJ_EVENT_GFX_GEORGIA                    248
 #define OBJ_EVENT_GFX_CAPTAIN                    249
-#define OBJ_EVENT_GFX_STEVEN_NEW                 250
+#define OBJ_EVENT_GFX_STEVEN_GEN4                250
 #define OBJ_EVENT_GFX_CYNTHIA                    251
 #define OBJ_EVENT_GFX_N                          252
 #define OBJ_EVENT_GFX_ACCORDIONIST               253
@@ -456,6 +456,7 @@
 #define OBJ_EVENT_PAL_TAG_FLUTIST                 0x1176
 #define OBJ_EVENT_PAL_TAG_CYNTHIA                 0x1177
 #define OBJ_EVENT_PAL_TAG_ASH_KETCHUM             0x1178
+#define OBJ_EVENT_PAL_TAG_STEVEN_GEN4             0x1179
 
 // Used as a placeholder follower graphic
 #define OBJ_EVENT_PAL_TAG_SUBSTITUTE              0x7611

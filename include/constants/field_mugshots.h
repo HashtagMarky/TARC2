@@ -32,7 +32,7 @@
 #define MUGSHOT_GEORGIA                     OBJ_EVENT_GFX_GEORGIA
 #define MUGSHOT_CAPTAIN                     OBJ_EVENT_GFX_CAPTAIN
 #define MUGSHOT_DIEGO                       OBJ_EVENT_GFX_DIEGO
-#define MUGSHOT_STEVEN                      OBJ_EVENT_GFX_STEVEN_NEW
+#define MUGSHOT_STEVEN                      OBJ_EVENT_GFX_STEVEN_GEN4
 #define MUGSHOT_CYNTHIA                     OBJ_EVENT_GFX_CYNTHIA
 #define MUGSHOT_N                           OBJ_EVENT_GFX_N
 #define MUGSHOT_ASH                         OBJ_EVENT_GFX_ASH_KETCHUM
