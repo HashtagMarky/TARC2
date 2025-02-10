@@ -1561,7 +1561,10 @@ static void PokeSphere_DrawCharacterMugshot(void)
     u32 mugshotEmotion = gIkigaiCharactersInfo[character].defaultEmotion;
 
     if (character == CHARACTER_PLAYER)
+    {
         mugshotId = gSaveBlock2Ptr->playerGender ? MUGSHOT_ANKA : MUGSHOT_KOLE;
+        mugshotEmotion = gSaveBlock2Ptr->playerEmote;
+    }
     
     FillWindowPixelBuffer(WIN_CHARACTER_MUGSHOT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
@@ -1645,7 +1648,10 @@ static void PokeSphere_DrawPartnerMugshot(void)
     u32 mugshotEmotion = gIkigaiCharactersInfo[character].defaultEmotion;
 
     if (character == CHARACTER_PLAYER)
+    {
         speciesId = VarGet(VAR_STARTER_MON);
+        mugshotEmotion = gSaveBlock2Ptr->playerEmote;
+    }
     
     sPokeSphereState->partnerMugshotSpriteId = CreateFieldMugshotSprite(speciesId, mugshotEmotion, TRUE, MUGSHOT_2);
     gSprites[sPokeSphereState->partnerMugshotSpriteId].oam.priority = 0;
