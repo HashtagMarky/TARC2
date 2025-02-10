@@ -338,6 +338,14 @@ bool32 IkigaiCharacter_GetMetFlag(u32 character)
     return FlagGet(gIkigaiCharactersInfo[character].flagMet);
 }
 
+void IkigaiCharacter_SetAllMetFlags(void)
+{
+    for (u32 character = CHARACTER_DEFAULT; character < CHARACTER_COUNT_TOTAL; character++)
+    {
+        IkigaiCharacter_SetMetFlag(character);
+    }
+}
+
 void ScrCmd_IkigaiCharacter_SetRomanticFlag(void)
 {
     IkigaiCharacter_SetRomanticFlag(

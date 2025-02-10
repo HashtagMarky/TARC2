@@ -130,6 +130,7 @@ u32 IkigaiCharacter_CheckRelationships(void);
 bool32 IkigaiCharacter_IsPlayerSingleOrMonogamous(void);
 void IkigaiCharacter_SetMetFlag(u32 character);
 bool32 IkigaiCharacter_GetMetFlag(u32 character);
+void IkigaiCharacter_SetAllMetFlags(void);
 bool32 IkigaiCharacter_ReturnOpinionDecay(u32 character);
 void IkigaiCharacter_OpinionDecay(u32 character);
 void IkigaiCharacter_AllOpinionDecay_NonConverse(void);

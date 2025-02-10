@@ -69,12 +69,14 @@
 #include "save.h"
 
 #include "dynamic_music.h"
+#include "ikigai_characters.h"
 
 #define FLAG_DEBUG_SOUND_OVERWORLD_PLAY TRUE
 
 // *******************************
 enum DebugMenu
 {
+    DEBUG_MENU_ITEM_IKIGAI,
     DEBUG_MENU_ITEM_UTILITIES,
     DEBUG_MENU_ITEM_PCBAG,
     DEBUG_MENU_ITEM_PARTY,
@@ -84,6 +86,25 @@ enum DebugMenu
     //DEBUG_MENU_ITEM_BATTLE,
     DEBUG_MENU_ITEM_SOUND,
     DEBUG_MENU_ITEM_CANCEL,
+};
+
+enum IkigaiDebugMenu
+{
+    DEBUG_IKIGAI_PLAYER,
+    DEBUG_IKIGAI_CHARACTER,
+};
+
+enum IkigaiPlayerDebugSubmenu
+{
+    DEBUG_IKIGAI_PLAYER_NAME,
+    DEBUG_IKIGAI_PLAYER_NICKNAME,
+    DEBUG_IKIGAI_PLAYER_GENDER,
+    DEBUG_IKIGAI_PLAYER_DYNPALS,
+};
+
+enum IkigaiCharacterDebugSubmenu
+{
+    DEBUG_IKIGAI_CHARACTER_MET,
 };
 
 enum UtilDebugMenu
@@ -98,10 +119,10 @@ enum UtilDebugMenu
     DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK,
     DEBUG_UTIL_MENU_ITEM_WATCHCREDITS,
     DEBUG_UTIL_MENU_ITEM_PLAYER_NAME,
-    DEBUG_UTIL_MENU_ITEM_PLAYER_NICKNAME,
+    // DEBUG_UTIL_MENU_ITEM_PLAYER_NICKNAME,
     DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER,
     DEBUG_UTIL_MENU_ITEM_PLAYER_ID,
-    DEBUG_UTIL_MENU_PLAYER_DYNPALS,
+    // DEBUG_UTIL_MENU_PLAYER_DYNPALS,
     DEBUG_UTIL_MENU_ITEM_CHEAT,
     DEBUG_UTIL_MENU_ITEM_EXPANSION_VER,
     DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS,
@@ -384,6 +405,10 @@ static void DebugAction_Util_Script_6(u8 taskId);
 static void DebugAction_Util_Script_7(u8 taskId);
 static void DebugAction_Util_Script_8(u8 taskId);
 
+static void DebugAction_OpenIkigaiMenu(u8 taskId);
+static void DebugAction_OpenSubmenuIkigai_Player(u8 taskId);
+static void DebugAction_OpenSubmenuIkigai_CharacterMenu(u8 taskId);
+
 static void DebugAction_OpenUtilitiesMenu(u8 taskId);
 static void DebugAction_OpenPCBagMenu(u8 taskId);
 static void DebugAction_OpenPartyMenu(u8 taskId);
@@ -396,6 +421,9 @@ static void DebugAction_OpenDynamicMusicInstrumentMenu(u8 taskId);
 static void DebugAction_OpenDynamicMusicIsolateTrackMenu(u8 taskId);
 
 static void DebugTask_HandleMenuInput_Main(u8 taskId);
+static void DebugTask_HandleMenuInput_Ikigai(u8 taskId);
+static void DebugTask_HandleSubmenuInput_Ikigai_Player(u8 taskId);
+static void DebugTask_HandleSubmenuInput_Ikigai_Character(u8 taskId);
 static void DebugTask_HandleMenuInput_Utilities(u8 taskId);
 static void DebugTask_HandleMenuInput_PCBag(u8 taskId);
 static void DebugTask_HandleMenuInput_PCBag_Fill(u8 taskId);
@@ -410,6 +438,8 @@ static void DebugTask_HandleMenuInput_DynamicMusic(u8 taskId);
 static void DebugTask_HandleMenuInput_DynamicMusicInstruments(u8 taskId);
 static void DebugTask_HandleMenuInput_DynamicMusicIsolateTracksList(u8 taskId);
 static void DebugTask_HandleMenuInput_DynamicMusicIsolateTracksFuncs(u8 taskId);
+
+static void DebugAction_Ikigai_MeetAllCharacter(u8 taskId);
 
 static void DebugAction_Util_Fly(u8 taskId);
 static void DebugAction_Util_Warp_Warp(u8 taskId);
@@ -428,7 +458,7 @@ static void DebugAction_Util_Player_Name(u8 taskId);
 static void DebugAction_Util_Player_Nickname(u8 taskId);
 static void DebugAction_Util_Player_Gender(u8 taskId);
 static void DebugAction_Util_Player_Id(u8 taskId);
-static void DebugAction_Util_PlayerDynPals(u8 taskId);
+static void DebugAction_Ikigai_PlayerDynPals(u8 taskId);
 static void DebugAction_Util_CheatStart(u8 taskId);
 static void DebugAction_Util_ExpansionVersion(u8 taskId);
 static void DebugAction_Util_BerryFunctions(u8 taskId);
@@ -631,6 +661,7 @@ static const s32 sPowersOfTen[] =
 // List Menu Items
 static const struct ListMenuItem sDebugMenu_Items_Main[] =
 {
+    [DEBUG_MENU_ITEM_IKIGAI]        = {COMPOUND_STRING("Ikigai Debug…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_MENU_ITEM_IKIGAI},
     [DEBUG_MENU_ITEM_UTILITIES]     = {COMPOUND_STRING("Utilities…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_MENU_ITEM_UTILITIES},
     [DEBUG_MENU_ITEM_PCBAG]         = {COMPOUND_STRING("PC/Bag…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_MENU_ITEM_PCBAG},
     [DEBUG_MENU_ITEM_PARTY]         = {COMPOUND_STRING("Party…{CLEAR_TO 110}{RIGHT_ARROW}"),        DEBUG_MENU_ITEM_PARTY},
@@ -640,6 +671,25 @@ static const struct ListMenuItem sDebugMenu_Items_Main[] =
     //[DEBUG_MENU_ITEM_BATTLE]        = {COMPOUND_STRING("Battle Test{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_MENU_ITEM_BATTLE},
     [DEBUG_MENU_ITEM_SOUND]         = {COMPOUND_STRING("Sound…{CLEAR_TO 110}{RIGHT_ARROW}"),        DEBUG_MENU_ITEM_SOUND},
     [DEBUG_MENU_ITEM_CANCEL]        = {COMPOUND_STRING("Cancel"),                                   DEBUG_MENU_ITEM_CANCEL},
+};
+
+static const struct ListMenuItem sDebugMenu_Items_Ikigai[] =
+{
+    [DEBUG_IKIGAI_PLAYER]                  = {COMPOUND_STRING("Player Menu…{CLEAR_TO 110}{RIGHT_ARROW}"),      DEBUG_IKIGAI_PLAYER},
+    [DEBUG_IKIGAI_CHARACTER]               = {COMPOUND_STRING("Character Menu…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_IKIGAI_CHARACTER},
+};
+
+static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Player[] =
+{
+    [DEBUG_IKIGAI_PLAYER_NAME]             = {COMPOUND_STRING("Player name"),                                  DEBUG_IKIGAI_PLAYER_NAME},
+    [DEBUG_IKIGAI_PLAYER_NICKNAME]         = {COMPOUND_STRING("Player nickname"),                              DEBUG_IKIGAI_PLAYER_NICKNAME},
+    [DEBUG_IKIGAI_PLAYER_GENDER]           = {COMPOUND_STRING("Toggle gender"),                                DEBUG_IKIGAI_PLAYER_GENDER},
+    [DEBUG_IKIGAI_PLAYER_DYNPALS]          = {COMPOUND_STRING("Player DynPal Menu"),                           DEBUG_IKIGAI_PLAYER_DYNPALS},
+};
+
+static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Character[] =
+{
+    [DEBUG_IKIGAI_CHARACTER_MET]           = {COMPOUND_STRING("Meet All Characters"),                          DEBUG_IKIGAI_CHARACTER_MET},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
@@ -654,10 +704,10 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]    = {COMPOUND_STRING("Set wall clock…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK},
     [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]    = {COMPOUND_STRING("Watch credits…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_UTIL_MENU_ITEM_WATCHCREDITS},
     [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]     = {COMPOUND_STRING("Player name"),                                  DEBUG_UTIL_MENU_ITEM_PLAYER_NAME},
-    [DEBUG_UTIL_MENU_ITEM_PLAYER_NICKNAME] = {COMPOUND_STRING("Player nickname"),                              DEBUG_UTIL_MENU_ITEM_PLAYER_NICKNAME},
+    // [DEBUG_UTIL_MENU_ITEM_PLAYER_NICKNAME] = {COMPOUND_STRING("Player nickname"),                              DEBUG_UTIL_MENU_ITEM_PLAYER_NICKNAME},
     [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]   = {COMPOUND_STRING("Toggle gender"),                                DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER},
     [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]       = {COMPOUND_STRING("New Trainer ID"),                               DEBUG_UTIL_MENU_ITEM_PLAYER_ID},
-    [DEBUG_UTIL_MENU_PLAYER_DYNPALS]       = {COMPOUND_STRING("Player DynPal Menu"),                           DEBUG_UTIL_MENU_PLAYER_DYNPALS},
+    // [DEBUG_UTIL_MENU_PLAYER_DYNPALS]       = {COMPOUND_STRING("Player DynPal Menu"),                           DEBUG_UTIL_MENU_PLAYER_DYNPALS},
     [DEBUG_UTIL_MENU_ITEM_CHEAT]           = {COMPOUND_STRING("Cheat start"),                                  DEBUG_UTIL_MENU_ITEM_CHEAT},
     [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]   = {COMPOUND_STRING("Expansion Version"),                            DEBUG_UTIL_MENU_ITEM_EXPANSION_VER},
     [DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS] = {COMPOUND_STRING("Berry Functions…{CLEAR_TO 110}{RIGHT_ARROW}"),  DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS},
@@ -854,6 +904,7 @@ static const struct ListMenuItem sDebugMenu_Items_DynamicMusic_IsolateTracks[] =
 // Menu Actions
 static void (*const sDebugMenu_Actions_Main[])(u8) =
 {
+    [DEBUG_MENU_ITEM_IKIGAI]        = DebugAction_OpenIkigaiMenu,
     [DEBUG_MENU_ITEM_UTILITIES]     = DebugAction_OpenUtilitiesMenu,
     [DEBUG_MENU_ITEM_PCBAG]         = DebugAction_OpenPCBagMenu,
     [DEBUG_MENU_ITEM_PARTY]         = DebugAction_OpenPartyMenu,
@@ -863,6 +914,25 @@ static void (*const sDebugMenu_Actions_Main[])(u8) =
     //[DEBUG_MENU_ITEM_BATTLE]        = DebugAction_OpenBattleMenu,
     [DEBUG_MENU_ITEM_SOUND]         = DebugAction_OpenSoundMenu,
     [DEBUG_MENU_ITEM_CANCEL]        = DebugAction_Cancel
+};
+
+static void (*const sDebugMenu_Actions_Ikigai[])(u8) =
+{
+    [DEBUG_IKIGAI_PLAYER]                  = DebugAction_OpenSubmenuIkigai_Player,
+    [DEBUG_IKIGAI_CHARACTER]               = DebugAction_OpenSubmenuIkigai_CharacterMenu,
+};
+
+static void (*const sDebugMenu_Actions_Ikigai_Player[])(u8) =
+{
+    [DEBUG_IKIGAI_PLAYER_NAME]             = DebugAction_Util_Player_Name,
+    [DEBUG_IKIGAI_PLAYER_NICKNAME]         = DebugAction_Util_Player_Nickname,
+    [DEBUG_IKIGAI_PLAYER_GENDER]           = DebugAction_Util_Player_Gender,
+    [DEBUG_IKIGAI_PLAYER_DYNPALS]          = DebugAction_Ikigai_PlayerDynPals,
+};
+
+static void (*const sDebugMenu_Actions_Ikigai_Character[])(u8) =
+{
+    [DEBUG_IKIGAI_CHARACTER_MET]           = DebugAction_Ikigai_MeetAllCharacter,
 };
 
 static void (*const sDebugMenu_Actions_Utilities[])(u8) =
@@ -877,10 +947,10 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]    = DebugAction_Util_SetWallClock,
     [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]    = DebugAction_Util_WatchCredits,
     [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]     = DebugAction_Util_Player_Name,
-    [DEBUG_UTIL_MENU_ITEM_PLAYER_NICKNAME] = DebugAction_Util_Player_Nickname,
+    // [DEBUG_UTIL_MENU_ITEM_PLAYER_NICKNAME] = DebugAction_Util_Player_Nickname,
     [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]   = DebugAction_Util_Player_Gender,
     [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]       = DebugAction_Util_Player_Id,
-    [DEBUG_UTIL_MENU_PLAYER_DYNPALS]       = DebugAction_Util_PlayerDynPals,
+    // [DEBUG_UTIL_MENU_PLAYER_DYNPALS]       = DebugAction_Ikigai_PlayerDynPals,
     [DEBUG_UTIL_MENU_ITEM_CHEAT]           = DebugAction_Util_CheatStart,
     [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]   = DebugAction_Util_ExpansionVersion,
     [DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS] = DebugAction_Util_BerryFunctions,
@@ -1089,6 +1159,27 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Main =
     .items = sDebugMenu_Items_Main,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_Main),
+};
+
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Ikigai =
+{
+    .items = sDebugMenu_Items_Ikigai,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Ikigai),
+};
+
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Ikigai_Player =
+{
+    .items = sDebugMenu_Items_SubmenuIkigai_Player,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_SubmenuIkigai_Player),
+};
+
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Ikigai_Character =
+{
+    .items = sDebugMenu_Items_SubmenuIkigai_Character,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_SubmenuIkigai_Character),
 };
 
 static const struct ListMenuTemplate sDebugMenu_ListTemplate_Utilities =
@@ -1626,6 +1717,21 @@ static void DebugTask_HandleMenuInput_General(u8 taskId, const void (*const acti
     }
 }
 
+static void DebugTask_HandleMenuInput_Ikigai(u8 taskId)
+{
+    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Ikigai, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
+}
+
+static void DebugTask_HandleSubmenuInput_Ikigai_Player(u8 taskId)
+{
+    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Ikigai_Player, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
+}
+
+static void DebugTask_HandleSubmenuInput_Ikigai_Character(u8 taskId)
+{
+    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Ikigai_Character, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
+}
+
 static void DebugTask_HandleMenuInput_Utilities(u8 taskId)
 {
     DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Utilities, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
@@ -1943,6 +2049,24 @@ static void DebugTask_HandleMenuInput_DynamicMusicIsolateTracksFuncs(u8 taskId)
 
 // *******************************
 // Open sub-menus
+static void DebugAction_OpenIkigaiMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_Ikigai, sDebugMenu_ListTemplate_Ikigai);
+}
+
+static void DebugAction_OpenSubmenuIkigai_Player(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleSubmenuInput_Ikigai_Player, sDebugMenu_ListTemplate_Ikigai_Player);
+}
+
+static void DebugAction_OpenSubmenuIkigai_CharacterMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleSubmenuInput_Ikigai_Character, sDebugMenu_ListTemplate_Ikigai_Character);
+}
+
 static void DebugAction_OpenUtilitiesMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
@@ -2014,6 +2138,16 @@ static void DebugAction_DynamicMusic_OpenTrackFuncMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_DynamicMusicIsolateTracksFuncs, sDebugMenu_ListTemplate_DynamicMusic_IsolateTracksFunc);
+}
+
+// *******************************
+// Actions Ikigai Debug
+
+static void DebugAction_Ikigai_MeetAllCharacter(u8 taskId)
+{
+    IkigaiCharacter_SetAllMetFlags();
+    Debug_DestroyMenu_Full(taskId);
+    ScriptContext_Enable();
 }
 
 // *******************************
@@ -2408,7 +2542,7 @@ static void DebugAction_Util_Player_Id(u8 taskId)
     ScriptContext_Enable();
 }
 
-static void DebugAction_Util_PlayerDynPals(u8 taskId)
+static void DebugAction_Ikigai_PlayerDynPals(u8 taskId)
 {
     Debug_DestroyMenu_Full_Script(taskId, Debug_OpenDynPalMenu);
 }
