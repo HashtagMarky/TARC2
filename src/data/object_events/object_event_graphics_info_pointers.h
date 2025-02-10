@@ -267,6 +267,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StevenGen4;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Hannah;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Katie;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Louis;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Georgia;
 
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
     [OBJ_EVENT_GFX_KOLE_NORMAL] =              &gObjectEventGraphicsInfo_BrendanNormal,
@@ -528,6 +529,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_HANNAH] =                   &gObjectEventGraphicsInfo_Hannah,
     [OBJ_EVENT_GFX_KATIE] =                    &gObjectEventGraphicsInfo_Katie,
     [OBJ_EVENT_GFX_LOUIS] =                    &gObjectEventGraphicsInfo_Louis,
+    [OBJ_EVENT_GFX_GEORGIA] =                  &gObjectEventGraphicsInfo_Georgia,
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {
