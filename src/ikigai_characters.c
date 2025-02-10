@@ -101,7 +101,7 @@ u32 IkigaiCharacter_GetPlayerAttitude_Character(u32 character)
 
 void IkigaiCharacter_SetDefaultOpinion(u32 character)
 {
-    if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)
+    if (character == CHARACTER_DEFAULT || character >= CHARACTER_RESIDENT_COUNT)
         return;
     
     gSaveBlock3Ptr->characters.opinionKindness[character] = gIkigaiCharactersInfo[character].baseOpinionKindness;
@@ -112,7 +112,7 @@ void IkigaiCharacter_SetAllCharacterDefaultOpinion(void)
 {
     u32 character;
 
-    for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
+    for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_RESIDENT_COUNT; character++)
     {
         IkigaiCharacter_SetDefaultOpinion(character);
     }
@@ -120,7 +120,7 @@ void IkigaiCharacter_SetAllCharacterDefaultOpinion(void)
 
 s32 IkigaiCharacter_GetKindness(u32 character)
 {
-    if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)
+    if (character == CHARACTER_DEFAULT || character >= CHARACTER_RESIDENT_COUNT)
         return 0;
      
     s32 kindnessCharacter = gSaveBlock3Ptr->characters.opinionKindness[character];
@@ -131,7 +131,7 @@ s32 IkigaiCharacter_GetKindness(u32 character)
 
 s32 IkigaiCharacter_GetStrength(u32 character)
 {
-    if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)
+    if (character == CHARACTER_DEFAULT || character >= CHARACTER_RESIDENT_COUNT)
         return 0;
      
     s32 strengthCharacter = gSaveBlock3Ptr->characters.opinionStrength[character];
@@ -140,9 +140,9 @@ s32 IkigaiCharacter_GetStrength(u32 character)
     return strengthCharacter + ClampedOpinionDelta(strengthCharacter, strengthAdded);
 }
 
-s32 IkigaiCharacter_GetKindness_Special(u32 character)
+s32 IkigaiCharacter_GetKindness_Wayfarer(u32 character)
 {
-    if (character <= MAIN_CHARACTER_COUNT && character == CHARACTER_COUNT_TOTAL)
+    if (character <= CHARACTER_RESIDENT_COUNT && character == CHARACTER_COUNT_TOTAL)
     {
         return 0;
     }
@@ -153,9 +153,9 @@ s32 IkigaiCharacter_GetKindness_Special(u32 character)
     return opinionKindness + ClampedOpinionDelta(opinionKindness, kindnessAdded);
 }
 
-s32 IkigaiCharacter_GetStrength_Special(u32 character)
+s32 IkigaiCharacter_GetStrength_Wayfarer(u32 character)
 {
-    if (character <= MAIN_CHARACTER_COUNT && character == CHARACTER_COUNT_TOTAL)
+    if (character <= CHARACTER_RESIDENT_COUNT && character == CHARACTER_COUNT_TOTAL)
     {
         return 0;
     }
@@ -182,12 +182,12 @@ s32 IkigaiCharacter_GetAverageKindness(void)
     s32 opinionKindness = 0;
     u32 character;
 
-    for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
+    for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_RESIDENT_COUNT; character++)
     {
         opinionKindness += IkigaiCharacter_GetKindness(character);
     }
 
-    return (opinionKindness / (MAIN_CHARACTER_COUNT - 1));
+    return (opinionKindness / (CHARACTER_RESIDENT_COUNT - 1));
 }
 
 s32 IkigaiCharacter_GetAverageStrength(void)
@@ -195,12 +195,12 @@ s32 IkigaiCharacter_GetAverageStrength(void)
     s32 opinionStrength = 0;
     u32 character;
 
-    for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
+    for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_RESIDENT_COUNT; character++)
     {
         opinionStrength += IkigaiCharacter_GetStrength(character);
     }
 
-    return (opinionStrength / (MAIN_CHARACTER_COUNT - 1));
+    return (opinionStrength / (CHARACTER_RESIDENT_COUNT - 1));
 }
 
 s32 IkigaiCharacter_GetSetConversedFlag(u32 character, bool32 setFlag)
@@ -208,7 +208,7 @@ s32 IkigaiCharacter_GetSetConversedFlag(u32 character, bool32 setFlag)
     u32 index, bit, mask;
     s32 retVal = 0;
 
-    if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)
+    if (character == CHARACTER_DEFAULT || character >= CHARACTER_RESIDENT_COUNT)
         return retVal;
 
     index = character / 8;
@@ -290,7 +290,7 @@ void IkigaiCharacter_ClearRomanticFlag_Hostile(u32 character)
         return;
 
     FlagClear(gIkigaiCharactersInfo[character].flagRomantic);
-    if (character > CHARACTER_DEFAULT && character < MAIN_CHARACTER_COUNT)
+    if (character > CHARACTER_DEFAULT && character < CHARACTER_RESIDENT_COUNT)
         gSaveBlock3Ptr->characters.opinionKindness[character] = - OPINION_NEUTRAL_BUFFER;
 }
 
@@ -449,7 +449,7 @@ void IkigaiCharacter_OpinionDecay(u32 character)
     s32 opinionKindness = gSaveBlock3Ptr->characters.opinionKindness[character];
     s32 opinionStrength = gSaveBlock3Ptr->characters.opinionStrength[character];
 
-    if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)
+    if (character == CHARACTER_DEFAULT || character >= CHARACTER_RESIDENT_COUNT)
         return;
     
     if (IkigaiCharacter_ReturnOpinionDecay(character))
@@ -473,7 +473,7 @@ void IkigaiCharacter_AllOpinionDecay_NonConverse(void)
 {
     u32 character;
 
-    for (character = CHARACTER_DEFAULT + 1; character < MAIN_CHARACTER_COUNT; character++)
+    for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_RESIDENT_COUNT; character++)
     {
         if (!IkigaiCharacter_GetSetConversedFlag(character, FALSE))
             IkigaiCharacter_OpinionDecay(character);
@@ -484,7 +484,7 @@ void IkigaiCharacter_HandleDialogue_Attitudes(void)
 {
     u32 character = ReturnIkigaiCharacter_SelectedObject();
 
-    if (character == CHARACTER_DEFAULT || character >= MAIN_CHARACTER_COUNT)
+    if (character == CHARACTER_DEFAULT || character >= CHARACTER_RESIDENT_COUNT)
         return;
 
     if (gSpecialVar_Result == MULTI_B_PRESSED && !IkigaiCharacter_GetSetConversedFlag(character, FALSE))
@@ -529,7 +529,7 @@ void DEBUG_IkigaiCharacter_CharacterOpinions(void)
     s32 opinionStrength = IkigaiCharacter_GetStrength(character);
     u8 string[3];
 
-    if (character > MAIN_CHARACTER_COUNT)
+    if (character > CHARACTER_RESIDENT_COUNT)
     {
         s8 addedKindess, addedStrength;
 
@@ -568,7 +568,7 @@ void DEBUG_IkigaiCharacter_CharacterOpinions(void)
     ConvertIntToDecimalStringN(string, IkigaiCharacter_GetOpinionBonus(character, OPINION_TYPE_STRENGTH), STR_CONV_MODE_LEFT_ALIGN, 3);
     StringAppend(gStringVar2, string);
     StringAppend(gStringVar2, COMPOUND_STRING("."));
-    if (character > MAIN_CHARACTER_COUNT)
+    if (character > CHARACTER_RESIDENT_COUNT)
     {
         StringAppend(gStringVar2, COMPOUND_STRING("\pI am a special character, I get my\nopinion from the PokéSphere."));
     }
@@ -700,7 +700,7 @@ s32 IkigaiCharacterOpinionBonus_Relationship(u32 character, bool32 opinionType)
         relationshipCharacter = gIkigaiCharactersInfo[character].relationships[i].characterId;
         relationshipAffinity = gIkigaiCharactersInfo[character].relationships[i].affinity;
 
-        if (relationshipCharacter == CHARACTER_DEFAULT || relationshipCharacter >= MAIN_CHARACTER_COUNT)
+        if (relationshipCharacter == CHARACTER_DEFAULT || relationshipCharacter >= CHARACTER_RESIDENT_COUNT)
         {}
 
         else if (opinionType == OPINION_TYPE_KINDNESS &&

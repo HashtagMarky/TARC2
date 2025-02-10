@@ -650,7 +650,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
         {
             sPokeSphereState->characterId = sPokeSphereState->exploreCharacterStartId + sPokeSphereState->exploreCursorPosition;
             
-            if (sPokeSphereState->characterId >= MAIN_CHARACTER_COUNT)
+            if (sPokeSphereState->characterId >= CHARACTER_RESIDENT_COUNT)
             {
                 sPokeSphereState->characterId++;
             }
@@ -1044,7 +1044,7 @@ static void PokeSphere_CycleCharacters(bool32 increment)
             return;
         }
 
-        if (characterNext == MAIN_CHARACTER_COUNT)
+        if (characterNext == CHARACTER_RESIDENT_COUNT)
         {
             if (increment)
                 characterNext++;
@@ -1099,7 +1099,7 @@ static void PokeSphere_Explore_CreateObjectEvents(void)
     u8 x, y, character, characterStart = sPokeSphereState->exploreCharacterStartId; 
     for (u8 coord = 0; coord < EXPLORE_COORDS_COUNT; coord++)
     {
-        if (characterStart + coord == MAIN_CHARACTER_COUNT)
+        if (characterStart + coord == CHARACTER_RESIDENT_COUNT)
         {
             characterStart++;
         }
@@ -1188,7 +1188,7 @@ static void PokeSphere_PrintNames(void)
     if (sPokeSphereState->mode == MODE_EXPLORE)
     {
         u8 character = sPokeSphereState->exploreCharacterStartId + sPokeSphereState->exploreCursorPosition;
-        if (character >= MAIN_CHARACTER_COUNT)
+        if (character >= CHARACTER_RESIDENT_COUNT)
             character++;
 
         if (!IkigaiCharacter_GetMetFlag(character)
@@ -1395,10 +1395,10 @@ static void PokeSphere_PrintOpinion(void)
     s8 opinionKindness = IkigaiCharacter_GetKindness(character);
     s8 opinionStrength = IkigaiCharacter_GetStrength(character);
 
-    if (character > MAIN_CHARACTER_COUNT)
+    if (character > CHARACTER_RESIDENT_COUNT)
     {
-        opinionKindness = IkigaiCharacter_GetKindness_Special(character);
-        opinionStrength = IkigaiCharacter_GetStrength_Special(character);
+        opinionKindness = IkigaiCharacter_GetKindness_Wayfarer(character);
+        opinionStrength = IkigaiCharacter_GetStrength_Wayfarer(character);
     }
 
     FillWindowPixelBuffer(WIN_CHARACTER_PROFILE_OPINION, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));

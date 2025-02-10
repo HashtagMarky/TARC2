@@ -14,7 +14,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .overworldGraphicsId = NUM_OBJ_EVENT_GFX,
     },
 
-    [MAIN_CHARACTER_SAMUEL] =
+    [CHARACTER_RESIDENT_SAMUEL] =
     {
         .name = _("Samuel"),
         .partnerPokemon = SPECIES_INFERNAPE,
@@ -38,20 +38,20 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_LAUREN,
+                .characterId = CHARACTER_RESIDENT_LAUREN,
                 .title = COMPOUND_STRING("Spouse"),
                 .affinity = OPINION_EXTREMELY_POSITIVE,
             },
             
             {
-                .characterId = MAIN_CHARACTER_THOMAS,
+                .characterId = CHARACTER_RESIDENT_THOMAS,
                 .title = COMPOUND_STRING("Best-Friend"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
         },
     },
 
-    [MAIN_CHARACTER_LAUREN] =
+    [CHARACTER_RESIDENT_LAUREN] =
     {
         .name = _("Lauren"),
         .highlights = COMPOUND_STRING(
@@ -75,20 +75,20 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_SAMUEL,
+                .characterId = CHARACTER_RESIDENT_SAMUEL,
                 .title = COMPOUND_STRING("Spouse"),
                 .affinity = OPINION_EXTREMELY_POSITIVE,
             },
             
             {
-                .characterId = MAIN_CHARACTER_KATIE,
+                .characterId = CHARACTER_RESIDENT_KATIE,
                 .title = COMPOUND_STRING("Best-Friend"),
                 .affinity = OPINION_EXTREMELY_POSITIVE,
             },
         },
     },
 
-    [MAIN_CHARACTER_THOMAS] =
+    [CHARACTER_RESIDENT_THOMAS] =
     {
         .name = _("Thomas"),
         .highlights = COMPOUND_STRING(
@@ -112,20 +112,20 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_HANNAH,
+                .characterId = CHARACTER_RESIDENT_HANNAH,
                 .title = COMPOUND_STRING("Spouse"),
                 .affinity = OPINION_EXTREMELY_POSITIVE,
             },
             
             {
-                .characterId = MAIN_CHARACTER_SAMUEL,
+                .characterId = CHARACTER_RESIDENT_SAMUEL,
                 .title = COMPOUND_STRING("Best-Friend"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
         },
     },
 
-    [MAIN_CHARACTER_HANNAH] =
+    [CHARACTER_RESIDENT_HANNAH] =
     {
         .name = _("Hannah"),
         .highlights = COMPOUND_STRING(
@@ -149,26 +149,26 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_THOMAS,
+                .characterId = CHARACTER_RESIDENT_THOMAS,
                 .title = COMPOUND_STRING("Spouse"),
                 .affinity = OPINION_EXTREMELY_POSITIVE,
             },
 
             {
-                .characterId = MAIN_CHARACTER_GEORGIA,
+                .characterId = CHARACTER_RESIDENT_GEORGIA,
                 .title = COMPOUND_STRING("Cousin"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
 
             {
-                .characterId = MAIN_CHARACTER_CAPTAIN,
+                .characterId = CHARACTER_RESIDENT_CAPTAIN,
                 .title = COMPOUND_STRING("Grandfather"),
                 .affinity = OPINION_POSITIVE,
             },
         },
     },
 
-    [MAIN_CHARACTER_KATIE] =
+    [CHARACTER_RESIDENT_KATIE] =
     {
         .name = _("Katie"),
         .highlights = COMPOUND_STRING(
@@ -192,20 +192,20 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_LOUIS,
+                .characterId = CHARACTER_RESIDENT_LOUIS,
                 .title = COMPOUND_STRING("Spouse"),
                 .affinity = OPINION_EXTREMELY_POSITIVE,
             },
             
             {
-                .characterId = MAIN_CHARACTER_LAUREN,
+                .characterId = CHARACTER_RESIDENT_LAUREN,
                 .title = COMPOUND_STRING("Best-Friend"),
                 .affinity = OPINION_EXTREMELY_POSITIVE,
             },
         },
     },
 
-    [MAIN_CHARACTER_LOUIS] =
+    [CHARACTER_RESIDENT_LOUIS] =
     {
         .name = _("Louis"),
         .highlights = COMPOUND_STRING(
@@ -229,14 +229,14 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_KATIE,
+                .characterId = CHARACTER_RESIDENT_KATIE,
                 .title = COMPOUND_STRING("Spouse"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
         },
     },
 
-    [MAIN_CHARACTER_GEORGIA] =
+    [CHARACTER_RESIDENT_GEORGIA] =
     {
         .name = _("Georgia"),
         .highlights = COMPOUND_STRING(
@@ -260,20 +260,20 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_HANNAH,
+                .characterId = CHARACTER_RESIDENT_HANNAH,
                 .title = COMPOUND_STRING("Cousin"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
 
             {
-                .characterId = MAIN_CHARACTER_CAPTAIN,
+                .characterId = CHARACTER_RESIDENT_CAPTAIN,
                 .title = COMPOUND_STRING("Grandfather"),
                 .affinity = OPINION_POSITIVE,
             },
         },
     },
 
-    [MAIN_CHARACTER_CAPTAIN] =
+    [CHARACTER_RESIDENT_CAPTAIN] =
     {
         .name = _("Skip"),
         .highlights = COMPOUND_STRING(
@@ -297,20 +297,20 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_HANNAH,
+                .characterId = CHARACTER_RESIDENT_HANNAH,
                 .title = COMPOUND_STRING("Granddaughter"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
 
             {
-                .characterId = MAIN_CHARACTER_GEORGIA,
+                .characterId = CHARACTER_RESIDENT_GEORGIA,
                 .title = COMPOUND_STRING("Granddaughter"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
         }
     },
 
-    [MAIN_CHARACTER_DIEGO] =
+    [CHARACTER_RESIDENT_DIEGO] =
     {
         .name = _("Diego"),
         .highlights = COMPOUND_STRING(
@@ -333,7 +333,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .opinionDecayChance = 5,
     },
 
-    [SPECIAL_CHARACTER_ASH] =
+    [CHARACTER_WAYFARER_ASH] =
     {
         .name = _("Ash"),
         .highlights = COMPOUND_STRING(
@@ -355,7 +355,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .flagMet = FLAG_TEMP_1,
     },
 
-    [SPECIAL_CHARACTER_STEVEN] =
+    [CHARACTER_WAYFARER_STEVEN] =
     {
         .name = _("Steven"),
         .highlights = COMPOUND_STRING(
@@ -377,14 +377,14 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_LAUREN,
+                .characterId = CHARACTER_RESIDENT_LAUREN,
                 .title = COMPOUND_STRING("Colleague"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
         },
     },
 
-    [SPECIAL_CHARACTER_CYNTHIA] =
+    [CHARACTER_WAYFARER_CYNTHIA] =
     {
         .name = _("Cynthia"),
         .highlights = COMPOUND_STRING(
@@ -406,14 +406,14 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_SAMUEL,
+                .characterId = CHARACTER_RESIDENT_SAMUEL,
                 .title = COMPOUND_STRING("Colleague"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
         },
     },
 
-    [SPECIAL_CHARACTER_N] =
+    [CHARACTER_WAYFARER_N] =
     {
         .name = _("N"),
         .highlights = COMPOUND_STRING(
