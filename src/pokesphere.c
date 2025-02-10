@@ -960,6 +960,7 @@ static void PokeSphere_DestroyExplorePage(void)
 {
     PokeSphere_Explore_DestroyObjectEvents();
     PokeSphere_Explore_DestroyCursor();
+    FreeAllSpritePalettes();
 }
 
 static void PokeSphere_CreateProfilePostPage(void)
@@ -984,6 +985,7 @@ static void PokeSphere_DestroyProfilePostPage(void)
     FillWindowPixelBuffer(WIN_CHARACTER_PROFILE_OPINION, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     CopyWindowToVram(WIN_CHARACTER_RELATIONSHIPS_POSTS, COPYWIN_FULL);
     CopyWindowToVram(WIN_CHARACTER_PROFILE_OPINION, COPYWIN_FULL);
+    FreeAllSpritePalettes();
 }
 
 static void PokeSphere_PrintUIControls(void)
@@ -1070,6 +1072,7 @@ static void PokeSphere_ReloadProfile(void)
     DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, MUGSHOT_2);
     DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterTypeHeartSpriteId]);
     DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterAttitudeSpriteId]);
+    FreeAllSpritePalettes();
     PokeSphere_DrawCharacterMugshot();
     PokeSphere_DrawPartnerMugshot();
     PokeSphere_DrawCharacterAttitude();
@@ -1139,11 +1142,9 @@ static void PokeSphere_Explore_DestroyObjectEvents(void)
 {
     for (u8 coord = 0; coord < EXPLORE_COORDS_COUNT; coord++)
     {
-        if (&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]] == &gSprites[sPokeSphereState->exploreCursorSpriteId])
-            break;
-        
         DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]]);
     }
+    FreeAllSpritePalettes();
 }
 
 static void PokeSphere_Explore_CreateCursor(void)
