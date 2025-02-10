@@ -658,3 +658,6 @@ const u16 gObjectEventPalette_Louis[] = INCBIN_U16("graphics/object_events/pics/
 
 const u32 gObjectEventPic_Georgia[] = INCBIN_U32("graphics/object_events/pics/people/georgia.4bpp");
 const u16 gObjectEventPalette_Georgia[] = INCBIN_U16("graphics/object_events/pics/people/georgia.gbapal");
+
+const u32 gObjectEventPic_Diego[] = INCBIN_U32("graphics/object_events/pics/people/diego.4bpp");
+const u16 gObjectEventPalette_Diego[] = INCBIN_U16("graphics/object_events/pics/people/diego.gbapal");
