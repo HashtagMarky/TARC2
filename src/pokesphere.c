@@ -1206,6 +1206,8 @@ static void PokeSphere_PrintNames(void)
             name = gIkigaiCharactersInfo[CHARACTER_DEFAULT].name;
         else if (character != CHARACTER_PLAYER)
             name = gIkigaiCharactersInfo[character].name;
+        else if (character == CHARACTER_PLAYER)
+            name = gSaveBlock2Ptr->playerName;
         
         y = 4;
         textColour = FONT_GRAY;
