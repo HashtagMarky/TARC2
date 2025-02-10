@@ -1093,7 +1093,6 @@ static void PokeSphere_ReloadText(void)
     }
 }
 
-#define PAL_LAST 15
 static void PokeSphere_Explore_CreateObjectEvents(void)
 {
     u16 objEvent;
@@ -1117,7 +1116,16 @@ static void PokeSphere_Explore_CreateObjectEvents(void)
         if (IkigaiCharacter_GetMetFlag(character))
             StartSpriteAnim(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]], ANIM_STD_GO_SOUTH);
         else
-            gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]].oam.paletteNum = PAL_LAST;
+            LoadPalette(
+                (u16 [PLTT_SIZE_4BPP]) { // Black Palette to show 'locked' state.
+                    RGB(0, 0, 0), RGB(0, 0, 0), RGB(0, 0, 0), RGB(0, 0, 0),
+                    RGB(0, 0, 0), RGB(0, 0, 0), RGB(0, 0, 0), RGB(0, 0, 0),
+                    RGB(0, 0, 0), RGB(0, 0, 0), RGB(0, 0, 0), RGB(0, 0, 0),
+                    RGB(0, 0, 0), RGB(0, 0, 0), RGB(0, 0, 0), RGB(0, 0, 0),
+                },
+                OBJ_PLTT_ID(IndexOfSpritePaletteTag(gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]].template->paletteTag)),
+                PLTT_SIZE_4BPP
+            );
     }
 }
 
