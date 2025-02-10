@@ -84,7 +84,10 @@ struct IkigaiCharacterInfo
 
 struct DialogueOptions
 {
-    const u8 *name;
+    const u8 *nameTitle;
+    const u8 *nameLower;
+    const u8 *nameTitleColour;
+    const u8 *nameLowerColour;
     s8 kindnessEffect;
     s8 strengthEffect;
     const u32 *iconImage;

@@ -31,6 +31,8 @@
 #include "international_string_util.h"
 #include "random.h"
 
+#include "bw_summary_screen.h"
+#include "event_data.h"
 #include "event_object_movement.h"
 #include "field_mugshot.h"
 #include "ikigai_characters.h"
@@ -77,7 +79,7 @@ struct PokeSphereState
     u8 exploreCharacterStartId;
     u8 characterId;
     u8 characterMugshotSpriteId;
-    u8 characterHeartSpriteId;
+    u8 characterTypeHeartSpriteId;
     u8 characterAttitudeSpriteId;
     u8 partnerMugshotSpriteId;
 };
@@ -436,6 +438,7 @@ static const struct SpriteTemplate sSpriteTemplate_PokeSphereAttitudeIcon =
 
 #define CHARACTER_MUGSHOT_X     57
 #define CHARACTER_MUGSHOT_Y     59
+#define CHARACTER_TYPE_X        75
 #define CHARACTER_HEART_X       84
 #define CHARACTER_ATTITUDE_X    28
 #define CHARACTER_ICON_Y        26
@@ -492,7 +495,7 @@ static void PokeSphere_Explore_CreateCursor(void);
 static void PokeSphere_Explore_DestroyCursor(void);
 static void PokeSphere_DrawCharacterMugshot(void);
 static void PokeSphere_DrawCharacterAttitude(void);
-static void PokeSphere_DrawCharacterHeart(void);
+static void PokeSphere_DrawCharacterTypeHeart(void);
 static void PokeSphere_DrawPartnerMugshot(void);
 static void PokeSphere_PrintUIControls(void);
 static void PokeSphere_ReloadText(void);
@@ -601,7 +604,7 @@ static void PokeSphere_SetupCB(void)
         gMain.state++;
         break;
     case 5:
-        sPokeSphereState->exploreCharacterStartId = CHARACTER_FIRST;
+        sPokeSphereState->exploreCharacterStartId = CHARACTER_PLAYER;
         sPokeSphereState->exploreCursorPosition = EXPLORE_COORDS_X1_Y1;
         PokeSphere_CreateExplorePage();
         CreateTask(Task_PokeSphereWaitFadeIn, 0);
@@ -683,7 +686,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
                 sPokeSphereState->exploreCursorPosition -= EXPLORE_COORDS_PER_ROW;
                 PlaySE(SE_BALL_TRAY_BALL);
             }
-            else if (sPokeSphereState->exploreCharacterStartId == CHARACTER_FIRST)
+            else if (sPokeSphereState->exploreCharacterStartId == CHARACTER_PLAYER)
             {
                 PlaySE(SE_BALL);
             } 
@@ -964,7 +967,7 @@ static void PokeSphere_CreateProfilePostPage(void)
     PokeSphere_DrawCharacterMugshot();
     PokeSphere_DrawPartnerMugshot();
     PokeSphere_DrawCharacterAttitude();
-    PokeSphere_DrawCharacterHeart();
+    PokeSphere_DrawCharacterTypeHeart();
     PokeSphere_PrintUIControls();
     PokeSphere_PrintNames();
     PokeSphere_PrintRelationships();
@@ -975,7 +978,7 @@ static void PokeSphere_DestroyProfilePostPage(void)
 {
     DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, MUGSHOT_1);
     DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, MUGSHOT_2);
-    DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterHeartSpriteId]);
+    DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterTypeHeartSpriteId]);
     DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterAttitudeSpriteId]);
     FillWindowPixelBuffer(WIN_CHARACTER_RELATIONSHIPS_POSTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     FillWindowPixelBuffer(WIN_CHARACTER_PROFILE_OPINION, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
@@ -1023,8 +1026,8 @@ static void PokeSphere_PrintUIControls(void)
 
 static void PokeSphere_CycleCharacters(bool32 increment)
 {
-    u8 initialCharacter = sPokeSphereState->characterId;
-    u8 characterNext = initialCharacter;
+    u32 initialCharacter = sPokeSphereState->characterId;
+    s32 characterNext = initialCharacter;
 
     while (TRUE)
     {
@@ -1034,8 +1037,8 @@ static void PokeSphere_CycleCharacters(bool32 increment)
             characterNext--;
 
         if (characterNext > CHARACTER_LAST)
-            characterNext = CHARACTER_FIRST;
-        else if (characterNext < CHARACTER_FIRST)
+            characterNext = CHARACTER_PLAYER;
+        else if (characterNext < CHARACTER_PLAYER)
             characterNext = CHARACTER_LAST;
 
         if (characterNext == initialCharacter)
@@ -1065,12 +1068,12 @@ static void PokeSphere_ReloadProfile(void)
     PokeSphere_PrintNames();
     DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, MUGSHOT_1);
     DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, MUGSHOT_2);
-    DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterHeartSpriteId]);
+    DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterTypeHeartSpriteId]);
     DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterAttitudeSpriteId]);
     PokeSphere_DrawCharacterMugshot();
     PokeSphere_DrawPartnerMugshot();
     PokeSphere_DrawCharacterAttitude();
-    PokeSphere_DrawCharacterHeart();
+    PokeSphere_DrawCharacterTypeHeart();
 }
 
 static void PokeSphere_ReloadText(void)
@@ -1110,7 +1113,10 @@ static void PokeSphere_Explore_CreateObjectEvents(void)
         character = characterStart + coord;
         x = sExplorePageSpriteCords[coord].x;
         y = sExplorePageSpriteCords[coord].y;
-        objEvent = gIkigaiCharactersInfo[character].overworldGraphicsId;
+        if (character == CHARACTER_PLAYER)
+            objEvent = gSaveBlock2Ptr->playerGender ? OBJ_EVENT_GFX_ANKA_NORMAL : OBJ_EVENT_GFX_KOLE_NORMAL;
+        else
+            objEvent = gIkigaiCharactersInfo[character].overworldGraphicsId;
         sPokeSphereState->exploreOverworldSpriteId[coord] = CreateObjectGraphicsSprite(objEvent, SpriteCallbackDummy, x, y, 102);
 
         if (IkigaiCharacter_GetMetFlag(character))
@@ -1163,6 +1169,9 @@ static void PokeSphere_PrintNames(void)
     u32 character = sPokeSphereState->characterId;
     u32 textColour = FONT_GRAY;
     const u8 *name = gIkigaiCharactersInfo[character].name;
+    
+    if (character == CHARACTER_PLAYER)
+        name = gSaveBlock2Ptr->playerName;
 
     switch (gIkigaiCharactersInfo[character].personality)
     {
@@ -1194,7 +1203,7 @@ static void PokeSphere_PrintNames(void)
         if (!IkigaiCharacter_GetMetFlag(character)
             || character >= CHARACTER_COUNT_TOTAL)
             name = gIkigaiCharactersInfo[CHARACTER_DEFAULT].name;
-        else
+        else if (character != CHARACTER_PLAYER)
             name = gIkigaiCharactersInfo[character].name;
         
         y = 4;
@@ -1210,7 +1219,7 @@ static void PokeSphere_PrintNames(void)
         name
     );
 
-    if (sPokeSphereState->mode != MODE_EXPLORE)
+    if (sPokeSphereState->mode != MODE_EXPLORE && character != CHARACTER_PLAYER)
     {
         x = GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
             gSpeciesInfo[gIkigaiCharactersInfo[character].partnerPokemon].speciesName,
@@ -1221,6 +1230,18 @@ static void PokeSphere_PrintNames(void)
             gSpeciesInfo[gIkigaiCharactersInfo[character].partnerPokemon].speciesName
         );
     }
+    else if (sPokeSphereState->mode != MODE_EXPLORE && character == CHARACTER_PLAYER)
+    {
+        x = GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
+            gSpeciesInfo[VarGet(VAR_STARTER_MON)].speciesName,
+            48
+        );
+        AddTextPrinterParameterized4(WIN_CHARACTER_NAME, FONT_SMALL_NARROWER, x, 9, 0, 0,
+            sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
+            gSpeciesInfo[VarGet(VAR_STARTER_MON)].speciesName
+        );
+    }
+    
 
     CopyWindowToVram(WIN_CHARACTER_NAME, COPYWIN_GFX);
 }
@@ -1414,38 +1435,115 @@ static void PokeSphere_PrintOpinion(void)
         string
     );
 
-    StringCopy(string, COMPOUND_STRING("Here's what I think about "));
-    if (IkigaiCharacter_NicknameInsteadOfName(character))
+    if (character != CHARACTER_PLAYER)
     {
-        StringAppend(string, gSaveBlock3Ptr->characters.playerNickname);
+        StringCopy(string, COMPOUND_STRING("Here's what I think about "));
+
+        if (IkigaiCharacter_NicknameInsteadOfName(character))
+        {
+            StringAppend(string, gSaveBlock3Ptr->characters.playerNickname);
+        }
+        else
+        {
+            StringAppend(string, gSaveBlock2Ptr->playerName);
+        }
+
+        StringAppend(string, COMPOUND_STRING(
+            ".\nI rate their kindness "
+        ));
+
+        if (opinionKindness < 0)
+        {
+            opinionKindness *= -1;
+            StringAppend(string, COMPOUND_STRING("-"));
+        }
+
+        if (opinionKindness != 0)
+        {
+            ConvertIntToDecimalStringN(opinion, opinionKindness, STR_CONV_MODE_LEFT_ALIGN, 3);
+            StringAppend(string, opinion);
+        }
+        else
+        {
+            StringAppend(string, gDialogueAttitudes[ATTITUDE_NEUTRAL].nameLower);
+        }
+
+        StringAppend(string, COMPOUND_STRING(
+            ".\nI rate their strength "
+        ));
+
+        if (opinionStrength < 0)
+        {
+            opinionStrength *= -1;
+            StringAppend(gStringVar1, COMPOUND_STRING("-"));
+        }
+
+        if (opinionStrength != 0)
+        {
+            ConvertIntToDecimalStringN(opinion, opinionStrength, STR_CONV_MODE_LEFT_ALIGN, 3);
+            StringAppend(string, opinion);
+        }
+        else
+        {
+            StringAppend(string, gDialogueAttitudes[ATTITUDE_NEUTRAL].nameLower);
+        }
+
+        StringAppend(string, COMPOUND_STRING(
+            "."
+        ));
     }
     else
     {
-        StringAppend(string, gSaveBlock2Ptr->playerName);
+        opinionKindness = IkigaiCharacter_GetAverageKindness();
+        opinionStrength = IkigaiCharacter_GetAverageStrength();
+
+        StringCopy(string, COMPOUND_STRING("I think that I am "));
+        StringAppend(string, gDialogueAttitudes[IkigaiCharacter_GetPlayerAttitude()].nameLowerColour);
+
+        StringAppend(string, COMPOUND_STRING(
+            ".\nPeople rate my kindness "
+        ));
+
+        if (opinionKindness < 0)
+        {
+            opinionKindness *= -1;
+            StringAppend(string, COMPOUND_STRING("-"));
+        }
+
+        if (opinionKindness != 0)
+        {
+            ConvertIntToDecimalStringN(opinion, opinionKindness, STR_CONV_MODE_LEFT_ALIGN, 3);
+            StringAppend(string, opinion);
+        }
+        else
+        {
+            StringAppend(string, gDialogueAttitudes[ATTITUDE_NEUTRAL].nameLower);
+        }
+
+        StringAppend(string, COMPOUND_STRING(
+            ".\nPeople rate my strength "
+        ));
+
+        if (opinionStrength < 0)
+        {
+            opinionStrength *= -1;
+            StringAppend(gStringVar1, COMPOUND_STRING("-"));
+        }
+
+        if (opinionStrength != 0)
+        {
+            ConvertIntToDecimalStringN(opinion, opinionStrength, STR_CONV_MODE_LEFT_ALIGN, 3);
+            StringAppend(string, opinion);
+        }
+        else
+        {
+            StringAppend(string, gDialogueAttitudes[ATTITUDE_NEUTRAL].nameLower);
+        }
+        
+        StringAppend(string, COMPOUND_STRING(
+            "."
+        ));
     }
-    StringAppend(string, COMPOUND_STRING(
-        ".\nI rate their kindness "
-    ));
-    if (opinionKindness < 0)
-    {
-        opinionKindness *= -1;
-        StringAppend(string, COMPOUND_STRING("-"));
-    }
-    ConvertIntToDecimalStringN(opinion, opinionKindness, STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringAppend(string, opinion);
-    StringAppend(string, COMPOUND_STRING(
-        ".\nI rate their strength "
-    ));
-    if (opinionStrength < 0)
-    {
-        opinionStrength *= -1;
-        StringAppend(gStringVar1, COMPOUND_STRING("-"));
-    }
-    ConvertIntToDecimalStringN(opinion, opinionStrength, STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringAppend(string, opinion);
-    StringAppend(string, COMPOUND_STRING(
-        "."
-    ));
 
     AddTextPrinterParameterized4(WIN_CHARACTER_PROFILE_OPINION, FONT_SMALL_NARROWER, 5, 13, 0, 1,
         sPokeSphereWindowFontColors[FONT_GRAY], TEXT_SKIP_DRAW,
@@ -1460,6 +1558,9 @@ static void PokeSphere_DrawCharacterMugshot(void)
     u32 character = sPokeSphereState->characterId;
     u32 mugshotId = gIkigaiCharactersInfo[character].mugshotId;
     u32 mugshotEmotion = gIkigaiCharactersInfo[character].defaultEmotion;
+
+    if (character == CHARACTER_PLAYER)
+        mugshotId = gSaveBlock2Ptr->playerGender ? MUGSHOT_ANKA : MUGSHOT_KOLE;
     
     FillWindowPixelBuffer(WIN_CHARACTER_MUGSHOT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
@@ -1474,8 +1575,10 @@ static void PokeSphere_DrawCharacterMugshot(void)
 static void PokeSphere_DrawCharacterAttitude(void)
 {
     u32 character = sPokeSphereState->characterId;
+    u32 attitude = character ? IkigaiCharacter_GetPlayerAttitude_Character(character)
+                             : IkigaiCharacter_GetPlayerAttitude();
 
-    switch (IkigaiCharacter_GetPlayerAttitude_Character(character))
+    switch (attitude)
     {
     case ATTITUDE_INSPIRED:
         LoadCompressedSpriteSheet(&sSpriteSheet_PokeSphereInspiredIcon);
@@ -1498,7 +1601,7 @@ static void PokeSphere_DrawCharacterAttitude(void)
         break;
     }
 
-    if (IkigaiCharacter_GetPlayerAttitude_Character(character))
+    if (attitude)
     {
         sPokeSphereState->characterAttitudeSpriteId = CreateSprite(&sSpriteTemplate_PokeSphereAttitudeIcon,
             CHARACTER_ATTITUDE_X,
@@ -1509,15 +1612,24 @@ static void PokeSphere_DrawCharacterAttitude(void)
     }
 }
 
-static void PokeSphere_DrawCharacterHeart(void)
+static void PokeSphere_DrawCharacterTypeHeart(void)
 {
     u32 character = sPokeSphereState->characterId;
 
-    if (IkigaiCharacter_GetRomanticFlag(character))
+    if (character == CHARACTER_PLAYER)
+    {
+        sPokeSphereState->characterTypeHeartSpriteId = CreateBWSummaryScreenMoveTypeIcon(
+            CHARACTER_TYPE_X,
+            CHARACTER_ICON_Y,
+            0, 13
+        );
+        StartSpriteAnim(&gSprites[sPokeSphereState->characterTypeHeartSpriteId], gSaveBlock2Ptr->ikigaiGymType);
+    }
+    else if (character != CHARACTER_PLAYER && IkigaiCharacter_GetRomanticFlag(character))
     {
         LoadCompressedSpriteSheet(&sSpriteSheet_PokeSphereHeartIcon);
         LoadSpritePalette(&sSpritePal_PokeSphereHeartIcon);
-        sPokeSphereState->characterHeartSpriteId = CreateSprite(&sSpriteTemplate_PokeSphereHeartIcon,
+        sPokeSphereState->characterTypeHeartSpriteId = CreateSprite(&sSpriteTemplate_PokeSphereHeartIcon,
             CHARACTER_HEART_X,
             CHARACTER_ICON_Y,
             0
@@ -1530,6 +1642,9 @@ static void PokeSphere_DrawPartnerMugshot(void)
     u32 character = sPokeSphereState->characterId;
     u32 speciesId = gIkigaiCharactersInfo[character].partnerPokemon;
     u32 mugshotEmotion = gIkigaiCharactersInfo[character].defaultEmotion;
+
+    if (character == CHARACTER_PLAYER)
+        speciesId = VarGet(VAR_STARTER_MON);
     
     sPokeSphereState->partnerMugshotSpriteId = CreateFieldMugshotSprite(speciesId, mugshotEmotion, TRUE, MUGSHOT_2);
     gSprites[sPokeSphereState->partnerMugshotSpriteId].oam.priority = 0;

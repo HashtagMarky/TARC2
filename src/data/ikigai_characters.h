@@ -12,6 +12,12 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .name = _("??????"),
 
         .overworldGraphicsId = NUM_OBJ_EVENT_GFX,
+
+        .highlights = COMPOUND_STRING(
+            "The new Gym Leader of Vyraton\n"
+            "and a true spark in the community,\n"
+            "igniting passion and growth."
+        ),
     },
 
     [CHARACTER_RESIDENT_SAMUEL] =
@@ -486,43 +492,43 @@ const struct DialogueOptions gDialogueOptions[DIALOGUE_OPTION_COUNT] =
 {
     [DIALOGUE_OPTION_TALK] =
     {
-        .name = COMPOUND_STRING("Talk"),
+        .nameTitle = COMPOUND_STRING("Talk"),
         .iconImage = sCharacteristicDialogueIcon_Talk,
         .iconPal = sCharacteristicDialoguePal_Talk
     },
     [DIALOGUE_OPTION_OPINION] =
     {
-        .name = COMPOUND_STRING("Opinion"),
+        .nameTitle = COMPOUND_STRING("Opinion"),
         .iconImage = sCharacteristicDialogueIcon_Opinion,
         .iconPal = sCharacteristicDialoguePal_Opinion
     },
     [DIALOGUE_OPTION_ROMANCE] =
     {
-        .name = COMPOUND_STRING("Romance"),
+        .nameTitle = COMPOUND_STRING("Romance"),
         .iconImage = sCharacteristicDialogueIcon_Romance,
         .iconPal = sCharacteristicDialoguePal_Romance
     },
     [DIALOGUE_OPTION_QUESTS] =
     {
-        .name = COMPOUND_STRING("Quests"),
+        .nameTitle = COMPOUND_STRING("Quests"),
         .iconImage = sCharacteristicDialogueIcon_Quest,
         .iconPal = sCharacteristicDialoguePal_Quest
     },
     [DIALOGUE_OPTION_BATTLE] =
     {
-        .name = COMPOUND_STRING("Battle"),
+        .nameTitle = COMPOUND_STRING("Battle"),
         .iconImage = sCharacteristicDialogueIcon_Battle,
         .iconPal = sCharacteristicDialoguePal_Battle
     },
     [DIALOGUE_OPTION_GIFT] =
     {
-        .name = COMPOUND_STRING("Gift"),
+        .nameTitle = COMPOUND_STRING("Gift"),
         .iconImage = sCharacteristicDialogueIcon_Gift,
         .iconPal = sCharacteristicDialoguePal_Gift
     },
     [DIALOGUE_OPTION_GOODBYE] =
     {
-        .name = COMPOUND_STRING("Goodbye"),
+        .nameTitle = COMPOUND_STRING("Goodbye"),
         .iconImage = sCharacteristicDialogueIcon_Goodbye,
         .iconPal = sCharacteristicDialoguePal_Goodbye
     },
@@ -533,7 +539,10 @@ const struct DialogueOptions gDialogueAttitudes[ATTITUDE_COUNT] =
 {
     [ATTITUDE_NEUTRAL] =
     {
-        .name = COMPOUND_STRING("Neutral"),
+        .nameTitle = COMPOUND_STRING("Neutral"),
+        .nameLower = COMPOUND_STRING("neutral"),
+        .nameTitleColour = COMPOUND_STRING("{COLOR DARK_GRAY}Neutral{COLOR DARK_GRAY}"),
+        .nameLowerColour = COMPOUND_STRING("{COLOR DARK_GRAY}neutral{COLOR DARK_GRAY}"),
         .kindnessEffect = 0,
         .strengthEffect = 0,
         .iconImage = sCharacteristicDialogueIcon_Neutral,
@@ -541,7 +550,10 @@ const struct DialogueOptions gDialogueAttitudes[ATTITUDE_COUNT] =
     },
     [ATTITUDE_INSPIRED] =
     {
-        .name = COMPOUND_STRING("Inspired"),
+        .nameTitle = COMPOUND_STRING("Inspired"),
+        .nameLower = COMPOUND_STRING("inspired"),
+        .nameTitleColour = COMPOUND_STRING("{COLOR BLUE}Inspired{COLOR DARK_GRAY}"),
+        .nameLowerColour = COMPOUND_STRING("{COLOR BLUE}inspired{COLOR DARK_GRAY}"),
         .kindnessEffect = 1,
         .strengthEffect = 1,
         .iconImage = sCharacteristicDialogueIcon_Inspired,
@@ -549,7 +561,10 @@ const struct DialogueOptions gDialogueAttitudes[ATTITUDE_COUNT] =
     },
     [ATTITUDE_HUMBLE] =
     {
-        .name = COMPOUND_STRING("Humble"),
+        .nameTitle = COMPOUND_STRING("Humble"),
+        .nameLower = COMPOUND_STRING("humble"),
+        .nameTitleColour = COMPOUND_STRING("{COLOR GREEN}Humble{COLOR DARK_GRAY}"),
+        .nameLowerColour = COMPOUND_STRING("{COLOR GREEN}humble{COLOR DARK_GRAY}"),
         .kindnessEffect = 1,
         .strengthEffect = -1,
         .iconImage = sCharacteristicDialogueIcon_Humble,
@@ -557,7 +572,10 @@ const struct DialogueOptions gDialogueAttitudes[ATTITUDE_COUNT] =
     },
     [ATTITUDE_DOMINANT] =
     {
-        .name = COMPOUND_STRING("Dominant"),
+        .nameTitle = COMPOUND_STRING("Dominant"),
+        .nameLower = COMPOUND_STRING("dominant"),
+        .nameTitleColour = COMPOUND_STRING("{COLOR RED}Dominant{COLOR DARK_GRAY}"),
+        .nameLowerColour = COMPOUND_STRING("{COLOR RED}dominant{COLOR DARK_GRAY}"),
         .kindnessEffect = -1,
         .strengthEffect = 1,
         .iconImage = sCharacteristicDialogueIcon_Dominant,
@@ -565,7 +583,10 @@ const struct DialogueOptions gDialogueAttitudes[ATTITUDE_COUNT] =
     },
     [ATTITUDE_CYNICAL] =
     {
-        .name = COMPOUND_STRING("Cynical"),
+        .nameTitle = COMPOUND_STRING("Cynical"),
+        .nameLower = COMPOUND_STRING("cynical"),
+        .nameTitleColour = COMPOUND_STRING("{COLOR LIGHT_BLUE}Cynical{COLOR DARK_GRAY}"),
+        .nameLowerColour = COMPOUND_STRING("{COLOR LIGHT_BLUE}cynical{COLOR DARK_GRAY}"),
         .kindnessEffect = -1,
         .strengthEffect = -1,
         .iconImage = sCharacteristicDialogueIcon_Cynical,
