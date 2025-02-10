@@ -459,6 +459,7 @@
 #define OBJ_EVENT_PAL_TAG_STEVEN_GEN4             0x1179
 #define OBJ_EVENT_PAL_TAG_HANNAH                  0x117A
 #define OBJ_EVENT_PAL_TAG_KATIE                   0x117B
+#define OBJ_EVENT_PAL_TAG_LOUIS                   0x117C
 
 // Used as a placeholder follower graphic
 #define OBJ_EVENT_PAL_TAG_SUBSTITUTE              0x7611
