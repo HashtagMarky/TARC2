@@ -381,7 +381,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
                 .title = COMPOUND_STRING("Colleague"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
-        }
+        },
     },
 
     [SPECIAL_CHARACTER_CYNTHIA] =
@@ -410,7 +410,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
                 .title = COMPOUND_STRING("Colleague"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
-        }
+        },
     },
 
     [SPECIAL_CHARACTER_N] =
