@@ -958,6 +958,7 @@ static void PokeSphere_DestroyExplorePage(void)
     PokeSphere_Explore_DestroyObjectEvents();
     PokeSphere_Explore_DestroyCursor();
     FreeAllSpritePalettes();
+    AllocSpriteTiles(0);
 }
 
 static void PokeSphere_CreateProfilePostPage(void)
@@ -983,6 +984,7 @@ static void PokeSphere_DestroyProfilePostPage(void)
     CopyWindowToVram(WIN_CHARACTER_RELATIONSHIPS_POSTS, COPYWIN_FULL);
     CopyWindowToVram(WIN_CHARACTER_PROFILE_OPINION, COPYWIN_FULL);
     FreeAllSpritePalettes();
+    AllocSpriteTiles(0);
 }
 
 static void PokeSphere_PrintUIControls(void)
@@ -1073,6 +1075,7 @@ static void PokeSphere_ReloadProfile(void)
     DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterAttitudeSpriteId]);
     ResetOamRange(SPRITE_SLOT_FIRST_ICON, 128); // Hacky fix to prevent palette and tile issues in icons when switching profiles
     FreeAllSpritePalettes();
+    AllocSpriteTiles(0);
     PokeSphere_DrawCharacterMugshot();
     PokeSphere_DrawPartnerMugshot();
     PokeSphere_DrawCharacterAttitude();
@@ -1145,6 +1148,7 @@ static void PokeSphere_Explore_DestroyObjectEvents(void)
         DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]]);
     }
     FreeAllSpritePalettes();
+    AllocSpriteTiles(0);
 }
 
 static void PokeSphere_Explore_CreateCursor(void)
