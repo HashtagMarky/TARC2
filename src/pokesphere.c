@@ -67,6 +67,7 @@ struct SpriteCoordsStruct {
 #define EXPLORE_COORDS_Y2       125
 #define EXPLORE_CURSOR_X_OFFSET 4
 #define EXPLORE_CURSOR_Y_OFFSET 3
+#define SPRITE_SLOT_FIRST_ICON  2 // Used to reset oam of sprites after the the mugshots when switching profiles
 
 struct PokeSphereState
 {
@@ -788,15 +789,11 @@ static void Task_PokeSphereMainInput(u8 taskId)
         if (JOY_REPEAT(DPAD_LEFT))
         {
             PokeSphere_CycleCharacters(FALSE);
-            PokeSphere_ReloadProfile();
-            PokeSphere_ReloadText();
         }
 
         if (JOY_REPEAT(DPAD_RIGHT))
         {
             PokeSphere_CycleCharacters(TRUE);
-            PokeSphere_ReloadProfile();
-            PokeSphere_ReloadText();
         }
     }
 }
@@ -1063,6 +1060,8 @@ static void PokeSphere_CycleCharacters(bool32 increment)
 
     sPokeSphereState->characterId = characterNext;
     PlaySE(SE_BALL_TRAY_BALL);
+    PokeSphere_ReloadProfile();
+    PokeSphere_ReloadText();
 }
 
 static void PokeSphere_ReloadProfile(void)
@@ -1072,6 +1071,7 @@ static void PokeSphere_ReloadProfile(void)
     DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, MUGSHOT_2);
     DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterTypeHeartSpriteId]);
     DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterAttitudeSpriteId]);
+    ResetOamRange(SPRITE_SLOT_FIRST_ICON, 128); // Hacky fix to prevent palette and tile issues in icons when switching profiles
     FreeAllSpritePalettes();
     PokeSphere_DrawCharacterMugshot();
     PokeSphere_DrawPartnerMugshot();
