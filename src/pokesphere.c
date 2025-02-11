@@ -1199,7 +1199,9 @@ static void PokeSphere_PrintNames(void)
 
     FillWindowPixelBuffer(WIN_CHARACTER_NAME, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    if (sPokeSphereState->mode == MODE_EXPLORE)
+    if (sPokeSphereState->mode == MODE_EXPLORE
+        || (VarGet(VAR_STARTER_MON) == SPECIES_NONE
+        && character == CHARACTER_PLAYER))
     {
         u8 character = sPokeSphereState->exploreCharacterStartId + sPokeSphereState->exploreCursorPosition;
         if (character >= CHARACTER_RESIDENT_COUNT)
@@ -1226,7 +1228,13 @@ static void PokeSphere_PrintNames(void)
         name
     );
 
-    if (sPokeSphereState->mode != MODE_EXPLORE && character != CHARACTER_PLAYER)
+    if (VarGet(VAR_STARTER_MON) == SPECIES_NONE
+        && character == CHARACTER_PLAYER
+        && sPokeSphereState->mode != MODE_EXPLORE)
+    {
+        // Do not print unchosen partner name if on profile or post page.
+    }
+    else if (sPokeSphereState->mode != MODE_EXPLORE && character != CHARACTER_PLAYER)
     {
         x = GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
             gSpeciesInfo[gIkigaiCharactersInfo[character].partnerPokemon].speciesName,
@@ -1651,14 +1659,22 @@ static void PokeSphere_DrawPartnerMugshot(void)
     u32 character = sPokeSphereState->characterId;
     u32 speciesId = gIkigaiCharactersInfo[character].partnerPokemon;
     u32 mugshotEmotion = gIkigaiCharactersInfo[character].defaultEmotion;
+    bool32 typeMon = TRUE;
 
     if (character == CHARACTER_PLAYER)
     {
         speciesId = VarGet(VAR_STARTER_MON);
         mugshotEmotion = gSaveBlock2Ptr->playerEmote;
     }
+
+    if (VarGet(VAR_STARTER_MON) == SPECIES_NONE
+        && character == CHARACTER_PLAYER)
+    {
+        speciesId = MUGSHOT_BLANK;
+        typeMon = FALSE;
+    }
     
-    sPokeSphereState->partnerMugshotSpriteId = CreateFieldMugshotSprite(speciesId, mugshotEmotion, TRUE, MUGSHOT_2);
+    sPokeSphereState->partnerMugshotSpriteId = CreateFieldMugshotSprite(speciesId, mugshotEmotion, typeMon, MUGSHOT_2);
     gSprites[sPokeSphereState->partnerMugshotSpriteId].oam.priority = 0;
     gSprites[sPokeSphereState->partnerMugshotSpriteId].x = CHARACTER_PARTNER_X;
     gSprites[sPokeSphereState->partnerMugshotSpriteId].y = CHARACTER_PARTNER_Y;

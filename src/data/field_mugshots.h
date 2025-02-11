@@ -1,3 +1,7 @@
+// Blank Mugshots
+static const u32 sFieldMugshotGfx_Blank[] = INCBIN_U32("graphics/field_mugshots/blank.4bpp.lz");
+static const u16 sFieldMugshotPal_Blank[] = INCBIN_U16("graphics/field_mugshots/blank.gbapal");
+
 // Protagonist Mugshots
 static const u32 sFieldMugshotGfx_KoleNormal[] = INCBIN_U32("graphics/protagonist_sprites/kole_mugshots/normal.4bpp.lz");
 static const u32 sFieldMugshotGfx_AnkaNormal[] = INCBIN_U32("graphics/protagonist_sprites/anka_mugshots/normal.4bpp.lz");
@@ -5748,6 +5752,15 @@ static const u16 sFieldMugshotPal_VikavoltNormalShiny[] = INCBIN_U16("graphics/f
 
 const struct MugshotGfx gFieldMugshots[][EMOTE_COUNT] =
 {
+    [MUGSHOT_BLANK] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_Blank,
+            .pal = sFieldMugshotPal_Blank,
+        },
+    },
+
     [MUGSHOT_KOLE] =
     {
         [EMOTE_NORMAL] =

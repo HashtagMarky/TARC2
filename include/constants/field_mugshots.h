@@ -21,6 +21,7 @@
 
 // Mugshot IDs
 #define MUGSHOT_AUTO_GRAPHICS_ID            NUM_OBJ_EVENT_GFX
+#define MUGSHOT_BLANK                       NUM_OBJ_EVENT_GFX // May cause issues with script commands but should be fine
 #define MUGSHOT_KOLE                        OBJ_EVENT_GFX_KOLE_NORMAL
 #define MUGSHOT_ANKA                        OBJ_EVENT_GFX_ANKA_NORMAL
 #define MUGSHOT_SAMUEL                      OBJ_EVENT_GFX_SAMUEL
