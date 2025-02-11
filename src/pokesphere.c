@@ -1625,7 +1625,7 @@ static void PokeSphere_DrawCharacterTypeHeart(void)
     if (character == CHARACTER_PLAYER)
     {
         sPokeSphereState->characterTypeHeartSpriteId = CreateBattlenMoveTypeIcon(
-            CHARACTER_TYPE_X,
+            CHARACTER_TYPE_X + NUM_FRAMES_HIDE_TYPE_ICON,
             CHARACTER_ICON_Y + 3,
             0, gSaveBlock2Ptr->ikigaiGymType
         );
