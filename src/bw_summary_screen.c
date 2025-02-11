@@ -5370,9 +5370,9 @@ static const struct SpritePalette *ReturnMoveSelectorPalette(void)
 u8 CreateBWSummaryScreenMoveTypeIcon(u8 x, u8 y, u8 subpriority, u8 palId)
 {
 #if BW_SUMMARY_SCREEN == TRUE && BW_SUMMARY_BW_TYPE_ICONS == TRUE
-    LoadCompressedSpriteSheet(&sSpriteSheet_MoveTypes);
+    LoadCompressedSpriteSheet(&sSpriteSheet_TeraType);
     LoadCompressedPalette(sMoveTypes_Pal_BW, OBJ_PLTT_ID(palId), 3 * PLTT_SIZE_4BPP);
-    return CreateSprite(&sSpriteTemplate_MoveTypes, x, y, subpriority);
+    return CreateSprite(&sSpriteTemplate_TeraType, x, y, subpriority);
 #else
     LoadCompressedSpriteSheet(&gSpriteSheet_MoveTypes);
     LoadCompressedPalette(gMoveTypes_Pal, OBJ_PLTT_ID(palId), 3 * PLTT_SIZE_4BPP);

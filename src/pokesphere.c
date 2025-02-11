@@ -439,7 +439,7 @@ static const struct SpriteTemplate sSpriteTemplate_PokeSphereAttitudeIcon =
 
 #define CHARACTER_MUGSHOT_X     57
 #define CHARACTER_MUGSHOT_Y     59
-#define CHARACTER_TYPE_X        75
+#define CHARACTER_TYPE_X        83
 #define CHARACTER_HEART_X       84
 #define CHARACTER_ATTITUDE_X    28
 #define CHARACTER_ICON_Y        26
@@ -1626,7 +1626,7 @@ static void PokeSphere_DrawCharacterTypeHeart(void)
     {
         sPokeSphereState->characterTypeHeartSpriteId = CreateBWSummaryScreenMoveTypeIcon(
             CHARACTER_TYPE_X,
-            CHARACTER_ICON_Y,
+            CHARACTER_ICON_Y + 2,
             0, 13
         );
         StartSpriteAnim(&gSprites[sPokeSphereState->characterTypeHeartSpriteId], gSaveBlock2Ptr->ikigaiGymType);
