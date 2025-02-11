@@ -31,11 +31,11 @@
 #include "international_string_util.h"
 #include "random.h"
 
-#include "bw_summary_screen.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_mugshot.h"
 #include "ikigai_characters.h"
+#include "type_icons.h"
 
 #define CHARACTER_OFFSET        1
 
@@ -439,7 +439,7 @@ static const struct SpriteTemplate sSpriteTemplate_PokeSphereAttitudeIcon =
 
 #define CHARACTER_MUGSHOT_X     57
 #define CHARACTER_MUGSHOT_Y     59
-#define CHARACTER_TYPE_X        83
+#define CHARACTER_TYPE_X        90
 #define CHARACTER_HEART_X       84
 #define CHARACTER_ATTITUDE_X    28
 #define CHARACTER_ICON_Y        26
@@ -1624,12 +1624,11 @@ static void PokeSphere_DrawCharacterTypeHeart(void)
 
     if (character == CHARACTER_PLAYER)
     {
-        sPokeSphereState->characterTypeHeartSpriteId = CreateBWSummaryScreenMoveTypeIcon(
+        sPokeSphereState->characterTypeHeartSpriteId = CreateBattlenMoveTypeIcon(
             CHARACTER_TYPE_X,
-            CHARACTER_ICON_Y + 2,
-            0, 13
+            CHARACTER_ICON_Y + 3,
+            0, gSaveBlock2Ptr->ikigaiGymType
         );
-        StartSpriteAnim(&gSprites[sPokeSphereState->characterTypeHeartSpriteId], gSaveBlock2Ptr->ikigaiGymType);
     }
     else if (character != CHARACTER_PLAYER && IkigaiCharacter_GetRomanticFlag(character))
     {
