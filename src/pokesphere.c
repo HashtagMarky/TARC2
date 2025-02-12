@@ -1219,6 +1219,9 @@ static void PokeSphere_PrintNames(void)
         textColour = FONT_GRAY;
     }
 
+    if (character == CHARACTER_PLAYER && sPokeSphereState->mode != MODE_EXPLORE)
+        name = gSaveBlock2Ptr->playerName;
+
     x = GetStringCenterAlignXOffset(FONT_SMALL_NARROWER,
         name,
         48
