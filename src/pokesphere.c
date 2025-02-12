@@ -63,7 +63,7 @@ struct SpriteCoordsStruct {
 #define EXPLORE_COORDS_X2       92
 #define EXPLORE_COORDS_X3       148
 #define EXPLORE_COORDS_X4       204
-#define EXPLORE_COORDS_Y1       77
+#define EXPLORE_COORDS_Y1       85
 #define EXPLORE_COORDS_Y2       125
 #define EXPLORE_CURSOR_X_OFFSET 4
 #define EXPLORE_CURSOR_Y_OFFSET 3
@@ -212,8 +212,8 @@ static const struct WindowTemplate sPokeSphereWindowTemplates[] =
 static const u32 sPokeSphereTiles[] = INCBIN_U32("graphics/pokesphere/tiles.4bpp.lz");
 static const u16 sPokeSpherePalette[] = INCBIN_U16("graphics/pokesphere/tiles.gbapal");
 
-static const u32 sPokeSphereTilemapExplore[] = INCBIN_U32("graphics/pokesphere/tilemap_explore.bin.lz");
-static const u32 sPokeSphereTilemapProfile[] = INCBIN_U32("graphics/pokesphere/tilemap_profile.bin.lz");
+static const u32 sPokeSphereTilemapExplore[] = INCBIN_U32("graphics/pokesphere/explore.bin.lz");
+static const u32 sPokeSphereTilemapProfile[] = INCBIN_U32("graphics/pokesphere/profile.bin.lz");
 
 static const u32 sPokeSphereExploreCursorGfx[] = INCBIN_U32("graphics/pokesphere/cursor.4bpp.lz");
 static const u16 sPokeSphereExploreCursorPal[] = INCBIN_U16("graphics/pokesphere/cursor.gbapal");
@@ -459,11 +459,11 @@ enum FontColor
 static const u8 sPokeSphereWindowFontColors[][3] =
 {
     [FONT_WHITE]        = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY},
-    [FONT_GRAY]         = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY},
-    [FONT_RED]          = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED,        TEXT_COLOR_LIGHT_GRAY},
-    [FONT_GREEN]        = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_GREEN,      TEXT_COLOR_LIGHT_GRAY},
-    [FONT_BLUE]         = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_BLUE,       TEXT_COLOR_LIGHT_GRAY},
-    [FONT_LIGHT_BLUE]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_BLUE, TEXT_COLOR_LIGHT_GRAY},
+    [FONT_GRAY]         = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_WHITE},
+    [FONT_RED]          = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED,        TEXT_COLOR_WHITE},
+    [FONT_GREEN]        = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_GREEN,      TEXT_COLOR_WHITE},
+    [FONT_BLUE]         = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_BLUE,       TEXT_COLOR_WHITE},
+    [FONT_LIGHT_BLUE]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_BLUE, TEXT_COLOR_WHITE},
 };
 
 // Callbacks for the PokeSphere
@@ -992,19 +992,19 @@ static void PokeSphere_PrintUIControls(void)
     u8 textTop[20];
     u8 textMiddle[20];
     u8 textBottom[20];
-    u8 x = 5, y = 1, yRow = 11;
+    u8 x = 13, y = 1, yRow = 11;
 
     if (sPokeSphereState->mode == MODE_EXPLORE)
     {
-        StringCopy(textTop, COMPOUND_STRING("{DPAD_LEFTRIGHT} Explore Profiles"));
-        StringCopy(textMiddle, COMPOUND_STRING("{A_BUTTON} View Profile"));
-        StringCopy(textBottom, COMPOUND_STRING("{B_BUTTON} Exit"));
+        StringCopy(textTop, COMPOUND_STRING("Explore Profiles"));
+        StringCopy(textMiddle, COMPOUND_STRING("View Profile"));
+        StringCopy(textBottom, COMPOUND_STRING("Exit"));
     }
     else if (sPokeSphereState->mode == MODE_PROFILE || sPokeSphereState->mode == MODE_POSTS)
     {
-        StringCopy(textTop, COMPOUND_STRING("{DPAD_LEFTRIGHT} Change Profile"));
-        StringCopy(textMiddle, COMPOUND_STRING("{A_BUTTON} Change View"));
-        StringCopy(textBottom, COMPOUND_STRING("{B_BUTTON} Explore Profiles"));
+        StringCopy(textTop, COMPOUND_STRING("Change Profile"));
+        StringCopy(textMiddle, COMPOUND_STRING("Change View"));
+        StringCopy(textBottom, COMPOUND_STRING("Explore Profiles"));
     }
 
     FillWindowPixelBuffer(WIN_UI_CONTROLS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
