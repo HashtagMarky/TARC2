@@ -38,8 +38,9 @@
 #include "ikigai_scrolling_background.h"
 #include "type_icons.h"
 
-#define CHARACTER_OFFSET        1
-#define TEXT_REPLACEMENT_INDEX  4
+#define CHARACTER_OFFSET                1
+#define TEXT_REPLACEMENT_INDEX          4
+#define MUGSHOT_BG_REPLACEMENT_INDEX    14
 
 enum ExploreProfilePositions
 {
@@ -1600,6 +1601,21 @@ static void PokeSphere_DrawCharacterMugshot(void)
     {
         mugshotId = gSaveBlock2Ptr->playerGender ? MUGSHOT_ANKA : MUGSHOT_KOLE;
         mugshotEmotion = gSaveBlock2Ptr->playerEmote;
+        LoadPalette(ReturnScrollingBackgroundPalette(), BG_PLTT_ID(1), PLTT_SIZE_4BPP);
+    }
+    else
+    {
+        u16 colour = sPokeSpherePalette[MUGSHOT_BG_REPLACEMENT_INDEX];
+        LoadPalette(
+                (u16 [PLTT_SIZE_4BPP]) { // Original Colour of PokéSphere Tiles.
+                    colour, colour, colour, colour,
+                    colour, colour, colour, colour,
+                    colour, colour, colour, colour,
+                    colour, colour, colour, colour,
+                },
+                BG_PLTT_ID(1),
+                PLTT_SIZE_4BPP
+            );
     }
     
     FillWindowPixelBuffer(WIN_CHARACTER_MUGSHOT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
