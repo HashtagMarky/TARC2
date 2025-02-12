@@ -35,6 +35,7 @@
 #include "event_object_movement.h"
 #include "field_mugshot.h"
 #include "ikigai_characters.h"
+#include "ikigai_scrolling_background.h"
 #include "type_icons.h"
 
 #define CHARACTER_OFFSET        1
@@ -104,6 +105,7 @@ enum Modes
 
 static EWRAM_DATA struct PokeSphereState *sPokeSphereState = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
+static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
 
 static const u8 *const sModeNames[MODE_COUNT] = {
     [MODE_EXPLORE]      = COMPOUND_STRING("Explore:"),
@@ -151,6 +153,12 @@ static const struct BgTemplate sPokeSphereBgTemplates[] =
         .charBaseIndex = 3,
         .mapBaseIndex = 30,
         .priority = 2
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 29,
+        .priority = 3
     }
 };
 
@@ -636,6 +644,7 @@ static void PokeSphere_VBlankCB(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
+    StartIkigaiScrollingBackground(2);
 }
 
 static void Task_PokeSphereWaitFadeIn(u8 taskId)
@@ -823,7 +832,8 @@ static bool8 PokeSphere_InitBgs(void)
     ResetAllBgsCoordinates();
 
     sBg1TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
-    if (sBg1TilemapBuffer == NULL)
+    sBg2TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
+    if (sBg1TilemapBuffer == NULL || sBg2TilemapBuffer == NULL)
     {
         return FALSE;
     }
@@ -834,8 +844,12 @@ static bool8 PokeSphere_InitBgs(void)
     SetBgTilemapBuffer(1, sBg1TilemapBuffer);
     ScheduleBgCopyTilemapToVram(1);
 
+    SetBgTilemapBuffer(2, sBg2TilemapBuffer);
+    ScheduleBgCopyTilemapToVram(2);
+
     ShowBg(0);
     ShowBg(1);
+    ShowBg(2);
 
     return TRUE;
 }
@@ -856,17 +870,20 @@ static bool8 PokeSphere_LoadGraphics(void)
     case 0:
         ResetTempTileDataBuffers();
         DecompressAndCopyTileDataToVram(1, sPokeSphereTiles, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(2, IkigaiScrollingBgTiles, 0, 0, 0);
         sPokeSphereState->loadState++;
         break;
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
             LZDecompressWram(sPokeSphereTilemapExplore, sBg1TilemapBuffer);
+            LZDecompressWram(IkigaiScrollingBgTilemap_PalOne, sBg2TilemapBuffer);
             sPokeSphereState->loadState++;
         }
         break;
     case 2:
         LoadPalette(sPokeSpherePalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+        LoadPalette(ReturnScrollingBackgroundPalette(), BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         sPokeSphereState->loadState++;
     default:
@@ -1692,6 +1709,10 @@ static void PokeSphere_FreeResources(void)
     if (sBg1TilemapBuffer != NULL)
     {
         Free(sBg1TilemapBuffer);
+    }
+    if (sBg2TilemapBuffer != NULL)
+    {
+        Free(sBg2TilemapBuffer);
     }
     FreeAllWindowBuffers();
     ResetSpriteData();
