@@ -885,6 +885,7 @@ static bool8 PokeSphere_LoadGraphics(void)
         LoadPalette(sPokeSpherePalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
         LoadPalette(ReturnScrollingBackgroundPalette(), BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        LoadPalette(&sPokeSpherePalette[4], BG_PLTT_ID(15) + 2, sizeof(&sPokeSpherePalette[4]));
         sPokeSphereState->loadState++;
     default:
         sPokeSphereState->loadState = 0;
