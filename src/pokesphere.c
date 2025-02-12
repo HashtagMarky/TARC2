@@ -1662,6 +1662,7 @@ static void PokeSphere_DrawCharacterTypeHeart(void)
             CHARACTER_ICON_Y + 3,
             0, gSaveBlock2Ptr->ikigaiGymType
         );
+        gSprites[sPokeSphereState->characterTypeHeartSpriteId].oam.priority = 3;
     }
     else if (character != CHARACTER_PLAYER && IkigaiCharacter_GetRomanticFlag(character))
     {
