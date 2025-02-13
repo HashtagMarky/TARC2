@@ -696,7 +696,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
             gTasks[taskId].func = Task_PokeSphereWaitFadeAndExitGracefully;
         }
 
-        if (JOY_REPEAT(DPAD_UP))
+        if (JOY_REPEAT(DPAD_UP) && !gPaletteFade.active)
         {
             if (sPokeSphereState->exploreCursorPosition >= EXPLORE_COORDS_X1_Y2)
             {
@@ -716,7 +716,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
             }
         }
 
-        if (JOY_REPEAT(DPAD_DOWN))
+        if (JOY_REPEAT(DPAD_DOWN) && !gPaletteFade.active)
         {
             if (sPokeSphereState->exploreCursorPosition < EXPLORE_COORDS_X1_Y2)
             {
@@ -736,7 +736,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
             }
         }
 
-        if (JOY_REPEAT(DPAD_LEFT))
+        if (JOY_REPEAT(DPAD_LEFT) && !gPaletteFade.active)
         {
             if (sPokeSphereState->exploreCursorPosition == EXPLORE_COORDS_X1_Y1)
             {
@@ -753,7 +753,7 @@ static void Task_PokeSphereMainInput(u8 taskId)
             PlaySE(SE_BALL_TRAY_BALL);
         }
 
-        if (JOY_REPEAT(DPAD_RIGHT))
+        if (JOY_REPEAT(DPAD_RIGHT) && !gPaletteFade.active)
         {
             if (sPokeSphereState->exploreCursorPosition == EXPLORE_COORDS_X4_Y1)
             {
