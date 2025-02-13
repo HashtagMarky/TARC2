@@ -1201,6 +1201,7 @@ static void PokeSphere_PrintNames(void)
     u32 character = sPokeSphereState->characterId;
     u32 textColour = FONT_GRAY;
     const u8 *name = gIkigaiCharactersInfo[character].name;
+    u8 nameBlank[3] = _("");
     
     if (character == CHARACTER_PLAYER)
         name = gSaveBlock2Ptr->playerName;
@@ -1234,9 +1235,10 @@ static void PokeSphere_PrintNames(void)
         if (character >= CHARACTER_RESIDENT_COUNT)
             character++;
 
-        if (!IkigaiCharacter_GetMetFlag(character)
-            || character >= CHARACTER_COUNT_TOTAL)
+        if (!IkigaiCharacter_GetMetFlag(character))
             name = gIkigaiCharactersInfo[CHARACTER_DEFAULT].name;
+        else if (character >= CHARACTER_COUNT_TOTAL)
+            name = nameBlank;
         else if (character != CHARACTER_PLAYER)
             name = gIkigaiCharactersInfo[character].name;
         else if (character == CHARACTER_PLAYER)
