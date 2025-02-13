@@ -12,9 +12,15 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .name = _("??????"),
 
         .overworldGraphicsId = NUM_OBJ_EVENT_GFX,
+
+        .highlights = COMPOUND_STRING(
+            "The new Gym Leader of Vyraton\n"
+            "and a true spark in the community,\n"
+            "igniting passion and growth."
+        ),
     },
 
-    [MAIN_CHARACTER_SAMUEL] =
+    [CHARACTER_RESIDENT_SAMUEL] =
     {
         .name = _("Samuel"),
         .partnerPokemon = SPECIES_INFERNAPE,
@@ -38,20 +44,20 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_LAUREN,
+                .characterId = CHARACTER_RESIDENT_LAUREN,
                 .title = COMPOUND_STRING("Spouse"),
                 .affinity = OPINION_EXTREMELY_POSITIVE,
             },
             
             {
-                .characterId = MAIN_CHARACTER_THOMAS,
+                .characterId = CHARACTER_RESIDENT_THOMAS,
                 .title = COMPOUND_STRING("Best-Friend"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
         },
     },
 
-    [MAIN_CHARACTER_LAUREN] =
+    [CHARACTER_RESIDENT_LAUREN] =
     {
         .name = _("Lauren"),
         .highlights = COMPOUND_STRING(
@@ -75,20 +81,20 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_SAMUEL,
+                .characterId = CHARACTER_RESIDENT_SAMUEL,
                 .title = COMPOUND_STRING("Spouse"),
                 .affinity = OPINION_EXTREMELY_POSITIVE,
             },
             
             {
-                .characterId = MAIN_CHARACTER_KATIE,
+                .characterId = CHARACTER_RESIDENT_KATIE,
                 .title = COMPOUND_STRING("Best-Friend"),
                 .affinity = OPINION_EXTREMELY_POSITIVE,
             },
         },
     },
 
-    [MAIN_CHARACTER_THOMAS] =
+    [CHARACTER_RESIDENT_THOMAS] =
     {
         .name = _("Thomas"),
         .highlights = COMPOUND_STRING(
@@ -112,20 +118,20 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_HANNAH,
+                .characterId = CHARACTER_RESIDENT_HANNAH,
                 .title = COMPOUND_STRING("Spouse"),
                 .affinity = OPINION_EXTREMELY_POSITIVE,
             },
             
             {
-                .characterId = MAIN_CHARACTER_SAMUEL,
+                .characterId = CHARACTER_RESIDENT_SAMUEL,
                 .title = COMPOUND_STRING("Best-Friend"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
         },
     },
 
-    [MAIN_CHARACTER_HANNAH] =
+    [CHARACTER_RESIDENT_HANNAH] =
     {
         .name = _("Hannah"),
         .highlights = COMPOUND_STRING(
@@ -149,26 +155,26 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_THOMAS,
+                .characterId = CHARACTER_RESIDENT_THOMAS,
                 .title = COMPOUND_STRING("Spouse"),
                 .affinity = OPINION_EXTREMELY_POSITIVE,
             },
 
             {
-                .characterId = MAIN_CHARACTER_GEORGIA,
+                .characterId = CHARACTER_RESIDENT_GEORGIA,
                 .title = COMPOUND_STRING("Cousin"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
 
             {
-                .characterId = MAIN_CHARACTER_CAPTAIN,
+                .characterId = CHARACTER_RESIDENT_CAPTAIN,
                 .title = COMPOUND_STRING("Grandfather"),
                 .affinity = OPINION_POSITIVE,
             },
         },
     },
 
-    [MAIN_CHARACTER_KATIE] =
+    [CHARACTER_RESIDENT_KATIE] =
     {
         .name = _("Katie"),
         .highlights = COMPOUND_STRING(
@@ -192,20 +198,20 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_LOUIS,
+                .characterId = CHARACTER_RESIDENT_LOUIS,
                 .title = COMPOUND_STRING("Spouse"),
                 .affinity = OPINION_EXTREMELY_POSITIVE,
             },
             
             {
-                .characterId = MAIN_CHARACTER_LAUREN,
+                .characterId = CHARACTER_RESIDENT_LAUREN,
                 .title = COMPOUND_STRING("Best-Friend"),
                 .affinity = OPINION_EXTREMELY_POSITIVE,
             },
         },
     },
 
-    [MAIN_CHARACTER_LOUIS] =
+    [CHARACTER_RESIDENT_LOUIS] =
     {
         .name = _("Louis"),
         .highlights = COMPOUND_STRING(
@@ -229,14 +235,14 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_KATIE,
+                .characterId = CHARACTER_RESIDENT_KATIE,
                 .title = COMPOUND_STRING("Spouse"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
         },
     },
 
-    [MAIN_CHARACTER_GEORGIA] =
+    [CHARACTER_RESIDENT_GEORGIA] =
     {
         .name = _("Georgia"),
         .highlights = COMPOUND_STRING(
@@ -260,20 +266,20 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_HANNAH,
+                .characterId = CHARACTER_RESIDENT_HANNAH,
                 .title = COMPOUND_STRING("Cousin"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
 
             {
-                .characterId = MAIN_CHARACTER_CAPTAIN,
+                .characterId = CHARACTER_RESIDENT_CAPTAIN,
                 .title = COMPOUND_STRING("Grandfather"),
                 .affinity = OPINION_POSITIVE,
             },
         },
     },
 
-    [MAIN_CHARACTER_CAPTAIN] =
+    [CHARACTER_RESIDENT_CAPTAIN] =
     {
         .name = _("Skip"),
         .highlights = COMPOUND_STRING(
@@ -297,20 +303,65 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_HANNAH,
+                .characterId = CHARACTER_RESIDENT_HANNAH,
                 .title = COMPOUND_STRING("Granddaughter"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
 
             {
-                .characterId = MAIN_CHARACTER_GEORGIA,
+                .characterId = CHARACTER_RESIDENT_GEORGIA,
                 .title = COMPOUND_STRING("Granddaughter"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
         }
     },
 
-    [SPECIAL_CHARACTER_STEVEN] =
+    [CHARACTER_RESIDENT_DIEGO] =
+    {
+        .name = _("Diego"),
+        .highlights = COMPOUND_STRING(
+            "A dedicated conservationist, known\n"
+            "for his efforts in protecting and\n"
+            "repopulating endangered Pokémon."
+        ),
+
+        .partnerPokemon = SPECIES_LAPRAS,
+        .favouriteType = TYPE_WATER,
+        .favouriteColour = BODY_COLOR_BLUE,
+        .personality = ATTITUDE_HUMBLE,
+
+        .overworldGraphicsId = OBJ_EVENT_GFX_DIEGO,
+        .mugshotId = MUGSHOT_DIEGO,
+        .defaultEmotion = EMOTE_INSPIRED,
+
+        .baseOpinionKindness = -10,
+        .baseOpinionStrength = 0,
+        .opinionDecayChance = 5,
+    },
+
+    [CHARACTER_WAYFARER_ASH] =
+    {
+        .name = _("Ash"),
+        .highlights = COMPOUND_STRING(
+            "A young but prolific battler, with\n"
+            "an ability to maximise every bit\n"
+            "of potential within his Pokémon."
+        ),
+
+        .partnerPokemon = SPECIES_PIKACHU,
+        .favouriteType = TYPE_STEEL,
+        .favouriteColour = BODY_COLOR_YELLOW,
+
+        .personality = ATTITUDE_INSPIRED,
+
+        .overworldGraphicsId = OBJ_EVENT_GFX_ASH_KETCHUM,
+        .mugshotId = MUGSHOT_ASH,
+        .defaultEmotion = EMOTE_DETERMINED,
+
+        .flagMet = FLAG_TEMP_1,
+    },
+
+    [CHARACTER_WAYFARER_STEVEN] =
     {
         .name = _("Steven"),
         .highlights = COMPOUND_STRING(
@@ -325,21 +376,21 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .personality = ATTITUDE_HUMBLE,
 
-        .overworldGraphicsId = OBJ_EVENT_GFX_STEVEN_NEW,
+        .overworldGraphicsId = OBJ_EVENT_GFX_STEVEN_GEN4,
         .mugshotId = MUGSHOT_STEVEN,
         .defaultEmotion = EMOTE_SPECIAL,
 
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_LAUREN,
+                .characterId = CHARACTER_RESIDENT_LAUREN,
                 .title = COMPOUND_STRING("Colleague"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
-        }
+        },
     },
 
-    [SPECIAL_CHARACTER_CYNTHIA] =
+    [CHARACTER_WAYFARER_CYNTHIA] =
     {
         .name = _("Cynthia"),
         .highlights = COMPOUND_STRING(
@@ -361,14 +412,14 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .relationships =
         {
             {
-                .characterId = MAIN_CHARACTER_SAMUEL,
+                .characterId = CHARACTER_RESIDENT_SAMUEL,
                 .title = COMPOUND_STRING("Colleague"),
                 .affinity = OPINION_VERY_POSITIVE,
             },
-        }
+        },
     },
 
-    [SPECIAL_CHARACTER_N] =
+    [CHARACTER_WAYFARER_N] =
     {
         .name = _("N"),
         .highlights = COMPOUND_STRING(
@@ -441,43 +492,43 @@ const struct DialogueOptions gDialogueOptions[DIALOGUE_OPTION_COUNT] =
 {
     [DIALOGUE_OPTION_TALK] =
     {
-        .name = COMPOUND_STRING("Talk"),
+        .nameTitle = COMPOUND_STRING("Talk"),
         .iconImage = sCharacteristicDialogueIcon_Talk,
         .iconPal = sCharacteristicDialoguePal_Talk
     },
     [DIALOGUE_OPTION_OPINION] =
     {
-        .name = COMPOUND_STRING("Opinion"),
+        .nameTitle = COMPOUND_STRING("Opinion"),
         .iconImage = sCharacteristicDialogueIcon_Opinion,
         .iconPal = sCharacteristicDialoguePal_Opinion
     },
     [DIALOGUE_OPTION_ROMANCE] =
     {
-        .name = COMPOUND_STRING("Romance"),
+        .nameTitle = COMPOUND_STRING("Romance"),
         .iconImage = sCharacteristicDialogueIcon_Romance,
         .iconPal = sCharacteristicDialoguePal_Romance
     },
     [DIALOGUE_OPTION_QUESTS] =
     {
-        .name = COMPOUND_STRING("Quests"),
+        .nameTitle = COMPOUND_STRING("Quests"),
         .iconImage = sCharacteristicDialogueIcon_Quest,
         .iconPal = sCharacteristicDialoguePal_Quest
     },
     [DIALOGUE_OPTION_BATTLE] =
     {
-        .name = COMPOUND_STRING("Battle"),
+        .nameTitle = COMPOUND_STRING("Battle"),
         .iconImage = sCharacteristicDialogueIcon_Battle,
         .iconPal = sCharacteristicDialoguePal_Battle
     },
     [DIALOGUE_OPTION_GIFT] =
     {
-        .name = COMPOUND_STRING("Gift"),
+        .nameTitle = COMPOUND_STRING("Gift"),
         .iconImage = sCharacteristicDialogueIcon_Gift,
         .iconPal = sCharacteristicDialoguePal_Gift
     },
     [DIALOGUE_OPTION_GOODBYE] =
     {
-        .name = COMPOUND_STRING("Goodbye"),
+        .nameTitle = COMPOUND_STRING("Goodbye"),
         .iconImage = sCharacteristicDialogueIcon_Goodbye,
         .iconPal = sCharacteristicDialoguePal_Goodbye
     },
@@ -488,7 +539,10 @@ const struct DialogueOptions gDialogueAttitudes[ATTITUDE_COUNT] =
 {
     [ATTITUDE_NEUTRAL] =
     {
-        .name = COMPOUND_STRING("Neutral"),
+        .nameTitle = COMPOUND_STRING("Neutral"),
+        .nameLower = COMPOUND_STRING("neutral"),
+        .nameTitleColour = COMPOUND_STRING("{COLOR DARK_GRAY}Neutral{COLOR DARK_GRAY}"),
+        .nameLowerColour = COMPOUND_STRING("{COLOR DARK_GRAY}neutral{COLOR DARK_GRAY}"),
         .kindnessEffect = 0,
         .strengthEffect = 0,
         .iconImage = sCharacteristicDialogueIcon_Neutral,
@@ -496,7 +550,10 @@ const struct DialogueOptions gDialogueAttitudes[ATTITUDE_COUNT] =
     },
     [ATTITUDE_INSPIRED] =
     {
-        .name = COMPOUND_STRING("Inspired"),
+        .nameTitle = COMPOUND_STRING("Inspired"),
+        .nameLower = COMPOUND_STRING("inspired"),
+        .nameTitleColour = COMPOUND_STRING("{COLOR BLUE}Inspired{COLOR DARK_GRAY}"),
+        .nameLowerColour = COMPOUND_STRING("{COLOR BLUE}inspired{COLOR DARK_GRAY}"),
         .kindnessEffect = 1,
         .strengthEffect = 1,
         .iconImage = sCharacteristicDialogueIcon_Inspired,
@@ -504,7 +561,10 @@ const struct DialogueOptions gDialogueAttitudes[ATTITUDE_COUNT] =
     },
     [ATTITUDE_HUMBLE] =
     {
-        .name = COMPOUND_STRING("Humble"),
+        .nameTitle = COMPOUND_STRING("Humble"),
+        .nameLower = COMPOUND_STRING("humble"),
+        .nameTitleColour = COMPOUND_STRING("{COLOR GREEN}Humble{COLOR DARK_GRAY}"),
+        .nameLowerColour = COMPOUND_STRING("{COLOR GREEN}humble{COLOR DARK_GRAY}"),
         .kindnessEffect = 1,
         .strengthEffect = -1,
         .iconImage = sCharacteristicDialogueIcon_Humble,
@@ -512,7 +572,10 @@ const struct DialogueOptions gDialogueAttitudes[ATTITUDE_COUNT] =
     },
     [ATTITUDE_DOMINANT] =
     {
-        .name = COMPOUND_STRING("Dominant"),
+        .nameTitle = COMPOUND_STRING("Dominant"),
+        .nameLower = COMPOUND_STRING("dominant"),
+        .nameTitleColour = COMPOUND_STRING("{COLOR RED}Dominant{COLOR DARK_GRAY}"),
+        .nameLowerColour = COMPOUND_STRING("{COLOR RED}dominant{COLOR DARK_GRAY}"),
         .kindnessEffect = -1,
         .strengthEffect = 1,
         .iconImage = sCharacteristicDialogueIcon_Dominant,
@@ -520,7 +583,10 @@ const struct DialogueOptions gDialogueAttitudes[ATTITUDE_COUNT] =
     },
     [ATTITUDE_CYNICAL] =
     {
-        .name = COMPOUND_STRING("Cynical"),
+        .nameTitle = COMPOUND_STRING("Cynical"),
+        .nameLower = COMPOUND_STRING("cynical"),
+        .nameTitleColour = COMPOUND_STRING("{COLOR LIGHT_BLUE}Cynical{COLOR DARK_GRAY}"),
+        .nameLowerColour = COMPOUND_STRING("{COLOR LIGHT_BLUE}cynical{COLOR DARK_GRAY}"),
         .kindnessEffect = -1,
         .strengthEffect = -1,
         .iconImage = sCharacteristicDialogueIcon_Cynical,

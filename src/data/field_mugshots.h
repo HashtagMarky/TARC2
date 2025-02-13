@@ -1,3 +1,7 @@
+// Blank Mugshots
+static const u32 sFieldMugshotGfx_Blank[] = INCBIN_U32("graphics/field_mugshots/blank.4bpp.lz");
+static const u16 sFieldMugshotPal_Blank[] = INCBIN_U16("graphics/field_mugshots/blank.gbapal");
+
 // Protagonist Mugshots
 static const u32 sFieldMugshotGfx_KoleNormal[] = INCBIN_U32("graphics/protagonist_sprites/kole_mugshots/normal.4bpp.lz");
 static const u32 sFieldMugshotGfx_AnkaNormal[] = INCBIN_U32("graphics/protagonist_sprites/anka_mugshots/normal.4bpp.lz");
@@ -50,10 +54,7 @@ static const u16 sFieldMugshotPal_KatieHappy[] = INCBIN_U16("graphics/field_mugs
 
 // Louis
 static const u32 sFieldMugshotGfx_LouisNormal[] = INCBIN_U32("graphics/field_mugshots/people/louis/normal.4bpp.lz");
-static const u32 sFieldMugshotGfx_LouisHappy[] = INCBIN_U32("graphics/field_mugshots/people/louis/happy.4bpp.lz");
-
 static const u16 sFieldMugshotPal_LouisNormal[] = INCBIN_U16("graphics/field_mugshots/people/louis/normal.gbapal");
-static const u16 sFieldMugshotPal_LouisHappy[] = INCBIN_U16("graphics/field_mugshots/people/louis/happy.gbapal");
 
 // Georgia
 static const u32 sFieldMugshotGfx_GeorgiaNormal[] = INCBIN_U32("graphics/field_mugshots/people/georgia/normal.4bpp.lz");
@@ -64,20 +65,50 @@ static const u16 sFieldMugshotPal_GeorgiaHappy[] = INCBIN_U16("graphics/field_mu
 
 // Captain
 static const u32 sFieldMugshotGfx_CaptainNormal[] = INCBIN_U32("graphics/field_mugshots/people/captain/normal.4bpp.lz");
-static const u32 sFieldMugshotGfx_CaptainHappy[] = INCBIN_U32("graphics/field_mugshots/people/captain/happy.4bpp.lz");
 
 static const u16 sFieldMugshotPal_CaptainNormal[] = INCBIN_U16("graphics/field_mugshots/people/captain/normal.gbapal");
-static const u16 sFieldMugshotPal_CaptainHappy[] = INCBIN_U16("graphics/field_mugshots/people/captain/happy.gbapal");
+
+// Diego
+static const u32 sFieldMugshotGfx_DiegoNormal[] = INCBIN_U32("graphics/field_mugshots/people/diego/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_DiegoHappy[] = INCBIN_U32("graphics/field_mugshots/people/diego/happy.4bpp.lz");
+
+static const u16 sFieldMugshotPal_DiegoNormal[] = INCBIN_U16("graphics/field_mugshots/people/diego/normal.gbapal");
+static const u16 sFieldMugshotPal_DiegoHappy[] = INCBIN_U16("graphics/field_mugshots/people/diego/happy.gbapal");
+
+// Ash
+static const u32 sFieldMugshotGfx_AshNormal[] = INCBIN_U32("graphics/field_mugshots/people/ash/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_AshHappy[] = INCBIN_U32("graphics/field_mugshots/people/ash/happy.4bpp.lz");
+
+static const u16 sFieldMugshotPal_AshNormal[] = INCBIN_U16("graphics/field_mugshots/people/ash/normal.gbapal");
+static const u16 sFieldMugshotPal_AshHappy[] = INCBIN_U16("graphics/field_mugshots/people/ash/happy.gbapal");
 
 // Steven
+static const u32 sFieldMugshotGfx_StevenNormal[] = INCBIN_U32("graphics/field_mugshots/people/steven/normal.4bpp.lz");
+static const u16 sFieldMugshotPal_StevenNormal[] = INCBIN_U16("graphics/field_mugshots/people/steven/normal.gbapal");
+
+static const u32 sFieldMugshotGfx_StevenHappy[] = INCBIN_U32("graphics/field_mugshots/people/steven/happy.4bpp.lz");
+static const u16 sFieldMugshotPal_StevenHappy[] = INCBIN_U16("graphics/field_mugshots/people/steven/happy.gbapal");
+
 static const u32 sFieldMugshotGfx_StevenSpecial[] = INCBIN_U32("graphics/field_mugshots/people/steven/special.4bpp.lz");
 static const u16 sFieldMugshotPal_StevenSpecial[] = INCBIN_U16("graphics/field_mugshots/people/steven/special.gbapal");
 
 // Cynthia
+static const u32 sFieldMugshotGfx_CynthiaNormal[] = INCBIN_U32("graphics/field_mugshots/people/cynthia/normal.4bpp.lz");
+static const u16 sFieldMugshotPal_CynthiaNormal[] = INCBIN_U16("graphics/field_mugshots/people/cynthia/normal.gbapal");
+
+static const u32 sFieldMugshotGfx_CynthiaHappy[] = INCBIN_U32("graphics/field_mugshots/people/cynthia/happy.4bpp.lz");
+static const u16 sFieldMugshotPal_CynthiaHappy[] = INCBIN_U16("graphics/field_mugshots/people/cynthia/happy.gbapal");
+
 static const u32 sFieldMugshotGfx_CynthiaSpecial[] = INCBIN_U32("graphics/field_mugshots/people/cynthia/special.4bpp.lz");
 static const u16 sFieldMugshotPal_CynthiaSpecial[] = INCBIN_U16("graphics/field_mugshots/people/cynthia/special.gbapal");
 
 // N
+static const u32 sFieldMugshotGfx_NNormal[] = INCBIN_U32("graphics/field_mugshots/people/N/normal.4bpp.lz");
+static const u16 sFieldMugshotPal_NNormal[] = INCBIN_U16("graphics/field_mugshots/people/N/normal.gbapal");
+
+static const u32 sFieldMugshotGfx_NHappy[] = INCBIN_U32("graphics/field_mugshots/people/N/happy.4bpp.lz");
+static const u16 sFieldMugshotPal_NHappy[] = INCBIN_U16("graphics/field_mugshots/people/N/happy.gbapal");
+
 static const u32 sFieldMugshotGfx_NSpecial[] = INCBIN_U32("graphics/field_mugshots/people/N/special.4bpp.lz");
 static const u16 sFieldMugshotPal_NSpecial[] = INCBIN_U16("graphics/field_mugshots/people/N/special.gbapal");
 
@@ -1023,6 +1054,73 @@ static const u16 sFieldMugshotPal_EeveeTearyShiny[] = INCBIN_U16("graphics/field
 static const u16 sFieldMugshotPal_EeveeWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/eevee/worried.gbapal");
 static const u16 sFieldMugshotPal_EeveeWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/eevee/worried_shiny.gbapal");
 
+// Lapras
+static const u32 sFieldMugshotGfx_LaprasNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_LaprasWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lapras/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_LaprasNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/normal.gbapal");
+static const u16 sFieldMugshotPal_LaprasNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_LaprasAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/angry.gbapal");
+static const u16 sFieldMugshotPal_LaprasAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_LaprasCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/crying.gbapal");
+static const u16 sFieldMugshotPal_LaprasCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_LaprasDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/determined.gbapal");
+static const u16 sFieldMugshotPal_LaprasDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_LaprasDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/dizzy.gbapal");
+static const u16 sFieldMugshotPal_LaprasDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_LaprasHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/happy.gbapal");
+static const u16 sFieldMugshotPal_LaprasHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_LaprasInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/inspired.gbapal");
+static const u16 sFieldMugshotPal_LaprasInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_LaprasJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/joyous.gbapal");
+static const u16 sFieldMugshotPal_LaprasJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_LaprasPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/pain.gbapal");
+static const u16 sFieldMugshotPal_LaprasPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_LaprasSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/sad.gbapal");
+static const u16 sFieldMugshotPal_LaprasSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_LaprasShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/shouting.gbapal");
+static const u16 sFieldMugshotPal_LaprasShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_LaprasSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/sigh.gbapal");
+static const u16 sFieldMugshotPal_LaprasSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_LaprasStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/stunned.gbapal");
+static const u16 sFieldMugshotPal_LaprasStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_LaprasSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/surprised.gbapal");
+static const u16 sFieldMugshotPal_LaprasSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_LaprasTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_LaprasTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_LaprasWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/worried.gbapal");
+static const u16 sFieldMugshotPal_LaprasWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lapras/worried_shiny.gbapal");
+
 // Relicanth
 static const u32 sFieldMugshotGfx_RelicanthNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/relicanth/normal.4bpp.lz");
 static const u32 sFieldMugshotGfx_RelicanthNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/relicanth/normal_shiny.4bpp.lz");
@@ -1770,11 +1868,3899 @@ static const u16 sFieldMugshotPal_GurdurrHappyShiny[] = INCBIN_U16("graphics/fie
 // static const u16 sFieldMugshotPal_GurdurrWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/gurdurr/worried.gbapal");
 // static const u16 sFieldMugshotPal_GurdurrWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/gurdurr/worried_shiny.gbapal");
 
+// Bagon
+static const u32 sFieldMugshotGfx_BagonNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_BagonWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/bagon/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_BagonNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/normal.gbapal");
+static const u16 sFieldMugshotPal_BagonNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_BagonAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/angry.gbapal");
+static const u16 sFieldMugshotPal_BagonAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_BagonCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/crying.gbapal");
+static const u16 sFieldMugshotPal_BagonCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_BagonDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/determined.gbapal");
+static const u16 sFieldMugshotPal_BagonDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_BagonDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/dizzy.gbapal");
+static const u16 sFieldMugshotPal_BagonDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_BagonHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/happy.gbapal");
+static const u16 sFieldMugshotPal_BagonHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_BagonInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/inspired.gbapal");
+static const u16 sFieldMugshotPal_BagonInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_BagonJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/joyous.gbapal");
+static const u16 sFieldMugshotPal_BagonJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_BagonPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/pain.gbapal");
+static const u16 sFieldMugshotPal_BagonPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_BagonSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/sad.gbapal");
+static const u16 sFieldMugshotPal_BagonSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_BagonShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/shouting.gbapal");
+static const u16 sFieldMugshotPal_BagonShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_BagonSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/sigh.gbapal");
+static const u16 sFieldMugshotPal_BagonSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_BagonStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/stunned.gbapal");
+static const u16 sFieldMugshotPal_BagonStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_BagonSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/surprised.gbapal");
+static const u16 sFieldMugshotPal_BagonSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_BagonTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_BagonTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_BagonWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/worried.gbapal");
+static const u16 sFieldMugshotPal_BagonWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/bagon/worried_shiny.gbapal");
+
+
+// Carkol
+static const u32 sFieldMugshotGfx_CarkolNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_CarkolNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CarkolWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/carkol/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_CarkolNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/normal.gbapal");
+static const u16 sFieldMugshotPal_CarkolNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CarkolAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/angry.gbapal");
+// static const u16 sFieldMugshotPal_CarkolAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CarkolCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/crying.gbapal");
+// static const u16 sFieldMugshotPal_CarkolCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CarkolDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/determined.gbapal");
+// static const u16 sFieldMugshotPal_CarkolDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CarkolDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_CarkolDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CarkolHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/happy.gbapal");
+// static const u16 sFieldMugshotPal_CarkolHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CarkolInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/inspired.gbapal");
+// static const u16 sFieldMugshotPal_CarkolInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CarkolJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/joyous.gbapal");
+// static const u16 sFieldMugshotPal_CarkolJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CarkolPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/pain.gbapal");
+// static const u16 sFieldMugshotPal_CarkolPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CarkolSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/sad.gbapal");
+// static const u16 sFieldMugshotPal_CarkolSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CarkolShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/shouting.gbapal");
+// static const u16 sFieldMugshotPal_CarkolShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CarkolSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/sigh.gbapal");
+// static const u16 sFieldMugshotPal_CarkolSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CarkolStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/stunned.gbapal");
+// static const u16 sFieldMugshotPal_CarkolStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CarkolSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/surprised.gbapal");
+// static const u16 sFieldMugshotPal_CarkolSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CarkolTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_CarkolTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CarkolWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/worried.gbapal");
+// static const u16 sFieldMugshotPal_CarkolWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/carkol/worried_shiny.gbapal");
+
+
+// Charjabug
+static const u32 sFieldMugshotGfx_CharjabugNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_CharjabugWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/charjabug/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_CharjabugNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/normal.gbapal");
+static const u16 sFieldMugshotPal_CharjabugNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_CharjabugAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/angry.gbapal");
+static const u16 sFieldMugshotPal_CharjabugAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_CharjabugCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/crying.gbapal");
+static const u16 sFieldMugshotPal_CharjabugCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_CharjabugDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/determined.gbapal");
+static const u16 sFieldMugshotPal_CharjabugDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_CharjabugDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/dizzy.gbapal");
+static const u16 sFieldMugshotPal_CharjabugDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_CharjabugHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/happy.gbapal");
+static const u16 sFieldMugshotPal_CharjabugHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_CharjabugInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/inspired.gbapal");
+static const u16 sFieldMugshotPal_CharjabugInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_CharjabugJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/joyous.gbapal");
+static const u16 sFieldMugshotPal_CharjabugJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_CharjabugPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/pain.gbapal");
+static const u16 sFieldMugshotPal_CharjabugPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_CharjabugSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/sad.gbapal");
+static const u16 sFieldMugshotPal_CharjabugSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_CharjabugShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/shouting.gbapal");
+static const u16 sFieldMugshotPal_CharjabugShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_CharjabugSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/sigh.gbapal");
+static const u16 sFieldMugshotPal_CharjabugSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_CharjabugStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/stunned.gbapal");
+static const u16 sFieldMugshotPal_CharjabugStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_CharjabugSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/surprised.gbapal");
+static const u16 sFieldMugshotPal_CharjabugSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_CharjabugTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_CharjabugTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_CharjabugWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/worried.gbapal");
+static const u16 sFieldMugshotPal_CharjabugWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/charjabug/worried_shiny.gbapal");
+
+
+// Coalossal
+static const u32 sFieldMugshotGfx_CoalossalNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_CoalossalNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CoalossalWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/coalossal/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_CoalossalNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/normal.gbapal");
+static const u16 sFieldMugshotPal_CoalossalNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/angry.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/crying.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/determined.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/happy.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/inspired.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/joyous.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/pain.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/sad.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/shouting.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/sigh.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/stunned.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/surprised.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/worried.gbapal");
+// static const u16 sFieldMugshotPal_CoalossalWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/coalossal/worried_shiny.gbapal");
+
+
+// Corviknight
+static const u32 sFieldMugshotGfx_CorviknightNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorviknightNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorviknightAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CorviknightAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorviknightCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CorviknightCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorviknightDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CorviknightDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorviknightDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CorviknightDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorviknightHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CorviknightHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorviknightInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CorviknightInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorviknightJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CorviknightJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorviknightPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CorviknightPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorviknightSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CorviknightSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorviknightShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CorviknightShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorviknightSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CorviknightSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorviknightStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CorviknightStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorviknightSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CorviknightSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorviknightTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CorviknightTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorviknightWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_CorviknightWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corviknight/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_CorviknightNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/normal.gbapal");
+static const u16 sFieldMugshotPal_CorviknightNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorviknightAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/angry.gbapal");
+// static const u16 sFieldMugshotPal_CorviknightAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorviknightCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/crying.gbapal");
+// static const u16 sFieldMugshotPal_CorviknightCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorviknightDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/determined.gbapal");
+// static const u16 sFieldMugshotPal_CorviknightDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorviknightDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_CorviknightDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorviknightHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/happy.gbapal");
+// static const u16 sFieldMugshotPal_CorviknightHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorviknightInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/inspired.gbapal");
+// static const u16 sFieldMugshotPal_CorviknightInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorviknightJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/joyous.gbapal");
+// static const u16 sFieldMugshotPal_CorviknightJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorviknightPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/pain.gbapal");
+// static const u16 sFieldMugshotPal_CorviknightPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorviknightSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/sad.gbapal");
+// static const u16 sFieldMugshotPal_CorviknightSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorviknightShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/shouting.gbapal");
+// static const u16 sFieldMugshotPal_CorviknightShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorviknightSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/sigh.gbapal");
+// static const u16 sFieldMugshotPal_CorviknightSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorviknightStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/stunned.gbapal");
+// static const u16 sFieldMugshotPal_CorviknightStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorviknightSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/surprised.gbapal");
+// static const u16 sFieldMugshotPal_CorviknightSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorviknightTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_CorviknightTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorviknightWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/worried.gbapal");
+// static const u16 sFieldMugshotPal_CorviknightWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corviknight/worried_shiny.gbapal");
+
+
+// Corvisquire
+static const u32 sFieldMugshotGfx_CorvisquireNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquirePain[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquirePainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_CorvisquireWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/corvisquire/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_CorvisquireNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/normal.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/angry.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/crying.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/determined.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/dizzy.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/happy.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/inspired.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/joyous.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorvisquirePain[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/pain.gbapal");
+static const u16 sFieldMugshotPal_CorvisquirePainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/sad.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/shouting.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/sigh.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/stunned.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/surprised.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/worried.gbapal");
+static const u16 sFieldMugshotPal_CorvisquireWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/corvisquire/worried_shiny.gbapal");
+
+
+// Dusclops
+static const u32 sFieldMugshotGfx_DusclopsNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_DusclopsCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_DusclopsDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_DusclopsDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_DusclopsJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_DusclopsShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusclopsWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusclops/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_DusclopsNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/normal.gbapal");
+static const u16 sFieldMugshotPal_DusclopsNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusclopsAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/angry.gbapal");
+static const u16 sFieldMugshotPal_DusclopsAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusclopsCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/crying.gbapal");
+// static const u16 sFieldMugshotPal_DusclopsCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusclopsDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/determined.gbapal");
+// static const u16 sFieldMugshotPal_DusclopsDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusclopsDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_DusclopsDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusclopsHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/happy.gbapal");
+static const u16 sFieldMugshotPal_DusclopsHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusclopsInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/inspired.gbapal");
+static const u16 sFieldMugshotPal_DusclopsInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusclopsJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/joyous.gbapal");
+// static const u16 sFieldMugshotPal_DusclopsJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusclopsPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/pain.gbapal");
+static const u16 sFieldMugshotPal_DusclopsPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusclopsSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/sad.gbapal");
+static const u16 sFieldMugshotPal_DusclopsSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusclopsShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/shouting.gbapal");
+// static const u16 sFieldMugshotPal_DusclopsShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusclopsSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/sigh.gbapal");
+static const u16 sFieldMugshotPal_DusclopsSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusclopsStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/stunned.gbapal");
+static const u16 sFieldMugshotPal_DusclopsStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusclopsSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/surprised.gbapal");
+static const u16 sFieldMugshotPal_DusclopsSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusclopsTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_DusclopsTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusclopsWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/worried.gbapal");
+static const u16 sFieldMugshotPal_DusclopsWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusclops/worried_shiny.gbapal");
+
+
+// Dusknoir
+static const u32 sFieldMugshotGfx_DusknoirNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_DusknoirWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/dusknoir/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_DusknoirNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/normal.gbapal");
+static const u16 sFieldMugshotPal_DusknoirNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusknoirAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/angry.gbapal");
+static const u16 sFieldMugshotPal_DusknoirAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusknoirCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/crying.gbapal");
+static const u16 sFieldMugshotPal_DusknoirCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusknoirDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/determined.gbapal");
+static const u16 sFieldMugshotPal_DusknoirDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusknoirDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/dizzy.gbapal");
+static const u16 sFieldMugshotPal_DusknoirDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusknoirHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/happy.gbapal");
+static const u16 sFieldMugshotPal_DusknoirHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusknoirInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/inspired.gbapal");
+static const u16 sFieldMugshotPal_DusknoirInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusknoirJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/joyous.gbapal");
+static const u16 sFieldMugshotPal_DusknoirJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusknoirPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/pain.gbapal");
+static const u16 sFieldMugshotPal_DusknoirPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusknoirSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/sad.gbapal");
+static const u16 sFieldMugshotPal_DusknoirSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusknoirShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/shouting.gbapal");
+static const u16 sFieldMugshotPal_DusknoirShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusknoirSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/sigh.gbapal");
+static const u16 sFieldMugshotPal_DusknoirSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusknoirStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/stunned.gbapal");
+static const u16 sFieldMugshotPal_DusknoirStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusknoirSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/surprised.gbapal");
+static const u16 sFieldMugshotPal_DusknoirSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusknoirTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_DusknoirTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_DusknoirWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/worried.gbapal");
+static const u16 sFieldMugshotPal_DusknoirWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/dusknoir/worried_shiny.gbapal");
+
+
+// Duskull
+static const u32 sFieldMugshotGfx_DuskullNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_DuskullWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/duskull/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_DuskullNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/normal.gbapal");
+static const u16 sFieldMugshotPal_DuskullNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_DuskullAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/angry.gbapal");
+static const u16 sFieldMugshotPal_DuskullAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_DuskullCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/crying.gbapal");
+static const u16 sFieldMugshotPal_DuskullCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_DuskullDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/determined.gbapal");
+static const u16 sFieldMugshotPal_DuskullDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_DuskullDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/dizzy.gbapal");
+static const u16 sFieldMugshotPal_DuskullDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_DuskullHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/happy.gbapal");
+static const u16 sFieldMugshotPal_DuskullHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_DuskullInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/inspired.gbapal");
+static const u16 sFieldMugshotPal_DuskullInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_DuskullJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/joyous.gbapal");
+static const u16 sFieldMugshotPal_DuskullJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_DuskullPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/pain.gbapal");
+static const u16 sFieldMugshotPal_DuskullPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_DuskullSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/sad.gbapal");
+static const u16 sFieldMugshotPal_DuskullSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_DuskullShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/shouting.gbapal");
+static const u16 sFieldMugshotPal_DuskullShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_DuskullSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/sigh.gbapal");
+static const u16 sFieldMugshotPal_DuskullSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_DuskullStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/stunned.gbapal");
+static const u16 sFieldMugshotPal_DuskullStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_DuskullSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/surprised.gbapal");
+static const u16 sFieldMugshotPal_DuskullSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_DuskullTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_DuskullTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_DuskullWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/worried.gbapal");
+static const u16 sFieldMugshotPal_DuskullWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/duskull/worried_shiny.gbapal");
+
+
+// Flabebe
+static const u32 sFieldMugshotGfx_FlabebeNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebePain[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebePainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlabebeWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/flabebe/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_FlabebeNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/normal.gbapal");
+static const u16 sFieldMugshotPal_FlabebeNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlabebeAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/angry.gbapal");
+static const u16 sFieldMugshotPal_FlabebeAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlabebeCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/crying.gbapal");
+static const u16 sFieldMugshotPal_FlabebeCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlabebeDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/determined.gbapal");
+static const u16 sFieldMugshotPal_FlabebeDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlabebeDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/dizzy.gbapal");
+static const u16 sFieldMugshotPal_FlabebeDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlabebeHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/happy.gbapal");
+static const u16 sFieldMugshotPal_FlabebeHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlabebeInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/inspired.gbapal");
+static const u16 sFieldMugshotPal_FlabebeInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlabebeJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/joyous.gbapal");
+static const u16 sFieldMugshotPal_FlabebeJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlabebePain[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/pain.gbapal");
+static const u16 sFieldMugshotPal_FlabebePainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlabebeSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/sad.gbapal");
+static const u16 sFieldMugshotPal_FlabebeSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlabebeShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/shouting.gbapal");
+static const u16 sFieldMugshotPal_FlabebeShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlabebeSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/sigh.gbapal");
+static const u16 sFieldMugshotPal_FlabebeSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlabebeStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/stunned.gbapal");
+static const u16 sFieldMugshotPal_FlabebeStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlabebeSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/surprised.gbapal");
+static const u16 sFieldMugshotPal_FlabebeSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlabebeTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_FlabebeTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlabebeWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/worried.gbapal");
+static const u16 sFieldMugshotPal_FlabebeWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/flabebe/worried_shiny.gbapal");
+
+
+// Floette
+static const u32 sFieldMugshotGfx_FloetteNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloettePain[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloettePainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_FloetteWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/floette/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_FloetteNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/normal.gbapal");
+static const u16 sFieldMugshotPal_FloetteNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_FloetteAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/angry.gbapal");
+static const u16 sFieldMugshotPal_FloetteAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_FloetteCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/crying.gbapal");
+static const u16 sFieldMugshotPal_FloetteCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_FloetteDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/determined.gbapal");
+static const u16 sFieldMugshotPal_FloetteDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_FloetteDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/dizzy.gbapal");
+static const u16 sFieldMugshotPal_FloetteDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_FloetteHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/happy.gbapal");
+static const u16 sFieldMugshotPal_FloetteHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_FloetteInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/inspired.gbapal");
+static const u16 sFieldMugshotPal_FloetteInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_FloetteJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/joyous.gbapal");
+static const u16 sFieldMugshotPal_FloetteJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_FloettePain[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/pain.gbapal");
+static const u16 sFieldMugshotPal_FloettePainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_FloetteSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/sad.gbapal");
+static const u16 sFieldMugshotPal_FloetteSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_FloetteShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/shouting.gbapal");
+static const u16 sFieldMugshotPal_FloetteShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_FloetteSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/sigh.gbapal");
+static const u16 sFieldMugshotPal_FloetteSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_FloetteStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/stunned.gbapal");
+static const u16 sFieldMugshotPal_FloetteStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_FloetteSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/surprised.gbapal");
+static const u16 sFieldMugshotPal_FloetteSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_FloetteTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_FloetteTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_FloetteWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/worried.gbapal");
+static const u16 sFieldMugshotPal_FloetteWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/floette/worried_shiny.gbapal");
+
+
+// Florges
+static const u32 sFieldMugshotGfx_FlorgesNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_FlorgesWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/florges/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_FlorgesNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/normal.gbapal");
+static const u16 sFieldMugshotPal_FlorgesNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlorgesAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/angry.gbapal");
+static const u16 sFieldMugshotPal_FlorgesAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlorgesCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/crying.gbapal");
+static const u16 sFieldMugshotPal_FlorgesCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlorgesDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/determined.gbapal");
+static const u16 sFieldMugshotPal_FlorgesDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlorgesDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/dizzy.gbapal");
+static const u16 sFieldMugshotPal_FlorgesDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlorgesHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/happy.gbapal");
+static const u16 sFieldMugshotPal_FlorgesHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlorgesInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/inspired.gbapal");
+static const u16 sFieldMugshotPal_FlorgesInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlorgesJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/joyous.gbapal");
+static const u16 sFieldMugshotPal_FlorgesJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlorgesPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/pain.gbapal");
+static const u16 sFieldMugshotPal_FlorgesPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlorgesSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/sad.gbapal");
+static const u16 sFieldMugshotPal_FlorgesSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlorgesShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/shouting.gbapal");
+static const u16 sFieldMugshotPal_FlorgesShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlorgesSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/sigh.gbapal");
+static const u16 sFieldMugshotPal_FlorgesSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlorgesStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/stunned.gbapal");
+static const u16 sFieldMugshotPal_FlorgesStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlorgesSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/surprised.gbapal");
+static const u16 sFieldMugshotPal_FlorgesSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlorgesTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_FlorgesTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_FlorgesWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/worried.gbapal");
+static const u16 sFieldMugshotPal_FlorgesWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/florges/worried_shiny.gbapal");
+
+
+// Grimmsnarl
+static const u32 sFieldMugshotGfx_GrimmsnarlNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_GrimmsnarlNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_GrimmsnarlHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_GrimmsnarlHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_GrimmsnarlPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_GrimmsnarlPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrimmsnarlWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grimmsnarl/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_GrimmsnarlNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/normal.gbapal");
+static const u16 sFieldMugshotPal_GrimmsnarlNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/angry.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/crying.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/determined.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_GrimmsnarlHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/happy.gbapal");
+static const u16 sFieldMugshotPal_GrimmsnarlHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/inspired.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/joyous.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_GrimmsnarlPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/pain.gbapal");
+static const u16 sFieldMugshotPal_GrimmsnarlPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/sad.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/shouting.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/sigh.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/stunned.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/surprised.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/worried.gbapal");
+// static const u16 sFieldMugshotPal_GrimmsnarlWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grimmsnarl/worried_shiny.gbapal");
+
+
+// Grubbin
+static const u32 sFieldMugshotGfx_GrubbinNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_GrubbinNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_GrubbinWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/grubbin/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_GrubbinNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/normal.gbapal");
+static const u16 sFieldMugshotPal_GrubbinNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/angry.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/crying.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/determined.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/happy.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/inspired.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/joyous.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/pain.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/sad.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/shouting.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/sigh.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/stunned.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/surprised.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/worried.gbapal");
+// static const u16 sFieldMugshotPal_GrubbinWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/grubbin/worried_shiny.gbapal");
+
+
+// Hatenna
+static const u32 sFieldMugshotGfx_HatennaNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatennaWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatenna/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_HatennaNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/normal.gbapal");
+static const u16 sFieldMugshotPal_HatennaNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_HatennaAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/angry.gbapal");
+static const u16 sFieldMugshotPal_HatennaAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_HatennaCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/crying.gbapal");
+static const u16 sFieldMugshotPal_HatennaCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_HatennaDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/determined.gbapal");
+static const u16 sFieldMugshotPal_HatennaDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_HatennaDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/dizzy.gbapal");
+static const u16 sFieldMugshotPal_HatennaDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_HatennaHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/happy.gbapal");
+static const u16 sFieldMugshotPal_HatennaHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_HatennaInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/inspired.gbapal");
+static const u16 sFieldMugshotPal_HatennaInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_HatennaJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/joyous.gbapal");
+static const u16 sFieldMugshotPal_HatennaJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_HatennaPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/pain.gbapal");
+static const u16 sFieldMugshotPal_HatennaPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_HatennaSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/sad.gbapal");
+static const u16 sFieldMugshotPal_HatennaSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_HatennaShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/shouting.gbapal");
+static const u16 sFieldMugshotPal_HatennaShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_HatennaSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/sigh.gbapal");
+static const u16 sFieldMugshotPal_HatennaSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_HatennaStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/stunned.gbapal");
+static const u16 sFieldMugshotPal_HatennaStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_HatennaSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/surprised.gbapal");
+static const u16 sFieldMugshotPal_HatennaSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_HatennaTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_HatennaTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_HatennaWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/worried.gbapal");
+static const u16 sFieldMugshotPal_HatennaWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatenna/worried_shiny.gbapal");
+
+
+// Hatterene
+static const u32 sFieldMugshotGfx_HattereneNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatterenePain[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_HatterenePainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattereneWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hatterene/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_HattereneNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/normal.gbapal");
+static const u16 sFieldMugshotPal_HattereneNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_HattereneAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/angry.gbapal");
+static const u16 sFieldMugshotPal_HattereneAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_HattereneCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/crying.gbapal");
+static const u16 sFieldMugshotPal_HattereneCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_HattereneDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/determined.gbapal");
+static const u16 sFieldMugshotPal_HattereneDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_HattereneDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/dizzy.gbapal");
+static const u16 sFieldMugshotPal_HattereneDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_HattereneHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/happy.gbapal");
+static const u16 sFieldMugshotPal_HattereneHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_HattereneInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/inspired.gbapal");
+static const u16 sFieldMugshotPal_HattereneInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_HattereneJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/joyous.gbapal");
+static const u16 sFieldMugshotPal_HattereneJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_HatterenePain[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/pain.gbapal");
+static const u16 sFieldMugshotPal_HatterenePainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_HattereneSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/sad.gbapal");
+static const u16 sFieldMugshotPal_HattereneSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_HattereneShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/shouting.gbapal");
+static const u16 sFieldMugshotPal_HattereneShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_HattereneSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/sigh.gbapal");
+static const u16 sFieldMugshotPal_HattereneSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_HattereneStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/stunned.gbapal");
+static const u16 sFieldMugshotPal_HattereneStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_HattereneSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/surprised.gbapal");
+static const u16 sFieldMugshotPal_HattereneSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_HattereneTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_HattereneTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_HattereneWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/worried.gbapal");
+static const u16 sFieldMugshotPal_HattereneWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hatterene/worried_shiny.gbapal");
+
+
+// Hattrem
+static const u32 sFieldMugshotGfx_HattremNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_HattremNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HattremWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/hattrem/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_HattremNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/normal.gbapal");
+static const u16 sFieldMugshotPal_HattremNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HattremAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/angry.gbapal");
+// static const u16 sFieldMugshotPal_HattremAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HattremCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/crying.gbapal");
+// static const u16 sFieldMugshotPal_HattremCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HattremDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/determined.gbapal");
+// static const u16 sFieldMugshotPal_HattremDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HattremDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_HattremDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HattremHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/happy.gbapal");
+// static const u16 sFieldMugshotPal_HattremHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HattremInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/inspired.gbapal");
+// static const u16 sFieldMugshotPal_HattremInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HattremJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/joyous.gbapal");
+// static const u16 sFieldMugshotPal_HattremJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HattremPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/pain.gbapal");
+// static const u16 sFieldMugshotPal_HattremPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HattremSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/sad.gbapal");
+// static const u16 sFieldMugshotPal_HattremSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HattremShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/shouting.gbapal");
+// static const u16 sFieldMugshotPal_HattremShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HattremSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/sigh.gbapal");
+// static const u16 sFieldMugshotPal_HattremSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HattremStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/stunned.gbapal");
+// static const u16 sFieldMugshotPal_HattremStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HattremSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/surprised.gbapal");
+// static const u16 sFieldMugshotPal_HattremSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HattremTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_HattremTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HattremWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/worried.gbapal");
+// static const u16 sFieldMugshotPal_HattremWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/hattrem/worried_shiny.gbapal");
+
+
+// Herdier
+static const u32 sFieldMugshotGfx_HerdierNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_HerdierNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_HerdierWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/herdier/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_HerdierNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/normal.gbapal");
+static const u16 sFieldMugshotPal_HerdierNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HerdierAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/angry.gbapal");
+// static const u16 sFieldMugshotPal_HerdierAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HerdierCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/crying.gbapal");
+// static const u16 sFieldMugshotPal_HerdierCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HerdierDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/determined.gbapal");
+// static const u16 sFieldMugshotPal_HerdierDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HerdierDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_HerdierDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HerdierHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/happy.gbapal");
+// static const u16 sFieldMugshotPal_HerdierHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HerdierInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/inspired.gbapal");
+// static const u16 sFieldMugshotPal_HerdierInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HerdierJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/joyous.gbapal");
+// static const u16 sFieldMugshotPal_HerdierJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HerdierPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/pain.gbapal");
+// static const u16 sFieldMugshotPal_HerdierPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HerdierSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/sad.gbapal");
+// static const u16 sFieldMugshotPal_HerdierSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HerdierShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/shouting.gbapal");
+// static const u16 sFieldMugshotPal_HerdierShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HerdierSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/sigh.gbapal");
+// static const u16 sFieldMugshotPal_HerdierSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HerdierStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/stunned.gbapal");
+// static const u16 sFieldMugshotPal_HerdierStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HerdierSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/surprised.gbapal");
+// static const u16 sFieldMugshotPal_HerdierSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HerdierTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_HerdierTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_HerdierWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/worried.gbapal");
+// static const u16 sFieldMugshotPal_HerdierWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/herdier/worried_shiny.gbapal");
+
+
+// Impidimp
+static const u32 sFieldMugshotGfx_ImpidimpNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_ImpidimpNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ImpidimpWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/impidimp/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_ImpidimpNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/normal.gbapal");
+static const u16 sFieldMugshotPal_ImpidimpNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/angry.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/crying.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/determined.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/happy.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/inspired.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/joyous.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/pain.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/sad.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/shouting.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/sigh.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/stunned.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/surprised.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/worried.gbapal");
+// static const u16 sFieldMugshotPal_ImpidimpWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/impidimp/worried_shiny.gbapal");
+
+
+// Klang
+static const u32 sFieldMugshotGfx_KlangNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_KlangNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlangWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klang/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_KlangNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/normal.gbapal");
+static const u16 sFieldMugshotPal_KlangNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlangAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/angry.gbapal");
+// static const u16 sFieldMugshotPal_KlangAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlangCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/crying.gbapal");
+// static const u16 sFieldMugshotPal_KlangCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlangDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/determined.gbapal");
+// static const u16 sFieldMugshotPal_KlangDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlangDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_KlangDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlangHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/happy.gbapal");
+// static const u16 sFieldMugshotPal_KlangHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlangInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/inspired.gbapal");
+// static const u16 sFieldMugshotPal_KlangInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlangJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/joyous.gbapal");
+// static const u16 sFieldMugshotPal_KlangJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlangPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/pain.gbapal");
+// static const u16 sFieldMugshotPal_KlangPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlangSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/sad.gbapal");
+// static const u16 sFieldMugshotPal_KlangSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlangShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/shouting.gbapal");
+// static const u16 sFieldMugshotPal_KlangShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlangSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/sigh.gbapal");
+// static const u16 sFieldMugshotPal_KlangSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlangStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/stunned.gbapal");
+// static const u16 sFieldMugshotPal_KlangStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlangSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/surprised.gbapal");
+// static const u16 sFieldMugshotPal_KlangSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlangTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_KlangTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlangWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/worried.gbapal");
+// static const u16 sFieldMugshotPal_KlangWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klang/worried_shiny.gbapal");
+
+
+// Klink
+static const u32 sFieldMugshotGfx_KlinkNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_KlinkNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinkWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klink/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_KlinkNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/normal.gbapal");
+static const u16 sFieldMugshotPal_KlinkNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinkAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/angry.gbapal");
+// static const u16 sFieldMugshotPal_KlinkAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinkCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/crying.gbapal");
+// static const u16 sFieldMugshotPal_KlinkCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinkDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/determined.gbapal");
+// static const u16 sFieldMugshotPal_KlinkDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinkDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_KlinkDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinkHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/happy.gbapal");
+// static const u16 sFieldMugshotPal_KlinkHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinkInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/inspired.gbapal");
+// static const u16 sFieldMugshotPal_KlinkInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinkJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/joyous.gbapal");
+// static const u16 sFieldMugshotPal_KlinkJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinkPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/pain.gbapal");
+// static const u16 sFieldMugshotPal_KlinkPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinkSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/sad.gbapal");
+// static const u16 sFieldMugshotPal_KlinkSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinkShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/shouting.gbapal");
+// static const u16 sFieldMugshotPal_KlinkShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinkSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/sigh.gbapal");
+// static const u16 sFieldMugshotPal_KlinkSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinkStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/stunned.gbapal");
+// static const u16 sFieldMugshotPal_KlinkStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinkSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/surprised.gbapal");
+// static const u16 sFieldMugshotPal_KlinkSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinkTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_KlinkTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinkWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/worried.gbapal");
+// static const u16 sFieldMugshotPal_KlinkWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klink/worried_shiny.gbapal");
+
+
+// Klinklang
+static const u32 sFieldMugshotGfx_KlinklangNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_KlinklangNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KlinklangWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/klinklang/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_KlinklangNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/normal.gbapal");
+static const u16 sFieldMugshotPal_KlinklangNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/angry.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/crying.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/determined.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/happy.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/inspired.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/joyous.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/pain.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/sad.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/shouting.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/sigh.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/stunned.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/surprised.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/worried.gbapal");
+// static const u16 sFieldMugshotPal_KlinklangWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/klinklang/worried_shiny.gbapal");
+
+
+// Krokorok
+static const u32 sFieldMugshotGfx_KrokorokNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrokorokWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krokorok/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_KrokorokNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/normal.gbapal");
+static const u16 sFieldMugshotPal_KrokorokNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrokorokAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/angry.gbapal");
+static const u16 sFieldMugshotPal_KrokorokAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrokorokCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/crying.gbapal");
+static const u16 sFieldMugshotPal_KrokorokCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrokorokDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/determined.gbapal");
+static const u16 sFieldMugshotPal_KrokorokDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrokorokDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/dizzy.gbapal");
+static const u16 sFieldMugshotPal_KrokorokDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrokorokHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/happy.gbapal");
+static const u16 sFieldMugshotPal_KrokorokHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrokorokInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/inspired.gbapal");
+static const u16 sFieldMugshotPal_KrokorokInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrokorokJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/joyous.gbapal");
+static const u16 sFieldMugshotPal_KrokorokJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrokorokPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/pain.gbapal");
+static const u16 sFieldMugshotPal_KrokorokPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrokorokSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/sad.gbapal");
+static const u16 sFieldMugshotPal_KrokorokSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrokorokShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/shouting.gbapal");
+static const u16 sFieldMugshotPal_KrokorokShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrokorokSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/sigh.gbapal");
+static const u16 sFieldMugshotPal_KrokorokSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrokorokStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/stunned.gbapal");
+static const u16 sFieldMugshotPal_KrokorokStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrokorokSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/surprised.gbapal");
+static const u16 sFieldMugshotPal_KrokorokSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrokorokTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_KrokorokTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrokorokWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/worried.gbapal");
+static const u16 sFieldMugshotPal_KrokorokWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krokorok/worried_shiny.gbapal");
+
+
+// Krookodile
+static const u32 sFieldMugshotGfx_KrookodileNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrookodileNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrookodileAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KrookodileAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrookodileCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KrookodileCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrookodileDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KrookodileDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrookodileDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KrookodileDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrookodileHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KrookodileHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrookodileInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KrookodileInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrookodileJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KrookodileJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrookodilePain[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KrookodilePainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrookodileSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KrookodileSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrookodileShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KrookodileShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrookodileSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KrookodileSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrookodileStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KrookodileStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrookodileSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KrookodileSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrookodileTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KrookodileTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrookodileWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_KrookodileWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/worried_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrookodileSpecial[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/special0.4bpp.lz");
+static const u32 sFieldMugshotGfx_KrookodileSpecialShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/krookodile/special0_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_KrookodileNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/normal.gbapal");
+static const u16 sFieldMugshotPal_KrookodileNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrookodileAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/angry.gbapal");
+// static const u16 sFieldMugshotPal_KrookodileAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrookodileCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/crying.gbapal");
+// static const u16 sFieldMugshotPal_KrookodileCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrookodileDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/determined.gbapal");
+// static const u16 sFieldMugshotPal_KrookodileDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrookodileDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_KrookodileDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrookodileHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/happy.gbapal");
+// static const u16 sFieldMugshotPal_KrookodileHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrookodileInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/inspired.gbapal");
+// static const u16 sFieldMugshotPal_KrookodileInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrookodileJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/joyous.gbapal");
+// static const u16 sFieldMugshotPal_KrookodileJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrookodilePain[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/pain.gbapal");
+// static const u16 sFieldMugshotPal_KrookodilePainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrookodileSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/sad.gbapal");
+// static const u16 sFieldMugshotPal_KrookodileSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrookodileShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/shouting.gbapal");
+// static const u16 sFieldMugshotPal_KrookodileShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrookodileSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/sigh.gbapal");
+// static const u16 sFieldMugshotPal_KrookodileSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrookodileStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/stunned.gbapal");
+// static const u16 sFieldMugshotPal_KrookodileStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrookodileSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/surprised.gbapal");
+// static const u16 sFieldMugshotPal_KrookodileSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrookodileTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_KrookodileTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrookodileWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/worried.gbapal");
+// static const u16 sFieldMugshotPal_KrookodileWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/worried_shiny.gbapal");
+static const u16 sFieldMugshotPal_KrookodileSpecial[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/special0.gbapal");
+static const u16 sFieldMugshotPal_KrookodileSpecialShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/krookodile/special0_shiny.gbapal");
+
+
+// Lillipup
+static const u32 sFieldMugshotGfx_LillipupNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_LillipupWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/lillipup/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_LillipupNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/normal.gbapal");
+static const u16 sFieldMugshotPal_LillipupNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_LillipupAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/angry.gbapal");
+static const u16 sFieldMugshotPal_LillipupAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_LillipupCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/crying.gbapal");
+static const u16 sFieldMugshotPal_LillipupCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_LillipupDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/determined.gbapal");
+static const u16 sFieldMugshotPal_LillipupDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_LillipupDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/dizzy.gbapal");
+static const u16 sFieldMugshotPal_LillipupDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_LillipupHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/happy.gbapal");
+static const u16 sFieldMugshotPal_LillipupHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_LillipupInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/inspired.gbapal");
+static const u16 sFieldMugshotPal_LillipupInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_LillipupJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/joyous.gbapal");
+static const u16 sFieldMugshotPal_LillipupJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_LillipupPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/pain.gbapal");
+static const u16 sFieldMugshotPal_LillipupPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_LillipupSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/sad.gbapal");
+static const u16 sFieldMugshotPal_LillipupSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_LillipupShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/shouting.gbapal");
+static const u16 sFieldMugshotPal_LillipupShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_LillipupSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/sigh.gbapal");
+static const u16 sFieldMugshotPal_LillipupSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_LillipupStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/stunned.gbapal");
+static const u16 sFieldMugshotPal_LillipupStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_LillipupSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/surprised.gbapal");
+static const u16 sFieldMugshotPal_LillipupSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_LillipupTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_LillipupTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_LillipupWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/worried.gbapal");
+static const u16 sFieldMugshotPal_LillipupWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/lillipup/worried_shiny.gbapal");
+
+
+// Luxio
+static const u32 sFieldMugshotGfx_LuxioNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxioWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxio/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_LuxioNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/normal.gbapal");
+static const u16 sFieldMugshotPal_LuxioNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxioAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/angry.gbapal");
+static const u16 sFieldMugshotPal_LuxioAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxioCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/crying.gbapal");
+static const u16 sFieldMugshotPal_LuxioCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxioDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/determined.gbapal");
+static const u16 sFieldMugshotPal_LuxioDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxioDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/dizzy.gbapal");
+static const u16 sFieldMugshotPal_LuxioDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxioHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/happy.gbapal");
+static const u16 sFieldMugshotPal_LuxioHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxioInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/inspired.gbapal");
+static const u16 sFieldMugshotPal_LuxioInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxioJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/joyous.gbapal");
+static const u16 sFieldMugshotPal_LuxioJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxioPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/pain.gbapal");
+static const u16 sFieldMugshotPal_LuxioPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxioSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/sad.gbapal");
+static const u16 sFieldMugshotPal_LuxioSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxioShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/shouting.gbapal");
+static const u16 sFieldMugshotPal_LuxioShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxioSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/sigh.gbapal");
+static const u16 sFieldMugshotPal_LuxioSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxioStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/stunned.gbapal");
+static const u16 sFieldMugshotPal_LuxioStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxioSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/surprised.gbapal");
+static const u16 sFieldMugshotPal_LuxioSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxioTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_LuxioTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxioWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/worried.gbapal");
+static const u16 sFieldMugshotPal_LuxioWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxio/worried_shiny.gbapal");
+
+
+// Luxray
+static const u32 sFieldMugshotGfx_LuxrayNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxraySad[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxraySadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxraySigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxraySighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxraySurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxraySurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_LuxrayWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/luxray/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_LuxrayNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/normal.gbapal");
+static const u16 sFieldMugshotPal_LuxrayNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxrayAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/angry.gbapal");
+static const u16 sFieldMugshotPal_LuxrayAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxrayCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/crying.gbapal");
+static const u16 sFieldMugshotPal_LuxrayCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxrayDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/determined.gbapal");
+static const u16 sFieldMugshotPal_LuxrayDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxrayDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/dizzy.gbapal");
+static const u16 sFieldMugshotPal_LuxrayDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxrayHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/happy.gbapal");
+static const u16 sFieldMugshotPal_LuxrayHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxrayInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/inspired.gbapal");
+static const u16 sFieldMugshotPal_LuxrayInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxrayJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/joyous.gbapal");
+static const u16 sFieldMugshotPal_LuxrayJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxrayPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/pain.gbapal");
+static const u16 sFieldMugshotPal_LuxrayPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxraySad[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/sad.gbapal");
+static const u16 sFieldMugshotPal_LuxraySadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxrayShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/shouting.gbapal");
+static const u16 sFieldMugshotPal_LuxrayShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxraySigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/sigh.gbapal");
+static const u16 sFieldMugshotPal_LuxraySighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxrayStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/stunned.gbapal");
+static const u16 sFieldMugshotPal_LuxrayStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxraySurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/surprised.gbapal");
+static const u16 sFieldMugshotPal_LuxraySurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxrayTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_LuxrayTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_LuxrayWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/worried.gbapal");
+static const u16 sFieldMugshotPal_LuxrayWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/luxray/worried_shiny.gbapal");
+
+
+// Machamp
+static const u32 sFieldMugshotGfx_MachampNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachampNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MachampWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machamp/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_MachampNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/normal.gbapal");
+static const u16 sFieldMugshotPal_MachampNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MachampAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/angry.gbapal");
+// static const u16 sFieldMugshotPal_MachampAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MachampCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/crying.gbapal");
+// static const u16 sFieldMugshotPal_MachampCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MachampDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/determined.gbapal");
+// static const u16 sFieldMugshotPal_MachampDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MachampDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_MachampDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MachampHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/happy.gbapal");
+// static const u16 sFieldMugshotPal_MachampHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MachampInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/inspired.gbapal");
+// static const u16 sFieldMugshotPal_MachampInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MachampJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/joyous.gbapal");
+// static const u16 sFieldMugshotPal_MachampJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MachampPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/pain.gbapal");
+// static const u16 sFieldMugshotPal_MachampPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MachampSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/sad.gbapal");
+// static const u16 sFieldMugshotPal_MachampSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MachampShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/shouting.gbapal");
+// static const u16 sFieldMugshotPal_MachampShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MachampSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/sigh.gbapal");
+// static const u16 sFieldMugshotPal_MachampSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MachampStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/stunned.gbapal");
+// static const u16 sFieldMugshotPal_MachampStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MachampSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/surprised.gbapal");
+// static const u16 sFieldMugshotPal_MachampSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MachampTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_MachampTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MachampWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/worried.gbapal");
+// static const u16 sFieldMugshotPal_MachampWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machamp/worried_shiny.gbapal");
+
+
+// Machoke
+static const u32 sFieldMugshotGfx_MachokeNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokePain[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokePainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachokeWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machoke/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_MachokeNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/normal.gbapal");
+static const u16 sFieldMugshotPal_MachokeNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachokeAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/angry.gbapal");
+static const u16 sFieldMugshotPal_MachokeAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachokeCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/crying.gbapal");
+static const u16 sFieldMugshotPal_MachokeCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachokeDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/determined.gbapal");
+static const u16 sFieldMugshotPal_MachokeDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachokeDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/dizzy.gbapal");
+static const u16 sFieldMugshotPal_MachokeDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachokeHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/happy.gbapal");
+static const u16 sFieldMugshotPal_MachokeHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachokeInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/inspired.gbapal");
+static const u16 sFieldMugshotPal_MachokeInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachokeJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/joyous.gbapal");
+static const u16 sFieldMugshotPal_MachokeJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachokePain[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/pain.gbapal");
+static const u16 sFieldMugshotPal_MachokePainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachokeSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/sad.gbapal");
+static const u16 sFieldMugshotPal_MachokeSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachokeShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/shouting.gbapal");
+static const u16 sFieldMugshotPal_MachokeShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachokeSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/sigh.gbapal");
+static const u16 sFieldMugshotPal_MachokeSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachokeStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/stunned.gbapal");
+static const u16 sFieldMugshotPal_MachokeStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachokeSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/surprised.gbapal");
+static const u16 sFieldMugshotPal_MachokeSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachokeTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_MachokeTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachokeWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/worried.gbapal");
+static const u16 sFieldMugshotPal_MachokeWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machoke/worried_shiny.gbapal");
+
+
+// Machop
+static const u32 sFieldMugshotGfx_MachopNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_MachopWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/machop/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_MachopNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/normal.gbapal");
+static const u16 sFieldMugshotPal_MachopNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachopAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/angry.gbapal");
+static const u16 sFieldMugshotPal_MachopAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachopCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/crying.gbapal");
+static const u16 sFieldMugshotPal_MachopCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachopDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/determined.gbapal");
+static const u16 sFieldMugshotPal_MachopDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachopDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/dizzy.gbapal");
+static const u16 sFieldMugshotPal_MachopDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachopHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/happy.gbapal");
+static const u16 sFieldMugshotPal_MachopHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachopInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/inspired.gbapal");
+static const u16 sFieldMugshotPal_MachopInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachopJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/joyous.gbapal");
+static const u16 sFieldMugshotPal_MachopJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachopPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/pain.gbapal");
+static const u16 sFieldMugshotPal_MachopPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachopSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/sad.gbapal");
+static const u16 sFieldMugshotPal_MachopSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachopShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/shouting.gbapal");
+static const u16 sFieldMugshotPal_MachopShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachopSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/sigh.gbapal");
+static const u16 sFieldMugshotPal_MachopSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachopStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/stunned.gbapal");
+static const u16 sFieldMugshotPal_MachopStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachopSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/surprised.gbapal");
+static const u16 sFieldMugshotPal_MachopSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachopTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_MachopTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_MachopWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/worried.gbapal");
+static const u16 sFieldMugshotPal_MachopWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/machop/worried_shiny.gbapal");
+
+
+// Magby
+static const u32 sFieldMugshotGfx_MagbyNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbySad[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbySadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbySigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbySighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbySurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbySurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagbyWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magby/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_MagbyNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/normal.gbapal");
+static const u16 sFieldMugshotPal_MagbyNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagbyAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/angry.gbapal");
+static const u16 sFieldMugshotPal_MagbyAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagbyCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/crying.gbapal");
+static const u16 sFieldMugshotPal_MagbyCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagbyDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/determined.gbapal");
+static const u16 sFieldMugshotPal_MagbyDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagbyDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/dizzy.gbapal");
+static const u16 sFieldMugshotPal_MagbyDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagbyHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/happy.gbapal");
+static const u16 sFieldMugshotPal_MagbyHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagbyInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/inspired.gbapal");
+static const u16 sFieldMugshotPal_MagbyInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagbyJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/joyous.gbapal");
+static const u16 sFieldMugshotPal_MagbyJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagbyPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/pain.gbapal");
+static const u16 sFieldMugshotPal_MagbyPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagbySad[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/sad.gbapal");
+static const u16 sFieldMugshotPal_MagbySadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagbyShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/shouting.gbapal");
+static const u16 sFieldMugshotPal_MagbyShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagbySigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/sigh.gbapal");
+static const u16 sFieldMugshotPal_MagbySighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagbyStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/stunned.gbapal");
+static const u16 sFieldMugshotPal_MagbyStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagbySurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/surprised.gbapal");
+static const u16 sFieldMugshotPal_MagbySurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagbyTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_MagbyTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagbyWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/worried.gbapal");
+static const u16 sFieldMugshotPal_MagbyWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magby/worried_shiny.gbapal");
+
+
+// Magmar
+static const u32 sFieldMugshotGfx_MagmarNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmarNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MagmarWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmar/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_MagmarNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/normal.gbapal");
+static const u16 sFieldMugshotPal_MagmarNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MagmarAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/angry.gbapal");
+// static const u16 sFieldMugshotPal_MagmarAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MagmarCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/crying.gbapal");
+// static const u16 sFieldMugshotPal_MagmarCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MagmarDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/determined.gbapal");
+// static const u16 sFieldMugshotPal_MagmarDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MagmarDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_MagmarDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MagmarHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/happy.gbapal");
+// static const u16 sFieldMugshotPal_MagmarHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MagmarInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/inspired.gbapal");
+// static const u16 sFieldMugshotPal_MagmarInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MagmarJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/joyous.gbapal");
+// static const u16 sFieldMugshotPal_MagmarJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MagmarPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/pain.gbapal");
+// static const u16 sFieldMugshotPal_MagmarPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MagmarSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/sad.gbapal");
+// static const u16 sFieldMugshotPal_MagmarSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MagmarShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/shouting.gbapal");
+// static const u16 sFieldMugshotPal_MagmarShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MagmarSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/sigh.gbapal");
+// static const u16 sFieldMugshotPal_MagmarSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MagmarStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/stunned.gbapal");
+// static const u16 sFieldMugshotPal_MagmarStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MagmarSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/surprised.gbapal");
+// static const u16 sFieldMugshotPal_MagmarSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MagmarTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_MagmarTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MagmarWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/worried.gbapal");
+// static const u16 sFieldMugshotPal_MagmarWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmar/worried_shiny.gbapal");
+
+
+// Magmortar
+static const u32 sFieldMugshotGfx_MagmortarNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_MagmortarWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/magmortar/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_MagmortarNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/normal.gbapal");
+static const u16 sFieldMugshotPal_MagmortarNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagmortarAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/angry.gbapal");
+static const u16 sFieldMugshotPal_MagmortarAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagmortarCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/crying.gbapal");
+static const u16 sFieldMugshotPal_MagmortarCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagmortarDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/determined.gbapal");
+static const u16 sFieldMugshotPal_MagmortarDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagmortarDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/dizzy.gbapal");
+static const u16 sFieldMugshotPal_MagmortarDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagmortarHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/happy.gbapal");
+static const u16 sFieldMugshotPal_MagmortarHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagmortarInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/inspired.gbapal");
+static const u16 sFieldMugshotPal_MagmortarInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagmortarJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/joyous.gbapal");
+static const u16 sFieldMugshotPal_MagmortarJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagmortarPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/pain.gbapal");
+static const u16 sFieldMugshotPal_MagmortarPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagmortarSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/sad.gbapal");
+static const u16 sFieldMugshotPal_MagmortarSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagmortarShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/shouting.gbapal");
+static const u16 sFieldMugshotPal_MagmortarShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagmortarSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/sigh.gbapal");
+static const u16 sFieldMugshotPal_MagmortarSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagmortarStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/stunned.gbapal");
+static const u16 sFieldMugshotPal_MagmortarStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagmortarSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/surprised.gbapal");
+static const u16 sFieldMugshotPal_MagmortarSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagmortarTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_MagmortarTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_MagmortarWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/worried.gbapal");
+static const u16 sFieldMugshotPal_MagmortarWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/magmortar/worried_shiny.gbapal");
+
+
+// Mamoswine
+static const u32 sFieldMugshotGfx_MamoswineNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_MamoswineNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswinePain[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswinePainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MamoswineWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/mamoswine/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_MamoswineNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/normal.gbapal");
+static const u16 sFieldMugshotPal_MamoswineNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/angry.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/crying.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/determined.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/happy.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/inspired.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/joyous.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MamoswinePain[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/pain.gbapal");
+// static const u16 sFieldMugshotPal_MamoswinePainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/sad.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/shouting.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/sigh.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/stunned.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/surprised.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/worried.gbapal");
+// static const u16 sFieldMugshotPal_MamoswineWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/mamoswine/worried_shiny.gbapal");
+
+
+// Morgrem
+static const u32 sFieldMugshotGfx_MorgremNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_MorgremNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MorgremAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MorgremAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MorgremCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MorgremCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MorgremDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MorgremDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MorgremDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MorgremDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MorgremHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MorgremHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MorgremInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MorgremInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MorgremJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MorgremJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MorgremPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MorgremPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MorgremSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MorgremSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MorgremShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MorgremShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MorgremSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MorgremSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MorgremStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MorgremStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MorgremSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MorgremSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MorgremTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MorgremTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_MorgremWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_MorgremWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/morgrem/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_MorgremNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/normal.gbapal");
+static const u16 sFieldMugshotPal_MorgremNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_MorgremAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/angry.gbapal");
+// static const u16 sFieldMugshotPal_MorgremAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_MorgremCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/crying.gbapal");
+// static const u16 sFieldMugshotPal_MorgremCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_MorgremDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/determined.gbapal");
+// static const u16 sFieldMugshotPal_MorgremDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_MorgremDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_MorgremDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_MorgremHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/happy.gbapal");
+// static const u16 sFieldMugshotPal_MorgremHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_MorgremInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/inspired.gbapal");
+// static const u16 sFieldMugshotPal_MorgremInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_MorgremJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/joyous.gbapal");
+// static const u16 sFieldMugshotPal_MorgremJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_MorgremPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/pain.gbapal");
+// static const u16 sFieldMugshotPal_MorgremPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_MorgremSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/sad.gbapal");
+// static const u16 sFieldMugshotPal_MorgremSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_MorgremShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/shouting.gbapal");
+// static const u16 sFieldMugshotPal_MorgremShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_MorgremSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/sigh.gbapal");
+// static const u16 sFieldMugshotPal_MorgremSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_MorgremStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/stunned.gbapal");
+// static const u16 sFieldMugshotPal_MorgremStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_MorgremSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/surprised.gbapal");
+// static const u16 sFieldMugshotPal_MorgremSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_MorgremTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_MorgremTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_MorgremWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/worried.gbapal");
+// static const u16 sFieldMugshotPal_MorgremWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/morgrem/worried_shiny.gbapal");
+
+
+// Nidoking
+static const u32 sFieldMugshotGfx_NidokingNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidokingWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoking/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_NidokingNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/normal.gbapal");
+static const u16 sFieldMugshotPal_NidokingNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidokingAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/angry.gbapal");
+static const u16 sFieldMugshotPal_NidokingAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidokingCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/crying.gbapal");
+static const u16 sFieldMugshotPal_NidokingCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidokingDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/determined.gbapal");
+static const u16 sFieldMugshotPal_NidokingDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidokingDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/dizzy.gbapal");
+static const u16 sFieldMugshotPal_NidokingDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidokingHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/happy.gbapal");
+static const u16 sFieldMugshotPal_NidokingHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidokingInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/inspired.gbapal");
+static const u16 sFieldMugshotPal_NidokingInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidokingJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/joyous.gbapal");
+static const u16 sFieldMugshotPal_NidokingJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidokingPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/pain.gbapal");
+static const u16 sFieldMugshotPal_NidokingPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidokingSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/sad.gbapal");
+static const u16 sFieldMugshotPal_NidokingSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidokingShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/shouting.gbapal");
+static const u16 sFieldMugshotPal_NidokingShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidokingSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/sigh.gbapal");
+static const u16 sFieldMugshotPal_NidokingSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidokingStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/stunned.gbapal");
+static const u16 sFieldMugshotPal_NidokingStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidokingSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/surprised.gbapal");
+static const u16 sFieldMugshotPal_NidokingSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidokingTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_NidokingTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidokingWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/worried.gbapal");
+static const u16 sFieldMugshotPal_NidokingWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoking/worried_shiny.gbapal");
+
+
+// Nidoqueen
+static const u32 sFieldMugshotGfx_NidoqueenNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidoqueenWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoqueen/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_NidoqueenNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/normal.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/angry.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/crying.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/determined.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/dizzy.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/happy.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/inspired.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/joyous.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/pain.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/sad.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/shouting.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/sigh.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/stunned.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/surprised.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/worried.gbapal");
+static const u16 sFieldMugshotPal_NidoqueenWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoqueen/worried_shiny.gbapal");
+
+
+// Nidoran_f
+static const u32 sFieldMugshotGfx_Nidoran_fNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_fWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_f/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_Nidoran_fNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/normal.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/angry.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/crying.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/determined.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/dizzy.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/happy.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/inspired.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/joyous.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/pain.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/sad.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/shouting.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/sigh.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/stunned.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/surprised.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/worried.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_fWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_f/worried_shiny.gbapal");
+
+
+// Nidoran_m
+static const u32 sFieldMugshotGfx_Nidoran_mNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_Nidoran_mWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidoran_m/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_Nidoran_mNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/normal.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/angry.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/crying.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/determined.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/dizzy.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/happy.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/inspired.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/joyous.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/pain.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/sad.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/shouting.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/sigh.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/stunned.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/surprised.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/worried.gbapal");
+static const u16 sFieldMugshotPal_Nidoran_mWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidoran_m/worried_shiny.gbapal");
+
+
+// Nidorina
+static const u32 sFieldMugshotGfx_NidorinaNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinaWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorina/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_NidorinaNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/normal.gbapal");
+static const u16 sFieldMugshotPal_NidorinaNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidorinaAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/angry.gbapal");
+static const u16 sFieldMugshotPal_NidorinaAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidorinaCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/crying.gbapal");
+static const u16 sFieldMugshotPal_NidorinaCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidorinaDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/determined.gbapal");
+static const u16 sFieldMugshotPal_NidorinaDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidorinaDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/dizzy.gbapal");
+static const u16 sFieldMugshotPal_NidorinaDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidorinaHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/happy.gbapal");
+static const u16 sFieldMugshotPal_NidorinaHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidorinaInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/inspired.gbapal");
+static const u16 sFieldMugshotPal_NidorinaInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidorinaJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/joyous.gbapal");
+static const u16 sFieldMugshotPal_NidorinaJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidorinaPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/pain.gbapal");
+static const u16 sFieldMugshotPal_NidorinaPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidorinaSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/sad.gbapal");
+static const u16 sFieldMugshotPal_NidorinaSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidorinaShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/shouting.gbapal");
+static const u16 sFieldMugshotPal_NidorinaShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidorinaSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/sigh.gbapal");
+static const u16 sFieldMugshotPal_NidorinaSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidorinaStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/stunned.gbapal");
+static const u16 sFieldMugshotPal_NidorinaStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidorinaSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/surprised.gbapal");
+static const u16 sFieldMugshotPal_NidorinaSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidorinaTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_NidorinaTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_NidorinaWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/worried.gbapal");
+static const u16 sFieldMugshotPal_NidorinaWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorina/worried_shiny.gbapal");
+
+
+// Nidorino
+static const u32 sFieldMugshotGfx_NidorinoNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_NidorinoNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_NidorinoWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nidorino/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_NidorinoNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/normal.gbapal");
+static const u16 sFieldMugshotPal_NidorinoNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/angry.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/crying.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/determined.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/happy.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/inspired.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/joyous.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/pain.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/sad.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/shouting.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/sigh.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/stunned.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/surprised.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/worried.gbapal");
+// static const u16 sFieldMugshotPal_NidorinoWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nidorino/worried_shiny.gbapal");
+
+
+// Nuzleaf
+static const u32 sFieldMugshotGfx_NuzleafNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_NuzleafWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/nuzleaf/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_NuzleafNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/normal.gbapal");
+static const u16 sFieldMugshotPal_NuzleafNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_NuzleafAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/angry.gbapal");
+static const u16 sFieldMugshotPal_NuzleafAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_NuzleafCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/crying.gbapal");
+static const u16 sFieldMugshotPal_NuzleafCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_NuzleafDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/determined.gbapal");
+static const u16 sFieldMugshotPal_NuzleafDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_NuzleafDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/dizzy.gbapal");
+static const u16 sFieldMugshotPal_NuzleafDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_NuzleafHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/happy.gbapal");
+static const u16 sFieldMugshotPal_NuzleafHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_NuzleafInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/inspired.gbapal");
+static const u16 sFieldMugshotPal_NuzleafInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_NuzleafJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/joyous.gbapal");
+static const u16 sFieldMugshotPal_NuzleafJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_NuzleafPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/pain.gbapal");
+static const u16 sFieldMugshotPal_NuzleafPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_NuzleafSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/sad.gbapal");
+static const u16 sFieldMugshotPal_NuzleafSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_NuzleafShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/shouting.gbapal");
+static const u16 sFieldMugshotPal_NuzleafShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_NuzleafSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/sigh.gbapal");
+static const u16 sFieldMugshotPal_NuzleafSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_NuzleafStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/stunned.gbapal");
+static const u16 sFieldMugshotPal_NuzleafStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_NuzleafSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/surprised.gbapal");
+static const u16 sFieldMugshotPal_NuzleafSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_NuzleafTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_NuzleafTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_NuzleafWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/worried.gbapal");
+static const u16 sFieldMugshotPal_NuzleafWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/nuzleaf/worried_shiny.gbapal");
+
+
+// Palpitoad
+static const u32 sFieldMugshotGfx_PalpitoadNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_PalpitoadNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PalpitoadWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/palpitoad/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_PalpitoadNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/normal.gbapal");
+static const u16 sFieldMugshotPal_PalpitoadNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/angry.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/crying.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/determined.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/happy.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/inspired.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/joyous.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/pain.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/sad.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/shouting.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/sigh.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/stunned.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/surprised.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/worried.gbapal");
+// static const u16 sFieldMugshotPal_PalpitoadWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/palpitoad/worried_shiny.gbapal");
+
+
+// Piloswine
+static const u32 sFieldMugshotGfx_PiloswineNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_PiloswineNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswinePain[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswinePainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_PiloswineWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/piloswine/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_PiloswineNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/normal.gbapal");
+static const u16 sFieldMugshotPal_PiloswineNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/angry.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/crying.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/determined.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/happy.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/inspired.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/joyous.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PiloswinePain[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/pain.gbapal");
+// static const u16 sFieldMugshotPal_PiloswinePainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/sad.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/shouting.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/sigh.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/stunned.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/surprised.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/worried.gbapal");
+// static const u16 sFieldMugshotPal_PiloswineWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/piloswine/worried_shiny.gbapal");
+
+
+// Rolycoly
+static const u32 sFieldMugshotGfx_RolycolyNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolySad[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolySadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolySigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolySighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolySurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolySurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_RolycolyWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rolycoly/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_RolycolyNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/normal.gbapal");
+static const u16 sFieldMugshotPal_RolycolyNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_RolycolyAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/angry.gbapal");
+static const u16 sFieldMugshotPal_RolycolyAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_RolycolyCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/crying.gbapal");
+static const u16 sFieldMugshotPal_RolycolyCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_RolycolyDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/determined.gbapal");
+static const u16 sFieldMugshotPal_RolycolyDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_RolycolyDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/dizzy.gbapal");
+static const u16 sFieldMugshotPal_RolycolyDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_RolycolyHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/happy.gbapal");
+static const u16 sFieldMugshotPal_RolycolyHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_RolycolyInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/inspired.gbapal");
+static const u16 sFieldMugshotPal_RolycolyInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_RolycolyJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/joyous.gbapal");
+static const u16 sFieldMugshotPal_RolycolyJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_RolycolyPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/pain.gbapal");
+static const u16 sFieldMugshotPal_RolycolyPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_RolycolySad[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/sad.gbapal");
+static const u16 sFieldMugshotPal_RolycolySadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_RolycolyShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/shouting.gbapal");
+static const u16 sFieldMugshotPal_RolycolyShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_RolycolySigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/sigh.gbapal");
+static const u16 sFieldMugshotPal_RolycolySighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_RolycolyStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/stunned.gbapal");
+static const u16 sFieldMugshotPal_RolycolyStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_RolycolySurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/surprised.gbapal");
+static const u16 sFieldMugshotPal_RolycolySurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_RolycolyTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_RolycolyTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_RolycolyWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/worried.gbapal");
+static const u16 sFieldMugshotPal_RolycolyWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rolycoly/worried_shiny.gbapal");
+
+
+// Rookidee
+static const u32 sFieldMugshotGfx_RookideeNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_RookideeNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideePain[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideePainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_RookideeWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/rookidee/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_RookideeNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/normal.gbapal");
+static const u16 sFieldMugshotPal_RookideeNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_RookideeAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/angry.gbapal");
+// static const u16 sFieldMugshotPal_RookideeAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_RookideeCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/crying.gbapal");
+// static const u16 sFieldMugshotPal_RookideeCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_RookideeDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/determined.gbapal");
+// static const u16 sFieldMugshotPal_RookideeDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_RookideeDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_RookideeDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_RookideeHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/happy.gbapal");
+// static const u16 sFieldMugshotPal_RookideeHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_RookideeInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/inspired.gbapal");
+// static const u16 sFieldMugshotPal_RookideeInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_RookideeJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/joyous.gbapal");
+// static const u16 sFieldMugshotPal_RookideeJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_RookideePain[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/pain.gbapal");
+// static const u16 sFieldMugshotPal_RookideePainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_RookideeSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/sad.gbapal");
+// static const u16 sFieldMugshotPal_RookideeSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_RookideeShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/shouting.gbapal");
+// static const u16 sFieldMugshotPal_RookideeShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_RookideeSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/sigh.gbapal");
+// static const u16 sFieldMugshotPal_RookideeSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_RookideeStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/stunned.gbapal");
+// static const u16 sFieldMugshotPal_RookideeStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_RookideeSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/surprised.gbapal");
+// static const u16 sFieldMugshotPal_RookideeSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_RookideeTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_RookideeTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_RookideeWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/worried.gbapal");
+// static const u16 sFieldMugshotPal_RookideeWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/rookidee/worried_shiny.gbapal");
+
+
+// Salamence
+static const u32 sFieldMugshotGfx_SalamenceNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamencePain[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamencePainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_SalamenceWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/salamence/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_SalamenceNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/normal.gbapal");
+static const u16 sFieldMugshotPal_SalamenceNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_SalamenceAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/angry.gbapal");
+static const u16 sFieldMugshotPal_SalamenceAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_SalamenceCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/crying.gbapal");
+static const u16 sFieldMugshotPal_SalamenceCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_SalamenceDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/determined.gbapal");
+static const u16 sFieldMugshotPal_SalamenceDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_SalamenceDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/dizzy.gbapal");
+static const u16 sFieldMugshotPal_SalamenceDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_SalamenceHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/happy.gbapal");
+static const u16 sFieldMugshotPal_SalamenceHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_SalamenceInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/inspired.gbapal");
+static const u16 sFieldMugshotPal_SalamenceInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_SalamenceJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/joyous.gbapal");
+static const u16 sFieldMugshotPal_SalamenceJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_SalamencePain[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/pain.gbapal");
+static const u16 sFieldMugshotPal_SalamencePainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_SalamenceSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/sad.gbapal");
+static const u16 sFieldMugshotPal_SalamenceSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_SalamenceShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/shouting.gbapal");
+static const u16 sFieldMugshotPal_SalamenceShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_SalamenceSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/sigh.gbapal");
+static const u16 sFieldMugshotPal_SalamenceSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_SalamenceStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/stunned.gbapal");
+static const u16 sFieldMugshotPal_SalamenceStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_SalamenceSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/surprised.gbapal");
+static const u16 sFieldMugshotPal_SalamenceSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_SalamenceTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_SalamenceTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_SalamenceWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/worried.gbapal");
+static const u16 sFieldMugshotPal_SalamenceWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/salamence/worried_shiny.gbapal");
+
+
+// Sandile
+static const u32 sFieldMugshotGfx_SandileNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandilePain[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandilePainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_SandileWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/sandile/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_SandileNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/normal.gbapal");
+static const u16 sFieldMugshotPal_SandileNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_SandileAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/angry.gbapal");
+static const u16 sFieldMugshotPal_SandileAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_SandileCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/crying.gbapal");
+static const u16 sFieldMugshotPal_SandileCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_SandileDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/determined.gbapal");
+static const u16 sFieldMugshotPal_SandileDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_SandileDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/dizzy.gbapal");
+static const u16 sFieldMugshotPal_SandileDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_SandileHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/happy.gbapal");
+static const u16 sFieldMugshotPal_SandileHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_SandileInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/inspired.gbapal");
+static const u16 sFieldMugshotPal_SandileInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_SandileJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/joyous.gbapal");
+static const u16 sFieldMugshotPal_SandileJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_SandilePain[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/pain.gbapal");
+static const u16 sFieldMugshotPal_SandilePainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_SandileSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/sad.gbapal");
+static const u16 sFieldMugshotPal_SandileSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_SandileShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/shouting.gbapal");
+static const u16 sFieldMugshotPal_SandileShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_SandileSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/sigh.gbapal");
+static const u16 sFieldMugshotPal_SandileSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_SandileStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/stunned.gbapal");
+static const u16 sFieldMugshotPal_SandileStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_SandileSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/surprised.gbapal");
+static const u16 sFieldMugshotPal_SandileSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_SandileTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_SandileTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_SandileWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/worried.gbapal");
+static const u16 sFieldMugshotPal_SandileWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/sandile/worried_shiny.gbapal");
+
+
+// Seedot
+static const u32 sFieldMugshotGfx_SeedotNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeedotWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seedot/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_SeedotNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/normal.gbapal");
+static const u16 sFieldMugshotPal_SeedotNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_SeedotAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/angry.gbapal");
+static const u16 sFieldMugshotPal_SeedotAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_SeedotCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/crying.gbapal");
+static const u16 sFieldMugshotPal_SeedotCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_SeedotDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/determined.gbapal");
+static const u16 sFieldMugshotPal_SeedotDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_SeedotDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/dizzy.gbapal");
+static const u16 sFieldMugshotPal_SeedotDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_SeedotHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/happy.gbapal");
+static const u16 sFieldMugshotPal_SeedotHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_SeedotInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/inspired.gbapal");
+static const u16 sFieldMugshotPal_SeedotInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_SeedotJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/joyous.gbapal");
+static const u16 sFieldMugshotPal_SeedotJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_SeedotPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/pain.gbapal");
+static const u16 sFieldMugshotPal_SeedotPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_SeedotSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/sad.gbapal");
+static const u16 sFieldMugshotPal_SeedotSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_SeedotShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/shouting.gbapal");
+static const u16 sFieldMugshotPal_SeedotShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_SeedotSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/sigh.gbapal");
+static const u16 sFieldMugshotPal_SeedotSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_SeedotStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/stunned.gbapal");
+static const u16 sFieldMugshotPal_SeedotStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_SeedotSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/surprised.gbapal");
+static const u16 sFieldMugshotPal_SeedotSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_SeedotTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_SeedotTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_SeedotWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/worried.gbapal");
+static const u16 sFieldMugshotPal_SeedotWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seedot/worried_shiny.gbapal");
+
+
+// Seismitoad
+static const u32 sFieldMugshotGfx_SeismitoadNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_SeismitoadNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_SeismitoadWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/seismitoad/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_SeismitoadNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/normal.gbapal");
+static const u16 sFieldMugshotPal_SeismitoadNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/angry.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/crying.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/determined.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/happy.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/inspired.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/joyous.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/pain.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/sad.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/shouting.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/sigh.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/stunned.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/surprised.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/worried.gbapal");
+// static const u16 sFieldMugshotPal_SeismitoadWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/seismitoad/worried_shiny.gbapal");
+
+
+// Shelgon
+static const u32 sFieldMugshotGfx_ShelgonNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShelgonNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_ShelgonWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shelgon/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_ShelgonNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/normal.gbapal");
+static const u16 sFieldMugshotPal_ShelgonNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/angry.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/crying.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/determined.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/happy.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/inspired.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/joyous.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/pain.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/sad.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/shouting.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/sigh.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/stunned.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/surprised.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/worried.gbapal");
+// static const u16 sFieldMugshotPal_ShelgonWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shelgon/worried_shiny.gbapal");
+
+
+// Shiftry
+static const u32 sFieldMugshotGfx_ShiftryNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftrySad[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftrySadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftrySigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftrySighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftrySurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftrySurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShiftryWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shiftry/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_ShiftryNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/normal.gbapal");
+static const u16 sFieldMugshotPal_ShiftryNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShiftryAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/angry.gbapal");
+static const u16 sFieldMugshotPal_ShiftryAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShiftryCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/crying.gbapal");
+static const u16 sFieldMugshotPal_ShiftryCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShiftryDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/determined.gbapal");
+static const u16 sFieldMugshotPal_ShiftryDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShiftryDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/dizzy.gbapal");
+static const u16 sFieldMugshotPal_ShiftryDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShiftryHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/happy.gbapal");
+static const u16 sFieldMugshotPal_ShiftryHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShiftryInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/inspired.gbapal");
+static const u16 sFieldMugshotPal_ShiftryInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShiftryJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/joyous.gbapal");
+static const u16 sFieldMugshotPal_ShiftryJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShiftryPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/pain.gbapal");
+static const u16 sFieldMugshotPal_ShiftryPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShiftrySad[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/sad.gbapal");
+static const u16 sFieldMugshotPal_ShiftrySadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShiftryShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/shouting.gbapal");
+static const u16 sFieldMugshotPal_ShiftryShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShiftrySigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/sigh.gbapal");
+static const u16 sFieldMugshotPal_ShiftrySighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShiftryStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/stunned.gbapal");
+static const u16 sFieldMugshotPal_ShiftryStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShiftrySurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/surprised.gbapal");
+static const u16 sFieldMugshotPal_ShiftrySurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShiftryTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_ShiftryTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShiftryWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/worried.gbapal");
+static const u16 sFieldMugshotPal_ShiftryWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shiftry/worried_shiny.gbapal");
+
+
+// Shinx
+static const u32 sFieldMugshotGfx_ShinxNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_ShinxWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/shinx/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_ShinxNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/normal.gbapal");
+static const u16 sFieldMugshotPal_ShinxNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShinxAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/angry.gbapal");
+static const u16 sFieldMugshotPal_ShinxAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShinxCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/crying.gbapal");
+static const u16 sFieldMugshotPal_ShinxCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShinxDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/determined.gbapal");
+static const u16 sFieldMugshotPal_ShinxDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShinxDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/dizzy.gbapal");
+static const u16 sFieldMugshotPal_ShinxDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShinxHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/happy.gbapal");
+static const u16 sFieldMugshotPal_ShinxHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShinxInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/inspired.gbapal");
+static const u16 sFieldMugshotPal_ShinxInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShinxJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/joyous.gbapal");
+static const u16 sFieldMugshotPal_ShinxJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShinxPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/pain.gbapal");
+static const u16 sFieldMugshotPal_ShinxPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShinxSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/sad.gbapal");
+static const u16 sFieldMugshotPal_ShinxSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShinxShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/shouting.gbapal");
+static const u16 sFieldMugshotPal_ShinxShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShinxSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/sigh.gbapal");
+static const u16 sFieldMugshotPal_ShinxSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShinxStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/stunned.gbapal");
+static const u16 sFieldMugshotPal_ShinxStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShinxSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/surprised.gbapal");
+static const u16 sFieldMugshotPal_ShinxSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShinxTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_ShinxTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_ShinxWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/worried.gbapal");
+static const u16 sFieldMugshotPal_ShinxWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/shinx/worried_shiny.gbapal");
+
+
+// Stoutland
+static const u32 sFieldMugshotGfx_StoutlandNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_StoutlandDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_StoutlandDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_StoutlandInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_StoutlandInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_StoutlandJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_StoutlandJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_StoutlandSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_StoutlandSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_StoutlandStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_StoutlandStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_StoutlandSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_StoutlandSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_StoutlandWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/stoutland/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_StoutlandNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/normal.gbapal");
+static const u16 sFieldMugshotPal_StoutlandNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_StoutlandAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/angry.gbapal");
+static const u16 sFieldMugshotPal_StoutlandAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_StoutlandCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/crying.gbapal");
+static const u16 sFieldMugshotPal_StoutlandCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_StoutlandDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/determined.gbapal");
+static const u16 sFieldMugshotPal_StoutlandDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_StoutlandDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_StoutlandDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_StoutlandHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/happy.gbapal");
+static const u16 sFieldMugshotPal_StoutlandHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_StoutlandInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/inspired.gbapal");
+// static const u16 sFieldMugshotPal_StoutlandInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_StoutlandJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/joyous.gbapal");
+// static const u16 sFieldMugshotPal_StoutlandJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_StoutlandPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/pain.gbapal");
+static const u16 sFieldMugshotPal_StoutlandPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_StoutlandSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/sad.gbapal");
+static const u16 sFieldMugshotPal_StoutlandSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_StoutlandShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/shouting.gbapal");
+static const u16 sFieldMugshotPal_StoutlandShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_StoutlandSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/sigh.gbapal");
+// static const u16 sFieldMugshotPal_StoutlandSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_StoutlandStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/stunned.gbapal");
+// static const u16 sFieldMugshotPal_StoutlandStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_StoutlandSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/surprised.gbapal");
+// static const u16 sFieldMugshotPal_StoutlandSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_StoutlandTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_StoutlandTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_StoutlandWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/worried.gbapal");
+static const u16 sFieldMugshotPal_StoutlandWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/stoutland/worried_shiny.gbapal");
+
+
+// Swinub
+static const u32 sFieldMugshotGfx_SwinubNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/normal_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/angry.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/angry_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/crying.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/crying_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/determined.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/determined_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/dizzy.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/dizzy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/happy.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/happy_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/inspired.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/inspired_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/joyous.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/joyous_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/pain.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/pain_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/sad.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/sad_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/shouting.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/shouting_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/sigh.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/sigh_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/stunned.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/stunned_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/surprised.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/surprised_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/teary_eyed.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/teary_eyed_shiny.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/worried.4bpp.lz");
+static const u32 sFieldMugshotGfx_SwinubWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/swinub/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_SwinubNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/normal.gbapal");
+static const u16 sFieldMugshotPal_SwinubNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/normal_shiny.gbapal");
+static const u16 sFieldMugshotPal_SwinubAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/angry.gbapal");
+static const u16 sFieldMugshotPal_SwinubAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/angry_shiny.gbapal");
+static const u16 sFieldMugshotPal_SwinubCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/crying.gbapal");
+static const u16 sFieldMugshotPal_SwinubCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/crying_shiny.gbapal");
+static const u16 sFieldMugshotPal_SwinubDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/determined.gbapal");
+static const u16 sFieldMugshotPal_SwinubDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/determined_shiny.gbapal");
+static const u16 sFieldMugshotPal_SwinubDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/dizzy.gbapal");
+static const u16 sFieldMugshotPal_SwinubDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/dizzy_shiny.gbapal");
+static const u16 sFieldMugshotPal_SwinubHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/happy.gbapal");
+static const u16 sFieldMugshotPal_SwinubHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/happy_shiny.gbapal");
+static const u16 sFieldMugshotPal_SwinubInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/inspired.gbapal");
+static const u16 sFieldMugshotPal_SwinubInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/inspired_shiny.gbapal");
+static const u16 sFieldMugshotPal_SwinubJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/joyous.gbapal");
+static const u16 sFieldMugshotPal_SwinubJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/joyous_shiny.gbapal");
+static const u16 sFieldMugshotPal_SwinubPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/pain.gbapal");
+static const u16 sFieldMugshotPal_SwinubPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/pain_shiny.gbapal");
+static const u16 sFieldMugshotPal_SwinubSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/sad.gbapal");
+static const u16 sFieldMugshotPal_SwinubSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/sad_shiny.gbapal");
+static const u16 sFieldMugshotPal_SwinubShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/shouting.gbapal");
+static const u16 sFieldMugshotPal_SwinubShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/shouting_shiny.gbapal");
+static const u16 sFieldMugshotPal_SwinubSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/sigh.gbapal");
+static const u16 sFieldMugshotPal_SwinubSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/sigh_shiny.gbapal");
+static const u16 sFieldMugshotPal_SwinubStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/stunned.gbapal");
+static const u16 sFieldMugshotPal_SwinubStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/stunned_shiny.gbapal");
+static const u16 sFieldMugshotPal_SwinubSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/surprised.gbapal");
+static const u16 sFieldMugshotPal_SwinubSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/surprised_shiny.gbapal");
+static const u16 sFieldMugshotPal_SwinubTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/teary_eyed.gbapal");
+static const u16 sFieldMugshotPal_SwinubTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/teary_eyed_shiny.gbapal");
+static const u16 sFieldMugshotPal_SwinubWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/worried.gbapal");
+static const u16 sFieldMugshotPal_SwinubWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/swinub/worried_shiny.gbapal");
+
+
+// Tympole
+static const u32 sFieldMugshotGfx_TympoleNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/normal.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympolePain[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympolePainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_TympoleWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/tympole/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_TympoleNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/normal.gbapal");
+// static const u16 sFieldMugshotPal_TympoleNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_TympoleAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/angry.gbapal");
+// static const u16 sFieldMugshotPal_TympoleAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_TympoleCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/crying.gbapal");
+// static const u16 sFieldMugshotPal_TympoleCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_TympoleDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/determined.gbapal");
+// static const u16 sFieldMugshotPal_TympoleDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_TympoleDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_TympoleDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_TympoleHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/happy.gbapal");
+// static const u16 sFieldMugshotPal_TympoleHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_TympoleInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/inspired.gbapal");
+// static const u16 sFieldMugshotPal_TympoleInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_TympoleJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/joyous.gbapal");
+// static const u16 sFieldMugshotPal_TympoleJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_TympolePain[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/pain.gbapal");
+// static const u16 sFieldMugshotPal_TympolePainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_TympoleSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/sad.gbapal");
+// static const u16 sFieldMugshotPal_TympoleSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_TympoleShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/shouting.gbapal");
+// static const u16 sFieldMugshotPal_TympoleShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_TympoleSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/sigh.gbapal");
+// static const u16 sFieldMugshotPal_TympoleSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_TympoleStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/stunned.gbapal");
+// static const u16 sFieldMugshotPal_TympoleStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_TympoleSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/surprised.gbapal");
+// static const u16 sFieldMugshotPal_TympoleSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_TympoleTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_TympoleTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_TympoleWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/worried.gbapal");
+// static const u16 sFieldMugshotPal_TympoleWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/tympole/worried_shiny.gbapal");
+
+
+// Vikavolt
+static const u32 sFieldMugshotGfx_VikavoltNormal[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/normal.4bpp.lz");
+static const u32 sFieldMugshotGfx_VikavoltNormalShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/normal_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltAngry[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/angry.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltAngryShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/angry_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltCrying[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/crying.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltCryingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/crying_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltDetermined[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/determined.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltDeterminedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/determined_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltDizzy[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/dizzy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltDizzyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/dizzy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltHappy[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/happy.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltHappyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/happy_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltInspired[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/inspired.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltInspiredShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/inspired_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltJoyous[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/joyous.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltJoyousShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/joyous_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltPain[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/pain.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltPainShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/pain_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltSad[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/sad.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltSadShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/sad_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltShouting[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/shouting.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltShoutingShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/shouting_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltSigh[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/sigh.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltSighShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/sigh_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltStunned[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/stunned.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltStunnedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/stunned_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltSurprised[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/surprised.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltSurprisedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/surprised_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltTeary[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/teary_eyed.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltTearyShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/teary_eyed_shiny.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltWorried[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/worried.4bpp.lz");
+// static const u32 sFieldMugshotGfx_VikavoltWorriedShiny[] = INCBIN_U32("graphics/field_mugshots/pokemon/vikavolt/worried_shiny.4bpp.lz");
+
+static const u16 sFieldMugshotPal_VikavoltNormal[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/normal.gbapal");
+static const u16 sFieldMugshotPal_VikavoltNormalShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/normal_shiny.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltAngry[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/angry.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltAngryShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/angry_shiny.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltCrying[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/crying.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltCryingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/crying_shiny.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltDetermined[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/determined.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltDeterminedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/determined_shiny.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltDizzy[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/dizzy.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltDizzyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/dizzy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltHappy[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/happy.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltHappyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/happy_shiny.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltInspired[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/inspired.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltInspiredShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/inspired_shiny.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltJoyous[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/joyous.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltJoyousShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/joyous_shiny.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltPain[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/pain.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltPainShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/pain_shiny.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltSad[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/sad.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltSadShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/sad_shiny.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltShouting[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/shouting.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltShoutingShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/shouting_shiny.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltSigh[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/sigh.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltSighShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/sigh_shiny.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltStunned[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/stunned.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltStunnedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/stunned_shiny.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltSurprised[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/surprised.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltSurprisedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/surprised_shiny.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltTeary[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/teary_eyed.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltTearyShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/teary_eyed_shiny.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltWorried[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/worried.gbapal");
+// static const u16 sFieldMugshotPal_VikavoltWorriedShiny[] = INCBIN_U16("graphics/field_mugshots/pokemon/vikavolt/worried_shiny.gbapal");
+
 #include "constants/event_objects.h"
 #include "constants/species.h"
 
 const struct MugshotGfx gFieldMugshots[][EMOTE_COUNT] =
 {
+    [MUGSHOT_BLANK] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_Blank,
+            .pal = sFieldMugshotPal_Blank,
+        },
+    },
+
     [MUGSHOT_KOLE] =
     {
         [EMOTE_NORMAL] =
@@ -1890,8 +5876,8 @@ const struct MugshotGfx gFieldMugshots[][EMOTE_COUNT] =
 
         [EMOTE_HAPPY] =
         {
-            .gfx = sFieldMugshotGfx_LouisHappy,
-            .pal = sFieldMugshotPal_LouisHappy,
+            .gfx = sFieldMugshotGfx_LouisNormal,
+            .pal = sFieldMugshotPal_LouisNormal,
         },
     },
 
@@ -1917,11 +5903,35 @@ const struct MugshotGfx gFieldMugshots[][EMOTE_COUNT] =
             .gfx = sFieldMugshotGfx_CaptainNormal,
             .pal = sFieldMugshotPal_CaptainNormal,
         },
+    },
+
+    [MUGSHOT_DIEGO] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_DiegoNormal,
+            .pal = sFieldMugshotPal_DiegoNormal,
+        },
 
         [EMOTE_HAPPY] =
         {
-            .gfx = sFieldMugshotGfx_CaptainHappy,
-            .pal = sFieldMugshotPal_CaptainHappy,
+            .gfx = sFieldMugshotGfx_DiegoHappy,
+            .pal = sFieldMugshotPal_DiegoHappy,
+        },
+    },
+
+    [MUGSHOT_ASH] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_AshNormal,
+            .pal = sFieldMugshotPal_AshNormal,
+        },
+
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_AshHappy,
+            .pal = sFieldMugshotPal_AshHappy,
         },
     },
 
@@ -1929,8 +5939,14 @@ const struct MugshotGfx gFieldMugshots[][EMOTE_COUNT] =
     {
         [EMOTE_NORMAL] =
         {
-            .gfx = sFieldMugshotGfx_StevenSpecial,
-            .pal = sFieldMugshotPal_StevenSpecial,
+            .gfx = sFieldMugshotGfx_StevenNormal,
+            .pal = sFieldMugshotPal_StevenNormal,
+        },
+
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_StevenHappy,
+            .pal = sFieldMugshotPal_StevenHappy,
         },
 
         [EMOTE_SPECIAL] =
@@ -1944,8 +5960,14 @@ const struct MugshotGfx gFieldMugshots[][EMOTE_COUNT] =
     {
         [EMOTE_NORMAL] =
         {
-            .gfx = sFieldMugshotGfx_CynthiaSpecial,
-            .pal = sFieldMugshotPal_CynthiaSpecial,
+            .gfx = sFieldMugshotGfx_CynthiaNormal,
+            .pal = sFieldMugshotPal_CynthiaNormal,
+        },
+
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_CynthiaHappy,
+            .pal = sFieldMugshotPal_CynthiaHappy,
         },
 
         [EMOTE_SPECIAL] =
@@ -1959,8 +5981,14 @@ const struct MugshotGfx gFieldMugshots[][EMOTE_COUNT] =
     {
         [EMOTE_NORMAL] =
         {
-            .gfx = sFieldMugshotGfx_NSpecial,
-            .pal = sFieldMugshotPal_NSpecial,
+            .gfx = sFieldMugshotGfx_NNormal,
+            .pal = sFieldMugshotPal_NNormal,
+        },
+
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_NHappy,
+            .pal = sFieldMugshotPal_NHappy,
         },
 
         [EMOTE_SPECIAL] =
@@ -4648,6 +8676,204 @@ const struct MugshotGfx gFieldMugshots[][EMOTE_COUNT] =
             .pal = sFieldMugshotPal_EeveeWorriedShiny,
         },
     },
+    
+    [MUGSHOT_LAPRAS] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasNormal,
+            .pal = sFieldMugshotPal_LaprasNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasAngry,
+            .pal = sFieldMugshotPal_LaprasAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasCrying,
+            .pal = sFieldMugshotPal_LaprasCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasDetermined,
+            .pal = sFieldMugshotPal_LaprasDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasDizzy,
+            .pal = sFieldMugshotPal_LaprasDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasHappy,
+            .pal = sFieldMugshotPal_LaprasHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasInspired,
+            .pal = sFieldMugshotPal_LaprasInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasJoyous,
+            .pal = sFieldMugshotPal_LaprasJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasPain,
+            .pal = sFieldMugshotPal_LaprasPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasSad,
+            .pal = sFieldMugshotPal_LaprasSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasShouting,
+            .pal = sFieldMugshotPal_LaprasShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasSigh,
+            .pal = sFieldMugshotPal_LaprasSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasStunned,
+            .pal = sFieldMugshotPal_LaprasStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasSurprised,
+            .pal = sFieldMugshotPal_LaprasSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasTeary,
+            .pal = sFieldMugshotPal_LaprasTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasWorried,
+            .pal = sFieldMugshotPal_LaprasWorried,
+        },
+    },
+
+    [MUGSHOT_LAPRAS_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasNormalShiny,
+            .pal = sFieldMugshotPal_LaprasNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasAngryShiny,
+            .pal = sFieldMugshotPal_LaprasAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasCryingShiny,
+            .pal = sFieldMugshotPal_LaprasCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasDeterminedShiny,
+            .pal = sFieldMugshotPal_LaprasDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasDizzyShiny,
+            .pal = sFieldMugshotPal_LaprasDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasHappyShiny,
+            .pal = sFieldMugshotPal_LaprasHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasInspiredShiny,
+            .pal = sFieldMugshotPal_LaprasInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasJoyousShiny,
+            .pal = sFieldMugshotPal_LaprasJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasPainShiny,
+            .pal = sFieldMugshotPal_LaprasPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasSadShiny,
+            .pal = sFieldMugshotPal_LaprasSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasShoutingShiny,
+            .pal = sFieldMugshotPal_LaprasShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasSighShiny,
+            .pal = sFieldMugshotPal_LaprasSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasStunnedShiny,
+            .pal = sFieldMugshotPal_LaprasStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasSurprisedShiny,
+            .pal = sFieldMugshotPal_LaprasSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasTearyShiny,
+            .pal = sFieldMugshotPal_LaprasTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_LaprasWorriedShiny,
+            .pal = sFieldMugshotPal_LaprasWorriedShiny,
+        },
+    },
 
     [MUGSHOT_RELICANTH] =
     {
@@ -6850,6 +11076,11404 @@ const struct MugshotGfx gFieldMugshots[][EMOTE_COUNT] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrWorriedShiny,
         //     .pal = sFieldMugshotPal_GurdurrWorriedShiny,
+        // },
+    },
+
+    [MUGSHOT_BAGON] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_BagonNormal,
+            .pal = sFieldMugshotPal_BagonNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_BagonAngry,
+            .pal = sFieldMugshotPal_BagonAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_BagonCrying,
+            .pal = sFieldMugshotPal_BagonCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_BagonDetermined,
+            .pal = sFieldMugshotPal_BagonDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_BagonDizzy,
+            .pal = sFieldMugshotPal_BagonDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_BagonHappy,
+            .pal = sFieldMugshotPal_BagonHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_BagonInspired,
+            .pal = sFieldMugshotPal_BagonInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_BagonJoyous,
+            .pal = sFieldMugshotPal_BagonJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_BagonPain,
+            .pal = sFieldMugshotPal_BagonPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_BagonSad,
+            .pal = sFieldMugshotPal_BagonSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_BagonShouting,
+            .pal = sFieldMugshotPal_BagonShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_BagonSigh,
+            .pal = sFieldMugshotPal_BagonSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_BagonStunned,
+            .pal = sFieldMugshotPal_BagonStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_BagonSurprised,
+            .pal = sFieldMugshotPal_BagonSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_BagonTeary,
+            .pal = sFieldMugshotPal_BagonTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_BagonWorried,
+            .pal = sFieldMugshotPal_BagonWorried,
+        },
+    },
+
+    [MUGSHOT_BAGON_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_BagonNormalShiny,
+            .pal = sFieldMugshotPal_BagonNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_BagonAngryShiny,
+            .pal = sFieldMugshotPal_BagonAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_BagonCryingShiny,
+            .pal = sFieldMugshotPal_BagonCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_BagonDeterminedShiny,
+            .pal = sFieldMugshotPal_BagonDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_BagonDizzyShiny,
+            .pal = sFieldMugshotPal_BagonDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_BagonHappyShiny,
+            .pal = sFieldMugshotPal_BagonHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_BagonInspiredShiny,
+            .pal = sFieldMugshotPal_BagonInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_BagonJoyousShiny,
+            .pal = sFieldMugshotPal_BagonJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_BagonPainShiny,
+            .pal = sFieldMugshotPal_BagonPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_BagonSadShiny,
+            .pal = sFieldMugshotPal_BagonSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_BagonShoutingShiny,
+            .pal = sFieldMugshotPal_BagonShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_BagonSighShiny,
+            .pal = sFieldMugshotPal_BagonSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_BagonStunnedShiny,
+            .pal = sFieldMugshotPal_BagonStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_BagonSurprisedShiny,
+            .pal = sFieldMugshotPal_BagonSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_BagonTearyShiny,
+            .pal = sFieldMugshotPal_BagonTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_BagonWorriedShiny,
+            .pal = sFieldMugshotPal_BagonWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_CARKOL] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_CarkolNormal,
+            .pal = sFieldMugshotPal_CarkolNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolAngry,
+        //     .pal = sFieldMugshotPal_CarkolAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolCrying,
+        //     .pal = sFieldMugshotPal_CarkolCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolDetermined,
+        //     .pal = sFieldMugshotPal_CarkolDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolDizzy,
+        //     .pal = sFieldMugshotPal_CarkolDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolHappy,
+        //     .pal = sFieldMugshotPal_CarkolHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolInspired,
+        //     .pal = sFieldMugshotPal_CarkolInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolJoyous,
+        //     .pal = sFieldMugshotPal_CarkolJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolPain,
+        //     .pal = sFieldMugshotPal_CarkolPain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolSad,
+        //     .pal = sFieldMugshotPal_CarkolSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolShouting,
+        //     .pal = sFieldMugshotPal_CarkolShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolSigh,
+        //     .pal = sFieldMugshotPal_CarkolSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolStunned,
+        //     .pal = sFieldMugshotPal_CarkolStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolSurprised,
+        //     .pal = sFieldMugshotPal_CarkolSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolTeary,
+        //     .pal = sFieldMugshotPal_CarkolTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolWorried,
+        //     .pal = sFieldMugshotPal_CarkolWorried,
+        // },
+    },
+
+    [MUGSHOT_CARKOL_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_CarkolNormalShiny,
+            .pal = sFieldMugshotPal_CarkolNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolAngryShiny,
+        //     .pal = sFieldMugshotPal_CarkolAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolCryingShiny,
+        //     .pal = sFieldMugshotPal_CarkolCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolDeterminedShiny,
+        //     .pal = sFieldMugshotPal_CarkolDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolDizzyShiny,
+        //     .pal = sFieldMugshotPal_CarkolDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolHappyShiny,
+        //     .pal = sFieldMugshotPal_CarkolHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolInspiredShiny,
+        //     .pal = sFieldMugshotPal_CarkolInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolJoyousShiny,
+        //     .pal = sFieldMugshotPal_CarkolJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolPainShiny,
+        //     .pal = sFieldMugshotPal_CarkolPainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolSadShiny,
+        //     .pal = sFieldMugshotPal_CarkolSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolShoutingShiny,
+        //     .pal = sFieldMugshotPal_CarkolShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolSighShiny,
+        //     .pal = sFieldMugshotPal_CarkolSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolStunnedShiny,
+        //     .pal = sFieldMugshotPal_CarkolStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolSurprisedShiny,
+        //     .pal = sFieldMugshotPal_CarkolSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolTearyShiny,
+        //     .pal = sFieldMugshotPal_CarkolTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CarkolWorriedShiny,
+        //     .pal = sFieldMugshotPal_CarkolWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_CHARJABUG] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugNormal,
+            .pal = sFieldMugshotPal_CharjabugNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugAngry,
+            .pal = sFieldMugshotPal_CharjabugAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugCrying,
+            .pal = sFieldMugshotPal_CharjabugCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugDetermined,
+            .pal = sFieldMugshotPal_CharjabugDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugDizzy,
+            .pal = sFieldMugshotPal_CharjabugDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugHappy,
+            .pal = sFieldMugshotPal_CharjabugHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugInspired,
+            .pal = sFieldMugshotPal_CharjabugInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugJoyous,
+            .pal = sFieldMugshotPal_CharjabugJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugPain,
+            .pal = sFieldMugshotPal_CharjabugPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugSad,
+            .pal = sFieldMugshotPal_CharjabugSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugShouting,
+            .pal = sFieldMugshotPal_CharjabugShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugSigh,
+            .pal = sFieldMugshotPal_CharjabugSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugStunned,
+            .pal = sFieldMugshotPal_CharjabugStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugSurprised,
+            .pal = sFieldMugshotPal_CharjabugSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugTeary,
+            .pal = sFieldMugshotPal_CharjabugTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugWorried,
+            .pal = sFieldMugshotPal_CharjabugWorried,
+        },
+    },
+
+    [MUGSHOT_CHARJABUG_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugNormalShiny,
+            .pal = sFieldMugshotPal_CharjabugNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugAngryShiny,
+            .pal = sFieldMugshotPal_CharjabugAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugCryingShiny,
+            .pal = sFieldMugshotPal_CharjabugCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugDeterminedShiny,
+            .pal = sFieldMugshotPal_CharjabugDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugDizzyShiny,
+            .pal = sFieldMugshotPal_CharjabugDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugHappyShiny,
+            .pal = sFieldMugshotPal_CharjabugHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugInspiredShiny,
+            .pal = sFieldMugshotPal_CharjabugInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugJoyousShiny,
+            .pal = sFieldMugshotPal_CharjabugJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugPainShiny,
+            .pal = sFieldMugshotPal_CharjabugPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugSadShiny,
+            .pal = sFieldMugshotPal_CharjabugSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugShoutingShiny,
+            .pal = sFieldMugshotPal_CharjabugShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugSighShiny,
+            .pal = sFieldMugshotPal_CharjabugSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugStunnedShiny,
+            .pal = sFieldMugshotPal_CharjabugStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugSurprisedShiny,
+            .pal = sFieldMugshotPal_CharjabugSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugTearyShiny,
+            .pal = sFieldMugshotPal_CharjabugTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_CharjabugWorriedShiny,
+            .pal = sFieldMugshotPal_CharjabugWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_COALOSSAL] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_CoalossalNormal,
+            .pal = sFieldMugshotPal_CoalossalNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalAngry,
+        //     .pal = sFieldMugshotPal_CoalossalAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalCrying,
+        //     .pal = sFieldMugshotPal_CoalossalCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalDetermined,
+        //     .pal = sFieldMugshotPal_CoalossalDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalDizzy,
+        //     .pal = sFieldMugshotPal_CoalossalDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalHappy,
+        //     .pal = sFieldMugshotPal_CoalossalHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalInspired,
+        //     .pal = sFieldMugshotPal_CoalossalInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalJoyous,
+        //     .pal = sFieldMugshotPal_CoalossalJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalPain,
+        //     .pal = sFieldMugshotPal_CoalossalPain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalSad,
+        //     .pal = sFieldMugshotPal_CoalossalSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalShouting,
+        //     .pal = sFieldMugshotPal_CoalossalShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalSigh,
+        //     .pal = sFieldMugshotPal_CoalossalSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalStunned,
+        //     .pal = sFieldMugshotPal_CoalossalStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalSurprised,
+        //     .pal = sFieldMugshotPal_CoalossalSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalTeary,
+        //     .pal = sFieldMugshotPal_CoalossalTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalWorried,
+        //     .pal = sFieldMugshotPal_CoalossalWorried,
+        // },
+    },
+
+    [MUGSHOT_COALOSSAL_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_CoalossalNormalShiny,
+            .pal = sFieldMugshotPal_CoalossalNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalAngryShiny,
+        //     .pal = sFieldMugshotPal_CoalossalAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalCryingShiny,
+        //     .pal = sFieldMugshotPal_CoalossalCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalDeterminedShiny,
+        //     .pal = sFieldMugshotPal_CoalossalDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalDizzyShiny,
+        //     .pal = sFieldMugshotPal_CoalossalDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalHappyShiny,
+        //     .pal = sFieldMugshotPal_CoalossalHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalInspiredShiny,
+        //     .pal = sFieldMugshotPal_CoalossalInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalJoyousShiny,
+        //     .pal = sFieldMugshotPal_CoalossalJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalPainShiny,
+        //     .pal = sFieldMugshotPal_CoalossalPainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalSadShiny,
+        //     .pal = sFieldMugshotPal_CoalossalSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalShoutingShiny,
+        //     .pal = sFieldMugshotPal_CoalossalShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalSighShiny,
+        //     .pal = sFieldMugshotPal_CoalossalSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalStunnedShiny,
+        //     .pal = sFieldMugshotPal_CoalossalStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalSurprisedShiny,
+        //     .pal = sFieldMugshotPal_CoalossalSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalTearyShiny,
+        //     .pal = sFieldMugshotPal_CoalossalTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CoalossalWorriedShiny,
+        //     .pal = sFieldMugshotPal_CoalossalWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_CORVIKNIGHT] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_CorviknightNormal,
+            .pal = sFieldMugshotPal_CorviknightNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_CorviknightAngry,
+            .pal = sFieldMugshotPal_CorviknightAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_CorviknightCrying,
+            .pal = sFieldMugshotPal_CorviknightCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_CorviknightDetermined,
+            .pal = sFieldMugshotPal_CorviknightDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_CorviknightDizzy,
+            .pal = sFieldMugshotPal_CorviknightDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_CorviknightHappy,
+            .pal = sFieldMugshotPal_CorviknightHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_CorviknightInspired,
+            .pal = sFieldMugshotPal_CorviknightInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_CorviknightJoyous,
+            .pal = sFieldMugshotPal_CorviknightJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_CorviknightPain,
+            .pal = sFieldMugshotPal_CorviknightPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_CorviknightSad,
+            .pal = sFieldMugshotPal_CorviknightSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_CorviknightShouting,
+            .pal = sFieldMugshotPal_CorviknightShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_CorviknightSigh,
+            .pal = sFieldMugshotPal_CorviknightSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_CorviknightStunned,
+            .pal = sFieldMugshotPal_CorviknightStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_CorviknightSurprised,
+            .pal = sFieldMugshotPal_CorviknightSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_CorviknightTeary,
+            .pal = sFieldMugshotPal_CorviknightTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_CorviknightWorried,
+            .pal = sFieldMugshotPal_CorviknightWorried,
+        },
+    },
+
+    [MUGSHOT_CORVIKNIGHT_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_CorviknightNormalShiny,
+            .pal = sFieldMugshotPal_CorviknightNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CorviknightAngryShiny,
+        //     .pal = sFieldMugshotPal_CorviknightAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CorviknightCryingShiny,
+        //     .pal = sFieldMugshotPal_CorviknightCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CorviknightDeterminedShiny,
+        //     .pal = sFieldMugshotPal_CorviknightDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CorviknightDizzyShiny,
+        //     .pal = sFieldMugshotPal_CorviknightDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CorviknightHappyShiny,
+        //     .pal = sFieldMugshotPal_CorviknightHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CorviknightInspiredShiny,
+        //     .pal = sFieldMugshotPal_CorviknightInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CorviknightJoyousShiny,
+        //     .pal = sFieldMugshotPal_CorviknightJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CorviknightPainShiny,
+        //     .pal = sFieldMugshotPal_CorviknightPainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CorviknightSadShiny,
+        //     .pal = sFieldMugshotPal_CorviknightSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CorviknightShoutingShiny,
+        //     .pal = sFieldMugshotPal_CorviknightShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CorviknightSighShiny,
+        //     .pal = sFieldMugshotPal_CorviknightSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CorviknightStunnedShiny,
+        //     .pal = sFieldMugshotPal_CorviknightStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CorviknightSurprisedShiny,
+        //     .pal = sFieldMugshotPal_CorviknightSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CorviknightTearyShiny,
+        //     .pal = sFieldMugshotPal_CorviknightTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_CorviknightWorriedShiny,
+        //     .pal = sFieldMugshotPal_CorviknightWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_CORVISQUIRE] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireNormal,
+            .pal = sFieldMugshotPal_CorvisquireNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireAngry,
+            .pal = sFieldMugshotPal_CorvisquireAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireCrying,
+            .pal = sFieldMugshotPal_CorvisquireCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireDetermined,
+            .pal = sFieldMugshotPal_CorvisquireDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireDizzy,
+            .pal = sFieldMugshotPal_CorvisquireDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireHappy,
+            .pal = sFieldMugshotPal_CorvisquireHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireInspired,
+            .pal = sFieldMugshotPal_CorvisquireInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireJoyous,
+            .pal = sFieldMugshotPal_CorvisquireJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquirePain,
+            .pal = sFieldMugshotPal_CorvisquirePain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireSad,
+            .pal = sFieldMugshotPal_CorvisquireSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireShouting,
+            .pal = sFieldMugshotPal_CorvisquireShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireSigh,
+            .pal = sFieldMugshotPal_CorvisquireSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireStunned,
+            .pal = sFieldMugshotPal_CorvisquireStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireSurprised,
+            .pal = sFieldMugshotPal_CorvisquireSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireTeary,
+            .pal = sFieldMugshotPal_CorvisquireTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireWorried,
+            .pal = sFieldMugshotPal_CorvisquireWorried,
+        },
+    },
+
+    [MUGSHOT_CORVISQUIRE_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireNormalShiny,
+            .pal = sFieldMugshotPal_CorvisquireNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireAngryShiny,
+            .pal = sFieldMugshotPal_CorvisquireAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireCryingShiny,
+            .pal = sFieldMugshotPal_CorvisquireCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireDeterminedShiny,
+            .pal = sFieldMugshotPal_CorvisquireDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireDizzyShiny,
+            .pal = sFieldMugshotPal_CorvisquireDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireHappyShiny,
+            .pal = sFieldMugshotPal_CorvisquireHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireInspiredShiny,
+            .pal = sFieldMugshotPal_CorvisquireInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireJoyousShiny,
+            .pal = sFieldMugshotPal_CorvisquireJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquirePainShiny,
+            .pal = sFieldMugshotPal_CorvisquirePainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireSadShiny,
+            .pal = sFieldMugshotPal_CorvisquireSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireShoutingShiny,
+            .pal = sFieldMugshotPal_CorvisquireShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireSighShiny,
+            .pal = sFieldMugshotPal_CorvisquireSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireStunnedShiny,
+            .pal = sFieldMugshotPal_CorvisquireStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireSurprisedShiny,
+            .pal = sFieldMugshotPal_CorvisquireSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireTearyShiny,
+            .pal = sFieldMugshotPal_CorvisquireTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_CorvisquireWorriedShiny,
+            .pal = sFieldMugshotPal_CorvisquireWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_DUSCLOPS] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsNormal,
+            .pal = sFieldMugshotPal_DusclopsNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsAngry,
+            .pal = sFieldMugshotPal_DusclopsAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsCrying,
+            .pal = sFieldMugshotPal_DusclopsCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsDetermined,
+            .pal = sFieldMugshotPal_DusclopsDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsDizzy,
+            .pal = sFieldMugshotPal_DusclopsDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsHappy,
+            .pal = sFieldMugshotPal_DusclopsHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsInspired,
+            .pal = sFieldMugshotPal_DusclopsInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsJoyous,
+            .pal = sFieldMugshotPal_DusclopsJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsPain,
+            .pal = sFieldMugshotPal_DusclopsPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsSad,
+            .pal = sFieldMugshotPal_DusclopsSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsShouting,
+            .pal = sFieldMugshotPal_DusclopsShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsSigh,
+            .pal = sFieldMugshotPal_DusclopsSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsStunned,
+            .pal = sFieldMugshotPal_DusclopsStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsSurprised,
+            .pal = sFieldMugshotPal_DusclopsSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsTeary,
+            .pal = sFieldMugshotPal_DusclopsTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsWorried,
+            .pal = sFieldMugshotPal_DusclopsWorried,
+        },
+    },
+
+    [MUGSHOT_DUSCLOPS_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsNormalShiny,
+            .pal = sFieldMugshotPal_DusclopsNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsAngryShiny,
+            .pal = sFieldMugshotPal_DusclopsAngryShiny,
+        },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_DusclopsCryingShiny,
+        //     .pal = sFieldMugshotPal_DusclopsCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_DusclopsDeterminedShiny,
+        //     .pal = sFieldMugshotPal_DusclopsDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_DusclopsDizzyShiny,
+        //     .pal = sFieldMugshotPal_DusclopsDizzyShiny,
+        // },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsHappyShiny,
+            .pal = sFieldMugshotPal_DusclopsHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsInspiredShiny,
+            .pal = sFieldMugshotPal_DusclopsInspiredShiny,
+        },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_DusclopsJoyousShiny,
+        //     .pal = sFieldMugshotPal_DusclopsJoyousShiny,
+        // },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsPainShiny,
+            .pal = sFieldMugshotPal_DusclopsPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsSadShiny,
+            .pal = sFieldMugshotPal_DusclopsSadShiny,
+        },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_DusclopsShoutingShiny,
+        //     .pal = sFieldMugshotPal_DusclopsShoutingShiny,
+        // },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsSighShiny,
+            .pal = sFieldMugshotPal_DusclopsSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsStunnedShiny,
+            .pal = sFieldMugshotPal_DusclopsStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsSurprisedShiny,
+            .pal = sFieldMugshotPal_DusclopsSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsTearyShiny,
+            .pal = sFieldMugshotPal_DusclopsTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_DusclopsWorriedShiny,
+            .pal = sFieldMugshotPal_DusclopsWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_DUSKNOIR] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirNormal,
+            .pal = sFieldMugshotPal_DusknoirNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirAngry,
+            .pal = sFieldMugshotPal_DusknoirAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirCrying,
+            .pal = sFieldMugshotPal_DusknoirCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirDetermined,
+            .pal = sFieldMugshotPal_DusknoirDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirDizzy,
+            .pal = sFieldMugshotPal_DusknoirDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirHappy,
+            .pal = sFieldMugshotPal_DusknoirHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirInspired,
+            .pal = sFieldMugshotPal_DusknoirInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirJoyous,
+            .pal = sFieldMugshotPal_DusknoirJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirPain,
+            .pal = sFieldMugshotPal_DusknoirPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirSad,
+            .pal = sFieldMugshotPal_DusknoirSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirShouting,
+            .pal = sFieldMugshotPal_DusknoirShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirSigh,
+            .pal = sFieldMugshotPal_DusknoirSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirStunned,
+            .pal = sFieldMugshotPal_DusknoirStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirSurprised,
+            .pal = sFieldMugshotPal_DusknoirSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirTeary,
+            .pal = sFieldMugshotPal_DusknoirTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirWorried,
+            .pal = sFieldMugshotPal_DusknoirWorried,
+        },
+    },
+
+    [MUGSHOT_DUSKNOIR_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirNormalShiny,
+            .pal = sFieldMugshotPal_DusknoirNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirAngryShiny,
+            .pal = sFieldMugshotPal_DusknoirAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirCryingShiny,
+            .pal = sFieldMugshotPal_DusknoirCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirDeterminedShiny,
+            .pal = sFieldMugshotPal_DusknoirDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirDizzyShiny,
+            .pal = sFieldMugshotPal_DusknoirDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirHappyShiny,
+            .pal = sFieldMugshotPal_DusknoirHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirInspiredShiny,
+            .pal = sFieldMugshotPal_DusknoirInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirJoyousShiny,
+            .pal = sFieldMugshotPal_DusknoirJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirPainShiny,
+            .pal = sFieldMugshotPal_DusknoirPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirSadShiny,
+            .pal = sFieldMugshotPal_DusknoirSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirShoutingShiny,
+            .pal = sFieldMugshotPal_DusknoirShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirSighShiny,
+            .pal = sFieldMugshotPal_DusknoirSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirStunnedShiny,
+            .pal = sFieldMugshotPal_DusknoirStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirSurprisedShiny,
+            .pal = sFieldMugshotPal_DusknoirSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirTearyShiny,
+            .pal = sFieldMugshotPal_DusknoirTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_DusknoirWorriedShiny,
+            .pal = sFieldMugshotPal_DusknoirWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_DUSKULL] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullNormal,
+            .pal = sFieldMugshotPal_DuskullNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullAngry,
+            .pal = sFieldMugshotPal_DuskullAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullCrying,
+            .pal = sFieldMugshotPal_DuskullCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullDetermined,
+            .pal = sFieldMugshotPal_DuskullDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullDizzy,
+            .pal = sFieldMugshotPal_DuskullDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullHappy,
+            .pal = sFieldMugshotPal_DuskullHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullInspired,
+            .pal = sFieldMugshotPal_DuskullInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullJoyous,
+            .pal = sFieldMugshotPal_DuskullJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullPain,
+            .pal = sFieldMugshotPal_DuskullPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullSad,
+            .pal = sFieldMugshotPal_DuskullSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullShouting,
+            .pal = sFieldMugshotPal_DuskullShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullSigh,
+            .pal = sFieldMugshotPal_DuskullSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullStunned,
+            .pal = sFieldMugshotPal_DuskullStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullSurprised,
+            .pal = sFieldMugshotPal_DuskullSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullTeary,
+            .pal = sFieldMugshotPal_DuskullTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullWorried,
+            .pal = sFieldMugshotPal_DuskullWorried,
+        },
+    },
+
+    [MUGSHOT_DUSKULL_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullNormalShiny,
+            .pal = sFieldMugshotPal_DuskullNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullAngryShiny,
+            .pal = sFieldMugshotPal_DuskullAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullCryingShiny,
+            .pal = sFieldMugshotPal_DuskullCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullDeterminedShiny,
+            .pal = sFieldMugshotPal_DuskullDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullDizzyShiny,
+            .pal = sFieldMugshotPal_DuskullDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullHappyShiny,
+            .pal = sFieldMugshotPal_DuskullHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullInspiredShiny,
+            .pal = sFieldMugshotPal_DuskullInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullJoyousShiny,
+            .pal = sFieldMugshotPal_DuskullJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullPainShiny,
+            .pal = sFieldMugshotPal_DuskullPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullSadShiny,
+            .pal = sFieldMugshotPal_DuskullSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullShoutingShiny,
+            .pal = sFieldMugshotPal_DuskullShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullSighShiny,
+            .pal = sFieldMugshotPal_DuskullSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullStunnedShiny,
+            .pal = sFieldMugshotPal_DuskullStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullSurprisedShiny,
+            .pal = sFieldMugshotPal_DuskullSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullTearyShiny,
+            .pal = sFieldMugshotPal_DuskullTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_DuskullWorriedShiny,
+            .pal = sFieldMugshotPal_DuskullWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_FLABEBE] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeNormal,
+            .pal = sFieldMugshotPal_FlabebeNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeAngry,
+            .pal = sFieldMugshotPal_FlabebeAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeCrying,
+            .pal = sFieldMugshotPal_FlabebeCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeDetermined,
+            .pal = sFieldMugshotPal_FlabebeDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeDizzy,
+            .pal = sFieldMugshotPal_FlabebeDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeHappy,
+            .pal = sFieldMugshotPal_FlabebeHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeInspired,
+            .pal = sFieldMugshotPal_FlabebeInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeJoyous,
+            .pal = sFieldMugshotPal_FlabebeJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebePain,
+            .pal = sFieldMugshotPal_FlabebePain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeSad,
+            .pal = sFieldMugshotPal_FlabebeSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeShouting,
+            .pal = sFieldMugshotPal_FlabebeShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeSigh,
+            .pal = sFieldMugshotPal_FlabebeSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeStunned,
+            .pal = sFieldMugshotPal_FlabebeStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeSurprised,
+            .pal = sFieldMugshotPal_FlabebeSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeTeary,
+            .pal = sFieldMugshotPal_FlabebeTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeWorried,
+            .pal = sFieldMugshotPal_FlabebeWorried,
+        },
+    },
+
+    [MUGSHOT_FLABEBE_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeNormalShiny,
+            .pal = sFieldMugshotPal_FlabebeNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeAngryShiny,
+            .pal = sFieldMugshotPal_FlabebeAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeCryingShiny,
+            .pal = sFieldMugshotPal_FlabebeCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeDeterminedShiny,
+            .pal = sFieldMugshotPal_FlabebeDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeDizzyShiny,
+            .pal = sFieldMugshotPal_FlabebeDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeHappyShiny,
+            .pal = sFieldMugshotPal_FlabebeHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeInspiredShiny,
+            .pal = sFieldMugshotPal_FlabebeInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeJoyousShiny,
+            .pal = sFieldMugshotPal_FlabebeJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebePainShiny,
+            .pal = sFieldMugshotPal_FlabebePainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeSadShiny,
+            .pal = sFieldMugshotPal_FlabebeSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeShoutingShiny,
+            .pal = sFieldMugshotPal_FlabebeShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeSighShiny,
+            .pal = sFieldMugshotPal_FlabebeSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeStunnedShiny,
+            .pal = sFieldMugshotPal_FlabebeStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeSurprisedShiny,
+            .pal = sFieldMugshotPal_FlabebeSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeTearyShiny,
+            .pal = sFieldMugshotPal_FlabebeTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_FlabebeWorriedShiny,
+            .pal = sFieldMugshotPal_FlabebeWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_FLOETTE] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteNormal,
+            .pal = sFieldMugshotPal_FloetteNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteAngry,
+            .pal = sFieldMugshotPal_FloetteAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteCrying,
+            .pal = sFieldMugshotPal_FloetteCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteDetermined,
+            .pal = sFieldMugshotPal_FloetteDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteDizzy,
+            .pal = sFieldMugshotPal_FloetteDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteHappy,
+            .pal = sFieldMugshotPal_FloetteHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteInspired,
+            .pal = sFieldMugshotPal_FloetteInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteJoyous,
+            .pal = sFieldMugshotPal_FloetteJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_FloettePain,
+            .pal = sFieldMugshotPal_FloettePain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteSad,
+            .pal = sFieldMugshotPal_FloetteSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteShouting,
+            .pal = sFieldMugshotPal_FloetteShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteSigh,
+            .pal = sFieldMugshotPal_FloetteSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteStunned,
+            .pal = sFieldMugshotPal_FloetteStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteSurprised,
+            .pal = sFieldMugshotPal_FloetteSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteTeary,
+            .pal = sFieldMugshotPal_FloetteTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteWorried,
+            .pal = sFieldMugshotPal_FloetteWorried,
+        },
+    },
+
+    [MUGSHOT_FLOETTE_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteNormalShiny,
+            .pal = sFieldMugshotPal_FloetteNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteAngryShiny,
+            .pal = sFieldMugshotPal_FloetteAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteCryingShiny,
+            .pal = sFieldMugshotPal_FloetteCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteDeterminedShiny,
+            .pal = sFieldMugshotPal_FloetteDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteDizzyShiny,
+            .pal = sFieldMugshotPal_FloetteDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteHappyShiny,
+            .pal = sFieldMugshotPal_FloetteHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteInspiredShiny,
+            .pal = sFieldMugshotPal_FloetteInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteJoyousShiny,
+            .pal = sFieldMugshotPal_FloetteJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_FloettePainShiny,
+            .pal = sFieldMugshotPal_FloettePainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteSadShiny,
+            .pal = sFieldMugshotPal_FloetteSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteShoutingShiny,
+            .pal = sFieldMugshotPal_FloetteShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteSighShiny,
+            .pal = sFieldMugshotPal_FloetteSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteStunnedShiny,
+            .pal = sFieldMugshotPal_FloetteStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteSurprisedShiny,
+            .pal = sFieldMugshotPal_FloetteSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteTearyShiny,
+            .pal = sFieldMugshotPal_FloetteTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_FloetteWorriedShiny,
+            .pal = sFieldMugshotPal_FloetteWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_FLORGES] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesNormal,
+            .pal = sFieldMugshotPal_FlorgesNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesAngry,
+            .pal = sFieldMugshotPal_FlorgesAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesCrying,
+            .pal = sFieldMugshotPal_FlorgesCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesDetermined,
+            .pal = sFieldMugshotPal_FlorgesDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesDizzy,
+            .pal = sFieldMugshotPal_FlorgesDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesHappy,
+            .pal = sFieldMugshotPal_FlorgesHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesInspired,
+            .pal = sFieldMugshotPal_FlorgesInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesJoyous,
+            .pal = sFieldMugshotPal_FlorgesJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesPain,
+            .pal = sFieldMugshotPal_FlorgesPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesSad,
+            .pal = sFieldMugshotPal_FlorgesSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesShouting,
+            .pal = sFieldMugshotPal_FlorgesShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesSigh,
+            .pal = sFieldMugshotPal_FlorgesSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesStunned,
+            .pal = sFieldMugshotPal_FlorgesStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesSurprised,
+            .pal = sFieldMugshotPal_FlorgesSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesTeary,
+            .pal = sFieldMugshotPal_FlorgesTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesWorried,
+            .pal = sFieldMugshotPal_FlorgesWorried,
+        },
+    },
+
+    [MUGSHOT_FLORGES_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesNormalShiny,
+            .pal = sFieldMugshotPal_FlorgesNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesAngryShiny,
+            .pal = sFieldMugshotPal_FlorgesAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesCryingShiny,
+            .pal = sFieldMugshotPal_FlorgesCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesDeterminedShiny,
+            .pal = sFieldMugshotPal_FlorgesDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesDizzyShiny,
+            .pal = sFieldMugshotPal_FlorgesDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesHappyShiny,
+            .pal = sFieldMugshotPal_FlorgesHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesInspiredShiny,
+            .pal = sFieldMugshotPal_FlorgesInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesJoyousShiny,
+            .pal = sFieldMugshotPal_FlorgesJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesPainShiny,
+            .pal = sFieldMugshotPal_FlorgesPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesSadShiny,
+            .pal = sFieldMugshotPal_FlorgesSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesShoutingShiny,
+            .pal = sFieldMugshotPal_FlorgesShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesSighShiny,
+            .pal = sFieldMugshotPal_FlorgesSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesStunnedShiny,
+            .pal = sFieldMugshotPal_FlorgesStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesSurprisedShiny,
+            .pal = sFieldMugshotPal_FlorgesSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesTearyShiny,
+            .pal = sFieldMugshotPal_FlorgesTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_FlorgesWorriedShiny,
+            .pal = sFieldMugshotPal_FlorgesWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_GRIMMSNARL] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_GrimmsnarlNormal,
+            .pal = sFieldMugshotPal_GrimmsnarlNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlAngry,
+        //     .pal = sFieldMugshotPal_GrimmsnarlAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlCrying,
+        //     .pal = sFieldMugshotPal_GrimmsnarlCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlDetermined,
+        //     .pal = sFieldMugshotPal_GrimmsnarlDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlDizzy,
+        //     .pal = sFieldMugshotPal_GrimmsnarlDizzy,
+        // },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_GrimmsnarlHappy,
+            .pal = sFieldMugshotPal_GrimmsnarlHappy,
+        },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlInspired,
+        //     .pal = sFieldMugshotPal_GrimmsnarlInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlJoyous,
+        //     .pal = sFieldMugshotPal_GrimmsnarlJoyous,
+        // },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_GrimmsnarlPain,
+            .pal = sFieldMugshotPal_GrimmsnarlPain,
+        },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlSad,
+        //     .pal = sFieldMugshotPal_GrimmsnarlSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlShouting,
+        //     .pal = sFieldMugshotPal_GrimmsnarlShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlSigh,
+        //     .pal = sFieldMugshotPal_GrimmsnarlSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlStunned,
+        //     .pal = sFieldMugshotPal_GrimmsnarlStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlSurprised,
+        //     .pal = sFieldMugshotPal_GrimmsnarlSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlTeary,
+        //     .pal = sFieldMugshotPal_GrimmsnarlTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlWorried,
+        //     .pal = sFieldMugshotPal_GrimmsnarlWorried,
+        // },
+    },
+
+    [MUGSHOT_GRIMMSNARL_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_GrimmsnarlNormalShiny,
+            .pal = sFieldMugshotPal_GrimmsnarlNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlAngryShiny,
+        //     .pal = sFieldMugshotPal_GrimmsnarlAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlCryingShiny,
+        //     .pal = sFieldMugshotPal_GrimmsnarlCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlDeterminedShiny,
+        //     .pal = sFieldMugshotPal_GrimmsnarlDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlDizzyShiny,
+        //     .pal = sFieldMugshotPal_GrimmsnarlDizzyShiny,
+        // },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_GrimmsnarlHappyShiny,
+            .pal = sFieldMugshotPal_GrimmsnarlHappyShiny,
+        },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlInspiredShiny,
+        //     .pal = sFieldMugshotPal_GrimmsnarlInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlJoyousShiny,
+        //     .pal = sFieldMugshotPal_GrimmsnarlJoyousShiny,
+        // },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_GrimmsnarlPainShiny,
+            .pal = sFieldMugshotPal_GrimmsnarlPainShiny,
+        },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlSadShiny,
+        //     .pal = sFieldMugshotPal_GrimmsnarlSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlShoutingShiny,
+        //     .pal = sFieldMugshotPal_GrimmsnarlShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlSighShiny,
+        //     .pal = sFieldMugshotPal_GrimmsnarlSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlStunnedShiny,
+        //     .pal = sFieldMugshotPal_GrimmsnarlStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlSurprisedShiny,
+        //     .pal = sFieldMugshotPal_GrimmsnarlSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlTearyShiny,
+        //     .pal = sFieldMugshotPal_GrimmsnarlTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrimmsnarlWorriedShiny,
+        //     .pal = sFieldMugshotPal_GrimmsnarlWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_GRUBBIN] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_GrubbinNormal,
+            .pal = sFieldMugshotPal_GrubbinNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinAngry,
+        //     .pal = sFieldMugshotPal_GrubbinAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinCrying,
+        //     .pal = sFieldMugshotPal_GrubbinCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinDetermined,
+        //     .pal = sFieldMugshotPal_GrubbinDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinDizzy,
+        //     .pal = sFieldMugshotPal_GrubbinDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinHappy,
+        //     .pal = sFieldMugshotPal_GrubbinHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinInspired,
+        //     .pal = sFieldMugshotPal_GrubbinInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinJoyous,
+        //     .pal = sFieldMugshotPal_GrubbinJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinPain,
+        //     .pal = sFieldMugshotPal_GrubbinPain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinSad,
+        //     .pal = sFieldMugshotPal_GrubbinSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinShouting,
+        //     .pal = sFieldMugshotPal_GrubbinShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinSigh,
+        //     .pal = sFieldMugshotPal_GrubbinSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinStunned,
+        //     .pal = sFieldMugshotPal_GrubbinStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinSurprised,
+        //     .pal = sFieldMugshotPal_GrubbinSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinTeary,
+        //     .pal = sFieldMugshotPal_GrubbinTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinWorried,
+        //     .pal = sFieldMugshotPal_GrubbinWorried,
+        // },
+    },
+
+    [MUGSHOT_GRUBBIN_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_GrubbinNormalShiny,
+            .pal = sFieldMugshotPal_GrubbinNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinAngryShiny,
+        //     .pal = sFieldMugshotPal_GrubbinAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinCryingShiny,
+        //     .pal = sFieldMugshotPal_GrubbinCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinDeterminedShiny,
+        //     .pal = sFieldMugshotPal_GrubbinDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinDizzyShiny,
+        //     .pal = sFieldMugshotPal_GrubbinDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinHappyShiny,
+        //     .pal = sFieldMugshotPal_GrubbinHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinInspiredShiny,
+        //     .pal = sFieldMugshotPal_GrubbinInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinJoyousShiny,
+        //     .pal = sFieldMugshotPal_GrubbinJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinPainShiny,
+        //     .pal = sFieldMugshotPal_GrubbinPainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinSadShiny,
+        //     .pal = sFieldMugshotPal_GrubbinSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinShoutingShiny,
+        //     .pal = sFieldMugshotPal_GrubbinShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinSighShiny,
+        //     .pal = sFieldMugshotPal_GrubbinSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinStunnedShiny,
+        //     .pal = sFieldMugshotPal_GrubbinStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinSurprisedShiny,
+        //     .pal = sFieldMugshotPal_GrubbinSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinTearyShiny,
+        //     .pal = sFieldMugshotPal_GrubbinTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_GrubbinWorriedShiny,
+        //     .pal = sFieldMugshotPal_GrubbinWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_HATENNA] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaNormal,
+            .pal = sFieldMugshotPal_HatennaNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaAngry,
+            .pal = sFieldMugshotPal_HatennaAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaCrying,
+            .pal = sFieldMugshotPal_HatennaCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaDetermined,
+            .pal = sFieldMugshotPal_HatennaDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaDizzy,
+            .pal = sFieldMugshotPal_HatennaDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaHappy,
+            .pal = sFieldMugshotPal_HatennaHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaInspired,
+            .pal = sFieldMugshotPal_HatennaInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaJoyous,
+            .pal = sFieldMugshotPal_HatennaJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaPain,
+            .pal = sFieldMugshotPal_HatennaPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaSad,
+            .pal = sFieldMugshotPal_HatennaSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaShouting,
+            .pal = sFieldMugshotPal_HatennaShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaSigh,
+            .pal = sFieldMugshotPal_HatennaSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaStunned,
+            .pal = sFieldMugshotPal_HatennaStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaSurprised,
+            .pal = sFieldMugshotPal_HatennaSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaTeary,
+            .pal = sFieldMugshotPal_HatennaTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaWorried,
+            .pal = sFieldMugshotPal_HatennaWorried,
+        },
+    },
+
+    [MUGSHOT_HATENNA_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaNormalShiny,
+            .pal = sFieldMugshotPal_HatennaNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaAngryShiny,
+            .pal = sFieldMugshotPal_HatennaAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaCryingShiny,
+            .pal = sFieldMugshotPal_HatennaCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaDeterminedShiny,
+            .pal = sFieldMugshotPal_HatennaDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaDizzyShiny,
+            .pal = sFieldMugshotPal_HatennaDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaHappyShiny,
+            .pal = sFieldMugshotPal_HatennaHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaInspiredShiny,
+            .pal = sFieldMugshotPal_HatennaInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaJoyousShiny,
+            .pal = sFieldMugshotPal_HatennaJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaPainShiny,
+            .pal = sFieldMugshotPal_HatennaPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaSadShiny,
+            .pal = sFieldMugshotPal_HatennaSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaShoutingShiny,
+            .pal = sFieldMugshotPal_HatennaShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaSighShiny,
+            .pal = sFieldMugshotPal_HatennaSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaStunnedShiny,
+            .pal = sFieldMugshotPal_HatennaStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaSurprisedShiny,
+            .pal = sFieldMugshotPal_HatennaSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaTearyShiny,
+            .pal = sFieldMugshotPal_HatennaTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_HatennaWorriedShiny,
+            .pal = sFieldMugshotPal_HatennaWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_HATTERENE] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneNormal,
+            .pal = sFieldMugshotPal_HattereneNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneAngry,
+            .pal = sFieldMugshotPal_HattereneAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneCrying,
+            .pal = sFieldMugshotPal_HattereneCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneDetermined,
+            .pal = sFieldMugshotPal_HattereneDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneDizzy,
+            .pal = sFieldMugshotPal_HattereneDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneHappy,
+            .pal = sFieldMugshotPal_HattereneHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneInspired,
+            .pal = sFieldMugshotPal_HattereneInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneJoyous,
+            .pal = sFieldMugshotPal_HattereneJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_HatterenePain,
+            .pal = sFieldMugshotPal_HatterenePain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneSad,
+            .pal = sFieldMugshotPal_HattereneSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneShouting,
+            .pal = sFieldMugshotPal_HattereneShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneSigh,
+            .pal = sFieldMugshotPal_HattereneSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneStunned,
+            .pal = sFieldMugshotPal_HattereneStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneSurprised,
+            .pal = sFieldMugshotPal_HattereneSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneTeary,
+            .pal = sFieldMugshotPal_HattereneTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneWorried,
+            .pal = sFieldMugshotPal_HattereneWorried,
+        },
+    },
+
+    [MUGSHOT_HATTERENE_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneNormalShiny,
+            .pal = sFieldMugshotPal_HattereneNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneAngryShiny,
+            .pal = sFieldMugshotPal_HattereneAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneCryingShiny,
+            .pal = sFieldMugshotPal_HattereneCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneDeterminedShiny,
+            .pal = sFieldMugshotPal_HattereneDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneDizzyShiny,
+            .pal = sFieldMugshotPal_HattereneDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneHappyShiny,
+            .pal = sFieldMugshotPal_HattereneHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneInspiredShiny,
+            .pal = sFieldMugshotPal_HattereneInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneJoyousShiny,
+            .pal = sFieldMugshotPal_HattereneJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_HatterenePainShiny,
+            .pal = sFieldMugshotPal_HatterenePainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneSadShiny,
+            .pal = sFieldMugshotPal_HattereneSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneShoutingShiny,
+            .pal = sFieldMugshotPal_HattereneShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneSighShiny,
+            .pal = sFieldMugshotPal_HattereneSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneStunnedShiny,
+            .pal = sFieldMugshotPal_HattereneStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneSurprisedShiny,
+            .pal = sFieldMugshotPal_HattereneSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneTearyShiny,
+            .pal = sFieldMugshotPal_HattereneTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_HattereneWorriedShiny,
+            .pal = sFieldMugshotPal_HattereneWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_HATTREM] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_HattremNormal,
+            .pal = sFieldMugshotPal_HattremNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremAngry,
+        //     .pal = sFieldMugshotPal_HattremAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremCrying,
+        //     .pal = sFieldMugshotPal_HattremCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremDetermined,
+        //     .pal = sFieldMugshotPal_HattremDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremDizzy,
+        //     .pal = sFieldMugshotPal_HattremDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremHappy,
+        //     .pal = sFieldMugshotPal_HattremHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremInspired,
+        //     .pal = sFieldMugshotPal_HattremInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremJoyous,
+        //     .pal = sFieldMugshotPal_HattremJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremPain,
+        //     .pal = sFieldMugshotPal_HattremPain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremSad,
+        //     .pal = sFieldMugshotPal_HattremSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremShouting,
+        //     .pal = sFieldMugshotPal_HattremShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremSigh,
+        //     .pal = sFieldMugshotPal_HattremSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremStunned,
+        //     .pal = sFieldMugshotPal_HattremStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremSurprised,
+        //     .pal = sFieldMugshotPal_HattremSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremTeary,
+        //     .pal = sFieldMugshotPal_HattremTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremWorried,
+        //     .pal = sFieldMugshotPal_HattremWorried,
+        // },
+    },
+
+    [MUGSHOT_HATTREM_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_HattremNormalShiny,
+            .pal = sFieldMugshotPal_HattremNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremAngryShiny,
+        //     .pal = sFieldMugshotPal_HattremAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremCryingShiny,
+        //     .pal = sFieldMugshotPal_HattremCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremDeterminedShiny,
+        //     .pal = sFieldMugshotPal_HattremDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremDizzyShiny,
+        //     .pal = sFieldMugshotPal_HattremDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremHappyShiny,
+        //     .pal = sFieldMugshotPal_HattremHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremInspiredShiny,
+        //     .pal = sFieldMugshotPal_HattremInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremJoyousShiny,
+        //     .pal = sFieldMugshotPal_HattremJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremPainShiny,
+        //     .pal = sFieldMugshotPal_HattremPainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremSadShiny,
+        //     .pal = sFieldMugshotPal_HattremSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremShoutingShiny,
+        //     .pal = sFieldMugshotPal_HattremShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremSighShiny,
+        //     .pal = sFieldMugshotPal_HattremSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremStunnedShiny,
+        //     .pal = sFieldMugshotPal_HattremStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremSurprisedShiny,
+        //     .pal = sFieldMugshotPal_HattremSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremTearyShiny,
+        //     .pal = sFieldMugshotPal_HattremTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HattremWorriedShiny,
+        //     .pal = sFieldMugshotPal_HattremWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_HERDIER] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_HerdierNormal,
+            .pal = sFieldMugshotPal_HerdierNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierAngry,
+        //     .pal = sFieldMugshotPal_HerdierAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierCrying,
+        //     .pal = sFieldMugshotPal_HerdierCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierDetermined,
+        //     .pal = sFieldMugshotPal_HerdierDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierDizzy,
+        //     .pal = sFieldMugshotPal_HerdierDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierHappy,
+        //     .pal = sFieldMugshotPal_HerdierHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierInspired,
+        //     .pal = sFieldMugshotPal_HerdierInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierJoyous,
+        //     .pal = sFieldMugshotPal_HerdierJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierPain,
+        //     .pal = sFieldMugshotPal_HerdierPain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierSad,
+        //     .pal = sFieldMugshotPal_HerdierSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierShouting,
+        //     .pal = sFieldMugshotPal_HerdierShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierSigh,
+        //     .pal = sFieldMugshotPal_HerdierSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierStunned,
+        //     .pal = sFieldMugshotPal_HerdierStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierSurprised,
+        //     .pal = sFieldMugshotPal_HerdierSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierTeary,
+        //     .pal = sFieldMugshotPal_HerdierTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierWorried,
+        //     .pal = sFieldMugshotPal_HerdierWorried,
+        // },
+    },
+
+    [MUGSHOT_HERDIER_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_HerdierNormalShiny,
+            .pal = sFieldMugshotPal_HerdierNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierAngryShiny,
+        //     .pal = sFieldMugshotPal_HerdierAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierCryingShiny,
+        //     .pal = sFieldMugshotPal_HerdierCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierDeterminedShiny,
+        //     .pal = sFieldMugshotPal_HerdierDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierDizzyShiny,
+        //     .pal = sFieldMugshotPal_HerdierDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierHappyShiny,
+        //     .pal = sFieldMugshotPal_HerdierHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierInspiredShiny,
+        //     .pal = sFieldMugshotPal_HerdierInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierJoyousShiny,
+        //     .pal = sFieldMugshotPal_HerdierJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierPainShiny,
+        //     .pal = sFieldMugshotPal_HerdierPainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierSadShiny,
+        //     .pal = sFieldMugshotPal_HerdierSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierShoutingShiny,
+        //     .pal = sFieldMugshotPal_HerdierShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierSighShiny,
+        //     .pal = sFieldMugshotPal_HerdierSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierStunnedShiny,
+        //     .pal = sFieldMugshotPal_HerdierStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierSurprisedShiny,
+        //     .pal = sFieldMugshotPal_HerdierSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierTearyShiny,
+        //     .pal = sFieldMugshotPal_HerdierTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_HerdierWorriedShiny,
+        //     .pal = sFieldMugshotPal_HerdierWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_IMPIDIMP] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_ImpidimpNormal,
+            .pal = sFieldMugshotPal_ImpidimpNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpAngry,
+        //     .pal = sFieldMugshotPal_ImpidimpAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpCrying,
+        //     .pal = sFieldMugshotPal_ImpidimpCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpDetermined,
+        //     .pal = sFieldMugshotPal_ImpidimpDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpDizzy,
+        //     .pal = sFieldMugshotPal_ImpidimpDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpHappy,
+        //     .pal = sFieldMugshotPal_ImpidimpHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpInspired,
+        //     .pal = sFieldMugshotPal_ImpidimpInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpJoyous,
+        //     .pal = sFieldMugshotPal_ImpidimpJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpPain,
+        //     .pal = sFieldMugshotPal_ImpidimpPain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpSad,
+        //     .pal = sFieldMugshotPal_ImpidimpSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpShouting,
+        //     .pal = sFieldMugshotPal_ImpidimpShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpSigh,
+        //     .pal = sFieldMugshotPal_ImpidimpSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpStunned,
+        //     .pal = sFieldMugshotPal_ImpidimpStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpSurprised,
+        //     .pal = sFieldMugshotPal_ImpidimpSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpTeary,
+        //     .pal = sFieldMugshotPal_ImpidimpTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpWorried,
+        //     .pal = sFieldMugshotPal_ImpidimpWorried,
+        // },
+    },
+
+    [MUGSHOT_IMPIDIMP_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_ImpidimpNormalShiny,
+            .pal = sFieldMugshotPal_ImpidimpNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpAngryShiny,
+        //     .pal = sFieldMugshotPal_ImpidimpAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpCryingShiny,
+        //     .pal = sFieldMugshotPal_ImpidimpCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpDeterminedShiny,
+        //     .pal = sFieldMugshotPal_ImpidimpDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpDizzyShiny,
+        //     .pal = sFieldMugshotPal_ImpidimpDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpHappyShiny,
+        //     .pal = sFieldMugshotPal_ImpidimpHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpInspiredShiny,
+        //     .pal = sFieldMugshotPal_ImpidimpInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpJoyousShiny,
+        //     .pal = sFieldMugshotPal_ImpidimpJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpPainShiny,
+        //     .pal = sFieldMugshotPal_ImpidimpPainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpSadShiny,
+        //     .pal = sFieldMugshotPal_ImpidimpSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpShoutingShiny,
+        //     .pal = sFieldMugshotPal_ImpidimpShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpSighShiny,
+        //     .pal = sFieldMugshotPal_ImpidimpSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpStunnedShiny,
+        //     .pal = sFieldMugshotPal_ImpidimpStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpSurprisedShiny,
+        //     .pal = sFieldMugshotPal_ImpidimpSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpTearyShiny,
+        //     .pal = sFieldMugshotPal_ImpidimpTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ImpidimpWorriedShiny,
+        //     .pal = sFieldMugshotPal_ImpidimpWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_KLANG] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_KlangNormal,
+            .pal = sFieldMugshotPal_KlangNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangAngry,
+        //     .pal = sFieldMugshotPal_KlangAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangCrying,
+        //     .pal = sFieldMugshotPal_KlangCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangDetermined,
+        //     .pal = sFieldMugshotPal_KlangDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangDizzy,
+        //     .pal = sFieldMugshotPal_KlangDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangHappy,
+        //     .pal = sFieldMugshotPal_KlangHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangInspired,
+        //     .pal = sFieldMugshotPal_KlangInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangJoyous,
+        //     .pal = sFieldMugshotPal_KlangJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangPain,
+        //     .pal = sFieldMugshotPal_KlangPain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangSad,
+        //     .pal = sFieldMugshotPal_KlangSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangShouting,
+        //     .pal = sFieldMugshotPal_KlangShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangSigh,
+        //     .pal = sFieldMugshotPal_KlangSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangStunned,
+        //     .pal = sFieldMugshotPal_KlangStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangSurprised,
+        //     .pal = sFieldMugshotPal_KlangSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangTeary,
+        //     .pal = sFieldMugshotPal_KlangTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangWorried,
+        //     .pal = sFieldMugshotPal_KlangWorried,
+        // },
+    },
+
+    [MUGSHOT_KLANG_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_KlangNormalShiny,
+            .pal = sFieldMugshotPal_KlangNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangAngryShiny,
+        //     .pal = sFieldMugshotPal_KlangAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangCryingShiny,
+        //     .pal = sFieldMugshotPal_KlangCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangDeterminedShiny,
+        //     .pal = sFieldMugshotPal_KlangDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangDizzyShiny,
+        //     .pal = sFieldMugshotPal_KlangDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangHappyShiny,
+        //     .pal = sFieldMugshotPal_KlangHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangInspiredShiny,
+        //     .pal = sFieldMugshotPal_KlangInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangJoyousShiny,
+        //     .pal = sFieldMugshotPal_KlangJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangPainShiny,
+        //     .pal = sFieldMugshotPal_KlangPainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangSadShiny,
+        //     .pal = sFieldMugshotPal_KlangSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangShoutingShiny,
+        //     .pal = sFieldMugshotPal_KlangShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangSighShiny,
+        //     .pal = sFieldMugshotPal_KlangSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangStunnedShiny,
+        //     .pal = sFieldMugshotPal_KlangStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangSurprisedShiny,
+        //     .pal = sFieldMugshotPal_KlangSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangTearyShiny,
+        //     .pal = sFieldMugshotPal_KlangTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlangWorriedShiny,
+        //     .pal = sFieldMugshotPal_KlangWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_KLINK] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_KlinkNormal,
+            .pal = sFieldMugshotPal_KlinkNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkAngry,
+        //     .pal = sFieldMugshotPal_KlinkAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkCrying,
+        //     .pal = sFieldMugshotPal_KlinkCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkDetermined,
+        //     .pal = sFieldMugshotPal_KlinkDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkDizzy,
+        //     .pal = sFieldMugshotPal_KlinkDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkHappy,
+        //     .pal = sFieldMugshotPal_KlinkHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkInspired,
+        //     .pal = sFieldMugshotPal_KlinkInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkJoyous,
+        //     .pal = sFieldMugshotPal_KlinkJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkPain,
+        //     .pal = sFieldMugshotPal_KlinkPain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkSad,
+        //     .pal = sFieldMugshotPal_KlinkSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkShouting,
+        //     .pal = sFieldMugshotPal_KlinkShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkSigh,
+        //     .pal = sFieldMugshotPal_KlinkSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkStunned,
+        //     .pal = sFieldMugshotPal_KlinkStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkSurprised,
+        //     .pal = sFieldMugshotPal_KlinkSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkTeary,
+        //     .pal = sFieldMugshotPal_KlinkTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkWorried,
+        //     .pal = sFieldMugshotPal_KlinkWorried,
+        // },
+    },
+
+    [MUGSHOT_KLINK_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_KlinkNormalShiny,
+            .pal = sFieldMugshotPal_KlinkNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkAngryShiny,
+        //     .pal = sFieldMugshotPal_KlinkAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkCryingShiny,
+        //     .pal = sFieldMugshotPal_KlinkCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkDeterminedShiny,
+        //     .pal = sFieldMugshotPal_KlinkDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkDizzyShiny,
+        //     .pal = sFieldMugshotPal_KlinkDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkHappyShiny,
+        //     .pal = sFieldMugshotPal_KlinkHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkInspiredShiny,
+        //     .pal = sFieldMugshotPal_KlinkInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkJoyousShiny,
+        //     .pal = sFieldMugshotPal_KlinkJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkPainShiny,
+        //     .pal = sFieldMugshotPal_KlinkPainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkSadShiny,
+        //     .pal = sFieldMugshotPal_KlinkSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkShoutingShiny,
+        //     .pal = sFieldMugshotPal_KlinkShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkSighShiny,
+        //     .pal = sFieldMugshotPal_KlinkSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkStunnedShiny,
+        //     .pal = sFieldMugshotPal_KlinkStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkSurprisedShiny,
+        //     .pal = sFieldMugshotPal_KlinkSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkTearyShiny,
+        //     .pal = sFieldMugshotPal_KlinkTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinkWorriedShiny,
+        //     .pal = sFieldMugshotPal_KlinkWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_KLINKLANG] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_KlinklangNormal,
+            .pal = sFieldMugshotPal_KlinklangNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangAngry,
+        //     .pal = sFieldMugshotPal_KlinklangAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangCrying,
+        //     .pal = sFieldMugshotPal_KlinklangCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangDetermined,
+        //     .pal = sFieldMugshotPal_KlinklangDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangDizzy,
+        //     .pal = sFieldMugshotPal_KlinklangDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangHappy,
+        //     .pal = sFieldMugshotPal_KlinklangHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangInspired,
+        //     .pal = sFieldMugshotPal_KlinklangInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangJoyous,
+        //     .pal = sFieldMugshotPal_KlinklangJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangPain,
+        //     .pal = sFieldMugshotPal_KlinklangPain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangSad,
+        //     .pal = sFieldMugshotPal_KlinklangSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangShouting,
+        //     .pal = sFieldMugshotPal_KlinklangShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangSigh,
+        //     .pal = sFieldMugshotPal_KlinklangSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangStunned,
+        //     .pal = sFieldMugshotPal_KlinklangStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangSurprised,
+        //     .pal = sFieldMugshotPal_KlinklangSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangTeary,
+        //     .pal = sFieldMugshotPal_KlinklangTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangWorried,
+        //     .pal = sFieldMugshotPal_KlinklangWorried,
+        // },
+    },
+
+    [MUGSHOT_KLINKLANG_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_KlinklangNormalShiny,
+            .pal = sFieldMugshotPal_KlinklangNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangAngryShiny,
+        //     .pal = sFieldMugshotPal_KlinklangAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangCryingShiny,
+        //     .pal = sFieldMugshotPal_KlinklangCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangDeterminedShiny,
+        //     .pal = sFieldMugshotPal_KlinklangDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangDizzyShiny,
+        //     .pal = sFieldMugshotPal_KlinklangDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangHappyShiny,
+        //     .pal = sFieldMugshotPal_KlinklangHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangInspiredShiny,
+        //     .pal = sFieldMugshotPal_KlinklangInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangJoyousShiny,
+        //     .pal = sFieldMugshotPal_KlinklangJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangPainShiny,
+        //     .pal = sFieldMugshotPal_KlinklangPainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangSadShiny,
+        //     .pal = sFieldMugshotPal_KlinklangSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangShoutingShiny,
+        //     .pal = sFieldMugshotPal_KlinklangShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangSighShiny,
+        //     .pal = sFieldMugshotPal_KlinklangSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangStunnedShiny,
+        //     .pal = sFieldMugshotPal_KlinklangStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangSurprisedShiny,
+        //     .pal = sFieldMugshotPal_KlinklangSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangTearyShiny,
+        //     .pal = sFieldMugshotPal_KlinklangTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KlinklangWorriedShiny,
+        //     .pal = sFieldMugshotPal_KlinklangWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_KROKOROK] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokNormal,
+            .pal = sFieldMugshotPal_KrokorokNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokAngry,
+            .pal = sFieldMugshotPal_KrokorokAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokCrying,
+            .pal = sFieldMugshotPal_KrokorokCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokDetermined,
+            .pal = sFieldMugshotPal_KrokorokDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokDizzy,
+            .pal = sFieldMugshotPal_KrokorokDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokHappy,
+            .pal = sFieldMugshotPal_KrokorokHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokInspired,
+            .pal = sFieldMugshotPal_KrokorokInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokJoyous,
+            .pal = sFieldMugshotPal_KrokorokJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokPain,
+            .pal = sFieldMugshotPal_KrokorokPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokSad,
+            .pal = sFieldMugshotPal_KrokorokSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokShouting,
+            .pal = sFieldMugshotPal_KrokorokShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokSigh,
+            .pal = sFieldMugshotPal_KrokorokSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokStunned,
+            .pal = sFieldMugshotPal_KrokorokStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokSurprised,
+            .pal = sFieldMugshotPal_KrokorokSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokTeary,
+            .pal = sFieldMugshotPal_KrokorokTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokWorried,
+            .pal = sFieldMugshotPal_KrokorokWorried,
+        },
+    },
+
+    [MUGSHOT_KROKOROK_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokNormalShiny,
+            .pal = sFieldMugshotPal_KrokorokNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokAngryShiny,
+            .pal = sFieldMugshotPal_KrokorokAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokCryingShiny,
+            .pal = sFieldMugshotPal_KrokorokCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokDeterminedShiny,
+            .pal = sFieldMugshotPal_KrokorokDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokDizzyShiny,
+            .pal = sFieldMugshotPal_KrokorokDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokHappyShiny,
+            .pal = sFieldMugshotPal_KrokorokHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokInspiredShiny,
+            .pal = sFieldMugshotPal_KrokorokInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokJoyousShiny,
+            .pal = sFieldMugshotPal_KrokorokJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokPainShiny,
+            .pal = sFieldMugshotPal_KrokorokPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokSadShiny,
+            .pal = sFieldMugshotPal_KrokorokSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokShoutingShiny,
+            .pal = sFieldMugshotPal_KrokorokShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokSighShiny,
+            .pal = sFieldMugshotPal_KrokorokSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokStunnedShiny,
+            .pal = sFieldMugshotPal_KrokorokStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokSurprisedShiny,
+            .pal = sFieldMugshotPal_KrokorokSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokTearyShiny,
+            .pal = sFieldMugshotPal_KrokorokTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_KrokorokWorriedShiny,
+            .pal = sFieldMugshotPal_KrokorokWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_KROOKODILE] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_KrookodileNormal,
+            .pal = sFieldMugshotPal_KrookodileNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_KrookodileAngry,
+            .pal = sFieldMugshotPal_KrookodileAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_KrookodileCrying,
+            .pal = sFieldMugshotPal_KrookodileCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_KrookodileDetermined,
+            .pal = sFieldMugshotPal_KrookodileDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_KrookodileDizzy,
+            .pal = sFieldMugshotPal_KrookodileDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_KrookodileHappy,
+            .pal = sFieldMugshotPal_KrookodileHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_KrookodileInspired,
+            .pal = sFieldMugshotPal_KrookodileInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_KrookodileJoyous,
+            .pal = sFieldMugshotPal_KrookodileJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_KrookodilePain,
+            .pal = sFieldMugshotPal_KrookodilePain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_KrookodileSad,
+            .pal = sFieldMugshotPal_KrookodileSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_KrookodileShouting,
+            .pal = sFieldMugshotPal_KrookodileShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_KrookodileSigh,
+            .pal = sFieldMugshotPal_KrookodileSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_KrookodileStunned,
+            .pal = sFieldMugshotPal_KrookodileStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_KrookodileSurprised,
+            .pal = sFieldMugshotPal_KrookodileSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_KrookodileTeary,
+            .pal = sFieldMugshotPal_KrookodileTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_KrookodileWorried,
+            .pal = sFieldMugshotPal_KrookodileWorried,
+        },
+    },
+
+    [MUGSHOT_KROOKODILE_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_KrookodileNormalShiny,
+            .pal = sFieldMugshotPal_KrookodileNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KrookodileAngryShiny,
+        //     .pal = sFieldMugshotPal_KrookodileAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KrookodileCryingShiny,
+        //     .pal = sFieldMugshotPal_KrookodileCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KrookodileDeterminedShiny,
+        //     .pal = sFieldMugshotPal_KrookodileDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KrookodileDizzyShiny,
+        //     .pal = sFieldMugshotPal_KrookodileDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KrookodileHappyShiny,
+        //     .pal = sFieldMugshotPal_KrookodileHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KrookodileInspiredShiny,
+        //     .pal = sFieldMugshotPal_KrookodileInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KrookodileJoyousShiny,
+        //     .pal = sFieldMugshotPal_KrookodileJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KrookodilePainShiny,
+        //     .pal = sFieldMugshotPal_KrookodilePainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KrookodileSadShiny,
+        //     .pal = sFieldMugshotPal_KrookodileSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KrookodileShoutingShiny,
+        //     .pal = sFieldMugshotPal_KrookodileShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KrookodileSighShiny,
+        //     .pal = sFieldMugshotPal_KrookodileSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KrookodileStunnedShiny,
+        //     .pal = sFieldMugshotPal_KrookodileStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KrookodileSurprisedShiny,
+        //     .pal = sFieldMugshotPal_KrookodileSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KrookodileTearyShiny,
+        //     .pal = sFieldMugshotPal_KrookodileTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_KrookodileWorriedShiny,
+        //     .pal = sFieldMugshotPal_KrookodileWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_LILLIPUP] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupNormal,
+            .pal = sFieldMugshotPal_LillipupNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupAngry,
+            .pal = sFieldMugshotPal_LillipupAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupCrying,
+            .pal = sFieldMugshotPal_LillipupCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupDetermined,
+            .pal = sFieldMugshotPal_LillipupDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupDizzy,
+            .pal = sFieldMugshotPal_LillipupDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupHappy,
+            .pal = sFieldMugshotPal_LillipupHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupInspired,
+            .pal = sFieldMugshotPal_LillipupInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupJoyous,
+            .pal = sFieldMugshotPal_LillipupJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupPain,
+            .pal = sFieldMugshotPal_LillipupPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupSad,
+            .pal = sFieldMugshotPal_LillipupSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupShouting,
+            .pal = sFieldMugshotPal_LillipupShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupSigh,
+            .pal = sFieldMugshotPal_LillipupSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupStunned,
+            .pal = sFieldMugshotPal_LillipupStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupSurprised,
+            .pal = sFieldMugshotPal_LillipupSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupTeary,
+            .pal = sFieldMugshotPal_LillipupTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupWorried,
+            .pal = sFieldMugshotPal_LillipupWorried,
+        },
+    },
+
+    [MUGSHOT_LILLIPUP_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupNormalShiny,
+            .pal = sFieldMugshotPal_LillipupNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupAngryShiny,
+            .pal = sFieldMugshotPal_LillipupAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupCryingShiny,
+            .pal = sFieldMugshotPal_LillipupCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupDeterminedShiny,
+            .pal = sFieldMugshotPal_LillipupDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupDizzyShiny,
+            .pal = sFieldMugshotPal_LillipupDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupHappyShiny,
+            .pal = sFieldMugshotPal_LillipupHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupInspiredShiny,
+            .pal = sFieldMugshotPal_LillipupInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupJoyousShiny,
+            .pal = sFieldMugshotPal_LillipupJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupPainShiny,
+            .pal = sFieldMugshotPal_LillipupPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupSadShiny,
+            .pal = sFieldMugshotPal_LillipupSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupShoutingShiny,
+            .pal = sFieldMugshotPal_LillipupShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupSighShiny,
+            .pal = sFieldMugshotPal_LillipupSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupStunnedShiny,
+            .pal = sFieldMugshotPal_LillipupStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupSurprisedShiny,
+            .pal = sFieldMugshotPal_LillipupSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupTearyShiny,
+            .pal = sFieldMugshotPal_LillipupTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_LillipupWorriedShiny,
+            .pal = sFieldMugshotPal_LillipupWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_LUXIO] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioNormal,
+            .pal = sFieldMugshotPal_LuxioNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioAngry,
+            .pal = sFieldMugshotPal_LuxioAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioCrying,
+            .pal = sFieldMugshotPal_LuxioCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioDetermined,
+            .pal = sFieldMugshotPal_LuxioDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioDizzy,
+            .pal = sFieldMugshotPal_LuxioDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioHappy,
+            .pal = sFieldMugshotPal_LuxioHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioInspired,
+            .pal = sFieldMugshotPal_LuxioInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioJoyous,
+            .pal = sFieldMugshotPal_LuxioJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioPain,
+            .pal = sFieldMugshotPal_LuxioPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioSad,
+            .pal = sFieldMugshotPal_LuxioSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioShouting,
+            .pal = sFieldMugshotPal_LuxioShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioSigh,
+            .pal = sFieldMugshotPal_LuxioSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioStunned,
+            .pal = sFieldMugshotPal_LuxioStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioSurprised,
+            .pal = sFieldMugshotPal_LuxioSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioTeary,
+            .pal = sFieldMugshotPal_LuxioTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioWorried,
+            .pal = sFieldMugshotPal_LuxioWorried,
+        },
+    },
+
+    [MUGSHOT_LUXIO_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioNormalShiny,
+            .pal = sFieldMugshotPal_LuxioNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioAngryShiny,
+            .pal = sFieldMugshotPal_LuxioAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioCryingShiny,
+            .pal = sFieldMugshotPal_LuxioCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioDeterminedShiny,
+            .pal = sFieldMugshotPal_LuxioDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioDizzyShiny,
+            .pal = sFieldMugshotPal_LuxioDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioHappyShiny,
+            .pal = sFieldMugshotPal_LuxioHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioInspiredShiny,
+            .pal = sFieldMugshotPal_LuxioInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioJoyousShiny,
+            .pal = sFieldMugshotPal_LuxioJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioPainShiny,
+            .pal = sFieldMugshotPal_LuxioPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioSadShiny,
+            .pal = sFieldMugshotPal_LuxioSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioShoutingShiny,
+            .pal = sFieldMugshotPal_LuxioShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioSighShiny,
+            .pal = sFieldMugshotPal_LuxioSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioStunnedShiny,
+            .pal = sFieldMugshotPal_LuxioStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioSurprisedShiny,
+            .pal = sFieldMugshotPal_LuxioSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioTearyShiny,
+            .pal = sFieldMugshotPal_LuxioTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxioWorriedShiny,
+            .pal = sFieldMugshotPal_LuxioWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_LUXRAY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayNormal,
+            .pal = sFieldMugshotPal_LuxrayNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayAngry,
+            .pal = sFieldMugshotPal_LuxrayAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayCrying,
+            .pal = sFieldMugshotPal_LuxrayCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayDetermined,
+            .pal = sFieldMugshotPal_LuxrayDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayDizzy,
+            .pal = sFieldMugshotPal_LuxrayDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayHappy,
+            .pal = sFieldMugshotPal_LuxrayHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayInspired,
+            .pal = sFieldMugshotPal_LuxrayInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayJoyous,
+            .pal = sFieldMugshotPal_LuxrayJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayPain,
+            .pal = sFieldMugshotPal_LuxrayPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_LuxraySad,
+            .pal = sFieldMugshotPal_LuxraySad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayShouting,
+            .pal = sFieldMugshotPal_LuxrayShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_LuxraySigh,
+            .pal = sFieldMugshotPal_LuxraySigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayStunned,
+            .pal = sFieldMugshotPal_LuxrayStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxraySurprised,
+            .pal = sFieldMugshotPal_LuxraySurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayTeary,
+            .pal = sFieldMugshotPal_LuxrayTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayWorried,
+            .pal = sFieldMugshotPal_LuxrayWorried,
+        },
+    },
+
+    [MUGSHOT_LUXRAY_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayNormalShiny,
+            .pal = sFieldMugshotPal_LuxrayNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayAngryShiny,
+            .pal = sFieldMugshotPal_LuxrayAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayCryingShiny,
+            .pal = sFieldMugshotPal_LuxrayCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayDeterminedShiny,
+            .pal = sFieldMugshotPal_LuxrayDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayDizzyShiny,
+            .pal = sFieldMugshotPal_LuxrayDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayHappyShiny,
+            .pal = sFieldMugshotPal_LuxrayHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayInspiredShiny,
+            .pal = sFieldMugshotPal_LuxrayInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayJoyousShiny,
+            .pal = sFieldMugshotPal_LuxrayJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayPainShiny,
+            .pal = sFieldMugshotPal_LuxrayPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_LuxraySadShiny,
+            .pal = sFieldMugshotPal_LuxraySadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayShoutingShiny,
+            .pal = sFieldMugshotPal_LuxrayShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_LuxraySighShiny,
+            .pal = sFieldMugshotPal_LuxraySighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayStunnedShiny,
+            .pal = sFieldMugshotPal_LuxrayStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxraySurprisedShiny,
+            .pal = sFieldMugshotPal_LuxraySurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayTearyShiny,
+            .pal = sFieldMugshotPal_LuxrayTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_LuxrayWorriedShiny,
+            .pal = sFieldMugshotPal_LuxrayWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_MACHAMP] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_MachampNormal,
+            .pal = sFieldMugshotPal_MachampNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampAngry,
+        //     .pal = sFieldMugshotPal_MachampAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampCrying,
+        //     .pal = sFieldMugshotPal_MachampCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampDetermined,
+        //     .pal = sFieldMugshotPal_MachampDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampDizzy,
+        //     .pal = sFieldMugshotPal_MachampDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampHappy,
+        //     .pal = sFieldMugshotPal_MachampHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampInspired,
+        //     .pal = sFieldMugshotPal_MachampInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampJoyous,
+        //     .pal = sFieldMugshotPal_MachampJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampPain,
+        //     .pal = sFieldMugshotPal_MachampPain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampSad,
+        //     .pal = sFieldMugshotPal_MachampSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampShouting,
+        //     .pal = sFieldMugshotPal_MachampShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampSigh,
+        //     .pal = sFieldMugshotPal_MachampSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampStunned,
+        //     .pal = sFieldMugshotPal_MachampStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampSurprised,
+        //     .pal = sFieldMugshotPal_MachampSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampTeary,
+        //     .pal = sFieldMugshotPal_MachampTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampWorried,
+        //     .pal = sFieldMugshotPal_MachampWorried,
+        // },
+    },
+
+    [MUGSHOT_MACHAMP_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_MachampNormalShiny,
+            .pal = sFieldMugshotPal_MachampNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampAngryShiny,
+        //     .pal = sFieldMugshotPal_MachampAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampCryingShiny,
+        //     .pal = sFieldMugshotPal_MachampCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampDeterminedShiny,
+        //     .pal = sFieldMugshotPal_MachampDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampDizzyShiny,
+        //     .pal = sFieldMugshotPal_MachampDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampHappyShiny,
+        //     .pal = sFieldMugshotPal_MachampHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampInspiredShiny,
+        //     .pal = sFieldMugshotPal_MachampInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampJoyousShiny,
+        //     .pal = sFieldMugshotPal_MachampJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampPainShiny,
+        //     .pal = sFieldMugshotPal_MachampPainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampSadShiny,
+        //     .pal = sFieldMugshotPal_MachampSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampShoutingShiny,
+        //     .pal = sFieldMugshotPal_MachampShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampSighShiny,
+        //     .pal = sFieldMugshotPal_MachampSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampStunnedShiny,
+        //     .pal = sFieldMugshotPal_MachampStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampSurprisedShiny,
+        //     .pal = sFieldMugshotPal_MachampSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampTearyShiny,
+        //     .pal = sFieldMugshotPal_MachampTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MachampWorriedShiny,
+        //     .pal = sFieldMugshotPal_MachampWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_MACHOKE] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeNormal,
+            .pal = sFieldMugshotPal_MachokeNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeAngry,
+            .pal = sFieldMugshotPal_MachokeAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeCrying,
+            .pal = sFieldMugshotPal_MachokeCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeDetermined,
+            .pal = sFieldMugshotPal_MachokeDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeDizzy,
+            .pal = sFieldMugshotPal_MachokeDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeHappy,
+            .pal = sFieldMugshotPal_MachokeHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeInspired,
+            .pal = sFieldMugshotPal_MachokeInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeJoyous,
+            .pal = sFieldMugshotPal_MachokeJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_MachokePain,
+            .pal = sFieldMugshotPal_MachokePain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeSad,
+            .pal = sFieldMugshotPal_MachokeSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeShouting,
+            .pal = sFieldMugshotPal_MachokeShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeSigh,
+            .pal = sFieldMugshotPal_MachokeSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeStunned,
+            .pal = sFieldMugshotPal_MachokeStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeSurprised,
+            .pal = sFieldMugshotPal_MachokeSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeTeary,
+            .pal = sFieldMugshotPal_MachokeTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeWorried,
+            .pal = sFieldMugshotPal_MachokeWorried,
+        },
+    },
+
+    [MUGSHOT_MACHOKE_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeNormalShiny,
+            .pal = sFieldMugshotPal_MachokeNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeAngryShiny,
+            .pal = sFieldMugshotPal_MachokeAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeCryingShiny,
+            .pal = sFieldMugshotPal_MachokeCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeDeterminedShiny,
+            .pal = sFieldMugshotPal_MachokeDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeDizzyShiny,
+            .pal = sFieldMugshotPal_MachokeDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeHappyShiny,
+            .pal = sFieldMugshotPal_MachokeHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeInspiredShiny,
+            .pal = sFieldMugshotPal_MachokeInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeJoyousShiny,
+            .pal = sFieldMugshotPal_MachokeJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_MachokePainShiny,
+            .pal = sFieldMugshotPal_MachokePainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeSadShiny,
+            .pal = sFieldMugshotPal_MachokeSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeShoutingShiny,
+            .pal = sFieldMugshotPal_MachokeShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeSighShiny,
+            .pal = sFieldMugshotPal_MachokeSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeStunnedShiny,
+            .pal = sFieldMugshotPal_MachokeStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeSurprisedShiny,
+            .pal = sFieldMugshotPal_MachokeSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeTearyShiny,
+            .pal = sFieldMugshotPal_MachokeTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_MachokeWorriedShiny,
+            .pal = sFieldMugshotPal_MachokeWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_MACHOP] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_MachopNormal,
+            .pal = sFieldMugshotPal_MachopNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_MachopAngry,
+            .pal = sFieldMugshotPal_MachopAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_MachopCrying,
+            .pal = sFieldMugshotPal_MachopCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_MachopDetermined,
+            .pal = sFieldMugshotPal_MachopDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_MachopDizzy,
+            .pal = sFieldMugshotPal_MachopDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_MachopHappy,
+            .pal = sFieldMugshotPal_MachopHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_MachopInspired,
+            .pal = sFieldMugshotPal_MachopInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_MachopJoyous,
+            .pal = sFieldMugshotPal_MachopJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_MachopPain,
+            .pal = sFieldMugshotPal_MachopPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_MachopSad,
+            .pal = sFieldMugshotPal_MachopSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_MachopShouting,
+            .pal = sFieldMugshotPal_MachopShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_MachopSigh,
+            .pal = sFieldMugshotPal_MachopSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_MachopStunned,
+            .pal = sFieldMugshotPal_MachopStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_MachopSurprised,
+            .pal = sFieldMugshotPal_MachopSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_MachopTeary,
+            .pal = sFieldMugshotPal_MachopTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_MachopWorried,
+            .pal = sFieldMugshotPal_MachopWorried,
+        },
+    },
+
+    [MUGSHOT_MACHOP_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_MachopNormalShiny,
+            .pal = sFieldMugshotPal_MachopNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_MachopAngryShiny,
+            .pal = sFieldMugshotPal_MachopAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_MachopCryingShiny,
+            .pal = sFieldMugshotPal_MachopCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_MachopDeterminedShiny,
+            .pal = sFieldMugshotPal_MachopDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_MachopDizzyShiny,
+            .pal = sFieldMugshotPal_MachopDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_MachopHappyShiny,
+            .pal = sFieldMugshotPal_MachopHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_MachopInspiredShiny,
+            .pal = sFieldMugshotPal_MachopInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_MachopJoyousShiny,
+            .pal = sFieldMugshotPal_MachopJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_MachopPainShiny,
+            .pal = sFieldMugshotPal_MachopPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_MachopSadShiny,
+            .pal = sFieldMugshotPal_MachopSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_MachopShoutingShiny,
+            .pal = sFieldMugshotPal_MachopShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_MachopSighShiny,
+            .pal = sFieldMugshotPal_MachopSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_MachopStunnedShiny,
+            .pal = sFieldMugshotPal_MachopStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_MachopSurprisedShiny,
+            .pal = sFieldMugshotPal_MachopSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_MachopTearyShiny,
+            .pal = sFieldMugshotPal_MachopTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_MachopWorriedShiny,
+            .pal = sFieldMugshotPal_MachopWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_MAGBY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyNormal,
+            .pal = sFieldMugshotPal_MagbyNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyAngry,
+            .pal = sFieldMugshotPal_MagbyAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyCrying,
+            .pal = sFieldMugshotPal_MagbyCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyDetermined,
+            .pal = sFieldMugshotPal_MagbyDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyDizzy,
+            .pal = sFieldMugshotPal_MagbyDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyHappy,
+            .pal = sFieldMugshotPal_MagbyHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyInspired,
+            .pal = sFieldMugshotPal_MagbyInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyJoyous,
+            .pal = sFieldMugshotPal_MagbyJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyPain,
+            .pal = sFieldMugshotPal_MagbyPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_MagbySad,
+            .pal = sFieldMugshotPal_MagbySad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyShouting,
+            .pal = sFieldMugshotPal_MagbyShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_MagbySigh,
+            .pal = sFieldMugshotPal_MagbySigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyStunned,
+            .pal = sFieldMugshotPal_MagbyStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_MagbySurprised,
+            .pal = sFieldMugshotPal_MagbySurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyTeary,
+            .pal = sFieldMugshotPal_MagbyTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyWorried,
+            .pal = sFieldMugshotPal_MagbyWorried,
+        },
+    },
+
+    [MUGSHOT_MAGBY_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyNormalShiny,
+            .pal = sFieldMugshotPal_MagbyNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyAngryShiny,
+            .pal = sFieldMugshotPal_MagbyAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyCryingShiny,
+            .pal = sFieldMugshotPal_MagbyCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyDeterminedShiny,
+            .pal = sFieldMugshotPal_MagbyDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyDizzyShiny,
+            .pal = sFieldMugshotPal_MagbyDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyHappyShiny,
+            .pal = sFieldMugshotPal_MagbyHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyInspiredShiny,
+            .pal = sFieldMugshotPal_MagbyInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyJoyousShiny,
+            .pal = sFieldMugshotPal_MagbyJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyPainShiny,
+            .pal = sFieldMugshotPal_MagbyPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_MagbySadShiny,
+            .pal = sFieldMugshotPal_MagbySadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyShoutingShiny,
+            .pal = sFieldMugshotPal_MagbyShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_MagbySighShiny,
+            .pal = sFieldMugshotPal_MagbySighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyStunnedShiny,
+            .pal = sFieldMugshotPal_MagbyStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_MagbySurprisedShiny,
+            .pal = sFieldMugshotPal_MagbySurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyTearyShiny,
+            .pal = sFieldMugshotPal_MagbyTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_MagbyWorriedShiny,
+            .pal = sFieldMugshotPal_MagbyWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_MAGMAR] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_MagmarNormal,
+            .pal = sFieldMugshotPal_MagmarNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarAngry,
+        //     .pal = sFieldMugshotPal_MagmarAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarCrying,
+        //     .pal = sFieldMugshotPal_MagmarCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarDetermined,
+        //     .pal = sFieldMugshotPal_MagmarDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarDizzy,
+        //     .pal = sFieldMugshotPal_MagmarDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarHappy,
+        //     .pal = sFieldMugshotPal_MagmarHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarInspired,
+        //     .pal = sFieldMugshotPal_MagmarInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarJoyous,
+        //     .pal = sFieldMugshotPal_MagmarJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarPain,
+        //     .pal = sFieldMugshotPal_MagmarPain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarSad,
+        //     .pal = sFieldMugshotPal_MagmarSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarShouting,
+        //     .pal = sFieldMugshotPal_MagmarShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarSigh,
+        //     .pal = sFieldMugshotPal_MagmarSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarStunned,
+        //     .pal = sFieldMugshotPal_MagmarStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarSurprised,
+        //     .pal = sFieldMugshotPal_MagmarSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarTeary,
+        //     .pal = sFieldMugshotPal_MagmarTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarWorried,
+        //     .pal = sFieldMugshotPal_MagmarWorried,
+        // },
+    },
+
+    [MUGSHOT_MAGMAR_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_MagmarNormalShiny,
+            .pal = sFieldMugshotPal_MagmarNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarAngryShiny,
+        //     .pal = sFieldMugshotPal_MagmarAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarCryingShiny,
+        //     .pal = sFieldMugshotPal_MagmarCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarDeterminedShiny,
+        //     .pal = sFieldMugshotPal_MagmarDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarDizzyShiny,
+        //     .pal = sFieldMugshotPal_MagmarDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarHappyShiny,
+        //     .pal = sFieldMugshotPal_MagmarHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarInspiredShiny,
+        //     .pal = sFieldMugshotPal_MagmarInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarJoyousShiny,
+        //     .pal = sFieldMugshotPal_MagmarJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarPainShiny,
+        //     .pal = sFieldMugshotPal_MagmarPainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarSadShiny,
+        //     .pal = sFieldMugshotPal_MagmarSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarShoutingShiny,
+        //     .pal = sFieldMugshotPal_MagmarShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarSighShiny,
+        //     .pal = sFieldMugshotPal_MagmarSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarStunnedShiny,
+        //     .pal = sFieldMugshotPal_MagmarStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarSurprisedShiny,
+        //     .pal = sFieldMugshotPal_MagmarSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarTearyShiny,
+        //     .pal = sFieldMugshotPal_MagmarTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MagmarWorriedShiny,
+        //     .pal = sFieldMugshotPal_MagmarWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_MAGMORTAR] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarNormal,
+            .pal = sFieldMugshotPal_MagmortarNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarAngry,
+            .pal = sFieldMugshotPal_MagmortarAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarCrying,
+            .pal = sFieldMugshotPal_MagmortarCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarDetermined,
+            .pal = sFieldMugshotPal_MagmortarDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarDizzy,
+            .pal = sFieldMugshotPal_MagmortarDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarHappy,
+            .pal = sFieldMugshotPal_MagmortarHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarInspired,
+            .pal = sFieldMugshotPal_MagmortarInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarJoyous,
+            .pal = sFieldMugshotPal_MagmortarJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarPain,
+            .pal = sFieldMugshotPal_MagmortarPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarSad,
+            .pal = sFieldMugshotPal_MagmortarSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarShouting,
+            .pal = sFieldMugshotPal_MagmortarShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarSigh,
+            .pal = sFieldMugshotPal_MagmortarSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarStunned,
+            .pal = sFieldMugshotPal_MagmortarStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarSurprised,
+            .pal = sFieldMugshotPal_MagmortarSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarTeary,
+            .pal = sFieldMugshotPal_MagmortarTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarWorried,
+            .pal = sFieldMugshotPal_MagmortarWorried,
+        },
+    },
+
+    [MUGSHOT_MAGMORTAR_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarNormalShiny,
+            .pal = sFieldMugshotPal_MagmortarNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarAngryShiny,
+            .pal = sFieldMugshotPal_MagmortarAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarCryingShiny,
+            .pal = sFieldMugshotPal_MagmortarCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarDeterminedShiny,
+            .pal = sFieldMugshotPal_MagmortarDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarDizzyShiny,
+            .pal = sFieldMugshotPal_MagmortarDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarHappyShiny,
+            .pal = sFieldMugshotPal_MagmortarHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarInspiredShiny,
+            .pal = sFieldMugshotPal_MagmortarInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarJoyousShiny,
+            .pal = sFieldMugshotPal_MagmortarJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarPainShiny,
+            .pal = sFieldMugshotPal_MagmortarPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarSadShiny,
+            .pal = sFieldMugshotPal_MagmortarSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarShoutingShiny,
+            .pal = sFieldMugshotPal_MagmortarShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarSighShiny,
+            .pal = sFieldMugshotPal_MagmortarSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarStunnedShiny,
+            .pal = sFieldMugshotPal_MagmortarStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarSurprisedShiny,
+            .pal = sFieldMugshotPal_MagmortarSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarTearyShiny,
+            .pal = sFieldMugshotPal_MagmortarTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_MagmortarWorriedShiny,
+            .pal = sFieldMugshotPal_MagmortarWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_MAMOSWINE] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_MamoswineNormal,
+            .pal = sFieldMugshotPal_MamoswineNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineAngry,
+        //     .pal = sFieldMugshotPal_MamoswineAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineCrying,
+        //     .pal = sFieldMugshotPal_MamoswineCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineDetermined,
+        //     .pal = sFieldMugshotPal_MamoswineDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineDizzy,
+        //     .pal = sFieldMugshotPal_MamoswineDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineHappy,
+        //     .pal = sFieldMugshotPal_MamoswineHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineInspired,
+        //     .pal = sFieldMugshotPal_MamoswineInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineJoyous,
+        //     .pal = sFieldMugshotPal_MamoswineJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswinePain,
+        //     .pal = sFieldMugshotPal_MamoswinePain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineSad,
+        //     .pal = sFieldMugshotPal_MamoswineSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineShouting,
+        //     .pal = sFieldMugshotPal_MamoswineShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineSigh,
+        //     .pal = sFieldMugshotPal_MamoswineSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineStunned,
+        //     .pal = sFieldMugshotPal_MamoswineStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineSurprised,
+        //     .pal = sFieldMugshotPal_MamoswineSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineTeary,
+        //     .pal = sFieldMugshotPal_MamoswineTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineWorried,
+        //     .pal = sFieldMugshotPal_MamoswineWorried,
+        // },
+    },
+
+    [MUGSHOT_MAMOSWINE_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_MamoswineNormalShiny,
+            .pal = sFieldMugshotPal_MamoswineNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineAngryShiny,
+        //     .pal = sFieldMugshotPal_MamoswineAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineCryingShiny,
+        //     .pal = sFieldMugshotPal_MamoswineCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineDeterminedShiny,
+        //     .pal = sFieldMugshotPal_MamoswineDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineDizzyShiny,
+        //     .pal = sFieldMugshotPal_MamoswineDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineHappyShiny,
+        //     .pal = sFieldMugshotPal_MamoswineHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineInspiredShiny,
+        //     .pal = sFieldMugshotPal_MamoswineInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineJoyousShiny,
+        //     .pal = sFieldMugshotPal_MamoswineJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswinePainShiny,
+        //     .pal = sFieldMugshotPal_MamoswinePainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineSadShiny,
+        //     .pal = sFieldMugshotPal_MamoswineSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineShoutingShiny,
+        //     .pal = sFieldMugshotPal_MamoswineShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineSighShiny,
+        //     .pal = sFieldMugshotPal_MamoswineSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineStunnedShiny,
+        //     .pal = sFieldMugshotPal_MamoswineStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineSurprisedShiny,
+        //     .pal = sFieldMugshotPal_MamoswineSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineTearyShiny,
+        //     .pal = sFieldMugshotPal_MamoswineTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MamoswineWorriedShiny,
+        //     .pal = sFieldMugshotPal_MamoswineWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_MORGREM] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_MorgremNormal,
+            .pal = sFieldMugshotPal_MorgremNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_MorgremAngry,
+            .pal = sFieldMugshotPal_MorgremAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_MorgremCrying,
+            .pal = sFieldMugshotPal_MorgremCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_MorgremDetermined,
+            .pal = sFieldMugshotPal_MorgremDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_MorgremDizzy,
+            .pal = sFieldMugshotPal_MorgremDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_MorgremHappy,
+            .pal = sFieldMugshotPal_MorgremHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_MorgremInspired,
+            .pal = sFieldMugshotPal_MorgremInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_MorgremJoyous,
+            .pal = sFieldMugshotPal_MorgremJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_MorgremPain,
+            .pal = sFieldMugshotPal_MorgremPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_MorgremSad,
+            .pal = sFieldMugshotPal_MorgremSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_MorgremShouting,
+            .pal = sFieldMugshotPal_MorgremShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_MorgremSigh,
+            .pal = sFieldMugshotPal_MorgremSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_MorgremStunned,
+            .pal = sFieldMugshotPal_MorgremStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_MorgremSurprised,
+            .pal = sFieldMugshotPal_MorgremSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_MorgremTeary,
+            .pal = sFieldMugshotPal_MorgremTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_MorgremWorried,
+            .pal = sFieldMugshotPal_MorgremWorried,
+        },
+    },
+
+    [MUGSHOT_MORGREM_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_MorgremNormalShiny,
+            .pal = sFieldMugshotPal_MorgremNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MorgremAngryShiny,
+        //     .pal = sFieldMugshotPal_MorgremAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MorgremCryingShiny,
+        //     .pal = sFieldMugshotPal_MorgremCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MorgremDeterminedShiny,
+        //     .pal = sFieldMugshotPal_MorgremDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MorgremDizzyShiny,
+        //     .pal = sFieldMugshotPal_MorgremDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MorgremHappyShiny,
+        //     .pal = sFieldMugshotPal_MorgremHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MorgremInspiredShiny,
+        //     .pal = sFieldMugshotPal_MorgremInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MorgremJoyousShiny,
+        //     .pal = sFieldMugshotPal_MorgremJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MorgremPainShiny,
+        //     .pal = sFieldMugshotPal_MorgremPainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MorgremSadShiny,
+        //     .pal = sFieldMugshotPal_MorgremSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MorgremShoutingShiny,
+        //     .pal = sFieldMugshotPal_MorgremShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MorgremSighShiny,
+        //     .pal = sFieldMugshotPal_MorgremSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MorgremStunnedShiny,
+        //     .pal = sFieldMugshotPal_MorgremStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MorgremSurprisedShiny,
+        //     .pal = sFieldMugshotPal_MorgremSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MorgremTearyShiny,
+        //     .pal = sFieldMugshotPal_MorgremTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_MorgremWorriedShiny,
+        //     .pal = sFieldMugshotPal_MorgremWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_NIDOKING] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingNormal,
+            .pal = sFieldMugshotPal_NidokingNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingAngry,
+            .pal = sFieldMugshotPal_NidokingAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingCrying,
+            .pal = sFieldMugshotPal_NidokingCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingDetermined,
+            .pal = sFieldMugshotPal_NidokingDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingDizzy,
+            .pal = sFieldMugshotPal_NidokingDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingHappy,
+            .pal = sFieldMugshotPal_NidokingHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingInspired,
+            .pal = sFieldMugshotPal_NidokingInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingJoyous,
+            .pal = sFieldMugshotPal_NidokingJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingPain,
+            .pal = sFieldMugshotPal_NidokingPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingSad,
+            .pal = sFieldMugshotPal_NidokingSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingShouting,
+            .pal = sFieldMugshotPal_NidokingShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingSigh,
+            .pal = sFieldMugshotPal_NidokingSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingStunned,
+            .pal = sFieldMugshotPal_NidokingStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingSurprised,
+            .pal = sFieldMugshotPal_NidokingSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingTeary,
+            .pal = sFieldMugshotPal_NidokingTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingWorried,
+            .pal = sFieldMugshotPal_NidokingWorried,
+        },
+    },
+
+    [MUGSHOT_NIDOKING_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingNormalShiny,
+            .pal = sFieldMugshotPal_NidokingNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingAngryShiny,
+            .pal = sFieldMugshotPal_NidokingAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingCryingShiny,
+            .pal = sFieldMugshotPal_NidokingCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingDeterminedShiny,
+            .pal = sFieldMugshotPal_NidokingDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingDizzyShiny,
+            .pal = sFieldMugshotPal_NidokingDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingHappyShiny,
+            .pal = sFieldMugshotPal_NidokingHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingInspiredShiny,
+            .pal = sFieldMugshotPal_NidokingInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingJoyousShiny,
+            .pal = sFieldMugshotPal_NidokingJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingPainShiny,
+            .pal = sFieldMugshotPal_NidokingPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingSadShiny,
+            .pal = sFieldMugshotPal_NidokingSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingShoutingShiny,
+            .pal = sFieldMugshotPal_NidokingShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingSighShiny,
+            .pal = sFieldMugshotPal_NidokingSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingStunnedShiny,
+            .pal = sFieldMugshotPal_NidokingStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingSurprisedShiny,
+            .pal = sFieldMugshotPal_NidokingSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingTearyShiny,
+            .pal = sFieldMugshotPal_NidokingTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_NidokingWorriedShiny,
+            .pal = sFieldMugshotPal_NidokingWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_NIDOQUEEN] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenNormal,
+            .pal = sFieldMugshotPal_NidoqueenNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenAngry,
+            .pal = sFieldMugshotPal_NidoqueenAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenCrying,
+            .pal = sFieldMugshotPal_NidoqueenCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenDetermined,
+            .pal = sFieldMugshotPal_NidoqueenDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenDizzy,
+            .pal = sFieldMugshotPal_NidoqueenDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenHappy,
+            .pal = sFieldMugshotPal_NidoqueenHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenInspired,
+            .pal = sFieldMugshotPal_NidoqueenInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenJoyous,
+            .pal = sFieldMugshotPal_NidoqueenJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenPain,
+            .pal = sFieldMugshotPal_NidoqueenPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenSad,
+            .pal = sFieldMugshotPal_NidoqueenSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenShouting,
+            .pal = sFieldMugshotPal_NidoqueenShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenSigh,
+            .pal = sFieldMugshotPal_NidoqueenSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenStunned,
+            .pal = sFieldMugshotPal_NidoqueenStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenSurprised,
+            .pal = sFieldMugshotPal_NidoqueenSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenTeary,
+            .pal = sFieldMugshotPal_NidoqueenTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenWorried,
+            .pal = sFieldMugshotPal_NidoqueenWorried,
+        },
+    },
+
+    [MUGSHOT_NIDOQUEEN_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenNormalShiny,
+            .pal = sFieldMugshotPal_NidoqueenNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenAngryShiny,
+            .pal = sFieldMugshotPal_NidoqueenAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenCryingShiny,
+            .pal = sFieldMugshotPal_NidoqueenCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenDeterminedShiny,
+            .pal = sFieldMugshotPal_NidoqueenDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenDizzyShiny,
+            .pal = sFieldMugshotPal_NidoqueenDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenHappyShiny,
+            .pal = sFieldMugshotPal_NidoqueenHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenInspiredShiny,
+            .pal = sFieldMugshotPal_NidoqueenInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenJoyousShiny,
+            .pal = sFieldMugshotPal_NidoqueenJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenPainShiny,
+            .pal = sFieldMugshotPal_NidoqueenPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenSadShiny,
+            .pal = sFieldMugshotPal_NidoqueenSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenShoutingShiny,
+            .pal = sFieldMugshotPal_NidoqueenShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenSighShiny,
+            .pal = sFieldMugshotPal_NidoqueenSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenStunnedShiny,
+            .pal = sFieldMugshotPal_NidoqueenStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenSurprisedShiny,
+            .pal = sFieldMugshotPal_NidoqueenSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenTearyShiny,
+            .pal = sFieldMugshotPal_NidoqueenTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_NidoqueenWorriedShiny,
+            .pal = sFieldMugshotPal_NidoqueenWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_NIDORAN_F] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fNormal,
+            .pal = sFieldMugshotPal_Nidoran_fNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fAngry,
+            .pal = sFieldMugshotPal_Nidoran_fAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fCrying,
+            .pal = sFieldMugshotPal_Nidoran_fCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fDetermined,
+            .pal = sFieldMugshotPal_Nidoran_fDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fDizzy,
+            .pal = sFieldMugshotPal_Nidoran_fDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fHappy,
+            .pal = sFieldMugshotPal_Nidoran_fHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fInspired,
+            .pal = sFieldMugshotPal_Nidoran_fInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fJoyous,
+            .pal = sFieldMugshotPal_Nidoran_fJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fPain,
+            .pal = sFieldMugshotPal_Nidoran_fPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fSad,
+            .pal = sFieldMugshotPal_Nidoran_fSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fShouting,
+            .pal = sFieldMugshotPal_Nidoran_fShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fSigh,
+            .pal = sFieldMugshotPal_Nidoran_fSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fStunned,
+            .pal = sFieldMugshotPal_Nidoran_fStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fSurprised,
+            .pal = sFieldMugshotPal_Nidoran_fSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fTeary,
+            .pal = sFieldMugshotPal_Nidoran_fTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fWorried,
+            .pal = sFieldMugshotPal_Nidoran_fWorried,
+        },
+    },
+
+    [MUGSHOT_NIDORAN_F_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fNormalShiny,
+            .pal = sFieldMugshotPal_Nidoran_fNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fAngryShiny,
+            .pal = sFieldMugshotPal_Nidoran_fAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fCryingShiny,
+            .pal = sFieldMugshotPal_Nidoran_fCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fDeterminedShiny,
+            .pal = sFieldMugshotPal_Nidoran_fDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fDizzyShiny,
+            .pal = sFieldMugshotPal_Nidoran_fDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fHappyShiny,
+            .pal = sFieldMugshotPal_Nidoran_fHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fInspiredShiny,
+            .pal = sFieldMugshotPal_Nidoran_fInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fJoyousShiny,
+            .pal = sFieldMugshotPal_Nidoran_fJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fPainShiny,
+            .pal = sFieldMugshotPal_Nidoran_fPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fSadShiny,
+            .pal = sFieldMugshotPal_Nidoran_fSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fShoutingShiny,
+            .pal = sFieldMugshotPal_Nidoran_fShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fSighShiny,
+            .pal = sFieldMugshotPal_Nidoran_fSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fStunnedShiny,
+            .pal = sFieldMugshotPal_Nidoran_fStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fSurprisedShiny,
+            .pal = sFieldMugshotPal_Nidoran_fSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fTearyShiny,
+            .pal = sFieldMugshotPal_Nidoran_fTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_fWorriedShiny,
+            .pal = sFieldMugshotPal_Nidoran_fWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_NIDORAN_M] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mNormal,
+            .pal = sFieldMugshotPal_Nidoran_mNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mAngry,
+            .pal = sFieldMugshotPal_Nidoran_mAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mCrying,
+            .pal = sFieldMugshotPal_Nidoran_mCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mDetermined,
+            .pal = sFieldMugshotPal_Nidoran_mDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mDizzy,
+            .pal = sFieldMugshotPal_Nidoran_mDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mHappy,
+            .pal = sFieldMugshotPal_Nidoran_mHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mInspired,
+            .pal = sFieldMugshotPal_Nidoran_mInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mJoyous,
+            .pal = sFieldMugshotPal_Nidoran_mJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mPain,
+            .pal = sFieldMugshotPal_Nidoran_mPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mSad,
+            .pal = sFieldMugshotPal_Nidoran_mSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mShouting,
+            .pal = sFieldMugshotPal_Nidoran_mShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mSigh,
+            .pal = sFieldMugshotPal_Nidoran_mSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mStunned,
+            .pal = sFieldMugshotPal_Nidoran_mStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mSurprised,
+            .pal = sFieldMugshotPal_Nidoran_mSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mTeary,
+            .pal = sFieldMugshotPal_Nidoran_mTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mWorried,
+            .pal = sFieldMugshotPal_Nidoran_mWorried,
+        },
+    },
+
+    [MUGSHOT_NIDORAN_M_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mNormalShiny,
+            .pal = sFieldMugshotPal_Nidoran_mNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mAngryShiny,
+            .pal = sFieldMugshotPal_Nidoran_mAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mCryingShiny,
+            .pal = sFieldMugshotPal_Nidoran_mCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mDeterminedShiny,
+            .pal = sFieldMugshotPal_Nidoran_mDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mDizzyShiny,
+            .pal = sFieldMugshotPal_Nidoran_mDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mHappyShiny,
+            .pal = sFieldMugshotPal_Nidoran_mHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mInspiredShiny,
+            .pal = sFieldMugshotPal_Nidoran_mInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mJoyousShiny,
+            .pal = sFieldMugshotPal_Nidoran_mJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mPainShiny,
+            .pal = sFieldMugshotPal_Nidoran_mPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mSadShiny,
+            .pal = sFieldMugshotPal_Nidoran_mSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mShoutingShiny,
+            .pal = sFieldMugshotPal_Nidoran_mShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mSighShiny,
+            .pal = sFieldMugshotPal_Nidoran_mSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mStunnedShiny,
+            .pal = sFieldMugshotPal_Nidoran_mStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mSurprisedShiny,
+            .pal = sFieldMugshotPal_Nidoran_mSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mTearyShiny,
+            .pal = sFieldMugshotPal_Nidoran_mTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_Nidoran_mWorriedShiny,
+            .pal = sFieldMugshotPal_Nidoran_mWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_NIDORINA] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaNormal,
+            .pal = sFieldMugshotPal_NidorinaNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaAngry,
+            .pal = sFieldMugshotPal_NidorinaAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaCrying,
+            .pal = sFieldMugshotPal_NidorinaCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaDetermined,
+            .pal = sFieldMugshotPal_NidorinaDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaDizzy,
+            .pal = sFieldMugshotPal_NidorinaDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaHappy,
+            .pal = sFieldMugshotPal_NidorinaHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaInspired,
+            .pal = sFieldMugshotPal_NidorinaInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaJoyous,
+            .pal = sFieldMugshotPal_NidorinaJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaPain,
+            .pal = sFieldMugshotPal_NidorinaPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaSad,
+            .pal = sFieldMugshotPal_NidorinaSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaShouting,
+            .pal = sFieldMugshotPal_NidorinaShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaSigh,
+            .pal = sFieldMugshotPal_NidorinaSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaStunned,
+            .pal = sFieldMugshotPal_NidorinaStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaSurprised,
+            .pal = sFieldMugshotPal_NidorinaSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaTeary,
+            .pal = sFieldMugshotPal_NidorinaTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaWorried,
+            .pal = sFieldMugshotPal_NidorinaWorried,
+        },
+    },
+
+    [MUGSHOT_NIDORINA_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaNormalShiny,
+            .pal = sFieldMugshotPal_NidorinaNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaAngryShiny,
+            .pal = sFieldMugshotPal_NidorinaAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaCryingShiny,
+            .pal = sFieldMugshotPal_NidorinaCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaDeterminedShiny,
+            .pal = sFieldMugshotPal_NidorinaDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaDizzyShiny,
+            .pal = sFieldMugshotPal_NidorinaDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaHappyShiny,
+            .pal = sFieldMugshotPal_NidorinaHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaInspiredShiny,
+            .pal = sFieldMugshotPal_NidorinaInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaJoyousShiny,
+            .pal = sFieldMugshotPal_NidorinaJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaPainShiny,
+            .pal = sFieldMugshotPal_NidorinaPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaSadShiny,
+            .pal = sFieldMugshotPal_NidorinaSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaShoutingShiny,
+            .pal = sFieldMugshotPal_NidorinaShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaSighShiny,
+            .pal = sFieldMugshotPal_NidorinaSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaStunnedShiny,
+            .pal = sFieldMugshotPal_NidorinaStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaSurprisedShiny,
+            .pal = sFieldMugshotPal_NidorinaSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaTearyShiny,
+            .pal = sFieldMugshotPal_NidorinaTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinaWorriedShiny,
+            .pal = sFieldMugshotPal_NidorinaWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_NIDORINO] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinoNormal,
+            .pal = sFieldMugshotPal_NidorinoNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoAngry,
+        //     .pal = sFieldMugshotPal_NidorinoAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoCrying,
+        //     .pal = sFieldMugshotPal_NidorinoCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoDetermined,
+        //     .pal = sFieldMugshotPal_NidorinoDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoDizzy,
+        //     .pal = sFieldMugshotPal_NidorinoDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoHappy,
+        //     .pal = sFieldMugshotPal_NidorinoHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoInspired,
+        //     .pal = sFieldMugshotPal_NidorinoInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoJoyous,
+        //     .pal = sFieldMugshotPal_NidorinoJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoPain,
+        //     .pal = sFieldMugshotPal_NidorinoPain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoSad,
+        //     .pal = sFieldMugshotPal_NidorinoSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoShouting,
+        //     .pal = sFieldMugshotPal_NidorinoShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoSigh,
+        //     .pal = sFieldMugshotPal_NidorinoSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoStunned,
+        //     .pal = sFieldMugshotPal_NidorinoStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoSurprised,
+        //     .pal = sFieldMugshotPal_NidorinoSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoTeary,
+        //     .pal = sFieldMugshotPal_NidorinoTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoWorried,
+        //     .pal = sFieldMugshotPal_NidorinoWorried,
+        // },
+    },
+
+    [MUGSHOT_NIDORINO_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_NidorinoNormalShiny,
+            .pal = sFieldMugshotPal_NidorinoNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoAngryShiny,
+        //     .pal = sFieldMugshotPal_NidorinoAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoCryingShiny,
+        //     .pal = sFieldMugshotPal_NidorinoCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoDeterminedShiny,
+        //     .pal = sFieldMugshotPal_NidorinoDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoDizzyShiny,
+        //     .pal = sFieldMugshotPal_NidorinoDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoHappyShiny,
+        //     .pal = sFieldMugshotPal_NidorinoHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoInspiredShiny,
+        //     .pal = sFieldMugshotPal_NidorinoInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoJoyousShiny,
+        //     .pal = sFieldMugshotPal_NidorinoJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoPainShiny,
+        //     .pal = sFieldMugshotPal_NidorinoPainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoSadShiny,
+        //     .pal = sFieldMugshotPal_NidorinoSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoShoutingShiny,
+        //     .pal = sFieldMugshotPal_NidorinoShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoSighShiny,
+        //     .pal = sFieldMugshotPal_NidorinoSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoStunnedShiny,
+        //     .pal = sFieldMugshotPal_NidorinoStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoSurprisedShiny,
+        //     .pal = sFieldMugshotPal_NidorinoSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoTearyShiny,
+        //     .pal = sFieldMugshotPal_NidorinoTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_NidorinoWorriedShiny,
+        //     .pal = sFieldMugshotPal_NidorinoWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_NUZLEAF] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafNormal,
+            .pal = sFieldMugshotPal_NuzleafNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafAngry,
+            .pal = sFieldMugshotPal_NuzleafAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafCrying,
+            .pal = sFieldMugshotPal_NuzleafCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafDetermined,
+            .pal = sFieldMugshotPal_NuzleafDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafDizzy,
+            .pal = sFieldMugshotPal_NuzleafDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafHappy,
+            .pal = sFieldMugshotPal_NuzleafHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafInspired,
+            .pal = sFieldMugshotPal_NuzleafInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafJoyous,
+            .pal = sFieldMugshotPal_NuzleafJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafPain,
+            .pal = sFieldMugshotPal_NuzleafPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafSad,
+            .pal = sFieldMugshotPal_NuzleafSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafShouting,
+            .pal = sFieldMugshotPal_NuzleafShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafSigh,
+            .pal = sFieldMugshotPal_NuzleafSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafStunned,
+            .pal = sFieldMugshotPal_NuzleafStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafSurprised,
+            .pal = sFieldMugshotPal_NuzleafSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafTeary,
+            .pal = sFieldMugshotPal_NuzleafTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafWorried,
+            .pal = sFieldMugshotPal_NuzleafWorried,
+        },
+    },
+
+    [MUGSHOT_NUZLEAF_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafNormalShiny,
+            .pal = sFieldMugshotPal_NuzleafNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafAngryShiny,
+            .pal = sFieldMugshotPal_NuzleafAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafCryingShiny,
+            .pal = sFieldMugshotPal_NuzleafCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafDeterminedShiny,
+            .pal = sFieldMugshotPal_NuzleafDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafDizzyShiny,
+            .pal = sFieldMugshotPal_NuzleafDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafHappyShiny,
+            .pal = sFieldMugshotPal_NuzleafHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafInspiredShiny,
+            .pal = sFieldMugshotPal_NuzleafInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafJoyousShiny,
+            .pal = sFieldMugshotPal_NuzleafJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafPainShiny,
+            .pal = sFieldMugshotPal_NuzleafPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafSadShiny,
+            .pal = sFieldMugshotPal_NuzleafSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafShoutingShiny,
+            .pal = sFieldMugshotPal_NuzleafShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafSighShiny,
+            .pal = sFieldMugshotPal_NuzleafSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafStunnedShiny,
+            .pal = sFieldMugshotPal_NuzleafStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafSurprisedShiny,
+            .pal = sFieldMugshotPal_NuzleafSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafTearyShiny,
+            .pal = sFieldMugshotPal_NuzleafTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_NuzleafWorriedShiny,
+            .pal = sFieldMugshotPal_NuzleafWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_PALPITOAD] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_PalpitoadNormal,
+            .pal = sFieldMugshotPal_PalpitoadNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadAngry,
+        //     .pal = sFieldMugshotPal_PalpitoadAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadCrying,
+        //     .pal = sFieldMugshotPal_PalpitoadCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadDetermined,
+        //     .pal = sFieldMugshotPal_PalpitoadDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadDizzy,
+        //     .pal = sFieldMugshotPal_PalpitoadDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadHappy,
+        //     .pal = sFieldMugshotPal_PalpitoadHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadInspired,
+        //     .pal = sFieldMugshotPal_PalpitoadInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadJoyous,
+        //     .pal = sFieldMugshotPal_PalpitoadJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadPain,
+        //     .pal = sFieldMugshotPal_PalpitoadPain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadSad,
+        //     .pal = sFieldMugshotPal_PalpitoadSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadShouting,
+        //     .pal = sFieldMugshotPal_PalpitoadShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadSigh,
+        //     .pal = sFieldMugshotPal_PalpitoadSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadStunned,
+        //     .pal = sFieldMugshotPal_PalpitoadStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadSurprised,
+        //     .pal = sFieldMugshotPal_PalpitoadSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadTeary,
+        //     .pal = sFieldMugshotPal_PalpitoadTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadWorried,
+        //     .pal = sFieldMugshotPal_PalpitoadWorried,
+        // },
+    },
+
+    [MUGSHOT_PALPITOAD_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_PalpitoadNormalShiny,
+            .pal = sFieldMugshotPal_PalpitoadNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadAngryShiny,
+        //     .pal = sFieldMugshotPal_PalpitoadAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadCryingShiny,
+        //     .pal = sFieldMugshotPal_PalpitoadCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadDeterminedShiny,
+        //     .pal = sFieldMugshotPal_PalpitoadDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadDizzyShiny,
+        //     .pal = sFieldMugshotPal_PalpitoadDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadHappyShiny,
+        //     .pal = sFieldMugshotPal_PalpitoadHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadInspiredShiny,
+        //     .pal = sFieldMugshotPal_PalpitoadInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadJoyousShiny,
+        //     .pal = sFieldMugshotPal_PalpitoadJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadPainShiny,
+        //     .pal = sFieldMugshotPal_PalpitoadPainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadSadShiny,
+        //     .pal = sFieldMugshotPal_PalpitoadSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadShoutingShiny,
+        //     .pal = sFieldMugshotPal_PalpitoadShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadSighShiny,
+        //     .pal = sFieldMugshotPal_PalpitoadSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadStunnedShiny,
+        //     .pal = sFieldMugshotPal_PalpitoadStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadSurprisedShiny,
+        //     .pal = sFieldMugshotPal_PalpitoadSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadTearyShiny,
+        //     .pal = sFieldMugshotPal_PalpitoadTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PalpitoadWorriedShiny,
+        //     .pal = sFieldMugshotPal_PalpitoadWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_PILOSWINE] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_PiloswineNormal,
+            .pal = sFieldMugshotPal_PiloswineNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineAngry,
+        //     .pal = sFieldMugshotPal_PiloswineAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineCrying,
+        //     .pal = sFieldMugshotPal_PiloswineCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineDetermined,
+        //     .pal = sFieldMugshotPal_PiloswineDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineDizzy,
+        //     .pal = sFieldMugshotPal_PiloswineDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineHappy,
+        //     .pal = sFieldMugshotPal_PiloswineHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineInspired,
+        //     .pal = sFieldMugshotPal_PiloswineInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineJoyous,
+        //     .pal = sFieldMugshotPal_PiloswineJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswinePain,
+        //     .pal = sFieldMugshotPal_PiloswinePain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineSad,
+        //     .pal = sFieldMugshotPal_PiloswineSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineShouting,
+        //     .pal = sFieldMugshotPal_PiloswineShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineSigh,
+        //     .pal = sFieldMugshotPal_PiloswineSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineStunned,
+        //     .pal = sFieldMugshotPal_PiloswineStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineSurprised,
+        //     .pal = sFieldMugshotPal_PiloswineSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineTeary,
+        //     .pal = sFieldMugshotPal_PiloswineTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineWorried,
+        //     .pal = sFieldMugshotPal_PiloswineWorried,
+        // },
+    },
+
+    [MUGSHOT_PILOSWINE_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_PiloswineNormalShiny,
+            .pal = sFieldMugshotPal_PiloswineNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineAngryShiny,
+        //     .pal = sFieldMugshotPal_PiloswineAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineCryingShiny,
+        //     .pal = sFieldMugshotPal_PiloswineCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineDeterminedShiny,
+        //     .pal = sFieldMugshotPal_PiloswineDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineDizzyShiny,
+        //     .pal = sFieldMugshotPal_PiloswineDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineHappyShiny,
+        //     .pal = sFieldMugshotPal_PiloswineHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineInspiredShiny,
+        //     .pal = sFieldMugshotPal_PiloswineInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineJoyousShiny,
+        //     .pal = sFieldMugshotPal_PiloswineJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswinePainShiny,
+        //     .pal = sFieldMugshotPal_PiloswinePainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineSadShiny,
+        //     .pal = sFieldMugshotPal_PiloswineSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineShoutingShiny,
+        //     .pal = sFieldMugshotPal_PiloswineShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineSighShiny,
+        //     .pal = sFieldMugshotPal_PiloswineSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineStunnedShiny,
+        //     .pal = sFieldMugshotPal_PiloswineStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineSurprisedShiny,
+        //     .pal = sFieldMugshotPal_PiloswineSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineTearyShiny,
+        //     .pal = sFieldMugshotPal_PiloswineTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_PiloswineWorriedShiny,
+        //     .pal = sFieldMugshotPal_PiloswineWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_ROLYCOLY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyNormal,
+            .pal = sFieldMugshotPal_RolycolyNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyAngry,
+            .pal = sFieldMugshotPal_RolycolyAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyCrying,
+            .pal = sFieldMugshotPal_RolycolyCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyDetermined,
+            .pal = sFieldMugshotPal_RolycolyDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyDizzy,
+            .pal = sFieldMugshotPal_RolycolyDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyHappy,
+            .pal = sFieldMugshotPal_RolycolyHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyInspired,
+            .pal = sFieldMugshotPal_RolycolyInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyJoyous,
+            .pal = sFieldMugshotPal_RolycolyJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyPain,
+            .pal = sFieldMugshotPal_RolycolyPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolySad,
+            .pal = sFieldMugshotPal_RolycolySad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyShouting,
+            .pal = sFieldMugshotPal_RolycolyShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolySigh,
+            .pal = sFieldMugshotPal_RolycolySigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyStunned,
+            .pal = sFieldMugshotPal_RolycolyStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolySurprised,
+            .pal = sFieldMugshotPal_RolycolySurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyTeary,
+            .pal = sFieldMugshotPal_RolycolyTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyWorried,
+            .pal = sFieldMugshotPal_RolycolyWorried,
+        },
+    },
+
+    [MUGSHOT_ROLYCOLY_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyNormalShiny,
+            .pal = sFieldMugshotPal_RolycolyNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyAngryShiny,
+            .pal = sFieldMugshotPal_RolycolyAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyCryingShiny,
+            .pal = sFieldMugshotPal_RolycolyCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyDeterminedShiny,
+            .pal = sFieldMugshotPal_RolycolyDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyDizzyShiny,
+            .pal = sFieldMugshotPal_RolycolyDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyHappyShiny,
+            .pal = sFieldMugshotPal_RolycolyHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyInspiredShiny,
+            .pal = sFieldMugshotPal_RolycolyInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyJoyousShiny,
+            .pal = sFieldMugshotPal_RolycolyJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyPainShiny,
+            .pal = sFieldMugshotPal_RolycolyPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolySadShiny,
+            .pal = sFieldMugshotPal_RolycolySadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyShoutingShiny,
+            .pal = sFieldMugshotPal_RolycolyShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolySighShiny,
+            .pal = sFieldMugshotPal_RolycolySighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyStunnedShiny,
+            .pal = sFieldMugshotPal_RolycolyStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolySurprisedShiny,
+            .pal = sFieldMugshotPal_RolycolySurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyTearyShiny,
+            .pal = sFieldMugshotPal_RolycolyTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_RolycolyWorriedShiny,
+            .pal = sFieldMugshotPal_RolycolyWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_ROOKIDEE] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_RookideeNormal,
+            .pal = sFieldMugshotPal_RookideeNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeAngry,
+        //     .pal = sFieldMugshotPal_RookideeAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeCrying,
+        //     .pal = sFieldMugshotPal_RookideeCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeDetermined,
+        //     .pal = sFieldMugshotPal_RookideeDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeDizzy,
+        //     .pal = sFieldMugshotPal_RookideeDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeHappy,
+        //     .pal = sFieldMugshotPal_RookideeHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeInspired,
+        //     .pal = sFieldMugshotPal_RookideeInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeJoyous,
+        //     .pal = sFieldMugshotPal_RookideeJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideePain,
+        //     .pal = sFieldMugshotPal_RookideePain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeSad,
+        //     .pal = sFieldMugshotPal_RookideeSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeShouting,
+        //     .pal = sFieldMugshotPal_RookideeShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeSigh,
+        //     .pal = sFieldMugshotPal_RookideeSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeStunned,
+        //     .pal = sFieldMugshotPal_RookideeStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeSurprised,
+        //     .pal = sFieldMugshotPal_RookideeSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeTeary,
+        //     .pal = sFieldMugshotPal_RookideeTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeWorried,
+        //     .pal = sFieldMugshotPal_RookideeWorried,
+        // },
+    },
+
+    [MUGSHOT_ROOKIDEE_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_RookideeNormalShiny,
+            .pal = sFieldMugshotPal_RookideeNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeAngryShiny,
+        //     .pal = sFieldMugshotPal_RookideeAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeCryingShiny,
+        //     .pal = sFieldMugshotPal_RookideeCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeDeterminedShiny,
+        //     .pal = sFieldMugshotPal_RookideeDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeDizzyShiny,
+        //     .pal = sFieldMugshotPal_RookideeDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeHappyShiny,
+        //     .pal = sFieldMugshotPal_RookideeHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeInspiredShiny,
+        //     .pal = sFieldMugshotPal_RookideeInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeJoyousShiny,
+        //     .pal = sFieldMugshotPal_RookideeJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideePainShiny,
+        //     .pal = sFieldMugshotPal_RookideePainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeSadShiny,
+        //     .pal = sFieldMugshotPal_RookideeSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeShoutingShiny,
+        //     .pal = sFieldMugshotPal_RookideeShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeSighShiny,
+        //     .pal = sFieldMugshotPal_RookideeSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeStunnedShiny,
+        //     .pal = sFieldMugshotPal_RookideeStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeSurprisedShiny,
+        //     .pal = sFieldMugshotPal_RookideeSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeTearyShiny,
+        //     .pal = sFieldMugshotPal_RookideeTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_RookideeWorriedShiny,
+        //     .pal = sFieldMugshotPal_RookideeWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_SALAMENCE] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceNormal,
+            .pal = sFieldMugshotPal_SalamenceNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceAngry,
+            .pal = sFieldMugshotPal_SalamenceAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceCrying,
+            .pal = sFieldMugshotPal_SalamenceCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceDetermined,
+            .pal = sFieldMugshotPal_SalamenceDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceDizzy,
+            .pal = sFieldMugshotPal_SalamenceDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceHappy,
+            .pal = sFieldMugshotPal_SalamenceHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceInspired,
+            .pal = sFieldMugshotPal_SalamenceInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceJoyous,
+            .pal = sFieldMugshotPal_SalamenceJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_SalamencePain,
+            .pal = sFieldMugshotPal_SalamencePain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceSad,
+            .pal = sFieldMugshotPal_SalamenceSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceShouting,
+            .pal = sFieldMugshotPal_SalamenceShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceSigh,
+            .pal = sFieldMugshotPal_SalamenceSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceStunned,
+            .pal = sFieldMugshotPal_SalamenceStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceSurprised,
+            .pal = sFieldMugshotPal_SalamenceSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceTeary,
+            .pal = sFieldMugshotPal_SalamenceTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceWorried,
+            .pal = sFieldMugshotPal_SalamenceWorried,
+        },
+    },
+
+    [MUGSHOT_SALAMENCE_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceNormalShiny,
+            .pal = sFieldMugshotPal_SalamenceNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceAngryShiny,
+            .pal = sFieldMugshotPal_SalamenceAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceCryingShiny,
+            .pal = sFieldMugshotPal_SalamenceCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceDeterminedShiny,
+            .pal = sFieldMugshotPal_SalamenceDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceDizzyShiny,
+            .pal = sFieldMugshotPal_SalamenceDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceHappyShiny,
+            .pal = sFieldMugshotPal_SalamenceHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceInspiredShiny,
+            .pal = sFieldMugshotPal_SalamenceInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceJoyousShiny,
+            .pal = sFieldMugshotPal_SalamenceJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_SalamencePainShiny,
+            .pal = sFieldMugshotPal_SalamencePainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceSadShiny,
+            .pal = sFieldMugshotPal_SalamenceSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceShoutingShiny,
+            .pal = sFieldMugshotPal_SalamenceShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceSighShiny,
+            .pal = sFieldMugshotPal_SalamenceSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceStunnedShiny,
+            .pal = sFieldMugshotPal_SalamenceStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceSurprisedShiny,
+            .pal = sFieldMugshotPal_SalamenceSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceTearyShiny,
+            .pal = sFieldMugshotPal_SalamenceTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_SalamenceWorriedShiny,
+            .pal = sFieldMugshotPal_SalamenceWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_SANDILE] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_SandileNormal,
+            .pal = sFieldMugshotPal_SandileNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_SandileAngry,
+            .pal = sFieldMugshotPal_SandileAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_SandileCrying,
+            .pal = sFieldMugshotPal_SandileCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_SandileDetermined,
+            .pal = sFieldMugshotPal_SandileDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_SandileDizzy,
+            .pal = sFieldMugshotPal_SandileDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_SandileHappy,
+            .pal = sFieldMugshotPal_SandileHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_SandileInspired,
+            .pal = sFieldMugshotPal_SandileInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_SandileJoyous,
+            .pal = sFieldMugshotPal_SandileJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_SandilePain,
+            .pal = sFieldMugshotPal_SandilePain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_SandileSad,
+            .pal = sFieldMugshotPal_SandileSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_SandileShouting,
+            .pal = sFieldMugshotPal_SandileShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_SandileSigh,
+            .pal = sFieldMugshotPal_SandileSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_SandileStunned,
+            .pal = sFieldMugshotPal_SandileStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_SandileSurprised,
+            .pal = sFieldMugshotPal_SandileSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_SandileTeary,
+            .pal = sFieldMugshotPal_SandileTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_SandileWorried,
+            .pal = sFieldMugshotPal_SandileWorried,
+        },
+    },
+
+    [MUGSHOT_SANDILE_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_SandileNormalShiny,
+            .pal = sFieldMugshotPal_SandileNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_SandileAngryShiny,
+            .pal = sFieldMugshotPal_SandileAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_SandileCryingShiny,
+            .pal = sFieldMugshotPal_SandileCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_SandileDeterminedShiny,
+            .pal = sFieldMugshotPal_SandileDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_SandileDizzyShiny,
+            .pal = sFieldMugshotPal_SandileDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_SandileHappyShiny,
+            .pal = sFieldMugshotPal_SandileHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_SandileInspiredShiny,
+            .pal = sFieldMugshotPal_SandileInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_SandileJoyousShiny,
+            .pal = sFieldMugshotPal_SandileJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_SandilePainShiny,
+            .pal = sFieldMugshotPal_SandilePainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_SandileSadShiny,
+            .pal = sFieldMugshotPal_SandileSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_SandileShoutingShiny,
+            .pal = sFieldMugshotPal_SandileShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_SandileSighShiny,
+            .pal = sFieldMugshotPal_SandileSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_SandileStunnedShiny,
+            .pal = sFieldMugshotPal_SandileStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_SandileSurprisedShiny,
+            .pal = sFieldMugshotPal_SandileSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_SandileTearyShiny,
+            .pal = sFieldMugshotPal_SandileTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_SandileWorriedShiny,
+            .pal = sFieldMugshotPal_SandileWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_SEEDOT] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotNormal,
+            .pal = sFieldMugshotPal_SeedotNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotAngry,
+            .pal = sFieldMugshotPal_SeedotAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotCrying,
+            .pal = sFieldMugshotPal_SeedotCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotDetermined,
+            .pal = sFieldMugshotPal_SeedotDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotDizzy,
+            .pal = sFieldMugshotPal_SeedotDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotHappy,
+            .pal = sFieldMugshotPal_SeedotHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotInspired,
+            .pal = sFieldMugshotPal_SeedotInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotJoyous,
+            .pal = sFieldMugshotPal_SeedotJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotPain,
+            .pal = sFieldMugshotPal_SeedotPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotSad,
+            .pal = sFieldMugshotPal_SeedotSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotShouting,
+            .pal = sFieldMugshotPal_SeedotShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotSigh,
+            .pal = sFieldMugshotPal_SeedotSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotStunned,
+            .pal = sFieldMugshotPal_SeedotStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotSurprised,
+            .pal = sFieldMugshotPal_SeedotSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotTeary,
+            .pal = sFieldMugshotPal_SeedotTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotWorried,
+            .pal = sFieldMugshotPal_SeedotWorried,
+        },
+    },
+
+    [MUGSHOT_SEEDOT_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotNormalShiny,
+            .pal = sFieldMugshotPal_SeedotNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotAngryShiny,
+            .pal = sFieldMugshotPal_SeedotAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotCryingShiny,
+            .pal = sFieldMugshotPal_SeedotCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotDeterminedShiny,
+            .pal = sFieldMugshotPal_SeedotDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotDizzyShiny,
+            .pal = sFieldMugshotPal_SeedotDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotHappyShiny,
+            .pal = sFieldMugshotPal_SeedotHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotInspiredShiny,
+            .pal = sFieldMugshotPal_SeedotInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotJoyousShiny,
+            .pal = sFieldMugshotPal_SeedotJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotPainShiny,
+            .pal = sFieldMugshotPal_SeedotPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotSadShiny,
+            .pal = sFieldMugshotPal_SeedotSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotShoutingShiny,
+            .pal = sFieldMugshotPal_SeedotShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotSighShiny,
+            .pal = sFieldMugshotPal_SeedotSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotStunnedShiny,
+            .pal = sFieldMugshotPal_SeedotStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotSurprisedShiny,
+            .pal = sFieldMugshotPal_SeedotSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotTearyShiny,
+            .pal = sFieldMugshotPal_SeedotTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_SeedotWorriedShiny,
+            .pal = sFieldMugshotPal_SeedotWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_SEISMITOAD] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_SeismitoadNormal,
+            .pal = sFieldMugshotPal_SeismitoadNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadAngry,
+        //     .pal = sFieldMugshotPal_SeismitoadAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadCrying,
+        //     .pal = sFieldMugshotPal_SeismitoadCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadDetermined,
+        //     .pal = sFieldMugshotPal_SeismitoadDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadDizzy,
+        //     .pal = sFieldMugshotPal_SeismitoadDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadHappy,
+        //     .pal = sFieldMugshotPal_SeismitoadHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadInspired,
+        //     .pal = sFieldMugshotPal_SeismitoadInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadJoyous,
+        //     .pal = sFieldMugshotPal_SeismitoadJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadPain,
+        //     .pal = sFieldMugshotPal_SeismitoadPain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadSad,
+        //     .pal = sFieldMugshotPal_SeismitoadSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadShouting,
+        //     .pal = sFieldMugshotPal_SeismitoadShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadSigh,
+        //     .pal = sFieldMugshotPal_SeismitoadSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadStunned,
+        //     .pal = sFieldMugshotPal_SeismitoadStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadSurprised,
+        //     .pal = sFieldMugshotPal_SeismitoadSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadTeary,
+        //     .pal = sFieldMugshotPal_SeismitoadTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadWorried,
+        //     .pal = sFieldMugshotPal_SeismitoadWorried,
+        // },
+    },
+
+    [MUGSHOT_SEISMITOAD_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_SeismitoadNormalShiny,
+            .pal = sFieldMugshotPal_SeismitoadNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadAngryShiny,
+        //     .pal = sFieldMugshotPal_SeismitoadAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadCryingShiny,
+        //     .pal = sFieldMugshotPal_SeismitoadCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadDeterminedShiny,
+        //     .pal = sFieldMugshotPal_SeismitoadDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadDizzyShiny,
+        //     .pal = sFieldMugshotPal_SeismitoadDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadHappyShiny,
+        //     .pal = sFieldMugshotPal_SeismitoadHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadInspiredShiny,
+        //     .pal = sFieldMugshotPal_SeismitoadInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadJoyousShiny,
+        //     .pal = sFieldMugshotPal_SeismitoadJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadPainShiny,
+        //     .pal = sFieldMugshotPal_SeismitoadPainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadSadShiny,
+        //     .pal = sFieldMugshotPal_SeismitoadSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadShoutingShiny,
+        //     .pal = sFieldMugshotPal_SeismitoadShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadSighShiny,
+        //     .pal = sFieldMugshotPal_SeismitoadSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadStunnedShiny,
+        //     .pal = sFieldMugshotPal_SeismitoadStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadSurprisedShiny,
+        //     .pal = sFieldMugshotPal_SeismitoadSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadTearyShiny,
+        //     .pal = sFieldMugshotPal_SeismitoadTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_SeismitoadWorriedShiny,
+        //     .pal = sFieldMugshotPal_SeismitoadWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_SHELGON] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_ShelgonNormal,
+            .pal = sFieldMugshotPal_ShelgonNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonAngry,
+        //     .pal = sFieldMugshotPal_ShelgonAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonCrying,
+        //     .pal = sFieldMugshotPal_ShelgonCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonDetermined,
+        //     .pal = sFieldMugshotPal_ShelgonDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonDizzy,
+        //     .pal = sFieldMugshotPal_ShelgonDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonHappy,
+        //     .pal = sFieldMugshotPal_ShelgonHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonInspired,
+        //     .pal = sFieldMugshotPal_ShelgonInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonJoyous,
+        //     .pal = sFieldMugshotPal_ShelgonJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonPain,
+        //     .pal = sFieldMugshotPal_ShelgonPain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonSad,
+        //     .pal = sFieldMugshotPal_ShelgonSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonShouting,
+        //     .pal = sFieldMugshotPal_ShelgonShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonSigh,
+        //     .pal = sFieldMugshotPal_ShelgonSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonStunned,
+        //     .pal = sFieldMugshotPal_ShelgonStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonSurprised,
+        //     .pal = sFieldMugshotPal_ShelgonSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonTeary,
+        //     .pal = sFieldMugshotPal_ShelgonTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonWorried,
+        //     .pal = sFieldMugshotPal_ShelgonWorried,
+        // },
+    },
+
+    [MUGSHOT_SHELGON_SHINY] =
+    {
+        // [EMOTE_NORMAL] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonNormalShiny,
+        //     .pal = sFieldMugshotPal_ShelgonNormalShiny,
+        // },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonAngryShiny,
+        //     .pal = sFieldMugshotPal_ShelgonAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonCryingShiny,
+        //     .pal = sFieldMugshotPal_ShelgonCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonDeterminedShiny,
+        //     .pal = sFieldMugshotPal_ShelgonDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonDizzyShiny,
+        //     .pal = sFieldMugshotPal_ShelgonDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonHappyShiny,
+        //     .pal = sFieldMugshotPal_ShelgonHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonInspiredShiny,
+        //     .pal = sFieldMugshotPal_ShelgonInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonJoyousShiny,
+        //     .pal = sFieldMugshotPal_ShelgonJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonPainShiny,
+        //     .pal = sFieldMugshotPal_ShelgonPainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonSadShiny,
+        //     .pal = sFieldMugshotPal_ShelgonSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonShoutingShiny,
+        //     .pal = sFieldMugshotPal_ShelgonShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonSighShiny,
+        //     .pal = sFieldMugshotPal_ShelgonSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonStunnedShiny,
+        //     .pal = sFieldMugshotPal_ShelgonStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonSurprisedShiny,
+        //     .pal = sFieldMugshotPal_ShelgonSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonTearyShiny,
+        //     .pal = sFieldMugshotPal_ShelgonTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_ShelgonWorriedShiny,
+        //     .pal = sFieldMugshotPal_ShelgonWorriedShiny,
+        // },
+    },
+
+
+    
+    [MUGSHOT_SHIFTRY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryNormal,
+            .pal = sFieldMugshotPal_ShiftryNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryAngry,
+            .pal = sFieldMugshotPal_ShiftryAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryCrying,
+            .pal = sFieldMugshotPal_ShiftryCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryDetermined,
+            .pal = sFieldMugshotPal_ShiftryDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryDizzy,
+            .pal = sFieldMugshotPal_ShiftryDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryHappy,
+            .pal = sFieldMugshotPal_ShiftryHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryInspired,
+            .pal = sFieldMugshotPal_ShiftryInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryJoyous,
+            .pal = sFieldMugshotPal_ShiftryJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryPain,
+            .pal = sFieldMugshotPal_ShiftryPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftrySad,
+            .pal = sFieldMugshotPal_ShiftrySad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryShouting,
+            .pal = sFieldMugshotPal_ShiftryShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftrySigh,
+            .pal = sFieldMugshotPal_ShiftrySigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryStunned,
+            .pal = sFieldMugshotPal_ShiftryStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftrySurprised,
+            .pal = sFieldMugshotPal_ShiftrySurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryTeary,
+            .pal = sFieldMugshotPal_ShiftryTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryWorried,
+            .pal = sFieldMugshotPal_ShiftryWorried,
+        },
+    },
+
+    [MUGSHOT_SHIFTRY_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryNormalShiny,
+            .pal = sFieldMugshotPal_ShiftryNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryAngryShiny,
+            .pal = sFieldMugshotPal_ShiftryAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryCryingShiny,
+            .pal = sFieldMugshotPal_ShiftryCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryDeterminedShiny,
+            .pal = sFieldMugshotPal_ShiftryDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryDizzyShiny,
+            .pal = sFieldMugshotPal_ShiftryDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryHappyShiny,
+            .pal = sFieldMugshotPal_ShiftryHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryInspiredShiny,
+            .pal = sFieldMugshotPal_ShiftryInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryJoyousShiny,
+            .pal = sFieldMugshotPal_ShiftryJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryPainShiny,
+            .pal = sFieldMugshotPal_ShiftryPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftrySadShiny,
+            .pal = sFieldMugshotPal_ShiftrySadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryShoutingShiny,
+            .pal = sFieldMugshotPal_ShiftryShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftrySighShiny,
+            .pal = sFieldMugshotPal_ShiftrySighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryStunnedShiny,
+            .pal = sFieldMugshotPal_ShiftryStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftrySurprisedShiny,
+            .pal = sFieldMugshotPal_ShiftrySurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryTearyShiny,
+            .pal = sFieldMugshotPal_ShiftryTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_ShiftryWorriedShiny,
+            .pal = sFieldMugshotPal_ShiftryWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_SHINX] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxNormal,
+            .pal = sFieldMugshotPal_ShinxNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxAngry,
+            .pal = sFieldMugshotPal_ShinxAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxCrying,
+            .pal = sFieldMugshotPal_ShinxCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxDetermined,
+            .pal = sFieldMugshotPal_ShinxDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxDizzy,
+            .pal = sFieldMugshotPal_ShinxDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxHappy,
+            .pal = sFieldMugshotPal_ShinxHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxInspired,
+            .pal = sFieldMugshotPal_ShinxInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxJoyous,
+            .pal = sFieldMugshotPal_ShinxJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxPain,
+            .pal = sFieldMugshotPal_ShinxPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxSad,
+            .pal = sFieldMugshotPal_ShinxSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxShouting,
+            .pal = sFieldMugshotPal_ShinxShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxSigh,
+            .pal = sFieldMugshotPal_ShinxSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxStunned,
+            .pal = sFieldMugshotPal_ShinxStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxSurprised,
+            .pal = sFieldMugshotPal_ShinxSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxTeary,
+            .pal = sFieldMugshotPal_ShinxTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxWorried,
+            .pal = sFieldMugshotPal_ShinxWorried,
+        },
+    },
+
+    [MUGSHOT_SHINX_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxNormalShiny,
+            .pal = sFieldMugshotPal_ShinxNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxAngryShiny,
+            .pal = sFieldMugshotPal_ShinxAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxCryingShiny,
+            .pal = sFieldMugshotPal_ShinxCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxDeterminedShiny,
+            .pal = sFieldMugshotPal_ShinxDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxDizzyShiny,
+            .pal = sFieldMugshotPal_ShinxDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxHappyShiny,
+            .pal = sFieldMugshotPal_ShinxHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxInspiredShiny,
+            .pal = sFieldMugshotPal_ShinxInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxJoyousShiny,
+            .pal = sFieldMugshotPal_ShinxJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxPainShiny,
+            .pal = sFieldMugshotPal_ShinxPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxSadShiny,
+            .pal = sFieldMugshotPal_ShinxSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxShoutingShiny,
+            .pal = sFieldMugshotPal_ShinxShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxSighShiny,
+            .pal = sFieldMugshotPal_ShinxSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxStunnedShiny,
+            .pal = sFieldMugshotPal_ShinxStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxSurprisedShiny,
+            .pal = sFieldMugshotPal_ShinxSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxTearyShiny,
+            .pal = sFieldMugshotPal_ShinxTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_ShinxWorriedShiny,
+            .pal = sFieldMugshotPal_ShinxWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_STOUTLAND] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandNormal,
+            .pal = sFieldMugshotPal_StoutlandNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandAngry,
+            .pal = sFieldMugshotPal_StoutlandAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandCrying,
+            .pal = sFieldMugshotPal_StoutlandCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandDetermined,
+            .pal = sFieldMugshotPal_StoutlandDetermined,
+        },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_StoutlandDizzy,
+        //     .pal = sFieldMugshotPal_StoutlandDizzy,
+        // },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandHappy,
+            .pal = sFieldMugshotPal_StoutlandHappy,
+        },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_StoutlandInspired,
+        //     .pal = sFieldMugshotPal_StoutlandInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_StoutlandJoyous,
+        //     .pal = sFieldMugshotPal_StoutlandJoyous,
+        // },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandPain,
+            .pal = sFieldMugshotPal_StoutlandPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandSad,
+            .pal = sFieldMugshotPal_StoutlandSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandShouting,
+            .pal = sFieldMugshotPal_StoutlandShouting,
+        },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_StoutlandSigh,
+        //     .pal = sFieldMugshotPal_StoutlandSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_StoutlandStunned,
+        //     .pal = sFieldMugshotPal_StoutlandStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_StoutlandSurprised,
+        //     .pal = sFieldMugshotPal_StoutlandSurprised,
+        // },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandTeary,
+            .pal = sFieldMugshotPal_StoutlandTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandWorried,
+            .pal = sFieldMugshotPal_StoutlandWorried,
+        },
+    },
+
+    [MUGSHOT_STOUTLAND_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandNormalShiny,
+            .pal = sFieldMugshotPal_StoutlandNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandAngryShiny,
+            .pal = sFieldMugshotPal_StoutlandAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandCryingShiny,
+            .pal = sFieldMugshotPal_StoutlandCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandDeterminedShiny,
+            .pal = sFieldMugshotPal_StoutlandDeterminedShiny,
+        },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_StoutlandDizzyShiny,
+        //     .pal = sFieldMugshotPal_StoutlandDizzyShiny,
+        // },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandHappyShiny,
+            .pal = sFieldMugshotPal_StoutlandHappyShiny,
+        },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_StoutlandInspiredShiny,
+        //     .pal = sFieldMugshotPal_StoutlandInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_StoutlandJoyousShiny,
+        //     .pal = sFieldMugshotPal_StoutlandJoyousShiny,
+        // },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandPainShiny,
+            .pal = sFieldMugshotPal_StoutlandPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandSadShiny,
+            .pal = sFieldMugshotPal_StoutlandSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandShoutingShiny,
+            .pal = sFieldMugshotPal_StoutlandShoutingShiny,
+        },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_StoutlandSighShiny,
+        //     .pal = sFieldMugshotPal_StoutlandSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_StoutlandStunnedShiny,
+        //     .pal = sFieldMugshotPal_StoutlandStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_StoutlandSurprisedShiny,
+        //     .pal = sFieldMugshotPal_StoutlandSurprisedShiny,
+        // },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandTearyShiny,
+            .pal = sFieldMugshotPal_StoutlandTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_StoutlandWorriedShiny,
+            .pal = sFieldMugshotPal_StoutlandWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_SWINUB] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubNormal,
+            .pal = sFieldMugshotPal_SwinubNormal,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubAngry,
+            .pal = sFieldMugshotPal_SwinubAngry,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubCrying,
+            .pal = sFieldMugshotPal_SwinubCrying,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubDetermined,
+            .pal = sFieldMugshotPal_SwinubDetermined,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubDizzy,
+            .pal = sFieldMugshotPal_SwinubDizzy,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubHappy,
+            .pal = sFieldMugshotPal_SwinubHappy,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubInspired,
+            .pal = sFieldMugshotPal_SwinubInspired,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubJoyous,
+            .pal = sFieldMugshotPal_SwinubJoyous,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubPain,
+            .pal = sFieldMugshotPal_SwinubPain,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubSad,
+            .pal = sFieldMugshotPal_SwinubSad,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubShouting,
+            .pal = sFieldMugshotPal_SwinubShouting,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubSigh,
+            .pal = sFieldMugshotPal_SwinubSigh,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubStunned,
+            .pal = sFieldMugshotPal_SwinubStunned,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubSurprised,
+            .pal = sFieldMugshotPal_SwinubSurprised,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubTeary,
+            .pal = sFieldMugshotPal_SwinubTeary,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubWorried,
+            .pal = sFieldMugshotPal_SwinubWorried,
+        },
+    },
+
+    [MUGSHOT_SWINUB_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubNormalShiny,
+            .pal = sFieldMugshotPal_SwinubNormalShiny,
+        },
+
+        [EMOTE_ANGRY] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubAngryShiny,
+            .pal = sFieldMugshotPal_SwinubAngryShiny,
+        },
+        
+        [EMOTE_CRYING] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubCryingShiny,
+            .pal = sFieldMugshotPal_SwinubCryingShiny,
+        },
+        
+        [EMOTE_DETERMINED] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubDeterminedShiny,
+            .pal = sFieldMugshotPal_SwinubDeterminedShiny,
+        },
+        
+        [EMOTE_DIZZY] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubDizzyShiny,
+            .pal = sFieldMugshotPal_SwinubDizzyShiny,
+        },
+        
+        [EMOTE_HAPPY] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubHappyShiny,
+            .pal = sFieldMugshotPal_SwinubHappyShiny,
+        },
+        
+        [EMOTE_INSPIRED] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubInspiredShiny,
+            .pal = sFieldMugshotPal_SwinubInspiredShiny,
+        },
+        
+        [EMOTE_JOYOUS] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubJoyousShiny,
+            .pal = sFieldMugshotPal_SwinubJoyousShiny,
+        },
+        
+        [EMOTE_PAIN] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubPainShiny,
+            .pal = sFieldMugshotPal_SwinubPainShiny,
+        },
+        
+        [EMOTE_SAD] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubSadShiny,
+            .pal = sFieldMugshotPal_SwinubSadShiny,
+        },
+        
+        [EMOTE_SHOUTING] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubShoutingShiny,
+            .pal = sFieldMugshotPal_SwinubShoutingShiny,
+        },
+        
+        [EMOTE_SIGH] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubSighShiny,
+            .pal = sFieldMugshotPal_SwinubSighShiny,
+        },
+        
+        [EMOTE_STUNNED] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubStunnedShiny,
+            .pal = sFieldMugshotPal_SwinubStunnedShiny,
+        },
+        
+        [EMOTE_SURPRISED] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubSurprisedShiny,
+            .pal = sFieldMugshotPal_SwinubSurprisedShiny,
+        },
+        
+        [EMOTE_TEARY] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubTearyShiny,
+            .pal = sFieldMugshotPal_SwinubTearyShiny,
+        },
+        
+        [EMOTE_WORRIED] =
+        {
+            .gfx = sFieldMugshotGfx_SwinubWorriedShiny,
+            .pal = sFieldMugshotPal_SwinubWorriedShiny,
+        },
+    },
+
+
+    
+    [MUGSHOT_TYMPOLE] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_TympoleNormal,
+            .pal = sFieldMugshotPal_TympoleNormal,
+        },
+
+    //     // [EMOTE_ANGRY] =
+    //     // {
+    //     //     .gfx = sFieldMugshotGfx_TympoleAngry,
+    //     //     .pal = sFieldMugshotPal_TympoleAngry,
+    //     // },
+        
+    //     // [EMOTE_CRYING] =
+    //     // {
+    //     //     .gfx = sFieldMugshotGfx_TympoleCrying,
+    //     //     .pal = sFieldMugshotPal_TympoleCrying,
+    //     // },
+        
+    //     // [EMOTE_DETERMINED] =
+    //     // {
+    //     //     .gfx = sFieldMugshotGfx_TympoleDetermined,
+    //     //     .pal = sFieldMugshotPal_TympoleDetermined,
+    //     // },
+        
+    //     // [EMOTE_DIZZY] =
+    //     // {
+    //     //     .gfx = sFieldMugshotGfx_TympoleDizzy,
+    //     //     .pal = sFieldMugshotPal_TympoleDizzy,
+    //     // },
+        
+    //     // [EMOTE_HAPPY] =
+    //     // {
+    //     //     .gfx = sFieldMugshotGfx_TympoleHappy,
+    //     //     .pal = sFieldMugshotPal_TympoleHappy,
+    //     // },
+        
+    //     // [EMOTE_INSPIRED] =
+    //     // {
+    //     //     .gfx = sFieldMugshotGfx_TympoleInspired,
+    //     //     .pal = sFieldMugshotPal_TympoleInspired,
+    //     // },
+        
+    //     // [EMOTE_JOYOUS] =
+    //     // {
+    //     //     .gfx = sFieldMugshotGfx_TympoleJoyous,
+    //     //     .pal = sFieldMugshotPal_TympoleJoyous,
+    //     // },
+        
+    //     // [EMOTE_PAIN] =
+    //     // {
+    //     //     .gfx = sFieldMugshotGfx_TympolePain,
+    //     //     .pal = sFieldMugshotPal_TympolePain,
+    //     // },
+        
+    //     // [EMOTE_SAD] =
+    //     // {
+    //     //     .gfx = sFieldMugshotGfx_TympoleSad,
+    //     //     .pal = sFieldMugshotPal_TympoleSad,
+    //     // },
+        
+    //     // [EMOTE_SHOUTING] =
+    //     // {
+    //     //     .gfx = sFieldMugshotGfx_TympoleShouting,
+    //     //     .pal = sFieldMugshotPal_TympoleShouting,
+    //     // },
+        
+    //     // [EMOTE_SIGH] =
+    //     // {
+    //     //     .gfx = sFieldMugshotGfx_TympoleSigh,
+    //     //     .pal = sFieldMugshotPal_TympoleSigh,
+    //     // },
+        
+    //     // [EMOTE_STUNNED] =
+    //     // {
+    //     //     .gfx = sFieldMugshotGfx_TympoleStunned,
+    //     //     .pal = sFieldMugshotPal_TympoleStunned,
+    //     // },
+        
+    //     // [EMOTE_SURPRISED] =
+    //     // {
+    //     //     .gfx = sFieldMugshotGfx_TympoleSurprised,
+    //     //     .pal = sFieldMugshotPal_TympoleSurprised,
+    //     // },
+        
+    //     // [EMOTE_TEARY] =
+    //     // {
+    //     //     .gfx = sFieldMugshotGfx_TympoleTeary,
+    //     //     .pal = sFieldMugshotPal_TympoleTeary,
+    //     // },
+        
+    //     // [EMOTE_WORRIED] =
+    //     // {
+    //     //     .gfx = sFieldMugshotGfx_TympoleWorried,
+    //     //     .pal = sFieldMugshotPal_TympoleWorried,
+    //     // },
+    },
+
+    // [MUGSHOT_TYMPOLE_SHINY] =
+    // {
+    //     [EMOTE_NORMAL] =
+    //     {
+    //         .gfx = sFieldMugshotGfx_TympoleNormalShiny,
+    //         .pal = sFieldMugshotPal_TympoleNormalShiny,
+    //     },
+
+    //     [EMOTE_ANGRY] =
+    //     {
+    //         .gfx = sFieldMugshotGfx_TympoleAngryShiny,
+    //         .pal = sFieldMugshotPal_TympoleAngryShiny,
+    //     },
+        
+    //     [EMOTE_CRYING] =
+    //     {
+    //         .gfx = sFieldMugshotGfx_TympoleCryingShiny,
+    //         .pal = sFieldMugshotPal_TympoleCryingShiny,
+    //     },
+        
+    //     [EMOTE_DETERMINED] =
+    //     {
+    //         .gfx = sFieldMugshotGfx_TympoleDeterminedShiny,
+    //         .pal = sFieldMugshotPal_TympoleDeterminedShiny,
+    //     },
+        
+    //     [EMOTE_DIZZY] =
+    //     {
+    //         .gfx = sFieldMugshotGfx_TympoleDizzyShiny,
+    //         .pal = sFieldMugshotPal_TympoleDizzyShiny,
+    //     },
+        
+    //     [EMOTE_HAPPY] =
+    //     {
+    //         .gfx = sFieldMugshotGfx_TympoleHappyShiny,
+    //         .pal = sFieldMugshotPal_TympoleHappyShiny,
+    //     },
+        
+    //     [EMOTE_INSPIRED] =
+    //     {
+    //         .gfx = sFieldMugshotGfx_TympoleInspiredShiny,
+    //         .pal = sFieldMugshotPal_TympoleInspiredShiny,
+    //     },
+        
+    //     [EMOTE_JOYOUS] =
+    //     {
+    //         .gfx = sFieldMugshotGfx_TympoleJoyousShiny,
+    //         .pal = sFieldMugshotPal_TympoleJoyousShiny,
+    //     },
+        
+    //     [EMOTE_PAIN] =
+    //     {
+    //         .gfx = sFieldMugshotGfx_TympolePainShiny,
+    //         .pal = sFieldMugshotPal_TympolePainShiny,
+    //     },
+        
+    //     [EMOTE_SAD] =
+    //     {
+    //         .gfx = sFieldMugshotGfx_TympoleSadShiny,
+    //         .pal = sFieldMugshotPal_TympoleSadShiny,
+    //     },
+        
+    //     [EMOTE_SHOUTING] =
+    //     {
+    //         .gfx = sFieldMugshotGfx_TympoleShoutingShiny,
+    //         .pal = sFieldMugshotPal_TympoleShoutingShiny,
+    //     },
+        
+    //     [EMOTE_SIGH] =
+    //     {
+    //         .gfx = sFieldMugshotGfx_TympoleSighShiny,
+    //         .pal = sFieldMugshotPal_TympoleSighShiny,
+    //     },
+        
+    //     [EMOTE_STUNNED] =
+    //     {
+    //         .gfx = sFieldMugshotGfx_TympoleStunnedShiny,
+    //         .pal = sFieldMugshotPal_TympoleStunnedShiny,
+    //     },
+        
+    //     [EMOTE_SURPRISED] =
+    //     {
+    //         .gfx = sFieldMugshotGfx_TympoleSurprisedShiny,
+    //         .pal = sFieldMugshotPal_TympoleSurprisedShiny,
+    //     },
+        
+    //     [EMOTE_TEARY] =
+    //     {
+    //         .gfx = sFieldMugshotGfx_TympoleTearyShiny,
+    //         .pal = sFieldMugshotPal_TympoleTearyShiny,
+    //     },
+        
+    //     [EMOTE_WORRIED] =
+    //     {
+    //         .gfx = sFieldMugshotGfx_TympoleWorriedShiny,
+    //         .pal = sFieldMugshotPal_TympoleWorriedShiny,
+    //     },
+    // },
+
+
+    
+    [MUGSHOT_VIKAVOLT] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_VikavoltNormal,
+            .pal = sFieldMugshotPal_VikavoltNormal,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltAngry,
+        //     .pal = sFieldMugshotPal_VikavoltAngry,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltCrying,
+        //     .pal = sFieldMugshotPal_VikavoltCrying,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltDetermined,
+        //     .pal = sFieldMugshotPal_VikavoltDetermined,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltDizzy,
+        //     .pal = sFieldMugshotPal_VikavoltDizzy,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltHappy,
+        //     .pal = sFieldMugshotPal_VikavoltHappy,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltInspired,
+        //     .pal = sFieldMugshotPal_VikavoltInspired,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltJoyous,
+        //     .pal = sFieldMugshotPal_VikavoltJoyous,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltPain,
+        //     .pal = sFieldMugshotPal_VikavoltPain,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltSad,
+        //     .pal = sFieldMugshotPal_VikavoltSad,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltShouting,
+        //     .pal = sFieldMugshotPal_VikavoltShouting,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltSigh,
+        //     .pal = sFieldMugshotPal_VikavoltSigh,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltStunned,
+        //     .pal = sFieldMugshotPal_VikavoltStunned,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltSurprised,
+        //     .pal = sFieldMugshotPal_VikavoltSurprised,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltTeary,
+        //     .pal = sFieldMugshotPal_VikavoltTeary,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltWorried,
+        //     .pal = sFieldMugshotPal_VikavoltWorried,
+        // },
+    },
+
+    [MUGSHOT_VIKAVOLT_SHINY] =
+    {
+        [EMOTE_NORMAL] =
+        {
+            .gfx = sFieldMugshotGfx_VikavoltNormalShiny,
+            .pal = sFieldMugshotPal_VikavoltNormalShiny,
+        },
+
+        // [EMOTE_ANGRY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltAngryShiny,
+        //     .pal = sFieldMugshotPal_VikavoltAngryShiny,
+        // },
+        
+        // [EMOTE_CRYING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltCryingShiny,
+        //     .pal = sFieldMugshotPal_VikavoltCryingShiny,
+        // },
+        
+        // [EMOTE_DETERMINED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltDeterminedShiny,
+        //     .pal = sFieldMugshotPal_VikavoltDeterminedShiny,
+        // },
+        
+        // [EMOTE_DIZZY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltDizzyShiny,
+        //     .pal = sFieldMugshotPal_VikavoltDizzyShiny,
+        // },
+        
+        // [EMOTE_HAPPY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltHappyShiny,
+        //     .pal = sFieldMugshotPal_VikavoltHappyShiny,
+        // },
+        
+        // [EMOTE_INSPIRED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltInspiredShiny,
+        //     .pal = sFieldMugshotPal_VikavoltInspiredShiny,
+        // },
+        
+        // [EMOTE_JOYOUS] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltJoyousShiny,
+        //     .pal = sFieldMugshotPal_VikavoltJoyousShiny,
+        // },
+        
+        // [EMOTE_PAIN] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltPainShiny,
+        //     .pal = sFieldMugshotPal_VikavoltPainShiny,
+        // },
+        
+        // [EMOTE_SAD] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltSadShiny,
+        //     .pal = sFieldMugshotPal_VikavoltSadShiny,
+        // },
+        
+        // [EMOTE_SHOUTING] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltShoutingShiny,
+        //     .pal = sFieldMugshotPal_VikavoltShoutingShiny,
+        // },
+        
+        // [EMOTE_SIGH] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltSighShiny,
+        //     .pal = sFieldMugshotPal_VikavoltSighShiny,
+        // },
+        
+        // [EMOTE_STUNNED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltStunnedShiny,
+        //     .pal = sFieldMugshotPal_VikavoltStunnedShiny,
+        // },
+        
+        // [EMOTE_SURPRISED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltSurprisedShiny,
+        //     .pal = sFieldMugshotPal_VikavoltSurprisedShiny,
+        // },
+        
+        // [EMOTE_TEARY] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltTearyShiny,
+        //     .pal = sFieldMugshotPal_VikavoltTearyShiny,
+        // },
+        
+        // [EMOTE_WORRIED] =
+        // {
+        //     .gfx = sFieldMugshotGfx_VikavoltWorriedShiny,
+        //     .pal = sFieldMugshotPal_VikavoltWorriedShiny,
         // },
     },
 };

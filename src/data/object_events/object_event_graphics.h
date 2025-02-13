@@ -637,3 +637,27 @@ const u16 gObjectEventPalette_SamuelBriefcase[] = INCBIN_U16("graphics/object_ev
 
 const u32 gFieldEffectObjectPic_CaveDust[] = INCBIN_U32("graphics/field_effects/pics/cave_dust.4bpp");
 const u16 gFieldEffectObjectPalette_CaveDust[] = INCBIN_U16("graphics/field_effects/palettes/cave_dust.gbapal");
+
+const u32 gObjectEventPic_Cynthia[] = INCBIN_U32("graphics/object_events/pics/people/cynthia.4bpp");
+const u16 gObjectEventPalette_Cynthia[] = INCBIN_U16("graphics/object_events/pics/people/cynthia.gbapal");
+
+const u32 gObjectEventPic_AshKetchum[] = INCBIN_U32("graphics/object_events/pics/people/ash.4bpp");
+const u16 gObjectEventPalette_AshKetchum[] = INCBIN_U16("graphics/object_events/pics/people/ash.gbapal");
+
+const u32 gObjectEventPic_StevenGen4[] = INCBIN_U32("graphics/object_events/pics/people/steven_gen4.4bpp");
+const u16 gObjectEventPalette_StevenGen4[] = INCBIN_U16("graphics/object_events/pics/people/steven_gen4.gbapal");
+
+const u32 gObjectEventPic_Hannah[] = INCBIN_U32("graphics/object_events/pics/people/hannah.4bpp");
+const u16 gObjectEventPalette_Hannah[] = INCBIN_U16("graphics/object_events/pics/people/hannah.gbapal");
+
+const u32 gObjectEventPic_Katie[] = INCBIN_U32("graphics/object_events/pics/people/katie.4bpp");
+const u16 gObjectEventPalette_Katie[] = INCBIN_U16("graphics/object_events/pics/people/katie.gbapal");
+
+const u32 gObjectEventPic_Louis[] = INCBIN_U32("graphics/object_events/pics/people/louis.4bpp");
+const u16 gObjectEventPalette_Louis[] = INCBIN_U16("graphics/object_events/pics/people/louis.gbapal");
+
+const u32 gObjectEventPic_Georgia[] = INCBIN_U32("graphics/object_events/pics/people/georgia.4bpp");
+const u16 gObjectEventPalette_Georgia[] = INCBIN_U16("graphics/object_events/pics/people/georgia.gbapal");
+
+const u32 gObjectEventPic_Diego[] = INCBIN_U32("graphics/object_events/pics/people/diego.4bpp");
+const u16 gObjectEventPalette_Diego[] = INCBIN_U16("graphics/object_events/pics/people/diego.gbapal");

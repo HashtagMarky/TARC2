@@ -1424,3 +1424,35 @@ static const struct SpriteFrameImage sPicTable_Whistler[] = {
 static const struct SpriteFrameImage sPicTable_Flutist[] = {
     overworld_ascending_frames(gObjectEventPic_Flutist, 4, 4),
 };
+
+static const struct SpriteFrameImage sPicTable_Cynthia[] = {
+    overworld_ascending_frames(gObjectEventPic_Cynthia, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_AshKetchum[] = {
+    overworld_ascending_frames(gObjectEventPic_AshKetchum, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_StevenGen4[] = {
+    overworld_ascending_frames(gObjectEventPic_StevenGen4, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_Hannah[] = {
+    overworld_ascending_frames(gObjectEventPic_Hannah, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_Katie[] = {
+    overworld_ascending_frames(gObjectEventPic_Katie, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_Louis[] = {
+    overworld_ascending_frames(gObjectEventPic_Louis, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_Georgia[] = {
+    overworld_ascending_frames(gObjectEventPic_Georgia, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_Diego[] = {
+    overworld_ascending_frames(gObjectEventPic_Diego, 2, 4),
+};

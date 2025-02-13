@@ -84,7 +84,10 @@ struct IkigaiCharacterInfo
 
 struct DialogueOptions
 {
-    const u8 *name;
+    const u8 *nameTitle;
+    const u8 *nameLower;
+    const u8 *nameTitleColour;
+    const u8 *nameLowerColour;
     s8 kindnessEffect;
     s8 strengthEffect;
     const u32 *iconImage;
@@ -104,12 +107,13 @@ extern const struct DialogueOptions gDialogueAttitudes[];
 extern const struct OpinionBonusFunctions gOpinionBonusFunction[];
 
 u32 IkigaiCharacter_GetPlayerAttitude(void);
+u32 IkigaiCharacter_GetPlayerAttitude_Character(u32 character);
 void IkigaiCharacter_SetDefaultOpinion(u32 character);
 void IkigaiCharacter_SetAllCharacterDefaultOpinion(void);
 s32 IkigaiCharacter_GetKindness(u32 character);
 s32 IkigaiCharacter_GetStrength(u32 character);
-s32 IkigaiCharacter_GetKindness_Special(u32 character);
-s32 IkigaiCharacter_GetStrength_Special(u32 character);
+s32 IkigaiCharacter_GetKindness_Wayfarer(u32 character);
+s32 IkigaiCharacter_GetStrength_Wayfarer(u32 character);
 s32 IkigaiCharacter_GetOpinionBonus(u32 character, u32 opinionType);
 s32 IkigaiCharacter_GetAverageKindness(void);
 s32 IkigaiCharacter_GetAverageStrength(void);
@@ -126,6 +130,7 @@ u32 IkigaiCharacter_CheckRelationships(void);
 bool32 IkigaiCharacter_IsPlayerSingleOrMonogamous(void);
 void IkigaiCharacter_SetMetFlag(u32 character);
 bool32 IkigaiCharacter_GetMetFlag(u32 character);
+void IkigaiCharacter_SetAllMetFlags(void);
 bool32 IkigaiCharacter_ReturnOpinionDecay(u32 character);
 void IkigaiCharacter_OpinionDecay(u32 character);
 void IkigaiCharacter_AllOpinionDecay_NonConverse(void);

@@ -69,8 +69,8 @@ VyratonIndoors_MayorsOffice_Text_IsThisThem::
 
 VyratonIndoors_MayorsOffice_Text_GivePokedex::
 # 84 "data//maps/VyratonIndoors_MayorsOffice/text.pory"
-	.string "Well, well, well, that was Thomas.\n"
-	.string "And what a blur he is!\p"
+	.string "Well, well, well, that was something.\n"
+	.string "What a blur that fellow is!\p"
 	.string "Doesn't even introduce himself\n"
 	.string "before he dashes off again.\p"
 	.string "I'm sure he'll have some time for you\n"

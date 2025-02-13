@@ -253,7 +253,7 @@
 #define OBJ_EVENT_GFX_LOUIS                      247
 #define OBJ_EVENT_GFX_GEORGIA                    248
 #define OBJ_EVENT_GFX_CAPTAIN                    249
-#define OBJ_EVENT_GFX_STEVEN_NEW                 250
+#define OBJ_EVENT_GFX_STEVEN_GEN4                250
 #define OBJ_EVENT_GFX_CYNTHIA                    251
 #define OBJ_EVENT_GFX_N                          252
 #define OBJ_EVENT_GFX_ACCORDIONIST               253
@@ -262,11 +262,13 @@
 #define OBJ_EVENT_GFX_GUITARIST                  256
 #define OBJ_EVENT_GFX_WHISTLER                   257
 #define OBJ_EVENT_GFX_FLUTIST                    258
+#define OBJ_EVENT_GFX_DIEGO                      259
+#define OBJ_EVENT_GFX_ASH_KETCHUM                260
 
 // NOTE: The maximum amount of object events has been expanded from 255 to 65535.
 // Since dynamic graphics ids still require at least 16 free values, the actual limit
 // is 65519, but even considering follower Pokémon, this should be more than enough :)
-#define NUM_OBJ_EVENT_GFX                        259
+#define NUM_OBJ_EVENT_GFX                        261
 
 
 // These are dynamic object gfx ids.
@@ -452,6 +454,14 @@
 #define OBJ_EVENT_PAL_TAG_GUITARIST               0x1174
 #define OBJ_EVENT_PAL_TAG_WHISTLER                0x1175
 #define OBJ_EVENT_PAL_TAG_FLUTIST                 0x1176
+#define OBJ_EVENT_PAL_TAG_CYNTHIA                 0x1177
+#define OBJ_EVENT_PAL_TAG_ASH_KETCHUM             0x1178
+#define OBJ_EVENT_PAL_TAG_STEVEN_GEN4             0x1179
+#define OBJ_EVENT_PAL_TAG_HANNAH                  0x117A
+#define OBJ_EVENT_PAL_TAG_KATIE                   0x117B
+#define OBJ_EVENT_PAL_TAG_LOUIS                   0x117C
+#define OBJ_EVENT_PAL_TAG_GEORGIA                 0x117D
+#define OBJ_EVENT_PAL_TAG_DIEGO                   0x117E
 
 // Used as a placeholder follower graphic
 #define OBJ_EVENT_PAL_TAG_SUBSTITUTE              0x7611

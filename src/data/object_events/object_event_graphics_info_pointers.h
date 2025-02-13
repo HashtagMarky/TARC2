@@ -261,6 +261,14 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Erhuist;
 // extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Guitarist;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Whistler;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Flutist;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Cynthia;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Ash;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StevenGen4;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Hannah;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Katie;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Louis;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Georgia;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Diego;
 
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
     [OBJ_EVENT_GFX_KOLE_NORMAL] =              &gObjectEventGraphicsInfo_BrendanNormal,
@@ -516,6 +524,14 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     // [OBJ_EVENT_GFX_GUITARIST] =                &gObjectEventGraphicsInfo_Guitarist,
     [OBJ_EVENT_GFX_WHISTLER] =                 &gObjectEventGraphicsInfo_Whistler,
     [OBJ_EVENT_GFX_FLUTIST] =                  &gObjectEventGraphicsInfo_Flutist,
+    [OBJ_EVENT_GFX_CYNTHIA] =                  &gObjectEventGraphicsInfo_Cynthia,
+    [OBJ_EVENT_GFX_ASH_KETCHUM] =              &gObjectEventGraphicsInfo_Ash,
+    [OBJ_EVENT_GFX_STEVEN_GEN4] =              &gObjectEventGraphicsInfo_StevenGen4,
+    [OBJ_EVENT_GFX_HANNAH] =                   &gObjectEventGraphicsInfo_Hannah,
+    [OBJ_EVENT_GFX_KATIE] =                    &gObjectEventGraphicsInfo_Katie,
+    [OBJ_EVENT_GFX_LOUIS] =                    &gObjectEventGraphicsInfo_Louis,
+    [OBJ_EVENT_GFX_GEORGIA] =                  &gObjectEventGraphicsInfo_Georgia,
+    [OBJ_EVENT_GFX_DIEGO] =                    &gObjectEventGraphicsInfo_Diego,
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {
