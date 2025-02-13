@@ -255,7 +255,7 @@ static const struct OamData sOamData_PokeSphereExploreCursor =
 static const struct CompressedSpriteSheet sSpriteSheet_PokeSphereExploreCursor =
 {
     .data = sPokeSphereExploreCursorGfx,
-    .size = 32*32*4/2,
+    .size = 3*32*32*4/2,
     .tag = TAG_POKESPHERE_CURSOR,
 };
 
@@ -267,7 +267,10 @@ static const struct SpritePalette sSpritePal_PokeSphereExploreCursor =
 
 static const union AnimCmd sSpriteAnim_PokeSphereExploreCursor[] =
 {
-    ANIMCMD_FRAME(0, 32),
+    ANIMCMD_FRAME(0, 12),
+    ANIMCMD_FRAME(16, 12),
+    ANIMCMD_FRAME(32, 12),
+    ANIMCMD_FRAME(16, 12),
     ANIMCMD_JUMP(0),
 };
 
