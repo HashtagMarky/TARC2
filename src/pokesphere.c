@@ -448,7 +448,7 @@ static const struct SpriteTemplate sSpriteTemplate_PokeSphereAttitudeIcon =
 };
 
 #define CHARACTER_MUGSHOT_X     57
-#define CHARACTER_MUGSHOT_Y     59
+#define CHARACTER_MUGSHOT_Y     61
 #define CHARACTER_TYPE_X        90
 #define CHARACTER_HEART_X       84
 #define CHARACTER_ATTITUDE_X    28
@@ -1621,7 +1621,7 @@ static void PokeSphere_DrawCharacterMugshot(void)
     FillWindowPixelBuffer(WIN_CHARACTER_MUGSHOT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     sPokeSphereState->characterMugshotSpriteId = CreateFieldMugshotSprite(mugshotId, mugshotEmotion, FALSE, MUGSHOT_1);
-    gSprites[sPokeSphereState->characterMugshotSpriteId].oam.priority = 0;
+    gSprites[sPokeSphereState->characterMugshotSpriteId].oam.priority = 3;
     gSprites[sPokeSphereState->characterMugshotSpriteId].x = CHARACTER_MUGSHOT_X;
     gSprites[sPokeSphereState->characterMugshotSpriteId].y = CHARACTER_MUGSHOT_Y;
     gSprites[sPokeSphereState->characterMugshotSpriteId].anims = gSpriteAnimTable_Mugshot_Flipped;
@@ -1664,6 +1664,7 @@ static void PokeSphere_DrawCharacterAttitude(void)
             CHARACTER_ICON_Y,
             0
         );
+        gSprites[sPokeSphereState->characterAttitudeSpriteId].oam.priority = 3;
         StartSpriteAnim(&gSprites[sPokeSphereState->characterAttitudeSpriteId], 0);
     }
 }
@@ -1690,6 +1691,7 @@ static void PokeSphere_DrawCharacterTypeHeart(void)
             CHARACTER_ICON_Y,
             0
         );
+        gSprites[sPokeSphereState->characterTypeHeartSpriteId].oam.priority = 3;
     }
 }
 
@@ -1714,7 +1716,7 @@ static void PokeSphere_DrawPartnerMugshot(void)
     }
     
     sPokeSphereState->partnerMugshotSpriteId = CreateFieldMugshotSprite(speciesId, mugshotEmotion, typeMon, MUGSHOT_2);
-    gSprites[sPokeSphereState->partnerMugshotSpriteId].oam.priority = 0;
+    gSprites[sPokeSphereState->partnerMugshotSpriteId].oam.priority = 3;
     gSprites[sPokeSphereState->partnerMugshotSpriteId].x = CHARACTER_PARTNER_X;
     gSprites[sPokeSphereState->partnerMugshotSpriteId].y = CHARACTER_PARTNER_Y;
 }
