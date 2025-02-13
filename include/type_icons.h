@@ -12,8 +12,6 @@ u8 CreateBattlenMoveTypeIcon(u8 x, u8 y, u8 subpriority, u8 type);
 #define tBattlerId        data[1]
 #define tHideIconTimer    data[2]
 #define tVerticalPosition data[3]
-#define tSlideIconTimer   data[4]
-#define tSlideIconToggle  data[5]
 
 #define TYPE_ICON_1_FRAME(monType) ((monType - 1) * 2)
 #define TYPE_ICON_2_FRAME(monType) ((monType - 11) * 2)

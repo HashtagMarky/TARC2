@@ -31,6 +31,7 @@
 #include "international_string_util.h"
 #include "random.h"
 
+#include "comfy_anim.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_mugshot.h"
@@ -70,6 +71,9 @@ struct SpriteCoordsStruct {
 #define EXPLORE_COORDS_Y2       125
 #define EXPLORE_CURSOR_X_OFFSET 4
 #define EXPLORE_CURSOR_Y_OFFSET 3
+#define EXPLORE_CURSOR_MASS     50
+#define EXPLORE_CURSOR_TENSION  250
+#define EXPLORE_CURSOR_FRICTION 1000
 #define SPRITE_SLOT_FIRST_ICON  2 // Used to reset oam of sprites after the the mugshots when switching profiles
 
 struct PokeSphereState
@@ -279,14 +283,6 @@ static const union AnimCmd *const sSpriteAnimTable_PokeSphereExploreCursor[] =
     sSpriteAnim_PokeSphereExploreCursor,
 };
 
-static void PokeSphereExploreCursorCallback(struct Sprite *sprite)
-{
-    struct SpriteCoordsStruct position;
-
-    sprite->x = sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].x + EXPLORE_CURSOR_X_OFFSET;
-    sprite->y = sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].y + EXPLORE_CURSOR_Y_OFFSET;
-}
-
 static const struct SpriteTemplate sSpriteTemplate_PokeSphereExploreCursor =
 {
     .tileTag = TAG_POKESPHERE_CURSOR,
@@ -452,7 +448,7 @@ static const struct SpriteTemplate sSpriteTemplate_PokeSphereAttitudeIcon =
 
 #define CHARACTER_MUGSHOT_X     57
 #define CHARACTER_MUGSHOT_Y     61
-#define CHARACTER_TYPE_X        90
+#define CHARACTER_TYPE_X        91
 #define CHARACTER_HEART_X       84
 #define CHARACTER_ATTITUDE_X    28
 #define CHARACTER_ICON_Y        26
@@ -522,6 +518,10 @@ static void PokeSphere_PrintPosts(void);
 static void PokeSphere_PrintProfile(void);
 static void PokeSphere_PrintOpinion(void);
 static void PokeSphere_FreeResources(void);
+
+// Sprite Callbacks
+static void PokeSphereExploreCursorCallback(struct Sprite *sprite);
+static void PokeSphere_TypeIconCallback(struct Sprite *sprite);
 
 // Declared in pokesphere.h
 void Task_OpenPokeSphere(u8 taskId)
@@ -643,6 +643,7 @@ static void PokeSphere_MainCB(void)
     BuildOamBuffer();
     DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
+    AdvanceComfyAnimations();
 }
 
 static void PokeSphere_VBlankCB(void)
@@ -829,6 +830,7 @@ static void Task_PokeSphereWaitFadeAndExitGracefully(u8 taskId)
     {
         SetMainCallback2(sPokeSphereState->savedCallback);
         PokeSphere_FreeResources();
+        ReleaseComfyAnims();
         DestroyTask(taskId);
     }
 }
@@ -1180,14 +1182,50 @@ static void PokeSphere_Explore_DestroyObjectEvents(void)
 
 static void PokeSphere_Explore_CreateCursor(void)
 {
+    struct ComfyAnimSpringConfig xConfig;
+    struct ComfyAnimSpringConfig yConfig;
+    InitComfyAnimConfig_Spring(&xConfig);
+    InitComfyAnimConfig_Spring(&yConfig);
+
+    u8 x = sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].x + EXPLORE_CURSOR_X_OFFSET;
+    u8 y = sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].y + EXPLORE_CURSOR_Y_OFFSET;
+
+    xConfig.from = Q_24_8(x);
+    xConfig.to = Q_24_8(x);
+    xConfig.mass = Q_24_8(EXPLORE_CURSOR_MASS);
+    xConfig.tension = Q_24_8(EXPLORE_CURSOR_TENSION);
+    xConfig.friction = Q_24_8(EXPLORE_CURSOR_FRICTION);
+
+    yConfig.from = Q_24_8(y);
+    yConfig.to = Q_24_8(y);
+    yConfig.mass = Q_24_8(EXPLORE_CURSOR_MASS);
+    yConfig.tension = Q_24_8(EXPLORE_CURSOR_TENSION);
+    yConfig.friction = Q_24_8(EXPLORE_CURSOR_FRICTION);
+
     LoadCompressedSpriteSheet(&sSpriteSheet_PokeSphereExploreCursor);
     LoadSpritePalette(&sSpritePal_PokeSphereExploreCursor);
     sPokeSphereState->exploreCursorSpriteId = CreateSprite(&sSpriteTemplate_PokeSphereExploreCursor,
-        sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].x + EXPLORE_CURSOR_X_OFFSET,
-        sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].y + EXPLORE_CURSOR_Y_OFFSET,
+        x,
+        y,
         0
     );
     gSprites[sPokeSphereState->exploreCursorSpriteId].callback = PokeSphereExploreCursorCallback;
+    gSprites[sPokeSphereState->exploreCursorSpriteId].sComfyAnimX = CreateComfyAnim_Spring(&xConfig);
+    gSprites[sPokeSphereState->exploreCursorSpriteId].sComfyAnimY = CreateComfyAnim_Spring(&yConfig);
+}
+
+static void PokeSphereExploreCursorCallback(struct Sprite *sprite)
+{
+    struct ComfyAnim *xAnim = &gComfyAnims[sprite->sComfyAnimX];
+    struct ComfyAnim *yAnim = &gComfyAnims[sprite->sComfyAnimY];
+    struct ComfyAnimSpringConfig *xConfig = &xAnim->config.data.spring;
+    struct ComfyAnimSpringConfig *yConfig = &yAnim->config.data.spring;
+
+    xConfig->to = Q_24_8(sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].x + EXPLORE_CURSOR_X_OFFSET);
+    yConfig->to = Q_24_8(sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].y + EXPLORE_CURSOR_Y_OFFSET);
+
+    sprite->x = ReadComfyAnimValueSmooth(xAnim);
+    sprite->y = ReadComfyAnimValueSmooth(yAnim);
 }
 
 static void PokeSphere_Explore_DestroyCursor(void)
@@ -1694,12 +1732,22 @@ static void PokeSphere_DrawCharacterTypeHeart(void)
 
     if (character == CHARACTER_PLAYER)
     {
+        struct ComfyAnimEasingConfig config;
+
+        InitComfyAnimConfig_Easing(&config);
+        config.durationFrames = 35;
+        config.from = Q_24_8(CHARACTER_TYPE_X + NUM_FRAMES_HIDE_TYPE_ICON);
+        config.to = Q_24_8(CHARACTER_TYPE_X);
+        config.easingFunc = ComfyAnimEasing_EaseInOutBack;
+        
         sPokeSphereState->characterTypeHeartSpriteId = CreateBattlenMoveTypeIcon(
             CHARACTER_TYPE_X + NUM_FRAMES_HIDE_TYPE_ICON,
             CHARACTER_ICON_Y + 3,
             0, gSaveBlock2Ptr->ikigaiGymType
         );
         gSprites[sPokeSphereState->characterTypeHeartSpriteId].oam.priority = 3;
+        gSprites[sPokeSphereState->characterTypeHeartSpriteId].callback = PokeSphere_TypeIconCallback;
+        gSprites[sPokeSphereState->characterTypeHeartSpriteId].sComfyAnimX = CreateComfyAnim_Easing(&config);
     }
     else if (character != CHARACTER_PLAYER && IkigaiCharacter_GetRomanticFlag(character))
     {
@@ -1711,6 +1759,17 @@ static void PokeSphere_DrawCharacterTypeHeart(void)
             0
         );
         gSprites[sPokeSphereState->characterTypeHeartSpriteId].oam.priority = 3;
+    }
+}
+
+static void PokeSphere_TypeIconCallback(struct Sprite *sprite)
+{
+    int animId = sprite->sComfyAnimX;
+    sprite->x = ReadComfyAnimValueSmooth(&gComfyAnims[animId]);
+    if (gComfyAnims[animId].completed)
+    {
+        ReleaseComfyAnim(animId);
+        sprite->callback = SpriteCallbackDummy;
     }
 }
 

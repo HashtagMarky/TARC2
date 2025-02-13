@@ -27,7 +27,6 @@ static void CreateSpriteAndSetTypeSpriteAttributes(u32, u32 x, u32 y, u32, u32, 
 static bool32 ShouldFlipTypeIcon(bool32, u32, u32);
 
 static void SpriteCB_TypeIcon(struct Sprite*);
-static void SpriteCB_TypeIconSprite_SlideLeft(struct Sprite* sprite);
 static void DestroyTypeIcon(struct Sprite*);
 static void FreeAllTypeIconResources(void);
 static bool32 ShouldHideTypeIcon(u32);
@@ -563,28 +562,7 @@ u8 CreateBattlenMoveTypeIcon(u8 x, u8 y, u8 subpriority, u8 type)
         return MAX_SPRITES;
 
     sprite = &gSprites[spriteId];
-    gSprites[spriteId].callback = SpriteCB_TypeIconSprite_SlideLeft;
 
     StartSpriteAnim(sprite, type);
     return spriteId;
-}
-
-static void SpriteCB_TypeIconSprite_SlideLeft(struct Sprite* sprite)
-{
-    if (sprite->tSlideIconTimer == NUM_FRAMES_HIDE_TYPE_ICON)
-    {
-        // DestroyTypeIcon(sprite);
-        return;
-    }
-
-    if (sprite->tSlideIconToggle)
-    {
-        sprite->tSlideIconToggle = FALSE;
-        return;
-    }
-
-    sprite->x += GetTypeIconHideMovement(FALSE, 0);
-    ++sprite->tSlideIconTimer;
-    sprite->tSlideIconToggle = TRUE;
-    return;
 }
