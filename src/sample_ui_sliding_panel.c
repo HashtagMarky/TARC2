@@ -38,16 +38,16 @@
  * Define dex regions here. We'll use an enum since that way we can use them to index into various arrays.
  * Recall that enums automatically assign starting from 0, so REGION_KANTO=0, REGION_JOHTO=1, etc.
  */
-enum Region
-{
-    REGION_KANTO,
-    REGION_JOHTO,
-    REGION_HOENN,
-    REGION_SINNOH,
-    REGION_UNOVA,
-    REGION_KALOS,
-    REGION_NONE = 0xFF
-};
+// enum Region A copy now exists in an include/constants/regions.h
+// {
+//     REGION_KANTO,
+//     REGION_JOHTO,
+//     REGION_HOENN,
+//     REGION_SINNOH,
+//     REGION_UNOVA,
+//     REGION_KALOS,
+//     REGION_NONE = 0xFF
+// };
 
 struct SampleUiState
 {
@@ -72,7 +72,7 @@ struct SampleUiState
      * global sprite table. The array is indexed by the region defines below, so for e.g. Kanto is index 0, Sinnoh is
      * index 3, etc.
      */
-    u8 regionButtonSpriteIds[6];
+    u8 regionButtonSpriteIds[REGIONS_COUNT];
 };
 
 enum WindowIds
@@ -89,7 +89,7 @@ static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
 #define MON_ICON_X     39
 #define MON_ICON_Y     36
 // Define the dex number start/end of each region for easy reference
-static const u16 sDexRanges[6][2] = {
+static const u16 sDexRanges[REGIONS_COUNT][2] = {
     // Kanto goes from Bulbasaur to Mew
     [REGION_KANTO]   = {NATIONAL_DEX_BULBASAUR, NATIONAL_DEX_MEW},
     // Johto goes from Chikorita to Celebi
@@ -106,7 +106,7 @@ static const u8 sRegionNameHoenn[] =  _("Hoenn");
 static const u8 sRegionNameSinnoh[] = _("Sinnoh");
 static const u8 sRegionNameUnova[] =  _("Unova");
 static const u8 sRegionNameKalos[] =  _("Kalos");
-static const u8 *const sRegionNames[6] = {
+static const u8 *const sRegionNames[REGIONS_COUNT] = {
     [REGION_KANTO]   = sRegionNameKanto,
     [REGION_JOHTO]   = sRegionNameJohto,
     [REGION_HOENN]   = sRegionNameHoenn,

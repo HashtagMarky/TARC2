@@ -2930,6 +2930,12 @@
 	callnative ScrCmd_DynamicMusic_RestoreMusicianInstrument, requests_effects=1
 	setobjectmovementtype VAR_LAST_TALKED, MOVEMENT_TYPE_WALK_IN_PLACE_DOWN, FALSE
 	.endm
+	
+	@ Hides any follower Pokémon if present, putting them into their Poké Ball; by default waits for their movement to finish.
+	.macro hidefollower wait=1
+	callnative ScrFunc_hidefollower
+	.2byte \wait
+	.endm
 
 	.macro increasedifficulty
 	callnative Script_IncreaseDifficulty, requests_effects=1
