@@ -487,7 +487,7 @@ static void Task_PokeSphereMainInput(u8 taskId);
 static void Task_PokeSphereWaitFadeAndBail(u8 taskId);
 static void Task_PokeSphereWaitFadeAndExitGracefully(u8 taskId);
 static void Task_PokeSphereWaitFadeOutAndChangeBackground(u8 taskId);
-static void Task_PokeSphereLoadSpritesAndTextAfterFade(u8 taskId);
+static void Task_PokeSphereLoadSpritesAndTextAfterModeSwitch(u8 taskId);
 
 // PokeSphere helper functions
 static void PokeSphere_Init(MainCallback callback);
@@ -504,7 +504,8 @@ static void PokeSphere_Explore_CreateObjectEvents(void);
 static void PokeSphere_Explore_DestroyObjectEvents(void);
 static void PokeSphere_Explore_CreateCursor(void);
 static void PokeSphere_Explore_DestroyCursor(void);
-static void PokeSphere_DrawCharacterMugshot(void);
+static void PokeSphere_DrawCharacterMugshot(bool32 loadBg);
+static void PokeSphere_DrawMugshotBackgrounds(u32 character);
 static void PokeSphere_DrawCharacterAttitude(void);
 static void PokeSphere_DrawCharacterTypeHeart(void);
 static void PokeSphere_DrawPartnerMugshot(void);
@@ -920,11 +921,11 @@ static void Task_PokeSphereWaitFadeOutAndChangeBackground(u8 taskId)
         ScheduleBgCopyTilemapToVram(1);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         gTasks[taskId].tLoadSprites = FALSE;
-        gTasks[taskId].func = Task_PokeSphereLoadSpritesAndTextAfterFade;
+        gTasks[taskId].func = Task_PokeSphereLoadSpritesAndTextAfterModeSwitch;
     }
 }
 
-static void Task_PokeSphereLoadSpritesAndTextAfterFade(u8 taskId)
+static void Task_PokeSphereLoadSpritesAndTextAfterModeSwitch(u8 taskId)
 {
     if (gPaletteFade.active && gTasks[taskId].tLoadSprites == FALSE)
     {
@@ -939,7 +940,10 @@ static void Task_PokeSphereLoadSpritesAndTextAfterFade(u8 taskId)
         gTasks[taskId].tLoadSprites = TRUE;
     }
     else
+    {
+        PokeSphere_DrawMugshotBackgrounds(sPokeSphereState->characterId);
         gTasks[taskId].func = Task_PokeSphereWaitFadeIn;
+    }
 }
 #undef tLoadSprites
 
@@ -983,7 +987,7 @@ static void PokeSphere_DestroyExplorePage(void)
 
 static void PokeSphere_CreateProfilePostPage(void)
 {
-    PokeSphere_DrawCharacterMugshot();
+    PokeSphere_DrawCharacterMugshot(FALSE);
     PokeSphere_DrawPartnerMugshot();
     PokeSphere_DrawCharacterAttitude();
     PokeSphere_DrawCharacterTypeHeart();
@@ -1096,7 +1100,7 @@ static void PokeSphere_ReloadProfile(void)
     ResetOamRange(SPRITE_SLOT_FIRST_ICON, 128); // Hacky fix to prevent palette and tile issues in icons when switching profiles
     FreeAllSpritePalettes();
     AllocSpriteTiles(0);
-    PokeSphere_DrawCharacterMugshot();
+    PokeSphere_DrawCharacterMugshot(TRUE);
     PokeSphere_DrawPartnerMugshot();
     PokeSphere_DrawCharacterAttitude();
     PokeSphere_DrawCharacterTypeHeart();
@@ -1591,7 +1595,7 @@ static void PokeSphere_PrintOpinion(void)
     CopyWindowToVram(WIN_CHARACTER_PROFILE_OPINION, COPYWIN_GFX);
 }
 
-static void PokeSphere_DrawCharacterMugshot(void)
+static void PokeSphere_DrawCharacterMugshot(bool32 loadBg)
 {
     u32 character = sPokeSphereState->characterId;
     u32 mugshotId = gIkigaiCharactersInfo[character].mugshotId;
@@ -1601,6 +1605,25 @@ static void PokeSphere_DrawCharacterMugshot(void)
     {
         mugshotId = gSaveBlock2Ptr->playerGender ? MUGSHOT_ANKA : MUGSHOT_KOLE;
         mugshotEmotion = gSaveBlock2Ptr->playerEmote;
+    }
+
+    if (loadBg)
+        PokeSphere_DrawMugshotBackgrounds(character);
+    
+    FillWindowPixelBuffer(WIN_CHARACTER_MUGSHOT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+
+    sPokeSphereState->characterMugshotSpriteId = CreateFieldMugshotSprite(mugshotId, mugshotEmotion, FALSE, MUGSHOT_1);
+    gSprites[sPokeSphereState->characterMugshotSpriteId].oam.priority = 3;
+    gSprites[sPokeSphereState->characterMugshotSpriteId].x = CHARACTER_MUGSHOT_X;
+    gSprites[sPokeSphereState->characterMugshotSpriteId].y = CHARACTER_MUGSHOT_Y;
+    gSprites[sPokeSphereState->characterMugshotSpriteId].anims = gSpriteAnimTable_Mugshot_Flipped;
+    StartSpriteAnim(&gSprites[sPokeSphereState->characterMugshotSpriteId], 0);
+}
+
+static void PokeSphere_DrawMugshotBackgrounds(u32 character)
+{
+    if (character == CHARACTER_PLAYER)
+    {
         LoadPalette(ReturnScrollingBackgroundPalette(), BG_PLTT_ID(1), PLTT_SIZE_4BPP);
     }
     else
@@ -1617,15 +1640,6 @@ static void PokeSphere_DrawCharacterMugshot(void)
                 PLTT_SIZE_4BPP
             );
     }
-    
-    FillWindowPixelBuffer(WIN_CHARACTER_MUGSHOT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-
-    sPokeSphereState->characterMugshotSpriteId = CreateFieldMugshotSprite(mugshotId, mugshotEmotion, FALSE, MUGSHOT_1);
-    gSprites[sPokeSphereState->characterMugshotSpriteId].oam.priority = 3;
-    gSprites[sPokeSphereState->characterMugshotSpriteId].x = CHARACTER_MUGSHOT_X;
-    gSprites[sPokeSphereState->characterMugshotSpriteId].y = CHARACTER_MUGSHOT_Y;
-    gSprites[sPokeSphereState->characterMugshotSpriteId].anims = gSpriteAnimTable_Mugshot_Flipped;
-    StartSpriteAnim(&gSprites[sPokeSphereState->characterMugshotSpriteId], 0);
 }
 
 static void PokeSphere_DrawCharacterAttitude(void)
