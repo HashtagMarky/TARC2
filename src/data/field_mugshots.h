@@ -5750,7 +5750,592 @@ static const u16 sFieldMugshotPal_VikavoltNormalShiny[] = INCBIN_U16("graphics/f
 #include "constants/event_objects.h"
 #include "constants/species.h"
 
-const struct MugshotGfx gFieldMugshots[][EMOTE_COUNT] =
+static const struct PokemonMugshot sPokemonMugshots[NUM_SPECIES] =
+{
+    [SPECIES_NONE] =
+        {
+            .mugshotId = MUGSHOT_SUBSTITUTE_DOLL,
+            .mugshotFemaleId = MUGSHOT_SUBSTITUTE_DOLL,
+            .mugshotShinyId = MUGSHOT_SUBSTITUTE_DOLL,
+            .mugshotFemaleShinyId = MUGSHOT_SUBSTITUTE_DOLL,
+        },
+    [SPECIES_BULBASAUR] =
+        {
+            .mugshotId = MUGSHOT_BULBASAUR,
+            .mugshotFemaleId = MUGSHOT_BULBASAUR,
+            .mugshotShinyId = MUGSHOT_BULBASAUR_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_BULBASAUR_SHINY,
+        },
+    [SPECIES_IVYSAUR] =
+        {
+            .mugshotId = MUGSHOT_IVYSAUR,
+            .mugshotFemaleId = MUGSHOT_IVYSAUR,
+            .mugshotShinyId = MUGSHOT_IVYSAUR_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_IVYSAUR_SHINY,
+        },
+    [SPECIES_VENUSAUR] =
+        {
+            .mugshotId = MUGSHOT_VENUSAUR,
+            .mugshotFemaleId = MUGSHOT_VENUSAUR,
+            .mugshotShinyId = MUGSHOT_VENUSAUR_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_VENUSAUR_SHINY,
+        },
+    [SPECIES_CHARMANDER] =
+        {
+            .mugshotId = MUGSHOT_CHARMANDER,
+            .mugshotFemaleId = MUGSHOT_CHARMANDER,
+            .mugshotShinyId = MUGSHOT_CHARMANDER_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_CHARMANDER_SHINY,
+        },
+    [SPECIES_CHARMELEON] =
+        {
+            .mugshotId = MUGSHOT_CHARMELEON,
+            .mugshotFemaleId = MUGSHOT_CHARMELEON,
+            .mugshotShinyId = MUGSHOT_CHARMELEON_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_CHARMELEON_SHINY,
+        },
+    [SPECIES_CHARIZARD] =
+        {
+            .mugshotId = MUGSHOT_CHARIZARD,
+            .mugshotFemaleId = MUGSHOT_CHARIZARD,
+            .mugshotShinyId = MUGSHOT_CHARIZARD_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_CHARIZARD_SHINY,
+        },
+    [SPECIES_SQUIRTLE] =
+        {
+            .mugshotId = MUGSHOT_SQUIRTLE,
+            .mugshotFemaleId = MUGSHOT_SQUIRTLE,
+            .mugshotShinyId = MUGSHOT_SQUIRTLE_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_SQUIRTLE_SHINY,
+        },
+    [SPECIES_WARTORTLE] =
+        {
+            .mugshotId = MUGSHOT_WARTORTLE,
+            .mugshotFemaleId = MUGSHOT_WARTORTLE,
+            .mugshotShinyId = MUGSHOT_WARTORTLE_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_WARTORTLE_SHINY,
+        },
+    [SPECIES_BLASTOISE] =
+        {
+            .mugshotId = MUGSHOT_BLASTOISE,
+            .mugshotFemaleId = MUGSHOT_BLASTOISE,
+            .mugshotShinyId = MUGSHOT_BLASTOISE_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_BLASTOISE_SHINY,
+        },
+    [SPECIES_PICHU] =
+        {
+            .mugshotId = MUGSHOT_PICHU,
+            .mugshotFemaleId = MUGSHOT_PICHU,
+            .mugshotShinyId = MUGSHOT_PICHU_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_PICHU_SHINY,
+        },
+    [SPECIES_PIKACHU] =
+        {
+            .mugshotId = MUGSHOT_PIKACHU,
+            .mugshotFemaleId = MUGSHOT_PIKACHU,
+            .mugshotShinyId = MUGSHOT_PIKACHU_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_PIKACHU_SHINY,
+        },
+    [SPECIES_RAICHU] =
+        {
+            .mugshotId = MUGSHOT_RAICHU,
+            .mugshotFemaleId = MUGSHOT_RAICHU,
+            .mugshotShinyId = MUGSHOT_RAICHU_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_RAICHU_SHINY,
+        },
+    [SPECIES_EEVEE] =
+        {
+            .mugshotId = MUGSHOT_EEVEE,
+            .mugshotFemaleId = MUGSHOT_EEVEE,
+            .mugshotShinyId = MUGSHOT_EEVEE_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_EEVEE_SHINY,
+        },
+    [SPECIES_LAPRAS] =
+        {
+            .mugshotId = MUGSHOT_LAPRAS,
+            .mugshotFemaleId = MUGSHOT_LAPRAS,
+            .mugshotShinyId = MUGSHOT_LAPRAS_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_LAPRAS_SHINY,
+        },
+    [SPECIES_RELICANTH] =
+        {
+            .mugshotId = MUGSHOT_RELICANTH,
+            .mugshotFemaleId = MUGSHOT_RELICANTH,
+            .mugshotShinyId = MUGSHOT_RELICANTH_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_RELICANTH_SHINY,
+        },
+    [SPECIES_INFERNAPE] =
+        {
+            .mugshotId = MUGSHOT_INFERNAPE,
+            .mugshotFemaleId = MUGSHOT_INFERNAPE,
+            .mugshotShinyId = MUGSHOT_INFERNAPE_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_INFERNAPE_SHINY,
+        },
+    [SPECIES_ZOROARK] =
+        {
+            .mugshotId = MUGSHOT_ZOROARK,
+            .mugshotFemaleId = MUGSHOT_ZOROARK,
+            .mugshotShinyId = MUGSHOT_ZOROARK_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_ZOROARK_SHINY,
+        },
+    [SPECIES_ESPURR] =
+        {
+            .mugshotId = MUGSHOT_ESPURR,
+            .mugshotFemaleId = MUGSHOT_ESPURR,
+            .mugshotShinyId = MUGSHOT_ESPURR_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_ESPURR_SHINY,
+        },
+    [SPECIES_ROCKRUFF] =
+        {
+            .mugshotId = MUGSHOT_ROCKRUFF,
+            .mugshotFemaleId = MUGSHOT_ROCKRUFF,
+            .mugshotShinyId = MUGSHOT_ROCKRUFF_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_ROCKRUFF_SHINY,
+        },
+    [SPECIES_METAGROSS] =
+        {
+            .mugshotId = MUGSHOT_METAGROSS,
+            .mugshotFemaleId = MUGSHOT_METAGROSS,
+            .mugshotShinyId = MUGSHOT_METAGROSS_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_METAGROSS_SHINY,
+        },
+    [SPECIES_GARCHOMP] =
+        {
+            .mugshotId = MUGSHOT_GARCHOMP,
+            .mugshotFemaleId = MUGSHOT_GARCHOMP,
+            .mugshotShinyId = MUGSHOT_GARCHOMP_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_GARCHOMP_SHINY,
+        },
+    [SPECIES_AMOONGUSS] =
+        {
+            .mugshotId = MUGSHOT_AMOONGUSS,
+            .mugshotFemaleId = MUGSHOT_AMOONGUSS,
+            .mugshotShinyId = MUGSHOT_AMOONGUSS_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_AMOONGUSS_SHINY,
+        },
+    [SPECIES_WHIMSICOTT] =
+        {
+            .mugshotId = MUGSHOT_WHIMSICOTT,
+            .mugshotFemaleId = MUGSHOT_WHIMSICOTT,
+            .mugshotShinyId = MUGSHOT_WHIMSICOTT_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_WHIMSICOTT_SHINY,
+        },
+    [SPECIES_GURDURR] =
+        {
+            .mugshotId = MUGSHOT_GURDURR,
+            .mugshotFemaleId = MUGSHOT_GURDURR,
+            .mugshotShinyId = MUGSHOT_GURDURR_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_GURDURR_SHINY,
+        },
+    [SPECIES_RIBOMBEE] =
+        {
+            .mugshotId = MUGSHOT_RIBOMBEE,
+            .mugshotFemaleId = MUGSHOT_RIBOMBEE,
+            .mugshotShinyId = MUGSHOT_RIBOMBEE_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_RIBOMBEE_SHINY,
+        },
+    [SPECIES_BAGON] =
+        {
+            .mugshotId = MUGSHOT_BAGON,
+            .mugshotFemaleId = MUGSHOT_BAGON,
+            .mugshotShinyId = MUGSHOT_BAGON_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_BAGON_SHINY,
+        },
+    [SPECIES_CARKOL] =
+        {
+            .mugshotId = MUGSHOT_CARKOL,
+            .mugshotFemaleId = MUGSHOT_CARKOL,
+            .mugshotShinyId = MUGSHOT_CARKOL_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_CARKOL_SHINY,
+        },
+    [SPECIES_CHARJABUG] =
+        {
+            .mugshotId = MUGSHOT_CHARJABUG,
+            .mugshotFemaleId = MUGSHOT_CHARJABUG,
+            .mugshotShinyId = MUGSHOT_CHARJABUG_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_CHARJABUG_SHINY,
+        },
+    [SPECIES_COALOSSAL] =
+        {
+            .mugshotId = MUGSHOT_COALOSSAL,
+            .mugshotFemaleId = MUGSHOT_COALOSSAL,
+            .mugshotShinyId = MUGSHOT_COALOSSAL_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_COALOSSAL_SHINY,
+        },
+    [SPECIES_CORVIKNIGHT] =
+        {
+            .mugshotId = MUGSHOT_CORVIKNIGHT,
+            .mugshotFemaleId = MUGSHOT_CORVIKNIGHT,
+            .mugshotShinyId = MUGSHOT_CORVIKNIGHT_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_CORVIKNIGHT_SHINY,
+        },
+    [SPECIES_CORVISQUIRE] =
+        {
+            .mugshotId = MUGSHOT_CORVISQUIRE,
+            .mugshotFemaleId = MUGSHOT_CORVISQUIRE,
+            .mugshotShinyId = MUGSHOT_CORVISQUIRE_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_CORVISQUIRE_SHINY,
+        },
+    [SPECIES_DUSCLOPS] =
+        {
+            .mugshotId = MUGSHOT_DUSCLOPS,
+            .mugshotFemaleId = MUGSHOT_DUSCLOPS,
+            .mugshotShinyId = MUGSHOT_DUSCLOPS_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_DUSCLOPS_SHINY,
+        },
+    [SPECIES_DUSKNOIR] =
+        {
+            .mugshotId = MUGSHOT_DUSKNOIR,
+            .mugshotFemaleId = MUGSHOT_DUSKNOIR,
+            .mugshotShinyId = MUGSHOT_DUSKNOIR_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_DUSKNOIR_SHINY,
+        },
+    [SPECIES_DUSKULL] =
+        {
+            .mugshotId = MUGSHOT_DUSKULL,
+            .mugshotFemaleId = MUGSHOT_DUSKULL,
+            .mugshotShinyId = MUGSHOT_DUSKULL_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_DUSKULL_SHINY,
+        },
+    [SPECIES_FLABEBE] =
+        {
+            .mugshotId = MUGSHOT_FLABEBE,
+            .mugshotFemaleId = MUGSHOT_FLABEBE,
+            .mugshotShinyId = MUGSHOT_FLABEBE_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_FLABEBE_SHINY,
+        },
+    [SPECIES_FLOETTE] =
+        {
+            .mugshotId = MUGSHOT_FLOETTE,
+            .mugshotFemaleId = MUGSHOT_FLOETTE,
+            .mugshotShinyId = MUGSHOT_FLOETTE_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_FLOETTE_SHINY,
+        },
+    [SPECIES_FLORGES] =
+        {
+            .mugshotId = MUGSHOT_FLORGES,
+            .mugshotFemaleId = MUGSHOT_FLORGES,
+            .mugshotShinyId = MUGSHOT_FLORGES_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_FLORGES_SHINY,
+        },
+    [SPECIES_GRIMMSNARL] =
+        {
+            .mugshotId = MUGSHOT_GRIMMSNARL,
+            .mugshotFemaleId = MUGSHOT_GRIMMSNARL,
+            .mugshotShinyId = MUGSHOT_GRIMMSNARL_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_GRIMMSNARL_SHINY,
+        },
+    [SPECIES_GRUBBIN] =
+        {
+            .mugshotId = MUGSHOT_GRUBBIN,
+            .mugshotFemaleId = MUGSHOT_GRUBBIN,
+            .mugshotShinyId = MUGSHOT_GRUBBIN_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_GRUBBIN_SHINY,
+        },
+    [SPECIES_HATENNA] =
+        {
+            .mugshotId = MUGSHOT_HATENNA,
+            .mugshotFemaleId = MUGSHOT_HATENNA,
+            .mugshotShinyId = MUGSHOT_HATENNA_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_HATENNA_SHINY,
+        },
+    [SPECIES_HATTERENE] =
+        {
+            .mugshotId = MUGSHOT_HATTERENE,
+            .mugshotFemaleId = MUGSHOT_HATTERENE,
+            .mugshotShinyId = MUGSHOT_HATTERENE_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_HATTERENE_SHINY,
+        },
+    [SPECIES_HATTREM] =
+        {
+            .mugshotId = MUGSHOT_HATTREM,
+            .mugshotFemaleId = MUGSHOT_HATTREM,
+            .mugshotShinyId = MUGSHOT_HATTREM_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_HATTREM_SHINY,
+        },
+    [SPECIES_HERDIER] =
+        {
+            .mugshotId = MUGSHOT_HERDIER,
+            .mugshotFemaleId = MUGSHOT_HERDIER,
+            .mugshotShinyId = MUGSHOT_HERDIER_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_HERDIER_SHINY,
+        },
+    [SPECIES_IMPIDIMP] =
+        {
+            .mugshotId = MUGSHOT_IMPIDIMP,
+            .mugshotFemaleId = MUGSHOT_IMPIDIMP,
+            .mugshotShinyId = MUGSHOT_IMPIDIMP_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_IMPIDIMP_SHINY,
+        },
+    [SPECIES_KLANG] =
+        {
+            .mugshotId = MUGSHOT_KLANG,
+            .mugshotFemaleId = MUGSHOT_KLANG,
+            .mugshotShinyId = MUGSHOT_KLANG_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_KLANG_SHINY,
+        },
+    [SPECIES_KLINK] =
+        {
+            .mugshotId = MUGSHOT_KLINK,
+            .mugshotFemaleId = MUGSHOT_KLINK,
+            .mugshotShinyId = MUGSHOT_KLINK_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_KLINK_SHINY,
+        },
+    [SPECIES_KLINKLANG] =
+        {
+            .mugshotId = MUGSHOT_KLINKLANG,
+            .mugshotFemaleId = MUGSHOT_KLINKLANG,
+            .mugshotShinyId = MUGSHOT_KLINKLANG_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_KLINKLANG_SHINY,
+        },
+    [SPECIES_KROKOROK] =
+        {
+            .mugshotId = MUGSHOT_KROKOROK,
+            .mugshotFemaleId = MUGSHOT_KROKOROK,
+            .mugshotShinyId = MUGSHOT_KROKOROK_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_KROKOROK_SHINY,
+        },
+    [SPECIES_KROOKODILE] =
+        {
+            .mugshotId = MUGSHOT_KROOKODILE,
+            .mugshotFemaleId = MUGSHOT_KROOKODILE,
+            .mugshotShinyId = MUGSHOT_KROOKODILE_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_KROOKODILE_SHINY,
+        },
+    [SPECIES_LILLIPUP] =
+        {
+            .mugshotId = MUGSHOT_LILLIPUP,
+            .mugshotFemaleId = MUGSHOT_LILLIPUP,
+            .mugshotShinyId = MUGSHOT_LILLIPUP_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_LILLIPUP_SHINY,
+        },
+    [SPECIES_LUXIO] =
+        {
+            .mugshotId = MUGSHOT_LUXIO,
+            .mugshotFemaleId = MUGSHOT_LUXIO,
+            .mugshotShinyId = MUGSHOT_LUXIO_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_LUXIO_SHINY,
+        },
+    [SPECIES_LUXRAY] =
+        {
+            .mugshotId = MUGSHOT_LUXRAY,
+            .mugshotFemaleId = MUGSHOT_LUXRAY,
+            .mugshotShinyId = MUGSHOT_LUXRAY_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_LUXRAY_SHINY,
+        },
+    [SPECIES_MACHAMP] =
+        {
+            .mugshotId = MUGSHOT_MACHAMP,
+            .mugshotFemaleId = MUGSHOT_MACHAMP,
+            .mugshotShinyId = MUGSHOT_MACHAMP_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_MACHAMP_SHINY,
+        },
+    [SPECIES_MACHOKE] =
+        {
+            .mugshotId = MUGSHOT_MACHOKE,
+            .mugshotFemaleId = MUGSHOT_MACHOKE,
+            .mugshotShinyId = MUGSHOT_MACHOKE_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_MACHOKE_SHINY,
+        },
+    [SPECIES_MACHOP] =
+        {
+            .mugshotId = MUGSHOT_MACHOP,
+            .mugshotFemaleId = MUGSHOT_MACHOP,
+            .mugshotShinyId = MUGSHOT_MACHOP_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_MACHOP_SHINY,
+        },
+    [SPECIES_MAGBY] =
+        {
+            .mugshotId = MUGSHOT_MAGBY,
+            .mugshotFemaleId = MUGSHOT_MAGBY,
+            .mugshotShinyId = MUGSHOT_MAGBY_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_MAGBY_SHINY,
+        },
+    [SPECIES_MAGMAR] =
+        {
+            .mugshotId = MUGSHOT_MAGMAR,
+            .mugshotFemaleId = MUGSHOT_MAGMAR,
+            .mugshotShinyId = MUGSHOT_MAGMAR_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_MAGMAR_SHINY,
+        },
+    [SPECIES_MAGMORTAR] =
+        {
+            .mugshotId = MUGSHOT_MAGMORTAR,
+            .mugshotFemaleId = MUGSHOT_MAGMORTAR,
+            .mugshotShinyId = MUGSHOT_MAGMORTAR_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_MAGMORTAR_SHINY,
+        },
+    [SPECIES_MAMOSWINE] =
+        {
+            .mugshotId = MUGSHOT_MAMOSWINE,
+            .mugshotFemaleId = MUGSHOT_MAMOSWINE,
+            .mugshotShinyId = MUGSHOT_MAMOSWINE_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_MAMOSWINE_SHINY,
+        },
+    [SPECIES_MORGREM] =
+        {
+            .mugshotId = MUGSHOT_MORGREM,
+            .mugshotFemaleId = MUGSHOT_MORGREM,
+            .mugshotShinyId = MUGSHOT_MORGREM_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_MORGREM_SHINY,
+        },
+    [SPECIES_NIDOKING] =
+        {
+            .mugshotId = MUGSHOT_NIDOKING,
+            .mugshotFemaleId = MUGSHOT_NIDOKING,
+            .mugshotShinyId = MUGSHOT_NIDOKING_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_NIDOKING_SHINY,
+        },
+    [SPECIES_NIDOQUEEN] =
+        {
+            .mugshotId = MUGSHOT_NIDOQUEEN,
+            .mugshotFemaleId = MUGSHOT_NIDOQUEEN,
+            .mugshotShinyId = MUGSHOT_NIDOQUEEN_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_NIDOQUEEN_SHINY,
+        },
+    [SPECIES_NIDORAN_F] =
+        {
+            .mugshotId = MUGSHOT_NIDORAN_F,
+            .mugshotFemaleId = MUGSHOT_NIDORAN_F,
+            .mugshotShinyId = MUGSHOT_NIDORAN_F_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_NIDORAN_F_SHINY,
+        },
+    [SPECIES_NIDORAN_M] =
+        {
+            .mugshotId = MUGSHOT_NIDORAN_M,
+            .mugshotFemaleId = MUGSHOT_NIDORAN_M,
+            .mugshotShinyId = MUGSHOT_NIDORAN_M_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_NIDORAN_M_SHINY,
+        },
+    [SPECIES_NIDORINA] =
+        {
+            .mugshotId = MUGSHOT_NIDORINA,
+            .mugshotFemaleId = MUGSHOT_NIDORINA,
+            .mugshotShinyId = MUGSHOT_NIDORINA_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_NIDORINA_SHINY,
+        },
+    [SPECIES_NIDORINO] =
+        {
+            .mugshotId = MUGSHOT_NIDORINO,
+            .mugshotFemaleId = MUGSHOT_NIDORINO,
+            .mugshotShinyId = MUGSHOT_NIDORINO_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_NIDORINO_SHINY,
+        },
+    [SPECIES_NUZLEAF] =
+        {
+            .mugshotId = MUGSHOT_NUZLEAF,
+            .mugshotFemaleId = MUGSHOT_NUZLEAF,
+            .mugshotShinyId = MUGSHOT_NUZLEAF_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_NUZLEAF_SHINY,
+        },
+    [SPECIES_PALPITOAD] =
+        {
+            .mugshotId = MUGSHOT_PALPITOAD,
+            .mugshotFemaleId = MUGSHOT_PALPITOAD,
+            .mugshotShinyId = MUGSHOT_PALPITOAD_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_PALPITOAD_SHINY,
+        },
+    [SPECIES_PILOSWINE] =
+        {
+            .mugshotId = MUGSHOT_PILOSWINE,
+            .mugshotFemaleId = MUGSHOT_PILOSWINE,
+            .mugshotShinyId = MUGSHOT_PILOSWINE_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_PILOSWINE_SHINY,
+        },
+    [SPECIES_ROLYCOLY] =
+        {
+            .mugshotId = MUGSHOT_ROLYCOLY,
+            .mugshotFemaleId = MUGSHOT_ROLYCOLY,
+            .mugshotShinyId = MUGSHOT_ROLYCOLY_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_ROLYCOLY_SHINY,
+        },
+    [SPECIES_ROOKIDEE] =
+        {
+            .mugshotId = MUGSHOT_ROOKIDEE,
+            .mugshotFemaleId = MUGSHOT_ROOKIDEE,
+            .mugshotShinyId = MUGSHOT_ROOKIDEE_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_ROOKIDEE_SHINY,
+        },
+    [SPECIES_SALAMENCE] =
+        {
+            .mugshotId = MUGSHOT_SALAMENCE,
+            .mugshotFemaleId = MUGSHOT_SALAMENCE,
+            .mugshotShinyId = MUGSHOT_SALAMENCE_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_SALAMENCE_SHINY,
+        },
+    [SPECIES_SANDILE] =
+        {
+            .mugshotId = MUGSHOT_SANDILE,
+            .mugshotFemaleId = MUGSHOT_SANDILE,
+            .mugshotShinyId = MUGSHOT_SANDILE_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_SANDILE_SHINY,
+        },
+    [SPECIES_SEEDOT] =
+        {
+            .mugshotId = MUGSHOT_SEEDOT,
+            .mugshotFemaleId = MUGSHOT_SEEDOT,
+            .mugshotShinyId = MUGSHOT_SEEDOT_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_SEEDOT_SHINY,
+        },
+    [SPECIES_SEISMITOAD] =
+        {
+            .mugshotId = MUGSHOT_SEISMITOAD,
+            .mugshotFemaleId = MUGSHOT_SEISMITOAD,
+            .mugshotShinyId = MUGSHOT_SEISMITOAD_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_SEISMITOAD_SHINY,
+        },
+    [SPECIES_SHELGON] =
+        {
+            .mugshotId = MUGSHOT_SHELGON,
+            .mugshotFemaleId = MUGSHOT_SHELGON,
+            .mugshotShinyId = MUGSHOT_SHELGON_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_SHELGON_SHINY,
+        },
+    [SPECIES_SHIFTRY] =
+        {
+            .mugshotId = MUGSHOT_SHIFTRY,
+            .mugshotFemaleId = MUGSHOT_SHIFTRY,
+            .mugshotShinyId = MUGSHOT_SHIFTRY_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_SHIFTRY_SHINY,
+        },
+    [SPECIES_SHINX] =
+        {
+            .mugshotId = MUGSHOT_SHINX,
+            .mugshotFemaleId = MUGSHOT_SHINX,
+            .mugshotShinyId = MUGSHOT_SHINX_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_SHINX_SHINY,
+        },
+    [SPECIES_STOUTLAND] =
+        {
+            .mugshotId = MUGSHOT_STOUTLAND,
+            .mugshotFemaleId = MUGSHOT_STOUTLAND,
+            .mugshotShinyId = MUGSHOT_STOUTLAND_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_STOUTLAND_SHINY,
+        },
+    [SPECIES_SWINUB] =
+        {
+            .mugshotId = MUGSHOT_SWINUB,
+            .mugshotFemaleId = MUGSHOT_SWINUB,
+            .mugshotShinyId = MUGSHOT_SWINUB_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_SWINUB_SHINY,
+        },
+    [SPECIES_TYMPOLE] =
+        {
+            .mugshotId = MUGSHOT_TYMPOLE,
+            .mugshotFemaleId = MUGSHOT_TYMPOLE,
+            .mugshotShinyId = MUGSHOT_TYMPOLE_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_TYMPOLE_SHINY,
+        },
+    [SPECIES_VIKAVOLT] =
+        {
+            .mugshotId = MUGSHOT_VIKAVOLT,
+            .mugshotFemaleId = MUGSHOT_VIKAVOLT,
+            .mugshotShinyId = MUGSHOT_VIKAVOLT_SHINY,
+            .mugshotFemaleShinyId = MUGSHOT_VIKAVOLT_SHINY,
+        },
+};
+
+const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 {
     [MUGSHOT_BLANK] =
     {

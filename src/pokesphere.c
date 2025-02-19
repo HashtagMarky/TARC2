@@ -1659,7 +1659,7 @@ static void PokeSphere_DrawCharacterMugshot(bool32 loadBg)
     
     FillWindowPixelBuffer(WIN_CHARACTER_MUGSHOT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    sPokeSphereState->characterMugshotSpriteId = CreateFieldMugshotSprite(mugshotId, mugshotEmotion, FALSE, MUGSHOT_1);
+    sPokeSphereState->characterMugshotSpriteId = CreateFieldMugshotSprite(mugshotId, mugshotEmotion, FALSE, FALSE, MUGSHOT_1);
     gSprites[sPokeSphereState->characterMugshotSpriteId].oam.priority = 3;
     gSprites[sPokeSphereState->characterMugshotSpriteId].x = CHARACTER_MUGSHOT_X;
     gSprites[sPokeSphereState->characterMugshotSpriteId].y = CHARACTER_MUGSHOT_Y;
@@ -1797,7 +1797,7 @@ static void PokeSphere_DrawPartnerMugshot(void)
         typeMon = FALSE;
     }
     
-    sPokeSphereState->partnerMugshotSpriteId = CreateFieldMugshotSprite(speciesId, mugshotEmotion, typeMon, MUGSHOT_2);
+    sPokeSphereState->partnerMugshotSpriteId = CreateFieldMugshotSprite(speciesId, mugshotEmotion, typeMon, FALSE, MUGSHOT_2);
     gSprites[sPokeSphereState->partnerMugshotSpriteId].oam.priority = 3;
     gSprites[sPokeSphereState->partnerMugshotSpriteId].x = CHARACTER_PARTNER_X;
     gSprites[sPokeSphereState->partnerMugshotSpriteId].y = CHARACTER_PARTNER_Y;

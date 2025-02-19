@@ -584,7 +584,7 @@ static void MainMenu_InitWindows(void) // Init Text Windows
 static void CreateMugshot()
 {
     u16 mugshotId = (gSaveBlock2Ptr->playerGender == MALE) ? MUGSHOT_KOLE : MUGSHOT_ANKA;
-    sMainMenuDataPtr->mugshotSpriteId = CreateFieldMugshotSprite(mugshotId, gSaveBlock2Ptr->playerEmote, FALSE, 0);
+    sMainMenuDataPtr->mugshotSpriteId = CreateFieldMugshotSprite(mugshotId, gSaveBlock2Ptr->playerEmote, FALSE, FALSE, 0);
     gSprites[sMainMenuDataPtr->mugshotSpriteId].x = 48;
     gSprites[sMainMenuDataPtr->mugshotSpriteId].y = 56;
     gSprites[sMainMenuDataPtr->mugshotSpriteId].subpriority = 1;

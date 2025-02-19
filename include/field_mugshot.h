@@ -6,9 +6,10 @@
 // Player Mugshot Palette
 extern const u16 sFieldMugshotPal_Protagonist[];
 
+u16 GetMugshotIdFromObjectEvent(struct ObjectEvent *objEvent);
 void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y, bool8 retainDetails);
 void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 shiny, bool8 emotePMD);
-u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion, bool8 typeMon, u8 mugshotNum);
+u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion, bool8 typeMon, bool8 shinyMon, u8 mugshotNum);
 void DestroyFieldMugshotSprite(u8 sprite, u8 mugshotNum);
 void RemoveFieldMugshot(bool8 retainDetails);
 void RemoveFieldMugshotAndWindow(void);
@@ -26,6 +27,14 @@ struct MugshotDetails
     s16 x;                 // X position of the mugshot
     s16 y;                 // Y position of the mugshot
     u8 windowType;         // Type of window (NPC, Follower, etc.)
+};
+
+struct PokemonMugshot
+{
+    u16 mugshotId;
+    u16 mugshotFemaleId;
+    u16 mugshotShinyId;
+    u16 mugshotFemaleShinyId;
 };
 
 struct MugshotGfx

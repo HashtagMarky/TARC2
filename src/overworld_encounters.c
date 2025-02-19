@@ -669,7 +669,7 @@ bool8 ScrCmd_SetObjectAsWildEncounter(struct ScriptContext *ctx)
 
 u16 ReturnFixedSpeciesEncounter(void)
 {
-    u16 shinyTag = GeneratedOverworldMonShinyRoll() ? SPECIES_SHINY_TAG : 0;
+    u16 shinyTag = GeneratedOverworldMonShinyRoll() ? OBJ_EVENT_MON_SHINY : 0;
     u16 species = SPECIES_NONE;
 
     species = SPECIES_PIKACHU;
@@ -679,7 +679,7 @@ u16 ReturnFixedSpeciesEncounter(void)
 
 u16 ReturnHeaderSpeciesEncounter(u8 encounterType, u16 headerId)
 {
-    u16 shinyTag = GeneratedOverworldMonShinyRoll() ? SPECIES_SHINY_TAG : 0;
+    u16 shinyTag = GeneratedOverworldMonShinyRoll() ? OBJ_EVENT_MON_SHINY : 0;
     u16 species = SPECIES_NONE;
 
     switch (encounterType)

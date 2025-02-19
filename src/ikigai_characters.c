@@ -674,6 +674,24 @@ u32 ReturnIkigaiCharacter_SelectedObject(void)
     return ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
 }
 
+u32 ReturnIkigaiMugshotID_ObjectEventGraphicsId(u16 graphicsId)
+{
+    u32 character;
+
+    for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
+    {
+        if (graphicsId == gIkigaiCharactersInfo[character].overworldGraphicsId)
+            return gIkigaiCharactersInfo[character].mugshotId;
+    }
+
+    return MUGSHOT_BLANK;
+}
+
+u32 ReturnIkigaiMugshotID_SelectedObject(void)
+{
+    return ReturnIkigaiMugshotID_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
+}
+
 void ScrCmd_ReturnIkigaiCharacter_SelectedObject(void)
 {
     gSpecialVar_Result = ReturnIkigaiCharacter_SelectedObject();

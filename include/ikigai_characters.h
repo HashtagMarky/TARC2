@@ -145,6 +145,8 @@ void IkigaiCharacter_DefaultEmote(void);
 void IkigaiCharacter_ResponseEmote(void);
 u32 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId);
 u32 ReturnIkigaiCharacter_SelectedObject(void);
+u32 ReturnIkigaiMugshotID_ObjectEventGraphicsId(u16 graphicsId);
+u32 ReturnIkigaiMugshotID_SelectedObject(void);
 u32 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void);
 s32 IkigaiCharacterOpinionBonus_Relationship(u32 character, bool32 opinionType);
 s32 IkigaiCharacterOpinionBonus_PartnerPokemon(u32 character, bool32 opinionType);

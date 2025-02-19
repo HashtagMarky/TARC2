@@ -3103,11 +3103,8 @@ bool8 ScrCmd_createfieldmugshot(struct ScriptContext *ctx)
 
     if (mugshotId == MUGSHOT_AUTO_GRAPHICS_ID)
     {
-        mugshotId = gObjectEvents[gSelectedObjectEvent].graphicsId;
-        if (gObjectEvents[gSelectedObjectEvent].shiny)
-        {
-            mugshotId += SPECIES_SHINY_TAG;
-        }
+        struct ObjectEvent *objEvent = &gObjectEvents[gSelectedObjectEvent];
+        mugshotId = GetMugshotIdFromObjectEvent(objEvent);
     }
 
     CreateFieldMugshot(mugshotType, mugshotId, mugshotEmotion, x, y, FALSE);
