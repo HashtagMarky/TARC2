@@ -33,8 +33,10 @@
 #define BW_SUMMARY_SHOW_TERA_TYPE                   FALSE               // show tera type icons
 #define BW_SUMMARY_SHOW_CONTEST_MOVES               TRUE                // show the contest moves page
 
-#define B_EXPANDED_MOVE_NAMES                       TRUE                // Removed in expansion, always set to TRUE
 #define BW_DEOKISHISU_ABILITY_DESCRIPTIONS          TRUE                // Use reformatted ability descriptions by Deokishisu
+
+// Looking for configs for renaming mons and relearning moves? Those use the standard expansion configs
+// P_SUMMARY_SCREEN_RENAME and P_SUMMARY_SCREEN_MOVE_RELEARNER in include/config/pokemon.h
 
 /* Info for users
 
@@ -77,15 +79,5 @@ u8 GetMoveSlotToReplace_BW(void);
 void SummaryScreen_SetAnimDelayTaskId_BW(u8 taskId);
 void SummaryScreen_SetShadowAnimDelayTaskId_BW(u8 taskId);
 u8 CreateBWSummaryScreenMoveTypeIcon(u8 x, u8 y, u8 subpriority, u8 palId);
-
-// The Pokémon Summary Screen can operate in different modes. Certain features,
-// such as move re-ordering, are available in the different modes.
-enum PokemonSummaryScreenMode_BW
-{
-    BW_SUMMARY_MODE_NORMAL,
-    BW_SUMMARY_MODE_LOCK_MOVES,
-    BW_SUMMARY_MODE_BOX,
-    BW_SUMMARY_MODE_SELECT_MOVE,
-};
 
 #endif // GUARD_BW_SUMMARY_SCREEN_H
