@@ -357,8 +357,6 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
         .overworldGraphicsId = OBJ_EVENT_GFX_ASH_KETCHUM,
         .mugshotId = MUGSHOT_ASH,
         .defaultEmotion = EMOTE_DETERMINED,
-
-        .flagMet = FLAG_TEMP_1,
     },
 
     [CHARACTER_WAYFARER_STEVEN] =
