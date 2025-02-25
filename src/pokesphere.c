@@ -1231,6 +1231,12 @@ static void PokeSphereExploreCursorCallback(struct Sprite *sprite)
 
     sprite->x = ReadComfyAnimValueSmooth(xAnim);
     sprite->y = ReadComfyAnimValueSmooth(yAnim);
+
+    if (sprite->x == 0 && sprite->y == 0)
+    {
+        sprite->x = sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].x + EXPLORE_CURSOR_X_OFFSET;
+        sprite->y = sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].y + EXPLORE_CURSOR_Y_OFFSET;
+    }
 }
 
 static void PokeSphere_Explore_DestroyCursor(void)
