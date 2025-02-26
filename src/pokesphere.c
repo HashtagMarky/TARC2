@@ -74,6 +74,7 @@ struct SpriteCoordsStruct {
 #define EXPLORE_CURSOR_MASS     50
 #define EXPLORE_CURSOR_TENSION  250
 #define EXPLORE_CURSOR_FRICTION 1000
+#define EXPLORE_CURSOR_PAL_SLOT 15
 #define SPRITE_SLOT_FIRST_ICON  2 // Used to reset oam of sprites after the the mugshots when switching profiles
 
 struct PokeSphereState
@@ -1181,7 +1182,7 @@ static void PokeSphere_Explore_DestroyObjectEvents(void)
         FreeSpritePalette(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]]);
         DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->exploreOverworldSpriteId[coord]]);
     } // Come back here if Object Pals & Tiles Mess Up Again
-    // FreeAllSpritePalettes();
+    FreeAllSpritePalettes();
     // AllocSpriteTiles(0);
 }
 
@@ -1208,7 +1209,7 @@ static void PokeSphere_Explore_CreateCursor(void)
     yConfig.friction = Q_24_8(EXPLORE_CURSOR_FRICTION);
 
     LoadCompressedSpriteSheet(&sSpriteSheet_PokeSphereExploreCursor);
-    LoadSpritePalette(&sSpritePal_PokeSphereExploreCursor);
+    LoadPalette(sPokeSphereExploreCursorPal, OBJ_PLTT_ID(EXPLORE_CURSOR_PAL_SLOT), PLTT_SIZE_4BPP);
     sPokeSphereState->exploreCursorSpriteId = CreateSprite(&sSpriteTemplate_PokeSphereExploreCursor,
         x,
         y,
