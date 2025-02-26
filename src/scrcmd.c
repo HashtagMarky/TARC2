@@ -25,6 +25,7 @@
 #include "field_tasks.h"
 #include "field_weather.h"
 #include "fieldmap.h"
+#include "ikigai_characters.h"
 #include "item.h"
 #include "lilycove_lady.h"
 #include "main.h"
@@ -3105,6 +3106,16 @@ bool8 ScrCmd_createfieldmugshot(struct ScriptContext *ctx)
     {
         struct ObjectEvent *objEvent = &gObjectEvents[gSelectedObjectEvent];
         mugshotId = GetMugshotIdFromObjectEvent(objEvent);
+    }
+
+    if (mugshotId > MUGSHOT_BLANK
+        && mugshotId < MUGSHOT_SUBSTITUTE_DOLL
+        && mugshotEmotion == MUGSHOT_AUTO_EMOTE_ID)
+    {
+        if (mugshotId == MUGSHOT_KOLE || mugshotId == MUGSHOT_ANKA)
+            mugshotEmotion = gSaveBlock2Ptr->playerEmote;
+        else
+            mugshotEmotion = gIkigaiCharactersInfo[ReturnIkigaiCharacter_MugshotId(mugshotId)].defaultEmotion;
     }
 
     CreateFieldMugshot(mugshotType, mugshotId, mugshotEmotion, x, y, FALSE);

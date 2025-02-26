@@ -228,4 +228,6 @@ enum MugshotIDs {
 #define EMOTE_SPECIAL       16
 #define EMOTE_COUNT         17
 
+#define MUGSHOT_AUTO_EMOTE_ID       EMOTE_COUNT
+
 #endif // GUARD_CONSTANTS_FIELD_MUGSHOTS_H
