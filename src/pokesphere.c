@@ -77,22 +77,6 @@ struct SpriteCoordsStruct {
 #define EXPLORE_CURSOR_PAL_SLOT 15
 #define SPRITE_SLOT_FIRST_ICON  2 // Used to reset oam of sprites after the the mugshots when switching profiles
 
-struct PokeSphereState
-{
-    MainCallback savedCallback;
-    u8 loadState;
-    u8 mode;
-    u8 exploreOverworldSpriteId[EXPLORE_COORDS_COUNT];
-    u8 exploreCursorSpriteId;
-    u8 exploreCursorPosition;
-    u8 exploreCharacterStartId;
-    u8 characterId;
-    u8 characterMugshotSpriteId;
-    u8 characterTypeHeartSpriteId;
-    u8 characterAttitudeSpriteId;
-    u8 partnerMugshotSpriteId;
-};
-
 enum WindowIds
 {
     WIN_UI_CONTROLS,
@@ -108,6 +92,22 @@ enum Modes
     MODE_PROFILE,
     MODE_POSTS,
     MODE_COUNT,
+};
+
+struct PokeSphereState
+{
+    MainCallback savedCallback;
+    u8 loadState;
+    enum Modes mode;
+    u8 exploreOverworldSpriteId[EXPLORE_COORDS_COUNT];
+    u8 exploreCursorSpriteId;
+    enum ExploreProfilePositions exploreCursorPosition;
+    enum CharacterId exploreCharacterStartId;
+    enum CharacterId characterId;
+    u8 characterMugshotSpriteId;
+    u8 characterTypeHeartSpriteId;
+    u8 characterAttitudeSpriteId;
+    u8 partnerMugshotSpriteId;
 };
 
 static EWRAM_DATA struct PokeSphereState *sPokeSphereState = NULL;
@@ -505,7 +505,7 @@ static void PokeSphere_Explore_DestroyObjectEvents(void);
 static void PokeSphere_Explore_CreateCursor(void);
 static void PokeSphere_Explore_DestroyCursor(void);
 static void PokeSphere_DrawCharacterMugshot(bool32 loadBg);
-static void PokeSphere_DrawMugshotBackgrounds(u32 character);
+static void PokeSphere_DrawMugshotBackgrounds(enum CharacterId character);
 static void PokeSphere_DrawCharacterAttitude(void);
 static void PokeSphere_DrawCharacterTypeHeart(void);
 static void PokeSphere_DrawPartnerMugshot(void);
@@ -1057,7 +1057,7 @@ static void PokeSphere_PrintUIControls(void)
 
 static void PokeSphere_CycleCharacters(bool32 increment)
 {
-    u32 initialCharacter = sPokeSphereState->characterId;
+    enum CharacterId initialCharacter = sPokeSphereState->characterId;
     s32 characterNext = initialCharacter;
 
     while (TRUE)
@@ -1248,7 +1248,7 @@ static void PokeSphere_Explore_DestroyCursor(void)
 static void PokeSphere_PrintNames(void)
 {   
     u8 x, y = 0;
-    u32 character = sPokeSphereState->characterId;
+    enum CharacterId character = sPokeSphereState->characterId;
     u32 textColour = FONT_GRAY;
     const u8 *name = gIkigaiCharactersInfo[character].name;
     u8 nameBlank[3] = _("");
@@ -1272,6 +1272,10 @@ static void PokeSphere_PrintNames(void)
         
     case ATTITUDE_INSPIRED:
         textColour = FONT_BLUE;
+        break;
+
+    case ATTITUDE_NEUTRAL:
+    case ATTITUDE_COUNT:
         break;
     }
 
@@ -1509,7 +1513,7 @@ static void PokeSphere_PrintOpinion(void)
 {
     u8 string[100];
     u8 opinion[3];
-    u32 character = sPokeSphereState->characterId;
+    enum CharacterId character = sPokeSphereState->characterId;
     s8 opinionKindness = IkigaiCharacter_GetKindness(character);
     s8 opinionStrength = IkigaiCharacter_GetStrength(character);
 
@@ -1652,9 +1656,9 @@ static void PokeSphere_PrintOpinion(void)
 
 static void PokeSphere_DrawCharacterMugshot(bool32 loadBg)
 {
-    u32 character = sPokeSphereState->characterId;
-    u32 mugshotId = gIkigaiCharactersInfo[character].mugshotId;
-    u32 mugshotEmotion = gIkigaiCharactersInfo[character].defaultEmotion;
+    enum CharacterId character = sPokeSphereState->characterId;
+    enum MugshotIDs mugshotId = gIkigaiCharactersInfo[character].mugshotId;
+    enum MugshotEmoteIDs mugshotEmotion = gIkigaiCharactersInfo[character].defaultEmotion;
 
     if (character == CHARACTER_PLAYER)
     {
@@ -1675,7 +1679,7 @@ static void PokeSphere_DrawCharacterMugshot(bool32 loadBg)
     StartSpriteAnim(&gSprites[sPokeSphereState->characterMugshotSpriteId], 0);
 }
 
-static void PokeSphere_DrawMugshotBackgrounds(u32 character)
+static void PokeSphere_DrawMugshotBackgrounds(enum CharacterId character)
 {
     if (character == CHARACTER_PLAYER)
     {
@@ -1699,8 +1703,8 @@ static void PokeSphere_DrawMugshotBackgrounds(u32 character)
 
 static void PokeSphere_DrawCharacterAttitude(void)
 {
-    u32 character = sPokeSphereState->characterId;
-    u32 attitude = character ? IkigaiCharacter_GetPlayerAttitude_Character(character)
+    enum CharacterId character = sPokeSphereState->characterId;
+    enum AttitudeId attitude = character ? IkigaiCharacter_GetPlayerAttitude_Character(character)
                              : IkigaiCharacter_GetPlayerAttitude();
 
     switch (attitude)
@@ -1724,6 +1728,10 @@ static void PokeSphere_DrawCharacterAttitude(void)
         LoadCompressedSpriteSheet(&sSpriteSheet_PokeSphereCynicalIcon);
         LoadSpritePalette(&sSpritePal_PokeSphereCynicalIcon);
         break;
+
+    case ATTITUDE_NEUTRAL:
+    case ATTITUDE_COUNT:
+        break;
     }
 
     if (attitude)
@@ -1740,7 +1748,7 @@ static void PokeSphere_DrawCharacterAttitude(void)
 
 static void PokeSphere_DrawCharacterTypeHeart(void)
 {
-    u32 character = sPokeSphereState->characterId;
+    enum CharacterId character = sPokeSphereState->characterId;
 
     if (character == CHARACTER_PLAYER)
     {
@@ -1787,9 +1795,9 @@ static void PokeSphere_TypeIconCallback(struct Sprite *sprite)
 
 static void PokeSphere_DrawPartnerMugshot(void)
 {
-    u32 character = sPokeSphereState->characterId;
+    enum CharacterId character = sPokeSphereState->characterId;
     u32 speciesId = gIkigaiCharactersInfo[character].partnerPokemon;
-    u32 mugshotEmotion = gIkigaiCharactersInfo[character].defaultEmotion;
+    enum MugshotEmoteIDs mugshotEmotion = gIkigaiCharactersInfo[character].defaultEmotion;
     bool32 typeMon = TRUE;
 
     if (character == CHARACTER_PLAYER)

@@ -47,7 +47,7 @@ static s32 ClampedOpinionDelta(s32 opinionCurrent, s32 opinionDelta)
         return opinionDelta;
 }
 
-u32 IkigaiCharacter_GetPlayerAttitude(void)
+enum AttitudeId IkigaiCharacter_GetPlayerAttitude(void)
 {
     s32 opinionKindness = IkigaiCharacter_GetAverageKindness();
     s32 opinionStrength = IkigaiCharacter_GetAverageStrength();
@@ -73,7 +73,7 @@ u32 IkigaiCharacter_GetPlayerAttitude(void)
     return ATTITUDE_NEUTRAL;
 }
 
-u32 IkigaiCharacter_GetPlayerAttitude_Character(u32 character)
+enum AttitudeId IkigaiCharacter_GetPlayerAttitude_Character(enum CharacterId character)
 {
     s32 opinionKindness = IkigaiCharacter_GetKindness(character);
     s32 opinionStrength = IkigaiCharacter_GetStrength(character);
@@ -99,7 +99,7 @@ u32 IkigaiCharacter_GetPlayerAttitude_Character(u32 character)
     return ATTITUDE_NEUTRAL;
 }
 
-void IkigaiCharacter_SetDefaultOpinion(u32 character)
+void IkigaiCharacter_SetDefaultOpinion(enum CharacterId character)
 {
     if (character == CHARACTER_DEFAULT || character >= CHARACTER_RESIDENT_COUNT)
         return;
@@ -110,7 +110,7 @@ void IkigaiCharacter_SetDefaultOpinion(u32 character)
 
 void IkigaiCharacter_SetAllCharacterDefaultOpinion(void)
 {
-    u32 character;
+    enum CharacterId character;
 
     for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_RESIDENT_COUNT; character++)
     {
@@ -118,7 +118,7 @@ void IkigaiCharacter_SetAllCharacterDefaultOpinion(void)
     }
 }
 
-s32 IkigaiCharacter_GetKindness(u32 character)
+s32 IkigaiCharacter_GetKindness(enum CharacterId character)
 {
     if (character == CHARACTER_DEFAULT || character >= CHARACTER_RESIDENT_COUNT)
         return 0;
@@ -129,7 +129,7 @@ s32 IkigaiCharacter_GetKindness(u32 character)
     return kindnessCharacter + ClampedOpinionDelta(kindnessCharacter, kindnessAdded);
 }
 
-s32 IkigaiCharacter_GetStrength(u32 character)
+s32 IkigaiCharacter_GetStrength(enum CharacterId character)
 {
     if (character == CHARACTER_DEFAULT || character >= CHARACTER_RESIDENT_COUNT)
         return 0;
@@ -140,7 +140,7 @@ s32 IkigaiCharacter_GetStrength(u32 character)
     return strengthCharacter + ClampedOpinionDelta(strengthCharacter, strengthAdded);
 }
 
-s32 IkigaiCharacter_GetKindness_Wayfarer(u32 character)
+s32 IkigaiCharacter_GetKindness_Wayfarer(enum CharacterId character)
 {
     if (character <= CHARACTER_RESIDENT_COUNT && character == CHARACTER_COUNT_TOTAL)
     {
@@ -153,7 +153,7 @@ s32 IkigaiCharacter_GetKindness_Wayfarer(u32 character)
     return opinionKindness + ClampedOpinionDelta(opinionKindness, kindnessAdded);
 }
 
-s32 IkigaiCharacter_GetStrength_Wayfarer(u32 character)
+s32 IkigaiCharacter_GetStrength_Wayfarer(enum CharacterId character)
 {
     if (character <= CHARACTER_RESIDENT_COUNT && character == CHARACTER_COUNT_TOTAL)
     {
@@ -166,7 +166,7 @@ s32 IkigaiCharacter_GetStrength_Wayfarer(u32 character)
     return opinionStrength + ClampedOpinionDelta(opinionStrength, strengthAdded);
 }
 
-s32 IkigaiCharacter_GetOpinionBonus(u32 character, u32 opinionType)
+s32 IkigaiCharacter_GetOpinionBonus(enum CharacterId character, u32 opinionType)
 {
     s32 opinionBonus = 0;
 
@@ -180,7 +180,7 @@ s32 IkigaiCharacter_GetOpinionBonus(u32 character, u32 opinionType)
 s32 IkigaiCharacter_GetAverageKindness(void)
 {
     s32 opinionKindness = 0;
-    u32 character;
+    enum CharacterId character;
 
     for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_RESIDENT_COUNT; character++)
     {
@@ -193,7 +193,7 @@ s32 IkigaiCharacter_GetAverageKindness(void)
 s32 IkigaiCharacter_GetAverageStrength(void)
 {
     s32 opinionStrength = 0;
-    u32 character;
+    enum CharacterId character;
 
     for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_RESIDENT_COUNT; character++)
     {
@@ -203,7 +203,7 @@ s32 IkigaiCharacter_GetAverageStrength(void)
     return (opinionStrength / (CHARACTER_RESIDENT_COUNT - 1));
 }
 
-s32 IkigaiCharacter_GetSetConversedFlag(u32 character, bool32 setFlag)
+s32 IkigaiCharacter_GetSetConversedFlag(enum CharacterId character, bool32 setFlag)
 {
     u32 index, bit, mask;
     s32 retVal = 0;
@@ -228,7 +228,7 @@ void IkigaiCharacter_ClearConversedFlags(void)
     memset(gSaveBlock3Ptr->characters.conversed, 0, sizeof(gSaveBlock3Ptr->characters.conversed));
 }
 
-void IkigaiCharacter_SetRomanticFlag(u32 character)
+void IkigaiCharacter_SetRomanticFlag(enum CharacterId character)
 {
     if (gIkigaiCharactersInfo[character].flagRomantic == 0)
         return;
@@ -236,7 +236,7 @@ void IkigaiCharacter_SetRomanticFlag(u32 character)
     FlagSet(gIkigaiCharactersInfo[character].flagRomantic);
 }
 
-void IkigaiCharacter_ToggleRomanticFlag(u32 character)
+void IkigaiCharacter_ToggleRomanticFlag(enum CharacterId character)
 {
     if (gIkigaiCharactersInfo[character].flagRomantic == 0)
         return;
@@ -244,7 +244,7 @@ void IkigaiCharacter_ToggleRomanticFlag(u32 character)
     FlagToggle(gIkigaiCharactersInfo[character].flagRomantic);
 }
 
-void IkigaiCharacter_ClearRomanticFlag(u32 character)
+void IkigaiCharacter_ClearRomanticFlag(enum CharacterId character)
 {
     if (gIkigaiCharactersInfo[character].flagRomantic == 0)
         return;
@@ -252,7 +252,7 @@ void IkigaiCharacter_ClearRomanticFlag(u32 character)
     FlagClear(gIkigaiCharactersInfo[character].flagRomantic);
 }
 
-bool32 IkigaiCharacter_GetRomanticFlag(u32 character)
+bool32 IkigaiCharacter_GetRomanticFlag(enum CharacterId character)
 {
     if (gIkigaiCharactersInfo[character].flagRomantic == 0)
         return FALSE;
@@ -260,14 +260,12 @@ bool32 IkigaiCharacter_GetRomanticFlag(u32 character)
     return FlagGet(gIkigaiCharactersInfo[character].flagRomantic);
 }
 
-void IkigaiCharacter_SetRomanticFlag_Exclusive(u32 character)
+void IkigaiCharacter_SetRomanticFlag_Exclusive(enum CharacterId character)
 {
     if (gIkigaiCharactersInfo[character].flagRomantic == 0)
         return;
 
-    u32 i;
-
-    for (i = CHARACTER_DEFAULT + 1; i < CHARACTER_COUNT_TOTAL; i++)
+    for (enum CharacterId i = CHARACTER_DEFAULT + 1; i < CHARACTER_COUNT_TOTAL; i++)
     {
         if (i == character)
             IkigaiCharacter_SetRomanticFlag(i);
@@ -276,7 +274,7 @@ void IkigaiCharacter_SetRomanticFlag_Exclusive(u32 character)
     }
 }
 
-void IkigaiCharacter_ClearRomanticFlag_Amicable(u32 character)
+void IkigaiCharacter_ClearRomanticFlag_Amicable(enum CharacterId character)
 {
     if (gIkigaiCharactersInfo[character].flagRomantic == 0)
         return;
@@ -284,7 +282,7 @@ void IkigaiCharacter_ClearRomanticFlag_Amicable(u32 character)
     FlagClear(gIkigaiCharactersInfo[character].flagRomantic);
 }
 
-void IkigaiCharacter_ClearRomanticFlag_Hostile(u32 character)
+void IkigaiCharacter_ClearRomanticFlag_Hostile(enum CharacterId character)
 {
     if (gIkigaiCharactersInfo[character].flagRomantic == 0)
         return;
@@ -294,7 +292,7 @@ void IkigaiCharacter_ClearRomanticFlag_Hostile(u32 character)
         gSaveBlock3Ptr->characters.opinionKindness[character] = - OPINION_NEUTRAL_BUFFER;
 }
 
-u32 IkigaiCharacter_CheckRelationships(void)
+enum CharacterId IkigaiCharacter_CheckRelationships(void)
 {
     if (IkigaiCharacter_IsPlayerSingleOrMonogamous())
         return ReturnIkigaiCharacter_RomanceFlag_Exclusive();
@@ -305,10 +303,9 @@ u32 IkigaiCharacter_CheckRelationships(void)
 
 bool32 IkigaiCharacter_IsPlayerSingleOrMonogamous(void)
 {
-    u32 character;
-    u32 relationships = RELATIONSHIP_SINGLE;
+    enum RelationshipType relationships = RELATIONSHIP_SINGLE;
 
-    for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
+    for (enum CharacterId character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
     {
         if (gIkigaiCharactersInfo[character].flagRomantic != 0 
             && FlagGet(gIkigaiCharactersInfo[character].flagRomantic))
@@ -322,7 +319,7 @@ bool32 IkigaiCharacter_IsPlayerSingleOrMonogamous(void)
     return TRUE;
 }
 
-void IkigaiCharacter_SetMetFlag(u32 character)
+void IkigaiCharacter_SetMetFlag(enum CharacterId character)
 {
     if (gIkigaiCharactersInfo[character].flagMet == 0)
         return;
@@ -330,7 +327,7 @@ void IkigaiCharacter_SetMetFlag(u32 character)
     FlagSet(gIkigaiCharactersInfo[character].flagMet);
 }
 
-bool32 IkigaiCharacter_GetMetFlag(u32 character)
+bool32 IkigaiCharacter_GetMetFlag(enum CharacterId character)
 {
     if (gIkigaiCharactersInfo[character].flagMet == 0)
         return TRUE;
@@ -340,7 +337,7 @@ bool32 IkigaiCharacter_GetMetFlag(u32 character)
 
 void IkigaiCharacter_SetAllMetFlags(void)
 {
-    for (u32 character = CHARACTER_DEFAULT; character < CHARACTER_COUNT_TOTAL; character++)
+    for (enum CharacterId character = CHARACTER_DEFAULT; character < CHARACTER_COUNT_TOTAL; character++)
     {
         IkigaiCharacter_SetMetFlag(character);
     }
@@ -441,7 +438,7 @@ void ScrCmd_IkigaiCharacter_BurfferName(void)
     Script_RequestEffects(SCREFF_V1);
 }
 
-bool32 IkigaiCharacter_ReturnOpinionDecay(u32 character)
+bool32 IkigaiCharacter_ReturnOpinionDecay(enum CharacterId character)
 {
     if (character > CHARACTER_COUNT_TOTAL)
         return FALSE; 
@@ -452,7 +449,7 @@ bool32 IkigaiCharacter_ReturnOpinionDecay(u32 character)
         return FALSE;
 }
 
-void IkigaiCharacter_OpinionDecay(u32 character)
+void IkigaiCharacter_OpinionDecay(enum CharacterId character)
 {
     s32 opinionKindness = gSaveBlock3Ptr->characters.opinionKindness[character];
     s32 opinionStrength = gSaveBlock3Ptr->characters.opinionStrength[character];
@@ -479,7 +476,7 @@ void IkigaiCharacter_OpinionDecay(u32 character)
 
 void IkigaiCharacter_AllOpinionDecay_NonConverse(void)
 {
-    u32 character;
+    enum CharacterId character;
 
     for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_RESIDENT_COUNT; character++)
     {
@@ -490,7 +487,7 @@ void IkigaiCharacter_AllOpinionDecay_NonConverse(void)
 
 void IkigaiCharacter_HandleDialogue_Attitudes(void)
 {
-    u32 character = ReturnIkigaiCharacter_SelectedObject();
+    enum CharacterId character = ReturnIkigaiCharacter_SelectedObject();
 
     if (character == CHARACTER_DEFAULT || character >= CHARACTER_RESIDENT_COUNT)
         return;
@@ -532,7 +529,7 @@ void IkigaiCharacter_HandleDialogue_Attitudes(void)
 
 void DEBUG_IkigaiCharacter_CharacterOpinions(void)
 {
-    u32 character = ReturnIkigaiCharacter_SelectedObject();
+    enum CharacterId character = ReturnIkigaiCharacter_SelectedObject();
     s32 opinionKindness = IkigaiCharacter_GetKindness(character);
     s32 opinionStrength = IkigaiCharacter_GetStrength(character);
     u8 string[3];
@@ -587,7 +584,7 @@ void SetDefaultPlayerNickname(void)
     StringCopy(gSaveBlock3Ptr->characters.playerNickname, gSaveBlock2Ptr->playerName);
 }
 
-bool32 IkigaiCharacter_NicknameInsteadOfName(u32 character)
+bool32 IkigaiCharacter_NicknameInsteadOfName(enum CharacterId character)
 {
     if (StringCompare(gSaveBlock3Ptr->characters.playerNickname, gSaveBlock2Ptr->playerName)
         && (IkigaiCharacter_GetRomanticFlag(character) || IkigaiCharacter_GetKindness(character) > OPINION_NEUTRAL_BUFFER * 2))
@@ -612,9 +609,9 @@ void IkigaiCharacter_MovementEmote(u8 localId, const u8 *movement)
     gSpecialVar_0x8000 = TRUE;
 }
 
-u32 IkigaiCharacter_GetPoseFromAttitude(u32 attitude)
+enum PoseId IkigaiCharacter_GetPoseFromAttitude(enum AttitudeId attitude)
 {
-    u32 pose;
+    enum PoseId pose;
 
     if (attitude == ATTITUDE_NEUTRAL)
         pose = Random() % 4;
@@ -624,7 +621,7 @@ u32 IkigaiCharacter_GetPoseFromAttitude(u32 attitude)
     return pose;
 }
 
-const u8 *IkigaiCharacter_GetMovementFromAttitude(u32 character, u32 attitude)
+const u8 *IkigaiCharacter_GetMovementFromAttitude(enum CharacterId character, enum AttitudeId attitude)
 {
     if (attitude >= ATTITUDE_COUNT)
         return NULL;
@@ -634,7 +631,7 @@ const u8 *IkigaiCharacter_GetMovementFromAttitude(u32 character, u32 attitude)
 
 void IkigaiCharacter_DefaultEmote(void)
 {
-    u32 character = ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
+    enum CharacterId character = ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
     
     IkigaiCharacter_MovementEmote(
         gObjectEvents[gSelectedObjectEvent].localId,
@@ -646,7 +643,7 @@ void IkigaiCharacter_DefaultEmote(void)
 
 void IkigaiCharacter_ResponseEmote(void)
 {
-    u32 character = ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
+    enum CharacterId character = ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
     
     IkigaiCharacter_MovementEmote(
         gObjectEvents[gSelectedObjectEvent].localId,
@@ -656,11 +653,9 @@ void IkigaiCharacter_ResponseEmote(void)
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 }
 
-u32 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId)
+enum CharacterId ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId)
 {
-    u32 character;
-
-    for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
+    for (enum CharacterId character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
     {
         if (graphicsId == gIkigaiCharactersInfo[character].overworldGraphicsId)
             return character;
@@ -669,16 +664,14 @@ u32 ReturnIkigaiCharacter_ObjectEventGraphicsId(u16 graphicsId)
     return CHARACTER_DEFAULT;
 }
 
-u32 ReturnIkigaiCharacter_SelectedObject(void)
+enum CharacterId ReturnIkigaiCharacter_SelectedObject(void)
 {
     return ReturnIkigaiCharacter_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
 }
 
-u32 ReturnIkigaiMugshotID_ObjectEventGraphicsId(u16 graphicsId)
+enum MugshotIDs ReturnIkigaiMugshotID_ObjectEventGraphicsId(u16 graphicsId)
 {
-    u32 character;
-
-    for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
+    for (enum CharacterId character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
     {
         if (graphicsId == gIkigaiCharactersInfo[character].overworldGraphicsId)
             return gIkigaiCharactersInfo[character].mugshotId;
@@ -687,16 +680,14 @@ u32 ReturnIkigaiMugshotID_ObjectEventGraphicsId(u16 graphicsId)
     return MUGSHOT_BLANK;
 }
 
-u32 ReturnIkigaiMugshotID_SelectedObject(void)
+enum MugshotIDs ReturnIkigaiMugshotID_SelectedObject(void)
 {
     return ReturnIkigaiMugshotID_ObjectEventGraphicsId(gObjectEvents[gSelectedObjectEvent].graphicsId);
 }
 
-u32 ReturnIkigaiCharacter_MugshotId(u16 mugshotId)
+enum CharacterId ReturnIkigaiCharacter_MugshotId(enum MugshotIDs mugshotId)
 {
-    u32 character;
-
-    for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
+    for (enum CharacterId character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
     {
         if (mugshotId == gIkigaiCharactersInfo[character].mugshotId)
             return character;
@@ -712,11 +703,9 @@ void ScrCmd_ReturnIkigaiCharacter_SelectedObject(void)
     Script_RequestEffects(SCREFF_V1);
 }
 
-u32 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void)
+enum CharacterId ReturnIkigaiCharacter_RomanceFlag_Exclusive(void)
 {
-    u32 character;
-
-    for (character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
+    for (enum CharacterId character = CHARACTER_DEFAULT + 1; character < CHARACTER_COUNT_TOTAL; character++)
     {
         if (gIkigaiCharactersInfo[character].flagRomantic != 0 
             && FlagGet(gIkigaiCharactersInfo[character].flagRomantic))
@@ -728,9 +717,10 @@ u32 ReturnIkigaiCharacter_RomanceFlag_Exclusive(void)
     return CHARACTER_DEFAULT;
 }
 
-s32 IkigaiCharacterOpinionBonus_Relationship(u32 character, bool32 opinionType)
+s32 IkigaiCharacterOpinionBonus_Relationship(enum CharacterId character, bool32 opinionType)
 {
-    u32 relationshipCharacter, relationshipAffinity, relationshipBonus, i;
+    enum CharacterId relationshipCharacter;
+    u32 relationshipAffinity, relationshipBonus, i;
 
     relationshipBonus = 0;
 
@@ -760,7 +750,7 @@ s32 IkigaiCharacterOpinionBonus_Relationship(u32 character, bool32 opinionType)
     return relationshipBonus;
 }
 
-s32 IkigaiCharacterOpinionBonus_PartnerPokemon(u32 character, bool32 opinionType)
+s32 IkigaiCharacterOpinionBonus_PartnerPokemon(enum CharacterId character, bool32 opinionType)
 {
     u32 species = gIkigaiCharactersInfo[character].partnerPokemon;
     u32 bonusPartner = 0;
@@ -790,7 +780,7 @@ s32 IkigaiCharacterOpinionBonus_PartnerPokemon(u32 character, bool32 opinionType
     return bonusPartner;
 }
 
-s32 IkigaiCharacterOpinionBonus_StarterPokemon(u32 character, bool32 opinionType)
+s32 IkigaiCharacterOpinionBonus_StarterPokemon(enum CharacterId character, bool32 opinionType)
 {
     u32 starter = VarGet(VAR_STARTER_MON);
     u32 species = gIkigaiCharactersInfo[character].partnerPokemon;
@@ -824,7 +814,7 @@ s32 IkigaiCharacterOpinionBonus_StarterPokemon(u32 character, bool32 opinionType
     return bonusStarter;
 }
 
-// static s32 IkigaiCharacterOpinionBonus_Player(u32 character, bool32 opinionType)
+// static s32 IkigaiCharacterOpinionBonus_Player(enum CharacterId character, bool32 opinionType)
 // {
 //     u32 bonusPlayerAttitude = 0;
 
@@ -840,7 +830,7 @@ s32 IkigaiCharacterOpinionBonus_StarterPokemon(u32 character, bool32 opinionType
 //     return bonusPlayerAttitude;
 // }
 
-// static s32 IkigaiCharacterOpinionBonus_Player(u32 character, bool32 opinionType)
+// static s32 IkigaiCharacterOpinionBonus_Player(enum CharacterId character, bool32 opinionType)
 // {
 //     if (IkigaiCharacter_GetRomanticFlag)
 // }
@@ -885,38 +875,42 @@ static uq4_12_t GetGymTypeEffectiveness(u16 species, bool32 speciesAtk)
     return modifier[0];
 }
 #define CHARACTER_NAME_TEXT_COLOUR TRUE
-u8 IkigaiCharacter_ReturnMessageBoxPersonalityPalette(u32 character)
+u8 IkigaiCharacter_ReturnMessageBoxPersonalityPalette(enum CharacterId character)
 {
-    u32 textColour = 2;
+    u32 textColour = TEXT_COLOR_DARK_GRAY;
 
     switch (gIkigaiCharactersInfo[character].personality)
     {
     case ATTITUDE_CYNICAL:
-        textColour = 9;
+        textColour = TEXT_COLOR_LIGHT_BLUE;
         break;
         
     case ATTITUDE_DOMINANT:
-        textColour = 4;
+        textColour = TEXT_COLOR_RED;
         break;
         
     case ATTITUDE_HUMBLE:
-        textColour = 6;
+        textColour = TEXT_COLOR_GREEN;
         break;
         
     case ATTITUDE_INSPIRED:
-        textColour = 8;
+        textColour = TEXT_COLOR_BLUE;
+        break;
+
+    case ATTITUDE_NEUTRAL:
+    case ATTITUDE_COUNT:
         break;
     }
 
     if (gSpeakerName == gIkigaiCharactersInfo[CHARACTER_DEFAULT].name)
-        textColour = 2;
+        textColour = TEXT_COLOR_DARK_GRAY;
 
     if (CHARACTER_NAME_TEXT_COLOUR == FALSE
         || IkigaiCharacter_GetMetFlag(character) == FALSE
         || gSaveBlock2Ptr->optionsNPCName == FALSE
         )
     {
-        return 2;
+        return TEXT_COLOR_DARK_GRAY;
     }
     else
     {
@@ -924,7 +918,7 @@ u8 IkigaiCharacter_ReturnMessageBoxPersonalityPalette(u32 character)
     }
 }
 
-u8 CreateDialogueOptionIconSprite(u32 dialogueIndex)
+u8 CreateDialogueOptionIconSprite(enum DialogueOption dialogue)
 {
     u8 spriteId;
 
@@ -932,11 +926,11 @@ u8 CreateDialogueOptionIconSprite(u32 dialogueIndex)
     struct SpritePalette pal = { .tag = TAG_CHARACTER_DIALOGUE_ICON };
     struct SpriteTemplate *spriteTemplate;
 
-    if (dialogueIndex >= DIALOGUE_OPTION_COUNT)
-        dialogueIndex = DIALOGUE_OPTION_TALK;
+    if (dialogue >= DIALOGUE_OPTION_COUNT)
+        dialogue = DIALOGUE_OPTION_TALK;
 
-    sheet.data = gDialogueOptions[dialogueIndex].iconImage;
-    pal.data = gDialogueOptions[dialogueIndex].iconPal;
+    sheet.data = gDialogueOptions[dialogue].iconImage;
+    pal.data = gDialogueOptions[dialogue].iconPal;
 
     LoadCompressedSpriteSheet(&sheet);
     LoadSpritePalette(&pal);
@@ -961,7 +955,7 @@ u8 CreateDialogueOptionIconSprite(u32 dialogueIndex)
     return spriteId;
 }
 
-u8 CreateAttitudeIconSprite(u32 attitudeIndex)
+u8 CreateAttitudeIconSprite(enum AttitudeId attitude)
 {
     u8 spriteId;
 
@@ -969,11 +963,11 @@ u8 CreateAttitudeIconSprite(u32 attitudeIndex)
     struct SpritePalette pal = { .tag = TAG_CHARACTER_DIALOGUE_ICON };
     struct SpriteTemplate *spriteTemplate;
 
-    if (attitudeIndex >= ATTITUDE_COUNT)
-        attitudeIndex = ATTITUDE_NEUTRAL;
+    if (attitude >= ATTITUDE_COUNT)
+        attitude = ATTITUDE_NEUTRAL;
 
-    sheet.data = gDialogueAttitudes[attitudeIndex].iconImage;
-    pal.data = gDialogueAttitudes[attitudeIndex].iconPal;
+    sheet.data = gDialogueAttitudes[attitude].iconImage;
+    pal.data = gDialogueAttitudes[attitude].iconPal;
 
     LoadCompressedSpriteSheet(&sheet);
     LoadSpritePalette(&pal);
