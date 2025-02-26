@@ -1104,9 +1104,10 @@ static void PokeSphere_ReloadProfile(void)
     DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterTypeHeartSpriteId]);
     DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterAttitudeSpriteId]);
     // ResetOamRange(SPRITE_SLOT_FIRST_ICON, 128); // Hacky fix to prevent palette and tile issues in icons when switching profiles
-    ResetOamRange(0, 128); // Less Hacky fix to prevent palette and tile issues in icons when switching profiles
-    FreeAllSpritePalettes();
-    AllocSpriteTiles(0);
+    // ResetOamRange(0, 128); // Less Hacky fix to prevent palette and tile issues in icons when switching profiles
+    // FreeAllSpritePalettes();
+    // AllocSpriteTiles(0);
+    ResetSpriteData();
     PokeSphere_DrawCharacterMugshot(TRUE);
     PokeSphere_DrawPartnerMugshot();
     PokeSphere_DrawCharacterAttitude();
