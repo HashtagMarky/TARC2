@@ -572,3 +572,5 @@ gSpecials::
 	def_special OverworldTrappedInBattle
 	def_special WillOverworldEncounterRun
 	def_special UseBlankMessageToCancelPokemonPic
+	def_special EnterCode
+	def_special GetCodeFeedback
