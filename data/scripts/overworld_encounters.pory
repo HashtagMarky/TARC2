@@ -20,13 +20,13 @@ script OverworldEncounters_EventScript_Encounter
     lock
     faceplayer
     special(GetOverworldMonSpecies)
-    if (var(VAR_0x8008) != EMOTE_ANGRY)
+    if (var(VAR_0x8008) != MUGSHOT_EMOTE_ANGRY)
     {
-        setvar(VAR_0x8008, EMOTE_SURPRISED)
+        setvar(VAR_0x8008, MUGSHOT_EMOTE_SURPRISED)
     }
     bufferspeciesname(STR_VAR_1, VAR_0x8004)
     playmoncry(VAR_0x8004, CRY_MODE_ENCOUNTER)
-    if (var(VAR_0x8008) != EMOTE_SURPRISED)
+    if (var(VAR_0x8008) != MUGSHOT_EMOTE_SURPRISED)
     {
         message(format("It's a wild {STR_VAR_1}!\n What will {PLAYER} do?"))
     }
@@ -232,7 +232,7 @@ script OverworldEncounters_EventScript_EncounterEnd
         special(RemoveCameraObject)
     }
     call(EventScript_DisplayPokedexHeader)
-    setvar(VAR_0x8008, EMOTE_NORMAL)
+    setvar(VAR_0x8008, MUGSHOT_EMOTE_NORMAL)
     clearflag(FLAG_SYS_OVERWORLD_ENCOUNTER_CAMERA)
     special(ExitSafariMode)
     releaseall

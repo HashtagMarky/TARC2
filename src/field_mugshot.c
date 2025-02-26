@@ -207,36 +207,36 @@ void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 
         switch (followerEmotion)
         {
         case FOLLOWER_EMOTION_HAPPY:
-            mugshotEmotion = EMOTE_HAPPY;
+            mugshotEmotion = MUGSHOT_EMOTE_HAPPY;
             break;
         case FOLLOWER_EMOTION_SAD:
-            mugshotEmotion = EMOTE_SAD;
+            mugshotEmotion = MUGSHOT_EMOTE_SAD;
             break;
         case FOLLOWER_EMOTION_UPSET:
-            mugshotEmotion = EMOTE_TEARY;
+            mugshotEmotion = MUGSHOT_EMOTE_TEARY;
             break;
         case FOLLOWER_EMOTION_ANGRY:
-            mugshotEmotion = EMOTE_ANGRY;
+            mugshotEmotion = MUGSHOT_EMOTE_ANGRY;
             break;
         case FOLLOWER_EMOTION_PENSIVE:
-            mugshotEmotion = EMOTE_WORRIED;
+            mugshotEmotion = MUGSHOT_EMOTE_WORRIED;
             break;
         case FOLLOWER_EMOTION_LOVE:
         case FOLLOWER_EMOTION_MUSIC:
-            mugshotEmotion = EMOTE_JOYOUS;
+            mugshotEmotion = MUGSHOT_EMOTE_JOYOUS;
             break;
         case FOLLOWER_EMOTION_SURPRISE:
-            mugshotEmotion = EMOTE_STUNNED;
+            mugshotEmotion = MUGSHOT_EMOTE_STUNNED;
             break;
         case FOLLOWER_EMOTION_CURIOUS:
-            mugshotEmotion = EMOTE_WORRIED;
+            mugshotEmotion = MUGSHOT_EMOTE_WORRIED;
             break;
         case FOLLOWER_EMOTION_POISONED:
-            mugshotEmotion = EMOTE_PAIN;
+            mugshotEmotion = MUGSHOT_EMOTE_PAIN;
             break;
         case FOLLOWER_EMOTION_NEUTRAL:
         default:
-            mugshotEmotion = EMOTE_NORMAL;
+            mugshotEmotion = MUGSHOT_EMOTE_NORMAL;
             break;
         }
 
@@ -267,8 +267,8 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
 
     RemoveFieldMugshot(retainDetails);
 
-    if (mugshotEmotion >= EMOTE_COUNT)
-        mugshotEmotion = EMOTE_NORMAL;
+    if (mugshotEmotion >= MUGSHOT_EMOTE_COUNT)
+        mugshotEmotion = MUGSHOT_EMOTE_NORMAL;
 
     if ((mugshotId >= NELEMS(gFieldMugshots)
         || (gSaveBlock2Ptr->optionsFollowerMugshots == MUGSHOT_FOLLOWER_PLACEHOLDER && mugshotType == MUGSHOT_FOLLOWER)))
@@ -286,20 +286,20 @@ void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x,
         sheet.data = gFieldMugshots[mugshotId][mugshotEmotion].gfx;
         pal.data = gFieldMugshots[mugshotId][mugshotEmotion].pal;
     }
-    else if ((gFieldMugshots[mugshotId][EMOTE_NORMAL].gfx != NULL && gFieldMugshots[mugshotId][EMOTE_NORMAL].pal != NULL))
+    else if ((gFieldMugshots[mugshotId][MUGSHOT_EMOTE_NORMAL].gfx != NULL && gFieldMugshots[mugshotId][MUGSHOT_EMOTE_NORMAL].pal != NULL))
     {
-        sheet.data = gFieldMugshots[mugshotId][EMOTE_NORMAL].gfx;
-        pal.data = gFieldMugshots[mugshotId][EMOTE_NORMAL].pal;
+        sheet.data = gFieldMugshots[mugshotId][MUGSHOT_EMOTE_NORMAL].gfx;
+        pal.data = gFieldMugshots[mugshotId][MUGSHOT_EMOTE_NORMAL].pal;
     }
     // else if (mugshotId > (OBJ_EVENT_GFX_SPECIES_SHINY(NONE)) && (gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][mugshotEmotion].gfx != NULL && gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][mugshotEmotion].pal != NULL))
     // {
     //     sheet.data = gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][mugshotEmotion].gfx;
     //     pal.data = gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][mugshotEmotion].pal;
     // }
-    // else if (mugshotId > (OBJ_EVENT_GFX_SPECIES_SHINY(NONE)) && (gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][EMOTE_NORMAL].gfx != NULL && gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][EMOTE_NORMAL].pal != NULL))
+    // else if (mugshotId > (OBJ_EVENT_GFX_SPECIES_SHINY(NONE)) && (gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][MUGSHOT_EMOTE_NORMAL].gfx != NULL && gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][MUGSHOT_EMOTE_NORMAL].pal != NULL))
     // {
-    //     sheet.data = gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][EMOTE_NORMAL].gfx;
-    //     pal.data = gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][EMOTE_NORMAL].pal;
+    //     sheet.data = gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][MUGSHOT_EMOTE_NORMAL].gfx;
+    //     pal.data = gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][MUGSHOT_EMOTE_NORMAL].pal;
     // }
     else if (mugshotType == MUGSHOT_FOLLOWER && gSaveBlock2Ptr->optionsFollowerMugshots == MUGSHOT_FOLLOWER_PLACEHOLDER)
     {
@@ -397,8 +397,8 @@ u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion, bool8 typeMon, boo
             mugshotId = sPokemonMugshots[mugshotId].mugshotId;
     }
 
-    if (mugshotEmotion >= EMOTE_COUNT)
-        mugshotEmotion = EMOTE_NORMAL;
+    if (mugshotEmotion >= MUGSHOT_EMOTE_COUNT)
+        mugshotEmotion = MUGSHOT_EMOTE_NORMAL;
 
     if (mugshotId >= NELEMS(gFieldMugshots))
         mugshotId = MUGSHOT_SUBSTITUTE_DOLL;
@@ -408,20 +408,20 @@ u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion, bool8 typeMon, boo
         sheet.data = gFieldMugshots[mugshotId][mugshotEmotion].gfx;
         pal.data = gFieldMugshots[mugshotId][mugshotEmotion].pal;
     }
-    else if ((gFieldMugshots[mugshotId][EMOTE_NORMAL].gfx != NULL && gFieldMugshots[mugshotId][EMOTE_NORMAL].pal != NULL))
+    else if ((gFieldMugshots[mugshotId][MUGSHOT_EMOTE_NORMAL].gfx != NULL && gFieldMugshots[mugshotId][MUGSHOT_EMOTE_NORMAL].pal != NULL))
     {
-        sheet.data = gFieldMugshots[mugshotId][EMOTE_NORMAL].gfx;
-        pal.data = gFieldMugshots[mugshotId][EMOTE_NORMAL].pal;
+        sheet.data = gFieldMugshots[mugshotId][MUGSHOT_EMOTE_NORMAL].gfx;
+        pal.data = gFieldMugshots[mugshotId][MUGSHOT_EMOTE_NORMAL].pal;
     }
     // else if (mugshotId > (OBJ_EVENT_GFX_SPECIES_SHINY(NONE)) && (gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][mugshotEmotion].gfx != NULL && gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][mugshotEmotion].pal != NULL))
     // {
     //     sheet.data = gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][mugshotEmotion].gfx;
     //     pal.data = gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][mugshotEmotion].pal;
     // }
-    // else if (mugshotId > (OBJ_EVENT_GFX_SPECIES_SHINY(NONE)) && (gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][EMOTE_NORMAL].gfx != NULL && gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][EMOTE_NORMAL].pal != NULL))
+    // else if (mugshotId > (OBJ_EVENT_GFX_SPECIES_SHINY(NONE)) && (gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][MUGSHOT_EMOTE_NORMAL].gfx != NULL && gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][MUGSHOT_EMOTE_NORMAL].pal != NULL))
     // {
-    //     sheet.data = gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][EMOTE_NORMAL].gfx;
-    //     pal.data = gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][EMOTE_NORMAL].pal;
+    //     sheet.data = gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][MUGSHOT_EMOTE_NORMAL].gfx;
+    //     pal.data = gFieldMugshots[mugshotId - SPECIES_SHINY_TAG][MUGSHOT_EMOTE_NORMAL].pal;
     // }
     else
     {
@@ -466,7 +466,7 @@ u16 CreatePlayerMugshotTrainerCardSprite(u8 gender, u8 mugshotEmotion, u16 destX
     if (mugshotBuffer == NULL)
         return 0xFFFF;
 
-    if (mugshotId >= NELEMS(gFieldMugshots) || mugshotEmotion >= EMOTE_COUNT)
+    if (mugshotId >= NELEMS(gFieldMugshots) || mugshotEmotion >= MUGSHOT_EMOTE_COUNT)
     {
         Free(mugshotBuffer);
         return 0xFFFF;

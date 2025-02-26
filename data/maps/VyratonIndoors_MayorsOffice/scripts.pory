@@ -134,7 +134,7 @@ script VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon
     callnative(ShowPokedexHeaderMessage)
     playfanfare(MUS_HG_RECEIVE_POKEMON)
     faceplayer
-    createfieldmugshot(MUGSHOT_PMD, emotion=EMOTE_DETERMINED)
+    createfieldmugshot(MUGSHOT_PMD, emotion=MUGSHOT_EMOTE_DETERMINED)
     special(GetOverworldMonSpecies)
     call(EventScript_DisplayPokedexSpeciesName)
     playmoncry(VAR_0x8004, CRY_MODE_NORMAL)

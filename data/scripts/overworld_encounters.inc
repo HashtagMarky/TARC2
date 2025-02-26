@@ -22,7 +22,7 @@ OverworldEncounters_EventScript_Encounter::
 # 22 "data//scripts/overworld_encounters.pory"
 	special GetOverworldMonSpecies
 # 23 "data//scripts/overworld_encounters.pory"
-	compare VAR_0x8008, EMOTE_ANGRY
+	compare VAR_0x8008, MUGSHOT_EMOTE_ANGRY
 	goto_if_ne OverworldEncounters_EventScript_Encounter_2
 OverworldEncounters_EventScript_Encounter_1:
 # 27 "data//scripts/overworld_encounters.pory"
@@ -30,7 +30,7 @@ OverworldEncounters_EventScript_Encounter_1:
 # 28 "data//scripts/overworld_encounters.pory"
 	playmoncry VAR_0x8004, CRY_MODE_ENCOUNTER
 # 29 "data//scripts/overworld_encounters.pory"
-	compare VAR_0x8008, EMOTE_SURPRISED
+	compare VAR_0x8008, MUGSHOT_EMOTE_SURPRISED
 	goto_if_ne OverworldEncounters_EventScript_Encounter_5
 # 35 "data//scripts/overworld_encounters.pory"
 	message OverworldEncounters_EventScript_Encounter_Text_1
@@ -73,7 +73,7 @@ OverworldEncounters_EventScript_Encounter_19:
 
 OverworldEncounters_EventScript_Encounter_2:
 # 25 "data//scripts/overworld_encounters.pory"
-	setvar VAR_0x8008, EMOTE_SURPRISED
+	setvar VAR_0x8008, MUGSHOT_EMOTE_SURPRISED
 	goto OverworldEncounters_EventScript_Encounter_1
 
 OverworldEncounters_EventScript_Encounter_5:
@@ -395,7 +395,7 @@ OverworldEncounters_EventScript_EncounterEnd_1:
 # 234 "data//scripts/overworld_encounters.pory"
 	call EventScript_DisplayPokedexHeader
 # 235 "data//scripts/overworld_encounters.pory"
-	setvar VAR_0x8008, EMOTE_NORMAL
+	setvar VAR_0x8008, MUGSHOT_EMOTE_NORMAL
 # 236 "data//scripts/overworld_encounters.pory"
 	clearflag FLAG_SYS_OVERWORLD_ENCOUNTER_CAMERA
 # 237 "data//scripts/overworld_encounters.pory"

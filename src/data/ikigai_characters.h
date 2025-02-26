@@ -36,7 +36,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_SAMUEL,
         .mugshotId = MUGSHOT_SAMUEL,
-        .defaultEmotion = EMOTE_HAPPY,
+        .defaultEmotion = MUGSHOT_EMOTE_HAPPY,
 
         .baseOpinionKindness = 20,
         .baseOpinionStrength = 25,
@@ -73,7 +73,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_LAUREN,
         .mugshotId = MUGSHOT_LAUREN,
-        .defaultEmotion = EMOTE_WORRIED,
+        .defaultEmotion = MUGSHOT_EMOTE_WORRIED,
 
         .baseOpinionKindness = 15,
         .baseOpinionStrength = 20,
@@ -110,7 +110,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_THOMAS,
         .mugshotId = MUGSHOT_THOMAS,
-        .defaultEmotion = EMOTE_JOYOUS,
+        .defaultEmotion = MUGSHOT_EMOTE_JOYOUS,
 
         .baseOpinionKindness = 20,
         .baseOpinionStrength = 25,
@@ -147,7 +147,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_HANNAH,
         .mugshotId = MUGSHOT_HANNAH,
-        .defaultEmotion = EMOTE_INSPIRED,
+        .defaultEmotion = MUGSHOT_EMOTE_INSPIRED,
 
         //.baseOpinionKindness = ,
         //.baseOpinionStrength = ,
@@ -190,7 +190,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_KATIE,
         .mugshotId = MUGSHOT_KATIE,
-        .defaultEmotion = EMOTE_HAPPY,
+        .defaultEmotion = MUGSHOT_EMOTE_HAPPY,
 
         //.baseOpinionKindness = ,
         //.baseOpinionStrength = ,
@@ -227,7 +227,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_LOUIS,
         .mugshotId = MUGSHOT_LOUIS,
-        .defaultEmotion = EMOTE_DETERMINED,
+        .defaultEmotion = MUGSHOT_EMOTE_DETERMINED,
 
         //.baseOpinionKindness = ,
         //.baseOpinionStrength = ,
@@ -258,7 +258,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_GEORGIA,
         .mugshotId = MUGSHOT_GEORGIA,
-        .defaultEmotion = EMOTE_SHOUTING,
+        .defaultEmotion = MUGSHOT_EMOTE_SHOUTING,
 
         //.baseOpinionKindness = ,
         //.baseOpinionStrength = ,
@@ -295,7 +295,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_CAPTAIN,
         .mugshotId = MUGSHOT_CAPTAIN,
-        .defaultEmotion = EMOTE_STUNNED,
+        .defaultEmotion = MUGSHOT_EMOTE_STUNNED,
 
         .baseOpinionKindness = 0,
         .baseOpinionStrength = 0,
@@ -332,7 +332,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_DIEGO,
         .mugshotId = MUGSHOT_DIEGO,
-        .defaultEmotion = EMOTE_INSPIRED,
+        .defaultEmotion = MUGSHOT_EMOTE_INSPIRED,
 
         .baseOpinionKindness = -10,
         .baseOpinionStrength = 0,
@@ -356,7 +356,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_ASH_KETCHUM,
         .mugshotId = MUGSHOT_ASH,
-        .defaultEmotion = EMOTE_DETERMINED,
+        .defaultEmotion = MUGSHOT_EMOTE_DETERMINED,
     },
 
     [CHARACTER_WAYFARER_STEVEN] =
@@ -376,7 +376,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_STEVEN_GEN4,
         .mugshotId = MUGSHOT_STEVEN,
-        .defaultEmotion = EMOTE_SPECIAL,
+        .defaultEmotion = MUGSHOT_EMOTE_SPECIAL,
 
         .relationships =
         {
@@ -405,7 +405,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_CYNTHIA,
         .mugshotId = MUGSHOT_CYNTHIA,
-        .defaultEmotion = EMOTE_SPECIAL,
+        .defaultEmotion = MUGSHOT_EMOTE_SPECIAL,
 
         .relationships =
         {
@@ -453,7 +453,7 @@ const struct IkigaiCharacterInfo gIkigaiCharactersInfo[] =
 
         .overworldGraphicsId = OBJ_EVENT_GFX_N,
         .mugshotId = MUGSHOT_N,
-        .defaultEmotion = EMOTE_SPECIAL,
+        .defaultEmotion = MUGSHOT_EMOTE_SPECIAL,
     },
 };
 

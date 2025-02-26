@@ -44,7 +44,7 @@ struct MugshotGfx
 };
 
 extern const union AnimCmd *const gSpriteAnimTable_Mugshot_Flipped[];
-extern const struct MugshotGfx gFieldMugshots[][EMOTE_COUNT];
+extern const struct MugshotGfx gFieldMugshots[][MUGSHOT_EMOTE_COUNT];
 extern struct MugshotDetails gActiveMugshotDetails;
 struct MugshotDetails GetMugshotDetails(void);
 

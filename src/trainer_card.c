@@ -470,28 +470,28 @@ static void Task_TrainerCard(u8 taskId)
             switch (gSaveBlock2Ptr->playerEmote)
             {
             default:
-            case EMOTE_NORMAL:
-            case EMOTE_ANGRY:
-            case EMOTE_CRYING:
-            case EMOTE_DETERMINED:
-            case EMOTE_DIZZY:
-            case EMOTE_INSPIRED:
-            case EMOTE_JOYOUS:
-            case EMOTE_PAIN:
-            case EMOTE_SAD:
-            case EMOTE_SHOUTING:
-            case EMOTE_SIGH:
-            case EMOTE_STUNNED:
-            case EMOTE_SURPRISED:
-            case EMOTE_TEARY:
-            case EMOTE_WORRIED:
+            case MUGSHOT_EMOTE_NORMAL:
+            case MUGSHOT_EMOTE_ANGRY:
+            case MUGSHOT_EMOTE_CRYING:
+            case MUGSHOT_EMOTE_DETERMINED:
+            case MUGSHOT_EMOTE_DIZZY:
+            case MUGSHOT_EMOTE_INSPIRED:
+            case MUGSHOT_EMOTE_JOYOUS:
+            case MUGSHOT_EMOTE_PAIN:
+            case MUGSHOT_EMOTE_SAD:
+            case MUGSHOT_EMOTE_SHOUTING:
+            case MUGSHOT_EMOTE_SIGH:
+            case MUGSHOT_EMOTE_STUNNED:
+            case MUGSHOT_EMOTE_SURPRISED:
+            case MUGSHOT_EMOTE_TEARY:
+            case MUGSHOT_EMOTE_WORRIED:
                 PlaySE(SE_RG_HELP_OPEN);
-                gSaveBlock2Ptr->playerEmote = EMOTE_HAPPY;
+                gSaveBlock2Ptr->playerEmote = MUGSHOT_EMOTE_HAPPY;
                 break;
             
-            case EMOTE_HAPPY:
+            case MUGSHOT_EMOTE_HAPPY:
                 PlaySE(SE_RG_HELP_CLOSE);
-                gSaveBlock2Ptr->playerEmote = EMOTE_NORMAL;
+                gSaveBlock2Ptr->playerEmote = MUGSHOT_EMOTE_NORMAL;
                 break;
             }
             FillWindowPixelBuffer(WIN_TRAINER_PIC, PIXEL_FILL(0));

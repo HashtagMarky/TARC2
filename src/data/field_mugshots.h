@@ -6335,11 +6335,11 @@ static const struct PokemonMugshot sPokemonMugshots[NUM_SPECIES] =
         },
 };
 
-const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
+const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][MUGSHOT_EMOTE_COUNT] =
 {
     [MUGSHOT_BLANK] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_Blank,
             .pal = sFieldMugshotPal_Blank,
@@ -6348,13 +6348,13 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_KOLE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_KoleNormal,
             .pal = sFieldMugshotPal_Protagonist,
         },
 
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_KoleHappy,
             .pal = sFieldMugshotPal_Protagonist,
@@ -6363,13 +6363,13 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_ANKA] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_AnkaNormal,
             .pal = sFieldMugshotPal_Protagonist,
         },
 
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_AnkaHappy,
             .pal = sFieldMugshotPal_Protagonist,
@@ -6378,13 +6378,13 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_SAMUEL] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_SamuelNormal,
             .pal = sFieldMugshotPal_SamuelNormal,
         },
 
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_SamuelHappy,
             .pal = sFieldMugshotPal_SamuelHappy,
@@ -6393,13 +6393,13 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_LAUREN] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_LaurenNormal,
             .pal = sFieldMugshotPal_LaurenNormal,
         },
 
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_LaurenHappy,
             .pal = sFieldMugshotPal_LaurenHappy,
@@ -6408,13 +6408,13 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_THOMAS] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_ThomasNormal,
             .pal = sFieldMugshotPal_ThomasNormal,
         },
 
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_ThomasHappy,
             .pal = sFieldMugshotPal_ThomasHappy,
@@ -6423,13 +6423,13 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_HANNAH] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_HannahNormal,
             .pal = sFieldMugshotPal_HannahNormal,
         },
 
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_HannahHappy,
             .pal = sFieldMugshotPal_HannahHappy,
@@ -6438,13 +6438,13 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_KATIE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_KatieNormal,
             .pal = sFieldMugshotPal_KatieNormal,
         },
 
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_KatieHappy,
             .pal = sFieldMugshotPal_KatieHappy,
@@ -6453,13 +6453,13 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_LOUIS] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_LouisNormal,
             .pal = sFieldMugshotPal_LouisNormal,
         },
 
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_LouisNormal,
             .pal = sFieldMugshotPal_LouisNormal,
@@ -6468,13 +6468,13 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_GEORGIA] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_GeorgiaNormal,
             .pal = sFieldMugshotPal_GeorgiaNormal,
         },
 
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_GeorgiaHappy,
             .pal = sFieldMugshotPal_GeorgiaHappy,
@@ -6483,7 +6483,7 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_CAPTAIN] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_CaptainNormal,
             .pal = sFieldMugshotPal_CaptainNormal,
@@ -6492,13 +6492,13 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_DIEGO] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_DiegoNormal,
             .pal = sFieldMugshotPal_DiegoNormal,
         },
 
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_DiegoHappy,
             .pal = sFieldMugshotPal_DiegoHappy,
@@ -6507,13 +6507,13 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_ASH] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_AshNormal,
             .pal = sFieldMugshotPal_AshNormal,
         },
 
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_AshHappy,
             .pal = sFieldMugshotPal_AshHappy,
@@ -6522,19 +6522,19 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_STEVEN] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_StevenNormal,
             .pal = sFieldMugshotPal_StevenNormal,
         },
 
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_StevenHappy,
             .pal = sFieldMugshotPal_StevenHappy,
         },
 
-        [EMOTE_SPECIAL] =
+        [MUGSHOT_EMOTE_SPECIAL] =
         {
             .gfx = sFieldMugshotGfx_StevenSpecial,
             .pal = sFieldMugshotPal_StevenSpecial,
@@ -6543,19 +6543,19 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_CYNTHIA] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_CynthiaNormal,
             .pal = sFieldMugshotPal_CynthiaNormal,
         },
 
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_CynthiaHappy,
             .pal = sFieldMugshotPal_CynthiaHappy,
         },
 
-        [EMOTE_SPECIAL] =
+        [MUGSHOT_EMOTE_SPECIAL] =
         {
             .gfx = sFieldMugshotGfx_CynthiaSpecial,
             .pal = sFieldMugshotPal_CynthiaSpecial,
@@ -6564,19 +6564,19 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_N] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_NNormal,
             .pal = sFieldMugshotPal_NNormal,
         },
 
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_NHappy,
             .pal = sFieldMugshotPal_NHappy,
         },
 
-        [EMOTE_SPECIAL] =
+        [MUGSHOT_EMOTE_SPECIAL] =
         {
             .gfx = sFieldMugshotGfx_NSpecial,
             .pal = sFieldMugshotPal_NSpecial,
@@ -6585,103 +6585,103 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_SUBSTITUTE_DOLL] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_SubstituteDollNormal,
             .pal = sFieldMugshotPal_SubstituteDollNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_SubstituteDollAngry,
             .pal = sFieldMugshotPal_SubstituteDollAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_SubstituteDollCrying,
             .pal = sFieldMugshotPal_SubstituteDollCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_SubstituteDollDetermined,
             .pal = sFieldMugshotPal_SubstituteDollDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_SubstituteDollDizzy,
             .pal = sFieldMugshotPal_SubstituteDollDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_SubstituteDollHappy,
             .pal = sFieldMugshotPal_SubstituteDollHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_SubstituteDollInspired,
             .pal = sFieldMugshotPal_SubstituteDollInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_SubstituteDollJoyous,
             .pal = sFieldMugshotPal_SubstituteDollJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_SubstituteDollPain,
             .pal = sFieldMugshotPal_SubstituteDollPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_SubstituteDollSad,
             .pal = sFieldMugshotPal_SubstituteDollSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_SubstituteDollShouting,
             .pal = sFieldMugshotPal_SubstituteDollShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_SubstituteDollSigh,
             .pal = sFieldMugshotPal_SubstituteDollSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_SubstituteDollStunned,
             .pal = sFieldMugshotPal_SubstituteDollStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_SubstituteDollSurprised,
             .pal = sFieldMugshotPal_SubstituteDollSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_SubstituteDollTeary,
             .pal = sFieldMugshotPal_SubstituteDollTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_SubstituteDollWorried,
             .pal = sFieldMugshotPal_SubstituteDollWorried,
         },
 
-        [EMOTE_SPECIAL] =
+        [MUGSHOT_EMOTE_SPECIAL] =
         {
             .gfx = sFieldMugshotGfx_SubstituteDollNormal,
             .pal = sFieldMugshotPal_SubstituteDollNormal,
@@ -6690,97 +6690,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_BULBASAUR] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurNormal,
             .pal = sFieldMugshotPal_BulbasaurNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurAngry,
             .pal = sFieldMugshotPal_BulbasaurAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurCrying,
             .pal = sFieldMugshotPal_BulbasaurCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurDetermined,
             .pal = sFieldMugshotPal_BulbasaurDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurDizzy,
             .pal = sFieldMugshotPal_BulbasaurDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurHappy,
             .pal = sFieldMugshotPal_BulbasaurHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurInspired,
             .pal = sFieldMugshotPal_BulbasaurInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurJoyous,
             .pal = sFieldMugshotPal_BulbasaurJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurPain,
             .pal = sFieldMugshotPal_BulbasaurPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurSad,
             .pal = sFieldMugshotPal_BulbasaurSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurShouting,
             .pal = sFieldMugshotPal_BulbasaurShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurSigh,
             .pal = sFieldMugshotPal_BulbasaurSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurStunned,
             .pal = sFieldMugshotPal_BulbasaurStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurSurprised,
             .pal = sFieldMugshotPal_BulbasaurSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurTeary,
             .pal = sFieldMugshotPal_BulbasaurTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurWorried,
             .pal = sFieldMugshotPal_BulbasaurWorried,
@@ -6789,97 +6789,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_BULBASAUR_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurNormalShiny,
             .pal = sFieldMugshotPal_BulbasaurNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurAngryShiny,
             .pal = sFieldMugshotPal_BulbasaurAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurCryingShiny,
             .pal = sFieldMugshotPal_BulbasaurCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurDeterminedShiny,
             .pal = sFieldMugshotPal_BulbasaurDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurDizzyShiny,
             .pal = sFieldMugshotPal_BulbasaurDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurHappyShiny,
             .pal = sFieldMugshotPal_BulbasaurHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurInspiredShiny,
             .pal = sFieldMugshotPal_BulbasaurInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurJoyousShiny,
             .pal = sFieldMugshotPal_BulbasaurJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurPainShiny,
             .pal = sFieldMugshotPal_BulbasaurPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurSadShiny,
             .pal = sFieldMugshotPal_BulbasaurSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurShoutingShiny,
             .pal = sFieldMugshotPal_BulbasaurShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurSighShiny,
             .pal = sFieldMugshotPal_BulbasaurSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurStunnedShiny,
             .pal = sFieldMugshotPal_BulbasaurStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurSurprisedShiny,
             .pal = sFieldMugshotPal_BulbasaurSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurTearyShiny,
             .pal = sFieldMugshotPal_BulbasaurTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_BulbasaurWorriedShiny,
             .pal = sFieldMugshotPal_BulbasaurWorriedShiny,
@@ -6888,97 +6888,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_IVYSAUR] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_IvysaurNormal,
             .pal = sFieldMugshotPal_IvysaurNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_IvysaurAngry,
             .pal = sFieldMugshotPal_IvysaurAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_IvysaurCrying,
             .pal = sFieldMugshotPal_IvysaurCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_IvysaurDetermined,
             .pal = sFieldMugshotPal_IvysaurDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_IvysaurDizzy,
             .pal = sFieldMugshotPal_IvysaurDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_IvysaurHappy,
             .pal = sFieldMugshotPal_IvysaurHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_IvysaurInspired,
             .pal = sFieldMugshotPal_IvysaurInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_IvysaurJoyous,
             .pal = sFieldMugshotPal_IvysaurJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_IvysaurPain,
             .pal = sFieldMugshotPal_IvysaurPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_IvysaurSad,
             .pal = sFieldMugshotPal_IvysaurSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_IvysaurShouting,
             .pal = sFieldMugshotPal_IvysaurShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_IvysaurSigh,
             .pal = sFieldMugshotPal_IvysaurSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_IvysaurStunned,
             .pal = sFieldMugshotPal_IvysaurStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_IvysaurSurprised,
             .pal = sFieldMugshotPal_IvysaurSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_IvysaurTeary,
             .pal = sFieldMugshotPal_IvysaurTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_IvysaurWorried,
             .pal = sFieldMugshotPal_IvysaurWorried,
@@ -6987,97 +6987,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_IVYSAUR_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_IvysaurNormalShiny,
             .pal = sFieldMugshotPal_IvysaurNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_IvysaurAngryShiny,
             .pal = sFieldMugshotPal_IvysaurAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_IvysaurCryingShiny,
             .pal = sFieldMugshotPal_IvysaurCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_IvysaurDeterminedShiny,
             .pal = sFieldMugshotPal_IvysaurDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_IvysaurDizzyShiny,
             .pal = sFieldMugshotPal_IvysaurDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_IvysaurHappyShiny,
             .pal = sFieldMugshotPal_IvysaurHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_IvysaurInspiredShiny,
             .pal = sFieldMugshotPal_IvysaurInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_IvysaurJoyousShiny,
             .pal = sFieldMugshotPal_IvysaurJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_IvysaurPainShiny,
             .pal = sFieldMugshotPal_IvysaurPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_IvysaurSadShiny,
             .pal = sFieldMugshotPal_IvysaurSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_IvysaurShoutingShiny,
             .pal = sFieldMugshotPal_IvysaurShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_IvysaurSighShiny,
             .pal = sFieldMugshotPal_IvysaurSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_IvysaurStunnedShiny,
             .pal = sFieldMugshotPal_IvysaurStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_IvysaurSurprisedShiny,
             .pal = sFieldMugshotPal_IvysaurSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_IvysaurTearyShiny,
             .pal = sFieldMugshotPal_IvysaurTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_IvysaurWorriedShiny,
             .pal = sFieldMugshotPal_IvysaurWorriedShiny,
@@ -7086,97 +7086,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_VENUSAUR] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_VenusaurNormal,
             .pal = sFieldMugshotPal_VenusaurNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_VenusaurAngry,
             .pal = sFieldMugshotPal_VenusaurAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_VenusaurCrying,
             .pal = sFieldMugshotPal_VenusaurCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_VenusaurDetermined,
             .pal = sFieldMugshotPal_VenusaurDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_VenusaurDizzy,
             .pal = sFieldMugshotPal_VenusaurDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_VenusaurHappy,
             .pal = sFieldMugshotPal_VenusaurHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_VenusaurInspired,
             .pal = sFieldMugshotPal_VenusaurInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_VenusaurJoyous,
             .pal = sFieldMugshotPal_VenusaurJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_VenusaurPain,
             .pal = sFieldMugshotPal_VenusaurPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_VenusaurSad,
             .pal = sFieldMugshotPal_VenusaurSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_VenusaurShouting,
             .pal = sFieldMugshotPal_VenusaurShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_VenusaurSigh,
             .pal = sFieldMugshotPal_VenusaurSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_VenusaurStunned,
             .pal = sFieldMugshotPal_VenusaurStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_VenusaurSurprised,
             .pal = sFieldMugshotPal_VenusaurSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_VenusaurTeary,
             .pal = sFieldMugshotPal_VenusaurTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_VenusaurWorried,
             .pal = sFieldMugshotPal_VenusaurWorried,
@@ -7185,97 +7185,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_VENUSAUR_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_VenusaurNormalShiny,
             .pal = sFieldMugshotPal_VenusaurNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_VenusaurAngryShiny,
             .pal = sFieldMugshotPal_VenusaurAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_VenusaurCryingShiny,
             .pal = sFieldMugshotPal_VenusaurCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_VenusaurDeterminedShiny,
             .pal = sFieldMugshotPal_VenusaurDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_VenusaurDizzyShiny,
             .pal = sFieldMugshotPal_VenusaurDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_VenusaurHappyShiny,
             .pal = sFieldMugshotPal_VenusaurHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_VenusaurInspiredShiny,
             .pal = sFieldMugshotPal_VenusaurInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_VenusaurJoyousShiny,
             .pal = sFieldMugshotPal_VenusaurJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_VenusaurPainShiny,
             .pal = sFieldMugshotPal_VenusaurPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_VenusaurSadShiny,
             .pal = sFieldMugshotPal_VenusaurSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_VenusaurShoutingShiny,
             .pal = sFieldMugshotPal_VenusaurShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_VenusaurSighShiny,
             .pal = sFieldMugshotPal_VenusaurSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_VenusaurStunnedShiny,
             .pal = sFieldMugshotPal_VenusaurStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_VenusaurSurprisedShiny,
             .pal = sFieldMugshotPal_VenusaurSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_VenusaurTearyShiny,
             .pal = sFieldMugshotPal_VenusaurTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_VenusaurWorriedShiny,
             .pal = sFieldMugshotPal_VenusaurWorriedShiny,
@@ -7284,97 +7284,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_CHARMANDER] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_CharmanderNormal,
             .pal = sFieldMugshotPal_CharmanderNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_CharmanderAngry,
             .pal = sFieldMugshotPal_CharmanderAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_CharmanderCrying,
             .pal = sFieldMugshotPal_CharmanderCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_CharmanderDetermined,
             .pal = sFieldMugshotPal_CharmanderDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_CharmanderDizzy,
             .pal = sFieldMugshotPal_CharmanderDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_CharmanderHappy,
             .pal = sFieldMugshotPal_CharmanderHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_CharmanderInspired,
             .pal = sFieldMugshotPal_CharmanderInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_CharmanderJoyous,
             .pal = sFieldMugshotPal_CharmanderJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_CharmanderPain,
             .pal = sFieldMugshotPal_CharmanderPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_CharmanderSad,
             .pal = sFieldMugshotPal_CharmanderSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_CharmanderShouting,
             .pal = sFieldMugshotPal_CharmanderShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_CharmanderSigh,
             .pal = sFieldMugshotPal_CharmanderSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_CharmanderStunned,
             .pal = sFieldMugshotPal_CharmanderStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_CharmanderSurprised,
             .pal = sFieldMugshotPal_CharmanderSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_CharmanderTeary,
             .pal = sFieldMugshotPal_CharmanderTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_CharmanderWorried,
             .pal = sFieldMugshotPal_CharmanderWorried,
@@ -7383,97 +7383,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_CHARMANDER_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_CharmanderNormalShiny,
             .pal = sFieldMugshotPal_CharmanderNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_CharmanderAngryShiny,
             .pal = sFieldMugshotPal_CharmanderAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_CharmanderCryingShiny,
             .pal = sFieldMugshotPal_CharmanderCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_CharmanderDeterminedShiny,
             .pal = sFieldMugshotPal_CharmanderDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_CharmanderDizzyShiny,
             .pal = sFieldMugshotPal_CharmanderDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_CharmanderHappyShiny,
             .pal = sFieldMugshotPal_CharmanderHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_CharmanderInspiredShiny,
             .pal = sFieldMugshotPal_CharmanderInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_CharmanderJoyousShiny,
             .pal = sFieldMugshotPal_CharmanderJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_CharmanderPainShiny,
             .pal = sFieldMugshotPal_CharmanderPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_CharmanderSadShiny,
             .pal = sFieldMugshotPal_CharmanderSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_CharmanderShoutingShiny,
             .pal = sFieldMugshotPal_CharmanderShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_CharmanderSighShiny,
             .pal = sFieldMugshotPal_CharmanderSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_CharmanderStunnedShiny,
             .pal = sFieldMugshotPal_CharmanderStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_CharmanderSurprisedShiny,
             .pal = sFieldMugshotPal_CharmanderSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_CharmanderTearyShiny,
             .pal = sFieldMugshotPal_CharmanderTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_CharmanderWorriedShiny,
             .pal = sFieldMugshotPal_CharmanderWorriedShiny,
@@ -7482,97 +7482,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_CHARMELEON] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonNormal,
             .pal = sFieldMugshotPal_CharmeleonNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonAngry,
             .pal = sFieldMugshotPal_CharmeleonAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonCrying,
             .pal = sFieldMugshotPal_CharmeleonCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonDetermined,
             .pal = sFieldMugshotPal_CharmeleonDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonDizzy,
             .pal = sFieldMugshotPal_CharmeleonDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonHappy,
             .pal = sFieldMugshotPal_CharmeleonHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonInspired,
             .pal = sFieldMugshotPal_CharmeleonInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonJoyous,
             .pal = sFieldMugshotPal_CharmeleonJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonPain,
             .pal = sFieldMugshotPal_CharmeleonPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonSad,
             .pal = sFieldMugshotPal_CharmeleonSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonShouting,
             .pal = sFieldMugshotPal_CharmeleonShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonSigh,
             .pal = sFieldMugshotPal_CharmeleonSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonStunned,
             .pal = sFieldMugshotPal_CharmeleonStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonSurprised,
             .pal = sFieldMugshotPal_CharmeleonSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonTeary,
             .pal = sFieldMugshotPal_CharmeleonTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonWorried,
             .pal = sFieldMugshotPal_CharmeleonWorried,
@@ -7581,97 +7581,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_CHARMELEON_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonNormalShiny,
             .pal = sFieldMugshotPal_CharmeleonNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonAngryShiny,
             .pal = sFieldMugshotPal_CharmeleonAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonCryingShiny,
             .pal = sFieldMugshotPal_CharmeleonCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonDeterminedShiny,
             .pal = sFieldMugshotPal_CharmeleonDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonDizzyShiny,
             .pal = sFieldMugshotPal_CharmeleonDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonHappyShiny,
             .pal = sFieldMugshotPal_CharmeleonHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonInspiredShiny,
             .pal = sFieldMugshotPal_CharmeleonInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonJoyousShiny,
             .pal = sFieldMugshotPal_CharmeleonJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonPainShiny,
             .pal = sFieldMugshotPal_CharmeleonPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonSadShiny,
             .pal = sFieldMugshotPal_CharmeleonSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonShoutingShiny,
             .pal = sFieldMugshotPal_CharmeleonShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonSighShiny,
             .pal = sFieldMugshotPal_CharmeleonSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonStunnedShiny,
             .pal = sFieldMugshotPal_CharmeleonStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonSurprisedShiny,
             .pal = sFieldMugshotPal_CharmeleonSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonTearyShiny,
             .pal = sFieldMugshotPal_CharmeleonTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_CharmeleonWorriedShiny,
             .pal = sFieldMugshotPal_CharmeleonWorriedShiny,
@@ -7680,97 +7680,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_CHARIZARD] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_CharizardNormal,
             .pal = sFieldMugshotPal_CharizardNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_CharizardAngry,
             .pal = sFieldMugshotPal_CharizardAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_CharizardCrying,
             .pal = sFieldMugshotPal_CharizardCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_CharizardDetermined,
             .pal = sFieldMugshotPal_CharizardDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_CharizardDizzy,
             .pal = sFieldMugshotPal_CharizardDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_CharizardHappy,
             .pal = sFieldMugshotPal_CharizardHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_CharizardInspired,
             .pal = sFieldMugshotPal_CharizardInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_CharizardJoyous,
             .pal = sFieldMugshotPal_CharizardJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_CharizardPain,
             .pal = sFieldMugshotPal_CharizardPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_CharizardSad,
             .pal = sFieldMugshotPal_CharizardSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_CharizardShouting,
             .pal = sFieldMugshotPal_CharizardShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_CharizardSigh,
             .pal = sFieldMugshotPal_CharizardSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_CharizardStunned,
             .pal = sFieldMugshotPal_CharizardStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_CharizardSurprised,
             .pal = sFieldMugshotPal_CharizardSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_CharizardTeary,
             .pal = sFieldMugshotPal_CharizardTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_CharizardWorried,
             .pal = sFieldMugshotPal_CharizardWorried,
@@ -7779,97 +7779,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_CHARIZARD_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_CharizardNormalShiny,
             .pal = sFieldMugshotPal_CharizardNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_CharizardAngryShiny,
             .pal = sFieldMugshotPal_CharizardAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_CharizardCryingShiny,
             .pal = sFieldMugshotPal_CharizardCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_CharizardDeterminedShiny,
             .pal = sFieldMugshotPal_CharizardDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_CharizardDizzyShiny,
             .pal = sFieldMugshotPal_CharizardDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_CharizardHappyShiny,
             .pal = sFieldMugshotPal_CharizardHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_CharizardInspiredShiny,
             .pal = sFieldMugshotPal_CharizardInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_CharizardJoyousShiny,
             .pal = sFieldMugshotPal_CharizardJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_CharizardPainShiny,
             .pal = sFieldMugshotPal_CharizardPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_CharizardSadShiny,
             .pal = sFieldMugshotPal_CharizardSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_CharizardShoutingShiny,
             .pal = sFieldMugshotPal_CharizardShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_CharizardSighShiny,
             .pal = sFieldMugshotPal_CharizardSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_CharizardStunnedShiny,
             .pal = sFieldMugshotPal_CharizardStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_CharizardSurprisedShiny,
             .pal = sFieldMugshotPal_CharizardSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_CharizardTearyShiny,
             .pal = sFieldMugshotPal_CharizardTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_CharizardWorriedShiny,
             .pal = sFieldMugshotPal_CharizardWorriedShiny,
@@ -7878,97 +7878,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_SQUIRTLE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_SquirtleNormal,
             .pal = sFieldMugshotPal_SquirtleNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_SquirtleAngry,
             .pal = sFieldMugshotPal_SquirtleAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_SquirtleCrying,
             .pal = sFieldMugshotPal_SquirtleCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_SquirtleDetermined,
             .pal = sFieldMugshotPal_SquirtleDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_SquirtleDizzy,
             .pal = sFieldMugshotPal_SquirtleDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_SquirtleHappy,
             .pal = sFieldMugshotPal_SquirtleHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_SquirtleInspired,
             .pal = sFieldMugshotPal_SquirtleInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_SquirtleJoyous,
             .pal = sFieldMugshotPal_SquirtleJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_SquirtlePain,
             .pal = sFieldMugshotPal_SquirtlePain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_SquirtleSad,
             .pal = sFieldMugshotPal_SquirtleSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_SquirtleShouting,
             .pal = sFieldMugshotPal_SquirtleShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_SquirtleSigh,
             .pal = sFieldMugshotPal_SquirtleSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_SquirtleStunned,
             .pal = sFieldMugshotPal_SquirtleStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_SquirtleSurprised,
             .pal = sFieldMugshotPal_SquirtleSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_SquirtleTeary,
             .pal = sFieldMugshotPal_SquirtleTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_SquirtleWorried,
             .pal = sFieldMugshotPal_SquirtleWorried,
@@ -7977,97 +7977,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_SQUIRTLE_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_SquirtleNormalShiny,
             .pal = sFieldMugshotPal_SquirtleNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_SquirtleAngryShiny,
             .pal = sFieldMugshotPal_SquirtleAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_SquirtleCryingShiny,
             .pal = sFieldMugshotPal_SquirtleCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_SquirtleDeterminedShiny,
             .pal = sFieldMugshotPal_SquirtleDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_SquirtleDizzyShiny,
             .pal = sFieldMugshotPal_SquirtleDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_SquirtleHappyShiny,
             .pal = sFieldMugshotPal_SquirtleHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_SquirtleInspiredShiny,
             .pal = sFieldMugshotPal_SquirtleInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_SquirtleJoyousShiny,
             .pal = sFieldMugshotPal_SquirtleJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_SquirtlePainShiny,
             .pal = sFieldMugshotPal_SquirtlePainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_SquirtleSadShiny,
             .pal = sFieldMugshotPal_SquirtleSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_SquirtleShoutingShiny,
             .pal = sFieldMugshotPal_SquirtleShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_SquirtleSighShiny,
             .pal = sFieldMugshotPal_SquirtleSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_SquirtleStunnedShiny,
             .pal = sFieldMugshotPal_SquirtleStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_SquirtleSurprisedShiny,
             .pal = sFieldMugshotPal_SquirtleSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_SquirtleTearyShiny,
             .pal = sFieldMugshotPal_SquirtleTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_SquirtleWorriedShiny,
             .pal = sFieldMugshotPal_SquirtleWorriedShiny,
@@ -8076,97 +8076,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_WARTORTLE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_WartortleNormal,
             .pal = sFieldMugshotPal_WartortleNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_WartortleAngry,
             .pal = sFieldMugshotPal_WartortleAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_WartortleCrying,
             .pal = sFieldMugshotPal_WartortleCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_WartortleDetermined,
             .pal = sFieldMugshotPal_WartortleDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_WartortleDizzy,
             .pal = sFieldMugshotPal_WartortleDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_WartortleHappy,
             .pal = sFieldMugshotPal_WartortleHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_WartortleInspired,
             .pal = sFieldMugshotPal_WartortleInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_WartortleJoyous,
             .pal = sFieldMugshotPal_WartortleJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_WartortlePain,
             .pal = sFieldMugshotPal_WartortlePain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_WartortleSad,
             .pal = sFieldMugshotPal_WartortleSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_WartortleShouting,
             .pal = sFieldMugshotPal_WartortleShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_WartortleSigh,
             .pal = sFieldMugshotPal_WartortleSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_WartortleStunned,
             .pal = sFieldMugshotPal_WartortleStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_WartortleSurprised,
             .pal = sFieldMugshotPal_WartortleSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_WartortleTeary,
             .pal = sFieldMugshotPal_WartortleTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_WartortleWorried,
             .pal = sFieldMugshotPal_WartortleWorried,
@@ -8175,97 +8175,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_WARTORTLE_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_WartortleNormalShiny,
             .pal = sFieldMugshotPal_WartortleNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_WartortleAngryShiny,
             .pal = sFieldMugshotPal_WartortleAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_WartortleCryingShiny,
             .pal = sFieldMugshotPal_WartortleCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_WartortleDeterminedShiny,
             .pal = sFieldMugshotPal_WartortleDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_WartortleDizzyShiny,
             .pal = sFieldMugshotPal_WartortleDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_WartortleHappyShiny,
             .pal = sFieldMugshotPal_WartortleHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_WartortleInspiredShiny,
             .pal = sFieldMugshotPal_WartortleInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_WartortleJoyousShiny,
             .pal = sFieldMugshotPal_WartortleJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_WartortlePainShiny,
             .pal = sFieldMugshotPal_WartortlePainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_WartortleSadShiny,
             .pal = sFieldMugshotPal_WartortleSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_WartortleShoutingShiny,
             .pal = sFieldMugshotPal_WartortleShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_WartortleSighShiny,
             .pal = sFieldMugshotPal_WartortleSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_WartortleStunnedShiny,
             .pal = sFieldMugshotPal_WartortleStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_WartortleSurprisedShiny,
             .pal = sFieldMugshotPal_WartortleSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_WartortleTearyShiny,
             .pal = sFieldMugshotPal_WartortleTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_WartortleWorriedShiny,
             .pal = sFieldMugshotPal_WartortleWorriedShiny,
@@ -8274,97 +8274,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_BLASTOISE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseNormal,
             .pal = sFieldMugshotPal_BlastoiseNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseAngry,
             .pal = sFieldMugshotPal_BlastoiseAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseCrying,
             .pal = sFieldMugshotPal_BlastoiseCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseDetermined,
             .pal = sFieldMugshotPal_BlastoiseDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseDizzy,
             .pal = sFieldMugshotPal_BlastoiseDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseHappy,
             .pal = sFieldMugshotPal_BlastoiseHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseInspired,
             .pal = sFieldMugshotPal_BlastoiseInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseJoyous,
             .pal = sFieldMugshotPal_BlastoiseJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_BlastoisePain,
             .pal = sFieldMugshotPal_BlastoisePain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseSad,
             .pal = sFieldMugshotPal_BlastoiseSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseShouting,
             .pal = sFieldMugshotPal_BlastoiseShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseSigh,
             .pal = sFieldMugshotPal_BlastoiseSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseStunned,
             .pal = sFieldMugshotPal_BlastoiseStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseSurprised,
             .pal = sFieldMugshotPal_BlastoiseSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseTeary,
             .pal = sFieldMugshotPal_BlastoiseTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseWorried,
             .pal = sFieldMugshotPal_BlastoiseWorried,
@@ -8373,97 +8373,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_BLASTOISE_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseNormalShiny,
             .pal = sFieldMugshotPal_BlastoiseNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseAngryShiny,
             .pal = sFieldMugshotPal_BlastoiseAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseCryingShiny,
             .pal = sFieldMugshotPal_BlastoiseCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseDeterminedShiny,
             .pal = sFieldMugshotPal_BlastoiseDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseDizzyShiny,
             .pal = sFieldMugshotPal_BlastoiseDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseHappyShiny,
             .pal = sFieldMugshotPal_BlastoiseHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseInspiredShiny,
             .pal = sFieldMugshotPal_BlastoiseInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseJoyousShiny,
             .pal = sFieldMugshotPal_BlastoiseJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_BlastoisePainShiny,
             .pal = sFieldMugshotPal_BlastoisePainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseSadShiny,
             .pal = sFieldMugshotPal_BlastoiseSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseShoutingShiny,
             .pal = sFieldMugshotPal_BlastoiseShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseSighShiny,
             .pal = sFieldMugshotPal_BlastoiseSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseStunnedShiny,
             .pal = sFieldMugshotPal_BlastoiseStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseSurprisedShiny,
             .pal = sFieldMugshotPal_BlastoiseSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseTearyShiny,
             .pal = sFieldMugshotPal_BlastoiseTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_BlastoiseWorriedShiny,
             .pal = sFieldMugshotPal_BlastoiseWorriedShiny,
@@ -8472,97 +8472,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_PICHU] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_PichuNormal,
             .pal = sFieldMugshotPal_PichuNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_PichuAngry,
             .pal = sFieldMugshotPal_PichuAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_PichuCrying,
             .pal = sFieldMugshotPal_PichuCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_PichuDetermined,
             .pal = sFieldMugshotPal_PichuDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_PichuDizzy,
             .pal = sFieldMugshotPal_PichuDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_PichuHappy,
             .pal = sFieldMugshotPal_PichuHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_PichuInspired,
             .pal = sFieldMugshotPal_PichuInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_PichuJoyous,
             .pal = sFieldMugshotPal_PichuJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_PichuPain,
             .pal = sFieldMugshotPal_PichuPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_PichuSad,
             .pal = sFieldMugshotPal_PichuSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_PichuShouting,
             .pal = sFieldMugshotPal_PichuShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_PichuSigh,
             .pal = sFieldMugshotPal_PichuSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_PichuStunned,
             .pal = sFieldMugshotPal_PichuStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_PichuSurprised,
             .pal = sFieldMugshotPal_PichuSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_PichuTeary,
             .pal = sFieldMugshotPal_PichuTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_PichuWorried,
             .pal = sFieldMugshotPal_PichuWorried,
@@ -8571,97 +8571,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_PICHU_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_PichuNormalShiny,
             .pal = sFieldMugshotPal_PichuNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_PichuAngryShiny,
             .pal = sFieldMugshotPal_PichuAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_PichuCryingShiny,
             .pal = sFieldMugshotPal_PichuCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_PichuDeterminedShiny,
             .pal = sFieldMugshotPal_PichuDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_PichuDizzyShiny,
             .pal = sFieldMugshotPal_PichuDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_PichuHappyShiny,
             .pal = sFieldMugshotPal_PichuHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_PichuInspiredShiny,
             .pal = sFieldMugshotPal_PichuInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_PichuJoyousShiny,
             .pal = sFieldMugshotPal_PichuJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_PichuPainShiny,
             .pal = sFieldMugshotPal_PichuPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_PichuSadShiny,
             .pal = sFieldMugshotPal_PichuSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_PichuShoutingShiny,
             .pal = sFieldMugshotPal_PichuShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_PichuSighShiny,
             .pal = sFieldMugshotPal_PichuSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_PichuStunnedShiny,
             .pal = sFieldMugshotPal_PichuStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_PichuSurprisedShiny,
             .pal = sFieldMugshotPal_PichuSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_PichuTearyShiny,
             .pal = sFieldMugshotPal_PichuTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_PichuWorriedShiny,
             .pal = sFieldMugshotPal_PichuWorriedShiny,
@@ -8670,97 +8670,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_PIKACHU] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_PikachuNormal,
             .pal = sFieldMugshotPal_PikachuNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_PikachuAngry,
             .pal = sFieldMugshotPal_PikachuAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_PikachuCrying,
             .pal = sFieldMugshotPal_PikachuCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_PikachuDetermined,
             .pal = sFieldMugshotPal_PikachuDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_PikachuDizzy,
             .pal = sFieldMugshotPal_PikachuDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_PikachuHappy,
             .pal = sFieldMugshotPal_PikachuHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_PikachuInspired,
             .pal = sFieldMugshotPal_PikachuInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_PikachuJoyous,
             .pal = sFieldMugshotPal_PikachuJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_PikachuPain,
             .pal = sFieldMugshotPal_PikachuPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_PikachuSad,
             .pal = sFieldMugshotPal_PikachuSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_PikachuShouting,
             .pal = sFieldMugshotPal_PikachuShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_PikachuSigh,
             .pal = sFieldMugshotPal_PikachuSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_PikachuStunned,
             .pal = sFieldMugshotPal_PikachuStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_PikachuSurprised,
             .pal = sFieldMugshotPal_PikachuSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_PikachuTeary,
             .pal = sFieldMugshotPal_PikachuTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_PikachuWorried,
             .pal = sFieldMugshotPal_PikachuWorried,
@@ -8769,97 +8769,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_PIKACHU_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_PikachuNormalShiny,
             .pal = sFieldMugshotPal_PikachuNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_PikachuAngryShiny,
             .pal = sFieldMugshotPal_PikachuAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_PikachuCryingShiny,
             .pal = sFieldMugshotPal_PikachuCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_PikachuDeterminedShiny,
             .pal = sFieldMugshotPal_PikachuDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_PikachuDizzyShiny,
             .pal = sFieldMugshotPal_PikachuDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_PikachuHappyShiny,
             .pal = sFieldMugshotPal_PikachuHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_PikachuInspiredShiny,
             .pal = sFieldMugshotPal_PikachuInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_PikachuJoyousShiny,
             .pal = sFieldMugshotPal_PikachuJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_PikachuPainShiny,
             .pal = sFieldMugshotPal_PikachuPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_PikachuSadShiny,
             .pal = sFieldMugshotPal_PikachuSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_PikachuShoutingShiny,
             .pal = sFieldMugshotPal_PikachuShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_PikachuSighShiny,
             .pal = sFieldMugshotPal_PikachuSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_PikachuStunnedShiny,
             .pal = sFieldMugshotPal_PikachuStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_PikachuSurprisedShiny,
             .pal = sFieldMugshotPal_PikachuSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_PikachuTearyShiny,
             .pal = sFieldMugshotPal_PikachuTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_PikachuWorriedShiny,
             .pal = sFieldMugshotPal_PikachuWorriedShiny,
@@ -8868,97 +8868,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_RAICHU] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_RaichuNormal,
             .pal = sFieldMugshotPal_RaichuNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_RaichuAngry,
             .pal = sFieldMugshotPal_RaichuAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_RaichuCrying,
             .pal = sFieldMugshotPal_RaichuCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_RaichuDetermined,
             .pal = sFieldMugshotPal_RaichuDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_RaichuDizzy,
             .pal = sFieldMugshotPal_RaichuDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_RaichuHappy,
             .pal = sFieldMugshotPal_RaichuHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_RaichuInspired,
             .pal = sFieldMugshotPal_RaichuInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_RaichuJoyous,
             .pal = sFieldMugshotPal_RaichuJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_RaichuPain,
             .pal = sFieldMugshotPal_RaichuPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_RaichuSad,
             .pal = sFieldMugshotPal_RaichuSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_RaichuShouting,
             .pal = sFieldMugshotPal_RaichuShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_RaichuSigh,
             .pal = sFieldMugshotPal_RaichuSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_RaichuStunned,
             .pal = sFieldMugshotPal_RaichuStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_RaichuSurprised,
             .pal = sFieldMugshotPal_RaichuSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_RaichuTeary,
             .pal = sFieldMugshotPal_RaichuTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_RaichuWorried,
             .pal = sFieldMugshotPal_RaichuWorried,
@@ -8967,97 +8967,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_RAICHU_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_RaichuNormalShiny,
             .pal = sFieldMugshotPal_RaichuNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_RaichuAngryShiny,
             .pal = sFieldMugshotPal_RaichuAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_RaichuCryingShiny,
             .pal = sFieldMugshotPal_RaichuCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_RaichuDeterminedShiny,
             .pal = sFieldMugshotPal_RaichuDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_RaichuDizzyShiny,
             .pal = sFieldMugshotPal_RaichuDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_RaichuHappyShiny,
             .pal = sFieldMugshotPal_RaichuHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_RaichuInspiredShiny,
             .pal = sFieldMugshotPal_RaichuInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_RaichuJoyousShiny,
             .pal = sFieldMugshotPal_RaichuJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_RaichuPainShiny,
             .pal = sFieldMugshotPal_RaichuPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_RaichuSadShiny,
             .pal = sFieldMugshotPal_RaichuSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_RaichuShoutingShiny,
             .pal = sFieldMugshotPal_RaichuShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_RaichuSighShiny,
             .pal = sFieldMugshotPal_RaichuSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_RaichuStunnedShiny,
             .pal = sFieldMugshotPal_RaichuStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_RaichuSurprisedShiny,
             .pal = sFieldMugshotPal_RaichuSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_RaichuTearyShiny,
             .pal = sFieldMugshotPal_RaichuTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_RaichuWorriedShiny,
             .pal = sFieldMugshotPal_RaichuWorriedShiny,
@@ -9066,97 +9066,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_EEVEE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_EeveeNormal,
             .pal = sFieldMugshotPal_EeveeNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_EeveeAngry,
             .pal = sFieldMugshotPal_EeveeAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_EeveeCrying,
             .pal = sFieldMugshotPal_EeveeCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_EeveeDetermined,
             .pal = sFieldMugshotPal_EeveeDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_EeveeDizzy,
             .pal = sFieldMugshotPal_EeveeDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_EeveeHappy,
             .pal = sFieldMugshotPal_EeveeHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_EeveeInspired,
             .pal = sFieldMugshotPal_EeveeInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_EeveeJoyous,
             .pal = sFieldMugshotPal_EeveeJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_EeveePain,
             .pal = sFieldMugshotPal_EeveePain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_EeveeSad,
             .pal = sFieldMugshotPal_EeveeSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_EeveeShouting,
             .pal = sFieldMugshotPal_EeveeShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_EeveeSigh,
             .pal = sFieldMugshotPal_EeveeSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_EeveeStunned,
             .pal = sFieldMugshotPal_EeveeStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_EeveeSurprised,
             .pal = sFieldMugshotPal_EeveeSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_EeveeTeary,
             .pal = sFieldMugshotPal_EeveeTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_EeveeWorried,
             .pal = sFieldMugshotPal_EeveeWorried,
@@ -9165,97 +9165,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_EEVEE_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_EeveeNormalShiny,
             .pal = sFieldMugshotPal_EeveeNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_EeveeAngryShiny,
             .pal = sFieldMugshotPal_EeveeAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_EeveeCryingShiny,
             .pal = sFieldMugshotPal_EeveeCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_EeveeDeterminedShiny,
             .pal = sFieldMugshotPal_EeveeDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_EeveeDizzyShiny,
             .pal = sFieldMugshotPal_EeveeDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_EeveeHappyShiny,
             .pal = sFieldMugshotPal_EeveeHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_EeveeInspiredShiny,
             .pal = sFieldMugshotPal_EeveeInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_EeveeJoyousShiny,
             .pal = sFieldMugshotPal_EeveeJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_EeveePainShiny,
             .pal = sFieldMugshotPal_EeveePainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_EeveeSadShiny,
             .pal = sFieldMugshotPal_EeveeSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_EeveeShoutingShiny,
             .pal = sFieldMugshotPal_EeveeShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_EeveeSighShiny,
             .pal = sFieldMugshotPal_EeveeSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_EeveeStunnedShiny,
             .pal = sFieldMugshotPal_EeveeStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_EeveeSurprisedShiny,
             .pal = sFieldMugshotPal_EeveeSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_EeveeTearyShiny,
             .pal = sFieldMugshotPal_EeveeTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_EeveeWorriedShiny,
             .pal = sFieldMugshotPal_EeveeWorriedShiny,
@@ -9264,97 +9264,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_LAPRAS] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_LaprasNormal,
             .pal = sFieldMugshotPal_LaprasNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_LaprasAngry,
             .pal = sFieldMugshotPal_LaprasAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_LaprasCrying,
             .pal = sFieldMugshotPal_LaprasCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_LaprasDetermined,
             .pal = sFieldMugshotPal_LaprasDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_LaprasDizzy,
             .pal = sFieldMugshotPal_LaprasDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_LaprasHappy,
             .pal = sFieldMugshotPal_LaprasHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_LaprasInspired,
             .pal = sFieldMugshotPal_LaprasInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_LaprasJoyous,
             .pal = sFieldMugshotPal_LaprasJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_LaprasPain,
             .pal = sFieldMugshotPal_LaprasPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_LaprasSad,
             .pal = sFieldMugshotPal_LaprasSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_LaprasShouting,
             .pal = sFieldMugshotPal_LaprasShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_LaprasSigh,
             .pal = sFieldMugshotPal_LaprasSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_LaprasStunned,
             .pal = sFieldMugshotPal_LaprasStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_LaprasSurprised,
             .pal = sFieldMugshotPal_LaprasSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_LaprasTeary,
             .pal = sFieldMugshotPal_LaprasTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_LaprasWorried,
             .pal = sFieldMugshotPal_LaprasWorried,
@@ -9363,97 +9363,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_LAPRAS_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_LaprasNormalShiny,
             .pal = sFieldMugshotPal_LaprasNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_LaprasAngryShiny,
             .pal = sFieldMugshotPal_LaprasAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_LaprasCryingShiny,
             .pal = sFieldMugshotPal_LaprasCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_LaprasDeterminedShiny,
             .pal = sFieldMugshotPal_LaprasDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_LaprasDizzyShiny,
             .pal = sFieldMugshotPal_LaprasDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_LaprasHappyShiny,
             .pal = sFieldMugshotPal_LaprasHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_LaprasInspiredShiny,
             .pal = sFieldMugshotPal_LaprasInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_LaprasJoyousShiny,
             .pal = sFieldMugshotPal_LaprasJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_LaprasPainShiny,
             .pal = sFieldMugshotPal_LaprasPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_LaprasSadShiny,
             .pal = sFieldMugshotPal_LaprasSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_LaprasShoutingShiny,
             .pal = sFieldMugshotPal_LaprasShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_LaprasSighShiny,
             .pal = sFieldMugshotPal_LaprasSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_LaprasStunnedShiny,
             .pal = sFieldMugshotPal_LaprasStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_LaprasSurprisedShiny,
             .pal = sFieldMugshotPal_LaprasSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_LaprasTearyShiny,
             .pal = sFieldMugshotPal_LaprasTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_LaprasWorriedShiny,
             .pal = sFieldMugshotPal_LaprasWorriedShiny,
@@ -9462,97 +9462,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_RELICANTH] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_RelicanthNormal,
             .pal = sFieldMugshotPal_RelicanthNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_RelicanthAngry,
             .pal = sFieldMugshotPal_RelicanthAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_RelicanthCrying,
             .pal = sFieldMugshotPal_RelicanthCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_RelicanthDetermined,
             .pal = sFieldMugshotPal_RelicanthDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_RelicanthDizzy,
             .pal = sFieldMugshotPal_RelicanthDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_RelicanthHappy,
             .pal = sFieldMugshotPal_RelicanthHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_RelicanthInspired,
             .pal = sFieldMugshotPal_RelicanthInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_RelicanthJoyous,
             .pal = sFieldMugshotPal_RelicanthJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_RelicanthPain,
             .pal = sFieldMugshotPal_RelicanthPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_RelicanthSad,
             .pal = sFieldMugshotPal_RelicanthSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_RelicanthShouting,
             .pal = sFieldMugshotPal_RelicanthShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_RelicanthSigh,
             .pal = sFieldMugshotPal_RelicanthSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_RelicanthStunned,
             .pal = sFieldMugshotPal_RelicanthStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_RelicanthSurprised,
             .pal = sFieldMugshotPal_RelicanthSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_RelicanthTeary,
             .pal = sFieldMugshotPal_RelicanthTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_RelicanthWorried,
             .pal = sFieldMugshotPal_RelicanthWorried,
@@ -9561,97 +9561,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_RELICANTH_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_RelicanthNormalShiny,
             .pal = sFieldMugshotPal_RelicanthNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_RelicanthAngryShiny,
             .pal = sFieldMugshotPal_RelicanthAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_RelicanthCryingShiny,
             .pal = sFieldMugshotPal_RelicanthCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_RelicanthDeterminedShiny,
             .pal = sFieldMugshotPal_RelicanthDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_RelicanthDizzyShiny,
             .pal = sFieldMugshotPal_RelicanthDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_RelicanthHappyShiny,
             .pal = sFieldMugshotPal_RelicanthHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_RelicanthInspiredShiny,
             .pal = sFieldMugshotPal_RelicanthInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_RelicanthJoyousShiny,
             .pal = sFieldMugshotPal_RelicanthJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_RelicanthPainShiny,
             .pal = sFieldMugshotPal_RelicanthPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_RelicanthSadShiny,
             .pal = sFieldMugshotPal_RelicanthSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_RelicanthShoutingShiny,
             .pal = sFieldMugshotPal_RelicanthShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_RelicanthSighShiny,
             .pal = sFieldMugshotPal_RelicanthSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_RelicanthStunnedShiny,
             .pal = sFieldMugshotPal_RelicanthStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_RelicanthSurprisedShiny,
             .pal = sFieldMugshotPal_RelicanthSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_RelicanthTearyShiny,
             .pal = sFieldMugshotPal_RelicanthTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_RelicanthWorriedShiny,
             .pal = sFieldMugshotPal_RelicanthWorriedShiny,
@@ -9660,97 +9660,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_INFERNAPE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_InfernapeNormal,
             .pal = sFieldMugshotPal_InfernapeNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_InfernapeAngry,
             .pal = sFieldMugshotPal_InfernapeAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_InfernapeCrying,
             .pal = sFieldMugshotPal_InfernapeCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_InfernapeDetermined,
             .pal = sFieldMugshotPal_InfernapeDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_InfernapeDizzy,
             .pal = sFieldMugshotPal_InfernapeDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_InfernapeHappy,
             .pal = sFieldMugshotPal_InfernapeHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_InfernapeInspired,
             .pal = sFieldMugshotPal_InfernapeInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_InfernapeJoyous,
             .pal = sFieldMugshotPal_InfernapeJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_InfernapePain,
             .pal = sFieldMugshotPal_InfernapePain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_InfernapeSad,
             .pal = sFieldMugshotPal_InfernapeSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_InfernapeShouting,
             .pal = sFieldMugshotPal_InfernapeShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_InfernapeSigh,
             .pal = sFieldMugshotPal_InfernapeSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_InfernapeStunned,
             .pal = sFieldMugshotPal_InfernapeStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_InfernapeSurprised,
             .pal = sFieldMugshotPal_InfernapeSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_InfernapeTeary,
             .pal = sFieldMugshotPal_InfernapeTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_InfernapeWorried,
             .pal = sFieldMugshotPal_InfernapeWorried,
@@ -9759,97 +9759,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_INFERNAPE_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_InfernapeNormalShiny,
             .pal = sFieldMugshotPal_InfernapeNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_InfernapeAngryShiny,
             .pal = sFieldMugshotPal_InfernapeAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_InfernapeCryingShiny,
             .pal = sFieldMugshotPal_InfernapeCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_InfernapeDeterminedShiny,
             .pal = sFieldMugshotPal_InfernapeDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_InfernapeDizzyShiny,
             .pal = sFieldMugshotPal_InfernapeDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_InfernapeHappyShiny,
             .pal = sFieldMugshotPal_InfernapeHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_InfernapeInspiredShiny,
             .pal = sFieldMugshotPal_InfernapeInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_InfernapeJoyousShiny,
             .pal = sFieldMugshotPal_InfernapeJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_InfernapePainShiny,
             .pal = sFieldMugshotPal_InfernapePainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_InfernapeSadShiny,
             .pal = sFieldMugshotPal_InfernapeSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_InfernapeShoutingShiny,
             .pal = sFieldMugshotPal_InfernapeShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_InfernapeSighShiny,
             .pal = sFieldMugshotPal_InfernapeSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_InfernapeStunnedShiny,
             .pal = sFieldMugshotPal_InfernapeStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_InfernapeSurprisedShiny,
             .pal = sFieldMugshotPal_InfernapeSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_InfernapeTearyShiny,
             .pal = sFieldMugshotPal_InfernapeTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_InfernapeWorriedShiny,
             .pal = sFieldMugshotPal_InfernapeWorriedShiny,
@@ -9858,97 +9858,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_ZOROARK] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkNormal,
             .pal = sFieldMugshotPal_ZoroarkNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkAngry,
             .pal = sFieldMugshotPal_ZoroarkAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkCrying,
             .pal = sFieldMugshotPal_ZoroarkCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkDetermined,
             .pal = sFieldMugshotPal_ZoroarkDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkDizzy,
             .pal = sFieldMugshotPal_ZoroarkDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkHappy,
             .pal = sFieldMugshotPal_ZoroarkHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkInspired,
             .pal = sFieldMugshotPal_ZoroarkInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkJoyous,
             .pal = sFieldMugshotPal_ZoroarkJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkPain,
             .pal = sFieldMugshotPal_ZoroarkPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkSad,
             .pal = sFieldMugshotPal_ZoroarkSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkShouting,
             .pal = sFieldMugshotPal_ZoroarkShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkSigh,
             .pal = sFieldMugshotPal_ZoroarkSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkStunned,
             .pal = sFieldMugshotPal_ZoroarkStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkSurprised,
             .pal = sFieldMugshotPal_ZoroarkSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkTeary,
             .pal = sFieldMugshotPal_ZoroarkTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkWorried,
             .pal = sFieldMugshotPal_ZoroarkWorried,
@@ -9957,97 +9957,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_ZOROARK_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkNormalShiny,
             .pal = sFieldMugshotPal_ZoroarkNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkAngryShiny,
             .pal = sFieldMugshotPal_ZoroarkAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkCryingShiny,
             .pal = sFieldMugshotPal_ZoroarkCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkDeterminedShiny,
             .pal = sFieldMugshotPal_ZoroarkDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkDizzyShiny,
             .pal = sFieldMugshotPal_ZoroarkDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkHappyShiny,
             .pal = sFieldMugshotPal_ZoroarkHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkInspiredShiny,
             .pal = sFieldMugshotPal_ZoroarkInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkJoyousShiny,
             .pal = sFieldMugshotPal_ZoroarkJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkPainShiny,
             .pal = sFieldMugshotPal_ZoroarkPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkSadShiny,
             .pal = sFieldMugshotPal_ZoroarkSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkShoutingShiny,
             .pal = sFieldMugshotPal_ZoroarkShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkSighShiny,
             .pal = sFieldMugshotPal_ZoroarkSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkStunnedShiny,
             .pal = sFieldMugshotPal_ZoroarkStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkSurprisedShiny,
             .pal = sFieldMugshotPal_ZoroarkSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkTearyShiny,
             .pal = sFieldMugshotPal_ZoroarkTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_ZoroarkWorriedShiny,
             .pal = sFieldMugshotPal_ZoroarkWorriedShiny,
@@ -10056,97 +10056,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_ESPURR] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_EspurrNormal,
             .pal = sFieldMugshotPal_EspurrNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_EspurrAngry,
             .pal = sFieldMugshotPal_EspurrAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_EspurrCrying,
             .pal = sFieldMugshotPal_EspurrCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_EspurrDetermined,
             .pal = sFieldMugshotPal_EspurrDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_EspurrDizzy,
             .pal = sFieldMugshotPal_EspurrDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_EspurrHappy,
             .pal = sFieldMugshotPal_EspurrHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_EspurrInspired,
             .pal = sFieldMugshotPal_EspurrInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_EspurrJoyous,
             .pal = sFieldMugshotPal_EspurrJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_EspurrPain,
             .pal = sFieldMugshotPal_EspurrPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_EspurrSad,
             .pal = sFieldMugshotPal_EspurrSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_EspurrShouting,
             .pal = sFieldMugshotPal_EspurrShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_EspurrSigh,
             .pal = sFieldMugshotPal_EspurrSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_EspurrStunned,
             .pal = sFieldMugshotPal_EspurrStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_EspurrSurprised,
             .pal = sFieldMugshotPal_EspurrSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_EspurrTeary,
             .pal = sFieldMugshotPal_EspurrTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_EspurrWorried,
             .pal = sFieldMugshotPal_EspurrWorried,
@@ -10155,97 +10155,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_ESPURR_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_EspurrNormalShiny,
             .pal = sFieldMugshotPal_EspurrNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_EspurrAngryShiny,
             .pal = sFieldMugshotPal_EspurrAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_EspurrCryingShiny,
             .pal = sFieldMugshotPal_EspurrCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_EspurrDeterminedShiny,
             .pal = sFieldMugshotPal_EspurrDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_EspurrDizzyShiny,
             .pal = sFieldMugshotPal_EspurrDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_EspurrHappyShiny,
             .pal = sFieldMugshotPal_EspurrHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_EspurrInspiredShiny,
             .pal = sFieldMugshotPal_EspurrInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_EspurrJoyousShiny,
             .pal = sFieldMugshotPal_EspurrJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_EspurrPainShiny,
             .pal = sFieldMugshotPal_EspurrPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_EspurrSadShiny,
             .pal = sFieldMugshotPal_EspurrSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_EspurrShoutingShiny,
             .pal = sFieldMugshotPal_EspurrShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_EspurrSighShiny,
             .pal = sFieldMugshotPal_EspurrSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_EspurrStunnedShiny,
             .pal = sFieldMugshotPal_EspurrStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_EspurrSurprisedShiny,
             .pal = sFieldMugshotPal_EspurrSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_EspurrTearyShiny,
             .pal = sFieldMugshotPal_EspurrTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_EspurrWorriedShiny,
             .pal = sFieldMugshotPal_EspurrWorriedShiny,
@@ -10254,103 +10254,103 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_ROCKRUFF] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_RockruffNormal,
             .pal = sFieldMugshotPal_RockruffNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_RockruffAngry,
             .pal = sFieldMugshotPal_RockruffAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_RockruffCrying,
             .pal = sFieldMugshotPal_RockruffCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_RockruffDetermined,
             .pal = sFieldMugshotPal_RockruffDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_RockruffDizzy,
             .pal = sFieldMugshotPal_RockruffDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_RockruffHappy,
             .pal = sFieldMugshotPal_RockruffHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_RockruffInspired,
             .pal = sFieldMugshotPal_RockruffInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_RockruffJoyous,
             .pal = sFieldMugshotPal_RockruffJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_RockruffPain,
             .pal = sFieldMugshotPal_RockruffPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_RockruffSad,
             .pal = sFieldMugshotPal_RockruffSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_RockruffShouting,
             .pal = sFieldMugshotPal_RockruffShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_RockruffSigh,
             .pal = sFieldMugshotPal_RockruffSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_RockruffStunned,
             .pal = sFieldMugshotPal_RockruffStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_RockruffSurprised,
             .pal = sFieldMugshotPal_RockruffSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_RockruffTeary,
             .pal = sFieldMugshotPal_RockruffTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_RockruffWorried,
             .pal = sFieldMugshotPal_RockruffWorried,
         },
         
-        [EMOTE_SPECIAL] =
+        [MUGSHOT_EMOTE_SPECIAL] =
         {
             .gfx = sFieldMugshotGfx_RockruffSpecial,
             .pal = sFieldMugshotPal_RockruffSpecial,
@@ -10359,103 +10359,103 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_ROCKRUFF_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_RockruffNormalShiny,
             .pal = sFieldMugshotPal_RockruffNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_RockruffAngryShiny,
             .pal = sFieldMugshotPal_RockruffAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_RockruffCryingShiny,
             .pal = sFieldMugshotPal_RockruffCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_RockruffDeterminedShiny,
             .pal = sFieldMugshotPal_RockruffDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_RockruffDizzyShiny,
             .pal = sFieldMugshotPal_RockruffDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_RockruffHappyShiny,
             .pal = sFieldMugshotPal_RockruffHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_RockruffInspiredShiny,
             .pal = sFieldMugshotPal_RockruffInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_RockruffJoyousShiny,
             .pal = sFieldMugshotPal_RockruffJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_RockruffPainShiny,
             .pal = sFieldMugshotPal_RockruffPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_RockruffSadShiny,
             .pal = sFieldMugshotPal_RockruffSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_RockruffShoutingShiny,
             .pal = sFieldMugshotPal_RockruffShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_RockruffSighShiny,
             .pal = sFieldMugshotPal_RockruffSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_RockruffStunnedShiny,
             .pal = sFieldMugshotPal_RockruffStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_RockruffSurprisedShiny,
             .pal = sFieldMugshotPal_RockruffSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_RockruffTearyShiny,
             .pal = sFieldMugshotPal_RockruffTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_RockruffWorriedShiny,
             .pal = sFieldMugshotPal_RockruffWorriedShiny,
         },
         
-        [EMOTE_SPECIAL] =
+        [MUGSHOT_EMOTE_SPECIAL] =
         {
             .gfx = sFieldMugshotGfx_RockruffSpecialShiny,
             .pal = sFieldMugshotPal_RockruffSpecialShiny,
@@ -10464,103 +10464,103 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_GARCHOMP] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_GarchompNormal,
             .pal = sFieldMugshotPal_GarchompNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_GarchompAngry,
             .pal = sFieldMugshotPal_GarchompAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_GarchompCrying,
             .pal = sFieldMugshotPal_GarchompCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_GarchompDetermined,
             .pal = sFieldMugshotPal_GarchompDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_GarchompDizzy,
             .pal = sFieldMugshotPal_GarchompDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_GarchompHappy,
             .pal = sFieldMugshotPal_GarchompHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_GarchompInspired,
             .pal = sFieldMugshotPal_GarchompInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_GarchompJoyous,
             .pal = sFieldMugshotPal_GarchompJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_GarchompPain,
             .pal = sFieldMugshotPal_GarchompPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_GarchompSad,
             .pal = sFieldMugshotPal_GarchompSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_GarchompShouting,
             .pal = sFieldMugshotPal_GarchompShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_GarchompSigh,
             .pal = sFieldMugshotPal_GarchompSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_GarchompStunned,
             .pal = sFieldMugshotPal_GarchompStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_GarchompSurprised,
             .pal = sFieldMugshotPal_GarchompSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_GarchompTeary,
             .pal = sFieldMugshotPal_GarchompTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_GarchompWorried,
             .pal = sFieldMugshotPal_GarchompWorried,
         },
         
-        [EMOTE_SPECIAL] =
+        [MUGSHOT_EMOTE_SPECIAL] =
         {
             .gfx = sFieldMugshotGfx_GarchompSpecial,
             .pal = sFieldMugshotPal_GarchompSpecial,
@@ -10569,103 +10569,103 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_GARCHOMP_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_GarchompNormalShiny,
             .pal = sFieldMugshotPal_GarchompNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_GarchompAngryShiny,
             .pal = sFieldMugshotPal_GarchompAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_GarchompCryingShiny,
             .pal = sFieldMugshotPal_GarchompCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_GarchompDeterminedShiny,
             .pal = sFieldMugshotPal_GarchompDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_GarchompDizzyShiny,
             .pal = sFieldMugshotPal_GarchompDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_GarchompHappyShiny,
             .pal = sFieldMugshotPal_GarchompHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_GarchompInspiredShiny,
             .pal = sFieldMugshotPal_GarchompInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_GarchompJoyousShiny,
             .pal = sFieldMugshotPal_GarchompJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_GarchompPainShiny,
             .pal = sFieldMugshotPal_GarchompPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_GarchompSadShiny,
             .pal = sFieldMugshotPal_GarchompSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_GarchompShoutingShiny,
             .pal = sFieldMugshotPal_GarchompShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_GarchompSighShiny,
             .pal = sFieldMugshotPal_GarchompSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_GarchompStunnedShiny,
             .pal = sFieldMugshotPal_GarchompStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_GarchompSurprisedShiny,
             .pal = sFieldMugshotPal_GarchompSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_GarchompTearyShiny,
             .pal = sFieldMugshotPal_GarchompTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_GarchompWorriedShiny,
             .pal = sFieldMugshotPal_GarchompWorriedShiny,
         },
         
-        [EMOTE_SPECIAL] =
+        [MUGSHOT_EMOTE_SPECIAL] =
         {
             .gfx = sFieldMugshotGfx_GarchompSpecialShiny,
             .pal = sFieldMugshotPal_GarchompSpecialShiny,
@@ -10675,97 +10675,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
 [MUGSHOT_AMOONGUSS] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_AmoongusNormal,
             .pal = sFieldMugshotPal_AmoongusNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_AmoongusAngry,
             .pal = sFieldMugshotPal_AmoongusAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_AmoongusCrying,
             .pal = sFieldMugshotPal_AmoongusCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_AmoongusDetermined,
             .pal = sFieldMugshotPal_AmoongusDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_AmoongusDizzy,
             .pal = sFieldMugshotPal_AmoongusDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_AmoongusHappy,
             .pal = sFieldMugshotPal_AmoongusHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_AmoongusInspired,
             .pal = sFieldMugshotPal_AmoongusInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_AmoongusJoyous,
             .pal = sFieldMugshotPal_AmoongusJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_AmoongusPain,
             .pal = sFieldMugshotPal_AmoongusPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_AmoongusSad,
             .pal = sFieldMugshotPal_AmoongusSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_AmoongusShouting,
             .pal = sFieldMugshotPal_AmoongusShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_AmoongusSigh,
             .pal = sFieldMugshotPal_AmoongusSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_AmoongusStunned,
             .pal = sFieldMugshotPal_AmoongusStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_AmoongusSurprised,
             .pal = sFieldMugshotPal_AmoongusSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_AmoongusTeary,
             .pal = sFieldMugshotPal_AmoongusTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_AmoongusWorried,
             .pal = sFieldMugshotPal_AmoongusWorried,
@@ -10774,97 +10774,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_AMOONGUSS_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_AmoongusNormalShiny,
             .pal = sFieldMugshotPal_AmoongusNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_AmoongusAngryShiny,
             .pal = sFieldMugshotPal_AmoongusAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_AmoongusCryingShiny,
             .pal = sFieldMugshotPal_AmoongusCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_AmoongusDeterminedShiny,
             .pal = sFieldMugshotPal_AmoongusDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_AmoongusDizzyShiny,
             .pal = sFieldMugshotPal_AmoongusDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_AmoongusHappyShiny,
             .pal = sFieldMugshotPal_AmoongusHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_AmoongusInspiredShiny,
             .pal = sFieldMugshotPal_AmoongusInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_AmoongusJoyousShiny,
             .pal = sFieldMugshotPal_AmoongusJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_AmoongusPainShiny,
             .pal = sFieldMugshotPal_AmoongusPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_AmoongusSadShiny,
             .pal = sFieldMugshotPal_AmoongusSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_AmoongusShoutingShiny,
             .pal = sFieldMugshotPal_AmoongusShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_AmoongusSighShiny,
             .pal = sFieldMugshotPal_AmoongusSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_AmoongusStunnedShiny,
             .pal = sFieldMugshotPal_AmoongusStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_AmoongusSurprisedShiny,
             .pal = sFieldMugshotPal_AmoongusSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_AmoongusTearyShiny,
             .pal = sFieldMugshotPal_AmoongusTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_AmoongusWorriedShiny,
             .pal = sFieldMugshotPal_AmoongusWorriedShiny,
@@ -10874,97 +10874,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
 [MUGSHOT_METAGROSS] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_MetagrossNormal,
             .pal = sFieldMugshotPal_MetagrossNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_MetagrossAngry,
             .pal = sFieldMugshotPal_MetagrossAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_MetagrossCrying,
             .pal = sFieldMugshotPal_MetagrossCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_MetagrossDetermined,
             .pal = sFieldMugshotPal_MetagrossDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_MetagrossDizzy,
             .pal = sFieldMugshotPal_MetagrossDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_MetagrossHappy,
             .pal = sFieldMugshotPal_MetagrossHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_MetagrossInspired,
             .pal = sFieldMugshotPal_MetagrossInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_MetagrossJoyous,
             .pal = sFieldMugshotPal_MetagrossJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_MetagrossPain,
             .pal = sFieldMugshotPal_MetagrossPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_MetagrossSad,
             .pal = sFieldMugshotPal_MetagrossSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_MetagrossShouting,
             .pal = sFieldMugshotPal_MetagrossShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_MetagrossSigh,
             .pal = sFieldMugshotPal_MetagrossSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_MetagrossStunned,
             .pal = sFieldMugshotPal_MetagrossStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_MetagrossSurprised,
             .pal = sFieldMugshotPal_MetagrossSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_MetagrossTeary,
             .pal = sFieldMugshotPal_MetagrossTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_MetagrossWorried,
             .pal = sFieldMugshotPal_MetagrossWorried,
@@ -10973,97 +10973,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_METAGROSS_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_MetagrossNormalShiny,
             .pal = sFieldMugshotPal_MetagrossNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_MetagrossAngryShiny,
             .pal = sFieldMugshotPal_MetagrossAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_MetagrossCryingShiny,
             .pal = sFieldMugshotPal_MetagrossCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_MetagrossDeterminedShiny,
             .pal = sFieldMugshotPal_MetagrossDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_MetagrossDizzyShiny,
             .pal = sFieldMugshotPal_MetagrossDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_MetagrossHappyShiny,
             .pal = sFieldMugshotPal_MetagrossHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_MetagrossInspiredShiny,
             .pal = sFieldMugshotPal_MetagrossInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_MetagrossJoyousShiny,
             .pal = sFieldMugshotPal_MetagrossJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_MetagrossPainShiny,
             .pal = sFieldMugshotPal_MetagrossPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_MetagrossSadShiny,
             .pal = sFieldMugshotPal_MetagrossSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_MetagrossShoutingShiny,
             .pal = sFieldMugshotPal_MetagrossShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_MetagrossSighShiny,
             .pal = sFieldMugshotPal_MetagrossSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_MetagrossStunnedShiny,
             .pal = sFieldMugshotPal_MetagrossStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_MetagrossSurprisedShiny,
             .pal = sFieldMugshotPal_MetagrossSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_MetagrossTearyShiny,
             .pal = sFieldMugshotPal_MetagrossTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_MetagrossWorriedShiny,
             .pal = sFieldMugshotPal_MetagrossWorriedShiny,
@@ -11072,97 +11072,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
 [MUGSHOT_WHIMSICOTT] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottNormal,
             .pal = sFieldMugshotPal_WhimsicottNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottAngry,
             .pal = sFieldMugshotPal_WhimsicottAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottCrying,
             .pal = sFieldMugshotPal_WhimsicottCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottDetermined,
             .pal = sFieldMugshotPal_WhimsicottDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottDizzy,
             .pal = sFieldMugshotPal_WhimsicottDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottHappy,
             .pal = sFieldMugshotPal_WhimsicottHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottInspired,
             .pal = sFieldMugshotPal_WhimsicottInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottJoyous,
             .pal = sFieldMugshotPal_WhimsicottJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottPain,
             .pal = sFieldMugshotPal_WhimsicottPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottSad,
             .pal = sFieldMugshotPal_WhimsicottSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottShouting,
             .pal = sFieldMugshotPal_WhimsicottShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottSigh,
             .pal = sFieldMugshotPal_WhimsicottSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottStunned,
             .pal = sFieldMugshotPal_WhimsicottStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottSurprised,
             .pal = sFieldMugshotPal_WhimsicottSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottTeary,
             .pal = sFieldMugshotPal_WhimsicottTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottWorried,
             .pal = sFieldMugshotPal_WhimsicottWorried,
@@ -11171,97 +11171,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_WHIMSICOTT_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottNormalShiny,
             .pal = sFieldMugshotPal_WhimsicottNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottAngryShiny,
             .pal = sFieldMugshotPal_WhimsicottAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottCryingShiny,
             .pal = sFieldMugshotPal_WhimsicottCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottDeterminedShiny,
             .pal = sFieldMugshotPal_WhimsicottDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottDizzyShiny,
             .pal = sFieldMugshotPal_WhimsicottDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottHappyShiny,
             .pal = sFieldMugshotPal_WhimsicottHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottInspiredShiny,
             .pal = sFieldMugshotPal_WhimsicottInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottJoyousShiny,
             .pal = sFieldMugshotPal_WhimsicottJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottPainShiny,
             .pal = sFieldMugshotPal_WhimsicottPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottSadShiny,
             .pal = sFieldMugshotPal_WhimsicottSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottShoutingShiny,
             .pal = sFieldMugshotPal_WhimsicottShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottSighShiny,
             .pal = sFieldMugshotPal_WhimsicottSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottStunnedShiny,
             .pal = sFieldMugshotPal_WhimsicottStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottSurprisedShiny,
             .pal = sFieldMugshotPal_WhimsicottSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottTearyShiny,
             .pal = sFieldMugshotPal_WhimsicottTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_WhimsicottWorriedShiny,
             .pal = sFieldMugshotPal_WhimsicottWorriedShiny,
@@ -11270,97 +11270,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_RIBOMBEE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_RibombeeNormal,
             .pal = sFieldMugshotPal_RibombeeNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_RibombeeAngry,
             .pal = sFieldMugshotPal_RibombeeAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_RibombeeCrying,
             .pal = sFieldMugshotPal_RibombeeCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_RibombeeDetermined,
             .pal = sFieldMugshotPal_RibombeeDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_RibombeeDizzy,
             .pal = sFieldMugshotPal_RibombeeDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_RibombeeHappy,
             .pal = sFieldMugshotPal_RibombeeHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_RibombeeInspired,
             .pal = sFieldMugshotPal_RibombeeInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_RibombeeJoyous,
             .pal = sFieldMugshotPal_RibombeeJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_RibombeePain,
             .pal = sFieldMugshotPal_RibombeePain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_RibombeeSad,
             .pal = sFieldMugshotPal_RibombeeSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_RibombeeShouting,
             .pal = sFieldMugshotPal_RibombeeShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_RibombeeSigh,
             .pal = sFieldMugshotPal_RibombeeSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_RibombeeStunned,
             .pal = sFieldMugshotPal_RibombeeStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_RibombeeSurprised,
             .pal = sFieldMugshotPal_RibombeeSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_RibombeeTeary,
             .pal = sFieldMugshotPal_RibombeeTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_RibombeeWorried,
             .pal = sFieldMugshotPal_RibombeeWorried,
@@ -11369,97 +11369,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_RIBOMBEE_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_RibombeeNormalShiny,
             .pal = sFieldMugshotPal_RibombeeNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_RibombeeAngryShiny,
             .pal = sFieldMugshotPal_RibombeeAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_RibombeeCryingShiny,
             .pal = sFieldMugshotPal_RibombeeCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_RibombeeDeterminedShiny,
             .pal = sFieldMugshotPal_RibombeeDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_RibombeeDizzyShiny,
             .pal = sFieldMugshotPal_RibombeeDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_RibombeeHappyShiny,
             .pal = sFieldMugshotPal_RibombeeHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_RibombeeInspiredShiny,
             .pal = sFieldMugshotPal_RibombeeInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_RibombeeJoyousShiny,
             .pal = sFieldMugshotPal_RibombeeJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_RibombeePainShiny,
             .pal = sFieldMugshotPal_RibombeePainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_RibombeeSadShiny,
             .pal = sFieldMugshotPal_RibombeeSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_RibombeeShoutingShiny,
             .pal = sFieldMugshotPal_RibombeeShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_RibombeeSighShiny,
             .pal = sFieldMugshotPal_RibombeeSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_RibombeeStunnedShiny,
             .pal = sFieldMugshotPal_RibombeeStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_RibombeeSurprisedShiny,
             .pal = sFieldMugshotPal_RibombeeSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_RibombeeTearyShiny,
             .pal = sFieldMugshotPal_RibombeeTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_RibombeeWorriedShiny,
             .pal = sFieldMugshotPal_RibombeeWorriedShiny,
@@ -11468,97 +11468,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_GURDURR] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_GurdurrNormal,
             .pal = sFieldMugshotPal_GurdurrNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrAngry,
         //     .pal = sFieldMugshotPal_GurdurrAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrCrying,
         //     .pal = sFieldMugshotPal_GurdurrCrying,
         // },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_GurdurrDetermined,
             .pal = sFieldMugshotPal_GurdurrDetermined,
         },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrDizzy,
         //     .pal = sFieldMugshotPal_GurdurrDizzy,
         // },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_GurdurrHappy,
             .pal = sFieldMugshotPal_GurdurrHappy,
         },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrInspired,
         //     .pal = sFieldMugshotPal_GurdurrInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrJoyous,
         //     .pal = sFieldMugshotPal_GurdurrJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrPain,
         //     .pal = sFieldMugshotPal_GurdurrPain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrSad,
         //     .pal = sFieldMugshotPal_GurdurrSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrShouting,
         //     .pal = sFieldMugshotPal_GurdurrShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrSigh,
         //     .pal = sFieldMugshotPal_GurdurrSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrStunned,
         //     .pal = sFieldMugshotPal_GurdurrStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrSurprised,
         //     .pal = sFieldMugshotPal_GurdurrSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrTeary,
         //     .pal = sFieldMugshotPal_GurdurrTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrWorried,
         //     .pal = sFieldMugshotPal_GurdurrWorried,
@@ -11567,97 +11567,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_GURDURR_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_GurdurrNormalShiny,
             .pal = sFieldMugshotPal_GurdurrNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrAngryShiny,
         //     .pal = sFieldMugshotPal_GurdurrAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrCryingShiny,
         //     .pal = sFieldMugshotPal_GurdurrCryingShiny,
         // },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_GurdurrDeterminedShiny,
             .pal = sFieldMugshotPal_GurdurrDeterminedShiny,
         },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrDizzyShiny,
         //     .pal = sFieldMugshotPal_GurdurrDizzyShiny,
         // },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_GurdurrHappyShiny,
             .pal = sFieldMugshotPal_GurdurrHappyShiny,
         },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrInspiredShiny,
         //     .pal = sFieldMugshotPal_GurdurrInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrJoyousShiny,
         //     .pal = sFieldMugshotPal_GurdurrJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrPainShiny,
         //     .pal = sFieldMugshotPal_GurdurrPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrSadShiny,
         //     .pal = sFieldMugshotPal_GurdurrSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrShoutingShiny,
         //     .pal = sFieldMugshotPal_GurdurrShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrSighShiny,
         //     .pal = sFieldMugshotPal_GurdurrSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrStunnedShiny,
         //     .pal = sFieldMugshotPal_GurdurrStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrSurprisedShiny,
         //     .pal = sFieldMugshotPal_GurdurrSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrTearyShiny,
         //     .pal = sFieldMugshotPal_GurdurrTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_GurdurrWorriedShiny,
         //     .pal = sFieldMugshotPal_GurdurrWorriedShiny,
@@ -11666,97 +11666,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_BAGON] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_BagonNormal,
             .pal = sFieldMugshotPal_BagonNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_BagonAngry,
             .pal = sFieldMugshotPal_BagonAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_BagonCrying,
             .pal = sFieldMugshotPal_BagonCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_BagonDetermined,
             .pal = sFieldMugshotPal_BagonDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_BagonDizzy,
             .pal = sFieldMugshotPal_BagonDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_BagonHappy,
             .pal = sFieldMugshotPal_BagonHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_BagonInspired,
             .pal = sFieldMugshotPal_BagonInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_BagonJoyous,
             .pal = sFieldMugshotPal_BagonJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_BagonPain,
             .pal = sFieldMugshotPal_BagonPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_BagonSad,
             .pal = sFieldMugshotPal_BagonSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_BagonShouting,
             .pal = sFieldMugshotPal_BagonShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_BagonSigh,
             .pal = sFieldMugshotPal_BagonSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_BagonStunned,
             .pal = sFieldMugshotPal_BagonStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_BagonSurprised,
             .pal = sFieldMugshotPal_BagonSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_BagonTeary,
             .pal = sFieldMugshotPal_BagonTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_BagonWorried,
             .pal = sFieldMugshotPal_BagonWorried,
@@ -11765,97 +11765,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_BAGON_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_BagonNormalShiny,
             .pal = sFieldMugshotPal_BagonNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_BagonAngryShiny,
             .pal = sFieldMugshotPal_BagonAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_BagonCryingShiny,
             .pal = sFieldMugshotPal_BagonCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_BagonDeterminedShiny,
             .pal = sFieldMugshotPal_BagonDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_BagonDizzyShiny,
             .pal = sFieldMugshotPal_BagonDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_BagonHappyShiny,
             .pal = sFieldMugshotPal_BagonHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_BagonInspiredShiny,
             .pal = sFieldMugshotPal_BagonInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_BagonJoyousShiny,
             .pal = sFieldMugshotPal_BagonJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_BagonPainShiny,
             .pal = sFieldMugshotPal_BagonPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_BagonSadShiny,
             .pal = sFieldMugshotPal_BagonSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_BagonShoutingShiny,
             .pal = sFieldMugshotPal_BagonShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_BagonSighShiny,
             .pal = sFieldMugshotPal_BagonSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_BagonStunnedShiny,
             .pal = sFieldMugshotPal_BagonStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_BagonSurprisedShiny,
             .pal = sFieldMugshotPal_BagonSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_BagonTearyShiny,
             .pal = sFieldMugshotPal_BagonTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_BagonWorriedShiny,
             .pal = sFieldMugshotPal_BagonWorriedShiny,
@@ -11866,97 +11866,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_CARKOL] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_CarkolNormal,
             .pal = sFieldMugshotPal_CarkolNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolAngry,
         //     .pal = sFieldMugshotPal_CarkolAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolCrying,
         //     .pal = sFieldMugshotPal_CarkolCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolDetermined,
         //     .pal = sFieldMugshotPal_CarkolDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolDizzy,
         //     .pal = sFieldMugshotPal_CarkolDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolHappy,
         //     .pal = sFieldMugshotPal_CarkolHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolInspired,
         //     .pal = sFieldMugshotPal_CarkolInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolJoyous,
         //     .pal = sFieldMugshotPal_CarkolJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolPain,
         //     .pal = sFieldMugshotPal_CarkolPain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolSad,
         //     .pal = sFieldMugshotPal_CarkolSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolShouting,
         //     .pal = sFieldMugshotPal_CarkolShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolSigh,
         //     .pal = sFieldMugshotPal_CarkolSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolStunned,
         //     .pal = sFieldMugshotPal_CarkolStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolSurprised,
         //     .pal = sFieldMugshotPal_CarkolSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolTeary,
         //     .pal = sFieldMugshotPal_CarkolTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolWorried,
         //     .pal = sFieldMugshotPal_CarkolWorried,
@@ -11965,97 +11965,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_CARKOL_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_CarkolNormalShiny,
             .pal = sFieldMugshotPal_CarkolNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolAngryShiny,
         //     .pal = sFieldMugshotPal_CarkolAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolCryingShiny,
         //     .pal = sFieldMugshotPal_CarkolCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolDeterminedShiny,
         //     .pal = sFieldMugshotPal_CarkolDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolDizzyShiny,
         //     .pal = sFieldMugshotPal_CarkolDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolHappyShiny,
         //     .pal = sFieldMugshotPal_CarkolHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolInspiredShiny,
         //     .pal = sFieldMugshotPal_CarkolInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolJoyousShiny,
         //     .pal = sFieldMugshotPal_CarkolJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolPainShiny,
         //     .pal = sFieldMugshotPal_CarkolPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolSadShiny,
         //     .pal = sFieldMugshotPal_CarkolSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolShoutingShiny,
         //     .pal = sFieldMugshotPal_CarkolShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolSighShiny,
         //     .pal = sFieldMugshotPal_CarkolSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolStunnedShiny,
         //     .pal = sFieldMugshotPal_CarkolStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolSurprisedShiny,
         //     .pal = sFieldMugshotPal_CarkolSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolTearyShiny,
         //     .pal = sFieldMugshotPal_CarkolTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_CarkolWorriedShiny,
         //     .pal = sFieldMugshotPal_CarkolWorriedShiny,
@@ -12066,97 +12066,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_CHARJABUG] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_CharjabugNormal,
             .pal = sFieldMugshotPal_CharjabugNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_CharjabugAngry,
             .pal = sFieldMugshotPal_CharjabugAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_CharjabugCrying,
             .pal = sFieldMugshotPal_CharjabugCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_CharjabugDetermined,
             .pal = sFieldMugshotPal_CharjabugDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_CharjabugDizzy,
             .pal = sFieldMugshotPal_CharjabugDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_CharjabugHappy,
             .pal = sFieldMugshotPal_CharjabugHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_CharjabugInspired,
             .pal = sFieldMugshotPal_CharjabugInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_CharjabugJoyous,
             .pal = sFieldMugshotPal_CharjabugJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_CharjabugPain,
             .pal = sFieldMugshotPal_CharjabugPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_CharjabugSad,
             .pal = sFieldMugshotPal_CharjabugSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_CharjabugShouting,
             .pal = sFieldMugshotPal_CharjabugShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_CharjabugSigh,
             .pal = sFieldMugshotPal_CharjabugSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_CharjabugStunned,
             .pal = sFieldMugshotPal_CharjabugStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_CharjabugSurprised,
             .pal = sFieldMugshotPal_CharjabugSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_CharjabugTeary,
             .pal = sFieldMugshotPal_CharjabugTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_CharjabugWorried,
             .pal = sFieldMugshotPal_CharjabugWorried,
@@ -12165,97 +12165,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_CHARJABUG_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_CharjabugNormalShiny,
             .pal = sFieldMugshotPal_CharjabugNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_CharjabugAngryShiny,
             .pal = sFieldMugshotPal_CharjabugAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_CharjabugCryingShiny,
             .pal = sFieldMugshotPal_CharjabugCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_CharjabugDeterminedShiny,
             .pal = sFieldMugshotPal_CharjabugDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_CharjabugDizzyShiny,
             .pal = sFieldMugshotPal_CharjabugDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_CharjabugHappyShiny,
             .pal = sFieldMugshotPal_CharjabugHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_CharjabugInspiredShiny,
             .pal = sFieldMugshotPal_CharjabugInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_CharjabugJoyousShiny,
             .pal = sFieldMugshotPal_CharjabugJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_CharjabugPainShiny,
             .pal = sFieldMugshotPal_CharjabugPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_CharjabugSadShiny,
             .pal = sFieldMugshotPal_CharjabugSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_CharjabugShoutingShiny,
             .pal = sFieldMugshotPal_CharjabugShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_CharjabugSighShiny,
             .pal = sFieldMugshotPal_CharjabugSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_CharjabugStunnedShiny,
             .pal = sFieldMugshotPal_CharjabugStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_CharjabugSurprisedShiny,
             .pal = sFieldMugshotPal_CharjabugSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_CharjabugTearyShiny,
             .pal = sFieldMugshotPal_CharjabugTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_CharjabugWorriedShiny,
             .pal = sFieldMugshotPal_CharjabugWorriedShiny,
@@ -12266,97 +12266,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_COALOSSAL] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_CoalossalNormal,
             .pal = sFieldMugshotPal_CoalossalNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalAngry,
         //     .pal = sFieldMugshotPal_CoalossalAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalCrying,
         //     .pal = sFieldMugshotPal_CoalossalCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalDetermined,
         //     .pal = sFieldMugshotPal_CoalossalDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalDizzy,
         //     .pal = sFieldMugshotPal_CoalossalDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalHappy,
         //     .pal = sFieldMugshotPal_CoalossalHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalInspired,
         //     .pal = sFieldMugshotPal_CoalossalInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalJoyous,
         //     .pal = sFieldMugshotPal_CoalossalJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalPain,
         //     .pal = sFieldMugshotPal_CoalossalPain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalSad,
         //     .pal = sFieldMugshotPal_CoalossalSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalShouting,
         //     .pal = sFieldMugshotPal_CoalossalShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalSigh,
         //     .pal = sFieldMugshotPal_CoalossalSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalStunned,
         //     .pal = sFieldMugshotPal_CoalossalStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalSurprised,
         //     .pal = sFieldMugshotPal_CoalossalSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalTeary,
         //     .pal = sFieldMugshotPal_CoalossalTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalWorried,
         //     .pal = sFieldMugshotPal_CoalossalWorried,
@@ -12365,97 +12365,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_COALOSSAL_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_CoalossalNormalShiny,
             .pal = sFieldMugshotPal_CoalossalNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalAngryShiny,
         //     .pal = sFieldMugshotPal_CoalossalAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalCryingShiny,
         //     .pal = sFieldMugshotPal_CoalossalCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalDeterminedShiny,
         //     .pal = sFieldMugshotPal_CoalossalDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalDizzyShiny,
         //     .pal = sFieldMugshotPal_CoalossalDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalHappyShiny,
         //     .pal = sFieldMugshotPal_CoalossalHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalInspiredShiny,
         //     .pal = sFieldMugshotPal_CoalossalInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalJoyousShiny,
         //     .pal = sFieldMugshotPal_CoalossalJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalPainShiny,
         //     .pal = sFieldMugshotPal_CoalossalPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalSadShiny,
         //     .pal = sFieldMugshotPal_CoalossalSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalShoutingShiny,
         //     .pal = sFieldMugshotPal_CoalossalShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalSighShiny,
         //     .pal = sFieldMugshotPal_CoalossalSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalStunnedShiny,
         //     .pal = sFieldMugshotPal_CoalossalStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalSurprisedShiny,
         //     .pal = sFieldMugshotPal_CoalossalSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalTearyShiny,
         //     .pal = sFieldMugshotPal_CoalossalTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_CoalossalWorriedShiny,
         //     .pal = sFieldMugshotPal_CoalossalWorriedShiny,
@@ -12466,97 +12466,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_CORVIKNIGHT] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_CorviknightNormal,
             .pal = sFieldMugshotPal_CorviknightNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_CorviknightAngry,
             .pal = sFieldMugshotPal_CorviknightAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_CorviknightCrying,
             .pal = sFieldMugshotPal_CorviknightCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_CorviknightDetermined,
             .pal = sFieldMugshotPal_CorviknightDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_CorviknightDizzy,
             .pal = sFieldMugshotPal_CorviknightDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_CorviknightHappy,
             .pal = sFieldMugshotPal_CorviknightHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_CorviknightInspired,
             .pal = sFieldMugshotPal_CorviknightInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_CorviknightJoyous,
             .pal = sFieldMugshotPal_CorviknightJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_CorviknightPain,
             .pal = sFieldMugshotPal_CorviknightPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_CorviknightSad,
             .pal = sFieldMugshotPal_CorviknightSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_CorviknightShouting,
             .pal = sFieldMugshotPal_CorviknightShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_CorviknightSigh,
             .pal = sFieldMugshotPal_CorviknightSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_CorviknightStunned,
             .pal = sFieldMugshotPal_CorviknightStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_CorviknightSurprised,
             .pal = sFieldMugshotPal_CorviknightSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_CorviknightTeary,
             .pal = sFieldMugshotPal_CorviknightTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_CorviknightWorried,
             .pal = sFieldMugshotPal_CorviknightWorried,
@@ -12565,97 +12565,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_CORVIKNIGHT_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_CorviknightNormalShiny,
             .pal = sFieldMugshotPal_CorviknightNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_CorviknightAngryShiny,
         //     .pal = sFieldMugshotPal_CorviknightAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_CorviknightCryingShiny,
         //     .pal = sFieldMugshotPal_CorviknightCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_CorviknightDeterminedShiny,
         //     .pal = sFieldMugshotPal_CorviknightDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_CorviknightDizzyShiny,
         //     .pal = sFieldMugshotPal_CorviknightDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_CorviknightHappyShiny,
         //     .pal = sFieldMugshotPal_CorviknightHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_CorviknightInspiredShiny,
         //     .pal = sFieldMugshotPal_CorviknightInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_CorviknightJoyousShiny,
         //     .pal = sFieldMugshotPal_CorviknightJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_CorviknightPainShiny,
         //     .pal = sFieldMugshotPal_CorviknightPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_CorviknightSadShiny,
         //     .pal = sFieldMugshotPal_CorviknightSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_CorviknightShoutingShiny,
         //     .pal = sFieldMugshotPal_CorviknightShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_CorviknightSighShiny,
         //     .pal = sFieldMugshotPal_CorviknightSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_CorviknightStunnedShiny,
         //     .pal = sFieldMugshotPal_CorviknightStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_CorviknightSurprisedShiny,
         //     .pal = sFieldMugshotPal_CorviknightSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_CorviknightTearyShiny,
         //     .pal = sFieldMugshotPal_CorviknightTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_CorviknightWorriedShiny,
         //     .pal = sFieldMugshotPal_CorviknightWorriedShiny,
@@ -12666,97 +12666,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_CORVISQUIRE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireNormal,
             .pal = sFieldMugshotPal_CorvisquireNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireAngry,
             .pal = sFieldMugshotPal_CorvisquireAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireCrying,
             .pal = sFieldMugshotPal_CorvisquireCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireDetermined,
             .pal = sFieldMugshotPal_CorvisquireDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireDizzy,
             .pal = sFieldMugshotPal_CorvisquireDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireHappy,
             .pal = sFieldMugshotPal_CorvisquireHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireInspired,
             .pal = sFieldMugshotPal_CorvisquireInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireJoyous,
             .pal = sFieldMugshotPal_CorvisquireJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_CorvisquirePain,
             .pal = sFieldMugshotPal_CorvisquirePain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireSad,
             .pal = sFieldMugshotPal_CorvisquireSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireShouting,
             .pal = sFieldMugshotPal_CorvisquireShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireSigh,
             .pal = sFieldMugshotPal_CorvisquireSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireStunned,
             .pal = sFieldMugshotPal_CorvisquireStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireSurprised,
             .pal = sFieldMugshotPal_CorvisquireSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireTeary,
             .pal = sFieldMugshotPal_CorvisquireTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireWorried,
             .pal = sFieldMugshotPal_CorvisquireWorried,
@@ -12765,97 +12765,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_CORVISQUIRE_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireNormalShiny,
             .pal = sFieldMugshotPal_CorvisquireNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireAngryShiny,
             .pal = sFieldMugshotPal_CorvisquireAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireCryingShiny,
             .pal = sFieldMugshotPal_CorvisquireCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireDeterminedShiny,
             .pal = sFieldMugshotPal_CorvisquireDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireDizzyShiny,
             .pal = sFieldMugshotPal_CorvisquireDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireHappyShiny,
             .pal = sFieldMugshotPal_CorvisquireHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireInspiredShiny,
             .pal = sFieldMugshotPal_CorvisquireInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireJoyousShiny,
             .pal = sFieldMugshotPal_CorvisquireJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_CorvisquirePainShiny,
             .pal = sFieldMugshotPal_CorvisquirePainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireSadShiny,
             .pal = sFieldMugshotPal_CorvisquireSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireShoutingShiny,
             .pal = sFieldMugshotPal_CorvisquireShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireSighShiny,
             .pal = sFieldMugshotPal_CorvisquireSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireStunnedShiny,
             .pal = sFieldMugshotPal_CorvisquireStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireSurprisedShiny,
             .pal = sFieldMugshotPal_CorvisquireSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireTearyShiny,
             .pal = sFieldMugshotPal_CorvisquireTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_CorvisquireWorriedShiny,
             .pal = sFieldMugshotPal_CorvisquireWorriedShiny,
@@ -12866,97 +12866,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_DUSCLOPS] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_DusclopsNormal,
             .pal = sFieldMugshotPal_DusclopsNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_DusclopsAngry,
             .pal = sFieldMugshotPal_DusclopsAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_DusclopsCrying,
             .pal = sFieldMugshotPal_DusclopsCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_DusclopsDetermined,
             .pal = sFieldMugshotPal_DusclopsDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_DusclopsDizzy,
             .pal = sFieldMugshotPal_DusclopsDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_DusclopsHappy,
             .pal = sFieldMugshotPal_DusclopsHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_DusclopsInspired,
             .pal = sFieldMugshotPal_DusclopsInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_DusclopsJoyous,
             .pal = sFieldMugshotPal_DusclopsJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_DusclopsPain,
             .pal = sFieldMugshotPal_DusclopsPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_DusclopsSad,
             .pal = sFieldMugshotPal_DusclopsSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_DusclopsShouting,
             .pal = sFieldMugshotPal_DusclopsShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_DusclopsSigh,
             .pal = sFieldMugshotPal_DusclopsSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_DusclopsStunned,
             .pal = sFieldMugshotPal_DusclopsStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_DusclopsSurprised,
             .pal = sFieldMugshotPal_DusclopsSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_DusclopsTeary,
             .pal = sFieldMugshotPal_DusclopsTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_DusclopsWorried,
             .pal = sFieldMugshotPal_DusclopsWorried,
@@ -12965,97 +12965,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_DUSCLOPS_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_DusclopsNormalShiny,
             .pal = sFieldMugshotPal_DusclopsNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_DusclopsAngryShiny,
             .pal = sFieldMugshotPal_DusclopsAngryShiny,
         },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_DusclopsCryingShiny,
         //     .pal = sFieldMugshotPal_DusclopsCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_DusclopsDeterminedShiny,
         //     .pal = sFieldMugshotPal_DusclopsDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_DusclopsDizzyShiny,
         //     .pal = sFieldMugshotPal_DusclopsDizzyShiny,
         // },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_DusclopsHappyShiny,
             .pal = sFieldMugshotPal_DusclopsHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_DusclopsInspiredShiny,
             .pal = sFieldMugshotPal_DusclopsInspiredShiny,
         },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_DusclopsJoyousShiny,
         //     .pal = sFieldMugshotPal_DusclopsJoyousShiny,
         // },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_DusclopsPainShiny,
             .pal = sFieldMugshotPal_DusclopsPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_DusclopsSadShiny,
             .pal = sFieldMugshotPal_DusclopsSadShiny,
         },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_DusclopsShoutingShiny,
         //     .pal = sFieldMugshotPal_DusclopsShoutingShiny,
         // },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_DusclopsSighShiny,
             .pal = sFieldMugshotPal_DusclopsSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_DusclopsStunnedShiny,
             .pal = sFieldMugshotPal_DusclopsStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_DusclopsSurprisedShiny,
             .pal = sFieldMugshotPal_DusclopsSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_DusclopsTearyShiny,
             .pal = sFieldMugshotPal_DusclopsTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_DusclopsWorriedShiny,
             .pal = sFieldMugshotPal_DusclopsWorriedShiny,
@@ -13066,97 +13066,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_DUSKNOIR] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_DusknoirNormal,
             .pal = sFieldMugshotPal_DusknoirNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_DusknoirAngry,
             .pal = sFieldMugshotPal_DusknoirAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_DusknoirCrying,
             .pal = sFieldMugshotPal_DusknoirCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_DusknoirDetermined,
             .pal = sFieldMugshotPal_DusknoirDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_DusknoirDizzy,
             .pal = sFieldMugshotPal_DusknoirDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_DusknoirHappy,
             .pal = sFieldMugshotPal_DusknoirHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_DusknoirInspired,
             .pal = sFieldMugshotPal_DusknoirInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_DusknoirJoyous,
             .pal = sFieldMugshotPal_DusknoirJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_DusknoirPain,
             .pal = sFieldMugshotPal_DusknoirPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_DusknoirSad,
             .pal = sFieldMugshotPal_DusknoirSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_DusknoirShouting,
             .pal = sFieldMugshotPal_DusknoirShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_DusknoirSigh,
             .pal = sFieldMugshotPal_DusknoirSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_DusknoirStunned,
             .pal = sFieldMugshotPal_DusknoirStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_DusknoirSurprised,
             .pal = sFieldMugshotPal_DusknoirSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_DusknoirTeary,
             .pal = sFieldMugshotPal_DusknoirTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_DusknoirWorried,
             .pal = sFieldMugshotPal_DusknoirWorried,
@@ -13165,97 +13165,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_DUSKNOIR_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_DusknoirNormalShiny,
             .pal = sFieldMugshotPal_DusknoirNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_DusknoirAngryShiny,
             .pal = sFieldMugshotPal_DusknoirAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_DusknoirCryingShiny,
             .pal = sFieldMugshotPal_DusknoirCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_DusknoirDeterminedShiny,
             .pal = sFieldMugshotPal_DusknoirDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_DusknoirDizzyShiny,
             .pal = sFieldMugshotPal_DusknoirDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_DusknoirHappyShiny,
             .pal = sFieldMugshotPal_DusknoirHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_DusknoirInspiredShiny,
             .pal = sFieldMugshotPal_DusknoirInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_DusknoirJoyousShiny,
             .pal = sFieldMugshotPal_DusknoirJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_DusknoirPainShiny,
             .pal = sFieldMugshotPal_DusknoirPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_DusknoirSadShiny,
             .pal = sFieldMugshotPal_DusknoirSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_DusknoirShoutingShiny,
             .pal = sFieldMugshotPal_DusknoirShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_DusknoirSighShiny,
             .pal = sFieldMugshotPal_DusknoirSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_DusknoirStunnedShiny,
             .pal = sFieldMugshotPal_DusknoirStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_DusknoirSurprisedShiny,
             .pal = sFieldMugshotPal_DusknoirSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_DusknoirTearyShiny,
             .pal = sFieldMugshotPal_DusknoirTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_DusknoirWorriedShiny,
             .pal = sFieldMugshotPal_DusknoirWorriedShiny,
@@ -13266,97 +13266,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_DUSKULL] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_DuskullNormal,
             .pal = sFieldMugshotPal_DuskullNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_DuskullAngry,
             .pal = sFieldMugshotPal_DuskullAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_DuskullCrying,
             .pal = sFieldMugshotPal_DuskullCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_DuskullDetermined,
             .pal = sFieldMugshotPal_DuskullDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_DuskullDizzy,
             .pal = sFieldMugshotPal_DuskullDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_DuskullHappy,
             .pal = sFieldMugshotPal_DuskullHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_DuskullInspired,
             .pal = sFieldMugshotPal_DuskullInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_DuskullJoyous,
             .pal = sFieldMugshotPal_DuskullJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_DuskullPain,
             .pal = sFieldMugshotPal_DuskullPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_DuskullSad,
             .pal = sFieldMugshotPal_DuskullSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_DuskullShouting,
             .pal = sFieldMugshotPal_DuskullShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_DuskullSigh,
             .pal = sFieldMugshotPal_DuskullSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_DuskullStunned,
             .pal = sFieldMugshotPal_DuskullStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_DuskullSurprised,
             .pal = sFieldMugshotPal_DuskullSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_DuskullTeary,
             .pal = sFieldMugshotPal_DuskullTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_DuskullWorried,
             .pal = sFieldMugshotPal_DuskullWorried,
@@ -13365,97 +13365,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_DUSKULL_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_DuskullNormalShiny,
             .pal = sFieldMugshotPal_DuskullNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_DuskullAngryShiny,
             .pal = sFieldMugshotPal_DuskullAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_DuskullCryingShiny,
             .pal = sFieldMugshotPal_DuskullCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_DuskullDeterminedShiny,
             .pal = sFieldMugshotPal_DuskullDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_DuskullDizzyShiny,
             .pal = sFieldMugshotPal_DuskullDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_DuskullHappyShiny,
             .pal = sFieldMugshotPal_DuskullHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_DuskullInspiredShiny,
             .pal = sFieldMugshotPal_DuskullInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_DuskullJoyousShiny,
             .pal = sFieldMugshotPal_DuskullJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_DuskullPainShiny,
             .pal = sFieldMugshotPal_DuskullPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_DuskullSadShiny,
             .pal = sFieldMugshotPal_DuskullSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_DuskullShoutingShiny,
             .pal = sFieldMugshotPal_DuskullShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_DuskullSighShiny,
             .pal = sFieldMugshotPal_DuskullSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_DuskullStunnedShiny,
             .pal = sFieldMugshotPal_DuskullStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_DuskullSurprisedShiny,
             .pal = sFieldMugshotPal_DuskullSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_DuskullTearyShiny,
             .pal = sFieldMugshotPal_DuskullTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_DuskullWorriedShiny,
             .pal = sFieldMugshotPal_DuskullWorriedShiny,
@@ -13466,97 +13466,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_FLABEBE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_FlabebeNormal,
             .pal = sFieldMugshotPal_FlabebeNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_FlabebeAngry,
             .pal = sFieldMugshotPal_FlabebeAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_FlabebeCrying,
             .pal = sFieldMugshotPal_FlabebeCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_FlabebeDetermined,
             .pal = sFieldMugshotPal_FlabebeDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_FlabebeDizzy,
             .pal = sFieldMugshotPal_FlabebeDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_FlabebeHappy,
             .pal = sFieldMugshotPal_FlabebeHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_FlabebeInspired,
             .pal = sFieldMugshotPal_FlabebeInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_FlabebeJoyous,
             .pal = sFieldMugshotPal_FlabebeJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_FlabebePain,
             .pal = sFieldMugshotPal_FlabebePain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_FlabebeSad,
             .pal = sFieldMugshotPal_FlabebeSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_FlabebeShouting,
             .pal = sFieldMugshotPal_FlabebeShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_FlabebeSigh,
             .pal = sFieldMugshotPal_FlabebeSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_FlabebeStunned,
             .pal = sFieldMugshotPal_FlabebeStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_FlabebeSurprised,
             .pal = sFieldMugshotPal_FlabebeSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_FlabebeTeary,
             .pal = sFieldMugshotPal_FlabebeTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_FlabebeWorried,
             .pal = sFieldMugshotPal_FlabebeWorried,
@@ -13565,97 +13565,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_FLABEBE_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_FlabebeNormalShiny,
             .pal = sFieldMugshotPal_FlabebeNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_FlabebeAngryShiny,
             .pal = sFieldMugshotPal_FlabebeAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_FlabebeCryingShiny,
             .pal = sFieldMugshotPal_FlabebeCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_FlabebeDeterminedShiny,
             .pal = sFieldMugshotPal_FlabebeDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_FlabebeDizzyShiny,
             .pal = sFieldMugshotPal_FlabebeDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_FlabebeHappyShiny,
             .pal = sFieldMugshotPal_FlabebeHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_FlabebeInspiredShiny,
             .pal = sFieldMugshotPal_FlabebeInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_FlabebeJoyousShiny,
             .pal = sFieldMugshotPal_FlabebeJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_FlabebePainShiny,
             .pal = sFieldMugshotPal_FlabebePainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_FlabebeSadShiny,
             .pal = sFieldMugshotPal_FlabebeSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_FlabebeShoutingShiny,
             .pal = sFieldMugshotPal_FlabebeShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_FlabebeSighShiny,
             .pal = sFieldMugshotPal_FlabebeSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_FlabebeStunnedShiny,
             .pal = sFieldMugshotPal_FlabebeStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_FlabebeSurprisedShiny,
             .pal = sFieldMugshotPal_FlabebeSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_FlabebeTearyShiny,
             .pal = sFieldMugshotPal_FlabebeTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_FlabebeWorriedShiny,
             .pal = sFieldMugshotPal_FlabebeWorriedShiny,
@@ -13666,97 +13666,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_FLOETTE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_FloetteNormal,
             .pal = sFieldMugshotPal_FloetteNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_FloetteAngry,
             .pal = sFieldMugshotPal_FloetteAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_FloetteCrying,
             .pal = sFieldMugshotPal_FloetteCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_FloetteDetermined,
             .pal = sFieldMugshotPal_FloetteDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_FloetteDizzy,
             .pal = sFieldMugshotPal_FloetteDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_FloetteHappy,
             .pal = sFieldMugshotPal_FloetteHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_FloetteInspired,
             .pal = sFieldMugshotPal_FloetteInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_FloetteJoyous,
             .pal = sFieldMugshotPal_FloetteJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_FloettePain,
             .pal = sFieldMugshotPal_FloettePain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_FloetteSad,
             .pal = sFieldMugshotPal_FloetteSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_FloetteShouting,
             .pal = sFieldMugshotPal_FloetteShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_FloetteSigh,
             .pal = sFieldMugshotPal_FloetteSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_FloetteStunned,
             .pal = sFieldMugshotPal_FloetteStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_FloetteSurprised,
             .pal = sFieldMugshotPal_FloetteSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_FloetteTeary,
             .pal = sFieldMugshotPal_FloetteTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_FloetteWorried,
             .pal = sFieldMugshotPal_FloetteWorried,
@@ -13765,97 +13765,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_FLOETTE_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_FloetteNormalShiny,
             .pal = sFieldMugshotPal_FloetteNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_FloetteAngryShiny,
             .pal = sFieldMugshotPal_FloetteAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_FloetteCryingShiny,
             .pal = sFieldMugshotPal_FloetteCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_FloetteDeterminedShiny,
             .pal = sFieldMugshotPal_FloetteDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_FloetteDizzyShiny,
             .pal = sFieldMugshotPal_FloetteDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_FloetteHappyShiny,
             .pal = sFieldMugshotPal_FloetteHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_FloetteInspiredShiny,
             .pal = sFieldMugshotPal_FloetteInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_FloetteJoyousShiny,
             .pal = sFieldMugshotPal_FloetteJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_FloettePainShiny,
             .pal = sFieldMugshotPal_FloettePainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_FloetteSadShiny,
             .pal = sFieldMugshotPal_FloetteSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_FloetteShoutingShiny,
             .pal = sFieldMugshotPal_FloetteShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_FloetteSighShiny,
             .pal = sFieldMugshotPal_FloetteSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_FloetteStunnedShiny,
             .pal = sFieldMugshotPal_FloetteStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_FloetteSurprisedShiny,
             .pal = sFieldMugshotPal_FloetteSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_FloetteTearyShiny,
             .pal = sFieldMugshotPal_FloetteTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_FloetteWorriedShiny,
             .pal = sFieldMugshotPal_FloetteWorriedShiny,
@@ -13866,97 +13866,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_FLORGES] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_FlorgesNormal,
             .pal = sFieldMugshotPal_FlorgesNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_FlorgesAngry,
             .pal = sFieldMugshotPal_FlorgesAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_FlorgesCrying,
             .pal = sFieldMugshotPal_FlorgesCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_FlorgesDetermined,
             .pal = sFieldMugshotPal_FlorgesDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_FlorgesDizzy,
             .pal = sFieldMugshotPal_FlorgesDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_FlorgesHappy,
             .pal = sFieldMugshotPal_FlorgesHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_FlorgesInspired,
             .pal = sFieldMugshotPal_FlorgesInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_FlorgesJoyous,
             .pal = sFieldMugshotPal_FlorgesJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_FlorgesPain,
             .pal = sFieldMugshotPal_FlorgesPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_FlorgesSad,
             .pal = sFieldMugshotPal_FlorgesSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_FlorgesShouting,
             .pal = sFieldMugshotPal_FlorgesShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_FlorgesSigh,
             .pal = sFieldMugshotPal_FlorgesSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_FlorgesStunned,
             .pal = sFieldMugshotPal_FlorgesStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_FlorgesSurprised,
             .pal = sFieldMugshotPal_FlorgesSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_FlorgesTeary,
             .pal = sFieldMugshotPal_FlorgesTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_FlorgesWorried,
             .pal = sFieldMugshotPal_FlorgesWorried,
@@ -13965,97 +13965,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_FLORGES_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_FlorgesNormalShiny,
             .pal = sFieldMugshotPal_FlorgesNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_FlorgesAngryShiny,
             .pal = sFieldMugshotPal_FlorgesAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_FlorgesCryingShiny,
             .pal = sFieldMugshotPal_FlorgesCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_FlorgesDeterminedShiny,
             .pal = sFieldMugshotPal_FlorgesDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_FlorgesDizzyShiny,
             .pal = sFieldMugshotPal_FlorgesDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_FlorgesHappyShiny,
             .pal = sFieldMugshotPal_FlorgesHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_FlorgesInspiredShiny,
             .pal = sFieldMugshotPal_FlorgesInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_FlorgesJoyousShiny,
             .pal = sFieldMugshotPal_FlorgesJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_FlorgesPainShiny,
             .pal = sFieldMugshotPal_FlorgesPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_FlorgesSadShiny,
             .pal = sFieldMugshotPal_FlorgesSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_FlorgesShoutingShiny,
             .pal = sFieldMugshotPal_FlorgesShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_FlorgesSighShiny,
             .pal = sFieldMugshotPal_FlorgesSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_FlorgesStunnedShiny,
             .pal = sFieldMugshotPal_FlorgesStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_FlorgesSurprisedShiny,
             .pal = sFieldMugshotPal_FlorgesSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_FlorgesTearyShiny,
             .pal = sFieldMugshotPal_FlorgesTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_FlorgesWorriedShiny,
             .pal = sFieldMugshotPal_FlorgesWorriedShiny,
@@ -14066,97 +14066,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_GRIMMSNARL] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_GrimmsnarlNormal,
             .pal = sFieldMugshotPal_GrimmsnarlNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlAngry,
         //     .pal = sFieldMugshotPal_GrimmsnarlAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlCrying,
         //     .pal = sFieldMugshotPal_GrimmsnarlCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlDetermined,
         //     .pal = sFieldMugshotPal_GrimmsnarlDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlDizzy,
         //     .pal = sFieldMugshotPal_GrimmsnarlDizzy,
         // },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_GrimmsnarlHappy,
             .pal = sFieldMugshotPal_GrimmsnarlHappy,
         },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlInspired,
         //     .pal = sFieldMugshotPal_GrimmsnarlInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlJoyous,
         //     .pal = sFieldMugshotPal_GrimmsnarlJoyous,
         // },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_GrimmsnarlPain,
             .pal = sFieldMugshotPal_GrimmsnarlPain,
         },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlSad,
         //     .pal = sFieldMugshotPal_GrimmsnarlSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlShouting,
         //     .pal = sFieldMugshotPal_GrimmsnarlShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlSigh,
         //     .pal = sFieldMugshotPal_GrimmsnarlSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlStunned,
         //     .pal = sFieldMugshotPal_GrimmsnarlStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlSurprised,
         //     .pal = sFieldMugshotPal_GrimmsnarlSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlTeary,
         //     .pal = sFieldMugshotPal_GrimmsnarlTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlWorried,
         //     .pal = sFieldMugshotPal_GrimmsnarlWorried,
@@ -14165,97 +14165,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_GRIMMSNARL_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_GrimmsnarlNormalShiny,
             .pal = sFieldMugshotPal_GrimmsnarlNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlAngryShiny,
         //     .pal = sFieldMugshotPal_GrimmsnarlAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlCryingShiny,
         //     .pal = sFieldMugshotPal_GrimmsnarlCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlDeterminedShiny,
         //     .pal = sFieldMugshotPal_GrimmsnarlDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlDizzyShiny,
         //     .pal = sFieldMugshotPal_GrimmsnarlDizzyShiny,
         // },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_GrimmsnarlHappyShiny,
             .pal = sFieldMugshotPal_GrimmsnarlHappyShiny,
         },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlInspiredShiny,
         //     .pal = sFieldMugshotPal_GrimmsnarlInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlJoyousShiny,
         //     .pal = sFieldMugshotPal_GrimmsnarlJoyousShiny,
         // },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_GrimmsnarlPainShiny,
             .pal = sFieldMugshotPal_GrimmsnarlPainShiny,
         },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlSadShiny,
         //     .pal = sFieldMugshotPal_GrimmsnarlSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlShoutingShiny,
         //     .pal = sFieldMugshotPal_GrimmsnarlShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlSighShiny,
         //     .pal = sFieldMugshotPal_GrimmsnarlSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlStunnedShiny,
         //     .pal = sFieldMugshotPal_GrimmsnarlStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlSurprisedShiny,
         //     .pal = sFieldMugshotPal_GrimmsnarlSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlTearyShiny,
         //     .pal = sFieldMugshotPal_GrimmsnarlTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrimmsnarlWorriedShiny,
         //     .pal = sFieldMugshotPal_GrimmsnarlWorriedShiny,
@@ -14266,97 +14266,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_GRUBBIN] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_GrubbinNormal,
             .pal = sFieldMugshotPal_GrubbinNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinAngry,
         //     .pal = sFieldMugshotPal_GrubbinAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinCrying,
         //     .pal = sFieldMugshotPal_GrubbinCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinDetermined,
         //     .pal = sFieldMugshotPal_GrubbinDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinDizzy,
         //     .pal = sFieldMugshotPal_GrubbinDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinHappy,
         //     .pal = sFieldMugshotPal_GrubbinHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinInspired,
         //     .pal = sFieldMugshotPal_GrubbinInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinJoyous,
         //     .pal = sFieldMugshotPal_GrubbinJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinPain,
         //     .pal = sFieldMugshotPal_GrubbinPain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinSad,
         //     .pal = sFieldMugshotPal_GrubbinSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinShouting,
         //     .pal = sFieldMugshotPal_GrubbinShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinSigh,
         //     .pal = sFieldMugshotPal_GrubbinSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinStunned,
         //     .pal = sFieldMugshotPal_GrubbinStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinSurprised,
         //     .pal = sFieldMugshotPal_GrubbinSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinTeary,
         //     .pal = sFieldMugshotPal_GrubbinTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinWorried,
         //     .pal = sFieldMugshotPal_GrubbinWorried,
@@ -14365,97 +14365,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_GRUBBIN_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_GrubbinNormalShiny,
             .pal = sFieldMugshotPal_GrubbinNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinAngryShiny,
         //     .pal = sFieldMugshotPal_GrubbinAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinCryingShiny,
         //     .pal = sFieldMugshotPal_GrubbinCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinDeterminedShiny,
         //     .pal = sFieldMugshotPal_GrubbinDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinDizzyShiny,
         //     .pal = sFieldMugshotPal_GrubbinDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinHappyShiny,
         //     .pal = sFieldMugshotPal_GrubbinHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinInspiredShiny,
         //     .pal = sFieldMugshotPal_GrubbinInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinJoyousShiny,
         //     .pal = sFieldMugshotPal_GrubbinJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinPainShiny,
         //     .pal = sFieldMugshotPal_GrubbinPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinSadShiny,
         //     .pal = sFieldMugshotPal_GrubbinSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinShoutingShiny,
         //     .pal = sFieldMugshotPal_GrubbinShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinSighShiny,
         //     .pal = sFieldMugshotPal_GrubbinSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinStunnedShiny,
         //     .pal = sFieldMugshotPal_GrubbinStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinSurprisedShiny,
         //     .pal = sFieldMugshotPal_GrubbinSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinTearyShiny,
         //     .pal = sFieldMugshotPal_GrubbinTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_GrubbinWorriedShiny,
         //     .pal = sFieldMugshotPal_GrubbinWorriedShiny,
@@ -14466,97 +14466,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_HATENNA] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_HatennaNormal,
             .pal = sFieldMugshotPal_HatennaNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_HatennaAngry,
             .pal = sFieldMugshotPal_HatennaAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_HatennaCrying,
             .pal = sFieldMugshotPal_HatennaCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_HatennaDetermined,
             .pal = sFieldMugshotPal_HatennaDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_HatennaDizzy,
             .pal = sFieldMugshotPal_HatennaDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_HatennaHappy,
             .pal = sFieldMugshotPal_HatennaHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_HatennaInspired,
             .pal = sFieldMugshotPal_HatennaInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_HatennaJoyous,
             .pal = sFieldMugshotPal_HatennaJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_HatennaPain,
             .pal = sFieldMugshotPal_HatennaPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_HatennaSad,
             .pal = sFieldMugshotPal_HatennaSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_HatennaShouting,
             .pal = sFieldMugshotPal_HatennaShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_HatennaSigh,
             .pal = sFieldMugshotPal_HatennaSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_HatennaStunned,
             .pal = sFieldMugshotPal_HatennaStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_HatennaSurprised,
             .pal = sFieldMugshotPal_HatennaSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_HatennaTeary,
             .pal = sFieldMugshotPal_HatennaTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_HatennaWorried,
             .pal = sFieldMugshotPal_HatennaWorried,
@@ -14565,97 +14565,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_HATENNA_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_HatennaNormalShiny,
             .pal = sFieldMugshotPal_HatennaNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_HatennaAngryShiny,
             .pal = sFieldMugshotPal_HatennaAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_HatennaCryingShiny,
             .pal = sFieldMugshotPal_HatennaCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_HatennaDeterminedShiny,
             .pal = sFieldMugshotPal_HatennaDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_HatennaDizzyShiny,
             .pal = sFieldMugshotPal_HatennaDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_HatennaHappyShiny,
             .pal = sFieldMugshotPal_HatennaHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_HatennaInspiredShiny,
             .pal = sFieldMugshotPal_HatennaInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_HatennaJoyousShiny,
             .pal = sFieldMugshotPal_HatennaJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_HatennaPainShiny,
             .pal = sFieldMugshotPal_HatennaPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_HatennaSadShiny,
             .pal = sFieldMugshotPal_HatennaSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_HatennaShoutingShiny,
             .pal = sFieldMugshotPal_HatennaShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_HatennaSighShiny,
             .pal = sFieldMugshotPal_HatennaSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_HatennaStunnedShiny,
             .pal = sFieldMugshotPal_HatennaStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_HatennaSurprisedShiny,
             .pal = sFieldMugshotPal_HatennaSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_HatennaTearyShiny,
             .pal = sFieldMugshotPal_HatennaTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_HatennaWorriedShiny,
             .pal = sFieldMugshotPal_HatennaWorriedShiny,
@@ -14666,97 +14666,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_HATTERENE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_HattereneNormal,
             .pal = sFieldMugshotPal_HattereneNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_HattereneAngry,
             .pal = sFieldMugshotPal_HattereneAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_HattereneCrying,
             .pal = sFieldMugshotPal_HattereneCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_HattereneDetermined,
             .pal = sFieldMugshotPal_HattereneDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_HattereneDizzy,
             .pal = sFieldMugshotPal_HattereneDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_HattereneHappy,
             .pal = sFieldMugshotPal_HattereneHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_HattereneInspired,
             .pal = sFieldMugshotPal_HattereneInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_HattereneJoyous,
             .pal = sFieldMugshotPal_HattereneJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_HatterenePain,
             .pal = sFieldMugshotPal_HatterenePain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_HattereneSad,
             .pal = sFieldMugshotPal_HattereneSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_HattereneShouting,
             .pal = sFieldMugshotPal_HattereneShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_HattereneSigh,
             .pal = sFieldMugshotPal_HattereneSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_HattereneStunned,
             .pal = sFieldMugshotPal_HattereneStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_HattereneSurprised,
             .pal = sFieldMugshotPal_HattereneSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_HattereneTeary,
             .pal = sFieldMugshotPal_HattereneTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_HattereneWorried,
             .pal = sFieldMugshotPal_HattereneWorried,
@@ -14765,97 +14765,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_HATTERENE_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_HattereneNormalShiny,
             .pal = sFieldMugshotPal_HattereneNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_HattereneAngryShiny,
             .pal = sFieldMugshotPal_HattereneAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_HattereneCryingShiny,
             .pal = sFieldMugshotPal_HattereneCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_HattereneDeterminedShiny,
             .pal = sFieldMugshotPal_HattereneDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_HattereneDizzyShiny,
             .pal = sFieldMugshotPal_HattereneDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_HattereneHappyShiny,
             .pal = sFieldMugshotPal_HattereneHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_HattereneInspiredShiny,
             .pal = sFieldMugshotPal_HattereneInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_HattereneJoyousShiny,
             .pal = sFieldMugshotPal_HattereneJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_HatterenePainShiny,
             .pal = sFieldMugshotPal_HatterenePainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_HattereneSadShiny,
             .pal = sFieldMugshotPal_HattereneSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_HattereneShoutingShiny,
             .pal = sFieldMugshotPal_HattereneShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_HattereneSighShiny,
             .pal = sFieldMugshotPal_HattereneSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_HattereneStunnedShiny,
             .pal = sFieldMugshotPal_HattereneStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_HattereneSurprisedShiny,
             .pal = sFieldMugshotPal_HattereneSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_HattereneTearyShiny,
             .pal = sFieldMugshotPal_HattereneTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_HattereneWorriedShiny,
             .pal = sFieldMugshotPal_HattereneWorriedShiny,
@@ -14866,97 +14866,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_HATTREM] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_HattremNormal,
             .pal = sFieldMugshotPal_HattremNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremAngry,
         //     .pal = sFieldMugshotPal_HattremAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremCrying,
         //     .pal = sFieldMugshotPal_HattremCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremDetermined,
         //     .pal = sFieldMugshotPal_HattremDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremDizzy,
         //     .pal = sFieldMugshotPal_HattremDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremHappy,
         //     .pal = sFieldMugshotPal_HattremHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremInspired,
         //     .pal = sFieldMugshotPal_HattremInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremJoyous,
         //     .pal = sFieldMugshotPal_HattremJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremPain,
         //     .pal = sFieldMugshotPal_HattremPain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremSad,
         //     .pal = sFieldMugshotPal_HattremSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremShouting,
         //     .pal = sFieldMugshotPal_HattremShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremSigh,
         //     .pal = sFieldMugshotPal_HattremSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremStunned,
         //     .pal = sFieldMugshotPal_HattremStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremSurprised,
         //     .pal = sFieldMugshotPal_HattremSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremTeary,
         //     .pal = sFieldMugshotPal_HattremTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremWorried,
         //     .pal = sFieldMugshotPal_HattremWorried,
@@ -14965,97 +14965,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_HATTREM_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_HattremNormalShiny,
             .pal = sFieldMugshotPal_HattremNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremAngryShiny,
         //     .pal = sFieldMugshotPal_HattremAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremCryingShiny,
         //     .pal = sFieldMugshotPal_HattremCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremDeterminedShiny,
         //     .pal = sFieldMugshotPal_HattremDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremDizzyShiny,
         //     .pal = sFieldMugshotPal_HattremDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremHappyShiny,
         //     .pal = sFieldMugshotPal_HattremHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremInspiredShiny,
         //     .pal = sFieldMugshotPal_HattremInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremJoyousShiny,
         //     .pal = sFieldMugshotPal_HattremJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremPainShiny,
         //     .pal = sFieldMugshotPal_HattremPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremSadShiny,
         //     .pal = sFieldMugshotPal_HattremSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremShoutingShiny,
         //     .pal = sFieldMugshotPal_HattremShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremSighShiny,
         //     .pal = sFieldMugshotPal_HattremSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremStunnedShiny,
         //     .pal = sFieldMugshotPal_HattremStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremSurprisedShiny,
         //     .pal = sFieldMugshotPal_HattremSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremTearyShiny,
         //     .pal = sFieldMugshotPal_HattremTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_HattremWorriedShiny,
         //     .pal = sFieldMugshotPal_HattremWorriedShiny,
@@ -15066,97 +15066,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_HERDIER] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_HerdierNormal,
             .pal = sFieldMugshotPal_HerdierNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierAngry,
         //     .pal = sFieldMugshotPal_HerdierAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierCrying,
         //     .pal = sFieldMugshotPal_HerdierCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierDetermined,
         //     .pal = sFieldMugshotPal_HerdierDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierDizzy,
         //     .pal = sFieldMugshotPal_HerdierDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierHappy,
         //     .pal = sFieldMugshotPal_HerdierHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierInspired,
         //     .pal = sFieldMugshotPal_HerdierInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierJoyous,
         //     .pal = sFieldMugshotPal_HerdierJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierPain,
         //     .pal = sFieldMugshotPal_HerdierPain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierSad,
         //     .pal = sFieldMugshotPal_HerdierSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierShouting,
         //     .pal = sFieldMugshotPal_HerdierShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierSigh,
         //     .pal = sFieldMugshotPal_HerdierSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierStunned,
         //     .pal = sFieldMugshotPal_HerdierStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierSurprised,
         //     .pal = sFieldMugshotPal_HerdierSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierTeary,
         //     .pal = sFieldMugshotPal_HerdierTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierWorried,
         //     .pal = sFieldMugshotPal_HerdierWorried,
@@ -15165,97 +15165,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_HERDIER_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_HerdierNormalShiny,
             .pal = sFieldMugshotPal_HerdierNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierAngryShiny,
         //     .pal = sFieldMugshotPal_HerdierAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierCryingShiny,
         //     .pal = sFieldMugshotPal_HerdierCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierDeterminedShiny,
         //     .pal = sFieldMugshotPal_HerdierDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierDizzyShiny,
         //     .pal = sFieldMugshotPal_HerdierDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierHappyShiny,
         //     .pal = sFieldMugshotPal_HerdierHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierInspiredShiny,
         //     .pal = sFieldMugshotPal_HerdierInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierJoyousShiny,
         //     .pal = sFieldMugshotPal_HerdierJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierPainShiny,
         //     .pal = sFieldMugshotPal_HerdierPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierSadShiny,
         //     .pal = sFieldMugshotPal_HerdierSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierShoutingShiny,
         //     .pal = sFieldMugshotPal_HerdierShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierSighShiny,
         //     .pal = sFieldMugshotPal_HerdierSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierStunnedShiny,
         //     .pal = sFieldMugshotPal_HerdierStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierSurprisedShiny,
         //     .pal = sFieldMugshotPal_HerdierSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierTearyShiny,
         //     .pal = sFieldMugshotPal_HerdierTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_HerdierWorriedShiny,
         //     .pal = sFieldMugshotPal_HerdierWorriedShiny,
@@ -15266,97 +15266,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_IMPIDIMP] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_ImpidimpNormal,
             .pal = sFieldMugshotPal_ImpidimpNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpAngry,
         //     .pal = sFieldMugshotPal_ImpidimpAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpCrying,
         //     .pal = sFieldMugshotPal_ImpidimpCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpDetermined,
         //     .pal = sFieldMugshotPal_ImpidimpDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpDizzy,
         //     .pal = sFieldMugshotPal_ImpidimpDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpHappy,
         //     .pal = sFieldMugshotPal_ImpidimpHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpInspired,
         //     .pal = sFieldMugshotPal_ImpidimpInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpJoyous,
         //     .pal = sFieldMugshotPal_ImpidimpJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpPain,
         //     .pal = sFieldMugshotPal_ImpidimpPain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpSad,
         //     .pal = sFieldMugshotPal_ImpidimpSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpShouting,
         //     .pal = sFieldMugshotPal_ImpidimpShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpSigh,
         //     .pal = sFieldMugshotPal_ImpidimpSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpStunned,
         //     .pal = sFieldMugshotPal_ImpidimpStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpSurprised,
         //     .pal = sFieldMugshotPal_ImpidimpSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpTeary,
         //     .pal = sFieldMugshotPal_ImpidimpTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpWorried,
         //     .pal = sFieldMugshotPal_ImpidimpWorried,
@@ -15365,97 +15365,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_IMPIDIMP_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_ImpidimpNormalShiny,
             .pal = sFieldMugshotPal_ImpidimpNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpAngryShiny,
         //     .pal = sFieldMugshotPal_ImpidimpAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpCryingShiny,
         //     .pal = sFieldMugshotPal_ImpidimpCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpDeterminedShiny,
         //     .pal = sFieldMugshotPal_ImpidimpDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpDizzyShiny,
         //     .pal = sFieldMugshotPal_ImpidimpDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpHappyShiny,
         //     .pal = sFieldMugshotPal_ImpidimpHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpInspiredShiny,
         //     .pal = sFieldMugshotPal_ImpidimpInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpJoyousShiny,
         //     .pal = sFieldMugshotPal_ImpidimpJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpPainShiny,
         //     .pal = sFieldMugshotPal_ImpidimpPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpSadShiny,
         //     .pal = sFieldMugshotPal_ImpidimpSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpShoutingShiny,
         //     .pal = sFieldMugshotPal_ImpidimpShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpSighShiny,
         //     .pal = sFieldMugshotPal_ImpidimpSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpStunnedShiny,
         //     .pal = sFieldMugshotPal_ImpidimpStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpSurprisedShiny,
         //     .pal = sFieldMugshotPal_ImpidimpSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpTearyShiny,
         //     .pal = sFieldMugshotPal_ImpidimpTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_ImpidimpWorriedShiny,
         //     .pal = sFieldMugshotPal_ImpidimpWorriedShiny,
@@ -15466,97 +15466,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_KLANG] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_KlangNormal,
             .pal = sFieldMugshotPal_KlangNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangAngry,
         //     .pal = sFieldMugshotPal_KlangAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangCrying,
         //     .pal = sFieldMugshotPal_KlangCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangDetermined,
         //     .pal = sFieldMugshotPal_KlangDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangDizzy,
         //     .pal = sFieldMugshotPal_KlangDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangHappy,
         //     .pal = sFieldMugshotPal_KlangHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangInspired,
         //     .pal = sFieldMugshotPal_KlangInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangJoyous,
         //     .pal = sFieldMugshotPal_KlangJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangPain,
         //     .pal = sFieldMugshotPal_KlangPain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangSad,
         //     .pal = sFieldMugshotPal_KlangSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangShouting,
         //     .pal = sFieldMugshotPal_KlangShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangSigh,
         //     .pal = sFieldMugshotPal_KlangSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangStunned,
         //     .pal = sFieldMugshotPal_KlangStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangSurprised,
         //     .pal = sFieldMugshotPal_KlangSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangTeary,
         //     .pal = sFieldMugshotPal_KlangTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangWorried,
         //     .pal = sFieldMugshotPal_KlangWorried,
@@ -15565,97 +15565,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_KLANG_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_KlangNormalShiny,
             .pal = sFieldMugshotPal_KlangNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangAngryShiny,
         //     .pal = sFieldMugshotPal_KlangAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangCryingShiny,
         //     .pal = sFieldMugshotPal_KlangCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangDeterminedShiny,
         //     .pal = sFieldMugshotPal_KlangDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangDizzyShiny,
         //     .pal = sFieldMugshotPal_KlangDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangHappyShiny,
         //     .pal = sFieldMugshotPal_KlangHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangInspiredShiny,
         //     .pal = sFieldMugshotPal_KlangInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangJoyousShiny,
         //     .pal = sFieldMugshotPal_KlangJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangPainShiny,
         //     .pal = sFieldMugshotPal_KlangPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangSadShiny,
         //     .pal = sFieldMugshotPal_KlangSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangShoutingShiny,
         //     .pal = sFieldMugshotPal_KlangShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangSighShiny,
         //     .pal = sFieldMugshotPal_KlangSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangStunnedShiny,
         //     .pal = sFieldMugshotPal_KlangStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangSurprisedShiny,
         //     .pal = sFieldMugshotPal_KlangSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangTearyShiny,
         //     .pal = sFieldMugshotPal_KlangTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlangWorriedShiny,
         //     .pal = sFieldMugshotPal_KlangWorriedShiny,
@@ -15666,97 +15666,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_KLINK] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_KlinkNormal,
             .pal = sFieldMugshotPal_KlinkNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkAngry,
         //     .pal = sFieldMugshotPal_KlinkAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkCrying,
         //     .pal = sFieldMugshotPal_KlinkCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkDetermined,
         //     .pal = sFieldMugshotPal_KlinkDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkDizzy,
         //     .pal = sFieldMugshotPal_KlinkDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkHappy,
         //     .pal = sFieldMugshotPal_KlinkHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkInspired,
         //     .pal = sFieldMugshotPal_KlinkInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkJoyous,
         //     .pal = sFieldMugshotPal_KlinkJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkPain,
         //     .pal = sFieldMugshotPal_KlinkPain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkSad,
         //     .pal = sFieldMugshotPal_KlinkSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkShouting,
         //     .pal = sFieldMugshotPal_KlinkShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkSigh,
         //     .pal = sFieldMugshotPal_KlinkSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkStunned,
         //     .pal = sFieldMugshotPal_KlinkStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkSurprised,
         //     .pal = sFieldMugshotPal_KlinkSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkTeary,
         //     .pal = sFieldMugshotPal_KlinkTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkWorried,
         //     .pal = sFieldMugshotPal_KlinkWorried,
@@ -15765,97 +15765,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_KLINK_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_KlinkNormalShiny,
             .pal = sFieldMugshotPal_KlinkNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkAngryShiny,
         //     .pal = sFieldMugshotPal_KlinkAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkCryingShiny,
         //     .pal = sFieldMugshotPal_KlinkCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkDeterminedShiny,
         //     .pal = sFieldMugshotPal_KlinkDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkDizzyShiny,
         //     .pal = sFieldMugshotPal_KlinkDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkHappyShiny,
         //     .pal = sFieldMugshotPal_KlinkHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkInspiredShiny,
         //     .pal = sFieldMugshotPal_KlinkInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkJoyousShiny,
         //     .pal = sFieldMugshotPal_KlinkJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkPainShiny,
         //     .pal = sFieldMugshotPal_KlinkPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkSadShiny,
         //     .pal = sFieldMugshotPal_KlinkSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkShoutingShiny,
         //     .pal = sFieldMugshotPal_KlinkShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkSighShiny,
         //     .pal = sFieldMugshotPal_KlinkSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkStunnedShiny,
         //     .pal = sFieldMugshotPal_KlinkStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkSurprisedShiny,
         //     .pal = sFieldMugshotPal_KlinkSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkTearyShiny,
         //     .pal = sFieldMugshotPal_KlinkTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinkWorriedShiny,
         //     .pal = sFieldMugshotPal_KlinkWorriedShiny,
@@ -15866,97 +15866,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_KLINKLANG] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_KlinklangNormal,
             .pal = sFieldMugshotPal_KlinklangNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangAngry,
         //     .pal = sFieldMugshotPal_KlinklangAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangCrying,
         //     .pal = sFieldMugshotPal_KlinklangCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangDetermined,
         //     .pal = sFieldMugshotPal_KlinklangDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangDizzy,
         //     .pal = sFieldMugshotPal_KlinklangDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangHappy,
         //     .pal = sFieldMugshotPal_KlinklangHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangInspired,
         //     .pal = sFieldMugshotPal_KlinklangInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangJoyous,
         //     .pal = sFieldMugshotPal_KlinklangJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangPain,
         //     .pal = sFieldMugshotPal_KlinklangPain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangSad,
         //     .pal = sFieldMugshotPal_KlinklangSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangShouting,
         //     .pal = sFieldMugshotPal_KlinklangShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangSigh,
         //     .pal = sFieldMugshotPal_KlinklangSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangStunned,
         //     .pal = sFieldMugshotPal_KlinklangStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangSurprised,
         //     .pal = sFieldMugshotPal_KlinklangSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangTeary,
         //     .pal = sFieldMugshotPal_KlinklangTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangWorried,
         //     .pal = sFieldMugshotPal_KlinklangWorried,
@@ -15965,97 +15965,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_KLINKLANG_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_KlinklangNormalShiny,
             .pal = sFieldMugshotPal_KlinklangNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangAngryShiny,
         //     .pal = sFieldMugshotPal_KlinklangAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangCryingShiny,
         //     .pal = sFieldMugshotPal_KlinklangCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangDeterminedShiny,
         //     .pal = sFieldMugshotPal_KlinklangDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangDizzyShiny,
         //     .pal = sFieldMugshotPal_KlinklangDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangHappyShiny,
         //     .pal = sFieldMugshotPal_KlinklangHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangInspiredShiny,
         //     .pal = sFieldMugshotPal_KlinklangInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangJoyousShiny,
         //     .pal = sFieldMugshotPal_KlinklangJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangPainShiny,
         //     .pal = sFieldMugshotPal_KlinklangPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangSadShiny,
         //     .pal = sFieldMugshotPal_KlinklangSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangShoutingShiny,
         //     .pal = sFieldMugshotPal_KlinklangShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangSighShiny,
         //     .pal = sFieldMugshotPal_KlinklangSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangStunnedShiny,
         //     .pal = sFieldMugshotPal_KlinklangStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangSurprisedShiny,
         //     .pal = sFieldMugshotPal_KlinklangSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangTearyShiny,
         //     .pal = sFieldMugshotPal_KlinklangTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_KlinklangWorriedShiny,
         //     .pal = sFieldMugshotPal_KlinklangWorriedShiny,
@@ -16066,97 +16066,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_KROKOROK] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_KrokorokNormal,
             .pal = sFieldMugshotPal_KrokorokNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_KrokorokAngry,
             .pal = sFieldMugshotPal_KrokorokAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_KrokorokCrying,
             .pal = sFieldMugshotPal_KrokorokCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_KrokorokDetermined,
             .pal = sFieldMugshotPal_KrokorokDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_KrokorokDizzy,
             .pal = sFieldMugshotPal_KrokorokDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_KrokorokHappy,
             .pal = sFieldMugshotPal_KrokorokHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_KrokorokInspired,
             .pal = sFieldMugshotPal_KrokorokInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_KrokorokJoyous,
             .pal = sFieldMugshotPal_KrokorokJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_KrokorokPain,
             .pal = sFieldMugshotPal_KrokorokPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_KrokorokSad,
             .pal = sFieldMugshotPal_KrokorokSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_KrokorokShouting,
             .pal = sFieldMugshotPal_KrokorokShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_KrokorokSigh,
             .pal = sFieldMugshotPal_KrokorokSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_KrokorokStunned,
             .pal = sFieldMugshotPal_KrokorokStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_KrokorokSurprised,
             .pal = sFieldMugshotPal_KrokorokSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_KrokorokTeary,
             .pal = sFieldMugshotPal_KrokorokTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_KrokorokWorried,
             .pal = sFieldMugshotPal_KrokorokWorried,
@@ -16165,97 +16165,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_KROKOROK_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_KrokorokNormalShiny,
             .pal = sFieldMugshotPal_KrokorokNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_KrokorokAngryShiny,
             .pal = sFieldMugshotPal_KrokorokAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_KrokorokCryingShiny,
             .pal = sFieldMugshotPal_KrokorokCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_KrokorokDeterminedShiny,
             .pal = sFieldMugshotPal_KrokorokDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_KrokorokDizzyShiny,
             .pal = sFieldMugshotPal_KrokorokDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_KrokorokHappyShiny,
             .pal = sFieldMugshotPal_KrokorokHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_KrokorokInspiredShiny,
             .pal = sFieldMugshotPal_KrokorokInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_KrokorokJoyousShiny,
             .pal = sFieldMugshotPal_KrokorokJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_KrokorokPainShiny,
             .pal = sFieldMugshotPal_KrokorokPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_KrokorokSadShiny,
             .pal = sFieldMugshotPal_KrokorokSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_KrokorokShoutingShiny,
             .pal = sFieldMugshotPal_KrokorokShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_KrokorokSighShiny,
             .pal = sFieldMugshotPal_KrokorokSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_KrokorokStunnedShiny,
             .pal = sFieldMugshotPal_KrokorokStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_KrokorokSurprisedShiny,
             .pal = sFieldMugshotPal_KrokorokSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_KrokorokTearyShiny,
             .pal = sFieldMugshotPal_KrokorokTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_KrokorokWorriedShiny,
             .pal = sFieldMugshotPal_KrokorokWorriedShiny,
@@ -16266,97 +16266,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_KROOKODILE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_KrookodileNormal,
             .pal = sFieldMugshotPal_KrookodileNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_KrookodileAngry,
             .pal = sFieldMugshotPal_KrookodileAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_KrookodileCrying,
             .pal = sFieldMugshotPal_KrookodileCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_KrookodileDetermined,
             .pal = sFieldMugshotPal_KrookodileDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_KrookodileDizzy,
             .pal = sFieldMugshotPal_KrookodileDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_KrookodileHappy,
             .pal = sFieldMugshotPal_KrookodileHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_KrookodileInspired,
             .pal = sFieldMugshotPal_KrookodileInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_KrookodileJoyous,
             .pal = sFieldMugshotPal_KrookodileJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_KrookodilePain,
             .pal = sFieldMugshotPal_KrookodilePain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_KrookodileSad,
             .pal = sFieldMugshotPal_KrookodileSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_KrookodileShouting,
             .pal = sFieldMugshotPal_KrookodileShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_KrookodileSigh,
             .pal = sFieldMugshotPal_KrookodileSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_KrookodileStunned,
             .pal = sFieldMugshotPal_KrookodileStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_KrookodileSurprised,
             .pal = sFieldMugshotPal_KrookodileSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_KrookodileTeary,
             .pal = sFieldMugshotPal_KrookodileTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_KrookodileWorried,
             .pal = sFieldMugshotPal_KrookodileWorried,
@@ -16365,97 +16365,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_KROOKODILE_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_KrookodileNormalShiny,
             .pal = sFieldMugshotPal_KrookodileNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_KrookodileAngryShiny,
         //     .pal = sFieldMugshotPal_KrookodileAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_KrookodileCryingShiny,
         //     .pal = sFieldMugshotPal_KrookodileCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_KrookodileDeterminedShiny,
         //     .pal = sFieldMugshotPal_KrookodileDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_KrookodileDizzyShiny,
         //     .pal = sFieldMugshotPal_KrookodileDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_KrookodileHappyShiny,
         //     .pal = sFieldMugshotPal_KrookodileHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_KrookodileInspiredShiny,
         //     .pal = sFieldMugshotPal_KrookodileInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_KrookodileJoyousShiny,
         //     .pal = sFieldMugshotPal_KrookodileJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_KrookodilePainShiny,
         //     .pal = sFieldMugshotPal_KrookodilePainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_KrookodileSadShiny,
         //     .pal = sFieldMugshotPal_KrookodileSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_KrookodileShoutingShiny,
         //     .pal = sFieldMugshotPal_KrookodileShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_KrookodileSighShiny,
         //     .pal = sFieldMugshotPal_KrookodileSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_KrookodileStunnedShiny,
         //     .pal = sFieldMugshotPal_KrookodileStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_KrookodileSurprisedShiny,
         //     .pal = sFieldMugshotPal_KrookodileSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_KrookodileTearyShiny,
         //     .pal = sFieldMugshotPal_KrookodileTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_KrookodileWorriedShiny,
         //     .pal = sFieldMugshotPal_KrookodileWorriedShiny,
@@ -16466,97 +16466,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_LILLIPUP] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_LillipupNormal,
             .pal = sFieldMugshotPal_LillipupNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_LillipupAngry,
             .pal = sFieldMugshotPal_LillipupAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_LillipupCrying,
             .pal = sFieldMugshotPal_LillipupCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_LillipupDetermined,
             .pal = sFieldMugshotPal_LillipupDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_LillipupDizzy,
             .pal = sFieldMugshotPal_LillipupDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_LillipupHappy,
             .pal = sFieldMugshotPal_LillipupHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_LillipupInspired,
             .pal = sFieldMugshotPal_LillipupInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_LillipupJoyous,
             .pal = sFieldMugshotPal_LillipupJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_LillipupPain,
             .pal = sFieldMugshotPal_LillipupPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_LillipupSad,
             .pal = sFieldMugshotPal_LillipupSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_LillipupShouting,
             .pal = sFieldMugshotPal_LillipupShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_LillipupSigh,
             .pal = sFieldMugshotPal_LillipupSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_LillipupStunned,
             .pal = sFieldMugshotPal_LillipupStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_LillipupSurprised,
             .pal = sFieldMugshotPal_LillipupSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_LillipupTeary,
             .pal = sFieldMugshotPal_LillipupTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_LillipupWorried,
             .pal = sFieldMugshotPal_LillipupWorried,
@@ -16565,97 +16565,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_LILLIPUP_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_LillipupNormalShiny,
             .pal = sFieldMugshotPal_LillipupNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_LillipupAngryShiny,
             .pal = sFieldMugshotPal_LillipupAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_LillipupCryingShiny,
             .pal = sFieldMugshotPal_LillipupCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_LillipupDeterminedShiny,
             .pal = sFieldMugshotPal_LillipupDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_LillipupDizzyShiny,
             .pal = sFieldMugshotPal_LillipupDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_LillipupHappyShiny,
             .pal = sFieldMugshotPal_LillipupHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_LillipupInspiredShiny,
             .pal = sFieldMugshotPal_LillipupInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_LillipupJoyousShiny,
             .pal = sFieldMugshotPal_LillipupJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_LillipupPainShiny,
             .pal = sFieldMugshotPal_LillipupPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_LillipupSadShiny,
             .pal = sFieldMugshotPal_LillipupSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_LillipupShoutingShiny,
             .pal = sFieldMugshotPal_LillipupShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_LillipupSighShiny,
             .pal = sFieldMugshotPal_LillipupSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_LillipupStunnedShiny,
             .pal = sFieldMugshotPal_LillipupStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_LillipupSurprisedShiny,
             .pal = sFieldMugshotPal_LillipupSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_LillipupTearyShiny,
             .pal = sFieldMugshotPal_LillipupTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_LillipupWorriedShiny,
             .pal = sFieldMugshotPal_LillipupWorriedShiny,
@@ -16666,97 +16666,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_LUXIO] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_LuxioNormal,
             .pal = sFieldMugshotPal_LuxioNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_LuxioAngry,
             .pal = sFieldMugshotPal_LuxioAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_LuxioCrying,
             .pal = sFieldMugshotPal_LuxioCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_LuxioDetermined,
             .pal = sFieldMugshotPal_LuxioDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_LuxioDizzy,
             .pal = sFieldMugshotPal_LuxioDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_LuxioHappy,
             .pal = sFieldMugshotPal_LuxioHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_LuxioInspired,
             .pal = sFieldMugshotPal_LuxioInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_LuxioJoyous,
             .pal = sFieldMugshotPal_LuxioJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_LuxioPain,
             .pal = sFieldMugshotPal_LuxioPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_LuxioSad,
             .pal = sFieldMugshotPal_LuxioSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_LuxioShouting,
             .pal = sFieldMugshotPal_LuxioShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_LuxioSigh,
             .pal = sFieldMugshotPal_LuxioSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_LuxioStunned,
             .pal = sFieldMugshotPal_LuxioStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_LuxioSurprised,
             .pal = sFieldMugshotPal_LuxioSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_LuxioTeary,
             .pal = sFieldMugshotPal_LuxioTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_LuxioWorried,
             .pal = sFieldMugshotPal_LuxioWorried,
@@ -16765,97 +16765,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_LUXIO_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_LuxioNormalShiny,
             .pal = sFieldMugshotPal_LuxioNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_LuxioAngryShiny,
             .pal = sFieldMugshotPal_LuxioAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_LuxioCryingShiny,
             .pal = sFieldMugshotPal_LuxioCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_LuxioDeterminedShiny,
             .pal = sFieldMugshotPal_LuxioDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_LuxioDizzyShiny,
             .pal = sFieldMugshotPal_LuxioDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_LuxioHappyShiny,
             .pal = sFieldMugshotPal_LuxioHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_LuxioInspiredShiny,
             .pal = sFieldMugshotPal_LuxioInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_LuxioJoyousShiny,
             .pal = sFieldMugshotPal_LuxioJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_LuxioPainShiny,
             .pal = sFieldMugshotPal_LuxioPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_LuxioSadShiny,
             .pal = sFieldMugshotPal_LuxioSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_LuxioShoutingShiny,
             .pal = sFieldMugshotPal_LuxioShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_LuxioSighShiny,
             .pal = sFieldMugshotPal_LuxioSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_LuxioStunnedShiny,
             .pal = sFieldMugshotPal_LuxioStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_LuxioSurprisedShiny,
             .pal = sFieldMugshotPal_LuxioSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_LuxioTearyShiny,
             .pal = sFieldMugshotPal_LuxioTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_LuxioWorriedShiny,
             .pal = sFieldMugshotPal_LuxioWorriedShiny,
@@ -16866,97 +16866,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_LUXRAY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_LuxrayNormal,
             .pal = sFieldMugshotPal_LuxrayNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_LuxrayAngry,
             .pal = sFieldMugshotPal_LuxrayAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_LuxrayCrying,
             .pal = sFieldMugshotPal_LuxrayCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_LuxrayDetermined,
             .pal = sFieldMugshotPal_LuxrayDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_LuxrayDizzy,
             .pal = sFieldMugshotPal_LuxrayDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_LuxrayHappy,
             .pal = sFieldMugshotPal_LuxrayHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_LuxrayInspired,
             .pal = sFieldMugshotPal_LuxrayInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_LuxrayJoyous,
             .pal = sFieldMugshotPal_LuxrayJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_LuxrayPain,
             .pal = sFieldMugshotPal_LuxrayPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_LuxraySad,
             .pal = sFieldMugshotPal_LuxraySad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_LuxrayShouting,
             .pal = sFieldMugshotPal_LuxrayShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_LuxraySigh,
             .pal = sFieldMugshotPal_LuxraySigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_LuxrayStunned,
             .pal = sFieldMugshotPal_LuxrayStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_LuxraySurprised,
             .pal = sFieldMugshotPal_LuxraySurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_LuxrayTeary,
             .pal = sFieldMugshotPal_LuxrayTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_LuxrayWorried,
             .pal = sFieldMugshotPal_LuxrayWorried,
@@ -16965,97 +16965,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_LUXRAY_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_LuxrayNormalShiny,
             .pal = sFieldMugshotPal_LuxrayNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_LuxrayAngryShiny,
             .pal = sFieldMugshotPal_LuxrayAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_LuxrayCryingShiny,
             .pal = sFieldMugshotPal_LuxrayCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_LuxrayDeterminedShiny,
             .pal = sFieldMugshotPal_LuxrayDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_LuxrayDizzyShiny,
             .pal = sFieldMugshotPal_LuxrayDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_LuxrayHappyShiny,
             .pal = sFieldMugshotPal_LuxrayHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_LuxrayInspiredShiny,
             .pal = sFieldMugshotPal_LuxrayInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_LuxrayJoyousShiny,
             .pal = sFieldMugshotPal_LuxrayJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_LuxrayPainShiny,
             .pal = sFieldMugshotPal_LuxrayPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_LuxraySadShiny,
             .pal = sFieldMugshotPal_LuxraySadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_LuxrayShoutingShiny,
             .pal = sFieldMugshotPal_LuxrayShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_LuxraySighShiny,
             .pal = sFieldMugshotPal_LuxraySighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_LuxrayStunnedShiny,
             .pal = sFieldMugshotPal_LuxrayStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_LuxraySurprisedShiny,
             .pal = sFieldMugshotPal_LuxraySurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_LuxrayTearyShiny,
             .pal = sFieldMugshotPal_LuxrayTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_LuxrayWorriedShiny,
             .pal = sFieldMugshotPal_LuxrayWorriedShiny,
@@ -17066,97 +17066,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_MACHAMP] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_MachampNormal,
             .pal = sFieldMugshotPal_MachampNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampAngry,
         //     .pal = sFieldMugshotPal_MachampAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampCrying,
         //     .pal = sFieldMugshotPal_MachampCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampDetermined,
         //     .pal = sFieldMugshotPal_MachampDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampDizzy,
         //     .pal = sFieldMugshotPal_MachampDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampHappy,
         //     .pal = sFieldMugshotPal_MachampHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampInspired,
         //     .pal = sFieldMugshotPal_MachampInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampJoyous,
         //     .pal = sFieldMugshotPal_MachampJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampPain,
         //     .pal = sFieldMugshotPal_MachampPain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampSad,
         //     .pal = sFieldMugshotPal_MachampSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampShouting,
         //     .pal = sFieldMugshotPal_MachampShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampSigh,
         //     .pal = sFieldMugshotPal_MachampSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampStunned,
         //     .pal = sFieldMugshotPal_MachampStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampSurprised,
         //     .pal = sFieldMugshotPal_MachampSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampTeary,
         //     .pal = sFieldMugshotPal_MachampTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampWorried,
         //     .pal = sFieldMugshotPal_MachampWorried,
@@ -17165,97 +17165,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_MACHAMP_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_MachampNormalShiny,
             .pal = sFieldMugshotPal_MachampNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampAngryShiny,
         //     .pal = sFieldMugshotPal_MachampAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampCryingShiny,
         //     .pal = sFieldMugshotPal_MachampCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampDeterminedShiny,
         //     .pal = sFieldMugshotPal_MachampDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampDizzyShiny,
         //     .pal = sFieldMugshotPal_MachampDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampHappyShiny,
         //     .pal = sFieldMugshotPal_MachampHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampInspiredShiny,
         //     .pal = sFieldMugshotPal_MachampInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampJoyousShiny,
         //     .pal = sFieldMugshotPal_MachampJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampPainShiny,
         //     .pal = sFieldMugshotPal_MachampPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampSadShiny,
         //     .pal = sFieldMugshotPal_MachampSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampShoutingShiny,
         //     .pal = sFieldMugshotPal_MachampShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampSighShiny,
         //     .pal = sFieldMugshotPal_MachampSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampStunnedShiny,
         //     .pal = sFieldMugshotPal_MachampStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampSurprisedShiny,
         //     .pal = sFieldMugshotPal_MachampSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampTearyShiny,
         //     .pal = sFieldMugshotPal_MachampTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_MachampWorriedShiny,
         //     .pal = sFieldMugshotPal_MachampWorriedShiny,
@@ -17266,97 +17266,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_MACHOKE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_MachokeNormal,
             .pal = sFieldMugshotPal_MachokeNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_MachokeAngry,
             .pal = sFieldMugshotPal_MachokeAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_MachokeCrying,
             .pal = sFieldMugshotPal_MachokeCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_MachokeDetermined,
             .pal = sFieldMugshotPal_MachokeDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_MachokeDizzy,
             .pal = sFieldMugshotPal_MachokeDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_MachokeHappy,
             .pal = sFieldMugshotPal_MachokeHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_MachokeInspired,
             .pal = sFieldMugshotPal_MachokeInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_MachokeJoyous,
             .pal = sFieldMugshotPal_MachokeJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_MachokePain,
             .pal = sFieldMugshotPal_MachokePain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_MachokeSad,
             .pal = sFieldMugshotPal_MachokeSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_MachokeShouting,
             .pal = sFieldMugshotPal_MachokeShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_MachokeSigh,
             .pal = sFieldMugshotPal_MachokeSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_MachokeStunned,
             .pal = sFieldMugshotPal_MachokeStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_MachokeSurprised,
             .pal = sFieldMugshotPal_MachokeSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_MachokeTeary,
             .pal = sFieldMugshotPal_MachokeTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_MachokeWorried,
             .pal = sFieldMugshotPal_MachokeWorried,
@@ -17365,97 +17365,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_MACHOKE_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_MachokeNormalShiny,
             .pal = sFieldMugshotPal_MachokeNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_MachokeAngryShiny,
             .pal = sFieldMugshotPal_MachokeAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_MachokeCryingShiny,
             .pal = sFieldMugshotPal_MachokeCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_MachokeDeterminedShiny,
             .pal = sFieldMugshotPal_MachokeDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_MachokeDizzyShiny,
             .pal = sFieldMugshotPal_MachokeDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_MachokeHappyShiny,
             .pal = sFieldMugshotPal_MachokeHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_MachokeInspiredShiny,
             .pal = sFieldMugshotPal_MachokeInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_MachokeJoyousShiny,
             .pal = sFieldMugshotPal_MachokeJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_MachokePainShiny,
             .pal = sFieldMugshotPal_MachokePainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_MachokeSadShiny,
             .pal = sFieldMugshotPal_MachokeSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_MachokeShoutingShiny,
             .pal = sFieldMugshotPal_MachokeShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_MachokeSighShiny,
             .pal = sFieldMugshotPal_MachokeSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_MachokeStunnedShiny,
             .pal = sFieldMugshotPal_MachokeStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_MachokeSurprisedShiny,
             .pal = sFieldMugshotPal_MachokeSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_MachokeTearyShiny,
             .pal = sFieldMugshotPal_MachokeTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_MachokeWorriedShiny,
             .pal = sFieldMugshotPal_MachokeWorriedShiny,
@@ -17466,97 +17466,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_MACHOP] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_MachopNormal,
             .pal = sFieldMugshotPal_MachopNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_MachopAngry,
             .pal = sFieldMugshotPal_MachopAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_MachopCrying,
             .pal = sFieldMugshotPal_MachopCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_MachopDetermined,
             .pal = sFieldMugshotPal_MachopDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_MachopDizzy,
             .pal = sFieldMugshotPal_MachopDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_MachopHappy,
             .pal = sFieldMugshotPal_MachopHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_MachopInspired,
             .pal = sFieldMugshotPal_MachopInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_MachopJoyous,
             .pal = sFieldMugshotPal_MachopJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_MachopPain,
             .pal = sFieldMugshotPal_MachopPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_MachopSad,
             .pal = sFieldMugshotPal_MachopSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_MachopShouting,
             .pal = sFieldMugshotPal_MachopShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_MachopSigh,
             .pal = sFieldMugshotPal_MachopSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_MachopStunned,
             .pal = sFieldMugshotPal_MachopStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_MachopSurprised,
             .pal = sFieldMugshotPal_MachopSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_MachopTeary,
             .pal = sFieldMugshotPal_MachopTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_MachopWorried,
             .pal = sFieldMugshotPal_MachopWorried,
@@ -17565,97 +17565,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_MACHOP_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_MachopNormalShiny,
             .pal = sFieldMugshotPal_MachopNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_MachopAngryShiny,
             .pal = sFieldMugshotPal_MachopAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_MachopCryingShiny,
             .pal = sFieldMugshotPal_MachopCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_MachopDeterminedShiny,
             .pal = sFieldMugshotPal_MachopDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_MachopDizzyShiny,
             .pal = sFieldMugshotPal_MachopDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_MachopHappyShiny,
             .pal = sFieldMugshotPal_MachopHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_MachopInspiredShiny,
             .pal = sFieldMugshotPal_MachopInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_MachopJoyousShiny,
             .pal = sFieldMugshotPal_MachopJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_MachopPainShiny,
             .pal = sFieldMugshotPal_MachopPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_MachopSadShiny,
             .pal = sFieldMugshotPal_MachopSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_MachopShoutingShiny,
             .pal = sFieldMugshotPal_MachopShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_MachopSighShiny,
             .pal = sFieldMugshotPal_MachopSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_MachopStunnedShiny,
             .pal = sFieldMugshotPal_MachopStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_MachopSurprisedShiny,
             .pal = sFieldMugshotPal_MachopSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_MachopTearyShiny,
             .pal = sFieldMugshotPal_MachopTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_MachopWorriedShiny,
             .pal = sFieldMugshotPal_MachopWorriedShiny,
@@ -17666,97 +17666,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_MAGBY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_MagbyNormal,
             .pal = sFieldMugshotPal_MagbyNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_MagbyAngry,
             .pal = sFieldMugshotPal_MagbyAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_MagbyCrying,
             .pal = sFieldMugshotPal_MagbyCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_MagbyDetermined,
             .pal = sFieldMugshotPal_MagbyDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_MagbyDizzy,
             .pal = sFieldMugshotPal_MagbyDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_MagbyHappy,
             .pal = sFieldMugshotPal_MagbyHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_MagbyInspired,
             .pal = sFieldMugshotPal_MagbyInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_MagbyJoyous,
             .pal = sFieldMugshotPal_MagbyJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_MagbyPain,
             .pal = sFieldMugshotPal_MagbyPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_MagbySad,
             .pal = sFieldMugshotPal_MagbySad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_MagbyShouting,
             .pal = sFieldMugshotPal_MagbyShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_MagbySigh,
             .pal = sFieldMugshotPal_MagbySigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_MagbyStunned,
             .pal = sFieldMugshotPal_MagbyStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_MagbySurprised,
             .pal = sFieldMugshotPal_MagbySurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_MagbyTeary,
             .pal = sFieldMugshotPal_MagbyTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_MagbyWorried,
             .pal = sFieldMugshotPal_MagbyWorried,
@@ -17765,97 +17765,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_MAGBY_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_MagbyNormalShiny,
             .pal = sFieldMugshotPal_MagbyNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_MagbyAngryShiny,
             .pal = sFieldMugshotPal_MagbyAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_MagbyCryingShiny,
             .pal = sFieldMugshotPal_MagbyCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_MagbyDeterminedShiny,
             .pal = sFieldMugshotPal_MagbyDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_MagbyDizzyShiny,
             .pal = sFieldMugshotPal_MagbyDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_MagbyHappyShiny,
             .pal = sFieldMugshotPal_MagbyHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_MagbyInspiredShiny,
             .pal = sFieldMugshotPal_MagbyInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_MagbyJoyousShiny,
             .pal = sFieldMugshotPal_MagbyJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_MagbyPainShiny,
             .pal = sFieldMugshotPal_MagbyPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_MagbySadShiny,
             .pal = sFieldMugshotPal_MagbySadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_MagbyShoutingShiny,
             .pal = sFieldMugshotPal_MagbyShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_MagbySighShiny,
             .pal = sFieldMugshotPal_MagbySighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_MagbyStunnedShiny,
             .pal = sFieldMugshotPal_MagbyStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_MagbySurprisedShiny,
             .pal = sFieldMugshotPal_MagbySurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_MagbyTearyShiny,
             .pal = sFieldMugshotPal_MagbyTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_MagbyWorriedShiny,
             .pal = sFieldMugshotPal_MagbyWorriedShiny,
@@ -17866,97 +17866,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_MAGMAR] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_MagmarNormal,
             .pal = sFieldMugshotPal_MagmarNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarAngry,
         //     .pal = sFieldMugshotPal_MagmarAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarCrying,
         //     .pal = sFieldMugshotPal_MagmarCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarDetermined,
         //     .pal = sFieldMugshotPal_MagmarDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarDizzy,
         //     .pal = sFieldMugshotPal_MagmarDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarHappy,
         //     .pal = sFieldMugshotPal_MagmarHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarInspired,
         //     .pal = sFieldMugshotPal_MagmarInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarJoyous,
         //     .pal = sFieldMugshotPal_MagmarJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarPain,
         //     .pal = sFieldMugshotPal_MagmarPain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarSad,
         //     .pal = sFieldMugshotPal_MagmarSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarShouting,
         //     .pal = sFieldMugshotPal_MagmarShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarSigh,
         //     .pal = sFieldMugshotPal_MagmarSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarStunned,
         //     .pal = sFieldMugshotPal_MagmarStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarSurprised,
         //     .pal = sFieldMugshotPal_MagmarSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarTeary,
         //     .pal = sFieldMugshotPal_MagmarTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarWorried,
         //     .pal = sFieldMugshotPal_MagmarWorried,
@@ -17965,97 +17965,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_MAGMAR_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_MagmarNormalShiny,
             .pal = sFieldMugshotPal_MagmarNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarAngryShiny,
         //     .pal = sFieldMugshotPal_MagmarAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarCryingShiny,
         //     .pal = sFieldMugshotPal_MagmarCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarDeterminedShiny,
         //     .pal = sFieldMugshotPal_MagmarDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarDizzyShiny,
         //     .pal = sFieldMugshotPal_MagmarDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarHappyShiny,
         //     .pal = sFieldMugshotPal_MagmarHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarInspiredShiny,
         //     .pal = sFieldMugshotPal_MagmarInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarJoyousShiny,
         //     .pal = sFieldMugshotPal_MagmarJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarPainShiny,
         //     .pal = sFieldMugshotPal_MagmarPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarSadShiny,
         //     .pal = sFieldMugshotPal_MagmarSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarShoutingShiny,
         //     .pal = sFieldMugshotPal_MagmarShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarSighShiny,
         //     .pal = sFieldMugshotPal_MagmarSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarStunnedShiny,
         //     .pal = sFieldMugshotPal_MagmarStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarSurprisedShiny,
         //     .pal = sFieldMugshotPal_MagmarSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarTearyShiny,
         //     .pal = sFieldMugshotPal_MagmarTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_MagmarWorriedShiny,
         //     .pal = sFieldMugshotPal_MagmarWorriedShiny,
@@ -18066,97 +18066,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_MAGMORTAR] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_MagmortarNormal,
             .pal = sFieldMugshotPal_MagmortarNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_MagmortarAngry,
             .pal = sFieldMugshotPal_MagmortarAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_MagmortarCrying,
             .pal = sFieldMugshotPal_MagmortarCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_MagmortarDetermined,
             .pal = sFieldMugshotPal_MagmortarDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_MagmortarDizzy,
             .pal = sFieldMugshotPal_MagmortarDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_MagmortarHappy,
             .pal = sFieldMugshotPal_MagmortarHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_MagmortarInspired,
             .pal = sFieldMugshotPal_MagmortarInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_MagmortarJoyous,
             .pal = sFieldMugshotPal_MagmortarJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_MagmortarPain,
             .pal = sFieldMugshotPal_MagmortarPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_MagmortarSad,
             .pal = sFieldMugshotPal_MagmortarSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_MagmortarShouting,
             .pal = sFieldMugshotPal_MagmortarShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_MagmortarSigh,
             .pal = sFieldMugshotPal_MagmortarSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_MagmortarStunned,
             .pal = sFieldMugshotPal_MagmortarStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_MagmortarSurprised,
             .pal = sFieldMugshotPal_MagmortarSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_MagmortarTeary,
             .pal = sFieldMugshotPal_MagmortarTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_MagmortarWorried,
             .pal = sFieldMugshotPal_MagmortarWorried,
@@ -18165,97 +18165,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_MAGMORTAR_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_MagmortarNormalShiny,
             .pal = sFieldMugshotPal_MagmortarNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_MagmortarAngryShiny,
             .pal = sFieldMugshotPal_MagmortarAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_MagmortarCryingShiny,
             .pal = sFieldMugshotPal_MagmortarCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_MagmortarDeterminedShiny,
             .pal = sFieldMugshotPal_MagmortarDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_MagmortarDizzyShiny,
             .pal = sFieldMugshotPal_MagmortarDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_MagmortarHappyShiny,
             .pal = sFieldMugshotPal_MagmortarHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_MagmortarInspiredShiny,
             .pal = sFieldMugshotPal_MagmortarInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_MagmortarJoyousShiny,
             .pal = sFieldMugshotPal_MagmortarJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_MagmortarPainShiny,
             .pal = sFieldMugshotPal_MagmortarPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_MagmortarSadShiny,
             .pal = sFieldMugshotPal_MagmortarSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_MagmortarShoutingShiny,
             .pal = sFieldMugshotPal_MagmortarShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_MagmortarSighShiny,
             .pal = sFieldMugshotPal_MagmortarSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_MagmortarStunnedShiny,
             .pal = sFieldMugshotPal_MagmortarStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_MagmortarSurprisedShiny,
             .pal = sFieldMugshotPal_MagmortarSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_MagmortarTearyShiny,
             .pal = sFieldMugshotPal_MagmortarTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_MagmortarWorriedShiny,
             .pal = sFieldMugshotPal_MagmortarWorriedShiny,
@@ -18266,97 +18266,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_MAMOSWINE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_MamoswineNormal,
             .pal = sFieldMugshotPal_MamoswineNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineAngry,
         //     .pal = sFieldMugshotPal_MamoswineAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineCrying,
         //     .pal = sFieldMugshotPal_MamoswineCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineDetermined,
         //     .pal = sFieldMugshotPal_MamoswineDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineDizzy,
         //     .pal = sFieldMugshotPal_MamoswineDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineHappy,
         //     .pal = sFieldMugshotPal_MamoswineHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineInspired,
         //     .pal = sFieldMugshotPal_MamoswineInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineJoyous,
         //     .pal = sFieldMugshotPal_MamoswineJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswinePain,
         //     .pal = sFieldMugshotPal_MamoswinePain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineSad,
         //     .pal = sFieldMugshotPal_MamoswineSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineShouting,
         //     .pal = sFieldMugshotPal_MamoswineShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineSigh,
         //     .pal = sFieldMugshotPal_MamoswineSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineStunned,
         //     .pal = sFieldMugshotPal_MamoswineStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineSurprised,
         //     .pal = sFieldMugshotPal_MamoswineSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineTeary,
         //     .pal = sFieldMugshotPal_MamoswineTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineWorried,
         //     .pal = sFieldMugshotPal_MamoswineWorried,
@@ -18365,97 +18365,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_MAMOSWINE_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_MamoswineNormalShiny,
             .pal = sFieldMugshotPal_MamoswineNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineAngryShiny,
         //     .pal = sFieldMugshotPal_MamoswineAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineCryingShiny,
         //     .pal = sFieldMugshotPal_MamoswineCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineDeterminedShiny,
         //     .pal = sFieldMugshotPal_MamoswineDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineDizzyShiny,
         //     .pal = sFieldMugshotPal_MamoswineDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineHappyShiny,
         //     .pal = sFieldMugshotPal_MamoswineHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineInspiredShiny,
         //     .pal = sFieldMugshotPal_MamoswineInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineJoyousShiny,
         //     .pal = sFieldMugshotPal_MamoswineJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswinePainShiny,
         //     .pal = sFieldMugshotPal_MamoswinePainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineSadShiny,
         //     .pal = sFieldMugshotPal_MamoswineSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineShoutingShiny,
         //     .pal = sFieldMugshotPal_MamoswineShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineSighShiny,
         //     .pal = sFieldMugshotPal_MamoswineSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineStunnedShiny,
         //     .pal = sFieldMugshotPal_MamoswineStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineSurprisedShiny,
         //     .pal = sFieldMugshotPal_MamoswineSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineTearyShiny,
         //     .pal = sFieldMugshotPal_MamoswineTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_MamoswineWorriedShiny,
         //     .pal = sFieldMugshotPal_MamoswineWorriedShiny,
@@ -18466,97 +18466,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_MORGREM] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_MorgremNormal,
             .pal = sFieldMugshotPal_MorgremNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_MorgremAngry,
             .pal = sFieldMugshotPal_MorgremAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_MorgremCrying,
             .pal = sFieldMugshotPal_MorgremCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_MorgremDetermined,
             .pal = sFieldMugshotPal_MorgremDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_MorgremDizzy,
             .pal = sFieldMugshotPal_MorgremDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_MorgremHappy,
             .pal = sFieldMugshotPal_MorgremHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_MorgremInspired,
             .pal = sFieldMugshotPal_MorgremInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_MorgremJoyous,
             .pal = sFieldMugshotPal_MorgremJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_MorgremPain,
             .pal = sFieldMugshotPal_MorgremPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_MorgremSad,
             .pal = sFieldMugshotPal_MorgremSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_MorgremShouting,
             .pal = sFieldMugshotPal_MorgremShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_MorgremSigh,
             .pal = sFieldMugshotPal_MorgremSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_MorgremStunned,
             .pal = sFieldMugshotPal_MorgremStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_MorgremSurprised,
             .pal = sFieldMugshotPal_MorgremSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_MorgremTeary,
             .pal = sFieldMugshotPal_MorgremTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_MorgremWorried,
             .pal = sFieldMugshotPal_MorgremWorried,
@@ -18565,97 +18565,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_MORGREM_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_MorgremNormalShiny,
             .pal = sFieldMugshotPal_MorgremNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_MorgremAngryShiny,
         //     .pal = sFieldMugshotPal_MorgremAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_MorgremCryingShiny,
         //     .pal = sFieldMugshotPal_MorgremCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_MorgremDeterminedShiny,
         //     .pal = sFieldMugshotPal_MorgremDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_MorgremDizzyShiny,
         //     .pal = sFieldMugshotPal_MorgremDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_MorgremHappyShiny,
         //     .pal = sFieldMugshotPal_MorgremHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_MorgremInspiredShiny,
         //     .pal = sFieldMugshotPal_MorgremInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_MorgremJoyousShiny,
         //     .pal = sFieldMugshotPal_MorgremJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_MorgremPainShiny,
         //     .pal = sFieldMugshotPal_MorgremPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_MorgremSadShiny,
         //     .pal = sFieldMugshotPal_MorgremSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_MorgremShoutingShiny,
         //     .pal = sFieldMugshotPal_MorgremShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_MorgremSighShiny,
         //     .pal = sFieldMugshotPal_MorgremSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_MorgremStunnedShiny,
         //     .pal = sFieldMugshotPal_MorgremStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_MorgremSurprisedShiny,
         //     .pal = sFieldMugshotPal_MorgremSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_MorgremTearyShiny,
         //     .pal = sFieldMugshotPal_MorgremTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_MorgremWorriedShiny,
         //     .pal = sFieldMugshotPal_MorgremWorriedShiny,
@@ -18666,97 +18666,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_NIDOKING] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_NidokingNormal,
             .pal = sFieldMugshotPal_NidokingNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_NidokingAngry,
             .pal = sFieldMugshotPal_NidokingAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_NidokingCrying,
             .pal = sFieldMugshotPal_NidokingCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_NidokingDetermined,
             .pal = sFieldMugshotPal_NidokingDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_NidokingDizzy,
             .pal = sFieldMugshotPal_NidokingDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_NidokingHappy,
             .pal = sFieldMugshotPal_NidokingHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_NidokingInspired,
             .pal = sFieldMugshotPal_NidokingInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_NidokingJoyous,
             .pal = sFieldMugshotPal_NidokingJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_NidokingPain,
             .pal = sFieldMugshotPal_NidokingPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_NidokingSad,
             .pal = sFieldMugshotPal_NidokingSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_NidokingShouting,
             .pal = sFieldMugshotPal_NidokingShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_NidokingSigh,
             .pal = sFieldMugshotPal_NidokingSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_NidokingStunned,
             .pal = sFieldMugshotPal_NidokingStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_NidokingSurprised,
             .pal = sFieldMugshotPal_NidokingSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_NidokingTeary,
             .pal = sFieldMugshotPal_NidokingTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_NidokingWorried,
             .pal = sFieldMugshotPal_NidokingWorried,
@@ -18765,97 +18765,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_NIDOKING_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_NidokingNormalShiny,
             .pal = sFieldMugshotPal_NidokingNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_NidokingAngryShiny,
             .pal = sFieldMugshotPal_NidokingAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_NidokingCryingShiny,
             .pal = sFieldMugshotPal_NidokingCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_NidokingDeterminedShiny,
             .pal = sFieldMugshotPal_NidokingDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_NidokingDizzyShiny,
             .pal = sFieldMugshotPal_NidokingDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_NidokingHappyShiny,
             .pal = sFieldMugshotPal_NidokingHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_NidokingInspiredShiny,
             .pal = sFieldMugshotPal_NidokingInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_NidokingJoyousShiny,
             .pal = sFieldMugshotPal_NidokingJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_NidokingPainShiny,
             .pal = sFieldMugshotPal_NidokingPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_NidokingSadShiny,
             .pal = sFieldMugshotPal_NidokingSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_NidokingShoutingShiny,
             .pal = sFieldMugshotPal_NidokingShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_NidokingSighShiny,
             .pal = sFieldMugshotPal_NidokingSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_NidokingStunnedShiny,
             .pal = sFieldMugshotPal_NidokingStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_NidokingSurprisedShiny,
             .pal = sFieldMugshotPal_NidokingSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_NidokingTearyShiny,
             .pal = sFieldMugshotPal_NidokingTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_NidokingWorriedShiny,
             .pal = sFieldMugshotPal_NidokingWorriedShiny,
@@ -18866,97 +18866,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_NIDOQUEEN] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenNormal,
             .pal = sFieldMugshotPal_NidoqueenNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenAngry,
             .pal = sFieldMugshotPal_NidoqueenAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenCrying,
             .pal = sFieldMugshotPal_NidoqueenCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenDetermined,
             .pal = sFieldMugshotPal_NidoqueenDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenDizzy,
             .pal = sFieldMugshotPal_NidoqueenDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenHappy,
             .pal = sFieldMugshotPal_NidoqueenHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenInspired,
             .pal = sFieldMugshotPal_NidoqueenInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenJoyous,
             .pal = sFieldMugshotPal_NidoqueenJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenPain,
             .pal = sFieldMugshotPal_NidoqueenPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenSad,
             .pal = sFieldMugshotPal_NidoqueenSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenShouting,
             .pal = sFieldMugshotPal_NidoqueenShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenSigh,
             .pal = sFieldMugshotPal_NidoqueenSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenStunned,
             .pal = sFieldMugshotPal_NidoqueenStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenSurprised,
             .pal = sFieldMugshotPal_NidoqueenSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenTeary,
             .pal = sFieldMugshotPal_NidoqueenTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenWorried,
             .pal = sFieldMugshotPal_NidoqueenWorried,
@@ -18965,97 +18965,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_NIDOQUEEN_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenNormalShiny,
             .pal = sFieldMugshotPal_NidoqueenNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenAngryShiny,
             .pal = sFieldMugshotPal_NidoqueenAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenCryingShiny,
             .pal = sFieldMugshotPal_NidoqueenCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenDeterminedShiny,
             .pal = sFieldMugshotPal_NidoqueenDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenDizzyShiny,
             .pal = sFieldMugshotPal_NidoqueenDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenHappyShiny,
             .pal = sFieldMugshotPal_NidoqueenHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenInspiredShiny,
             .pal = sFieldMugshotPal_NidoqueenInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenJoyousShiny,
             .pal = sFieldMugshotPal_NidoqueenJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenPainShiny,
             .pal = sFieldMugshotPal_NidoqueenPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenSadShiny,
             .pal = sFieldMugshotPal_NidoqueenSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenShoutingShiny,
             .pal = sFieldMugshotPal_NidoqueenShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenSighShiny,
             .pal = sFieldMugshotPal_NidoqueenSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenStunnedShiny,
             .pal = sFieldMugshotPal_NidoqueenStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenSurprisedShiny,
             .pal = sFieldMugshotPal_NidoqueenSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenTearyShiny,
             .pal = sFieldMugshotPal_NidoqueenTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_NidoqueenWorriedShiny,
             .pal = sFieldMugshotPal_NidoqueenWorriedShiny,
@@ -19066,97 +19066,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_NIDORAN_F] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fNormal,
             .pal = sFieldMugshotPal_Nidoran_fNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fAngry,
             .pal = sFieldMugshotPal_Nidoran_fAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fCrying,
             .pal = sFieldMugshotPal_Nidoran_fCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fDetermined,
             .pal = sFieldMugshotPal_Nidoran_fDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fDizzy,
             .pal = sFieldMugshotPal_Nidoran_fDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fHappy,
             .pal = sFieldMugshotPal_Nidoran_fHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fInspired,
             .pal = sFieldMugshotPal_Nidoran_fInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fJoyous,
             .pal = sFieldMugshotPal_Nidoran_fJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fPain,
             .pal = sFieldMugshotPal_Nidoran_fPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fSad,
             .pal = sFieldMugshotPal_Nidoran_fSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fShouting,
             .pal = sFieldMugshotPal_Nidoran_fShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fSigh,
             .pal = sFieldMugshotPal_Nidoran_fSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fStunned,
             .pal = sFieldMugshotPal_Nidoran_fStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fSurprised,
             .pal = sFieldMugshotPal_Nidoran_fSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fTeary,
             .pal = sFieldMugshotPal_Nidoran_fTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fWorried,
             .pal = sFieldMugshotPal_Nidoran_fWorried,
@@ -19165,97 +19165,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_NIDORAN_F_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fNormalShiny,
             .pal = sFieldMugshotPal_Nidoran_fNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fAngryShiny,
             .pal = sFieldMugshotPal_Nidoran_fAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fCryingShiny,
             .pal = sFieldMugshotPal_Nidoran_fCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fDeterminedShiny,
             .pal = sFieldMugshotPal_Nidoran_fDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fDizzyShiny,
             .pal = sFieldMugshotPal_Nidoran_fDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fHappyShiny,
             .pal = sFieldMugshotPal_Nidoran_fHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fInspiredShiny,
             .pal = sFieldMugshotPal_Nidoran_fInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fJoyousShiny,
             .pal = sFieldMugshotPal_Nidoran_fJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fPainShiny,
             .pal = sFieldMugshotPal_Nidoran_fPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fSadShiny,
             .pal = sFieldMugshotPal_Nidoran_fSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fShoutingShiny,
             .pal = sFieldMugshotPal_Nidoran_fShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fSighShiny,
             .pal = sFieldMugshotPal_Nidoran_fSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fStunnedShiny,
             .pal = sFieldMugshotPal_Nidoran_fStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fSurprisedShiny,
             .pal = sFieldMugshotPal_Nidoran_fSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fTearyShiny,
             .pal = sFieldMugshotPal_Nidoran_fTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_fWorriedShiny,
             .pal = sFieldMugshotPal_Nidoran_fWorriedShiny,
@@ -19266,97 +19266,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_NIDORAN_M] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mNormal,
             .pal = sFieldMugshotPal_Nidoran_mNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mAngry,
             .pal = sFieldMugshotPal_Nidoran_mAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mCrying,
             .pal = sFieldMugshotPal_Nidoran_mCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mDetermined,
             .pal = sFieldMugshotPal_Nidoran_mDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mDizzy,
             .pal = sFieldMugshotPal_Nidoran_mDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mHappy,
             .pal = sFieldMugshotPal_Nidoran_mHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mInspired,
             .pal = sFieldMugshotPal_Nidoran_mInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mJoyous,
             .pal = sFieldMugshotPal_Nidoran_mJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mPain,
             .pal = sFieldMugshotPal_Nidoran_mPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mSad,
             .pal = sFieldMugshotPal_Nidoran_mSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mShouting,
             .pal = sFieldMugshotPal_Nidoran_mShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mSigh,
             .pal = sFieldMugshotPal_Nidoran_mSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mStunned,
             .pal = sFieldMugshotPal_Nidoran_mStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mSurprised,
             .pal = sFieldMugshotPal_Nidoran_mSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mTeary,
             .pal = sFieldMugshotPal_Nidoran_mTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mWorried,
             .pal = sFieldMugshotPal_Nidoran_mWorried,
@@ -19365,97 +19365,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_NIDORAN_M_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mNormalShiny,
             .pal = sFieldMugshotPal_Nidoran_mNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mAngryShiny,
             .pal = sFieldMugshotPal_Nidoran_mAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mCryingShiny,
             .pal = sFieldMugshotPal_Nidoran_mCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mDeterminedShiny,
             .pal = sFieldMugshotPal_Nidoran_mDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mDizzyShiny,
             .pal = sFieldMugshotPal_Nidoran_mDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mHappyShiny,
             .pal = sFieldMugshotPal_Nidoran_mHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mInspiredShiny,
             .pal = sFieldMugshotPal_Nidoran_mInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mJoyousShiny,
             .pal = sFieldMugshotPal_Nidoran_mJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mPainShiny,
             .pal = sFieldMugshotPal_Nidoran_mPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mSadShiny,
             .pal = sFieldMugshotPal_Nidoran_mSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mShoutingShiny,
             .pal = sFieldMugshotPal_Nidoran_mShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mSighShiny,
             .pal = sFieldMugshotPal_Nidoran_mSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mStunnedShiny,
             .pal = sFieldMugshotPal_Nidoran_mStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mSurprisedShiny,
             .pal = sFieldMugshotPal_Nidoran_mSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mTearyShiny,
             .pal = sFieldMugshotPal_Nidoran_mTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_Nidoran_mWorriedShiny,
             .pal = sFieldMugshotPal_Nidoran_mWorriedShiny,
@@ -19466,97 +19466,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_NIDORINA] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_NidorinaNormal,
             .pal = sFieldMugshotPal_NidorinaNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_NidorinaAngry,
             .pal = sFieldMugshotPal_NidorinaAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_NidorinaCrying,
             .pal = sFieldMugshotPal_NidorinaCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_NidorinaDetermined,
             .pal = sFieldMugshotPal_NidorinaDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_NidorinaDizzy,
             .pal = sFieldMugshotPal_NidorinaDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_NidorinaHappy,
             .pal = sFieldMugshotPal_NidorinaHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_NidorinaInspired,
             .pal = sFieldMugshotPal_NidorinaInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_NidorinaJoyous,
             .pal = sFieldMugshotPal_NidorinaJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_NidorinaPain,
             .pal = sFieldMugshotPal_NidorinaPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_NidorinaSad,
             .pal = sFieldMugshotPal_NidorinaSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_NidorinaShouting,
             .pal = sFieldMugshotPal_NidorinaShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_NidorinaSigh,
             .pal = sFieldMugshotPal_NidorinaSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_NidorinaStunned,
             .pal = sFieldMugshotPal_NidorinaStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_NidorinaSurprised,
             .pal = sFieldMugshotPal_NidorinaSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_NidorinaTeary,
             .pal = sFieldMugshotPal_NidorinaTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_NidorinaWorried,
             .pal = sFieldMugshotPal_NidorinaWorried,
@@ -19565,97 +19565,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_NIDORINA_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_NidorinaNormalShiny,
             .pal = sFieldMugshotPal_NidorinaNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_NidorinaAngryShiny,
             .pal = sFieldMugshotPal_NidorinaAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_NidorinaCryingShiny,
             .pal = sFieldMugshotPal_NidorinaCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_NidorinaDeterminedShiny,
             .pal = sFieldMugshotPal_NidorinaDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_NidorinaDizzyShiny,
             .pal = sFieldMugshotPal_NidorinaDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_NidorinaHappyShiny,
             .pal = sFieldMugshotPal_NidorinaHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_NidorinaInspiredShiny,
             .pal = sFieldMugshotPal_NidorinaInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_NidorinaJoyousShiny,
             .pal = sFieldMugshotPal_NidorinaJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_NidorinaPainShiny,
             .pal = sFieldMugshotPal_NidorinaPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_NidorinaSadShiny,
             .pal = sFieldMugshotPal_NidorinaSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_NidorinaShoutingShiny,
             .pal = sFieldMugshotPal_NidorinaShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_NidorinaSighShiny,
             .pal = sFieldMugshotPal_NidorinaSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_NidorinaStunnedShiny,
             .pal = sFieldMugshotPal_NidorinaStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_NidorinaSurprisedShiny,
             .pal = sFieldMugshotPal_NidorinaSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_NidorinaTearyShiny,
             .pal = sFieldMugshotPal_NidorinaTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_NidorinaWorriedShiny,
             .pal = sFieldMugshotPal_NidorinaWorriedShiny,
@@ -19666,97 +19666,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_NIDORINO] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_NidorinoNormal,
             .pal = sFieldMugshotPal_NidorinoNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoAngry,
         //     .pal = sFieldMugshotPal_NidorinoAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoCrying,
         //     .pal = sFieldMugshotPal_NidorinoCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoDetermined,
         //     .pal = sFieldMugshotPal_NidorinoDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoDizzy,
         //     .pal = sFieldMugshotPal_NidorinoDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoHappy,
         //     .pal = sFieldMugshotPal_NidorinoHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoInspired,
         //     .pal = sFieldMugshotPal_NidorinoInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoJoyous,
         //     .pal = sFieldMugshotPal_NidorinoJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoPain,
         //     .pal = sFieldMugshotPal_NidorinoPain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoSad,
         //     .pal = sFieldMugshotPal_NidorinoSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoShouting,
         //     .pal = sFieldMugshotPal_NidorinoShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoSigh,
         //     .pal = sFieldMugshotPal_NidorinoSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoStunned,
         //     .pal = sFieldMugshotPal_NidorinoStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoSurprised,
         //     .pal = sFieldMugshotPal_NidorinoSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoTeary,
         //     .pal = sFieldMugshotPal_NidorinoTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoWorried,
         //     .pal = sFieldMugshotPal_NidorinoWorried,
@@ -19765,97 +19765,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_NIDORINO_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_NidorinoNormalShiny,
             .pal = sFieldMugshotPal_NidorinoNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoAngryShiny,
         //     .pal = sFieldMugshotPal_NidorinoAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoCryingShiny,
         //     .pal = sFieldMugshotPal_NidorinoCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoDeterminedShiny,
         //     .pal = sFieldMugshotPal_NidorinoDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoDizzyShiny,
         //     .pal = sFieldMugshotPal_NidorinoDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoHappyShiny,
         //     .pal = sFieldMugshotPal_NidorinoHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoInspiredShiny,
         //     .pal = sFieldMugshotPal_NidorinoInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoJoyousShiny,
         //     .pal = sFieldMugshotPal_NidorinoJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoPainShiny,
         //     .pal = sFieldMugshotPal_NidorinoPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoSadShiny,
         //     .pal = sFieldMugshotPal_NidorinoSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoShoutingShiny,
         //     .pal = sFieldMugshotPal_NidorinoShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoSighShiny,
         //     .pal = sFieldMugshotPal_NidorinoSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoStunnedShiny,
         //     .pal = sFieldMugshotPal_NidorinoStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoSurprisedShiny,
         //     .pal = sFieldMugshotPal_NidorinoSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoTearyShiny,
         //     .pal = sFieldMugshotPal_NidorinoTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_NidorinoWorriedShiny,
         //     .pal = sFieldMugshotPal_NidorinoWorriedShiny,
@@ -19866,97 +19866,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_NUZLEAF] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_NuzleafNormal,
             .pal = sFieldMugshotPal_NuzleafNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_NuzleafAngry,
             .pal = sFieldMugshotPal_NuzleafAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_NuzleafCrying,
             .pal = sFieldMugshotPal_NuzleafCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_NuzleafDetermined,
             .pal = sFieldMugshotPal_NuzleafDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_NuzleafDizzy,
             .pal = sFieldMugshotPal_NuzleafDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_NuzleafHappy,
             .pal = sFieldMugshotPal_NuzleafHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_NuzleafInspired,
             .pal = sFieldMugshotPal_NuzleafInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_NuzleafJoyous,
             .pal = sFieldMugshotPal_NuzleafJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_NuzleafPain,
             .pal = sFieldMugshotPal_NuzleafPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_NuzleafSad,
             .pal = sFieldMugshotPal_NuzleafSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_NuzleafShouting,
             .pal = sFieldMugshotPal_NuzleafShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_NuzleafSigh,
             .pal = sFieldMugshotPal_NuzleafSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_NuzleafStunned,
             .pal = sFieldMugshotPal_NuzleafStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_NuzleafSurprised,
             .pal = sFieldMugshotPal_NuzleafSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_NuzleafTeary,
             .pal = sFieldMugshotPal_NuzleafTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_NuzleafWorried,
             .pal = sFieldMugshotPal_NuzleafWorried,
@@ -19965,97 +19965,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_NUZLEAF_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_NuzleafNormalShiny,
             .pal = sFieldMugshotPal_NuzleafNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_NuzleafAngryShiny,
             .pal = sFieldMugshotPal_NuzleafAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_NuzleafCryingShiny,
             .pal = sFieldMugshotPal_NuzleafCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_NuzleafDeterminedShiny,
             .pal = sFieldMugshotPal_NuzleafDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_NuzleafDizzyShiny,
             .pal = sFieldMugshotPal_NuzleafDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_NuzleafHappyShiny,
             .pal = sFieldMugshotPal_NuzleafHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_NuzleafInspiredShiny,
             .pal = sFieldMugshotPal_NuzleafInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_NuzleafJoyousShiny,
             .pal = sFieldMugshotPal_NuzleafJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_NuzleafPainShiny,
             .pal = sFieldMugshotPal_NuzleafPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_NuzleafSadShiny,
             .pal = sFieldMugshotPal_NuzleafSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_NuzleafShoutingShiny,
             .pal = sFieldMugshotPal_NuzleafShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_NuzleafSighShiny,
             .pal = sFieldMugshotPal_NuzleafSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_NuzleafStunnedShiny,
             .pal = sFieldMugshotPal_NuzleafStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_NuzleafSurprisedShiny,
             .pal = sFieldMugshotPal_NuzleafSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_NuzleafTearyShiny,
             .pal = sFieldMugshotPal_NuzleafTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_NuzleafWorriedShiny,
             .pal = sFieldMugshotPal_NuzleafWorriedShiny,
@@ -20066,97 +20066,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_PALPITOAD] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_PalpitoadNormal,
             .pal = sFieldMugshotPal_PalpitoadNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadAngry,
         //     .pal = sFieldMugshotPal_PalpitoadAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadCrying,
         //     .pal = sFieldMugshotPal_PalpitoadCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadDetermined,
         //     .pal = sFieldMugshotPal_PalpitoadDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadDizzy,
         //     .pal = sFieldMugshotPal_PalpitoadDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadHappy,
         //     .pal = sFieldMugshotPal_PalpitoadHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadInspired,
         //     .pal = sFieldMugshotPal_PalpitoadInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadJoyous,
         //     .pal = sFieldMugshotPal_PalpitoadJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadPain,
         //     .pal = sFieldMugshotPal_PalpitoadPain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadSad,
         //     .pal = sFieldMugshotPal_PalpitoadSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadShouting,
         //     .pal = sFieldMugshotPal_PalpitoadShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadSigh,
         //     .pal = sFieldMugshotPal_PalpitoadSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadStunned,
         //     .pal = sFieldMugshotPal_PalpitoadStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadSurprised,
         //     .pal = sFieldMugshotPal_PalpitoadSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadTeary,
         //     .pal = sFieldMugshotPal_PalpitoadTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadWorried,
         //     .pal = sFieldMugshotPal_PalpitoadWorried,
@@ -20165,97 +20165,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_PALPITOAD_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_PalpitoadNormalShiny,
             .pal = sFieldMugshotPal_PalpitoadNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadAngryShiny,
         //     .pal = sFieldMugshotPal_PalpitoadAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadCryingShiny,
         //     .pal = sFieldMugshotPal_PalpitoadCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadDeterminedShiny,
         //     .pal = sFieldMugshotPal_PalpitoadDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadDizzyShiny,
         //     .pal = sFieldMugshotPal_PalpitoadDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadHappyShiny,
         //     .pal = sFieldMugshotPal_PalpitoadHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadInspiredShiny,
         //     .pal = sFieldMugshotPal_PalpitoadInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadJoyousShiny,
         //     .pal = sFieldMugshotPal_PalpitoadJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadPainShiny,
         //     .pal = sFieldMugshotPal_PalpitoadPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadSadShiny,
         //     .pal = sFieldMugshotPal_PalpitoadSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadShoutingShiny,
         //     .pal = sFieldMugshotPal_PalpitoadShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadSighShiny,
         //     .pal = sFieldMugshotPal_PalpitoadSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadStunnedShiny,
         //     .pal = sFieldMugshotPal_PalpitoadStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadSurprisedShiny,
         //     .pal = sFieldMugshotPal_PalpitoadSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadTearyShiny,
         //     .pal = sFieldMugshotPal_PalpitoadTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_PalpitoadWorriedShiny,
         //     .pal = sFieldMugshotPal_PalpitoadWorriedShiny,
@@ -20266,97 +20266,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_PILOSWINE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_PiloswineNormal,
             .pal = sFieldMugshotPal_PiloswineNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineAngry,
         //     .pal = sFieldMugshotPal_PiloswineAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineCrying,
         //     .pal = sFieldMugshotPal_PiloswineCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineDetermined,
         //     .pal = sFieldMugshotPal_PiloswineDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineDizzy,
         //     .pal = sFieldMugshotPal_PiloswineDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineHappy,
         //     .pal = sFieldMugshotPal_PiloswineHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineInspired,
         //     .pal = sFieldMugshotPal_PiloswineInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineJoyous,
         //     .pal = sFieldMugshotPal_PiloswineJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswinePain,
         //     .pal = sFieldMugshotPal_PiloswinePain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineSad,
         //     .pal = sFieldMugshotPal_PiloswineSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineShouting,
         //     .pal = sFieldMugshotPal_PiloswineShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineSigh,
         //     .pal = sFieldMugshotPal_PiloswineSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineStunned,
         //     .pal = sFieldMugshotPal_PiloswineStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineSurprised,
         //     .pal = sFieldMugshotPal_PiloswineSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineTeary,
         //     .pal = sFieldMugshotPal_PiloswineTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineWorried,
         //     .pal = sFieldMugshotPal_PiloswineWorried,
@@ -20365,97 +20365,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_PILOSWINE_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_PiloswineNormalShiny,
             .pal = sFieldMugshotPal_PiloswineNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineAngryShiny,
         //     .pal = sFieldMugshotPal_PiloswineAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineCryingShiny,
         //     .pal = sFieldMugshotPal_PiloswineCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineDeterminedShiny,
         //     .pal = sFieldMugshotPal_PiloswineDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineDizzyShiny,
         //     .pal = sFieldMugshotPal_PiloswineDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineHappyShiny,
         //     .pal = sFieldMugshotPal_PiloswineHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineInspiredShiny,
         //     .pal = sFieldMugshotPal_PiloswineInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineJoyousShiny,
         //     .pal = sFieldMugshotPal_PiloswineJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswinePainShiny,
         //     .pal = sFieldMugshotPal_PiloswinePainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineSadShiny,
         //     .pal = sFieldMugshotPal_PiloswineSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineShoutingShiny,
         //     .pal = sFieldMugshotPal_PiloswineShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineSighShiny,
         //     .pal = sFieldMugshotPal_PiloswineSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineStunnedShiny,
         //     .pal = sFieldMugshotPal_PiloswineStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineSurprisedShiny,
         //     .pal = sFieldMugshotPal_PiloswineSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineTearyShiny,
         //     .pal = sFieldMugshotPal_PiloswineTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_PiloswineWorriedShiny,
         //     .pal = sFieldMugshotPal_PiloswineWorriedShiny,
@@ -20466,97 +20466,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_ROLYCOLY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_RolycolyNormal,
             .pal = sFieldMugshotPal_RolycolyNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_RolycolyAngry,
             .pal = sFieldMugshotPal_RolycolyAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_RolycolyCrying,
             .pal = sFieldMugshotPal_RolycolyCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_RolycolyDetermined,
             .pal = sFieldMugshotPal_RolycolyDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_RolycolyDizzy,
             .pal = sFieldMugshotPal_RolycolyDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_RolycolyHappy,
             .pal = sFieldMugshotPal_RolycolyHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_RolycolyInspired,
             .pal = sFieldMugshotPal_RolycolyInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_RolycolyJoyous,
             .pal = sFieldMugshotPal_RolycolyJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_RolycolyPain,
             .pal = sFieldMugshotPal_RolycolyPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_RolycolySad,
             .pal = sFieldMugshotPal_RolycolySad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_RolycolyShouting,
             .pal = sFieldMugshotPal_RolycolyShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_RolycolySigh,
             .pal = sFieldMugshotPal_RolycolySigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_RolycolyStunned,
             .pal = sFieldMugshotPal_RolycolyStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_RolycolySurprised,
             .pal = sFieldMugshotPal_RolycolySurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_RolycolyTeary,
             .pal = sFieldMugshotPal_RolycolyTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_RolycolyWorried,
             .pal = sFieldMugshotPal_RolycolyWorried,
@@ -20565,97 +20565,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_ROLYCOLY_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_RolycolyNormalShiny,
             .pal = sFieldMugshotPal_RolycolyNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_RolycolyAngryShiny,
             .pal = sFieldMugshotPal_RolycolyAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_RolycolyCryingShiny,
             .pal = sFieldMugshotPal_RolycolyCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_RolycolyDeterminedShiny,
             .pal = sFieldMugshotPal_RolycolyDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_RolycolyDizzyShiny,
             .pal = sFieldMugshotPal_RolycolyDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_RolycolyHappyShiny,
             .pal = sFieldMugshotPal_RolycolyHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_RolycolyInspiredShiny,
             .pal = sFieldMugshotPal_RolycolyInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_RolycolyJoyousShiny,
             .pal = sFieldMugshotPal_RolycolyJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_RolycolyPainShiny,
             .pal = sFieldMugshotPal_RolycolyPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_RolycolySadShiny,
             .pal = sFieldMugshotPal_RolycolySadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_RolycolyShoutingShiny,
             .pal = sFieldMugshotPal_RolycolyShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_RolycolySighShiny,
             .pal = sFieldMugshotPal_RolycolySighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_RolycolyStunnedShiny,
             .pal = sFieldMugshotPal_RolycolyStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_RolycolySurprisedShiny,
             .pal = sFieldMugshotPal_RolycolySurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_RolycolyTearyShiny,
             .pal = sFieldMugshotPal_RolycolyTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_RolycolyWorriedShiny,
             .pal = sFieldMugshotPal_RolycolyWorriedShiny,
@@ -20666,97 +20666,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_ROOKIDEE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_RookideeNormal,
             .pal = sFieldMugshotPal_RookideeNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeAngry,
         //     .pal = sFieldMugshotPal_RookideeAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeCrying,
         //     .pal = sFieldMugshotPal_RookideeCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeDetermined,
         //     .pal = sFieldMugshotPal_RookideeDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeDizzy,
         //     .pal = sFieldMugshotPal_RookideeDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeHappy,
         //     .pal = sFieldMugshotPal_RookideeHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeInspired,
         //     .pal = sFieldMugshotPal_RookideeInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeJoyous,
         //     .pal = sFieldMugshotPal_RookideeJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideePain,
         //     .pal = sFieldMugshotPal_RookideePain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeSad,
         //     .pal = sFieldMugshotPal_RookideeSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeShouting,
         //     .pal = sFieldMugshotPal_RookideeShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeSigh,
         //     .pal = sFieldMugshotPal_RookideeSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeStunned,
         //     .pal = sFieldMugshotPal_RookideeStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeSurprised,
         //     .pal = sFieldMugshotPal_RookideeSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeTeary,
         //     .pal = sFieldMugshotPal_RookideeTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeWorried,
         //     .pal = sFieldMugshotPal_RookideeWorried,
@@ -20765,97 +20765,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_ROOKIDEE_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_RookideeNormalShiny,
             .pal = sFieldMugshotPal_RookideeNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeAngryShiny,
         //     .pal = sFieldMugshotPal_RookideeAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeCryingShiny,
         //     .pal = sFieldMugshotPal_RookideeCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeDeterminedShiny,
         //     .pal = sFieldMugshotPal_RookideeDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeDizzyShiny,
         //     .pal = sFieldMugshotPal_RookideeDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeHappyShiny,
         //     .pal = sFieldMugshotPal_RookideeHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeInspiredShiny,
         //     .pal = sFieldMugshotPal_RookideeInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeJoyousShiny,
         //     .pal = sFieldMugshotPal_RookideeJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideePainShiny,
         //     .pal = sFieldMugshotPal_RookideePainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeSadShiny,
         //     .pal = sFieldMugshotPal_RookideeSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeShoutingShiny,
         //     .pal = sFieldMugshotPal_RookideeShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeSighShiny,
         //     .pal = sFieldMugshotPal_RookideeSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeStunnedShiny,
         //     .pal = sFieldMugshotPal_RookideeStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeSurprisedShiny,
         //     .pal = sFieldMugshotPal_RookideeSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeTearyShiny,
         //     .pal = sFieldMugshotPal_RookideeTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_RookideeWorriedShiny,
         //     .pal = sFieldMugshotPal_RookideeWorriedShiny,
@@ -20866,97 +20866,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_SALAMENCE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_SalamenceNormal,
             .pal = sFieldMugshotPal_SalamenceNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_SalamenceAngry,
             .pal = sFieldMugshotPal_SalamenceAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_SalamenceCrying,
             .pal = sFieldMugshotPal_SalamenceCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_SalamenceDetermined,
             .pal = sFieldMugshotPal_SalamenceDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_SalamenceDizzy,
             .pal = sFieldMugshotPal_SalamenceDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_SalamenceHappy,
             .pal = sFieldMugshotPal_SalamenceHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_SalamenceInspired,
             .pal = sFieldMugshotPal_SalamenceInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_SalamenceJoyous,
             .pal = sFieldMugshotPal_SalamenceJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_SalamencePain,
             .pal = sFieldMugshotPal_SalamencePain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_SalamenceSad,
             .pal = sFieldMugshotPal_SalamenceSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_SalamenceShouting,
             .pal = sFieldMugshotPal_SalamenceShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_SalamenceSigh,
             .pal = sFieldMugshotPal_SalamenceSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_SalamenceStunned,
             .pal = sFieldMugshotPal_SalamenceStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_SalamenceSurprised,
             .pal = sFieldMugshotPal_SalamenceSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_SalamenceTeary,
             .pal = sFieldMugshotPal_SalamenceTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_SalamenceWorried,
             .pal = sFieldMugshotPal_SalamenceWorried,
@@ -20965,97 +20965,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_SALAMENCE_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_SalamenceNormalShiny,
             .pal = sFieldMugshotPal_SalamenceNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_SalamenceAngryShiny,
             .pal = sFieldMugshotPal_SalamenceAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_SalamenceCryingShiny,
             .pal = sFieldMugshotPal_SalamenceCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_SalamenceDeterminedShiny,
             .pal = sFieldMugshotPal_SalamenceDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_SalamenceDizzyShiny,
             .pal = sFieldMugshotPal_SalamenceDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_SalamenceHappyShiny,
             .pal = sFieldMugshotPal_SalamenceHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_SalamenceInspiredShiny,
             .pal = sFieldMugshotPal_SalamenceInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_SalamenceJoyousShiny,
             .pal = sFieldMugshotPal_SalamenceJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_SalamencePainShiny,
             .pal = sFieldMugshotPal_SalamencePainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_SalamenceSadShiny,
             .pal = sFieldMugshotPal_SalamenceSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_SalamenceShoutingShiny,
             .pal = sFieldMugshotPal_SalamenceShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_SalamenceSighShiny,
             .pal = sFieldMugshotPal_SalamenceSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_SalamenceStunnedShiny,
             .pal = sFieldMugshotPal_SalamenceStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_SalamenceSurprisedShiny,
             .pal = sFieldMugshotPal_SalamenceSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_SalamenceTearyShiny,
             .pal = sFieldMugshotPal_SalamenceTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_SalamenceWorriedShiny,
             .pal = sFieldMugshotPal_SalamenceWorriedShiny,
@@ -21066,97 +21066,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_SANDILE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_SandileNormal,
             .pal = sFieldMugshotPal_SandileNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_SandileAngry,
             .pal = sFieldMugshotPal_SandileAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_SandileCrying,
             .pal = sFieldMugshotPal_SandileCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_SandileDetermined,
             .pal = sFieldMugshotPal_SandileDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_SandileDizzy,
             .pal = sFieldMugshotPal_SandileDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_SandileHappy,
             .pal = sFieldMugshotPal_SandileHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_SandileInspired,
             .pal = sFieldMugshotPal_SandileInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_SandileJoyous,
             .pal = sFieldMugshotPal_SandileJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_SandilePain,
             .pal = sFieldMugshotPal_SandilePain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_SandileSad,
             .pal = sFieldMugshotPal_SandileSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_SandileShouting,
             .pal = sFieldMugshotPal_SandileShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_SandileSigh,
             .pal = sFieldMugshotPal_SandileSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_SandileStunned,
             .pal = sFieldMugshotPal_SandileStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_SandileSurprised,
             .pal = sFieldMugshotPal_SandileSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_SandileTeary,
             .pal = sFieldMugshotPal_SandileTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_SandileWorried,
             .pal = sFieldMugshotPal_SandileWorried,
@@ -21165,97 +21165,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_SANDILE_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_SandileNormalShiny,
             .pal = sFieldMugshotPal_SandileNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_SandileAngryShiny,
             .pal = sFieldMugshotPal_SandileAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_SandileCryingShiny,
             .pal = sFieldMugshotPal_SandileCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_SandileDeterminedShiny,
             .pal = sFieldMugshotPal_SandileDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_SandileDizzyShiny,
             .pal = sFieldMugshotPal_SandileDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_SandileHappyShiny,
             .pal = sFieldMugshotPal_SandileHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_SandileInspiredShiny,
             .pal = sFieldMugshotPal_SandileInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_SandileJoyousShiny,
             .pal = sFieldMugshotPal_SandileJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_SandilePainShiny,
             .pal = sFieldMugshotPal_SandilePainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_SandileSadShiny,
             .pal = sFieldMugshotPal_SandileSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_SandileShoutingShiny,
             .pal = sFieldMugshotPal_SandileShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_SandileSighShiny,
             .pal = sFieldMugshotPal_SandileSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_SandileStunnedShiny,
             .pal = sFieldMugshotPal_SandileStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_SandileSurprisedShiny,
             .pal = sFieldMugshotPal_SandileSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_SandileTearyShiny,
             .pal = sFieldMugshotPal_SandileTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_SandileWorriedShiny,
             .pal = sFieldMugshotPal_SandileWorriedShiny,
@@ -21266,97 +21266,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_SEEDOT] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_SeedotNormal,
             .pal = sFieldMugshotPal_SeedotNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_SeedotAngry,
             .pal = sFieldMugshotPal_SeedotAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_SeedotCrying,
             .pal = sFieldMugshotPal_SeedotCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_SeedotDetermined,
             .pal = sFieldMugshotPal_SeedotDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_SeedotDizzy,
             .pal = sFieldMugshotPal_SeedotDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_SeedotHappy,
             .pal = sFieldMugshotPal_SeedotHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_SeedotInspired,
             .pal = sFieldMugshotPal_SeedotInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_SeedotJoyous,
             .pal = sFieldMugshotPal_SeedotJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_SeedotPain,
             .pal = sFieldMugshotPal_SeedotPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_SeedotSad,
             .pal = sFieldMugshotPal_SeedotSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_SeedotShouting,
             .pal = sFieldMugshotPal_SeedotShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_SeedotSigh,
             .pal = sFieldMugshotPal_SeedotSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_SeedotStunned,
             .pal = sFieldMugshotPal_SeedotStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_SeedotSurprised,
             .pal = sFieldMugshotPal_SeedotSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_SeedotTeary,
             .pal = sFieldMugshotPal_SeedotTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_SeedotWorried,
             .pal = sFieldMugshotPal_SeedotWorried,
@@ -21365,97 +21365,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_SEEDOT_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_SeedotNormalShiny,
             .pal = sFieldMugshotPal_SeedotNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_SeedotAngryShiny,
             .pal = sFieldMugshotPal_SeedotAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_SeedotCryingShiny,
             .pal = sFieldMugshotPal_SeedotCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_SeedotDeterminedShiny,
             .pal = sFieldMugshotPal_SeedotDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_SeedotDizzyShiny,
             .pal = sFieldMugshotPal_SeedotDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_SeedotHappyShiny,
             .pal = sFieldMugshotPal_SeedotHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_SeedotInspiredShiny,
             .pal = sFieldMugshotPal_SeedotInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_SeedotJoyousShiny,
             .pal = sFieldMugshotPal_SeedotJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_SeedotPainShiny,
             .pal = sFieldMugshotPal_SeedotPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_SeedotSadShiny,
             .pal = sFieldMugshotPal_SeedotSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_SeedotShoutingShiny,
             .pal = sFieldMugshotPal_SeedotShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_SeedotSighShiny,
             .pal = sFieldMugshotPal_SeedotSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_SeedotStunnedShiny,
             .pal = sFieldMugshotPal_SeedotStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_SeedotSurprisedShiny,
             .pal = sFieldMugshotPal_SeedotSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_SeedotTearyShiny,
             .pal = sFieldMugshotPal_SeedotTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_SeedotWorriedShiny,
             .pal = sFieldMugshotPal_SeedotWorriedShiny,
@@ -21466,97 +21466,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_SEISMITOAD] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_SeismitoadNormal,
             .pal = sFieldMugshotPal_SeismitoadNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadAngry,
         //     .pal = sFieldMugshotPal_SeismitoadAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadCrying,
         //     .pal = sFieldMugshotPal_SeismitoadCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadDetermined,
         //     .pal = sFieldMugshotPal_SeismitoadDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadDizzy,
         //     .pal = sFieldMugshotPal_SeismitoadDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadHappy,
         //     .pal = sFieldMugshotPal_SeismitoadHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadInspired,
         //     .pal = sFieldMugshotPal_SeismitoadInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadJoyous,
         //     .pal = sFieldMugshotPal_SeismitoadJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadPain,
         //     .pal = sFieldMugshotPal_SeismitoadPain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadSad,
         //     .pal = sFieldMugshotPal_SeismitoadSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadShouting,
         //     .pal = sFieldMugshotPal_SeismitoadShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadSigh,
         //     .pal = sFieldMugshotPal_SeismitoadSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadStunned,
         //     .pal = sFieldMugshotPal_SeismitoadStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadSurprised,
         //     .pal = sFieldMugshotPal_SeismitoadSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadTeary,
         //     .pal = sFieldMugshotPal_SeismitoadTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadWorried,
         //     .pal = sFieldMugshotPal_SeismitoadWorried,
@@ -21565,97 +21565,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_SEISMITOAD_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_SeismitoadNormalShiny,
             .pal = sFieldMugshotPal_SeismitoadNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadAngryShiny,
         //     .pal = sFieldMugshotPal_SeismitoadAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadCryingShiny,
         //     .pal = sFieldMugshotPal_SeismitoadCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadDeterminedShiny,
         //     .pal = sFieldMugshotPal_SeismitoadDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadDizzyShiny,
         //     .pal = sFieldMugshotPal_SeismitoadDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadHappyShiny,
         //     .pal = sFieldMugshotPal_SeismitoadHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadInspiredShiny,
         //     .pal = sFieldMugshotPal_SeismitoadInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadJoyousShiny,
         //     .pal = sFieldMugshotPal_SeismitoadJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadPainShiny,
         //     .pal = sFieldMugshotPal_SeismitoadPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadSadShiny,
         //     .pal = sFieldMugshotPal_SeismitoadSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadShoutingShiny,
         //     .pal = sFieldMugshotPal_SeismitoadShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadSighShiny,
         //     .pal = sFieldMugshotPal_SeismitoadSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadStunnedShiny,
         //     .pal = sFieldMugshotPal_SeismitoadStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadSurprisedShiny,
         //     .pal = sFieldMugshotPal_SeismitoadSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadTearyShiny,
         //     .pal = sFieldMugshotPal_SeismitoadTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_SeismitoadWorriedShiny,
         //     .pal = sFieldMugshotPal_SeismitoadWorriedShiny,
@@ -21666,97 +21666,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_SHELGON] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_ShelgonNormal,
             .pal = sFieldMugshotPal_ShelgonNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonAngry,
         //     .pal = sFieldMugshotPal_ShelgonAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonCrying,
         //     .pal = sFieldMugshotPal_ShelgonCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonDetermined,
         //     .pal = sFieldMugshotPal_ShelgonDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonDizzy,
         //     .pal = sFieldMugshotPal_ShelgonDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonHappy,
         //     .pal = sFieldMugshotPal_ShelgonHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonInspired,
         //     .pal = sFieldMugshotPal_ShelgonInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonJoyous,
         //     .pal = sFieldMugshotPal_ShelgonJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonPain,
         //     .pal = sFieldMugshotPal_ShelgonPain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonSad,
         //     .pal = sFieldMugshotPal_ShelgonSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonShouting,
         //     .pal = sFieldMugshotPal_ShelgonShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonSigh,
         //     .pal = sFieldMugshotPal_ShelgonSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonStunned,
         //     .pal = sFieldMugshotPal_ShelgonStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonSurprised,
         //     .pal = sFieldMugshotPal_ShelgonSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonTeary,
         //     .pal = sFieldMugshotPal_ShelgonTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonWorried,
         //     .pal = sFieldMugshotPal_ShelgonWorried,
@@ -21765,97 +21765,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_SHELGON_SHINY] =
     {
-        // [EMOTE_NORMAL] =
+        // [MUGSHOT_EMOTE_NORMAL] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonNormalShiny,
         //     .pal = sFieldMugshotPal_ShelgonNormalShiny,
         // },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonAngryShiny,
         //     .pal = sFieldMugshotPal_ShelgonAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonCryingShiny,
         //     .pal = sFieldMugshotPal_ShelgonCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonDeterminedShiny,
         //     .pal = sFieldMugshotPal_ShelgonDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonDizzyShiny,
         //     .pal = sFieldMugshotPal_ShelgonDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonHappyShiny,
         //     .pal = sFieldMugshotPal_ShelgonHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonInspiredShiny,
         //     .pal = sFieldMugshotPal_ShelgonInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonJoyousShiny,
         //     .pal = sFieldMugshotPal_ShelgonJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonPainShiny,
         //     .pal = sFieldMugshotPal_ShelgonPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonSadShiny,
         //     .pal = sFieldMugshotPal_ShelgonSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonShoutingShiny,
         //     .pal = sFieldMugshotPal_ShelgonShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonSighShiny,
         //     .pal = sFieldMugshotPal_ShelgonSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonStunnedShiny,
         //     .pal = sFieldMugshotPal_ShelgonStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonSurprisedShiny,
         //     .pal = sFieldMugshotPal_ShelgonSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonTearyShiny,
         //     .pal = sFieldMugshotPal_ShelgonTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_ShelgonWorriedShiny,
         //     .pal = sFieldMugshotPal_ShelgonWorriedShiny,
@@ -21866,97 +21866,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_SHIFTRY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_ShiftryNormal,
             .pal = sFieldMugshotPal_ShiftryNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_ShiftryAngry,
             .pal = sFieldMugshotPal_ShiftryAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_ShiftryCrying,
             .pal = sFieldMugshotPal_ShiftryCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_ShiftryDetermined,
             .pal = sFieldMugshotPal_ShiftryDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_ShiftryDizzy,
             .pal = sFieldMugshotPal_ShiftryDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_ShiftryHappy,
             .pal = sFieldMugshotPal_ShiftryHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_ShiftryInspired,
             .pal = sFieldMugshotPal_ShiftryInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_ShiftryJoyous,
             .pal = sFieldMugshotPal_ShiftryJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_ShiftryPain,
             .pal = sFieldMugshotPal_ShiftryPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_ShiftrySad,
             .pal = sFieldMugshotPal_ShiftrySad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_ShiftryShouting,
             .pal = sFieldMugshotPal_ShiftryShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_ShiftrySigh,
             .pal = sFieldMugshotPal_ShiftrySigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_ShiftryStunned,
             .pal = sFieldMugshotPal_ShiftryStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_ShiftrySurprised,
             .pal = sFieldMugshotPal_ShiftrySurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_ShiftryTeary,
             .pal = sFieldMugshotPal_ShiftryTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_ShiftryWorried,
             .pal = sFieldMugshotPal_ShiftryWorried,
@@ -21965,97 +21965,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_SHIFTRY_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_ShiftryNormalShiny,
             .pal = sFieldMugshotPal_ShiftryNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_ShiftryAngryShiny,
             .pal = sFieldMugshotPal_ShiftryAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_ShiftryCryingShiny,
             .pal = sFieldMugshotPal_ShiftryCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_ShiftryDeterminedShiny,
             .pal = sFieldMugshotPal_ShiftryDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_ShiftryDizzyShiny,
             .pal = sFieldMugshotPal_ShiftryDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_ShiftryHappyShiny,
             .pal = sFieldMugshotPal_ShiftryHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_ShiftryInspiredShiny,
             .pal = sFieldMugshotPal_ShiftryInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_ShiftryJoyousShiny,
             .pal = sFieldMugshotPal_ShiftryJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_ShiftryPainShiny,
             .pal = sFieldMugshotPal_ShiftryPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_ShiftrySadShiny,
             .pal = sFieldMugshotPal_ShiftrySadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_ShiftryShoutingShiny,
             .pal = sFieldMugshotPal_ShiftryShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_ShiftrySighShiny,
             .pal = sFieldMugshotPal_ShiftrySighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_ShiftryStunnedShiny,
             .pal = sFieldMugshotPal_ShiftryStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_ShiftrySurprisedShiny,
             .pal = sFieldMugshotPal_ShiftrySurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_ShiftryTearyShiny,
             .pal = sFieldMugshotPal_ShiftryTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_ShiftryWorriedShiny,
             .pal = sFieldMugshotPal_ShiftryWorriedShiny,
@@ -22066,97 +22066,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_SHINX] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_ShinxNormal,
             .pal = sFieldMugshotPal_ShinxNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_ShinxAngry,
             .pal = sFieldMugshotPal_ShinxAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_ShinxCrying,
             .pal = sFieldMugshotPal_ShinxCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_ShinxDetermined,
             .pal = sFieldMugshotPal_ShinxDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_ShinxDizzy,
             .pal = sFieldMugshotPal_ShinxDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_ShinxHappy,
             .pal = sFieldMugshotPal_ShinxHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_ShinxInspired,
             .pal = sFieldMugshotPal_ShinxInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_ShinxJoyous,
             .pal = sFieldMugshotPal_ShinxJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_ShinxPain,
             .pal = sFieldMugshotPal_ShinxPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_ShinxSad,
             .pal = sFieldMugshotPal_ShinxSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_ShinxShouting,
             .pal = sFieldMugshotPal_ShinxShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_ShinxSigh,
             .pal = sFieldMugshotPal_ShinxSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_ShinxStunned,
             .pal = sFieldMugshotPal_ShinxStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_ShinxSurprised,
             .pal = sFieldMugshotPal_ShinxSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_ShinxTeary,
             .pal = sFieldMugshotPal_ShinxTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_ShinxWorried,
             .pal = sFieldMugshotPal_ShinxWorried,
@@ -22165,97 +22165,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_SHINX_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_ShinxNormalShiny,
             .pal = sFieldMugshotPal_ShinxNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_ShinxAngryShiny,
             .pal = sFieldMugshotPal_ShinxAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_ShinxCryingShiny,
             .pal = sFieldMugshotPal_ShinxCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_ShinxDeterminedShiny,
             .pal = sFieldMugshotPal_ShinxDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_ShinxDizzyShiny,
             .pal = sFieldMugshotPal_ShinxDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_ShinxHappyShiny,
             .pal = sFieldMugshotPal_ShinxHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_ShinxInspiredShiny,
             .pal = sFieldMugshotPal_ShinxInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_ShinxJoyousShiny,
             .pal = sFieldMugshotPal_ShinxJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_ShinxPainShiny,
             .pal = sFieldMugshotPal_ShinxPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_ShinxSadShiny,
             .pal = sFieldMugshotPal_ShinxSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_ShinxShoutingShiny,
             .pal = sFieldMugshotPal_ShinxShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_ShinxSighShiny,
             .pal = sFieldMugshotPal_ShinxSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_ShinxStunnedShiny,
             .pal = sFieldMugshotPal_ShinxStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_ShinxSurprisedShiny,
             .pal = sFieldMugshotPal_ShinxSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_ShinxTearyShiny,
             .pal = sFieldMugshotPal_ShinxTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_ShinxWorriedShiny,
             .pal = sFieldMugshotPal_ShinxWorriedShiny,
@@ -22266,97 +22266,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_STOUTLAND] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_StoutlandNormal,
             .pal = sFieldMugshotPal_StoutlandNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_StoutlandAngry,
             .pal = sFieldMugshotPal_StoutlandAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_StoutlandCrying,
             .pal = sFieldMugshotPal_StoutlandCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_StoutlandDetermined,
             .pal = sFieldMugshotPal_StoutlandDetermined,
         },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_StoutlandDizzy,
         //     .pal = sFieldMugshotPal_StoutlandDizzy,
         // },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_StoutlandHappy,
             .pal = sFieldMugshotPal_StoutlandHappy,
         },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_StoutlandInspired,
         //     .pal = sFieldMugshotPal_StoutlandInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_StoutlandJoyous,
         //     .pal = sFieldMugshotPal_StoutlandJoyous,
         // },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_StoutlandPain,
             .pal = sFieldMugshotPal_StoutlandPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_StoutlandSad,
             .pal = sFieldMugshotPal_StoutlandSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_StoutlandShouting,
             .pal = sFieldMugshotPal_StoutlandShouting,
         },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_StoutlandSigh,
         //     .pal = sFieldMugshotPal_StoutlandSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_StoutlandStunned,
         //     .pal = sFieldMugshotPal_StoutlandStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_StoutlandSurprised,
         //     .pal = sFieldMugshotPal_StoutlandSurprised,
         // },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_StoutlandTeary,
             .pal = sFieldMugshotPal_StoutlandTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_StoutlandWorried,
             .pal = sFieldMugshotPal_StoutlandWorried,
@@ -22365,97 +22365,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_STOUTLAND_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_StoutlandNormalShiny,
             .pal = sFieldMugshotPal_StoutlandNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_StoutlandAngryShiny,
             .pal = sFieldMugshotPal_StoutlandAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_StoutlandCryingShiny,
             .pal = sFieldMugshotPal_StoutlandCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_StoutlandDeterminedShiny,
             .pal = sFieldMugshotPal_StoutlandDeterminedShiny,
         },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_StoutlandDizzyShiny,
         //     .pal = sFieldMugshotPal_StoutlandDizzyShiny,
         // },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_StoutlandHappyShiny,
             .pal = sFieldMugshotPal_StoutlandHappyShiny,
         },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_StoutlandInspiredShiny,
         //     .pal = sFieldMugshotPal_StoutlandInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_StoutlandJoyousShiny,
         //     .pal = sFieldMugshotPal_StoutlandJoyousShiny,
         // },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_StoutlandPainShiny,
             .pal = sFieldMugshotPal_StoutlandPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_StoutlandSadShiny,
             .pal = sFieldMugshotPal_StoutlandSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_StoutlandShoutingShiny,
             .pal = sFieldMugshotPal_StoutlandShoutingShiny,
         },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_StoutlandSighShiny,
         //     .pal = sFieldMugshotPal_StoutlandSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_StoutlandStunnedShiny,
         //     .pal = sFieldMugshotPal_StoutlandStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_StoutlandSurprisedShiny,
         //     .pal = sFieldMugshotPal_StoutlandSurprisedShiny,
         // },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_StoutlandTearyShiny,
             .pal = sFieldMugshotPal_StoutlandTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_StoutlandWorriedShiny,
             .pal = sFieldMugshotPal_StoutlandWorriedShiny,
@@ -22466,97 +22466,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_SWINUB] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_SwinubNormal,
             .pal = sFieldMugshotPal_SwinubNormal,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_SwinubAngry,
             .pal = sFieldMugshotPal_SwinubAngry,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_SwinubCrying,
             .pal = sFieldMugshotPal_SwinubCrying,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_SwinubDetermined,
             .pal = sFieldMugshotPal_SwinubDetermined,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_SwinubDizzy,
             .pal = sFieldMugshotPal_SwinubDizzy,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_SwinubHappy,
             .pal = sFieldMugshotPal_SwinubHappy,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_SwinubInspired,
             .pal = sFieldMugshotPal_SwinubInspired,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_SwinubJoyous,
             .pal = sFieldMugshotPal_SwinubJoyous,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_SwinubPain,
             .pal = sFieldMugshotPal_SwinubPain,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_SwinubSad,
             .pal = sFieldMugshotPal_SwinubSad,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_SwinubShouting,
             .pal = sFieldMugshotPal_SwinubShouting,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_SwinubSigh,
             .pal = sFieldMugshotPal_SwinubSigh,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_SwinubStunned,
             .pal = sFieldMugshotPal_SwinubStunned,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_SwinubSurprised,
             .pal = sFieldMugshotPal_SwinubSurprised,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_SwinubTeary,
             .pal = sFieldMugshotPal_SwinubTeary,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_SwinubWorried,
             .pal = sFieldMugshotPal_SwinubWorried,
@@ -22565,97 +22565,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_SWINUB_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_SwinubNormalShiny,
             .pal = sFieldMugshotPal_SwinubNormalShiny,
         },
 
-        [EMOTE_ANGRY] =
+        [MUGSHOT_EMOTE_ANGRY] =
         {
             .gfx = sFieldMugshotGfx_SwinubAngryShiny,
             .pal = sFieldMugshotPal_SwinubAngryShiny,
         },
         
-        [EMOTE_CRYING] =
+        [MUGSHOT_EMOTE_CRYING] =
         {
             .gfx = sFieldMugshotGfx_SwinubCryingShiny,
             .pal = sFieldMugshotPal_SwinubCryingShiny,
         },
         
-        [EMOTE_DETERMINED] =
+        [MUGSHOT_EMOTE_DETERMINED] =
         {
             .gfx = sFieldMugshotGfx_SwinubDeterminedShiny,
             .pal = sFieldMugshotPal_SwinubDeterminedShiny,
         },
         
-        [EMOTE_DIZZY] =
+        [MUGSHOT_EMOTE_DIZZY] =
         {
             .gfx = sFieldMugshotGfx_SwinubDizzyShiny,
             .pal = sFieldMugshotPal_SwinubDizzyShiny,
         },
         
-        [EMOTE_HAPPY] =
+        [MUGSHOT_EMOTE_HAPPY] =
         {
             .gfx = sFieldMugshotGfx_SwinubHappyShiny,
             .pal = sFieldMugshotPal_SwinubHappyShiny,
         },
         
-        [EMOTE_INSPIRED] =
+        [MUGSHOT_EMOTE_INSPIRED] =
         {
             .gfx = sFieldMugshotGfx_SwinubInspiredShiny,
             .pal = sFieldMugshotPal_SwinubInspiredShiny,
         },
         
-        [EMOTE_JOYOUS] =
+        [MUGSHOT_EMOTE_JOYOUS] =
         {
             .gfx = sFieldMugshotGfx_SwinubJoyousShiny,
             .pal = sFieldMugshotPal_SwinubJoyousShiny,
         },
         
-        [EMOTE_PAIN] =
+        [MUGSHOT_EMOTE_PAIN] =
         {
             .gfx = sFieldMugshotGfx_SwinubPainShiny,
             .pal = sFieldMugshotPal_SwinubPainShiny,
         },
         
-        [EMOTE_SAD] =
+        [MUGSHOT_EMOTE_SAD] =
         {
             .gfx = sFieldMugshotGfx_SwinubSadShiny,
             .pal = sFieldMugshotPal_SwinubSadShiny,
         },
         
-        [EMOTE_SHOUTING] =
+        [MUGSHOT_EMOTE_SHOUTING] =
         {
             .gfx = sFieldMugshotGfx_SwinubShoutingShiny,
             .pal = sFieldMugshotPal_SwinubShoutingShiny,
         },
         
-        [EMOTE_SIGH] =
+        [MUGSHOT_EMOTE_SIGH] =
         {
             .gfx = sFieldMugshotGfx_SwinubSighShiny,
             .pal = sFieldMugshotPal_SwinubSighShiny,
         },
         
-        [EMOTE_STUNNED] =
+        [MUGSHOT_EMOTE_STUNNED] =
         {
             .gfx = sFieldMugshotGfx_SwinubStunnedShiny,
             .pal = sFieldMugshotPal_SwinubStunnedShiny,
         },
         
-        [EMOTE_SURPRISED] =
+        [MUGSHOT_EMOTE_SURPRISED] =
         {
             .gfx = sFieldMugshotGfx_SwinubSurprisedShiny,
             .pal = sFieldMugshotPal_SwinubSurprisedShiny,
         },
         
-        [EMOTE_TEARY] =
+        [MUGSHOT_EMOTE_TEARY] =
         {
             .gfx = sFieldMugshotGfx_SwinubTearyShiny,
             .pal = sFieldMugshotPal_SwinubTearyShiny,
         },
         
-        [EMOTE_WORRIED] =
+        [MUGSHOT_EMOTE_WORRIED] =
         {
             .gfx = sFieldMugshotGfx_SwinubWorriedShiny,
             .pal = sFieldMugshotPal_SwinubWorriedShiny,
@@ -22666,97 +22666,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_TYMPOLE] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_TympoleNormal,
             .pal = sFieldMugshotPal_TympoleNormal,
         },
 
-    //     // [EMOTE_ANGRY] =
+    //     // [MUGSHOT_EMOTE_ANGRY] =
     //     // {
     //     //     .gfx = sFieldMugshotGfx_TympoleAngry,
     //     //     .pal = sFieldMugshotPal_TympoleAngry,
     //     // },
         
-    //     // [EMOTE_CRYING] =
+    //     // [MUGSHOT_EMOTE_CRYING] =
     //     // {
     //     //     .gfx = sFieldMugshotGfx_TympoleCrying,
     //     //     .pal = sFieldMugshotPal_TympoleCrying,
     //     // },
         
-    //     // [EMOTE_DETERMINED] =
+    //     // [MUGSHOT_EMOTE_DETERMINED] =
     //     // {
     //     //     .gfx = sFieldMugshotGfx_TympoleDetermined,
     //     //     .pal = sFieldMugshotPal_TympoleDetermined,
     //     // },
         
-    //     // [EMOTE_DIZZY] =
+    //     // [MUGSHOT_EMOTE_DIZZY] =
     //     // {
     //     //     .gfx = sFieldMugshotGfx_TympoleDizzy,
     //     //     .pal = sFieldMugshotPal_TympoleDizzy,
     //     // },
         
-    //     // [EMOTE_HAPPY] =
+    //     // [MUGSHOT_EMOTE_HAPPY] =
     //     // {
     //     //     .gfx = sFieldMugshotGfx_TympoleHappy,
     //     //     .pal = sFieldMugshotPal_TympoleHappy,
     //     // },
         
-    //     // [EMOTE_INSPIRED] =
+    //     // [MUGSHOT_EMOTE_INSPIRED] =
     //     // {
     //     //     .gfx = sFieldMugshotGfx_TympoleInspired,
     //     //     .pal = sFieldMugshotPal_TympoleInspired,
     //     // },
         
-    //     // [EMOTE_JOYOUS] =
+    //     // [MUGSHOT_EMOTE_JOYOUS] =
     //     // {
     //     //     .gfx = sFieldMugshotGfx_TympoleJoyous,
     //     //     .pal = sFieldMugshotPal_TympoleJoyous,
     //     // },
         
-    //     // [EMOTE_PAIN] =
+    //     // [MUGSHOT_EMOTE_PAIN] =
     //     // {
     //     //     .gfx = sFieldMugshotGfx_TympolePain,
     //     //     .pal = sFieldMugshotPal_TympolePain,
     //     // },
         
-    //     // [EMOTE_SAD] =
+    //     // [MUGSHOT_EMOTE_SAD] =
     //     // {
     //     //     .gfx = sFieldMugshotGfx_TympoleSad,
     //     //     .pal = sFieldMugshotPal_TympoleSad,
     //     // },
         
-    //     // [EMOTE_SHOUTING] =
+    //     // [MUGSHOT_EMOTE_SHOUTING] =
     //     // {
     //     //     .gfx = sFieldMugshotGfx_TympoleShouting,
     //     //     .pal = sFieldMugshotPal_TympoleShouting,
     //     // },
         
-    //     // [EMOTE_SIGH] =
+    //     // [MUGSHOT_EMOTE_SIGH] =
     //     // {
     //     //     .gfx = sFieldMugshotGfx_TympoleSigh,
     //     //     .pal = sFieldMugshotPal_TympoleSigh,
     //     // },
         
-    //     // [EMOTE_STUNNED] =
+    //     // [MUGSHOT_EMOTE_STUNNED] =
     //     // {
     //     //     .gfx = sFieldMugshotGfx_TympoleStunned,
     //     //     .pal = sFieldMugshotPal_TympoleStunned,
     //     // },
         
-    //     // [EMOTE_SURPRISED] =
+    //     // [MUGSHOT_EMOTE_SURPRISED] =
     //     // {
     //     //     .gfx = sFieldMugshotGfx_TympoleSurprised,
     //     //     .pal = sFieldMugshotPal_TympoleSurprised,
     //     // },
         
-    //     // [EMOTE_TEARY] =
+    //     // [MUGSHOT_EMOTE_TEARY] =
     //     // {
     //     //     .gfx = sFieldMugshotGfx_TympoleTeary,
     //     //     .pal = sFieldMugshotPal_TympoleTeary,
     //     // },
         
-    //     // [EMOTE_WORRIED] =
+    //     // [MUGSHOT_EMOTE_WORRIED] =
     //     // {
     //     //     .gfx = sFieldMugshotGfx_TympoleWorried,
     //     //     .pal = sFieldMugshotPal_TympoleWorried,
@@ -22765,97 +22765,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     // [MUGSHOT_TYMPOLE_SHINY] =
     // {
-    //     [EMOTE_NORMAL] =
+    //     [MUGSHOT_EMOTE_NORMAL] =
     //     {
     //         .gfx = sFieldMugshotGfx_TympoleNormalShiny,
     //         .pal = sFieldMugshotPal_TympoleNormalShiny,
     //     },
 
-    //     [EMOTE_ANGRY] =
+    //     [MUGSHOT_EMOTE_ANGRY] =
     //     {
     //         .gfx = sFieldMugshotGfx_TympoleAngryShiny,
     //         .pal = sFieldMugshotPal_TympoleAngryShiny,
     //     },
         
-    //     [EMOTE_CRYING] =
+    //     [MUGSHOT_EMOTE_CRYING] =
     //     {
     //         .gfx = sFieldMugshotGfx_TympoleCryingShiny,
     //         .pal = sFieldMugshotPal_TympoleCryingShiny,
     //     },
         
-    //     [EMOTE_DETERMINED] =
+    //     [MUGSHOT_EMOTE_DETERMINED] =
     //     {
     //         .gfx = sFieldMugshotGfx_TympoleDeterminedShiny,
     //         .pal = sFieldMugshotPal_TympoleDeterminedShiny,
     //     },
         
-    //     [EMOTE_DIZZY] =
+    //     [MUGSHOT_EMOTE_DIZZY] =
     //     {
     //         .gfx = sFieldMugshotGfx_TympoleDizzyShiny,
     //         .pal = sFieldMugshotPal_TympoleDizzyShiny,
     //     },
         
-    //     [EMOTE_HAPPY] =
+    //     [MUGSHOT_EMOTE_HAPPY] =
     //     {
     //         .gfx = sFieldMugshotGfx_TympoleHappyShiny,
     //         .pal = sFieldMugshotPal_TympoleHappyShiny,
     //     },
         
-    //     [EMOTE_INSPIRED] =
+    //     [MUGSHOT_EMOTE_INSPIRED] =
     //     {
     //         .gfx = sFieldMugshotGfx_TympoleInspiredShiny,
     //         .pal = sFieldMugshotPal_TympoleInspiredShiny,
     //     },
         
-    //     [EMOTE_JOYOUS] =
+    //     [MUGSHOT_EMOTE_JOYOUS] =
     //     {
     //         .gfx = sFieldMugshotGfx_TympoleJoyousShiny,
     //         .pal = sFieldMugshotPal_TympoleJoyousShiny,
     //     },
         
-    //     [EMOTE_PAIN] =
+    //     [MUGSHOT_EMOTE_PAIN] =
     //     {
     //         .gfx = sFieldMugshotGfx_TympolePainShiny,
     //         .pal = sFieldMugshotPal_TympolePainShiny,
     //     },
         
-    //     [EMOTE_SAD] =
+    //     [MUGSHOT_EMOTE_SAD] =
     //     {
     //         .gfx = sFieldMugshotGfx_TympoleSadShiny,
     //         .pal = sFieldMugshotPal_TympoleSadShiny,
     //     },
         
-    //     [EMOTE_SHOUTING] =
+    //     [MUGSHOT_EMOTE_SHOUTING] =
     //     {
     //         .gfx = sFieldMugshotGfx_TympoleShoutingShiny,
     //         .pal = sFieldMugshotPal_TympoleShoutingShiny,
     //     },
         
-    //     [EMOTE_SIGH] =
+    //     [MUGSHOT_EMOTE_SIGH] =
     //     {
     //         .gfx = sFieldMugshotGfx_TympoleSighShiny,
     //         .pal = sFieldMugshotPal_TympoleSighShiny,
     //     },
         
-    //     [EMOTE_STUNNED] =
+    //     [MUGSHOT_EMOTE_STUNNED] =
     //     {
     //         .gfx = sFieldMugshotGfx_TympoleStunnedShiny,
     //         .pal = sFieldMugshotPal_TympoleStunnedShiny,
     //     },
         
-    //     [EMOTE_SURPRISED] =
+    //     [MUGSHOT_EMOTE_SURPRISED] =
     //     {
     //         .gfx = sFieldMugshotGfx_TympoleSurprisedShiny,
     //         .pal = sFieldMugshotPal_TympoleSurprisedShiny,
     //     },
         
-    //     [EMOTE_TEARY] =
+    //     [MUGSHOT_EMOTE_TEARY] =
     //     {
     //         .gfx = sFieldMugshotGfx_TympoleTearyShiny,
     //         .pal = sFieldMugshotPal_TympoleTearyShiny,
     //     },
         
-    //     [EMOTE_WORRIED] =
+    //     [MUGSHOT_EMOTE_WORRIED] =
     //     {
     //         .gfx = sFieldMugshotGfx_TympoleWorriedShiny,
     //         .pal = sFieldMugshotPal_TympoleWorriedShiny,
@@ -22866,97 +22866,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
     
     [MUGSHOT_VIKAVOLT] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_VikavoltNormal,
             .pal = sFieldMugshotPal_VikavoltNormal,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltAngry,
         //     .pal = sFieldMugshotPal_VikavoltAngry,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltCrying,
         //     .pal = sFieldMugshotPal_VikavoltCrying,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltDetermined,
         //     .pal = sFieldMugshotPal_VikavoltDetermined,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltDizzy,
         //     .pal = sFieldMugshotPal_VikavoltDizzy,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltHappy,
         //     .pal = sFieldMugshotPal_VikavoltHappy,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltInspired,
         //     .pal = sFieldMugshotPal_VikavoltInspired,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltJoyous,
         //     .pal = sFieldMugshotPal_VikavoltJoyous,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltPain,
         //     .pal = sFieldMugshotPal_VikavoltPain,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltSad,
         //     .pal = sFieldMugshotPal_VikavoltSad,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltShouting,
         //     .pal = sFieldMugshotPal_VikavoltShouting,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltSigh,
         //     .pal = sFieldMugshotPal_VikavoltSigh,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltStunned,
         //     .pal = sFieldMugshotPal_VikavoltStunned,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltSurprised,
         //     .pal = sFieldMugshotPal_VikavoltSurprised,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltTeary,
         //     .pal = sFieldMugshotPal_VikavoltTeary,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltWorried,
         //     .pal = sFieldMugshotPal_VikavoltWorried,
@@ -22965,97 +22965,97 @@ const struct MugshotGfx gFieldMugshots[MUGSHOT_COUNT][EMOTE_COUNT] =
 
     [MUGSHOT_VIKAVOLT_SHINY] =
     {
-        [EMOTE_NORMAL] =
+        [MUGSHOT_EMOTE_NORMAL] =
         {
             .gfx = sFieldMugshotGfx_VikavoltNormalShiny,
             .pal = sFieldMugshotPal_VikavoltNormalShiny,
         },
 
-        // [EMOTE_ANGRY] =
+        // [MUGSHOT_EMOTE_ANGRY] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltAngryShiny,
         //     .pal = sFieldMugshotPal_VikavoltAngryShiny,
         // },
         
-        // [EMOTE_CRYING] =
+        // [MUGSHOT_EMOTE_CRYING] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltCryingShiny,
         //     .pal = sFieldMugshotPal_VikavoltCryingShiny,
         // },
         
-        // [EMOTE_DETERMINED] =
+        // [MUGSHOT_EMOTE_DETERMINED] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltDeterminedShiny,
         //     .pal = sFieldMugshotPal_VikavoltDeterminedShiny,
         // },
         
-        // [EMOTE_DIZZY] =
+        // [MUGSHOT_EMOTE_DIZZY] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltDizzyShiny,
         //     .pal = sFieldMugshotPal_VikavoltDizzyShiny,
         // },
         
-        // [EMOTE_HAPPY] =
+        // [MUGSHOT_EMOTE_HAPPY] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltHappyShiny,
         //     .pal = sFieldMugshotPal_VikavoltHappyShiny,
         // },
         
-        // [EMOTE_INSPIRED] =
+        // [MUGSHOT_EMOTE_INSPIRED] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltInspiredShiny,
         //     .pal = sFieldMugshotPal_VikavoltInspiredShiny,
         // },
         
-        // [EMOTE_JOYOUS] =
+        // [MUGSHOT_EMOTE_JOYOUS] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltJoyousShiny,
         //     .pal = sFieldMugshotPal_VikavoltJoyousShiny,
         // },
         
-        // [EMOTE_PAIN] =
+        // [MUGSHOT_EMOTE_PAIN] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltPainShiny,
         //     .pal = sFieldMugshotPal_VikavoltPainShiny,
         // },
         
-        // [EMOTE_SAD] =
+        // [MUGSHOT_EMOTE_SAD] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltSadShiny,
         //     .pal = sFieldMugshotPal_VikavoltSadShiny,
         // },
         
-        // [EMOTE_SHOUTING] =
+        // [MUGSHOT_EMOTE_SHOUTING] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltShoutingShiny,
         //     .pal = sFieldMugshotPal_VikavoltShoutingShiny,
         // },
         
-        // [EMOTE_SIGH] =
+        // [MUGSHOT_EMOTE_SIGH] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltSighShiny,
         //     .pal = sFieldMugshotPal_VikavoltSighShiny,
         // },
         
-        // [EMOTE_STUNNED] =
+        // [MUGSHOT_EMOTE_STUNNED] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltStunnedShiny,
         //     .pal = sFieldMugshotPal_VikavoltStunnedShiny,
         // },
         
-        // [EMOTE_SURPRISED] =
+        // [MUGSHOT_EMOTE_SURPRISED] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltSurprisedShiny,
         //     .pal = sFieldMugshotPal_VikavoltSurprisedShiny,
         // },
         
-        // [EMOTE_TEARY] =
+        // [MUGSHOT_EMOTE_TEARY] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltTearyShiny,
         //     .pal = sFieldMugshotPal_VikavoltTearyShiny,
         // },
         
-        // [EMOTE_WORRIED] =
+        // [MUGSHOT_EMOTE_WORRIED] =
         // {
         //     .gfx = sFieldMugshotGfx_VikavoltWorriedShiny,
         //     .pal = sFieldMugshotPal_VikavoltWorriedShiny,

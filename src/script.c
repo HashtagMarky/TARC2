@@ -540,7 +540,7 @@ bool8 LoadOverworldPokemonObjectScript(void)
     }
     else
     {
-        gSpecialVar_0x8008 = EMOTE_ANGRY;
+        gSpecialVar_0x8008 = MUGSHOT_EMOTE_ANGRY;
         sGlobalScriptContext.scriptPtr = OverworldEncounters_EventScript_Encounter;
     }
     return TRUE;

@@ -183,7 +183,7 @@ VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon::
 # 136 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	faceplayer
 # 137 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	createfieldmugshot MUGSHOT_PMD, emotion = EMOTE_DETERMINED
+	createfieldmugshot MUGSHOT_PMD, emotion = MUGSHOT_EMOTE_DETERMINED
 # 138 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	special GetOverworldMonSpecies
 # 139 "data//maps/VyratonIndoors_MayorsOffice/scripts.pory"

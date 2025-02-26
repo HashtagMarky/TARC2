@@ -500,7 +500,7 @@ void GetOverworldSpeciesCatchRate(void)
         
     odds = (catchRate * ballMultiplier / 100) * (3 - 2) / (3); // Full HP calculation.
     odds *= OVERWORLD_CATCH_RATE_MULTIPLYER;
-    if (gSpecialVar_0x8006 == EMOTE_SURPRISED)
+    if (gSpecialVar_0x8006 == MUGSHOT_EMOTE_SURPRISED)
         odds *= 2;
 
     if (odds > 254) // mon caught
