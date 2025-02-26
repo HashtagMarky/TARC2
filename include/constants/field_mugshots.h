@@ -6,18 +6,20 @@
 
 #define TAG_MUGSHOT 0x9000
 
-// Mugshot Types
-#define MUGSHOT_DEFINED     0
-#define MUGSHOT_NPC         1
-#define MUGSHOT_PLAYER      2
-#define MUGSHOT_PMD         3
-#define MUGSHOT_FOLLOWER    4
-#define MUGSHOT_TYPES       5
+enum MugshotType {
+    MUGSHOT_DEFINED,
+    MUGSHOT_NPC,
+    MUGSHOT_PLAYER,
+    MUGSHOT_PMD,
+    MUGSHOT_FOLLOWER,
+    MUGSHOT_TYPES
+};
 
-// Follower Mugshot Settings
-#define MUGSHOT_FOLLOWER_PLACEHOLDER    0
-#define MUGSHOT_FOLLOWER_ON             1
-#define MUGSHOT_FOLLOWER_OFF            2
+enum FollowerMugshotSetting {
+    MUGSHOT_FOLLOWER_PLACEHOLDER,
+    MUGSHOT_FOLLOWER_ON,
+    MUGSHOT_FOLLOWER_OFF
+};
 
 enum MugshotIDs {
     MUGSHOT_BLANK,

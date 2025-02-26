@@ -54,7 +54,7 @@ static const struct WindowTemplate sMugshotWindowPokemon =
 
 static void SpriteCB_FieldMugshot(struct Sprite *s);
 static void Task_MugshotWindow(u8 taskId);
-static u16 GetPokemonMugshotIdFromObjectEvent(struct ObjectEvent *objEvent);
+static enum MugshotIDs GetPokemonMugshotIdFromObjectEvent(struct ObjectEvent *objEvent);
 
 static const struct OamData sFieldMugshot_Oam = {
     .size = SPRITE_SIZE(64x64),
@@ -120,7 +120,7 @@ struct MugshotDetails GetMugshotDetails(void)
     return gActiveMugshotDetails;
 }
 
-u16 GetMugshotIdFromObjectEvent(struct ObjectEvent *objEvent)
+enum MugshotIDs GetMugshotIdFromObjectEvent(struct ObjectEvent *objEvent)
 {
     if (IS_OW_MON_OBJ(objEvent))
     {
@@ -132,7 +132,7 @@ u16 GetMugshotIdFromObjectEvent(struct ObjectEvent *objEvent)
     }
 }
 
-static u16 GetPokemonMugshotIdFromObjectEvent(struct ObjectEvent *objEvent)
+static enum MugshotIDs GetPokemonMugshotIdFromObjectEvent(struct ObjectEvent *objEvent)
 {
     u32 species = OW_SPECIES(objEvent);
     bool32 shiny = OW_SHINY(objEvent);
@@ -243,7 +243,7 @@ void CreateFollowerFieldMugshot(u32 followerSpecies, u32 followerEmotion, bool8 
     CreateFieldMugshot(MUGSHOT_FOLLOWER, mugshotId, mugshotEmotion, 0, 0, FALSE);
 }
 
-void CreateFieldMugshot(u8 mugshotType, u16 mugshotId, u8 mugshotEmotion, s16 x, s16 y, bool8 retainDetails)
+void CreateFieldMugshot(enum MugshotType mugshotType, enum MugshotIDs mugshotId, enum MugshotEmoteIDs mugshotEmotion, s16 x, s16 y, bool8 retainDetails)
 {
     u8 windowTask = TASK_NONE;
     u8 windowId = WINDOW_NONE;
@@ -369,7 +369,7 @@ u8 IsFieldMugshotActive(void)
     return sIsFieldMugshotActive;
 }
 
-u8 CreateFieldMugshotSprite(u16 mugshotId, u8 mugshotEmotion, bool8 typeMon, bool8 shinyMon, u8 mugshotNum)
+u8 CreateFieldMugshotSprite(enum MugshotIDs mugshotId, enum MugshotEmoteIDs mugshotEmotion, bool8 typeMon, bool8 shinyMon, u8 mugshotNum)
 {
     u32 mugshotTag = TAG_MUGSHOT;
     u8 spriteId;
@@ -453,9 +453,9 @@ void DestroyFieldMugshotSprite(u8 sprite, u8 mugshotNum)
     FreeSpriteTilesByTag(TAG_MUGSHOT + mugshotNum);
 }
 
-u16 CreatePlayerMugshotTrainerCardSprite(u8 gender, u8 mugshotEmotion, u16 destX, u16 destY, u8 paletteSlot, u8 windowId)
+u16 CreatePlayerMugshotTrainerCardSprite(u8 gender, enum MugshotEmoteIDs mugshotEmotion, u16 destX, u16 destY, u8 paletteSlot, u8 windowId)
 {
-    u16 mugshotId;
+    enum MugshotIDs mugshotId;
     u8 *mugshotBuffer;
     const u32 *mugshotGfx;
     const u16 *mugshotPal;
