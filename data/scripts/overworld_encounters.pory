@@ -76,6 +76,7 @@ script OverworldEncounters_EventScript_Fight
     closemessage
     waitmoncry
     dowildsafaribattle
+    waitstate
     specialvar(VAR_RESULT, GetBattleOutcome)
     switch (var(VAR_RESULT))
     {
