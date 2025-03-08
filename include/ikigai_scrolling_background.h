@@ -8,6 +8,7 @@ extern const u16 *ReturnScrollingBackgroundPalette(void);
 extern const u16 *ReturnScrollingBackgroundGymPalette(void);
 extern const u16 *ReturnMenuUIPalette(void);
 extern const u16 *ReturnMenuUIGymPalette(void);
+extern const u16 *ReturnScrollingBackgroundSeasonPalette(u8 season);
 
 extern const u32 IkigaiScrollingBgTiles[];
 extern const u32 IkigaiScrollingBgTilemap_PalOne[];

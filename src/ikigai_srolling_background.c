@@ -91,3 +91,25 @@ const u16 *ReturnMenuUIGymPalette(void)
             return IkigaiMainUIPal;
     }
 }
+
+const u16 *ReturnScrollingBackgroundSeasonPalette(u8 season)
+{
+    switch (season)
+    {
+        case 1:
+            return IkigaiScrollingBgPal_Pink;
+
+        case 2:
+            return IkigaiScrollingBgPal_Green;
+        
+        case 3:
+            return IkigaiScrollingBgPal_Orange;
+        
+        case 4:
+            return IkigaiScrollingBgPal_Blue;
+
+        case 0:
+        default:
+            return IkigaiScrollingBgPal_Default;
+    }
+}
