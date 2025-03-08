@@ -50,7 +50,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "pokesphere.h"
-#include "sample_ui.h"
+#include "calendar.h"
 
 #if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_START_MENU)
 #define AddTextPrinterParameterized (AddTextPrinterFixedCaseParameterized)
@@ -1523,7 +1523,7 @@ static bool8 StartMenuPokesphereCallback(void)
 static bool8 StartMenuSampleUiCallback(void)
 {
     // Change which version of the UI is launched by changing which task is called from here
-    CreateTask(Task_OpenSampleUi_BlankTemplate, 0);
+    CreateTask(Task_OpenCalendarUI, 0);
     return TRUE;
 }
 

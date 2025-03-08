@@ -12,5 +12,6 @@ extern const u16 *ReturnMenuUIGymPalette(void);
 extern const u32 IkigaiScrollingBgTiles[];
 extern const u32 IkigaiScrollingBgTilemap_PalOne[];
 extern const u32 IkigaiScrollingBgTilemap_PalTwo[];
+extern const u16 IkigaiScrollingBgPal_Default[];
 
 #endif // GUARD_IKIGAI_SCROLLING_BACKGROUND_H

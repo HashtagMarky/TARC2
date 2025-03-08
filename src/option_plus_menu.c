@@ -798,7 +798,7 @@ static void HighlightOptionMenuItem(void)
     SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(8, 232));
     SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(cursor * Y_DIFF + 24, cursor * Y_DIFF + 40));
 }
-static const u16 IkigaiScrollingBgPal_Default[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles.gbapal");
+
 static bool8 OptionsMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spritesheets, and palettes
 {
     switch (sOptions->gfxLoadState)
