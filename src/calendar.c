@@ -30,8 +30,10 @@
 #include "pokedex.h"
 #include "gpu_regs.h"
 
+#include "event_object_movement.h"
 #include "ikigai_scrolling_background.h"
 #include "international_string_util.h"
+#include "constants/event_objects.h"
 
 #define DAYS_IN_SEASON 28
 
@@ -97,6 +99,9 @@ static const u32 sCalendarUITiles[] = INCBIN_U32("graphics/calendar/tiles.4bpp.l
 static const u32 sCalendarUITilemap[] = INCBIN_U32("graphics/calendar/tilemap.bin.lz");
 static const u16 sCalendarUIPalette[] = INCBIN_U16("graphics/calendar/tiles.gbapal");
 
+static const u32 sCalendarWeatherIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/sunny_day.4bpp.lz");
+static const u16 sCalendarWeatherIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/sunny_day.gbapal");
+
 enum FontColor
 {
     FONT_BROWN,
@@ -108,6 +113,39 @@ static const u8 sCalendarUIWindowFontColors[][3] =
 
 #define TEXT_REPLACEMENT_INDEX      5
 #define SHADOW_REPLACEMENT_INDEX    11
+
+#define TAG_WEATHER_ICON            7281
+
+static const struct OamData sOamData_CalendarWeatherIcon =
+{
+    .size = SPRITE_SIZE(32x32),
+    .shape = SPRITE_SHAPE(32x32),
+    .priority = 1,
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_CalendarWeatherIcon =
+{
+    .data = sCalendarWeatherIconGfx,
+    .size = 32*32*4/2,
+    .tag = TAG_WEATHER_ICON,
+};
+
+static const struct SpritePalette sSpritePal_CalendarWeatherIcon =
+{
+    .data = sCalendarWeatherIconPal,
+    .tag = TAG_WEATHER_ICON
+};
+
+static const struct SpriteTemplate sSpriteTemplate_CalendarWeatherIcon =
+{
+    .tileTag = TAG_WEATHER_ICON,
+    .paletteTag = TAG_WEATHER_ICON,
+    .oam = &sOamData_CalendarWeatherIcon,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
 
 // Callbacks for the Calendar UI
 static void CalendarUI_SetupCB(void);
@@ -128,6 +166,7 @@ static void CalendarUI_FadeAndBail(void);
 static bool8 CalendarUI_LoadGraphics(void);
 static void CalendarUI_InitWindows(void);
 static void CalendarUI_PrintScheduleText(void);
+static void CalendarUI_CreateSprites(void);
 static void CalendarUI_FreeResources(void);
 
 void Task_OpenCalendarUI(u8 taskId)
@@ -202,6 +241,7 @@ static void CalendarUI_SetupCB(void)
         break;
     case 5:
         CalendarUI_PrintScheduleText();
+        CalendarUI_CreateSprites();
         CreateTask(Task_CalendarUIWaitFadeIn, 0);
         gMain.state++;
         break;
@@ -407,6 +447,24 @@ static void CalendarUI_PrintScheduleText(void)
     );
 
     CopyWindowToVram(WINDOW_SCHEDULE, COPYWIN_GFX);
+}
+
+static void CalendarUI_CreateSprites(void)
+{
+    // spriteIdSeason
+
+    LoadCompressedSpriteSheet(&sSpriteSheet_CalendarWeatherIcon);
+    LoadSpritePalette(&sSpritePal_CalendarWeatherIcon);
+    sCalendarUIState->spriteIdWeather = CreateSprite(&sSpriteTemplate_CalendarWeatherIcon, 36, 86, 0);
+    gSprites[sCalendarUIState->spriteIdWeather].oam.priority = 3;
+
+    u16 objEvent = gSaveBlock2Ptr->playerGender ? OBJ_EVENT_GFX_ANKA_NORMAL : OBJ_EVENT_GFX_KOLE_NORMAL;
+    sCalendarUIState->spriteIdPlayer = CreateObjectGraphicsSprite(objEvent, SpriteCallbackDummy, 33, 131, 102);
+    StartSpriteAnim(&gSprites[sCalendarUIState->spriteIdPlayer], ANIM_STD_GO_SOUTH);
+
+    // spriteIdGymType
+
+    // spriteIdDate[DAYS_IN_SEASON]
 }
 
 static void CalendarUI_FreeResources(void)
