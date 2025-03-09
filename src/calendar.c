@@ -31,11 +31,14 @@
 #include "gpu_regs.h"
 
 #include "comfy_anim.h"
+#include "event_data.h"
 #include "event_object_movement.h"
 #include "ikigai_scrolling_background.h"
 #include "international_string_util.h"
+#include "rtc.h"
 #include "type_icons.h"
 #include "constants/event_objects.h"
+#include "constants/weather.h"
 
 #define DAYS_IN_SEASON 28
 
@@ -100,8 +103,285 @@ static const u32 sCalendarUITiles[] = INCBIN_U32("graphics/calendar/tiles.4bpp.l
 static const u32 sCalendarUITilemap[] = INCBIN_U32("graphics/calendar/tilemap.bin.lz");
 static const u16 sCalendarUIPalette[] = INCBIN_U16("graphics/calendar/tiles.gbapal");
 
-static const u32 sCalendarWeatherIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/sunny_day.4bpp.lz");
-static const u16 sCalendarWeatherIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/sunny_day.gbapal");
+static const u32 sCalendarSunnyCloudsMorningIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/sunny_clouds_morning.4bpp.lz");
+static const u16 sCalendarSunnyCloudsMorningIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/sunny_clouds_morning.gbapal");
+static const u32 sCalendarSunnyCloudsDayIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/sunny_clouds_day.4bpp.lz");
+static const u16 sCalendarSunnyCloudsDayIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/sunny_clouds_day.gbapal");
+static const u32 sCalendarSunnyCloudsEveningIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/sunny_clouds_evening.4bpp.lz");
+static const u16 sCalendarSunnyCloudsEveningIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/sunny_clouds_evening.gbapal");
+static const u32 sCalendarFullMoonCloudsIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/full_moon_clouds.4bpp.lz");
+static const u16 sCalendarFullMoonCloudsIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/full_moon_clouds.gbapal");
+static const u32 sCalendarSunnyMorningIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/sunny_morning.4bpp.lz");
+static const u16 sCalendarSunnyMorningIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/sunny_morning.gbapal");
+static const u32 sCalendarSunnyDayIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/sunny_day.4bpp.lz");
+static const u16 sCalendarSunnyDayIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/sunny_day.gbapal");
+static const u32 sCalendarSunnyEveningIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/sunny_evening.4bpp.lz");
+static const u16 sCalendarSunnyEveningIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/sunny_evening.gbapal");
+static const u32 sCalendarFullMoonIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/full_moon.4bpp.lz");
+static const u16 sCalendarFullMoonIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/full_moon.gbapal");
+static const u32 sCalendarRainIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/rain.4bpp.lz");
+static const u16 sCalendarRainIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/rain.gbapal");
+static const u32 sCalendarSnowIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/snow.4bpp.lz");
+static const u16 sCalendarSnowIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/snow.gbapal");
+static const u32 sCalendarThunderstormIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/thunderstorm.4bpp.lz");
+static const u16 sCalendarThunderstormIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/thunderstorm.gbapal");
+static const u32 sCalendarFogIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/fog.4bpp.lz");
+static const u16 sCalendarFogIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/fog.gbapal");
+static const u32 sCalendarSandstormIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/sandstorm.4bpp.lz");
+static const u16 sCalendarSandstormIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/sandstorm.gbapal");
+
+struct WeatherIcons
+{
+    const u32 *gfx;
+    const u16 *pal;
+};
+
+#define INDEX_COLOUR_TOP 1
+#define INDEX_COLOUR_MIDDLE 2
+#define INDEX_COLOUR_BOTTOM 3
+#define TIME_COUNT TIME_NIGHT + 1
+static const struct WeatherIcons sWeatherIcons[WEATHER_COUNT][TIME_COUNT] =
+{
+    [WEATHER_SUNNY_CLOUDS] =
+    {
+        [TIME_MORNING] =
+        {
+            .gfx = sCalendarSunnyCloudsMorningIconGfx,
+            .pal = sCalendarSunnyCloudsMorningIconPal,
+        },
+        [TIME_DAY] =
+        {
+            .gfx = sCalendarSunnyCloudsDayIconGfx,
+            .pal = sCalendarSunnyCloudsDayIconPal,
+        },
+        [TIME_EVENING] =
+        {
+            .gfx = sCalendarSunnyCloudsEveningIconGfx,
+            .pal = sCalendarSunnyCloudsEveningIconPal,
+        },
+        [TIME_NIGHT] =
+        {
+            .gfx = sCalendarFullMoonCloudsIconGfx,
+            .pal = sCalendarFullMoonCloudsIconPal,
+        },
+    },
+
+    [WEATHER_SUNNY] =
+    {
+        [TIME_MORNING] =
+        {
+            .gfx = sCalendarSunnyMorningIconGfx,
+            .pal = sCalendarSunnyMorningIconPal,
+        },
+        [TIME_DAY] =
+        {
+            .gfx = sCalendarSunnyDayIconGfx,
+            .pal = sCalendarSunnyDayIconPal,
+        },
+        [TIME_EVENING] =
+        {
+            .gfx = sCalendarSunnyEveningIconGfx,
+            .pal = sCalendarSunnyEveningIconPal,
+        },
+        [TIME_NIGHT] =
+        {
+            .gfx = sCalendarFullMoonIconGfx,
+            .pal = sCalendarFullMoonIconPal,
+        },
+    },
+
+    [WEATHER_RAIN] =
+    {
+        [TIME_MORNING] =
+        {
+            .gfx = sCalendarRainIconGfx,
+            .pal = sCalendarRainIconPal,
+        },
+        [TIME_DAY] =
+        {
+            .gfx = sCalendarRainIconGfx,
+            .pal = sCalendarRainIconPal,
+        },
+        [TIME_EVENING] =
+        {
+            .gfx = sCalendarRainIconGfx,
+            .pal = sCalendarRainIconPal,
+        },
+        [TIME_NIGHT] =
+        {
+            .gfx = sCalendarRainIconGfx,
+            .pal = sCalendarRainIconPal,
+        },
+    },
+
+    [WEATHER_SNOW] =
+    {
+        [TIME_MORNING] =
+        {
+            .gfx = sCalendarSnowIconGfx,
+            .pal = sCalendarSnowIconPal,
+        },
+        [TIME_DAY] =
+        {
+            .gfx = sCalendarSnowIconGfx,
+            .pal = sCalendarSnowIconPal,
+        },
+        [TIME_EVENING] =
+        {
+            .gfx = sCalendarSnowIconGfx,
+            .pal = sCalendarSnowIconPal,
+        },
+        [TIME_NIGHT] =
+        {
+            .gfx = sCalendarSnowIconGfx,
+            .pal = sCalendarSnowIconPal,
+        },
+    },
+
+    [WEATHER_RAIN_THUNDERSTORM] =
+    {
+        [TIME_MORNING] =
+        {
+            .gfx = sCalendarThunderstormIconGfx,
+            .pal = sCalendarThunderstormIconPal,
+        },
+        [TIME_DAY] =
+        {
+            .gfx = sCalendarThunderstormIconGfx,
+            .pal = sCalendarThunderstormIconPal,
+        },
+        [TIME_EVENING] =
+        {
+            .gfx = sCalendarThunderstormIconGfx,
+            .pal = sCalendarThunderstormIconPal,
+        },
+        [TIME_NIGHT] =
+        {
+            .gfx = sCalendarThunderstormIconGfx,
+            .pal = sCalendarThunderstormIconPal,
+        },
+    },
+
+    [WEATHER_FOG_HORIZONTAL] =
+    {
+        [TIME_MORNING] =
+        {
+            .gfx = sCalendarFogIconGfx,
+            .pal = sCalendarFogIconPal,
+        },
+        [TIME_DAY] =
+        {
+            .gfx = sCalendarFogIconGfx,
+            .pal = sCalendarFogIconPal,
+        },
+        [TIME_EVENING] =
+        {
+            .gfx = sCalendarFogIconGfx,
+            .pal = sCalendarFogIconPal,
+        },
+        [TIME_NIGHT] =
+        {
+            .gfx = sCalendarFogIconGfx,
+            .pal = sCalendarFogIconPal,
+        },
+    },
+
+    [WEATHER_SANDSTORM] =
+    {
+        [TIME_MORNING] =
+        {
+            .gfx = sCalendarSandstormIconGfx,
+            .pal = sCalendarSandstormIconPal,
+        },
+        [TIME_DAY] =
+        {
+            .gfx = sCalendarSandstormIconGfx,
+            .pal = sCalendarSandstormIconPal,
+        },
+        [TIME_EVENING] =
+        {
+            .gfx = sCalendarSandstormIconGfx,
+            .pal = sCalendarSandstormIconPal,
+        },
+        [TIME_NIGHT] =
+        {
+            .gfx = sCalendarSandstormIconGfx,
+            .pal = sCalendarSandstormIconPal,
+        },
+    },
+
+    [WEATHER_FOG_DIAGONAL] =
+    {
+        [TIME_MORNING] =
+        {
+            .gfx = sCalendarFogIconGfx,
+            .pal = sCalendarFogIconPal,
+        },
+        [TIME_DAY] =
+        {
+            .gfx = sCalendarFogIconGfx,
+            .pal = sCalendarFogIconPal,
+        },
+        [TIME_EVENING] =
+        {
+            .gfx = sCalendarFogIconGfx,
+            .pal = sCalendarFogIconPal,
+        },
+        [TIME_NIGHT] =
+        {
+            .gfx = sCalendarFogIconGfx,
+            .pal = sCalendarFogIconPal,
+        },
+    },
+
+    [WEATHER_DROUGHT] =
+    {
+        [TIME_MORNING] =
+        {
+            .gfx = sCalendarSunnyMorningIconGfx,
+            .pal = sCalendarSunnyMorningIconPal,
+        },
+        [TIME_DAY] =
+        {
+            .gfx = sCalendarSunnyDayIconGfx,
+            .pal = sCalendarSunnyDayIconPal,
+        },
+        [TIME_EVENING] =
+        {
+            .gfx = sCalendarSunnyEveningIconGfx,
+            .pal = sCalendarSunnyEveningIconPal,
+        },
+        [TIME_NIGHT] =
+        {
+            .gfx = sCalendarFullMoonIconGfx,
+            .pal = sCalendarFullMoonIconPal,
+        },
+    },
+
+    [WEATHER_DOWNPOUR] =
+    {
+        [TIME_MORNING] =
+        {
+            .gfx = sCalendarThunderstormIconGfx,
+            .pal = sCalendarThunderstormIconPal,
+        },
+        [TIME_DAY] =
+        {
+            .gfx = sCalendarThunderstormIconGfx,
+            .pal = sCalendarThunderstormIconPal,
+        },
+        [TIME_EVENING] =
+        {
+            .gfx = sCalendarThunderstormIconGfx,
+            .pal = sCalendarThunderstormIconPal,
+        },
+        [TIME_NIGHT] =
+        {
+            .gfx = sCalendarThunderstormIconGfx,
+            .pal = sCalendarThunderstormIconPal,
+        },
+    },
+};
 
 enum FontColor
 {
@@ -122,30 +402,6 @@ static const struct OamData sOamData_CalendarWeatherIcon =
     .size = SPRITE_SIZE(32x32),
     .shape = SPRITE_SHAPE(32x32),
     .priority = 1,
-};
-
-static const struct CompressedSpriteSheet sSpriteSheet_CalendarWeatherIcon =
-{
-    .data = sCalendarWeatherIconGfx,
-    .size = 32*32*4/2,
-    .tag = TAG_WEATHER_ICON,
-};
-
-static const struct SpritePalette sSpritePal_CalendarWeatherIcon =
-{
-    .data = sCalendarWeatherIconPal,
-    .tag = TAG_WEATHER_ICON
-};
-
-static const struct SpriteTemplate sSpriteTemplate_CalendarWeatherIcon =
-{
-    .tileTag = TAG_WEATHER_ICON,
-    .paletteTag = TAG_WEATHER_ICON,
-    .oam = &sOamData_CalendarWeatherIcon,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 // Callbacks for the Calendar UI
@@ -449,10 +705,88 @@ static void CalendarUI_CreateSprites_Season(void)
 
 static void CalendarUI_CreateSprites_Weather(void)
 {
+    u32 weather = VarGet(VAR_TEMP_0);
+    u32 time = VarGet(VAR_TEMP_1);
+
+    if (time >= TIME_COUNT)
+        time = TIME_DAY;
+    
+    switch (weather)
+    {
+    case WEATHER_SUNNY_CLOUDS:
+    case WEATHER_SUNNY:
+    case WEATHER_RAIN:
+    case WEATHER_SNOW:
+    case WEATHER_RAIN_THUNDERSTORM:
+    case WEATHER_FOG_HORIZONTAL:
+    case WEATHER_SANDSTORM:
+    case WEATHER_FOG_DIAGONAL:
+    case WEATHER_DROUGHT:
+    case WEATHER_DOWNPOUR:
+        break;
+
+    case WEATHER_SHADE:
+    case WEATHER_VOLCANIC_ASH:
+    case WEATHER_UNDERWATER:
+    case WEATHER_UNDERWATER_BUBBLES:
+    case WEATHER_ABNORMAL:
+        weather = WEATHER_SUNNY_CLOUDS;
+        break;
+    
+    case WEATHER_NONE:
+    default:
+        weather = WEATHER_SUNNY_CLOUDS;
+        break;
+    }
+
+    struct CompressedSpriteSheet sSpriteSheet_CalendarWeatherIcon;
+    sSpriteSheet_CalendarWeatherIcon.data = sWeatherIcons[weather][time].gfx;
+    sSpriteSheet_CalendarWeatherIcon.size = 32*32*4/2;
+    sSpriteSheet_CalendarWeatherIcon.tag = TAG_WEATHER_ICON;
+    
+    struct SpritePalette sSpritePal_CalendarWeatherIcon;
+    sSpritePal_CalendarWeatherIcon.data = sWeatherIcons[weather][time].pal;
+    sSpritePal_CalendarWeatherIcon.tag = TAG_WEATHER_ICON;
+    
+    struct SpriteTemplate sSpriteTemplate_CalendarWeatherIcon;
+    sSpriteTemplate_CalendarWeatherIcon.tileTag = TAG_WEATHER_ICON;
+    sSpriteTemplate_CalendarWeatherIcon.paletteTag = TAG_WEATHER_ICON;
+    sSpriteTemplate_CalendarWeatherIcon.oam = &sOamData_CalendarWeatherIcon;
+    sSpriteTemplate_CalendarWeatherIcon.anims = gDummySpriteAnimTable;
+    sSpriteTemplate_CalendarWeatherIcon.images = NULL;
+    sSpriteTemplate_CalendarWeatherIcon.affineAnims = gDummySpriteAffineAnimTable;
+    sSpriteTemplate_CalendarWeatherIcon.callback = SpriteCallbackDummy;
+
     LoadCompressedSpriteSheet(&sSpriteSheet_CalendarWeatherIcon);
     LoadSpritePalette(&sSpritePal_CalendarWeatherIcon);
     sCalendarUIState->spriteIdWeather = CreateSprite(&sSpriteTemplate_CalendarWeatherIcon, 36, 86, 0);
     gSprites[sCalendarUIState->spriteIdWeather].oam.priority = 3;
+    
+    u16 colourTop = sWeatherIcons[WEATHER_SUNNY][time].pal[INDEX_COLOUR_TOP];
+    u16 colourMiddle = sWeatherIcons[WEATHER_SUNNY][time].pal[INDEX_COLOUR_MIDDLE];
+    u16 colourBottom = sWeatherIcons[WEATHER_SUNNY][time].pal[INDEX_COLOUR_BOTTOM];
+    
+    LoadPalette(
+        &colourTop,
+        OBJ_PLTT_ID(IndexOfSpritePaletteTag(
+            gSprites[sCalendarUIState->spriteIdWeather].template->paletteTag)
+        ) + INDEX_COLOUR_TOP,
+        sizeof(colourTop)
+    );
+    LoadPalette(
+        &colourMiddle,
+        OBJ_PLTT_ID(IndexOfSpritePaletteTag(
+            gSprites[sCalendarUIState->spriteIdWeather].template->paletteTag)
+        ) + INDEX_COLOUR_MIDDLE,
+        sizeof(colourMiddle)
+    );
+    LoadPalette(
+        &colourBottom,
+        OBJ_PLTT_ID(IndexOfSpritePaletteTag(
+            gSprites[sCalendarUIState->spriteIdWeather].template->paletteTag)
+        ) + INDEX_COLOUR_BOTTOM,
+        sizeof(colourBottom)
+    );
 }
 
 static void CalendarUI_CreateSprites_Player(void)
