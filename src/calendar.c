@@ -397,11 +397,11 @@ static void CalendarUI_PrintScheduleText(void)
         COMPOUND_STRING("Gym")
     );
 
-    AddTextPrinterParameterized4(WINDOW_SCHEDULE, FONT_SHORT_NARROWER, 
+    AddTextPrinterParameterized4(WINDOW_SCHEDULE, FONT_SHORT_NARROW, 
         GetStringRightAlignXOffset(FONT_BW_SUMMARY_SCREEN,
             numGym,
             40
-        ) - 3, y, 0, 0,
+        ) - 4, y, 0, 0,
         sCalendarUIWindowFontColors[FONT_BROWN], TEXT_SKIP_DRAW,
         numGym
     );
@@ -414,11 +414,11 @@ static void CalendarUI_PrintScheduleText(void)
         COMPOUND_STRING("Works")
     );
 
-    AddTextPrinterParameterized4(WINDOW_SCHEDULE, FONT_SHORT_NARROWER, 
+    AddTextPrinterParameterized4(WINDOW_SCHEDULE, FONT_SHORT_NARROW, 
         GetStringRightAlignXOffset(FONT_BW_SUMMARY_SCREEN,
             numWorks,
             40
-        ) - 3, y, 0, 0,
+        ) - 4, y, 0, 0,
         sCalendarUIWindowFontColors[FONT_BROWN], TEXT_SKIP_DRAW,
         numWorks
     );
