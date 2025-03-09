@@ -44,7 +44,6 @@ struct CalendarUIState
     u8 spriteIdSeason;
     u8 spriteIdWeather;
     u8 spriteIdPlayer;
-    u8 spriteIdPartner;
     u8 spriteIdGymType;
     u8 spriteIdDate[DAYS_IN_SEASON];
 };
