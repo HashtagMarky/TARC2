@@ -30,9 +30,11 @@
 #include "pokedex.h"
 #include "gpu_regs.h"
 
+#include "comfy_anim.h"
 #include "event_object_movement.h"
 #include "ikigai_scrolling_background.h"
 #include "international_string_util.h"
+#include "type_icons.h"
 #include "constants/event_objects.h"
 
 #define DAYS_IN_SEASON 28
@@ -167,6 +169,9 @@ static void CalendarUI_InitWindows(void);
 static void CalendarUI_PrintScheduleText(void);
 static void CalendarUI_CreateSprites(void);
 static void CalendarUI_FreeResources(void);
+
+// Sprite Callbacks
+static void PokeSphere_TypeIconCallback(struct Sprite *sprite);
 
 void Task_OpenCalendarUI(u8 taskId)
 {
@@ -437,22 +442,58 @@ static void CalendarUI_PrintScheduleText(void)
     CopyWindowToVram(WINDOW_SCHEDULE, COPYWIN_GFX);
 }
 
-static void CalendarUI_CreateSprites(void)
+static void CalendarUI_CreateSprites_Season(void)
 {
-    // spriteIdSeason
 
+}
+
+static void CalendarUI_CreateSprites_Weather(void)
+{
     LoadCompressedSpriteSheet(&sSpriteSheet_CalendarWeatherIcon);
     LoadSpritePalette(&sSpritePal_CalendarWeatherIcon);
     sCalendarUIState->spriteIdWeather = CreateSprite(&sSpriteTemplate_CalendarWeatherIcon, 36, 86, 0);
     gSprites[sCalendarUIState->spriteIdWeather].oam.priority = 3;
+}
 
+static void CalendarUI_CreateSprites_Player(void)
+{
     u16 objEvent = gSaveBlock2Ptr->playerGender ? OBJ_EVENT_GFX_ANKA_NORMAL : OBJ_EVENT_GFX_KOLE_NORMAL;
     sCalendarUIState->spriteIdPlayer = CreateObjectGraphicsSprite(objEvent, SpriteCallbackDummy, 33, 131, 102);
     StartSpriteAnim(&gSprites[sCalendarUIState->spriteIdPlayer], ANIM_STD_GO_SOUTH);
+}
 
-    // spriteIdGymType
+static void CalendarUI_CreateSprites_TypeIcon(void)
+{
+    struct ComfyAnimEasingConfig config;
 
-    // spriteIdDate[DAYS_IN_SEASON]
+    InitComfyAnimConfig_Easing(&config);
+    config.durationFrames = 35;
+    config.from = Q_24_8(38 + NUM_FRAMES_HIDE_TYPE_ICON);
+    config.to = Q_24_8(38);
+    config.easingFunc = ComfyAnimEasing_EaseInOutBack;
+    
+    sCalendarUIState->spriteIdGymType = CreateBattlenMoveTypeIcon(
+        38 + NUM_FRAMES_HIDE_TYPE_ICON,
+        129,
+        0, gSaveBlock2Ptr->ikigaiGymType
+    );
+    gSprites[sCalendarUIState->spriteIdGymType].oam.priority = 2;
+    gSprites[sCalendarUIState->spriteIdGymType].callback = PokeSphere_TypeIconCallback;
+    gSprites[sCalendarUIState->spriteIdGymType].sComfyAnimX = CreateComfyAnim_Easing(&config);
+}
+
+static void CalendarUI_CreateSprites_Dates(void)
+{
+
+}
+
+static void CalendarUI_CreateSprites(void)
+{
+    CalendarUI_CreateSprites_Season();
+    CalendarUI_CreateSprites_Weather();
+    CalendarUI_CreateSprites_Player();
+    CalendarUI_CreateSprites_TypeIcon();
+    CalendarUI_CreateSprites_Dates();
 }
 
 static void CalendarUI_FreeResources(void)
@@ -471,4 +512,15 @@ static void CalendarUI_FreeResources(void)
     }
     FreeAllWindowBuffers();
     ResetSpriteData();
+}
+
+static void PokeSphere_TypeIconCallback(struct Sprite *sprite)
+{
+    int animId = sprite->sComfyAnimX;
+    sprite->x = ReadComfyAnimValueSmooth(&gComfyAnims[animId]);
+    if (gComfyAnims[animId].completed)
+    {
+        ReleaseComfyAnim(animId);
+        sprite->callback = SpriteCallbackDummy;
+    }
 }
