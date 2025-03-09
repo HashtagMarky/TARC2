@@ -396,22 +396,11 @@ static void CalendarUI_PrintScheduleText(void)
 {
     FillWindowPixelBuffer(WINDOW_SCHEDULE, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    u32 y = 5;
+    u32 y = 18;
     u8 numGym[1], numWorks[1];
 
     ConvertIntToDecimalStringN(numGym, 0, STR_CONV_MODE_RIGHT_ALIGN, 1);
     ConvertIntToDecimalStringN(numWorks, 0, STR_CONV_MODE_RIGHT_ALIGN, 1);
-
-    // AddTextPrinterParameterized4(WINDOW_SCHEDULE, FONT_BW_SUMMARY_SCREEN, 
-    //     GetStringCenterAlignXOffset(FONT_BW_SUMMARY_SCREEN,
-    //         COMPOUND_STRING("Today"),
-    //         40
-    //     ), y, 0, 0,
-    //     sCalendarUIWindowFontColors[FONT_BROWN], TEXT_SKIP_DRAW,
-    //     COMPOUND_STRING("Today")
-    // );
-
-    y += 13;
 
     AddTextPrinterParameterized4(WINDOW_SCHEDULE, FONT_SHORT_NARROWER, 
         6, y, 0, 0,
