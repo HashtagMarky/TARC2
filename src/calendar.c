@@ -33,11 +33,18 @@
 #include "ikigai_scrolling_background.h"
 #include "international_string_util.h"
 
+#define DAYS_IN_SEASON 28
+
 struct CalendarUIState
 {
     MainCallback savedCallback;
     u8 loadState;
-    u8 mode;
+    u8 spriteIdSeason;
+    u8 spriteIdWeather;
+    u8 spriteIdPlayer;
+    u8 spriteIdPartner;
+    u8 spriteIdGymType;
+    u8 spriteIdDate[DAYS_IN_SEASON];
 };
 
 enum WindowIds
