@@ -130,6 +130,35 @@ static const u16 sCalendarFogIconPal[] = INCBIN_U16("graphics/calendar/weather_i
 static const u32 sCalendarSandstormIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/sandstorm.4bpp.lz");
 static const u16 sCalendarSandstormIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/sandstorm.gbapal");
 
+static const u32 sCalendarDate1Gfx[] = INCBIN_U32("graphics/calendar/numbers/1.4bpp.lz");
+static const u32 sCalendarDate2Gfx[] = INCBIN_U32("graphics/calendar/numbers/2.4bpp.lz");
+static const u32 sCalendarDate3Gfx[] = INCBIN_U32("graphics/calendar/numbers/3.4bpp.lz");
+static const u32 sCalendarDate4Gfx[] = INCBIN_U32("graphics/calendar/numbers/4.4bpp.lz");
+static const u32 sCalendarDate5Gfx[] = INCBIN_U32("graphics/calendar/numbers/5.4bpp.lz");
+static const u32 sCalendarDate6Gfx[] = INCBIN_U32("graphics/calendar/numbers/6.4bpp.lz");
+static const u32 sCalendarDate7Gfx[] = INCBIN_U32("graphics/calendar/numbers/7.4bpp.lz");
+static const u32 sCalendarDate8Gfx[] = INCBIN_U32("graphics/calendar/numbers/8.4bpp.lz");
+static const u32 sCalendarDate9Gfx[] = INCBIN_U32("graphics/calendar/numbers/9.4bpp.lz");
+static const u32 sCalendarDate10Gfx[] = INCBIN_U32("graphics/calendar/numbers/10.4bpp.lz");
+static const u32 sCalendarDate11Gfx[] = INCBIN_U32("graphics/calendar/numbers/11.4bpp.lz");
+static const u32 sCalendarDate12Gfx[] = INCBIN_U32("graphics/calendar/numbers/12.4bpp.lz");
+static const u32 sCalendarDate13Gfx[] = INCBIN_U32("graphics/calendar/numbers/13.4bpp.lz");
+static const u32 sCalendarDate14Gfx[] = INCBIN_U32("graphics/calendar/numbers/14.4bpp.lz");
+static const u32 sCalendarDate15Gfx[] = INCBIN_U32("graphics/calendar/numbers/15.4bpp.lz");
+static const u32 sCalendarDate16Gfx[] = INCBIN_U32("graphics/calendar/numbers/16.4bpp.lz");
+static const u32 sCalendarDate17Gfx[] = INCBIN_U32("graphics/calendar/numbers/17.4bpp.lz");
+static const u32 sCalendarDate18Gfx[] = INCBIN_U32("graphics/calendar/numbers/18.4bpp.lz");
+static const u32 sCalendarDate19Gfx[] = INCBIN_U32("graphics/calendar/numbers/19.4bpp.lz");
+static const u32 sCalendarDate20Gfx[] = INCBIN_U32("graphics/calendar/numbers/20.4bpp.lz");
+static const u32 sCalendarDate21Gfx[] = INCBIN_U32("graphics/calendar/numbers/21.4bpp.lz");
+static const u32 sCalendarDate22Gfx[] = INCBIN_U32("graphics/calendar/numbers/22.4bpp.lz");
+static const u32 sCalendarDate23Gfx[] = INCBIN_U32("graphics/calendar/numbers/23.4bpp.lz");
+static const u32 sCalendarDate24Gfx[] = INCBIN_U32("graphics/calendar/numbers/24.4bpp.lz");
+static const u32 sCalendarDate25Gfx[] = INCBIN_U32("graphics/calendar/numbers/25.4bpp.lz");
+static const u32 sCalendarDate26Gfx[] = INCBIN_U32("graphics/calendar/numbers/26.4bpp.lz");
+static const u32 sCalendarDate27Gfx[] = INCBIN_U32("graphics/calendar/numbers/27.4bpp.lz");
+static const u32 sCalendarDate28Gfx[] = INCBIN_U32("graphics/calendar/numbers/28.4bpp.lz");
+
 struct WeatherIcons
 {
     const u32 *gfx;
@@ -383,6 +412,93 @@ static const struct WeatherIcons sWeatherIcons[WEATHER_COUNT][TIME_COUNT] =
     },
 };
 
+struct DateNumbers
+{
+    const u32 *gfx;
+    u8 x;
+    u8 y;
+    u8 offset;
+};
+
+enum Dates
+{
+    DAY_1 = 1,
+    DAY_2,
+    DAY_3,
+    DAY_4,
+    DAY_5,
+    DAY_6,
+    DAY_7,
+    DAY_8,
+    DAY_9,
+    DAY_10,
+    DAY_11,
+    DAY_12,
+    DAY_13,
+    DAY_14,
+    DAY_15,
+    DAY_16,
+    DAY_17,
+    DAY_18,
+    DAY_19,
+    DAY_20,
+    DAY_21,
+    DAY_22,
+    DAY_23,
+    DAY_24,
+    DAY_25,
+    DAY_26,
+    DAY_27,
+    DAY_28,
+};
+
+#define MONDAY_X 76
+#define TUESDAY_X 100
+#define WEDNESDAY_X 124
+#define THURSDAY_X 148
+#define FRIDAY_X 172
+#define SATURDAY_X 196
+#define SUNDAY_X 220
+#define WEEK_1_Y 70
+#define WEEK_2_Y 94
+#define WEEK_3_Y 118
+#define WEEK_4_Y 142
+
+static const struct DateNumbers sDateNumbers[DAYS_IN_SEASON + 1] =
+{
+    [DAY_1]  = {sCalendarDate1Gfx,  MONDAY_X,    WEEK_1_Y, 0},
+    [DAY_2]  = {sCalendarDate2Gfx,  TUESDAY_X,   WEEK_1_Y, 0},
+    [DAY_3]  = {sCalendarDate3Gfx,  WEDNESDAY_X, WEEK_1_Y, 0},
+    [DAY_4]  = {sCalendarDate4Gfx,  THURSDAY_X,  WEEK_1_Y, 0},
+    [DAY_5]  = {sCalendarDate5Gfx,  FRIDAY_X,    WEEK_1_Y, 0},
+    [DAY_6]  = {sCalendarDate6Gfx,  SATURDAY_X,  WEEK_1_Y, 0},
+    [DAY_7]  = {sCalendarDate7Gfx,  SUNDAY_X,    WEEK_1_Y, 0},
+
+    [DAY_8]  = {sCalendarDate8Gfx,  MONDAY_X,    WEEK_2_Y, 0},
+    [DAY_9]  = {sCalendarDate9Gfx,  TUESDAY_X,   WEEK_2_Y, 0},
+    [DAY_10] = {sCalendarDate10Gfx, WEDNESDAY_X, WEEK_2_Y, 0},
+    [DAY_11] = {sCalendarDate11Gfx, THURSDAY_X,  WEEK_2_Y, 0},
+    [DAY_12] = {sCalendarDate12Gfx, FRIDAY_X,    WEEK_2_Y, 0},
+    [DAY_13] = {sCalendarDate13Gfx, SATURDAY_X,  WEEK_2_Y, 0},
+    [DAY_14] = {sCalendarDate14Gfx, SUNDAY_X,    WEEK_2_Y, 0},
+
+    [DAY_15] = {sCalendarDate15Gfx, MONDAY_X,    WEEK_3_Y, 0},
+    [DAY_16] = {sCalendarDate16Gfx, TUESDAY_X,   WEEK_3_Y, 0},
+    [DAY_17] = {sCalendarDate17Gfx, WEDNESDAY_X, WEEK_3_Y, 0},
+    [DAY_18] = {sCalendarDate18Gfx, THURSDAY_X,  WEEK_3_Y, 0},
+    [DAY_19] = {sCalendarDate19Gfx, FRIDAY_X,    WEEK_3_Y, 0},
+    [DAY_20] = {sCalendarDate20Gfx, SATURDAY_X,  WEEK_3_Y, 0},
+    [DAY_21] = {sCalendarDate21Gfx, SUNDAY_X,    WEEK_3_Y, 0},
+
+    [DAY_22] = {sCalendarDate22Gfx, MONDAY_X,    WEEK_4_Y, 0},
+    [DAY_23] = {sCalendarDate23Gfx, TUESDAY_X,   WEEK_4_Y, 0},
+    [DAY_24] = {sCalendarDate24Gfx, WEDNESDAY_X, WEEK_4_Y, 0},
+    [DAY_25] = {sCalendarDate25Gfx, THURSDAY_X,  WEEK_4_Y, 0},
+    [DAY_26] = {sCalendarDate26Gfx, FRIDAY_X,    WEEK_4_Y, 0},
+    [DAY_27] = {sCalendarDate27Gfx, SATURDAY_X,  WEEK_4_Y, 0},
+    [DAY_28] = {sCalendarDate28Gfx, SUNDAY_X,    WEEK_4_Y, 0},
+};
+
 enum FontColor
 {
     FONT_BROWN,
@@ -396,12 +512,44 @@ static const u8 sCalendarUIWindowFontColors[][3] =
 #define SHADOW_REPLACEMENT_INDEX    11
 
 #define TAG_WEATHER_ICON            7281
+#define TAG_DATE_ICON               1827
 
 static const struct OamData sOamData_CalendarWeatherIcon =
 {
     .size = SPRITE_SIZE(32x32),
     .shape = SPRITE_SHAPE(32x32),
     .priority = 1,
+};
+
+static const struct OamData sOamData_CalendarDate =
+{
+    .size = SPRITE_SIZE(16x16),
+    .shape = SPRITE_SHAPE(16x16),
+    .priority = 1,
+};
+
+static const struct SpritePalette sSpritePal_CalendarDate =
+{
+    .data = sCalendarUIPalette,
+    .tag = TAG_DATE_ICON
+};
+
+static const union AnimCmd sSpriteAnim_CalendarDate[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_CalendarDateChecked[] =
+{
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sSpriteAnimTable_CalendarDate[] =
+{
+    sSpriteAnim_CalendarDate,
+    sSpriteAnim_CalendarDateChecked,
 };
 
 // Callbacks for the Calendar UI
@@ -818,13 +966,53 @@ static void CalendarUI_CreateSprites_TypeIcon(void)
 
 static void CalendarUI_CreateSprites_Dates(void)
 {
+    u32 date = VarGet(VAR_TEMP_2);
+    date = (date < DAY_1) ? DAY_1 : (date > DAY_28) ? DAY_28 : date;
 
+    for (u32 dateCount = 0; dateCount < DAYS_IN_SEASON; dateCount++)
+    {
+        struct CompressedSpriteSheet sSpriteSheet_CalendarDate;
+        sSpriteSheet_CalendarDate.data = sDateNumbers[dateCount].gfx;
+        sSpriteSheet_CalendarDate.size = 2*16*16*4/2;
+        sSpriteSheet_CalendarDate.tag = TAG_DATE_ICON + dateCount;
+    
+        struct SpriteTemplate sSpriteTemplate_CalendarDate;
+        sSpriteTemplate_CalendarDate.tileTag = TAG_DATE_ICON + dateCount;
+        sSpriteTemplate_CalendarDate.paletteTag = TAG_DATE_ICON;
+        sSpriteTemplate_CalendarDate.oam = &sOamData_CalendarDate;
+        sSpriteTemplate_CalendarDate.anims = sSpriteAnimTable_CalendarDate;
+        sSpriteTemplate_CalendarDate.images = NULL;
+        sSpriteTemplate_CalendarDate.affineAnims = gDummySpriteAffineAnimTable;
+        sSpriteTemplate_CalendarDate.callback = SpriteCallbackDummy;
+
+        LoadCompressedSpriteSheet(&sSpriteSheet_CalendarDate);
+        LoadSpritePalette(&sSpritePal_CalendarDate);
+        sCalendarUIState->spriteIdDate[dateCount] = CreateSprite(&sSpriteTemplate_CalendarDate,
+            sDateNumbers[dateCount].x,
+            sDateNumbers[dateCount].y,
+            0
+        );
+
+        if (date > dateCount)
+            StartSpriteAnim(&gSprites[sCalendarUIState->spriteIdDate[dateCount]], 1);
+        
+        // LoadPalette(&sCalendarUIPalette[TEXT_REPLACEMENT_INDEX],
+        //     OBJ_PLTT_ID(IndexOfSpritePaletteTag(
+        //         gSprites[sCalendarUIState->spriteIdDate[dateCount]].template->paletteTag)
+        //     ) + 3,
+        //     sizeof(&sCalendarUIPalette[TEXT_REPLACEMENT_INDEX]));
+        // LoadPalette(&sCalendarUIPalette[SHADOW_REPLACEMENT_INDEX],
+        //     OBJ_PLTT_ID(IndexOfSpritePaletteTag(
+        //         gSprites[sCalendarUIState->spriteIdDate[dateCount]].template->paletteTag)
+        //     ) + 10,
+        //     sizeof(&sCalendarUIPalette[SHADOW_REPLACEMENT_INDEX]));
+    }
 }
 
 static void CalendarUI_CreateSprites(void)
 {
     CalendarUI_CreateSprites_Season();
-    CalendarUI_CreateSprites_Weather();
+    // CalendarUI_CreateSprites_Weather();
     CalendarUI_CreateSprites_Player();
     CalendarUI_CreateSprites_TypeIcon();
     CalendarUI_CreateSprites_Dates();
