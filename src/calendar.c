@@ -40,6 +40,9 @@
 #include "constants/event_objects.h"
 #include "constants/weather.h"
 
+#define tFinishedLoading data[0]
+#define CALENDAR_LOAD_TIME 90 // Number of Frames
+
 #define DAYS_IN_SEASON 28
 
 struct CalendarUIState
@@ -725,20 +728,19 @@ static void Task_CalendarUIWaitFadeIn(u8 taskId)
     if (!gPaletteFade.active)
     {
         gTasks[taskId].func = Task_CalendarUIMainInput;
+        gTasks[taskId].tFinishedLoading = 0;
     }
 }
 
 static void Task_CalendarUIMainInput(u8 taskId)
 {
-    if (JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_PC_OFF);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_CalendarUIWaitFadeAndExitGracefully;
-    }
-    if (JOY_NEW(A_BUTTON))
+    gTasks[taskId].tFinishedLoading++;
+    if (gTasks[taskId].tFinishedLoading >= CALENDAR_LOAD_TIME
+        && JOY_NEW(A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON))
     {
         PlaySE(SE_SELECT);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = Task_CalendarUIWaitFadeAndExitGracefully;
     }
 }
 
@@ -1111,3 +1113,4 @@ static void PokeSphere_TypeIconCallback(struct Sprite *sprite)
         sprite->callback = SpriteCallbackDummy;
     }
 }
+#undef tFinishedLoading
