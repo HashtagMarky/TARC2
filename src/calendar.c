@@ -691,6 +691,7 @@ static void CalendarUI_SetupCB(void)
         sCalendarUIState->weather = VarGet(VAR_TEMP_4);
         CalendarUI_PrintScheduleText();
         CalendarUI_CreateSprites();
+        PlaySE(SE_RG_CARD_FLIPPING);
         CreateTask(Task_CalendarUIWaitFadeIn, 0);
         gMain.state++;
         break;
@@ -738,7 +739,7 @@ static void Task_CalendarUIMainInput(u8 taskId)
     if (gTasks[taskId].tFinishedLoading >= CALENDAR_LOAD_TIME
         && JOY_NEW(A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON))
     {
-        PlaySE(SE_SELECT);
+        PlaySE(SE_RG_CARD_FLIP);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_CalendarUIWaitFadeAndExitGracefully;
     }
