@@ -52,11 +52,11 @@ struct CalendarUIState
     u8 time;
     u8 weather;
     u8 spriteIdSeason;
-    u8 spriteIdWeather;
     u8 spriteIdPlayer;
     u8 spriteIdGymType;
     u8 spriteIdDate[DAYS_IN_SEASON + 1];
     u8 spriteIdDateSelector;
+    u8 spriteIdWeather;
 };
 
 enum WindowIds
@@ -921,7 +921,7 @@ static void CalendarUI_CreateSprites_Weather(void)
 
     struct CompressedSpriteSheet sSpriteSheet_CalendarWeatherIcon;
     sSpriteSheet_CalendarWeatherIcon.data = sWeatherIcons[weather][time].gfx;
-    sSpriteSheet_CalendarWeatherIcon.size = 32*32*4/2;
+    sSpriteSheet_CalendarWeatherIcon.size = 32*32*2/4;
     sSpriteSheet_CalendarWeatherIcon.tag = TAG_WEATHER_ICON;
     
     struct SpritePalette sSpritePal_CalendarWeatherIcon;
@@ -1058,11 +1058,11 @@ static void CalendarUI_CreateSprites(void)
 {
     LoadSpritePalette(&sSpritePal_CalendarDate);
     CalendarUI_CreateSprites_Season();
-    // CalendarUI_CreateSprites_Weather();
     CalendarUI_CreateSprites_Player();
     CalendarUI_CreateSprites_TypeIcon();
     CalendarUI_CreateSprites_Dates();
     CalendarUI_CreateSprites_DateSelector();
+    CalendarUI_CreateSprites_Weather();
 }
 
 static void CalendarUI_FreeResources(void)
