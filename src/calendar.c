@@ -46,6 +46,11 @@ struct CalendarUIState
 {
     MainCallback savedCallback;
     u8 loadState;
+    u8 year;
+    u8 season;
+    u8 date;
+    u8 time;
+    u8 weather;
     u8 spriteIdSeason;
     u8 spriteIdWeather;
     u8 spriteIdPlayer;
@@ -648,6 +653,11 @@ static void CalendarUI_SetupCB(void)
         gMain.state++;
         break;
     case 5:
+        sCalendarUIState->year = VarGet(VAR_TEMP_0);
+        sCalendarUIState->season = VarGet(VAR_TEMP_1);
+        sCalendarUIState->date = VarGet(VAR_TEMP_2);
+        sCalendarUIState->time = VarGet(VAR_TEMP_3);
+        sCalendarUIState->weather = VarGet(VAR_TEMP_4);
         CalendarUI_PrintScheduleText();
         CalendarUI_CreateSprites();
         CreateTask(Task_CalendarUIWaitFadeIn, 0);
@@ -853,8 +863,8 @@ static void CalendarUI_CreateSprites_Season(void)
 
 static void CalendarUI_CreateSprites_Weather(void)
 {
-    u32 weather = VarGet(VAR_TEMP_0);
-    u32 time = VarGet(VAR_TEMP_1);
+    u32 weather = sCalendarUIState->weather;
+    u32 time = sCalendarUIState->time;
 
     if (time >= TIME_COUNT)
         time = TIME_DAY;
@@ -966,7 +976,7 @@ static void CalendarUI_CreateSprites_TypeIcon(void)
 
 static void CalendarUI_CreateSprites_Dates(void)
 {
-    u32 date = VarGet(VAR_TEMP_2);
+    u32 date = sCalendarUIState->date;
     date = (date < DAY_1) ? DAY_1 : (date > DAY_28) ? DAY_28 : date;
 
     for (u32 dateCount = 0; dateCount < DAYS_IN_SEASON; dateCount++)
