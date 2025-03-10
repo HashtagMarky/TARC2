@@ -611,6 +611,7 @@ static bool8 CalendarUI_InitBgs(void);
 static void CalendarUI_FadeAndBail(void);
 static bool8 CalendarUI_LoadGraphics(void);
 static void CalendarUI_InitWindows(void);
+static void CalendarUI_GetData(void);
 static void CalendarUI_PrintScheduleText(void);
 static void CalendarUI_CreateSprites(void);
 static void CalendarUI_FreeResources(void);
@@ -689,13 +690,7 @@ static void CalendarUI_SetupCB(void)
         gMain.state++;
         break;
     case 5:
-        sCalendarUIState->year = VarGet(VAR_TEMP_0);
-        sCalendarUIState->season = VarGet(VAR_TEMP_1);
-        sCalendarUIState->date = VarGet(VAR_TEMP_2);
-        sCalendarUIState->time = VarGet(VAR_TEMP_3);
-        sCalendarUIState->weather = VarGet(VAR_TEMP_4);
-        sCalendarUIState->gymBattles = VarGet(VAR_TEMP_5);
-        sCalendarUIState->buildProjects = VarGet(VAR_TEMP_6);
+        CalendarUI_GetData();
         CalendarUI_PrintScheduleText();
         CalendarUI_CreateSprites();
         PlaySE(SE_RG_CARD_FLIPPING);
@@ -855,6 +850,17 @@ static void CalendarUI_InitWindows(void)
     FillWindowPixelBuffer(WINDOW_SCHEDULE, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     PutWindowTilemap(WINDOW_SCHEDULE);
     CopyWindowToVram(WINDOW_SCHEDULE, 3);
+}
+
+static void CalendarUI_GetData(void)
+{
+    sCalendarUIState->year = VarGet(VAR_TEMP_0);
+    sCalendarUIState->season = VarGet(VAR_TEMP_1);
+    sCalendarUIState->date = VarGet(VAR_TEMP_2);
+    sCalendarUIState->time = VarGet(VAR_TEMP_3);
+    sCalendarUIState->weather = VarGet(VAR_TEMP_4);
+    sCalendarUIState->gymBattles = VarGet(VAR_TEMP_5);
+    sCalendarUIState->buildProjects = VarGet(VAR_TEMP_6);
 }
 
 static void CalendarUI_PrintScheduleText(void)
