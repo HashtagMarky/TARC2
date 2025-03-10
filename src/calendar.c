@@ -531,8 +531,11 @@ static const u8 sCalendarUIWindowFontColors[][3] =
     [FONT_BROWN]  = {TEXT_COLOR_TRANSPARENT,    TEXT_COLOR_DARK_GRAY,   TEXT_COLOR_LIGHT_GRAY},
 };
 
-#define TEXT_REPLACEMENT_INDEX      5
-#define SHADOW_REPLACEMENT_INDEX    11
+#define DEFAULT_TEXT_REPLACEMENT_INDEX      5
+#define DEFAULT_SHADOW_REPLACEMENT_INDEX    11
+
+#define DATE_TEXT_REPLACEMENT_INDEX         3
+#define DATE_SHADOW_REPLACEMENT_INDEX       10
 
 #define TAG_WEATHER_ICON            7281
 #define TAG_DATE_ICON               1827
@@ -832,8 +835,8 @@ static bool8 CalendarUI_LoadGraphics(void)
         LoadPalette(sCalendarUIPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
         LoadPalette(ReturnScrollingBackgroundSeasonPalette(0), BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
-        LoadPalette(&sCalendarUIPalette[TEXT_REPLACEMENT_INDEX], BG_PLTT_ID(15) + TEXT_COLOR_DARK_GRAY, sizeof(&sCalendarUIPalette[TEXT_REPLACEMENT_INDEX]));
-        LoadPalette(&sCalendarUIPalette[SHADOW_REPLACEMENT_INDEX], BG_PLTT_ID(15) + TEXT_COLOR_LIGHT_GRAY, sizeof(&sCalendarUIPalette[SHADOW_REPLACEMENT_INDEX]));
+        LoadPalette(&sCalendarUIPalette[DEFAULT_TEXT_REPLACEMENT_INDEX], BG_PLTT_ID(15) + TEXT_COLOR_DARK_GRAY, sizeof(&sCalendarUIPalette[DEFAULT_TEXT_REPLACEMENT_INDEX]));
+        LoadPalette(&sCalendarUIPalette[DEFAULT_SHADOW_REPLACEMENT_INDEX], BG_PLTT_ID(15) + TEXT_COLOR_LIGHT_GRAY, sizeof(&sCalendarUIPalette[DEFAULT_SHADOW_REPLACEMENT_INDEX]));
         sCalendarUIState->loadState++;
     default:
         sCalendarUIState->loadState = 0;
@@ -1065,16 +1068,16 @@ static void CalendarUI_CreateSprites_Dates(void)
         if (dateCount < date)
             StartSpriteAnim(&gSprites[sCalendarUIState->spriteIdDate[dateCount]], 1);
         
-        // LoadPalette(&sCalendarUIPalette[TEXT_REPLACEMENT_INDEX],
+        // LoadPalette(&sCalendarUIPalette[DEFAULT_TEXT_REPLACEMENT_INDEX],
         //     OBJ_PLTT_ID(IndexOfSpritePaletteTag(
         //         gSprites[sCalendarUIState->spriteIdDate[dateCount]].template->paletteTag)
-        //     ) + 3,
-        //     sizeof(&sCalendarUIPalette[TEXT_REPLACEMENT_INDEX]));
-        // LoadPalette(&sCalendarUIPalette[SHADOW_REPLACEMENT_INDEX],
-        //     OBJ_PLTT_ID(IndexOfSpritePaletteTag(
-        //         gSprites[sCalendarUIState->spriteIdDate[dateCount]].template->paletteTag)
-        //     ) + 10,
-        //     sizeof(&sCalendarUIPalette[SHADOW_REPLACEMENT_INDEX]));
+        //     ) + DATE_TEXT_REPLACEMENT_INDEX,
+        //     sizeof(&sCalendarUIPalette[DEFAULT_TEXT_REPLACEMENT_INDEX]));
+        LoadPalette(&sCalendarUIPalette[DEFAULT_SHADOW_REPLACEMENT_INDEX],
+            OBJ_PLTT_ID(IndexOfSpritePaletteTag(
+                gSprites[sCalendarUIState->spriteIdDate[dateCount]].template->paletteTag)
+            ) + DATE_SHADOW_REPLACEMENT_INDEX,
+            sizeof(&sCalendarUIPalette[DEFAULT_SHADOW_REPLACEMENT_INDEX]));
     }
 }
 
