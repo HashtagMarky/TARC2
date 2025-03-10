@@ -681,6 +681,7 @@ static void CalendarUI_MainCB(void)
     BuildOamBuffer();
     DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
+    AdvanceComfyAnimations();
 }
 
 static void CalendarUI_VBlankCB(void)
@@ -729,6 +730,7 @@ static void Task_CalendarUIWaitFadeAndExitGracefully(u8 taskId)
     {
         SetMainCallback2(sCalendarUIState->savedCallback);
         CalendarUI_FreeResources();
+        ReleaseComfyAnims();
         DestroyTask(taskId);
     }
 }
@@ -959,17 +961,17 @@ static void CalendarUI_CreateSprites_TypeIcon(void)
     struct ComfyAnimEasingConfig config;
 
     InitComfyAnimConfig_Easing(&config);
-    config.durationFrames = 35;
-    config.from = Q_24_8(38 + NUM_FRAMES_HIDE_TYPE_ICON);
-    config.to = Q_24_8(38);
+    config.durationFrames = 60;
+    config.from = Q_24_8(49 + NUM_FRAMES_HIDE_TYPE_ICON);
+    config.to = Q_24_8(49);
     config.easingFunc = ComfyAnimEasing_EaseInOutBack;
     
     sCalendarUIState->spriteIdGymType = CreateBattlenMoveTypeIcon(
-        38 + NUM_FRAMES_HIDE_TYPE_ICON,
+        49 + NUM_FRAMES_HIDE_TYPE_ICON,
         129,
         0, gSaveBlock2Ptr->ikigaiGymType
     );
-    gSprites[sCalendarUIState->spriteIdGymType].oam.priority = 2;
+    gSprites[sCalendarUIState->spriteIdGymType].oam.priority = 3;
     gSprites[sCalendarUIState->spriteIdGymType].callback = PokeSphere_TypeIconCallback;
     gSprites[sCalendarUIState->spriteIdGymType].sComfyAnimX = CreateComfyAnim_Easing(&config);
 }
