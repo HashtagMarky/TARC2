@@ -55,7 +55,8 @@ struct CalendarUIState
     u8 spriteIdWeather;
     u8 spriteIdPlayer;
     u8 spriteIdGymType;
-    u8 spriteIdDate[DAYS_IN_SEASON];
+    u8 spriteIdDate[DAYS_IN_SEASON + 1];
+    u8 spriteIdDateSelector;
 };
 
 enum WindowIds
@@ -135,6 +136,7 @@ static const u16 sCalendarFogIconPal[] = INCBIN_U16("graphics/calendar/weather_i
 static const u32 sCalendarSandstormIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/sandstorm.4bpp.lz");
 static const u16 sCalendarSandstormIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/sandstorm.gbapal");
 
+static const u32 sCalendarDateSelectorGfx[] = INCBIN_U32("graphics/calendar/numbers/date_selector.4bpp.lz");
 static const u32 sCalendarDate1Gfx[] = INCBIN_U32("graphics/calendar/numbers/1.4bpp.lz");
 static const u32 sCalendarDate2Gfx[] = INCBIN_U32("graphics/calendar/numbers/2.4bpp.lz");
 static const u32 sCalendarDate3Gfx[] = INCBIN_U32("graphics/calendar/numbers/3.4bpp.lz");
@@ -555,6 +557,24 @@ static const union AnimCmd *const sSpriteAnimTable_CalendarDate[] =
 {
     sSpriteAnim_CalendarDate,
     sSpriteAnim_CalendarDateChecked,
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_CalendarDateSelector =
+{
+    .data = sCalendarDateSelectorGfx,
+    .size = 16*16*4/2,
+    .tag = TAG_DATE_ICON - 1,
+};
+    
+static const struct SpriteTemplate sSpriteTemplate_CalendarDateSelector =
+{
+    .tileTag = TAG_DATE_ICON - 1,
+    .paletteTag = TAG_DATE_ICON,
+    .oam = &sOamData_CalendarDate,
+    .anims = sSpriteAnimTable_CalendarDate,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
 };
 
 // Callbacks for the Calendar UI
@@ -981,7 +1001,7 @@ static void CalendarUI_CreateSprites_Dates(void)
     u32 date = sCalendarUIState->date;
     date = (date < DAY_1) ? DAY_1 : (date > DAY_28) ? DAY_28 : date;
 
-    for (u32 dateCount = DAY_1; dateCount <= DAYS_IN_SEASON; dateCount++)
+    for (u32 dateCount = DAY_1; dateCount < DAYS_IN_SEASON + 1; dateCount++)
     {
         struct CompressedSpriteSheet sSpriteSheet_CalendarDate;
         sSpriteSheet_CalendarDate.data = sDateNumbers[dateCount].gfx;
@@ -998,11 +1018,10 @@ static void CalendarUI_CreateSprites_Dates(void)
         sSpriteTemplate_CalendarDate.callback = SpriteCallbackDummy;
 
         LoadCompressedSpriteSheet(&sSpriteSheet_CalendarDate);
-        LoadSpritePalette(&sSpritePal_CalendarDate);
         sCalendarUIState->spriteIdDate[dateCount] = CreateSprite(&sSpriteTemplate_CalendarDate,
             sDateNumbers[dateCount].x,
             sDateNumbers[dateCount].y,
-            0
+            1
         );
 
         if (dateCount < date)
@@ -1021,13 +1040,29 @@ static void CalendarUI_CreateSprites_Dates(void)
     }
 }
 
+static void CalendarUI_CreateSprites_DateSelector(void)
+{
+    u32 date = sCalendarUIState->date;
+    date = (date < DAY_1) ? DAY_1 : (date > DAY_28) ? DAY_28 : date;
+    
+    LoadCompressedSpriteSheet(&sSpriteSheet_CalendarDateSelector);
+    sCalendarUIState->spriteIdDateSelector = CreateSprite(
+        &sSpriteTemplate_CalendarDateSelector,
+        sDateNumbers[date].x,
+        sDateNumbers[date].y - 1,
+        0
+    );
+}
+
 static void CalendarUI_CreateSprites(void)
 {
+    LoadSpritePalette(&sSpritePal_CalendarDate);
     CalendarUI_CreateSprites_Season();
     // CalendarUI_CreateSprites_Weather();
     CalendarUI_CreateSprites_Player();
     CalendarUI_CreateSprites_TypeIcon();
     CalendarUI_CreateSprites_Dates();
+    CalendarUI_CreateSprites_DateSelector();
 }
 
 static void CalendarUI_FreeResources(void)
