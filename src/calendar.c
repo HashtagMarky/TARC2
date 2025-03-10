@@ -67,6 +67,7 @@ enum WindowIds
 static EWRAM_DATA struct CalendarUIState *sCalendarUIState = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
+static EWRAM_DATA u8 *sBg3TilemapBuffer = NULL;
 
 static const struct BgTemplate sCalendarUIBgTemplates[] =
 {
@@ -80,13 +81,19 @@ static const struct BgTemplate sCalendarUIBgTemplates[] =
         .bg = 1,
         .charBaseIndex = 3,
         .mapBaseIndex = 30,
-        .priority = 2
+        .priority = 1
     },
     {
         .bg = 2,
         .charBaseIndex = 2,
         .mapBaseIndex = 29,
         .priority = 3
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 28,
+        .priority = 2
     }
 };
 
@@ -107,6 +114,7 @@ static const struct WindowTemplate sCalendarUIWindowTemplates[] =
 
 static const u32 sCalendarUITiles[] = INCBIN_U32("graphics/calendar/tiles.4bpp.lz");
 static const u32 sCalendarUITilemap[] = INCBIN_U32("graphics/calendar/tilemap.bin.lz");
+static const u32 sCalendarUITilemapSupplement[] = INCBIN_U32("graphics/calendar/tilemap_supplement.bin.lz");
 static const u16 sCalendarUIPalette[] = INCBIN_U16("graphics/calendar/tiles.gbapal");
 
 static const u32 sCalendarSunnyCloudsMorningIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/sunny_clouds_morning.4bpp.lz");
@@ -761,7 +769,8 @@ static bool8 CalendarUI_InitBgs(void)
 
     sBg1TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
     sBg2TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
-    if (sBg1TilemapBuffer == NULL || sBg2TilemapBuffer == NULL)
+    sBg3TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
+    if (sBg1TilemapBuffer == NULL || sBg2TilemapBuffer == NULL || sBg3TilemapBuffer == NULL)
     {
         return FALSE;
     }
@@ -775,9 +784,13 @@ static bool8 CalendarUI_InitBgs(void)
     SetBgTilemapBuffer(2, sBg2TilemapBuffer);
     ScheduleBgCopyTilemapToVram(2);
 
+    SetBgTilemapBuffer(3, sBg3TilemapBuffer);
+    ScheduleBgCopyTilemapToVram(3);
+
     ShowBg(0);
     ShowBg(1);
     ShowBg(2);
+    ShowBg(3);
 
     return TRUE;
 }
@@ -806,6 +819,7 @@ static bool8 CalendarUI_LoadGraphics(void)
         {
             LZDecompressWram(sCalendarUITilemap, sBg1TilemapBuffer);
             LZDecompressWram(IkigaiScrollingBgTilemap_PalOne, sBg2TilemapBuffer);
+            LZDecompressWram(sCalendarUITilemapSupplement, sBg3TilemapBuffer);
             sCalendarUIState->loadState++;
         }
         break;
@@ -972,7 +986,7 @@ static void CalendarUI_CreateSprites_Weather(void)
 static void CalendarUI_CreateSprites_Player(void)
 {
     u16 objEvent = gSaveBlock2Ptr->playerGender ? OBJ_EVENT_GFX_ANKA_NORMAL : OBJ_EVENT_GFX_KOLE_NORMAL;
-    sCalendarUIState->spriteIdPlayer = CreateObjectGraphicsSprite(objEvent, SpriteCallbackDummy, 33, 131, 102);
+    sCalendarUIState->spriteIdPlayer = CreateObjectGraphicsSprite(objEvent, SpriteCallbackDummy, 33, 130, 102);
     StartSpriteAnim(&gSprites[sCalendarUIState->spriteIdPlayer], ANIM_STD_GO_SOUTH);
 }
 
@@ -991,7 +1005,7 @@ static void CalendarUI_CreateSprites_TypeIcon(void)
         129,
         0, gSaveBlock2Ptr->ikigaiGymType
     );
-    gSprites[sCalendarUIState->spriteIdGymType].oam.priority = 3;
+    gSprites[sCalendarUIState->spriteIdGymType].oam.priority = 2;
     gSprites[sCalendarUIState->spriteIdGymType].callback = PokeSphere_TypeIconCallback;
     gSprites[sCalendarUIState->spriteIdGymType].sComfyAnimX = CreateComfyAnim_Easing(&config);
 }
@@ -1078,6 +1092,10 @@ static void CalendarUI_FreeResources(void)
     if (sBg2TilemapBuffer != NULL)
     {
         Free(sBg2TilemapBuffer);
+    }
+    if (sBg3TilemapBuffer != NULL)
+    {
+        Free(sBg3TilemapBuffer);
     }
     FreeAllWindowBuffers();
     ResetSpriteData();
