@@ -981,7 +981,7 @@ static void CalendarUI_CreateSprites_Dates(void)
     u32 date = sCalendarUIState->date;
     date = (date < DAY_1) ? DAY_1 : (date > DAY_28) ? DAY_28 : date;
 
-    for (u32 dateCount = 0; dateCount < DAYS_IN_SEASON; dateCount++)
+    for (u32 dateCount = DAY_1; dateCount <= DAYS_IN_SEASON; dateCount++)
     {
         struct CompressedSpriteSheet sSpriteSheet_CalendarDate;
         sSpriteSheet_CalendarDate.data = sDateNumbers[dateCount].gfx;
@@ -1005,7 +1005,7 @@ static void CalendarUI_CreateSprites_Dates(void)
             0
         );
 
-        if (date > dateCount)
+        if (dateCount < date)
             StartSpriteAnim(&gSprites[sCalendarUIState->spriteIdDate[dateCount]], 1);
         
         // LoadPalette(&sCalendarUIPalette[TEXT_REPLACEMENT_INDEX],
