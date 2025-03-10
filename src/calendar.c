@@ -45,6 +45,9 @@
 
 #define DAYS_IN_SEASON 28
 
+#define MAX_NUM_GYM     9
+#define MAX_NUM_WORKS   9
+
 struct CalendarUIState
 {
     MainCallback savedCallback;
@@ -54,6 +57,8 @@ struct CalendarUIState
     u8 date;
     u8 time;
     u8 weather;
+    u8 gymBattles;
+    u8 buildProjects;
     u8 spriteIdSeason;
     u8 spriteIdPlayer;
     u8 spriteIdGymType;
@@ -689,6 +694,8 @@ static void CalendarUI_SetupCB(void)
         sCalendarUIState->date = VarGet(VAR_TEMP_2);
         sCalendarUIState->time = VarGet(VAR_TEMP_3);
         sCalendarUIState->weather = VarGet(VAR_TEMP_4);
+        sCalendarUIState->gymBattles = VarGet(VAR_TEMP_5);
+        sCalendarUIState->buildProjects = VarGet(VAR_TEMP_6);
         CalendarUI_PrintScheduleText();
         CalendarUI_CreateSprites();
         PlaySE(SE_RG_CARD_FLIPPING);
@@ -855,10 +862,18 @@ static void CalendarUI_PrintScheduleText(void)
     FillWindowPixelBuffer(WINDOW_SCHEDULE, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     u32 y = 18;
-    u8 numGym[1], numWorks[1];
+    u32 numGym = sCalendarUIState->gymBattles;
+    u32 numWorks = sCalendarUIState->buildProjects;
+    u8 stringNumGym[1], stringNumWorks[1];
 
-    ConvertIntToDecimalStringN(numGym, 0, STR_CONV_MODE_RIGHT_ALIGN, 1);
-    ConvertIntToDecimalStringN(numWorks, 0, STR_CONV_MODE_RIGHT_ALIGN, 1);
+    if (numGym > MAX_NUM_GYM)
+        numGym = MAX_NUM_GYM;
+
+    if (numWorks > MAX_NUM_WORKS)
+        numWorks = MAX_NUM_WORKS;
+
+    ConvertIntToDecimalStringN(stringNumGym, numGym, STR_CONV_MODE_RIGHT_ALIGN, 1);
+    ConvertIntToDecimalStringN(stringNumWorks, numWorks, STR_CONV_MODE_RIGHT_ALIGN, 1);
 
     AddTextPrinterParameterized4(WINDOW_SCHEDULE, FONT_SHORT_NARROWER, 
         6, y, 0, 0,
@@ -868,11 +883,11 @@ static void CalendarUI_PrintScheduleText(void)
 
     AddTextPrinterParameterized4(WINDOW_SCHEDULE, FONT_SHORT_NARROW, 
         GetStringRightAlignXOffset(FONT_BW_SUMMARY_SCREEN,
-            numGym,
+            stringNumGym,
             40
         ) - 4, y, 0, 0,
         sCalendarUIWindowFontColors[FONT_BROWN], TEXT_SKIP_DRAW,
-        numGym
+        stringNumGym
     );
 
     y += 12;
@@ -885,11 +900,11 @@ static void CalendarUI_PrintScheduleText(void)
 
     AddTextPrinterParameterized4(WINDOW_SCHEDULE, FONT_SHORT_NARROW, 
         GetStringRightAlignXOffset(FONT_BW_SUMMARY_SCREEN,
-            numWorks,
+            stringNumWorks,
             40
         ) - 4, y, 0, 0,
         sCalendarUIWindowFontColors[FONT_BROWN], TEXT_SKIP_DRAW,
-        numWorks
+        stringNumWorks
     );
 
     CopyWindowToVram(WINDOW_SCHEDULE, COPYWIN_GFX);
