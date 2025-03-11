@@ -63,7 +63,6 @@ struct CalendarUIState
     u8 spriteIdPlayer;
     u8 spriteIdGymType;
     u8 spriteIdDate[DAYS_IN_SEASON + 1];
-    u8 spriteIdDateSelector;
     u8 spriteIdWeather;
 };
 
@@ -572,28 +571,24 @@ static const union AnimCmd sSpriteAnim_CalendarDateChecked[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sSpriteAnim_CalendarDateCircled[] =
+{
+    ANIMCMD_FRAME(8, 1),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd *const sSpriteAnimTable_CalendarDate[] =
 {
     sSpriteAnim_CalendarDate,
     sSpriteAnim_CalendarDateChecked,
+    sSpriteAnim_CalendarDateCircled,
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_CalendarDateSelector =
+enum DateAnims
 {
-    .data = sCalendarDateSelectorGfx,
-    .size = 16*16*4/2,
-    .tag = TAG_DATE_ICON - 1,
-};
-    
-static const struct SpriteTemplate sSpriteTemplate_CalendarDateSelector =
-{
-    .tileTag = TAG_DATE_ICON - 1,
-    .paletteTag = TAG_DATE_ICON,
-    .oam = &sOamData_CalendarDate,
-    .anims = sSpriteAnimTable_CalendarDate,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
+    DATE_ANIM_NONE,
+    DATE_ANIM_CHECKED,
+    DATE_ANIM_CIRCLED,
 };
 
 // Callbacks for the Calendar UI
@@ -1066,7 +1061,10 @@ static void CalendarUI_CreateSprites_Dates(void)
         );
 
         if (dateCount < date)
-            StartSpriteAnim(&gSprites[sCalendarUIState->spriteIdDate[dateCount]], 1);
+            StartSpriteAnim(&gSprites[sCalendarUIState->spriteIdDate[dateCount]], DATE_ANIM_CHECKED);
+
+        if (dateCount == date)
+            StartSpriteAnim(&gSprites[sCalendarUIState->spriteIdDate[dateCount]], DATE_ANIM_CIRCLED);
         
         // LoadPalette(&sCalendarUIPalette[DEFAULT_TEXT_REPLACEMENT_INDEX],
         //     OBJ_PLTT_ID(IndexOfSpritePaletteTag(
@@ -1081,20 +1079,6 @@ static void CalendarUI_CreateSprites_Dates(void)
     }
 }
 
-static void CalendarUI_CreateSprites_DateSelector(void)
-{
-    u32 date = sCalendarUIState->date;
-    date = (date < DAY_1) ? DAY_1 : (date > DAY_28) ? DAY_28 : date;
-    
-    LoadCompressedSpriteSheet(&sSpriteSheet_CalendarDateSelector);
-    sCalendarUIState->spriteIdDateSelector = CreateSprite(
-        &sSpriteTemplate_CalendarDateSelector,
-        sDateNumbers[date].x,
-        sDateNumbers[date].y - 1,
-        0
-    );
-}
-
 static void CalendarUI_CreateSprites(void)
 {
     LoadSpritePalette(&sSpritePal_CalendarDate);
@@ -1102,7 +1086,6 @@ static void CalendarUI_CreateSprites(void)
     CalendarUI_CreateSprites_Player();
     CalendarUI_CreateSprites_TypeIcon();
     CalendarUI_CreateSprites_Dates();
-    CalendarUI_CreateSprites_DateSelector();
     CalendarUI_CreateSprites_Weather();
 }
 
