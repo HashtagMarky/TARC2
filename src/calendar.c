@@ -1053,7 +1053,7 @@ static void CalendarUI_CreateSprites_Weather(void)
 
     struct CompressedSpriteSheet sSpriteSheet_CalendarWeatherIcon;
     sSpriteSheet_CalendarWeatherIcon.data = sWeatherIcons[weather][time].gfx;
-    sSpriteSheet_CalendarWeatherIcon.size = 32*32*2/4;
+    sSpriteSheet_CalendarWeatherIcon.size = 32*32;
     sSpriteSheet_CalendarWeatherIcon.tag = TAG_WEATHER_ICON;
     
     struct SpritePalette sSpritePal_CalendarWeatherIcon;
@@ -1137,7 +1137,7 @@ static void CalendarUI_CreateSprites_Dates(void)
     {
         struct CompressedSpriteSheet sSpriteSheet_CalendarDate;
         sSpriteSheet_CalendarDate.data = sDateNumbers[dateCount].gfx;
-        sSpriteSheet_CalendarDate.size = 2*16*16*4/2;
+        sSpriteSheet_CalendarDate.size = 16*16*3;
         sSpriteSheet_CalendarDate.tag = TAG_DATE_ICON + dateCount;
     
         struct SpriteTemplate sSpriteTemplate_CalendarDate;
