@@ -48,6 +48,13 @@
 #define MAX_NUM_GYM     9
 #define MAX_NUM_WORKS   9
 
+enum SeasonSprites
+{
+    SEASON_SPRITE_LEFT,
+    SEASON_SPRITE_RIGHT,
+    SEASON_SPRITE_COUNT,
+};
+
 struct CalendarUIState
 {
     MainCallback savedCallback;
@@ -59,7 +66,7 @@ struct CalendarUIState
     u8 weather;
     u8 gymBattles;
     u8 buildProjects;
-    u8 spriteIdSeason;
+    u8 spriteIdSeason[SEASON_SPRITE_COUNT];
     u8 spriteIdPlayer;
     u8 spriteIdGymType;
     u8 spriteIdDate[DAYS_IN_SEASON + 1];
@@ -180,6 +187,15 @@ static const u32 sCalendarDate25Gfx[] = INCBIN_U32("graphics/calendar/numbers/25
 static const u32 sCalendarDate26Gfx[] = INCBIN_U32("graphics/calendar/numbers/26.4bpp.lz");
 static const u32 sCalendarDate27Gfx[] = INCBIN_U32("graphics/calendar/numbers/27.4bpp.lz");
 static const u32 sCalendarDate28Gfx[] = INCBIN_U32("graphics/calendar/numbers/28.4bpp.lz");
+
+static const u32 sSpringIconGfx[] = INCBIN_U32("graphics/calendar/seasons/spring.4bpp.lz");
+static const u16 sSpringIconPal[] = INCBIN_U16("graphics/calendar/seasons/spring.gbapal");
+static const u32 sSummerIconGfx[] = INCBIN_U32("graphics/calendar/seasons/summer.4bpp.lz");
+static const u16 sSummerIconPal[] = INCBIN_U16("graphics/calendar/seasons/summer.gbapal");
+static const u32 sAutumnIconGfx[] = INCBIN_U32("graphics/calendar/seasons/autumn.4bpp.lz");
+static const u16 sAutumnIconPal[] = INCBIN_U16("graphics/calendar/seasons/autumn.gbapal");
+static const u32 sWinterIconGfx[] = INCBIN_U32("graphics/calendar/seasons/winter.4bpp.lz");
+static const u16 sWinterIconPal[] = INCBIN_U16("graphics/calendar/seasons/winter.gbapal");
 
 struct WeatherIcons
 {
@@ -538,6 +554,7 @@ static const u8 sCalendarUIWindowFontColors[][3] =
 
 #define TAG_WEATHER_ICON            7281
 #define TAG_DATE_ICON               1827
+#define TAG_SEASON_ICON             3672
 
 static const struct OamData sOamData_CalendarWeatherIcon =
 {
@@ -550,6 +567,13 @@ static const struct OamData sOamData_CalendarDate =
 {
     .size = SPRITE_SIZE(16x16),
     .shape = SPRITE_SHAPE(16x16),
+    .priority = 1,
+};
+
+static const struct OamData sOamData_CalendarSeasonIcon =
+{
+    .size = SPRITE_SIZE(64x32),
+    .shape = SPRITE_SHAPE(64x32),
     .priority = 1,
 };
 
@@ -589,6 +613,24 @@ enum DateAnims
     DATE_ANIM_NONE,
     DATE_ANIM_CHECKED,
     DATE_ANIM_CIRCLED,
+};
+
+static const union AnimCmd sSpriteAnim_CalendarSeasonLeft[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_CalendarSeasonRight[] =
+{
+    ANIMCMD_FRAME(32, 30),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sSpriteAnimTable_Calendar_Season[] =
+{
+    sSpriteAnim_CalendarSeasonLeft,
+    sSpriteAnim_CalendarSeasonRight,
 };
 
 // Callbacks for the Calendar UI
@@ -916,7 +958,61 @@ static void CalendarUI_PrintScheduleText(void)
 
 static void CalendarUI_CreateSprites_Season(void)
 {
+    struct CompressedSpriteSheet sSpriteSheet_CalendarSeasonIcon;
+    sSpriteSheet_CalendarSeasonIcon.size = 64*32;
+    sSpriteSheet_CalendarSeasonIcon.tag = TAG_SEASON_ICON;
+    
+    struct SpritePalette sSpritePal_CalendarSeasonIcon;
+    sSpritePal_CalendarSeasonIcon.tag = TAG_SEASON_ICON;
+    
+    struct SpriteTemplate sSpriteTemplate_CalendarSeasonIcon;
+    sSpriteTemplate_CalendarSeasonIcon.tileTag = TAG_SEASON_ICON;
+    sSpriteTemplate_CalendarSeasonIcon.paletteTag = TAG_SEASON_ICON;
+    sSpriteTemplate_CalendarSeasonIcon.oam = &sOamData_CalendarSeasonIcon;
+    sSpriteTemplate_CalendarSeasonIcon.anims = sSpriteAnimTable_Calendar_Season;
+    sSpriteTemplate_CalendarSeasonIcon.images = NULL;
+    sSpriteTemplate_CalendarSeasonIcon.affineAnims = gDummySpriteAffineAnimTable;
+    sSpriteTemplate_CalendarSeasonIcon.callback = SpriteCallbackDummy;
 
+    switch (sCalendarUIState->season)
+    {
+    case SEASON_SPRING:
+        sSpriteSheet_CalendarSeasonIcon.data = sSpringIconGfx;
+        sSpritePal_CalendarSeasonIcon.data = sSpringIconPal;
+        break;
+
+    case SEASON_SUMMER:
+        sSpriteSheet_CalendarSeasonIcon.data = sSummerIconGfx;
+        sSpritePal_CalendarSeasonIcon.data = sSummerIconPal;
+        break;
+
+    case SEASON_AUTUMN:
+        sSpriteSheet_CalendarSeasonIcon.data = sAutumnIconGfx;
+        sSpritePal_CalendarSeasonIcon.data = sAutumnIconPal;
+        break;
+
+    case SEASON_WINTER:
+        sSpriteSheet_CalendarSeasonIcon.data = sWinterIconGfx;
+        sSpritePal_CalendarSeasonIcon.data = sWinterIconPal;
+        break;
+    }
+
+    LoadCompressedSpriteSheet(&sSpriteSheet_CalendarSeasonIcon);
+    LoadSpritePalette(&sSpritePal_CalendarSeasonIcon);
+
+    u32 x = 116;
+    u32 y = 28;
+    sCalendarUIState->spriteIdSeason[SEASON_SPRITE_LEFT] = CreateSprite(&sSpriteTemplate_CalendarSeasonIcon,
+        x,
+        y,
+        1
+    );
+    sCalendarUIState->spriteIdSeason[SEASON_SPRITE_RIGHT] = CreateSprite(&sSpriteTemplate_CalendarSeasonIcon,
+        x + 64,
+        y,
+        1
+    );
+    StartSpriteAnim(&gSprites[sCalendarUIState->spriteIdSeason[SEASON_SPRITE_RIGHT]], 1);
 }
 
 static void CalendarUI_CreateSprites_Weather(void)
