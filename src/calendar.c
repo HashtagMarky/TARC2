@@ -55,6 +55,15 @@ enum SeasonSprites
     SEASON_SPRITE_COUNT,
 };
 
+enum YearSprites
+{
+    YEAR_SPRITE_TEXT,
+    YEAR_SPRITE_NUMBER_DIGIT_1,
+    YEAR_SPRITE_NUMBER_DIGIT_2,
+    YEAR_SPRITE_NUMBER_DIGIT_3,
+    YEAR_SPRITE_COUNT,
+};
+
 struct CalendarUIState
 {
     MainCallback savedCallback;
@@ -67,6 +76,7 @@ struct CalendarUIState
     u8 gymBattles;
     u8 buildProjects;
     u8 spriteIdSeason[SEASON_SPRITE_COUNT];
+    u8 spriteIdYear[YEAR_SPRITE_COUNT];
     u8 spriteIdPlayer;
     u8 spriteIdGymType;
     u8 spriteIdDate[DAYS_IN_SEASON + 1];
@@ -196,6 +206,8 @@ static const u32 sAutumnIconGfx[] = INCBIN_U32("graphics/calendar/seasons/autumn
 static const u16 sAutumnIconPal[] = INCBIN_U16("graphics/calendar/seasons/autumn.gbapal");
 static const u32 sWinterIconGfx[] = INCBIN_U32("graphics/calendar/seasons/winter.4bpp.lz");
 static const u16 sWinterIconPal[] = INCBIN_U16("graphics/calendar/seasons/winter.gbapal");
+
+static const u32 sYearIconGfx[] = INCBIN_U32("graphics/calendar/year.4bpp.lz");
 
 struct WeatherIcons
 {
@@ -555,6 +567,7 @@ static const u8 sCalendarUIWindowFontColors[][3] =
 #define TAG_WEATHER_ICON            7281
 #define TAG_DATE_ICON               1827
 #define TAG_SEASON_ICON             3672
+#define TAG_YEAR_ICON               4792
 
 static const struct OamData sOamData_CalendarWeatherIcon =
 {
@@ -574,6 +587,13 @@ static const struct OamData sOamData_CalendarSeasonIcon =
 {
     .size = SPRITE_SIZE(64x32),
     .shape = SPRITE_SHAPE(64x32),
+    .priority = 1,
+};
+
+static const struct OamData sOamData_CalendarYearIcon =
+{
+    .size = SPRITE_SIZE(32x32),
+    .shape = SPRITE_SHAPE(32x32),
     .priority = 1,
 };
 
@@ -631,6 +651,25 @@ static const union AnimCmd *const sSpriteAnimTable_Calendar_Season[] =
 {
     sSpriteAnim_CalendarSeasonLeft,
     sSpriteAnim_CalendarSeasonRight,
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_CalendarYearIcon =
+{
+    .data = sYearIconGfx,
+    .size = 32*32,
+    .tag = TAG_YEAR_ICON,
+};
+
+    
+static const struct SpriteTemplate sSpriteTemplate_CalendarYearIcon =
+{
+    .tileTag = TAG_YEAR_ICON,
+    .paletteTag = TAG_DATE_ICON,
+    .oam = &sOamData_CalendarYearIcon,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
 };
 
 // Callbacks for the Calendar UI
@@ -1015,6 +1054,83 @@ static void CalendarUI_CreateSprites_Season(void)
     StartSpriteAnim(&gSprites[sCalendarUIState->spriteIdSeason[SEASON_SPRITE_RIGHT]], 1);
 }
 
+static void CalendarUI_CreateSprites_Year(void)
+{
+    u32 year = sCalendarUIState->year;
+    u32 digitHundreds = year / 100;
+    u32 digitTens = (year / 10) % 10;
+    u32 digitOnes = year % 10;
+    u32 x = 148;
+    u32 y = 39;
+
+    digitHundreds = 2;
+    digitTens = 2;
+    digitOnes = 1;
+
+    LoadCompressedSpriteSheet(&sSpriteSheet_CalendarYearIcon);
+    sCalendarUIState->spriteIdYear[YEAR_SPRITE_TEXT] = CreateSprite(&sSpriteTemplate_CalendarYearIcon, x, y, 0);
+    x += 22;
+
+    struct CompressedSpriteSheet sSpriteSheet_CalendarYearDigitOne;
+    sSpriteSheet_CalendarYearDigitOne.data = sDateNumbers[digitHundreds].gfx;
+    sSpriteSheet_CalendarYearDigitOne.size = 3*16*16;
+    sSpriteSheet_CalendarYearDigitOne.tag = TAG_YEAR_ICON + YEAR_SPRITE_NUMBER_DIGIT_1;
+    
+    struct SpriteTemplate sSpriteTemplate_CalendarYearDigitOne;
+    sSpriteTemplate_CalendarYearDigitOne.tileTag = TAG_YEAR_ICON + YEAR_SPRITE_NUMBER_DIGIT_1;
+    sSpriteTemplate_CalendarYearDigitOne.paletteTag = TAG_DATE_ICON;
+    sSpriteTemplate_CalendarYearDigitOne.oam = &sOamData_CalendarDate;
+    sSpriteTemplate_CalendarYearDigitOne.anims = gDummySpriteAnimTable;
+    sSpriteTemplate_CalendarYearDigitOne.images = NULL;
+    sSpriteTemplate_CalendarYearDigitOne.affineAnims = gDummySpriteAffineAnimTable;
+    sSpriteTemplate_CalendarYearDigitOne.callback = SpriteCallbackDummy;
+
+    LoadCompressedSpriteSheet(&sSpriteSheet_CalendarYearDigitOne);
+    x -= sDateNumbers[digitHundreds].offset;
+    sCalendarUIState->spriteIdYear[YEAR_SPRITE_NUMBER_DIGIT_1] = CreateSprite(&sSpriteTemplate_CalendarYearDigitOne, x, y, 0);
+    x += 16;
+
+    struct CompressedSpriteSheet sSpriteSheet_CalendarYearDigitTwo;
+    sSpriteSheet_CalendarYearDigitTwo.data = sDateNumbers[digitTens].gfx;
+    sSpriteSheet_CalendarYearDigitTwo.size = 3*16*16;
+    sSpriteSheet_CalendarYearDigitTwo.tag = TAG_YEAR_ICON + YEAR_SPRITE_NUMBER_DIGIT_2;
+    
+    struct SpriteTemplate sSpriteTemplate_CalendarYearDigitTwo;
+    sSpriteTemplate_CalendarYearDigitTwo.tileTag = TAG_YEAR_ICON + YEAR_SPRITE_NUMBER_DIGIT_2;
+    sSpriteTemplate_CalendarYearDigitTwo.paletteTag = TAG_DATE_ICON;
+    sSpriteTemplate_CalendarYearDigitTwo.oam = &sOamData_CalendarDate;
+    sSpriteTemplate_CalendarYearDigitTwo.anims = gDummySpriteAnimTable;
+    sSpriteTemplate_CalendarYearDigitTwo.images = NULL;
+    sSpriteTemplate_CalendarYearDigitTwo.affineAnims = gDummySpriteAffineAnimTable;
+    sSpriteTemplate_CalendarYearDigitTwo.callback = SpriteCallbackDummy;
+
+    LoadCompressedSpriteSheet(&sSpriteSheet_CalendarYearDigitTwo);
+    x -= sDateNumbers[digitHundreds].offset;
+    x -= sDateNumbers[digitTens].offset;
+    sCalendarUIState->spriteIdYear[YEAR_SPRITE_NUMBER_DIGIT_2] = CreateSprite(&sSpriteTemplate_CalendarYearDigitTwo, x, y, 0);
+    x += 16;
+
+
+    struct CompressedSpriteSheet sSpriteSheet_CalendarYearDigitThree;
+    sSpriteSheet_CalendarYearDigitThree.data = sDateNumbers[digitOnes].gfx;
+    sSpriteSheet_CalendarYearDigitThree.size = 3*16*16;
+    sSpriteSheet_CalendarYearDigitThree.tag = TAG_YEAR_ICON + YEAR_SPRITE_NUMBER_DIGIT_3;
+    
+    struct SpriteTemplate sSpriteTemplate_CalendarYearDigitThree;
+    sSpriteTemplate_CalendarYearDigitThree.tileTag = TAG_YEAR_ICON + YEAR_SPRITE_NUMBER_DIGIT_3;
+    sSpriteTemplate_CalendarYearDigitThree.paletteTag = TAG_DATE_ICON;
+    sSpriteTemplate_CalendarYearDigitThree.oam = &sOamData_CalendarDate;
+    sSpriteTemplate_CalendarYearDigitThree.anims = gDummySpriteAnimTable;
+    sSpriteTemplate_CalendarYearDigitThree.images = NULL;
+    sSpriteTemplate_CalendarYearDigitThree.affineAnims = gDummySpriteAffineAnimTable;
+    sSpriteTemplate_CalendarYearDigitThree.callback = SpriteCallbackDummy;
+
+    LoadCompressedSpriteSheet(&sSpriteSheet_CalendarYearDigitThree);
+    x -= sDateNumbers[digitTens].offset;
+    x -= sDateNumbers[digitOnes].offset;
+    sCalendarUIState->spriteIdYear[YEAR_SPRITE_NUMBER_DIGIT_3] = CreateSprite(&sSpriteTemplate_CalendarYearDigitThree, x, y, 0);
+}
+
 static void CalendarUI_CreateSprites_Weather(void)
 {
     u32 weather = sCalendarUIState->weather;
@@ -1179,6 +1295,7 @@ static void CalendarUI_CreateSprites(void)
 {
     LoadSpritePalette(&sSpritePal_CalendarDate);
     CalendarUI_CreateSprites_Season();
+    CalendarUI_CreateSprites_Year();
     CalendarUI_CreateSprites_Player();
     CalendarUI_CreateSprites_TypeIcon();
     CalendarUI_CreateSprites_Dates();
