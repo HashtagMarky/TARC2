@@ -169,6 +169,7 @@ static const u32 sCalendarSandstormIconGfx[] = INCBIN_U32("graphics/calendar/wea
 static const u16 sCalendarSandstormIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/sandstorm.gbapal");
 
 static const u32 sCalendarDateSelectorGfx[] = INCBIN_U32("graphics/calendar/numbers/date_selector.4bpp.lz");
+static const u32 sCalendarDate0Gfx[] = INCBIN_U32("graphics/calendar/numbers/0.4bpp.lz");
 static const u32 sCalendarDate1Gfx[] = INCBIN_U32("graphics/calendar/numbers/1.4bpp.lz");
 static const u32 sCalendarDate2Gfx[] = INCBIN_U32("graphics/calendar/numbers/2.4bpp.lz");
 static const u32 sCalendarDate3Gfx[] = INCBIN_U32("graphics/calendar/numbers/3.4bpp.lz");
@@ -472,7 +473,8 @@ struct DateNumbers
 
 enum Dates
 {
-    DAY_1 = 1,
+    DAY_0,
+    DAY_1,
     DAY_2,
     DAY_3,
     DAY_4,
@@ -519,6 +521,7 @@ static const struct DateNumbers sDateNumbers[DAYS_IN_SEASON + 1] =
     [DAY_1]  = {sCalendarDate1Gfx,  MONDAY_X,    WEEK_1_Y, 0},
     [DAY_2]  = {sCalendarDate2Gfx,  TUESDAY_X,   WEEK_1_Y, 0},
     [DAY_3]  = {sCalendarDate3Gfx,  WEDNESDAY_X, WEEK_1_Y, 0},
+    [DAY_0]  = {sCalendarDate0Gfx,  0,           0,        5},
     [DAY_4]  = {sCalendarDate4Gfx,  THURSDAY_X,  WEEK_1_Y, 0},
     [DAY_5]  = {sCalendarDate5Gfx,  FRIDAY_X,    WEEK_1_Y, 0},
     [DAY_6]  = {sCalendarDate6Gfx,  SATURDAY_X,  WEEK_1_Y, 0},
@@ -1057,19 +1060,16 @@ static void CalendarUI_CreateSprites_Season(void)
 static void CalendarUI_CreateSprites_Year(void)
 {
     u32 year = sCalendarUIState->year;
+    year = (year < 1) ? 1 : year;
     u32 digitHundreds = year / 100;
     u32 digitTens = (year / 10) % 10;
     u32 digitOnes = year % 10;
     u32 x = 148;
     u32 y = 39;
 
-    digitHundreds = 2;
-    digitTens = 2;
-    digitOnes = 1;
-
-    LoadCompressedSpriteSheet(&sSpriteSheet_CalendarYearIcon);
-    sCalendarUIState->spriteIdYear[YEAR_SPRITE_TEXT] = CreateSprite(&sSpriteTemplate_CalendarYearIcon, x, y, 0);
-    x += 22;
+    digitHundreds = 0;
+    digitTens = 1;
+    digitOnes = 0;
 
     struct CompressedSpriteSheet sSpriteSheet_CalendarYearDigitOne;
     sSpriteSheet_CalendarYearDigitOne.data = sDateNumbers[digitHundreds].gfx;
@@ -1085,11 +1085,7 @@ static void CalendarUI_CreateSprites_Year(void)
     sSpriteTemplate_CalendarYearDigitOne.affineAnims = gDummySpriteAffineAnimTable;
     sSpriteTemplate_CalendarYearDigitOne.callback = SpriteCallbackDummy;
 
-    LoadCompressedSpriteSheet(&sSpriteSheet_CalendarYearDigitOne);
-    x -= sDateNumbers[digitHundreds].offset;
-    sCalendarUIState->spriteIdYear[YEAR_SPRITE_NUMBER_DIGIT_1] = CreateSprite(&sSpriteTemplate_CalendarYearDigitOne, x, y, 0);
-    x += 16;
-
+    
     struct CompressedSpriteSheet sSpriteSheet_CalendarYearDigitTwo;
     sSpriteSheet_CalendarYearDigitTwo.data = sDateNumbers[digitTens].gfx;
     sSpriteSheet_CalendarYearDigitTwo.size = 3*16*16;
@@ -1103,12 +1099,6 @@ static void CalendarUI_CreateSprites_Year(void)
     sSpriteTemplate_CalendarYearDigitTwo.images = NULL;
     sSpriteTemplate_CalendarYearDigitTwo.affineAnims = gDummySpriteAffineAnimTable;
     sSpriteTemplate_CalendarYearDigitTwo.callback = SpriteCallbackDummy;
-
-    LoadCompressedSpriteSheet(&sSpriteSheet_CalendarYearDigitTwo);
-    x -= sDateNumbers[digitHundreds].offset;
-    x -= sDateNumbers[digitTens].offset;
-    sCalendarUIState->spriteIdYear[YEAR_SPRITE_NUMBER_DIGIT_2] = CreateSprite(&sSpriteTemplate_CalendarYearDigitTwo, x, y, 0);
-    x += 16;
 
 
     struct CompressedSpriteSheet sSpriteSheet_CalendarYearDigitThree;
@@ -1125,8 +1115,31 @@ static void CalendarUI_CreateSprites_Year(void)
     sSpriteTemplate_CalendarYearDigitThree.affineAnims = gDummySpriteAffineAnimTable;
     sSpriteTemplate_CalendarYearDigitThree.callback = SpriteCallbackDummy;
 
+    LoadCompressedSpriteSheet(&sSpriteSheet_CalendarYearIcon);
+    sCalendarUIState->spriteIdYear[YEAR_SPRITE_TEXT] = CreateSprite(&sSpriteTemplate_CalendarYearIcon, x, y, 0);
+    x += 22;
+
+    if (digitHundreds)
+    {
+        LoadCompressedSpriteSheet(&sSpriteSheet_CalendarYearDigitOne);
+        x -= sDateNumbers[digitHundreds].offset;
+        sCalendarUIState->spriteIdYear[YEAR_SPRITE_NUMBER_DIGIT_1] = CreateSprite(&sSpriteTemplate_CalendarYearDigitOne, x, y, 0);
+        x += 16;
+    }
+
+    if (digitHundreds || digitTens)
+    {
+        LoadCompressedSpriteSheet(&sSpriteSheet_CalendarYearDigitTwo);
+        if (digitHundreds)
+            x -= sDateNumbers[digitHundreds].offset;
+        x -= sDateNumbers[digitTens].offset;
+        sCalendarUIState->spriteIdYear[YEAR_SPRITE_NUMBER_DIGIT_2] = CreateSprite(&sSpriteTemplate_CalendarYearDigitTwo, x, y, 0);
+        x += 16;
+    }
+
     LoadCompressedSpriteSheet(&sSpriteSheet_CalendarYearDigitThree);
-    x -= sDateNumbers[digitTens].offset;
+    if (digitHundreds || digitTens)
+        x -= sDateNumbers[digitTens].offset;
     x -= sDateNumbers[digitOnes].offset;
     sCalendarUIState->spriteIdYear[YEAR_SPRITE_NUMBER_DIGIT_3] = CreateSprite(&sSpriteTemplate_CalendarYearDigitThree, x, y, 0);
 }
