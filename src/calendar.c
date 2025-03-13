@@ -518,38 +518,38 @@ enum Dates
 
 static const struct DateNumbers sDateNumbers[DAYS_IN_SEASON + 1] =
 {
-    [DAY_1]  = {sCalendarDate1Gfx,  MONDAY_X,    WEEK_1_Y, 0},
-    [DAY_2]  = {sCalendarDate2Gfx,  TUESDAY_X,   WEEK_1_Y, 0},
-    [DAY_3]  = {sCalendarDate3Gfx,  WEDNESDAY_X, WEEK_1_Y, 0},
     [DAY_0]  = {sCalendarDate0Gfx,  0,           0,        5},
-    [DAY_4]  = {sCalendarDate4Gfx,  THURSDAY_X,  WEEK_1_Y, 0},
-    [DAY_5]  = {sCalendarDate5Gfx,  FRIDAY_X,    WEEK_1_Y, 0},
-    [DAY_6]  = {sCalendarDate6Gfx,  SATURDAY_X,  WEEK_1_Y, 0},
-    [DAY_7]  = {sCalendarDate7Gfx,  SUNDAY_X,    WEEK_1_Y, 0},
+    [DAY_1]  = {sCalendarDate1Gfx,  MONDAY_X,    WEEK_1_Y, 6},
+    [DAY_2]  = {sCalendarDate2Gfx,  TUESDAY_X,   WEEK_1_Y, 5},
+    [DAY_3]  = {sCalendarDate3Gfx,  WEDNESDAY_X, WEEK_1_Y, 5},
+    [DAY_4]  = {sCalendarDate4Gfx,  THURSDAY_X,  WEEK_1_Y, 5},
+    [DAY_5]  = {sCalendarDate5Gfx,  FRIDAY_X,    WEEK_1_Y, 5},
+    [DAY_6]  = {sCalendarDate6Gfx,  SATURDAY_X,  WEEK_1_Y, 5},
+    [DAY_7]  = {sCalendarDate7Gfx,  SUNDAY_X,    WEEK_1_Y, 5},
 
-    [DAY_8]  = {sCalendarDate8Gfx,  MONDAY_X,    WEEK_2_Y, 0},
-    [DAY_9]  = {sCalendarDate9Gfx,  TUESDAY_X,   WEEK_2_Y, 0},
-    [DAY_10] = {sCalendarDate10Gfx, WEDNESDAY_X, WEEK_2_Y, 0},
-    [DAY_11] = {sCalendarDate11Gfx, THURSDAY_X,  WEEK_2_Y, 0},
-    [DAY_12] = {sCalendarDate12Gfx, FRIDAY_X,    WEEK_2_Y, 0},
-    [DAY_13] = {sCalendarDate13Gfx, SATURDAY_X,  WEEK_2_Y, 0},
-    [DAY_14] = {sCalendarDate14Gfx, SUNDAY_X,    WEEK_2_Y, 0},
+    [DAY_8]  = {sCalendarDate8Gfx,  MONDAY_X,    WEEK_2_Y, 5},
+    [DAY_9]  = {sCalendarDate9Gfx,  TUESDAY_X,   WEEK_2_Y, 5},
+    [DAY_10] = {sCalendarDate10Gfx, WEDNESDAY_X, WEEK_2_Y},
+    [DAY_11] = {sCalendarDate11Gfx, THURSDAY_X,  WEEK_2_Y},
+    [DAY_12] = {sCalendarDate12Gfx, FRIDAY_X,    WEEK_2_Y},
+    [DAY_13] = {sCalendarDate13Gfx, SATURDAY_X,  WEEK_2_Y},
+    [DAY_14] = {sCalendarDate14Gfx, SUNDAY_X,    WEEK_2_Y},
 
-    [DAY_15] = {sCalendarDate15Gfx, MONDAY_X,    WEEK_3_Y, 0},
-    [DAY_16] = {sCalendarDate16Gfx, TUESDAY_X,   WEEK_3_Y, 0},
-    [DAY_17] = {sCalendarDate17Gfx, WEDNESDAY_X, WEEK_3_Y, 0},
-    [DAY_18] = {sCalendarDate18Gfx, THURSDAY_X,  WEEK_3_Y, 0},
-    [DAY_19] = {sCalendarDate19Gfx, FRIDAY_X,    WEEK_3_Y, 0},
-    [DAY_20] = {sCalendarDate20Gfx, SATURDAY_X,  WEEK_3_Y, 0},
-    [DAY_21] = {sCalendarDate21Gfx, SUNDAY_X,    WEEK_3_Y, 0},
+    [DAY_15] = {sCalendarDate15Gfx, MONDAY_X,    WEEK_3_Y},
+    [DAY_16] = {sCalendarDate16Gfx, TUESDAY_X,   WEEK_3_Y},
+    [DAY_17] = {sCalendarDate17Gfx, WEDNESDAY_X, WEEK_3_Y},
+    [DAY_18] = {sCalendarDate18Gfx, THURSDAY_X,  WEEK_3_Y},
+    [DAY_19] = {sCalendarDate19Gfx, FRIDAY_X,    WEEK_3_Y},
+    [DAY_20] = {sCalendarDate20Gfx, SATURDAY_X,  WEEK_3_Y},
+    [DAY_21] = {sCalendarDate21Gfx, SUNDAY_X,    WEEK_3_Y},
 
-    [DAY_22] = {sCalendarDate22Gfx, MONDAY_X,    WEEK_4_Y, 0},
-    [DAY_23] = {sCalendarDate23Gfx, TUESDAY_X,   WEEK_4_Y, 0},
-    [DAY_24] = {sCalendarDate24Gfx, WEDNESDAY_X, WEEK_4_Y, 0},
-    [DAY_25] = {sCalendarDate25Gfx, THURSDAY_X,  WEEK_4_Y, 0},
-    [DAY_26] = {sCalendarDate26Gfx, FRIDAY_X,    WEEK_4_Y, 0},
-    [DAY_27] = {sCalendarDate27Gfx, SATURDAY_X,  WEEK_4_Y, 0},
-    [DAY_28] = {sCalendarDate28Gfx, SUNDAY_X,    WEEK_4_Y, 0},
+    [DAY_22] = {sCalendarDate22Gfx, MONDAY_X,    WEEK_4_Y},
+    [DAY_23] = {sCalendarDate23Gfx, TUESDAY_X,   WEEK_4_Y},
+    [DAY_24] = {sCalendarDate24Gfx, WEDNESDAY_X, WEEK_4_Y},
+    [DAY_25] = {sCalendarDate25Gfx, THURSDAY_X,  WEEK_4_Y},
+    [DAY_26] = {sCalendarDate26Gfx, FRIDAY_X,    WEEK_4_Y},
+    [DAY_27] = {sCalendarDate27Gfx, SATURDAY_X,  WEEK_4_Y},
+    [DAY_28] = {sCalendarDate28Gfx, SUNDAY_X,    WEEK_4_Y},
 };
 
 enum FontColor
@@ -1064,12 +1064,8 @@ static void CalendarUI_CreateSprites_Year(void)
     u32 digitHundreds = year / 100;
     u32 digitTens = (year / 10) % 10;
     u32 digitOnes = year % 10;
-    u32 x = 148;
+    u32 x = 100;
     u32 y = 39;
-
-    digitHundreds = 0;
-    digitTens = 1;
-    digitOnes = 0;
 
     struct CompressedSpriteSheet sSpriteSheet_CalendarYearDigitOne;
     sSpriteSheet_CalendarYearDigitOne.data = sDateNumbers[digitHundreds].gfx;
