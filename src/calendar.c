@@ -715,7 +715,7 @@ void Task_OpenCalendarUI(u8 taskId)
         if (gTasks[taskId].tWarp)
             warp = TRUE;
 
-        CalendarUI_Init(CB2_ReturnToFieldWithOpenMenu, warp);
+        CalendarUI_Init(CB2_ReturnToField, warp);
         
         DestroyTask(taskId);
     }
