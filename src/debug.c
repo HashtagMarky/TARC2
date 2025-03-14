@@ -68,6 +68,7 @@
 #include "constants/weather.h"
 #include "save.h"
 
+#include "calendar.h"
 #include "dynamic_music.h"
 #include "ikigai_characters.h"
 
@@ -92,6 +93,7 @@ enum IkigaiDebugMenu
 {
     DEBUG_IKIGAI_PLAYER,
     DEBUG_IKIGAI_CHARACTER,
+    DEBUG_IKIGAI_TEMPORAL,
 };
 
 enum IkigaiPlayerDebugSubmenu
@@ -105,6 +107,12 @@ enum IkigaiPlayerDebugSubmenu
 enum IkigaiCharacterDebugSubmenu
 {
     DEBUG_IKIGAI_CHARACTER_MET,
+};
+
+enum IkigaiTimeDebugSubmenu
+{
+    DEBUG_IKIGAI_TEMPORAL_CALENDAR_SHOW,
+    DEBUG_IKIGAI_TEMPORAL_CALENDAR_WARP,
 };
 
 enum UtilDebugMenu
@@ -408,6 +416,7 @@ static void DebugAction_Util_Script_8(u8 taskId);
 static void DebugAction_OpenIkigaiMenu(u8 taskId);
 static void DebugAction_OpenSubmenuIkigai_Player(u8 taskId);
 static void DebugAction_OpenSubmenuIkigai_CharacterMenu(u8 taskId);
+static void DebugAction_OpenSubmenuIkigai_TemporalMenu(u8 taskId);
 
 static void DebugAction_OpenUtilitiesMenu(u8 taskId);
 static void DebugAction_OpenPCBagMenu(u8 taskId);
@@ -424,6 +433,7 @@ static void DebugTask_HandleMenuInput_Main(u8 taskId);
 static void DebugTask_HandleMenuInput_Ikigai(u8 taskId);
 static void DebugTask_HandleSubmenuInput_Ikigai_Player(u8 taskId);
 static void DebugTask_HandleSubmenuInput_Ikigai_Character(u8 taskId);
+static void DebugTask_HandleSubmenuInput_Ikigai_Temporal(u8 taskId);
 static void DebugTask_HandleMenuInput_Utilities(u8 taskId);
 static void DebugTask_HandleMenuInput_PCBag(u8 taskId);
 static void DebugTask_HandleMenuInput_PCBag_Fill(u8 taskId);
@@ -440,6 +450,8 @@ static void DebugTask_HandleMenuInput_DynamicMusicIsolateTracksList(u8 taskId);
 static void DebugTask_HandleMenuInput_DynamicMusicIsolateTracksFuncs(u8 taskId);
 
 static void DebugAction_Ikigai_MeetAllCharacter(u8 taskId);
+static void DebugAction_Ikigai_ShowCalendar(u8 taskId);
+static void DebugAction_Ikigai_CalendarWarp(u8 taskId);
 
 static void DebugAction_Util_Fly(u8 taskId);
 static void DebugAction_Util_Warp_Warp(u8 taskId);
@@ -576,6 +588,7 @@ extern const u8 DebugScript_ZeroDaycareMons[];
 
 extern const u8 Debug_ShowFieldMessageStringVar4[];
 extern const u8 Debug_OpenDynPalMenu[];
+extern const u8 Debug_OpenCalendar[];
 extern const u8 Debug_CheatStart[];
 extern const u8 Debug_HatchAnEgg[];
 extern const u8 PlayersHouse_2F_EventScript_SetWallClock[];
@@ -677,6 +690,7 @@ static const struct ListMenuItem sDebugMenu_Items_Ikigai[] =
 {
     [DEBUG_IKIGAI_PLAYER]                  = {COMPOUND_STRING("Player Menu…{CLEAR_TO 110}{RIGHT_ARROW}"),      DEBUG_IKIGAI_PLAYER},
     [DEBUG_IKIGAI_CHARACTER]               = {COMPOUND_STRING("Character Menu…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_IKIGAI_CHARACTER},
+    [DEBUG_IKIGAI_TEMPORAL]                = {COMPOUND_STRING("Temporal Menu…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_IKIGAI_TEMPORAL},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Player[] =
@@ -690,6 +704,12 @@ static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Player[] =
 static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Character[] =
 {
     [DEBUG_IKIGAI_CHARACTER_MET]           = {COMPOUND_STRING("Meet All Characters"),                          DEBUG_IKIGAI_CHARACTER_MET},
+};
+
+static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Temporal[] =
+{
+    [DEBUG_IKIGAI_TEMPORAL_CALENDAR_SHOW]   = {COMPOUND_STRING("Show Calendar"),                                DEBUG_IKIGAI_TEMPORAL_CALENDAR_SHOW},
+    [DEBUG_IKIGAI_TEMPORAL_CALENDAR_WARP]   = {COMPOUND_STRING("Calendar Warp"),                                DEBUG_IKIGAI_TEMPORAL_CALENDAR_WARP},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
@@ -920,6 +940,7 @@ static void (*const sDebugMenu_Actions_Ikigai[])(u8) =
 {
     [DEBUG_IKIGAI_PLAYER]                  = DebugAction_OpenSubmenuIkigai_Player,
     [DEBUG_IKIGAI_CHARACTER]               = DebugAction_OpenSubmenuIkigai_CharacterMenu,
+    [DEBUG_IKIGAI_TEMPORAL]                = DebugAction_OpenSubmenuIkigai_TemporalMenu,
 };
 
 static void (*const sDebugMenu_Actions_Ikigai_Player[])(u8) =
@@ -933,6 +954,12 @@ static void (*const sDebugMenu_Actions_Ikigai_Player[])(u8) =
 static void (*const sDebugMenu_Actions_Ikigai_Character[])(u8) =
 {
     [DEBUG_IKIGAI_CHARACTER_MET]           = DebugAction_Ikigai_MeetAllCharacter,
+};
+
+static void (*const sDebugMenu_Actions_Ikigai_Temporal[])(u8) =
+{
+    [DEBUG_IKIGAI_TEMPORAL_CALENDAR_SHOW]  = DebugAction_Ikigai_ShowCalendar,
+    [DEBUG_IKIGAI_TEMPORAL_CALENDAR_WARP]  = DebugAction_Ikigai_CalendarWarp,
 };
 
 static void (*const sDebugMenu_Actions_Utilities[])(u8) =
@@ -1180,6 +1207,13 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Ikigai_Character =
     .items = sDebugMenu_Items_SubmenuIkigai_Character,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_SubmenuIkigai_Character),
+};
+
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Ikigai_Temporal =
+{
+    .items = sDebugMenu_Items_SubmenuIkigai_Temporal,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_SubmenuIkigai_Temporal),
 };
 
 static const struct ListMenuTemplate sDebugMenu_ListTemplate_Utilities =
@@ -1732,6 +1766,11 @@ static void DebugTask_HandleSubmenuInput_Ikigai_Character(u8 taskId)
     DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Ikigai_Character, DebugTask_HandleMenuInput_Ikigai, sDebugMenu_ListTemplate_Ikigai);
 }
 
+static void DebugTask_HandleSubmenuInput_Ikigai_Temporal(u8 taskId)
+{
+    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Ikigai_Temporal, DebugTask_HandleMenuInput_Ikigai, sDebugMenu_ListTemplate_Ikigai);
+}
+
 static void DebugTask_HandleMenuInput_Utilities(u8 taskId)
 {
     DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Utilities, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
@@ -2067,6 +2106,12 @@ static void DebugAction_OpenSubmenuIkigai_CharacterMenu(u8 taskId)
     Debug_ShowMenu(DebugTask_HandleSubmenuInput_Ikigai_Character, sDebugMenu_ListTemplate_Ikigai_Character);
 }
 
+static void DebugAction_OpenSubmenuIkigai_TemporalMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleSubmenuInput_Ikigai_Temporal, sDebugMenu_ListTemplate_Ikigai_Temporal);
+}
+
 static void DebugAction_OpenUtilitiesMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
@@ -2148,6 +2193,17 @@ static void DebugAction_Ikigai_MeetAllCharacter(u8 taskId)
     IkigaiCharacter_SetAllMetFlags();
     Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
+}
+
+static void DebugAction_Ikigai_ShowCalendar(u8 taskId)
+{
+    Debug_DestroyMenu_Full_Script(taskId, Debug_OpenCalendar);
+}
+
+static void DebugAction_Ikigai_CalendarWarp(u8 taskId)
+{
+    Debug_DestroyMenu_Full(taskId);
+    DoCalendarWarpHome();
 }
 
 // *******************************

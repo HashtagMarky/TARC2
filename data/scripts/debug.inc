@@ -150,6 +150,11 @@ Debug_OpenDynPalMenu::
 Debug_EventScript_Text_DynPal:
 	.string "Choose a new set of palettes.$"
 
+Debug_OpenCalendar::
+	fadescreenswapbuffers FADE_TO_BLACK
+	callnative OpenCalendarUI
+	end
+
 Debug_EventScript_Script_1::
 	release
 	end

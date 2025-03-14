@@ -705,6 +705,11 @@ static void CalendarUI_FreeResources(void);
 // Sprite Callbacks
 static void PokeSphere_TypeIconCallback(struct Sprite *sprite);
 
+void OpenCalendarUI(void)
+{
+    CreateTask(Task_OpenCalendarUI, 0);
+}
+
 void Task_OpenCalendarUI(u8 taskId)
 {
     bool32 warp = FALSE;
