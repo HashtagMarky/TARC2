@@ -82,8 +82,13 @@ gFieldEffectScriptPointers::
 	.4byte gFieldEffectScript_SmilingIcon               @ FLDEFF_SMILING_ICON
 	.4byte gFieldEffectScript_TalkingIcon               @ FLDEFF_TALKING_ICON
 	.4byte gFieldEffectScript_ThinkingIcon              @ FLDEFF_THINKING_ICON
-
 	.4byte gFieldEffectScript_CaveDust                  @ FLDEFF_CAVE_DUST
+	.4byte gFieldEffectScript_Saving					@ FLDEFF_SAVING
+
+
+gFieldEffectScript_Saving::
+	field_eff_loadfadedpal_callnative gSpritePalette_SavingFieldEffect, FldEff_Saving
+	field_eff_end
     
 gFieldEffectScript_ExclamationMarkIcon1::
 	field_eff_callnative FldEff_ExclamationMarkIcon
