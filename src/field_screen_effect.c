@@ -40,6 +40,8 @@
 #include "trainer_hill.h"
 #include "fldeff.h"
 
+#include "calendar.h"
+
 static void Task_ExitNonAnimDoor(u8);
 static void Task_ExitNonDoor(u8);
 static void Task_DoContestHallWarp(u8);
@@ -702,6 +704,21 @@ static void Task_ReturnToWorldFromLinkRoom(u8 taskId)
 void ReturnFromLinkRoom(void)
 {
     CreateTask(Task_ReturnToWorldFromLinkRoom, 10);
+}
+
+void DoCalendarWarpHome(void)
+{
+    SetWarpDestination(MAP_GROUP(LITTLEROOT_TOWN_BRENDANS_HOUSE_2F), MAP_NUM(LITTLEROOT_TOWN_BRENDANS_HOUSE_2F), WARP_ID_NONE, 1, 4);
+    DoWarp();
+    ResetInitialPlayerAvatarState();
+    LockPlayerFieldControls();
+    TryFadeOutOldMapMusic();
+    WarpFadeOutScreen();
+    PlayRainStoppingSoundEffect();
+    PlaySE(SE_EXIT);
+    gFieldCallback = FieldCB_DefaultWarpExit;
+    CreateTask(Task_OpenCalendarUI, 10);
+    gTasks[FindTaskIdByFunc(Task_OpenCalendarUI)].tWarp = TRUE;
 }
 
 void Task_WarpAndLoadMap_Global(u8 taskId)

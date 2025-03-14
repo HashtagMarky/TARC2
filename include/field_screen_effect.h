@@ -45,6 +45,7 @@ bool8 IsPlayerStandingStill(void);
 void DoStairWarp(u16 metatileBehavior, u16 delay);
 bool32 IsDirectionalStairWarpMetatileBehavior(u16 metatileBehavior, u8 playerDirection);
 void DoDoorScript(void);
+void DoCalendarWarpHome(void);
 void Task_WarpAndLoadMap_Global(u8 taskId);
 void Task_WarpAndLoadMap_Save(u8 taskId);
 
