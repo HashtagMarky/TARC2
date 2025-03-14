@@ -113,6 +113,9 @@ enum IkigaiTimeDebugSubmenu
 {
     DEBUG_IKIGAI_TEMPORAL_CALENDAR_SHOW,
     DEBUG_IKIGAI_TEMPORAL_CALENDAR_WARP,
+    DEBUG_IKIGAI_TEMPORAL_WEATHER,
+    DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK,
+    DEBUG_IKIGAI_TEMPORAL_SET_CLOCK,
 };
 
 enum UtilDebugMenu
@@ -710,6 +713,9 @@ static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Temporal[] =
 {
     [DEBUG_IKIGAI_TEMPORAL_CALENDAR_SHOW]   = {COMPOUND_STRING("Show Calendar"),                                DEBUG_IKIGAI_TEMPORAL_CALENDAR_SHOW},
     [DEBUG_IKIGAI_TEMPORAL_CALENDAR_WARP]   = {COMPOUND_STRING("Calendar Warp"),                                DEBUG_IKIGAI_TEMPORAL_CALENDAR_WARP},
+    [DEBUG_IKIGAI_TEMPORAL_WEATHER]         = {COMPOUND_STRING("Set weather…{CLEAR_TO 110}{RIGHT_ARROW}"),      DEBUG_IKIGAI_TEMPORAL_WEATHER},
+    [DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK]     = {COMPOUND_STRING("Check wall clock…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK},
+    [DEBUG_IKIGAI_TEMPORAL_SET_CLOCK]       = {COMPOUND_STRING("Set wall clock…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_IKIGAI_TEMPORAL_SET_CLOCK},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
@@ -960,6 +966,9 @@ static void (*const sDebugMenu_Actions_Ikigai_Temporal[])(u8) =
 {
     [DEBUG_IKIGAI_TEMPORAL_CALENDAR_SHOW]  = DebugAction_Ikigai_ShowCalendar,
     [DEBUG_IKIGAI_TEMPORAL_CALENDAR_WARP]  = DebugAction_Ikigai_CalendarWarp,
+    [DEBUG_IKIGAI_TEMPORAL_WEATHER]        = DebugAction_Util_Weather,
+    [DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK]    = DebugAction_Util_CheckWallClock,
+    [DEBUG_IKIGAI_TEMPORAL_SET_CLOCK]      = DebugAction_Util_SetWallClock,
 };
 
 static void (*const sDebugMenu_Actions_Utilities[])(u8) =
