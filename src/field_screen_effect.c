@@ -712,7 +712,7 @@ void DoCalendarWarpHome(void)
     DoWarp();
     ResetInitialPlayerAvatarState();
     LockPlayerFieldControls();
-    TryFadeOutOldMapMusic();
+    FadeOutMapMusic(GetMapMusicFadeoutSpeed());
     WarpFadeOutScreen();
     PlayRainStoppingSoundEffect();
     PlaySE(SE_EXIT);
