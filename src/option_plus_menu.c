@@ -40,6 +40,7 @@ enum
     MENUITEM_MAIN_SOUND,
     MENUITEM_MAIN_UNIT_SYSTEM,
     MENUITEM_MAIN_CLOCK_MODE,
+    MENUITEM_MAIN_AUTOSAVE,
     MENUITEM_MAIN_FRAMETYPE,
     MENUITEM_MAIN_TITLE_SCREEN,
     MENUITEM_MAIN_CANCEL,
@@ -210,6 +211,7 @@ static void DrawChoices_Speedup(int selection, int y);
 static void DrawChoices_NameColour(int selection, int y);
 static void DrawChoices_UnitSystem(int selection, int y);
 static void DrawChoices_ClockMode(int selection, int y);
+static void DrawChoices_AutoSave(int selection, int y);
 static void DrawChoices_Font(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_Interface(int selection, int y);
@@ -272,6 +274,7 @@ struct // MENU_MAIN
     [MENUITEM_MAIN_BUTTONMODE]      = {DrawChoices_ButtonMode,  ProcessInput_Options_Three},
     [MENUITEM_MAIN_UNIT_SYSTEM]     = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
     [MENUITEM_MAIN_CLOCK_MODE]      = {DrawChoices_ClockMode,   ProcessInput_Options_Two},
+    [MENUITEM_MAIN_AUTOSAVE]        = {DrawChoices_AutoSave,    ProcessInput_Options_Two},
     [MENUITEM_MAIN_FRAMETYPE]       = {DrawChoices_Interface,   ProcessInput_Interface},
     [MENUITEM_MAIN_TITLE_SCREEN]    = {DrawChoices_TitleScreen, ProcessInput_Options_Two},
     [MENUITEM_MAIN_CANCEL]          = {NULL, NULL},
@@ -330,6 +333,7 @@ static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
     [MENUITEM_MAIN_BUTTONMODE]      = gText_ButtonMode,
     [MENUITEM_MAIN_UNIT_SYSTEM]     = sText_UnitSystem,
     [MENUITEM_MAIN_CLOCK_MODE]      = COMPOUND_STRING("CLOCK MODE"),
+    [MENUITEM_MAIN_AUTOSAVE]        = COMPOUND_STRING("AUTO SAVE"),
     [MENUITEM_MAIN_FRAMETYPE]       = COMPOUND_STRING("INTERFACE"),
     [MENUITEM_MAIN_TITLE_SCREEN]    = sText_TitleScreen,
     [MENUITEM_MAIN_CANCEL]          = gText_OptionMenuSave,
@@ -387,6 +391,7 @@ static bool8 CheckConditions(int selection)
         case MENUITEM_MAIN_BUTTONMODE:      return TRUE;
         case MENUITEM_MAIN_UNIT_SYSTEM:     return TRUE;
         case MENUITEM_MAIN_CLOCK_MODE:      return TRUE;
+        case MENUITEM_MAIN_AUTOSAVE:        return TRUE;
         case MENUITEM_MAIN_FRAMETYPE:       return TRUE;
         case MENUITEM_MAIN_TITLE_SCREEN:    return TRUE;
         case MENUITEM_MAIN_CANCEL:          return TRUE;
@@ -473,6 +478,8 @@ static const u8 sText_Desc_FastBikeOn[]                 = _("When riding the bik
 static const u8 sText_Desc_FastBikeOff[]                = _("When riding the bike, technique will\nbe priritised.");
 static const u8 sText_Desx_OverworldSpeed[]             = _("Choose the speed of animations\nin the overworld.");
 static const u8 sText_Desc_NPCNames[]                   = _("Whether or not NPC names are are\ncoloured based on their personality.");
+static const u8 sText_Desc_AutoSaveOn[]                 = _("Save the game automatically at\nthe end of every in game day.");
+static const u8 sText_Desc_AutoSaveOff[]                = _("Do not save the game automatically at\nthe end of every in game day.");
 
 // Disabled Descriptions
 static const u8 sText_Desc_Disabled_Textspeed[]     = _("Only active if xyz.");
@@ -488,6 +495,7 @@ static const u8 *const sOptionMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
     [MENUITEM_MAIN_BUTTONMODE]      = {sText_Desc_ButtonMode,           sText_Desc_ButtonMode_LR,       sText_Desc_ButtonMode_LA},
     [MENUITEM_MAIN_UNIT_SYSTEM]     = {sText_Desc_UnitSystemImperial,   sText_Desc_UnitSystemMetric,    sText_Empty},
     [MENUITEM_MAIN_CLOCK_MODE]      = {sText_Desc_ClockMode,            sText_Empty,                    sText_Empty},
+    [MENUITEM_MAIN_AUTOSAVE]        = {sText_Desc_AutoSaveOn,           sText_Desc_AutoSaveOff,         sText_Empty},
     [MENUITEM_MAIN_FRAMETYPE]       = {sText_Desc_FrameType,            sText_Empty,                    sText_Empty},
     [MENUITEM_MAIN_TITLE_SCREEN]    = {sText_Desc_TitleScreenMatch,     sText_Desc_TitleScreenRandom,   sText_Empty},
     [MENUITEM_MAIN_CANCEL]          = {sText_Desc_Save,                 sText_Empty,                    sText_Empty},
@@ -528,6 +536,7 @@ static const u8 *const sOptionMenuItemDescriptionsDisabledMain[MENUITEM_MAIN_COU
     [MENUITEM_MAIN_BUTTONMODE]      = sText_Empty,
     [MENUITEM_MAIN_UNIT_SYSTEM]     = sText_Empty,
     [MENUITEM_MAIN_CLOCK_MODE]      = sText_Empty,
+    [MENUITEM_MAIN_AUTOSAVE]        = sText_Empty,
     [MENUITEM_MAIN_FRAMETYPE]       = sText_Empty,
     [MENUITEM_MAIN_TITLE_SCREEN]    = sText_Empty,
     [MENUITEM_MAIN_CANCEL]          = sText_Empty,
@@ -917,6 +926,7 @@ void CB2_InitOptionPlusMenu(void)
         sOptions->sel[MENUITEM_MAIN_BUTTONMODE]                 = gSaveBlock2Ptr->optionsButtonMode;
         sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM]                = gSaveBlock2Ptr->optionsUnitSystem;
         sOptions->sel[MENUITEM_MAIN_CLOCK_MODE]                 = gSaveBlock2Ptr->optionsClockMode;
+        sOptions->sel[MENUITEM_MAIN_AUTOSAVE]                   = gSaveBlock2Ptr->optionsAutoSave;
         sOptions->sel[MENUITEM_MAIN_FRAMETYPE]                  = gSaveBlock2Ptr->optionsInterfaceColor;
         sOptions->sel[MENUITEM_MAIN_TITLE_SCREEN]               = gSaveBlock2Ptr->optionsTitleScreenRandomise;
         
@@ -1159,6 +1169,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsButtonMode               = sOptions->sel[MENUITEM_MAIN_BUTTONMODE];
     gSaveBlock2Ptr->optionsUnitSystem               = sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM];
     gSaveBlock2Ptr->optionsClockMode                = sOptions->sel[MENUITEM_MAIN_CLOCK_MODE];
+    gSaveBlock2Ptr->optionsAutoSave                 = sOptions->sel[MENUITEM_MAIN_AUTOSAVE];
     gSaveBlock2Ptr->optionsInterfaceColor           = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
     gSaveBlock2Ptr->optionsTitleScreenRandomise     = sOptions->sel[MENUITEM_MAIN_TITLE_SCREEN];
 
@@ -1583,6 +1594,16 @@ static void DrawChoices_ClockMode(int selection, int y)
         DrawOptionMenuChoice(COMPOUND_STRING("24"), 104, y, 1, active);
 
     DrawOptionMenuChoice(COMPOUND_STRING("HOUR"), 119, y, 0, active);
+}
+
+static void DrawChoices_AutoSave(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_MAIN_AUTOSAVE);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_BattleSceneOn, 104, y, styles[0], active);
+    DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(1, gText_BattleSceneOff, 198), y, styles[1], active);
 }
 
 static void DrawChoices_FrameType(int selection, int y)

@@ -42,8 +42,6 @@
 #include "constants/event_objects.h"
 #include "constants/weather.h"
 
-#define CALENDAR_AUTO_SAVE TRUE
-
 #define CALENDAR_LOAD_TIME 90 // Number of Frames
 
 #define DAYS_IN_SEASON 28
@@ -853,7 +851,7 @@ static void Task_CalendarUIWaitFadeAndBail(u8 taskId)
         
         if (sCalendarUIState->warp)
         {
-            if (CALENDAR_AUTO_SAVE)
+            if (gSaveBlock2Ptr->optionsAutoSave)
                 gTasks[taskId].func = Task_WarpAndLoadMap_Save;
             else
                 gTasks[taskId].func = Task_WarpAndLoadMap_Global;
@@ -875,7 +873,7 @@ static void Task_CalendarUIWaitFadeAndExitGracefully(u8 taskId)
 
         if (sCalendarUIState->warp)
         {
-            if (CALENDAR_AUTO_SAVE)
+            if (gSaveBlock2Ptr->optionsAutoSave)
                 gTasks[taskId].func = Task_WarpAndLoadMap_Save;
             else
                 gTasks[taskId].func = Task_WarpAndLoadMap_Global;
