@@ -36,11 +36,11 @@
 #include "ikigai_scrolling_background.h"
 #include "international_string_util.h"
 #include "rtc.h"
+#include "start_menu.h"
 #include "type_icons.h"
 #include "constants/event_objects.h"
 #include "constants/weather.h"
 
-#define tFinishedLoading data[0]
 #define CALENDAR_LOAD_TIME 90 // Number of Frames
 
 #define DAYS_IN_SEASON 28
@@ -705,6 +705,12 @@ void Task_OpenCalendarUI(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
+        if (gTasks[taskId].tShouldSave && gTasks[taskId].tSaved == FALSE)
+        {
+            AutoSaveDoSave();
+            gTasks[taskId].tSaved = TRUE;
+        }
+    
         CleanupOverworldWindowsAndTilemaps();
         CalendarUI_Init(CB2_ReturnToFieldWithOpenMenu);
         DestroyTask(taskId);
@@ -1343,4 +1349,3 @@ static void PokeSphere_TypeIconCallback(struct Sprite *sprite)
         sprite->callback = SpriteCallbackDummy;
     }
 }
-#undef tFinishedLoading
