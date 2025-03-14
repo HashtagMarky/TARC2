@@ -33,6 +33,7 @@
 #include "comfy_anim.h"
 #include "event_data.h"
 #include "event_object_movement.h"
+#include "field_screen_effect.h"
 #include "ikigai_scrolling_background.h"
 #include "international_string_util.h"
 #include "rtc.h"
@@ -68,6 +69,7 @@ struct CalendarUIState
 {
     MainCallback savedCallback;
     u8 loadState;
+    bool8 warp;
     u8 year;
     u8 season;
     u8 date;
@@ -687,7 +689,7 @@ static void Task_CalendarUIWaitFadeAndBail(u8 taskId);
 static void Task_CalendarUIWaitFadeAndExitGracefully(u8 taskId);
 
 // Calendar UI helper functions
-static void CalendarUI_Init(MainCallback callback);
+static void CalendarUI_Init(MainCallback callback, bool32 warp);
 static void CalendarUI_ResetGpuRegsAndBgs(void);
 static bool8 CalendarUI_InitBgs(void);
 static void CalendarUI_FadeAndBail(void);
@@ -703,21 +705,21 @@ static void PokeSphere_TypeIconCallback(struct Sprite *sprite);
 
 void Task_OpenCalendarUI(u8 taskId)
 {
+    bool32 warp = FALSE;
     if (!gPaletteFade.active)
     {
-        if (gTasks[taskId].tShouldSave && gTasks[taskId].tSaved == FALSE)
-        {
-            AutoSaveDoSave();
-            gTasks[taskId].tSaved = TRUE;
-        }
-    
         CleanupOverworldWindowsAndTilemaps();
-        CalendarUI_Init(CB2_ReturnToFieldWithOpenMenu);
+
+        if (gTasks[taskId].tWarp)
+            warp = TRUE;
+
+        CalendarUI_Init(CB2_ReturnToFieldWithOpenMenu, warp);
+        
         DestroyTask(taskId);
     }
 }
 
-static void CalendarUI_Init(MainCallback callback)
+static void CalendarUI_Init(MainCallback callback, bool32 warp)
 {
     sCalendarUIState = AllocZeroed(sizeof(struct CalendarUIState));
     if (sCalendarUIState == NULL)
@@ -728,6 +730,7 @@ static void CalendarUI_Init(MainCallback callback)
 
     sCalendarUIState->loadState = 0;
     sCalendarUIState->savedCallback = callback;
+    sCalendarUIState->warp = warp;
 
     SetMainCallback2(CalendarUI_SetupCB);
 }
@@ -839,9 +842,20 @@ static void Task_CalendarUIWaitFadeAndBail(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(sCalendarUIState->savedCallback);
         CalendarUI_FreeResources();
-        DestroyTask(taskId);
+        
+        if (sCalendarUIState->warp)
+        {
+            if (1)
+                gTasks[taskId].func = Task_WarpAndLoadMap_Save;
+            else
+                gTasks[taskId].func = Task_WarpAndLoadMap_Global;
+        }
+        else
+        {
+            SetMainCallback2(sCalendarUIState->savedCallback);
+            DestroyTask(taskId);
+        }
     }
 }
 
@@ -849,10 +863,21 @@ static void Task_CalendarUIWaitFadeAndExitGracefully(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(sCalendarUIState->savedCallback);
         CalendarUI_FreeResources();
         ReleaseComfyAnims();
-        DestroyTask(taskId);
+
+        if (sCalendarUIState->warp)
+        {
+            if (1)
+                gTasks[taskId].func = Task_WarpAndLoadMap_Save;
+            else
+                gTasks[taskId].func = Task_WarpAndLoadMap_Global;
+        }
+        else
+        {
+            SetMainCallback2(sCalendarUIState->savedCallback);
+            DestroyTask(taskId);
+        }
     }
 }
 #define TILEMAP_BUFFER_SIZE (1024 * 2)

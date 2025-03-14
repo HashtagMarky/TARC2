@@ -704,6 +704,11 @@ void ReturnFromLinkRoom(void)
     CreateTask(Task_ReturnToWorldFromLinkRoom, 10);
 }
 
+void Task_WarpAndLoadMap_Global(u8 taskId)
+{
+    gTasks[taskId].func = Task_WarpAndLoadMap;
+}
+
 static void Task_WarpAndLoadMap(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
@@ -730,6 +735,37 @@ static void Task_WarpAndLoadMap(u8 taskId)
     case 2:
         WarpIntoMap();
         SetMainCallback2(CB2_LoadMap);
+        DestroyTask(taskId);
+        break;
+    }
+}
+
+void Task_WarpAndLoadMap_Save(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    switch (task->tState)
+    {
+    case 0:
+        FreezeObjectEvents();
+        LockPlayerFieldControls();
+        task->tState++;
+        break;
+    case 1:
+        if (!PaletteFadeActive())
+        {
+            if (task->data[1] == 0)
+            {
+                ClearMirageTowerPulseBlendEffect();
+                task->data[1] = 1;
+            }
+            if (BGMusicStopped())
+                task->tState++;
+        }
+        break;
+    case 2:
+        WarpIntoMap();
+        SetMainCallback2(CB2_LoadMapAndSave);
         DestroyTask(taskId);
         break;
     }
