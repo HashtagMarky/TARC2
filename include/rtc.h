@@ -113,6 +113,9 @@ void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct T
 void RtcCalcLocalTime(void);
 bool8 IsBetweenHours(s32 hours, s32 begin, s32 end);
 u8 GetTimeOfDay(void);
+u8 Ikigai_GetYearFromDays(u32 days);
+enum Seasons Ikigai_GetSeasonFromDays(u32 days);
+u8 Ikigai_GetDateFromDays(u32 days);
 void RtcInitLocalTimeOffset(s32 hour, s32 minute);
 void RtcCalcLocalTimeOffset(s32 days, s32 hours, s32 minutes, s32 seconds);
 void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2);

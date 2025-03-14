@@ -34,6 +34,7 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_screen_effect.h"
+#include "field_weather.h"
 #include "ikigai_scrolling_background.h"
 #include "international_string_util.h"
 #include "rtc.h"
@@ -972,13 +973,15 @@ static void CalendarUI_InitWindows(void)
 
 static void CalendarUI_GetData(void)
 {
-    sCalendarUIState->year = VarGet(VAR_TEMP_0);
-    sCalendarUIState->season = VarGet(VAR_TEMP_1);
-    sCalendarUIState->date = VarGet(VAR_TEMP_2);
-    sCalendarUIState->time = VarGet(VAR_TEMP_3);
-    sCalendarUIState->weather = VarGet(VAR_TEMP_4);
-    sCalendarUIState->gymBattles = VarGet(VAR_TEMP_5);
-    sCalendarUIState->buildProjects = VarGet(VAR_TEMP_6);
+    RtcCalcLocalTime();
+    u32 days = gLocalTime.days;
+    sCalendarUIState->year = Ikigai_GetYearFromDays(days);
+    sCalendarUIState->season = Ikigai_GetSeasonFromDays(days);
+    sCalendarUIState->date = Ikigai_GetDateFromDays(days);
+    sCalendarUIState->time = GetTimeOfDay();
+    sCalendarUIState->weather = GetSavedWeather();
+    sCalendarUIState->gymBattles = gSaveBlock3Ptr->numGymBattles;
+    sCalendarUIState->buildProjects = gSaveBlock3Ptr->numBuildProjects;
 }
 
 static void CalendarUI_PrintScheduleText(void)

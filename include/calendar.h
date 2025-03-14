@@ -15,6 +15,7 @@ enum Seasons
     SEASON_SUMMER,
     SEASON_AUTUMN,
     SEASON_WINTER,
+    SEASON_COUNT,
 };
 
 #endif // CALENDAR_UI_H
