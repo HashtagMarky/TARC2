@@ -586,7 +586,7 @@ struct SaveBlock2
              u16 optionsDamageNumbers:2; // whether damage numbers are shown
              u16 optionsClockMode:1; // whether 12 or 24 hour clock is used.
              u16 optionsNPCName:1; // whether NPC names are coloured by personality.
-             u16 optionsAutoSave:1; // whether AutoSave is enabled.
+             u16 optionsDisableAutoSave:1; // whether AutoSave is enabled.
              u16 regionMapZoom:1; // whether the map is zoomed in
              //u16 padding1:3;
     /*0x18*/ struct Pokedex pokedex;

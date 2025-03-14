@@ -852,7 +852,7 @@ static void Task_CalendarUIWaitFadeAndBail(u8 taskId)
         
         if (sCalendarUIState->warp)
         {
-            if (gSaveBlock2Ptr->optionsAutoSave)
+            if (!gSaveBlock2Ptr->optionsDisableAutoSave)
                 gTasks[taskId].func = Task_WarpAndLoadMap_Save;
             else
                 gTasks[taskId].func = Task_WarpAndLoadMap_Global;
@@ -874,7 +874,7 @@ static void Task_CalendarUIWaitFadeAndExitGracefully(u8 taskId)
 
         if (sCalendarUIState->warp)
         {
-            if (gSaveBlock2Ptr->optionsAutoSave)
+            if (!gSaveBlock2Ptr->optionsDisableAutoSave)
                 gTasks[taskId].func = Task_WarpAndLoadMap_Save;
             else
                 gTasks[taskId].func = Task_WarpAndLoadMap_Global;

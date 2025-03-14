@@ -926,7 +926,7 @@ void CB2_InitOptionPlusMenu(void)
         sOptions->sel[MENUITEM_MAIN_BUTTONMODE]                 = gSaveBlock2Ptr->optionsButtonMode;
         sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM]                = gSaveBlock2Ptr->optionsUnitSystem;
         sOptions->sel[MENUITEM_MAIN_CLOCK_MODE]                 = gSaveBlock2Ptr->optionsClockMode;
-        sOptions->sel[MENUITEM_MAIN_AUTOSAVE]                   = gSaveBlock2Ptr->optionsAutoSave;
+        sOptions->sel[MENUITEM_MAIN_AUTOSAVE]                   = gSaveBlock2Ptr->optionsDisableAutoSave;
         sOptions->sel[MENUITEM_MAIN_FRAMETYPE]                  = gSaveBlock2Ptr->optionsInterfaceColor;
         sOptions->sel[MENUITEM_MAIN_TITLE_SCREEN]               = gSaveBlock2Ptr->optionsTitleScreenRandomise;
         
@@ -1169,7 +1169,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsButtonMode               = sOptions->sel[MENUITEM_MAIN_BUTTONMODE];
     gSaveBlock2Ptr->optionsUnitSystem               = sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM];
     gSaveBlock2Ptr->optionsClockMode                = sOptions->sel[MENUITEM_MAIN_CLOCK_MODE];
-    gSaveBlock2Ptr->optionsAutoSave                 = sOptions->sel[MENUITEM_MAIN_AUTOSAVE];
+    gSaveBlock2Ptr->optionsDisableAutoSave          = sOptions->sel[MENUITEM_MAIN_AUTOSAVE];
     gSaveBlock2Ptr->optionsInterfaceColor           = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
     gSaveBlock2Ptr->optionsTitleScreenRandomise     = sOptions->sel[MENUITEM_MAIN_TITLE_SCREEN];
 
