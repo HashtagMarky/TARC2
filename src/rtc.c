@@ -341,17 +341,17 @@ u8 GetTimeOfDay(void)
 
 u8 Ikigai_GetYearFromDays(u32 days)
 {
-    return (days / 112) + 1;
+    return (days == 0) ? 0 : (days / 112) + 1;
 }
 
 enum Seasons Ikigai_GetSeasonFromDays(u32 days)
 {
-    return (days / 28) % SEASON_COUNT;
+    return (days == 0) ? SEASON_COUNT : ((days - 1) / 28) % SEASON_COUNT + 1;
 }
 
 u8 Ikigai_GetDateFromDays(u32 days)
 {
-    return (days % 28) + 1;
+    return (days == 0) ? 0 : ((days - 1) % 28) + 1;
 }
 
 void RtcInitLocalTimeOffset(s32 hour, s32 minute)

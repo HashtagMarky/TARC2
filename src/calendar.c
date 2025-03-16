@@ -72,7 +72,7 @@ struct CalendarUIState
     u8 loadState;
     bool8 warp;
     u8 year;
-    u8 season;
+    enum Seasons season;
     u8 date;
     u8 time;
     u8 weather;
@@ -210,6 +210,8 @@ static const u32 sAutumnIconGfx[] = INCBIN_U32("graphics/calendar/seasons/autumn
 static const u16 sAutumnIconPal[] = INCBIN_U16("graphics/calendar/seasons/autumn.gbapal");
 static const u32 sWinterIconGfx[] = INCBIN_U32("graphics/calendar/seasons/winter.4bpp.lz");
 static const u16 sWinterIconPal[] = INCBIN_U16("graphics/calendar/seasons/winter.gbapal");
+static const u32 sNoneIconGfx[] = INCBIN_U32("graphics/calendar/seasons/none.4bpp.lz");
+static const u16 sNoneIconPal[] = INCBIN_U16("graphics/calendar/seasons/none.gbapal");
 
 static const u32 sYearIconGfx[] = INCBIN_U32("graphics/calendar/year.4bpp.lz");
 
@@ -1075,6 +1077,11 @@ static void CalendarUI_CreateSprites_Season(void)
     case SEASON_WINTER:
         sSpriteSheet_CalendarSeasonIcon.data = sWinterIconGfx;
         sSpritePal_CalendarSeasonIcon.data = sWinterIconPal;
+        break;
+
+    default:
+        sSpriteSheet_CalendarSeasonIcon.data = sNoneIconGfx;
+        sSpritePal_CalendarSeasonIcon.data = sNoneIconPal;
         break;
     }
 
