@@ -10,4 +10,8 @@ void FakeRtc_ManuallySetTime(u32 hour, u32 minute, u32 second);
 void FakeRtc_TickTimeForward(void);
 u32 FakeRtc_GetSecondsRatio(void);
 
+u8 Ikigai_GetYearFromDays(u32 days);
+enum Seasons Ikigai_GetSeasonFromDays(u32 days);
+u8 Ikigai_GetDateFromDays(u32 days);
+
 #endif // GUARD_FAKE_RTC_UTIL_H

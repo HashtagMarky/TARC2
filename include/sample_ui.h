@@ -18,4 +18,7 @@ void Task_OpenSampleUi_SlidingPanel(u8 taskId);
 // Launch the blank template version of the UI
 void Task_OpenSampleUi_BlankTemplate(u8 taskId);
 
+// Common Sample UI Functions
+void SampleUI_ResetGpuRegsAndBgs(void);
+
 #endif

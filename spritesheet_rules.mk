@@ -1032,7 +1032,8 @@ $(OBJEVENTGFXDIR)/misc/cuttable_tree.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/misc/mr_brineys_boat.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-
+$(FLDEFFGFXDIR)/saving.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 8 -mheight 8
 
 $(PROTAGOBJEVENTGFXDIR)/kole_walking.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4

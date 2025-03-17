@@ -238,6 +238,8 @@ struct SaveBlock3
     u8 dexNavSearchLevels[NUM_SPECIES];
 #endif
     u8 dexNavChain;
+    u8 numGymBattles:4;
+    u8 numBuildProjects:4;
 }; /* max size 1624 bytes */
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;
@@ -584,8 +586,9 @@ struct SaveBlock2
              u16 optionsDamageNumbers:2; // whether damage numbers are shown
              u16 optionsClockMode:1; // whether 12 or 24 hour clock is used.
              u16 optionsNPCName:1; // whether NPC names are coloured by personality.
+             u16 optionsDisableAutoSave:1; // whether AutoSave is enabled.
              u16 regionMapZoom:1; // whether the map is zoomed in
-             //u16 padding1:4;
+             //u16 padding1:3;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 playerEmote:4;
              u8 paddingPE:4;
