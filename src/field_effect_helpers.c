@@ -1946,9 +1946,9 @@ static bool8 Saving_WaitForFinish(struct Task *task)
 
 void SavingSpriteCallback(struct Sprite *sprite)
 {   
-    if(FlagGet(FLAG_TEMP_F))
+    if(FlagGet(FLAG_AUTO_SAVING))
     {
         FieldEffectFreeGraphicsResources(sprite);
-        FlagClear(FLAG_TEMP_F);
+        FlagClear(FLAG_AUTO_SAVING);
     }
 }

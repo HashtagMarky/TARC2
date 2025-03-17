@@ -671,6 +671,6 @@ void AutoSave(void)
 {
     ScriptContext_Stop();
     AutoSaveDoSave();
-    FlagSet(FLAG_TEMP_F);
+    FlagSet(FLAG_AUTO_SAVING);
     ScriptContext_Enable();
 }
