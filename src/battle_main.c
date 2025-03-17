@@ -210,6 +210,7 @@ EWRAM_DATA u8 gSentPokesToOpponent[2] = {0};
 EWRAM_DATA struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA struct BattleScripting gBattleScripting = {0};
 EWRAM_DATA struct BattleStruct *gBattleStruct = NULL;
+EWRAM_DATA struct AiBattleData *gAiBattleData = NULL;
 EWRAM_DATA u8 *gLinkBattleSendBuffer = NULL;
 EWRAM_DATA u8 *gLinkBattleRecvBuffer = NULL;
 EWRAM_DATA struct BattleResources *gBattleResources = NULL;
@@ -426,6 +427,10 @@ void CB2_InitBattle(void)
     AllocateBattleSpritesData();
     AllocateMonSpritesGfx();
     RecordedBattle_ClearFrontierPassFlag();
+
+#if T_SHOULD_RUN_MOVE_ANIM
+    gLoadFail = FALSE;
+#endif // T_SHOULD_RUN_MOVE_ANIM
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
@@ -4281,7 +4286,7 @@ static void HandleTurnActionSelectionState(void)
                 SetupAISwitchingData(battler, switchType);
 
                 // Do scoring
-                gBattleStruct->aiMoveOrAction[battler] = BattleAI_ChooseMoveOrAction(battler);
+                gAiBattleData->moveOrAction[battler] = BattleAI_ChooseMoveOrAction(battler);
                 AI_DATA->aiCalcInProgress = FALSE;
             }
             // fallthrough
