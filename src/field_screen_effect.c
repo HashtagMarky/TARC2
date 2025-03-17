@@ -718,7 +718,7 @@ void DoCalendarWarpHome(void)
     PlaySE(SE_EXIT);
     gFieldCallback = FieldCB_DefaultWarpExit;
     CreateTask(Task_OpenCalendarUI, 10);
-    gTasks[FindTaskIdByFunc(Task_OpenCalendarUI)].tWarp = TRUE;
+    gTasks[FindTaskIdByFunc(Task_OpenCalendarUI)].tIsWarp = TRUE;
 }
 
 void Task_WarpAndLoadMap_Global(u8 taskId)

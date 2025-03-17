@@ -716,7 +716,7 @@ void Task_OpenCalendarUI(u8 taskId)
     {
         CleanupOverworldWindowsAndTilemaps();
 
-        if (gTasks[taskId].tWarp)
+        if (gTasks[taskId].tIsWarp)
             warp = TRUE;
 
         CalendarUI_Init(CB2_ReturnToField, warp);

@@ -4,7 +4,7 @@
 #include "gba/types.h"
 #include "main.h"
 
-#define tWarp data[0]
+#define tIsWarp data[0]
 #define tFinishedLoading data[1]
 
 void Task_OpenCalendarUI(u8 taskId);
