@@ -525,6 +525,22 @@ static void PokeSphere_FreeResources(void);
 static void PokeSphereExploreCursorCallback(struct Sprite *sprite);
 static void PokeSphere_TypeIconCallback(struct Sprite *sprite);
 
+// Debug Functions
+static void DEBUG_Task_OpenPokeSphere(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        CleanupOverworldWindowsAndTilemaps();
+        PokeSphere_Init(CB2_ReturnToField);
+        DestroyTask(taskId);
+    }
+}
+
+void DEBUG_OpenPokeSphereUI(void)
+{
+    CreateTask(DEBUG_Task_OpenPokeSphere, 0);
+}
+
 // Declared in pokesphere.h
 void Task_OpenPokeSphere(u8 taskId)
 {

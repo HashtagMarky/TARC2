@@ -106,6 +106,7 @@ enum IkigaiPlayerDebugSubmenu
 
 enum IkigaiCharacterDebugSubmenu
 {
+    DEBUG_IKIGAI_CHARACTER_POKESPHERE,
     DEBUG_IKIGAI_CHARACTER_MET,
 };
 
@@ -452,6 +453,7 @@ static void DebugTask_HandleMenuInput_DynamicMusicInstruments(u8 taskId);
 static void DebugTask_HandleMenuInput_DynamicMusicIsolateTracksList(u8 taskId);
 static void DebugTask_HandleMenuInput_DynamicMusicIsolateTracksFuncs(u8 taskId);
 
+static void DebugAction_Ikigai_OpenPokeSphere(u8 taskId);
 static void DebugAction_Ikigai_MeetAllCharacter(u8 taskId);
 static void DebugAction_Ikigai_ShowCalendar(u8 taskId);
 static void DebugAction_Ikigai_CalendarWarp(u8 taskId);
@@ -591,6 +593,7 @@ extern const u8 DebugScript_ZeroDaycareMons[];
 
 extern const u8 Debug_ShowFieldMessageStringVar4[];
 extern const u8 Debug_OpenDynPalMenu[];
+extern const u8 Debug_OpenPokeSphere[];
 extern const u8 Debug_OpenCalendar[];
 extern const u8 Debug_CheatStart[];
 extern const u8 Debug_HatchAnEgg[];
@@ -706,6 +709,7 @@ static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Player[] =
 
 static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Character[] =
 {
+    [DEBUG_IKIGAI_CHARACTER_POKESPHERE]    = {COMPOUND_STRING("Open PokéSphere"),                              DEBUG_IKIGAI_CHARACTER_POKESPHERE},
     [DEBUG_IKIGAI_CHARACTER_MET]           = {COMPOUND_STRING("Meet All Characters"),                          DEBUG_IKIGAI_CHARACTER_MET},
 };
 
@@ -959,6 +963,7 @@ static void (*const sDebugMenu_Actions_Ikigai_Player[])(u8) =
 
 static void (*const sDebugMenu_Actions_Ikigai_Character[])(u8) =
 {
+    [DEBUG_IKIGAI_CHARACTER_POKESPHERE]    = DebugAction_Ikigai_OpenPokeSphere,
     [DEBUG_IKIGAI_CHARACTER_MET]           = DebugAction_Ikigai_MeetAllCharacter,
 };
 
@@ -2196,6 +2201,11 @@ static void DebugAction_DynamicMusic_OpenTrackFuncMenu(u8 taskId)
 
 // *******************************
 // Actions Ikigai Debug
+
+static void DebugAction_Ikigai_OpenPokeSphere(u8 taskId)
+{
+    Debug_DestroyMenu_Full_Script(taskId, Debug_OpenPokeSphere);
+}
 
 static void DebugAction_Ikigai_MeetAllCharacter(u8 taskId)
 {
