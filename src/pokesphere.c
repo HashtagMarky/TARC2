@@ -620,6 +620,7 @@ static void PokeSphere_SetupCB(void)
         gMain.state++;
         break;
     case 6:
+        PlaySE(SE_DEX_PAGE);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
