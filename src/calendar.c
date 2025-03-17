@@ -1106,7 +1106,7 @@ static void CalendarUI_CreateSprites_Season(void)
 static void CalendarUI_CreateSprites_Year(void)
 {
     u32 year = sCalendarUIState->year;
-    year = (year < 1) ? 1 : year;
+    // year = (year < 1) ? 1 : year;
     u32 digitHundreds = year / 100;
     u32 digitTens = (year / 10) % 10;
     u32 digitOnes = year % 10;
@@ -1302,7 +1302,7 @@ static void CalendarUI_CreateSprites_TypeIcon(void)
 static void CalendarUI_CreateSprites_Dates(void)
 {
     u32 date = sCalendarUIState->date;
-    date = (date < DAY_1) ? DAY_1 : (date > DAY_28) ? DAY_28 : date;
+    // date = (date < DAY_1) ? DAY_1 : (date > DAY_28) ? DAY_28 : date;
 
     for (u32 dateCount = DAY_1; dateCount < DAYS_IN_SEASON + 1; dateCount++)
     {
