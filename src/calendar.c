@@ -210,8 +210,6 @@ static const u32 sAutumnIconGfx[] = INCBIN_U32("graphics/calendar/seasons/autumn
 static const u16 sAutumnIconPal[] = INCBIN_U16("graphics/calendar/seasons/autumn.gbapal");
 static const u32 sWinterIconGfx[] = INCBIN_U32("graphics/calendar/seasons/winter.4bpp.lz");
 static const u16 sWinterIconPal[] = INCBIN_U16("graphics/calendar/seasons/winter.gbapal");
-static const u32 sNoneIconGfx[] = INCBIN_U32("graphics/calendar/seasons/none.4bpp.lz");
-static const u16 sNoneIconPal[] = INCBIN_U16("graphics/calendar/seasons/none.gbapal");
 
 static const u32 sYearIconGfx[] = INCBIN_U32("graphics/calendar/year.4bpp.lz");
 
@@ -1041,6 +1039,9 @@ static void CalendarUI_PrintScheduleText(void)
 
 static void CalendarUI_CreateSprites_Season(void)
 {
+    if (sCalendarUIState->season)
+        return;
+    
     struct CompressedSpriteSheet sSpriteSheet_CalendarSeasonIcon;
     sSpriteSheet_CalendarSeasonIcon.size = 64*32;
     sSpriteSheet_CalendarSeasonIcon.tag = TAG_SEASON_ICON;
@@ -1079,9 +1080,7 @@ static void CalendarUI_CreateSprites_Season(void)
         sSpritePal_CalendarSeasonIcon.data = sWinterIconPal;
         break;
 
-    default:
-        sSpriteSheet_CalendarSeasonIcon.data = sNoneIconGfx;
-        sSpritePal_CalendarSeasonIcon.data = sNoneIconPal;
+    case SEASON_COUNT:
         break;
     }
 
