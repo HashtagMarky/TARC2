@@ -1348,12 +1348,12 @@ static void CalendarUI_CreateSprites_Dates(void)
 static void CalendarUI_CreateSprites(void)
 {
     LoadSpritePalette(&sSpritePal_CalendarDate);
-    CalendarUI_CreateSprites_Season();
     CalendarUI_CreateSprites_Year();
     CalendarUI_CreateSprites_Player();
     CalendarUI_CreateSprites_TypeIcon();
     CalendarUI_CreateSprites_Dates();
     CalendarUI_CreateSprites_Weather();
+    CalendarUI_CreateSprites_Season();
 }
 
 static void CalendarUI_FreeResources(void)
