@@ -151,13 +151,13 @@ Debug_EventScript_Text_DynPal:
 	.string "Choose a new set of palettes.$"
 
 Debug_OpenPokeSphere::
-	fadescreenswapbuffers FADE_TO_BLACK
+	fadescreen FADE_TO_BLACK
 	delay 30
 	callnative DEBUG_OpenPokeSphereUI
 	end
 
 Debug_OpenCalendar::
-	fadescreenswapbuffers FADE_TO_BLACK
+	fadescreen FADE_TO_BLACK
 	delay 30
 	callnative OpenCalendarUI
 	end
