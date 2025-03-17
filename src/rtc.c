@@ -5,8 +5,6 @@
 #include "text.h"
 #include "fake_rtc.h"
 
-#include "calendar.h"
-
 // iwram bss
 static u16 sErrorStatus;
 static struct SiiRtcInfo sRtc;
@@ -337,21 +335,6 @@ u8 GetTimeOfDay(void)
     else if (IsBetweenHours(gLocalTime.hours, NIGHT_HOUR_BEGIN, NIGHT_HOUR_END))
         return TIME_NIGHT;
     return TIME_DAY;
-}
-
-u8 Ikigai_GetYearFromDays(u32 days)
-{
-    return (days == 0) ? 0 : (days / 112) + 1;
-}
-
-enum Seasons Ikigai_GetSeasonFromDays(u32 days)
-{
-    return (days == 0) ? SEASON_COUNT : ((days - 1) / 28) % SEASON_COUNT + 1;
-}
-
-u8 Ikigai_GetDateFromDays(u32 days)
-{
-    return (days == 0) ? 0 : ((days - 1) % 28) + 1;
 }
 
 void RtcInitLocalTimeOffset(s32 hour, s32 minute)

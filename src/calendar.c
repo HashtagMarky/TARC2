@@ -33,6 +33,7 @@
 #include "comfy_anim.h"
 #include "event_data.h"
 #include "event_object_movement.h"
+#include "fake_rtc.h"
 #include "field_screen_effect.h"
 #include "field_weather.h"
 #include "ikigai_scrolling_background.h"
