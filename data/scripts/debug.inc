@@ -152,6 +152,7 @@ Debug_EventScript_Text_DynPal:
 
 Debug_OpenCalendar::
 	fadescreenswapbuffers FADE_TO_BLACK
+	delay 30
 	callnative OpenCalendarUI
 	end
 

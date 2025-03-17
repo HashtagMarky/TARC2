@@ -2557,6 +2557,7 @@
 	@ Starts Player Nicknaming Screen
 	.macro nicknameplayer
 	fadescreen FADE_TO_BLACK
+	delay 30
 	callnative DoPlayerNicknamingScreen, requests_effects=1
 	waitstate
 	.endm
