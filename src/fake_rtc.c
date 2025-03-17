@@ -7,6 +7,8 @@
 #include "event_data.h"
 #include "script.h"
 
+#include "calendar.h"
+
 struct Time *FakeRtc_GetCurrentTime(void)
 {
 #if OW_USE_FAKE_RTC
@@ -108,4 +110,19 @@ void Script_ToggleFakeRtc(void)
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 
     FlagToggle(OW_FLAG_PAUSE_TIME);
+}
+
+u8 Ikigai_GetYearFromDays(u32 days)
+{
+    return (days == 0) ? 0 : (days / 112) + 1;
+}
+
+enum Seasons Ikigai_GetSeasonFromDays(u32 days)
+{
+    return (days == 0) ? SEASON_COUNT : ((days - 1) / 28) % SEASON_COUNT + 1;
+}
+
+u8 Ikigai_GetDateFromDays(u32 days)
+{
+    return (days == 0) ? 0 : ((days - 1) % 28) + 1;
 }

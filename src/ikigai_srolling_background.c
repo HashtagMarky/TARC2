@@ -7,8 +7,8 @@
 const u32 IkigaiScrollingBgTiles[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles.4bpp.lz");
 const u32 IkigaiScrollingBgTilemap_PalOne[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles_pal_one.bin.lz");
 const u32 IkigaiScrollingBgTilemap_PalTwo[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles_pal_two.bin.lz");
+const u16 IkigaiScrollingBgPal_Default[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles.gbapal");
 
-static const u16 IkigaiScrollingBgPal_Default[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles.gbapal");
 static const u16 IkigaiScrollingBgPal_Green[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles_green.gbapal");
 static const u16 IkigaiScrollingBgPal_Blue[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles_blue.gbapal");
 static const u16 IkigaiScrollingBgPal_Orange[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_tiles_orange.gbapal");
@@ -89,5 +89,27 @@ const u16 *ReturnMenuUIGymPalette(void)
         case TYPE_NONE:
         default:
             return IkigaiMainUIPal;
+    }
+}
+
+const u16 *ReturnScrollingBackgroundSeasonPalette(u8 season)
+{
+    switch (season)
+    {
+        case 1:
+            return IkigaiScrollingBgPal_Pink;
+
+        case 2:
+            return IkigaiScrollingBgPal_Green;
+        
+        case 3:
+            return IkigaiScrollingBgPal_Orange;
+        
+        case 4:
+            return IkigaiScrollingBgPal_Blue;
+
+        case 0:
+        default:
+            return IkigaiScrollingBgPal_Default;
     }
 }

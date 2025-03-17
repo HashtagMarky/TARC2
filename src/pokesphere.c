@@ -1,4 +1,5 @@
 #include "pokesphere.h"
+#include "sample_ui.h"
 
 #include "gba/types.h"
 #include "gba/defines.h"
@@ -524,6 +525,22 @@ static void PokeSphere_FreeResources(void);
 static void PokeSphereExploreCursorCallback(struct Sprite *sprite);
 static void PokeSphere_TypeIconCallback(struct Sprite *sprite);
 
+// Debug Functions
+static void DEBUG_Task_OpenPokeSphere(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        CleanupOverworldWindowsAndTilemaps();
+        PokeSphere_Init(CB2_ReturnToField);
+        DestroyTask(taskId);
+    }
+}
+
+void DEBUG_OpenPokeSphereUI(void)
+{
+    CreateTask(DEBUG_Task_OpenPokeSphere, 0);
+}
+
 // Declared in pokesphere.h
 void Task_OpenPokeSphere(u8 taskId)
 {
@@ -550,33 +567,9 @@ static void PokeSphere_Init(MainCallback callback)
     SetMainCallback2(PokeSphere_SetupCB);
 }
 
-// Credit: Jaizu, pret
 static void PokeSphere_ResetGpuRegsAndBgs(void)
 {
-    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-    SetGpuReg(REG_OFFSET_BG3CNT, 0);
-    SetGpuReg(REG_OFFSET_BG2CNT, 0);
-    SetGpuReg(REG_OFFSET_BG1CNT, 0);
-    SetGpuReg(REG_OFFSET_BG0CNT, 0);
-    ChangeBgX(0, 0, BG_COORD_SET);
-    ChangeBgY(0, 0, BG_COORD_SET);
-    ChangeBgX(1, 0, BG_COORD_SET);
-    ChangeBgY(1, 0, BG_COORD_SET);
-    ChangeBgX(2, 0, BG_COORD_SET);
-    ChangeBgY(2, 0, BG_COORD_SET);
-    ChangeBgX(3, 0, BG_COORD_SET);
-    ChangeBgY(3, 0, BG_COORD_SET);
-    SetGpuReg(REG_OFFSET_BLDCNT, 0);
-    SetGpuReg(REG_OFFSET_BLDY, 0);
-    SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-    SetGpuReg(REG_OFFSET_WIN0H, 0);
-    SetGpuReg(REG_OFFSET_WIN0V, 0);
-    SetGpuReg(REG_OFFSET_WIN1H, 0);
-    SetGpuReg(REG_OFFSET_WIN1V, 0);
-    SetGpuReg(REG_OFFSET_WININ, 0);
-    SetGpuReg(REG_OFFSET_WINOUT, 0);
-    CpuFill16(0, (void *)VRAM, VRAM_SIZE);
-    CpuFill32(0, (void *)OAM, OAM_SIZE);
+    SampleUI_ResetGpuRegsAndBgs();
 }
 
 static void PokeSphere_SetupCB(void)
@@ -627,6 +620,7 @@ static void PokeSphere_SetupCB(void)
         gMain.state++;
         break;
     case 6:
+        PlaySE(SE_DEX_PAGE);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;

@@ -40,6 +40,8 @@
 #include "trainer_hill.h"
 #include "fldeff.h"
 
+#include "calendar.h"
+
 static void Task_ExitNonAnimDoor(u8);
 static void Task_ExitNonDoor(u8);
 static void Task_DoContestHallWarp(u8);
@@ -704,6 +706,26 @@ void ReturnFromLinkRoom(void)
     CreateTask(Task_ReturnToWorldFromLinkRoom, 10);
 }
 
+void DoCalendarWarpHome(void)
+{
+    SetWarpDestination(MAP_GROUP(LITTLEROOT_TOWN_BRENDANS_HOUSE_2F), MAP_NUM(LITTLEROOT_TOWN_BRENDANS_HOUSE_2F), WARP_ID_NONE, 1, 4);
+    DoWarp();
+    ResetInitialPlayerAvatarState();
+    LockPlayerFieldControls();
+    FadeOutMapMusic(GetMapMusicFadeoutSpeed());
+    WarpFadeOutScreen();
+    PlayRainStoppingSoundEffect();
+    PlaySE(SE_EXIT);
+    gFieldCallback = FieldCB_DefaultWarpExit;
+    CreateTask(Task_OpenCalendarUI, 10);
+    gTasks[FindTaskIdByFunc(Task_OpenCalendarUI)].tWarp = TRUE;
+}
+
+void Task_WarpAndLoadMap_Global(u8 taskId)
+{
+    gTasks[taskId].func = Task_WarpAndLoadMap;
+}
+
 static void Task_WarpAndLoadMap(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
@@ -730,6 +752,37 @@ static void Task_WarpAndLoadMap(u8 taskId)
     case 2:
         WarpIntoMap();
         SetMainCallback2(CB2_LoadMap);
+        DestroyTask(taskId);
+        break;
+    }
+}
+
+void Task_WarpAndLoadMap_Save(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    switch (task->tState)
+    {
+    case 0:
+        FreezeObjectEvents();
+        LockPlayerFieldControls();
+        task->tState++;
+        break;
+    case 1:
+        if (!PaletteFadeActive())
+        {
+            if (task->data[1] == 0)
+            {
+                ClearMirageTowerPulseBlendEffect();
+                task->data[1] = 1;
+            }
+            if (BGMusicStopped())
+                task->tState++;
+        }
+        break;
+    case 2:
+        WarpIntoMap();
+        SetMainCallback2(CB2_LoadMapAndSave);
         DestroyTask(taskId);
         break;
     }

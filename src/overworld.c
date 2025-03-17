@@ -111,6 +111,7 @@ static void CB2_ReturnToFieldLocal(void);
 static void CB2_ReturnToFieldLink(void);
 static void CB2_LoadMapOnReturnToFieldCableClub(void);
 static void CB2_LoadMap2(void);
+static void CB2_LoadMapAndSave2(void);
 static void VBlankCB_Field(void);
 static void SpriteCB_LinkPlayer(struct Sprite *);
 static void ChooseAmbientCrySpecies(void);
@@ -1683,12 +1684,31 @@ void CB2_LoadMap(void)
     gMain.savedCallback = CB2_LoadMap2;
 }
 
+void CB2_LoadMapAndSave(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
+    SetMainCallback1(NULL);
+    SetMainCallback2(CB2_DoChangeMap);
+    gMain.savedCallback = CB2_LoadMapAndSave2;
+}
+
 static void CB2_LoadMap2(void)
 {
     DoMapLoadLoop(&gMain.state);
     SetFieldVBlankCallback();
     SetMainCallback1(CB1_Overworld);
     SetMainCallback2(CB2_Overworld);
+}
+
+static void CB2_LoadMapAndSave2(void)
+{
+    DoMapLoadLoop(&gMain.state);
+    SetFieldVBlankCallback();
+    SetMainCallback1(CB1_Overworld);
+    SetMainCallback2(CB2_Overworld);
+    AutoSaveDoSave();
 }
 
 void CB2_ReturnToFieldContestHall(void)

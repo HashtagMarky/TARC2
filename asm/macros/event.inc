@@ -2557,6 +2557,7 @@
 	@ Starts Player Nicknaming Screen
 	.macro nicknameplayer
 	fadescreen FADE_TO_BLACK
+	delay 30
 	callnative DoPlayerNicknamingScreen, requests_effects=1
 	waitstate
 	.endm
@@ -3018,4 +3019,12 @@
 	.macro cant_see_if_ne, a:req, b:req
 	compare \a, \b
 	cant_see_if 5
+	.endm
+	
+	@ Performs a Save Without the Save Menu
+	.macro autosave
+	clearflag FLAG_TEMP_F
+	dofieldeffect(FLDEFF_SAVING)
+	waitfieldeffect(FLDEFF_SAVING)
+	callnative AutoSave
 	.endm

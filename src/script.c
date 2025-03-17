@@ -17,6 +17,8 @@
 #include "task.h"
 #include "field_weather.h"
 
+#include "start_menu.h"
+
 #define RAM_SCRIPT_MAGIC 51
 
 enum {
@@ -663,4 +665,12 @@ void Script_RequestWriteVar_Internal(u32 varId)
     if (SPECIAL_VARS_START <= varId && varId <= SPECIAL_VARS_END)
         return;
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+}
+
+void AutoSave(void)
+{
+    ScriptContext_Stop();
+    AutoSaveDoSave();
+    FlagSet(FLAG_TEMP_F);
+    ScriptContext_Enable();
 }

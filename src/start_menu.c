@@ -49,7 +49,7 @@
 #include "constants/battle_frontier.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "pokesphere.h"
+
 #include "sample_ui.h"
 
 #if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_START_MENU)
@@ -73,7 +73,6 @@ enum
     MENU_ACTION_RETIRE_FRONTIER,
     MENU_ACTION_PYRAMID_BAG,
     MENU_ACTION_DEBUG,
-    MENU_ACTION_POKESPHERE,
     MENU_ACTION_SAMPLE_UI,
     MENU_ACTION_DEXNAV,
 };
@@ -117,8 +116,7 @@ static bool8 StartMenuLinkModePlayerNameCallback(void);
 static bool8 StartMenuBattlePyramidRetireCallback(void);
 static bool8 StartMenuBattlePyramidBagCallback(void);
 static bool8 StartMenuDebugCallback(void);
-static bool8 StartMenuPokesphereCallback(void);
-static bool8 StartMenuSampleUiCallback(void);
+static bool8 StartMenuSampleUICallback(void);
 static bool8 StartMenuDexNavCallback(void);
 
 // Menu callbacks
@@ -187,7 +185,7 @@ static const struct WindowTemplate sWindowTemplate_PyramidFloor = {
 };
 
 static const u8 gText_MenuDebug[] = _("DEBUG");
-static const u8 sText_SampleUi[] = _("SAMPLEUI");
+static const u8 sText_SampleUI[] = _("SampleUI");
 static const struct WindowTemplate sWindowTemplate_PyramidPeak = {
     .bg = 0,
     .tilemapLeft = 1,
@@ -217,8 +215,7 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_RETIRE_FRONTIER] = {gText_MenuRetire,  {.u8_void = StartMenuBattlePyramidRetireCallback}},
     [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}},
     [MENU_ACTION_DEBUG]           = {sText_MenuDebug,   {.u8_void = StartMenuDebugCallback}},
-    [MENU_ACTION_POKESPHERE]      = {sText_PokeSphere,  {.u8_void = StartMenuPokesphereCallback}},
-    [MENU_ACTION_SAMPLE_UI]       = {sText_SampleUi,    {.u8_void = StartMenuSampleUiCallback}},
+    [MENU_ACTION_SAMPLE_UI]       = {sText_SampleUI,    {.u8_void = StartMenuSampleUICallback}},
     [MENU_ACTION_DEXNAV]          = {gText_MenuDexNav,  {.u8_void = StartMenuDexNavCallback}},
 };
 
@@ -358,8 +355,6 @@ static void BuildNormalStartMenu(void)
 
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKENAV);
-    
-    AddStartMenuAction(MENU_ACTION_POKESPHERE);
 
     if (DEBUG_ACTIVE)
     {
@@ -1514,13 +1509,7 @@ void AppendToList(u8 *list, u8 *pos, u8 newEntry)
     (*pos)++;
 }
 
-static bool8 StartMenuPokesphereCallback(void)
-{
-    CreateTask(Task_OpenPokeSphere, 0);
-    return TRUE;
-}
-
-static bool8 StartMenuSampleUiCallback(void)
+static bool8 StartMenuSampleUICallback(void)
 {
     // Change which version of the UI is launched by changing which task is called from here
     CreateTask(Task_OpenSampleUi_BlankTemplate, 0);
@@ -1539,4 +1528,15 @@ void Script_ForceSaveGame(struct ScriptContext *ctx)
     ShowSaveInfoWindow();
     gMenuCallback = SaveCallback;
     sSaveDialogCallback = SaveSavingMessageCallback;
+}
+
+void AutoSaveDoSave(void)
+{
+    u8 saveStatus;
+    SaveMapView();
+    sSavingComplete = FALSE;
+    IncrementGameStat(GAME_STAT_SAVED_GAME);
+    saveStatus = TrySavingData(SAVE_NORMAL);
+    gDifferentSaveFile = FALSE;
+    return;
 }
