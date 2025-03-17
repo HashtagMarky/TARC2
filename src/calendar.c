@@ -172,7 +172,6 @@ static const u16 sCalendarFogIconPal[] = INCBIN_U16("graphics/calendar/weather_i
 static const u32 sCalendarSandstormIconGfx[] = INCBIN_U32("graphics/calendar/weather_icons/sandstorm.4bpp.lz");
 static const u16 sCalendarSandstormIconPal[] = INCBIN_U16("graphics/calendar/weather_icons/sandstorm.gbapal");
 
-static const u32 sCalendarDateSelectorGfx[] = INCBIN_U32("graphics/calendar/numbers/date_selector.4bpp.lz");
 static const u32 sCalendarDate0Gfx[] = INCBIN_U32("graphics/calendar/numbers/0.4bpp.lz");
 static const u32 sCalendarDate1Gfx[] = INCBIN_U32("graphics/calendar/numbers/1.4bpp.lz");
 static const u32 sCalendarDate2Gfx[] = INCBIN_U32("graphics/calendar/numbers/2.4bpp.lz");
