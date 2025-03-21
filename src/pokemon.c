@@ -3571,8 +3571,8 @@ bool8 IsPokemonStorageFull(void)
 const u8 *GetSpeciesName(u16 species)
 {
     species = SanitizeSpeciesId(species);
-    if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
-        return gIkigaiCharactersInfo[CHARACTER_DEFAULT].name;
+    // if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
+    //     return gIkigaiCharactersInfo[CHARACTER_DEFAULT].name;
     if (gSpeciesInfo[species].speciesName[0] == 0)
         return gSpeciesInfo[SPECIES_NONE].speciesName;
     return gSpeciesInfo[species].speciesName;
