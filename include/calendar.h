@@ -9,6 +9,8 @@
 
 void Task_OpenCalendarUI(u8 taskId);
 
+#define DAYS_IN_SEASON 28
+
 enum Seasons
 {
     SEASON_SPRING,
@@ -17,5 +19,7 @@ enum Seasons
     SEASON_WINTER,
     SEASON_COUNT,
 };
+
+extern const u8 gSeasonNames[SEASON_COUNT][7];
 
 #endif // CALENDAR_UI_H

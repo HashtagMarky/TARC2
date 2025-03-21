@@ -13,5 +13,6 @@ u32 FakeRtc_GetSecondsRatio(void);
 u8 Ikigai_GetYearFromDays(u32 days);
 enum Seasons Ikigai_GetSeasonFromDays(u32 days);
 u8 Ikigai_GetDateFromDays(u32 days);
+void UNUSED Ikigai_SetToNextSeason(s16 days, enum Seasons newSeason);
 
 #endif // GUARD_FAKE_RTC_UTIL_H

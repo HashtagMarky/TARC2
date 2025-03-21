@@ -46,8 +46,6 @@
 
 #define CALENDAR_LOAD_TIME 90 // Number of Frames
 
-#define DAYS_IN_SEASON 28
-
 #define MAX_NUM_GYM     9
 #define MAX_NUM_WORKS   9
 
@@ -464,6 +462,13 @@ static const struct WeatherIcons sWeatherIcons[WEATHER_COUNT][TIME_COUNT] =
             .pal = sCalendarThunderstormIconPal,
         },
     },
+};
+
+const u8 gSeasonNames[SEASON_COUNT][7] = {
+    [SEASON_SPRING]     = _("Spring"),
+    [SEASON_SUMMER]     = _("Summer"),
+    [SEASON_AUTUMN]     = _("Autumn"),
+    [SEASON_WINTER]     = _("Winter"),
 };
 
 struct DateNumbers

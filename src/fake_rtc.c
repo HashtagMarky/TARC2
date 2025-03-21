@@ -114,15 +114,38 @@ void Script_ToggleFakeRtc(void)
 
 u8 Ikigai_GetYearFromDays(u32 days)
 {
-    return (days == 0) ? 0 : (days / 112) + 1;
+    return (days == 0) ? 0 : ((days - 1) / (SEASON_COUNT * DAYS_IN_SEASON)) + 1;
 }
 
 enum Seasons Ikigai_GetSeasonFromDays(u32 days)
 {
-    return (days == 0) ? SEASON_COUNT : ((days - 1) / 28) % SEASON_COUNT + 1;
+    if (days == 0)
+        return SEASON_COUNT;
+
+    while (days > SEASON_COUNT * DAYS_IN_SEASON)
+        days -= SEASON_COUNT * DAYS_IN_SEASON;
+
+    return (days - 1) / DAYS_IN_SEASON;
 }
 
 u8 Ikigai_GetDateFromDays(u32 days)
 {
-    return (days == 0) ? 0 : ((days - 1) % 28) + 1;
+    return (days == 0) ? 0 : ((days - 1) % DAYS_IN_SEASON) + 1;
+}
+
+void UNUSED Ikigai_SetToNextSeason(s16 days, enum Seasons newSeason)
+{
+    if (newSeason > SEASON_COUNT)
+        return;
+    
+    u8 year = Ikigai_GetYearFromDays(days);
+    u8 currentSeason = Ikigai_GetSeasonFromDays(days);
+    s16 daysDiff;
+
+    if (newSeason <= currentSeason || newSeason == SEASON_COUNT)
+        year++;
+
+    daysDiff = (year * 112) + (newSeason * 28);
+    daysDiff -= days; 
+    FakeRtc_AdvanceTimeBy(daysDiff * 24, 0, 0);
 }

@@ -70,6 +70,7 @@
 
 #include "calendar.h"
 #include "dynamic_music.h"
+#include "fake_rtc.h"
 #include "ikigai_characters.h"
 
 #define FLAG_DEBUG_SOUND_OVERWORLD_PLAY TRUE
@@ -117,6 +118,7 @@ enum IkigaiTimeDebugSubmenu
     DEBUG_IKIGAI_TEMPORAL_WEATHER,
     DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK,
     DEBUG_IKIGAI_TEMPORAL_SET_CLOCK,
+    DEBUG_IKIGAI_TEMPORAL_SET_SEASON,
 };
 
 enum UtilDebugMenu
@@ -345,6 +347,9 @@ enum DynamicMusicTracksDebugMenu
 #define DEBUG_MENU_WIDTH_FLAGVAR 4
 #define DEBUG_MENU_HEIGHT_FLAGVAR 2
 
+#define DEBUG_MENU_WIDTH_SEASON 10
+#define DEBUG_MENU_HEIGHT_SEASON 3
+
 #define DEBUG_NUMBER_DIGITS_FLAGS 4
 #define DEBUG_NUMBER_DIGITS_VARIABLES 5
 #define DEBUG_NUMBER_DIGITS_VARIABLE_VALUE 5
@@ -457,6 +462,8 @@ static void DebugAction_Ikigai_OpenPokeSphere(u8 taskId);
 static void DebugAction_Ikigai_MeetAllCharacter(u8 taskId);
 static void DebugAction_Ikigai_ShowCalendar(u8 taskId);
 static void DebugAction_Ikigai_CalendarWarp(u8 taskId);
+static void DebugAction_Ikigai_Season(u8 taskId);
+static void DebugAction_Ikigai_SeasonsSelect(u8 taskId);
 
 static void DebugAction_Util_Fly(u8 taskId);
 static void DebugAction_Util_Warp_Warp(u8 taskId);
@@ -622,6 +629,8 @@ static const u8 sDebugText_Colored_False[] = _("{COLOR RED}FALSE");
 static const u8 sDebugText_Dashes[] =        _("---");
 static const u8 sDebugText_Empty[] =         _("");
 static const u8 sDebugText_Continue[] =      _("Continue…{CLEAR_TO 110}{RIGHT_ARROW}");
+// Ikigai Menu
+static const u8 sDebugText_Ikigai_Season_ID[] =              _("Season ID: {STR_VAR_3}\n{STR_VAR_1}\n{STR_VAR_2}");
 // Util Menu
 static const u8 sDebugText_Util_WarpToMap_SelectMapGroup[] = _("Group: {STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n\n{STR_VAR_3}{CLEAR_TO 90}");
 static const u8 sDebugText_Util_WarpToMap_SelectMap[] =      _("Map: {STR_VAR_1}{CLEAR_TO 90}\nMapSec:{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}\n{STR_VAR_3}{CLEAR_TO 90}");
@@ -720,6 +729,7 @@ static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Temporal[] =
     [DEBUG_IKIGAI_TEMPORAL_WEATHER]         = {COMPOUND_STRING("Set weather…{CLEAR_TO 110}{RIGHT_ARROW}"),      DEBUG_IKIGAI_TEMPORAL_WEATHER},
     [DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK]     = {COMPOUND_STRING("Check wall clock…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK},
     [DEBUG_IKIGAI_TEMPORAL_SET_CLOCK]       = {COMPOUND_STRING("Set wall clock…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_IKIGAI_TEMPORAL_SET_CLOCK},
+    [DEBUG_IKIGAI_TEMPORAL_SET_SEASON]      = {COMPOUND_STRING("Set Season…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_IKIGAI_TEMPORAL_SET_SEASON},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
@@ -974,6 +984,7 @@ static void (*const sDebugMenu_Actions_Ikigai_Temporal[])(u8) =
     [DEBUG_IKIGAI_TEMPORAL_WEATHER]        = DebugAction_Util_Weather,
     [DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK]    = DebugAction_Util_CheckWallClock,
     [DEBUG_IKIGAI_TEMPORAL_SET_CLOCK]      = DebugAction_Util_SetWallClock,
+    [DEBUG_IKIGAI_TEMPORAL_SET_SEASON]     = DebugAction_Ikigai_Season,
 };
 
 static void (*const sDebugMenu_Actions_Utilities[])(u8) =
@@ -1191,6 +1202,17 @@ static const struct WindowTemplate sDebugMenuWindowTemplateFlagsVars =
     .height = DEBUG_MENU_HEIGHT_FLAGVAR,
     .paletteNum = 15,
     .baseBlock = 1 + DEBUG_MENU_WIDTH_MAIN * DEBUG_MENU_HEIGHT_MAIN * 2,
+};
+
+static const struct WindowTemplate sDebugMenuWindowTemplateSeason =
+{
+    .bg = 0,
+    .tilemapLeft = 30 - DEBUG_MENU_WIDTH_SEASON - 1,
+    .tilemapTop = 1,
+    .width = DEBUG_MENU_WIDTH_SEASON,
+    .height = 2 * DEBUG_MENU_HEIGHT_SEASON,
+    .paletteNum = 15,
+    .baseBlock = 1,
 };
 
 // *******************************
@@ -2223,6 +2245,65 @@ static void DebugAction_Ikigai_CalendarWarp(u8 taskId)
 {
     Debug_DestroyMenu_Full(taskId);
     DoCalendarWarpHome();
+}
+
+static void DebugAction_Ikigai_Season(u8 taskId)
+{
+    u8 windowId;
+
+    ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
+    RemoveWindow(gTasks[taskId].tWindowId);
+
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+    windowId = AddWindow(&sDebugMenuWindowTemplateSeason);
+    DrawStdWindowFrame(windowId, FALSE);
+
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+
+    //Display initial ID
+    StringCopy(gStringVar2, gText_DigitIndicator[0]);
+    ConvertIntToDecimalStringN(gStringVar3, SEASON_SPRING, STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringCopyPadded(gStringVar1, gSeasonNames[SEASON_SPRING], CHAR_SPACE, 30);
+    StringExpandPlaceholders(gStringVar4, sDebugText_Ikigai_Season_ID);
+    AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
+
+    gTasks[taskId].func = DebugAction_Ikigai_SeasonsSelect;
+    gTasks[taskId].tSubWindowId = windowId;
+    gTasks[taskId].tInput = 0;
+    gTasks[taskId].tDigit = 0;
+}
+
+static void DebugAction_Ikigai_SeasonsSelect(u8 taskId)
+{
+    if (JOY_NEW(DPAD_ANY))
+    {
+        PlaySE(SE_SELECT);
+        Debug_HandleInput_Numeric(taskId, SEASON_SPRING, SEASON_COUNT - 1, 1);
+
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 2);
+
+        StringCopyPadded(gStringVar1, gSeasonNames[gTasks[taskId].tInput], CHAR_SPACE, 30);
+
+        StringExpandPlaceholders(gStringVar4, sDebugText_Ikigai_Season_ID);
+        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        RtcCalcLocalTime();
+        gTasks[taskId].data[5] = gTasks[taskId].tInput;
+        // Ikigai_SetToNextSeason(gLocalTime.days, gTasks[taskId].data[5]);
+
+        PlaySE(SE_SELECT);
+        DebugAction_DestroyExtraWindow(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        DebugAction_DestroyExtraWindow(taskId);
+    }
 }
 
 // *******************************
