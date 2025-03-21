@@ -1559,6 +1559,12 @@ static void OverworldBasic(void)
     AnimateSprites();
     CameraUpdate();
     UpdateCameraPanning();
+    for (u8 loops = 0; loops < Speedup_AdditionalIterations(gSaveBlock2Ptr->optionsOverworldSpeed, TRUE); loops++)
+    {
+        AnimateSprites();
+        CameraUpdate();
+        UpdateCameraPanning();
+    }
     BuildOamBuffer();
     UpdatePaletteFade();
     UpdateTilesetAnimations();
@@ -1578,13 +1584,6 @@ void CB2_Overworld(void)
     if (fading)
         SetVBlankCallback(NULL);
     OverworldBasic();
-
-    for (u8 loops = 0; loops < Speedup_AdditionalIterations(gSaveBlock2Ptr->optionsOverworldSpeed, TRUE); loops++)
-    {
-        AnimateSprites();
-        CameraUpdate();
-        UpdateCameraPanning();
-    }
 
     if (fading)
     {
