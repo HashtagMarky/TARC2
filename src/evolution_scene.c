@@ -1211,6 +1211,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
             GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskId].tPostEvoSpecies), FLAG_SET_SEEN);
             GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskId].tPostEvoSpecies), FLAG_SET_CAUGHT);
             IncrementGameStat(GAME_STAT_EVOLVED_POKEMON);
+            Ikigai_UpdatePartnerMonSpecies(taskId);
         }
         break;
     case T_EVOSTATE_TRY_LEARN_MOVE:
