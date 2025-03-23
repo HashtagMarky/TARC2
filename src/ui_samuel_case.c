@@ -1,4 +1,5 @@
 #include "global.h"
+#include "gba/gba.h"
 #include "ui_samuel_case.h"
 #include "strings.h"
 #include "bg.h"
@@ -320,58 +321,18 @@ static const struct SpritePalette sSpritePal_PokeballHand =
 };
 
 // Right Hand Animations (Same as original, with renamed variables)
-static const union AnimCmd sSpriteAnim_PokeballStatic_Right[] =
+static const union AnimCmd sSpriteAnim_PokeballStatic[] =
 {
     ANIMCMD_FRAME(0, 32),
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd sSpriteAnim_PokeballRockBackAndForth_Right[] =
+static const union AnimCmd sSpriteAnim_PokeballRockBackAndForth[] =
 {
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_FRAME(16, 16),
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_FRAME(32, 16),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sSpriteAnim_Hand_Right[] =
-{
-    ANIMCMD_FRAME(48, 32),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd *const sSpriteAnimTable_PokeballHand_Right[] =
-{
-    sSpriteAnim_PokeballStatic_Right,
-    sSpriteAnim_PokeballRockBackAndForth_Right,
-    sSpriteAnim_Hand_Right,
-};
-
-static const struct SpriteTemplate sSpriteTemplate_PokeballHandMap_Right =
-{
-    .tileTag = TAG_POKEBALL_CURSOR,
-    .paletteTag = TAG_POKEBALL_CURSOR,
-    .oam = &sOamData_PokeballHand,
-    .anims = sSpriteAnimTable_PokeballHand_Right,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
-};
-
-// Left Hand Animations (Flipped)
-static const union AnimCmd sSpriteAnim_PokeballStatic_Left[] =
-{
-    ANIMCMD_FRAME(0, 32, .hFlip = TRUE),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sSpriteAnim_PokeballRockBackAndForth_Left[] =
-{
-    ANIMCMD_FRAME(0, 16, .hFlip = TRUE),
-    ANIMCMD_FRAME(16, 16, .hFlip = TRUE),
-    ANIMCMD_FRAME(0, 16, .hFlip = TRUE),
-    ANIMCMD_FRAME(32, 16, .hFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 
@@ -381,23 +342,33 @@ static const union AnimCmd sSpriteAnim_Hand_Left[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const sSpriteAnimTable_PokeballHand_Left[] =
+static const union AnimCmd sSpriteAnim_Hand_Right[] =
 {
-    sSpriteAnim_PokeballStatic_Left,
-    sSpriteAnim_PokeballRockBackAndForth_Left,
-    sSpriteAnim_Hand_Left,
+    ANIMCMD_FRAME(48, 32),
+    ANIMCMD_JUMP(0),
 };
 
-static const struct SpriteTemplate sSpriteTemplate_PokeballHandMap_Left =
+static const union AnimCmd *const sSpriteAnimTable_PokeballHand[] =
+{
+    sSpriteAnim_PokeballStatic,
+    sSpriteAnim_PokeballRockBackAndForth,
+    sSpriteAnim_Hand_Left,
+    sSpriteAnim_Hand_Right,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_PokeballHandMap =
 {
     .tileTag = TAG_POKEBALL_CURSOR,
     .paletteTag = TAG_POKEBALL_CURSOR,
     .oam = &sOamData_PokeballHand,
-    .anims = sSpriteAnimTable_PokeballHand_Left,
+    .anims = sSpriteAnimTable_PokeballHand,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
+
+#define POKEBALL_HAND_ANIM_LEFT     2
+#define POKEBALL_HAND_ANIM_RIGHT    3
 
 
 //
@@ -487,10 +458,10 @@ static void CreateHandSprite()
     y = current_position.y - 6;
     sSamuelCaseDataPtr->handPosition = i;
     if (sSamuelCaseDataPtr->handSpriteId == SPRITE_NONE)
-        sSamuelCaseDataPtr->handSpriteId = CreateSpriteAtEnd(&sSpriteTemplate_PokeballHandMap_Right, x, y, 0);
+        sSamuelCaseDataPtr->handSpriteId = CreateSpriteAtEnd(&sSpriteTemplate_PokeballHandMap, x, y, 0);
     gSprites[sSamuelCaseDataPtr->handSpriteId].invisible = FALSE;
     gSprites[sSamuelCaseDataPtr->handSpriteId].callback = CursorCallback;
-    StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->handSpriteId], 2);
+    StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->handSpriteId], POKEBALL_HAND_ANIM_LEFT);
     StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->pokeballSpriteIds[sSamuelCaseDataPtr->handPosition]], 1);
     SampleUi_DrawMonIcon(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species);
     
@@ -537,7 +508,7 @@ static void CreatePokeballSprites()
             y = ReturnBallPositionByPage()[2][i - 7].y;
         }
         if (sSamuelCaseDataPtr->pokeballSpriteIds[i] == SPRITE_NONE)
-            sSamuelCaseDataPtr->pokeballSpriteIds[i] = CreateSpriteAtEnd(&sSpriteTemplate_PokeballHandMap_Right, x, y, 1);
+            sSamuelCaseDataPtr->pokeballSpriteIds[i] = CreateSpriteAtEnd(&sSpriteTemplate_PokeballHandMap, x, y, 1);
         gSprites[sSamuelCaseDataPtr->pokeballSpriteIds[i]].invisible = FALSE;
         StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->pokeballSpriteIds[i]], 0);
 
@@ -1208,11 +1179,13 @@ static void Task_WaitFadeOutAndChangeGraphics(u8 taskId)
         {
             LZDecompressWram(sCaseTilemapLeft, sBg1TilemapBuffer);
             LZDecompressWram(sTextBgTilemapLeft, sBg2TilemapBuffer);
+            StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->handSpriteId], POKEBALL_HAND_ANIM_LEFT);
         }
         else
         {
             LZDecompressWram(sCaseTilemapRight, sBg1TilemapBuffer);
             LZDecompressWram(sTextBgTilemapRight, sBg2TilemapBuffer);
+            StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->handSpriteId], POKEBALL_HAND_ANIM_RIGHT);
         }
         ScheduleBgCopyTilemapToVram(1);
         ScheduleBgCopyTilemapToVram(2);
