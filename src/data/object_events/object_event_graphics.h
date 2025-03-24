@@ -662,5 +662,8 @@ const u16 gObjectEventPalette_Georgia[] = INCBIN_U16("graphics/object_events/pic
 const u32 gObjectEventPic_Diego[] = INCBIN_U32("graphics/object_events/pics/people/diego.4bpp");
 const u16 gObjectEventPalette_Diego[] = INCBIN_U16("graphics/object_events/pics/people/diego.gbapal");
 
+const u32 gObjectEventPic_Joy[] = INCBIN_U32("graphics/object_events/pics/people/joy.4bpp");
+const u16 gObjectEventPalette_Joy[] = INCBIN_U16("graphics/object_events/pics/people/joy.gbapal");
+
 const u32 gFieldEffectObjectPic_Saving[] 	= INCBIN_U32("graphics/field_effects/pics/saving.4bpp");
 const u16 gFieldEffectObjectPaletteSaving[] = INCBIN_U16("graphics/field_effects/palettes/saving.gbapal");
