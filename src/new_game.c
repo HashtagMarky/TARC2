@@ -166,6 +166,7 @@ static void WarpToShip(void)
 {
     FlagSet(FLAG_HIDE_MAP_NAME_POPUP);
     FlagSet(FLAG_SUPPRESS_MUGSHOT);
+    FlagSet(FLAG_SUPPRESS_FOLLOWER);
     SetWarpDestination(MAP_GROUP(VYRATON_OUTDOORS_OCEAN), MAP_NUM(VYRATON_OUTDOORS_OCEAN), WARP_ID_NONE, 4, 2);
     WarpIntoMap();
 }
