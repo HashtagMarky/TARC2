@@ -76,6 +76,7 @@
 #include "constants/weather.h"
 
 #include "speedup.h"
+#include "constants/field_effects.h"
 STATIC_ASSERT((B_FLAG_FOLLOWERS_DISABLED == 0 || OW_FOLLOWERS_ENABLED), FollowersFlagAssignedWithoutEnablingThem);
 
 struct CableClubPlayer
@@ -183,6 +184,7 @@ static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *, u
 static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *, u8, u16, u8);
 static u16 GetCenterScreenMetatileBehavior(void);
 static void TryUpdateOverworldDayNightMusic(void);
+static void Task_ShowSaveIconOnLoad(u8 taskId);
 
 static void *sUnusedOverworldCallback;
 static u8 sPlayerLinkStates[MAX_LINK_PLAYERS];
@@ -1708,7 +1710,26 @@ static void CB2_LoadMapAndSave2(void)
     SetMainCallback1(CB1_Overworld);
     SetMainCallback2(CB2_Overworld);
     AutoSaveDoSave();
+    FieldEffectStart(FLDEFF_SAVING);
+    CreateTask(Task_ShowSaveIconOnLoad, 0);
 }
+
+#define tSaveTimer data[0]
+#define SaveTime 60
+static void Task_ShowSaveIconOnLoad(u8 taskId)
+{
+    if (gTasks[taskId].tSaveTimer < SaveTime)
+    {
+        gTasks[taskId].tSaveTimer++;
+        return;
+    }
+
+    FieldEffectActiveListRemove(FLDEFF_SAVING);
+    FlagSet(FLAG_AUTO_SAVING);
+    DestroyTask(taskId);
+}
+#undef tSaveTimer
+#undef SaveTime
 
 void CB2_ReturnToFieldContestHall(void)
 {
