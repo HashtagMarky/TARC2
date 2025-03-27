@@ -268,6 +268,7 @@ ifneq ($(NOCLEAN),1)
 	$(MAKE) clean
 endif
 	$(MAKE) all
+	flips --create --bps '/Users/samuelmark/Code/Pokémon Rom Hacks/emerald/pokeemerald.gba' pokeikigai.gba pokeikigai.bps
 # Uncomment the next line, and then comment the 4 lines after it to reenable agbcc.
 #agbcc: all
 agbcc:
@@ -315,6 +316,7 @@ clean-assets:
 	find sound -iname '*.bin' -exec rm {} +
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
+	find . \( -iname '*.bps' \) -exec rm {} +
 
 tidy: tidymodern tidycheck tidydebug
 
