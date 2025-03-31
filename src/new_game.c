@@ -118,10 +118,10 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsSurfMusic = FALSE;
     gSaveBlock2Ptr->optionsOverworldSpeed = OPTIONS_SPEEDUP_NORMAL;
     gSaveBlock2Ptr->optionsNPCName = TRUE;
-    gSaveBlock2Ptr->optionsDisableAutoSave = FALSE;
+    gSaveBlock2Ptr->optionsDisableAutoSave = DEBUG_ACTIVE ? TRUE : FALSE;
     gSaveBlock2Ptr->optionsWildBattleSpeed = OPTIONS_SPEEDUP_NORMAL;
     gSaveBlock2Ptr->optionsTrainerBattleSpeed = OPTIONS_SPEEDUP_NORMAL;
-    gSaveBlock2Ptr->optionsClockMode = FALSE;
+    gSaveBlock2Ptr->optionsClockMode = TRUE;
     gSaveBlock2Ptr->optionsDamageNumbers = FALSE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
     gSaveBlock3Ptr->autoRun = FALSE;
