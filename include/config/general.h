@@ -7,7 +7,10 @@
 // to define NDEBUG before release, however this has been changed as
 // Ruby's actual debug build does not use the AGBPrint features.
 #if RELEASE
+#define DEV_BUILD FALSE
 #define NDEBUG
+#else
+#define DEV_BUILD TRUE
 #endif
 
 // To enable printf debugging, comment out "#define NDEBUG". This allows
