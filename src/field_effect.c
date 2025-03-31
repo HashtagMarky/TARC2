@@ -1095,6 +1095,7 @@ bool8 FldEff_PokecenterHeal(void)
 
     nPokemon = (OW_IGNORE_EGGS_ON_HEAL <= GEN_3) ? CalculatePlayerPartyCount() : CountPartyNonEggMons();
     task = &gTasks[CreateTask(Task_PokecenterHeal, 0xff)];
+    nPokemon = nPokemon != 0 ? nPokemon : 1; // If no Pokémon are in the party, act as if the player has one to prevent a soft-lock.
     task->tNumMons = nPokemon;
     task->tFirstBallX = 93;
     task->tFirstBallY = 36;
