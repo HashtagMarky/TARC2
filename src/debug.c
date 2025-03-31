@@ -99,9 +99,9 @@ enum IkigaiDebugMenu
 
 enum IkigaiPlayerDebugSubmenu
 {
+    DEBUG_IKIGAI_PLAYER_BODY,
     DEBUG_IKIGAI_PLAYER_NAME,
     DEBUG_IKIGAI_PLAYER_NICKNAME,
-    DEBUG_IKIGAI_PLAYER_GENDER,
     DEBUG_IKIGAI_PLAYER_DYNPALS,
 };
 
@@ -710,10 +710,10 @@ static const struct ListMenuItem sDebugMenu_Items_Ikigai[] =
 
 static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Player[] =
 {
-    [DEBUG_IKIGAI_PLAYER_NAME]             = {COMPOUND_STRING("Player name"),                                  DEBUG_IKIGAI_PLAYER_NAME},
-    [DEBUG_IKIGAI_PLAYER_NICKNAME]         = {COMPOUND_STRING("Player nickname"),                              DEBUG_IKIGAI_PLAYER_NICKNAME},
-    [DEBUG_IKIGAI_PLAYER_GENDER]           = {COMPOUND_STRING("Toggle gender"),                                DEBUG_IKIGAI_PLAYER_GENDER},
-    [DEBUG_IKIGAI_PLAYER_DYNPALS]          = {COMPOUND_STRING("Player DynPal Menu"),                           DEBUG_IKIGAI_PLAYER_DYNPALS},
+    [DEBUG_IKIGAI_PLAYER_BODY]             = {COMPOUND_STRING("Toggle Player Body"),                                DEBUG_IKIGAI_PLAYER_BODY},
+    [DEBUG_IKIGAI_PLAYER_NAME]             = {COMPOUND_STRING("Player Name…{CLEAR_TO 110}{RIGHT_ARROW}"),           DEBUG_IKIGAI_PLAYER_NAME},
+    [DEBUG_IKIGAI_PLAYER_NICKNAME]         = {COMPOUND_STRING("Player Nickname…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_IKIGAI_PLAYER_NICKNAME},
+    [DEBUG_IKIGAI_PLAYER_DYNPALS]          = {COMPOUND_STRING("Player DynPal Menu…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_IKIGAI_PLAYER_DYNPALS},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Character[] =
@@ -726,9 +726,9 @@ static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Temporal[] =
 {
     [DEBUG_IKIGAI_TEMPORAL_CALENDAR_SHOW]   = {COMPOUND_STRING("Show Calendar"),                                DEBUG_IKIGAI_TEMPORAL_CALENDAR_SHOW},
     [DEBUG_IKIGAI_TEMPORAL_CALENDAR_WARP]   = {COMPOUND_STRING("Calendar Warp"),                                DEBUG_IKIGAI_TEMPORAL_CALENDAR_WARP},
-    [DEBUG_IKIGAI_TEMPORAL_WEATHER]         = {COMPOUND_STRING("Set weather…{CLEAR_TO 110}{RIGHT_ARROW}"),      DEBUG_IKIGAI_TEMPORAL_WEATHER},
-    [DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK]     = {COMPOUND_STRING("Check wall clock…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK},
-    [DEBUG_IKIGAI_TEMPORAL_SET_CLOCK]       = {COMPOUND_STRING("Set wall clock…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_IKIGAI_TEMPORAL_SET_CLOCK},
+    [DEBUG_IKIGAI_TEMPORAL_WEATHER]         = {COMPOUND_STRING("Set Weather…{CLEAR_TO 110}{RIGHT_ARROW}"),      DEBUG_IKIGAI_TEMPORAL_WEATHER},
+    [DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK]     = {COMPOUND_STRING("Check Wall Clock…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK},
+    [DEBUG_IKIGAI_TEMPORAL_SET_CLOCK]       = {COMPOUND_STRING("Set Wall Clock…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_IKIGAI_TEMPORAL_SET_CLOCK},
     [DEBUG_IKIGAI_TEMPORAL_SET_SEASON]      = {COMPOUND_STRING("Set Season…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_IKIGAI_TEMPORAL_SET_SEASON},
 };
 
@@ -965,9 +965,9 @@ static void (*const sDebugMenu_Actions_Ikigai[])(u8) =
 
 static void (*const sDebugMenu_Actions_Ikigai_Player[])(u8) =
 {
+    [DEBUG_IKIGAI_PLAYER_BODY]             = DebugAction_Util_Player_Gender,
     [DEBUG_IKIGAI_PLAYER_NAME]             = DebugAction_Util_Player_Name,
     [DEBUG_IKIGAI_PLAYER_NICKNAME]         = DebugAction_Util_Player_Nickname,
-    [DEBUG_IKIGAI_PLAYER_GENDER]           = DebugAction_Util_Player_Gender,
     [DEBUG_IKIGAI_PLAYER_DYNPALS]          = DebugAction_Ikigai_PlayerDynPals,
 };
 
