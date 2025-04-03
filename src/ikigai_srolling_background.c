@@ -7,18 +7,18 @@
 const u32 IkigaiScrollingBgTiles[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles.4bpp.lz");
 const u32 IkigaiScrollingBgTilemap_PalOne[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles_pal_one.bin.lz");
 const u32 IkigaiScrollingBgTilemap_PalTwo[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles_pal_two.bin.lz");
-const u16 IkigaiScrollingBgPal_Default[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_bg_default.gbapal");
+const u16 IkigaiScrollingBgPal_Default[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_bg_palettes/default.gbapal");
 
-static const u16 IkigaiScrollingBgPal_Tornadus[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_bg_tornadus.gbapal");
-static const u16 IkigaiScrollingBgPal_Thundurus[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_bg_thundurus.gbapal");
-static const u16 IkigaiScrollingBgPal_Landorus[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_bg_landorus.gbapal");
-static const u16 IkigaiScrollingBgPal_Enamorus[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_bg_enamorus.gbapal");
+static const u16 IkigaiScrollingBgPal_Tornadus[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_bg_palettes/tornadus.gbapal");
+static const u16 IkigaiScrollingBgPal_Thundurus[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_bg_palettes/thundurus.gbapal");
+static const u16 IkigaiScrollingBgPal_Landorus[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_bg_palettes/landorus.gbapal");
+static const u16 IkigaiScrollingBgPal_Enamorus[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_bg_palettes/enamorus.gbapal");
 
-static const u16 IkigaiUIPal_Default[] = INCBIN_U16("graphics/ikigai_scrolling_background/ui_tiles_default.gbapal");
-static const u16 IkigaiUIPal_Tornadus[] = INCBIN_U16("graphics/ikigai_scrolling_background/ui_tiles_tornadus.gbapal");
-static const u16 IkigaiUIPal_Thundurus[] = INCBIN_U16("graphics/ikigai_scrolling_background/ui_tiles_thundurus.gbapal");
-static const u16 IkigaiUIPal_Landorus[] = INCBIN_U16("graphics/ikigai_scrolling_background/ui_tiles_landorus.gbapal");
-static const u16 IkigaiUIPal_Enamorus[] = INCBIN_U16("graphics/ikigai_scrolling_background/ui_tiles_enamorus.gbapal");
+static const u16 IkigaiUIPal_Default[] = INCBIN_U16("graphics/ikigai_scrolling_background/ui_tiles_palettes/default.gbapal");
+static const u16 IkigaiUIPal_Tornadus[] = INCBIN_U16("graphics/ikigai_scrolling_background/ui_tiles_palettes/tornadus.gbapal");
+static const u16 IkigaiUIPal_Thundurus[] = INCBIN_U16("graphics/ikigai_scrolling_background/ui_tiles_palettes/thundurus.gbapal");
+static const u16 IkigaiUIPal_Landorus[] = INCBIN_U16("graphics/ikigai_scrolling_background/ui_tiles_palettes/landorus.gbapal");
+static const u16 IkigaiUIPal_Enamorus[] = INCBIN_U16("graphics/ikigai_scrolling_background/ui_tiles_palettes/enamorus.gbapal");
 
 #define SCROLLING_SPEED         64
 
