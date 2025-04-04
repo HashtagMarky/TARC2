@@ -3401,10 +3401,17 @@ static void ResetMonDataStruct(struct DebugMonData *sDebugMonData)
 static void Debug_Display_IkigaiGymInfo(u32 type, u32 digit, u8 windowId)
 {
     StringCopy(gStringVar2, gText_DigitIndicator[digit]);
-    u8 *end = StringCopy(gStringVar1, GetSpeciesName(gIkigaiStarters[type][gSaveBlock2Ptr->playerGender]));
+    u8 *end;
+    if (type != TYPE_NONE && type != TYPE_MYSTERY)
+        end = StringCopy(gStringVar1, GetSpeciesName(gIkigaiStarters[type][gSaveBlock2Ptr->playerGender]));
+    else
+        end = StringCopy(gStringVar1, COMPOUND_STRING("No Available Starter"));
     WrapFontIdToFit(gStringVar1, end, DEBUG_MENU_FONT, WindowWidthPx(windowId));
     StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
-    StringCopy(gStringVar3, gTypesInfo[type].name);
+    if (type != TYPE_NONE && type != TYPE_MYSTERY)
+        StringCopy(gStringVar3, gTypesInfo[type].name);
+    else
+        StringCopy(gStringVar3, COMPOUND_STRING("None"));
     StringAppend(gStringVar3, COMPOUND_STRING("{CLEAR_TO 110}"));
     StringExpandPlaceholders(gStringVar4, sDebugText_Ikigai_Gym_Type);
     AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
@@ -3461,6 +3468,9 @@ static void DebugAction_Ikigai_GymType_SelectId(u8 taskId)
 
     if (JOY_NEW(A_BUTTON))
     {
+        if (gTasks[taskId].tInput == TYPE_MYSTERY)
+            gTasks[taskId].tInput = TYPE_NONE;
+
         gSaveBlock2Ptr->ikigaiGymType = gTasks[taskId].tInput;
         VarSet(VAR_STARTER_MON, gIkigaiStarters[gTasks[taskId].tInput][gSaveBlock2Ptr->playerGender]);
 
