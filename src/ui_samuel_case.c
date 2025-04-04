@@ -90,11 +90,6 @@ enum PageNumbers
     PAGE_COUNT,
 };
 
-// Type offsets exist as type defines do not run 1 - 18
-#define TYPE_OFFSET_1               1 // Used for types before TYPE_MYSTERY
-#define TYPE_OFFSET_2               2 // Used for types after TYPE_MYSTERY
-#define TYPE_OFFSET(type, offset)   ((type) - (offset))
-
 enum Colors
 {
     FONT_BLACK,
@@ -143,28 +138,6 @@ struct MonChoiceData{ // This is the format used to define a mon, everything lef
     bool8 ggMaxFactor;      // only work in Expansion set to 0 otherwise or leave blank
     u8 teraType;            // only work in Expansion set to 0 otherwise or leave blank
     bool8 isShinyExpansion; // only work in Expansion set to 0 otherwise or leave blank
-};
-
-// Species Lists to be Randomly Chosen
-static const u16 sRandomSpeciesList[18][3] = {
-    [TYPE_OFFSET(TYPE_NORMAL, TYPE_OFFSET_1)]    = {SPECIES_EEVEE, SPECIES_SNORLAX, SPECIES_MEOWTH},
-    [TYPE_OFFSET(TYPE_FIGHTING, TYPE_OFFSET_1)]  = {SPECIES_MACHOP, SPECIES_HITMONLEE, SPECIES_LUCARIO},
-    [TYPE_OFFSET(TYPE_FLYING, TYPE_OFFSET_1)]    = {SPECIES_PIDGEY, SPECIES_SPEAROW, SPECIES_STARLY},
-    [TYPE_OFFSET(TYPE_POISON, TYPE_OFFSET_1)]    = {SPECIES_EKANS, SPECIES_GRIMER, SPECIES_KOFFING},
-    [TYPE_OFFSET(TYPE_GROUND, TYPE_OFFSET_1)]    = {SPECIES_SANDSHREW, SPECIES_DIGLETT, SPECIES_PHANPY},
-    [TYPE_OFFSET(TYPE_ROCK, TYPE_OFFSET_1)]      = {SPECIES_GEODUDE, SPECIES_ONIX, SPECIES_RHYHORN},
-    [TYPE_OFFSET(TYPE_BUG, TYPE_OFFSET_1)]       = {SPECIES_CATERPIE, SPECIES_WEEDLE, SPECIES_SCYTHER},
-    [TYPE_OFFSET(TYPE_GHOST, TYPE_OFFSET_1)]     = {SPECIES_GASTLY, SPECIES_HAUNTER, SPECIES_DUSKULL},
-    [TYPE_OFFSET(TYPE_STEEL, TYPE_OFFSET_1)]     = {SPECIES_MAGNEMITE, SPECIES_SKARMORY, SPECIES_STEELIX},
-    [TYPE_OFFSET(TYPE_FIRE, TYPE_OFFSET_2)]      = {SPECIES_CHARMANDER, SPECIES_CYNDAQUIL, SPECIES_TORCHIC},
-    [TYPE_OFFSET(TYPE_WATER, TYPE_OFFSET_2)]     = {SPECIES_SQUIRTLE, SPECIES_TOTODILE, SPECIES_MUDKIP},
-    [TYPE_OFFSET(TYPE_GRASS, TYPE_OFFSET_2)]     = {SPECIES_BULBASAUR, SPECIES_CHIKORITA, SPECIES_TREECKO},
-    [TYPE_OFFSET(TYPE_ELECTRIC, TYPE_OFFSET_2)]  = {SPECIES_PIKACHU, SPECIES_RAICHU, SPECIES_ELECTABUZZ},
-    [TYPE_OFFSET(TYPE_PSYCHIC, TYPE_OFFSET_2)]   = {SPECIES_ABRA, SPECIES_RALTS, SPECIES_SPOINK},
-    [TYPE_OFFSET(TYPE_ICE, TYPE_OFFSET_2)]       = {SPECIES_SWINUB, SPECIES_SNEASEL, SPECIES_GLACEON},
-    [TYPE_OFFSET(TYPE_DRAGON, TYPE_OFFSET_2)]    = {SPECIES_DRATINI, SPECIES_BAGON, SPECIES_GIBLE},
-    [TYPE_OFFSET(TYPE_DARK, TYPE_OFFSET_2)]      = {SPECIES_UMBREON, SPECIES_MURKROW, SPECIES_HOUNDOOM},
-    [TYPE_OFFSET(TYPE_FAIRY, TYPE_OFFSET_2)]     = {SPECIES_JIGGLYPUFF, SPECIES_CLEFAIRY, SPECIES_SYLVEON},
 };
 
 //
@@ -262,8 +235,6 @@ static void SampleUi_DrawMonIcon(u16 speciesId);
 static void Task_DelayedSpriteLoad(u8 taskId);
 static const struct MonChoiceData* ReturnStartersByPage(void);
 static const struct SpriteCordsStruct (*ReturnBallPositionByPage(void))[4];
-static u16 GetRandomSpecies(void);
-static void RandomiseMonChoiceData(const struct MonChoiceData *monChoiceDataArray, size_t count);
 static void SamuelCaseChangeGraphics(void);
 static void Task_WaitFadeOutAndChangeGraphics(u8 taskId);
 
@@ -1158,35 +1129,6 @@ static const struct MonChoiceData* ReturnStartersByPage(void)
     else
     {
         return sStarterChoices_Page2;
-    }
-}
-
-static u16 GetRandomSpecies(void)
-{
-    // Choose a random type from the sRandomSpeciesList
-    u16 typeIndex = Random() % ARRAY_COUNT(sRandomSpeciesList);
-    
-    // Get the number of species in the selected type's list
-    u16 speciesCount = ARRAY_COUNT(sRandomSpeciesList[typeIndex]);
-    
-    // Choose a random species from the selected type's list
-    u16 speciesIndex = Random() % speciesCount;
-    
-    // Return the selected species
-    return sRandomSpeciesList[typeIndex][speciesIndex];
-}
-
-static void RandomiseMonChoiceData(const struct MonChoiceData *monChoiceDataArray, size_t count)
-{
-    bool8 isShiny = (Random() < SHINY_ODDS) ? TRUE : FALSE;
-
-    for (size_t i = 0; i < count; i++)
-    {
-        if (monChoiceDataArray[i].species == SPECIES_NONE)
-        {
-            //monChoiceDataArray[i].species = GetRandomSpecies();
-        }
-        //monChoiceDataArray[i].isShinyExpansion = isShiny;
     }
 }
 
