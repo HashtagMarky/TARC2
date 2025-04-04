@@ -294,7 +294,7 @@ struct // MENU_OVERWORLD
     [MENUITEM_OVERWORLD_BIKE_MUSIC]     = {DrawChoices_BikeMusic,           ProcessInput_Options_Two},
     [MENUITEM_OVERWORLD_SURF_MUSIC]     = {DrawChoices_SurfMusic,           ProcessInput_Options_Two},
     [MENUITEM_OVERWORLD_NPC_MUG]        = {DrawChoices_MugshotsNPC,         ProcessInput_Options_Two},
-    [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = {DrawChoices_MugshotsFollower,    ProcessInput_Options_Three},
+    [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = {DrawChoices_MugshotsFollower,    ProcessInput_Options_Two},
     [MENUITEM_OVERWORLD_MATCHCALL]      = {DrawChoices_MatchCall,           ProcessInput_Options_Two},
     [MENUITEM_OVERWORLD_SPEED]          = {DrawChoices_Speedup,             ProcessInput_Options_Four},
     [MENUITEM_OVERWORLD_NPC_NAME_COLOUR]= {DrawChoices_NameColour,          ProcessInput_Options_Two},
@@ -322,7 +322,7 @@ static const u8 sText_UnitSystem[]          = _("UNIT SYSTEM");
 static const u8 sText_BikeMusic[]           = _("BIKE MUSIC");
 static const u8 sText_SurfMusic[]           = _("SURF MUSIC");
 static const u8 sText_MugshotNPC[]          = _("{FONT_GET_NARROW}NPC MUGSHOTS{FONT_NORMAL}");
-static const u8 sText_MugshotFollower[]     = _("{FONT_GET_NARROW}FOLLOWER MUGSHOTS{FONT_NORMAL}");
+static const u8 sText_MugshotFollower[]     = _("{FONT_GET_NARROW}PARTNER MUGSHOTS{FONT_NORMAL}");
 static const u8 sText_TitleScreen[]         = _("TITLE SCREEN");
 static const u8 sText_OverworldSpeed[]      = _("{FONT_GET_NARROW}OVERWORLD SPEED");
 static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
@@ -465,8 +465,8 @@ static const u8 sText_Desc_OverworldCallsOff[]          = _("You will not receiv
 static const u8 sText_Desc_MugshotNPCOn[]               = _("Show NPC mugshots during dialogue.\nExcludes following POKéMON.");
 static const u8 sText_Desc_MugshotNPCOff[]              = _("Hide NPC mugshots during dialogue.\nExcludes following POKéMON.");
 static const u8 sText_Desc_MugshotFollowerPlaceholder[] = _("Show a placeholder mugshot when\nfollowing POKéMON do not have one.");
-static const u8 sText_Desc_MugshotFollowerOn[]          = _("Show mugshot of following POKéMON if\nthey are available.");
-static const u8 sText_Desc_MugshotFollowerOff[]         = _("Hide following POKéMON mugshots.");
+static const u8 sText_Desc_MugshotFollowerOn[]          = _("Show partner POKéMON mugshots.");
+static const u8 sText_Desc_MugshotFollowerOff[]         = _("Hide partner POKéMON mugshots.");
 static const u8 sText_Desc_TitleScreenMatch[]           = _("Title screen legendary matches choice\nof interface, if available.");
 static const u8 sText_Desc_TitleScreenRandom[]          = _("Title screen legendary is randomised.");
 static const u8 sText_Desc_DamageNumbers[]              = _("Whether damage numbers are shown in\nbattle and when they appear.");
@@ -511,7 +511,7 @@ static const u8 *const sOptionMenuItemDescriptionsOverworld[MENUITEM_OVERWORLD_C
     [MENUITEM_OVERWORLD_BIKE_MUSIC]     = {sText_Desc_BikeOn,                       sText_Desc_BikeOff,             sText_Empty},
     [MENUITEM_OVERWORLD_SURF_MUSIC]     = {sText_Desc_SurfOn,                       sText_Desc_SurfOff,             sText_Empty},
     [MENUITEM_OVERWORLD_NPC_MUG]        = {sText_Desc_MugshotNPCOn,                 sText_Desc_MugshotNPCOff,       sText_Empty},
-    [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = {sText_Desc_MugshotFollowerPlaceholder,   sText_Desc_MugshotFollowerOn,   sText_Desc_MugshotFollowerOff},
+    [MENUITEM_OVERWORLD_FOLLOWER_MUG]   = {sText_Desc_MugshotFollowerOff,           sText_Desc_MugshotFollowerOn,   sText_Desc_MugshotFollowerPlaceholder},
     [MENUITEM_OVERWORLD_MATCHCALL]      = {sText_Desc_OverworldCallsOn,             sText_Desc_OverworldCallsOff,   sText_Empty},
     [MENUITEM_OVERWORLD_SPEED]          = {sText_Desx_OverworldSpeed,               sText_Empty,                    sText_Empty},
     [MENUITEM_OVERWORLD_NPC_NAME_COLOUR]= {sText_Desc_NPCNames,                     sText_Empty,                    sText_Empty},
@@ -1767,15 +1767,21 @@ static void DrawChoices_MugshotsFollower(int selection, int y)
 {
     bool8 active = CheckConditions(MENUITEM_OVERWORLD_FOLLOWER_MUG);
 
-    if (selection == 0)
-        DrawOptionMenuChoice(COMPOUND_STRING("PLACEHOLDER"), 104, y, 1, active);
-    else if (selection < 2)
-    {
-        u8 textOn[] = _("POKéMON ONLY{0x77}{0x77}{0x77}{0x77}{0x77}");
-        DrawOptionMenuChoice(textOn, 104, y, 1, active);
-    }
-    else
-        DrawOptionMenuChoice(gText_BattleSceneOff, 104, y, 0, active);
+    // if (selection == 0)
+    //     DrawOptionMenuChoice(COMPOUND_STRING("PLACEHOLDER"), 104, y, 1, active);
+    // else if (selection < 2)
+    // {
+    //     u8 textOn[] = _("POKéMON ONLY{0x77}{0x77}{0x77}{0x77}{0x77}");
+    //     DrawOptionMenuChoice(textOn, 104, y, 1, active);
+    // }
+    // else
+    //     DrawOptionMenuChoice(gText_BattleSceneOff, 104, y, 0, active);
+
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_BattleSceneOn, 104, y, styles[0], active);
+    DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(1, gText_BattleSceneOff, 198), y, styles[1], active);
 }
 
 static void DrawChoices_TitleScreen(int selection, int y)

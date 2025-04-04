@@ -16,9 +16,9 @@ enum MugshotType {
 };
 
 enum FollowerMugshotSetting {
-    MUGSHOT_FOLLOWER_PLACEHOLDER,
+    MUGSHOT_FOLLOWER_OFF,
     MUGSHOT_FOLLOWER_ON,
-    MUGSHOT_FOLLOWER_OFF
+    MUGSHOT_FOLLOWER_PLACEHOLDER,
 };
 
 enum MugshotIDs {
