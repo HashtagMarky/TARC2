@@ -149,3 +149,50 @@ void UNUSED Ikigai_SetToNextSeason(s16 days, enum Seasons newSeason)
     daysDiff -= days; 
     FakeRtc_AdvanceTimeBy(daysDiff * 24, 0, 0);
 }
+
+u8 Ikigai_GetSeasonalTimeHour(s32 days, u8 time, bool32 begin)
+{
+    const u8 baseTime[SEASON_COUNT][2] =
+    {
+        {MORNING_HOUR_BEGIN,    MORNING_HOUR_END},
+        {DAY_HOUR_BEGIN,        DAY_HOUR_END},
+        {EVENING_HOUR_BEGIN,    EVENING_HOUR_END},
+        {NIGHT_HOUR_BEGIN,      NIGHT_HOUR_END},
+    };
+
+    const s8 seasonalAdjustments[SEASON_COUNT][TIMES_OF_DAY][2] =
+    {
+        [SEASON_SPRING] = {
+            [TIME_MORNING]  = {  0,  0  },
+            [TIME_DAY]      = {  0,  0  },
+            [TIME_EVENING]  = {  0,  0  },
+            [TIME_NIGHT]    = {  0,  0  },
+        },
+        
+        [SEASON_SUMMER] = {
+            [TIME_MORNING]  = {  0, -2  },
+            [TIME_DAY]      = { -2,  4  },
+            [TIME_EVENING]  = {  4,  4  },
+            [TIME_NIGHT]    = {  4,  0  },
+        },
+        
+        [SEASON_AUTUMN] = {
+            [TIME_MORNING]  = {  2,  0  },
+            [TIME_DAY]      = {  0, -1  },
+            [TIME_EVENING]  = { -1,  3  },
+            [TIME_NIGHT]    = {  3,  2  },
+        },
+        
+        [SEASON_WINTER] = {
+            [TIME_MORNING]  = {  3,  0  },
+            [TIME_DAY]      = {  0, -2  },
+            [TIME_EVENING]  = { -2, -1  },
+            [TIME_NIGHT]    = { -1,  3  },
+        },
+    };
+
+    enum Seasons season = Ikigai_GetSeasonFromDays(days);
+    time = time >= TIMES_OF_DAY ? TIME_DAY : time;
+
+    return baseTime[time][begin] + seasonalAdjustments[season][time][begin];
+}

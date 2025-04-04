@@ -87,6 +87,7 @@
 #define TIME_DAY               1
 #define TIME_EVENING           2
 #define TIME_NIGHT             3
+#define TIMES_OF_DAY           4
 
 extern struct Time gLocalTime;
 

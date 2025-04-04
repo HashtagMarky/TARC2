@@ -325,14 +325,26 @@ bool8 IsBetweenHours(s32 hours, s32 begin, s32 end)
         return hours >= begin && hours < end;
 }
 
+// u8 GetTimeOfDay(void)
+// {
+//     RtcCalcLocalTime();
+//     if (IsBetweenHours(gLocalTime.hours, MORNING_HOUR_BEGIN, MORNING_HOUR_END))
+//         return TIME_MORNING;
+//     else if (IsBetweenHours(gLocalTime.hours, EVENING_HOUR_BEGIN, EVENING_HOUR_END))
+//         return TIME_EVENING;
+//     else if (IsBetweenHours(gLocalTime.hours, NIGHT_HOUR_BEGIN, NIGHT_HOUR_END))
+//         return TIME_NIGHT;
+//     return TIME_DAY;
+// }
+
 u8 GetTimeOfDay(void)
 {
     RtcCalcLocalTime();
-    if (IsBetweenHours(gLocalTime.hours, MORNING_HOUR_BEGIN, MORNING_HOUR_END))
+    if (IsBetweenHours(gLocalTime.hours, Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_MORNING, TRUE), Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_MORNING, FALSE)))
         return TIME_MORNING;
-    else if (IsBetweenHours(gLocalTime.hours, EVENING_HOUR_BEGIN, EVENING_HOUR_END))
+    else if (IsBetweenHours(gLocalTime.hours, Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_EVENING, TRUE), Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_EVENING, FALSE)))
         return TIME_EVENING;
-    else if (IsBetweenHours(gLocalTime.hours, NIGHT_HOUR_BEGIN, NIGHT_HOUR_END))
+    else if (IsBetweenHours(gLocalTime.hours, Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_NIGHT, TRUE), Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_NIGHT, FALSE)))
         return TIME_NIGHT;
     return TIME_DAY;
 }

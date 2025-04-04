@@ -220,8 +220,8 @@ struct WeatherIcons
 #define INDEX_COLOUR_TOP 1
 #define INDEX_COLOUR_MIDDLE 2
 #define INDEX_COLOUR_BOTTOM 3
-#define TIME_COUNT TIME_NIGHT + 1
-static const struct WeatherIcons sWeatherIcons[WEATHER_COUNT][TIME_COUNT] =
+
+static const struct WeatherIcons sWeatherIcons[WEATHER_COUNT][TIMES_OF_DAY] =
 {
     [WEATHER_SUNNY_CLOUDS] =
     {
@@ -1195,7 +1195,7 @@ static void CalendarUI_CreateSprites_Weather(void)
     u32 weather = sCalendarUIState->weather;
     u32 time = sCalendarUIState->time;
 
-    if (time >= TIME_COUNT)
+    if (time >= TIMES_OF_DAY)
         time = TIME_DAY;
     
     switch (weather)
