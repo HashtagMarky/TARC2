@@ -72,6 +72,7 @@
 #include "dynamic_music.h"
 #include "fake_rtc.h"
 #include "ikigai_characters.h"
+#include "ui_samuel_case.h"
 
 #define FLAG_DEBUG_SOUND_OVERWORLD_PLAY TRUE
 
@@ -99,6 +100,7 @@ enum IkigaiDebugMenu
 
 enum IkigaiPlayerDebugSubmenu
 {
+    DEBUG_IKIGAI_PLAYER_GYM_TYPE,
     DEBUG_IKIGAI_PLAYER_BODY,
     DEBUG_IKIGAI_PLAYER_NAME,
     DEBUG_IKIGAI_PLAYER_NICKNAME,
@@ -338,6 +340,8 @@ enum DynamicMusicTracksDebugMenu
 #define DEBUG_MENU_WIDTH_EXTRA 10
 #define DEBUG_MENU_HEIGHT_EXTRA 4
 
+#define DEBUG_MENU_WIDTH_GYM_TYPE 12
+
 #define DEBUG_MENU_WIDTH_WEATHER 15
 #define DEBUG_MENU_HEIGHT_WEATHER 3
 
@@ -355,6 +359,7 @@ enum DynamicMusicTracksDebugMenu
 #define DEBUG_NUMBER_DIGITS_VARIABLE_VALUE 5
 #define DEBUG_NUMBER_DIGITS_ITEMS 4
 #define DEBUG_NUMBER_DIGITS_ITEM_QUANTITY 3
+#define DEBUG_NUMBER_DIGITS_POKEMON_TYPE 2
 
 #define DEBUG_NUMBER_ICON_X 210
 #define DEBUG_NUMBER_ICON_Y 50
@@ -458,6 +463,9 @@ static void DebugTask_HandleMenuInput_DynamicMusicInstruments(u8 taskId);
 static void DebugTask_HandleMenuInput_DynamicMusicIsolateTracksList(u8 taskId);
 static void DebugTask_HandleMenuInput_DynamicMusicIsolateTracksFuncs(u8 taskId);
 
+static void Debug_Display_IkigaiGymInfo(u32 species, u32 digit, u8 windowId);
+static void DebugAction_Ikigai_GymType(u8 taskId);
+static void DebugAction_Ikigai_GymType_SelectId(u8 taskId);
 static void DebugAction_Ikigai_OpenPokeSphere(u8 taskId);
 static void DebugAction_Ikigai_MeetAllCharacter(u8 taskId);
 static void DebugAction_Ikigai_ShowCalendar(u8 taskId);
@@ -630,6 +638,8 @@ static const u8 sDebugText_Dashes[] =        _("---");
 static const u8 sDebugText_Empty[] =         _("");
 static const u8 sDebugText_Continue[] =      _("Continue…{CLEAR_TO 110}{RIGHT_ARROW}");
 // Ikigai Menu
+static const u8 sDebugText_Ikigai_Gym_Type[] =               _("Gym Type: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 110}\n\n{STR_VAR_2}{CLEAR_TO 110}");
+static const u8 sDebugText_Ikigai_Gym_PokemonLevel[] =       _("Level:{CLEAR_TO 110}\n{STR_VAR_1}{CLEAR_TO 110}\n{CLEAR_TO 110}\n{STR_VAR_2}{CLEAR_TO 110}");
 static const u8 sDebugText_Ikigai_Season_ID[] =              _("Season ID: {STR_VAR_3}\n{STR_VAR_1}\n{STR_VAR_2}");
 // Util Menu
 static const u8 sDebugText_Util_WarpToMap_SelectMapGroup[] = _("Group: {STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n\n{STR_VAR_3}{CLEAR_TO 90}");
@@ -710,6 +720,7 @@ static const struct ListMenuItem sDebugMenu_Items_Ikigai[] =
 
 static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Player[] =
 {
+    [DEBUG_IKIGAI_PLAYER_GYM_TYPE]         = {COMPOUND_STRING("Gym Type…{CLEAR_TO 110}{RIGHT_ARROW}"),              DEBUG_IKIGAI_PLAYER_GYM_TYPE},
     [DEBUG_IKIGAI_PLAYER_BODY]             = {COMPOUND_STRING("Toggle Player Body"),                                DEBUG_IKIGAI_PLAYER_BODY},
     [DEBUG_IKIGAI_PLAYER_NAME]             = {COMPOUND_STRING("Player Name…{CLEAR_TO 110}{RIGHT_ARROW}"),           DEBUG_IKIGAI_PLAYER_NAME},
     [DEBUG_IKIGAI_PLAYER_NICKNAME]         = {COMPOUND_STRING("Player Nickname…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_IKIGAI_PLAYER_NICKNAME},
@@ -965,6 +976,7 @@ static void (*const sDebugMenu_Actions_Ikigai[])(u8) =
 
 static void (*const sDebugMenu_Actions_Ikigai_Player[])(u8) =
 {
+    [DEBUG_IKIGAI_PLAYER_GYM_TYPE]         = DebugAction_Ikigai_GymType,
     [DEBUG_IKIGAI_PLAYER_BODY]             = DebugAction_Util_Player_Gender,
     [DEBUG_IKIGAI_PLAYER_NAME]             = DebugAction_Util_Player_Name,
     [DEBUG_IKIGAI_PLAYER_NICKNAME]         = DebugAction_Util_Player_Nickname,
@@ -1166,6 +1178,17 @@ static const struct WindowTemplate sDebugMenuWindowTemplateExtra =
     .tilemapLeft = 30 - DEBUG_MENU_WIDTH_EXTRA - 1,
     .tilemapTop = 1,
     .width = DEBUG_MENU_WIDTH_EXTRA,
+    .height = 2 * DEBUG_MENU_HEIGHT_EXTRA,
+    .paletteNum = 15,
+    .baseBlock = 1,
+};
+
+static const struct WindowTemplate sDebugMenuWindowTemplateGymType =
+{
+    .bg = 0,
+    .tilemapLeft = 30 - DEBUG_MENU_WIDTH_GYM_TYPE - 1,
+    .tilemapTop = 1,
+    .width = DEBUG_MENU_WIDTH_GYM_TYPE,
     .height = 2 * DEBUG_MENU_HEIGHT_EXTRA,
     .paletteNum = 15,
     .baseBlock = 1,
@@ -3374,6 +3397,103 @@ static void ResetMonDataStruct(struct DebugMonData *sDebugMonData)
 #define tIsComplex  data[5]
 #define tSpriteId   data[6]
 #define tIterator   data[7]
+
+static void Debug_Display_IkigaiGymInfo(u32 type, u32 digit, u8 windowId)
+{
+    StringCopy(gStringVar2, gText_DigitIndicator[digit]);
+    u8 *end = StringCopy(gStringVar1, GetSpeciesName(gIkigaiStarters[type][gSaveBlock2Ptr->playerGender]));
+    WrapFontIdToFit(gStringVar1, end, DEBUG_MENU_FONT, WindowWidthPx(windowId));
+    StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
+    StringCopy(gStringVar3, gTypesInfo[type].name);
+    StringAppend(gStringVar3, COMPOUND_STRING("{CLEAR_TO 110}"));
+    StringExpandPlaceholders(gStringVar4, sDebugText_Ikigai_Gym_Type);
+    AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
+}
+
+static void DebugAction_Ikigai_GymType(u8 taskId)
+{
+    u8 windowId;
+
+    //Mon data struct
+    sDebugMonData = AllocZeroed(sizeof(struct DebugMonData));
+    ResetMonDataStruct(sDebugMonData);
+
+    //Window initialization
+    ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
+    RemoveWindow(gTasks[taskId].tWindowId);
+
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+    windowId = AddWindow(&sDebugMenuWindowTemplateGymType);
+    DrawStdWindowFrame(windowId, FALSE);
+
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+
+    // Display initial Pokémon
+    Debug_Display_IkigaiGymInfo(TYPE_NORMAL, 0, windowId);
+
+    //Set task data
+    gTasks[taskId].func = DebugAction_Ikigai_GymType_SelectId;
+    gTasks[taskId].tSubWindowId = windowId;
+    gTasks[taskId].tInput = TYPE_NORMAL;
+    gTasks[taskId].tDigit = 0;
+    gTasks[taskId].tIsComplex = FALSE;
+
+    FreeMonIconPalettes();
+    LoadMonIconPalette(gIkigaiStarters[gTasks[taskId].tInput][gSaveBlock2Ptr->playerGender]);
+    gTasks[taskId].tSpriteId = CreateMonIcon(gIkigaiStarters[gTasks[taskId].tInput][gSaveBlock2Ptr->playerGender], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0);
+    gSprites[gTasks[taskId].tSpriteId].oam.priority = 0;
+}
+
+static void DebugAction_Ikigai_GymType_SelectId(u8 taskId)
+{
+    if (JOY_NEW(DPAD_ANY))
+    {
+        PlaySE(SE_SELECT);
+        Debug_HandleInput_Numeric(taskId, TYPE_NORMAL, NUMBER_OF_MON_TYPES - 2, DEBUG_NUMBER_DIGITS_POKEMON_TYPE);
+        Debug_Display_IkigaiGymInfo(gTasks[taskId].tInput, gTasks[taskId].tDigit, gTasks[taskId].tSubWindowId);
+        FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].tSpriteId]);
+        FreeMonIconPalettes();
+        LoadMonIconPalette(gIkigaiStarters[gTasks[taskId].tInput][gSaveBlock2Ptr->playerGender]);
+        gTasks[taskId].tSpriteId = CreateMonIcon(gIkigaiStarters[gTasks[taskId].tInput][gSaveBlock2Ptr->playerGender], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0);
+        gSprites[gTasks[taskId].tSpriteId].oam.priority = 0;
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        gSaveBlock2Ptr->ikigaiGymType = gTasks[taskId].tInput;
+        VarSet(VAR_STARTER_MON, gIkigaiStarters[gTasks[taskId].tInput][gSaveBlock2Ptr->playerGender]);
+
+        if (gIkigaiStarters[gTasks[taskId].tInput][gSaveBlock2Ptr->playerGender] == SPECIES_NONE)
+        {
+            PlaySE(SE_BOO);
+            Free(sDebugMonData);
+            FreeMonIconPalettes();
+            FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].tSpriteId]);
+            DebugAction_DestroyExtraWindow(taskId);
+        }
+
+        sDebugMonData->species = gIkigaiStarters[gTasks[taskId].tInput][gSaveBlock2Ptr->playerGender];
+        gTasks[taskId].tInput = 1;
+        gTasks[taskId].tDigit = 0;
+
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
+        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 3);
+        StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
+        StringExpandPlaceholders(gStringVar4, sDebugText_Ikigai_Gym_PokemonLevel);
+        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
+
+        gTasks[taskId].func = DebugAction_Give_Pokemon_SelectLevel;
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        Free(sDebugMonData);
+        FreeMonIconPalettes();
+        FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].tSpriteId]);
+        DebugAction_DestroyExtraWindow(taskId);
+    }
+}
 
 static void Debug_Display_SpeciesInfo(u32 species, u32 digit, u8 windowId)
 {
