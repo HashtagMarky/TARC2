@@ -3,6 +3,12 @@
 
 #include "main.h"
 
+#define IKIGAI_STARTER(type)                 (gIkigaiStarters[TYPE_##name][MALE])
+#define IKIGAI_STARTER_M(type)               (gIkigaiStarters[TYPE_##name][MALE])
+#define IKIGAI_STARTER_F(type)               (gIkigaiStarters[TYPE_##name][FEMALE])
+
+extern const u16 gIkigaiStarters[NUMBER_OF_MON_TYPES][2];
+
 void Task_OpenSamuelCase(u8 taskId);
 void SamuelCase_Init(MainCallback callback);
 void SetIkigaiStarterPokedexFlags(void);

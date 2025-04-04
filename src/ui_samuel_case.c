@@ -170,49 +170,75 @@ static const u16 sRandomSpeciesList[18][3] = {
 //
 //  Making Changes Here Changes The Options In The UI. This is where you define your mons
 //
+
+const u16 gIkigaiStarters[NUMBER_OF_MON_TYPES][2] =
+{
+    [TYPE_NONE]       = {SPECIES_NONE,      SPECIES_NONE},      // No assigned starter
+    [TYPE_NORMAL]     = {SPECIES_LILLIPUP,  SPECIES_LILLIPUP},
+    [TYPE_FIGHTING]   = {SPECIES_MACHOP,    SPECIES_MACHOP},
+    [TYPE_FLYING]     = {SPECIES_ROOKIDEE,  SPECIES_ROOKIDEE},
+    [TYPE_POISON]     = {SPECIES_NIDORAN_M, SPECIES_NIDORAN_F},
+    [TYPE_GROUND]     = {SPECIES_SANDILE,   SPECIES_SANDILE},
+    [TYPE_ROCK]       = {SPECIES_ROLYCOLY,  SPECIES_ROLYCOLY},
+    [TYPE_BUG]        = {SPECIES_GRUBBIN,   SPECIES_GRUBBIN},
+    [TYPE_GHOST]      = {SPECIES_DUSKULL,   SPECIES_DUSKULL},
+    [TYPE_STEEL]      = {SPECIES_KLINK,     SPECIES_KLINK},
+    [TYPE_MYSTERY]    = {SPECIES_NONE,      SPECIES_NONE},      // No assigned starter
+    [TYPE_FIRE]       = {SPECIES_MAGBY,     SPECIES_MAGBY},
+    [TYPE_WATER]      = {SPECIES_TYMPOLE,   SPECIES_TYMPOLE},
+    [TYPE_GRASS]      = {SPECIES_SEEDOT,    SPECIES_SEEDOT},
+    [TYPE_ELECTRIC]   = {SPECIES_SHINX,     SPECIES_SHINX},
+    [TYPE_PSYCHIC]    = {SPECIES_HATENNA,   SPECIES_HATENNA},
+    [TYPE_ICE]        = {SPECIES_SWINUB,    SPECIES_SWINUB},
+    [TYPE_DRAGON]     = {SPECIES_BAGON,     SPECIES_BAGON},
+    [TYPE_DARK]       = {SPECIES_IMPIDIMP,  SPECIES_IMPIDIMP},
+    [TYPE_FAIRY]      = {SPECIES_FLABEBE,   SPECIES_FLABEBE},
+    [TYPE_STELLAR]    = {SPECIES_NONE,      SPECIES_NONE},      // No assigned starter
+};
+
 static const struct MonChoiceData sStarterChoices_Page1_Male[9] = 
 {
-    [BALL_TOP_FIRST]        = {SPECIES_LILLIPUP, 5},
-    [BALL_TOP_SECOND]       = {SPECIES_MACHOP, 5},
-    [BALL_MIDDLE_FIRST]     = {SPECIES_ROOKIDEE, 5},
+    [BALL_TOP_FIRST]        = {gIkigaiStarters[TYPE_NORMAL][MALE],      5},
+    [BALL_TOP_SECOND]       = {gIkigaiStarters[TYPE_FIGHTING][MALE],    5},
+    [BALL_MIDDLE_FIRST]     = {gIkigaiStarters[TYPE_FLYING][MALE],      5},
 
-    [BALL_TOP_THIRD]        = {SPECIES_NIDORAN_M, 5},
-    [BALL_TOP_FOURTH]       = {SPECIES_SANDILE, 5},
-    [BALL_MIDDLE_THIRD]     = {SPECIES_ROLYCOLY, 5},
+    [BALL_TOP_THIRD]        = {gIkigaiStarters[TYPE_POISON][MALE],      5},
+    [BALL_TOP_FOURTH]       = {gIkigaiStarters[TYPE_GROUND][MALE],      5},
+    [BALL_MIDDLE_THIRD]     = {gIkigaiStarters[TYPE_ROCK][MALE],        5},
 
-    [BALL_MIDDLE_SECOND]    = {SPECIES_GRUBBIN, 5},
-    [BALL_BOTTOM_FIRST]     = {SPECIES_DUSKULL, 5},
-    [BALL_BOTTOM_SECOND]    = {SPECIES_KLINK, 5},
+    [BALL_MIDDLE_SECOND]    = {gIkigaiStarters[TYPE_BUG][MALE],         5},
+    [BALL_BOTTOM_FIRST]     = {gIkigaiStarters[TYPE_GHOST][MALE],       5},
+    [BALL_BOTTOM_SECOND]    = {gIkigaiStarters[TYPE_STEEL][MALE],       5},
 };
 
 static const struct MonChoiceData sStarterChoices_Page1_Female[9] = 
 {
-    [BALL_TOP_FIRST]        = {SPECIES_LILLIPUP, 5},
-    [BALL_TOP_SECOND]       = {SPECIES_MACHOP, 5},
-    [BALL_MIDDLE_FIRST]     = {SPECIES_ROOKIDEE, 5},
+    [BALL_TOP_FIRST]        = {gIkigaiStarters[TYPE_NORMAL][FEMALE],    5},
+    [BALL_TOP_SECOND]       = {gIkigaiStarters[TYPE_FIGHTING][FEMALE],  5},
+    [BALL_MIDDLE_FIRST]     = {gIkigaiStarters[TYPE_FLYING][FEMALE],    5},
 
-    [BALL_TOP_THIRD]        = {SPECIES_NIDORAN_F, 5},
-    [BALL_TOP_FOURTH]       = {SPECIES_SANDILE, 5},
-    [BALL_MIDDLE_THIRD]     = {SPECIES_ROLYCOLY, 5},
+    [BALL_TOP_THIRD]        = {gIkigaiStarters[TYPE_POISON][FEMALE],    5},
+    [BALL_TOP_FOURTH]       = {gIkigaiStarters[TYPE_GROUND][FEMALE],    5},
+    [BALL_MIDDLE_THIRD]     = {gIkigaiStarters[TYPE_ROCK][FEMALE],      5},
 
-    [BALL_MIDDLE_SECOND]    = {SPECIES_GRUBBIN, 5},
-    [BALL_BOTTOM_FIRST]     = {SPECIES_DUSKULL, 5},
-    [BALL_BOTTOM_SECOND]    = {SPECIES_KLINK, 5},
+    [BALL_MIDDLE_SECOND]    = {gIkigaiStarters[TYPE_BUG][FEMALE],       5},
+    [BALL_BOTTOM_FIRST]     = {gIkigaiStarters[TYPE_GHOST][FEMALE],     5},
+    [BALL_BOTTOM_SECOND]    = {gIkigaiStarters[TYPE_STEEL][FEMALE],     5},
 };
 
 static const struct MonChoiceData sStarterChoices_Page2[9] = 
 {
-    [BALL_TOP_FIRST]        = {SPECIES_MAGBY, 5},
-    [BALL_TOP_SECOND]       = {SPECIES_TYMPOLE, 5},
-    [BALL_MIDDLE_FIRST]     = {SPECIES_SEEDOT, 5},
+    [BALL_TOP_FIRST]        = {gIkigaiStarters[TYPE_FIRE][MALE],        5},
+    [BALL_TOP_SECOND]       = {gIkigaiStarters[TYPE_WATER][MALE],       5},
+    [BALL_MIDDLE_FIRST]     = {gIkigaiStarters[TYPE_GRASS][MALE],       5},
 
-    [BALL_TOP_THIRD]        = {SPECIES_SHINX, 5},
-    [BALL_TOP_FOURTH]       = {SPECIES_HATENNA, 5},
-    [BALL_MIDDLE_THIRD]     = {SPECIES_SWINUB, 5},
+    [BALL_TOP_THIRD]        = {gIkigaiStarters[TYPE_ELECTRIC][MALE],    5},
+    [BALL_TOP_FOURTH]       = {gIkigaiStarters[TYPE_PSYCHIC][MALE],     5},
+    [BALL_MIDDLE_THIRD]     = {gIkigaiStarters[TYPE_ICE][MALE],         5},
 
-    [BALL_MIDDLE_SECOND]    = {SPECIES_BAGON, 5},
-    [BALL_BOTTOM_FIRST]     = {SPECIES_IMPIDIMP, 5},
-    [BALL_BOTTOM_SECOND]    = {SPECIES_FLABEBE, 5},
+    [BALL_MIDDLE_SECOND]    = {gIkigaiStarters[TYPE_DRAGON][MALE],      5},
+    [BALL_BOTTOM_FIRST]     = {gIkigaiStarters[TYPE_DARK][MALE],        5},
+    [BALL_BOTTOM_SECOND]    = {gIkigaiStarters[TYPE_FAIRY][MALE],       5},
 };
 
 //==========EWRAM==========//
