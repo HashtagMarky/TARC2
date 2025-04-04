@@ -46,6 +46,7 @@
 #include "constants/pokemon.h"
 #include "naming_screen.h"
 #include "tv.h"
+#include "ikigai_scrolling_background.h"
 
  /*
     9 Starter Selection Samuel Case
@@ -288,7 +289,6 @@ static const u16 sCasePalette[] = INCBIN_U16("graphics/ui_samuel_case/case_tiles
 static const u32 sTextBgTiles[]   = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles.4bpp.lz");
 static const u32 sTextBgTilemapLeft[] = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles_left.bin.lz");
 static const u32 sTextBgTilemapRight[] = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles_right.bin.lz");
-static const u16 sTextBgPalette[] = INCBIN_U16("graphics/ui_samuel_case/text_bg_tiles.gbapal");
 
 static const u32 sPokeballHand_Gfx[] = INCBIN_U32("graphics/ui_samuel_case/pokeball_hand.4bpp.lz");
 static const u16 sPokeballHand_Pal[] = INCBIN_U16("graphics/ui_samuel_case/pokeball_hand.gbapal");
@@ -774,7 +774,7 @@ static bool8 SamuelCase_InitBgs(void) // Init the bgs and bg tilemap buffers and
     ScheduleBgCopyTilemapToVram(2);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2);
-    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(1, 8));
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(10, 6));
     ShowBg(0);
     ShowBg(1);
     ShowBg(2);
@@ -803,7 +803,7 @@ static bool8 SamuelCaseLoadGraphics(void) // load tilesets, tilemaps, spriteshee
         LoadCompressedSpriteSheet(&sSpriteSheet_PokeballHand);
         LoadSpritePalette(&sSpritePal_PokeballHand);
         LoadPalette(sCasePalette, 32, 32);
-        LoadPalette(sTextBgPalette, 16, 16);
+        LoadPalette(IkigaiScrollingBgPal_Default, 16, 16);
         sSamuelCaseDataPtr->gfxLoadState++;
         break;
     default:
