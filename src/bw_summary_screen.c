@@ -2011,7 +2011,7 @@ static void InitBGs(void)
         else
             SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_BG3 | BLDCNT_TGT2_BG2 | BLDCNT_EFFECT_BLEND);
 
-        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(14, 6));
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 2));
     }
     ShowBg(3);
     ShowBg(2);
