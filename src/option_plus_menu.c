@@ -1552,7 +1552,7 @@ static void DrawChoices_Speedup(int selection, int y)
     bool8 active = TRUE;
 
     if (selection == 0)
-        DrawOptionMenuChoice(sText_Normal, 104, y, 0, active);
+        DrawOptionMenuChoice(sText_Normal, 104, y, 1, active);
     else
     {
         u8 textMultipler[] = _("x1 SPEED{0x77}{0x77}{0x77}{0x77}{0x77}");
@@ -1593,7 +1593,7 @@ static void DrawChoices_ClockMode(int selection, int y)
     else
         DrawOptionMenuChoice(COMPOUND_STRING("24"), 104, y, 1, active);
 
-    DrawOptionMenuChoice(COMPOUND_STRING("HOUR"), 119, y, 0, active);
+    DrawOptionMenuChoice(COMPOUND_STRING("HOUR"), 119, y, 1, active);
 }
 
 static void DrawChoices_AutoSave(int selection, int y)
