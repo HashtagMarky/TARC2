@@ -744,11 +744,11 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
     if (active)
     {
         color_red[0]    = TEXT_COLOR_TRANSPARENT;
-        color_red[1]    = TEXT_COLOR_OPTIONS_WHITE;
-        color_red[2]    = TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG;
+        color_red[1]    = TEXT_COLOR_OPTIONS_ORANGE_FG;
+        color_red[2]    = TEXT_COLOR_OPTIONS_GRAY_FG;
         color_gray[0]   = TEXT_COLOR_TRANSPARENT;
-        color_gray[1]   = TEXT_COLOR_OPTIONS_ORANGE_FG;
-        color_gray[2]   = TEXT_COLOR_OPTIONS_GRAY_FG;
+        color_gray[1]   = TEXT_COLOR_OPTIONS_WHITE;
+        color_gray[2]   = TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG;
     }
     else
     {
@@ -756,15 +756,15 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
         color_red[1]    = TEXT_COLOR_OPTIONS_ORANGE_FG;
         color_red[2]    = TEXT_COLOR_OPTIONS_GRAY_FG;
         color_gray[0]   = TEXT_COLOR_TRANSPARENT;
-        color_gray[1]   = TEXT_COLOR_OPTIONS_WHITE;
-        color_gray[2]   = TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG;
+        color_gray[1]   = TEXT_COLOR_OPTIONS_ORANGE_FG;
+        color_gray[2]   = TEXT_COLOR_OPTIONS_GRAY_FG;
     }
 
 
     if (choosen)
     {
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, x, y, 0, 0, color_gray, TEXT_SKIP_DRAW, text);
-        if (active)
+        if (!active)
         {
             LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_gray[1], sizeof(selectedTextColor));
             LoadPalette(&selectedShadowColor, OPTIONS_TEXT_OFFSET + color_gray[2], sizeof(selectedShadowColor));
@@ -773,7 +773,7 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
     else
     {
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, x, y, 0, 0, color_red, TEXT_SKIP_DRAW, text);
-        if (!active)
+        if (active)
         {
             LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_red[1], sizeof(selectedTextColor));
             LoadPalette(&selectedShadowColor, OPTIONS_TEXT_OFFSET + color_red[2], sizeof(selectedShadowColor));
