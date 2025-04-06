@@ -1141,7 +1141,7 @@ static void Task_OptionMenuProcessInput(u8 taskId)
     }
     else if (JOY_NEW(R_BUTTON))
     {
-        if (sOptions->submenu != MENU_BATTLE)
+        if (sOptions->submenu != MENU_COUNT - 1)
             sOptions->submenu++;
 
         DrawTopBarText();
