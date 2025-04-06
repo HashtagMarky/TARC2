@@ -667,7 +667,7 @@ static const u8 sText_TopBar_Battle[]           = _("BATTLE");
 static const u8 sText_TopBar_Battle_Left[]      = _("{L_BUTTON}OVERWORLD");
 static void DrawTopBarText(void)
 {
-    const u8 color[3] = { 0, TEXT_COLOR_WHITE, TEXT_COLOR_OPTIONS_GRAY_FG };
+    const u8 color[3] = { 0, TEXT_COLOR_WHITE, TEXT_COLOR_OPTIONS_ORANGE_FG };
 
     FillWindowPixelBuffer(WIN_TOPBAR, PIXEL_FILL(0));
     switch (sOptions->submenu)
@@ -716,21 +716,24 @@ static void DrawLeftSideOptionText(int selection, int y)
 {
     u8 color_yellow[3];
     u8 color_gray[3];
-    const u16 *selectedColorPal = ReturnMenuUIPalette();
-    u16 selectedTextColor = selectedColorPal[1];
+    const u16 *selectedColorMenuUIPal = ReturnMenuUIPalette();
+    u16 selectedTextColor = selectedColorMenuUIPal[1];
+    const u16 *selectedColorScrollingBGPal = ReturnScrollingBackgroundPalette();
+    u16 selectedShadowColor = selectedColorScrollingBGPal[1];
 
     color_yellow[0] = TEXT_COLOR_TRANSPARENT;
     color_yellow[1] = TEXT_COLOR_WHITE;
     color_yellow[2] = TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG;
     color_gray[0] = TEXT_COLOR_TRANSPARENT;
+    color_gray[2] = TEXT_COLOR_OPTIONS_RED_FG;
     color_gray[1] = TEXT_COLOR_OPTIONS_ORANGE_SHADOW;
-    color_gray[2] = TEXT_COLOR_OPTIONS_GRAY_FG;
 
     if (CheckConditions(selection))
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_yellow, TEXT_SKIP_DRAW, OptionTextRight(selection));
     else
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_gray, TEXT_SKIP_DRAW, OptionTextRight(selection));
         LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_gray[1], sizeof(selectedTextColor));
+        LoadPalette(&selectedShadowColor, OPTIONS_TEXT_OFFSET + color_gray[2], sizeof(selectedShadowColor));
 }
 
 static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen, bool8 active)
@@ -738,8 +741,8 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
     u8 color_red[3];
     u8 color_gray[3];
     const u16 *selectedColorPal = ReturnMenuUIPalette();
-    u16 selectedTextColor = selectedColorPal[1];
-    u16 selectedShadowColor = selectedColorPal[2];
+    u16 selectedTextColor = selectedColorPal[2];
+    u16 selectedShadowColor = selectedColorPal[1];
 
     if (active)
     {
