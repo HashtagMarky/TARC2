@@ -1,7 +1,7 @@
 #include "gba/gba.h"
 #include "gba/flash_internal.h"
 
-static const char AgbLibFlashVersion[] = "FLASH1M_V103";
+USED static const char AgbLibFlashVersion[] = "FLASH1M_V103";
 
 static const struct FlashSetupInfo * const sSetupInfos[] =
 {
@@ -52,6 +52,12 @@ u16 WaitForFlashWrite_Common(u8 phase, u8 *addr, u8 lastData)
 {
     u16 result = 0;
     u8 status;
+
+    #define REG_DEBUG_ENABLE ((vu16*) (0x4FFF780))
+    *REG_DEBUG_ENABLE = 0xC0DE;
+    u32 isMGBA = (*REG_DEBUG_ENABLE) == 0x1DEA;
+    if(isMGBA)
+        return result;
 
     StartFlashTimer(phase);
 

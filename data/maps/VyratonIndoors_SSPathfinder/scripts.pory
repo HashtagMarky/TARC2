@@ -5,6 +5,7 @@ const LOCALID_Captain = 1
 script VyratonIndoors_SSPathfinder_IkigaiIntroSetup
 {
     setvar(VAR_IKIGAI_INTRO_STATE, 2)
+    setflag(FLAG_DONT_TRANSITION_MUSIC)
     setdynamicwarp(MAP_VYRATON_OUTDOORS_HARBOUR, 15, 25)
 }
 
@@ -12,22 +13,23 @@ script VyratonIndoors_SSPathfinder_EventScript_MeetCaptain
 {
     call(VyratonIndoors_SSPathfinder_IkigaiIntroSetup)
     setvar(VAR_TEMP_0, 1)
-    turnplayer(DIR_NORTH)
+    playerface(DIR_NORTH)
     opendoor(4, 1)
     playse(SE_DOOR)
     waitdooranim
     applymoveplayer(VyratonIndoors_SSPathfinder_Movement_Player_NoExit, FALSE)
     applymove(LOCALID_Captain, Common_Movement_DoorEntrance)
+    emote(LOCALID_Captain, EMOTE_QUESTION, wait=FALSE)
     closedoor(4, 1)
     waitdooranim
     mnmbox(VyratonIndoors_SSPathfinder_Text_IntroduceCaptain, nameKnown=FALSE, localId=LOCALID_Captain)
     applymoveplayer(VyratonIndoors_SSPathfinder_Movement_Player_LeadIn, FALSE)
     applymove(LOCALID_Captain, VyratonIndoors_SSPathfinder_Movement_Captain_FollowIn)
-    mnmbox(VyratonIndoors_SSPathfinder_Text_WhatBringsYou, nameKnown=FALSE, waitbuttonpress=TRUE, remain=TRUE)
+    mnmbox(VyratonIndoors_SSPathfinder_Text_WhatBringsYou, nameKnown=FALSE, waitbuttonpress=FALSE, remain=TRUE)
     emote(LOCALID_Captain, EMOTE_QUESTION)
     call(VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue)
     emote(OBJ_EVENT_ID_PLAYER, EMOTE_TALK)
-    mnmbox(VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice, waitbuttonpress=TRUE, remain=TRUE)
+    mnmbox(VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice, waitbuttonpress=FALSE, remain=TRUE)
     emote(LOCALID_Captain, EMOTE_QUESTION)
     call(VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue)
     emote(OBJ_EVENT_ID_PLAYER, EMOTE_TALK)
@@ -50,32 +52,33 @@ script VyratonIndoors_SSPathfinder_EventScript_MeetCaptain
 }
 
 script VyratonIndoors_SSPathfinder_Text_WhatBringsYou_PlayerDialogue
-{
-    dynmultichoice(0, 0, TRUE, 2, 0, DYN_MULTICHOICE_CB_NONE,
+{ // Made redundant as all options with the same characteristic outputs the same value.
+    attitudemultipush(ATTITUDE_NEUTRAL,
         "I wanted a fresh start.",
         "I'm moving for a new challenge.")
-    //  "I'm going for business.") // Old Option
+    attitudechoice
     switch (var(VAR_RESULT))
     {
         case 0: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_FreshStart)
         case 1: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_NewChallenge)
         case 2: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_Business)
     }
+    bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_WhatBringsYou_WhateverItMayBe)
 }
 
 script VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_PlayerDialgue
 {
-    dynmultichoice(0, 0, TRUE, 2, 0, DYN_MULTICHOICE_CB_NONE,
-        "{COLOR BLUE}{FONT_GET_NARROW}I'll make the most of your advice!",
-        "{COLOR GREEN}{FONT_GET_NARROW}I need all the help I can get.",
-        "{COLOR RED}{FONT_GET_NARROW}I don't care, I'll handle myself.",
-        "{COLOR LIGHT_BLUE}{FONT_GET_NARROW}Sure, like that means anything…")
+    attitudechoice(
+        "I'll make the most of your advice!",
+        "I need all the help I can get.",
+        "I don't care, I'll handle myself.",
+        "Sure, like that means anything…")
     switch (var(VAR_RESULT))
     {
-        case 0: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Inspired)
-        case 1: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Humble)
-        case 2: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Dominant)
-        case 3: bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Cynical)
+        case ATTITUDE_INSPIRED:   bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Inspired)
+        case ATTITUDE_HUMBLE:     bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Humble)
+        case ATTITUDE_DOMINANT:   bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Dominant)
+        case ATTITUDE_CYNICAL:    bufferstring(STR_VAR_1, VyratonIndoors_SSPathfinder_Text_GranddaughtersAdvice_Cynical)
     }
 }
 

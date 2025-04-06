@@ -22,7 +22,7 @@ OverworldEncounters_EventScript_Encounter::
 # 22 "data//scripts/overworld_encounters.pory"
 	special GetOverworldMonSpecies
 # 23 "data//scripts/overworld_encounters.pory"
-	compare VAR_0x8008, EMOTE_ANGRY
+	compare VAR_0x8008, MUGSHOT_EMOTE_ANGRY
 	goto_if_ne OverworldEncounters_EventScript_Encounter_2
 OverworldEncounters_EventScript_Encounter_1:
 # 27 "data//scripts/overworld_encounters.pory"
@@ -30,7 +30,7 @@ OverworldEncounters_EventScript_Encounter_1:
 # 28 "data//scripts/overworld_encounters.pory"
 	playmoncry VAR_0x8004, CRY_MODE_ENCOUNTER
 # 29 "data//scripts/overworld_encounters.pory"
-	compare VAR_0x8008, EMOTE_SURPRISED
+	compare VAR_0x8008, MUGSHOT_EMOTE_SURPRISED
 	goto_if_ne OverworldEncounters_EventScript_Encounter_5
 # 35 "data//scripts/overworld_encounters.pory"
 	message OverworldEncounters_EventScript_Encounter_Text_1
@@ -73,7 +73,7 @@ OverworldEncounters_EventScript_Encounter_19:
 
 OverworldEncounters_EventScript_Encounter_2:
 # 25 "data//scripts/overworld_encounters.pory"
-	setvar VAR_0x8008, EMOTE_SURPRISED
+	setvar VAR_0x8008, MUGSHOT_EMOTE_SURPRISED
 	goto OverworldEncounters_EventScript_Encounter_1
 
 OverworldEncounters_EventScript_Encounter_5:
@@ -139,49 +139,51 @@ OverworldEncounters_EventScript_Fight::
 # 78 "data//scripts/overworld_encounters.pory"
 	dowildsafaribattle
 # 79 "data//scripts/overworld_encounters.pory"
-	specialvar VAR_RESULT, GetBattleOutcome
+	waitstate
 # 80 "data//scripts/overworld_encounters.pory"
+	specialvar VAR_RESULT, GetBattleOutcome
+# 81 "data//scripts/overworld_encounters.pory"
 	switch VAR_RESULT
-# 82 "data//scripts/overworld_encounters.pory"
-	case B_OUTCOME_WON, OverworldEncounters_EventScript_Fight_3
 # 83 "data//scripts/overworld_encounters.pory"
+	case B_OUTCOME_WON, OverworldEncounters_EventScript_Fight_3
+# 84 "data//scripts/overworld_encounters.pory"
 	case B_OUTCOME_DREW, OverworldEncounters_EventScript_Fight_3
-# 85 "data//scripts/overworld_encounters.pory"
-	case B_OUTCOME_MON_FLED, OverworldEncounters_EventScript_Fight_4
 # 86 "data//scripts/overworld_encounters.pory"
+	case B_OUTCOME_MON_FLED, OverworldEncounters_EventScript_Fight_4
+# 87 "data//scripts/overworld_encounters.pory"
 	case B_OUTCOME_MON_TELEPORTED, OverworldEncounters_EventScript_Fight_4
-# 88 "data//scripts/overworld_encounters.pory"
+# 89 "data//scripts/overworld_encounters.pory"
 	case B_OUTCOME_CAUGHT, OverworldEncounters_EventScript_Fight_5
-# 91 "data//scripts/overworld_encounters.pory"
-	call OverworldEncounters_EventScript_EncounterEscapeAttempt
 # 92 "data//scripts/overworld_encounters.pory"
+	call OverworldEncounters_EventScript_EncounterEscapeAttempt
+# 93 "data//scripts/overworld_encounters.pory"
 	goto OverworldEncounters_EventScript_EncounterEnd
 OverworldEncounters_EventScript_Fight_1:
-# 94 "data//scripts/overworld_encounters.pory"
+# 95 "data//scripts/overworld_encounters.pory"
 	goto OverworldEncounters_EventScript_EncounterRemove
 	end
 
 OverworldEncounters_EventScript_Fight_3:
-# 84 "data//scripts/overworld_encounters.pory"
+# 85 "data//scripts/overworld_encounters.pory"
 	playmoncry VAR_0x8004, CRY_MODE_FAINT
 	goto OverworldEncounters_EventScript_Fight_1
 
 OverworldEncounters_EventScript_Fight_4:
-# 87 "data//scripts/overworld_encounters.pory"
+# 88 "data//scripts/overworld_encounters.pory"
 	playmoncry VAR_0x8004, CRY_MODE_DOUBLES
 	goto OverworldEncounters_EventScript_Fight_1
 
 OverworldEncounters_EventScript_Fight_5:
-# 89 "data//scripts/overworld_encounters.pory"
+# 90 "data//scripts/overworld_encounters.pory"
 	playmoncry VAR_0x8004, CRY_MODE_NORMAL
 	goto OverworldEncounters_EventScript_Fight_1
 
 
 OverworldEncounters_EventScript_ThrowBall::
-# 100 "data//scripts/overworld_encounters.pory"
+# 101 "data//scripts/overworld_encounters.pory"
 	setvar VAR_0x8007, ITEM_POKE_BALL
 OverworldEncounters_EventScript_ThrowBall_2:
-# 101 "data//scripts/overworld_encounters.pory"
+# 102 "data//scripts/overworld_encounters.pory"
 	compare VAR_0x8007, ITEM_CHERISH_BALL
 	goto_if_le OverworldEncounters_EventScript_ThrowBall_3
 	checkitem ITEM_STRANGE_BALL
@@ -189,20 +191,20 @@ OverworldEncounters_EventScript_ThrowBall_2:
 	compare VAR_RESULT, TRUE
 	goto_if_eq OverworldEncounters_EventScript_ThrowBall_6
 OverworldEncounters_EventScript_ThrowBall_5:
-# 115 "data//scripts/overworld_encounters.pory"
-	message OverworldEncounters_EventScript_ThrowBall_Text_1
 # 116 "data//scripts/overworld_encounters.pory"
-	waitmessage
+	message OverworldEncounters_EventScript_ThrowBall_Text_1
 # 117 "data//scripts/overworld_encounters.pory"
-	dynmultistack 0, 0, FALSE, 3, TRUE, 0, DYN_MULTICHOICE_CB_SHOW_ITEM
+	waitmessage
 # 118 "data//scripts/overworld_encounters.pory"
+	dynmultistack 0, 0, FALSE, 3, TRUE, 0, DYN_MULTICHOICE_CB_SHOW_ITEM
+# 119 "data//scripts/overworld_encounters.pory"
 	compare VAR_RESULT, MULTI_B_PRESSED
 	goto_if_eq OverworldEncounters_EventScript_ThrowBall_12
-# 124 "data//scripts/overworld_encounters.pory"
-	copyvar VAR_0x8007, VAR_RESULT
 # 125 "data//scripts/overworld_encounters.pory"
-	removeitem VAR_0x8007, 1
+	copyvar VAR_0x8007, VAR_RESULT
 # 126 "data//scripts/overworld_encounters.pory"
+	removeitem VAR_0x8007, 1
+# 127 "data//scripts/overworld_encounters.pory"
 	goto OverworldEncounters_EventScript_CatchAttempt
 OverworldEncounters_EventScript_ThrowBall_11:
 	end
@@ -213,93 +215,93 @@ OverworldEncounters_EventScript_ThrowBall_3:
 	compare VAR_RESULT, TRUE
 	goto_if_eq OverworldEncounters_EventScript_ThrowBall_9
 OverworldEncounters_EventScript_ThrowBall_8:
-# 108 "data//scripts/overworld_encounters.pory"
+# 109 "data//scripts/overworld_encounters.pory"
 	addvar VAR_0x8007, 1
 	goto OverworldEncounters_EventScript_ThrowBall_2
 
 OverworldEncounters_EventScript_ThrowBall_6:
-# 112 "data//scripts/overworld_encounters.pory"
-	bufferitemname STR_VAR_1, ITEM_STRANGE_BALL
 # 113 "data//scripts/overworld_encounters.pory"
+	bufferitemname STR_VAR_1, ITEM_STRANGE_BALL
+# 114 "data//scripts/overworld_encounters.pory"
 	dynmultipush OverworldEncounters_EventScript_ThrowBall_Text_0, ITEM_STRANGE_BALL
 	goto OverworldEncounters_EventScript_ThrowBall_5
 
 OverworldEncounters_EventScript_ThrowBall_9:
-# 105 "data//scripts/overworld_encounters.pory"
-	bufferitemname STR_VAR_1, VAR_0x8007
 # 106 "data//scripts/overworld_encounters.pory"
+	bufferitemname STR_VAR_1, VAR_0x8007
+# 107 "data//scripts/overworld_encounters.pory"
 	dynmultipush OverworldEncounters_EventScript_ThrowBall_Text_0, VAR_0x8007
 	goto OverworldEncounters_EventScript_ThrowBall_8
 
 OverworldEncounters_EventScript_ThrowBall_12:
-# 120 "data//scripts/overworld_encounters.pory"
+# 121 "data//scripts/overworld_encounters.pory"
 	goto OverworldEncounters_EventScript_Encounter
 	goto OverworldEncounters_EventScript_ThrowBall_11
 
 
 OverworldEncounters_EventScript_Approach::
-# 133 "data//scripts/overworld_encounters.pory"
-	special EnterSafariMode
 # 134 "data//scripts/overworld_encounters.pory"
+	special EnterSafariMode
+# 135 "data//scripts/overworld_encounters.pory"
 	goto OverworldEncounters_EventScript_Fight
 	return
 
 
 OverworldEncounters_EventScript_CatchAttempt::
-# 139 "data//scripts/overworld_encounters.pory"
-	special GetOverworldSpeciesCatchRate
 # 140 "data//scripts/overworld_encounters.pory"
-	bufferspeciesname STR_VAR_1, VAR_0x8004
+	special GetOverworldSpeciesCatchRate
 # 141 "data//scripts/overworld_encounters.pory"
+	bufferspeciesname STR_VAR_1, VAR_0x8004
+# 142 "data//scripts/overworld_encounters.pory"
 	switch VAR_RESULT
-# 143 "data//scripts/overworld_encounters.pory"
+# 144 "data//scripts/overworld_encounters.pory"
 	case 3, OverworldEncounters_EventScript_CatchAttempt_3
-# 145 "data//scripts/overworld_encounters.pory"
+# 146 "data//scripts/overworld_encounters.pory"
 	case 1, OverworldEncounters_EventScript_CatchAttempt_4
-# 148 "data//scripts/overworld_encounters.pory"
-	message OverworldEncounters_EventScript_CatchAttempt_Text_2
 # 149 "data//scripts/overworld_encounters.pory"
-	waitmessage
+	message OverworldEncounters_EventScript_CatchAttempt_Text_2
 # 150 "data//scripts/overworld_encounters.pory"
-	waitbuttonpress
-# 151 "data//scripts/overworld_encounters.pory"
-	call OverworldEncounters_EventScript_EncounterEscapeAttempt
-# 152 "data//scripts/overworld_encounters.pory"
-	message OverworldEncounters_EventScript_CatchAttempt_Text_3
-# 153 "data//scripts/overworld_encounters.pory"
-	playmoncry VAR_0x8004, CRY_MODE_ENCOUNTER
-# 154 "data//scripts/overworld_encounters.pory"
 	waitmessage
-# 155 "data//scripts/overworld_encounters.pory"
+# 151 "data//scripts/overworld_encounters.pory"
 	waitbuttonpress
+# 152 "data//scripts/overworld_encounters.pory"
+	call OverworldEncounters_EventScript_EncounterEscapeAttempt
+# 153 "data//scripts/overworld_encounters.pory"
+	message OverworldEncounters_EventScript_CatchAttempt_Text_3
+# 154 "data//scripts/overworld_encounters.pory"
+	playmoncry VAR_0x8004, CRY_MODE_ENCOUNTER
+# 155 "data//scripts/overworld_encounters.pory"
+	waitmessage
 # 156 "data//scripts/overworld_encounters.pory"
+	waitbuttonpress
+# 157 "data//scripts/overworld_encounters.pory"
 	goto OverworldEncounters_EventScript_Fight
 OverworldEncounters_EventScript_CatchAttempt_1:
-# 158 "data//scripts/overworld_encounters.pory"
-	playfanfare MUS_OBTAIN_ITEM
 # 159 "data//scripts/overworld_encounters.pory"
-	waitfanfare
+	playfanfare MUS_OBTAIN_ITEM
 # 160 "data//scripts/overworld_encounters.pory"
-	waitmessage
+	waitfanfare
 # 161 "data//scripts/overworld_encounters.pory"
-	waitbuttonpress
+	waitmessage
 # 162 "data//scripts/overworld_encounters.pory"
-	closemessage
+	waitbuttonpress
 # 163 "data//scripts/overworld_encounters.pory"
-	givemon VAR_0x8004, VAR_OVERWORLD_MON_LEVEL, isShiny = VAR_0x8005
+	closemessage
 # 164 "data//scripts/overworld_encounters.pory"
-	playmoncry VAR_0x8004, CRY_MODE_NORMAL
+	givemon VAR_0x8004, VAR_OVERWORLD_MON_LEVEL, isShiny = VAR_0x8005
 # 165 "data//scripts/overworld_encounters.pory"
+	playmoncry VAR_0x8004, CRY_MODE_NORMAL
+# 166 "data//scripts/overworld_encounters.pory"
 	goto OverworldEncounters_EventScript_EncounterRemove
 	end
 
 OverworldEncounters_EventScript_CatchAttempt_3:
-# 144 "data//scripts/overworld_encounters.pory"
+# 145 "data//scripts/overworld_encounters.pory"
 	message OverworldEncounters_EventScript_CatchAttempt_Text_0
 	goto OverworldEncounters_EventScript_CatchAttempt_1
 
 OverworldEncounters_EventScript_CatchAttempt_4:
-# 146 "data//scripts/overworld_encounters.pory"
+# 147 "data//scripts/overworld_encounters.pory"
 	message OverworldEncounters_EventScript_CatchAttempt_Text_1
 	goto OverworldEncounters_EventScript_CatchAttempt_1
 
@@ -309,29 +311,29 @@ OverworldEncounters_EventScript_RunAway::
 # 0 "data//scripts/overworld_encounters.pory"
 	compare VAR_RESULT, BATTLE_RUN_SUCCESS
 	goto_if_eq OverworldEncounters_EventScript_RunAway_2
-# 181 "data//scripts/overworld_encounters.pory"
-	message OverworldEncounters_EventScript_RunAway_Text_1
 # 182 "data//scripts/overworld_encounters.pory"
-	waitmessage
+	message OverworldEncounters_EventScript_RunAway_Text_1
 # 183 "data//scripts/overworld_encounters.pory"
-	playmoncry VAR_0x8004, CRY_MODE_ENCOUNTER
+	waitmessage
 # 184 "data//scripts/overworld_encounters.pory"
-	waitbuttonpress
+	playmoncry VAR_0x8004, CRY_MODE_ENCOUNTER
 # 185 "data//scripts/overworld_encounters.pory"
+	waitbuttonpress
+# 186 "data//scripts/overworld_encounters.pory"
 	goto OverworldEncounters_EventScript_Fight
 OverworldEncounters_EventScript_RunAway_1:
 	end
 
 OverworldEncounters_EventScript_RunAway_2:
-# 173 "data//scripts/overworld_encounters.pory"
-	message OverworldEncounters_EventScript_RunAway_Text_0
 # 174 "data//scripts/overworld_encounters.pory"
-	waitmessage
+	message OverworldEncounters_EventScript_RunAway_Text_0
 # 175 "data//scripts/overworld_encounters.pory"
-	waitbuttonpress
+	waitmessage
 # 176 "data//scripts/overworld_encounters.pory"
-	call OverworldEncounters_EventScript_EncounterEscapeAttempt
+	waitbuttonpress
 # 177 "data//scripts/overworld_encounters.pory"
+	call OverworldEncounters_EventScript_EncounterEscapeAttempt
+# 178 "data//scripts/overworld_encounters.pory"
 	goto OverworldEncounters_EventScript_EncounterEnd
 	goto OverworldEncounters_EventScript_RunAway_1
 
@@ -345,95 +347,95 @@ OverworldEncounters_EventScript_EncounterEscapeAttempt_1:
 	return
 
 OverworldEncounters_EventScript_EncounterEscapeAttempt_2:
-# 194 "data//scripts/overworld_encounters.pory"
+# 195 "data//scripts/overworld_encounters.pory"
 	goto OverworldEncounters_EventScript_EncounterEscape
 	goto OverworldEncounters_EventScript_EncounterEscapeAttempt_1
 
 
 OverworldEncounters_EventScript_EncounterEscape::
-# 201 "data//scripts/overworld_encounters.pory"
-	closemessage
 # 202 "data//scripts/overworld_encounters.pory"
-	special GetOverworldMonSpecies
+	closemessage
 # 203 "data//scripts/overworld_encounters.pory"
-	playmoncry VAR_0x8004, CRY_MODE_DOUBLES
+	special GetOverworldMonSpecies
 # 204 "data//scripts/overworld_encounters.pory"
+	playmoncry VAR_0x8004, CRY_MODE_DOUBLES
+# 205 "data//scripts/overworld_encounters.pory"
 	goto OverworldEncounters_EventScript_EncounterRemove
 	end
 
 
 OverworldEncounters_EventScript_EncounterRemove::
-# 210 "data//scripts/overworld_encounters.pory"
-	closemessage
 # 211 "data//scripts/overworld_encounters.pory"
-	fadescreenswapbuffers FADE_TO_BLACK
+	closemessage
 # 212 "data//scripts/overworld_encounters.pory"
-	removeobject VAR_LAST_TALKED
+	fadescreenswapbuffers FADE_TO_BLACK
 # 213 "data//scripts/overworld_encounters.pory"
-	fadescreenswapbuffers FADE_FROM_BLACK
+	removeobject VAR_LAST_TALKED
 # 214 "data//scripts/overworld_encounters.pory"
-	waitfanfare
+	fadescreenswapbuffers FADE_FROM_BLACK
 # 215 "data//scripts/overworld_encounters.pory"
-	waitmoncry
+	waitfanfare
 # 216 "data//scripts/overworld_encounters.pory"
+	waitmoncry
+# 217 "data//scripts/overworld_encounters.pory"
 	goto OverworldEncounters_EventScript_EncounterEnd
 	end
 
 
 OverworldEncounters_EventScript_EncounterEnd::
-# 222 "data//scripts/overworld_encounters.pory"
-	closemessage
 # 223 "data//scripts/overworld_encounters.pory"
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceAwayPlayer
+	closemessage
 # 224 "data//scripts/overworld_encounters.pory"
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceAwayPlayer
+# 225 "data//scripts/overworld_encounters.pory"
 	waitmovement VAR_LAST_TALKED
 	specialvar VAR_RESULT, GetPlayerFacingDirection
 # 0 "data//scripts/overworld_encounters.pory"
 	compare VAR_RESULT, DIR_NORTH
 	goto_if_eq OverworldEncounters_EventScript_EncounterEnd_3
 OverworldEncounters_EventScript_EncounterEnd_1:
-# 234 "data//scripts/overworld_encounters.pory"
-	call EventScript_DisplayPokedexHeader
 # 235 "data//scripts/overworld_encounters.pory"
-	setvar VAR_0x8008, EMOTE_NORMAL
+	call EventScript_DisplayPokedexHeader
 # 236 "data//scripts/overworld_encounters.pory"
-	clearflag FLAG_SYS_OVERWORLD_ENCOUNTER_CAMERA
+	setvar VAR_0x8008, MUGSHOT_EMOTE_NORMAL
 # 237 "data//scripts/overworld_encounters.pory"
-	special ExitSafariMode
+	clearflag FLAG_SYS_OVERWORLD_ENCOUNTER_CAMERA
 # 238 "data//scripts/overworld_encounters.pory"
+	special ExitSafariMode
+# 239 "data//scripts/overworld_encounters.pory"
 	releaseall
 	end
 
 OverworldEncounters_EventScript_EncounterEnd_2:
-# 227 "data//scripts/overworld_encounters.pory"
-	special SpawnCameraObject
 # 228 "data//scripts/overworld_encounters.pory"
-	setflag FLAG_SAFE_FOLLOWER_MOVEMENT
+	special SpawnCameraObject
 # 229 "data//scripts/overworld_encounters.pory"
-	applymovement OBJ_EVENT_ID_CAMERA, OverworldEncounters_Movement_CameraReAdjust
+	setflag FLAG_SAFE_FOLLOWER_MOVEMENT
 # 230 "data//scripts/overworld_encounters.pory"
-	waitmovement OBJ_EVENT_ID_CAMERA
+	applymovement OBJ_EVENT_ID_CAMERA, OverworldEncounters_Movement_CameraReAdjust
 # 231 "data//scripts/overworld_encounters.pory"
-	clearflag FLAG_SAFE_FOLLOWER_MOVEMENT
+	waitmovement OBJ_EVENT_ID_CAMERA
 # 232 "data//scripts/overworld_encounters.pory"
+	clearflag FLAG_SAFE_FOLLOWER_MOVEMENT
+# 233 "data//scripts/overworld_encounters.pory"
 	special RemoveCameraObject
 	goto OverworldEncounters_EventScript_EncounterEnd_1
 
 OverworldEncounters_EventScript_EncounterEnd_3:
-# 225 "data//scripts/overworld_encounters.pory"
+# 226 "data//scripts/overworld_encounters.pory"
 	goto_if_set FLAG_SYS_OVERWORLD_ENCOUNTER_CAMERA, OverworldEncounters_EventScript_EncounterEnd_2
 	goto OverworldEncounters_EventScript_EncounterEnd_1
 
 
-# 242 "data//scripts/overworld_encounters.pory"
-OverworldEncounters_Movement_CameraAdjust:
 # 243 "data//scripts/overworld_encounters.pory"
+OverworldEncounters_Movement_CameraAdjust:
+# 244 "data//scripts/overworld_encounters.pory"
 	walk_up
 	step_end
 
-# 246 "data//scripts/overworld_encounters.pory"
-OverworldEncounters_Movement_CameraReAdjust:
 # 247 "data//scripts/overworld_encounters.pory"
+OverworldEncounters_Movement_CameraReAdjust:
+# 248 "data//scripts/overworld_encounters.pory"
 	walk_down
 	step_end
 
@@ -466,38 +468,38 @@ OverworldEncounters_EventScript_Encounter_Text_5:
 	.string "{FONT_GET_NARROW}RUN$"
 
 OverworldEncounters_EventScript_ThrowBall_Text_0:
-# 106 "data//scripts/overworld_encounters.pory"
+# 107 "data//scripts/overworld_encounters.pory"
 	.string "{FONT_GET_NARROW}{STR_VAR_1}$"
 
 OverworldEncounters_EventScript_ThrowBall_Text_1:
-# 115 "data//scripts/overworld_encounters.pory"
+# 116 "data//scripts/overworld_encounters.pory"
 	.string "What {FONT_GET_NARROWER}{POKE}BALL {FONT_NORMAL}will {PLAYER} use?$"
 
 OverworldEncounters_EventScript_CatchAttempt_Text_0:
-# 144 "data//scripts/overworld_encounters.pory"
+# 145 "data//scripts/overworld_encounters.pory"
 	.string "The wild {STR_VAR_1} was caught!\n"
 	.string "It was a critical capture!$"
 
 OverworldEncounters_EventScript_CatchAttempt_Text_1:
-# 146 "data//scripts/overworld_encounters.pory"
+# 147 "data//scripts/overworld_encounters.pory"
 	.string "The wild {STR_VAR_1} was caught!$"
 
 OverworldEncounters_EventScript_CatchAttempt_Text_2:
-# 148 "data//scripts/overworld_encounters.pory"
+# 149 "data//scripts/overworld_encounters.pory"
 	.string "The wild {STR_VAR_1} broke free!$"
 
 OverworldEncounters_EventScript_CatchAttempt_Text_3:
-# 152 "data//scripts/overworld_encounters.pory"
+# 153 "data//scripts/overworld_encounters.pory"
 	.string "The wild {STR_VAR_1} lunged\n"
 	.string "at {PLAYER}!$"
 
 OverworldEncounters_EventScript_RunAway_Text_0:
-# 173 "data//scripts/overworld_encounters.pory"
+# 174 "data//scripts/overworld_encounters.pory"
 	.string "{PLAYER} got away from the\n"
 	.string "wild {STR_VAR_1}!$"
 
 OverworldEncounters_EventScript_RunAway_Text_1:
-# 181 "data//scripts/overworld_encounters.pory"
+# 182 "data//scripts/overworld_encounters.pory"
 	.string "Couldn't get away from the\n"
 	.string "wild {STR_VAR_1}!\p"
 	.string "The wild {STR_VAR_1} lunged\n"

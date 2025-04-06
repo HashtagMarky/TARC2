@@ -208,11 +208,13 @@ struct Time
     /*0x04*/ s8 seconds;
 };
 
-#include "ikigai_characters.h"
+#include "constants/ikigai_characters.h"
 struct IkigaiCharacterData
 {
-    u8 friendship[CHARACTER_COUNT];
-    u8 conversed[ROUND_BITS_TO_BYTES(CHARACTER_COUNT)];
+    u8 playerNickname[PLAYER_NAME_LENGTH + 1];
+    s8 opinionKindness[CHARACTER_RESIDENT_COUNT];
+    s8 opinionStrength[CHARACTER_RESIDENT_COUNT];
+    u8 conversed[ROUND_BITS_TO_BYTES(CHARACTER_RESIDENT_COUNT)];
 };
 
 #include "constants/items.h"
@@ -232,7 +234,13 @@ struct SaveBlock3
     u8 itemFlags[ITEM_FLAGS_COUNT];
 #endif
     struct IkigaiCharacterData characters;
-};
+#if USE_DEXNAV_SEARCH_LEVELS == TRUE
+    u8 dexNavSearchLevels[NUM_SPECIES];
+#endif
+    u8 dexNavChain;
+    u8 numGymBattles:4;
+    u8 numBuildProjects:4;
+}; /* max size 1624 bytes */
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;
 
@@ -569,21 +577,25 @@ struct SaveBlock2
              u16 optionsSuppressNPCMugshots:1; // whether NPC Mugshots are disabled
              u16 optionsFollowerMugshots:2; // whether Follower Mugshots/Placeholders are disabled
              u16 optionsOverworldCatchSuccessMultiplyer:1; // whether or not a x1 or x2 multiplier is used in Overworld Capture Odds
+             u16 optionsBikeCamera:1; // whether or a dynamic camera is used on the bike
              u16 optionsBikeMusic:1; // whether or not bike music is played
              u16 optionsSurfMusic:1; // whether or not surf music is played
              u16 optionsWildBattleSpeed:2; // speed of wild battles
              u16 optionsTrainerBattleSpeed:2; // speed of trainer battles
+             u16 optionsOverworldSpeed:2; // speedup of the overworld
              u16 optionsDamageNumbers:2; // whether damage numbers are shown
              u16 optionsClockMode:1; // whether 12 or 24 hour clock is used.
+             u16 optionsNPCName:1; // whether NPC names are coloured by personality.
+             u16 optionsDisableAutoSave:1; // whether AutoSave is enabled.
              u16 regionMapZoom:1; // whether the map is zoomed in
-             //u16 padding1:8;
+             //u16 padding1:3;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 playerEmote:4;
              u8 paddingPE:4;
-             u8 dynPalSkinTone;
+    /*0x91*/ u8 dynPalSkinTone;
              u8 dynPalHairTone;
              u8 dynPalClothesTone;
-    /*0x91*/ u8 filler_90[0x4];
+    /*0x94*/ u8 filler_94[0x4];
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
     /*0xA8*/ u32 gcnLinkFlags; // Read by Pokémon Colosseum/XD
@@ -720,8 +732,8 @@ struct MauvilleManBard
 {
     /*0x00*/ u8 id;
     /*0x01*/ //u8 padding1;
-    /*0x02*/ u16 songLyrics[BARD_SONG_LENGTH];
-    /*0x0E*/ u16 temporaryLyrics[BARD_SONG_LENGTH];
+    /*0x02*/ u16 songLyrics[NUM_BARD_SONG_WORDS];
+    /*0x0E*/ u16 newSongLyrics[NUM_BARD_SONG_WORDS];
     /*0x1A*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x22*/ u8 filler_2DB6[0x3];
     /*0x25*/ u8 playerTrainerId[TRAINER_ID_LENGTH];
@@ -854,8 +866,7 @@ struct DayCare
 {
     struct DaycareMon mons[DAYCARE_MON_COUNT];
     u32 offspringPersonality;
-    u8 stepCounter;
-    //u8 padding[3];
+    u32 stepCounter;
 };
 
 struct LilycoveLadyQuiz
@@ -1169,5 +1180,9 @@ struct MapPosition
     s16 y;
     s8 elevation;
 };
+
+#if T_SHOULD_RUN_MOVE_ANIM
+extern bool32 gLoadFail;
+#endif // T_SHOULD_RUN_MOVE_ANIM
 
 #endif // GUARD_GLOBAL_H

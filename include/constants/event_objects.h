@@ -248,12 +248,28 @@
 #define OBJ_EVENT_GFX_SAMUEL                     242
 #define OBJ_EVENT_GFX_LAUREN                     243
 #define OBJ_EVENT_GFX_THOMAS                     244
-#define OBJ_EVENT_GFX_CAPTAIN                    245
+#define OBJ_EVENT_GFX_HANNAH                     245
+#define OBJ_EVENT_GFX_KATIE                      246
+#define OBJ_EVENT_GFX_LOUIS                      247
+#define OBJ_EVENT_GFX_GEORGIA                    248
+#define OBJ_EVENT_GFX_CAPTAIN                    249
+#define OBJ_EVENT_GFX_STEVEN_GEN4                250
+#define OBJ_EVENT_GFX_CYNTHIA                    251
+#define OBJ_EVENT_GFX_N                          252
+#define OBJ_EVENT_GFX_ACCORDIONIST               253
+#define OBJ_EVENT_GFX_KEYTARIST                  254
+#define OBJ_EVENT_GFX_ERHUIST                    255
+#define OBJ_EVENT_GFX_GUITARIST                  256
+#define OBJ_EVENT_GFX_WHISTLER                   257
+#define OBJ_EVENT_GFX_FLUTIST                    258
+#define OBJ_EVENT_GFX_DIEGO                      259
+#define OBJ_EVENT_GFX_ASH_KETCHUM                260
+#define OBJ_EVENT_GFX_JOY                        261
 
 // NOTE: The maximum amount of object events has been expanded from 255 to 65535.
 // Since dynamic graphics ids still require at least 16 free values, the actual limit
 // is 65519, but even considering follower Pokémon, this should be more than enough :)
-#define NUM_OBJ_EVENT_GFX                        246
+#define NUM_OBJ_EVENT_GFX                        262
 
 
 // These are dynamic object gfx ids.
@@ -277,19 +293,23 @@
 #define OBJ_EVENT_GFX_VAR_E  (OBJ_EVENT_GFX_VARS + 0xE)
 #define OBJ_EVENT_GFX_VAR_F  (OBJ_EVENT_GFX_VARS + 0xF)
 
-#define OBJ_EVENT_GFX_MON_BASE  0x200 // 512
-#define OBJ_EVENT_GFX_SPECIES_BITS 12 // This will need to be updated when NUM_SPECIES is > ~3.5k
-#define OBJ_EVENT_GFX_SPECIES_MASK ((1 << OBJ_EVENT_GFX_SPECIES_BITS) - 1)
+#define OBJ_EVENT_MON               (1u << 14)
+#define OBJ_EVENT_MON_SHINY         (1u << 13)
+#define OBJ_EVENT_MON_FEMALE        (1u << 12)
+#define OBJ_EVENT_MON_SPECIES_MASK  (~(7u << 12))
 
 // Used to call a specific species' follower graphics. Useful for static encounters.
-#define OBJ_EVENT_GFX_SPECIES(name)       (SPECIES_##name + OBJ_EVENT_GFX_MON_BASE)
-#define OBJ_EVENT_GFX_SPECIES_SHINY(name) (SPECIES_##name + OBJ_EVENT_GFX_MON_BASE + SPECIES_SHINY_TAG)
+#define OBJ_EVENT_GFX_SPECIES(name)                 (SPECIES_##name + OBJ_EVENT_MON)
+#define OBJ_EVENT_GFX_SPECIES_SHINY(name)           (SPECIES_##name + OBJ_EVENT_MON + OBJ_EVENT_MON_SHINY)
+#define OBJ_EVENT_GFX_SPECIES_FEMALE(name)          (SPECIES_##name + OBJ_EVENT_MON + OBJ_EVENT_MON_FEMALE)
+#define OBJ_EVENT_GFX_SPECIES_SHINY_FEMALE(name)    (SPECIES_##name + OBJ_EVENT_MON + OBJ_EVENT_MON_SHINY + OBJ_EVENT_MON_FEMALE)
 
-#define OW_SPECIES(x) (((x)->graphicsId & OBJ_EVENT_GFX_SPECIES_MASK) - OBJ_EVENT_GFX_MON_BASE)
-#define OW_FORM(x) ((x)->graphicsId >> OBJ_EVENT_GFX_SPECIES_BITS)
+#define OW_SPECIES(x) ((x)->graphicsId & OBJ_EVENT_MON_SPECIES_MASK)
+#define OW_SHINY(x) ((x)->graphicsId & OBJ_EVENT_MON_SHINY)
+#define OW_FEMALE(x) ((x)->graphicsId & OBJ_EVENT_MON_FEMALE)
 
 // Whether Object Event is an OW pokemon
-#define IS_OW_MON_OBJ(obj) ((obj)->graphicsId >= OBJ_EVENT_GFX_MON_BASE)
+#define IS_OW_MON_OBJ(obj) ((obj)->graphicsId & OBJ_EVENT_MON)
 
 #define SHADOW_SIZE_S       0
 #define SHADOW_SIZE_M       1
@@ -432,6 +452,22 @@
 #define OBJ_EVENT_PAL_TAG_SAMUEL_BRIEFACSE        0x116D
 #define OBJ_EVENT_PAL_TAG_THOMAS                  0x116E
 #define OBJ_EVENT_PAL_TAG_CAPTAIN                 0x116F
+#define OBJ_EVENT_PAL_TAG_N                       0x1170
+#define OBJ_EVENT_PAL_TAG_ACCORDIONIST            0x1171
+#define OBJ_EVENT_PAL_TAG_KEYTARIST               0x1172
+#define OBJ_EVENT_PAL_TAG_ERHUIST                 0x1173
+#define OBJ_EVENT_PAL_TAG_GUITARIST               0x1174
+#define OBJ_EVENT_PAL_TAG_WHISTLER                0x1175
+#define OBJ_EVENT_PAL_TAG_FLUTIST                 0x1176
+#define OBJ_EVENT_PAL_TAG_CYNTHIA                 0x1177
+#define OBJ_EVENT_PAL_TAG_ASH_KETCHUM             0x1178
+#define OBJ_EVENT_PAL_TAG_STEVEN_GEN4             0x1179
+#define OBJ_EVENT_PAL_TAG_HANNAH                  0x117A
+#define OBJ_EVENT_PAL_TAG_KATIE                   0x117B
+#define OBJ_EVENT_PAL_TAG_LOUIS                   0x117C
+#define OBJ_EVENT_PAL_TAG_GEORGIA                 0x117D
+#define OBJ_EVENT_PAL_TAG_DIEGO                   0x117E
+#define OBJ_EVENT_PAL_TAG_JOY                     0x117F
 
 // Used as a placeholder follower graphic
 #define OBJ_EVENT_PAL_TAG_SUBSTITUTE              0x7611

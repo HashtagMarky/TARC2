@@ -2,6 +2,7 @@
 #define GUARD_TYPE_ICONS_H
 
 void LoadTypeIcons(u32);
+u8 CreateBattlenMoveTypeIcon(u8 x, u8 y, u8 subpriority, u8 type);
 
 #define TYPE_ICON_TAG 0x2720
 #define TYPE_ICON_TAG_2 0x2721

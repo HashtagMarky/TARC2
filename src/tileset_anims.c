@@ -924,13 +924,22 @@ static void TilesetAnim_EverGrande(u16 timer)
         QueueAnimTiles_EverGrande_Flowers(timer / 8, 7);
 }
 
+#include "constants/layouts.h"
 static void TilesetAnim_Pacifidlog(u16 timer)
 {
     if (timer % 16 == 0)
         QueueAnimTiles_Pacifidlog_LogBridges(timer / 16);
-    if (timer % 6 == 1)
-    //  QueueAnimTiles_Pacifidlog_WaterCurrents(timer / 16);
-        QueueAnimTiles_Pacifidlog_WaterCurrents_IncreasedSpeed(timer / 6);
+    if (gMapHeader.mapLayoutId == LAYOUT_VYRATON_OUTDOORS_OCEAN_EAST
+    || gMapHeader.mapLayoutId == LAYOUT_VYRATON_OUTDOORS_OCEAN_WEST)
+    {
+        if (timer % 6 == 1)
+            QueueAnimTiles_Pacifidlog_WaterCurrents_IncreasedSpeed(timer / 6);
+    }
+    else
+    {
+        if (timer % 16 == 1)
+            QueueAnimTiles_Pacifidlog_WaterCurrents(timer / 16);
+    }
 }
 
 static void TilesetAnim_Sootopolis(u16 timer)

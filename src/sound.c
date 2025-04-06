@@ -8,7 +8,8 @@
 #include "constants/cries.h"
 #include "constants/songs.h"
 #include "task.h"
-#include <math.h>
+// #include <math.h>
+#include "test_runner.h"
 
 struct Fanfare
 {
@@ -18,6 +19,10 @@ struct Fanfare
 
 EWRAM_DATA struct MusicPlayerInfo* gMPlay_PokemonCry = NULL;
 EWRAM_DATA u8 gPokemonCryBGMDuckingCounter = 0;
+
+// Kurausukun's Movement Dynamic Music
+#include "dynamic_music.h"
+EWRAM_DATA s16 gMapMusicVolume = 0;
 
 static u16 sCurrentMapMusic;
 static u16 sNextMapMusic;
@@ -298,6 +303,13 @@ bool8 IsFanfareTaskInactive(void)
 
 static void Task_Fanfare(u8 taskId)
 {
+    if (gTestRunnerHeadless)
+    {
+        DestroyTask(taskId);
+        sFanfareCounter = 0;
+        return;
+    }
+
     if (sFanfareCounter)
     {
         sFanfareCounter--;
@@ -349,7 +361,12 @@ void FadeInBGM(u8 speed)
 
 void FadeOutBGM(u8 speed)
 {
-    m4aMPlayFadeOut(&gMPlayInfo_BGM, speed);
+    // Kurausukun's Movement Dynamic Music
+    // m4aMPlayFadeOut(&gMPlayInfo_BGM, speed);
+    if (FindTaskIdByFunc(Task_UpdateMovementDynamicMusic) != TASK_NONE)
+        m4aMPlayFadeOutFromVol(&gMPlayInfo_BGM, speed, gMapMusicVolume);
+    else
+        m4aMPlayFadeOut(&gMPlayInfo_BGM, speed);
 }
 
 bool8 IsBGMStopped(void)
@@ -621,6 +638,15 @@ void PlayBGM(u16 songNum)
     m4aSongNumStart(songNum);
 }
 
+void PlayBGMOrContinue(u16 songNum)
+{
+    if (gDisableMusic)
+        songNum = 0;
+    if (songNum == MUS_NONE)
+        songNum = 0;
+    m4aSongNumStartOrContinue(songNum);
+}
+
 void PlaySE(u16 songNum)
 {
     m4aSongNumStart(songNum);
@@ -684,6 +710,8 @@ bool8 IsSpecialSEPlaying(void)
 
 void PlayVoiceLine(u16 voice, u8 voiceLine, u8 voiceVolume, u16 bgVolume)
 {
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+    
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, bgVolume);
 
     SetPokemonCryVolume(voiceVolume);

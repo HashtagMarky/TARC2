@@ -7,6 +7,7 @@
 #include "bike.h"
 #include "cable_club.h"
 #include "clock.h"
+#include "dexnav.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -74,6 +75,10 @@
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
 
+#include "speedup.h"
+#include "constants/field_effects.h"
+STATIC_ASSERT((B_FLAG_FOLLOWERS_DISABLED == 0 || OW_FOLLOWERS_ENABLED), FollowersFlagAssignedWithoutEnablingThem);
+
 struct CableClubPlayer
 {
     u8 playerId;
@@ -107,6 +112,7 @@ static void CB2_ReturnToFieldLocal(void);
 static void CB2_ReturnToFieldLink(void);
 static void CB2_LoadMapOnReturnToFieldCableClub(void);
 static void CB2_LoadMap2(void);
+static void CB2_LoadMapAndSave2(void);
 static void VBlankCB_Field(void);
 static void SpriteCB_LinkPlayer(struct Sprite *);
 static void ChooseAmbientCrySpecies(void);
@@ -177,6 +183,8 @@ static void TransitionMapMusic(void);
 static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *, u16, u8);
 static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *, u8, u16, u8);
 static u16 GetCenterScreenMetatileBehavior(void);
+static void TryUpdateOverworldDayNightMusic(void);
+static void Task_ShowSaveIconOnLoad(u8 taskId);
 
 static void *sUnusedOverworldCallback;
 static u8 sPlayerLinkStates[MAX_LINK_PLAYERS];
@@ -840,6 +848,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     LoadObjEventTemplatesFromHeader();
     TrySetMapSaveWarpStatus();
     ClearTempFieldEventData();
+    ResetDexNavSearch();
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
 #if FREE_MATCH_CALL == FALSE
@@ -904,6 +913,7 @@ static void LoadMapFromWarp(bool32 a1)
     CheckLeftFriendsSecretBase();
     TrySetMapSaveWarpStatus();
     ClearTempFieldEventData();
+    ResetDexNavSearch();
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
 #if FREE_MATCH_CALL == FALSE
@@ -1218,6 +1228,9 @@ void Overworld_ResetMapMusic(void)
 void Overworld_PlaySpecialMapMusic(void)
 {
     u16 music = GetCurrLocationDefaultMusic();
+
+    if (FlagGet(FLAG_DONT_TRANSITION_MUSIC))
+        return;
 
     if (music != MUS_ABNORMAL_WEATHER && music != MUS_NONE)
     {
@@ -1548,10 +1561,17 @@ static void OverworldBasic(void)
     AnimateSprites();
     CameraUpdate();
     UpdateCameraPanning();
+    for (u8 loops = 0; loops < Speedup_AdditionalIterations(gSaveBlock2Ptr->optionsOverworldSpeed, TRUE); loops++)
+    {
+        AnimateSprites();
+        CameraUpdate();
+        UpdateCameraPanning();
+    }
     BuildOamBuffer();
     UpdatePaletteFade();
     UpdateTilesetAnimations();
     DoScheduledBgTilemapCopiesToVram();
+    TryUpdateOverworldDayNightMusic();
 }
 
 // This CB2 is used when starting
@@ -1566,6 +1586,7 @@ void CB2_Overworld(void)
     if (fading)
         SetVBlankCallback(NULL);
     OverworldBasic();
+
     if (fading)
     {
         SetFieldVBlankCallback();
@@ -1664,6 +1685,16 @@ void CB2_LoadMap(void)
     gMain.savedCallback = CB2_LoadMap2;
 }
 
+void CB2_LoadMapAndSave(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
+    SetMainCallback1(NULL);
+    SetMainCallback2(CB2_DoChangeMap);
+    gMain.savedCallback = CB2_LoadMapAndSave2;
+}
+
 static void CB2_LoadMap2(void)
 {
     DoMapLoadLoop(&gMain.state);
@@ -1671,6 +1702,34 @@ static void CB2_LoadMap2(void)
     SetMainCallback1(CB1_Overworld);
     SetMainCallback2(CB2_Overworld);
 }
+
+static void CB2_LoadMapAndSave2(void)
+{
+    DoMapLoadLoop(&gMain.state);
+    SetFieldVBlankCallback();
+    SetMainCallback1(CB1_Overworld);
+    SetMainCallback2(CB2_Overworld);
+    AutoSaveDoSave();
+    FieldEffectStart(FLDEFF_SAVING);
+    CreateTask(Task_ShowSaveIconOnLoad, 0);
+}
+
+#define tSaveTimer data[0]
+#define SaveTime 60
+static void Task_ShowSaveIconOnLoad(u8 taskId)
+{
+    if (gTasks[taskId].tSaveTimer < SaveTime)
+    {
+        gTasks[taskId].tSaveTimer++;
+        return;
+    }
+
+    FieldEffectActiveListRemove(FLDEFF_SAVING);
+    FlagSet(FLAG_AUTO_SAVING);
+    DestroyTask(taskId);
+}
+#undef tSaveTimer
+#undef SaveTime
 
 void CB2_ReturnToFieldContestHall(void)
 {
@@ -3394,6 +3453,9 @@ static u8 ReformatItemDescription(u16 item, u8 *dest)
 void ScriptShowItemDescription(struct ScriptContext *ctx)
 {
     u8 headerType = ScriptReadByte(ctx);
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+
     struct WindowTemplate template;
     u16 item = gSpecialVar_0x8006;
     u8 textY;
@@ -3433,6 +3495,8 @@ void ScriptShowItemDescription(struct ScriptContext *ctx)
 
 void ScriptHideItemDescription(struct ScriptContext *ctx)
 {
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
+
     DestroyItemIconSprite();
 
     if (!GetSetItemObtained(gSpecialVar_0x8006, FLAG_GET_ITEM_OBTAINED))
@@ -3578,4 +3642,41 @@ void HideItemDescription(u16 item)
 }
 #endif // OW_SHOW_ITEM_DESCRIPTIONS
 
+static void TryUpdateOverworldDayNightMusic(void)
+{
+    u16 music = GetCurrLocationDefaultMusic();
+    const struct MapHeader *mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+
+    if ((GetCurrentMapMusic() != mapHeader->music
+        && GetCurrentMapMusic() != mapHeader->musicNight)
+        || GetCurrentMapMusic() == MUS_DUMMY
+        || FlagGet(FLAG_DONT_TRANSITION_MUSIC) == TRUE
+        || gPaletteFade.active)
+        return;
+    
+
+    // Only checks for music change on the hour of time
+    // of day, to reduce number of checks. If gPaletteFade
+    // is active during this period it may be skipped.
+
+    // RtcCalcLocalTime();
+    // if (music != GetCurrentMapMusic()
+    //     && (gLocalTime.hours == MORNING_HOUR_BEGIN
+    //     || gLocalTime.hours == DAY_HOUR_BEGIN
+    //     || gLocalTime.hours == EVENING_HOUR_BEGIN
+    //     || gLocalTime.hours == NIGHT_HOUR_BEGIN))
+    //     && gLocalTime.seconds == 0
+    //     && gLocalTime.minutes == 0
+    // {
+    //     FadeOutAndPlayNewMapMusic(music, 16);
+    // }
+
+
+    // Checks everytime function is called.
+
+    if (GetCurrentMapMusic() != music)
+    {
+        FadeOutAndPlayNewMapMusic(music, 16);
+    }
+}
 

@@ -118,6 +118,8 @@ void DoSSAnneDepartureCutscene(void)
     PlaySE(SE_RG_SS_ANNE_HORN);
     taskId = CreateTask(Task_SSAnneInit, 8);
     gTasks[taskId].data[0] = 50;
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 }
 
 static void Task_SSAnneInit(u8 taskId)

@@ -15,6 +15,7 @@
 #include "constants/species.h"
 
 #include "ikigai_characters.h"
+#include "text.h"
 
 static EWRAM_DATA u8 sFieldMessageBoxMode = 0;
 EWRAM_DATA u8 gWalkAwayFromSignpostTimer = 0;
@@ -47,13 +48,11 @@ static void Task_DrawFieldMessage(u8 taskId)
                 LoadMessageBoxAndBorderGfx();
             task->tState++;
             break;
-           task->tState++;
-           break;
         case 1:
             DrawDialogueFrame(0, TRUE);
             if (gSpeakerName != NULL && !FlagGet(FLAG_SUPPRESS_SPEAKER_NAME))
             {
-                DrawNamePlate(1, FALSE);
+                DrawNamePlate(WIN_NAME_PLATE, FALSE);
             }
             task->tState++;
            break;
@@ -138,8 +137,30 @@ bool8 ShowFieldMessageFromBuffer(void)
 
 extern void FillDialogFramePlate();
 extern int GetDialogFramePlateWidth();
+enum FontColor
+{
+    FONT_WHITE,
+    FONT_GRAY,
+    FONT_RED,
+    FONT_GREEN,
+    FONT_BLUE,
+    FONT_LIGHT_BLUE,
+};
+static const u8 sFontColorTable[][3] =
+{
+    [FONT_WHITE]        = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY},
+    [FONT_GRAY]         = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY},
+    [FONT_RED]          = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED,        TEXT_COLOR_LIGHT_GRAY},
+    [FONT_GREEN]        = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_GREEN,      TEXT_COLOR_LIGHT_GRAY},
+    [FONT_BLUE]         = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_BLUE,       TEXT_COLOR_LIGHT_GRAY},
+    [FONT_LIGHT_BLUE]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_BLUE, TEXT_COLOR_LIGHT_GRAY},
+};
 static void ExpandStringAndStartDrawFieldMessage(const u8 *str, bool32 allowSkippingDelayWithButtonPress)
 {
+    u8 fgColor = IkigaiCharacter_ReturnMessageBoxPersonalityPalette(
+        ReturnIkigaiCharacter_SelectedObject()
+    );
+
     if (gSpeakerName != NULL && !FlagGet(FLAG_SUPPRESS_SPEAKER_NAME))
     {
         int strLen = GetStringWidth(FONT_SMALL, gSpeakerName, -1);
@@ -156,9 +177,9 @@ static void ExpandStringAndStartDrawFieldMessage(const u8 *str, bool32 allowSkip
             StringExpandPlaceholders(&gNamePlateBuffer[0], gSpeakerName);
         }
         FillDialogFramePlate();
-        AddTextPrinterParameterized2(1, FONT_SMALL, gNamePlateBuffer, 0, NULL, 2, 0, 3);
-        PutWindowTilemap(1);
-        CopyWindowToVram(1, COPYWIN_FULL);
+        AddTextPrinterParameterizedNamePlate(WIN_NAME_PLATE, FONT_SMALL, gNamePlateBuffer, 0, NULL, fgColor, 0, 3);
+        PutWindowTilemap(WIN_NAME_PLATE);
+        CopyWindowToVram(WIN_NAME_PLATE, COPYWIN_FULL);
     }
     StringExpandPlaceholders(gStringVar4, str);
     AddTextPrinterForMessage(allowSkippingDelayWithButtonPress);
@@ -237,6 +258,8 @@ bool8 ScrCmd_setspeaker(struct ScriptContext *ctx)
     {
         SetSpeakerName(name);
     }
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
     
     return FALSE;
 }
@@ -248,7 +271,7 @@ void SetSpeakerName(const u8* name)
 
 void SetSpeakerAuto(u16 graphicsId)
 {
-    u8 character = ReturnCharacterFromObjectGraphicsId(graphicsId);
+    u8 character = ReturnIkigaiCharacter_ObjectEventGraphicsId(graphicsId);
 
     if (graphicsId > OBJ_EVENT_GFX_SPECIES(NONE) && graphicsId < OBJ_EVENT_GFX_SPECIES(EGG))
     {
@@ -268,6 +291,11 @@ void ReprintSpeakerName(void)
 {
     if (gSpeakerName != NULL)
     {
+        u8 colorBackup[3];
+        u8 fgColor = IkigaiCharacter_ReturnMessageBoxPersonalityPalette(
+            ReturnIkigaiCharacter_SelectedObject()
+        );
+
         int strLen = GetStringWidth(FONT_SMALL, gSpeakerName, -1);
         if (strLen > 0)
         {
@@ -282,6 +310,8 @@ void ReprintSpeakerName(void)
             StringExpandPlaceholders(&gNamePlateBuffer[0], gSpeakerName);
         }
         FillDialogFramePlate();
-        AddTextPrinterParameterized2(1, FONT_SMALL, gNamePlateBuffer, 0, NULL, 2, 0, 3);
+        SaveTextColors(&colorBackup[0], &colorBackup[1], &colorBackup[2]);
+        AddTextPrinterParameterizedNamePlate(WIN_NAME_PLATE, FONT_SMALL, gNamePlateBuffer, 0, NULL, fgColor, 0, 3);
+        RestoreTextColors(&colorBackup[0], &colorBackup[1], &colorBackup[2]);
     }
 }

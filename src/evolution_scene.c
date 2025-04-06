@@ -36,6 +36,8 @@
 #include "constants/rgb.h"
 #include "constants/items.h"
 
+#include "event_data.h"
+
 struct EvoInfo
 {
     u8 preEvoSpriteId;
@@ -66,6 +68,7 @@ static void StartBgAnimation(bool8 isLink);
 static void StopBgAnimation(void);
 static void Task_AnimateBg(u8 taskId);
 static void RestoreBgAfterAnim(void);
+static void Ikigai_UpdatePartnerMonSpecies(struct Pokemon *mon, u8 taskId);
 
 static const u16 sUnusedPal1[] = INCBIN_U16("graphics/evolution_scene/unused_1.gbapal");
 static const u32 sBgAnim_Gfx[] = INCBIN_U32("graphics/evolution_scene/bg.4bpp.lz");
@@ -777,6 +780,7 @@ static void Task_EvolutionScene(u8 taskId)
             GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskId].tPostEvoSpecies), FLAG_SET_SEEN);
             GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskId].tPostEvoSpecies), FLAG_SET_CAUGHT);
             IncrementGameStat(GAME_STAT_EVOLVED_POKEMON);
+            Ikigai_UpdatePartnerMonSpecies(mon, taskId);
         }
         break;
     case EVOSTATE_TRY_LEARN_MOVE:
@@ -1207,6 +1211,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
             GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskId].tPostEvoSpecies), FLAG_SET_SEEN);
             GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskId].tPostEvoSpecies), FLAG_SET_CAUGHT);
             IncrementGameStat(GAME_STAT_EVOLVED_POKEMON);
+            Ikigai_UpdatePartnerMonSpecies(mon, taskId);
         }
         break;
     case T_EVOSTATE_TRY_LEARN_MOVE:
@@ -1442,6 +1447,16 @@ static void Task_TradeEvolutionScene(u8 taskId)
         }
         break;
     }
+}
+
+static void Ikigai_UpdatePartnerMonSpecies(struct Pokemon *mon, u8 taskId)
+{
+    if ((OW_MON_ALLOWED_MET_LVL && GetMonData(mon, MON_DATA_MET_LEVEL) != VarGet(OW_MON_ALLOWED_MET_LVL))
+    || (OW_MON_ALLOWED_MET_LOC && GetMonData(mon, MON_DATA_MET_LOCATION) != VarGet(OW_MON_ALLOWED_MET_LOC)))
+        return;
+    
+    if (VarGet(VAR_STARTER_MON) == gTasks[taskId].tPreEvoSpecies)
+        VarSet(VAR_STARTER_MON, gTasks[taskId].tPostEvoSpecies);
 }
 
 #undef tState

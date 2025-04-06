@@ -390,7 +390,9 @@ static u8 AcroBikeHandleInputWheelieStanding(u8 *newDirection, u16 newKeys, u16 
     gPlayerAvatar.runningState = NOT_MOVING;
 
     if (heldKeys & B_BUTTON)
+    {
         gPlayerAvatar.bikeFrameCounter++;
+    }
     else
     {
         // B button was released.
@@ -995,8 +997,6 @@ bool8 IsPlayerNotUsingAcroBikeOnBumpySlope(void)
 
 void GetOnOffBike(u8 transitionFlags)
 {
-    gUnusedBikeCameraAheadPanback = FALSE;
-
     if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
     {
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
@@ -1006,6 +1006,7 @@ void GetOnOffBike(u8 transitionFlags)
     }
     else
     {
+        gUnusedBikeCameraAheadPanback = gSaveBlock2Ptr->optionsBikeCamera;
         SetPlayerAvatarTransitionFlags(transitionFlags);
         if (gSaveBlock2Ptr->optionsBikeMusic == FALSE)
         {

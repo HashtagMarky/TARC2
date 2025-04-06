@@ -252,9 +252,16 @@
 #define MOVEMENT_ACTION_RUN_UP_SLOW                     0xA3
 #define MOVEMENT_ACTION_RUN_LEFT_SLOW                   0xA4
 #define MOVEMENT_ACTION_RUN_RIGHT_SLOW                  0xA5
-#define MOVEMENT_ACTION_EMOTE_SMILING                   0xA6
-#define MOVEMENT_ACTION_EMOTE_TALKING                   0xA7
-#define MOVEMENT_ACTION_EMOTE_THINKING                  0xA8
+#define MOVEMENT_ACTION_WALK_SLOW_STAIRS_DOWN           0xA6
+#define MOVEMENT_ACTION_WALK_SLOW_STAIRS_UP             0xA7
+#define MOVEMENT_ACTION_WALK_SLOW_STAIRS_LEFT           0xA8
+#define MOVEMENT_ACTION_WALK_SLOW_STAIRS_RIGHT          0xA9
+#define MOVEMENT_ACTION_EMOTE_SMILING                   0xAA
+#define MOVEMENT_ACTION_EMOTE_TALKING                   0xAB
+#define MOVEMENT_ACTION_EMOTE_THINKING                  0xAC
+#define MOVEMENT_ACTION_N_SHRUG                         0xAD
+#define MOVEMENT_ACTION_N_HEADSHAKE                     0xAE
+#define MOVEMENT_ACTION_N_POSE                          0xAF
 
 #define MOVEMENT_ACTION_STEP_END 0xFE
 #define MOVEMENT_ACTION_NONE     0xFF
@@ -319,6 +326,10 @@
 
 #define ANIM_NURSE_BOW (ANIM_STD_COUNT + 0)
 #define ANIM_RAISE_HAND (ANIM_STD_COUNT + 0)
+
+#define ANIM_N_SHRUG     (ANIM_STD_COUNT + 0)
+#define ANIM_N_HEADSHAKE (ANIM_STD_COUNT + 1)
+#define ANIM_N_POSE      (ANIM_STD_COUNT + 2)
 
 #define ANIM_FIELD_MOVE      0
 #define ANIM_FIELD_MOVE_BIKE 1

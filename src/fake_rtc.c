@@ -5,6 +5,9 @@
 #include "rtc.h"
 #include "fake_rtc.h"
 #include "event_data.h"
+#include "script.h"
+
+#include "calendar.h"
 
 struct Time *FakeRtc_GetCurrentTime(void)
 {
@@ -90,15 +93,106 @@ STATIC_ASSERT((OW_FLAG_PAUSE_TIME == 0 || OW_USE_FAKE_RTC == TRUE), FakeRtcMustB
 
 void Script_PauseFakeRtc(void)
 {
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+
     FlagSet(OW_FLAG_PAUSE_TIME);
 }
 
 void Script_ResumeFakeRtc(void)
 {
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+
     FlagClear(OW_FLAG_PAUSE_TIME);
 }
 
 void Script_ToggleFakeRtc(void)
 {
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+
     FlagToggle(OW_FLAG_PAUSE_TIME);
+}
+
+u8 Ikigai_GetYearFromDays(u32 days)
+{
+    return (days == 0) ? 0 : ((days - 1) / (SEASON_COUNT * DAYS_IN_SEASON)) + 1;
+}
+
+enum Seasons Ikigai_GetSeasonFromDays(u32 days)
+{
+    if (days == 0)
+        return SEASON_COUNT;
+
+    while (days > SEASON_COUNT * DAYS_IN_SEASON)
+        days -= SEASON_COUNT * DAYS_IN_SEASON;
+
+    return (days - 1) / DAYS_IN_SEASON;
+}
+
+u8 Ikigai_GetDateFromDays(u32 days)
+{
+    return (days == 0) ? 0 : ((days - 1) % DAYS_IN_SEASON) + 1;
+}
+
+void UNUSED Ikigai_SetToNextSeason(s16 days, enum Seasons newSeason)
+{
+    if (newSeason > SEASON_COUNT)
+        return;
+    
+    u8 year = Ikigai_GetYearFromDays(days);
+    u8 currentSeason = Ikigai_GetSeasonFromDays(days);
+    s16 daysDiff;
+
+    if (newSeason <= currentSeason || newSeason == SEASON_COUNT)
+        year++;
+
+    daysDiff = (year * 112) + (newSeason * 28);
+    daysDiff -= days; 
+    FakeRtc_AdvanceTimeBy(daysDiff * 24, 0, 0);
+}
+
+u8 Ikigai_GetSeasonalTimeHour(s32 days, u8 time, bool32 begin)
+{
+    const u8 baseTime[SEASON_COUNT][2] =
+    {
+        {MORNING_HOUR_BEGIN,    MORNING_HOUR_END},
+        {DAY_HOUR_BEGIN,        DAY_HOUR_END},
+        {EVENING_HOUR_BEGIN,    EVENING_HOUR_END},
+        {NIGHT_HOUR_BEGIN,      NIGHT_HOUR_END},
+    };
+
+    const s8 seasonalAdjustments[SEASON_COUNT][TIMES_OF_DAY][2] =
+    {
+        [SEASON_SPRING] = {
+            [TIME_MORNING]  = {  0,  0  },
+            [TIME_DAY]      = {  0,  0  },
+            [TIME_EVENING]  = {  0,  0  },
+            [TIME_NIGHT]    = {  0,  0  },
+        },
+        
+        [SEASON_SUMMER] = {
+            [TIME_MORNING]  = {  0, -2  },
+            [TIME_DAY]      = { -2,  4  },
+            [TIME_EVENING]  = {  4,  4  },
+            [TIME_NIGHT]    = {  4,  0  },
+        },
+        
+        [SEASON_AUTUMN] = {
+            [TIME_MORNING]  = {  2,  0  },
+            [TIME_DAY]      = {  0, -1  },
+            [TIME_EVENING]  = { -1,  3  },
+            [TIME_NIGHT]    = {  3,  2  },
+        },
+        
+        [SEASON_WINTER] = {
+            [TIME_MORNING]  = {  3,  0  },
+            [TIME_DAY]      = {  0, -2  },
+            [TIME_EVENING]  = { -2, -1  },
+            [TIME_NIGHT]    = { -1,  3  },
+        },
+    };
+
+    enum Seasons season = Ikigai_GetSeasonFromDays(days);
+    time = time >= TIMES_OF_DAY ? TIME_DAY : time;
+
+    return baseTime[time][begin] + seasonalAdjustments[season][time][begin];
 }

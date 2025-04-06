@@ -94,7 +94,8 @@ static bool8 PlayerAnimIsMultiFrameStationaryAndStateNotTurning(void);
 static bool8 PlayerIsAnimActive(void);
 static bool8 PlayerCheckIfAnimFinishedOrInactive(void);
 
-static void PlayerWalkSlow(u8 direction);
+static void PlayerWalkSlowStairs(u8 direction);
+static void UNUSED PlayerWalkSlow(u8 direction);
 static void PlayerNotOnBikeCollide(u8);
 static void PlayerNotOnBikeCollideWithFarawayIslandMew(u8);
 
@@ -673,17 +674,38 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
         HandleFastSurf(direction);
         return;
     }
+    
+    gPlayerAvatar.creeping = FALSE;
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
+    {
+        if (FlagGet(DN_FLAG_SEARCHING) && (heldKeys & A_BUTTON))
+        {
+            gPlayerAvatar.creeping = TRUE;
+            PlayerWalkSlow(direction);
+        }
+        else
+        {
+            // speed 2 is fast, same speed as running
+            PlayerWalkFast(direction);
+        }
+        return;
+    }
 
-    if ((/*heldKeys & B_BUTTON ||*/ gSaveBlock3Ptr->autoRun) && FlagGet(FLAG_SYS_B_DASH)
+    if ((/*heldKeys & B_BUTTON ||*/ gSaveBlock3Ptr->autoRun) && FlagGet(FLAG_SYS_B_DASH) && !FlagGet(DN_FLAG_SEARCHING)
      && IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) == 0)
     {
         HandleRunning(direction);
         return;
     }
+    else if (FlagGet(DN_FLAG_SEARCHING) && (heldKeys & A_BUTTON))
+    {
+        gPlayerAvatar.creeping = TRUE;
+        PlayerWalkSlow(direction);
+    }
     else
     {
         if (ObjectMovingOnRockStairs(&gObjectEvents[gPlayerAvatar.objectEventId], direction))
-            PlayerWalkSlow(direction);
+            PlayerWalkSlowStairs(direction);
         else
             PlayerWalkNormal(direction);
     }
@@ -998,8 +1020,14 @@ void PlayerSetAnimId(u8 movementActionId, u8 copyableMovement)
     }
 }
 
+// slow stairs (from FRLG--faster than slow)
+static void PlayerWalkSlowStairs(u8 direction)
+{
+    PlayerSetAnimId(GetWalkSlowStairsMovementAction(direction), 2);
+}
+
 // slow
-static void PlayerWalkSlow(u8 direction)
+static void UNUSED PlayerWalkSlow(u8 direction)
 {
     PlayerSetAnimId(GetWalkSlowMovementAction(direction), 2);
 }
@@ -1218,6 +1246,8 @@ u8 player_get_pos_including_state_based_drift(s16 *x, s16 *y)
 
 u8 GetPlayerFacingDirection(void)
 {
+    Script_RequestEffects(SCREFF_V1);
+
     return gObjectEvents[gPlayerAvatar.objectEventId].facingDirection;
 }
 

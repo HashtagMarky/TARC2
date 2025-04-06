@@ -15,6 +15,9 @@
 #include "constants/field_effects.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "task.h"
+#include "field_player_avatar.h"
+#include "event_data.h"
 
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF // duplicate of define in event_object_movement.c
 #define PAL_TAG_REFLECTION_OFFSET 0x2000 // reflection tag value is paletteTag + 0x2000
@@ -1015,7 +1018,7 @@ void UpdateHotSpringsWaterFieldEffect(struct Sprite *sprite)
 #undef sPrevX
 #undef sPrevY
 
-u32 FldEff_UnusedGrass(void)
+u32 FldEff_ShakingGrass(void)
 {
     u8 spriteId;
 
@@ -1026,12 +1029,13 @@ u32 FldEff_UnusedGrass(void)
         struct Sprite *sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
-        sprite->sWaitFldEff = FLDEFF_UNUSED_GRASS;
+        sprite->sWaitFldEff = FLDEFF_SHAKING_GRASS;
     }
-    return 0;
+    
+    return spriteId;
 }
 
-u32 FldEff_UnusedGrass2(void)
+u32 FldEff_ShakingGrass2(void)
 {
     u8 spriteId;
 
@@ -1042,9 +1046,10 @@ u32 FldEff_UnusedGrass2(void)
         struct Sprite *sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
-        sprite->sWaitFldEff = FLDEFF_UNUSED_GRASS_2;
+        sprite->sWaitFldEff = FLDEFF_SHAKING_LONG_GRASS;
     }
-    return 0;
+    
+    return spriteId;
 }
 
 u32 FldEff_UnusedSand(void)
@@ -1058,9 +1063,9 @@ u32 FldEff_UnusedSand(void)
         struct Sprite *sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
-        sprite->sWaitFldEff = FLDEFF_UNUSED_SAND;
+        sprite->sWaitFldEff = FLDEFF_SAND_HOLE;
     }
-    return 0;
+    return spriteId;
 }
 
 u32 FldEff_WaterSurfacing(void)
@@ -1076,7 +1081,8 @@ u32 FldEff_WaterSurfacing(void)
         sprite->oam.priority = gFieldEffectArguments[3];
         sprite->sWaitFldEff = FLDEFF_WATER_SURFACING;
     }
-    return 0;
+    
+    return spriteId;
 }
 
 // Sprite data for FLDEFF_ASH
@@ -1474,7 +1480,7 @@ u32 FldEff_BerryTreeGrowthSparkle(void)
         UpdateSpritePaletteByTemplate(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SPARKLE], sprite);
         sprite->sWaitFldEff = FLDEFF_BERRY_TREE_GROWTH_SPARKLE;
     }
-    return 0;
+    return spriteId;
 }
 
 // Sprite data for FLDEFF_TREE_DISGUISE / FLDEFF_MOUNTAIN_DISGUISE / FLDEFF_SAND_DISGUISE
@@ -1602,7 +1608,7 @@ u32 FldEff_Sparkle(void)
         gSprites[spriteId].oam.priority = gFieldEffectArguments[2];
         gSprites[spriteId].coordOffsetEnabled = TRUE;
     }
-    return 0;
+    return spriteId;
 }
 
 void UpdateSparkleFieldEffect(struct Sprite *sprite)
@@ -1866,27 +1872,83 @@ static void UpdateGrassFieldEffectSubpriority(struct Sprite *sprite, u8 elevatio
     }
 }
 
-// Unused, duplicates of data in event_object_movement.c
-static const s8 sFigure8XOffsets[FIGURE_8_LENGTH] = {
-    1, 2, 2, 2, 2, 2, 2, 2,
-    2, 2, 2, 1, 2, 2, 1, 2,
-    2, 1, 2, 2, 1, 2, 1, 1,
-    2, 1, 1, 2, 1, 1, 2, 1,
-    1, 2, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1,
-    0, 1, 1, 1, 0, 1, 1, 0,
-    1, 0, 1, 0, 1, 0, 0, 0,
-    0, 1, 0, 0, 0, 0, 0, 0,
+#define eState               data[0]
+#define eSavingSpriteID      data[1]
+#define eSavingAnimFrame     data[4]
+
+static void Task_Saving(u8 taskId);
+static u8 Saving_Init(struct Task *task);
+static u8 Saving_WaitForFinish(struct Task *task);
+
+static bool8 (*const sSavingStateFuncs[])(struct Task *) =
+{
+    Saving_Init,
+    Saving_WaitForFinish       
 };
 
-static const s8 sFigure8YOffsets[FIGURE_8_LENGTH] = {
-     0,  0,  1,  0,  0,  1,  0,  0,
-     1,  0,  1,  1,  0,  1,  1,  0,
-     1,  1,  0,  1,  1,  0,  1,  1,
-     0,  0,  1,  0,  0,  1,  0,  0,
-     1,  0,  0,  0,  0,  0,  0,  0,
-     0,  0,  0,  0,  0,  0,  0,  0,
-     0,  0, -1,  0,  0, -1,  0,  0,
-    -1,  0, -1, -1,  0, -1, -1,  0,
-    -1, -1, -1, -1, -1, -1, -1, -2,
-};
+void FldEff_Saving(void)
+{
+    u8 taskId = CreateTask(Task_Saving, 0xFF);
+    Task_Saving(taskId);
+}
+
+static void Task_Saving(u8 taskId)
+{
+    while (sSavingStateFuncs[gTasks[taskId].eState](&gTasks[taskId]))
+        ;
+}
+
+static bool8 Saving_Init(struct Task *task)
+{
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    s16 x = playerObjEvent->currentCoords.x;
+    s16 y = playerObjEvent->currentCoords.y;
+    s16 x2;
+    s16 y2;    
+    s16 x_diff;
+    s16 y_diff;
+
+    u8 spriteId;
+    struct Sprite *sprite;
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SAVING], 0, 0, 0xFF);
+    task->eSavingSpriteID = spriteId;
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->oam.priority = 0;
+        sprite->invisible = FALSE;
+        sprite->coordOffsetEnabled = TRUE;
+    }
+    sprite = &gSprites[spriteId];
+
+    y_diff = 1;
+    x_diff = 0;
+
+    SetSpritePosToMapCoords((playerObjEvent->currentCoords.x + x_diff), (playerObjEvent->currentCoords.y + y_diff), &x2, &y2);
+    StartSpriteAnim(sprite, 0);
+    sprite->x = x2 + 8;
+    sprite->y = y2 + 8;
+    sprite->data[0] = playerObjEvent->currentCoords.x;
+    sprite->data[1] = playerObjEvent->currentCoords.y;
+
+    task->eSavingAnimFrame = 0;
+    task->eState++;
+    return FALSE;
+}
+
+static bool8 Saving_WaitForFinish(struct Task *task)
+{   
+    FieldEffectActiveListRemove(FLDEFF_SAVING);
+    DestroyTask(FindTaskIdByFunc(Task_Saving));
+    task->eSavingAnimFrame++;
+    return FALSE;
+}
+
+void SavingSpriteCallback(struct Sprite *sprite)
+{   
+    if(FlagGet(FLAG_AUTO_SAVING))
+    {
+        FieldEffectFreeGraphicsResources(sprite);
+        FlagClear(FLAG_AUTO_SAVING);
+    }
+}

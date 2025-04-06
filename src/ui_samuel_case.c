@@ -1,4 +1,5 @@
 #include "global.h"
+#include "gba/gba.h"
 #include "ui_samuel_case.h"
 #include "strings.h"
 #include "bg.h"
@@ -45,6 +46,7 @@
 #include "constants/pokemon.h"
 #include "naming_screen.h"
 #include "tv.h"
+#include "ikigai_scrolling_background.h"
 
  /*
     9 Starter Selection Samuel Case
@@ -88,11 +90,6 @@ enum PageNumbers
     PAGE_TWO,
     PAGE_COUNT,
 };
-
-// Type offsets exist as type defines do not run 1 - 18
-#define TYPE_OFFSET_1               1 // Used for types before TYPE_MYSTERY
-#define TYPE_OFFSET_2               2 // Used for types after TYPE_MYSTERY
-#define TYPE_OFFSET(type, offset)   ((type) - (offset))
 
 enum Colors
 {
@@ -144,74 +141,78 @@ struct MonChoiceData{ // This is the format used to define a mon, everything lef
     bool8 isShinyExpansion; // only work in Expansion set to 0 otherwise or leave blank
 };
 
-// Species Lists to be Randomly Chosen
-static const u16 sRandomSpeciesList[18][3] = {
-    [TYPE_OFFSET(TYPE_NORMAL, TYPE_OFFSET_1)]    = {SPECIES_EEVEE, SPECIES_SNORLAX, SPECIES_MEOWTH},
-    [TYPE_OFFSET(TYPE_FIGHTING, TYPE_OFFSET_1)]  = {SPECIES_MACHOP, SPECIES_HITMONLEE, SPECIES_LUCARIO},
-    [TYPE_OFFSET(TYPE_FLYING, TYPE_OFFSET_1)]    = {SPECIES_PIDGEY, SPECIES_SPEAROW, SPECIES_STARLY},
-    [TYPE_OFFSET(TYPE_POISON, TYPE_OFFSET_1)]    = {SPECIES_EKANS, SPECIES_GRIMER, SPECIES_KOFFING},
-    [TYPE_OFFSET(TYPE_GROUND, TYPE_OFFSET_1)]    = {SPECIES_SANDSHREW, SPECIES_DIGLETT, SPECIES_PHANPY},
-    [TYPE_OFFSET(TYPE_ROCK, TYPE_OFFSET_1)]      = {SPECIES_GEODUDE, SPECIES_ONIX, SPECIES_RHYHORN},
-    [TYPE_OFFSET(TYPE_BUG, TYPE_OFFSET_1)]       = {SPECIES_CATERPIE, SPECIES_WEEDLE, SPECIES_SCYTHER},
-    [TYPE_OFFSET(TYPE_GHOST, TYPE_OFFSET_1)]     = {SPECIES_GASTLY, SPECIES_HAUNTER, SPECIES_DUSKULL},
-    [TYPE_OFFSET(TYPE_STEEL, TYPE_OFFSET_1)]     = {SPECIES_MAGNEMITE, SPECIES_SKARMORY, SPECIES_STEELIX},
-    [TYPE_OFFSET(TYPE_FIRE, TYPE_OFFSET_2)]      = {SPECIES_CHARMANDER, SPECIES_CYNDAQUIL, SPECIES_TORCHIC},
-    [TYPE_OFFSET(TYPE_WATER, TYPE_OFFSET_2)]     = {SPECIES_SQUIRTLE, SPECIES_TOTODILE, SPECIES_MUDKIP},
-    [TYPE_OFFSET(TYPE_GRASS, TYPE_OFFSET_2)]     = {SPECIES_BULBASAUR, SPECIES_CHIKORITA, SPECIES_TREECKO},
-    [TYPE_OFFSET(TYPE_ELECTRIC, TYPE_OFFSET_2)]  = {SPECIES_PIKACHU, SPECIES_RAICHU, SPECIES_ELECTABUZZ},
-    [TYPE_OFFSET(TYPE_PSYCHIC, TYPE_OFFSET_2)]   = {SPECIES_ABRA, SPECIES_RALTS, SPECIES_SPOINK},
-    [TYPE_OFFSET(TYPE_ICE, TYPE_OFFSET_2)]       = {SPECIES_SWINUB, SPECIES_SNEASEL, SPECIES_GLACEON},
-    [TYPE_OFFSET(TYPE_DRAGON, TYPE_OFFSET_2)]    = {SPECIES_DRATINI, SPECIES_BAGON, SPECIES_GIBLE},
-    [TYPE_OFFSET(TYPE_DARK, TYPE_OFFSET_2)]      = {SPECIES_UMBREON, SPECIES_MURKROW, SPECIES_HOUNDOOM},
-    [TYPE_OFFSET(TYPE_FAIRY, TYPE_OFFSET_2)]     = {SPECIES_JIGGLYPUFF, SPECIES_CLEFAIRY, SPECIES_SYLVEON},
-};
-
 //
 //  Making Changes Here Changes The Options In The UI. This is where you define your mons
 //
+
+const u16 gIkigaiStarters[NUMBER_OF_MON_TYPES][2] =
+{
+    [TYPE_NONE]       = {SPECIES_NONE,      SPECIES_NONE},      // No assigned starter
+    [TYPE_NORMAL]     = {SPECIES_LILLIPUP,  SPECIES_LILLIPUP},
+    [TYPE_FIGHTING]   = {SPECIES_MACHOP,    SPECIES_MACHOP},
+    [TYPE_FLYING]     = {SPECIES_ROOKIDEE,  SPECIES_ROOKIDEE},
+    [TYPE_POISON]     = {SPECIES_NIDORAN_M, SPECIES_NIDORAN_F},
+    [TYPE_GROUND]     = {SPECIES_SANDILE,   SPECIES_SANDILE},
+    [TYPE_ROCK]       = {SPECIES_ROLYCOLY,  SPECIES_ROLYCOLY},
+    [TYPE_BUG]        = {SPECIES_GRUBBIN,   SPECIES_GRUBBIN},
+    [TYPE_GHOST]      = {SPECIES_DUSKULL,   SPECIES_DUSKULL},
+    [TYPE_STEEL]      = {SPECIES_KLINK,     SPECIES_KLINK},
+    [TYPE_MYSTERY]    = {SPECIES_NONE,      SPECIES_NONE},      // No assigned starter
+    [TYPE_FIRE]       = {SPECIES_MAGBY,     SPECIES_MAGBY},
+    [TYPE_WATER]      = {SPECIES_TYMPOLE,   SPECIES_TYMPOLE},
+    [TYPE_GRASS]      = {SPECIES_SEEDOT,    SPECIES_SEEDOT},
+    [TYPE_ELECTRIC]   = {SPECIES_SHINX,     SPECIES_SHINX},
+    [TYPE_PSYCHIC]    = {SPECIES_HATENNA,   SPECIES_HATENNA},
+    [TYPE_ICE]        = {SPECIES_SWINUB,    SPECIES_SWINUB},
+    [TYPE_DRAGON]     = {SPECIES_BAGON,     SPECIES_BAGON},
+    [TYPE_DARK]       = {SPECIES_IMPIDIMP,  SPECIES_IMPIDIMP},
+    [TYPE_FAIRY]      = {SPECIES_FLABEBE,   SPECIES_FLABEBE},
+    [TYPE_STELLAR]    = {SPECIES_NONE,      SPECIES_NONE},      // No assigned starter
+};
+
 static const struct MonChoiceData sStarterChoices_Page1_Male[9] = 
 {
-    [BALL_TOP_FIRST]        = {SPECIES_LILLIPUP, 5},
-    [BALL_TOP_SECOND]       = {SPECIES_MACHOP, 5},
-    [BALL_MIDDLE_FIRST]     = {SPECIES_ROOKIDEE, 5},
+    [BALL_TOP_FIRST]        = {gIkigaiStarters[TYPE_NORMAL][MALE],      5},
+    [BALL_TOP_SECOND]       = {gIkigaiStarters[TYPE_FIGHTING][MALE],    5},
+    [BALL_MIDDLE_FIRST]     = {gIkigaiStarters[TYPE_FLYING][MALE],      5},
 
-    [BALL_TOP_THIRD]        = {SPECIES_NIDORAN_M, 5},
-    [BALL_TOP_FOURTH]       = {SPECIES_SANDILE, 5},
-    [BALL_MIDDLE_THIRD]     = {SPECIES_ROLYCOLY, 5},
+    [BALL_TOP_THIRD]        = {gIkigaiStarters[TYPE_POISON][MALE],      5},
+    [BALL_TOP_FOURTH]       = {gIkigaiStarters[TYPE_GROUND][MALE],      5},
+    [BALL_MIDDLE_THIRD]     = {gIkigaiStarters[TYPE_ROCK][MALE],        5},
 
-    [BALL_MIDDLE_SECOND]    = {SPECIES_GRUBBIN, 5},
-    [BALL_BOTTOM_FIRST]     = {SPECIES_DUSKULL, 5},
-    [BALL_BOTTOM_SECOND]    = {SPECIES_KLINK, 5},
+    [BALL_MIDDLE_SECOND]    = {gIkigaiStarters[TYPE_BUG][MALE],         5},
+    [BALL_BOTTOM_FIRST]     = {gIkigaiStarters[TYPE_GHOST][MALE],       5},
+    [BALL_BOTTOM_SECOND]    = {gIkigaiStarters[TYPE_STEEL][MALE],       5},
 };
 
 static const struct MonChoiceData sStarterChoices_Page1_Female[9] = 
 {
-    [BALL_TOP_FIRST]        = {SPECIES_LILLIPUP, 5},
-    [BALL_TOP_SECOND]       = {SPECIES_MACHOP, 5},
-    [BALL_MIDDLE_FIRST]     = {SPECIES_ROOKIDEE, 5},
+    [BALL_TOP_FIRST]        = {gIkigaiStarters[TYPE_NORMAL][FEMALE],    5},
+    [BALL_TOP_SECOND]       = {gIkigaiStarters[TYPE_FIGHTING][FEMALE],  5},
+    [BALL_MIDDLE_FIRST]     = {gIkigaiStarters[TYPE_FLYING][FEMALE],    5},
 
-    [BALL_TOP_THIRD]        = {SPECIES_NIDORAN_F, 5},
-    [BALL_TOP_FOURTH]       = {SPECIES_SANDILE, 5},
-    [BALL_MIDDLE_THIRD]     = {SPECIES_ROLYCOLY, 5},
+    [BALL_TOP_THIRD]        = {gIkigaiStarters[TYPE_POISON][FEMALE],    5},
+    [BALL_TOP_FOURTH]       = {gIkigaiStarters[TYPE_GROUND][FEMALE],    5},
+    [BALL_MIDDLE_THIRD]     = {gIkigaiStarters[TYPE_ROCK][FEMALE],      5},
 
-    [BALL_MIDDLE_SECOND]    = {SPECIES_GRUBBIN, 5},
-    [BALL_BOTTOM_FIRST]     = {SPECIES_DUSKULL, 5},
-    [BALL_BOTTOM_SECOND]    = {SPECIES_KLINK, 5},
+    [BALL_MIDDLE_SECOND]    = {gIkigaiStarters[TYPE_BUG][FEMALE],       5},
+    [BALL_BOTTOM_FIRST]     = {gIkigaiStarters[TYPE_GHOST][FEMALE],     5},
+    [BALL_BOTTOM_SECOND]    = {gIkigaiStarters[TYPE_STEEL][FEMALE],     5},
 };
 
 static const struct MonChoiceData sStarterChoices_Page2[9] = 
 {
-    [BALL_TOP_FIRST]        = {SPECIES_MAGBY, 5},
-    [BALL_TOP_SECOND]       = {SPECIES_TYMPOLE, 5},
-    [BALL_MIDDLE_FIRST]     = {SPECIES_SEEDOT, 5},
+    [BALL_TOP_FIRST]        = {gIkigaiStarters[TYPE_FIRE][MALE],        5},
+    [BALL_TOP_SECOND]       = {gIkigaiStarters[TYPE_WATER][MALE],       5},
+    [BALL_MIDDLE_FIRST]     = {gIkigaiStarters[TYPE_GRASS][MALE],       5},
 
-    [BALL_TOP_THIRD]        = {SPECIES_SHINX, 5},
-    [BALL_TOP_FOURTH]       = {SPECIES_HATENNA, 5},
-    [BALL_MIDDLE_THIRD]     = {SPECIES_SWINUB, 5},
+    [BALL_TOP_THIRD]        = {gIkigaiStarters[TYPE_ELECTRIC][MALE],    5},
+    [BALL_TOP_FOURTH]       = {gIkigaiStarters[TYPE_PSYCHIC][MALE],     5},
+    [BALL_MIDDLE_THIRD]     = {gIkigaiStarters[TYPE_ICE][MALE],         5},
 
-    [BALL_MIDDLE_SECOND]    = {SPECIES_BAGON, 5},
-    [BALL_BOTTOM_FIRST]     = {SPECIES_IMPIDIMP, 5},
-    [BALL_BOTTOM_SECOND]    = {SPECIES_FLABEBE, 5},
+    [BALL_MIDDLE_SECOND]    = {gIkigaiStarters[TYPE_DRAGON][MALE],      5},
+    [BALL_BOTTOM_FIRST]     = {gIkigaiStarters[TYPE_DARK][MALE],        5},
+    [BALL_BOTTOM_SECOND]    = {gIkigaiStarters[TYPE_FAIRY][MALE],       5},
 };
 
 //==========EWRAM==========//
@@ -235,8 +236,6 @@ static void SampleUi_DrawMonIcon(u16 speciesId);
 static void Task_DelayedSpriteLoad(u8 taskId);
 static const struct MonChoiceData* ReturnStartersByPage(void);
 static const struct SpriteCordsStruct (*ReturnBallPositionByPage(void))[4];
-static u16 GetRandomSpecies(void);
-static void RandomiseMonChoiceData(const struct MonChoiceData *monChoiceDataArray, size_t count);
 static void SamuelCaseChangeGraphics(void);
 static void Task_WaitFadeOutAndChangeGraphics(u8 taskId);
 
@@ -290,7 +289,6 @@ static const u16 sCasePalette[] = INCBIN_U16("graphics/ui_samuel_case/case_tiles
 static const u32 sTextBgTiles[]   = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles.4bpp.lz");
 static const u32 sTextBgTilemapLeft[] = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles_left.bin.lz");
 static const u32 sTextBgTilemapRight[] = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles_right.bin.lz");
-static const u16 sTextBgPalette[] = INCBIN_U16("graphics/ui_samuel_case/text_bg_tiles.gbapal");
 
 static const u32 sPokeballHand_Gfx[] = INCBIN_U32("graphics/ui_samuel_case/pokeball_hand.4bpp.lz");
 static const u16 sPokeballHand_Pal[] = INCBIN_U16("graphics/ui_samuel_case/pokeball_hand.gbapal");
@@ -320,58 +318,18 @@ static const struct SpritePalette sSpritePal_PokeballHand =
 };
 
 // Right Hand Animations (Same as original, with renamed variables)
-static const union AnimCmd sSpriteAnim_PokeballStatic_Right[] =
+static const union AnimCmd sSpriteAnim_PokeballStatic[] =
 {
     ANIMCMD_FRAME(0, 32),
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd sSpriteAnim_PokeballRockBackAndForth_Right[] =
+static const union AnimCmd sSpriteAnim_PokeballRockBackAndForth[] =
 {
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_FRAME(16, 16),
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_FRAME(32, 16),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sSpriteAnim_Hand_Right[] =
-{
-    ANIMCMD_FRAME(48, 32),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd *const sSpriteAnimTable_PokeballHand_Right[] =
-{
-    sSpriteAnim_PokeballStatic_Right,
-    sSpriteAnim_PokeballRockBackAndForth_Right,
-    sSpriteAnim_Hand_Right,
-};
-
-static const struct SpriteTemplate sSpriteTemplate_PokeballHandMap_Right =
-{
-    .tileTag = TAG_POKEBALL_CURSOR,
-    .paletteTag = TAG_POKEBALL_CURSOR,
-    .oam = &sOamData_PokeballHand,
-    .anims = sSpriteAnimTable_PokeballHand_Right,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
-};
-
-// Left Hand Animations (Flipped)
-static const union AnimCmd sSpriteAnim_PokeballStatic_Left[] =
-{
-    ANIMCMD_FRAME(0, 32, .hFlip = TRUE),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sSpriteAnim_PokeballRockBackAndForth_Left[] =
-{
-    ANIMCMD_FRAME(0, 16, .hFlip = TRUE),
-    ANIMCMD_FRAME(16, 16, .hFlip = TRUE),
-    ANIMCMD_FRAME(0, 16, .hFlip = TRUE),
-    ANIMCMD_FRAME(32, 16, .hFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 
@@ -381,23 +339,33 @@ static const union AnimCmd sSpriteAnim_Hand_Left[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const sSpriteAnimTable_PokeballHand_Left[] =
+static const union AnimCmd sSpriteAnim_Hand_Right[] =
 {
-    sSpriteAnim_PokeballStatic_Left,
-    sSpriteAnim_PokeballRockBackAndForth_Left,
-    sSpriteAnim_Hand_Left,
+    ANIMCMD_FRAME(48, 32),
+    ANIMCMD_JUMP(0),
 };
 
-static const struct SpriteTemplate sSpriteTemplate_PokeballHandMap_Left =
+static const union AnimCmd *const sSpriteAnimTable_PokeballHand[] =
+{
+    sSpriteAnim_PokeballStatic,
+    sSpriteAnim_PokeballRockBackAndForth,
+    sSpriteAnim_Hand_Left,
+    sSpriteAnim_Hand_Right,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_PokeballHandMap =
 {
     .tileTag = TAG_POKEBALL_CURSOR,
     .paletteTag = TAG_POKEBALL_CURSOR,
     .oam = &sOamData_PokeballHand,
-    .anims = sSpriteAnimTable_PokeballHand_Left,
+    .anims = sSpriteAnimTable_PokeballHand,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
+
+#define POKEBALL_HAND_ANIM_LEFT     2
+#define POKEBALL_HAND_ANIM_RIGHT    3
 
 
 //
@@ -487,10 +455,10 @@ static void CreateHandSprite()
     y = current_position.y - 6;
     sSamuelCaseDataPtr->handPosition = i;
     if (sSamuelCaseDataPtr->handSpriteId == SPRITE_NONE)
-        sSamuelCaseDataPtr->handSpriteId = CreateSpriteAtEnd(&sSpriteTemplate_PokeballHandMap_Right, x, y, 0);
+        sSamuelCaseDataPtr->handSpriteId = CreateSpriteAtEnd(&sSpriteTemplate_PokeballHandMap, x, y, 0);
     gSprites[sSamuelCaseDataPtr->handSpriteId].invisible = FALSE;
     gSprites[sSamuelCaseDataPtr->handSpriteId].callback = CursorCallback;
-    StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->handSpriteId], 2);
+    StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->handSpriteId], POKEBALL_HAND_ANIM_LEFT);
     StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->pokeballSpriteIds[sSamuelCaseDataPtr->handPosition]], 1);
     SampleUi_DrawMonIcon(ReturnStartersByPage()[sSamuelCaseDataPtr->handPosition].species);
     
@@ -537,7 +505,7 @@ static void CreatePokeballSprites()
             y = ReturnBallPositionByPage()[2][i - 7].y;
         }
         if (sSamuelCaseDataPtr->pokeballSpriteIds[i] == SPRITE_NONE)
-            sSamuelCaseDataPtr->pokeballSpriteIds[i] = CreateSpriteAtEnd(&sSpriteTemplate_PokeballHandMap_Right, x, y, 1);
+            sSamuelCaseDataPtr->pokeballSpriteIds[i] = CreateSpriteAtEnd(&sSpriteTemplate_PokeballHandMap, x, y, 1);
         gSprites[sSamuelCaseDataPtr->pokeballSpriteIds[i]].invisible = FALSE;
         StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->pokeballSpriteIds[i]], 0);
 
@@ -636,11 +604,7 @@ void SamuelCase_Init(MainCallback callback)
     // RandomiseMonChoiceData(sStarterChoices_Page1_Male, ARRAY_COUNT(sStarterChoices_Page1_Male));
     // RandomiseMonChoiceData(sStarterChoices_Page2, ARRAY_COUNT(sStarterChoices_Page2));
 
-    for(i=0; i < 9; i++)
-    {
-        (gSaveBlock2Ptr->playerGender == MALE) ? GetSetPokedexFlag(SpeciesToNationalPokedexNum(sStarterChoices_Page1_Male[i].species), FLAG_SET_SEEN) : GetSetPokedexFlag(SpeciesToNationalPokedexNum(sStarterChoices_Page1_Female[i].species), FLAG_SET_SEEN);
-        GetSetPokedexFlag(SpeciesToNationalPokedexNum(sStarterChoices_Page2[i].species), FLAG_SET_SEEN);
-    }
+    SetIkigaiStarterPokedexFlags();
 
     for(i=0; i < 9; i++)
     {
@@ -810,7 +774,7 @@ static bool8 SamuelCase_InitBgs(void) // Init the bgs and bg tilemap buffers and
     ScheduleBgCopyTilemapToVram(2);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2);
-    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(1, 8));
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(10, 6));
     ShowBg(0);
     ShowBg(1);
     ShowBg(2);
@@ -839,7 +803,7 @@ static bool8 SamuelCaseLoadGraphics(void) // load tilesets, tilemaps, spriteshee
         LoadCompressedSpriteSheet(&sSpriteSheet_PokeballHand);
         LoadSpritePalette(&sSpritePal_PokeballHand);
         LoadPalette(sCasePalette, 32, 32);
-        LoadPalette(sTextBgPalette, 16, 16);
+        LoadPalette(IkigaiScrollingBgPal_Default, 16, 16);
         sSamuelCaseDataPtr->gfxLoadState++;
         break;
     default:
@@ -873,7 +837,7 @@ static const u8 sText_AreYouSure[] = _("Are you sure?    {A_BUTTON} Yes  {B_BUTT
 static const u8 sText_RecievedMon[] = _("Give your Pokémon a Nickname?   {A_BUTTON} Yes  {B_BUTTON} No");
 static void PrintTextToBottomBar(u8 textId)
 {
-    u8 speciesCategoryArray[16];
+    u8 speciesCategoryArray[64];
     const u8 *mainBarAlternatingText;
     const u8 * speciesTypeText;
 
@@ -1168,35 +1132,6 @@ static const struct MonChoiceData* ReturnStartersByPage(void)
     }
 }
 
-static u16 GetRandomSpecies(void)
-{
-    // Choose a random type from the sRandomSpeciesList
-    u16 typeIndex = Random() % ARRAY_COUNT(sRandomSpeciesList);
-    
-    // Get the number of species in the selected type's list
-    u16 speciesCount = ARRAY_COUNT(sRandomSpeciesList[typeIndex]);
-    
-    // Choose a random species from the selected type's list
-    u16 speciesIndex = Random() % speciesCount;
-    
-    // Return the selected species
-    return sRandomSpeciesList[typeIndex][speciesIndex];
-}
-
-static void RandomiseMonChoiceData(const struct MonChoiceData *monChoiceDataArray, size_t count)
-{
-    bool8 isShiny = (Random() < SHINY_ODDS) ? TRUE : FALSE;
-
-    for (size_t i = 0; i < count; i++)
-    {
-        if (monChoiceDataArray[i].species == SPECIES_NONE)
-        {
-            //monChoiceDataArray[i].species = GetRandomSpecies();
-        }
-        //monChoiceDataArray[i].isShinyExpansion = isShiny;
-    }
-}
-
 static void SamuelCaseChangeGraphics(void)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
@@ -1212,11 +1147,13 @@ static void Task_WaitFadeOutAndChangeGraphics(u8 taskId)
         {
             LZDecompressWram(sCaseTilemapLeft, sBg1TilemapBuffer);
             LZDecompressWram(sTextBgTilemapLeft, sBg2TilemapBuffer);
+            StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->handSpriteId], POKEBALL_HAND_ANIM_LEFT);
         }
         else
         {
             LZDecompressWram(sCaseTilemapRight, sBg1TilemapBuffer);
             LZDecompressWram(sTextBgTilemapRight, sBg2TilemapBuffer);
+            StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->handSpriteId], POKEBALL_HAND_ANIM_RIGHT);
         }
         ScheduleBgCopyTilemapToVram(1);
         ScheduleBgCopyTilemapToVram(2);
@@ -1237,5 +1174,15 @@ static const struct SpriteCordsStruct (*ReturnBallPositionByPage(void))[4]
     else
     {
         return sBallSpriteCords_Page2;
+    }
+}
+
+void SetIkigaiStarterPokedexFlags(void)
+{
+    u16 i;
+    for(i=0; i < 9; i++)
+    {
+        (gSaveBlock2Ptr->playerGender == MALE) ? GetSetPokedexFlag(SpeciesToNationalPokedexNum(sStarterChoices_Page1_Male[i].species), FLAG_SET_SEEN) : GetSetPokedexFlag(SpeciesToNationalPokedexNum(sStarterChoices_Page1_Female[i].species), FLAG_SET_SEEN);
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(sStarterChoices_Page2[i].species), FLAG_SET_SEEN);
     }
 }

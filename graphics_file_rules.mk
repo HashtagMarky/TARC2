@@ -24,6 +24,7 @@ STARTERGFXDIR := graphics/starter_choose
 NAMINGGFXDIR := graphics/naming_screen
 SPINDAGFXDIR := graphics/pokemon/spinda/spots
 TITLESCREENGFXDIR := graphics/title_screen
+CALENDARSEASONGFXDIR := graphics/calendar/seasons
 
 types := none normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark fairy stellar
 contest_types := cool beauty cute smart tough
@@ -248,6 +249,9 @@ $(FONTGFXDIR)/small_narrower.latfont: $(FONTGFXDIR)/latin_small_narrower.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/short_narrow.latfont: $(FONTGFXDIR)/latin_short_narrow.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/short_narrower.latfont: $(FONTGFXDIR)/latin_short_narrower.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/small.hwjpnfont: $(FONTGFXDIR)/japanese_small.png
@@ -676,3 +680,15 @@ $(SPINDAGFXDIR)/spot_2.1bpp: %.1bpp: %.png
 
 $(SPINDAGFXDIR)/spot_3.1bpp: %.1bpp: %.png
 	$(GFX) $< $@ -plain -data_width 2
+
+$(CALENDARSEASONGFXDIR)/spring.8bpp: %.8bpp %.png
+	$(GFX) $< $@ -mwidth 8 -mheight 4
+
+$(CALENDARSEASONGFXDIR)/summer.8bpp: %.8bpp %.png
+	$(GFX) $< $@ -mwidth 8 -mheight 4
+
+$(CALENDARSEASONGFXDIR)/autumn.8bpp: %.8bpp %.png
+	$(GFX) $< $@ -mwidth 8 -mheight 4
+
+$(CALENDARSEASONGFXDIR)/winter.8bpp: %.8bpp %.png
+	$(GFX) $< $@ -mwidth 8 -mheight 4

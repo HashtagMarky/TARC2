@@ -40,6 +40,8 @@
 #include "trainer_hill.h"
 #include "fldeff.h"
 
+#include "calendar.h"
+
 static void Task_ExitNonAnimDoor(u8);
 static void Task_ExitNonDoor(u8);
 static void Task_DoContestHallWarp(u8);
@@ -704,6 +706,26 @@ void ReturnFromLinkRoom(void)
     CreateTask(Task_ReturnToWorldFromLinkRoom, 10);
 }
 
+void DoCalendarWarpHome(void)
+{
+    SetWarpDestination(MAP_GROUP(LITTLEROOT_TOWN_BRENDANS_HOUSE_2F), MAP_NUM(LITTLEROOT_TOWN_BRENDANS_HOUSE_2F), WARP_ID_NONE, 1, 4);
+    DoWarp();
+    ResetInitialPlayerAvatarState();
+    LockPlayerFieldControls();
+    FadeOutMapMusic(GetMapMusicFadeoutSpeed());
+    WarpFadeOutScreen();
+    PlayRainStoppingSoundEffect();
+    PlaySE(SE_EXIT);
+    gFieldCallback = FieldCB_DefaultWarpExit;
+    CreateTask(Task_OpenCalendarUI, 10);
+    gTasks[FindTaskIdByFunc(Task_OpenCalendarUI)].tIsWarp = TRUE;
+}
+
+void Task_WarpAndLoadMap_Global(u8 taskId)
+{
+    gTasks[taskId].func = Task_WarpAndLoadMap;
+}
+
 static void Task_WarpAndLoadMap(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
@@ -730,6 +752,37 @@ static void Task_WarpAndLoadMap(u8 taskId)
     case 2:
         WarpIntoMap();
         SetMainCallback2(CB2_LoadMap);
+        DestroyTask(taskId);
+        break;
+    }
+}
+
+void Task_WarpAndLoadMap_Save(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    switch (task->tState)
+    {
+    case 0:
+        FreezeObjectEvents();
+        LockPlayerFieldControls();
+        task->tState++;
+        break;
+    case 1:
+        if (!PaletteFadeActive())
+        {
+            if (task->data[1] == 0)
+            {
+                ClearMirageTowerPulseBlendEffect();
+                task->data[1] = 1;
+            }
+            if (BGMusicStopped())
+                task->tState++;
+        }
+        break;
+    case 2:
+        WarpIntoMap();
+        SetMainCallback2(CB2_LoadMapAndSave);
         DestroyTask(taskId);
         break;
     }
@@ -1418,7 +1471,6 @@ static void Task_RushInjuredPokemonToCenter(u8 taskId)
         ClearWindowTilemap(windowId);
         CopyWindowToVram(windowId, COPYWIN_MAP);
         RemoveWindow(windowId);
-        FillPalBufferBlack();
         FadeInFromBlack();
         gTasks[taskId].tState = FRLG_WHITEOUT_HEAL_SCRIPT;
         break;
@@ -1685,4 +1737,69 @@ static bool8 CheckIsWarpFromShip(s16 x, s16 y)
         return TRUE;
 
     return FALSE;
+}
+
+static void Task_DoDoorScript(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    u8 objEventId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
+    s16 *x = &task->data[2];
+    s16 *y = &task->data[3];
+
+    switch (task->tState)
+    {
+    case 0: //open door
+        FreezeObjectEvents();
+        PlayerGetDestCoords(x, y);
+        PlaySE(GetDoorSoundEffect(*x, *y - 1));
+        task->data[1] = FieldAnimateDoorOpen(*x, *y - 1);
+        task->tState++;
+        break;
+    case 1: //wait for door to open, then walk into door
+        if (task->data[1] < 0 || gTasks[task->data[1]].isActive != TRUE)
+        {
+            ObjectEventClearHeldMovementIfActive(&gObjectEvents[objEventId]);
+            ObjectEventSetHeldMovement(&gObjectEvents[objEventId], MOVEMENT_ACTION_WALK_NORMAL_UP);
+            task->tState++;
+        }
+        break;
+    case 2: //wait for movement, then close door
+        if (IsPlayerStandingStill())
+        {
+            task->data[1] = FieldAnimateDoorClose(*x, *y - 1);
+            ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objEventId]);
+            SetPlayerVisibility(FALSE);
+            task->tState++;
+        }
+        break;
+    case 3: //wait for door to close, then start script
+        if (task->data[1] < 0 || gTasks[task->data[1]].isActive != TRUE)
+        {
+            ScriptContext_Enable();
+            task->tState++;
+        }
+	break;
+    case 4: //wait for script to complete, then open door
+        if(ScriptContext_IsEnabled() == FALSE)
+        {
+            LockPlayerFieldControls();
+            task->data[1] = FieldAnimateDoorOpen(*x, *y - 1);
+            task->tState++;
+        }
+	    break;
+    case 5: //wait for door to reopen, then exit
+        if (task->data[1] < 0 || gTasks[task->data[1]].isActive != TRUE)
+	    {
+            task->tState = 0;
+	        task->func = Task_ExitDoor;
+	    }
+        break;
+    }
+}
+
+void DoDoorScript(void)
+{
+    LockPlayerFieldControls();
+    ScriptContext_Stop();
+    CreateTask(Task_DoDoorScript, 10);
 }

@@ -20,6 +20,7 @@
 #include "constants/contest.h"
 #include "constants/daycare.h"
 #include "constants/decorations.h"
+#include "constants/difficulty.h"
 #include "constants/easy_chat.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
@@ -58,12 +59,14 @@
 #include "constants/vars.h"
 #include "constants/weather.h"
 #include "constants/field_mugshots.h"
+#include "constants/ikigai_characters.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
 
 	.section script_data, "aw", %progbits
 
+	.set ALLOCATE_SCRIPT_CMD_TABLE, 1
 	.include "data/script_cmd_table.inc"
 
 gSpecialVars::
@@ -88,7 +91,7 @@ gSpecialVars::
 	.4byte gSpecialVar_MonBoxId
 	.4byte gSpecialVar_MonBoxPos
 	.4byte gSpecialVar_Unused_0x8014
-	.4byte gTrainerBattleOpponent_A
+	.4byte gTrainerBattleParameter + 2 // gTrainerBattleParameter.params.opponentA
 
 	.include "data/specials.inc"
 
@@ -1155,6 +1158,10 @@ EventScript_VsSeekerChargingDone::
 	.include "data/scripts/toggleable_transport.inc"
 	.include "data/scripts/overworld_encounters.inc"
 	.include "data/scripts/pokedex.inc"
+	.include "data/scripts/dexnav.inc"
+	
+	.include "data/scripts/ikigai_characters/scripts.inc"
+	.include "data/scripts/ikigai_characters/n.inc"
 
 	.include "data/maps/VyratonOutdoors_Ocean/scripts.inc"
 	.include "data/maps/VyratonOutdoors_Ocean/text.inc"

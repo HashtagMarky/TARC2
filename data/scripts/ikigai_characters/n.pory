@@ -1,0 +1,14 @@
+movement(global) IkigaiCharacter_Movement_N_Shrug
+{
+    n_shrug
+}
+
+movement(global) IkigaiCharacter_Movement_N_Headshake
+{
+    n_headshake
+}
+
+movement(global) IkigaiCharacter_Movement_N_Pose
+{
+    n_pose
+}

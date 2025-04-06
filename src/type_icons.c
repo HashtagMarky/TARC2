@@ -550,3 +550,19 @@ static s32 GetTypeIconBounceMovement(s32 originalY, u32 position)
     return originalY + healthbox->y2;
 }
 
+u8 CreateBattlenMoveTypeIcon(u8 x, u8 y, u8 subpriority, u8 type)
+{
+    LoadTypeSpritesAndPalettes();
+
+    struct Sprite* sprite;
+    const struct SpriteTemplate* spriteTemplate = gTypesInfo[type].useSecondTypeIconPalette ? &sSpriteTemplate_TypeIcons2 : &sSpriteTemplate_TypeIcons1;
+    u32 spriteId = CreateSpriteAtEnd(spriteTemplate, x, y, subpriority);
+
+    if (spriteId == MAX_SPRITES)
+        return MAX_SPRITES;
+
+    sprite = &gSprites[spriteId];
+
+    StartSpriteAnim(sprite, type);
+    return spriteId;
+}

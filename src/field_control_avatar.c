@@ -4,6 +4,7 @@
 #include "coord_event_weather.h"
 #include "daycare.h"
 #include "debug.h"
+#include "dexnav.h"
 #include "faraway_island.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -39,6 +40,7 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
+#include "speedup.h"
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPrevMetatileBehavior = 0;
@@ -119,7 +121,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
                 input->pressedAButton = TRUE;
             if (newKeys & B_BUTTON)
                 input->pressedBButton = TRUE;
-            if (newKeys & R_BUTTON && !(heldKeys & B_BUTTON)) // Not Holding B Button as may cause Acro Bike freeze.
+            if (newKeys & R_BUTTON && !(heldKeys & B_BUTTON) && !FlagGet(DN_FLAG_SEARCHING)) // Not Holding B Button as may cause Acro Bike freeze.
                 input->pressedRButton = TRUE;
             if (((newKeys & B_BUTTON) && (newKeys & R_BUTTON)) || ((heldKeys & B_BUTTON) && (newKeys & R_BUTTON)) || ((newKeys & B_BUTTON) && (heldKeys & R_BUTTON)))
                 input->pressedBandRButton = TRUE;
@@ -229,13 +231,25 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         ShowStartMenu();
         return TRUE;
     }
+    
+    if (input->tookStep && TryFindHiddenPokemon())
+        return TRUE;
+    
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
         return TRUE;
+    
+    if (input->pressedRButton && TryStartDexNavSearch())
+        return TRUE;
 
-    if (input->pressedBandRButton && ToggleAutoBike())
-        return TRUE;
-    else if (input->pressedRButton && ToggleTransport())
-        return TRUE;
+    if (VarGet(DN_VAR_SPECIES) == SPECIES_NONE && gPlayerAvatar.tileTransitionState == T_NOT_MOVING
+        && (gSaveBlock2Ptr->optionsOverworldSpeed == OPTIONS_SPEEDUP_NORMAL || FlagGet(FLAG_SUPPRESS_OVERWORLD_SPEEDUP)))
+    {
+        if (input->pressedBandRButton && ToggleAutoBike())
+            return TRUE;
+
+        else if (input->pressedRButton && ToggleTransport())
+            return TRUE;
+    }
 
     if(input->input_field_1_2 && DEBUG_OVERWORLD_MENU && !DEBUG_OVERWORLD_IN_MENU)
     {
@@ -277,7 +291,7 @@ static u16 GetPlayerCurMetatileBehavior(int runningState)
 static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatileBehavior, u8 direction)
 {
     const u8 *script = GetInteractionScript(position, metatileBehavior, direction);
-    if (script == NULL)
+    if (script == NULL || Script_HasNoEffect(script))
         return FALSE;
 
     // Don't play interaction sound for certain scripts.
@@ -499,6 +513,20 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         return EventScript_Questionnaire;
     if (MetatileBehavior_IsTrainerHillTimer(metatileBehavior) == TRUE)
         return EventScript_TrainerHillTimer;
+    if (MetatileBehavior_IsPokeMartSign(metatileBehavior) == TRUE)
+    {
+        if(direction != DIR_NORTH)
+            return NULL;
+        SetMsgSignPostAndVarFacing(direction);
+        return Common_EventScript_ShowPokemartSign;
+    }
+    if (MetatileBehavior_IsPokemonCenterSign(metatileBehavior) == TRUE)
+    {
+        if(direction != DIR_NORTH)
+            return NULL;
+        SetMsgSignPostAndVarFacing(direction);
+        return Common_EventScript_ShowPokemonCenterSign;
+    }
 
     elevation = position->elevation;
     if (elevation == MapGridGetElevationAt(position->x, position->y))
@@ -592,7 +620,12 @@ static bool8 TryStartCoordEventScript(struct MapPosition *position)
 
     if (script == NULL)
         return FALSE;
-    ScriptContext_SetupScript(script);
+
+    struct ScriptContext ctx;
+    if (!RunScriptImmediatelyUntilEffect(SCREFF_V1 | SCREFF_HARDWARE, script, &ctx))
+        return FALSE;
+
+    ScriptContext_ContinueScript(&ctx);
     return TRUE;
 }
 
@@ -976,6 +1009,13 @@ static bool8 TryDoorWarp(struct MapPosition *position, u16 metatileBehavior, u8 
 
         if (MetatileBehavior_IsWarpDoor(metatileBehavior) == TRUE)
         {
+            // Script of Door Entry
+            if (TryStartCoordEventScript(position) == TRUE)
+            {
+                DoDoorScript();
+                return TRUE;
+            }
+
             warpEventId = GetWarpEventAtMapPosition(&gMapHeader, position);
             if (warpEventId != WARP_ID_NONE && IsWarpMetatileBehavior(metatileBehavior) == TRUE)
             {

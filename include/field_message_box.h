@@ -12,6 +12,7 @@ enum
 };
 
 extern const u8* gSpeakerName;
+#define WIN_NAME_PLATE 1
 
 bool8 ShowFieldMessage(const u8 *message);
 bool8 ShowPokenavFieldMessage(const u8 *message);

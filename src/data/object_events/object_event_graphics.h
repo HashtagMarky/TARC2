@@ -615,6 +615,55 @@ const u32 gObjectEventPic_Thomas[] = INCBIN_U32("graphics/object_events/pics/peo
 const u16 gObjectEventPalette_Thomas[] = INCBIN_U16("graphics/object_events/pics/people/thomas.gbapal");
 const u32 gObjectEventPic_Captain[] = INCBIN_U32("graphics/object_events/pics/people/captain.4bpp");
 const u16 gObjectEventPalette_Captain[] = INCBIN_U16("graphics/object_events/pics/people/captain.gbapal");
+const u32 gObjectEventPic_N[] = INCBIN_U32("graphics/object_events/pics/people/n.4bpp");
+const u32 gObjectEventPic_N_Animation[] = INCBIN_U32("graphics/object_events/pics/people/n_animation.4bpp");
+const u16 gObjectEventPalette_N[] = INCBIN_U16("graphics/object_events/pics/people/n.gbapal");
+
+const u32 gObjectEventPic_Accordionist[] = INCBIN_U32("graphics/object_events/pics/people/accordionist.4bpp");
+const u16 gObjectEventPalette_Accordionist[] = INCBIN_U16("graphics/object_events/pics/people/accordionist.gbapal");
+const u32 gObjectEventPic_Keytarist[] = INCBIN_U32("graphics/object_events/pics/people/keytarist.4bpp");
+const u16 gObjectEventPalette_Keytarist[] = INCBIN_U16("graphics/object_events/pics/people/keytarist.gbapal");
+const u32 gObjectEventPic_Erhuist[] = INCBIN_U32("graphics/object_events/pics/people/erhuist.4bpp");
+const u16 gObjectEventPalette_Erhuist[] = INCBIN_U16("graphics/object_events/pics/people/erhuist.gbapal");
+// const u32 gObjectEventPic_Guitarist[] = INCBIN_U32("graphics/object_events/pics/people/guitarist.4bpp");
+// const u16 gObjectEventPalette_Guitarist[] = INCBIN_U16("graphics/object_events/pics/people/guitarist.gbapal");
+const u32 gObjectEventPic_Whistler[] = INCBIN_U32("graphics/object_events/pics/people/whistler.4bpp");
+const u16 gObjectEventPalette_Whistler[] = INCBIN_U16("graphics/object_events/pics/people/whistler.gbapal");
+const u32 gObjectEventPic_Flutist[] = INCBIN_U32("graphics/object_events/pics/people/flutist.4bpp");
+const u16 gObjectEventPalette_Flutist[] = INCBIN_U16("graphics/object_events/pics/people/flutist.gbapal");
 
 const u32 gObjectEventPic_SamuelBriefcase[] = INCBIN_U32("graphics/object_events/pics/misc/samuel_briefcase.4bpp");
 const u16 gObjectEventPalette_SamuelBriefcase[] = INCBIN_U16("graphics/object_events/pics/misc/samuel_briefcase.gbapal");
+
+const u32 gFieldEffectObjectPic_CaveDust[] = INCBIN_U32("graphics/field_effects/pics/cave_dust.4bpp");
+const u16 gFieldEffectObjectPalette_CaveDust[] = INCBIN_U16("graphics/field_effects/palettes/cave_dust.gbapal");
+
+const u32 gObjectEventPic_Cynthia[] = INCBIN_U32("graphics/object_events/pics/people/cynthia.4bpp");
+const u16 gObjectEventPalette_Cynthia[] = INCBIN_U16("graphics/object_events/pics/people/cynthia.gbapal");
+
+const u32 gObjectEventPic_AshKetchum[] = INCBIN_U32("graphics/object_events/pics/people/ash.4bpp");
+const u16 gObjectEventPalette_AshKetchum[] = INCBIN_U16("graphics/object_events/pics/people/ash.gbapal");
+
+const u32 gObjectEventPic_StevenGen4[] = INCBIN_U32("graphics/object_events/pics/people/steven_gen4.4bpp");
+const u16 gObjectEventPalette_StevenGen4[] = INCBIN_U16("graphics/object_events/pics/people/steven_gen4.gbapal");
+
+const u32 gObjectEventPic_Hannah[] = INCBIN_U32("graphics/object_events/pics/people/hannah.4bpp");
+const u16 gObjectEventPalette_Hannah[] = INCBIN_U16("graphics/object_events/pics/people/hannah.gbapal");
+
+const u32 gObjectEventPic_Katie[] = INCBIN_U32("graphics/object_events/pics/people/katie.4bpp");
+const u16 gObjectEventPalette_Katie[] = INCBIN_U16("graphics/object_events/pics/people/katie.gbapal");
+
+const u32 gObjectEventPic_Louis[] = INCBIN_U32("graphics/object_events/pics/people/louis.4bpp");
+const u16 gObjectEventPalette_Louis[] = INCBIN_U16("graphics/object_events/pics/people/louis.gbapal");
+
+const u32 gObjectEventPic_Georgia[] = INCBIN_U32("graphics/object_events/pics/people/georgia.4bpp");
+const u16 gObjectEventPalette_Georgia[] = INCBIN_U16("graphics/object_events/pics/people/georgia.gbapal");
+
+const u32 gObjectEventPic_Diego[] = INCBIN_U32("graphics/object_events/pics/people/diego.4bpp");
+const u16 gObjectEventPalette_Diego[] = INCBIN_U16("graphics/object_events/pics/people/diego.gbapal");
+
+const u32 gObjectEventPic_Joy[] = INCBIN_U32("graphics/object_events/pics/people/joy.4bpp");
+const u16 gObjectEventPalette_Joy[] = INCBIN_U16("graphics/object_events/pics/people/joy.gbapal");
+
+const u32 gFieldEffectObjectPic_Saving[] 	= INCBIN_U32("graphics/field_effects/pics/saving.4bpp");
+const u16 gFieldEffectObjectPaletteSaving[] = INCBIN_U16("graphics/field_effects/palettes/saving.gbapal");

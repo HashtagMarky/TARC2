@@ -3,6 +3,7 @@
 *.i
 *.elf
 *.gba
+*.bps
 !data/*.gba
 *.sgm
 *.sa1
@@ -41,3 +42,9 @@ prefabs.json
 /pokeemerald-*.png
 src/data/map_group_count.h
 tools/trainerproc/trainerproc
+*.Identifier
+*.smol
+*.fastSmol
+*.smolTM
+__pycache__
+tools/poryscript/poryscript

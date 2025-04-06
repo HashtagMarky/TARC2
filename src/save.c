@@ -7,6 +7,7 @@
 #include "decompress.h"
 #include "load_save.h"
 #include "overworld.h"
+#include "hall_of_fame.h"
 #include "pokemon_storage_system.h"
 #include "main.h"
 #include "trainer_hill.h"
@@ -227,7 +228,6 @@ static u8 HandleWriteSectorNBytes(u8 sectorId, u8 *data, u16 size)
     for (i = 0; i < size; i++)
         sector->data[i] = data[i];
 
-    sector->id = CalculateChecksum(data, size); // though this appears to be incorrect, it might be some sector checksum instead of a whole save checksum and only appears to be relevent to HOF data, if used.
     return TryWriteSector(sectorId, sector->data);
 }
 
@@ -504,10 +504,8 @@ static u8 CopySaveSlotData(u16 sectorId, struct SaveSectorLocation *locations)
         if (id == 0)
             gLastWrittenSector = i;
 
-        checksum = CalculateChecksum(gReadWriteSector->data, locations[id].size);
-
         // Only copy data for sectors whose signature and checksum fields are correct
-        if (gReadWriteSector->signature == SECTOR_SIGNATURE && gReadWriteSector->checksum == checksum)
+        if (gReadWriteSector->signature == SECTOR_SIGNATURE)
         {
             u16 j;
             for (j = 0; j < locations[id].size; j++)
@@ -537,12 +535,8 @@ static u8 GetSaveValidStatus(const struct SaveSectorLocation *locations)
         if (gReadWriteSector->signature == SECTOR_SIGNATURE)
         {
             signatureValid = TRUE;
-            checksum = CalculateChecksum(gReadWriteSector->data, locations[gReadWriteSector->id].size);
-            if (gReadWriteSector->checksum == checksum)
-            {
-                saveSlot1Counter = gReadWriteSector->counter;
-                validSectorFlags |= 1 << gReadWriteSector->id;
-            }
+            saveSlot1Counter = gReadWriteSector->counter;
+            validSectorFlags |= 1 << gReadWriteSector->id;
         }
     }
 
@@ -569,12 +563,8 @@ static u8 GetSaveValidStatus(const struct SaveSectorLocation *locations)
         if (gReadWriteSector->signature == SECTOR_SIGNATURE)
         {
             signatureValid = TRUE;
-            checksum = CalculateChecksum(gReadWriteSector->data, locations[gReadWriteSector->id].size);
-            if (gReadWriteSector->checksum == checksum)
-            {
-                saveSlot2Counter = gReadWriteSector->counter;
-                validSectorFlags |= 1 << gReadWriteSector->id;
-            }
+            saveSlot2Counter = gReadWriteSector->counter;
+            validSectorFlags |= 1 << gReadWriteSector->id;
         }
     }
 
@@ -651,19 +641,10 @@ static u8 TryLoadSaveSector(u8 sectorId, u8 *data, u16 size)
     ReadFlashSector(sectorId, sector);
     if (sector->signature == SECTOR_SIGNATURE)
     {
-        u16 checksum = CalculateChecksum(sector->data, size);
-        if (sector->id == checksum)
-        {
-            // Signature and checksum are correct, copy data
-            for (i = 0; i < size; i++)
-                data[i] = sector->data[i];
-            return SAVE_STATUS_OK;
-        }
-        else
-        {
-            // Incorrect checksum
-            return SAVE_STATUS_CORRUPT;
-        }
+        // Signature and checksum are correct, copy data
+        for (i = 0; i < size; i++)
+            data[i] = sector->data[i];
+        return SAVE_STATUS_OK;
     }
     else
     {
@@ -716,7 +697,6 @@ u8 HandleSavingData(u8 saveType)
 {
     u8 i;
     u32 *backupVar = gTrainerHillVBlankCounter;
-    u8 *tempAddr;
 
     gTrainerHillVBlankCounter = NULL;
     UpdateSaveAddresses();
@@ -737,9 +717,12 @@ u8 HandleSavingData(u8 saveType)
         WriteSaveSectorOrSlot(FULL_SAVE_SLOT, gRamSaveSectorLocations);
 
         // Save the Hall of Fame
-        tempAddr = gDecompressionBuffer;
-        HandleWriteSectorNBytes(SECTOR_ID_HOF_1, tempAddr, SECTOR_DATA_SIZE);
-        HandleWriteSectorNBytes(SECTOR_ID_HOF_2, tempAddr + SECTOR_DATA_SIZE, SECTOR_DATA_SIZE);
+        if (gHoFSaveBuffer != NULL)
+        {
+            u8 *tempAddr = (void *) gHoFSaveBuffer;
+            HandleWriteSectorNBytes(SECTOR_ID_HOF_1, tempAddr, SECTOR_DATA_SIZE);
+            HandleWriteSectorNBytes(SECTOR_ID_HOF_2, tempAddr + SECTOR_DATA_SIZE, SECTOR_DATA_SIZE);
+        }
         break;
     case SAVE_NORMAL:
     default:
@@ -897,9 +880,17 @@ u8 LoadGameSave(u8 saveType)
         gGameContinueCallback = 0;
         break;
     case SAVE_HALL_OF_FAME:
-        status = TryLoadSaveSector(SECTOR_ID_HOF_1, gDecompressionBuffer, SECTOR_DATA_SIZE);
-        if (status == SAVE_STATUS_OK)
-            status = TryLoadSaveSector(SECTOR_ID_HOF_2, &gDecompressionBuffer[SECTOR_DATA_SIZE], SECTOR_DATA_SIZE);
+        if (gHoFSaveBuffer != NULL)
+        {
+            u8 *hofData = (u8 *) gHoFSaveBuffer;
+            status = TryLoadSaveSector(SECTOR_ID_HOF_1, hofData, SECTOR_DATA_SIZE);
+            if (status == SAVE_STATUS_OK)
+                status = TryLoadSaveSector(SECTOR_ID_HOF_2, &hofData[SECTOR_DATA_SIZE], SECTOR_DATA_SIZE);
+        }
+        else
+        {
+            status = SAVE_STATUS_ERROR;
+        }
         break;
     }
 

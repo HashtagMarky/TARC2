@@ -31,6 +31,15 @@ text VyratonIndoors_SSPathfinder_Text_WhatBringsYou
         Whit's brought ye tae it?")
 }
 
+text VyratonIndoors_SSPathfinder_Text_WhatBringsYou_WhateverItMayBe
+{
+    format("
+        No matter if ye want a fresh start, or\n
+        ye looki' fer a new challenge tae face,\l
+        I know ye'll find success.\p
+        Some folks just say the weather…")
+}
+
 text VyratonIndoors_SSPathfinder_Text_WhatBringsYou_FreshStart
 {
     format("

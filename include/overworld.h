@@ -52,6 +52,7 @@ extern bool8 (*gFieldCallback2)(void);
 extern u8 gLocalLinkPlayerId;
 extern u8 gFieldLinkPlayerCount;
 extern bool8 gExitStairsMovementDisabled;
+extern bool8 gSkipShowMonAnim;
 
 extern const struct UCoords32 gDirectionToVectors[];
 
@@ -135,6 +136,7 @@ void SetUnusedCallback(void *func);
 void CB2_NewGame(void);
 void CB2_WhiteOut(void);
 void CB2_LoadMap(void);
+void CB2_LoadMapAndSave(void);
 void CB2_ReturnToFieldContestHall(void);
 void CB2_ReturnToFieldCableClub(void);
 void CB2_ReturnToField(void);

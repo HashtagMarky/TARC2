@@ -44,10 +44,17 @@
 #include "trainer_card.h"
 #include "window.h"
 #include "union_room.h"
+#include "dexnav.h"
+#include "wild_encounter.h"
 #include "constants/battle_frontier.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "social_media.h"
+
+#include "sample_ui.h"
+
+#if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_START_MENU)
+#define AddTextPrinterParameterized (AddTextPrinterFixedCaseParameterized)
+#endif
 
 // Menu actions
 enum
@@ -66,7 +73,8 @@ enum
     MENU_ACTION_RETIRE_FRONTIER,
     MENU_ACTION_PYRAMID_BAG,
     MENU_ACTION_DEBUG,
-    MENU_ACTION_SOCIAL_MEDIA,
+    MENU_ACTION_SAMPLE_UI,
+    MENU_ACTION_DEXNAV,
 };
 
 // Save status
@@ -108,7 +116,8 @@ static bool8 StartMenuLinkModePlayerNameCallback(void);
 static bool8 StartMenuBattlePyramidRetireCallback(void);
 static bool8 StartMenuBattlePyramidBagCallback(void);
 static bool8 StartMenuDebugCallback(void);
-static bool8 StartMenuUiMenuCallback(void);
+static bool8 StartMenuSampleUICallback(void);
+static bool8 StartMenuDexNavCallback(void);
 
 // Menu callbacks
 static bool8 SaveStartCallback(void);
@@ -175,6 +184,8 @@ static const struct WindowTemplate sWindowTemplate_PyramidFloor = {
     .baseBlock = 0x8
 };
 
+static const u8 gText_MenuDebug[] = _("DEBUG");
+static const u8 sText_SampleUI[] = _("SampleUI");
 static const struct WindowTemplate sWindowTemplate_PyramidPeak = {
     .bg = 0,
     .tilemapLeft = 1,
@@ -187,7 +198,7 @@ static const struct WindowTemplate sWindowTemplate_PyramidPeak = {
 
 static const u8 sText_MenuDebug[] = _("DEBUG");
 
-static const u8 sText_NewMenu[] = _("My Menu");
+static const u8 sText_PokeSphere[] = _("POKéSPHERE");
 static const struct MenuAction sStartMenuItems[] =
 {
     [MENU_ACTION_POKEDEX]         = {gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback}},
@@ -204,7 +215,8 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_RETIRE_FRONTIER] = {gText_MenuRetire,  {.u8_void = StartMenuBattlePyramidRetireCallback}},
     [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}},
     [MENU_ACTION_DEBUG]           = {sText_MenuDebug,   {.u8_void = StartMenuDebugCallback}},
-    [MENU_ACTION_SOCIAL_MEDIA]         = {sText_NewMenu,     {.u8_void = StartMenuUiMenuCallback}}
+    [MENU_ACTION_SAMPLE_UI]       = {sText_SampleUI,    {.u8_void = StartMenuSampleUICallback}},
+    [MENU_ACTION_DEXNAV]          = {gText_MenuDexNav,  {.u8_void = StartMenuDexNavCallback}},
 };
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
@@ -331,22 +343,23 @@ static void AddStartMenuAction(u8 action)
 static void BuildNormalStartMenu(void)
 {
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
-    {
         AddStartMenuAction(MENU_ACTION_POKEDEX);
-    }
+
+    if (DN_FLAG_DEXNAV_GET != 0 && FlagGet(DN_FLAG_DEXNAV_GET))
+        AddStartMenuAction(MENU_ACTION_DEXNAV);
+
     if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
-    {
         AddStartMenuAction(MENU_ACTION_POKEMON);
-    }
 
     AddStartMenuAction(MENU_ACTION_BAG);
 
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
-    {
         AddStartMenuAction(MENU_ACTION_POKENAV);
+
+    if (DEV_BUILD)
+    {
+        AddStartMenuAction(MENU_ACTION_SAMPLE_UI);
     }
-    
-    AddStartMenuAction(MENU_ACTION_SOCIAL_MEDIA);
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
@@ -645,6 +658,9 @@ static bool8 HandleStartMenuInput(void)
             if (GetNationalPokedexCount(FLAG_GET_SEEN) == 0)
                 return FALSE;
         }
+        if (sCurrentStartMenuActions[sStartMenuCursorPos] == MENU_ACTION_DEXNAV
+          && MapHasNoEncounterData())
+            return FALSE;
 
         gMenuCallback = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void;
 
@@ -670,7 +686,7 @@ static bool8 HandleStartMenuInput(void)
     return FALSE;
 }
 
-static bool8 StartMenuPokedexCallback(void)
+bool8 StartMenuPokedexCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -1493,8 +1509,34 @@ void AppendToList(u8 *list, u8 *pos, u8 newEntry)
     (*pos)++;
 }
 
-static bool8 StartMenuUiMenuCallback(void)
+static bool8 StartMenuSampleUICallback(void)
 {
-    CreateTask(Task_OpenMenuFromStartMenu, 0);
+    // Change which version of the UI is launched by changing which task is called from here
+    CreateTask(Task_OpenSampleUi_BlankTemplate, 0);
     return TRUE;
+}
+
+static bool8 StartMenuDexNavCallback(void)
+{
+    CreateTask(Task_OpenDexNavFromStartMenu, 0);
+    return TRUE;
+}
+
+void Script_ForceSaveGame(struct ScriptContext *ctx)
+{
+    SaveGame();
+    ShowSaveInfoWindow();
+    gMenuCallback = SaveCallback;
+    sSaveDialogCallback = SaveSavingMessageCallback;
+}
+
+void AutoSaveDoSave(void)
+{
+    u8 saveStatus;
+    SaveMapView();
+    sSavingComplete = FALSE;
+    IncrementGameStat(GAME_STAT_SAVED_GAME);
+    saveStatus = TrySavingData(SAVE_NORMAL);
+    gDifferentSaveFile = FALSE;
+    return;
 }

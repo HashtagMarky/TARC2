@@ -119,7 +119,6 @@ static void Task_MainMenuWaitFadeIn(u8 taskId);
 static void Task_MainMenuMain(u8 taskId);
 static void MainMenu_InitializeGPUWindows(void);
 
-static void CreateProtagonistMugshotSpriteSheets();
 static void CreateMugshot();
 static void DestroyMugshot();
 static void CreateIconShadow();
@@ -217,51 +216,6 @@ static const u32 sMainBgTiles[] = INCBIN_U32("graphics/ui_main_menu/main_tiles.4
 //  Sprite Data for Mugshots and Icon Shadows 
 //
 #define TAG_ICON_BOX 30006
-static const struct OamData sOamData_Mugshot =
-{
-    .size = SPRITE_SIZE(64x64),
-    .shape = SPRITE_SHAPE(64x64),
-    .priority = 1,
-};
-
-static struct CompressedSpriteSheet sSpriteSheet_ProtagonistMugshot;
-
-static void CreateProtagonistMugshotSpriteSheets()
-{
-    u16 mugshotId = (gSaveBlock2Ptr->playerGender == MALE) ? MUGSHOT_KOLE : MUGSHOT_ANKA;
-    sSpriteSheet_ProtagonistMugshot.data = gFieldMugshots[mugshotId][gSaveBlock2Ptr->playerEmote].gfx;
-    sSpriteSheet_ProtagonistMugshot.size = 64 * 64 * 1 / 2;
-    sSpriteSheet_ProtagonistMugshot.tag = TAG_MUGSHOT;
-}
-
-static const struct SpritePalette sSpritePal_ProtagonistMugshot =
-{
-    .data = sFieldMugshotPal_Protagonist,
-    .tag = TAG_MUGSHOT
-};
-
-static const union AnimCmd sSpriteAnim_Mugshot[] =
-{
-    ANIMCMD_FRAME(0, 32),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd *const sSpriteAnimTable_Mugshot[] =
-{
-    sSpriteAnim_Mugshot,
-};
-
-static const struct SpriteTemplate sSpriteTemplate_Mugshot =
-{
-    .tileTag = TAG_MUGSHOT,
-    .paletteTag = TAG_MUGSHOT,
-    .oam = &sOamData_Mugshot,
-    .anims = sSpriteAnimTable_Mugshot,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
-};
-
 static const struct OamData sOamData_IconBox =
 {
     .size = SPRITE_SIZE(32x32),
@@ -593,9 +547,6 @@ static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spr
     {
         LoadCompressedSpriteSheet(&sSpriteSheet_IconBox);
         LoadSpritePalette(ReturnIconBoxPalette());
-        CreateProtagonistMugshotSpriteSheets();
-        LoadCompressedSpriteSheet(&sSpriteSheet_ProtagonistMugshot);
-        LoadSpritePalette(&sSpritePal_ProtagonistMugshot);
         DynPal_LoadPaletteByTag(sDynPalPlayerMugshot, TAG_MUGSHOT);
         LoadPalette(ReturnMenuUIPalette(), 0, 32);
         LoadPalette(ReturnScrollingBackgroundPalette(), 16, 32);
@@ -632,7 +583,12 @@ static void MainMenu_InitWindows(void) // Init Text Windows
 //
 static void CreateMugshot()
 {
-    sMainMenuDataPtr->mugshotSpriteId = CreateSprite(&sSpriteTemplate_Mugshot, 48, 56, 1);
+    u16 mugshotId = (gSaveBlock2Ptr->playerGender == MALE) ? MUGSHOT_KOLE : MUGSHOT_ANKA;
+    sMainMenuDataPtr->mugshotSpriteId = CreateFieldMugshotSprite(mugshotId, gSaveBlock2Ptr->playerEmote, FALSE, FALSE, 0);
+    gSprites[sMainMenuDataPtr->mugshotSpriteId].x = 48;
+    gSprites[sMainMenuDataPtr->mugshotSpriteId].y = 56;
+    gSprites[sMainMenuDataPtr->mugshotSpriteId].subpriority = 1;
+    gSprites[sMainMenuDataPtr->mugshotSpriteId].anims = gSpriteAnimTable_Mugshot_Flipped;
     gSprites[sMainMenuDataPtr->mugshotSpriteId].invisible = FALSE;
     StartSpriteAnim(&gSprites[sMainMenuDataPtr->mugshotSpriteId], 0);
     gSprites[sMainMenuDataPtr->mugshotSpriteId].oam.priority = 0;

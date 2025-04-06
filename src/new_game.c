@@ -46,7 +46,11 @@
 #include "union_room_chat.h"
 #include "constants/battle.h"
 #include "constants/field_mugshots.h"
+#include "constants/map_groups.h"
 #include "constants/items.h"
+#include "ikigai_characters.h"
+#include "speedup.h"
+#include "difficulty.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 extern const u8 EventScript_ResetIkigaiMapFlags[];
@@ -55,6 +59,7 @@ static void ClearFrontierRecord(void);
 static void WarpToTruck(void);
 static void ResetMiniGamesRecords(void);
 static void ResetItemFlags(void);
+static void ResetDexNav(void);
 
 static void WarpToShip(void);
 
@@ -96,7 +101,7 @@ static void InitPlayerTrainerId(void)
 // L=A isnt set here for some reason.
 static void SetDefaultOptions(void)
 {
-    gSaveBlock2Ptr->playerEmote = EMOTE_NORMAL;
+    gSaveBlock2Ptr->playerEmote = MUGSHOT_EMOTE_HAPPY;
     gSaveBlock2Ptr->ikigaiGymType = TYPE_NONE;
     gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FASTER;
     gSaveBlock2Ptr->optionsTitleScreenRandomise = TRUE;
@@ -107,13 +112,16 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsDisableMatchCall = FALSE;    //tx_optionsPlus
     gSaveBlock2Ptr->optionsCurrentFont = FONT_SMALL;         //tx_optionsPlus
     gSaveBlock2Ptr->optionsSuppressNPCMugshots = FALSE;
-    gSaveBlock2Ptr->optionsFollowerMugshots = MUGSHOT_FOLLOWER_PLACEHOLDER;
+    gSaveBlock2Ptr->optionsFollowerMugshots = MUGSHOT_FOLLOWER_ON;
     gSaveBlock2Ptr->optionsOverworldCatchSuccessMultiplyer = FALSE;
     gSaveBlock2Ptr->optionsBikeMusic = FALSE;
     gSaveBlock2Ptr->optionsSurfMusic = FALSE;
-    gSaveBlock2Ptr->optionsWildBattleSpeed = OPTIONS_BATTLE_SPEED_NORMAL;
-    gSaveBlock2Ptr->optionsTrainerBattleSpeed = OPTIONS_BATTLE_SPEED_NORMAL;
-    gSaveBlock2Ptr->optionsClockMode = FALSE;
+    gSaveBlock2Ptr->optionsOverworldSpeed = OPTIONS_SPEEDUP_NORMAL;
+    gSaveBlock2Ptr->optionsNPCName = TRUE;
+    gSaveBlock2Ptr->optionsDisableAutoSave = DEV_BUILD ? TRUE : FALSE;
+    gSaveBlock2Ptr->optionsWildBattleSpeed = OPTIONS_SPEEDUP_NORMAL;
+    gSaveBlock2Ptr->optionsTrainerBattleSpeed = OPTIONS_SPEEDUP_NORMAL;
+    gSaveBlock2Ptr->optionsClockMode = TRUE;
     gSaveBlock2Ptr->optionsDamageNumbers = FALSE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
     gSaveBlock3Ptr->autoRun = FALSE;
@@ -158,6 +166,7 @@ static void WarpToShip(void)
 {
     FlagSet(FLAG_HIDE_MAP_NAME_POPUP);
     FlagSet(FLAG_SUPPRESS_MUGSHOT);
+    FlagSet(FLAG_SUPPRESS_FOLLOWER);
     SetWarpDestination(MAP_GROUP(VYRATON_OUTDOORS_OCEAN), MAP_NUM(VYRATON_OUTDOORS_OCEAN), WARP_ID_NONE, 4, 2);
     WarpIntoMap();
 }
@@ -239,7 +248,11 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
+    SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     ResetItemFlags();
+    IkigaiCharacter_SetAllCharacterDefaultOpinion();
+    SetDefaultPlayerNickname();
+    ResetDexNav();
 }
 
 static void ResetMiniGamesRecords(void)
@@ -255,4 +268,12 @@ static void ResetItemFlags(void)
 #if OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_FIRST_TIME
     memset(&gSaveBlock3Ptr->itemFlags, 0, sizeof(gSaveBlock3Ptr->itemFlags));
 #endif
+}
+
+static void ResetDexNav(void)
+{
+#if USE_DEXNAV_SEARCH_LEVELS == TRUE
+    memset(gSaveBlock3Ptr->dexNavSearchLevels, 0, sizeof(gSaveBlock3Ptr->dexNavSearchLevels));
+#endif
+    gSaveBlock3Ptr->dexNavChain = 0;
 }
