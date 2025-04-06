@@ -638,6 +638,15 @@ void PlayBGM(u16 songNum)
     m4aSongNumStart(songNum);
 }
 
+void PlayBGMOrContinue(u16 songNum)
+{
+    if (gDisableMusic)
+        songNum = 0;
+    if (songNum == MUS_NONE)
+        songNum = 0;
+    m4aSongNumStartOrContinue(songNum);
+}
+
 void PlaySE(u16 songNum)
 {
     m4aSongNumStart(songNum);
