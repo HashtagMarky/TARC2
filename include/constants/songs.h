@@ -567,13 +567,14 @@
 #define MUS_B_DOME_LOBBY                  531 // MUS_B_DOME1
 
 #define EM_MUSIC_END                      MUS_B_DOME_LOBBY
-#define MUSIC_EXPANSION_START             (EM_MUSIC_END + 1)
 
 enum MusicExpansion 
 {  
+    MUSIC_EXPANSION_START = EM_MUSIC_END,
+
     #if MUSIC_EXPANSION_GEN4_MUSIC_ENABLED == TRUE
     // Diamond & Pearl Music
-    MUS_DP_TWINLEAF_DAY = MUSIC_EXPANSION_START, // Twinleaf Town (Day)
+    MUS_DP_TWINLEAF_DAY,               // Twinleaf Town (Day)
     MUS_DP_SANDGEM_DAY,                // Sandgem Town (Day)
     MUS_DP_FLOAROMA_DAY,               // Floaroma Town (Day)
     MUS_DP_SOLACEON_DAY,               // Solaceon Town (Day)
