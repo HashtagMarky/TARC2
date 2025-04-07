@@ -162,6 +162,7 @@ static inline u32 CycleCountEnd()
     // return result
     return REG_TM2CNT_L | (REG_TM3CNT_L << 16u);
 }
+#endif
 
 struct Coords8
 {
