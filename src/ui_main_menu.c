@@ -48,6 +48,8 @@
 #include "mystery_gift_menu.h"
 #include "link.h"
 
+#define tStopBGM data[1]
+
 /*
  * 
  */
@@ -128,6 +130,7 @@ static void CreatePartyMonIcons();
 static void DestroyMonIcons();
 
 static const struct SpritePalette *ReturnIconBoxPalette(void);
+static void FadeOutMainMenuMusic(u8 taskId);
 
 
 //==========Background and Window Data==========//
@@ -368,6 +371,9 @@ static void Task_MainMenuWaitFadeIn(u8 taskId)
 
 static void Task_MainMenuTurnOff(u8 taskId)
 {
+    if (IsBGMPlaying() && gTasks[taskId].tStopBGM)
+        return;
+    
     if (!gPaletteFade.active)
     {
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
@@ -789,6 +795,7 @@ static void Task_MainMenuMain(u8 taskId)
     if (JOY_NEW(A_BUTTON)) // If Pressed A go to thing you pressed A on
     {
         PlaySE(SE_SELECT);
+        gTasks[taskId].tStopBGM = FALSE;
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         switch(sSelectedOption)
         {
@@ -817,12 +824,17 @@ static void Task_MainMenuMain(u8 taskId)
                 sSelectedOption = HW_WIN_CONTINUE;
                 break;
         }
+
+        if (sSelectedOption != HW_WIN_OPTIONS)
+            FadeOutMainMenuMusic(taskId);
+        
         gTasks[taskId].func = Task_MainMenuTurnOff;
     }
 
     if (JOY_NEW(B_BUTTON)) // If B Pressed Go To Title Screen
     {
         PlaySE(SE_PC_OFF);
+        FadeOutMainMenuMusic(taskId);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         sMainMenuDataPtr->savedCallback = CB2_InitTitleScreen;
         sSelectedOption = HW_WIN_CONTINUE;
@@ -939,3 +951,11 @@ static const struct SpritePalette *ReturnIconBoxPalette(void)
 
     return &palIconBox;
 }
+
+static void FadeOutMainMenuMusic(u8 taskId)
+{
+    FadeOutBGM(6);
+    gTasks[taskId].tStopBGM = TRUE;
+}
+
+#undef tStopBGM
