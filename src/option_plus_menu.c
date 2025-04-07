@@ -23,6 +23,9 @@
 #include "event_data.h"
 #include "speedup.h"
 
+#include "sound.h"
+#include "constants/songs.h"
+
 enum
 {
     MENU_MAIN,
@@ -1196,6 +1199,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsDamageNumbers        = sOptions->sel_battle[MENUITEM_BATTLE_DAMAGE_NUMBERS];
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+    PlaySE(SE_PC_OFF);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
 }
 
