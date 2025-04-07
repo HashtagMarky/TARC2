@@ -4560,12 +4560,16 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
 
     if (JOY_NEW(A_BUTTON))
     {
-        m4aSongNumStop(gTasks[taskId].tCurrentSong);
         gTasks[taskId].tCurrentSong = gTasks[taskId].tInput;
         if (FLAG_DEBUG_SOUND_OVERWORLD_PLAY)
-            Overworld_ChangeMusicTo(gTasks[taskId].tInput);
+        {
+            FadeOutAndPlayNewMapMusic(gTasks[taskId].tInput, 1);
+        }
         else
+        {
+            m4aSongNumStop(gTasks[taskId].tCurrentSong);
             m4aSongNumStart(gTasks[taskId].tInput);
+        }
     }
     else if (JOY_NEW(B_BUTTON))
     {
