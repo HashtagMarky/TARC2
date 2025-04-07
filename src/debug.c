@@ -345,7 +345,7 @@ enum DynamicMusicTracksDebugMenu
 #define DEBUG_MENU_WIDTH_WEATHER 15
 #define DEBUG_MENU_HEIGHT_WEATHER 3
 
-#define DEBUG_MENU_WIDTH_SOUND 20
+#define DEBUG_MENU_WIDTH_SOUND 25
 #define DEBUG_MENU_HEIGHT_SOUND 6
 
 #define DEBUG_MENU_WIDTH_FLAGVAR 4
@@ -666,8 +666,8 @@ static const u8 sDebugText_PokemonGmaxFactor[] =        _("Gmax Factor:{CLEAR_TO
 static const u8 sDebugText_IVs[] =                      _("IV {STR_VAR_1}:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_EVs[] =                      _("EV {STR_VAR_1}:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 // Sound Menu
-static const u8 sDebugText_Sound_SFX_ID[] =             _("SFX ID: {STR_VAR_3}   {START_BUTTON} Stop\n{STR_VAR_1}    \n{STR_VAR_2}");
-static const u8 sDebugText_Sound_Music_ID[] =           _("Music ID: {STR_VAR_3}   {START_BUTTON} Stop\n{STR_VAR_1}    \n{STR_VAR_2}");
+static const u8 sDebugText_Sound_SFX_ID[] =             _("SFX ID: {STR_VAR_3}   {START_BUTTON} Stop\n{STR_VAR_1}    {CLEAR_TO 240}\n{STR_VAR_2}");
+static const u8 sDebugText_Sound_Music_ID[] =           _("Music ID: {STR_VAR_3}   {START_BUTTON} Stop\n{STR_VAR_1}    {CLEAR_TO 240}\n{STR_VAR_2}");
 
 const u8 *const gText_DigitIndicator[] =
 {
