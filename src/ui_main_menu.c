@@ -450,6 +450,7 @@ static bool8 MainMenu_DoGfxSetup(void)
         break;
     case 6:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        PlayBGMOrContinue(PMD_EVENT_ESCAPE_01);
         gMain.state++;
         break;
     default:
@@ -924,6 +925,9 @@ static void Task_MainMenuMain(u8 taskId)
         }
         MoveHWindowsWithInput();
     }
+
+    if (JOY_NEW(DPAD_ANY))
+        PlaySE(SE_SELECT);
 }
 
 static const struct SpritePalette *ReturnIconBoxPalette(void)
