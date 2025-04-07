@@ -1,3 +1,4 @@
+.if MUSIC_EXPANSION_PMDR_MUSIC_ENABLED == TRUE
 	.include "sound/wave/gbwave_016.s"
 	.include "sound/wave/gbwave_000.s"
 	.include "sound/wave/gbwave_001.s"
@@ -16,3 +17,4 @@
 	.include "sound/wave/gbwave_014.s"
 	.include "sound/wave/gbwave_015.s"
 	.include "sound/wave/gbwave_017.s"
+.endif @ MUSIC_EXPANSION_PMDR_MUSIC_ENABLED

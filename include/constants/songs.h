@@ -571,6 +571,7 @@
 
 enum MusicExpansion 
 {  
+    #if MUSIC_EXPANSION_GEN4_MUSIC_ENABLED == TRUE
     // Diamond & Pearl Music
     MUS_DP_TWINLEAF_DAY = MUSIC_EXPANSION_START, // Twinleaf Town (Day)
     MUS_DP_SANDGEM_DAY,                // Sandgem Town (Day)
@@ -943,7 +944,9 @@ enum MusicExpansion
     MUS_HG_OBTAIN_CASTLE_POINTS,       // Received Castle Points!
     MUS_HG_OBTAIN_B_POINTS,            // Received Battle Points!
     MUS_HG_WIN_MINIGAME,               // Cleared Wobbuffet Pop!
+#endif // MUSIC_EXPANSION_GEN4_MUSIC_ENABLED
 
+#if MUSIC_EXPANSION_GEN5_MUSIC_ENABLED == TRUE
     // Start BW/2 Songs
     MUS_BW12_001,
     MUS_BW12_002,
@@ -1150,7 +1153,9 @@ enum MusicExpansion
     MUS_BW12_CREDITS,
     MUS_BW12_CREDITS_END,
     MUS_BW12_PWT_VENUE,
+#endif // MUSIC_EXPANSION_GEN5_MUSIC_ENABLED
 
+#if MUSIC_EXPANSION_PMDR_MUSIC_ENABLED == TRUE
     // Red & Blue Rescue Team Music
     PMD_HABITAT_HOME01,
     PMD_HABITAT_DARK_01,
@@ -1400,6 +1405,7 @@ enum MusicExpansion
     PMD_EVENT_MOTION_EAT_L,
     PMD_EVENT_EXPLOSION_01,
     PMD_EVENT_EFF_RAIN,
+#endif // MUSIC_EXPANSION_PMDR_MUSIC_ENABLED
 
     // End of Music Expansion
     MUSIC_EXPANSION_END,

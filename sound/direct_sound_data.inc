@@ -6434,6 +6434,7 @@ DirectSoundWaveData_puresquare_50::
 DirectSoundWaveData_purenoise::
 	.incbin "sound/direct_sound_samples/purenoise.bin"
 
+.if MUSIC_EXPANSION_GEN4_MUSIC_ENABLED == TRUE
 	.align 2
 DirectSoundWaveData_dp_808snare_16::
 	.incbin "sound/direct_sound_samples/dp_808snare_16.bin"
@@ -7709,11 +7710,13 @@ DirectSoundWaveData_hg_hoohclap::
 	.align 2
 DirectSoundWaveData_hg_choirc5::
 	.incbin "sound/direct_sound_samples/hg_choirc5.bin"
+.endif @ MUSIC_EXPANSION_GEN4_MUSIC_ENABLED
 
 	.align 2
 Voice_NarraterGreeting::
 	.incbin "sound/direct_sound_samples/voices/narrater_ikigai.bin"
 
+.if MUSIC_EXPANSION_GEN5_MUSIC_ENABLED == TRUE
 @ -- Start BW/2 Instrument Samples --
 
     .align 2
@@ -9617,3 +9620,4 @@ DirectSoundWaveData_BWInstrumentSample475::
     .incbin "sound/direct_sound_samples/bw/bw_instrument_sample_475.bin"
 
 @ -- End BW/2 Instrument Samples --
+.endif @ MUSIC_EXPANSION_GEN5_MUSIC_ENABLED

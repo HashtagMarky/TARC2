@@ -1,3 +1,4 @@
+.if MUSIC_EXPANSION_PMDR_MUSIC_ENABLED == TRUE
 	.include "sound/pmd_voicegroups/bank_000.s"
 	.include "sound/pmd_voicegroups/drums_000.s"
 	.include "sound/pmd_voicegroups/drums_001.s"
@@ -38,3 +39,4 @@
 	.include "sound/pmd_voicegroups/map_004.s"
 	.include "sound/pmd_voicegroups/map_008.s"
 	.include "sound/pmd_voicegroups/map_009.s"
+.endif @ MUSIC_EXPANSION_PMDR_MUSIC_ENABLED

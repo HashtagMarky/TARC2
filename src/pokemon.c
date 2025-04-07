@@ -5837,6 +5837,7 @@ u16 GetBattleBGM(void)
     {
         switch (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL))
         {
+        #if MUSIC_EXPANSION_GEN4_MUSIC_ENABLED == TRUE
         case SPECIES_ARTICUNO:
         case SPECIES_ZAPDOS:
         case SPECIES_MOLTRES:
@@ -5946,6 +5947,7 @@ u16 GetBattleBGM(void)
         case SPECIES_ARCEUS_FAIRY:
             return MUS_DP_VS_ARCEUS;
         #endif
+        #endif // MUSIC_EXPANSION_GEN4_MUSIC_ENABLED
         default:
             return MUS_VS_WILD;
         }

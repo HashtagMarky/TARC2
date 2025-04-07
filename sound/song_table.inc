@@ -533,6 +533,7 @@ gSongTable::
 	song mus_vs_frontier_brain, 0, 0
 	song mus_vs_mew, 0, 0
 	song mus_b_dome_lobby, 0, 0
+.if MUSIC_EXPANSION_GEN4_MUSIC_ENABLED == TRUE
 	song mus_dp_twinleaf_day, 0, 0
 	song mus_dp_sandgem_day, 0, 0
 	song mus_dp_floaroma_day, 0, 0
@@ -900,6 +901,8 @@ gSongTable::
 	song mus_hg_obtain_castle_points, 2, 2
 	song mus_hg_obtain_b_points, 2, 2
 	song mus_hg_win_minigame, 2, 2
+.endif @ MUSIC_EXPANSION_GEN4_MUSIC_ENABLED
+.if MUSIC_EXPANSION_GEN5_MUSIC_ENABLED == TRUE
 	song mus_pkmn_bw12_001, 0, 0
     song mus_pkmn_bw12_002, 0, 0
     song mus_pkmn_bw12_003, 0, 0
@@ -1105,6 +1108,8 @@ gSongTable::
     song mus_pkmn_bw12_203, 0, 0
     song mus_pkmn_bw12_204, 0, 0
     song mus_pkmn_bw12_205, 0, 0
+.endif @ MUSIC_EXPANSION_GEN5_MUSIC_ENABLED
+.if MUSIC_EXPANSION_PMDR_MUSIC_ENABLED == TRUE
 	song seq_001,  0,  0
 	song seq_002,  0,  0
 	song seq_003,  0,  0
@@ -1353,6 +1358,7 @@ gSongTable::
 	song seq_516,  5,  5
 	song seq_517,  5,  5
 	song seq_518,  5,  5
+.endif @ MUSIC_EXPANSION_PMDR_MUSIC_ENABLED
 
 	.align 2
 dummy_song_header:

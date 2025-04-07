@@ -1,3 +1,4 @@
+.if MUSIC_EXPANSION_PMDR_MUSIC_ENABLED == TRUE
 	.include "sound/wave/wave_000.s"
 	.include "sound/wave/wave_001.s"
 	.include "sound/wave/wave_003.s"
@@ -169,3 +170,4 @@
 	.word 0x0 @ padding?
 	.include "sound/wave/wave_137.s"
 	.include "sound/wave/wave_138.s"
+.endif @ MUSIC_EXPANSION_PMDR_MUSIC_ENABLED

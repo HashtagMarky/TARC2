@@ -190,6 +190,11 @@
 .include "sound/voicegroups/voicegroup188.inc"
 .include "sound/voicegroups/voicegroup189.inc"
 .include "sound/voicegroups/voicegroup190.inc"
+
+.include "sound/voice_line_tables.inc"
+
+
+.if MUSIC_EXPANSION_GEN4_MUSIC_ENABLED == TRUE
 .include "sound/voicegroups/voicegroup191.inc" @ DPPt main
 .include "sound/voicegroups/voicegroup192.inc"
 .include "sound/voicegroups/voicegroup193.inc"
@@ -273,8 +278,9 @@
 .include "sound/voicegroups/voicegroup271.inc"
 .include "sound/voicegroups/voicegroup272.inc"
 .include "sound/voicegroups/voicegroup273.inc"
-.include "sound/voice_line_tables.inc"
+.endif @ MUSIC_EXPANSION_GEN4_MUSIC_ENABLED
 
+.if MUSIC_EXPANSION_GEN5_MUSIC_ENABLED == TRUE
 @ --Start BW/2--
 
 .include "sound/voicegroups/voicegroup531.inc"
@@ -354,3 +360,4 @@
 .include "sound/voicegroups/voicegroup605.inc"
 
 @ --End BW/2--
+.endif @ MUSIC_EXPANSION_GEN5_MUSIC_ENABLED
