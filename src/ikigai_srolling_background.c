@@ -7,6 +7,7 @@
 const u32 IkigaiScrollingBgTiles[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles.4bpp.lz");
 const u32 IkigaiScrollingBgTilemap_PalOne[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles_pal_one.bin.lz");
 const u32 IkigaiScrollingBgTilemap_PalTwo[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles_pal_two.bin.lz");
+const u32 IkigaiScrollingBgTilemap_PalEleven[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles_pal_eleven.bin.lz");
 const u16 IkigaiScrollingBgPal_Default[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_bg_palettes/default.gbapal");
 
 static const u16 IkigaiScrollingBgPal_Tornadus[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_bg_palettes/tornadus.gbapal");
