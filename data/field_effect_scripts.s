@@ -83,6 +83,7 @@ gFieldEffectScriptPointers::
 	.4byte gFieldEffectScript_TalkingIcon               @ FLDEFF_TALKING_ICON
 	.4byte gFieldEffectScript_ThinkingIcon              @ FLDEFF_THINKING_ICON
 	.4byte gFieldEffectScript_CaveDust                  @ FLDEFF_CAVE_DUST
+	.4byte gFieldEffectScript_Defog                     @ FLDEFF_DEFOG
 	.4byte gFieldEffectScript_Saving					@ FLDEFF_SAVING
 
 
@@ -400,3 +401,7 @@ gFieldEffectScript_TracksSlither::
 gFieldEffectScript_CaveDust::
 	field_eff_loadfadedpal_callnative gSpritePalette_CaveDust FldEff_CaveDust
 	field_eff_end
+
+gFieldEffectScript_Defog::
+    field_eff_callnative FldEff_Defog
+    field_eff_end

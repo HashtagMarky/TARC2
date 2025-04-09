@@ -79,7 +79,8 @@
 #define FLDEFF_TALKING_ICON              74
 #define FLDEFF_THINKING_ICON             75
 #define FLDEFF_CAVE_DUST                 76
-#define FLDEFF_SAVING					 77
+#define FLDEFF_DEFOG                     77
+#define FLDEFF_SAVING					 78
 
 #define FLDEFFOBJ_SHADOW_S              0
 #define FLDEFFOBJ_SHADOW_M              1
