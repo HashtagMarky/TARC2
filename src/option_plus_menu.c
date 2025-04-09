@@ -178,6 +178,7 @@ static void VBlankCB(void);
 static void DrawTopBarText(void); //top Option text
 static void DrawLeftSideOptionText(int selection, int y);
 static void DrawRightSideChoiceText(const u8 *str, int x, int y, bool8 choosen, bool8 active);
+static void Ikigai_LoadOptionsMenuText_Pal(void);
 static void DrawOptionMenuTexts(void); //left side text;
 static void DrawChoices(u32 id, int y); //right side draw function
 static void HighlightOptionMenuItem(void);
@@ -670,7 +671,7 @@ static const u8 sText_TopBar_Battle[]           = _("BATTLE");
 static const u8 sText_TopBar_Battle_Left[]      = _("{L_BUTTON}OVERWORLD");
 static void DrawTopBarText(void)
 {
-    const u8 color[3] = { 0, TEXT_COLOR_WHITE, TEXT_COLOR_OPTIONS_ORANGE_FG };
+    const u8 color[3] = { 0, TEXT_COLOR_WHITE, TEXT_COLOR_OPTIONS_GREEN_DARK_SHADOW };
 
     FillWindowPixelBuffer(WIN_TOPBAR, PIXEL_FILL(0));
     switch (sOptions->submenu)
@@ -725,18 +726,18 @@ static void DrawLeftSideOptionText(int selection, int y)
     u16 selectedShadowColor = selectedColorScrollingBGPal[1];
 
     color_yellow[0] = TEXT_COLOR_TRANSPARENT;
-    color_yellow[1] = TEXT_COLOR_WHITE;
-    color_yellow[2] = TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG;
+    color_yellow[1] = TEXT_COLOR_OPTIONS_RED_DARK_FG;
+    color_yellow[2] = TEXT_COLOR_OPTIONS_RED_DARK_SHADOW;
     color_gray[0] = TEXT_COLOR_TRANSPARENT;
-    color_gray[2] = TEXT_COLOR_OPTIONS_RED_FG;
-    color_gray[1] = TEXT_COLOR_OPTIONS_ORANGE_SHADOW;
+    color_gray[1] = TEXT_COLOR_OPTIONS_RED_FG;
+    color_gray[2] = TEXT_COLOR_OPTIONS_RED_SHADOW;
 
     if (CheckConditions(selection))
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_yellow, TEXT_SKIP_DRAW, OptionTextRight(selection));
     else
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_gray, TEXT_SKIP_DRAW, OptionTextRight(selection));
-        LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_gray[1], sizeof(selectedTextColor));
-        LoadPalette(&selectedShadowColor, OPTIONS_TEXT_OFFSET + color_gray[2], sizeof(selectedShadowColor));
+        // LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_gray[1], sizeof(selectedTextColor));
+        // LoadPalette(&selectedShadowColor, OPTIONS_TEXT_OFFSET + color_gray[2], sizeof(selectedShadowColor));
 }
 
 static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen, bool8 active)
@@ -751,7 +752,7 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
     {
         color_red[0]    = TEXT_COLOR_TRANSPARENT;
         color_red[1]    = TEXT_COLOR_OPTIONS_ORANGE_FG;
-        color_red[2]    = TEXT_COLOR_OPTIONS_GRAY_FG;
+        color_red[2]    = TEXT_COLOR_OPTIONS_ORANGE_SHADOW;
         color_gray[0]   = TEXT_COLOR_TRANSPARENT;
         color_gray[1]   = TEXT_COLOR_OPTIONS_WHITE;
         color_gray[2]   = TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG;
@@ -759,11 +760,11 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
     else
     {
         color_red[0]    = TEXT_COLOR_TRANSPARENT;
-        color_red[1]    = TEXT_COLOR_OPTIONS_ORANGE_FG;
-        color_red[2]    = TEXT_COLOR_OPTIONS_GRAY_FG;
+        color_red[1]    = TEXT_COLOR_OPTIONS_GREEN_FG;
+        color_red[2]    = TEXT_COLOR_OPTIONS_GREEN_SHADOW;
         color_gray[0]   = TEXT_COLOR_TRANSPARENT;
-        color_gray[1]   = TEXT_COLOR_OPTIONS_ORANGE_FG;
-        color_gray[2]   = TEXT_COLOR_OPTIONS_GRAY_FG;
+        color_gray[1]   = TEXT_COLOR_OPTIONS_GREEN_FG;
+        color_gray[2]   = TEXT_COLOR_OPTIONS_GREEN_SHADOW;
     }
 
 
@@ -772,8 +773,8 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, x, y, 0, 0, color_gray, TEXT_SKIP_DRAW, text);
         if (!active)
         {
-            LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_gray[1], sizeof(selectedTextColor));
-            LoadPalette(&selectedShadowColor, OPTIONS_TEXT_OFFSET + color_gray[2], sizeof(selectedShadowColor));
+            // LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_gray[1], sizeof(selectedTextColor));
+            // LoadPalette(&selectedShadowColor, OPTIONS_TEXT_OFFSET + color_gray[2], sizeof(selectedShadowColor));
         }
     }
     else
@@ -781,10 +782,35 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, x, y, 0, 0, color_red, TEXT_SKIP_DRAW, text);
         if (active)
         {
-            LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_red[1], sizeof(selectedTextColor));
-            LoadPalette(&selectedShadowColor, OPTIONS_TEXT_OFFSET + color_red[2], sizeof(selectedShadowColor));
+            // LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_red[1], sizeof(selectedTextColor));
+            // LoadPalette(&selectedShadowColor, OPTIONS_TEXT_OFFSET + color_red[2], sizeof(selectedShadowColor));
         }
     }
+}
+
+static void Ikigai_LoadOptionsMenuText_Pal(void)
+{
+    const u16 *colorMenuUIPal = ReturnMenuUIPalette();
+    const u16 *colorScrollingBGPal = ReturnScrollingBackgroundPalette();
+
+    // Top Bar Shadow
+    LoadPalette(&colorScrollingBGPal[3], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GREEN_DARK_SHADOW, sizeof(u16));
+
+    // Left Side Unlocked
+    LoadPalette(&colorScrollingBGPal[3], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_FG, sizeof(u16));
+    LoadPalette(&colorScrollingBGPal[2], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_SHADOW, sizeof(u16));
+
+    // Left Side Locked
+    LoadPalette(&colorScrollingBGPal[2], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_FG, sizeof(u16));
+    LoadPalette(&colorScrollingBGPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_SHADOW, sizeof(u16));
+
+    // Right Side Locked
+    LoadPalette(&colorMenuUIPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GREEN_FG, sizeof(u16));
+    LoadPalette(&colorScrollingBGPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GREEN_SHADOW, sizeof(u16));
+
+    // Right Side Unselected
+    LoadPalette(&colorMenuUIPal[2], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_ORANGE_FG, sizeof(u16));
+    LoadPalette(&colorMenuUIPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_ORANGE_SHADOW, sizeof(u16));
 }
 
 static void DrawChoices(u32 id, int y) //right side draw function
@@ -923,6 +949,7 @@ void CB2_InitOptionPlusMenu(void)
         break;
     case 5:
         LoadPalette(sOptionMenuText_Pal, OPTIONS_TEXT_OFFSET, sizeof(sOptionMenuText_Pal));
+        Ikigai_LoadOptionsMenuText_Pal();
         gMain.state++;
         break;
     case 6:
@@ -1402,6 +1429,7 @@ static int ProcessInput_Interface(int selection)
     // Reloads Palettes in case of Interface Changes
     LoadPalette(ReturnMenuUIPalette(), 64, 32);
     LoadPalette(ReturnScrollingBackgroundPalette(), 32, 32);
+    Ikigai_LoadOptionsMenuText_Pal();
     return selection;
 }
 
