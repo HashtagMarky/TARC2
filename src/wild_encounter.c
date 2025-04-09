@@ -1053,10 +1053,13 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
 u16 GetLocalLandMon(void)
 {
     u16 headerId = GetCurrentMapWildMonHeaderId();
+    enum TimeOfDay timeOfDay;
 
     if (headerId != HEADER_NONE)
     {
-        const struct WildPokemonInfo *landMonsInfo = gWildMonHeaders[headerId].landMonsInfo;
+        timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_LAND);
+
+        const struct WildPokemonInfo *landMonsInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo;
 
         if (landMonsInfo)
             return landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
@@ -1084,10 +1087,13 @@ u16 GetLocalWaterMon(void)
 u16 GetLocalRockSmashMon(void)
 {
     u16 headerId = GetCurrentMapWildMonHeaderId();
+    enum TimeOfDay timeOfDay;
 
     if (headerId != HEADER_NONE)
     {
-        const struct WildPokemonInfo *rockSmashMonsInfo = gWildMonHeaders[headerId].rockSmashMonsInfo;
+        timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_ROCKS);
+
+        const struct WildPokemonInfo *rockSmashMonsInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].rockSmashMonsInfo;
 
         if (rockSmashMonsInfo)
             return rockSmashMonsInfo->wildPokemon[ChooseWildMonIndex_WaterRock()].species;
@@ -1098,10 +1104,13 @@ u16 GetLocalRockSmashMon(void)
 u16 GetLocalFishingMon(u8 rod)
 {
     u16 headerId = GetCurrentMapWildMonHeaderId();
+    enum TimeOfDay timeOfDay;
 
     if (headerId != HEADER_NONE)
     {
-        const struct WildPokemonInfo *fishingMonsInfo = gWildMonHeaders[headerId].fishingMonsInfo;
+        timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_FISHING);
+
+        const struct WildPokemonInfo *fishingMonsInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].fishingMonsInfo;
 
         if (fishingMonsInfo)
             return fishingMonsInfo->wildPokemon[ChooseWildMonIndex_Fishing(rod)].species;
