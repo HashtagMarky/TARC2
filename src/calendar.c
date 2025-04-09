@@ -73,7 +73,7 @@ struct CalendarUIState
     u8 year;
     enum Seasons season;
     u8 date;
-    u8 time;
+    enum TimeOfDay time;
     u8 weather;
     u8 gymBattles;
     u8 buildProjects;
@@ -221,7 +221,7 @@ struct WeatherIcons
 #define INDEX_COLOUR_MIDDLE 2
 #define INDEX_COLOUR_BOTTOM 3
 
-static const struct WeatherIcons sWeatherIcons[WEATHER_COUNT][TIMES_OF_DAY] =
+static const struct WeatherIcons sWeatherIcons[WEATHER_COUNT][TIMES_OF_DAY_COUNT] =
 {
     [WEATHER_SUNNY_CLOUDS] =
     {
@@ -1193,9 +1193,9 @@ static void CalendarUI_CreateSprites_Year(void)
 static void CalendarUI_CreateSprites_Weather(void)
 {
     u32 weather = sCalendarUIState->weather;
-    u32 time = sCalendarUIState->time;
+    enum TimeOfDay time = sCalendarUIState->time;
 
-    if (time >= TIMES_OF_DAY)
+    if (time >= TIMES_OF_DAY_COUNT)
         time = TIME_DAY;
     
     switch (weather)
