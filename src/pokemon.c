@@ -3609,14 +3609,12 @@ u16 GetSpeciesWeight(u16 species)
 
 u8 GetSpeciesPrimaryType(u16 species)
 {
-    species = SanitizeSpeciesId(species);
-    return gSpeciesInfo[species].types[0];
+    return gSpeciesInfo[SanitizeSpeciesId(species)].types[0];
 }
 
 u8 GetSpeciesSecondaryType(u16 species)
 {
-    species = SanitizeSpeciesId(species);
-    return gSpeciesInfo[species].types[1];
+    return gSpeciesInfo[SanitizeSpeciesId(species)].types[1];
 }
 
 bool8 CheckSpeciesOfType(u16 species, u8 type)
