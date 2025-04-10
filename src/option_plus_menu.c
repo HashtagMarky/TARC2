@@ -793,6 +793,9 @@ static void Ikigai_LoadOptionsMenuText_Pal(void)
     const u16 *colorMenuUIPal = ReturnMenuUIPalette();
     const u16 *colorScrollingBGPal = ReturnScrollingBackgroundPalette();
 
+    // Options Printed Window Text
+    LoadPalette(&colorScrollingBGPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GRAY_FG, sizeof(u16));
+
     // Top Bar Shadow
     LoadPalette(&colorScrollingBGPal[3], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GREEN_DARK_SHADOW, sizeof(u16));
 
