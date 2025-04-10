@@ -801,7 +801,23 @@ static void Ikigai_LoadOptionsMenuText_Pal(void)
 
     // Left Side Unlocked
     LoadPalette(&colorScrollingBGPal[3], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_FG, sizeof(u16));
-    LoadPalette(&colorScrollingBGPal[2], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_SHADOW, sizeof(u16));
+    switch (gSaveBlock2Ptr->ikigaiGymType)
+    {
+        case TYPE_NORMAL:
+        case TYPE_FIGHTING:
+        case TYPE_FIRE:
+        case TYPE_WATER:
+        case TYPE_GRASS:
+        case TYPE_ELECTRIC:
+        case TYPE_PSYCHIC:
+        case TYPE_ICE:
+        case TYPE_FAIRY:
+            LoadPalette(&colorScrollingBGPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_SHADOW, sizeof(u16));
+            break;
+        
+        default:
+            LoadPalette(&colorScrollingBGPal[2], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_SHADOW, sizeof(u16));
+    }
 
     // Left Side Locked
     LoadPalette(&colorScrollingBGPal[2], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_FG, sizeof(u16));
