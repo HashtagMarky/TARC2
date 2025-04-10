@@ -10,10 +10,10 @@
 
 const u8 gTextWindowFrame_Gfx[] = INCBIN_U8("graphics/text_window/window_frame.4bpp");
 const u16 gTextWindowFrame_EmeraldPal[] = INCBIN_U16("graphics/text_window/window_frame_emerald.gbapal");
-static const u16 gTextWindowFrame_GreenPal[] = INCBIN_U16("graphics/text_window/window_frame_ikigai_green.gbapal");
-static const u16 gTextWindowFrame_BluePal[] = INCBIN_U16("graphics/text_window/window_frame_ikigai_blue.gbapal");
-static const u16 gTextWindowFrame_OrangePal[] = INCBIN_U16("graphics/text_window/window_frame_ikigai_orange.gbapal");
-static const u16 gTextWindowFrame_PinkPal[] = INCBIN_U16("graphics/text_window/window_frame_ikigai_pink.gbapal");
+static const u16 gTextWindowFrame_TornadusPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/tornadus.gbapal");
+static const u16 gTextWindowFrame_ThundurusPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/thundurus.gbapal");
+static const u16 gTextWindowFrame_LandorusPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/landorus.gbapal");
+static const u16 gTextWindowFrame_EnamorusPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/enamorus.gbapal");
 
 static const u16 sTextWindowPalettes[IKIGAI_TEXT_BOX_FRAMES_COUNT][16] = // Ikigai Type Window Pals Here
 {
@@ -22,10 +22,10 @@ static const u16 sTextWindowPalettes[IKIGAI_TEXT_BOX_FRAMES_COUNT][16] = // Ikig
     INCBIN_U16("graphics/text_window/text_window_pal2.gbapal"),
     INCBIN_U16("graphics/text_window/text_window_pal3.gbapal"),
     INCBIN_U16("graphics/text_window/text_window_pal4.gbapal"),
-    INCBIN_U16("graphics/text_window/message_box_ikigai_green.gbapal"),         // IKIGAI_INTERFACE_BLUE + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    INCBIN_U16("graphics/text_window/message_box_ikigai_blue.gbapal"),          // IKIGAI_INTERFACE_BLUE + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    INCBIN_U16("graphics/text_window/message_box_ikigai_orange.gbapal"),        // IKIGAI_INTERFACE_BLUE + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    INCBIN_U16("graphics/text_window/message_box_ikigai_pink.gbapal")           // IKIGAI_INTERFACE_PINK + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/tornadus.gbapal"),     // IKIGAI_INTERFACE_BLUE + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/thundurus.gbapal"),    // IKIGAI_INTERFACE_BLUE + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/landorus.gbapal"),     // IKIGAI_INTERFACE_BLUE + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/enamorus.gbapal"),     // IKIGAI_INTERFACE_PINK + DEFAULT_TEXT_BOX_FRAME_PALETTES
     // TYPE_NONE + DEFAULT_TEXT_BOX_FRAME_PALETTES
     // TYPE_NORMAL + DEFAULT_TEXT_BOX_FRAME_PALETTES
     // TYPE_FIGHTING + DEFAULT_TEXT_BOX_FRAME_PALETTES
@@ -50,10 +50,10 @@ static const u16 sTextWindowPalettes[IKIGAI_TEXT_BOX_FRAMES_COUNT][16] = // Ikig
 
 static const struct TilesPal sWindowFrames[IKIGAI_WINDOW_FRAMES_COUNT] =
 {
-    {gTextWindowFrame_Gfx, gTextWindowFrame_GreenPal},       // IKIGAI_INTERFACE_GREEN
-    {gTextWindowFrame_Gfx, gTextWindowFrame_BluePal},        // IKIGAI_INTERFACE_BLUE
-    {gTextWindowFrame_Gfx, gTextWindowFrame_OrangePal},      // IKIGAI_INTERFACE_ORANGE
-    {gTextWindowFrame_Gfx, gTextWindowFrame_PinkPal},        // IKIGAI_INTERFACE_PINK
+    {gTextWindowFrame_Gfx, gTextWindowFrame_TornadusPal},       // IKIGAI_INTERFACE_GREEN
+    {gTextWindowFrame_Gfx, gTextWindowFrame_ThundurusPal},        // IKIGAI_INTERFACE_BLUE
+    {gTextWindowFrame_Gfx, gTextWindowFrame_LandorusPal},      // IKIGAI_INTERFACE_ORANGE
+    {gTextWindowFrame_Gfx, gTextWindowFrame_EnamorusPal},        // IKIGAI_INTERFACE_PINK
     {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_NONE + IKIGAI_DEFAULT_INTERFACE_COUNT
     {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_NORMAL + IKIGAI_DEFAULT_INTERFACE_COUNT
     {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_FIGHTING + IKIGAI_DEFAULT_INTERFACE_COUNT
@@ -245,17 +245,17 @@ const u32 *GetBattleTextboxPalettePtr(void)
         return gBattleTextboxPalette_Emerald;
         break;
     case IKIGAI_INTERFACE_PINK:
-        return gBattleTextboxPalette_Pink;
+        return gBattleTextboxPalette_Enamorus;
         break;
     case IKIGAI_INTERFACE_ORANGE:
-        return gBattleTextboxPalette_Orange;
+        return gBattleTextboxPalette_Landorus;
         break;
     case IKIGAI_INTERFACE_BLUE:
-        return gBattleTextboxPalette_Blue;
+        return gBattleTextboxPalette_Thundurus;
         break;
     default:
     case IKIGAI_INTERFACE_GREEN:
-        return gBattleTextboxPalette_Green;
+        return gBattleTextboxPalette_Tornadus;
         break;
     }   
 }

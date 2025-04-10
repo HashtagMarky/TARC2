@@ -3,10 +3,10 @@
 const u32 gBattleTextboxTiles[] = INCBIN_U32("graphics/battle_interface/textbox.4bpp.lz");
 const u32 gBattleTextboxTilemap[] = INCBIN_U32("graphics/battle_interface/textbox_map.bin.lz");
 const u32 gBattleTextboxPalette_Emerald[] = INCBIN_U32("graphics/battle_interface/textbox_emerald.gbapal.lz");
-const u32 gBattleTextboxPalette_Green[] = INCBIN_U32("graphics/battle_interface/textbox_ikigai_green.gbapal.lz");
-const u32 gBattleTextboxPalette_Blue[] = INCBIN_U32("graphics/battle_interface/textbox_ikigai_blue.gbapal.lz");
-const u32 gBattleTextboxPalette_Orange[] = INCBIN_U32("graphics/battle_interface/textbox_ikigai_orange.gbapal.lz");
-const u32 gBattleTextboxPalette_Pink[] = INCBIN_U32("graphics/battle_interface/textbox_ikigai_pink.gbapal.lz");
+const u32 gBattleTextboxPalette_Tornadus[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/tornadus.gbapal.lz");
+const u32 gBattleTextboxPalette_Thundurus[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/thundurus.gbapal.lz");
+const u32 gBattleTextboxPalette_Landorus[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/landorus.gbapal.lz");
+const u32 gBattleTextboxPalette_Enamorus[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/enamorus.gbapal.lz");
 
 const u32 gUnusedGfx_OldCharmap[] = INCBIN_U32("graphics/unused/old_charmap.4bpp.lz"); // japanese table and bunch of stuff
 const u32 gUnusedTimemap_OldCharmap[] = INCBIN_U32("graphics/unused/old_charmap.bin.lz");
