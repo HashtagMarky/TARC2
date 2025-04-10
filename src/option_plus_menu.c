@@ -25,6 +25,7 @@
 
 #include "sound.h"
 #include "constants/songs.h"
+#include "battle_main.h"
 
 enum
 {
@@ -197,6 +198,7 @@ static int ProcessInput_Options_Eleven(int selection);
 static int ProcessInput_Sound(int selection);
 static int ProcessInput_FrameType(int selection);
 static int ProcessInput_Interface(int selection);
+static int DEBUG_ProcessInput_Interface_GymTypes(int selection);
 static const u8 *const OptionTextDescription(void);
 static const u8 *const OptionTextRight(u8 menuItem);
 static u8 MenuItemCount(void);
@@ -219,6 +221,7 @@ static void DrawChoices_AutoSave(int selection, int y);
 static void DrawChoices_Font(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_Interface(int selection, int y);
+static void DrawChoices_Interface_GymTypes(int selection, int y);
 static void DrawChoices_MatchCall(int selection, int y);
 static void DrawChoices_AutoRun(int selection, int y);
 static void DrawChoices_FastSurf(int selection, int y);
@@ -1452,6 +1455,36 @@ static int ProcessInput_Interface(int selection)
     return selection;
 }
 
+static int DEBUG_ProcessInput_Interface_GymTypes(int selection)
+{
+    if (JOY_NEW(DPAD_RIGHT))
+    {
+        if (selection < NUMBER_OF_MON_TYPES - 2)
+            selection++;
+        else
+            selection = 0;
+    }
+    if (JOY_NEW(DPAD_LEFT))
+    {
+        if (selection != 0)
+            selection--;
+        else
+            selection = NUMBER_OF_MON_TYPES - 2;
+    }
+    
+    gSaveBlock2Ptr->optionsInterfaceColor = IKIGAI_INTERFACE_GYM_TYPE_COLOUR;
+    gSaveBlock2Ptr->ikigaiGymType = selection;
+    while (REG_VCOUNT >= 160);          // Wait until VBlank starts
+    while (REG_VCOUNT < 160);           // Wait until VBlank ends
+    LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
+    LoadPalette(GetWindowFrameTilesPal(IKIGAI_INTERFACE_GYM_TYPE_COLOUR)->pal, 0x70, 0x20);
+    // Reloads Palettes in case of Interface Changes
+    LoadPalette(ReturnMenuUIPalette(), 64, 32);
+    LoadPalette(ReturnScrollingBackgroundPalette(), 32, 32);
+    Ikigai_LoadOptionsMenuText_Pal();
+    return selection;
+}
+
 // Draw Choices functions ****GENERIC****
 static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style, bool8 active)
 {
@@ -1715,6 +1748,13 @@ static void DrawChoices_Interface(int selection, int y)
             DrawOptionMenuChoice(COMPOUND_STRING("GYM TYPE"), 104, y, 1, active);
             break;
     }
+}
+
+static void DrawChoices_Interface_GymTypes(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_MAIN_FRAMETYPE);
+
+    DrawOptionMenuChoice(gTypesInfo[selection].name, 104, y, 1, active);
 }
 
 static void DrawChoices_Font(int selection, int y)
