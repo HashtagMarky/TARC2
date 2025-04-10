@@ -800,7 +800,11 @@ static void Ikigai_LoadOptionsMenuText_Pal(void)
     LoadPalette(&colorScrollingBGPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GRAY_FG, sizeof(u16));
 
     // Top Bar Shadow
-    LoadPalette(&colorScrollingBGPal[3], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GREEN_DARK_SHADOW, sizeof(u16));
+    if (gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_GYM_TYPE_COLOUR
+        && gSaveBlock2Ptr->ikigaiGymType == TYPE_NORMAL)
+        LoadPalette(&colorScrollingBGPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GREEN_DARK_SHADOW, sizeof(u16));
+    else
+        LoadPalette(&colorScrollingBGPal[3], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GREEN_DARK_SHADOW, sizeof(u16));
 
     // Left Side Unlocked
     LoadPalette(&colorScrollingBGPal[3], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_FG, sizeof(u16));
@@ -816,10 +820,12 @@ static void Ikigai_LoadOptionsMenuText_Pal(void)
         case TYPE_ICE:
         case TYPE_FAIRY:
             LoadPalette(&colorScrollingBGPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_SHADOW, sizeof(u16));
-            break;
+            if (gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_GYM_TYPE_COLOUR)
+                break; // Switch only ends if set to Gym Colour, otherwise use default.
         
         default:
             LoadPalette(&colorScrollingBGPal[2], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_SHADOW, sizeof(u16));
+            break;
     }
 
     // Left Side Locked
