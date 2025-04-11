@@ -2062,7 +2062,7 @@ static bool8 DecompressGraphics(void)
     case 8:
         LoadCompressedPalette(sSummaryScreen_Pal_BW, BG_PLTT_ID(0), 8 * PLTT_SIZE_4BPP);
         LoadPalette(&sSummaryScreen_PPTextPalette_BW, BG_PLTT_ID(8) + 1, PLTT_SIZEOF(16 - 1));
-        IkigaiScrollingBackground_LoadPalette(11, IKIGAI_BG_INTERFACE);
+        IkigaiScrollingBackground_LoadPalette(11, IKIGAI_PAL_INTERFACE);
         UpdateIkigaiSummaryScreenPal();
         sMonSummaryScreen->switchCounter++;
         break;

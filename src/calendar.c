@@ -954,7 +954,7 @@ static bool8 CalendarUI_LoadGraphics(void)
         break;
     case 2:
         LoadPalette(sCalendarUIPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-        IkigaiScrollingBackground_LoadPalette(1, IKIGAI_BG_SEASON);
+        IkigaiScrollingBackground_LoadPalette(1, IKIGAI_PAL_SEASON);
         LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         LoadPalette(&sCalendarUIPalette[DEFAULT_TEXT_REPLACEMENT_INDEX], BG_PLTT_ID(15) + TEXT_COLOR_DARK_GRAY, sizeof(&sCalendarUIPalette[DEFAULT_TEXT_REPLACEMENT_INDEX]));
         LoadPalette(&sCalendarUIPalette[DEFAULT_SHADOW_REPLACEMENT_INDEX], BG_PLTT_ID(15) + TEXT_COLOR_LIGHT_GRAY, sizeof(&sCalendarUIPalette[DEFAULT_SHADOW_REPLACEMENT_INDEX]));

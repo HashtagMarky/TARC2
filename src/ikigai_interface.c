@@ -96,24 +96,24 @@ void IkigaiScrollingBackground_CreateTilemap(u8 paletteSlot, void *dest)
     LZDecompressWram(sIkigaiScrollingBgTilemaps[paletteSlot], dest);
 }
 
-void IkigaiScrollingBackground_LoadPalette(u8 paletteSlot, enum IkigaiBackgroundTypes type)
+void IkigaiScrollingBackground_LoadPalette(u8 paletteSlot, enum IkigaiInterfacePalettes type)
 {
     const u16 *palette;
     switch (type)
     {
-        case IKIGAI_BG_INTERFACE:
+        case IKIGAI_PAL_INTERFACE:
         palette = Ikigai_ReturnScrollingBackgroundPalette();
         break;
     
-        case IKIGAI_BG_GYM:
+        case IKIGAI_PAL_GYM:
         palette = Ikigai_ReturnScrollingBackgroundGymPalette();
         break;
     
-        case IKIGAI_BG_SEASON:
+        case IKIGAI_PAL_SEASON:
         palette = Ikigai_ReturnScrollingBackgroundSeasonPalette(SEASON_COUNT);
         break;
     
-        case IKIGAI_BG_DEFAULT:
+        case IKIGAI_PAL_DEFAULT:
         default:
         palette = IkigaiScrollingBgPal_Default;
         break;
@@ -122,15 +122,15 @@ void IkigaiScrollingBackground_LoadPalette(u8 paletteSlot, enum IkigaiBackground
     LoadPalette(palette, BG_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
 }
 
-void IkigaiUI_LoadPalette(u8 paletteSlot, enum IkigaiBackgroundTypes type)
+void IkigaiUI_LoadPalette(u8 paletteSlot, enum IkigaiInterfacePalettes type)
 {
     const u16 *palette;
     switch (type)
     {
-        case IKIGAI_BG_GYM:
+        case IKIGAI_PAL_GYM:
         palette = Ikigai_ReturnUIGymPalette();
     
-        case IKIGAI_BG_INTERFACE:
+        case IKIGAI_PAL_INTERFACE:
         default:
         palette = Ikigai_ReturnUIPalette();
         break;

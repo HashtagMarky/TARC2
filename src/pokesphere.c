@@ -886,7 +886,7 @@ static bool8 PokeSphere_LoadGraphics(void)
         break;
     case 2:
         LoadPalette(sPokeSpherePalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-        IkigaiScrollingBackground_LoadPalette(1, IKIGAI_BG_INTERFACE);
+        IkigaiScrollingBackground_LoadPalette(1, IKIGAI_PAL_INTERFACE);
         LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         LoadPalette(&sPokeSpherePalette[TEXT_REPLACEMENT_INDEX], BG_PLTT_ID(15) + TEXT_COLOR_DARK_GRAY, sizeof(&sPokeSpherePalette[TEXT_REPLACEMENT_INDEX]));
         sPokeSphereState->loadState++;
@@ -1677,7 +1677,7 @@ static void PokeSphere_DrawMugshotBackgrounds(enum CharacterId character)
 {
     if (character == CHARACTER_PLAYER)
     {
-        IkigaiScrollingBackground_LoadPalette(1, IKIGAI_BG_INTERFACE);
+        IkigaiScrollingBackground_LoadPalette(1, IKIGAI_PAL_INTERFACE);
     }
     else
     {
