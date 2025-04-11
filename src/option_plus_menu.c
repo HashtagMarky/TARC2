@@ -221,7 +221,7 @@ static void DrawChoices_AutoSave(int selection, int y);
 static void DrawChoices_Font(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_Interface(int selection, int y);
-static void DrawChoices_Interface_GymTypes(int selection, int y);
+static void DEBUG_DrawChoices_Interface_GymTypes(int selection, int y);
 static void DrawChoices_MatchCall(int selection, int y);
 static void DrawChoices_AutoRun(int selection, int y);
 static void DrawChoices_FastSurf(int selection, int y);
@@ -282,7 +282,7 @@ struct // MENU_MAIN
     [MENUITEM_MAIN_UNIT_SYSTEM]     = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
     [MENUITEM_MAIN_CLOCK_MODE]      = {DrawChoices_ClockMode,   ProcessInput_Options_Two},
     [MENUITEM_MAIN_AUTOSAVE]        = {DrawChoices_AutoSave,    ProcessInput_Options_Two},
-    [MENUITEM_MAIN_FRAMETYPE]       = {DrawChoices_Interface_GymTypes,   DEBUG_ProcessInput_Interface_GymTypes},
+    [MENUITEM_MAIN_FRAMETYPE]       = {DrawChoices_Interface,   ProcessInput_Interface},
     [MENUITEM_MAIN_TITLE_SCREEN]    = {DrawChoices_TitleScreen, ProcessInput_Options_Two},
     [MENUITEM_MAIN_CANCEL]          = {NULL, NULL},
 };
@@ -1756,7 +1756,7 @@ static void DrawChoices_Interface(int selection, int y)
     }
 }
 
-static void DrawChoices_Interface_GymTypes(int selection, int y)
+static void DEBUG_DrawChoices_Interface_GymTypes(int selection, int y)
 {
     bool8 active = CheckConditions(MENUITEM_MAIN_FRAMETYPE);
 
