@@ -730,7 +730,7 @@ static void DestroyMonIcons()
 //
 static void PrintToWindow(u8 windowId, u8 colorIdx)
 {
-    const u8 colorsGameText[3] = {0,  5,  3};
+    const u8 colorsGameText[3] = {0,  5,  2};
     const u8 colorsTrainerText[3] = {0,  5,  2};
     u8 mapDisplayHeader[24];
     u8 *withoutPrefixPtr, *playTimePtr;
