@@ -1,15 +1,32 @@
 #include "ikigai_scrolling_background.h"
 #include "global.h"
 #include "main.h"
+#include "decompress.h"
+#include "menu.h"
 #include "bg.h"
-#include "constants/pokemon.h"
+#include "palette.h"
 
-const u32 IkigaiScrollingBgTiles[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles.4bpp.lz");
-const u32 IkigaiScrollingBgTilemap_PalOne[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles_pal_one.bin.lz");
-const u32 IkigaiScrollingBgTilemap_PalTwo[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles_pal_two.bin.lz");
-const u32 IkigaiScrollingBgTilemap_PalEleven[] = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles_pal_eleven.bin.lz");
-const u16 IkigaiScrollingBgPal_Default[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_bg_palettes/default.gbapal");
 
+static const u32 IkigaiScrollingBgTiles[]               = INCBIN_U32("graphics/ikigai_scrolling_background/scroll_tiles.4bpp.lz");
+
+static const u32 IkigaiScrollingBgTilemap_PalZero[]     = INCBIN_U32("graphics/ikigai_scrolling_background/tilemaps/zero.bin.lz");
+static const u32 IkigaiScrollingBgTilemap_PalOne[]      = INCBIN_U32("graphics/ikigai_scrolling_background/tilemaps/one.bin.lz");
+static const u32 IkigaiScrollingBgTilemap_PalTwo[]      = INCBIN_U32("graphics/ikigai_scrolling_background/tilemaps/two.bin.lz");
+static const u32 IkigaiScrollingBgTilemap_PalThree[]    = INCBIN_U32("graphics/ikigai_scrolling_background/tilemaps/three.bin.lz");
+static const u32 IkigaiScrollingBgTilemap_PalFour[]     = INCBIN_U32("graphics/ikigai_scrolling_background/tilemaps/four.bin.lz");
+static const u32 IkigaiScrollingBgTilemap_PalFive[]     = INCBIN_U32("graphics/ikigai_scrolling_background/tilemaps/five.bin.lz");
+static const u32 IkigaiScrollingBgTilemap_PalSix[]      = INCBIN_U32("graphics/ikigai_scrolling_background/tilemaps/six.bin.lz");
+static const u32 IkigaiScrollingBgTilemap_PalSeven[]    = INCBIN_U32("graphics/ikigai_scrolling_background/tilemaps/seven.bin.lz");
+static const u32 IkigaiScrollingBgTilemap_PalEight[]    = INCBIN_U32("graphics/ikigai_scrolling_background/tilemaps/eight.bin.lz");
+static const u32 IkigaiScrollingBgTilemap_PalNine[]     = INCBIN_U32("graphics/ikigai_scrolling_background/tilemaps/nine.bin.lz");
+static const u32 IkigaiScrollingBgTilemap_PalTen[]      = INCBIN_U32("graphics/ikigai_scrolling_background/tilemaps/ten.bin.lz");
+static const u32 IkigaiScrollingBgTilemap_PalEleven[]   = INCBIN_U32("graphics/ikigai_scrolling_background/tilemaps/eleven.bin.lz");
+static const u32 IkigaiScrollingBgTilemap_PalTwelve[]   = INCBIN_U32("graphics/ikigai_scrolling_background/tilemaps/twelve.bin.lz");
+static const u32 IkigaiScrollingBgTilemap_PalThirteen[] = INCBIN_U32("graphics/ikigai_scrolling_background/tilemaps/thirteen.bin.lz");
+static const u32 IkigaiScrollingBgTilemap_PalFourteen[] = INCBIN_U32("graphics/ikigai_scrolling_background/tilemaps/fourteen.bin.lz");
+static const u32 IkigaiScrollingBgTilemap_PalFifteen[]  = INCBIN_U32("graphics/ikigai_scrolling_background/tilemaps/fifteen.bin.lz");
+
+static const u16 IkigaiScrollingBgPal_Default[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_bg_palettes/default.gbapal");
 static const u16 IkigaiScrollingBgPal_Tornadus[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_bg_palettes/tornadus.gbapal");
 static const u16 IkigaiScrollingBgPal_Thundurus[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_bg_palettes/thundurus.gbapal");
 static const u16 IkigaiScrollingBgPal_Landorus[] = INCBIN_U16("graphics/ikigai_scrolling_background/scroll_bg_palettes/landorus.gbapal");
@@ -40,12 +57,86 @@ static const u16 IkigaiUIPal_Thundurus[] = INCBIN_U16("graphics/ikigai_scrolling
 static const u16 IkigaiUIPal_Landorus[] = INCBIN_U16("graphics/ikigai_scrolling_background/ui_tiles_palettes/landorus.gbapal");
 static const u16 IkigaiUIPal_Enamorus[] = INCBIN_U16("graphics/ikigai_scrolling_background/ui_tiles_palettes/enamorus.gbapal");
 
+static const u32 *const sIkigaiScrollingBgTilemaps[16] =
+{
+    IkigaiScrollingBgTilemap_PalZero,
+    IkigaiScrollingBgTilemap_PalOne,
+    IkigaiScrollingBgTilemap_PalTwo,
+    IkigaiScrollingBgTilemap_PalThree,
+    IkigaiScrollingBgTilemap_PalFour,
+    IkigaiScrollingBgTilemap_PalFive,
+    IkigaiScrollingBgTilemap_PalSix,
+    IkigaiScrollingBgTilemap_PalSeven,
+    IkigaiScrollingBgTilemap_PalEight,
+    IkigaiScrollingBgTilemap_PalNine,
+    IkigaiScrollingBgTilemap_PalTen,
+    IkigaiScrollingBgTilemap_PalEleven,
+    IkigaiScrollingBgTilemap_PalTwelve,
+    IkigaiScrollingBgTilemap_PalThirteen,
+    IkigaiScrollingBgTilemap_PalFourteen,
+    IkigaiScrollingBgTilemap_PalFifteen
+};
+
 #define SCROLLING_SPEED         64
 
 void StartIkigaiScrollingBackground(u8 background)
 {
     ChangeBgX(background, SCROLLING_SPEED, BG_COORD_SUB);
     ChangeBgY(background, SCROLLING_SPEED, BG_COORD_ADD);
+}
+
+void IkigaiScrollingBackground_CreateTiles(u8 background)
+{
+    DecompressAndCopyTileDataToVram(background, &IkigaiScrollingBgTiles, 0, 0, 0);
+}
+
+void IkigaiScrollingBackground_CreateTilemap(u8 paletteSlot, void *dest)
+{
+    paletteSlot = paletteSlot > NELEMS(sIkigaiScrollingBgTilemaps) ? 0 : paletteSlot;
+    LZDecompressWram(sIkigaiScrollingBgTilemaps[paletteSlot], dest);
+}
+
+void IkigaiScrollingBackground_LoadPalette(u8 paletteSlot, enum IkigaiBackgroundTypes type)
+{
+    const u16 *palette;
+    switch (type)
+    {
+        case IKIGAI_BG_INTERFACE:
+        palette = ReturnScrollingBackgroundPalette();
+        break;
+    
+        case IKIGAI_BG_GYM:
+        palette = ReturnScrollingBackgroundGymPalette();
+        break;
+    
+        case IKIGAI_BG_SEASON:
+        palette = ReturnScrollingBackgroundSeasonPalette(SEASON_COUNT);
+        break;
+    
+        case IKIGAI_BG_DEFAULT:
+        default:
+        palette = IkigaiScrollingBgPal_Default;
+        break;
+    }
+
+    LoadPalette(palette, BG_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
+}
+
+void IkigaiMenuUI_LoadPalette(u8 paletteSlot, enum IkigaiBackgroundTypes type)
+{
+    const u16 *palette;
+    switch (type)
+    {
+        case IKIGAI_BG_GYM:
+        palette = ReturnMenuUIGymPalette();
+    
+        case IKIGAI_BG_INTERFACE:
+        default:
+        palette = ReturnMenuUIPalette();
+        break;
+    }
+
+    LoadPalette(palette, BG_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
 }
 
 const u16 *ReturnScrollingBackgroundPalette(void)
@@ -117,6 +208,28 @@ const u16 *ReturnScrollingBackgroundGymPalette(void)
     }
 }
 
+const u16 *ReturnScrollingBackgroundSeasonPalette(enum Seasons season)
+{
+    switch (season)
+    {
+        case SEASON_SPRING:
+            return IkigaiScrollingBgPal_Enamorus;
+
+        case SEASON_SUMMER:
+            return IkigaiScrollingBgPal_Tornadus;
+        
+        case SEASON_AUTUMN:
+            return IkigaiScrollingBgPal_Landorus;
+        
+        case SEASON_WINTER:
+            return IkigaiScrollingBgPal_Thundurus;
+
+        case SEASON_COUNT:
+        default:
+            return IkigaiScrollingBgPal_Default;
+    }
+}
+
 const u16 *ReturnMenuUIPalette(void)
 {
     switch (gSaveBlock2Ptr->optionsInterfaceColor)
@@ -146,27 +259,5 @@ const u16 *ReturnMenuUIGymPalette(void)
         case TYPE_NONE:
         default:
             return IkigaiUIPal_Default;
-    }
-}
-
-const u16 *ReturnScrollingBackgroundSeasonPalette(u8 season)
-{
-    switch (season)
-    {
-        case 1:
-            return IkigaiScrollingBgPal_Enamorus;
-
-        case 2:
-            return IkigaiScrollingBgPal_Tornadus;
-        
-        case 3:
-            return IkigaiScrollingBgPal_Landorus;
-        
-        case 4:
-            return IkigaiScrollingBgPal_Thundurus;
-
-        case 0:
-        default:
-            return IkigaiScrollingBgPal_Default;
     }
 }

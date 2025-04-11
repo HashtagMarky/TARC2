@@ -2025,7 +2025,7 @@ static bool8 DecompressGraphics(void)
     case 0:
         ResetTempTileDataBuffers();
         DecompressAndCopyTileDataToVram(1, &sSummaryScreen_Gfx_BW, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(3, &IkigaiScrollingBgTiles, 0, 0, 0);
+        IkigaiScrollingBackground_CreateTiles(3);
         sMonSummaryScreen->switchCounter++;
         break;
     case 1:
@@ -2056,13 +2056,13 @@ static bool8 DecompressGraphics(void)
         sMonSummaryScreen->switchCounter++;
         break;
     case 7:
-        LZDecompressWram(IkigaiScrollingBgTilemap_PalEleven, sMonSummaryScreen->bg3TilemapBuffers);
+        IkigaiScrollingBackground_CreateTilemap(11, sMonSummaryScreen->bg3TilemapBuffers);
         sMonSummaryScreen->switchCounter++;
         break;
     case 8:
         LoadCompressedPalette(sSummaryScreen_Pal_BW, BG_PLTT_ID(0), 8 * PLTT_SIZE_4BPP);
         LoadPalette(&sSummaryScreen_PPTextPalette_BW, BG_PLTT_ID(8) + 1, PLTT_SIZEOF(16 - 1));
-        LoadPalette(ReturnScrollingBackgroundPalette(), BG_PLTT_ID(11), PLTT_SIZE_4BPP);
+        IkigaiScrollingBackground_LoadPalette(11, IKIGAI_BG_INTERFACE);
         UpdateIkigaiSummaryScreenPal();
         sMonSummaryScreen->switchCounter++;
         break;

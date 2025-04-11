@@ -873,20 +873,20 @@ static bool8 PokeSphere_LoadGraphics(void)
     case 0:
         ResetTempTileDataBuffers();
         DecompressAndCopyTileDataToVram(1, sPokeSphereTiles, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(2, IkigaiScrollingBgTiles, 0, 0, 0);
+        IkigaiScrollingBackground_CreateTiles(2);
         sPokeSphereState->loadState++;
         break;
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
             LZDecompressWram(sPokeSphereTilemapExplore, sBg1TilemapBuffer);
-            LZDecompressWram(IkigaiScrollingBgTilemap_PalOne, sBg2TilemapBuffer);
+            IkigaiScrollingBackground_CreateTilemap(1, sBg2TilemapBuffer);
             sPokeSphereState->loadState++;
         }
         break;
     case 2:
         LoadPalette(sPokeSpherePalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-        LoadPalette(ReturnScrollingBackgroundPalette(), BG_PLTT_ID(1), PLTT_SIZE_4BPP);
+        IkigaiScrollingBackground_LoadPalette(1, IKIGAI_BG_INTERFACE);
         LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         LoadPalette(&sPokeSpherePalette[TEXT_REPLACEMENT_INDEX], BG_PLTT_ID(15) + TEXT_COLOR_DARK_GRAY, sizeof(&sPokeSpherePalette[TEXT_REPLACEMENT_INDEX]));
         sPokeSphereState->loadState++;
@@ -1677,7 +1677,7 @@ static void PokeSphere_DrawMugshotBackgrounds(enum CharacterId character)
 {
     if (character == CHARACTER_PLAYER)
     {
-        LoadPalette(ReturnScrollingBackgroundPalette(), BG_PLTT_ID(1), PLTT_SIZE_4BPP);
+        IkigaiScrollingBackground_LoadPalette(1, IKIGAI_BG_INTERFACE);
     }
     else
     {

@@ -940,21 +940,21 @@ static bool8 CalendarUI_LoadGraphics(void)
     case 0:
         ResetTempTileDataBuffers();
         DecompressAndCopyTileDataToVram(1, sCalendarUITiles, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(2, IkigaiScrollingBgTiles, 0, 0, 0);
+        IkigaiScrollingBackground_CreateTiles(2);
         sCalendarUIState->loadState++;
         break;
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
             LZDecompressWram(sCalendarUITilemap, sBg1TilemapBuffer);
-            LZDecompressWram(IkigaiScrollingBgTilemap_PalOne, sBg2TilemapBuffer);
+            IkigaiScrollingBackground_CreateTilemap(1, sBg2TilemapBuffer);
             LZDecompressWram(sCalendarUITilemapSupplement, sBg3TilemapBuffer);
             sCalendarUIState->loadState++;
         }
         break;
     case 2:
         LoadPalette(sCalendarUIPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-        LoadPalette(ReturnScrollingBackgroundSeasonPalette(0), BG_PLTT_ID(1), PLTT_SIZE_4BPP);
+        IkigaiScrollingBackground_LoadPalette(1, IKIGAI_BG_SEASON);
         LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         LoadPalette(&sCalendarUIPalette[DEFAULT_TEXT_REPLACEMENT_INDEX], BG_PLTT_ID(15) + TEXT_COLOR_DARK_GRAY, sizeof(&sCalendarUIPalette[DEFAULT_TEXT_REPLACEMENT_INDEX]));
         LoadPalette(&sCalendarUIPalette[DEFAULT_SHADOW_REPLACEMENT_INDEX], BG_PLTT_ID(15) + TEXT_COLOR_LIGHT_GRAY, sizeof(&sCalendarUIPalette[DEFAULT_SHADOW_REPLACEMENT_INDEX]));

@@ -803,7 +803,7 @@ static bool8 SamuelCaseLoadGraphics(void) // load tilesets, tilemaps, spriteshee
         LoadCompressedSpriteSheet(&sSpriteSheet_PokeballHand);
         LoadSpritePalette(&sSpritePal_PokeballHand);
         LoadPalette(sCasePalette, 32, 32);
-        LoadPalette(IkigaiScrollingBgPal_Default, 16, 16);
+        IkigaiScrollingBackground_LoadPalette(1, IKIGAI_BG_DEFAULT);
         sSamuelCaseDataPtr->gfxLoadState++;
         break;
     default:

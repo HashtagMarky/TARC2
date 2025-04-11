@@ -282,7 +282,7 @@ struct // MENU_MAIN
     [MENUITEM_MAIN_UNIT_SYSTEM]     = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
     [MENUITEM_MAIN_CLOCK_MODE]      = {DrawChoices_ClockMode,   ProcessInput_Options_Two},
     [MENUITEM_MAIN_AUTOSAVE]        = {DrawChoices_AutoSave,    ProcessInput_Options_Two},
-    [MENUITEM_MAIN_FRAMETYPE]       = {DrawChoices_Interface,   ProcessInput_Interface},
+    [MENUITEM_MAIN_FRAMETYPE]       = {DrawChoices_Interface_GymTypes,   DEBUG_ProcessInput_Interface_GymTypes},
     [MENUITEM_MAIN_TITLE_SCREEN]    = {DrawChoices_TitleScreen, ProcessInput_Options_Two},
     [MENUITEM_MAIN_CANCEL]          = {NULL, NULL},
 };
@@ -886,19 +886,19 @@ static bool8 OptionsMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, 
         break;
     case 2:
         ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(3, IkigaiScrollingBgTiles, 0, 0, 0);
+        IkigaiScrollingBackground_CreateTiles(3);
         sOptions->gfxLoadState++;
         break;
     case 3:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(IkigaiScrollingBgTilemap_PalTwo, sBg3TilemapBuffer);
+            IkigaiScrollingBackground_CreateTilemap(2, sBg3TilemapBuffer);
             sOptions->gfxLoadState++;
         }
         break;
     case 4:
-        LoadPalette(ReturnMenuUIPalette(), 64, 32);
-        LoadPalette(ReturnScrollingBackgroundPalette(), 32, 32);
+        IkigaiMenuUI_LoadPalette(4, IKIGAI_BG_INTERFACE);
+        IkigaiScrollingBackground_LoadPalette(2, IKIGAI_BG_INTERFACE);
         sOptions->gfxLoadState++;
         break;
     default:
@@ -1455,8 +1455,8 @@ static int ProcessInput_Interface(int selection)
     LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
     LoadPalette(GetWindowFrameTilesPal(selection)->pal, 0x70, 0x20);
     // Reloads Palettes in case of Interface Changes
-    LoadPalette(ReturnMenuUIPalette(), 64, 32);
-    LoadPalette(ReturnScrollingBackgroundPalette(), 32, 32);
+    IkigaiMenuUI_LoadPalette(4, IKIGAI_BG_INTERFACE);
+    IkigaiScrollingBackground_LoadPalette(2, IKIGAI_BG_INTERFACE);
     Ikigai_LoadOptionsMenuText_Pal();
     return selection;
 }
@@ -1485,8 +1485,8 @@ static int DEBUG_ProcessInput_Interface_GymTypes(int selection)
     LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
     LoadPalette(GetWindowFrameTilesPal(IKIGAI_INTERFACE_GYM_TYPE_COLOUR)->pal, 0x70, 0x20);
     // Reloads Palettes in case of Interface Changes
-    LoadPalette(ReturnMenuUIPalette(), 64, 32);
-    LoadPalette(ReturnScrollingBackgroundPalette(), 32, 32);
+    IkigaiMenuUI_LoadPalette(4, IKIGAI_BG_INTERFACE);
+    IkigaiScrollingBackground_LoadPalette(2, IKIGAI_BG_INTERFACE);
     Ikigai_LoadOptionsMenuText_Pal();
     return selection;
 }
