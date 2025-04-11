@@ -37,7 +37,7 @@
 #include "event_object_movement.h"
 #include "field_mugshot.h"
 #include "ikigai_characters.h"
-#include "ikigai_scrolling_background.h"
+#include "ikigai_interface.h"
 #include "type_icons.h"
 
 #define CHARACTER_OFFSET                1

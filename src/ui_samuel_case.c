@@ -46,7 +46,7 @@
 #include "constants/pokemon.h"
 #include "naming_screen.h"
 #include "tv.h"
-#include "ikigai_scrolling_background.h"
+#include "ikigai_interface.h"
 
  /*
     9 Starter Selection Samuel Case

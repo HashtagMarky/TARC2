@@ -53,7 +53,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-#include "ikigai_scrolling_background.h"
+#include "ikigai_interface.h"
 #include "data/b_summary_screen.h"
 
 #if BW_SUMMARY_SCREEN == TRUE

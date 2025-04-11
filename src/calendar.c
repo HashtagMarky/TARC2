@@ -36,7 +36,7 @@
 #include "fake_rtc.h"
 #include "field_screen_effect.h"
 #include "field_weather.h"
-#include "ikigai_scrolling_background.h"
+#include "ikigai_interface.h"
 #include "international_string_util.h"
 #include "rtc.h"
 #include "start_menu.h"

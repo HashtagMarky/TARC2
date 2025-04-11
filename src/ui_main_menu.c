@@ -10,7 +10,7 @@
 #include "field_weather.h"
 #include "gpu_regs.h"
 #include "graphics.h"
-#include "ikigai_scrolling_background.h"
+#include "ikigai_interface.h"
 #include "item.h"
 #include "item_menu.h"
 #include "item_menu_icons.h"

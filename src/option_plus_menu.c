@@ -18,7 +18,7 @@
 #include "constants/rgb.h"
 #include "menu_helpers.h"
 #include "decompress.h"
-#include "ikigai_scrolling_background.h"
+#include "ikigai_interface.h"
 #include "constants/battle.h"
 #include "event_data.h"
 #include "speedup.h"

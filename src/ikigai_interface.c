@@ -1,4 +1,4 @@
-#include "ikigai_scrolling_background.h"
+#include "ikigai_interface.h"
 #include "global.h"
 #include "main.h"
 #include "decompress.h"
