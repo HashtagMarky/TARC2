@@ -57,6 +57,26 @@ static const u16 IkigaiUIPal_Thundurus[] = INCBIN_U16("graphics/ikigai_interface
 static const u16 IkigaiUIPal_Landorus[] = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/landorus.gbapal");
 static const u16 IkigaiUIPal_Enamorus[] = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/enamorus.gbapal");
 
+static const u16 IkigaiUIPal_Lillipup[]   = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/lillipup.gbapal");
+static const u16 IkigaiUIPal_Machop[]     = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/machop.gbapal");
+static const u16 IkigaiUIPal_Rookidee[]   = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/rookidee.gbapal");
+static const u16 IkigaiUIPal_NidoranM[]   = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/nidoran_m.gbapal");
+static const u16 IkigaiUIPal_NidoranF[]   = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/nidoran_f.gbapal");
+static const u16 IkigaiUIPal_Sandile[]    = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/sandile.gbapal");
+static const u16 IkigaiUIPal_Rolycoly[]   = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/rolycoly.gbapal");
+static const u16 IkigaiUIPal_Grubbin[]    = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/grubbin.gbapal");
+static const u16 IkigaiUIPal_Duskull[]    = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/duskull.gbapal");
+static const u16 IkigaiUIPal_Klink[]      = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/klink.gbapal");
+static const u16 IkigaiUIPal_Magby[]      = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/magby.gbapal");
+static const u16 IkigaiUIPal_Tympole[]    = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/tympole.gbapal");
+static const u16 IkigaiUIPal_Seedot[]     = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/seedot.gbapal");
+static const u16 IkigaiUIPal_Shinx[]      = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/shinx.gbapal");
+static const u16 IkigaiUIPal_Hatenna[]    = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/hatenna.gbapal");
+static const u16 IkigaiUIPal_Swinub[]     = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/swinub.gbapal");
+static const u16 IkigaiUIPal_Bagon[]      = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/bagon.gbapal");
+static const u16 IkigaiUIPal_Impidimp[]   = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/impidimp.gbapal");
+static const u16 IkigaiUIPal_Flabebe[]    = INCBIN_U16("graphics/ikigai_interface/ui_tiles_palettes/flabebe.gbapal");
+
 static const u32 *const sIkigaiScrollingBgTilemaps[16] =
 {
     IkigaiScrollingBgTilemap_PalZero,
@@ -256,6 +276,42 @@ const u16 *Ikigai_ReturnUIGymPalette(void)
 {
     switch (gSaveBlock2Ptr->ikigaiGymType)
     {
+        case TYPE_NORMAL:
+            return IkigaiUIPal_Lillipup;
+        case TYPE_FIGHTING:
+            return IkigaiUIPal_Machop;
+        case TYPE_FLYING:
+            return IkigaiUIPal_Rookidee;
+        case TYPE_POISON:
+            return gSaveBlock2Ptr->playerGender == MALE ? IkigaiUIPal_NidoranM : IkigaiUIPal_NidoranF;
+        case TYPE_GROUND:
+            return IkigaiUIPal_Sandile;
+        case TYPE_ROCK:
+            return IkigaiUIPal_Rolycoly;
+        case TYPE_BUG:
+            return IkigaiUIPal_Grubbin;
+        case TYPE_GHOST:
+            return IkigaiUIPal_Duskull;
+        case TYPE_STEEL:
+            return IkigaiUIPal_Klink;
+        case TYPE_FIRE:
+            return IkigaiUIPal_Magby;
+        case TYPE_WATER:
+            return IkigaiUIPal_Tympole;
+        case TYPE_GRASS:
+            return IkigaiUIPal_Seedot;
+        case TYPE_ELECTRIC:
+            return IkigaiUIPal_Shinx;
+        case TYPE_PSYCHIC:
+            return IkigaiUIPal_Hatenna;
+        case TYPE_ICE:
+            return IkigaiUIPal_Swinub;
+        case TYPE_DRAGON:
+            return IkigaiUIPal_Bagon;
+        case TYPE_DARK:
+            return IkigaiUIPal_Impidimp;
+        case TYPE_FAIRY:
+            return IkigaiUIPal_Flabebe;
         case TYPE_NONE:
         default:
             return IkigaiUIPal_Default;
