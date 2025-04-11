@@ -852,10 +852,10 @@ static void Ikigai_LoadOptionsMenuText_Pal(void)
     }
 
     // Left Side Unlocked (Non-Gym Interface)
-    if (gSaveBlock2Ptr->ikigaiGymType == IKIGAI_INTERFACE_GREEN
-        // || gSaveBlock2Ptr->ikigaiGymType == IKIGAI_INTERFACE_BLUE
-        || gSaveBlock2Ptr->ikigaiGymType == IKIGAI_INTERFACE_ORANGE
-        || gSaveBlock2Ptr->ikigaiGymType == IKIGAI_INTERFACE_PINK)
+    if (gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_GREEN
+        // || gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_BLUE
+        || gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_ORANGE
+        || gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_PINK)
         LoadPalette(&colorScrollingBGPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_SHADOW, sizeof(u16));
 
     // Left Side Locked
@@ -1270,7 +1270,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsClockMode                = sOptions->sel[MENUITEM_MAIN_CLOCK_MODE];
     gSaveBlock2Ptr->optionsDisableAutoSave          = sOptions->sel[MENUITEM_MAIN_AUTOSAVE];
 #if (OPTIONS_DEBUG_GYM && DEV_BUILD)
-    gSaveBlock2Ptr->ikigaiGymType                   = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
+    gSaveBlock2Ptr->ikigaiGymType                   = (sOptions->sel[MENUITEM_MAIN_FRAMETYPE] == TYPE_MYSTERY ? TYPE_NONE : sOptions->sel[MENUITEM_MAIN_FRAMETYPE]);
 #else
     gSaveBlock2Ptr->optionsInterfaceColor           = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
 #endif
