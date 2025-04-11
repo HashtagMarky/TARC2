@@ -17,12 +17,12 @@ void StartIkigaiScrollingBackground(u8 background);
 void IkigaiScrollingBackground_CreateTiles(u8 background);
 void IkigaiScrollingBackground_CreateTilemap(u8 paletteSlot, void *dest);
 void IkigaiScrollingBackground_LoadPalette(u8 paletteSlot, enum IkigaiBackgroundTypes type);
-void IkigaiMenuUI_LoadPalette(u8 paletteSlot, enum IkigaiBackgroundTypes type);
+void IkigaiUI_LoadPalette(u8 paletteSlot, enum IkigaiBackgroundTypes type);
 
-extern const u16 *ReturnScrollingBackgroundPalette(void);
-extern const u16 *ReturnScrollingBackgroundGymPalette(void);
-extern const u16 *ReturnScrollingBackgroundSeasonPalette(enum Seasons season);
-extern const u16 *ReturnMenuUIPalette(void);
-extern const u16 *ReturnMenuUIGymPalette(void);
+extern const u16 *Ikigai_ReturnScrollingBackgroundPalette(void);
+extern const u16 *Ikigai_ReturnScrollingBackgroundGymPalette(void);
+extern const u16 *Ikigai_ReturnScrollingBackgroundSeasonPalette(enum Seasons season);
+extern const u16 *Ikigai_ReturnUIPalette(void);
+extern const u16 *Ikigai_ReturnUIGymPalette(void);
 
 #endif // GUARD_IKIGAI_SCROLLING_BACKGROUND_H

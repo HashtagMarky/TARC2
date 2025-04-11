@@ -5463,7 +5463,7 @@ static void UpdateIkigaiSummaryScreenPal(void)
 {
     // Not needed now loading actual Ikigai Scrolling Background.
 
-    // const u16 *ikigaiScrollingBgPal = ReturnScrollingBackgroundPalette();
+    // const u16 *ikigaiScrollingBgPal = Ikigai_ReturnScrollingBackgroundPalette();
     // u16 colorDark = ikigaiScrollingBgPal[1];
     // u16 colorMedium = ikigaiScrollingBgPal[2];
     // u16 colorLight = ikigaiScrollingBgPal[3];
@@ -5472,7 +5472,7 @@ static void UpdateIkigaiSummaryScreenPal(void)
     // LoadPalette(&colorMedium, BG_PLTT_ID(0) + 13, sizeof(colorMedium));
     // LoadPalette(&colorLight, BG_PLTT_ID(0) + 11, sizeof(colorLight));
 
-    const u16 *ikigaiMenuUIPal = ReturnMenuUIPalette();
+    const u16 *ikigaiMenuUIPal = Ikigai_ReturnUIPalette();
     u16 colorDarker = ikigaiMenuUIPal[2];
     u16 colorLighter = ikigaiMenuUIPal[4];
 
@@ -5484,7 +5484,7 @@ static const struct SpritePalette *ReturnMoveSelectorPalette(void)
 {
     static struct SpritePalette palMoveSelector;
 
-    palMoveSelector.data = ReturnMenuUIPalette();
+    palMoveSelector.data = Ikigai_ReturnUIPalette();
     palMoveSelector.tag = TAG_MOVE_SELECTOR;
 
     return &palMoveSelector;

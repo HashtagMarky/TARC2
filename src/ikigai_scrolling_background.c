@@ -102,15 +102,15 @@ void IkigaiScrollingBackground_LoadPalette(u8 paletteSlot, enum IkigaiBackground
     switch (type)
     {
         case IKIGAI_BG_INTERFACE:
-        palette = ReturnScrollingBackgroundPalette();
+        palette = Ikigai_ReturnScrollingBackgroundPalette();
         break;
     
         case IKIGAI_BG_GYM:
-        palette = ReturnScrollingBackgroundGymPalette();
+        palette = Ikigai_ReturnScrollingBackgroundGymPalette();
         break;
     
         case IKIGAI_BG_SEASON:
-        palette = ReturnScrollingBackgroundSeasonPalette(SEASON_COUNT);
+        palette = Ikigai_ReturnScrollingBackgroundSeasonPalette(SEASON_COUNT);
         break;
     
         case IKIGAI_BG_DEFAULT:
@@ -122,24 +122,24 @@ void IkigaiScrollingBackground_LoadPalette(u8 paletteSlot, enum IkigaiBackground
     LoadPalette(palette, BG_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
 }
 
-void IkigaiMenuUI_LoadPalette(u8 paletteSlot, enum IkigaiBackgroundTypes type)
+void IkigaiUI_LoadPalette(u8 paletteSlot, enum IkigaiBackgroundTypes type)
 {
     const u16 *palette;
     switch (type)
     {
         case IKIGAI_BG_GYM:
-        palette = ReturnMenuUIGymPalette();
+        palette = Ikigai_ReturnUIGymPalette();
     
         case IKIGAI_BG_INTERFACE:
         default:
-        palette = ReturnMenuUIPalette();
+        palette = Ikigai_ReturnUIPalette();
         break;
     }
 
     LoadPalette(palette, BG_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
 }
 
-const u16 *ReturnScrollingBackgroundPalette(void)
+const u16 *Ikigai_ReturnScrollingBackgroundPalette(void)
 {
     switch (gSaveBlock2Ptr->optionsInterfaceColor)
     {
@@ -157,11 +157,11 @@ const u16 *ReturnScrollingBackgroundPalette(void)
 
         case IKIGAI_INTERFACE_GYM_TYPE_COLOUR:
         default:
-            return ReturnScrollingBackgroundGymPalette();
+            return Ikigai_ReturnScrollingBackgroundGymPalette();
     }
 }
 
-const u16 *ReturnScrollingBackgroundGymPalette(void)
+const u16 *Ikigai_ReturnScrollingBackgroundGymPalette(void)
 {
     switch (gSaveBlock2Ptr->ikigaiGymType)
     {
@@ -208,7 +208,7 @@ const u16 *ReturnScrollingBackgroundGymPalette(void)
     }
 }
 
-const u16 *ReturnScrollingBackgroundSeasonPalette(enum Seasons season)
+const u16 *Ikigai_ReturnScrollingBackgroundSeasonPalette(enum Seasons season)
 {
     switch (season)
     {
@@ -230,7 +230,7 @@ const u16 *ReturnScrollingBackgroundSeasonPalette(enum Seasons season)
     }
 }
 
-const u16 *ReturnMenuUIPalette(void)
+const u16 *Ikigai_ReturnUIPalette(void)
 {
     switch (gSaveBlock2Ptr->optionsInterfaceColor)
     {
@@ -248,11 +248,11 @@ const u16 *ReturnMenuUIPalette(void)
             
         case IKIGAI_INTERFACE_GYM_TYPE_COLOUR:
         default:
-            return ReturnMenuUIGymPalette();
+            return Ikigai_ReturnUIGymPalette();
     }
 }
 
-const u16 *ReturnMenuUIGymPalette(void)
+const u16 *Ikigai_ReturnUIGymPalette(void)
 {
     switch (gSaveBlock2Ptr->ikigaiGymType)
     {

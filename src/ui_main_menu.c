@@ -555,7 +555,7 @@ static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spr
         LoadCompressedSpriteSheet(&sSpriteSheet_IconBox);
         LoadSpritePalette(ReturnIconBoxPalette());
         DynPal_LoadPaletteByTag(sDynPalPlayerMugshot, TAG_MUGSHOT);
-        IkigaiMenuUI_LoadPalette(0, IKIGAI_BG_INTERFACE);
+        IkigaiUI_LoadPalette(0, IKIGAI_BG_INTERFACE);
         IkigaiScrollingBackground_LoadPalette(1, IKIGAI_BG_INTERFACE);
     }
         sMainMenuDataPtr->gfxLoadState++;
@@ -946,7 +946,7 @@ static const struct SpritePalette *ReturnIconBoxPalette(void)
 {
     static struct SpritePalette palIconBox;
 
-    palIconBox.data = ReturnMenuUIPalette();
+    palIconBox.data = Ikigai_ReturnUIPalette();
     palIconBox.tag = TAG_ICON_BOX;
 
     return &palIconBox;

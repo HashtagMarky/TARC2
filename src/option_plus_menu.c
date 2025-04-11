@@ -723,9 +723,9 @@ static void DrawLeftSideOptionText(int selection, int y)
 {
     u8 color_yellow[3];
     u8 color_gray[3];
-    const u16 *selectedColorMenuUIPal = ReturnMenuUIPalette();
+    const u16 *selectedColorMenuUIPal = Ikigai_ReturnUIPalette();
     u16 selectedTextColor = selectedColorMenuUIPal[1];
-    const u16 *selectedColorScrollingBGPal = ReturnScrollingBackgroundPalette();
+    const u16 *selectedColorScrollingBGPal = Ikigai_ReturnScrollingBackgroundPalette();
     u16 selectedShadowColor = selectedColorScrollingBGPal[1];
 
     color_yellow[0] = TEXT_COLOR_TRANSPARENT;
@@ -747,7 +747,7 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
 {
     u8 color_red[3];
     u8 color_gray[3];
-    const u16 *selectedColorPal = ReturnMenuUIPalette();
+    const u16 *selectedColorPal = Ikigai_ReturnUIPalette();
     u16 selectedTextColor = selectedColorPal[2];
     u16 selectedShadowColor = selectedColorPal[1];
 
@@ -793,8 +793,8 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
 
 static void Ikigai_LoadOptionsMenuText_Pal(void)
 {
-    const u16 *colorMenuUIPal = ReturnMenuUIPalette();
-    const u16 *colorScrollingBGPal = ReturnScrollingBackgroundPalette();
+    const u16 *colorMenuUIPal = Ikigai_ReturnUIPalette();
+    const u16 *colorScrollingBGPal = Ikigai_ReturnScrollingBackgroundPalette();
 
     // Options Printed Window Text
     LoadPalette(&colorScrollingBGPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GRAY_FG, sizeof(u16));
@@ -897,7 +897,7 @@ static bool8 OptionsMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, 
         }
         break;
     case 4:
-        IkigaiMenuUI_LoadPalette(4, IKIGAI_BG_INTERFACE);
+        IkigaiUI_LoadPalette(4, IKIGAI_BG_INTERFACE);
         IkigaiScrollingBackground_LoadPalette(2, IKIGAI_BG_INTERFACE);
         sOptions->gfxLoadState++;
         break;
@@ -1455,7 +1455,7 @@ static int ProcessInput_Interface(int selection)
     LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
     LoadPalette(GetWindowFrameTilesPal(selection)->pal, 0x70, 0x20);
     // Reloads Palettes in case of Interface Changes
-    IkigaiMenuUI_LoadPalette(4, IKIGAI_BG_INTERFACE);
+    IkigaiUI_LoadPalette(4, IKIGAI_BG_INTERFACE);
     IkigaiScrollingBackground_LoadPalette(2, IKIGAI_BG_INTERFACE);
     Ikigai_LoadOptionsMenuText_Pal();
     return selection;
@@ -1485,7 +1485,7 @@ static int DEBUG_ProcessInput_Interface_GymTypes(int selection)
     LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
     LoadPalette(GetWindowFrameTilesPal(IKIGAI_INTERFACE_GYM_TYPE_COLOUR)->pal, 0x70, 0x20);
     // Reloads Palettes in case of Interface Changes
-    IkigaiMenuUI_LoadPalette(4, IKIGAI_BG_INTERFACE);
+    IkigaiUI_LoadPalette(4, IKIGAI_BG_INTERFACE);
     IkigaiScrollingBackground_LoadPalette(2, IKIGAI_BG_INTERFACE);
     Ikigai_LoadOptionsMenuText_Pal();
     return selection;
