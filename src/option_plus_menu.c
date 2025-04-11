@@ -811,6 +811,8 @@ static void Ikigai_LoadOptionsMenuText_Pal(void)
 
     // Left Side Unlocked
     LoadPalette(&colorScrollingBGPal[3], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_FG, sizeof(u16));
+
+    // Left Side Unlocked (Genie Interface)
     switch (gSaveBlock2Ptr->ikigaiGymType)
     {
         case TYPE_NORMAL:
@@ -836,11 +838,19 @@ static void Ikigai_LoadOptionsMenuText_Pal(void)
         case TYPE_DARK:
             if (gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_GYM_TYPE_COLOUR)
                 LoadPalette(&colorScrollingBGPal[3], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_FG, sizeof(u16));
+                // Allow fallthrough for Dark Type.
         
         default:
             LoadPalette(&colorScrollingBGPal[2], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_SHADOW, sizeof(u16));
             break;
     }
+
+    // Left Side Unlocked (Non-Gym Interface)
+    if (gSaveBlock2Ptr->ikigaiGymType == IKIGAI_INTERFACE_GREEN
+        // || gSaveBlock2Ptr->ikigaiGymType == IKIGAI_INTERFACE_BLUE
+        || gSaveBlock2Ptr->ikigaiGymType == IKIGAI_INTERFACE_ORANGE
+        || gSaveBlock2Ptr->ikigaiGymType == IKIGAI_INTERFACE_PINK)
+        LoadPalette(&colorScrollingBGPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_SHADOW, sizeof(u16));
 
     // Left Side Locked
     LoadPalette(&colorScrollingBGPal[2], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_FG, sizeof(u16));
