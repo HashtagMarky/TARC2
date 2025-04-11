@@ -27,6 +27,8 @@
 #include "constants/songs.h"
 #include "battle_main.h"
 
+#define OPTIONS_DEBUG_GYM FALSE
+
 enum
 {
     MENU_MAIN,
@@ -282,7 +284,11 @@ struct // MENU_MAIN
     [MENUITEM_MAIN_UNIT_SYSTEM]     = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
     [MENUITEM_MAIN_CLOCK_MODE]      = {DrawChoices_ClockMode,   ProcessInput_Options_Two},
     [MENUITEM_MAIN_AUTOSAVE]        = {DrawChoices_AutoSave,    ProcessInput_Options_Two},
+#if (OPTIONS_DEBUG_GYM && DEV_BUILD)
+    [MENUITEM_MAIN_FRAMETYPE]       = {DEBUG_DrawChoices_Interface_GymTypes,   DEBUG_ProcessInput_Interface_GymTypes},
+#else
     [MENUITEM_MAIN_FRAMETYPE]       = {DrawChoices_Interface,   ProcessInput_Interface},
+#endif
     [MENUITEM_MAIN_TITLE_SCREEN]    = {DrawChoices_TitleScreen, ProcessInput_Options_Two},
     [MENUITEM_MAIN_CANCEL]          = {NULL, NULL},
 };
@@ -1016,7 +1022,11 @@ void CB2_InitOptionPlusMenu(void)
         sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM]                = gSaveBlock2Ptr->optionsUnitSystem;
         sOptions->sel[MENUITEM_MAIN_CLOCK_MODE]                 = gSaveBlock2Ptr->optionsClockMode;
         sOptions->sel[MENUITEM_MAIN_AUTOSAVE]                   = gSaveBlock2Ptr->optionsDisableAutoSave;
+#if (OPTIONS_DEBUG_GYM && DEV_BUILD)
+        sOptions->sel[MENUITEM_MAIN_FRAMETYPE]                  = gSaveBlock2Ptr->ikigaiGymType;
+#else
         sOptions->sel[MENUITEM_MAIN_FRAMETYPE]                  = gSaveBlock2Ptr->optionsInterfaceColor;
+#endif
         sOptions->sel[MENUITEM_MAIN_TITLE_SCREEN]               = gSaveBlock2Ptr->optionsTitleScreenRandomise;
         
         sOptions->sel_overworld[MENUITEM_OVERWORLD_AUTO_RUN]        = gSaveBlock3Ptr->autoRun;
@@ -1259,7 +1269,11 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsUnitSystem               = sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM];
     gSaveBlock2Ptr->optionsClockMode                = sOptions->sel[MENUITEM_MAIN_CLOCK_MODE];
     gSaveBlock2Ptr->optionsDisableAutoSave          = sOptions->sel[MENUITEM_MAIN_AUTOSAVE];
+#if (OPTIONS_DEBUG_GYM && DEV_BUILD)
+    gSaveBlock2Ptr->ikigaiGymType                   = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
+#else
     gSaveBlock2Ptr->optionsInterfaceColor           = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
+#endif
     gSaveBlock2Ptr->optionsTitleScreenRandomise     = sOptions->sel[MENUITEM_MAIN_TITLE_SCREEN];
 
     gSaveBlock3Ptr->autoRun                     = sOptions->sel_overworld[MENUITEM_OVERWORLD_AUTO_RUN];
