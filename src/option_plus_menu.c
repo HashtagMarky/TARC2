@@ -793,6 +793,9 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
 
 static void Ikigai_LoadOptionsMenuText_Pal(void)
 {
+    // Load Original Palette First
+    LoadPalette(sOptionMenuText_Pal, OPTIONS_TEXT_OFFSET, sizeof(sOptionMenuText_Pal));
+
     const u16 *colorMenuUIPal = Ikigai_ReturnUIPalette();
     const u16 *colorScrollingBGPal = Ikigai_ReturnScrollingBackgroundPalette();
 
@@ -801,7 +804,7 @@ static void Ikigai_LoadOptionsMenuText_Pal(void)
 
     // Top Bar Shadow
     if (gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_GYM_TYPE_COLOUR
-        && gSaveBlock2Ptr->ikigaiGymType == TYPE_NORMAL)
+        && (gSaveBlock2Ptr->ikigaiGymType == TYPE_NORMAL || gSaveBlock2Ptr->ikigaiGymType == TYPE_NORMAL))
         LoadPalette(&colorScrollingBGPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GREEN_DARK_SHADOW, sizeof(u16));
     else
         LoadPalette(&colorScrollingBGPal[3], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GREEN_DARK_SHADOW, sizeof(u16));
@@ -812,16 +815,27 @@ static void Ikigai_LoadOptionsMenuText_Pal(void)
     {
         case TYPE_NORMAL:
         case TYPE_FIGHTING:
+        case TYPE_FLYING:
+        case TYPE_POISON:
+        case TYPE_GROUND:
+        case TYPE_ROCK:
+        case TYPE_BUG:
+        case TYPE_GHOST:
         case TYPE_FIRE:
         case TYPE_WATER:
         case TYPE_GRASS:
         case TYPE_ELECTRIC:
         case TYPE_PSYCHIC:
         case TYPE_ICE:
+        case TYPE_DRAGON:
         case TYPE_FAIRY:
             LoadPalette(&colorScrollingBGPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_SHADOW, sizeof(u16));
             if (gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_GYM_TYPE_COLOUR)
                 break; // Switch only ends if set to Gym Colour, otherwise use default.
+
+        case TYPE_DARK:
+            if (gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_GYM_TYPE_COLOUR)
+                LoadPalette(&colorScrollingBGPal[3], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_FG, sizeof(u16));
         
         default:
             LoadPalette(&colorScrollingBGPal[2], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_SHADOW, sizeof(u16));
@@ -839,6 +853,11 @@ static void Ikigai_LoadOptionsMenuText_Pal(void)
     // Right Side Unselected
     LoadPalette(&colorMenuUIPal[2], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_ORANGE_FG, sizeof(u16));
     LoadPalette(&colorMenuUIPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_ORANGE_SHADOW, sizeof(u16));
+
+    // Right Side Selected
+    if (gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_GYM_TYPE_COLOUR
+        && (gSaveBlock2Ptr->ikigaiGymType == TYPE_STEEL || gSaveBlock2Ptr->ikigaiGymType == TYPE_WATER))
+        LoadPalette(&colorMenuUIPal[2], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG, sizeof(u16));
 }
 
 static void DrawChoices(u32 id, int y) //right side draw function
@@ -976,7 +995,6 @@ void CB2_InitOptionPlusMenu(void)
         gMain.state++;
         break;
     case 5:
-        LoadPalette(sOptionMenuText_Pal, OPTIONS_TEXT_OFFSET, sizeof(sOptionMenuText_Pal));
         Ikigai_LoadOptionsMenuText_Pal();
         gMain.state++;
         break;
