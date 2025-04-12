@@ -1,7 +1,7 @@
 #ifndef GUARD_TYPE_ICONS_H
 #define GUARD_TYPE_ICONS_H
 
-void LoadTypeIcons(u32);
+void LoadTypeIcons(u32 battler);
 u8 CreateBattlenMoveTypeIcon(u8 x, u8 y, u8 subpriority, u8 type);
 
 #define TYPE_ICON_TAG 0x2720
