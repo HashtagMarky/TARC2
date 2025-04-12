@@ -47,6 +47,7 @@
 #include "mystery_event_menu.h"
 #include "mystery_gift_menu.h"
 #include "link.h"
+#include "battle_main.h"
 
 #define tStopBGM data[1]
 
@@ -173,9 +174,9 @@ static const struct WindowTemplate sMainMenuWindowTemplates[] =
     {
         .bg = 0,                   // which bg to print text on
         .tilemapLeft = 8,          // position from left (per 8 pixels)
-        .tilemapTop = 4,           // position from top (per 8 pixels)
+        .tilemapTop = 3,           // position from top (per 8 pixels)
         .width = 18,               // width (per 8 pixels)
-        .height = 7,               // height (per 8 pixels)
+        .height = 8,               // height (per 8 pixels)
         .paletteNum = 0,           // palette index to use for text
         .baseBlock = 1 + (18 * 2), // tile start in VRAM
     },
@@ -747,7 +748,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
     mapDisplayHeader[0] = EXT_CTRL_CODE_BEGIN;
     mapDisplayHeader[1] = EXT_CTRL_CODE_HIGHLIGHT;
     mapDisplayHeader[2] = TEXT_COLOR_TRANSPARENT;
-    AddTextPrinterParameterized4(WINDOW_HEADER, FONT_NARROW, GetStringCenterAlignXOffset(FONT_NARROW, withoutPrefixPtr, 10 * 8), 1, 0, 0, colorsGameText, 0xFF, mapDisplayHeader);
+    AddTextPrinterParameterized4(WINDOW_HEADER, ReturnNarrowTextFont(), GetStringCenterAlignXOffset(ReturnNarrowTextFont(), withoutPrefixPtr, 10 * 8), ReturnNarrowTextFont() == FONT_SHORT_NARROW ? 2 : 1, 0, 0, colorsGameText, 0xFF, mapDisplayHeader);
 
     // Print Playtime In Header
     playTimePtr = ConvertIntToDecimalStringN(gStringVar4, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -756,29 +757,41 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
     AddTextPrinterParameterized4(WINDOW_HEADER, FONT_NORMAL, (104 - 12) + GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, (6*8)), 1 + yOffset, 0, 0, colorsGameText, TEXT_SKIP_DRAW, gStringVar4);
 
     // Print Dex Numbers if You Have It
-    if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
+    // if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
+    // {
+    //     if (IsNationalPokedexEnabled())
+    //         dexCount = GetNationalPokedexCount(FLAG_GET_CAUGHT);
+    //     else
+    //         dexCount = GetHoennPokedexCount(FLAG_GET_CAUGHT);
+    //     ConvertIntToDecimalStringN(gStringVar1, dexCount, STR_CONV_MODE_RIGHT_ALIGN, 4);
+    //     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Dex {STR_VAR_1}"));
+    //     AddTextPrinterParameterized4(WINDOW_MIDDLE, FONT_NORMAL, 8 + 8, 16 + 2, 0, 0, colorsTrainerText, TEXT_SKIP_DRAW, gStringVar4);
+    // }
+
+    // Print Gym Type
+    if (gSaveBlock2Ptr->ikigaiGymType)
     {
-        if (IsNationalPokedexEnabled())
-            dexCount = GetNationalPokedexCount(FLAG_GET_CAUGHT);
-        else
-            dexCount = GetHoennPokedexCount(FLAG_GET_CAUGHT);
-        ConvertIntToDecimalStringN(gStringVar1, dexCount, STR_CONV_MODE_RIGHT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Dex {STR_VAR_1}"));
-        AddTextPrinterParameterized4(WINDOW_MIDDLE, FONT_NORMAL, 8 + 8, 16 + 2, 0, 0, colorsTrainerText, TEXT_SKIP_DRAW, gStringVar4);
+        StringCopy(gStringVar1, gTypesInfo[gSaveBlock2Ptr->ikigaiGymType].name);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1}\nType Gym"));
+        AddTextPrinterParameterized4(WINDOW_MIDDLE, FONT_SMALL, 8 + 8, 20, 0, 0, colorsTrainerText, TEXT_SKIP_DRAW, gStringVar4);
+    }
+    else
+    {
+        AddTextPrinterParameterized4(WINDOW_MIDDLE, FONT_SMALL, 8 + 8, 20, 0, 0, colorsTrainerText, TEXT_SKIP_DRAW, COMPOUND_STRING("An Incoming\nGym Leader"));
     }
 
     // Print Badge Numbers if You Have Them
-    for (i = FLAG_BADGE01_GET; i < FLAG_BADGE01_GET + NUM_BADGES; i++)
-    {
-        if (FlagGet(i))
-            badgeCount++;
-    } 
-    ConvertIntToDecimalStringN(gStringVar1, badgeCount, STR_CONV_MODE_LEADING_ZEROS, 1);
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Badges {STR_VAR_1}"));
-    AddTextPrinterParameterized4(WINDOW_MIDDLE, FONT_NORMAL, 16, 32 + 2, 0, 0, colorsTrainerText, TEXT_SKIP_DRAW, gStringVar4);
+    // for (i = FLAG_BADGE01_GET; i < FLAG_BADGE01_GET + NUM_BADGES; i++)
+    // {
+    //     if (FlagGet(i))
+    //         badgeCount++;
+    // } 
+    // ConvertIntToDecimalStringN(gStringVar1, badgeCount, STR_CONV_MODE_LEADING_ZEROS, 1);
+    // StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Badges {STR_VAR_1}"));
+    // AddTextPrinterParameterized4(WINDOW_MIDDLE, FONT_SMALL, 16, 44 + 2, 0, 0, colorsTrainerText, TEXT_SKIP_DRAW, gStringVar4);
 
     // Print Player Name
-    AddTextPrinterParameterized3(WINDOW_MIDDLE, FONT_NORMAL, 16, 2, colorsTrainerText, TEXT_SKIP_DRAW, gSaveBlock2Ptr->playerName);
+    AddTextPrinterParameterized3(WINDOW_MIDDLE, FONT_SMALL, 16, 6, colorsTrainerText, TEXT_SKIP_DRAW, gSaveBlock2Ptr->playerName);
 
     PutWindowTilemap(WINDOW_HEADER);
     CopyWindowToVram(WINDOW_HEADER, 3);
