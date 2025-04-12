@@ -27,7 +27,10 @@
 #include "constants/songs.h"
 #include "battle_main.h"
 
-#define OPTIONS_DEBUG_GYM FALSE
+#include "ui_samuel_case.h"
+#include "random.h"
+#include "dynamic_palettes.h"
+#include "main_menu.h"
 
 enum
 {
@@ -224,6 +227,7 @@ static void DrawChoices_Font(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_Interface(int selection, int y);
 static void DEBUG_DrawChoices_Interface_GymTypes(int selection, int y);
+static void DEBUG_RandomisePlayerForScreenshots(void);
 static void DrawChoices_MatchCall(int selection, int y);
 static void DrawChoices_AutoRun(int selection, int y);
 static void DrawChoices_FastSurf(int selection, int y);
@@ -284,7 +288,7 @@ struct // MENU_MAIN
     [MENUITEM_MAIN_UNIT_SYSTEM]     = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
     [MENUITEM_MAIN_CLOCK_MODE]      = {DrawChoices_ClockMode,   ProcessInput_Options_Two},
     [MENUITEM_MAIN_AUTOSAVE]        = {DrawChoices_AutoSave,    ProcessInput_Options_Two},
-#if (OPTIONS_DEBUG_GYM && DEV_BUILD)
+#if (DEBUG_OPTIONS_MENU_GYM_INTERFACE && DEV_BUILD)
     [MENUITEM_MAIN_FRAMETYPE]       = {DEBUG_DrawChoices_Interface_GymTypes,   DEBUG_ProcessInput_Interface_GymTypes},
 #else
     [MENUITEM_MAIN_FRAMETYPE]       = {DrawChoices_Interface,   ProcessInput_Interface},
@@ -1022,7 +1026,7 @@ void CB2_InitOptionPlusMenu(void)
         sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM]                = gSaveBlock2Ptr->optionsUnitSystem;
         sOptions->sel[MENUITEM_MAIN_CLOCK_MODE]                 = gSaveBlock2Ptr->optionsClockMode;
         sOptions->sel[MENUITEM_MAIN_AUTOSAVE]                   = gSaveBlock2Ptr->optionsDisableAutoSave;
-#if (OPTIONS_DEBUG_GYM && DEV_BUILD)
+#if (DEBUG_OPTIONS_MENU_GYM_INTERFACE && DEV_BUILD)
         sOptions->sel[MENUITEM_MAIN_FRAMETYPE]                  = gSaveBlock2Ptr->ikigaiGymType;
 #else
         sOptions->sel[MENUITEM_MAIN_FRAMETYPE]                  = gSaveBlock2Ptr->optionsInterfaceColor;
@@ -1269,7 +1273,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsUnitSystem               = sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM];
     gSaveBlock2Ptr->optionsClockMode                = sOptions->sel[MENUITEM_MAIN_CLOCK_MODE];
     gSaveBlock2Ptr->optionsDisableAutoSave          = sOptions->sel[MENUITEM_MAIN_AUTOSAVE];
-#if (OPTIONS_DEBUG_GYM && DEV_BUILD)
+#if (DEBUG_OPTIONS_MENU_GYM_INTERFACE && DEV_BUILD)
     gSaveBlock2Ptr->ikigaiGymType                   = (sOptions->sel[MENUITEM_MAIN_FRAMETYPE] == TYPE_MYSTERY ? TYPE_NONE : sOptions->sel[MENUITEM_MAIN_FRAMETYPE]);
 #else
     gSaveBlock2Ptr->optionsInterfaceColor           = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
@@ -1492,6 +1496,7 @@ static int ProcessInput_Interface(int selection)
     }
     
     gSaveBlock2Ptr->optionsInterfaceColor = selection;
+    DEBUG_RandomisePlayerForScreenshots();
     while (REG_VCOUNT >= 160);          // Wait until VBlank starts
     while (REG_VCOUNT < 160);           // Wait until VBlank ends
     LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
@@ -1522,6 +1527,7 @@ static int DEBUG_ProcessInput_Interface_GymTypes(int selection)
     
     gSaveBlock2Ptr->optionsInterfaceColor = IKIGAI_INTERFACE_GYM_TYPE_COLOUR;
     gSaveBlock2Ptr->ikigaiGymType = selection;
+    DEBUG_RandomisePlayerForScreenshots();
     while (REG_VCOUNT >= 160);          // Wait until VBlank starts
     while (REG_VCOUNT < 160);           // Wait until VBlank ends
     LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
@@ -1531,6 +1537,20 @@ static int DEBUG_ProcessInput_Interface_GymTypes(int selection)
     IkigaiScrollingBackground_LoadPalette(2, IKIGAI_PAL_INTERFACE);
     Ikigai_LoadOptionsMenuText_Pal();
     return selection;
+}
+
+static void DEBUG_RandomisePlayerForScreenshots(void)
+{
+    if (DEBUG_OPTIONS_MENU_MAIN_MENU_SCREENSHOTS && DEV_BUILD)
+    {
+        gSaveBlock2Ptr->playerGender = Random() % 2;
+        gSaveBlock2Ptr->dynPalSkinTone = Random() % 4;
+        gSaveBlock2Ptr->dynPalHairTone = Random() % 11;
+        gSaveBlock2Ptr->dynPalClothesTone = Random() % 6;
+        DynPal_InitAllDynamicPalettes();
+        SetMonData(&gPlayerParty[0], MON_DATA_SPECIES, &(u16){gIkigaiStarters[gSaveBlock2Ptr->ikigaiGymType][gSaveBlock2Ptr->playerGender]});
+        NewGameSamuelSpeech_SetPlayerNameKoleAnka();
+    }
 }
 
 // Draw Choices functions ****GENERIC****

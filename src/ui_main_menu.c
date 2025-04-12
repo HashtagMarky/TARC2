@@ -328,7 +328,8 @@ static void MainMenu_VBlankCB(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    StartIkigaiScrollingBackground(2);
+    if (!(DEBUG_OPTIONS_MENU_MAIN_MENU_SCREENSHOTS && DEV_BUILD))
+        StartIkigaiScrollingBackground(2);
 }
 
 //

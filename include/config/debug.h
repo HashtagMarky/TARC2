@@ -14,4 +14,8 @@
 // Pokémon Debug
 #define DEBUG_POKEMON_SPRITE_VISUALIZER DEV_BUILD    // Enables a debug menu for Pokémon sprites and icons, accessed by pressing Select in the summary screen.
 
+// Options Menu
+#define DEBUG_OPTIONS_MENU_GYM_INTERFACE            FALSE   // Enable this to allow for changing Gym Type via the Options menu.
+#define DEBUG_OPTIONS_MENU_MAIN_MENU_SCREENSHOTS    FALSE   // Enable this to randomise the DynPals and Gender of the player as well as modify the starter when leaving the options menu.
+
 #endif // GUARD_CONFIG_DEBUG_H
