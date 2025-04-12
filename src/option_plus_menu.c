@@ -18,10 +18,19 @@
 #include "constants/rgb.h"
 #include "menu_helpers.h"
 #include "decompress.h"
-#include "ikigai_scrolling_background.h"
+#include "ikigai_interface.h"
 #include "constants/battle.h"
 #include "event_data.h"
 #include "speedup.h"
+
+#include "sound.h"
+#include "constants/songs.h"
+#include "battle_main.h"
+
+#include "ui_samuel_case.h"
+#include "random.h"
+#include "dynamic_palettes.h"
+#include "main_menu.h"
 
 enum
 {
@@ -175,6 +184,7 @@ static void VBlankCB(void);
 static void DrawTopBarText(void); //top Option text
 static void DrawLeftSideOptionText(int selection, int y);
 static void DrawRightSideChoiceText(const u8 *str, int x, int y, bool8 choosen, bool8 active);
+static void Ikigai_LoadOptionsMenuText_Pal(void);
 static void DrawOptionMenuTexts(void); //left side text;
 static void DrawChoices(u32 id, int y); //right side draw function
 static void HighlightOptionMenuItem(void);
@@ -193,6 +203,7 @@ static int ProcessInput_Options_Eleven(int selection);
 static int ProcessInput_Sound(int selection);
 static int ProcessInput_FrameType(int selection);
 static int ProcessInput_Interface(int selection);
+static int DEBUG_ProcessInput_Interface_GymTypes(int selection);
 static const u8 *const OptionTextDescription(void);
 static const u8 *const OptionTextRight(u8 menuItem);
 static u8 MenuItemCount(void);
@@ -215,6 +226,8 @@ static void DrawChoices_AutoSave(int selection, int y);
 static void DrawChoices_Font(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_Interface(int selection, int y);
+static void DEBUG_DrawChoices_Interface_GymTypes(int selection, int y);
+static void DEBUG_RandomisePlayerForScreenshots(void);
 static void DrawChoices_MatchCall(int selection, int y);
 static void DrawChoices_AutoRun(int selection, int y);
 static void DrawChoices_FastSurf(int selection, int y);
@@ -275,7 +288,11 @@ struct // MENU_MAIN
     [MENUITEM_MAIN_UNIT_SYSTEM]     = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
     [MENUITEM_MAIN_CLOCK_MODE]      = {DrawChoices_ClockMode,   ProcessInput_Options_Two},
     [MENUITEM_MAIN_AUTOSAVE]        = {DrawChoices_AutoSave,    ProcessInput_Options_Two},
+#if (DEBUG_OPTIONS_MENU_GYM_INTERFACE && DEV_BUILD)
+    [MENUITEM_MAIN_FRAMETYPE]       = {DEBUG_DrawChoices_Interface_GymTypes,   DEBUG_ProcessInput_Interface_GymTypes},
+#else
     [MENUITEM_MAIN_FRAMETYPE]       = {DrawChoices_Interface,   ProcessInput_Interface},
+#endif
     [MENUITEM_MAIN_TITLE_SCREEN]    = {DrawChoices_TitleScreen, ProcessInput_Options_Two},
     [MENUITEM_MAIN_CANCEL]          = {NULL, NULL},
 };
@@ -667,7 +684,7 @@ static const u8 sText_TopBar_Battle[]           = _("BATTLE");
 static const u8 sText_TopBar_Battle_Left[]      = _("{L_BUTTON}OVERWORLD");
 static void DrawTopBarText(void)
 {
-    const u8 color[3] = { 0, TEXT_COLOR_WHITE, TEXT_COLOR_OPTIONS_GRAY_FG };
+    const u8 color[3] = { 0, TEXT_COLOR_WHITE, TEXT_COLOR_OPTIONS_GREEN_DARK_SHADOW };
 
     FillWindowPixelBuffer(WIN_TOPBAR, PIXEL_FILL(0));
     switch (sOptions->submenu)
@@ -716,36 +733,39 @@ static void DrawLeftSideOptionText(int selection, int y)
 {
     u8 color_yellow[3];
     u8 color_gray[3];
-    const u16 *selectedColorPal = ReturnMenuUIPalette();
-    u16 selectedTextColor = selectedColorPal[1];
+    const u16 *selectedColorMenuUIPal = Ikigai_ReturnUIPalette();
+    u16 selectedTextColor = selectedColorMenuUIPal[1];
+    const u16 *selectedColorScrollingBGPal = Ikigai_ReturnScrollingBackgroundPalette();
+    u16 selectedShadowColor = selectedColorScrollingBGPal[1];
 
     color_yellow[0] = TEXT_COLOR_TRANSPARENT;
-    color_yellow[1] = TEXT_COLOR_WHITE;
-    color_yellow[2] = TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG;
+    color_yellow[1] = TEXT_COLOR_OPTIONS_RED_DARK_FG;
+    color_yellow[2] = TEXT_COLOR_OPTIONS_RED_DARK_SHADOW;
     color_gray[0] = TEXT_COLOR_TRANSPARENT;
-    color_gray[1] = TEXT_COLOR_OPTIONS_ORANGE_SHADOW;
-    color_gray[2] = TEXT_COLOR_OPTIONS_GRAY_FG;
+    color_gray[1] = TEXT_COLOR_OPTIONS_RED_FG;
+    color_gray[2] = TEXT_COLOR_OPTIONS_RED_SHADOW;
 
     if (CheckConditions(selection))
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_yellow, TEXT_SKIP_DRAW, OptionTextRight(selection));
     else
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_gray, TEXT_SKIP_DRAW, OptionTextRight(selection));
-        LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_gray[1], sizeof(selectedTextColor));
+        // LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_gray[1], sizeof(selectedTextColor));
+        // LoadPalette(&selectedShadowColor, OPTIONS_TEXT_OFFSET + color_gray[2], sizeof(selectedShadowColor));
 }
 
 static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen, bool8 active)
 {
     u8 color_red[3];
     u8 color_gray[3];
-    const u16 *selectedColorPal = ReturnMenuUIPalette();
-    u16 selectedTextColor = selectedColorPal[1];
-    u16 selectedShadowColor = selectedColorPal[2];
+    const u16 *selectedColorPal = Ikigai_ReturnUIPalette();
+    u16 selectedTextColor = selectedColorPal[2];
+    u16 selectedShadowColor = selectedColorPal[1];
 
     if (active)
     {
         color_red[0]    = TEXT_COLOR_TRANSPARENT;
         color_red[1]    = TEXT_COLOR_OPTIONS_ORANGE_FG;
-        color_red[2]    = TEXT_COLOR_OPTIONS_GRAY_FG;
+        color_red[2]    = TEXT_COLOR_OPTIONS_ORANGE_SHADOW;
         color_gray[0]   = TEXT_COLOR_TRANSPARENT;
         color_gray[1]   = TEXT_COLOR_OPTIONS_WHITE;
         color_gray[2]   = TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG;
@@ -753,11 +773,11 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
     else
     {
         color_red[0]    = TEXT_COLOR_TRANSPARENT;
-        color_red[1]    = TEXT_COLOR_OPTIONS_ORANGE_FG;
-        color_red[2]    = TEXT_COLOR_OPTIONS_GRAY_FG;
+        color_red[1]    = TEXT_COLOR_OPTIONS_GREEN_FG;
+        color_red[2]    = TEXT_COLOR_OPTIONS_GREEN_SHADOW;
         color_gray[0]   = TEXT_COLOR_TRANSPARENT;
-        color_gray[1]   = TEXT_COLOR_OPTIONS_ORANGE_FG;
-        color_gray[2]   = TEXT_COLOR_OPTIONS_GRAY_FG;
+        color_gray[1]   = TEXT_COLOR_OPTIONS_GREEN_FG;
+        color_gray[2]   = TEXT_COLOR_OPTIONS_GREEN_SHADOW;
     }
 
 
@@ -766,8 +786,8 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, x, y, 0, 0, color_gray, TEXT_SKIP_DRAW, text);
         if (!active)
         {
-            LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_gray[1], sizeof(selectedTextColor));
-            LoadPalette(&selectedShadowColor, OPTIONS_TEXT_OFFSET + color_gray[2], sizeof(selectedShadowColor));
+            // LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_gray[1], sizeof(selectedTextColor));
+            // LoadPalette(&selectedShadowColor, OPTIONS_TEXT_OFFSET + color_gray[2], sizeof(selectedShadowColor));
         }
     }
     else
@@ -775,10 +795,89 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, x, y, 0, 0, color_red, TEXT_SKIP_DRAW, text);
         if (active)
         {
-            LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_red[1], sizeof(selectedTextColor));
-            LoadPalette(&selectedShadowColor, OPTIONS_TEXT_OFFSET + color_red[2], sizeof(selectedShadowColor));
+            // LoadPalette(&selectedTextColor, OPTIONS_TEXT_OFFSET + color_red[1], sizeof(selectedTextColor));
+            // LoadPalette(&selectedShadowColor, OPTIONS_TEXT_OFFSET + color_red[2], sizeof(selectedShadowColor));
         }
     }
+}
+
+static void Ikigai_LoadOptionsMenuText_Pal(void)
+{
+    // Load Original Palette First
+    LoadPalette(sOptionMenuText_Pal, OPTIONS_TEXT_OFFSET, sizeof(sOptionMenuText_Pal));
+
+    const u16 *colorMenuUIPal = Ikigai_ReturnUIPalette();
+    const u16 *colorScrollingBGPal = Ikigai_ReturnScrollingBackgroundPalette();
+
+    // Options Printed Window Text
+    LoadPalette(&colorScrollingBGPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GRAY_FG, sizeof(u16));
+
+    // Top Bar Shadow
+    if (gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_GYM_TYPE_COLOUR
+        && (gSaveBlock2Ptr->ikigaiGymType == TYPE_NORMAL || gSaveBlock2Ptr->ikigaiGymType == TYPE_NORMAL))
+        LoadPalette(&colorScrollingBGPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GREEN_DARK_SHADOW, sizeof(u16));
+    else
+        LoadPalette(&colorScrollingBGPal[3], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GREEN_DARK_SHADOW, sizeof(u16));
+
+    // Left Side Unlocked
+    LoadPalette(&colorScrollingBGPal[3], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_FG, sizeof(u16));
+
+    // Left Side Unlocked (Genie Interface)
+    switch (gSaveBlock2Ptr->ikigaiGymType)
+    {
+        case TYPE_NORMAL:
+        case TYPE_FIGHTING:
+        case TYPE_FLYING:
+        case TYPE_POISON:
+        case TYPE_GROUND:
+        case TYPE_ROCK:
+        case TYPE_BUG:
+        case TYPE_GHOST:
+        case TYPE_FIRE:
+        case TYPE_WATER:
+        case TYPE_GRASS:
+        case TYPE_ELECTRIC:
+        case TYPE_PSYCHIC:
+        case TYPE_ICE:
+        case TYPE_DRAGON:
+        case TYPE_FAIRY:
+            LoadPalette(&colorScrollingBGPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_SHADOW, sizeof(u16));
+            if (gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_GYM_TYPE_COLOUR)
+                break; // Switch only ends if set to Gym Colour, otherwise use default.
+
+        case TYPE_DARK:
+            if (gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_GYM_TYPE_COLOUR)
+                LoadPalette(&colorScrollingBGPal[3], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_FG, sizeof(u16));
+                // Allow fallthrough for Dark Type.
+        
+        default:
+            LoadPalette(&colorScrollingBGPal[2], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_SHADOW, sizeof(u16));
+            break;
+    }
+
+    // Left Side Unlocked (Non-Gym Interface)
+    if (gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_GREEN
+        // || gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_BLUE
+        || gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_ORANGE
+        || gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_PINK)
+        LoadPalette(&colorScrollingBGPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_DARK_SHADOW, sizeof(u16));
+
+    // Left Side Locked
+    LoadPalette(&colorScrollingBGPal[2], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_FG, sizeof(u16));
+    LoadPalette(&colorScrollingBGPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_RED_SHADOW, sizeof(u16));
+
+    // Right Side Locked
+    LoadPalette(&colorMenuUIPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GREEN_FG, sizeof(u16));
+    LoadPalette(&colorScrollingBGPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GREEN_SHADOW, sizeof(u16));
+
+    // Right Side Unselected
+    LoadPalette(&colorMenuUIPal[2], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_ORANGE_FG, sizeof(u16));
+    LoadPalette(&colorMenuUIPal[1], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_ORANGE_SHADOW, sizeof(u16));
+
+    // Right Side Selected
+    if (gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_GYM_TYPE_COLOUR
+        && (gSaveBlock2Ptr->ikigaiGymType == TYPE_STEEL || gSaveBlock2Ptr->ikigaiGymType == TYPE_WATER))
+        LoadPalette(&colorMenuUIPal[2], OPTIONS_TEXT_OFFSET + TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG, sizeof(u16));
 }
 
 static void DrawChoices(u32 id, int y) //right side draw function
@@ -826,19 +925,19 @@ static bool8 OptionsMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, 
         break;
     case 2:
         ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(3, IkigaiScrollingBgTiles, 0, 0, 0);
+        IkigaiScrollingBackground_CreateTiles(3);
         sOptions->gfxLoadState++;
         break;
     case 3:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(IkigaiScrollingBgTilemap_PalTwo, sBg3TilemapBuffer);
+            IkigaiScrollingBackground_CreateTilemap(2, sBg3TilemapBuffer);
             sOptions->gfxLoadState++;
         }
         break;
     case 4:
-        LoadPalette(ReturnMenuUIPalette(), 64, 32);
-        LoadPalette(ReturnScrollingBackgroundPalette(), 32, 32);
+        IkigaiUI_LoadPalette(4, IKIGAI_PAL_INTERFACE);
+        IkigaiScrollingBackground_LoadPalette(2, IKIGAI_PAL_INTERFACE);
         sOptions->gfxLoadState++;
         break;
     default:
@@ -916,7 +1015,7 @@ void CB2_InitOptionPlusMenu(void)
         gMain.state++;
         break;
     case 5:
-        LoadPalette(sOptionMenuText_Pal, OPTIONS_TEXT_OFFSET, sizeof(sOptionMenuText_Pal));
+        Ikigai_LoadOptionsMenuText_Pal();
         gMain.state++;
         break;
     case 6:
@@ -927,7 +1026,11 @@ void CB2_InitOptionPlusMenu(void)
         sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM]                = gSaveBlock2Ptr->optionsUnitSystem;
         sOptions->sel[MENUITEM_MAIN_CLOCK_MODE]                 = gSaveBlock2Ptr->optionsClockMode;
         sOptions->sel[MENUITEM_MAIN_AUTOSAVE]                   = gSaveBlock2Ptr->optionsDisableAutoSave;
+#if (DEBUG_OPTIONS_MENU_GYM_INTERFACE && DEV_BUILD)
+        sOptions->sel[MENUITEM_MAIN_FRAMETYPE]                  = gSaveBlock2Ptr->ikigaiGymType;
+#else
         sOptions->sel[MENUITEM_MAIN_FRAMETYPE]                  = gSaveBlock2Ptr->optionsInterfaceColor;
+#endif
         sOptions->sel[MENUITEM_MAIN_TITLE_SCREEN]               = gSaveBlock2Ptr->optionsTitleScreenRandomise;
         
         sOptions->sel_overworld[MENUITEM_OVERWORLD_AUTO_RUN]        = gSaveBlock3Ptr->autoRun;
@@ -1141,7 +1244,7 @@ static void Task_OptionMenuProcessInput(u8 taskId)
     }
     else if (JOY_NEW(R_BUTTON))
     {
-        if (sOptions->submenu != MENU_BATTLE)
+        if (sOptions->submenu != MENU_COUNT - 1)
             sOptions->submenu++;
 
         DrawTopBarText();
@@ -1170,7 +1273,11 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsUnitSystem               = sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM];
     gSaveBlock2Ptr->optionsClockMode                = sOptions->sel[MENUITEM_MAIN_CLOCK_MODE];
     gSaveBlock2Ptr->optionsDisableAutoSave          = sOptions->sel[MENUITEM_MAIN_AUTOSAVE];
+#if (DEBUG_OPTIONS_MENU_GYM_INTERFACE && DEV_BUILD)
+    gSaveBlock2Ptr->ikigaiGymType                   = (sOptions->sel[MENUITEM_MAIN_FRAMETYPE] == TYPE_MYSTERY ? TYPE_NONE : sOptions->sel[MENUITEM_MAIN_FRAMETYPE]);
+#else
     gSaveBlock2Ptr->optionsInterfaceColor           = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
+#endif
     gSaveBlock2Ptr->optionsTitleScreenRandomise     = sOptions->sel[MENUITEM_MAIN_TITLE_SCREEN];
 
     gSaveBlock3Ptr->autoRun                     = sOptions->sel_overworld[MENUITEM_OVERWORLD_AUTO_RUN];
@@ -1193,6 +1300,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsDamageNumbers        = sOptions->sel_battle[MENUITEM_BATTLE_DAMAGE_NUMBERS];
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+    PlaySE(SE_PC_OFF);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
 }
 
@@ -1388,14 +1496,61 @@ static int ProcessInput_Interface(int selection)
     }
     
     gSaveBlock2Ptr->optionsInterfaceColor = selection;
+    DEBUG_RandomisePlayerForScreenshots();
     while (REG_VCOUNT >= 160);          // Wait until VBlank starts
     while (REG_VCOUNT < 160);           // Wait until VBlank ends
     LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
     LoadPalette(GetWindowFrameTilesPal(selection)->pal, 0x70, 0x20);
     // Reloads Palettes in case of Interface Changes
-    LoadPalette(ReturnMenuUIPalette(), 64, 32);
-    LoadPalette(ReturnScrollingBackgroundPalette(), 32, 32);
+    IkigaiUI_LoadPalette(4, IKIGAI_PAL_INTERFACE);
+    IkigaiScrollingBackground_LoadPalette(2, IKIGAI_PAL_INTERFACE);
+    Ikigai_LoadOptionsMenuText_Pal();
     return selection;
+}
+
+static int DEBUG_ProcessInput_Interface_GymTypes(int selection)
+{
+    if (JOY_NEW(DPAD_RIGHT))
+    {
+        if (selection < NUMBER_OF_MON_TYPES - 2)
+            selection++;
+        else
+            selection = 0;
+    }
+    if (JOY_NEW(DPAD_LEFT))
+    {
+        if (selection != 0)
+            selection--;
+        else
+            selection = NUMBER_OF_MON_TYPES - 2;
+    }
+    
+    gSaveBlock2Ptr->optionsInterfaceColor = IKIGAI_INTERFACE_GYM_TYPE_COLOUR;
+    gSaveBlock2Ptr->ikigaiGymType = selection;
+    DEBUG_RandomisePlayerForScreenshots();
+    while (REG_VCOUNT >= 160);          // Wait until VBlank starts
+    while (REG_VCOUNT < 160);           // Wait until VBlank ends
+    LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
+    LoadPalette(GetWindowFrameTilesPal(IKIGAI_INTERFACE_GYM_TYPE_COLOUR)->pal, 0x70, 0x20);
+    // Reloads Palettes in case of Interface Changes
+    IkigaiUI_LoadPalette(4, IKIGAI_PAL_INTERFACE);
+    IkigaiScrollingBackground_LoadPalette(2, IKIGAI_PAL_INTERFACE);
+    Ikigai_LoadOptionsMenuText_Pal();
+    return selection;
+}
+
+static void DEBUG_RandomisePlayerForScreenshots(void)
+{
+    if (DEBUG_OPTIONS_MENU_MAIN_MENU_SCREENSHOTS && DEV_BUILD)
+    {
+        gSaveBlock2Ptr->playerGender = Random() % 2;
+        gSaveBlock2Ptr->dynPalSkinTone = Random() % 4;
+        gSaveBlock2Ptr->dynPalHairTone = Random() % 11;
+        gSaveBlock2Ptr->dynPalClothesTone = Random() % 6;
+        DynPal_InitAllDynamicPalettes();
+        SetMonData(&gPlayerParty[0], MON_DATA_SPECIES, &(u16){gIkigaiStarters[gSaveBlock2Ptr->ikigaiGymType][gSaveBlock2Ptr->playerGender]});
+        NewGameSamuelSpeech_SetPlayerNameKoleAnka();
+    }
 }
 
 // Draw Choices functions ****GENERIC****
@@ -1661,6 +1816,13 @@ static void DrawChoices_Interface(int selection, int y)
             DrawOptionMenuChoice(COMPOUND_STRING("GYM TYPE"), 104, y, 1, active);
             break;
     }
+}
+
+static void DEBUG_DrawChoices_Interface_GymTypes(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_MAIN_FRAMETYPE);
+
+    DrawOptionMenuChoice(gTypesInfo[selection].name, 104, y, 1, active);
 }
 
 static void DrawChoices_Font(int selection, int y)

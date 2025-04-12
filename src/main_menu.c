@@ -252,7 +252,6 @@ static void MainMenu_FormatSavegamePokedex(void);
 static void MainMenu_FormatSavegameTime(void);
 static void MainMenu_FormatSavegameBadges(void);
 static void NewGameSamuelSpeech_CreateDialogueWindowBorder(u8, u8, u8, u8, u8, u8);
-static void NewGameSamuelSpeech_SetPlayerNameKoleAnka(void);
 
 static const u32 *ReturnShadowGfx(void);
 static const u32 *ReturnSpeechBgMap(void);
@@ -2312,7 +2311,7 @@ void NewGameSamuelSpeech_SetDefaultPlayerName(u8 nameId)
     gSaveBlock2Ptr->playerName[PLAYER_NAME_LENGTH] = EOS;
 }
 
-static void NewGameSamuelSpeech_SetPlayerNameKoleAnka(void)
+void NewGameSamuelSpeech_SetPlayerNameKoleAnka(void)
 {
     const u8 *name;
     u8 i;

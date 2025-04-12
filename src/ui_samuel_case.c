@@ -46,7 +46,7 @@
 #include "constants/pokemon.h"
 #include "naming_screen.h"
 #include "tv.h"
-#include "ikigai_scrolling_background.h"
+#include "ikigai_interface.h"
 
  /*
     9 Starter Selection Samuel Case
@@ -803,7 +803,7 @@ static bool8 SamuelCaseLoadGraphics(void) // load tilesets, tilemaps, spriteshee
         LoadCompressedSpriteSheet(&sSpriteSheet_PokeballHand);
         LoadSpritePalette(&sSpritePal_PokeballHand);
         LoadPalette(sCasePalette, 32, 32);
-        LoadPalette(IkigaiScrollingBgPal_Default, 16, 16);
+        IkigaiScrollingBackground_LoadPalette(1, IKIGAI_PAL_DEFAULT);
         sSamuelCaseDataPtr->gfxLoadState++;
         break;
     default:

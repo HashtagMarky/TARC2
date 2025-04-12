@@ -23,7 +23,7 @@
 #include "config/general.h"
 #include "config/overworld.h"
 
-#include "ikigai_scrolling_background.h"
+#include "ikigai_interface.h"
 
 // enums
 enum MapPopUp_Themes
@@ -660,8 +660,8 @@ static void LoadMapNamePopUpWindowBg(void)
 
 static void LoadIkigaiMapPopupPal(void)
 {
-    const u16 *ikigaiScrollingBgPal = ReturnScrollingBackgroundPalette();
-    const u16 *ikigaiMenuUIPal = ReturnMenuUIPalette();
+    const u16 *ikigaiScrollingBgPal = Ikigai_ReturnScrollingBackgroundPalette();
+    const u16 *ikigaiMenuUIPal = Ikigai_ReturnUIPalette();
     u16 colorDarkest = ikigaiScrollingBgPal[2];
     u16 colorDark = ikigaiMenuUIPal[1];
     u16 colorMedium = ikigaiMenuUIPal[2];

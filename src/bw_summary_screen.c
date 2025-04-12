@@ -53,7 +53,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-#include "ikigai_scrolling_background.h"
+#include "ikigai_interface.h"
 #include "data/b_summary_screen.h"
 
 #if BW_SUMMARY_SCREEN == TRUE
@@ -370,7 +370,7 @@ static void BufferAndPrintStats_HandleState(u8);
 static void SetFriendshipSprite(void);
 static void TrySetInfoPageIcons(void);
 static void RunMonAnimTimer(void);
-static void UpdateIkigaiBackgroundPal(void);
+static void UpdateIkigaiSummaryScreenPal(void);
 static const struct SpritePalette *ReturnMoveSelectorPalette(void);
 static bool32 ShouldShowMoveRelearner(void);
 static void ShowMoveRelearner(void);
@@ -493,7 +493,7 @@ static const struct BgTemplate sBgTemplates[] =
     },
     {
         .bg = 3,
-        .charBaseIndex = 2,
+        .charBaseIndex = 3,
         .mapBaseIndex = 31,
         .paletteMode = 0,
         .priority = 3,
@@ -2025,6 +2025,7 @@ static bool8 DecompressGraphics(void)
     case 0:
         ResetTempTileDataBuffers();
         DecompressAndCopyTileDataToVram(1, &sSummaryScreen_Gfx_BW, 0, 0, 0);
+        IkigaiScrollingBackground_CreateTiles(3);
         sMonSummaryScreen->switchCounter++;
         break;
     case 1:
@@ -2055,13 +2056,14 @@ static bool8 DecompressGraphics(void)
         sMonSummaryScreen->switchCounter++;
         break;
     case 7:
-        LZDecompressWram(sSummaryPage_ScrollBG_Tilemap_BW, sMonSummaryScreen->bg3TilemapBuffers);
+        IkigaiScrollingBackground_CreateTilemap(11, sMonSummaryScreen->bg3TilemapBuffers);
         sMonSummaryScreen->switchCounter++;
         break;
     case 8:
         LoadCompressedPalette(sSummaryScreen_Pal_BW, BG_PLTT_ID(0), 8 * PLTT_SIZE_4BPP);
-        UpdateIkigaiBackgroundPal();
         LoadPalette(&sSummaryScreen_PPTextPalette_BW, BG_PLTT_ID(8) + 1, PLTT_SIZEOF(16 - 1));
+        IkigaiScrollingBackground_LoadPalette(11, IKIGAI_PAL_INTERFACE);
+        UpdateIkigaiSummaryScreenPal();
         sMonSummaryScreen->switchCounter++;
         break;
     case 9:
@@ -5457,18 +5459,20 @@ static void FormatTextByWidth(u8 *result, s32 maxWidth, u8 fontId, const u8 *str
     }
 }
 
-static void UpdateIkigaiBackgroundPal(void)
+static void UpdateIkigaiSummaryScreenPal(void)
 {
-    const u16 *ikigaiScrollingBgPal = ReturnScrollingBackgroundPalette();
-    u16 colorDark = ikigaiScrollingBgPal[1];
-    u16 colorMedium = ikigaiScrollingBgPal[2];
-    u16 colorLight = ikigaiScrollingBgPal[3];
+    // Not needed now loading actual Ikigai Scrolling Background.
 
-    LoadPalette(&colorDark, BG_PLTT_ID(0) + 14, sizeof(colorDark));
-    LoadPalette(&colorMedium, BG_PLTT_ID(0) + 13, sizeof(colorMedium));
-    LoadPalette(&colorLight, BG_PLTT_ID(0) + 11, sizeof(colorLight));
+    // const u16 *ikigaiScrollingBgPal = Ikigai_ReturnScrollingBackgroundPalette();
+    // u16 colorDark = ikigaiScrollingBgPal[1];
+    // u16 colorMedium = ikigaiScrollingBgPal[2];
+    // u16 colorLight = ikigaiScrollingBgPal[3];
 
-    const u16 *ikigaiMenuUIPal = ReturnMenuUIPalette();
+    // LoadPalette(&colorDark, BG_PLTT_ID(0) + 14, sizeof(colorDark));
+    // LoadPalette(&colorMedium, BG_PLTT_ID(0) + 13, sizeof(colorMedium));
+    // LoadPalette(&colorLight, BG_PLTT_ID(0) + 11, sizeof(colorLight));
+
+    const u16 *ikigaiMenuUIPal = Ikigai_ReturnUIPalette();
     u16 colorDarker = ikigaiMenuUIPal[2];
     u16 colorLighter = ikigaiMenuUIPal[4];
 
@@ -5480,7 +5484,7 @@ static const struct SpritePalette *ReturnMoveSelectorPalette(void)
 {
     static struct SpritePalette palMoveSelector;
 
-    palMoveSelector.data = ReturnMenuUIPalette();
+    palMoveSelector.data = Ikigai_ReturnUIPalette();
     palMoveSelector.tag = TAG_MOVE_SELECTOR;
 
     return &palMoveSelector;

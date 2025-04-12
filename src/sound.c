@@ -69,6 +69,7 @@ static const struct Fanfare sFanfares[] = {
     [FANFARE_OBTAIN_B_POINTS]          = { MUS_OBTAIN_B_POINTS         , 313 },
     [FANFARE_REGISTER_MATCH_CALL]      = { MUS_REGISTER_MATCH_CALL     , 135 },
     [FANFARE_OBTAIN_SYMBOL]            = { MUS_OBTAIN_SYMBOL           , 318 },
+#if MUSIC_EXPANSION_GEN4_MUSIC_ENABLED == TRUE
     [FANFARE_DP_TV_END]                = { MUS_DP_TV_END               , 244 },
     [FANFARE_DP_OBTAIN_ITEM]           = { MUS_DP_OBTAIN_ITEM          , 160 },
     [FANFARE_DP_HEAL]                  = { MUS_DP_HEAL                 , 160 },
@@ -118,6 +119,7 @@ static const struct Fanfare sFanfares[] = {
     [FANFARE_HG_OBTAIN_CASTLE_POINTS]  = { MUS_HG_OBTAIN_CASTLE_POINTS , 200 },
     [FANFARE_HG_CLEAR_MINIGAME]        = { MUS_HG_WIN_MINIGAME         , 230 },
     [FANFARE_HG_PARTNER]               = { MUS_HG_LETS_GO_TOGETHER     , 180 },
+#endif // MUSIC_EXPANSION_GEN4_MUSIC_ENABLED
 };
 
 void InitMapMusic(void)
@@ -636,6 +638,15 @@ void PlayBGM(u16 songNum)
     if (songNum == MUS_NONE)
         songNum = 0;
     m4aSongNumStart(songNum);
+}
+
+void PlayBGMOrContinue(u16 songNum)
+{
+    if (gDisableMusic)
+        songNum = 0;
+    if (songNum == MUS_NONE)
+        songNum = 0;
+    m4aSongNumStartOrContinue(songNum);
 }
 
 void PlaySE(u16 songNum)

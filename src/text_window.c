@@ -10,10 +10,29 @@
 
 const u8 gTextWindowFrame_Gfx[] = INCBIN_U8("graphics/text_window/window_frame.4bpp");
 const u16 gTextWindowFrame_EmeraldPal[] = INCBIN_U16("graphics/text_window/window_frame_emerald.gbapal");
-static const u16 gTextWindowFrame_GreenPal[] = INCBIN_U16("graphics/text_window/window_frame_ikigai_green.gbapal");
-static const u16 gTextWindowFrame_BluePal[] = INCBIN_U16("graphics/text_window/window_frame_ikigai_blue.gbapal");
-static const u16 gTextWindowFrame_OrangePal[] = INCBIN_U16("graphics/text_window/window_frame_ikigai_orange.gbapal");
-static const u16 gTextWindowFrame_PinkPal[] = INCBIN_U16("graphics/text_window/window_frame_ikigai_pink.gbapal");
+static const u16 gTextWindowFrame_TornadusPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/tornadus.gbapal");
+static const u16 gTextWindowFrame_ThundurusPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/thundurus.gbapal");
+static const u16 gTextWindowFrame_LandorusPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/landorus.gbapal");
+static const u16 gTextWindowFrame_EnamorusPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/enamorus.gbapal");
+
+static const u16 gTextWindowFrame_NormalPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/normal.gbapal");
+static const u16 gTextWindowFrame_FightingPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/fighting.gbapal");
+static const u16 gTextWindowFrame_FlyingPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/flying.gbapal");
+static const u16 gTextWindowFrame_PoisonPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/poison.gbapal");
+static const u16 gTextWindowFrame_GroundPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/ground.gbapal");
+static const u16 gTextWindowFrame_RockPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/rock.gbapal");
+static const u16 gTextWindowFrame_BugPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/bug.gbapal");
+static const u16 gTextWindowFrame_GhostPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/ghost.gbapal");
+static const u16 gTextWindowFrame_SteelPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/steel.gbapal");
+static const u16 gTextWindowFrame_FirePal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/fire.gbapal");
+static const u16 gTextWindowFrame_WaterPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/water.gbapal");
+static const u16 gTextWindowFrame_GrassPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/grass.gbapal");
+static const u16 gTextWindowFrame_ElectricPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/electric.gbapal");
+static const u16 gTextWindowFrame_PsychicPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/psychic.gbapal");
+static const u16 gTextWindowFrame_IcePal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/ice.gbapal");
+static const u16 gTextWindowFrame_DragonPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/dragon.gbapal");
+static const u16 gTextWindowFrame_DarkPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/dark.gbapal");
+static const u16 gTextWindowFrame_FairyPal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/fairy.gbapal");
 
 static const u16 sTextWindowPalettes[IKIGAI_TEXT_BOX_FRAMES_COUNT][16] = // Ikigai Type Window Pals Here
 {
@@ -22,68 +41,92 @@ static const u16 sTextWindowPalettes[IKIGAI_TEXT_BOX_FRAMES_COUNT][16] = // Ikig
     INCBIN_U16("graphics/text_window/text_window_pal2.gbapal"),
     INCBIN_U16("graphics/text_window/text_window_pal3.gbapal"),
     INCBIN_U16("graphics/text_window/text_window_pal4.gbapal"),
-    INCBIN_U16("graphics/text_window/message_box_ikigai_green.gbapal"),         // IKIGAI_INTERFACE_BLUE + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    INCBIN_U16("graphics/text_window/message_box_ikigai_blue.gbapal"),          // IKIGAI_INTERFACE_BLUE + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    INCBIN_U16("graphics/text_window/message_box_ikigai_orange.gbapal"),        // IKIGAI_INTERFACE_BLUE + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    INCBIN_U16("graphics/text_window/message_box_ikigai_pink.gbapal")           // IKIGAI_INTERFACE_PINK + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_NONE + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_NORMAL + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_FIGHTING + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_FLYING + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_POISON + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_GROUND + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_ROCK + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_BUG + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_GHOST + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_STEEL + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_MYSTERY + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_FIRE + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_WATER + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_GRASS + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_ELECTRIC + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_PSYCHIC + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_ICE + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_DRAGON + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_DARK + DEFAULT_TEXT_BOX_FRAME_PALETTES
-    // TYPE_FAIRY + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/tornadus.gbapal"),     // IKIGAI_INTERFACE_BLUE + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/thundurus.gbapal"),    // IKIGAI_INTERFACE_GREEN + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/landorus.gbapal"),     // IKIGAI_INTERFACE_ORANGE + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/enamorus.gbapal"),     // IKIGAI_INTERFACE_PINK + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/message_box_emerald.gbapal"),                      // TYPE_NONE + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/normal.gbapal"),       // TYPE_NORMAL + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/fighting.gbapal"),     // TYPE_FIGHTING + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/flying.gbapal"),       // TYPE_FLYING + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/poison.gbapal"),       // TYPE_POISON + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/ground.gbapal"),       // TYPE_GROUND + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/rock.gbapal"),         // TYPE_ROCK + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/bug.gbapal"),          // TYPE_BUG + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/ghost.gbapal"),        // TYPE_GHOST + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/steel.gbapal"),        // TYPE_STEEL + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/message_box_emerald.gbapal"),                      // TYPE_MYSTERY + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/fire.gbapal"),         // TYPE_FIRE + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/water.gbapal"),        // TYPE_WATER + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/grass.gbapal"),        // TYPE_GRASS + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/electric.gbapal"),     // TYPE_ELECTRIC + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/psychic.gbapal"),      // TYPE_PSYCHIC + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/ice.gbapal"),          // TYPE_ICE + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/dragon.gbapal"),       // TYPE_DRAGON + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/dark.gbapal"),         // TYPE_DARK + DEFAULT_TEXT_BOX_FRAME_PALETTES
+    INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/fairy.gbapal"),        // TYPE_FAIRY + DEFAULT_TEXT_BOX_FRAME_PALETTES
 };
 
 static const struct TilesPal sWindowFrames[IKIGAI_WINDOW_FRAMES_COUNT] =
 {
-    {gTextWindowFrame_Gfx, gTextWindowFrame_GreenPal},       // IKIGAI_INTERFACE_GREEN
-    {gTextWindowFrame_Gfx, gTextWindowFrame_BluePal},        // IKIGAI_INTERFACE_BLUE
-    {gTextWindowFrame_Gfx, gTextWindowFrame_OrangePal},      // IKIGAI_INTERFACE_ORANGE
-    {gTextWindowFrame_Gfx, gTextWindowFrame_PinkPal},        // IKIGAI_INTERFACE_PINK
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_NONE + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_NORMAL + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_FIGHTING + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_FLYING + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_POISON + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_GROUND + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_ROCK + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_BUG + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_GHOST + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_STEEL + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_MYSTERY + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_FIRE + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_WATER + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_GRASS + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_ELECTRIC + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_PSYCHIC + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_ICE + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_DRAGON + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},     // TYPE_DARK + IKIGAI_DEFAULT_INTERFACE_COUNT
-    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal}      // TYPE_FAIRY + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_TornadusPal},       // IKIGAI_INTERFACE_GREEN
+    {gTextWindowFrame_Gfx, gTextWindowFrame_ThundurusPal},      // IKIGAI_INTERFACE_BLUE
+    {gTextWindowFrame_Gfx, gTextWindowFrame_LandorusPal},       // IKIGAI_INTERFACE_ORANGE
+    {gTextWindowFrame_Gfx, gTextWindowFrame_EnamorusPal},       // IKIGAI_INTERFACE_PINK
+    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},        // TYPE_NONE + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_NormalPal},         // TYPE_NORMAL + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_FightingPal},       // TYPE_FIGHTING + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_FlyingPal},         // TYPE_FLYING + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_PoisonPal},         // TYPE_POISON + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_GroundPal},         // TYPE_GROUND + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_RockPal},           // TYPE_ROCK + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_BugPal},            // TYPE_BUG + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_GhostPal},          // TYPE_GHOST + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_SteelPal},          // TYPE_STEEL + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_EmeraldPal},        // TYPE_MYSTERY + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_FirePal},           // TYPE_FIRE + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_WaterPal},          // TYPE_WATER + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_GrassPal},          // TYPE_GRASS + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_ElectricPal},       // TYPE_ELECTRIC + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_PsychicPal},        // TYPE_PSYCHIC + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_IcePal},            // TYPE_ICE + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_DragonPal},         // TYPE_DRAGON + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_DarkPal},           // TYPE_DARK + IKIGAI_DEFAULT_INTERFACE_COUNT
+    {gTextWindowFrame_Gfx, gTextWindowFrame_FairyPal}           // TYPE_FAIRY + IKIGAI_DEFAULT_INTERFACE_COUNT
 };
 
 static const u16 sTextWindowDexNavFrame[] = INCBIN_U16("graphics/text_window/dexnav_pal.gbapal");
 static const struct TilesPal sDexNavWindowFrame = {gTextWindowFrame_Gfx, sTextWindowDexNavFrame};
+
+// Battle Textboxes
+static const u32 gBattleTextboxPalette_Normal[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/normal.gbapal.lz");
+static const u32 gBattleTextboxPalette_Fighting[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/fighting.gbapal.lz");
+static const u32 gBattleTextboxPalette_Flying[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/flying.gbapal.lz");
+static const u32 gBattleTextboxPalette_Poison[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/poison.gbapal.lz");
+static const u32 gBattleTextboxPalette_Ground[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/ground.gbapal.lz");
+static const u32 gBattleTextboxPalette_Rock[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/rock.gbapal.lz");
+static const u32 gBattleTextboxPalette_Bug[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/bug.gbapal.lz");
+static const u32 gBattleTextboxPalette_Ghost[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/ghost.gbapal.lz");
+static const u32 gBattleTextboxPalette_Steel[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/steel.gbapal.lz");
+static const u32 gBattleTextboxPalette_Fire[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/fire.gbapal.lz");
+static const u32 gBattleTextboxPalette_Water[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/water.gbapal.lz");
+static const u32 gBattleTextboxPalette_Grass[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/grass.gbapal.lz");
+static const u32 gBattleTextboxPalette_Electric[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/electric.gbapal.lz");
+static const u32 gBattleTextboxPalette_Psychic[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/psychic.gbapal.lz");
+static const u32 gBattleTextboxPalette_Ice[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/ice.gbapal.lz");
+static const u32 gBattleTextboxPalette_Dragon[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/dragon.gbapal.lz");
+static const u32 gBattleTextboxPalette_Dark[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/dark.gbapal.lz");
+static const u32 gBattleTextboxPalette_Fairy[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/fairy.gbapal.lz");
+
+static const u32 *GetBattleTextboxGymPalettePtr(void);
 
 // code
 const struct TilesPal *GetWindowFrameTilesPal(u8 id)
 {
     if (id >= IKIGAI_WINDOW_FRAMES_COUNT)
         return &sWindowFrames[0];
+    else if (id == IKIGAI_INTERFACE_GYM_TYPE_COLOUR)
+        return &sWindowFrames[IKIGAI_DEFAULT_INTERFACE_COUNT + gSaveBlock2Ptr->ikigaiGymType];
     else
         return &sWindowFrames[id];
 }
@@ -108,6 +151,8 @@ void LoadUserWindowBorderGfx_(u8 windowId, u16 destOffset, u8 palOffset)
 void LoadWindowGfx(u8 windowId, u8 frameId, u16 destOffset, u8 palOffset)
 {
     LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), sWindowFrames[frameId].tiles, 0x120, destOffset);
+    if (frameId == IKIGAI_INTERFACE_GYM_TYPE_COLOUR)
+        frameId = IKIGAI_DEFAULT_INTERFACE_COUNT + gSaveBlock2Ptr->ikigaiGymType;
     LoadPalette(sWindowFrames[frameId].pal, palOffset, PLTT_SIZE_4BPP);
 }
 
@@ -167,7 +212,6 @@ const u16 *GetTextWindowPalette(u8 id)
 {
     switch (id)
     {
-    default:
     case 0:
         id = 0x00;
         break;
@@ -194,6 +238,9 @@ const u16 *GetTextWindowPalette(u8 id)
         break;
     case IKIGAI_INTERFACE_PINK + DEFAULT_TEXT_BOX_FRAME_PALETTES:
         id = 0x80;
+        break;
+    default:
+        id *= 16;
         break;
     }
 
@@ -241,22 +288,66 @@ const u32 *GetBattleTextboxPalettePtr(void)
 {
     switch (gSaveBlock2Ptr->optionsInterfaceColor)
     {
-    case IKIGAI_INTERFACE_GYM_TYPE_COLOUR:
-        return gBattleTextboxPalette_Emerald;
-        break;
     case IKIGAI_INTERFACE_PINK:
-        return gBattleTextboxPalette_Pink;
-        break;
+        return gBattleTextboxPalette_Enamorus;
+        
     case IKIGAI_INTERFACE_ORANGE:
-        return gBattleTextboxPalette_Orange;
-        break;
+        return gBattleTextboxPalette_Landorus;
+        
     case IKIGAI_INTERFACE_BLUE:
-        return gBattleTextboxPalette_Blue;
-        break;
-    default:
+        return gBattleTextboxPalette_Thundurus;
+        
     case IKIGAI_INTERFACE_GREEN:
-        return gBattleTextboxPalette_Green;
-        break;
+        return gBattleTextboxPalette_Tornadus;
+    
+    default:
+        return GetBattleTextboxGymPalettePtr();
+    }   
+}
+
+const u32 *GetBattleTextboxGymPalettePtr(void)
+{
+    switch (gSaveBlock2Ptr->ikigaiGymType)
+    {
+        case TYPE_NORMAL:
+            return gBattleTextboxPalette_Normal;
+        case TYPE_FIGHTING:
+            return gBattleTextboxPalette_Fighting;
+        case TYPE_FLYING:
+            return gBattleTextboxPalette_Flying;
+        case TYPE_POISON:
+            return gBattleTextboxPalette_Poison;
+        case TYPE_GROUND:
+            return gBattleTextboxPalette_Ground;
+        case TYPE_ROCK:
+            return gBattleTextboxPalette_Rock;
+        case TYPE_BUG:
+            return gBattleTextboxPalette_Bug;
+        case TYPE_GHOST:
+            return gBattleTextboxPalette_Ghost;
+        case TYPE_STEEL:
+            return gBattleTextboxPalette_Steel;
+        case TYPE_FIRE:
+            return gBattleTextboxPalette_Fire;
+        case TYPE_WATER:
+            return gBattleTextboxPalette_Water;
+        case TYPE_GRASS:
+            return gBattleTextboxPalette_Grass;
+        case TYPE_ELECTRIC:
+            return gBattleTextboxPalette_Electric;
+        case TYPE_PSYCHIC:
+            return gBattleTextboxPalette_Psychic;
+        case TYPE_ICE:
+            return gBattleTextboxPalette_Ice;
+        case TYPE_DRAGON:
+            return gBattleTextboxPalette_Dragon;
+        case TYPE_DARK:
+            return gBattleTextboxPalette_Dark;
+        case TYPE_FAIRY:
+            return gBattleTextboxPalette_Fairy;
+            
+        default:
+            return gBattleTextboxPalette_Emerald;
     }   
 }
 

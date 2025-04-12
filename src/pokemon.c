@@ -1205,6 +1205,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     SetBoxMonData(boxMon, MON_DATA_POKEBALL, &value);
     SetBoxMonData(boxMon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
 
+    u32 teraType = (boxMon->personality & 0x1) == 0 ? gSpeciesInfo[species].types[0] : gSpeciesInfo[species].types[1];
+    SetBoxMonData(boxMon, MON_DATA_TERA_TYPE, &teraType);
+
     if (fixedIV < USE_RANDOM_IVS)
     {
         SetBoxMonData(boxMon, MON_DATA_HP_IV, &fixedIV);
@@ -3609,14 +3612,12 @@ u16 GetSpeciesWeight(u16 species)
 
 u8 GetSpeciesPrimaryType(u16 species)
 {
-    species = SanitizeSpeciesId(species);
-    return gSpeciesInfo[species].types[0];
+    return gSpeciesInfo[SanitizeSpeciesId(species)].types[0];
 }
 
 u8 GetSpeciesSecondaryType(u16 species)
 {
-    species = SanitizeSpeciesId(species);
-    return gSpeciesInfo[species].types[1];
+    return gSpeciesInfo[SanitizeSpeciesId(species)].types[1];
 }
 
 bool8 CheckSpeciesOfType(u16 species, u8 type)
@@ -5860,6 +5861,7 @@ u16 GetBattleBGM(void)
     {
         switch (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL))
         {
+        #if MUSIC_EXPANSION_GEN4_MUSIC_ENABLED == TRUE
         case SPECIES_ARTICUNO:
         case SPECIES_ZAPDOS:
         case SPECIES_MOLTRES:
@@ -5969,6 +5971,7 @@ u16 GetBattleBGM(void)
         case SPECIES_ARCEUS_FAIRY:
             return MUS_DP_VS_ARCEUS;
         #endif
+        #endif // MUSIC_EXPANSION_GEN4_MUSIC_ENABLED
         default:
             return MUS_VS_WILD;
         }
@@ -7113,25 +7116,20 @@ u16 GetCryIdBySpecies(u16 species)
     species = SanitizeSpeciesId(species);
     #if (P_CRIES_GENERIC && P_CRIES_ENABLED == FALSE)
         if (GetBaseStatTotal(species) < BST_TINY)
-        {
             return CRY_GENERIC_SMALLEST;
-        }
+        
         else if (GetBaseStatTotal(species) < BST_SMALL)
-        {
             return CRY_GENERIC_SMALL;
-        }
+        
         else if (GetBaseStatTotal(species) < BST_MEDIUM)
-        {
             return CRY_GENERIC_MEDIUM;
-        }
+        
         else if (GetBaseStatTotal(species) < BST_LARGE)
-        {
             return CRY_GENERIC_LARGE;
-        }
+        
         else
-        {
             return CRY_GENERIC_LARGEST;
-        }
+        
     #endif //(P_CRIES_GENERIC && P_CRIES_ENABLED == FALSE)
     if (P_CRIES_ENABLED == FALSE || gSpeciesInfo[species].cryId >= CRY_COUNT || gTestRunnerHeadless)
         return CRY_NONE;
@@ -7284,4 +7282,10 @@ bool32 IsSpeciesForeignRegionalForm(u32 species, u32 currentRegion)
             return TRUE;
     }
     return FALSE;
+}
+
+u32 GetTeraTypeFromPersonality(struct Pokemon *mon)
+{
+    const u8 *types = gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].types;
+    return (GetMonData(mon, MON_DATA_PERSONALITY) & 0x1) == 0 ? types[0] : types[1];
 }

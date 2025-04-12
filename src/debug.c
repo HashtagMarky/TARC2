@@ -96,6 +96,7 @@ enum IkigaiDebugMenu
     DEBUG_IKIGAI_PLAYER,
     DEBUG_IKIGAI_CHARACTER,
     DEBUG_IKIGAI_TEMPORAL,
+    DEBUG_IKIGAI_SOUND,
 };
 
 enum IkigaiPlayerDebugSubmenu
@@ -121,6 +122,13 @@ enum IkigaiTimeDebugSubmenu
     DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK,
     DEBUG_IKIGAI_TEMPORAL_SET_CLOCK,
     DEBUG_IKIGAI_TEMPORAL_SET_SEASON,
+};
+
+enum IkigaiSoundSubmenu
+{
+    DEBUG_IKIGAI_SOUND_CRIES,
+    DEBUG_IKIGAI_SOUND_MUSIC_EXPANSION,
+    DEBUG_IKIGAI_SOUND_DYNAMIC_MUSIC,
 };
 
 enum UtilDebugMenu
@@ -345,7 +353,7 @@ enum DynamicMusicTracksDebugMenu
 #define DEBUG_MENU_WIDTH_WEATHER 15
 #define DEBUG_MENU_HEIGHT_WEATHER 3
 
-#define DEBUG_MENU_WIDTH_SOUND 20
+#define DEBUG_MENU_WIDTH_SOUND 25
 #define DEBUG_MENU_HEIGHT_SOUND 6
 
 #define DEBUG_MENU_WIDTH_FLAGVAR 4
@@ -431,6 +439,7 @@ static void DebugAction_OpenIkigaiMenu(u8 taskId);
 static void DebugAction_OpenSubmenuIkigai_Player(u8 taskId);
 static void DebugAction_OpenSubmenuIkigai_CharacterMenu(u8 taskId);
 static void DebugAction_OpenSubmenuIkigai_TemporalMenu(u8 taskId);
+static void DebugAction_OpenSubmenuIkigai_SoundMenu(u8 taskId);
 
 static void DebugAction_OpenUtilitiesMenu(u8 taskId);
 static void DebugAction_OpenPCBagMenu(u8 taskId);
@@ -442,12 +451,14 @@ static void DebugAction_OpenSoundMenu(u8 taskId);
 static void DebugAction_OpenDynamicMusicMenu(u8 taskId);
 static void DebugAction_OpenDynamicMusicInstrumentMenu(u8 taskId);
 static void DebugAction_OpenDynamicMusicIsolateTrackMenu(u8 taskId);
+static void DebugAction_Ikigai_MUS_Expansion(u8 taskId);
 
 static void DebugTask_HandleMenuInput_Main(u8 taskId);
 static void DebugTask_HandleMenuInput_Ikigai(u8 taskId);
 static void DebugTask_HandleSubmenuInput_Ikigai_Player(u8 taskId);
 static void DebugTask_HandleSubmenuInput_Ikigai_Character(u8 taskId);
 static void DebugTask_HandleSubmenuInput_Ikigai_Temporal(u8 taskId);
+static void DebugTask_HandleSubmenuInput_Ikigai_Sound(u8 taskId);
 static void DebugTask_HandleMenuInput_Utilities(u8 taskId);
 static void DebugTask_HandleMenuInput_PCBag(u8 taskId);
 static void DebugTask_HandleMenuInput_PCBag_Fill(u8 taskId);
@@ -472,6 +483,7 @@ static void DebugAction_Ikigai_ShowCalendar(u8 taskId);
 static void DebugAction_Ikigai_CalendarWarp(u8 taskId);
 static void DebugAction_Ikigai_Season(u8 taskId);
 static void DebugAction_Ikigai_SeasonsSelect(u8 taskId);
+static void DebugAction_Ikigai_PokemonCries(u8 taskId);
 
 static void DebugAction_Util_Fly(u8 taskId);
 static void DebugAction_Util_Warp_Warp(u8 taskId);
@@ -666,8 +678,8 @@ static const u8 sDebugText_PokemonGmaxFactor[] =        _("Gmax Factor:{CLEAR_TO
 static const u8 sDebugText_IVs[] =                      _("IV {STR_VAR_1}:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_EVs[] =                      _("EV {STR_VAR_1}:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 // Sound Menu
-static const u8 sDebugText_Sound_SFX_ID[] =             _("SFX ID: {STR_VAR_3}   {START_BUTTON} Stop\n{STR_VAR_1}    \n{STR_VAR_2}");
-static const u8 sDebugText_Sound_Music_ID[] =           _("Music ID: {STR_VAR_3}   {START_BUTTON} Stop\n{STR_VAR_1}    \n{STR_VAR_2}");
+static const u8 sDebugText_Sound_SFX_ID[] =             _("SFX ID: {STR_VAR_3}   {START_BUTTON} Stop\n{STR_VAR_1}    {CLEAR_TO 240}\n{STR_VAR_2}");
+static const u8 sDebugText_Sound_Music_ID[] =           _("Music ID: {STR_VAR_3}   {START_BUTTON} Stop\n{STR_VAR_1}    {CLEAR_TO 240}\n{STR_VAR_2}");
 
 const u8 *const gText_DigitIndicator[] =
 {
@@ -716,6 +728,7 @@ static const struct ListMenuItem sDebugMenu_Items_Ikigai[] =
     [DEBUG_IKIGAI_PLAYER]                  = {COMPOUND_STRING("Player Menu…{CLEAR_TO 110}{RIGHT_ARROW}"),      DEBUG_IKIGAI_PLAYER},
     [DEBUG_IKIGAI_CHARACTER]               = {COMPOUND_STRING("Character Menu…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_IKIGAI_CHARACTER},
     [DEBUG_IKIGAI_TEMPORAL]                = {COMPOUND_STRING("Temporal Menu…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_IKIGAI_TEMPORAL},
+    [DEBUG_IKIGAI_SOUND]                   = {COMPOUND_STRING("Sound Menu…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_IKIGAI_SOUND},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Player[] =
@@ -741,6 +754,13 @@ static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Temporal[] =
     [DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK]     = {COMPOUND_STRING("Check Wall Clock…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK},
     [DEBUG_IKIGAI_TEMPORAL_SET_CLOCK]       = {COMPOUND_STRING("Set Wall Clock…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_IKIGAI_TEMPORAL_SET_CLOCK},
     [DEBUG_IKIGAI_TEMPORAL_SET_SEASON]      = {COMPOUND_STRING("Set Season…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_IKIGAI_TEMPORAL_SET_SEASON},
+};
+
+static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Sound[] =
+{
+    [DEBUG_IKIGAI_SOUND_MUSIC_EXPANSION]    = {COMPOUND_STRING("Music Expansion…{CLEAR_TO 110}{RIGHT_ARROW}"),  DEBUG_IKIGAI_SOUND_MUSIC_EXPANSION},
+    [DEBUG_IKIGAI_SOUND_DYNAMIC_MUSIC]      = {COMPOUND_STRING("Dynamic Music…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_IKIGAI_SOUND_DYNAMIC_MUSIC},
+    [DEBUG_IKIGAI_SOUND_CRIES]              = {COMPOUND_STRING("Pokémon Cries…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_IKIGAI_SOUND_CRIES},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
@@ -972,6 +992,7 @@ static void (*const sDebugMenu_Actions_Ikigai[])(u8) =
     [DEBUG_IKIGAI_PLAYER]                  = DebugAction_OpenSubmenuIkigai_Player,
     [DEBUG_IKIGAI_CHARACTER]               = DebugAction_OpenSubmenuIkigai_CharacterMenu,
     [DEBUG_IKIGAI_TEMPORAL]                = DebugAction_OpenSubmenuIkigai_TemporalMenu,
+    [DEBUG_IKIGAI_SOUND]                   = DebugAction_OpenSubmenuIkigai_SoundMenu,
 };
 
 static void (*const sDebugMenu_Actions_Ikigai_Player[])(u8) =
@@ -997,6 +1018,13 @@ static void (*const sDebugMenu_Actions_Ikigai_Temporal[])(u8) =
     [DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK]    = DebugAction_Util_CheckWallClock,
     [DEBUG_IKIGAI_TEMPORAL_SET_CLOCK]      = DebugAction_Util_SetWallClock,
     [DEBUG_IKIGAI_TEMPORAL_SET_SEASON]     = DebugAction_Ikigai_Season,
+};
+
+static void (*const sDebugMenu_Actions_Ikigai_Sound[])(u8) =
+{
+    [DEBUG_IKIGAI_SOUND_MUSIC_EXPANSION]   = DebugAction_Ikigai_MUS_Expansion,
+    [DEBUG_IKIGAI_SOUND_DYNAMIC_MUSIC]     = DebugAction_OpenDynamicMusicMenu,
+    [DEBUG_IKIGAI_SOUND_CRIES]             = DebugAction_Ikigai_PokemonCries,
 };
 
 static void (*const sDebugMenu_Actions_Utilities[])(u8) =
@@ -1273,6 +1301,13 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Ikigai_Temporal =
     .items = sDebugMenu_Items_SubmenuIkigai_Temporal,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_SubmenuIkigai_Temporal),
+};
+
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Ikigai_Sound =
+{
+    .items = sDebugMenu_Items_SubmenuIkigai_Sound,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_SubmenuIkigai_Sound),
 };
 
 static const struct ListMenuTemplate sDebugMenu_ListTemplate_Utilities =
@@ -1830,6 +1865,11 @@ static void DebugTask_HandleSubmenuInput_Ikigai_Temporal(u8 taskId)
     DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Ikigai_Temporal, DebugTask_HandleMenuInput_Ikigai, sDebugMenu_ListTemplate_Ikigai);
 }
 
+static void DebugTask_HandleSubmenuInput_Ikigai_Sound(u8 taskId)
+{
+    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Ikigai_Sound, DebugTask_HandleMenuInput_Ikigai, sDebugMenu_ListTemplate_Sound);
+}
+
 static void DebugTask_HandleMenuInput_Utilities(u8 taskId)
 {
     DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Utilities, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
@@ -2169,6 +2209,12 @@ static void DebugAction_OpenSubmenuIkigai_TemporalMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     Debug_ShowMenu(DebugTask_HandleSubmenuInput_Ikigai_Temporal, sDebugMenu_ListTemplate_Ikigai_Temporal);
+}
+
+static void DebugAction_OpenSubmenuIkigai_SoundMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleSubmenuInput_Ikigai_Sound, sDebugMenu_ListTemplate_Ikigai_Sound);
 }
 
 static void DebugAction_OpenUtilitiesMenu(u8 taskId)
@@ -3516,6 +3562,73 @@ static void Debug_Display_SpeciesInfo(u32 species, u32 digit, u8 windowId)
     AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
 }
 
+static void DebugAction_PokemonCries_SelectId(u8 taskId)
+{
+    if (JOY_NEW(DPAD_ANY))
+    {
+        PlaySE(SE_SELECT);
+        Debug_HandleInput_Numeric(taskId, 1, NUM_SPECIES - 1, DEBUG_NUMBER_DIGITS_ITEMS);
+        Debug_Display_SpeciesInfo(gTasks[taskId].tInput, gTasks[taskId].tDigit, gTasks[taskId].tSubWindowId);
+        FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].tSpriteId]);
+        FreeMonIconPalettes();
+        LoadMonIconPalette(gTasks[taskId].tInput);
+        gTasks[taskId].tSpriteId = CreateMonIcon(gTasks[taskId].tInput, SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0);
+        gSprites[gTasks[taskId].tSpriteId].oam.priority = 0;
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        sDebugMonData->species = gTasks[taskId].tInput;
+        PlayCry_Script(sDebugMonData->species, CRY_MODE_NORMAL);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        Free(sDebugMonData);
+        FreeMonIconPalettes();
+        FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].tSpriteId]);
+        DebugAction_DestroyExtraWindow(taskId);
+        Overworld_ChangeMusicToDefault();
+    }
+}
+
+static void DebugAction_Ikigai_PokemonCries(u8 taskId)
+{
+    u8 windowId;
+
+    StopMapMusic(); //Stop map music to better hear sounds
+
+    //Mon data struct
+    sDebugMonData = AllocZeroed(sizeof(struct DebugMonData));
+    ResetMonDataStruct(sDebugMonData);
+
+    //Window initialization
+    ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
+    RemoveWindow(gTasks[taskId].tWindowId);
+
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+    windowId = AddWindow(&sDebugMenuWindowTemplateExtra);
+    DrawStdWindowFrame(windowId, FALSE);
+
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+
+    // Display initial Pokémon
+    Debug_Display_SpeciesInfo(sDebugMonData->species, 0, windowId);
+
+    //Set task data
+    gTasks[taskId].func = DebugAction_PokemonCries_SelectId;
+    gTasks[taskId].tSubWindowId = windowId;
+    gTasks[taskId].tInput = sDebugMonData->species;
+    gTasks[taskId].tDigit = 0;
+    gTasks[taskId].tIsComplex = FALSE;
+
+    FreeMonIconPalettes();
+    LoadMonIconPalette(gTasks[taskId].tInput);
+    gTasks[taskId].tSpriteId = CreateMonIcon(gTasks[taskId].tInput, SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0);
+    gSprites[gTasks[taskId].tSpriteId].oam.priority = 0;
+}
+
 static void DebugAction_Give_PokemonSimple(u8 taskId)
 {
     u8 windowId;
@@ -4176,8 +4289,8 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
     SetMonData(&mon, MON_DATA_DYNAMAX_LEVEL, &dmaxLevel);
 
     // tera type
-    if (teraType >= NUMBER_OF_MON_TYPES)
-        teraType = TYPE_NONE;
+    if (teraType == TYPE_NONE || teraType == TYPE_MYSTERY || teraType >= NUMBER_OF_MON_TYPES)
+        teraType = GetTeraTypeFromPersonality(&mon);
     SetMonData(&mon, MON_DATA_TERA_TYPE, &teraType);
 
     //IVs
@@ -4560,12 +4673,16 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
 
     if (JOY_NEW(A_BUTTON))
     {
-        m4aSongNumStop(gTasks[taskId].tCurrentSong);
         gTasks[taskId].tCurrentSong = gTasks[taskId].tInput;
         if (FLAG_DEBUG_SOUND_OVERWORLD_PLAY)
-            Overworld_ChangeMusicTo(gTasks[taskId].tInput);
+        {
+            FadeOutAndPlayNewMapMusic(gTasks[taskId].tInput, 1);
+        }
         else
+        {
+            m4aSongNumStop(gTasks[taskId].tCurrentSong);
             m4aSongNumStart(gTasks[taskId].tInput);
+        }
     }
     else if (JOY_NEW(B_BUTTON))
     {
@@ -4577,6 +4694,74 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     {
         m4aSongNumStop(gTasks[taskId].tCurrentSong);
     }
+}
+
+static void DebugAction_Ikigai_MUS_Expansion_SelectId(u8 taskId)
+{
+    if (JOY_NEW(DPAD_ANY))
+    {
+        Debug_HandleInput_Numeric(taskId, MUSIC_EXPANSION_START + 1, END_MUS, DEBUG_NUMBER_DIGITS_ITEMS);
+
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
+        StringCopyPadded(gStringVar1, sBGMNames[gTasks[taskId].tInput - START_MUS], CHAR_SPACE, 35);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
+        StringExpandPlaceholders(gStringVar4, sDebugText_Sound_Music_ID);
+        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        gTasks[taskId].tCurrentSong = gTasks[taskId].tInput;
+        if (FLAG_DEBUG_SOUND_OVERWORLD_PLAY)
+        {
+            FadeOutAndPlayNewMapMusic(gTasks[taskId].tInput, 1);
+        }
+        else
+        {
+            m4aSongNumStop(gTasks[taskId].tCurrentSong);
+            m4aSongNumStart(gTasks[taskId].tInput);
+        }
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        // m4aSongNumStop(gTasks[taskId].tCurrentSong);   //Uncomment if music should stop after leaving menu
+        DebugAction_DestroyExtraWindow(taskId);
+    }
+    else if (JOY_NEW(START_BUTTON))
+    {
+        m4aSongNumStop(gTasks[taskId].tCurrentSong);
+    }
+}
+
+static void DebugAction_Ikigai_MUS_Expansion(u8 taskId)
+{
+    u8 windowId;
+
+    ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
+    RemoveWindow(gTasks[taskId].tWindowId);
+
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+    windowId = AddWindow(&sDebugMenuWindowTemplateSound);
+    DrawStdWindowFrame(windowId, FALSE);
+
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+
+    // Display initial song
+    StringCopy(gStringVar2, gText_DigitIndicator[0]);
+    ConvertIntToDecimalStringN(gStringVar3, MUSIC_EXPANSION_START + 1, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
+    StringCopyPadded(gStringVar1, sBGMNames[MUSIC_EXPANSION_START - MUS_LITTLEROOT_TEST + 1], CHAR_SPACE, 35);
+    StringExpandPlaceholders(gStringVar4, sDebugText_Sound_Music_ID);
+    AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
+
+    StopMapMusic(); //Stop map music to better hear new music
+
+    gTasks[taskId].func = DebugAction_Ikigai_MUS_Expansion_SelectId;
+    gTasks[taskId].tSubWindowId = windowId;
+    gTasks[taskId].tInput = MUSIC_EXPANSION_START + 1;
+    gTasks[taskId].tDigit = 0;
+    gTasks[taskId].tCurrentSong = gTasks[taskId].tInput;
 }
 
 #undef tCurrentSong
@@ -5165,6 +5350,459 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_HG_OBTAIN_CASTLE_POINTS) \
     X(MUS_HG_OBTAIN_B_POINTS) \
     X(MUS_HG_WIN_MINIGAME) \
+    X(MUS_BW12_001) \
+	X(MUS_BW12_002) \
+	X(MUS_BW12_003) \
+	X(MUS_BW12_004) \
+	X(MUS_BW12_005) \
+	X(MUS_BW12_006) \
+	X(MUS_BW12_007) \
+	X(MUS_BW12_008) \
+	X(MUS_BW12_009) \
+	X(MUS_BW12_VS_ELITE_FOUR) \
+	X(MUS_BW12_VS_CHEREN_BIANCA) \
+	X(MUS_BW12_VS_WILD_STRONG) \
+	X(MUS_BW12_013) \
+	X(MUS_BW12_014) \
+	X(MUS_BW12_015) \
+	X(MUS_BW12_016) \
+	X(MUS_BW12_GYM) \
+	X(MUS_BW12_UNWAVERING_EMOTIONS) \
+	X(MUS_BW12_THE_POKEMON_1) \
+	X(MUS_BW12_TITLE_SCREEN) \
+	X(MUS_BW12_021) \
+	X(MUS_BW12_022) \
+	X(MUS_BW12_023) \
+	X(MUS_BW12_024) \
+	X(MUS_BW12_025) \
+	X(MUS_BW12_026) \
+	X(MUS_BW12_027) \
+	X(MUS_BW12_028) \
+	X(MUS_BW12_029) \
+	X(MUS_BW12_030) \
+	X(MUS_BW12_031) \
+	X(MUS_BW12_032) \
+	X(MUS_BW12_033) \
+	X(MUS_BW12_ROUTE_2) \
+	X(MUS_BW12_035) \
+	X(MUS_BW12_036) \
+	X(MUS_BW12_VS_GYM_LEADER_1) \
+	X(MUS_BW12_VS_TRAINER_1) \
+	X(MUS_BW12_VS_WILD_1) \
+	X(MUS_BW12_VS_ALDER) \
+	X(MUS_BW12_041) \
+	X(MUS_BW12_042) \
+	X(MUS_BW12_043) \
+	X(MUS_BW12_POKEMON_CENTER) \
+	X(MUS_BW12_045) \
+	X(MUS_BW12_046) \
+	X(MUS_BW12_047) \
+	X(MUS_BW12_048) \
+	X(MUS_BW12_049) \
+	X(MUS_BW12_050) \
+	X(MUS_BW12_051) \
+	X(MUS_BW12_052) \
+	X(MUS_BW12_053) \
+	X(MUS_BW12_054) \
+	X(MUS_BW12_055) \
+	X(MUS_BW12_056) \
+	X(MUS_BW12_057) \
+	X(MUS_BW12_058) \
+	X(MUS_BW12_059) \
+	X(MUS_BW12_GAMEFREAK) \
+	X(MUS_BW12_061) \
+	X(MUS_BW12_062) \
+	X(MUS_BW12_063) \
+	X(MUS_BW12_064) \
+	X(MUS_BW12_065) \
+	X(MUS_BW12_066) \
+	X(MUS_BW12_067) \
+	X(MUS_BW12_068) \
+	X(MUS_BW12_069) \
+	X(MUS_BW12_070) \
+	X(MUS_BW12_071) \
+	X(MUS_BW12_072) \
+	X(MUS_BW12_073) \
+	X(MUS_BW12_VS_ZEKROM) \
+	X(MUS_BW12_VS_RESHIRAM) \
+	X(MUS_BW12_VS_LEGENDARY) \
+	X(MUS_BW12_077) \
+	X(MUS_BW12_078) \
+	X(MUS_BW12_VS_PWC_FINAL) \
+	X(MUS_BW12_080) \
+	X(MUS_BW12_081) \
+	X(MUS_BW12_VS_TRAINER_SUBWAY) \
+	X(MUS_BW12_VS_N) \
+	X(MUS_BW12_VS_GHETSIS_1) \
+	X(MUS_BW12_085) \
+	X(MUS_BW12_086) \
+	X(MUS_BW12_087) \
+	X(MUS_BW12_088) \
+	X(MUS_BW12_BLACK_CITY) \
+	X(MUS_BW12_WHITE_FOREST) \
+	X(MUS_BW12_091) \
+	X(MUS_BW12_092) \
+	X(MUS_BW12_VS_GYM_LEADER_WINNING_1) \
+	X(MUS_BW12_094) \
+	X(MUS_BW12_095) \
+	X(MUS_BW12_096) \
+	X(MUS_BW12_097) \
+	X(MUS_BW12_098) \
+	X(MUS_BW12_099) \
+	X(MUS_BW12_100) \
+	X(MUS_BW12_101) \
+	X(MUS_BW12_102) \
+	X(MUS_BW12_103) \
+	X(MUS_BW12_104) \
+	X(MUS_BW12_105) \
+	X(MUS_BW12_106) \
+	X(MUS_BW12_107) \
+	X(MUS_BW12_VS_IN_DANGER) \
+	X(MUS_BW12_109) \
+	X(MUS_BW12_110) \
+	X(MUS_BW12_111) \
+	X(MUS_BW12_112) \
+	X(MUS_BW12_113) \
+	X(MUS_BW12_114) \
+	X(MUS_BW12_VS_N_DECISIVE_BATTLE) \
+	X(MUS_BW12_116) \
+	X(MUS_BW12_117) \
+	X(MUS_BW12_118) \
+	X(MUS_BW12_119) \
+	X(MUS_BW12_120) \
+	X(MUS_BW12_121) \
+	X(MUS_BW12_CYNTIA_INTRO) \
+	X(MUS_BW12_VS_CYNTIA) \
+	X(MUS_BW12_124) \
+	X(MUS_BW12_VS_WILD_2) \
+	X(MUS_BW12_VS_TRAINER_2) \
+	X(MUS_BW12_127) \
+	X(MUS_BW12_VS_GYM_LEADER_2) \
+	X(MUS_BW12_VS_PLASMA_GRUNT_2) \
+	X(MUS_BW12_130) \
+	X(MUS_BW12_131) \
+	X(MUS_BW12_VS_COLRESS) \
+	X(MUS_BW12_VS_HUGH) \
+	X(MUS_BW12_134) \
+	X(MUS_BW12_135) \
+	X(MUS_BW12_ENTRALINK) \
+	X(MUS_BW12_137) \
+	X(MUS_BW12_OPENING_2) \
+	X(MUS_BW12_THE_POKEMON_2) \
+	X(MUS_BW12_140) \
+	X(MUS_BW12_141) \
+	X(MUS_BW12_VS_GHETSIS_2) \
+	X(MUS_BW12_VS_BW_KYUREM) \
+	X(MUS_BW12_144) \
+	X(MUS_BW12_145) \
+	X(MUS_BW12_146) \
+	X(MUS_BW12_147) \
+	X(MUS_BW12_148) \
+	X(MUS_BW12_VS_PWT_FINAL) \
+	X(MUS_BW12_150) \
+	X(MUS_BW12_151) \
+	X(MUS_BW12_152) \
+	X(MUS_BW12_153) \
+	X(MUS_BW12_VS_REGI) \
+	X(MUS_BW12_REGI_CHAMBER) \
+	X(MUS_BW12_VS_PLASMA_GRUNT_1) \
+	X(MUS_BW12_PWT) \
+	X(MUS_BW12_VS_PWT_KANTO_LEADER) \
+	X(MUS_BW12_VS_PWT_KANTO_CHAMPION) \
+	X(MUS_BW12_VS_PWT_JOHTO_LEADER) \
+	X(MUS_BW12_VS_PWT_JOHTO_CHAMPION) \
+	X(MUS_BW12_VS_PWT_HOENN_LEADER) \
+	X(MUS_BW12_VS_PWT_HOENN_CHAMPION) \
+	X(MUS_BW12_VS_PWT_SINNOH_LEADER) \
+	X(MUS_BW12_VS_PWT_SINNOH_CHAMPION) \
+	X(MUS_BW12_VS_IRIS) \
+	X(MUS_BW12_167) \
+	X(MUS_BW12_168) \
+	X(MUS_BW12_169) \
+	X(MUS_BW12_VS_GYM_LEADER_WINNING_2) \
+	X(MUS_BW12_171) \
+	X(MUS_BW12_172) \
+	X(MUS_BW12_173) \
+	X(MUS_BW12_174) \
+	X(MUS_BW12_POKEWOOD) \
+	X(MUS_BW12_176) \
+	X(MUS_BW12_177) \
+	X(MUS_BW12_178) \
+	X(MUS_BW12_179) \
+	X(MUS_BW12_180) \
+	X(MUS_BW12_181) \
+	X(MUS_BW12_GYM_MISTRALTON) \
+	X(MUS_BW12_GYM_OPELUCID) \
+	X(MUS_BW12_ASSAULT_OPELUCID_CITY) \
+	X(MUS_BW12_FROZEN_TOWN) \
+	X(MUS_BW12_186) \
+	X(MUS_BW12_187) \
+	X(MUS_BW12_188) \
+	X(MUS_BW12_189) \
+	X(MUS_BW12_190) \
+	X(MUS_BW12_191) \
+	X(MUS_BW12_192) \
+	X(MUS_BW12_193) \
+	X(MUS_BW12_GYM_VIRBANK) \
+	X(MUS_BW12_195) \
+	X(MUS_BW12_196) \
+	X(MUS_BW12_197) \
+	X(MUS_BW12_GYM_HUMILAU) \
+	X(MUS_BW12_199) \
+	X(MUS_BW12_GYM_NIMBASA_RUNAWAY) \
+	X(MUS_BW12_GYM_NIMBASA_STAGE) \
+	X(MUS_BW12_SPOTTED_BEAUTY) \
+	X(MUS_BW12_CREDITS) \
+	X(MUS_BW12_CREDITS_END) \
+	X(MUS_BW12_PWT_VENUE) \
+    X(PMD_HABITAT_HOME01) \
+    X(PMD_HABITAT_DARK_01) \
+    X(PMD_HABITAT_MYSTIC_01) \
+    X(PMD_EVENT_DREAM_01) \
+    X(PMD_EVENT_DREAM_02) \
+    X(PMD_EVENT_LEGEND_01) \
+    X(PMD_HABITAT_HIROBA) \
+    X(PMD_HABITAT_HOME_SHINKA) \
+    X(PMD_EVENT_FEAR) \
+    X(PMD_EVENT_KINPAKU) \
+    X(PMD_BOSS01) \
+    X(PMD_EVENT_YUME) \
+    X(PMD_DUNGEON_GENERAL_01) \
+    X(PMD_DUNGEON_DENJIHA_01) \
+    X(PMD_DUNGEON_AYASHIIMORI_01) \
+    X(PMD_HABITAT_CALMLY_02) \
+    X(PMD_SYS_SHOP) \
+    X(PMD_SYS_STEAL) \
+    X(PMD_EVENT_DISASTER) \
+    X(PMD_DUNGEON_KYOUKOKU_01) \
+    X(PMD_DUNGEON_GENERAL_02) \
+    X(PMD_DUNGEON_TENKUU_01) \
+    X(PMD_DUNGEON_TENKUU_02) \
+    X(PMD_EVENT_ESCAPE_01) \
+    X(PMD_DUNGEON_HONOU_01) \
+    X(PMD_DUNGEON_EVENTFLOOR_02) \
+    X(PMD_HABITAT_ITADAKI_01) \
+    X(PMD_HABITAT_NIJI_01) \
+    X(PMD_EVENT_ENV_MYSTIC) \
+    X(PMD_HABITAT_KAIRYU_01) \
+    X(PMD_HABITAT_KAITEI_01) \
+    X(PMD_BOSS02) \
+    X(PMD_DUNGEON_HONOU_02) \
+    X(PMD_HABITAT_DAICHI_01) \
+    X(PMD_HABITAT_NAZO_01) \
+    X(PMD_EVENT_ESCAPE_02) \
+    X(PMD_EVENT_ENV_SOUL) \
+    X(PMD_EVENT_ENV_HONOU) \
+    X(PMD_DUNGEON_JUHYOU_02) \
+    X(PMD_SYS_TITLE_01) \
+    X(PMD_EVENT_SEPARATION_01) \
+    X(PMD_EVENT_SEPARATION_02) \
+    X(PMD_SYS_TITLE_02) \
+    X(PMD_SYS_ENDING_01) \
+    X(PMD_SYS_ENDING_02) \
+    X(PMD_SYS_TITLE_03) \
+    X(PMD_SAVE_01) \
+    X(PMD_GAMEOVER) \
+    X(PMD_GAMECLEAR) \
+    X(PMD_EVENT_ZUKKOKE) \
+    X(PMD_EVENT_CALMLY) \
+    X(PMD_DUNGEON_GUNJYOU_01) \
+    X(PMD_EVENT_CLEARD) \
+    X(PMD_DUNGEON_JUHYOU_01) \
+    X(PMD_HABITAT_CALMLY_01) \
+    X(PMD_HABITAT_MYSTIC_02) \
+    X(PMD_HABITAT_CALMLY_03) \
+    X(PMD_DUNGEON_CHITEI_01) \
+    X(PMD_SYS_TRAINING) \
+    X(PMD_DUNGEON_TUTORIAL_01) \
+    X(PMD_DUNGEON_RAIMEI_01) \
+    X(PMD_HABITAT_MYSTIC_06) \
+    X(PMD_DUNGEON_CHINMOKU_01) \
+    X(PMD_DUNGEON_EVENTFLOOR_01) \
+    X(PMD_DUNGEON_REIHOU_01) \
+    X(PMD_HABITAT_MYSTIC_03) \
+    X(PMD_HABITAT_DENSETSU_01) \
+    X(PMD_HABITAT_MINAMI_01) \
+    X(PMD_HABITAT_TOZASARETA_01) \
+    X(PMD_DUNGEON_HAGANE_01) \
+    X(PMD_HABITAT_MYSTIC_04) \
+    X(PMD_HABITAT_SAIGO_01) \
+    X(PMD_DUNGEON_REIHOU_02) \
+    X(PMD_DUNGEON_CHITEI_02) \
+    X(PMD_DUNGEON_CHIISANAMORI_01) \
+    X(PMD_DUNGEON_RAIMEI_02) \
+    X(PMD_HABITAT_IYASHI_01) \
+    X(PMD_SYS_MONSTER) \
+    X(PMD_LEVELUP) \
+    X(PMD_RANKUP) \
+    X(PMD_SEEYOU) \
+    X(PMD_REWARD) \
+    X(PMD_PARTY) \
+    X(PMD_DUNGEON_OPEN) \
+    X(PMD_AREA_OPEN) \
+    X(PMD_INFORMATION) \
+    X(PMD_FANFARE) \
+    X(PMD_EVOLUTION) \
+    X(PMD_EVOLUTION_02) \
+    X(PMD_ITEM_IMPORTANT) \
+    X(PMD_NEWS) \
+    X(PMD_MUSICBOX) \
+    X(PMD_EFF_ORUGORU) \
+    X(PMD_WIND_S) \
+    X(PMD_WIND_M) \
+    X(PMD_WAVE_S) \
+    X(PMD_WAVE_M) \
+    X(PMD_SYS_01) \
+    X(PMD_SYS_02) \
+    X(PMD_SYS_03) \
+    X(PMD_SYS_04) \
+    X(PMD_SYS_05) \
+    X(PMD_SYS_06) \
+    X(PMD_SYS_07) \
+    X(PMD_SYS_08) \
+    X(PMD_SYS_09) \
+    X(PMD_SYS_10) \
+    X(PMD_DS_SYS_01) \
+    X(PMD_WAZA) \
+    X(PMD_WAZA_CLEAR) \
+    X(PMD_ITEM_M) \
+    X(PMD_ITEM_M_03) \
+    X(PMD_MOTION_MONEY) \
+    X(PMD_MOTION_ITEM) \
+    X(PMD_MOTION_EAT) \
+    X(PMD_MOTION_THROW) \
+    X(PMD_MOTION_THROW_02) \
+    X(PMD_MOTION_THROW_03) \
+    X(PMD_MOTION_HUNGRY) \
+    X(PMD_MOTION_STAIRS_UP) \
+    X(PMD_MOTION_STAIRS_DOWN) \
+    X(PMD_MISS_PLAYER_M) \
+    X(PMD_MISS_ENEMY_M) \
+    X(PMD_TAIATARI_M) \
+    X(PMD_MOTION_BREAK) \
+    X(PMD_MOTION_DOOR_GENERAL) \
+    X(PMD_MOTION_DOOR_BIG) \
+    X(PMD_MOTION_SWITCH) \
+    X(PMD_EFF_ANIM_2) \
+    X(PMD_EFF_ANIM_8) \
+    X(PMD_EFF_ANIM_9) \
+    X(PMD_EFF_ANIM_10) \
+    X(PMD_EFF_ANIM_11) \
+    X(PMD_EFF_ANIM_12) \
+    X(PMD_EFF_ANIM_4_SCRATCH) \
+    X(PMD_EFF_ANIM_4_LICK) \
+    X(PMD_EFF_ANIM_4_GORE) \
+    X(PMD_EFF_ANIM_4_ATTACK) \
+    X(PMD_EFF_ANIM_4_HEEL_DOWN) \
+    X(PMD_EFF_ANIM_4_WAG_TAIL) \
+    X(PMD_EFF_ANIM_4_PAWUP) \
+    X(PMD_EFF_ANIM_4_ELECTRICITY) \
+    X(PMD_EFF_ANIM_4_WING_S) \
+    X(PMD_EFF_ANIM_4_WING_M) \
+    X(PMD_EFF_ANIM_4_WING_L) \
+    X(PMD_EFF_ANIM_4_SHAKE) \
+    X(PMD_EFF_ANIM_4_JUMP) \
+    X(PMD_EFF_ANIM_4_ATTACK_LIGHT) \
+    X(PMD_MOTION_WIND_LARGE) \
+    X(PMD_MOTION_WAVE_LARGE) \
+    X(PMD_THUNDER_M) \
+    X(PMD_WIND_M_2) \
+    X(PMD_ESP_M) \
+    X(PMD_TRAP_TUMBLE) \
+    X(PMD_TRAP_SCISSOR) \
+    X(PMD_TRAP_BETOBETA) \
+    X(PMD_TRAP_SIREN) \
+    X(PMD_TRAP_SUMMON) \
+    X(PMD_TRAP_HOLE) \
+    X(PMD_TRAP_TURNTABLE) \
+    X(PMD_TRAP_SLEEP) \
+    X(PMD_TRAP_SEAL) \
+    X(PMD_TRAP_MINE) \
+    X(PMD_TRAP_BIGMINE) \
+    X(PMD_STATE_SHIELD) \
+    X(PMD_STATE_QUESTION) \
+    X(PMD_STATE_SWING) \
+    X(PMD_STATE_STIFF) \
+    X(PMD_STATE_INVISIBLE) \
+    X(PMD_STATE_BLIND_EYE) \
+    X(PMD_STATE_DRY_UP) \
+    X(PMD_STATE_PULL) \
+    X(PMD_STATE_THROW) \
+    X(PMD_STATE_QUAKE) \
+    X(PMD_STATE_JUMP) \
+    X(PMD_STATE_LV_DOWN) \
+    X(PMD_STATE_REVIVE) \
+    X(PMD_STATE_ESCAPE) \
+    X(PMD_WEATHER_CLOUDY) \
+    X(PMD_WEATHER_FOG) \
+    X(PMD_EVENT_FLY_01_L) \
+    X(PMD_EVENT_FLY_02_L) \
+    X(PMD_EVENT_FLY_03) \
+    X(PMD_EVENT_EARTHQUAKE_01_L) \
+    X(PMD_EVENT_MOTION_APPEAR_01) \
+    X(PMD_EVENT_MOTION_JUMP_01) \
+    X(PMD_EVENT_MOTION_JUMP_05) \
+    X(PMD_EVENT_MOTION_JUMP_02) \
+    X(PMD_EVENT_MOTION_JUMP_04) \
+    X(PMD_EVENT_FLYAWAY_01) \
+    X(PMD_EVENT_FLY_FIRE_01) \
+    X(PMD_EVENT_SIGN_LAUGH_01) \
+    X(PMD_EVENT_SIGN_LAUGH_01_L) \
+    X(PMD_EVENT_SIGN_NOTICE_01) \
+    X(PMD_EVENT_SIGN_NOTICE_02) \
+    X(PMD_EVENT_SIGN_NOTICE_04) \
+    X(PMD_EVENT_SIGN_NOTICE_03) \
+    X(PMD_EVENT_SIGN_HATENA_01) \
+    X(PMD_EVENT_SIGN_HATENA_02) \
+    X(PMD_EVENT_SIGN_HATENA_03) \
+    X(PMD_EVENT_SIGN_ASE_01) \
+    X(PMD_EVENT_SIGN_ANGER_01) \
+    X(PMD_EVENT_SIGN_ANGER_02) \
+    X(PMD_EVENT_SIGN_SHOCK_01) \
+    X(PMD_EVENT_MOTION_QUACK_01) \
+    X(PMD_EVENT_MOTION_FEATHER_01) \
+    X(PMD_EVENT_EFF_DIZZINESS_01) \
+    X(PMD_EVENT_APPEAR_02) \
+    X(PMD_EVENT_MOTION_JUMP_03) \
+    X(PMD_EVENT_FLASH_02) \
+    X(PMD_EVENT_SNEEZE) \
+    X(PMD_EVENT_LIGHT_02) \
+    X(PMD_EVENT_SIGN_SHOCK_02) \
+    X(PMD_EVENT_FALL_01) \
+    X(PMD_EVENT_LIGHT_03_L) \
+    X(PMD_EVENT_INTERFERE_01) \
+    X(PMD_EVENT_MOTION_HOLEUP_01) \
+    X(PMD_EVENT_WHITEOUT_03) \
+    X(PMD_EVENT_SHOOTINGSTAR) \
+    X(PMD_EVENT_KESSYOU) \
+    X(PMD_EVENT_FLY_09) \
+    X(PMD_EVENT_FLASH_02_L) \
+    X(PMD_EVENT_FLASH_03) \
+    X(PMD_EVENT_FLASH_06) \
+    X(PMD_EVENT_FLASH_04) \
+    X(PMD_EVENT_FREEZE) \
+    X(PMD_EVENT_DAMAGE_01) \
+    X(PMD_EVENT_EARTHQUAKE_02) \
+    X(PMD_EVENT_APPEAR_03) \
+    X(PMD_EVENT_TELEPORT) \
+    X(PMD_EVENT_POST) \
+    X(PMD_EVENT_FLASH_01) \
+    X(PMD_EVENT_FOOTSTEP_01) \
+    X(PMD_EVENT_FLY_04) \
+    X(PMD_EVENT_FOOTSTEP_02) \
+    X(PMD_EVENT_WHITEOUT) \
+    X(PMD_EVENT_WHITEOUT_04) \
+    X(PMD_EVENT_SHOOTING_L) \
+    X(PMD_EVENT_FALL_02) \
+    X(PMD_EVENT_BOUND) \
+    X(PMD_EVENT_LIGHTBALL_01) \
+    X(PMD_EVENT_EARTHQUAKE_03_L) \
+    X(PMD_EVENT_HAKAIKOUSEN) \
+    X(PMD_EVENT_LIGHTBALL_02) \
+    X(PMD_EVENT_MOTION_HARAHERI) \
+    X(PMD_EVENT_MOTION_EAT_L) \
+    X(PMD_EVENT_EXPLOSION_01) \
+    X(PMD_EVENT_EFF_RAIN) \
 
 #define SOUND_LIST_SE \
     X(SE_USE_ITEM) \
