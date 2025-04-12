@@ -1453,8 +1453,8 @@ static void Task_TradeEvolutionScene(u8 taskId)
 
 static void Ikigai_UpdatePartnerMonSpecies(struct Pokemon *mon, u8 taskId)
 {
-    if ((OW_MON_ALLOWED_MET_LVL && GetMonData(mon, MON_DATA_MET_LEVEL) != VarGet(OW_MON_ALLOWED_MET_LVL))
-    || (OW_MON_ALLOWED_MET_LOC && GetMonData(mon, MON_DATA_MET_LOCATION) != VarGet(OW_MON_ALLOWED_MET_LOC)))
+    if ((OW_FOLLOWERS_ALLOWED_MET_LVL && GetMonData(mon, MON_DATA_MET_LEVEL) != VarGet(OW_FOLLOWERS_ALLOWED_MET_LVL))
+    || (OW_FOLLOWERS_ALLOWED_MET_LOC && GetMonData(mon, MON_DATA_MET_LOCATION) != VarGet(OW_FOLLOWERS_ALLOWED_MET_LOC)))
         return;
     
     if (VarGet(VAR_STARTER_MON) == gTasks[taskId].tPreEvoSpecies)

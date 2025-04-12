@@ -137,7 +137,7 @@ void UNUSED Ikigai_SetToNextSeason(s16 days, enum Seasons newSeason)
 
     daysDiff = (year * 112) + (newSeason * 28);
     daysDiff -= days; 
-    FakeRtc_AdvanceTimeBy(daysDiff * 24, 0, 0);
+    FakeRtc_AdvanceTimeBy(daysDiff, 0, 0, 0);
 }
 
 u8 Ikigai_GetSeasonalTimeHour(s32 days, enum TimeOfDay time, bool32 begin)
