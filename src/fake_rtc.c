@@ -142,12 +142,12 @@ void UNUSED Ikigai_SetToNextSeason(s16 days, enum Seasons newSeason)
 
 u8 Ikigai_GetSeasonalTimeHour(s32 days, enum TimeOfDay time, bool32 begin)
 {
-    const u8 baseTime[SEASON_COUNT][2] =
+    const u8 baseTime[TIMES_OF_DAY_COUNT][2] =
     {
-        {MORNING_HOUR_BEGIN,    MORNING_HOUR_END},
-        {DAY_HOUR_BEGIN,        DAY_HOUR_END},
-        {EVENING_HOUR_BEGIN,    EVENING_HOUR_END},
-        {NIGHT_HOUR_BEGIN,      NIGHT_HOUR_END},
+        [TIME_MORNING] = {MORNING_HOUR_BEGIN, MORNING_HOUR_END},
+        [TIME_DAY]     = {DAY_HOUR_BEGIN,     DAY_HOUR_END},
+        [TIME_EVENING] = {EVENING_HOUR_BEGIN, EVENING_HOUR_END},
+        [TIME_NIGHT]   = {NIGHT_HOUR_BEGIN,   NIGHT_HOUR_END},
     };
 
     const s8 seasonalAdjustments[SEASON_COUNT][TIMES_OF_DAY_COUNT][2] =

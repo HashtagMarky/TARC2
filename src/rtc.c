@@ -332,18 +332,6 @@ enum TimeOfDay GetTimeOfDay(void)
     return gTimeOfDay;
 }
 
-// enum TimeOfDay GetTimeOfDay(void)
-// {
-//     RtcCalcLocalTime();
-//     if (IsBetweenHours(gLocalTime.hours, Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_MORNING, TRUE), Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_MORNING, FALSE)))
-//         return TIME_MORNING;
-//     else if (IsBetweenHours(gLocalTime.hours, Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_EVENING, TRUE), Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_EVENING, FALSE)))
-//         return TIME_EVENING;
-//     else if (IsBetweenHours(gLocalTime.hours, Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_NIGHT, TRUE), Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_NIGHT, FALSE)))
-//         return TIME_NIGHT;
-//     return TIME_DAY;
-// }
-
 enum TimeOfDay GetTimeOfDayForDex(void)
 {
     return OW_TIME_OF_DAY_ENCOUNTERS ? GetTimeOfDay() : OW_TIME_OF_DAY_DEFAULT;
