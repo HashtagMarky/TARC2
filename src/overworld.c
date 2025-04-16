@@ -1587,15 +1587,21 @@ void UpdateTimeOfDay(void)
     minutes = sHoursOverride ? 0 : gLocalTime.minutes;
     days = gLocalTime.days;
 
-    s32 morningStart = Ikigai_GetSeasonalTimeHour(days, TIME_MORNING, TRUE);
-    s32 morningEnd = Ikigai_GetSeasonalTimeHour(days, TIME_MORNING, FALSE);
+    s32 morningStart = Ikigai_GetSeasonalTimeHour(days, TIME_MORNING, FALSE);
+    s32 morningEnd = Ikigai_GetSeasonalTimeHour(days, TIME_MORNING, TRUE);
     s32 morningMiddle = (morningStart + morningEnd) / 2;
-    s32 dayStart = Ikigai_GetSeasonalTimeHour(days, TIME_DAY, TRUE);
-    s32 dayEnd = Ikigai_GetSeasonalTimeHour(days, TIME_DAY, FALSE);
-    s32 eveningStart = Ikigai_GetSeasonalTimeHour(days, TIME_EVENING, TRUE);
-    s32 eveningEnd = Ikigai_GetSeasonalTimeHour(days, TIME_EVENING, FALSE);
-    s32 nightStart = Ikigai_GetSeasonalTimeHour(days, TIME_NIGHT, TRUE);
-    s32 nightEnd = Ikigai_GetSeasonalTimeHour(days, TIME_NIGHT, FALSE);
+    s32 dayStart = Ikigai_GetSeasonalTimeHour(days, TIME_DAY, FALSE);
+    s32 dayEnd = Ikigai_GetSeasonalTimeHour(days, TIME_DAY, TRUE);
+    s32 eveningStart = Ikigai_GetSeasonalTimeHour(days, TIME_EVENING, FALSE);
+    s32 eveningEnd = Ikigai_GetSeasonalTimeHour(days, TIME_EVENING, TRUE);
+    s32 nightStart = Ikigai_GetSeasonalTimeHour(days, TIME_NIGHT, FALSE);
+    s32 nightEnd = Ikigai_GetSeasonalTimeHour(days, TIME_NIGHT, TRUE);
+    DebugPrintf("Time Ranges (Seasonal):\n");
+    DebugPrintf("  Morning: Start = %d, End = %d, Middle = %d\n", morningStart, morningEnd, morningMiddle);
+    DebugPrintf("  Day:     Start = %d, End = %d\n", dayStart, dayEnd);
+    DebugPrintf("  Evening: Start = %d, End = %d\n", eveningStart, eveningEnd);
+    DebugPrintf("  Night:   Start = %d, End = %d\n", nightStart, nightEnd);
+
 
     if (IsBetweenHours(hours, morningStart, morningMiddle)) // night->morning
     {

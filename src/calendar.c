@@ -1196,7 +1196,7 @@ static void CalendarUI_CreateSprites_Weather(void)
     enum TimeOfDay time = sCalendarUIState->time;
 
     if (time >= TIMES_OF_DAY_COUNT)
-        time = TIME_DAY;
+        time = OW_TIME_OF_DAY_DEFAULT;
     
     switch (weather)
     {
