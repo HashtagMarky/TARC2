@@ -1180,7 +1180,7 @@ u16 GetLocationMusic(struct WarpData *warp)
     else
     {
         const struct MapHeader *mapHeader = Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum);
-        if ((GetTimeOfDay() == TIME_EVENING || GetTimeOfDay() == TIME_NIGHT) && mapHeader->musicNight != MUS_DUMMY)
+        if ((gTimeOfDay == TIME_EVENING || gTimeOfDay == TIME_NIGHT) && mapHeader->musicNight != MUS_DUMMY)
             return mapHeader->musicNight;
         else
             return mapHeader->music;
