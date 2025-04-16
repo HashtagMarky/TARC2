@@ -1579,8 +1579,6 @@ const struct BlendSettings gTimeOfDayBlend[] =
 
 void UpdateTimeOfDay(void)
 {
-    if (!OW_ENABLE_DNS)
-        return;
     s32 days, hours, minutes;
     RtcCalcLocalTime();
     hours = sHoursOverride ? sHoursOverride : gLocalTime.hours;
@@ -1657,10 +1655,11 @@ void UpdateTimeOfDay(void)
 // Whether a map type is naturally lit/outside
 bool32 MapHasNaturalLight(u8 mapType)
 {
-    return (mapType == MAP_TYPE_TOWN
-         || mapType == MAP_TYPE_CITY
-         || mapType == MAP_TYPE_ROUTE
-         || mapType == MAP_TYPE_OCEAN_ROUTE);
+    return (OW_ENABLE_DNS
+         && (mapType == MAP_TYPE_TOWN
+          || mapType == MAP_TYPE_CITY
+          || mapType == MAP_TYPE_ROUTE
+          || mapType == MAP_TYPE_OCEAN_ROUTE));
 }
 
 bool32 CurrentMapHasShadows(void)
@@ -1673,8 +1672,6 @@ bool32 CurrentMapHasShadows(void)
 // Update & mix day / night bg palettes (into unfaded)
 void UpdateAltBgPalettes(u16 palettes)
 {
-    if (!OW_ENABLE_DNS)
-        return;
     const struct Tileset *primary = gMapHeader.mapLayout->primaryTileset;
     const struct Tileset *secondary = gMapHeader.mapLayout->secondaryTileset;
     u32 i = 1;
@@ -1702,7 +1699,7 @@ void UpdateAltBgPalettes(u16 palettes)
 
 void UpdatePalettesWithTime(u32 palettes)
 {
-    if (!OW_ENABLE_DNS || !MapHasNaturalLight(gMapHeader.mapType))
+    if (!MapHasNaturalLight(gMapHeader.mapType))
         return;
     u32 i;
     u32 mask = 1 << 16;
@@ -1721,8 +1718,7 @@ void UpdatePalettesWithTime(u32 palettes)
 
 u8 UpdateSpritePaletteWithTime(u8 paletteNum)
 {
-    if (OW_ENABLE_DNS
-     && MapHasNaturalLight(gMapHeader.mapType)
+    if (MapHasNaturalLight(gMapHeader.mapType)
      && !IS_BLEND_IMMUNE_TAG(GetSpritePaletteTagByPaletteNum(paletteNum)))
         TimeMixPalettes(1, &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteNum)], &gPlttBufferFaded[OBJ_PLTT_ID(paletteNum)], &gTimeBlend.startBlend, &gTimeBlend.endBlend, gTimeBlend.weight);
     return paletteNum;
