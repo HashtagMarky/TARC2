@@ -140,7 +140,6 @@
 #define IKIGAI_INTERFACE_GYM_TYPE_COLOUR      IKIGAI_DEFAULT_INTERFACE_COUNT
 // #define IKIGAI_INTERFACE_GYM_TYPE_COLOUR_DARK IKIGAI_INTERFACE_GYM_TYPE_COLOUR + 1
 
-#ifndef NDEBUG
 static inline void CycleCountStart()
 {
     REG_TM2CNT_H = 0;
@@ -163,7 +162,6 @@ static inline u32 CycleCountEnd()
     // return result
     return REG_TM2CNT_L | (REG_TM3CNT_L << 16u);
 }
-#endif
 
 struct Coords8
 {
