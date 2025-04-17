@@ -208,7 +208,7 @@ void rbox_fill_rectangle(u8 windowId)
     FillBgTilemapBufferRect(bgLayer, 0, tilemapLeft - 1, tilemapTop - 1, width + 2, height + 2, 0x11);
 }
 
-const u16 *GetTextWindowPalette(u8 id)
+const u16 *GetTextWindowPalette(u16 id)
 {
     switch (id)
     {
