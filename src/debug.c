@@ -1867,7 +1867,7 @@ static void DebugTask_HandleSubmenuInput_Ikigai_Temporal(u8 taskId)
 
 static void DebugTask_HandleSubmenuInput_Ikigai_Sound(u8 taskId)
 {
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Ikigai_Sound, DebugTask_HandleMenuInput_Ikigai, sDebugMenu_ListTemplate_Sound);
+    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Ikigai_Sound, DebugTask_HandleMenuInput_Ikigai, sDebugMenu_ListTemplate_Ikigai);
 }
 
 static void DebugTask_HandleMenuInput_Utilities(u8 taskId)
