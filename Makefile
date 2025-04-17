@@ -283,6 +283,7 @@ OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 SUBDIRS  := $(sort $(dir $(OBJS) $(dir $(TEST_OBJS))))
 $(shell mkdir -p $(SUBDIRS))
 
+PRET_POKEEMERALD_DIR := /Users/samuelmark/Code/Pokémon Rom Hacks/emerald
 # Pretend rules that are actually flags defer to `make all`
 modern: all
 compare: all
@@ -292,7 +293,18 @@ ifneq ($(NOCLEAN),1)
 	$(MAKE) clean
 endif
 	$(MAKE) all
-	flips --create --bps '/Users/samuelmark/Code/Pokémon Rom Hacks/emerald/pokeemerald.gba' pokeikigai.gba pokeikigai.bps
+	@cd '$(PRET_POKEEMERALD_DIR)' && \
+		branch=$$(git rev-parse --abbrev-ref HEAD); \
+		if [ "$$branch" != "pret/master" ]; then \
+			echo "Switching from $$branch to pret/master..."; \
+			git checkout pret/master || exit 1; \
+		else \
+			echo "Already on pret/master"; \
+		fi; \
+		echo "Pulling latest changes..."; \
+		git pull upstream master || exit 1; \
+		$(MAKE)
+	flips --create --bps '$(PRET_POKEEMERALD_DIR)/pokeemerald.gba' pokeikigai.gba pokeikigai.bps
 # Uncomment the next line, and then comment the 4 lines after it to reenable agbcc.
 #agbcc: all
 agbcc:
