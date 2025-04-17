@@ -303,7 +303,7 @@ endif
 		fi; \
 		echo "Pulling latest changes..."; \
 		git pull upstream master || exit 1; \
-		$(MAKE)
+		$(MAKE) clean && $(MAKE)
 	flips --create --bps '$(PRET_POKEEMERALD_DIR)/pokeemerald.gba' pokeikigai.gba pokeikigai.bps
 # Uncomment the next line, and then comment the 4 lines after it to reenable agbcc.
 #agbcc: all
