@@ -16,8 +16,8 @@
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_SAMUEL",
-      "x": 5,
-      "y": 3,
+      "x": 3,
+      "y": 8,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -29,8 +29,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
-      "x": 7,
-      "y": 4,
+      "x": 5,
+      "y": 9,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_UP",
       "movement_range_x": 0,
@@ -42,8 +42,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SAMUEL_BRIEFCASE",
-      "x": 6,
-      "y": 3,
+      "x": 4,
+      "y": 8,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -55,8 +55,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_THOMAS",
-      "x": 5,
-      "y": 9,
+      "x": 3,
+      "y": 13,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -68,19 +68,13 @@
     }
   ],
   "warp_events": [
-    {
-      "x": 21,
-      "y": 16,
-      "elevation": 0,
-      "dest_map": "MAP_PETALBURG_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
-    }
+
   ],
   "coord_events": [
     {
       "type": "trigger",
-      "x": 5,
-      "y": 9,
+      "x": 3,
+      "y": 13,
       "elevation": 0,
       "var": "VAR_IKIGAI_INTRO_STATE",
       "var_value": "4",
@@ -88,8 +82,8 @@
     },
     {
       "type": "trigger",
-      "x": 6,
-      "y": 9,
+      "x": 4,
+      "y": 13,
       "elevation": 0,
       "var": "VAR_IKIGAI_INTRO_STATE",
       "var_value": "4",
