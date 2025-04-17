@@ -284,6 +284,7 @@ SUBDIRS  := $(sort $(dir $(OBJS) $(dir $(TEST_OBJS))))
 $(shell mkdir -p $(SUBDIRS))
 
 PRET_POKEEMERALD_DIR := /Users/samuelmark/Code/Pokémon Rom Hacks/emerald
+PRET_POKEEMERALD_CRC := 1F1C08FB
 # Pretend rules that are actually flags defer to `make all`
 modern: all
 compare: all
@@ -305,6 +306,14 @@ endif
 		git pull upstream master || exit 1; \
 		$(MAKE) clean && $(MAKE)
 	flips --create --bps '$(PRET_POKEEMERALD_DIR)/pokeemerald.gba' pokeikigai.gba pokeikigai.bps
+	flips --info pokeikigai.bps
+	@actual_crc=$$(flips --info pokeikigai.bps | grep 'Input ROM' | awk '{ print $$NF }'); \
+	if [ "$$actual_crc" != "$(PRET_POKEEMERALD_CRC)" ]; then \
+		echo "⚠️ WARNING: pret/pokeemerald CRC mismatch! Expected $(PRET_POKEEMERALD_CRC), got $$actual_crc"; \
+	else \
+		echo "✅ pret/pokeemerald CRC matches: $$actual_crc"; \
+	fi
+
 # Uncomment the next line, and then comment the 4 lines after it to reenable agbcc.
 #agbcc: all
 agbcc:
