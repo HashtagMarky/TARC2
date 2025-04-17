@@ -4444,9 +4444,9 @@
     {
       "id": "LAYOUT_VYRATON_MAYOR_OFFICE",
       "name": "Vyraton_MayorsOffice_Layout",
-      "width": 10,
+      "width": 12,
       "height": 10,
-      "primary_tileset": "gTileset_Building",
+      "primary_tileset": "gTileset_IkigaiOffice",
       "secondary_tileset": "gTileset_PokemonSchool",
       "border_filepath": "data/layouts/VyratonIndoors_MayorsOffice/border.bin",
       "blockdata_filepath": "data/layouts/VyratonIndoors_MayorsOffice/map.bin"

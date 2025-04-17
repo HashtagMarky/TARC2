@@ -56,7 +56,7 @@ script VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures
     mnmbox(VyratonOutdoors_Harbour_Text_HeadToOffice)
     applymoveplayer(VyratonOutdoors_Harbour_Movement_Player_Exit, FALSE)
     applymove(LOCALID_Samuel, VyratonOutdoors_Harbour_Movement_Samuel_Exit)
-    warp(MAP_VYRATON_INDOORS_MAYORS_OFFICE, 4, 9)
+    warp(MAP_VYRATON_INDOORS_MAYORS_OFFICE, 5, 9)
     setflag(FLAG_HIDE_VYRATON_HARBOR_SAMUEL)
     setflag(FLAG_HIDE_VYRATON_HARBOR_CAPTAIN)
     waitstate
