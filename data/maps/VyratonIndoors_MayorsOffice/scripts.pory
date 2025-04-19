@@ -7,13 +7,20 @@ mapscripts VyratonIndoors_MayorsOffice_MapScripts
 }
 
 const LOCALID_Samuel = 1
-const LOCALID_Starter = 2
-const LOCALID_Thomas = 4
+const LOCALID_Starter = 4
+const LOCALID_Thomas = 3
 
 script VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_DontLeave
 {
     playerbox(VyratonIndoors_MayorsOffice_Text_ShouldReturn, EMOTE_THINK)
     applymoveplayer(Common_Movement_WalkUp)
+    end
+}
+
+script VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_DontGoTooFar
+{
+    playerbox(VyratonIndoors_MayorsOffice_Text_ShouldNotGoTooFar, EMOTE_THINK)
+    applymoveplayer(Common_Movement_WalkDown)
     end
 }
 
@@ -204,10 +211,7 @@ script VyratonIndoors_MayorsOffice_EventScript_Samuel_ReceivePokdex
 
 movement VyratonIndoors_MayorsOffice_Movement_Player_Entrance
 {
-    walk_up
-    walk_left
     walk_up * 3
-    walk_right
     face_up
 }
 
@@ -249,13 +253,13 @@ movement VyratonIndoors_MayorsOffice_Movement_Thomas_Entrance
     delay_16
     walk_up
     walk_left
-    walk_up * 5
+    walk_up * 4
     face_right
 }
 
 movement VyratonIndoors_MayorsOffice_Movement_Thomas_Exit
 {
-    walk_down * 5
+    walk_down * 4
     walk_right
     walk_down
     delay_16
@@ -265,7 +269,7 @@ movement VyratonIndoors_MayorsOffice_Movement_Thomas_Exit
 movement VyratonIndoors_MayorsOffice_Movement_Player_WatchThomasEntrance
 {
     emote_exclamation_mark
-    delay_16 * 5
+    delay_16 * 4
     delay_8
     face_left
     delay_2

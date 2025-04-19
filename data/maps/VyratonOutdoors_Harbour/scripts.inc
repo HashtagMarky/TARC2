@@ -86,7 +86,7 @@ VyratonOutdoors_Harbour_EventScript_IkigaiIntro_Departures::
 # 58 "data/maps/VyratonOutdoors_Harbour/scripts.pory"
 	applymove 2, VyratonOutdoors_Harbour_Movement_Samuel_Exit
 # 59 "data/maps/VyratonOutdoors_Harbour/scripts.pory"
-	warp MAP_VYRATON_INDOORS_MAYORS_OFFICE, 5, 9
+	warp MAP_VYRATON_INDOORS_MAYORS_OFFICE, 3, 13
 # 60 "data/maps/VyratonOutdoors_Harbour/scripts.pory"
 	setflag FLAG_HIDE_VYRATON_HARBOR_SAMUEL
 # 61 "data/maps/VyratonOutdoors_Harbour/scripts.pory"

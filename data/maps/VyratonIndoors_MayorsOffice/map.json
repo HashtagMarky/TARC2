@@ -88,6 +88,24 @@
       "var": "VAR_IKIGAI_INTRO_STATE",
       "var_value": "4",
       "script": "VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_DontLeave"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 8,
+      "elevation": 0,
+      "var": "VAR_IKIGAI_INTRO_STATE",
+      "var_value": "4",
+      "script": "VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_DontGoTooFar"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 8,
+      "elevation": 0,
+      "var": "VAR_IKIGAI_INTRO_STATE",
+      "var_value": "4",
+      "script": "VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_DontGoTooFar"
     }
   ],
   "bg_events": [

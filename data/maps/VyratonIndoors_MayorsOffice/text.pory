@@ -5,6 +5,14 @@ text VyratonIndoors_MayorsOffice_Text_ShouldReturn
         longer, there's more to finish up…")
 }
 
+text VyratonIndoors_MayorsOffice_Text_ShouldNotGoTooFar
+{
+    format("
+        I should probably wait to check out\n
+        the rest of the office…\l
+        Time to meet my new partner!")
+}
+
 text VyratonIndoors_MayorsOffice_Text_KickStart
 {
     format("
