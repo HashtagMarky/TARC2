@@ -1358,6 +1358,38 @@ bool8 MetatileBehavior_IsBlueprint(u8 metatileBehavior)
         return FALSE;
 }
 
+bool8 MetatileBehavior_IsOfficeCertificate(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_OFFICE_CERTIFICATE)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsOfficeWaterCooler(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_OFFICE_WATER_COOLER)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsOfficeBlankWhiteboard(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_OFFICE_WHITEBOARD_BLANK)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsOfficeWhiteboard(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_OFFICE_WHITEBOARD)
+        return TRUE;
+    else
+        return FALSE;
+}
+
 bool8 MetatileBehavior_IsBattlePyramidWarp(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_BATTLE_PYRAMID_WARP)

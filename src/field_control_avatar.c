@@ -512,6 +512,14 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         return EventScript_ShopShelf;
     if (MetatileBehavior_IsBlueprint(metatileBehavior) == TRUE)
         return EventScript_Blueprint;
+    if (MetatileBehavior_IsOfficeCertificate(metatileBehavior) == TRUE)
+        return EventScript_OfficeCertificate;
+    if (MetatileBehavior_IsOfficeWaterCooler(metatileBehavior) == TRUE)
+        return EventScript_OfficeWaterCooler;
+    if (MetatileBehavior_IsOfficeBlankWhiteboard(metatileBehavior) == TRUE)
+        return EventScript_OfficeBlankWhiteboard;
+    if (MetatileBehavior_IsOfficeWhiteboard(metatileBehavior) == TRUE)
+        return EventScript_OfficeWhiteboard;
     if (MetatileBehavior_IsPlayerFacingWirelessBoxResults(metatileBehavior, direction) == TRUE)
         return EventScript_WirelessBoxResults;
     if (MetatileBehavior_IsCableBoxResults2(metatileBehavior, direction) == TRUE)

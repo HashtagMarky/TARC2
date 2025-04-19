@@ -25,3 +25,15 @@ Text_ShopShelf:
 Text_Blueprint:
 	.string "A blueprint of some sort?\n"
 	.string "It's too complicated!$"
+
+Text_OfficeCertificate:
+	.string "An certificate of some sort?\n"
+	.string "It's so fancy!$"
+
+Text_OfficeBlankWhiteboard:
+	.string "A blank whiteboard fills the wall.\n"
+	.string "I wonder what will be drawn on it?$"
+
+Text_OfficeWhiteboard:
+	.string "A whiteboard full of diagrams.\n"
+	.string "It goes into so much detail!$"
