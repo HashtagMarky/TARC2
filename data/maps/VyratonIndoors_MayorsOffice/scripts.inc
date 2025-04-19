@@ -374,10 +374,10 @@ VyratonIndoors_MayorsOffice_Movement_Thomas_Entrance:
 	delay_16
 # 254 "data/maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_up
+# 254 "data/maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	walk_up
 # 255 "data/maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_left
-# 256 "data/maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	walk_up
 # 256 "data/maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_up
 # 256 "data/maps/VyratonIndoors_MayorsOffice/scripts.pory"
@@ -396,10 +396,10 @@ VyratonIndoors_MayorsOffice_Movement_Thomas_Exit:
 	walk_down
 # 262 "data/maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_down
-# 262 "data/maps/VyratonIndoors_MayorsOffice/scripts.pory"
-	walk_down
 # 263 "data/maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_right
+# 264 "data/maps/VyratonIndoors_MayorsOffice/scripts.pory"
+	walk_down
 # 264 "data/maps/VyratonIndoors_MayorsOffice/scripts.pory"
 	walk_down
 # 265 "data/maps/VyratonIndoors_MayorsOffice/scripts.pory"

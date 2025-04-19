@@ -251,17 +251,17 @@ movement VyratonIndoors_MayorsOffice_Movement_Player_ReturnFromStarter_Two
 movement VyratonIndoors_MayorsOffice_Movement_Thomas_Entrance
 {
     delay_16
-    walk_up
+    walk_up * 2
     walk_left
-    walk_up * 4
+    walk_up * 3
     face_right
 }
 
 movement VyratonIndoors_MayorsOffice_Movement_Thomas_Exit
 {
-    walk_down * 4
+    walk_down * 3
     walk_right
-    walk_down
+    walk_down * 2
     delay_16
     set_invisible
 }
