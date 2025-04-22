@@ -146,6 +146,7 @@ bool8 MetatileBehavior_IsOfficeCertificate(u8);
 bool8 MetatileBehavior_IsOfficeWaterCooler(u8);
 bool8 MetatileBehavior_IsOfficeBlankWhiteboard(u8);
 bool8 MetatileBehavior_IsOfficeWhiteboard(u8);
+bool8 MetatileBehavior_IsOfficeCoffeeMachine(u8);
 bool8 MetatileBehavior_IsBattlePyramidWarp(u8);
 bool8 MetatileBehavior_IsPlayerFacingWirelessBoxResults(u8 tile, u8 playerDir);
 bool8 MetatileBehavior_IsCableBoxResults2(u8 tile, u8 playerDir);

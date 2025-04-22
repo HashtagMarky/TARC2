@@ -41,3 +41,7 @@ EventScript_OfficeBlankWhiteboard::
 EventScript_OfficeWhiteboard::
 	msgbox Text_OfficeWhiteboard, MSGBOX_SIGN
 	end
+
+EventScript_OfficeCoffeeCup::
+	callnative DoCoffeeMachineEffect
+	end

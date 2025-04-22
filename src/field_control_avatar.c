@@ -520,6 +520,8 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         return EventScript_OfficeBlankWhiteboard;
     if (MetatileBehavior_IsOfficeWhiteboard(metatileBehavior) == TRUE)
         return EventScript_OfficeWhiteboard;
+    if (MetatileBehavior_IsOfficeCoffeeMachine(metatileBehavior) == TRUE)
+        return EventScript_OfficeCoffeeCup;
     if (MetatileBehavior_IsPlayerFacingWirelessBoxResults(metatileBehavior, direction) == TRUE)
         return EventScript_WirelessBoxResults;
     if (MetatileBehavior_IsCableBoxResults2(metatileBehavior, direction) == TRUE)

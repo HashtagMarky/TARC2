@@ -1390,6 +1390,14 @@ bool8 MetatileBehavior_IsOfficeWhiteboard(u8 metatileBehavior)
         return FALSE;
 }
 
+bool8 MetatileBehavior_IsOfficeCoffeeMachine(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_OFFICE_COFFEE_MACHINE)
+        return TRUE;
+    else
+        return FALSE;
+}
+
 bool8 MetatileBehavior_IsBattlePyramidWarp(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_BATTLE_PYRAMID_WARP)

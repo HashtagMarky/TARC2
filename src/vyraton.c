@@ -4,11 +4,18 @@
 #include "vyraton.h"
 #include "data/vyraton_randomised_metatiles.h"
 #include "fieldmap.h"
+#include "field_camera.h"
+#include "field_player_avatar.h"
 #include "global.fieldmap.h"
 #include "random.h"
+#include "sound.h"
+#include "task.h"
 #include "constants/metatile_labels.h"
 #include "constants/region_map_sections.h"
+#include "constants/songs.h"
 
+
+static void Task_DoCoffeeMachineEffect(u8 taskId);
 
 void VyratonTilesets_DrawRandomisedMetatiles(void)
 {
@@ -102,3 +109,53 @@ void gTileset_IkigaiOffice_ReplacementFunc_Whiteboard(s32 x, s32 y)
         MapGridSetMetatileIdAt(x + 1, y + 1, METATILE_IkigaiOffice_WhiteboardChartTwo_BottomRight | MAPGRID_COLLISION_MASK);
     }
 }
+#define tTaskId       data[1]
+#define tTimer        data[2]
+#define tCoffeeCoordX data[3]
+#define tCoffeeCoordY data[4]
+void DoCoffeeMachineEffect(void)
+{
+    s16 x, y;
+    u32 tileInFront;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    tileInFront = MapGridGetMetatileIdAt(x, y);
+
+    if (FuncIsActiveTask(Task_DoCoffeeMachineEffect) != TRUE && tileInFront == METATILE_IkigaiOffice_CoffeeMachine_CleanTable)
+    {
+        u8 taskId = CreateTask(Task_DoCoffeeMachineEffect, 8);
+        gTasks[taskId].tTaskId = taskId;
+        gTasks[taskId].tTimer = 0;
+        gTasks[taskId].tCoffeeCoordX = x;
+        gTasks[taskId].tCoffeeCoordY = y;
+    }
+}
+
+static void Task_DoCoffeeMachineEffect(u8 taskId)
+{
+    s32 x = gTasks[taskId].tCoffeeCoordX;
+    s32 y = gTasks[taskId].tCoffeeCoordY;
+
+    if (gTasks[taskId].tTimer == 20)
+    {
+        PlaySE(SE_THUNDERSTORM_STOP);
+        MapGridSetMetatileIdAt(x, y - 1, METATILE_IkigaiOffice_CoffeeMachine_CoffeeCup | MAPGRID_COLLISION_MASK);
+        DrawWholeMapView();
+    }
+    else if (gTasks[taskId].tTimer == 60)
+    {
+        MapGridSetMetatileIdAt(x, y, METATILE_IkigaiOffice_CoffeeMachine_DirtyTable | MAPGRID_COLLISION_MASK);
+        DrawWholeMapView();
+    }
+    else if (gTasks[taskId].tTimer == 100)
+    {
+        MapGridSetMetatileIdAt(x, y - 1, METATILE_IkigaiOffice_CoffeeMachine_NoCup | MAPGRID_COLLISION_MASK);
+        DrawWholeMapView();
+        DestroyTask(gTasks[taskId].tTaskId);
+    }
+    gTasks[taskId].tTimer++;
+}
+#undef tTaskId
+#undef tTimer
+#undef tCoffeeCoordX
+#undef tCoffeeCoordY

@@ -568,6 +568,7 @@ extern const u8 EventScript_OfficeCertificate[];
 extern const u8 EventScript_OfficeWaterCooler[];
 extern const u8 EventScript_OfficeBlankWhiteboard[];
 extern const u8 EventScript_OfficeWhiteboard[];
+extern const u8 EventScript_OfficeCoffeeCup[];
 extern const u8 EventScript_WirelessBoxResults[];
 extern const u8 EventScript_CableBoxResults[];
 extern const u8 EventScript_Questionnaire[];
