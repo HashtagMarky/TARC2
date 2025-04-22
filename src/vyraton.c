@@ -14,7 +14,7 @@ void VyratonTilesets_DrawRandomisedMetatiles(void)
 {
     if (gMapHeader.regionMapSectionId != MAPSEC_VYRATON)
         return;
-    
+
     const struct Tileset *tilesetPrimary = gMapHeader.mapLayout->primaryTileset;
     const struct Tileset *tilesetSecondary = gMapHeader.mapLayout->secondaryTileset;
     s32 width = gBackupMapLayout.width;
@@ -22,34 +22,37 @@ void VyratonTilesets_DrawRandomisedMetatiles(void)
 
     for (u32 entryTileset = 0; entryTileset < ARRAY_COUNT(sTilesetReplacement); entryTileset++)
     {
-        if (sTilesetReplacement[entryTileset].tileset != tilesetPrimary && sTilesetReplacement[entryTileset].tileset != tilesetSecondary)
-            break;
+        const struct IkigaiTilesetReplacements *tilesetEntry = &sTilesetReplacement[entryTileset];
+        const struct IkigaiTilesetReplacementMetatiles *tilesetReplacements = tilesetEntry->replacementTiles;
 
-        for (u32 entryMetatile = 0; sTilesetReplacement[entryTileset].replacementTiles[entryMetatile].metatileIdKey != INVALID_METATILE; entryMetatile++)
+        if (tilesetEntry->tileset != tilesetPrimary && tilesetEntry->tileset != tilesetSecondary)
+            continue;
+
+        for (u32 entryReplacement = 0; tilesetReplacements[entryReplacement].metatileIdKey != INVALID_METATILE; entryReplacement++)
         {
-            u16 metatileIdKey = sTilesetReplacement[entryTileset].replacementTiles[entryMetatile].metatileIdKey;
+            const struct IkigaiTilesetReplacementMetatiles *metatileEntry = &tilesetReplacements[entryReplacement];
+            u16 key = metatileEntry->metatileIdKey;
+
             for (s32 y = 0; y < height; y++)
             {
                 for (s32 x = 0; x < width; x++)
                 {
-                    if (MapGridGetMetatileIdAt(x, y) == metatileIdKey && sTilesetReplacement[entryTileset].replacementTiles[entryMetatile].metatileReplacementFunc != NULL)
-                    // Call Metatile Replacement Function
-                    {
-                        sTilesetReplacement[entryTileset].replacementTiles[entryMetatile].metatileReplacementFunc(x, y);
-                    }
-                    
-                    else if (MapGridGetMetatileIdAt(x, y) == metatileIdKey && sTilesetReplacement[entryTileset].replacementTiles[entryMetatile].metatileReplacementFunc == NULL)
-                    // Replace with Single Random Metatile
-                    {
-                        u16 metatileIdReplacement = INVALID_METATILE;
-                        u16 maskCollision = sTilesetReplacement[entryTileset].replacementTiles[entryMetatile].maskCollision;
+                    if (MapGridGetMetatileIdAt(x, y) != key)
+                        continue;
 
-                        while (metatileIdReplacement == INVALID_METATILE)
+                    if (metatileEntry->metatileReplacementFunc != NULL)
+                    {
+                        metatileEntry->metatileReplacementFunc(x, y);
+                    }
+                    else
+                    {
+                        u16 replacement = INVALID_METATILE;
+                        while (replacement == INVALID_METATILE)
                         {
-                            metatileIdReplacement = sTilesetReplacement[entryTileset].replacementTiles[entryMetatile].metatileIdReplacements[Random() % NUM_REPLACEMENT_METATILES];
+                            replacement = metatileEntry->metatileIdReplacements[Random() % NUM_REPLACEMENT_METATILES];
                         }
 
-                        MapGridSetMetatileIdAt(x, y, metatileIdReplacement | maskCollision);
+                        MapGridSetMetatileIdAt(x, y, replacement | metatileEntry->maskCollision);
                     }
                 }
             }
@@ -61,18 +64,15 @@ void gTileset_IkigaiOffice_ReplacementFunc_Printer(s32 x, s32 y)
 {
     enum gTileset_IkigaiOffice_Printers printer = Random() % PRINTER_COUNT;
 
-    if (MapGridGetMetatileIdAt(x, y) == METATILE_IkigaiOffice_PrinterFull_Top
-    && MapGridGetMetatileIdAt(x, y + 1) == METATILE_IkigaiOffice_PrinterFull_Bottom)
+    if (MapGridGetMetatileIdAt(x, y) != METATILE_IkigaiOffice_PrinterFull_Top
+    || MapGridGetMetatileIdAt(x, y + 1) != METATILE_IkigaiOffice_PrinterFull_Bottom
+    || printer == PRINTER_FULL)
+        return;
+
+    if (printer == PRINTER_EMPTY)
     {
-        if (printer == PRINTER_FULL)
-        {
-            return;
-        }
-        else if (printer == PRINTER_EMPTY)
-        {
-            MapGridSetMetatileIdAt(x, y, METATILE_IkigaiOffice_PrinterEmpty_Top | MAPGRID_COLLISION_MASK);
-            MapGridSetMetatileIdAt(x, y + 1, METATILE_IkigaiOffice_PrinterEmpty_Bottom | MAPGRID_COLLISION_MASK);
-        }
+        MapGridSetMetatileIdAt(x, y, METATILE_IkigaiOffice_PrinterEmpty_Top | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x, y + 1, METATILE_IkigaiOffice_PrinterEmpty_Bottom | MAPGRID_COLLISION_MASK);
     }
 }
 
@@ -80,28 +80,25 @@ void gTileset_IkigaiOffice_ReplacementFunc_Whiteboard(s32 x, s32 y)
 {
     enum gTileset_IkigaiOffice_Whiteboards whiteboard = Random() % WHITEBOARD_COUNT;
 
-    if (MapGridGetMetatileIdAt(x, y) == METATILE_IkigaiOffice_WhiteboardBlank_TopLeft
-    && MapGridGetMetatileIdAt(x + 1, y) == METATILE_IkigaiOffice_WhiteboardBlank_TopRight
-    && MapGridGetMetatileIdAt(x, y + 1) == METATILE_IkigaiOffice_WhiteboardBlank_BottomLeft
-    && MapGridGetMetatileIdAt(x + 1, y + 1) == METATILE_IkigaiOffice_WhiteboardBlank_BottomRight)
+    if (MapGridGetMetatileIdAt(x, y) != METATILE_IkigaiOffice_WhiteboardBlank_TopLeft
+    || MapGridGetMetatileIdAt(x + 1, y) != METATILE_IkigaiOffice_WhiteboardBlank_TopRight
+    || MapGridGetMetatileIdAt(x, y + 1) != METATILE_IkigaiOffice_WhiteboardBlank_BottomLeft
+    || MapGridGetMetatileIdAt(x + 1, y + 1) != METATILE_IkigaiOffice_WhiteboardBlank_BottomRight
+    || whiteboard == WHITEBOARD_BLANK)
+        return;
+
+    if (whiteboard == WHITEBOARD_CHART_ONE)
     {
-        if (whiteboard == WHITEBOARD_BLANK)
-        {
-            return;
-        }
-        else if (whiteboard == WHITEBOARD_CHART_ONE)
-        {
-            MapGridSetMetatileIdAt(x, y, METATILE_IkigaiOffice_WhiteboardChartOne_TopLeft | MAPGRID_COLLISION_MASK);
-            MapGridSetMetatileIdAt(x + 1, y, METATILE_IkigaiOffice_WhiteboardChartOne_TopRight | MAPGRID_COLLISION_MASK);
-            MapGridSetMetatileIdAt(x, y + 1, METATILE_IkigaiOffice_WhiteboardChartOne_BottomLeft | MAPGRID_COLLISION_MASK);
-            MapGridSetMetatileIdAt(x + 1, y + 1, METATILE_IkigaiOffice_WhiteboardChartOne_BottomRight | MAPGRID_COLLISION_MASK);
-        }
-        else if (whiteboard == WHITEBOARD_CHART_TWO)
-        {
-            MapGridSetMetatileIdAt(x, y, METATILE_IkigaiOffice_WhiteboardChartTwo_TopLeft | MAPGRID_COLLISION_MASK);
-            MapGridSetMetatileIdAt(x + 1, y, METATILE_IkigaiOffice_WhiteboardChartTwo_TopRight | MAPGRID_COLLISION_MASK);
-            MapGridSetMetatileIdAt(x, y + 1, METATILE_IkigaiOffice_WhiteboardChartTwo_BottomLeft | MAPGRID_COLLISION_MASK);
-            MapGridSetMetatileIdAt(x + 1, y + 1, METATILE_IkigaiOffice_WhiteboardChartTwo_BottomRight | MAPGRID_COLLISION_MASK);
-        }
+        MapGridSetMetatileIdAt(x, y, METATILE_IkigaiOffice_WhiteboardChartOne_TopLeft | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x + 1, y, METATILE_IkigaiOffice_WhiteboardChartOne_TopRight | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x, y + 1, METATILE_IkigaiOffice_WhiteboardChartOne_BottomLeft | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x + 1, y + 1, METATILE_IkigaiOffice_WhiteboardChartOne_BottomRight | MAPGRID_COLLISION_MASK);
+    }
+    else if (whiteboard == WHITEBOARD_CHART_TWO)
+    {
+        MapGridSetMetatileIdAt(x, y, METATILE_IkigaiOffice_WhiteboardChartTwo_TopLeft | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x + 1, y, METATILE_IkigaiOffice_WhiteboardChartTwo_TopRight | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x, y + 1, METATILE_IkigaiOffice_WhiteboardChartTwo_BottomLeft | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x + 1, y + 1, METATILE_IkigaiOffice_WhiteboardChartTwo_BottomRight | MAPGRID_COLLISION_MASK);
     }
 }
