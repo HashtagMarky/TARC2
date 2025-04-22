@@ -17,6 +17,7 @@
 #include "constants/rgb.h"
 #include "constants/metatile_behaviors.h"
 #include "wild_encounter.h"
+#include "vyraton.h"
 
 struct ConnectionFlags
 {
@@ -68,6 +69,7 @@ void InitMap(void)
 {
     InitMapLayoutData(&gMapHeader);
     SetOccupiedSecretBaseEntranceMetatiles(gMapHeader.events);
+    VyratonTilesets_DrawRandomisedMetatiles();
     RunOnLoadMapScript();
 }
 
