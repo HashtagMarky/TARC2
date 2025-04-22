@@ -251,6 +251,10 @@
 
 // gTileset_IkigaiOffice
 #define METATILE_IkigaiOffice_ClosedBin                       0x030
+#define METATILE_IkigaiOffice_CoffeeMachine_CleanTable        0x077
+#define METATILE_IkigaiOffice_CoffeeMachine_CoffeeCup         0x074
+#define METATILE_IkigaiOffice_CoffeeMachine_DirtyTable        0x072
+#define METATILE_IkigaiOffice_CoffeeMachine_NoCup             0x076
 #define METATILE_IkigaiOffice_EmptyBin                        0x070
 #define METATILE_IkigaiOffice_FullBin                         0x071
 #define METATILE_IkigaiOffice_PrinterEmpty_Bottom             0x06D
