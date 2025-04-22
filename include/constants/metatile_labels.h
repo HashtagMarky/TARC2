@@ -249,6 +249,27 @@
 #define METATILE_GenericBuilding_TrickHouse_Door_Closed  0x21B
 #define METATILE_GenericBuilding_TrickHouse_Stairs_Down  0x219
 
+// gTileset_IkigaiOffice
+#define METATILE_IkigaiOffice_ClosedBin                       0x030
+#define METATILE_IkigaiOffice_EmptyBin                        0x070
+#define METATILE_IkigaiOffice_FullBin                         0x071
+#define METATILE_IkigaiOffice_PrinterEmpty_Bottom             0x06D
+#define METATILE_IkigaiOffice_PrinterEmpty_Top                0x06E
+#define METATILE_IkigaiOffice_PrinterFull_Bottom              0x06A
+#define METATILE_IkigaiOffice_PrinterFull_Top                 0x06C
+#define METATILE_IkigaiOffice_WhiteboardBlank_BottomLeft      0x016
+#define METATILE_IkigaiOffice_WhiteboardBlank_BottomRight     0x017
+#define METATILE_IkigaiOffice_WhiteboardBlank_TopLeft         0x014
+#define METATILE_IkigaiOffice_WhiteboardBlank_TopRight        0x015
+#define METATILE_IkigaiOffice_WhiteboardChartOne_BottomLeft   0x01A
+#define METATILE_IkigaiOffice_WhiteboardChartOne_BottomRight  0x01B
+#define METATILE_IkigaiOffice_WhiteboardChartOne_TopLeft      0x018
+#define METATILE_IkigaiOffice_WhiteboardChartOne_TopRight     0x019
+#define METATILE_IkigaiOffice_WhiteboardChartTwo_BottomLeft   0x043
+#define METATILE_IkigaiOffice_WhiteboardChartTwo_BottomRight  0x044
+#define METATILE_IkigaiOffice_WhiteboardChartTwo_TopLeft      0x041
+#define METATILE_IkigaiOffice_WhiteboardChartTwo_TopRight     0x042
+
 // gTileset_InsideOfTruck
 #define METATILE_InsideOfTruck_DoorClosedFloor_Bottom  0x21D
 #define METATILE_InsideOfTruck_DoorClosedFloor_Mid     0x215
