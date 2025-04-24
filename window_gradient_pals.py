@@ -68,7 +68,7 @@ def main():
         (248, 248, 248),
         (224, 232, 224),
         (248, 248, 248),
-        *gradient2[:2],
+        *reversed(gradient4[:2]),
         (72, 112, 160),
     ]
     save_palette(f"text_window/ikigai_palettes/message_box/{args.name}.pal", palette1)
