@@ -841,3 +841,14 @@ const struct Tileset gTileset_IkigaiOffice =
     .metatileAttributes = gMetatileAttributes_IkigaiOffice,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_SSPathfinderIndoors =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_SSPathfinderIndoors,
+    .palettes = gTilesetPalettes_SSPathfinderIndoors,
+    .metatiles = gMetatiles_SSPathfinderIndoors,
+    .metatileAttributes = gMetatileAttributes_SSPathfinderIndoors,
+    .callback = NULL,
+};
