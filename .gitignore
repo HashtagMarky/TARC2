@@ -52,3 +52,4 @@ tools/trainerproc/trainerproc
 *.smolTM
 __pycache__
 tools/poryscript/poryscript
+tools/porytiles/raw/*/*/assign.cache

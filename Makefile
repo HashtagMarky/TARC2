@@ -383,6 +383,9 @@ boot:
 	@if pgrep -x "mGBA" > /dev/null; then pkill -x "mGBA"; fi
 	@/Applications/mGBA.app/Contents/MacOS/mGBA $(ROM) > /dev/null 2>&1 &
 
+porytiles:
+	@sh $(TOOLS_DIR)/porytiles/porytiles.sh
+
 # Other rules
 include graphics_file_rules.mk
 include map_data_rules.mk
