@@ -11,6 +11,7 @@ void m4aSoundMain(void);
 void m4aSongNumStart(u16 n);
 void m4aSongNumStartOrChange(u16 n);
 void m4aSongNumStartOrContinue(u16 n);
+bool32 m4aSongNumPlaying(u16 n);
 void m4aSongNumStop(u16 n);
 void m4aMPlayAllStop(void);
 void m4aMPlayContinue(struct MusicPlayerInfo *mplayInfo);

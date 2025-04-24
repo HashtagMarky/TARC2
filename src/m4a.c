@@ -151,6 +151,19 @@ void m4aSongNumStartOrContinue(u16 n)
         MPlayContinue(mplay->info);
 }
 
+bool32 m4aSongNumPlaying(u16 n)
+{
+    const struct MusicPlayer *mplayTable = gMPlayTable;
+    const struct Song *songTable = gSongTable;
+    const struct Song *song = &songTable[n];
+    const struct MusicPlayer *mplay = &mplayTable[song->ms];
+
+    if (mplay->info->songHeader == song->header)
+        return TRUE;
+
+    return FALSE;
+}
+
 void m4aSongNumStop(u16 n)
 {
     const struct MusicPlayer *mplayTable = gMPlayTable;
