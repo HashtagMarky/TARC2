@@ -213,8 +213,6 @@ static void CopyObjectGraphicsInfoToSpriteTemplate_WithMovementType(u16 graphics
 static u16 GetGraphicsIdForMon(u32 species, bool32 shiny, bool32 female);
 static u16 GetUnownSpecies(struct Pokemon *mon);
 
-static u8 TryGetBedRollAnim(u8 direction);
-
 static const struct SpriteFrameImage sPicTable_PechaBerryTree[];
 
 static void StartSlowRunningAnim(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction);
@@ -6081,9 +6079,6 @@ u8 GetFaceDirectionAnimNum(u8 direction)
 
 u8 GetMoveDirectionAnimNum(u8 direction)
 {
-    if (TryGetBedRollAnim(direction) != MOVEMENT_ACTION_NONE)
-        return TryGetBedRollAnim(direction);
-    
     return sMoveDirectionAnimNums[direction];
 }
 
@@ -6886,7 +6881,7 @@ static void FaceDirection(struct ObjectEvent *objectEvent, struct Sprite *sprite
 {
     SetObjectEventDirection(objectEvent, direction);
     ShiftStillObjectEventCoords(objectEvent);
-    SetStepAnim(objectEvent, sprite, GetFaceDirectionAnimNum(objectEvent->facingDirection));
+    SetStepAnim(objectEvent, sprite, GetMoveDirectionAnimNum(objectEvent->facingDirection));
     sprite->animPaused = TRUE;
     sprite->sActionFuncId = 1;
 }
@@ -11516,27 +11511,4 @@ static u16 GetUnownSpecies(struct Pokemon *mon)
     if (form == 0)
         return SPECIES_UNOWN;
     return SPECIES_UNOWN_B + form - 1;
-}
-
-bool32 IsPlayerMovingOnAndToBed(void)
-{
-    s16 xPlayerDest, yPlayerDest;
-    PlayerGetDestCoords(&xPlayerDest, &yPlayerDest);
-
-    if (MapGridGetMetatileBehaviorAt(gSaveBlock1Ptr->pos.x + MAP_OFFSET, gSaveBlock1Ptr->pos.y + MAP_OFFSET) == MB_BED_ROLL
-    && MapGridGetMetatileBehaviorAt(xPlayerDest, yPlayerDest) == MB_BED_ROLL)
-        return TRUE;
-
-    return FALSE;
-}
-
-static u8 TryGetBedRollAnim(u8 direction)
-{
-    if (IsPlayerMovingOnAndToBed() && direction == DIR_WEST)
-        return ANIM_BED_ROLL_WEST;
-
-    if (IsPlayerMovingOnAndToBed() && direction == DIR_EAST)
-        return ANIM_BED_ROLL_EAST;
-
-    return MOVEMENT_ACTION_NONE;
 }

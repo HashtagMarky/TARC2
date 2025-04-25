@@ -720,24 +720,6 @@ static const union AnimCmd sAnim_RunEast[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd sAnim_BedRollWest[] =
-{
-    ANIMCMD_FRAME(1, 4),
-    ANIMCMD_FRAME(2, 4, .hFlip = TRUE),
-    ANIMCMD_FRAME(0, 4),
-    ANIMCMD_FRAME(2, 4),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sAnim_BedRollEast[] =
-{
-    ANIMCMD_FRAME(1, 4),
-    ANIMCMD_FRAME(2, 4),
-    ANIMCMD_FRAME(0, 4),
-    ANIMCMD_FRAME(2, 4, .hFlip = TRUE),
-    ANIMCMD_END
-};
-
 static const union AnimCmd sAnim_FieldMove[] =
 {
     ANIMCMD_FRAME(0, 4),
@@ -1721,8 +1703,6 @@ static const union AnimCmd *const sAnimTable_BrendanMayNormal[] = {
     [ANIM_RUN_NORTH] = sAnim_RunNorth,
     [ANIM_RUN_WEST] = sAnim_RunWest,
     [ANIM_RUN_EAST] = sAnim_RunEast,
-    [ANIM_BED_ROLL_WEST] = sAnim_BedRollWest,
-    [ANIM_BED_ROLL_EAST] = sAnim_BedRollEast,
 };
 
 static const union AnimCmd *const sAnimTable_AcroBike[] = {
