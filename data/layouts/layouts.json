@@ -4454,7 +4454,7 @@
     {
       "id": "LAYOUT_VYRATON_INDOORS_SSPATHFINDER",
       "name": "VyratonIndoors_SSPathfinder_Layout",
-      "width": 9,
+      "width": 14,
       "height": 8,
       "primary_tileset": "gTileset_SSPathfinderIndoors",
       "secondary_tileset": "gTileset_InsideShip",

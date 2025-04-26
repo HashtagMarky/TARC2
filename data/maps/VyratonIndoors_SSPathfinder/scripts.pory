@@ -40,11 +40,11 @@ script VyratonIndoors_SSPathfinder_EventScript_MeetCaptain
     waitse
     mnmbox(VyratonIndoors_SSPathfinder_Text_SoundOfDocking)
     applymove(LOCALID_Captain, Common_Movement_WalkUp2) // applymove(LOCALID_Captain, Common_Movement_WalkUp)
-    opendoor(4, 1)
+    opendoor(5, 1)
     playse(SE_DOOR)
     waitdooranim
     applymove(LOCALID_Captain, Common_Movement_DoorExit)
-    closedoor(4, 1)
+    closedoor(5, 1)
     waitdooranim
     removeobject(LOCALID_Captain)
     releaseall
