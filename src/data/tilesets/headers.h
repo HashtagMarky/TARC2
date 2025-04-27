@@ -852,3 +852,14 @@ const struct Tileset gTileset_SSPathfinderIndoors =
     .metatileAttributes = gMetatileAttributes_SSPathfinderIndoors,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_SSPathfinder_Cabin_Bathroom =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_SSPathfinder_Cabin_Bathroom,
+    .palettes = gTilesetPalettes_SSPathfinder_Cabin_Bathroom,
+    .metatiles = gMetatiles_SSPathfinder_Cabin_Bathroom,
+    .metatileAttributes = gMetatileAttributes_SSPathfinder_Cabin_Bathroom,
+    .callback = NULL,
+};

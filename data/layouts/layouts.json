@@ -4457,7 +4457,7 @@
       "width": 14,
       "height": 8,
       "primary_tileset": "gTileset_SSPathfinderIndoors",
-      "secondary_tileset": "gTileset_InsideShip",
+      "secondary_tileset": "gTileset_SSPathfinder_Cabin_Bathroom",
       "border_filepath": "data/layouts/VyratonIndoors_SSPathfinder/border.bin",
       "blockdata_filepath": "data/layouts/VyratonIndoors_SSPathfinder/map.bin"
     }

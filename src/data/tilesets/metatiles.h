@@ -213,3 +213,6 @@ const u16 gMetatileAttributes_IkigaiOffice[] = INCBIN_U16("data/tilesets/primary
 
 const u16 gMetatiles_SSPathfinderIndoors[] = INCBIN_U16("data/tilesets/primary/sspathfinder_indoors/metatiles.bin");
 const u16 gMetatileAttributes_SSPathfinderIndoors[] = INCBIN_U16("data/tilesets/primary/sspathfinder_indoors/metatile_attributes.bin");
+
+const u16 gMetatiles_SSPathfinder_Cabin_Bathroom[] = INCBIN_U16("data/tilesets/secondary/sspathfinder_cabin_bathroom/metatiles.bin");
+const u16 gMetatileAttributes_SSPathfinder_Cabin_Bathroom[] = INCBIN_U16("data/tilesets/secondary/sspathfinder_cabin_bathroom/metatile_attributes.bin");
