@@ -14,13 +14,13 @@ script VyratonIndoors_SSPathfinder_EventScript_MeetCaptain
     call(VyratonIndoors_SSPathfinder_IkigaiIntroSetup)
     setvar(VAR_TEMP_0, 1)
     playerface(DIR_NORTH)
-    opendoor(4, 1)
+    opendoor(5, 1)
     playse(SE_DOOR)
     waitdooranim
     applymoveplayer(VyratonIndoors_SSPathfinder_Movement_Player_NoExit, FALSE)
     applymove(LOCALID_Captain, Common_Movement_DoorEntrance)
     emote(LOCALID_Captain, EMOTE_QUESTION, wait=FALSE)
-    closedoor(4, 1)
+    closedoor(5, 1)
     waitdooranim
     mnmbox(VyratonIndoors_SSPathfinder_Text_IntroduceCaptain, nameKnown=FALSE, localId=LOCALID_Captain)
     applymoveplayer(VyratonIndoors_SSPathfinder_Movement_Player_LeadIn, FALSE)

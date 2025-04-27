@@ -20,7 +20,7 @@ VyratonIndoors_SSPathfinder_EventScript_MeetCaptain::
 # 16 "data/maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	playerface DIR_NORTH
 # 17 "data/maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	opendoor 4, 1
+	opendoor 5, 1
 # 18 "data/maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	playse SE_DOOR
 # 19 "data/maps/VyratonIndoors_SSPathfinder/scripts.pory"
@@ -32,7 +32,7 @@ VyratonIndoors_SSPathfinder_EventScript_MeetCaptain::
 # 22 "data/maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	emote 1, EMOTE_QUESTION, wait = FALSE
 # 23 "data/maps/VyratonIndoors_SSPathfinder/scripts.pory"
-	closedoor 4, 1
+	closedoor 5, 1
 # 24 "data/maps/VyratonIndoors_SSPathfinder/scripts.pory"
 	waitdooranim
 # 25 "data/maps/VyratonIndoors_SSPathfinder/scripts.pory"
