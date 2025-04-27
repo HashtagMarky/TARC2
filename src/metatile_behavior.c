@@ -1398,6 +1398,14 @@ bool8 MetatileBehavior_IsOfficeCoffeeMachine(u8 metatileBehavior)
         return FALSE;
 }
 
+bool8 MetatileBehavior_IsSSPathfinderToilet(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_SS_PATHFINDER_TOILET)
+        return TRUE;
+    else
+        return FALSE;
+}
+
 bool8 MetatileBehavior_IsBattlePyramidWarp(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_BATTLE_PYRAMID_WARP)

@@ -20,6 +20,13 @@ enum gTileset_IkigaiOffice_Whiteboards
     WHITEBOARD_COUNT,
 };
 
+enum gTileset_SSPathfinder_Cabin_Bathroom_Toilets
+{
+    TOILET_OPEN,
+    TOILET_CLOSED,
+    TOILET_COUNT,
+};
+
 const struct IkigaiTilesetReplacementMetatiles gTileset_IkigaiOffice_Replacement[] =
 {
     {
@@ -40,7 +47,19 @@ const struct IkigaiTilesetReplacementMetatiles gTileset_IkigaiOffice_Replacement
     },
 };
 
+const struct IkigaiTilesetReplacementMetatiles gTileset_SSPathfinder_Cabin_Bathroom_Replacement[] =
+{
+    {
+        .metatileIdKey = METATILE_SSPathfinder_Cabin_Bathroom_ToiletBottom_Open,
+        .metatileReplacementFunc = gTileset_SSPathfinder_Cabin_Bathroom_ReplacementFunc_Toilet,
+    },
+    {
+        INVALID_METATILE,
+    },
+};
+
 const struct IkigaiTilesetReplacements sTilesetReplacement[] =
 {
     {&gTileset_IkigaiOffice, gTileset_IkigaiOffice_Replacement},
+    {&gTileset_SSPathfinder_Cabin_Bathroom, gTileset_SSPathfinder_Cabin_Bathroom_Replacement},
 };

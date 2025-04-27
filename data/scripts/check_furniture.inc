@@ -45,3 +45,8 @@ EventScript_OfficeWhiteboard::
 EventScript_OfficeCoffeeCup::
 	callnative DoCoffeeMachineEffect
 	end
+
+EventScript_SSPathfinderToilet::
+	callnative DoToiletEffect
+	playse SE_M_BUBBLE3
+	end

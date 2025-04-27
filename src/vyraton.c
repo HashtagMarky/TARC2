@@ -109,6 +109,25 @@ void gTileset_IkigaiOffice_ReplacementFunc_Whiteboard(s32 x, s32 y)
         MapGridSetMetatileIdAt(x + 1, y + 1, METATILE_IkigaiOffice_WhiteboardChartTwo_BottomRight | MAPGRID_COLLISION_MASK);
     }
 }
+
+void gTileset_SSPathfinder_Cabin_Bathroom_ReplacementFunc_Toilet(s32 x, s32 y)
+{
+    enum gTileset_SSPathfinder_Cabin_Bathroom_Toilets toilet = Random() % TOILET_COUNT;
+
+    if (MapGridGetMetatileIdAt(x, y) != METATILE_SSPathfinder_Cabin_Bathroom_ToiletBottom_Open
+    || MapGridGetMetatileIdAt(x, y - 1) != METATILE_SSPathfinder_Cabin_Bathroom_ToiletMiddle_Open
+    || MapGridGetMetatileIdAt(x, y - 2) != METATILE_SSPathfinder_Cabin_Bathroom_ToiletTop_Open
+    || toilet == TOILET_OPEN)
+        return;
+
+    if (toilet == TOILET_CLOSED)
+    {
+        MapGridSetMetatileIdAt(x, y, METATILE_SSPathfinder_Cabin_Bathroom_ToiletBottom_Closed | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x, y - 1, METATILE_SSPathfinder_Cabin_Bathroom_ToiletMiddle_Closed | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x, y - 2, METATILE_SSPathfinder_Cabin_Bathroom_ToiletTop_Closed | MAPGRID_COLLISION_MASK);
+    }
+}
+
 #define tTaskId       data[1]
 #define tTimer        data[2]
 #define tCoffeeCoordX data[3]
@@ -159,3 +178,28 @@ static void Task_DoCoffeeMachineEffect(u8 taskId)
 #undef tTimer
 #undef tCoffeeCoordX
 #undef tCoffeeCoordY
+
+void DoToiletEffect(void)
+{
+    s16 x, y;
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+
+    if (MapGridGetMetatileIdAt(x, y) == METATILE_SSPathfinder_Cabin_Bathroom_ToiletBottom_Open
+    && MapGridGetMetatileIdAt(x, y - 1) == METATILE_SSPathfinder_Cabin_Bathroom_ToiletMiddle_Open
+    && MapGridGetMetatileIdAt(x, y - 2) == METATILE_SSPathfinder_Cabin_Bathroom_ToiletTop_Open)
+    {
+        MapGridSetMetatileIdAt(x, y, METATILE_SSPathfinder_Cabin_Bathroom_ToiletBottom_Closed | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x, y - 1, METATILE_SSPathfinder_Cabin_Bathroom_ToiletMiddle_Closed | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x, y - 2, METATILE_SSPathfinder_Cabin_Bathroom_ToiletTop_Closed | MAPGRID_COLLISION_MASK);
+    }
+    else if (MapGridGetMetatileIdAt(x, y) == METATILE_SSPathfinder_Cabin_Bathroom_ToiletBottom_Closed
+    && MapGridGetMetatileIdAt(x, y - 1) == METATILE_SSPathfinder_Cabin_Bathroom_ToiletMiddle_Closed
+    && MapGridGetMetatileIdAt(x, y - 2) == METATILE_SSPathfinder_Cabin_Bathroom_ToiletTop_Closed)
+    {
+        MapGridSetMetatileIdAt(x, y, METATILE_SSPathfinder_Cabin_Bathroom_ToiletBottom_Open);
+        MapGridSetMetatileIdAt(x, y - 1, METATILE_SSPathfinder_Cabin_Bathroom_ToiletMiddle_Open | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x, y - 2, METATILE_SSPathfinder_Cabin_Bathroom_ToiletTop_Open | MAPGRID_COLLISION_MASK);
+    }
+    
+    DrawWholeMapView();
+}
