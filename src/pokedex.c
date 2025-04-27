@@ -6045,6 +6045,15 @@ u16 GetEligiblePokedexCount(u8 caseID)
 
     for (i = 0; i < NUM_SPECIES; i++)
     {
+        if (gSpeciesInfo[i].isLegendary
+            || gSpeciesInfo[i].isMythical
+            || gSpeciesInfo[i].isUltraBeast
+            || gSpeciesInfo[i].isTotem
+            || gSpeciesInfo[i].isUltraBurst)
+        {
+            continue;
+        }
+        
         if (GetSpeciesFormTable(i) == NULL)
         {
             if (CheckSpeciesOfType(i, gSaveBlock2Ptr->ikigaiGymType))
