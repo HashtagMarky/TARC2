@@ -43,10 +43,10 @@ EventScript_OfficeWhiteboard::
 	end
 
 EventScript_OfficeCoffeeCup::
-	callnative DoCoffeeMachineEffect
+	callnative gTileset_IkigaiOffice_DoCoffeeMachineEffect
 	end
 
 EventScript_SSPathfinderToilet::
-	callnative DoToiletEffect
+	callnative gTileset_SSPathfinder_Cabin_Bathroom_DoToiletEffect
 	playse SE_M_BUBBLE3
 	end

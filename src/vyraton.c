@@ -15,8 +15,6 @@
 #include "constants/songs.h"
 
 
-static void Task_DoCoffeeMachineEffect(u8 taskId);
-
 void VyratonTilesets_DrawRandomisedMetatiles(void)
 {
     if (gMapHeader.regionMapSectionId != MAPSEC_VYRATON)
@@ -132,25 +130,7 @@ void gTileset_SSPathfinder_Cabin_Bathroom_ReplacementFunc_Toilet(s32 x, s32 y)
 #define tTimer        data[2]
 #define tCoffeeCoordX data[3]
 #define tCoffeeCoordY data[4]
-void DoCoffeeMachineEffect(void)
-{
-    s16 x, y;
-    u32 tileInFront;
-
-    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-    tileInFront = MapGridGetMetatileIdAt(x, y);
-
-    if (FuncIsActiveTask(Task_DoCoffeeMachineEffect) != TRUE && tileInFront == METATILE_IkigaiOffice_CoffeeMachine_CleanTable)
-    {
-        u8 taskId = CreateTask(Task_DoCoffeeMachineEffect, 8);
-        gTasks[taskId].tTaskId = taskId;
-        gTasks[taskId].tTimer = 0;
-        gTasks[taskId].tCoffeeCoordX = x;
-        gTasks[taskId].tCoffeeCoordY = y;
-    }
-}
-
-static void Task_DoCoffeeMachineEffect(u8 taskId)
+static void Task_gTileset_IkigaiOffice_DoCoffeeMachineEffect(u8 taskId)
 {
     s32 x = gTasks[taskId].tCoffeeCoordX;
     s32 y = gTasks[taskId].tCoffeeCoordY;
@@ -174,12 +154,30 @@ static void Task_DoCoffeeMachineEffect(u8 taskId)
     }
     gTasks[taskId].tTimer++;
 }
+
+void gTileset_IkigaiOffice_DoCoffeeMachineEffect(void)
+{
+    s16 x, y;
+    u32 tileInFront;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    tileInFront = MapGridGetMetatileIdAt(x, y);
+
+    if (FuncIsActiveTask(Task_gTileset_IkigaiOffice_DoCoffeeMachineEffect) != TRUE && tileInFront == METATILE_IkigaiOffice_CoffeeMachine_CleanTable)
+    {
+        u8 taskId = CreateTask(Task_gTileset_IkigaiOffice_DoCoffeeMachineEffect, 8);
+        gTasks[taskId].tTaskId = taskId;
+        gTasks[taskId].tTimer = 0;
+        gTasks[taskId].tCoffeeCoordX = x;
+        gTasks[taskId].tCoffeeCoordY = y;
+    }
+}
 #undef tTaskId
 #undef tTimer
 #undef tCoffeeCoordX
 #undef tCoffeeCoordY
 
-void DoToiletEffect(void)
+void gTileset_SSPathfinder_Cabin_Bathroom_DoToiletEffect(void)
 {
     s16 x, y;
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
