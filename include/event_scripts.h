@@ -618,6 +618,13 @@ extern const u8 SecretBase_EventScript_CaveUseSecretPower[];
 extern const u8 SecretBase_EventScript_TreeUseSecretPower[];
 extern const u8 SecretBase_EventScript_ShrubUseSecretPower[];
 
+// DynPals
+extern const u8 DynPal_OpenFullMenu[];
+extern const u8 DynPal_OpenCharacteristicMenu[];
+extern const u8 DynPal_OpenSkinMenu[];
+extern const u8 DynPal_OpenHairMenu[];
+extern const u8 DynPal_OpenClothesMenu[];
+
 // trainer hill
 extern const u8 TrainerHill_EventScript_TrainerBattle[];
 

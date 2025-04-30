@@ -2,6 +2,8 @@
 #include "metatile_behavior.h"
 #include "constants/metatile_behaviors.h"
 
+#include "dynamic_palettes.h"
+
 #define TILE_FLAG_HAS_ENCOUNTERS (1 << 0)
 #define TILE_FLAG_SURFABLE       (1 << 1)
 #define TILE_FLAG_UNUSED         (1 << 2) // Roughly all of the traversable metatiles. Set but never read
@@ -1522,6 +1524,19 @@ bool8 MetatileBehavior_IsPokemonCenterSign(u32 metatileBehavior)
 bool8 MetatileBehavior_IsPokeMartSign(u32 metatileBehavior)
 {
     return (metatileBehavior == MB_POKEMART_SIGN);
+}
+
+enum DynamicPalettes MetatileBehavior_CanChangeDynPals(u8 metatileBehavior)
+{
+    switch (metatileBehavior)
+    {
+    case MB_DYNPALS_ALL:                return DYNPALS_FULL;
+    case MB_DYNPALS_CHARACTERISTICS:    return DYNPALS_CHARACTERISTICS;    
+    case MB_DYNPALS_CLOTHES:            return DYNPALS_CLOTHES;    
+    case MB_DYNPALS_HAIR:               return DYNPALS_HAIR;
+    case MB_DYNPALS_SKIN:               return DYNPALS_SKIN;
+    default:                            return DYNPALS_NONE;
+    }
 }
 
 bool8 MetatileBehavior_IsSidewaysStairsRightSide(u8 metatileBehavior)

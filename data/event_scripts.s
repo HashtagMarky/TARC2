@@ -1158,6 +1158,7 @@ EventScript_VsSeekerChargingDone::
 	.include "data/scripts/toggleable_transport.inc"
 	.include "data/scripts/overworld_encounters.inc"
 	.include "data/scripts/pokedex.inc"
+	.include "data/scripts/dynamic_palettes.inc"
 	.include "data/scripts/dexnav.inc"
 	
 	.include "data/scripts/ikigai_characters/scripts.inc"

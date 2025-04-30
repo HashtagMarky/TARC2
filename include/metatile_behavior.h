@@ -163,6 +163,7 @@ bool8 MetatileBehavior_IsDirectionalStairWarp(u8 metatileBehavior);
 bool8 MetatileBehavior_IsSignpost(u32);
 bool8 MetatileBehavior_IsPokemonCenterSign(u32);
 bool8 MetatileBehavior_IsPokeMartSign(u32);
+enum DynamicPalettes MetatileBehavior_CanChangeDynPals(u8);
 bool8 MetatileBehavior_IsRockStairs(u8);
 bool8 MetatileBehavior_IsSidewaysStairsRightSide(u8);
 bool8 MetatileBehavior_IsSidewaysStairsLeftSide(u8);

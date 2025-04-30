@@ -619,7 +619,6 @@ extern const u8 DebugScript_OneDaycareMons[];
 extern const u8 DebugScript_ZeroDaycareMons[];
 
 extern const u8 Debug_ShowFieldMessageStringVar4[];
-extern const u8 Debug_OpenDynPalMenu[];
 extern const u8 Debug_OpenPokeSphere[];
 extern const u8 Debug_OpenCalendar[];
 extern const u8 Debug_CheatStart[];
@@ -2769,7 +2768,7 @@ static void DebugAction_Util_Player_Id(u8 taskId)
 
 static void DebugAction_Ikigai_PlayerDynPals(u8 taskId)
 {
-    Debug_DestroyMenu_Full_Script(taskId, Debug_OpenDynPalMenu);
+    Debug_DestroyMenu_Full_Script(taskId, DynPal_OpenFullMenu);
 }
 
 static void DebugAction_Util_CheatStart(u8 taskId)

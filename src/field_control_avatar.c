@@ -41,6 +41,7 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "speedup.h"
+#include "dynamic_palettes.h"
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPrevMetatileBehavior = 0;
@@ -545,6 +546,15 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
             return NULL;
         SetMsgSignPostAndVarFacing(direction);
         return Common_EventScript_ShowPokemonCenterSign;
+    }
+    switch (MetatileBehavior_CanChangeDynPals(metatileBehavior))
+    {
+    case DYNPALS_FULL:              return DynPal_OpenFullMenu;
+    case DYNPALS_CHARACTERISTICS:   return DynPal_OpenCharacteristicMenu;
+    case DYNPALS_CLOTHES:           return DynPal_OpenClothesMenu;
+    case DYNPALS_HAIR:              return DynPal_OpenHairMenu;
+    case DYNPALS_SKIN:              return DynPal_OpenSkinMenu;
+    default:                        break;
     }
 
     elevation = position->elevation;

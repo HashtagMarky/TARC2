@@ -25,3 +25,13 @@ void DynPal_ShowFullToneMenu(void); // Do complete sequence of 3 menus
 void DynPal_ShowToneMenu_Skin(void);
 void DynPal_ShowToneMenu_Hair(void);
 void DynPal_ShowToneMenu_Clothes(void);
+
+enum DynamicPalettes
+{
+    DYNPALS_NONE,
+    DYNPALS_SKIN,
+    DYNPALS_HAIR,
+    DYNPALS_CLOTHES,
+    DYNPALS_FULL,
+    DYNPALS_CHARACTERISTICS,
+};

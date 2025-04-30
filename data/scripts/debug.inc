@@ -136,20 +136,6 @@ Debug_EventScript_Text_OffensiveIVs:
 Debug_EventScript_Text_DefensiveIVs:
 	.string "HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}$"
 
-Debug_OpenDynPalMenu::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
-	waitmovement OBJ_EVENT_ID_PLAYER
-	createfieldmugshot MUGSHOT_PLAYER, emotion=MUGSHOT_EMOTE_HAPPY
-	message Debug_EventScript_Text_DynPal
-	special DynPal_ShowFullToneMenu
-	waitstate
-	closemessage
-	release
-	end
-
-Debug_EventScript_Text_DynPal:
-	.string "Choose a new set of palettes.$"
-
 Debug_OpenPokeSphere::
 	fadescreen FADE_TO_BLACK
 	delay 30
