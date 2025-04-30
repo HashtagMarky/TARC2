@@ -464,6 +464,12 @@
 #define METATILE_SSPathfinderIndoors_CabinDoor_Unlocked  0x045
 
 // gTileset_SSPathfinder_Cabin_Bathroom
+#define METATILE_SSPathfinder_Cabin_Bathroom_BathLeft_Duck        0x217
+#define METATILE_SSPathfinder_Cabin_Bathroom_BathLeft_Empty       0x215
+#define METATILE_SSPathfinder_Cabin_Bathroom_BathLeft_Full        0x213
+#define METATILE_SSPathfinder_Cabin_Bathroom_BathRight_Duck       0x218
+#define METATILE_SSPathfinder_Cabin_Bathroom_BathRight_Empty      0x216
+#define METATILE_SSPathfinder_Cabin_Bathroom_BathRight_Full       0x214
 #define METATILE_SSPathfinder_Cabin_Bathroom_ToiletBottom_Closed  0x20C
 #define METATILE_SSPathfinder_Cabin_Bathroom_ToiletBottom_Open    0x209
 #define METATILE_SSPathfinder_Cabin_Bathroom_ToiletMiddle_Closed  0x20B

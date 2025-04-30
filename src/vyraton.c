@@ -126,6 +126,28 @@ void gTileset_SSPathfinder_Cabin_Bathroom_ReplacementFunc_Toilet(s32 x, s32 y)
     }
 }
 
+void gTileset_SSPathfinder_Cabin_Bathroom_ReplacementFunc_Bath(s32 x, s32 y)
+{
+    enum gTileset_SSPathfinder_Cabin_Bathroom_Baths bath = Random() % BATH_COUNT;
+
+    if (MapGridGetMetatileIdAt(x, y) != METATILE_SSPathfinder_Cabin_Bathroom_BathLeft_Full
+    || MapGridGetMetatileIdAt(x + 1, y) != METATILE_SSPathfinder_Cabin_Bathroom_BathRight_Full
+    || bath == BATH_FULL)
+        return;
+
+    
+    if (bath == BATH_DUCK)
+    {
+        MapGridSetMetatileIdAt(x, y, METATILE_SSPathfinder_Cabin_Bathroom_BathLeft_Duck | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x + 1, y, METATILE_SSPathfinder_Cabin_Bathroom_BathRight_Duck | MAPGRID_COLLISION_MASK);
+    }
+    else if (bath == BATH_EMPTY)
+    {
+        MapGridSetMetatileIdAt(x, y, METATILE_SSPathfinder_Cabin_Bathroom_BathLeft_Empty | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x + 1, y, METATILE_SSPathfinder_Cabin_Bathroom_BathRight_Empty | MAPGRID_COLLISION_MASK);
+    }
+}
+
 #define tTaskId       data[1]
 #define tTimer        data[2]
 #define tCoffeeCoordX data[3]

@@ -27,6 +27,7 @@ void VyratonTilesets_DrawRandomisedMetatiles(void);
 void gTileset_IkigaiOffice_ReplacementFunc_Printer(s32 x, s32 y);
 void gTileset_IkigaiOffice_ReplacementFunc_Whiteboard(s32 x, s32 y);
 void gTileset_SSPathfinder_Cabin_Bathroom_ReplacementFunc_Toilet(s32 x, s32 y);
+void gTileset_SSPathfinder_Cabin_Bathroom_ReplacementFunc_Bath(s32 x, s32 y);
 
 
 #endif // GUARD_VYRATON_H

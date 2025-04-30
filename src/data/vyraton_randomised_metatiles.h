@@ -27,6 +27,14 @@ enum gTileset_SSPathfinder_Cabin_Bathroom_Toilets
     TOILET_COUNT,
 };
 
+enum gTileset_SSPathfinder_Cabin_Bathroom_Baths
+{
+    BATH_FULL,
+    BATH_DUCK,
+    BATH_EMPTY,
+    BATH_COUNT,
+};
+
 const struct IkigaiTilesetReplacementMetatiles gTileset_IkigaiOffice_Replacement[] =
 {
     {
@@ -52,6 +60,10 @@ const struct IkigaiTilesetReplacementMetatiles gTileset_SSPathfinder_Cabin_Bathr
     {
         .metatileIdKey = METATILE_SSPathfinder_Cabin_Bathroom_ToiletBottom_Open,
         .metatileReplacementFunc = gTileset_SSPathfinder_Cabin_Bathroom_ReplacementFunc_Toilet,
+    },
+    {
+        .metatileIdKey = METATILE_SSPathfinder_Cabin_Bathroom_BathLeft_Full,
+        .metatileReplacementFunc = gTileset_SSPathfinder_Cabin_Bathroom_ReplacementFunc_Bath,
     },
     {
         INVALID_METATILE,
