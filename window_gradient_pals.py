@@ -108,7 +108,7 @@ def main():
     save_palette(f"text_window/ikigai_palettes/window_frame/{args.name}.pal", palette3)
 
     print(f'✅ All palettes generated!\n'
-          f'static const u32 gBattleTextboxPalette_{args.name.capitalize()}[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/{args.name}.gbapal.lz");\n'
+          f'static const u16 gBattleTextboxPalette_{args.name.capitalize()}[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/{args.name}.gbapal.lz");\n'
           f'static const u16 gTextWindowFrame_{args.name.capitalize()}Pal[] = INCBIN_U16("graphics/text_window/ikigai_palettes/window_frame/{args.name}.gbapal");\n'
           f'INCBIN_U16("graphics/text_window/ikigai_palettes/message_box/{args.name}.gbapal"),')
 

@@ -860,7 +860,7 @@ static void Task_CalendarUIWaitFadeAndBail(u8 taskId)
             if (!gSaveBlock2Ptr->optionsDisableAutoSave)
                 gTasks[taskId].func = Task_WarpAndLoadMap_Save;
             else
-                gTasks[taskId].func = Task_WarpAndLoadMap_Global;
+                gTasks[taskId].func = Task_WarpAndLoadMap;
         }
         else
         {
@@ -882,7 +882,7 @@ static void Task_CalendarUIWaitFadeAndExitGracefully(u8 taskId)
             if (!gSaveBlock2Ptr->optionsDisableAutoSave)
                 gTasks[taskId].func = Task_WarpAndLoadMap_Save;
             else
-                gTasks[taskId].func = Task_WarpAndLoadMap_Global;
+                gTasks[taskId].func = Task_WarpAndLoadMap;
         }
         else
         {
@@ -1196,7 +1196,7 @@ static void CalendarUI_CreateSprites_Weather(void)
     enum TimeOfDay time = sCalendarUIState->time;
 
     if (time >= TIMES_OF_DAY_COUNT)
-        time = OW_TIME_OF_DAY_DEFAULT;
+        time = OW_TIME_OF_DAY_FALLBACK;
     
     switch (weather)
     {

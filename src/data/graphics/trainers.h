@@ -294,11 +294,11 @@ const u16 gTrainerBackPicPalette_Leaf[] = INCBIN_U16("graphics/trainers/back_pic
 
 const u32 gTrainerFrontPic_Kole[] = INCBIN_U32("graphics/protagonist_sprites/kole_front_pic.4bpp.lz");
 const u8 gTrainerBackPic_Kole[] = INCBIN_U8("graphics/protagonist_sprites/kole_back_pic.4bpp");
-const u32 gTrainerPalette_Kole[] = INCBIN_U32("graphics/protagonist_sprites/protagonist.gbapal.lz");
+const u16 gTrainerPalette_Kole[] = INCBIN_U16("graphics/protagonist_sprites/protagonist.gbapal");
 
 const u32 gTrainerFrontPic_Anka[] = INCBIN_U32("graphics/protagonist_sprites/anka_front_pic.4bpp.lz");
 const u8 gTrainerBackPic_Anka[] = INCBIN_U8("graphics/protagonist_sprites/anka_back_pic.4bpp");
-const u32 gTrainerPalette_Anka[] = INCBIN_U32("graphics/protagonist_sprites/protagonist.gbapal.lz");
+const u16 gTrainerPalette_Anka[] = INCBIN_U16("graphics/protagonist_sprites/protagonist.gbapal");
 
 // The first two parameters invoke a front pic and palette by
 // calling a "TRAINER_PIC" constant (e.g. TRAINER_PIC_HIKER), and

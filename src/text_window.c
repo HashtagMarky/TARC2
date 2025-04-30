@@ -99,26 +99,26 @@ static const u16 sTextWindowDexNavFrame[] = INCBIN_U16("graphics/text_window/dex
 static const struct TilesPal sDexNavWindowFrame = {gTextWindowFrame_Gfx, sTextWindowDexNavFrame};
 
 // Battle Textboxes
-static const u32 gBattleTextboxPalette_Normal[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/normal.gbapal.lz");
-static const u32 gBattleTextboxPalette_Fighting[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/fighting.gbapal.lz");
-static const u32 gBattleTextboxPalette_Flying[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/flying.gbapal.lz");
-static const u32 gBattleTextboxPalette_Poison[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/poison.gbapal.lz");
-static const u32 gBattleTextboxPalette_Ground[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/ground.gbapal.lz");
-static const u32 gBattleTextboxPalette_Rock[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/rock.gbapal.lz");
-static const u32 gBattleTextboxPalette_Bug[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/bug.gbapal.lz");
-static const u32 gBattleTextboxPalette_Ghost[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/ghost.gbapal.lz");
-static const u32 gBattleTextboxPalette_Steel[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/steel.gbapal.lz");
-static const u32 gBattleTextboxPalette_Fire[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/fire.gbapal.lz");
-static const u32 gBattleTextboxPalette_Water[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/water.gbapal.lz");
-static const u32 gBattleTextboxPalette_Grass[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/grass.gbapal.lz");
-static const u32 gBattleTextboxPalette_Electric[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/electric.gbapal.lz");
-static const u32 gBattleTextboxPalette_Psychic[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/psychic.gbapal.lz");
-static const u32 gBattleTextboxPalette_Ice[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/ice.gbapal.lz");
-static const u32 gBattleTextboxPalette_Dragon[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/dragon.gbapal.lz");
-static const u32 gBattleTextboxPalette_Dark[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/dark.gbapal.lz");
-static const u32 gBattleTextboxPalette_Fairy[] = INCBIN_U32("graphics/battle_interface/ikigai_palettes/textbox/fairy.gbapal.lz");
+static const u16 gBattleTextboxPalette_Normal[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/normal.gbapal");
+static const u16 gBattleTextboxPalette_Fighting[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/fighting.gbapal");
+static const u16 gBattleTextboxPalette_Flying[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/flying.gbapal");
+static const u16 gBattleTextboxPalette_Poison[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/poison.gbapal");
+static const u16 gBattleTextboxPalette_Ground[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/ground.gbapal");
+static const u16 gBattleTextboxPalette_Rock[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/rock.gbapal");
+static const u16 gBattleTextboxPalette_Bug[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/bug.gbapal");
+static const u16 gBattleTextboxPalette_Ghost[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/ghost.gbapal");
+static const u16 gBattleTextboxPalette_Steel[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/steel.gbapal");
+static const u16 gBattleTextboxPalette_Fire[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/fire.gbapal");
+static const u16 gBattleTextboxPalette_Water[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/water.gbapal");
+static const u16 gBattleTextboxPalette_Grass[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/grass.gbapal");
+static const u16 gBattleTextboxPalette_Electric[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/electric.gbapal");
+static const u16 gBattleTextboxPalette_Psychic[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/psychic.gbapal");
+static const u16 gBattleTextboxPalette_Ice[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/ice.gbapal");
+static const u16 gBattleTextboxPalette_Dragon[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/dragon.gbapal");
+static const u16 gBattleTextboxPalette_Dark[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/dark.gbapal");
+static const u16 gBattleTextboxPalette_Fairy[] = INCBIN_U16("graphics/battle_interface/ikigai_palettes/textbox/fairy.gbapal");
 
-static const u32 *GetBattleTextboxGymPalettePtr(void);
+static const u16 *GetBattleTextboxGymPalettePtr(void);
 
 // code
 const struct TilesPal *GetWindowFrameTilesPal(u8 id)
@@ -284,7 +284,7 @@ void LoadUserWindowBorderGfxOnBg(u8 bg, u16 destOffset, u8 palOffset)
     }
 }
 
-const u32 *GetBattleTextboxPalettePtr(void)
+const u16 *GetBattleTextboxPalettePtr(void)
 {
     switch (gSaveBlock2Ptr->optionsInterfaceColor)
     {
@@ -305,7 +305,7 @@ const u32 *GetBattleTextboxPalettePtr(void)
     }   
 }
 
-const u32 *GetBattleTextboxGymPalettePtr(void)
+const u16 *GetBattleTextboxGymPalettePtr(void)
 {
     switch (gSaveBlock2Ptr->ikigaiGymType)
     {

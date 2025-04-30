@@ -26,7 +26,7 @@ void DrawTextBorderInner(u8 windowId, u16 tileNum, u8 palNum);
 void rbox_fill_rectangle(u8 windowId);
 const u16 *GetTextWindowPalette(u16 id);
 const u16 *GetOverworldTextboxPalettePtr(void);
-const u32 *GetBattleTextboxPalettePtr(void);
+const u16 *GetBattleTextboxPalettePtr(void);
 void LoadSignPostWindowFrameGfx(void);
 void LoadDexNavWindowGfx(u8 windowId, u16 destOffset, u8 palOffset);
 

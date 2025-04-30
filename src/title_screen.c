@@ -94,8 +94,8 @@ static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/
 #else
     static const u32 sTitleScreenLogoIkigaiVersionNumber[] = INCBIN_U32("graphics/title_screen/ikigai_version_number_blank.4bpp.lz");
 #endif
-static const u32 sTitleScreenLogoIkigaiVersionNumberPal_Blue[] = INCBIN_U32("graphics/title_screen/ikigai_title_screen_blue.gbapal.lz");
-static const u32 sTitleScreenLogoIkigaiVersionNumberPal_Pink[] = INCBIN_U32("graphics/title_screen/ikigai_title_screen_pink.gbapal.lz");
+static const u16 sTitleScreenLogoIkigaiVersionNumberPal_Blue[] = INCBIN_U16("graphics/title_screen/ikigai_title_screen_blue.gbapal");
+static const u16 sTitleScreenLogoIkigaiVersionNumberPal_Pink[] = INCBIN_U16("graphics/title_screen/ikigai_title_screen_pink.gbapal");
 
 
 
@@ -391,7 +391,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_IkigaiVersionNumber[] =
     {},
 };
 
-static const struct CompressedSpritePalette sSpritePalette_IkigaiVersionNumber_Blue[] =
+static const struct SpritePalette sSpritePalette_IkigaiVersionNumber_Blue[] =
 {
     {
         .data = sTitleScreenLogoIkigaiVersionNumberPal_Blue,
@@ -400,7 +400,7 @@ static const struct CompressedSpritePalette sSpritePalette_IkigaiVersionNumber_B
     {},
 };
 
-static const struct CompressedSpritePalette sSpritePalette_IkigaiVersionNumber_Pink[] =
+static const struct SpritePalette sSpritePalette_IkigaiVersionNumber_Pink[] =
 {
     {
         .data = sTitleScreenLogoIkigaiVersionNumberPal_Pink,
@@ -816,12 +816,12 @@ void CB2_InitTitleScreen(void)
         {
         case IKIGAI_INTERFACE_GREEN:
         case IKIGAI_INTERFACE_BLUE:
-            LoadCompressedSpritePalette(sSpritePalette_IkigaiVersionNumber_Pink);
+            LoadSpritePalette(sSpritePalette_IkigaiVersionNumber_Pink);
             break;
         
         case IKIGAI_INTERFACE_ORANGE:
         case IKIGAI_INTERFACE_PINK:
-            LoadCompressedSpritePalette(sSpritePalette_IkigaiVersionNumber_Blue);
+            LoadSpritePalette(sSpritePalette_IkigaiVersionNumber_Blue);
             break;
         }
         gMain.state = 2;
