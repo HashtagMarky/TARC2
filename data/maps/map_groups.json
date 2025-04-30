@@ -625,7 +625,8 @@
   ],
   "gMapGroup_VyratonOutdoors": [
     "VyratonOutdoors_Ocean",
-    "VyratonOutdoors_Harbour"
+    "VyratonOutdoors_Harbour",
+    "VyratonCentre"
   ],
   "gMapGroup_VyratonIndoors": [
     "VyratonIndoors_SSPathfinder",
