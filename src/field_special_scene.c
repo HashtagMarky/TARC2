@@ -291,7 +291,9 @@ static void Task_HandleSSPathfinderSequence(u8 taskId)
     switch (tState)
     {
     case 0:
+        FadeInFromBlack();
         tTimer++;
+        tTimer = 90;
         if (tTimer == 90)
         {
             tTimer = 0;
@@ -301,10 +303,11 @@ static void Task_HandleSSPathfinderSequence(u8 taskId)
         break;
     case 1:
         tTimer++;
+        tTimer = 150;
         if (tTimer == 150)
         {
             DoSSPathfinderCutscene();
-            FadeInFromBlack();
+            // FadeInFromBlack();
             tTimer = 0;
             tSmokeTimer = 0;
             tState = 2;
