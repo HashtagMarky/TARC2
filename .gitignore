@@ -53,3 +53,4 @@ tools/trainerproc/trainerproc
 __pycache__
 tools/poryscript/poryscript
 tools/porytiles/raw/*/*/assign.cache
+!tools/porymap/scripts/*.js
