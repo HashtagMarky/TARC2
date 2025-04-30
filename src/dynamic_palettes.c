@@ -19,6 +19,7 @@
 #include "constants/trainers.h"
 #include "field_mugshot.h"
 #include "constants/field_mugshots.h"
+#include "overworld.h"
 
 // *MODIFY*
 // Define all dynamic palettes here and in dynamic_palettes.h
@@ -824,6 +825,9 @@ static void DynPal_ReloadPlayerPaletteForMenu(u16 paletteTag, u8 partATone, u8 p
     memcpy(&gPlttBufferFaded[offsetDefault], &gPlttBufferUnfaded[offsetDefault], PLTT_SIZE_4BPP);
     if (IsFieldMugshotActive())
         memcpy(&gPlttBufferFaded[offsetMugshot], &gPlttBufferUnfaded[offsetMugshot], PLTT_SIZE_4BPP);
+
+    if (sDynPalMenu.isOverworld)
+        UpdatePalettesWithTime(PALETTES_ALL);
 }
 
 // SCRIPT SPECIAL WRAPPERS
