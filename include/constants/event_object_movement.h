@@ -262,6 +262,10 @@
 #define MOVEMENT_ACTION_N_SHRUG                         0xAD
 #define MOVEMENT_ACTION_N_HEADSHAKE                     0xAE
 #define MOVEMENT_ACTION_N_POSE                          0xAF
+#define MOVEMENT_ACTION_SURF_STILL_DOWN                 0xB0
+#define MOVEMENT_ACTION_SURF_STILL_UP                   0xB1
+#define MOVEMENT_ACTION_SURF_STILL_LEFT                 0xB2
+#define MOVEMENT_ACTION_SURF_STILL_RIGHT                0xB3
 
 #define MOVEMENT_ACTION_STEP_END 0xFE
 #define MOVEMENT_ACTION_NONE     0xFF

@@ -51,6 +51,7 @@
 #include "ikigai_characters.h"
 #include "speedup.h"
 #include "difficulty.h"
+#include "follower_npc.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 extern const u8 EventScript_ResetIkigaiMapFlags[];
@@ -253,6 +254,7 @@ void NewGameInitData(void)
     IkigaiCharacter_SetAllCharacterDefaultOpinion();
     SetDefaultPlayerNickname();
     ResetDexNav();
+    ClearFollowerNPCData();
 }
 
 static void ResetMiniGamesRecords(void)
