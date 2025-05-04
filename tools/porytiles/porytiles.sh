@@ -8,11 +8,12 @@ esac
 
 script_dir=$(dirname "$script_path")
 dir_project=$(dirname "$(dirname "$script_dir")")/
+porytiles_dir="${dir_project}tools/porytiles/"
 
 dir_compiled_primary="${dir_project}data/tilesets/primary/"
 dir_compiled_secondary="${dir_project}data/tilesets/secondary/"
 metatile_behaviors="${dir_project}include/constants/metatile_behaviors.h"
-dir_raw_tilesets="${dir_project}tools/porytiles/raw/"
+dir_raw_tilesets="${porytiles_dir}raw/"
 dir_raw_tilesets_primary="${dir_raw_tilesets}primary/"
 dir_raw_tilesets_secondary="${dir_raw_tilesets}secondary/"
 
@@ -80,6 +81,13 @@ while(true); do
             lastcmd="porytiles compile-primary ${attribute_generation} -Wall -o \"${dir_compiled_primary}${tileset}\" \"${dir_raw_tilesets_primary}${tilesetsrc}\" \"${metatile_behaviors}\""
 
             echo "Compiled primary tileset."
+
+            # compile seasonal tilesets
+            if [ -f "${dir_raw_tilesets_primary}${tilesetsrc}/seasonal.csv" ]; then
+                python3 "${porytiles_dir}seasonal_pals.py" \
+                "${dir_compiled_primary}${tileset}/palettes/" \
+                "${dir_raw_tilesets_primary}${tilesetsrc}/seasonal.csv"
+            fi
             ;;
         2)
             if [ "$tileset" != "" ]; then
@@ -125,6 +133,13 @@ while(true); do
             "${metatile_behaviors}"
 
             lastcmd="porytiles compile-secondary ${attribute_generation} -Wall -o \"${dir_compiled_secondary}${tileset}\" \"${dir_raw_tilesets_secondary}${tilesetsrc}\" \"${dir_raw_tilesets_primary}${tilesetsrc2}\" \"${metatile_behaviors}\""
+
+            # compile seasonal tilesets
+            if [ -f "${dir_raw_tilesets_secondary}${tilesetsrc}/seasonal.csv" ]; then
+                python3 "${porytiles_dir}seasonal_pals.py" \
+                "${dir_compiled_secondary}${tileset}/palettes/" \
+                "${dir_raw_tilesets_secondary}${tilesetsrc}/seasonal.csv"
+            fi
 
             # write ${tilesetsrc2} to a .txt file for use later
             echo $tilesetsrc2 > ${dir_raw_tilesets_secondary}${tilesetsrc}/primarysrc.txt
