@@ -624,8 +624,9 @@
     "Route124_DivingTreasureHuntersHouse"
   ],
   "gMapGroup_VyratonOutdoors": [
-    "VyratonOutdoors_Ocean",
-    "VyratonOutdoors_Harbour"
+    "VyratonCentre",
+    "VyratonOutdoors_Harbour",
+    "VyratonOutdoors_Ocean"
   ],
   "gMapGroup_VyratonIndoors": [
     "VyratonIndoors_SSPathfinder",

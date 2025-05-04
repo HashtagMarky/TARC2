@@ -9,6 +9,9 @@ const struct Tileset gTileset_General =
     .isSecondary = FALSE,
     .tiles = gTilesetTiles_General,
     .palettes = gTilesetPalettes_General,
+    .palettes_summer = gTilesetPalettes_General_Summer,
+    .palettes_autumn = gTilesetPalettes_General_Autumn,
+    .palettes_winter = gTilesetPalettes_General_Winter,
     .metatiles = gMetatiles_General,
     .metatileAttributes = gMetatileAttributes_General,
     .callback = InitTilesetAnim_General,
@@ -861,5 +864,16 @@ const struct Tileset gTileset_SSPathfinder_Cabin_Bathroom =
     .palettes = gTilesetPalettes_SSPathfinder_Cabin_Bathroom,
     .metatiles = gMetatiles_SSPathfinder_Cabin_Bathroom,
     .metatileAttributes = gMetatileAttributes_SSPathfinder_Cabin_Bathroom,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_IkigaiOutdoors =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_IkigaiOutdoors,
+    .palettes = gTilesetPalettes_IkigaiOutdoors,
+    .metatiles = gMetatiles_IkigaiOutdoors,
+    .metatileAttributes = gMetatileAttributes_IkigaiOutdoors,
     .callback = NULL,
 };

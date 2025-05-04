@@ -4460,6 +4460,16 @@
       "secondary_tileset": "gTileset_SSPathfinder_Cabin_Bathroom",
       "border_filepath": "data/layouts/VyratonIndoors_SSPathfinder/border.bin",
       "blockdata_filepath": "data/layouts/VyratonIndoors_SSPathfinder/map.bin"
+    },
+    {
+      "id": "LAYOUT_VYRATON_CENTRE",
+      "name": "VyratonCentre_Layout",
+      "width": 24,
+      "height": 20,
+      "primary_tileset": "gTileset_IkigaiOutdoors",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/VyratonCentre/border.bin",
+      "blockdata_filepath": "data/layouts/VyratonCentre/map.bin"
     }
   ]
 }
