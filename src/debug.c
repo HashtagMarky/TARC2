@@ -2515,12 +2515,11 @@ static void DebugAction_Ikigai_SeasonsSelect(u8 taskId)
 
     if (JOY_NEW(A_BUTTON))
     {
-        RtcCalcLocalTime();
-        gTasks[taskId].data[5] = gTasks[taskId].tInput;
-        // Ikigai_SetToNextSeason(gLocalTime.days, gTasks[taskId].data[5]);
+        Ikigai_SetToYearOneSeason(gTasks[taskId].tInput);
 
         PlaySE(SE_SELECT);
         DebugAction_DestroyExtraWindow(taskId);
+        SetMainCallback2(CB2_LoadMap);
     }
     else if (JOY_NEW(B_BUTTON))
     {
