@@ -119,12 +119,13 @@ enum IkigaiCharacterDebugSubmenu
 
 enum IkigaiTimeDebugSubmenu
 {
-    DEBUG_IKIGAI_TEMPORAL_CALENDAR_SHOW,
-    DEBUG_IKIGAI_TEMPORAL_CALENDAR_WARP,
-    DEBUG_IKIGAI_TEMPORAL_WEATHER,
+    DEBUG_IKIGAI_TEMPORAL_BASE_TIME_MENU,
     DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK,
     DEBUG_IKIGAI_TEMPORAL_SET_CLOCK,
     DEBUG_IKIGAI_TEMPORAL_SET_SEASON,
+    DEBUG_IKIGAI_TEMPORAL_CALENDAR_SHOW,
+    DEBUG_IKIGAI_TEMPORAL_CALENDAR_WARP,
+    DEBUG_IKIGAI_TEMPORAL_WEATHER,
 };
 
 enum IkigaiSoundSubmenu
@@ -816,6 +817,7 @@ static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Temporal[] =
     [DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK]     = {COMPOUND_STRING("Check Wall Clock…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK},
     [DEBUG_IKIGAI_TEMPORAL_SET_CLOCK]       = {COMPOUND_STRING("Set Wall Clock…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_IKIGAI_TEMPORAL_SET_CLOCK},
     [DEBUG_IKIGAI_TEMPORAL_SET_SEASON]      = {COMPOUND_STRING("Set Season…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_IKIGAI_TEMPORAL_SET_SEASON},
+    [DEBUG_IKIGAI_TEMPORAL_BASE_TIME_MENU]  = {COMPOUND_STRING("{FONT_GET_NARROW}Expansion Time Menu{RESET_FONT}…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_IKIGAI_TEMPORAL_BASE_TIME_MENU},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Sound[] =
@@ -852,8 +854,8 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
 static const struct ListMenuItem sDebugMenu_Items_TimeMenu[] =
 {
     [DEBUG_TIME_MENU_ITEM_PRINTTIME] = {COMPOUND_STRING("Print current time"),                          DEBUG_TIME_MENU_ITEM_PRINTTIME},
-    [DEBUG_TIME_MENU_ITEM_PRINTTIMEOFDAY] = {COMPOUND_STRING("{FONT_NARROW}Print current time of day"), DEBUG_TIME_MENU_ITEM_PRINTTIMEOFDAY},
-    [DEBUG_TIME_MENU_ITEM_TIMESOFDAY] = {COMPOUND_STRING("{FONT_NARROW}Change current time of day"),    DEBUG_TIME_MENU_ITEM_TIMESOFDAY},
+    [DEBUG_TIME_MENU_ITEM_PRINTTIMEOFDAY] = {COMPOUND_STRING("{FONT_GET_NARROW}Print current time of day"), DEBUG_TIME_MENU_ITEM_PRINTTIMEOFDAY},
+    [DEBUG_TIME_MENU_ITEM_TIMESOFDAY] = {COMPOUND_STRING("{FONT_GET_NARROW}Change current time of day"),    DEBUG_TIME_MENU_ITEM_TIMESOFDAY},
     [DEBUG_TIME_MENU_ITEM_WEEKDAYS] = {COMPOUND_STRING("Change current weekday"),                       DEBUG_TIME_MENU_ITEM_WEEKDAYS},
 };
 
@@ -1108,6 +1110,7 @@ static void (*const sDebugMenu_Actions_Ikigai_Temporal[])(u8) =
     [DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK]    = DebugAction_Util_CheckWallClock,
     [DEBUG_IKIGAI_TEMPORAL_SET_CLOCK]      = DebugAction_Util_SetWallClock,
     [DEBUG_IKIGAI_TEMPORAL_SET_SEASON]     = DebugAction_Ikigai_Season,
+    [DEBUG_IKIGAI_TEMPORAL_BASE_TIME_MENU] = DebugAction_Util_OpenTimeMenu,
 };
 
 static void (*const sDebugMenu_Actions_Ikigai_Sound[])(u8) =
