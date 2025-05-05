@@ -19,7 +19,6 @@
 #include "field_player_avatar.h"
 #include "event_data.h"
 #include "fake_rtc.h"
-#include "calendar.h"
 #include "vyraton.h"
 
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF // duplicate of define in event_object_movement.c
@@ -436,8 +435,7 @@ u32 FldEff_TallGrass(void)
     u8 spriteId;
     s16 x = gFieldEffectArguments[0];
     s16 y = gFieldEffectArguments[1];
-    RtcCalcLocalTime();
-    enum Seasons season = Ikigai_GetSeasonFromDays(gLocalTime.days);
+    enum Seasons season = Ikigai_GetSeason();
     const u16 *pal;
     SetSpritePosToOffsetMapCoords(&x, &y, 8, 8);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS], x, y, 0);
@@ -525,8 +523,7 @@ void UpdateTallGrassFieldEffect(struct Sprite *sprite)
 u32 FldEff_JumpTallGrass(void)
 {
     u8 spriteId;
-    RtcCalcLocalTime();
-    enum Seasons season = Ikigai_GetSeasonFromDays(gLocalTime.days);
+    enum Seasons season = Ikigai_GetSeason();
     const u16 *pal;
 
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 12);

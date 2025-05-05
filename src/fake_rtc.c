@@ -8,7 +8,6 @@
 #include "event_data.h"
 #include "script.h"
 
-#include "calendar.h"
 static void FakeRtc_CalcTimeDifference(struct Time *result, struct SiiRtcInfo *t1, struct Time *t2);
 
 void FakeRtc_Reset(void)
@@ -154,6 +153,12 @@ enum Seasons Ikigai_GetSeasonFromDays(u32 days)
         days -= SEASON_COUNT * DAYS_IN_SEASON;
 
     return (days - 1) / DAYS_IN_SEASON;
+}
+
+enum Seasons Ikigai_GetSeason(void)
+{
+    RtcCalcLocalTime();
+    return Ikigai_GetSeasonFromDays(gLocalTime.days);
 }
 
 u8 Ikigai_GetDateFromDays(u32 days)

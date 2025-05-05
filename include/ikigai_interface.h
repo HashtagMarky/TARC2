@@ -2,7 +2,7 @@
 #define GUARD_IKIGAI_SCROLLING_BACKGROUND_H
 
 #include "global.h"
-#include "calendar.h"
+#include "fake_rtc.h"
 
 enum IkigaiInterfacePalettes
 {

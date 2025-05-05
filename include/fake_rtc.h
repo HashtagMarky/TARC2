@@ -18,6 +18,7 @@ void Script_ToggleFakeRtc(void);
 
 u8 Ikigai_GetYearFromDays(u32 days);
 enum Seasons Ikigai_GetSeasonFromDays(u32 days);
+enum Seasons Ikigai_GetSeason(void);
 u8 Ikigai_GetDateFromDays(u32 days);
 void UNUSED Ikigai_SetToNextSeason(s16 days, enum Seasons newSeason);
 void Ikigai_SetToYearOneSeason(enum Seasons newSeason);

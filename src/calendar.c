@@ -464,13 +464,6 @@ static const struct WeatherIcons sWeatherIcons[WEATHER_COUNT][TIMES_OF_DAY_COUNT
     },
 };
 
-const u8 gSeasonNames[SEASON_COUNT][7] = {
-    [SEASON_SPRING]     = _("Spring"),
-    [SEASON_SUMMER]     = _("Summer"),
-    [SEASON_AUTUMN]     = _("Autumn"),
-    [SEASON_WINTER]     = _("Winter"),
-};
-
 struct DateNumbers
 {
     const u32 *gfx;

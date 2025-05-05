@@ -38,6 +38,13 @@ const s32 sNumDaysInMonths[MONTH_COUNT] =
     [MONTH_DEC - 1] = 31,
 };
 
+const u8 gSeasonNames[SEASON_COUNT][7] = {
+    [SEASON_SPRING]     = _("Spring"),
+    [SEASON_SUMMER]     = _("Summer"),
+    [SEASON_AUTUMN]     = _("Autumn"),
+    [SEASON_WINTER]     = _("Winter"),
+};
+
 void RtcDisableInterrupts(void)
 {
     sSavedIme = REG_IME;

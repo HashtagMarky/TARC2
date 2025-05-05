@@ -18,7 +18,6 @@
 #include "constants/metatile_behaviors.h"
 #include "wild_encounter.h"
 #include "vyraton.h"
-#include "calendar.h"
 #include "fake_rtc.h"
 
 struct ConnectionFlags
@@ -883,8 +882,7 @@ static void UNUSED ApplyGlobalTintToPaletteSlot(u8 slot, u8 count)
 
 static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u16 size, bool8 skipFaded)
 {
-    RtcCalcLocalTime();
-    enum Seasons season = Ikigai_GetSeasonFromDays(gLocalTime.days);
+    enum Seasons season = Ikigai_GetSeason();
 
     const u16 (*paletteTileset)[16];
     switch (season)

@@ -100,6 +100,21 @@ enum TimeOfDay
 extern struct Time gLocalTime;
 extern const s32 sNumDaysInMonths[12];
 
+
+#define DAYS_IN_SEASON 28
+
+enum Seasons
+{
+    SEASON_SPRING,
+    SEASON_SUMMER,
+    SEASON_AUTUMN,
+    SEASON_WINTER,
+    SEASON_COUNT,
+};
+
+extern const u8 gSeasonNames[SEASON_COUNT][7];
+
+
 void RtcDisableInterrupts(void);
 void RtcRestoreInterrupts(void);
 u32 ConvertBcdToBinary(u8 bcd);

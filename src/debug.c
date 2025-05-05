@@ -73,7 +73,6 @@
 
 #include "calendar.h"
 #include "dynamic_music.h"
-#include "fake_rtc.h"
 #include "ikigai_characters.h"
 #include "ui_samuel_case.h"
 
