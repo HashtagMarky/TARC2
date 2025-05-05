@@ -18,6 +18,9 @@
 #include "task.h"
 #include "field_player_avatar.h"
 #include "event_data.h"
+#include "fake_rtc.h"
+#include "calendar.h"
+#include "vyraton.h"
 
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF // duplicate of define in event_object_movement.c
 #define PAL_TAG_REFLECTION_OFFSET 0x2000 // reflection tag value is paletteTag + 0x2000
@@ -433,8 +436,31 @@ u32 FldEff_TallGrass(void)
     u8 spriteId;
     s16 x = gFieldEffectArguments[0];
     s16 y = gFieldEffectArguments[1];
+    RtcCalcLocalTime();
+    enum Seasons season = Ikigai_GetSeasonFromDays(gLocalTime.days);
+    const u16 *pal;
     SetSpritePosToOffsetMapCoords(&x, &y, 8, 8);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS], x, y, 0);
+    switch (season)
+    {
+    default:
+    case SEASON_SPRING:
+        pal = gTilesetPalettes_IkigaiOutdoors[PAL_IKIGAI_OUTDOORS_TILESET_FOLIAGE];
+        break;
+    
+    case SEASON_SUMMER:
+        pal = gTilesetPalettes_IkigaiOutdoors_Summer[PAL_IKIGAI_OUTDOORS_TILESET_FOLIAGE];
+        break;
+
+    case SEASON_AUTUMN:
+        pal = gTilesetPalettes_IkigaiOutdoors_Autumn[PAL_IKIGAI_OUTDOORS_TILESET_FOLIAGE];
+        break;
+
+    case SEASON_WINTER:
+        pal = gTilesetPalettes_IkigaiOutdoors_Winter[PAL_IKIGAI_OUTDOORS_TILESET_FOLIAGE];
+        break;
+    }
+    LoadPalette(pal, OBJ_PLTT_ID(IndexOfSpritePaletteTag(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS]->paletteTag)), PLTT_SIZE_4BPP);
     if (spriteId != MAX_SPRITES)
     {
         struct Sprite *sprite = &gSprites[spriteId];
@@ -499,6 +525,9 @@ void UpdateTallGrassFieldEffect(struct Sprite *sprite)
 u32 FldEff_JumpTallGrass(void)
 {
     u8 spriteId;
+    RtcCalcLocalTime();
+    enum Seasons season = Ikigai_GetSeasonFromDays(gLocalTime.days);
+    const u16 *pal;
 
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 12);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_JUMP_TALL_GRASS], gFieldEffectArguments[0], gFieldEffectArguments[1], 0);
@@ -509,6 +538,26 @@ u32 FldEff_JumpTallGrass(void)
         sprite->oam.priority = gFieldEffectArguments[3];
         sprite->sJumpElevation = gFieldEffectArguments[2];
         sprite->sJumpFldEff = FLDEFF_JUMP_TALL_GRASS;
+        switch (season)
+        {
+        default:
+        case SEASON_SPRING:
+            pal = gTilesetPalettes_IkigaiOutdoors[PAL_IKIGAI_OUTDOORS_TILESET_FOLIAGE];
+            break;
+        
+        case SEASON_SUMMER:
+            pal = gTilesetPalettes_IkigaiOutdoors_Summer[PAL_IKIGAI_OUTDOORS_TILESET_FOLIAGE];
+            break;
+
+        case SEASON_AUTUMN:
+            pal = gTilesetPalettes_IkigaiOutdoors_Autumn[PAL_IKIGAI_OUTDOORS_TILESET_FOLIAGE];
+            break;
+
+        case SEASON_WINTER:
+            pal = gTilesetPalettes_IkigaiOutdoors_Winter[PAL_IKIGAI_OUTDOORS_TILESET_FOLIAGE];
+            break;
+        }
+        LoadPalette(pal, OBJ_PLTT_ID(IndexOfSpritePaletteTag(gFieldEffectObjectTemplatePointers[FLDEFF_JUMP_TALL_GRASS]->paletteTag)), PLTT_SIZE_4BPP);
     }
     return 0;
 }

@@ -8,6 +8,12 @@
 extern const struct Tileset gTileset_IkigaiOffice;
 extern const struct Tileset gTileset_SSPathfinder_Cabin_Bathroom;
 
+extern const u16 gTilesetPalettes_IkigaiOutdoors[][16];
+extern const u16 gTilesetPalettes_IkigaiOutdoors_Summer[][16];
+extern const u16 gTilesetPalettes_IkigaiOutdoors_Autumn[][16];
+extern const u16 gTilesetPalettes_IkigaiOutdoors_Winter[][16];
+#define PAL_IKIGAI_OUTDOORS_TILESET_FOLIAGE 4
+
 struct IkigaiTilesetReplacementMetatiles
 {
     u16 metatileIdKey;
