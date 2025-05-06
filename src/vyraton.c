@@ -3,6 +3,7 @@
 #include "main.h"
 #include "vyraton.h"
 #include "data/vyraton_randomised_metatiles.h"
+#include "fake_rtc.h"
 #include "fieldmap.h"
 #include "field_camera.h"
 #include "field_player_avatar.h"
@@ -10,10 +11,14 @@
 #include "random.h"
 #include "sound.h"
 #include "task.h"
+#include "constants/metatile_behaviors.h"
 #include "constants/metatile_labels.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
 
+
+static EWRAM_DATA enum Seasons season;
+#define IKIGAI_GROUND_ELEVATION 3
 
 void VyratonTilesets_DrawRandomisedMetatiles(void)
 {
@@ -24,6 +29,7 @@ void VyratonTilesets_DrawRandomisedMetatiles(void)
     const struct Tileset *tilesetSecondary = gMapHeader.mapLayout->secondaryTileset;
     s32 width = gBackupMapLayout.width;
     s32 height = gBackupMapLayout.height;
+    season = Ikigai_GetSeason();
 
     for (s32 y = 0; y < height; y++)
     {
@@ -149,6 +155,101 @@ void gTileset_SSPathfinder_Cabin_Bathroom_ReplacementFunc_Bath(s32 x, s32 y)
     {
         MapGridSetMetatileIdAt(x, y, METATILE_SSPathfinder_Cabin_Bathroom_BathLeft_Empty | MAPGRID_COLLISION_MASK);
         MapGridSetMetatileIdAt(x + 1, y, METATILE_SSPathfinder_Cabin_Bathroom_BathRight_Empty | MAPGRID_COLLISION_MASK);
+    }
+}
+
+void gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater(s32 x, s32 y)
+{
+    if (season != SEASON_WINTER ||
+        (MapGridGetMetatileBehaviorAt(x, y) != MB_PUDDLE &&
+         MapGridGetMetatileBehaviorAt(x, y) != MB_POND_WATER))
+        return;
+    
+    switch (MapGridGetMetatileIdAt(x, y))
+    {
+        case METATILE_IkigaiOutdoors_Pond_Outside_BottomCentre:
+        case METATILE_IkigaiOutdoors_Puddle_Outside_BottomCentre:
+            MapGridSetMetatileEntryAt(x, y, METATILE_IkigaiOutdoors_Ice_Outside_BottomCentre | (IKIGAI_GROUND_ELEVATION << MAPGRID_ELEVATION_SHIFT));
+            break;
+        
+        case METATILE_IkigaiOutdoors_Pond_Outside_BottomLeft:
+        case METATILE_IkigaiOutdoors_Puddle_Outside_BottomLeft:
+            MapGridSetMetatileEntryAt(x, y, METATILE_IkigaiOutdoors_Ice_Outside_BottomLeft | (IKIGAI_GROUND_ELEVATION << MAPGRID_ELEVATION_SHIFT));
+            break;
+        
+        case METATILE_IkigaiOutdoors_Pond_Outside_BottomRight:
+        case METATILE_IkigaiOutdoors_Puddle_Outside_BottomRight:
+            MapGridSetMetatileEntryAt(x, y, METATILE_IkigaiOutdoors_Ice_Outside_BottomRight | (IKIGAI_GROUND_ELEVATION << MAPGRID_ELEVATION_SHIFT));
+            break;
+        
+        case METATILE_IkigaiOutdoors_Pond_CentreLeft_Wall:
+        case METATILE_IkigaiOutdoors_Pond_Outside_CentreLeft:
+        case METATILE_IkigaiOutdoors_Puddle_Outside_CentreLeft:
+            MapGridSetMetatileEntryAt(x, y, METATILE_IkigaiOutdoors_Ice_Outside_CentreLeft | (IKIGAI_GROUND_ELEVATION << MAPGRID_ELEVATION_SHIFT));
+            break;
+        
+        case METATILE_IkigaiOutdoors_Pond_CentreRight_Wall:
+        case METATILE_IkigaiOutdoors_Pond_Outside_CentreRight:
+        case METATILE_IkigaiOutdoors_Puddle_Outside_CentreRight:
+            MapGridSetMetatileEntryAt(x, y, METATILE_IkigaiOutdoors_Ice_Outside_CentreRight | (IKIGAI_GROUND_ELEVATION << MAPGRID_ELEVATION_SHIFT));
+            break;
+        
+        case METATILE_IkigaiOutdoors_Pond_Inside_BottomLeft:
+        case METATILE_IkigaiOutdoors_Puddle_Inside_BottomLeft:
+            MapGridSetMetatileEntryAt(x, y, METATILE_IkigaiOutdoors_Ice_Inside_BottomLeft | (IKIGAI_GROUND_ELEVATION << MAPGRID_ELEVATION_SHIFT));
+            break;
+        
+        case METATILE_IkigaiOutdoors_Pond_Inside_BottomRight:
+        case METATILE_IkigaiOutdoors_Puddle_Inside_BottomRight:
+            MapGridSetMetatileEntryAt(x, y, METATILE_IkigaiOutdoors_Ice_Inside_BottomRight | (IKIGAI_GROUND_ELEVATION << MAPGRID_ELEVATION_SHIFT));
+            break;
+        
+        case METATILE_IkigaiOutdoors_Pond_Outside_TopLeft:
+        case METATILE_IkigaiOutdoors_Puddle_Outside_TopLeft:
+        case METATILE_IkigaiOutdoors_Pond_Outside_TopLeft_Wall:
+            MapGridSetMetatileEntryAt(x, y, METATILE_IkigaiOutdoors_Ice_Outside_TopLeft | (IKIGAI_GROUND_ELEVATION << MAPGRID_ELEVATION_SHIFT));
+            break;
+        
+        case METATILE_IkigaiOutdoors_Pond_Inside_TopRight:
+        case METATILE_IkigaiOutdoors_Puddle_Inside_TopRight:
+        case METATILE_IkigaiOutdoors_Pond_Inside_TopLeft_Wall:
+            MapGridSetMetatileEntryAt(x, y, METATILE_IkigaiOutdoors_Ice_Inside_TopRight | (IKIGAI_GROUND_ELEVATION << MAPGRID_ELEVATION_SHIFT));
+            break;
+        
+        case METATILE_IkigaiOutdoors_Pond_Outside_TopCentre:
+        case METATILE_IkigaiOutdoors_Puddle_Outside_TopCentre:
+        case METATILE_IkigaiOutdoors_Pond_TopCentre_Wall:
+            MapGridSetMetatileEntryAt(x, y, METATILE_IkigaiOutdoors_Ice_Outside_TopCentre | (IKIGAI_GROUND_ELEVATION << MAPGRID_ELEVATION_SHIFT));
+            break;
+        
+        case METATILE_IkigaiOutdoors_Pond_Outside_TopRight:
+        case METATILE_IkigaiOutdoors_Puddle_Outside_TopRight:
+        case METATILE_IkigaiOutdoors_Pond_Outside_TopRight_Wall:
+            MapGridSetMetatileEntryAt(x, y, METATILE_IkigaiOutdoors_Ice_Outside_TopRight | (IKIGAI_GROUND_ELEVATION << MAPGRID_ELEVATION_SHIFT));
+            break;
+
+        case METATILE_IkigaiOutdoors_Pond_Inside_TopLeft:
+        case METATILE_IkigaiOutdoors_Puddle_Inside_TopLeft:
+        case METATILE_IkigaiOutdoors_Pond_Inside_TopRight_Wall:
+            MapGridSetMetatileEntryAt(x, y, METATILE_IkigaiOutdoors_Ice_Inside_TopLeft | (IKIGAI_GROUND_ELEVATION << MAPGRID_ELEVATION_SHIFT));
+            break;
+        
+        case METATILE_IkigaiOutdoors_Pond_Lilypad_One:
+        case METATILE_IkigaiOutdoors_Pond_Lilypad_Two:
+        case METATILE_IkigaiOutdoors_Pond_Rock_One:
+        case METATILE_IkigaiOutdoors_Pond_Rock_Two:
+        case METATILE_IkigaiOutdoors_Pond_Rock_Three:
+        case METATILE_IkigaiOutdoors_Pond_Weed_One:
+        case METATILE_IkigaiOutdoors_Pond_Weed_Two:
+        case METATILE_IkigaiOutdoors_Pond_Weed_Three:
+        case METATILE_IkigaiOutdoors_Pond_Centre_Wall:
+        case METATILE_IkigaiOutdoors_Pond_Water:
+        case METATILE_IkigaiOutdoors_Puddle_Water:
+        case METATILE_IkigaiOutdoors_Pond_BottomLeft_Wall:
+        case METATILE_IkigaiOutdoors_Pond_BottomCentre_Wall:
+        case METATILE_IkigaiOutdoors_Pond_BottomRight_Wall:
+            MapGridSetMetatileEntryAt(x, y, METATILE_IkigaiOutdoors_Ice_Water | (IKIGAI_GROUND_ELEVATION << MAPGRID_ELEVATION_SHIFT));
+            break;
     }
 }
 

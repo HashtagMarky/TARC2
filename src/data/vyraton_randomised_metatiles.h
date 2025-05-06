@@ -70,8 +70,196 @@ const struct IkigaiTilesetReplacementMetatiles gTileset_SSPathfinder_Cabin_Bathr
     },
 };
 
+const struct IkigaiTilesetReplacementMetatiles gTileset_IkigaiOutdoors_Replacement[] =
+{
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_BottomCentre_Wall,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_BottomLeft_Wall,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_BottomRight_Wall,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_CentreLeft_Wall,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_CentreRight_Wall,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Centre_Wall,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Inside_BottomLeft,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Inside_BottomRight,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Inside_TopLeft,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Inside_TopRight,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Lilypad_One,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Lilypad_Two,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Outside_BottomCentre,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Outside_BottomLeft,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Outside_BottomRight,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Outside_CentreLeft,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Outside_CentreRight,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Outside_TopCentre,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Outside_TopLeft,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Outside_TopLeft_Wall,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Outside_TopRight,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Outside_TopRight_Wall,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Rock_One,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Rock_Three,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Rock_Two,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_TopCentre_Wall,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Inside_TopLeft_Wall,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Inside_TopRight_Wall,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Water,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Weed_One,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Weed_Three,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Pond_Weed_Two,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Puddle_Inside_BottomLeft,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Puddle_Inside_BottomRight,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Puddle_Inside_TopLeft,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Puddle_Inside_TopRight,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Puddle_Outside_BottomCentre,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Puddle_Outside_BottomLeft,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Puddle_Outside_BottomRight,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Puddle_Outside_CentreLeft,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Puddle_Outside_CentreRight,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Puddle_Outside_TopCentre,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Puddle_Outside_TopLeft,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Puddle_Outside_TopRight,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },
+    {
+        .metatileIdKey = METATILE_IkigaiOutdoors_Puddle_Water,
+        .metatileReplacementFunc = gTileset_IkigaiOutdoors_ReplacementFunc_FrozenWater,
+    },    
+    {
+        INVALID_METATILE,
+    },
+};
+
 const struct IkigaiTilesetReplacements sTilesetReplacement[] =
 {
     {&gTileset_IkigaiOffice, gTileset_IkigaiOffice_Replacement},
     {&gTileset_SSPathfinder_Cabin_Bathroom, gTileset_SSPathfinder_Cabin_Bathroom_Replacement},
+    {&gTileset_IkigaiOutdoors, gTileset_IkigaiOutdoors_Replacement},
 };
