@@ -25,24 +25,26 @@ void VyratonTilesets_DrawRandomisedMetatiles(void)
     s32 width = gBackupMapLayout.width;
     s32 height = gBackupMapLayout.height;
 
-    for (u32 entryTileset = 0; entryTileset < ARRAY_COUNT(sTilesetReplacement); entryTileset++)
+    for (s32 y = 0; y < height; y++)
     {
-        const struct IkigaiTilesetReplacements *tilesetEntry = &sTilesetReplacement[entryTileset];
-        const struct IkigaiTilesetReplacementMetatiles *tilesetReplacements = tilesetEntry->replacementTiles;
-
-        if (tilesetEntry->tileset != tilesetPrimary && tilesetEntry->tileset != tilesetSecondary)
-            continue;
-
-        for (u32 entryReplacement = 0; tilesetReplacements[entryReplacement].metatileIdKey != INVALID_METATILE; entryReplacement++)
+        for (s32 x = 0; x < width; x++)
         {
-            const struct IkigaiTilesetReplacementMetatiles *metatileEntry = &tilesetReplacements[entryReplacement];
-            u16 key = metatileEntry->metatileIdKey;
+            u16 currentMetatile = MapGridGetMetatileIdAt(x, y);
 
-            for (s32 y = 0; y < height; y++)
+            for (u32 entryTileset = 0; entryTileset < ARRAY_COUNT(sTilesetReplacement); entryTileset++)
             {
-                for (s32 x = 0; x < width; x++)
+                const struct IkigaiTilesetReplacements *tilesetEntry = &sTilesetReplacement[entryTileset];
+
+                if (tilesetEntry->tileset != tilesetPrimary && tilesetEntry->tileset != tilesetSecondary)
+                    continue;
+
+                const struct IkigaiTilesetReplacementMetatiles *tilesetReplacements = tilesetEntry->replacementTiles;
+
+                for (u32 entryReplacement = 0; tilesetReplacements[entryReplacement].metatileIdKey != INVALID_METATILE; entryReplacement++)
                 {
-                    if (MapGridGetMetatileIdAt(x, y) != key)
+                    const struct IkigaiTilesetReplacementMetatiles *metatileEntry = &tilesetReplacements[entryReplacement];
+
+                    if (currentMetatile != metatileEntry->metatileIdKey)
                         continue;
 
                     if (metatileEntry->metatileReplacementFunc != NULL)
@@ -59,6 +61,8 @@ void VyratonTilesets_DrawRandomisedMetatiles(void)
 
                         MapGridSetMetatileIdAt(x, y, replacement | metatileEntry->maskCollision);
                     }
+
+                    break; // stop checking other replacements once a match is found
                 }
             }
         }
