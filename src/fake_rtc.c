@@ -144,15 +144,20 @@ u8 Ikigai_GetYearFromDays(u32 days)
     return (days == 0) ? 0 : ((days - 1) / (SEASON_COUNT * DAYS_IN_SEASON)) + 1;
 }
 
+u8 Ikigai_GetYear(void)
+{
+    RtcCalcLocalTime();
+    return Ikigai_GetYearFromDays(gLocalTime.days);
+}
+
 enum Seasons Ikigai_GetSeasonFromDays(u32 days)
 {
     if (days == 0)
         return SEASON_COUNT;
 
-    while (days > SEASON_COUNT * DAYS_IN_SEASON)
-        days -= SEASON_COUNT * DAYS_IN_SEASON;
+    days = (days - 1) % (SEASON_COUNT * DAYS_IN_SEASON);
 
-    return (days - 1) / DAYS_IN_SEASON;
+    return days / DAYS_IN_SEASON;
 }
 
 enum Seasons Ikigai_GetSeason(void)
@@ -190,7 +195,7 @@ void Ikigai_SetToYearOneSeason(enum Seasons newSeason)
     if (newSeason == SEASON_COUNT)
         day = 0;
     else
-        day = 1 + (28 * newSeason);
+        day = 1 + (DAYS_IN_SEASON * newSeason);
 
     FakeRtc_ManuallySetTime(day, 0, 0, 0);
 }
