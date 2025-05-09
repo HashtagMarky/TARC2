@@ -9,6 +9,9 @@
 #include "constants/songs.h"
 #include "constants/vars.h"
 
+#include "overworld.h"
+#include "palette.h"
+
 // Tasks governing the ship's departure after you've gotten HM01 CUT
 
 #define SPRITE_TAG_WAKE  4000
@@ -220,6 +223,7 @@ static void CreateWakeBehindBoat(void)
     x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 48;
     spriteId = CreateSprite(&sWakeSpriteTemplate, x, 109, 0xFF);
     gSprites[spriteId].oam.priority = 2;
+    UpdatePalettesWithTime(PALETTES_ALL);
 }
 
 static void WakeSpriteCallback(struct Sprite *sprite)
@@ -251,6 +255,7 @@ static void CreateSmokeSprite(void)
     x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 25;
     if ((s16)x >= -32)
         spriteId = CreateSprite(&sSmokeSpriteTemplate, x, 78, 8);
+    UpdatePalettesWithTime(PALETTES_ALL);
 }
 
 static void SmokeSpriteCallback(struct Sprite *sprite)
@@ -295,6 +300,7 @@ static void CreateWakeBehindBoat_SSPathfinder(void)
     spriteId = CreateSprite(&sWakeSpriteTemplate_SSPathfinder, x, 77, 0xFF); // Decreased y by 16
     gSprites[spriteId].oam.priority = 2;
     gSprites[spriteId].x2 = 0; // Set to final position, no movement
+    UpdatePalettesWithTime(PALETTES_ALL);
 }
 
 static void WakeSpriteCallback_SSPathfinder(struct Sprite *sprite)
@@ -315,6 +321,7 @@ void CreateSmokeSprite_SSPathfinder(void)
     x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 25;
     if ((s16)x >= -32)
         spriteId = CreateSprite(&sSmokeSpriteTemplate_SSPathfinder, x, 46, 8); // Decreased y by 16
+    UpdatePalettesWithTime(PALETTES_ALL);
 }
 
 static void SmokeSpriteCallback_SSPathfinder(struct Sprite *sprite)
