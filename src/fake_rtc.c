@@ -171,6 +171,11 @@ enum Seasons Ikigai_GetSeason(void)
     return Ikigai_GetSeasonFromDays(gLocalTime.days);
 }
 
+enum Seasons Ikigai_FetchSeason(void)
+{
+    return Ikigai_GetSeasonFromDays(gLocalTime.days);
+}
+
 u8 Ikigai_GetDateFromDays(u32 days)
 {
     return (days == 0) ? 0 : ((days - 1) % Ikigai_ReturnDaysInSeason()) + 1;

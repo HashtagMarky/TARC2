@@ -4651,19 +4651,20 @@ static void DebugAction_TimeMenu_ChangeTimeOfDay(u8 taskId)
     u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
     
     DebugAction_DestroyExtraWindow(taskId);
+    RtcCalcLocalTime();
     switch (input)
     {
         case DEBUG_TIME_MENU_ITEM_MORNING:
-            FakeRtc_ForwardTimeTo(MORNING_HOUR_BEGIN, 0, 0);
+            FakeRtc_ForwardTimeTo(Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_MORNING, FALSE) + IKIGAI_HOUR_OFFSET, 0, 0);
             break;
         case DEBUG_TIME_MENU_ITEM_DAY:
-            FakeRtc_ForwardTimeTo(DAY_HOUR_BEGIN, 0, 0);
+            FakeRtc_ForwardTimeTo(Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_DAY, FALSE) + IKIGAI_HOUR_OFFSET, 0, 0);
             break;
         case DEBUG_TIME_MENU_ITEM_EVENING:
-            FakeRtc_ForwardTimeTo(EVENING_HOUR_BEGIN, 0, 0);
+            FakeRtc_ForwardTimeTo(Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_EVENING, FALSE) + IKIGAI_HOUR_OFFSET, 0, 0);
             break;
         case DEBUG_TIME_MENU_ITEM_NIGHT:
-            FakeRtc_ForwardTimeTo(NIGHT_HOUR_BEGIN, 0, 0);
+            FakeRtc_ForwardTimeTo(Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_NIGHT, FALSE) + IKIGAI_HOUR_OFFSET, 0, 0);
             break;
     }
     Debug_DestroyMenu_Full(taskId);

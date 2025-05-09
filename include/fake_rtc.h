@@ -18,12 +18,14 @@ void Script_ToggleFakeRtc(void);
 
 
 #define IKIGAI_FULL_MONTH    TRUE
+#define IKIGAI_HOUR_OFFSET   9
 
 u8 Ikigai_ReturnDaysInSeason(void);
 u8 Ikigai_GetYearFromDays(u32 days);
 u8 Ikigai_GetYear(void);
 enum Seasons Ikigai_GetSeasonFromDays(u32 days);
 enum Seasons Ikigai_GetSeason(void);
+enum Seasons Ikigai_FetchSeason(void);
 u8 Ikigai_GetDateFromDays(u32 days);
 void UNUSED Ikigai_SetToNextSeason(s16 days, enum Seasons newSeason);
 void Ikigai_SetToYearOneSeason(enum Seasons newSeason);
