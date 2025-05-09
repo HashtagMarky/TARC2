@@ -53,6 +53,7 @@
 #include "difficulty.h"
 #include "follower_npc.h"
 #include "fake_rtc.h"
+#include "clock.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 extern const u8 EventScript_ResetIkigaiMapFlags[];
@@ -166,7 +167,8 @@ static void WarpToTruck(void)
 
 static void WarpToShip(void)
 {
-    FakeRtc_ManuallySetTime(0, Ikigai_GetSeasonalTimeHour(0, TIME_EVENING, TRUE) - 15, 0, 0);
+    InitTimeBasedEvents();
+    FakeRtc_ManuallySetTime(0, Ikigai_GetSeasonalTimeHour(0, TIME_EVENING, TRUE), 0, 0);
     FlagSet(FLAG_PAUSE_TIME);
     FlagSet(FLAG_HIDE_MAP_NAME_POPUP);
     FlagSet(FLAG_SUPPRESS_MUGSHOT);
