@@ -44,6 +44,7 @@
 #include "constants/event_objects.h"
 #include "constants/weather.h"
 
+#define CALENDAR_DITHERING FALSE
 #define CALENDAR_LOAD_TIME 90 // Number of Frames
 
 #define MAX_NUM_GYM     9
@@ -139,6 +140,7 @@ static const struct WindowTemplate sCalendarUIWindowTemplates[] =
 };
 
 static const u32 sCalendarUITiles[] = INCBIN_U32("graphics/calendar/tiles.4bpp.lz");
+static const u32 sCalendarUITiles_Dithering[] = INCBIN_U32("graphics/calendar/tiles_dithering.4bpp.lz");
 static const u32 sCalendarUITilemap_FourWeeks[] = INCBIN_U32("graphics/calendar/tilemap_four_weeks.bin.lz");
 static const u32 sCalendarUITilemap_TwoWeeks[] = INCBIN_U32("graphics/calendar/tilemap_two_weeks.bin.lz");
 static const u32 sCalendarUITilemapSupplement[] = INCBIN_U32("graphics/calendar/tilemap_supplement.bin.lz");
@@ -933,6 +935,11 @@ static bool8 CalendarUI_LoadGraphics(void)
     {
     case 0:
         ResetTempTileDataBuffers();
+        const u32 *tilesCalendarUI;
+        if (CALENDAR_DITHERING)
+            tilesCalendarUI = sCalendarUITiles_Dithering;
+        else
+            tilesCalendarUI = sCalendarUITiles;
         DecompressAndCopyTileDataToVram(1, sCalendarUITiles, 0, 0, 0);
         IkigaiScrollingBackground_CreateTiles(2);
         sCalendarUIState->loadState++;
