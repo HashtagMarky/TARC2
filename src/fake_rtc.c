@@ -139,9 +139,14 @@ void Script_ToggleFakeRtc(void)
     FlagToggle(OW_FLAG_PAUSE_TIME);
 }
 
+u8 Ikigai_ReturnDaysInSeason(void)
+{
+    return IKIGAI_FULL_MONTH ? 28 : 14;
+}
+
 u8 Ikigai_GetYearFromDays(u32 days)
 {
-    return (days == 0) ? 0 : ((days - 1) / (SEASON_COUNT * DAYS_IN_SEASON)) + 1;
+    return (days == 0) ? 0 : ((days - 1) / (SEASON_COUNT * Ikigai_ReturnDaysInSeason())) + 1;
 }
 
 u8 Ikigai_GetYear(void)
@@ -155,9 +160,9 @@ enum Seasons Ikigai_GetSeasonFromDays(u32 days)
     if (days == 0)
         return SEASON_COUNT;
 
-    days = (days - 1) % (SEASON_COUNT * DAYS_IN_SEASON);
+    days = (days - 1) % (SEASON_COUNT * Ikigai_ReturnDaysInSeason());
 
-    return days / DAYS_IN_SEASON;
+    return days / Ikigai_ReturnDaysInSeason();
 }
 
 enum Seasons Ikigai_GetSeason(void)
@@ -168,7 +173,7 @@ enum Seasons Ikigai_GetSeason(void)
 
 u8 Ikigai_GetDateFromDays(u32 days)
 {
-    return (days == 0) ? 0 : ((days - 1) % DAYS_IN_SEASON) + 1;
+    return (days == 0) ? 0 : ((days - 1) % Ikigai_ReturnDaysInSeason()) + 1;
 }
 
 void UNUSED Ikigai_SetToNextSeason(s16 days, enum Seasons newSeason)
@@ -183,7 +188,7 @@ void UNUSED Ikigai_SetToNextSeason(s16 days, enum Seasons newSeason)
     if (newSeason <= currentSeason || newSeason == SEASON_COUNT)
         year++;
 
-    daysDiff = (year * 112) + (newSeason * 28);
+    daysDiff = (year * 112) + (newSeason * Ikigai_ReturnDaysInSeason());
     daysDiff -= days; 
     FakeRtc_AdvanceTimeBy(daysDiff, 0, 0, 0);
 }
@@ -195,7 +200,7 @@ void Ikigai_SetToYearOneSeason(enum Seasons newSeason)
     if (newSeason == SEASON_COUNT)
         day = 0;
     else
-        day = 1 + (DAYS_IN_SEASON * newSeason);
+        day = 1 + (Ikigai_ReturnDaysInSeason() * newSeason);
 
     FakeRtc_ManuallySetTime(day, 0, 0, 0);
 }

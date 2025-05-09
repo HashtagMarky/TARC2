@@ -139,7 +139,8 @@ static const struct WindowTemplate sCalendarUIWindowTemplates[] =
 };
 
 static const u32 sCalendarUITiles[] = INCBIN_U32("graphics/calendar/tiles.4bpp.lz");
-static const u32 sCalendarUITilemap[] = INCBIN_U32("graphics/calendar/tilemap.bin.lz");
+static const u32 sCalendarUITilemap_FourWeeks[] = INCBIN_U32("graphics/calendar/tilemap_four_weeks.bin.lz");
+static const u32 sCalendarUITilemap_TwoWeeks[] = INCBIN_U32("graphics/calendar/tilemap_two_weeks.bin.lz");
 static const u32 sCalendarUITilemapSupplement[] = INCBIN_U32("graphics/calendar/tilemap_supplement.bin.lz");
 static const u16 sCalendarUIPalette[] = INCBIN_U16("graphics/calendar/tiles.gbapal");
 
@@ -939,7 +940,12 @@ static bool8 CalendarUI_LoadGraphics(void)
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(sCalendarUITilemap, sBg1TilemapBuffer);
+            const u32 *tilemapCalendarUI;
+            if (IKIGAI_FULL_MONTH)
+                tilemapCalendarUI = sCalendarUITilemap_FourWeeks;
+            else
+                tilemapCalendarUI = sCalendarUITilemap_TwoWeeks;
+            LZDecompressWram(tilemapCalendarUI, sBg1TilemapBuffer);
             IkigaiScrollingBackground_CreateTilemap(1, sBg2TilemapBuffer);
             LZDecompressWram(sCalendarUITilemapSupplement, sBg3TilemapBuffer);
             sCalendarUIState->loadState++;
@@ -1087,6 +1093,8 @@ static void CalendarUI_CreateSprites_Season(void)
 
     u32 x = 116;
     u32 y = 28;
+    if (!IKIGAI_FULL_MONTH)
+        y += 16;
     sCalendarUIState->spriteIdSeason[SEASON_SPRITE_LEFT] = CreateSprite(&sSpriteTemplate_CalendarSeasonIcon,
         x,
         y,
@@ -1109,6 +1117,8 @@ static void CalendarUI_CreateSprites_Year(void)
     u32 digitOnes = year % 10;
     u32 x = 100;
     u32 y = 39;
+    if (!IKIGAI_FULL_MONTH)
+        y += 16;
 
     struct CompressedSpriteSheet sSpriteSheet_CalendarYearDigitOne;
     sSpriteSheet_CalendarYearDigitOne.data = sDateNumbers[digitHundreds].gfx;
@@ -1299,9 +1309,13 @@ static void CalendarUI_CreateSprites_TypeIcon(void)
 static void CalendarUI_CreateSprites_Dates(void)
 {
     u32 date = sCalendarUIState->date;
+    u32 days = Ikigai_ReturnDaysInSeason();
+    u32 y = 0;
+    if (!IKIGAI_FULL_MONTH)
+        y = 24;
     // date = (date < DAY_1) ? DAY_1 : (date > DAY_28) ? DAY_28 : date;
 
-    for (u32 dateCount = DAY_1; dateCount < DAYS_IN_SEASON + 1; dateCount++)
+    for (u32 dateCount = DAY_1; dateCount < days + 1; dateCount++)
     {
         struct CompressedSpriteSheet sSpriteSheet_CalendarDate;
         sSpriteSheet_CalendarDate.data = sDateNumbers[dateCount].gfx;
@@ -1320,7 +1334,7 @@ static void CalendarUI_CreateSprites_Dates(void)
         LoadCompressedSpriteSheet(&sSpriteSheet_CalendarDate);
         sCalendarUIState->spriteIdDate[dateCount] = CreateSprite(&sSpriteTemplate_CalendarDate,
             sDateNumbers[dateCount].x,
-            sDateNumbers[dateCount].y,
+            sDateNumbers[dateCount].y + y,
             1
         );
 
