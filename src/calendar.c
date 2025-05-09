@@ -1037,7 +1037,7 @@ static void CalendarUI_PrintScheduleText(void)
 
 static void CalendarUI_CreateSprites_Season(void)
 {
-    if (sCalendarUIState->season)
+    if (sCalendarUIState->season == SEASON_COUNT)
         return;
     
     struct CompressedSpriteSheet sSpriteSheet_CalendarSeasonIcon;
