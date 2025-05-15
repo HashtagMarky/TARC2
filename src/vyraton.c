@@ -11,10 +11,94 @@
 #include "random.h"
 #include "sound.h"
 #include "task.h"
+#include "constants/map_types.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/metatile_labels.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
+#include "constants/weather.h"
+
+
+struct IkigaiRandomWeather
+{
+    u32 weather;
+    u32 chance;
+};
+
+static const struct IkigaiRandomWeather sIkigaiRandomWeatherSpring[] =
+{
+    { WEATHER_RAIN, 100 },
+};
+
+static const struct IkigaiRandomWeather sIkigaiRandomWeatherSummer[] =
+{
+    { WEATHER_SUNNY, 100 },
+};
+
+static const struct IkigaiRandomWeather sIkigaiRandomWeatherAutumn[] =
+{
+    { WEATHER_NONE, 100 },
+};
+
+static const struct IkigaiRandomWeather sIkigaiRandomWeatherWinter[] =
+{
+    { WEATHER_SNOW, 100 },
+};
+
+static const struct IkigaiRandomWeather *sIkigaiRandomWeather[SEASON_COUNT] =
+{
+    [SEASON_SPRING] = sIkigaiRandomWeatherSpring,
+    [SEASON_SUMMER] = sIkigaiRandomWeatherSummer,
+    [SEASON_AUTUMN] = sIkigaiRandomWeatherAutumn,
+    [SEASON_WINTER] = sIkigaiRandomWeatherWinter,
+};
+
+static const size_t sIkigaiRandomWeatherCount[SEASON_COUNT] =
+{
+    [SEASON_SPRING] = sizeof(sIkigaiRandomWeatherSpring) / sizeof(struct IkigaiRandomWeather),
+    [SEASON_SUMMER] = sizeof(sIkigaiRandomWeatherSummer) / sizeof(struct IkigaiRandomWeather),
+    [SEASON_AUTUMN] = sizeof(sIkigaiRandomWeatherAutumn) / sizeof(struct IkigaiRandomWeather),
+    [SEASON_WINTER] = sizeof(sIkigaiRandomWeatherWinter) / sizeof(struct IkigaiRandomWeather),
+};
+
+bool32 Ikigai_ShouldLoadVyratonWeather(void)
+{
+    return (gMapHeader.regionMapSectionId == MAPSEC_VYRATON
+        && gMapHeader.weather == WEATHER_NONE
+        && (gMapHeader.mapType == MAP_TYPE_TOWN
+            || gMapHeader.mapType == MAP_TYPE_CITY
+            || gMapHeader.mapType == MAP_TYPE_ROUTE
+            || gMapHeader.mapType == MAP_TYPE_OCEAN_ROUTE)
+    );
+}
+
+void Ikigai_SetVyratonWeather(void)
+{
+    enum Seasons season = Ikigai_FetchSeason();
+    const struct IkigaiRandomWeather *tableWeather = sIkigaiRandomWeather[season];
+    size_t count = sIkigaiRandomWeatherCount[season];
+
+    u32 totalChance = 0;
+    for (size_t i = 0; i < count; ++i)
+    {
+        totalChance += tableWeather[i].chance;
+    }
+
+    u32 roll = Random() % totalChance;
+    u32 cumulativeChance = 0;
+
+    for (size_t i = 0; i < count; ++i)
+    {
+        cumulativeChance += tableWeather[i].chance;
+        if (roll < cumulativeChance)
+        {
+            gSaveBlock1Ptr->weatherVyraton = tableWeather[i].weather;
+            return;
+        }
+    }
+
+    gSaveBlock1Ptr->weatherVyraton = WEATHER_NONE;
+}
 
 
 static EWRAM_DATA enum Seasons season;

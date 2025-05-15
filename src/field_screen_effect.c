@@ -45,6 +45,7 @@
 #include "calendar.h"
 #include "clock.h"
 #include "fake_rtc.h"
+#include "vyraton.h"
 
 static void Task_ExitNonAnimDoor(u8);
 static void Task_ExitNonDoor(u8);
@@ -734,6 +735,7 @@ void DoCalendarWarpHome(void)
     RtcCalcLocalTime();
     FakeRtc_ForwardTimeTo((Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_MORNING, FALSE) + IKIGAI_HOUR_OFFSET) % HOURS_PER_DAY, 0, 0);
     DoTimeBasedEvents();
+    Ikigai_SetVyratonWeather();
     gFieldCallback = FieldCB_DefaultWarpExit;
     CreateTask(Task_OpenCalendarUI, 10);
     gTasks[FindTaskIdByFunc(Task_OpenCalendarUI)].tIsWarp = TRUE;

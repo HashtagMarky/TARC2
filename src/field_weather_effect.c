@@ -15,6 +15,7 @@
 #include "trig.h"
 #include "gpu_regs.h"
 #include "palette.h"
+#include "vyraton.h"
 
 EWRAM_DATA static u8 sCurrentAbnormalWeather = 0;
 
@@ -2539,7 +2540,12 @@ u8 GetSavedWeather(void)
 void SetSavedWeatherFromCurrMapHeader(void)
 {
     u8 oldWeather = gSaveBlock1Ptr->weather;
-    gSaveBlock1Ptr->weather = TranslateWeatherNum(gMapHeader.weather);
+
+    if (!Ikigai_ShouldLoadVyratonWeather())
+        gSaveBlock1Ptr->weather = TranslateWeatherNum(gMapHeader.weather);
+    else
+        gSaveBlock1Ptr->weather = gSaveBlock1Ptr->weatherVyraton;
+
     UpdateRainCounter(gSaveBlock1Ptr->weather, oldWeather);
 }
 

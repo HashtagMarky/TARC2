@@ -30,6 +30,10 @@ struct IkigaiTilesetReplacements
 };
 
 
+bool32 Ikigai_ShouldLoadVyratonWeather(void);
+void Ikigai_SetVyratonWeather(void);
+void Ikigai_UpdateVyratonWeather(void);
+
 void VyratonTilesets_DrawRandomisedMetatiles(void);
 void gTileset_IkigaiOffice_ReplacementFunc_Printer(s32 x, s32 y);
 void gTileset_IkigaiOffice_ReplacementFunc_Whiteboard(s32 x, s32 y);
