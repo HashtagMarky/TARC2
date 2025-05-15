@@ -3,6 +3,7 @@
 #include "main.h"
 #include "vyraton.h"
 #include "data/vyraton_randomised_metatiles.h"
+#include "data/vyraton_randomised_weather.h"
 #include "fake_rtc.h"
 #include "fieldmap.h"
 #include "field_camera.h"
@@ -16,50 +17,10 @@
 #include "constants/metatile_labels.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
-#include "constants/weather.h"
 
+static EWRAM_DATA enum Seasons season;
+#define IKIGAI_GROUND_ELEVATION 3
 
-struct IkigaiRandomWeather
-{
-    u32 weather;
-    u32 chance;
-};
-
-static const struct IkigaiRandomWeather sIkigaiRandomWeatherSpring[] =
-{
-    { WEATHER_RAIN, 100 },
-};
-
-static const struct IkigaiRandomWeather sIkigaiRandomWeatherSummer[] =
-{
-    { WEATHER_SUNNY, 100 },
-};
-
-static const struct IkigaiRandomWeather sIkigaiRandomWeatherAutumn[] =
-{
-    { WEATHER_NONE, 100 },
-};
-
-static const struct IkigaiRandomWeather sIkigaiRandomWeatherWinter[] =
-{
-    { WEATHER_SNOW, 100 },
-};
-
-static const struct IkigaiRandomWeather *sIkigaiRandomWeather[SEASON_COUNT] =
-{
-    [SEASON_SPRING] = sIkigaiRandomWeatherSpring,
-    [SEASON_SUMMER] = sIkigaiRandomWeatherSummer,
-    [SEASON_AUTUMN] = sIkigaiRandomWeatherAutumn,
-    [SEASON_WINTER] = sIkigaiRandomWeatherWinter,
-};
-
-static const size_t sIkigaiRandomWeatherCount[SEASON_COUNT] =
-{
-    [SEASON_SPRING] = sizeof(sIkigaiRandomWeatherSpring) / sizeof(struct IkigaiRandomWeather),
-    [SEASON_SUMMER] = sizeof(sIkigaiRandomWeatherSummer) / sizeof(struct IkigaiRandomWeather),
-    [SEASON_AUTUMN] = sizeof(sIkigaiRandomWeatherAutumn) / sizeof(struct IkigaiRandomWeather),
-    [SEASON_WINTER] = sizeof(sIkigaiRandomWeatherWinter) / sizeof(struct IkigaiRandomWeather),
-};
 
 bool32 Ikigai_ShouldLoadVyratonWeather(void)
 {
@@ -101,8 +62,6 @@ void Ikigai_SetVyratonWeather(void)
 }
 
 
-static EWRAM_DATA enum Seasons season;
-#define IKIGAI_GROUND_ELEVATION 3
 
 void VyratonTilesets_DrawRandomisedMetatiles(void)
 {

@@ -2,6 +2,17 @@
 #define GUARD_VYRATON_H
 
 
+struct IkigaiRandomWeather
+{
+    u32 weather;
+    u32 chance;
+};
+
+bool32 Ikigai_ShouldLoadVyratonWeather(void);
+void Ikigai_SetVyratonWeather(void);
+void Ikigai_UpdateVyratonWeather(void);
+
+
 #define INVALID_METATILE            NUM_METATILES_TOTAL
 #define NUM_REPLACEMENT_METATILES   3
 
@@ -29,10 +40,6 @@ struct IkigaiTilesetReplacements
     const struct IkigaiTilesetReplacementMetatiles *replacementTiles;
 };
 
-
-bool32 Ikigai_ShouldLoadVyratonWeather(void);
-void Ikigai_SetVyratonWeather(void);
-void Ikigai_UpdateVyratonWeather(void);
 
 void VyratonTilesets_DrawRandomisedMetatiles(void);
 void gTileset_IkigaiOffice_ReplacementFunc_Printer(s32 x, s32 y);
