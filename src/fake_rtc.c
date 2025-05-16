@@ -46,6 +46,7 @@ void FakeRtc_TickTimeForward(void)
         return;
 
     FakeRtc_AdvanceTimeBy(0, 0, 0, FakeRtc_GetSecondsRatio());
+    // Ikigai_UpdateVyratonWeather();
 }
 
 void FakeRtc_AdvanceTimeBy(u32 days, u32 hours, u32 minutes, u32 seconds)

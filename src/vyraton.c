@@ -61,6 +61,18 @@ void Ikigai_SetVyratonWeather(void)
     gSaveBlock1Ptr->weatherVyraton = WEATHER_NONE;
 }
 
+void Ikigai_UpdateVyratonWeather(void)
+{
+    RtcCalcLocalTime();
+    if (gLocalTime.minutes != 0
+        && (gLocalTime.hours != Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_DAY, FALSE)
+        || gLocalTime.hours != Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_EVENING, FALSE)
+        || gLocalTime.hours != Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_NIGHT, FALSE)))
+        return;
+    
+    if (Random() % 2 == TRUE)
+        Ikigai_SetVyratonWeather();
+}
 
 
 void VyratonTilesets_DrawRandomisedMetatiles(void)

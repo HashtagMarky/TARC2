@@ -82,6 +82,7 @@
 
 #include "speedup.h"
 #include "constants/field_effects.h"
+#include "vyraton.h"
 STATIC_ASSERT((B_FLAG_FOLLOWERS_DISABLED == 0 || OW_FOLLOWERS_ENABLED), FollowersFlagAssignedWithoutEnablingThem);
 
 struct CableClubPlayer
@@ -1742,6 +1743,7 @@ static void OverworldBasic(void)
     UpdateTilesetAnimations();
     DoScheduledBgTilemapCopiesToVram();
     TryUpdateOverworldDayNightMusic();
+    Ikigai_UpdateVyratonWeather();
     // Every minute if no palette fade is active, update TOD blending as needed
     if (!gPaletteFade.active && --gTimeUpdateCounter <= 0)
     {
