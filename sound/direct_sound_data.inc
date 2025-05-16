@@ -7716,7 +7716,7 @@ DirectSoundWaveData_hg_choirc5::
 Voice_NarraterGreeting::
 	.incbin "sound/direct_sound_samples/voices/narrater_ikigai.bin"
 
-.if MUSIC_EXPANSION_GEN5_MUSIC_ENABLED == TRUE
+.if MUSIC_EXPANSION_GEN5_MUSIC_ENABLED == TRUE && MUSIC_EXPANSION_GEN5_MUSIC_REDUCE_SIZE == FALSE
 @ -- Start BW/2 Instrument Samples --
 
     .align 2
@@ -9620,4 +9620,4 @@ DirectSoundWaveData_BWInstrumentSample475::
     .incbin "sound/direct_sound_samples/bw/bw_instrument_sample_475.bin"
 
 @ -- End BW/2 Instrument Samples --
-.endif @ MUSIC_EXPANSION_GEN5_MUSIC_ENABLED
+.endif @ MUSIC_EXPANSION_GEN5_MUSIC_ENABLED == TRUE && MUSIC_EXPANSION_GEN5_MUSIC_REDUCE_SIZE == FALSE

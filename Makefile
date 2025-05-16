@@ -270,7 +270,7 @@ DATA_ASM_OBJS := $(patsubst $(DATA_ASM_SUBDIR)/%.s,$(DATA_ASM_BUILDDIR)/%.o,$(DA
 include music_expansion.mk
 SONG_SRCS := $(wildcard $(SONG_SUBDIR)/*.s)
 # SONG_SRCS := $(filter-out $(addprefix $(SONG_SUBDIR)/,$(MUS_GEN4)),$(SONG_SRCS)) # Comment if MUSIC_EXPANSION_GEN4_MUSIC_ENABLED is FALSE.
-# SONG_SRCS := $(filter-out $(addprefix $(SONG_SUBDIR)/,$(MUS_GEN5)),$(SONG_SRCS)) # Comment if MUSIC_EXPANSION_GEN5_MUSIC_ENABLED is FALSE.
+SONG_SRCS := $(filter-out $(addprefix $(SONG_SUBDIR)/,$(MUS_GEN5)),$(SONG_SRCS)) # Comment if MUSIC_EXPANSION_GEN5_MUSIC_ENABLED is FALSE.
 # SONG_SRCS := $(filter-out $(addprefix $(SONG_SUBDIR)/,$(MUS_PMDR)),$(SONG_SRCS)) # Comment if MUSIC_EXPANSION_PMDR_MUSIC_ENABLED is FALSE.
 SONG_OBJS := $(patsubst $(SONG_SUBDIR)/%.s,$(SONG_BUILDDIR)/%.o,$(SONG_SRCS))
 

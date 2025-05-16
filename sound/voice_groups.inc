@@ -281,6 +281,7 @@
 .endif @ MUSIC_EXPANSION_GEN4_MUSIC_ENABLED
 
 .if MUSIC_EXPANSION_GEN5_MUSIC_ENABLED == TRUE
+.if MUSIC_EXPANSION_GEN5_MUSIC_REDUCE_SIZE == FALSE
 @ --Start BW/2--
 
 .include "sound/voicegroups/voicegroup531.inc"
@@ -359,5 +360,22 @@
 .include "sound/voicegroups/voicegroup604.inc"
 .include "sound/voicegroups/voicegroup605.inc"
 
+.else
+
+.include "sound/voicegroups/voicegroup274.inc"
+.include "sound/voicegroups/voicegroup275.inc"
+.include "sound/voicegroups/voicegroup276.inc"
+.include "sound/voicegroups/voicegroup277.inc"
+.include "sound/voicegroups/voicegroup278.inc"
+.include "sound/voicegroups/voicegroup279.inc"
+.include "sound/voicegroups/voicegroup280.inc"
+.include "sound/voicegroups/voicegroup281.inc"
+.include "sound/voicegroups/voicegroup282.inc"
+.include "sound/voicegroups/voicegroup283.inc"
+.include "sound/voicegroups/voicegroup284.inc"
+.include "sound/voicegroups/voicegroup285.inc"
+.include "sound/voicegroups/voicegroup286.inc"
+
+.endif
 @ --End BW/2--
 .endif @ MUSIC_EXPANSION_GEN5_MUSIC_ENABLED
