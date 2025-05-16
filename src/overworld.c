@@ -1760,7 +1760,6 @@ static void OverworldBasic(void)
         }
     }
     TryUpdateOverworldDayNightMusic();
-    Ikigai_UpdateVyratonWeather();
 }
 
 // This CB2 is used when starting
