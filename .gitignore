@@ -54,3 +54,4 @@ __pycache__
 tools/poryscript/poryscript
 tools/porytiles/raw/*/*/assign.cache
 !tools/porymap/scripts/*.js
+pokeikigai_map_analysis.csv

@@ -386,6 +386,10 @@ boot:
 porytiles:
 	@sh $(TOOLS_DIR)/porytiles/porytiles.sh
 
+size:
+	@$(MAKE)
+	@python3 map_analysis.py $(MAP_NAME)
+
 # Other rules
 include graphics_file_rules.mk
 include map_data_rules.mk
