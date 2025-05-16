@@ -1742,8 +1742,6 @@ static void OverworldBasic(void)
     UpdatePaletteFade();
     UpdateTilesetAnimations();
     DoScheduledBgTilemapCopiesToVram();
-    TryUpdateOverworldDayNightMusic();
-    Ikigai_UpdateVyratonWeather();
     // Every minute if no palette fade is active, update TOD blending as needed
     if (!gPaletteFade.active && --gTimeUpdateCounter <= 0)
     {
@@ -1761,6 +1759,8 @@ static void OverworldBasic(void)
            UpdatePalettesWithTime(PALETTES_ALL);
         }
     }
+    TryUpdateOverworldDayNightMusic();
+    Ikigai_UpdateVyratonWeather();
 }
 
 // This CB2 is used when starting
