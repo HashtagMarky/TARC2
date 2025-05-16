@@ -7,6 +7,7 @@
 #include "fake_rtc.h"
 #include "event_data.h"
 #include "script.h"
+#include "vyraton.h"
 
 static void FakeRtc_CalcTimeDifference(struct Time *result, struct SiiRtcInfo *t1, struct Time *t2);
 
@@ -46,7 +47,8 @@ void FakeRtc_TickTimeForward(void)
         return;
 
     FakeRtc_AdvanceTimeBy(0, 0, 0, FakeRtc_GetSecondsRatio());
-    // Ikigai_UpdateVyratonWeather();
+
+    Ikigai_TimeAdvanceFunctions();
 }
 
 void FakeRtc_AdvanceTimeBy(u32 days, u32 hours, u32 minutes, u32 seconds)

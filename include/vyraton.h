@@ -2,6 +2,9 @@
 #define GUARD_VYRATON_H
 
 
+void Ikigai_TimeAdvanceFunctions(void);
+
+
 struct IkigaiRandomWeather
 {
     u32 weather;

@@ -22,6 +22,12 @@ static EWRAM_DATA enum Seasons season;
 #define IKIGAI_GROUND_ELEVATION 3
 
 
+void Ikigai_TimeAdvanceFunctions(void)
+{
+    Ikigai_UpdateVyratonWeather();
+}
+
+
 bool32 Ikigai_ShouldLoadVyratonWeather(void)
 {
     return (gMapHeader.regionMapSectionId == MAPSEC_VYRATON
@@ -63,7 +69,7 @@ void Ikigai_SetVyratonWeather(void)
 
 void Ikigai_UpdateVyratonWeather(void)
 {
-    RtcCalcLocalTime();
+    // RtcCalcLocalTime();
     if (gLocalTime.minutes != 0
         && (gLocalTime.hours != Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_DAY, FALSE)
         || gLocalTime.hours != Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_EVENING, FALSE)
