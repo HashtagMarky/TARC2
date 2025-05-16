@@ -940,7 +940,7 @@ static bool8 CalendarUI_LoadGraphics(void)
             tilesCalendarUI = sCalendarUITiles_Dithering;
         else
             tilesCalendarUI = sCalendarUITiles;
-        DecompressAndCopyTileDataToVram(1, sCalendarUITiles, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, tilesCalendarUI, 0, 0, 0);
         IkigaiScrollingBackground_CreateTiles(2);
         sCalendarUIState->loadState++;
         break;
