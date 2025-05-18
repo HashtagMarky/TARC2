@@ -75,6 +75,7 @@
 #include "dynamic_music.h"
 #include "ikigai_characters.h"
 #include "ui_samuel_case.h"
+#include "vyraton.h"
 
 #define FLAG_DEBUG_SOUND_OVERWORLD_PLAY TRUE
 
@@ -2521,6 +2522,10 @@ static void DebugAction_Ikigai_SeasonsSelect(u8 taskId)
 
         PlaySE(SE_SELECT);
         DebugAction_DestroyExtraWindow(taskId);
+        RtcCalcLocalTime();
+        Ikigai_SetVyratonWeather();
+        SetSavedWeatherFromCurrMapHeader();
+        SetWeather(GetSavedWeather());
         SetMainCallback2(CB2_LoadMap);
     }
     else if (JOY_NEW(B_BUTTON))
