@@ -4,6 +4,7 @@
 #include "vyraton.h"
 #include "data/vyraton_randomised_metatiles.h"
 #include "data/vyraton_randomised_weather.h"
+#include "event_data.h"
 #include "fake_rtc.h"
 #include "fieldmap.h"
 #include "field_camera.h"
@@ -12,11 +13,14 @@
 #include "random.h"
 #include "sound.h"
 #include "task.h"
+#include "constants/flags.h"
 #include "constants/map_types.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/metatile_labels.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
+
+static void Ikigai_SetBedtime(void);
 
 static EWRAM_DATA enum Seasons season;
 #define IKIGAI_GROUND_ELEVATION 3
@@ -25,6 +29,7 @@ static EWRAM_DATA enum Seasons season;
 void Ikigai_TimeAdvanceFunctions(void)
 {
     Ikigai_UpdateVyratonWeather();
+    Ikigai_SetBedtime();
 }
 
 
@@ -79,6 +84,16 @@ void Ikigai_UpdateVyratonWeather(void)
     
     if (Random() % 2 == TRUE)
         Ikigai_SetVyratonWeather();
+}
+
+#define MIN_HOURS_REST 6
+static void Ikigai_SetBedtime(void)
+{
+    if (gLocalTime.minutes == 0 && gLocalTime.hours == (Ikigai_FetchSeasonalWakeUpTime() - MIN_HOURS_REST))
+    {
+        FlagSet(FLAG_PAUSE_TIME);
+        FlagSet(FLAG_SYS_BEDTIME);
+    }
 }
 
 

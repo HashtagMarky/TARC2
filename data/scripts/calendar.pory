@@ -1,0 +1,18 @@
+script EventScript_SetupCalendarWarpHome
+{
+    lock
+    playerbox(Text_TimeToGoToBed, EMOTE_THINK)
+    closemessage
+    delay(20)
+    callnative(DoCalendarWarpHome)
+    waitstate
+    end
+}
+
+text Text_TimeToGoToBed
+{
+    format("
+        Wow… It's getting late now.\n
+        I should probably head home to rest\l
+        for another big day tomorrow.")
+}

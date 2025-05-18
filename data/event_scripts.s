@@ -1161,6 +1161,7 @@ EventScript_VsSeekerChargingDone::
 	.include "data/scripts/pokedex.inc"
 	.include "data/scripts/dynamic_palettes.inc"
 	.include "data/scripts/dexnav.inc"
+	.include "data/scripts/calendar.inc"
 	
 	.include "data/scripts/ikigai_characters/scripts.inc"
 	.include "data/scripts/ikigai_characters/n.inc"

@@ -38,6 +38,7 @@
 #include "field_weather.h"
 #include "ikigai_interface.h"
 #include "international_string_util.h"
+#include "map_name_popup.h"
 #include "rtc.h"
 #include "start_menu.h"
 #include "type_icons.h"
@@ -708,6 +709,19 @@ static void PokeSphere_TypeIconCallback(struct Sprite *sprite);
 void OpenCalendarUI(void)
 {
     CreateTask(Task_OpenCalendarUI, 0);
+}
+
+void Ikigai_CheckBedtime(void)
+{
+    if (FlagGet(FLAG_SYS_BEDTIME)
+        && !ScriptContext_IsEnabled()
+        && !ArePlayerFieldControlsLocked()
+        && gFieldCallback == NULL)
+    {
+        HideMapNamePopUpWindow();
+        FadeOutAndFadeInNewMapMusic(PMD_EVENT_DREAM_01, 4, 4);
+        ScriptContext_SetupScript(EventScript_SetupCalendarWarpHome);
+    }
 }
 
 void Task_OpenCalendarUI(u8 taskId)

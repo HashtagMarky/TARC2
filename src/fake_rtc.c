@@ -260,3 +260,15 @@ u8 Ikigai_GetSeasonalTimeHour(s32 days, enum TimeOfDay time, bool32 end)
 
     return baseTime[time][end] + seasonalAdjustments[season][time][end];
 }
+
+u8 Ikigai_FetchSeasonalWakeUpTime(void)
+{
+    // return 7;
+
+    s32 days = gLocalTime.days;
+    s32 morningStart = Ikigai_GetSeasonalTimeHour(days, TIME_MORNING, FALSE);
+    s32 morningEnd = Ikigai_GetSeasonalTimeHour(days, TIME_MORNING, TRUE);
+    s32 morningMiddle = (morningStart + morningEnd) / 2;
+
+    return morningMiddle;
+}

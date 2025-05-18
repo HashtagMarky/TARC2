@@ -733,9 +733,10 @@ void DoCalendarWarpHome(void)
     PlayRainStoppingSoundEffect();
     PlaySE(SE_EXIT);
     RtcCalcLocalTime();
-    FakeRtc_ForwardTimeTo((Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_MORNING, FALSE) + IKIGAI_HOUR_OFFSET) % HOURS_PER_DAY, 0, 0);
+    FakeRtc_ForwardTimeTo((Ikigai_FetchSeasonalWakeUpTime() + IKIGAI_HOUR_OFFSET) % HOURS_PER_DAY, 0, 0);
     DoTimeBasedEvents();
     Ikigai_SetVyratonWeather();
+    FlagClear(FLAG_SYS_BEDTIME);
     gFieldCallback = FieldCB_DefaultWarpExit;
     CreateTask(Task_OpenCalendarUI, 10);
     gTasks[FindTaskIdByFunc(Task_OpenCalendarUI)].tIsWarp = TRUE;

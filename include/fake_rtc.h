@@ -30,5 +30,6 @@ u8 Ikigai_GetDateFromDays(u32 days);
 void UNUSED Ikigai_SetToNextSeason(s16 days, enum Seasons newSeason);
 void Ikigai_SetToYearOneSeason(enum Seasons newSeason);
 u8 Ikigai_GetSeasonalTimeHour(s32 days, enum TimeOfDay time, bool32 end);
+u8 Ikigai_FetchSeasonalWakeUpTime(void);
 
 #endif // GUARD_FAKE_RTC_UTIL_H

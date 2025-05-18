@@ -82,6 +82,7 @@
 
 #include "speedup.h"
 #include "constants/field_effects.h"
+#include "calendar.h"
 STATIC_ASSERT((B_FLAG_FOLLOWERS_DISABLED == 0 || OW_FOLLOWERS_ENABLED), FollowersFlagAssignedWithoutEnablingThem);
 
 struct CableClubPlayer
@@ -1759,6 +1760,7 @@ static void OverworldBasic(void)
         }
     }
     TryUpdateOverworldDayNightMusic();
+    Ikigai_CheckBedtime();
 }
 
 // This CB2 is used when starting
