@@ -42,6 +42,7 @@ bool32 Ikigai_ShouldLoadVyratonWeather(void)
 void Ikigai_SetVyratonWeather(void)
 {
     enum Seasons season = Ikigai_FetchSeason();
+    season = (season != SEASON_COUNT) ? season : SEASON_SPRING;
     const struct IkigaiRandomWeather *tableWeather = sIkigaiRandomWeather[season];
     size_t count = sIkigaiRandomWeatherCount[season];
 
