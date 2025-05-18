@@ -392,6 +392,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .text = (u8*)sDayTexts,
         .textSpread = 1,
         .emotion = FOLLOWER_EMOTION_MUSIC,
+        .emotionPMD = MUGSHOT_EMOTE_INSPIRED,
         .conditions =
         {
             MATCH_TIME_OF_DAY(TIME_DAY),
@@ -402,6 +403,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .text = (u8*)sNightTexts,
         .textSpread = 1,
         .emotion = FOLLOWER_EMOTION_MUSIC,
+        .emotionPMD = MUGSHOT_EMOTE_INSPIRED,
         .conditions =
         {
             MATCH_TIME_OF_DAY(TIME_NIGHT),
