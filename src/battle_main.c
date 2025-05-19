@@ -536,7 +536,14 @@ static void CB2_InitBattleInternal(void)
                                                                         | BATTLE_TYPE_TRAINER_HILL
                                                                         | BATTLE_TYPE_RECORDED)))
     {
-        gBattleTypeFlags |= (IsTrainerDoubleBattle(TRAINER_BATTLE_PARAM.opponentA) ? BATTLE_TYPE_DOUBLE : 0);
+        switch (GetTrainerBattleType(TRAINER_BATTLE_PARAM.opponentA))
+        {
+        case TRAINER_BATTLE_TYPE_SINGLES:
+            break;
+        case TRAINER_BATTLE_TYPE_DOUBLES:
+            gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
+            break;
+        }
     }
 
     InitBattleBgsVideo();
@@ -1975,7 +1982,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             u32 fixedOtId = 0;
             u32 abilityNum = 0;
 
-            if (trainer->doubleBattle == TRUE)
+            if (trainer->battleType != TRAINER_BATTLE_TYPE_SINGLES)
                 personalityValue = 0x80;
             else if (trainer->encounterMusic_gender & F_TRAINER_FEMALE)
                 personalityValue = 0x78; // Use personality more likely to result in a female Pokémon
@@ -3415,7 +3422,7 @@ const u8* FaintClearSetData(u32 battler)
         u32 partner = BATTLE_PARTNER(battler);
         if (IsBattlerAlive(partner))
         {
-            BtlController_EmitSpriteInvisibility(partner, BUFFER_A, FALSE);
+            BtlController_EmitSpriteInvisibility(partner, B_COMM_TO_CONTROLLER, FALSE);
             MarkBattlerForControllerExec(partner);
         }
     }
@@ -3493,7 +3500,7 @@ static void DoBattleIntro(void)
     {
     case BATTLE_INTRO_STATE_GET_MON_DATA:
         battler = gBattleCommunication[1];
-        BtlController_EmitGetMonData(battler, BUFFER_A, REQUEST_ALL_BATTLE, 0);
+        BtlController_EmitGetMonData(battler, B_COMM_TO_CONTROLLER, REQUEST_ALL_BATTLE, 0);
         MarkBattlerForControllerExec(battler);
         gBattleStruct->introState++;
         break;
@@ -3510,7 +3517,7 @@ static void DoBattleIntro(void)
         if (!gBattleControllerExecFlags)
         {
             battler = GetBattlerAtPosition(0);
-            BtlController_EmitIntroSlide(battler, BUFFER_A, gBattleEnvironment);
+            BtlController_EmitIntroSlide(battler, B_COMM_TO_CONTROLLER, gBattleEnvironment);
             MarkBattlerForControllerExec(battler);
             gBattleCommunication[0] = 0;
             gBattleCommunication[1] = 0;
@@ -3554,18 +3561,18 @@ static void DoBattleIntro(void)
             switch (GetBattlerPosition(battler))
             {
             case B_POSITION_PLAYER_LEFT: // player sprite
-                BtlController_EmitDrawTrainerPic(battler, BUFFER_A);
+                BtlController_EmitDrawTrainerPic(battler, B_COMM_TO_CONTROLLER);
                 MarkBattlerForControllerExec(battler);
                 break;
             case B_POSITION_OPPONENT_LEFT:
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER) // opponent 1 sprite
                 {
-                    BtlController_EmitDrawTrainerPic(battler, BUFFER_A);
+                    BtlController_EmitDrawTrainerPic(battler, B_COMM_TO_CONTROLLER);
                     MarkBattlerForControllerExec(battler);
                 }
                 else // wild mon 1
                 {
-                    BtlController_EmitLoadMonSprite(battler, BUFFER_A);
+                    BtlController_EmitLoadMonSprite(battler, B_COMM_TO_CONTROLLER);
                     MarkBattlerForControllerExec(battler);
                     gBattleResults.lastOpponentSpecies = GetMonData(GetBattlerMon(battler), MON_DATA_SPECIES, NULL);
                 }
@@ -3573,7 +3580,7 @@ static void DoBattleIntro(void)
             case B_POSITION_PLAYER_RIGHT:
                 if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER)) // partner sprite
                 {
-                    BtlController_EmitDrawTrainerPic(battler, BUFFER_A);
+                    BtlController_EmitDrawTrainerPic(battler, B_COMM_TO_CONTROLLER);
                     MarkBattlerForControllerExec(battler);
                 }
                 break;
@@ -3582,13 +3589,13 @@ static void DoBattleIntro(void)
                 {
                     if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS) && !BATTLE_TWO_VS_ONE_OPPONENT) // opponent 2 if exists
                     {
-                        BtlController_EmitDrawTrainerPic(battler, BUFFER_A);
+                        BtlController_EmitDrawTrainerPic(battler, B_COMM_TO_CONTROLLER);
                         MarkBattlerForControllerExec(battler);
                     }
                 }
                 else if (IsBattlerAlive(battler)) // wild mon 2 if alive
                 {
-                    BtlController_EmitLoadMonSprite(battler, BUFFER_A);
+                    BtlController_EmitLoadMonSprite(battler, B_COMM_TO_CONTROLLER);
                     MarkBattlerForControllerExec(battler);
                     gBattleResults.lastOpponentSpecies = GetMonData(GetBattlerMon(battler), MON_DATA_SPECIES, NULL);
                 }
@@ -3625,7 +3632,7 @@ static void DoBattleIntro(void)
             }
 
             battler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-            BtlController_EmitDrawPartyStatusSummary(battler, BUFFER_A, hpStatus, PARTY_SUMM_SKIP_DRAW_DELAY);
+            BtlController_EmitDrawPartyStatusSummary(battler, B_COMM_TO_CONTROLLER, hpStatus, PARTY_SUMM_SKIP_DRAW_DELAY);
             MarkBattlerForControllerExec(battler);
 
             for (i = 0; i < PARTY_SIZE; i++)
@@ -3644,7 +3651,7 @@ static void DoBattleIntro(void)
             }
 
             battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-            BtlController_EmitDrawPartyStatusSummary(battler, BUFFER_A, hpStatus, PARTY_SUMM_SKIP_DRAW_DELAY);
+            BtlController_EmitDrawPartyStatusSummary(battler, B_COMM_TO_CONTROLLER, hpStatus, PARTY_SUMM_SKIP_DRAW_DELAY);
             MarkBattlerForControllerExec(battler);
 
             gBattleStruct->introState++;
@@ -3694,7 +3701,7 @@ static void DoBattleIntro(void)
         else
             battler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
 
-        BtlController_EmitIntroTrainerBallThrow(battler, BUFFER_A);
+        BtlController_EmitIntroTrainerBallThrow(battler, B_COMM_TO_CONTROLLER);
         MarkBattlerForControllerExec(battler);
         gBattleStruct->introState++;
         break;
@@ -3706,7 +3713,7 @@ static void DoBattleIntro(void)
             else
                 battler = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
 
-            BtlController_EmitIntroTrainerBallThrow(battler, BUFFER_A);
+            BtlController_EmitIntroTrainerBallThrow(battler, B_COMM_TO_CONTROLLER);
             MarkBattlerForControllerExec(battler);
         }
         if (B_FAST_INTRO_PKMN_TEXT == TRUE
@@ -3762,7 +3769,7 @@ static void DoBattleIntro(void)
         else
             battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
 
-        BtlController_EmitIntroTrainerBallThrow(battler, BUFFER_A);
+        BtlController_EmitIntroTrainerBallThrow(battler, B_COMM_TO_CONTROLLER);
         MarkBattlerForControllerExec(battler);
         gBattleStruct->introState++;
         break;
@@ -3774,7 +3781,7 @@ static void DoBattleIntro(void)
             else
                 battler = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
 
-            BtlController_EmitIntroTrainerBallThrow(battler, BUFFER_A);
+            BtlController_EmitIntroTrainerBallThrow(battler, B_COMM_TO_CONTROLLER);
             MarkBattlerForControllerExec(battler);
         }
         gBattleStruct->introState++;
@@ -4276,7 +4283,7 @@ static void HandleTurnActionSelectionState(void)
                     else
                     {
                         gBattleStruct->itemPartyIndex[battler] = PARTY_SIZE;
-                        BtlController_EmitChooseAction(battler, BUFFER_A, gChosenActionByBattler[0], gBattleResources->bufferB[0][1] | (gBattleResources->bufferB[0][2] << 8));
+                        BtlController_EmitChooseAction(battler, B_COMM_TO_CONTROLLER, gChosenActionByBattler[0], gBattleResources->bufferB[0][1] | (gBattleResources->bufferB[0][2] << 8));
                         MarkBattlerForControllerExec(battler);
                         gBattleCommunication[battler]++;
                     }
@@ -4327,7 +4334,7 @@ static void HandleTurnActionSelectionState(void)
                                                             i);
                         }
 
-                        BtlController_EmitChooseMove(battler, BUFFER_A, IsDoubleBattle() != 0, FALSE, &moveInfo);
+                        BtlController_EmitChooseMove(battler, B_COMM_TO_CONTROLLER, IsDoubleBattle() != 0, FALSE, &moveInfo);
                         MarkBattlerForControllerExec(battler);
                     }
                     break;
@@ -4359,7 +4366,7 @@ static void HandleTurnActionSelectionState(void)
                     }
                     else
                     {
-                        BtlController_EmitChooseItem(battler, BUFFER_A, gBattleStruct->battlerPartyOrders[battler]);
+                        BtlController_EmitChooseItem(battler, B_COMM_TO_CONTROLLER, gBattleStruct->battlerPartyOrders[battler]);
                         MarkBattlerForControllerExec(battler);
                     }
                     break;
@@ -4368,21 +4375,21 @@ static void HandleTurnActionSelectionState(void)
                     if (gBattleTypeFlags & BATTLE_TYPE_ARENA
                         || !CanBattlerEscape(battler))
                     {
-                        BtlController_EmitChoosePokemon(battler, BUFFER_A, PARTY_ACTION_CANT_SWITCH, PARTY_SIZE, ABILITY_NONE, gBattleStruct->battlerPartyOrders[battler]);
+                        BtlController_EmitChoosePokemon(battler, B_COMM_TO_CONTROLLER, PARTY_ACTION_CANT_SWITCH, PARTY_SIZE, ABILITY_NONE, gBattleStruct->battlerPartyOrders[battler]);
                     }
                     else if (ItemId_GetHoldEffect(gBattleMons[battler].item) != HOLD_EFFECT_SHED_SHELL
                       && (i = IsAbilityPreventingEscape(battler)))   // must be last to keep i value integrity
                     {
-                        BtlController_EmitChoosePokemon(battler, BUFFER_A, ((i - 1) << 4) | PARTY_ACTION_ABILITY_PREVENTS, PARTY_SIZE, gBattleMons[i - 1].ability, gBattleStruct->battlerPartyOrders[battler]);
+                        BtlController_EmitChoosePokemon(battler, B_COMM_TO_CONTROLLER, ((i - 1) << 4) | PARTY_ACTION_ABILITY_PREVENTS, PARTY_SIZE, gBattleMons[i - 1].ability, gBattleStruct->battlerPartyOrders[battler]);
                     }
                     else
                     {
                         if (battler == 2 && gChosenActionByBattler[0] == B_ACTION_SWITCH)
-                            BtlController_EmitChoosePokemon(battler, BUFFER_A, PARTY_ACTION_CHOOSE_MON, gBattleStruct->monToSwitchIntoId[0], ABILITY_NONE, gBattleStruct->battlerPartyOrders[battler]);
+                            BtlController_EmitChoosePokemon(battler, B_COMM_TO_CONTROLLER, PARTY_ACTION_CHOOSE_MON, gBattleStruct->monToSwitchIntoId[0], ABILITY_NONE, gBattleStruct->battlerPartyOrders[battler]);
                         else if (battler == 3 && gChosenActionByBattler[1] == B_ACTION_SWITCH)
-                            BtlController_EmitChoosePokemon(battler, BUFFER_A, PARTY_ACTION_CHOOSE_MON, gBattleStruct->monToSwitchIntoId[1], ABILITY_NONE, gBattleStruct->battlerPartyOrders[battler]);
+                            BtlController_EmitChoosePokemon(battler, B_COMM_TO_CONTROLLER, PARTY_ACTION_CHOOSE_MON, gBattleStruct->monToSwitchIntoId[1], ABILITY_NONE, gBattleStruct->battlerPartyOrders[battler]);
                         else
-                            BtlController_EmitChoosePokemon(battler, BUFFER_A, PARTY_ACTION_CHOOSE_MON, PARTY_SIZE, ABILITY_NONE, gBattleStruct->battlerPartyOrders[battler]);
+                            BtlController_EmitChoosePokemon(battler, B_COMM_TO_CONTROLLER, PARTY_ACTION_CHOOSE_MON, PARTY_SIZE, ABILITY_NONE, gBattleStruct->battlerPartyOrders[battler]);
                     }
                     MarkBattlerForControllerExec(battler);
                     break;
@@ -4397,7 +4404,7 @@ static void HandleTurnActionSelectionState(void)
                     }
                     break;
                 case B_ACTION_SAFARI_POKEBLOCK:
-                    BtlController_EmitChooseItem(battler, BUFFER_A, gBattleStruct->battlerPartyOrders[battler]);
+                    BtlController_EmitChooseItem(battler, B_COMM_TO_CONTROLLER, gBattleStruct->battlerPartyOrders[battler]);
                     MarkBattlerForControllerExec(battler);
                     break;
                 case B_ACTION_CANCEL_PARTNER:
@@ -4407,7 +4414,7 @@ static void HandleTurnActionSelectionState(void)
                     if (gBattleMons[GetPartnerBattler(battler)].status2 & STATUS2_MULTIPLETURNS
                         || gBattleMons[GetPartnerBattler(battler)].status2 & STATUS2_RECHARGE)
                     {
-                        BtlController_EmitEndBounceEffect(battler, BUFFER_A);
+                        BtlController_EmitEndBounceEffect(battler, B_COMM_TO_CONTROLLER);
                         MarkBattlerForControllerExec(battler);
                         return;
                     }
@@ -4437,11 +4444,11 @@ static void HandleTurnActionSelectionState(void)
                     }
 
                     gBattleStruct->gimmick.toActivate &= ~((1u << BATTLE_PARTNER(GetBattlerPosition(battler))));
-                    BtlController_EmitEndBounceEffect(battler, BUFFER_A);
+                    BtlController_EmitEndBounceEffect(battler, B_COMM_TO_CONTROLLER);
                     MarkBattlerForControllerExec(battler);
                     return;
                 case B_ACTION_DEBUG:
-                    BtlController_EmitDebugMenu(battler, BUFFER_A);
+                    BtlController_EmitDebugMenu(battler, B_COMM_TO_CONTROLLER);
                     MarkBattlerForControllerExec(battler);
                     break;
                 }
@@ -4633,11 +4640,11 @@ static void HandleTurnActionSelectionState(void)
                     || (position & BIT_FLANK) != B_FLANK_LEFT
                     || gBattleStruct->battlerState[GetBattlerAtPosition(BATTLE_PARTNER(position))].absent)
                 {
-                    BtlController_EmitLinkStandbyMsg(battler, BUFFER_A, LINK_STANDBY_MSG_STOP_BOUNCE, i);
+                    BtlController_EmitLinkStandbyMsg(battler, B_COMM_TO_CONTROLLER, LINK_STANDBY_MSG_STOP_BOUNCE, i);
                 }
                 else
                 {
-                    BtlController_EmitLinkStandbyMsg(battler, BUFFER_A, LINK_STANDBY_STOP_BOUNCE_ONLY, i);
+                    BtlController_EmitLinkStandbyMsg(battler, B_COMM_TO_CONTROLLER, LINK_STANDBY_STOP_BOUNCE_ONLY, i);
                 }
                 MarkBattlerForControllerExec(battler);
                 gBattleCommunication[battler]++;
