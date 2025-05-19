@@ -28,6 +28,7 @@ extern const u16 gTilesetPalettes_IkigaiOutdoors_Summer[][16];
 extern const u16 gTilesetPalettes_IkigaiOutdoors_Autumn[][16];
 extern const u16 gTilesetPalettes_IkigaiOutdoors_Winter[][16];
 #define PAL_IKIGAI_OUTDOORS_TILESET_FOLIAGE 4
+#define PAL_IKIGAI_OUTDOORS_TILESET_GRASS_PATH 3
 
 struct IkigaiTilesetReplacementMetatiles
 {

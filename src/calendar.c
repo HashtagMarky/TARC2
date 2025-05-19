@@ -42,6 +42,7 @@
 #include "rtc.h"
 #include "start_menu.h"
 #include "type_icons.h"
+#include "vyraton.h"
 #include "constants/event_objects.h"
 #include "constants/weather.h"
 
@@ -566,6 +567,7 @@ static const u8 sCalendarUIWindowFontColors[][3] =
     [FONT_BROWN]  = {TEXT_COLOR_TRANSPARENT,    TEXT_COLOR_DARK_GRAY,   TEXT_COLOR_LIGHT_GRAY},
 };
 
+#define CALENDAR_BACKGROUND_INDEX           11
 #define DEFAULT_TEXT_REPLACEMENT_INDEX      5
 #define DEFAULT_SHADOW_REPLACEMENT_INDEX    11
 
@@ -792,6 +794,7 @@ static void CalendarUI_SetupCB(void)
         }
         break;
     case 3:
+        CalendarUI_GetData();
         if (CalendarUI_LoadGraphics() == TRUE)
         {
             gMain.state++;
@@ -802,7 +805,6 @@ static void CalendarUI_SetupCB(void)
         gMain.state++;
         break;
     case 5:
-        CalendarUI_GetData();
         CalendarUI_PrintScheduleText();
         CalendarUI_CreateSprites();
         PlaySE(SE_RG_CARD_FLIPPING);
@@ -974,6 +976,27 @@ static bool8 CalendarUI_LoadGraphics(void)
         break;
     case 2:
         LoadPalette(sCalendarUIPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+        u16 colour;
+        switch (sCalendarUIState->season)
+        {
+        default:
+        case SEASON_SPRING:
+            colour = gTilesetPalettes_IkigaiOutdoors[PAL_IKIGAI_OUTDOORS_TILESET_FOLIAGE][PAL_IKIGAI_OUTDOORS_TILESET_GRASS_PATH];
+            break;
+        
+        case SEASON_SUMMER:
+            colour = gTilesetPalettes_IkigaiOutdoors_Summer[PAL_IKIGAI_OUTDOORS_TILESET_FOLIAGE][PAL_IKIGAI_OUTDOORS_TILESET_GRASS_PATH];
+            break;
+
+        case SEASON_AUTUMN:
+            colour = gTilesetPalettes_IkigaiOutdoors_Autumn[PAL_IKIGAI_OUTDOORS_TILESET_FOLIAGE][PAL_IKIGAI_OUTDOORS_TILESET_GRASS_PATH];
+            break;
+
+        case SEASON_WINTER:
+            colour = gTilesetPalettes_IkigaiOutdoors_Winter[PAL_IKIGAI_OUTDOORS_TILESET_FOLIAGE][PAL_IKIGAI_OUTDOORS_TILESET_GRASS_PATH];
+            break;
+        }
+        LoadPalette(&colour, BG_PLTT_ID(0) + CALENDAR_BACKGROUND_INDEX, sizeof(colour));
         IkigaiScrollingBackground_LoadPalette(1, IKIGAI_PAL_SEASON);
         LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         LoadPalette(&sCalendarUIPalette[DEFAULT_TEXT_REPLACEMENT_INDEX], BG_PLTT_ID(15) + TEXT_COLOR_DARK_GRAY, sizeof(&sCalendarUIPalette[DEFAULT_TEXT_REPLACEMENT_INDEX]));

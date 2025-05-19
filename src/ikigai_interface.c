@@ -130,7 +130,7 @@ void IkigaiScrollingBackground_LoadPalette(u8 paletteSlot, enum IkigaiInterfaceP
         break;
     
         case IKIGAI_PAL_SEASON:
-        palette = Ikigai_ReturnScrollingBackgroundSeasonPalette(SEASON_COUNT);
+        palette = Ikigai_ReturnScrollingBackgroundSeasonPalette(Ikigai_FetchSeason());
         break;
     
         case IKIGAI_PAL_DEFAULT:
@@ -232,6 +232,7 @@ const u16 *Ikigai_ReturnScrollingBackgroundSeasonPalette(enum Seasons season)
 {
     switch (season)
     {
+        default:
         case SEASON_SPRING:
             return IkigaiScrollingBgPal_Enamorus;
 
@@ -243,10 +244,6 @@ const u16 *Ikigai_ReturnScrollingBackgroundSeasonPalette(enum Seasons season)
         
         case SEASON_WINTER:
             return IkigaiScrollingBgPal_Thundurus;
-
-        case SEASON_COUNT:
-        default:
-            return IkigaiScrollingBgPal_Default;
     }
 }
 
