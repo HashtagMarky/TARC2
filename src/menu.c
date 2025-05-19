@@ -21,6 +21,7 @@
 #include "script.h"
 #include "task.h"
 #include "text_window.h"
+#include "text.h"
 #include "window.h"
 #include "config/overworld.h"
 #include "constants/songs.h"
@@ -1792,23 +1793,26 @@ void PrintMenuActionTextsInUpperLeftCorner(u8 windowId, u8 itemCount, const stru
 void CreateYesNoMenu(const struct WindowTemplate *window, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
 {
     struct TextPrinterTemplate printer;
+    u8 fontId = ReturnNormalTextFont();
 
     sYesNoWindowId = AddWindow(window);
     DrawStdFrameWithCustomTileAndPalette(sYesNoWindowId, TRUE, baseTileNum, paletteNum);
 
     printer.currentChar = gText_YesNo;
     printer.windowId = sYesNoWindowId;
-    printer.fontId = FONT_NORMAL;
+    printer.fontId = fontId;
     printer.x = 8;
     printer.y = 1;
     printer.currentX = printer.x;
     printer.currentY = printer.y;
-    printer.fgColor = GetFontAttribute(FONT_NORMAL, FONTATTR_COLOR_FOREGROUND);
-    printer.bgColor = GetFontAttribute(FONT_NORMAL, FONTATTR_COLOR_BACKGROUND);
-    printer.shadowColor = GetFontAttribute(FONT_NORMAL, FONTATTR_COLOR_SHADOW);
-    printer.unk = GetFontAttribute(FONT_NORMAL, FONTATTR_UNKNOWN);
+    printer.fgColor = GetFontAttribute(fontId, FONTATTR_COLOR_FOREGROUND);
+    printer.bgColor = GetFontAttribute(fontId, FONTATTR_COLOR_BACKGROUND);
+    printer.shadowColor = GetFontAttribute(fontId, FONTATTR_COLOR_SHADOW);
+    printer.unk = GetFontAttribute(fontId, FONTATTR_UNKNOWN);
     printer.letterSpacing = 0;
     printer.lineSpacing = 0;
+    if (fontId == FONT_SHORT)
+        printer.lineSpacing += 2;
 
     AddTextPrinter(&printer, TEXT_SKIP_DRAW, NULL);
     InitMenuInUpperLeftCornerNormal(sYesNoWindowId, 2, initialCursorPos);
