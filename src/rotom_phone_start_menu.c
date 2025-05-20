@@ -96,26 +96,13 @@ static u8 SaveConfirmSaveCallback(void);
 static void InitSave(void);
 
 /* ENUMs */
-enum MenuItems
-{
-    MENU_POKEDEX,
-    MENU_PARTY,
-    MENU_BAG,
-    MENU_POKETCH,
-    MENU_TRAINER_CARD,
-    MENU_SAVE,
-    MENU_OPTIONS,
-    MENU_FLAG,
-    MENU_COUNT,
-};
-
-enum FlagValues
+enum RotomPhoneFlagValues
 {
     FLAG_VALUE_NOT_SET,
     FLAG_VALUE_SET,
 };
 
-enum SaveStates
+enum RotomPhoneSaveStates
 {
     SAVE_IN_PROGRESS,
     SAVE_SUCCESS,
@@ -123,7 +110,7 @@ enum SaveStates
     SAVE_ERROR,
 };
 
-enum SpriteAnims
+enum RotomPhoneSpriteAnims
 {
     SPRITE_INACTIVE,
     SPRITE_ACTIVE,
@@ -469,13 +456,13 @@ static const struct SpriteTemplate gSpriteIconFlag = {
 
 static void SpriteCB_IconPoketch(struct Sprite* sprite)
 {
-    if (menuSelected == MENU_POKETCH && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == ROTOM_PHONE_MENU_POKENAV && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
     {
         sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
-    else if (menuSelected != MENU_POKETCH)
+    else if (menuSelected != ROTOM_PHONE_MENU_POKENAV)
     {
         StartSpriteAnim(sprite, SPRITE_INACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
@@ -484,13 +471,13 @@ static void SpriteCB_IconPoketch(struct Sprite* sprite)
 
 static void SpriteCB_IconPokedex(struct Sprite* sprite)
 {
-    if (menuSelected == MENU_POKEDEX && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == ROTOM_PHONE_MENU_POKEDEX && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
     {
         sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
-    else if (menuSelected != MENU_POKEDEX)
+    else if (menuSelected != ROTOM_PHONE_MENU_POKEDEX)
     {
         StartSpriteAnim(sprite, SPRITE_INACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
@@ -499,13 +486,13 @@ static void SpriteCB_IconPokedex(struct Sprite* sprite)
 
 static void SpriteCB_IconParty(struct Sprite* sprite)
 {
-    if (menuSelected == MENU_PARTY && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == ROTOM_PHONE_MENU_PARTY && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
     {
         sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
-    else if (menuSelected != MENU_PARTY)
+    else if (menuSelected != ROTOM_PHONE_MENU_PARTY)
     {
         StartSpriteAnim(sprite, SPRITE_INACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
@@ -514,13 +501,13 @@ static void SpriteCB_IconParty(struct Sprite* sprite)
 
 static void SpriteCB_IconBag(struct Sprite* sprite)
 {
-    if (menuSelected == MENU_BAG && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == ROTOM_PHONE_MENU_BAG && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
     {
         sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
-    else if (menuSelected != MENU_BAG)
+    else if (menuSelected != ROTOM_PHONE_MENU_BAG)
     {
         StartSpriteAnim(sprite, SPRITE_INACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
@@ -529,13 +516,13 @@ static void SpriteCB_IconBag(struct Sprite* sprite)
 
 static void SpriteCB_IconTrainerCard(struct Sprite* sprite)
 {
-    if (menuSelected == MENU_TRAINER_CARD && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == ROTOM_PHONE_MENU_TRAINER_CARD && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
     {
         sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
-    else if (menuSelected != MENU_TRAINER_CARD)
+    else if (menuSelected != ROTOM_PHONE_MENU_TRAINER_CARD)
     {
         StartSpriteAnim(sprite, SPRITE_INACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
@@ -544,13 +531,13 @@ static void SpriteCB_IconTrainerCard(struct Sprite* sprite)
 
 static void SpriteCB_IconSave(struct Sprite* sprite)
 {
-    if (menuSelected == MENU_SAVE && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == ROTOM_PHONE_MENU_SAVE && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
     {
         sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
-    else if (menuSelected != MENU_SAVE)
+    else if (menuSelected != ROTOM_PHONE_MENU_SAVE)
     {
         StartSpriteAnim(sprite, SPRITE_INACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
@@ -559,13 +546,13 @@ static void SpriteCB_IconSave(struct Sprite* sprite)
 
 static void SpriteCB_IconOptions(struct Sprite* sprite)
 {
-    if (menuSelected == MENU_OPTIONS && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == ROTOM_PHONE_MENU_OPTIONS && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
     {
         sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
-    else if (menuSelected != MENU_OPTIONS)
+    else if (menuSelected != ROTOM_PHONE_MENU_OPTIONS)
     {
         StartSpriteAnim(sprite, SPRITE_INACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
@@ -574,13 +561,13 @@ static void SpriteCB_IconOptions(struct Sprite* sprite)
 
 static void SpriteCB_IconFlag(struct Sprite* sprite)
 {
-    if (menuSelected == MENU_FLAG && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == ROTOM_PHONE_MENU_FLAG && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
     {
         sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
-    else if (menuSelected != MENU_FLAG)
+    else if (menuSelected != ROTOM_PHONE_MENU_FLAG)
     {
         StartSpriteAnim(sprite, SPRITE_INACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
@@ -590,37 +577,37 @@ static void SpriteCB_IconFlag(struct Sprite* sprite)
 // If you want to shorten the dates to Sat., Sun., etc., change this to 70
 #define CLOCK_WINDOW_WIDTH 100
 
-static struct RotomPhoneMenuOptions sRotomPhoneOptions[MENU_COUNT] =
+static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
 {
-    [MENU_POKEDEX] =
+    [ROTOM_PHONE_MENU_POKEDEX] =
     {
         .menuName = COMPOUND_STRING("Pokédex"),
     },
-    [MENU_PARTY] =
+    [ROTOM_PHONE_MENU_PARTY] =
     {
         .menuName = COMPOUND_STRING("Party"),
     },
-    [MENU_BAG] =
+    [ROTOM_PHONE_MENU_BAG] =
     {
         .menuName = COMPOUND_STRING("Bag"),
     },
-    [MENU_POKETCH] =
+    [ROTOM_PHONE_MENU_POKENAV] =
     {
         .menuName = COMPOUND_STRING("PokéNav"),
     },
-    [MENU_TRAINER_CARD] =
+    [ROTOM_PHONE_MENU_TRAINER_CARD] =
     {
         .menuName = COMPOUND_STRING("Trainer"),
     },
-    [MENU_SAVE] =
+    [ROTOM_PHONE_MENU_SAVE] =
     {
         .menuName = COMPOUND_STRING("Save"),
     },
-    [MENU_OPTIONS] =
+    [ROTOM_PHONE_MENU_OPTIONS] =
     {
         .menuName = COMPOUND_STRING("Settings"),
     },
-    [MENU_FLAG] =
+    [ROTOM_PHONE_MENU_FLAG] =
     {
         .menuName = COMPOUND_STRING("Retire"),
     },
@@ -655,16 +642,16 @@ static const u8 gText_CurrentTimePMOff[] = _("  {STR_VAR_3} {CLEAR_TO 51}{STR_VA
 static void SetSelectedMenu(void)
 {
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
-        menuSelected = MENU_POKETCH;
+        menuSelected = ROTOM_PHONE_MENU_POKENAV;
     
     else if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
-        menuSelected = MENU_POKEDEX;
+        menuSelected = ROTOM_PHONE_MENU_POKEDEX;
     
     else if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
-        menuSelected = MENU_PARTY;
+        menuSelected = ROTOM_PHONE_MENU_PARTY;
     
     else
-        menuSelected = MENU_BAG;
+        menuSelected = ROTOM_PHONE_MENU_BAG;
 }
 
 static void ShowSafariBallsWindow(void)
@@ -711,8 +698,8 @@ void RotomPhone_StartMenu_Init(void)
         if (FlagGet(FLAG_SYS_POKENAV_GET) == FALSE && menuSelected == 0)
             menuSelected = 255;
 
-        if (menuSelected == MENU_FLAG)
-            menuSelected = MENU_POKEDEX;
+        if (menuSelected == ROTOM_PHONE_MENU_FLAG)
+            menuSelected = ROTOM_PHONE_MENU_POKEDEX;
 
         if (menuSelected == 255)
             SetSelectedMenu();
@@ -727,8 +714,8 @@ void RotomPhone_StartMenu_Init(void)
     }
     else
     {
-        if (menuSelected == 255 || menuSelected == MENU_POKETCH || menuSelected == MENU_SAVE)
-            menuSelected = MENU_FLAG;
+        if (menuSelected == 255 || menuSelected == ROTOM_PHONE_MENU_POKENAV || menuSelected == ROTOM_PHONE_MENU_SAVE)
+            menuSelected = ROTOM_PHONE_MENU_FLAG;
 
         RotomPhone_StartMenu_LoadSprites();
         RotomPhone_StartMenu_SafariZone_CreateSprites();
@@ -1392,22 +1379,22 @@ static void RotomPhone_StartMenu_OpenMenu(void)
 {
     switch (menuSelected)
     {
-    case MENU_POKETCH:
+    case ROTOM_PHONE_MENU_POKENAV:
         DoCleanUpAndChangeCallback(CB2_InitPokeNav);
         break;
-    case MENU_POKEDEX:
+    case ROTOM_PHONE_MENU_POKEDEX:
         DoCleanUpAndChangeCallback(CB2_OpenPokedex);
         break;
-    case MENU_PARTY: 
+    case ROTOM_PHONE_MENU_PARTY: 
         DoCleanUpAndChangeCallback(CB2_PartyMenuFromStartMenu);
         break;
-    case MENU_BAG: 
+    case ROTOM_PHONE_MENU_BAG: 
         DoCleanUpAndChangeCallback(CB2_BagMenuFromStartMenu);
         break;
-    case MENU_TRAINER_CARD:
+    case ROTOM_PHONE_MENU_TRAINER_CARD:
         DoCleanUpAndOpenTrainerCard();
         break;
-    case MENU_OPTIONS:
+    case ROTOM_PHONE_MENU_OPTIONS:
         DoCleanUpAndChangeCallback(CB2_InitOptionMenu);
         break;
     }
@@ -1425,20 +1412,20 @@ static void RotomPhone_StartMenu_HandleInput_DPADDOWN(void)
 
     switch (menuSelected)
     {
-    case MENU_OPTIONS:
+    case ROTOM_PHONE_MENU_OPTIONS:
         if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
-            menuSelected = MENU_POKEDEX;
+            menuSelected = ROTOM_PHONE_MENU_POKEDEX;
         else if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
-            menuSelected = MENU_PARTY;
+            menuSelected = ROTOM_PHONE_MENU_PARTY;
         else
-            menuSelected = MENU_BAG;
+            menuSelected = ROTOM_PHONE_MENU_BAG;
         break;
     default:
         menuSelected++;
         PlaySE(SE_SELECT);
-        if (FlagGet(FLAG_SYS_POKENAV_GET) == FALSE && menuSelected == MENU_POKETCH)
+        if (FlagGet(FLAG_SYS_POKENAV_GET) == FALSE && menuSelected == ROTOM_PHONE_MENU_POKENAV)
             menuSelected++;
-        else if (FlagGet(FLAG_SYS_POKEMON_GET) == FALSE && menuSelected == MENU_PARTY)
+        else if (FlagGet(FLAG_SYS_POKEMON_GET) == FALSE && menuSelected == ROTOM_PHONE_MENU_PARTY)
             menuSelected++;
         break;
     }
@@ -1451,18 +1438,18 @@ static void RotomPhone_StartMenu_HandleInput_DPADUP(void)
 
     switch (menuSelected)
     {
-    case MENU_POKEDEX:
-        menuSelected = MENU_OPTIONS;
+    case ROTOM_PHONE_MENU_POKEDEX:
+        menuSelected = ROTOM_PHONE_MENU_OPTIONS;
         break;
     default:
         PlaySE(SE_SELECT);
-        if (FlagGet(FLAG_SYS_POKENAV_GET) == FALSE && menuSelected == MENU_TRAINER_CARD)
+        if (FlagGet(FLAG_SYS_POKENAV_GET) == FALSE && menuSelected == ROTOM_PHONE_MENU_TRAINER_CARD)
         {
             menuSelected -= 2;
         }
-        else if ((FlagGet(FLAG_SYS_POKEMON_GET) == FALSE && menuSelected == MENU_BAG) || (FlagGet(FLAG_SYS_POKEDEX_GET) == FALSE && menuSelected == MENU_PARTY))
+        else if ((FlagGet(FLAG_SYS_POKEMON_GET) == FALSE && menuSelected == ROTOM_PHONE_MENU_BAG) || (FlagGet(FLAG_SYS_POKEDEX_GET) == FALSE && menuSelected == ROTOM_PHONE_MENU_PARTY))
         {
-            menuSelected = MENU_OPTIONS;
+            menuSelected = ROTOM_PHONE_MENU_OPTIONS;
             break;
         }
         else
@@ -1488,7 +1475,7 @@ static void Task_RotomPhone_StartMenu_HandleMainInput(u8 taskId)
     {
         if (sRotomPhone_StartMenu->loadState == 0)
         {
-            if (menuSelected != MENU_SAVE)
+            if (menuSelected != ROTOM_PHONE_MENU_SAVE)
                 FadeScreen(FADE_TO_BLACK, 0);
             
             sRotomPhone_StartMenu->loadState = 1;
@@ -1510,7 +1497,7 @@ static void Task_RotomPhone_StartMenu_HandleMainInput(u8 taskId)
     }
     else if (sRotomPhone_StartMenu->loadState == 1)
     {
-        if (menuSelected != MENU_SAVE)
+        if (menuSelected != ROTOM_PHONE_MENU_SAVE)
             RotomPhone_StartMenu_OpenMenu();
         
         else
@@ -1525,20 +1512,20 @@ static void RotomPhone_StartMenu_SafariZone_HandleInput_DPADDOWN(void)
 
     switch (menuSelected)
     {
-    case MENU_OPTIONS:
-        menuSelected = MENU_FLAG;
+    case ROTOM_PHONE_MENU_OPTIONS:
+        menuSelected = ROTOM_PHONE_MENU_FLAG;
         break;
     default:
         PlaySE(SE_SELECT);
 
-        if (menuSelected == MENU_FLAG)
-            menuSelected = MENU_POKEDEX;
+        if (menuSelected == ROTOM_PHONE_MENU_FLAG)
+            menuSelected = ROTOM_PHONE_MENU_POKEDEX;
         
-        else if (menuSelected == MENU_BAG)
-            menuSelected = MENU_TRAINER_CARD;
+        else if (menuSelected == ROTOM_PHONE_MENU_BAG)
+            menuSelected = ROTOM_PHONE_MENU_TRAINER_CARD;
         
-        else if (menuSelected == MENU_TRAINER_CARD)
-            menuSelected = MENU_OPTIONS;
+        else if (menuSelected == ROTOM_PHONE_MENU_TRAINER_CARD)
+            menuSelected = ROTOM_PHONE_MENU_OPTIONS;
         
         else
             menuSelected++;
@@ -1554,19 +1541,19 @@ static void RotomPhone_StartMenu_SafariZone_HandleInput_DPADUP(void)
 
     switch (menuSelected)
     {
-    case MENU_FLAG:
-        menuSelected = MENU_OPTIONS;
+    case ROTOM_PHONE_MENU_FLAG:
+        menuSelected = ROTOM_PHONE_MENU_OPTIONS;
         break;
     default:
         PlaySE(SE_SELECT);
-        if (menuSelected == MENU_POKEDEX)
-            menuSelected = MENU_FLAG;
+        if (menuSelected == ROTOM_PHONE_MENU_POKEDEX)
+            menuSelected = ROTOM_PHONE_MENU_FLAG;
         
-        else if (menuSelected == MENU_OPTIONS)
-            menuSelected = MENU_TRAINER_CARD;
+        else if (menuSelected == ROTOM_PHONE_MENU_OPTIONS)
+            menuSelected = ROTOM_PHONE_MENU_TRAINER_CARD;
         
-        else if (menuSelected == MENU_TRAINER_CARD)
-            menuSelected = MENU_BAG;
+        else if (menuSelected == ROTOM_PHONE_MENU_TRAINER_CARD)
+            menuSelected = ROTOM_PHONE_MENU_BAG;
         
         else
             menuSelected--;
@@ -1590,7 +1577,7 @@ static void Task_RotomPhone_StartMenu_SafariZone_HandleMainInput(u8 taskId)
     {
         if (sRotomPhone_StartMenu->loadState == 0)
         {
-            if (menuSelected != MENU_FLAG)
+            if (menuSelected != ROTOM_PHONE_MENU_FLAG)
                 FadeScreen(FADE_TO_BLACK, 0);
             
             sRotomPhone_StartMenu->loadState = 1;
@@ -1612,7 +1599,7 @@ static void Task_RotomPhone_StartMenu_SafariZone_HandleMainInput(u8 taskId)
     }
     else if (sRotomPhone_StartMenu->loadState == 1)
     {
-        if (menuSelected != MENU_FLAG)
+        if (menuSelected != ROTOM_PHONE_MENU_FLAG)
             RotomPhone_StartMenu_OpenMenu();
         
         else
