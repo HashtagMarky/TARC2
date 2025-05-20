@@ -20,6 +20,8 @@ enum RotomPhoneMenuItems
 struct RotomPhoneMenuOptions
 {
     const u8 *menuName;
+    bool32 (*unlockedFunc)(void);
+    const struct SpriteTemplate *iconTemplate;
 };
 
 void RotomPhone_StartMenu_Init(void);
