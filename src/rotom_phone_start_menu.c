@@ -1,5 +1,5 @@
 #include "option_menu.h"
-#include "heat_start_menu.h"
+#include "rotom_phone_start_menu.h"
 #include "global.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
@@ -67,18 +67,18 @@ static void SpriteCB_IconOptions(struct Sprite* sprite);
 static void SpriteCB_IconFlag(struct Sprite* sprite);
 
 /* TASKs */
-static void Task_HeatStartMenu_HandleMainInput(u8 taskId);
-static void Task_HeatStartMenu_SafariZone_HandleMainInput(u8 taskId);
+static void Task_RotomPhone_StartMenu_HandleMainInput(u8 taskId);
+static void Task_RotomPhone_StartMenu_SafariZone_HandleMainInput(u8 taskId);
 static void Task_HandleSave(u8 taskId);
 
 /* OTHER FUNCTIONS */
-static void HeatStartMenu_LoadSprites(void);
-static void HeatStartMenu_CreateSprites(void);
-static void HeatStartMenu_SafariZone_CreateSprites(void);
-static void HeatStartMenu_LoadBgGfx(void);
-static void HeatStartMenu_ShowTimeWindow(void);
-static void HeatStartMenu_UpdateClockDisplay(void);
-static void HeatStartMenu_UpdateMenuName(void);
+static void RotomPhone_StartMenu_LoadSprites(void);
+static void RotomPhone_StartMenu_CreateSprites(void);
+static void RotomPhone_StartMenu_SafariZone_CreateSprites(void);
+static void RotomPhone_StartMenu_LoadBgGfx(void);
+static void RotomPhone_StartMenu_ShowTimeWindow(void);
+static void RotomPhone_StartMenu_UpdateClockDisplay(void);
+static void RotomPhone_StartMenu_UpdateMenuName(void);
 static u8 RunSaveCallback(void);
 static u8 SaveDoSaveCallback(void);
 static void HideSaveInfoWindow(void);
@@ -129,7 +129,7 @@ enum SpriteAnims
 };
 
 /* STRUCTs */
-struct HeatStartMenu
+struct RotomPhone_StartMenu
 {
     MainCallback savedCallback;
     u32 loadState;
@@ -148,24 +148,24 @@ struct HeatStartMenu
     u32 spriteIdFlag;
 };
 
-static EWRAM_DATA struct HeatStartMenu *sHeatStartMenu = NULL;
+static EWRAM_DATA struct RotomPhone_StartMenu *sRotomPhone_StartMenu = NULL;
 static EWRAM_DATA u8 menuSelected;
 static EWRAM_DATA u8 (*sSaveDialogCallback)(void) = NULL;
 static EWRAM_DATA u8 sSaveDialogTimer = 0;
 static EWRAM_DATA u8 sSaveInfoWindowId = 0;
 
 // --BG-GFX--
-static const u32 sStartMenuTiles[] = INCBIN_U32("graphics/heat_start_menu/bg.4bpp.lz");
-static const u32 sStartMenuTilemap[] = INCBIN_U32("graphics/heat_start_menu/bg.bin.lz");
-static const u32 sStartMenuTilemapSafari[] = INCBIN_U32("graphics/heat_start_menu/bg_safari.bin.lz");
-static const u16 sStartMenuPalette[] = INCBIN_U16("graphics/heat_start_menu/bg.gbapal");
+static const u32 sStartMenuTiles[] = INCBIN_U32("graphics/rotom_phone_start_menu/bg.4bpp.lz");
+static const u32 sStartMenuTilemap[] = INCBIN_U32("graphics/rotom_phone_start_menu/bg.bin.lz");
+static const u32 sStartMenuTilemapSafari[] = INCBIN_U32("graphics/rotom_phone_start_menu/bg_safari.bin.lz");
+static const u16 sStartMenuPalette[] = INCBIN_U16("graphics/rotom_phone_start_menu/bg.gbapal");
 
 //--SPRITE-GFX--
 #define TAG_ICON_GFX 1234
 #define TAG_ICON_PAL 0x4654 | BLEND_IMMUNE_FLAG
 
-static const u32 sIconGfx[] = INCBIN_U32("graphics/heat_start_menu/icons.4bpp.lz");
-static const u16 sIconPal[] = INCBIN_U16("graphics/heat_start_menu/icons.gbapal");
+static const u32 sIconGfx[] = INCBIN_U32("graphics/rotom_phone_start_menu/icons.4bpp.lz");
+static const u16 sIconPal[] = INCBIN_U16("graphics/rotom_phone_start_menu/icons.gbapal");
 
 static const struct WindowTemplate sSaveInfoWindowTemplate = {
     .bg = 0,
@@ -468,9 +468,9 @@ static const struct SpriteTemplate gSpriteIconFlag = {
 
 static void SpriteCB_IconPoketch(struct Sprite* sprite)
 {
-    if (menuSelected == MENU_POKETCH && sHeatStartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == MENU_POKETCH && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
     {
-        sHeatStartMenu->flag = FLAG_VALUE_SET;
+        sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
@@ -483,9 +483,9 @@ static void SpriteCB_IconPoketch(struct Sprite* sprite)
 
 static void SpriteCB_IconPokedex(struct Sprite* sprite)
 {
-    if (menuSelected == MENU_POKEDEX && sHeatStartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == MENU_POKEDEX && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
     {
-        sHeatStartMenu->flag = FLAG_VALUE_SET;
+        sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
@@ -498,9 +498,9 @@ static void SpriteCB_IconPokedex(struct Sprite* sprite)
 
 static void SpriteCB_IconParty(struct Sprite* sprite)
 {
-    if (menuSelected == MENU_PARTY && sHeatStartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == MENU_PARTY && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
     {
-        sHeatStartMenu->flag = FLAG_VALUE_SET;
+        sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
@@ -513,9 +513,9 @@ static void SpriteCB_IconParty(struct Sprite* sprite)
 
 static void SpriteCB_IconBag(struct Sprite* sprite)
 {
-    if (menuSelected == MENU_BAG && sHeatStartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == MENU_BAG && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
     {
-        sHeatStartMenu->flag = FLAG_VALUE_SET;
+        sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
@@ -528,9 +528,9 @@ static void SpriteCB_IconBag(struct Sprite* sprite)
 
 static void SpriteCB_IconTrainerCard(struct Sprite* sprite)
 {
-    if (menuSelected == MENU_TRAINER_CARD && sHeatStartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == MENU_TRAINER_CARD && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
     {
-        sHeatStartMenu->flag = FLAG_VALUE_SET;
+        sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
@@ -543,9 +543,9 @@ static void SpriteCB_IconTrainerCard(struct Sprite* sprite)
 
 static void SpriteCB_IconSave(struct Sprite* sprite)
 {
-    if (menuSelected == MENU_SAVE && sHeatStartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == MENU_SAVE && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
     {
-        sHeatStartMenu->flag = FLAG_VALUE_SET;
+        sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
@@ -558,9 +558,9 @@ static void SpriteCB_IconSave(struct Sprite* sprite)
 
 static void SpriteCB_IconOptions(struct Sprite* sprite)
 {
-    if (menuSelected == MENU_OPTIONS && sHeatStartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == MENU_OPTIONS && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
     {
-        sHeatStartMenu->flag = FLAG_VALUE_SET;
+        sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
@@ -573,9 +573,9 @@ static void SpriteCB_IconOptions(struct Sprite* sprite)
 
 static void SpriteCB_IconFlag(struct Sprite* sprite)
 {
-    if (menuSelected == MENU_FLAG && sHeatStartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == MENU_FLAG && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
     {
-        sHeatStartMenu->flag = FLAG_VALUE_SET;
+        sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
@@ -632,16 +632,16 @@ static void SetSelectedMenu(void)
 
 static void ShowSafariBallsWindow(void)
 {
-    sHeatStartMenu->sSafariBallsWindowId = AddWindow(&sWindowTemplate_SafariBalls);
-    FillWindowPixelBuffer(sHeatStartMenu->sSafariBallsWindowId, PIXEL_FILL(TEXT_COLOR_WHITE));
-    PutWindowTilemap(sHeatStartMenu->sSafariBallsWindowId);
+    sRotomPhone_StartMenu->sSafariBallsWindowId = AddWindow(&sWindowTemplate_SafariBalls);
+    FillWindowPixelBuffer(sRotomPhone_StartMenu->sSafariBallsWindowId, PIXEL_FILL(TEXT_COLOR_WHITE));
+    PutWindowTilemap(sRotomPhone_StartMenu->sSafariBallsWindowId);
     ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gText_SafariBallStock);
-    AddTextPrinterParameterized(sHeatStartMenu->sSafariBallsWindowId, FONT_NARROW, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(sHeatStartMenu->sSafariBallsWindowId, COPYWIN_GFX);
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->sSafariBallsWindowId, FONT_NARROW, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sRotomPhone_StartMenu->sSafariBallsWindowId, COPYWIN_GFX);
 }
 
-void HeatStartMenu_Init(void)
+void RotomPhone_StartMenu_Init(void)
 {
     if (!IsOverworldLinkActive())
     {
@@ -653,21 +653,21 @@ void HeatStartMenu_Init(void)
     HideMapNamePopUpWindow();
     LockPlayerFieldControls();
 
-    if (sHeatStartMenu == NULL)
+    if (sRotomPhone_StartMenu == NULL)
     {
-        sHeatStartMenu = AllocZeroed(sizeof(struct HeatStartMenu));
+        sRotomPhone_StartMenu = AllocZeroed(sizeof(struct RotomPhone_StartMenu));
     }
 
-    if (sHeatStartMenu == NULL)
+    if (sRotomPhone_StartMenu == NULL)
     {
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
         return;
     }
 
-    sHeatStartMenu->savedCallback = CB2_ReturnToFieldWithOpenMenu;
-    sHeatStartMenu->loadState = 0;
-    sHeatStartMenu->sStartClockWindowId = 0;
-    sHeatStartMenu->flag = 0;
+    sRotomPhone_StartMenu->savedCallback = CB2_ReturnToFieldWithOpenMenu;
+    sRotomPhone_StartMenu->loadState = 0;
+    sRotomPhone_StartMenu->sStartClockWindowId = 0;
+    sRotomPhone_StartMenu->flag = 0;
 
     if (GetSafariZoneFlag() == FALSE)
     { 
@@ -680,31 +680,31 @@ void HeatStartMenu_Init(void)
         if (menuSelected == 255)
             SetSelectedMenu();
       
-        HeatStartMenu_LoadSprites();
-        HeatStartMenu_CreateSprites();
-        HeatStartMenu_LoadBgGfx();
-        HeatStartMenu_ShowTimeWindow();
-        sHeatStartMenu->sMenuNameWindowId = AddWindow(&sWindowTemplate_MenuName);
-        HeatStartMenu_UpdateMenuName();
-        CreateTask(Task_HeatStartMenu_HandleMainInput, 0);
+        RotomPhone_StartMenu_LoadSprites();
+        RotomPhone_StartMenu_CreateSprites();
+        RotomPhone_StartMenu_LoadBgGfx();
+        RotomPhone_StartMenu_ShowTimeWindow();
+        sRotomPhone_StartMenu->sMenuNameWindowId = AddWindow(&sWindowTemplate_MenuName);
+        RotomPhone_StartMenu_UpdateMenuName();
+        CreateTask(Task_RotomPhone_StartMenu_HandleMainInput, 0);
     }
     else
     {
         if (menuSelected == 255 || menuSelected == MENU_POKETCH || menuSelected == MENU_SAVE)
             menuSelected = MENU_FLAG;
 
-        HeatStartMenu_LoadSprites();
-        HeatStartMenu_SafariZone_CreateSprites();
-        HeatStartMenu_LoadBgGfx();
+        RotomPhone_StartMenu_LoadSprites();
+        RotomPhone_StartMenu_SafariZone_CreateSprites();
+        RotomPhone_StartMenu_LoadBgGfx();
         ShowSafariBallsWindow();
-        HeatStartMenu_ShowTimeWindow();
-        sHeatStartMenu->sMenuNameWindowId = AddWindow(&sWindowTemplate_MenuName);
-        HeatStartMenu_UpdateMenuName();
-        CreateTask(Task_HeatStartMenu_SafariZone_HandleMainInput, 0);
+        RotomPhone_StartMenu_ShowTimeWindow();
+        sRotomPhone_StartMenu->sMenuNameWindowId = AddWindow(&sWindowTemplate_MenuName);
+        RotomPhone_StartMenu_UpdateMenuName();
+        CreateTask(Task_RotomPhone_StartMenu_SafariZone_HandleMainInput, 0);
     }
 }
 
-static void HeatStartMenu_LoadSprites(void)
+static void RotomPhone_StartMenu_LoadSprites(void)
 {
     u32 index;
     LoadSpritePalette(sSpritePal_Icon);
@@ -713,7 +713,7 @@ static void HeatStartMenu_LoadSprites(void)
     LoadCompressedSpriteSheet(sSpriteSheet_Icon);
 }
 
-static void HeatStartMenu_CreateSprites(void)
+static void RotomPhone_StartMenu_CreateSprites(void)
 {
     u32 x = 224;
     u32 y1 = 14;
@@ -726,44 +726,44 @@ static void HeatStartMenu_CreateSprites(void)
 
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
     {
-        sHeatStartMenu->spriteIdPokedex = CreateSprite(&gSpriteIconPokedex, x-1, y1-2, 0);
-        sHeatStartMenu->spriteIdParty   = CreateSprite(&gSpriteIconParty, x, y2-3, 0);
-        sHeatStartMenu->spriteIdBag     = CreateSprite(&gSpriteIconBag, x, y3-2, 0);
-        sHeatStartMenu->spriteIdPoketch = CreateSprite(&gSpriteIconPoketch, x, y4+1, 0);
-        sHeatStartMenu->spriteIdTrainerCard = CreateSprite(&gSpriteIconTrainerCard, x, y5, 0);
-        sHeatStartMenu->spriteIdSave    = CreateSprite(&gSpriteIconSave, x, y6, 0);
-        sHeatStartMenu->spriteIdOptions = CreateSprite(&gSpriteIconOptions, x, y7, 0);
+        sRotomPhone_StartMenu->spriteIdPokedex = CreateSprite(&gSpriteIconPokedex, x-1, y1-2, 0);
+        sRotomPhone_StartMenu->spriteIdParty   = CreateSprite(&gSpriteIconParty, x, y2-3, 0);
+        sRotomPhone_StartMenu->spriteIdBag     = CreateSprite(&gSpriteIconBag, x, y3-2, 0);
+        sRotomPhone_StartMenu->spriteIdPoketch = CreateSprite(&gSpriteIconPoketch, x, y4+1, 0);
+        sRotomPhone_StartMenu->spriteIdTrainerCard = CreateSprite(&gSpriteIconTrainerCard, x, y5, 0);
+        sRotomPhone_StartMenu->spriteIdSave    = CreateSprite(&gSpriteIconSave, x, y6, 0);
+        sRotomPhone_StartMenu->spriteIdOptions = CreateSprite(&gSpriteIconOptions, x, y7, 0);
         return;
     }
     else if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
     {
-        sHeatStartMenu->spriteIdPokedex = CreateSprite(&gSpriteIconPokedex, x-1, y1, 0);
-        sHeatStartMenu->spriteIdParty = CreateSprite(&gSpriteIconParty, x, y2-1, 0);
-        sHeatStartMenu->spriteIdBag     = CreateSprite(&gSpriteIconBag, x, y3+1, 0);
-        sHeatStartMenu->spriteIdTrainerCard = CreateSprite(&gSpriteIconTrainerCard, x, y4 + 2, 0);
-        sHeatStartMenu->spriteIdSave    = CreateSprite(&gSpriteIconSave, x, y5 - 1, 0);
-        sHeatStartMenu->spriteIdOptions = CreateSprite(&gSpriteIconOptions, x, y6-2, 0);
+        sRotomPhone_StartMenu->spriteIdPokedex = CreateSprite(&gSpriteIconPokedex, x-1, y1, 0);
+        sRotomPhone_StartMenu->spriteIdParty = CreateSprite(&gSpriteIconParty, x, y2-1, 0);
+        sRotomPhone_StartMenu->spriteIdBag     = CreateSprite(&gSpriteIconBag, x, y3+1, 0);
+        sRotomPhone_StartMenu->spriteIdTrainerCard = CreateSprite(&gSpriteIconTrainerCard, x, y4 + 2, 0);
+        sRotomPhone_StartMenu->spriteIdSave    = CreateSprite(&gSpriteIconSave, x, y5 - 1, 0);
+        sRotomPhone_StartMenu->spriteIdOptions = CreateSprite(&gSpriteIconOptions, x, y6-2, 0);
         return;
     }
     else if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
     {
-        sHeatStartMenu->spriteIdParty = CreateSprite(&gSpriteIconParty, x, y1, 0);
-        sHeatStartMenu->spriteIdBag     = CreateSprite(&gSpriteIconBag, x, y2 + 1, 0);
-        sHeatStartMenu->spriteIdTrainerCard = CreateSprite(&gSpriteIconTrainerCard, x, y3 + 3, 0);
-        sHeatStartMenu->spriteIdSave    = CreateSprite(&gSpriteIconSave, x, y4 + 1, 0);
-        sHeatStartMenu->spriteIdOptions = CreateSprite(&gSpriteIconOptions, x, y5 - 4, 0);
+        sRotomPhone_StartMenu->spriteIdParty = CreateSprite(&gSpriteIconParty, x, y1, 0);
+        sRotomPhone_StartMenu->spriteIdBag     = CreateSprite(&gSpriteIconBag, x, y2 + 1, 0);
+        sRotomPhone_StartMenu->spriteIdTrainerCard = CreateSprite(&gSpriteIconTrainerCard, x, y3 + 3, 0);
+        sRotomPhone_StartMenu->spriteIdSave    = CreateSprite(&gSpriteIconSave, x, y4 + 1, 0);
+        sRotomPhone_StartMenu->spriteIdOptions = CreateSprite(&gSpriteIconOptions, x, y5 - 4, 0);
         return;
     }
     else
     {
-        sHeatStartMenu->spriteIdBag     = CreateSprite(&gSpriteIconBag, x, y1, 0);
-        sHeatStartMenu->spriteIdTrainerCard = CreateSprite(&gSpriteIconTrainerCard, x, y2 + 1, 0);
-        sHeatStartMenu->spriteIdSave    = CreateSprite(&gSpriteIconSave, x, y3 + 3, 0);
-        sHeatStartMenu->spriteIdOptions = CreateSprite(&gSpriteIconOptions, x, y4 + 1, 0);
+        sRotomPhone_StartMenu->spriteIdBag     = CreateSprite(&gSpriteIconBag, x, y1, 0);
+        sRotomPhone_StartMenu->spriteIdTrainerCard = CreateSprite(&gSpriteIconTrainerCard, x, y2 + 1, 0);
+        sRotomPhone_StartMenu->spriteIdSave    = CreateSprite(&gSpriteIconSave, x, y3 + 3, 0);
+        sRotomPhone_StartMenu->spriteIdOptions = CreateSprite(&gSpriteIconOptions, x, y4 + 1, 0);
     }
 }
 
-static void HeatStartMenu_SafariZone_CreateSprites(void)
+static void RotomPhone_StartMenu_SafariZone_CreateSprites(void)
 {
     u32 x = 224;
     u32 y1 = 14;
@@ -773,15 +773,15 @@ static void HeatStartMenu_SafariZone_CreateSprites(void)
     u32 y5 = 109;
     u32 y6 = 130;
 
-    sHeatStartMenu->spriteIdFlag = CreateSprite(&gSpriteIconFlag, x, y1, 0);
-    sHeatStartMenu->spriteIdPokedex = CreateSprite(&gSpriteIconPokedex, x-1, y2, 0);
-    sHeatStartMenu->spriteIdParty   = CreateSprite(&gSpriteIconParty, x, y3, 0);
-    sHeatStartMenu->spriteIdBag     = CreateSprite(&gSpriteIconBag, x, y4, 0);
-    sHeatStartMenu->spriteIdTrainerCard = CreateSprite(&gSpriteIconTrainerCard, x, y5, 0);
-    sHeatStartMenu->spriteIdOptions = CreateSprite(&gSpriteIconOptions, x, y6, 0);
+    sRotomPhone_StartMenu->spriteIdFlag = CreateSprite(&gSpriteIconFlag, x, y1, 0);
+    sRotomPhone_StartMenu->spriteIdPokedex = CreateSprite(&gSpriteIconPokedex, x-1, y2, 0);
+    sRotomPhone_StartMenu->spriteIdParty   = CreateSprite(&gSpriteIconParty, x, y3, 0);
+    sRotomPhone_StartMenu->spriteIdBag     = CreateSprite(&gSpriteIconBag, x, y4, 0);
+    sRotomPhone_StartMenu->spriteIdTrainerCard = CreateSprite(&gSpriteIconTrainerCard, x, y5, 0);
+    sRotomPhone_StartMenu->spriteIdOptions = CreateSprite(&gSpriteIconOptions, x, y6, 0);
 }
 
-static void HeatStartMenu_LoadBgGfx(void)
+static void RotomPhone_StartMenu_LoadBgGfx(void)
 {
     u8* buf = GetBgTilemapBuffer(0); 
     LoadBgTilemap(0, 0, 0, 0);
@@ -797,15 +797,15 @@ static void HeatStartMenu_LoadBgGfx(void)
     ScheduleBgCopyTilemapToVram(0);
 }
 
-static void HeatStartMenu_ShowTimeWindow(void)
+static void RotomPhone_StartMenu_ShowTimeWindow(void)
 {
     u8 analogHour;
 
 	RtcCalcLocalTime();
     // print window
-    sHeatStartMenu->sStartClockWindowId = AddWindow(&sWindowTemplate_StartClock);
-    FillWindowPixelBuffer(sHeatStartMenu->sStartClockWindowId, PIXEL_FILL(TEXT_COLOR_WHITE));
-    PutWindowTilemap(sHeatStartMenu->sStartClockWindowId);
+    sRotomPhone_StartMenu->sStartClockWindowId = AddWindow(&sWindowTemplate_StartClock);
+    FillWindowPixelBuffer(sRotomPhone_StartMenu->sStartClockWindowId, PIXEL_FILL(TEXT_COLOR_WHITE));
+    PutWindowTilemap(sRotomPhone_StartMenu->sStartClockWindowId);
     FlagSet(FLAG_TEMP_5);
 
     analogHour = (gLocalTime.hours >= 13 && gLocalTime.hours <= 24) ? gLocalTime.hours - 12 : gLocalTime.hours;
@@ -822,11 +822,11 @@ static void HeatStartMenu_ShowTimeWindow(void)
     else
         StringExpandPlaceholders(gStringVar4, gText_CurrentTimeAM);
     
-	AddTextPrinterParameterized(sHeatStartMenu->sStartClockWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
-	CopyWindowToVram(sHeatStartMenu->sStartClockWindowId, COPYWIN_GFX);
+	AddTextPrinterParameterized(sRotomPhone_StartMenu->sStartClockWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
+	CopyWindowToVram(sRotomPhone_StartMenu->sStartClockWindowId, COPYWIN_GFX);
 }
 
-static void HeatStartMenu_UpdateClockDisplay(void)
+static void RotomPhone_StartMenu_UpdateClockDisplay(void)
 {
     u8 analogHour;
 
@@ -864,8 +864,8 @@ static void HeatStartMenu_UpdateClockDisplay(void)
             StringExpandPlaceholders(gStringVar4, gText_CurrentTimeAMOff);
     }
     
-	AddTextPrinterParameterized(sHeatStartMenu->sStartClockWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
-	CopyWindowToVram(sHeatStartMenu->sStartClockWindowId, COPYWIN_GFX);
+	AddTextPrinterParameterized(sRotomPhone_StartMenu->sStartClockWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
+	CopyWindowToVram(sRotomPhone_StartMenu->sStartClockWindowId, COPYWIN_GFX);
 }
 
 static const u8 gText_Poketch[] = _("  PokeNav");
@@ -877,64 +877,64 @@ static const u8 gText_Save[]    = _("     Save  ");
 static const u8 gText_Options[] = _("   Options");
 static const u8 gText_Flag[]    = _("   Retire");
 
-static void HeatStartMenu_UpdateMenuName(void)
+static void RotomPhone_StartMenu_UpdateMenuName(void)
 {
-    FillWindowPixelBuffer(sHeatStartMenu->sMenuNameWindowId, PIXEL_FILL(TEXT_COLOR_WHITE));
-    PutWindowTilemap(sHeatStartMenu->sMenuNameWindowId);
+    FillWindowPixelBuffer(sRotomPhone_StartMenu->sMenuNameWindowId, PIXEL_FILL(TEXT_COLOR_WHITE));
+    PutWindowTilemap(sRotomPhone_StartMenu->sMenuNameWindowId);
 
     switch(menuSelected)
     {
     case MENU_POKETCH:
-        AddTextPrinterParameterized(sHeatStartMenu->sMenuNameWindowId, 1, gText_Poketch, 1, 0, 0xFF, NULL);
+        AddTextPrinterParameterized(sRotomPhone_StartMenu->sMenuNameWindowId, 1, gText_Poketch, 1, 0, 0xFF, NULL);
         break;
     case MENU_POKEDEX:
-        AddTextPrinterParameterized(sHeatStartMenu->sMenuNameWindowId, 1, gText_Pokedex, 1, 0, 0xFF, NULL);
+        AddTextPrinterParameterized(sRotomPhone_StartMenu->sMenuNameWindowId, 1, gText_Pokedex, 1, 0, 0xFF, NULL);
         break;
     case MENU_PARTY:
-        AddTextPrinterParameterized(sHeatStartMenu->sMenuNameWindowId, 1, gText_Party, 1, 0, 0xFF, NULL);
+        AddTextPrinterParameterized(sRotomPhone_StartMenu->sMenuNameWindowId, 1, gText_Party, 1, 0, 0xFF, NULL);
         break;
     case MENU_BAG:
-        AddTextPrinterParameterized(sHeatStartMenu->sMenuNameWindowId, 1, gText_Bag, 1, 0, 0xFF, NULL);
+        AddTextPrinterParameterized(sRotomPhone_StartMenu->sMenuNameWindowId, 1, gText_Bag, 1, 0, 0xFF, NULL);
         break;
     case MENU_TRAINER_CARD:
-        AddTextPrinterParameterized(sHeatStartMenu->sMenuNameWindowId, 1, gText_Trainer, 1, 0, 0xFF, NULL);
+        AddTextPrinterParameterized(sRotomPhone_StartMenu->sMenuNameWindowId, 1, gText_Trainer, 1, 0, 0xFF, NULL);
         break;
     case MENU_SAVE:
-        AddTextPrinterParameterized(sHeatStartMenu->sMenuNameWindowId, 1, gText_Save, 1, 0, 0xFF, NULL);
+        AddTextPrinterParameterized(sRotomPhone_StartMenu->sMenuNameWindowId, 1, gText_Save, 1, 0, 0xFF, NULL);
         break;
     case MENU_OPTIONS:
-        AddTextPrinterParameterized(sHeatStartMenu->sMenuNameWindowId, 1, gText_Options, 1, 0, 0xFF, NULL);
+        AddTextPrinterParameterized(sRotomPhone_StartMenu->sMenuNameWindowId, 1, gText_Options, 1, 0, 0xFF, NULL);
         break;
     case MENU_FLAG:
-        AddTextPrinterParameterized(sHeatStartMenu->sMenuNameWindowId, 1, gText_Flag, 1, 0, 0xFF, NULL);
+        AddTextPrinterParameterized(sRotomPhone_StartMenu->sMenuNameWindowId, 1, gText_Flag, 1, 0, 0xFF, NULL);
         break;
     }
-    CopyWindowToVram(sHeatStartMenu->sMenuNameWindowId, COPYWIN_GFX);
+    CopyWindowToVram(sRotomPhone_StartMenu->sMenuNameWindowId, COPYWIN_GFX);
 }
 
-static void HeatStartMenu_ExitAndClearTilemap(void)
+static void RotomPhone_StartMenu_ExitAndClearTilemap(void)
 {
     u32 i;
     u8 *buf = GetBgTilemapBuffer(0);
     
-    FillWindowPixelBuffer(sHeatStartMenu->sMenuNameWindowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    FillWindowPixelBuffer(sHeatStartMenu->sStartClockWindowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(sRotomPhone_StartMenu->sMenuNameWindowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(sRotomPhone_StartMenu->sStartClockWindowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    ClearWindowTilemap(sHeatStartMenu->sMenuNameWindowId);
-    ClearWindowTilemap(sHeatStartMenu->sStartClockWindowId);
+    ClearWindowTilemap(sRotomPhone_StartMenu->sMenuNameWindowId);
+    ClearWindowTilemap(sRotomPhone_StartMenu->sStartClockWindowId);
 
-    CopyWindowToVram(sHeatStartMenu->sMenuNameWindowId, COPYWIN_GFX);
-    CopyWindowToVram(sHeatStartMenu->sStartClockWindowId, COPYWIN_GFX);
+    CopyWindowToVram(sRotomPhone_StartMenu->sMenuNameWindowId, COPYWIN_GFX);
+    CopyWindowToVram(sRotomPhone_StartMenu->sStartClockWindowId, COPYWIN_GFX);
 
-    RemoveWindow(sHeatStartMenu->sStartClockWindowId);
-    RemoveWindow(sHeatStartMenu->sMenuNameWindowId);
+    RemoveWindow(sRotomPhone_StartMenu->sStartClockWindowId);
+    RemoveWindow(sRotomPhone_StartMenu->sMenuNameWindowId);
 
     if (GetSafariZoneFlag() == TRUE)
     {
-        FillWindowPixelBuffer(sHeatStartMenu->sSafariBallsWindowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-        ClearWindowTilemap(sHeatStartMenu->sSafariBallsWindowId); 
-        CopyWindowToVram(sHeatStartMenu->sSafariBallsWindowId, COPYWIN_GFX);
-        RemoveWindow(sHeatStartMenu->sSafariBallsWindowId);
+        FillWindowPixelBuffer(sRotomPhone_StartMenu->sSafariBallsWindowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+        ClearWindowTilemap(sRotomPhone_StartMenu->sSafariBallsWindowId); 
+        CopyWindowToVram(sRotomPhone_StartMenu->sSafariBallsWindowId, COPYWIN_GFX);
+        RemoveWindow(sRotomPhone_StartMenu->sSafariBallsWindowId);
     }
 
     for(i=0; i<2048; i++)
@@ -945,44 +945,44 @@ static void HeatStartMenu_ExitAndClearTilemap(void)
 
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
     {
-        FreeSpriteOamMatrix(&gSprites[sHeatStartMenu->spriteIdPokedex]);
-        DestroySprite(&gSprites[sHeatStartMenu->spriteIdPokedex]);
+        FreeSpriteOamMatrix(&gSprites[sRotomPhone_StartMenu->spriteIdPokedex]);
+        DestroySprite(&gSprites[sRotomPhone_StartMenu->spriteIdPokedex]);
     }
 
     if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
     {
-        FreeSpriteOamMatrix(&gSprites[sHeatStartMenu->spriteIdParty]);
-        DestroySprite(&gSprites[sHeatStartMenu->spriteIdParty]);
+        FreeSpriteOamMatrix(&gSprites[sRotomPhone_StartMenu->spriteIdParty]);
+        DestroySprite(&gSprites[sRotomPhone_StartMenu->spriteIdParty]);
     }
     
     if (GetSafariZoneFlag() == FALSE)
     {
-        FreeSpriteOamMatrix(&gSprites[sHeatStartMenu->spriteIdSave]);
-        DestroySprite(&gSprites[sHeatStartMenu->spriteIdSave]); 
+        FreeSpriteOamMatrix(&gSprites[sRotomPhone_StartMenu->spriteIdSave]);
+        DestroySprite(&gSprites[sRotomPhone_StartMenu->spriteIdSave]); 
         if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
         {
-            FreeSpriteOamMatrix(&gSprites[sHeatStartMenu->spriteIdPoketch]);
-            DestroySprite(&gSprites[sHeatStartMenu->spriteIdPoketch]);
+            FreeSpriteOamMatrix(&gSprites[sRotomPhone_StartMenu->spriteIdPoketch]);
+            DestroySprite(&gSprites[sRotomPhone_StartMenu->spriteIdPoketch]);
         }
     }
     else
     {
-        FreeSpriteOamMatrix(&gSprites[sHeatStartMenu->spriteIdFlag]);
-        DestroySprite(&gSprites[sHeatStartMenu->spriteIdFlag]); 
+        FreeSpriteOamMatrix(&gSprites[sRotomPhone_StartMenu->spriteIdFlag]);
+        DestroySprite(&gSprites[sRotomPhone_StartMenu->spriteIdFlag]); 
     }
 
-    FreeSpriteOamMatrix(&gSprites[sHeatStartMenu->spriteIdBag]);
-    FreeSpriteOamMatrix(&gSprites[sHeatStartMenu->spriteIdTrainerCard]);
-    FreeSpriteOamMatrix(&gSprites[sHeatStartMenu->spriteIdOptions]);
-    DestroySprite(&gSprites[sHeatStartMenu->spriteIdBag]);
-    DestroySprite(&gSprites[sHeatStartMenu->spriteIdTrainerCard]);
-    DestroySprite(&gSprites[sHeatStartMenu->spriteIdOptions]);
+    FreeSpriteOamMatrix(&gSprites[sRotomPhone_StartMenu->spriteIdBag]);
+    FreeSpriteOamMatrix(&gSprites[sRotomPhone_StartMenu->spriteIdTrainerCard]);
+    FreeSpriteOamMatrix(&gSprites[sRotomPhone_StartMenu->spriteIdOptions]);
+    DestroySprite(&gSprites[sRotomPhone_StartMenu->spriteIdBag]);
+    DestroySprite(&gSprites[sRotomPhone_StartMenu->spriteIdTrainerCard]);
+    DestroySprite(&gSprites[sRotomPhone_StartMenu->spriteIdOptions]);
 
-    if (sHeatStartMenu != NULL)
+    if (sRotomPhone_StartMenu != NULL)
     {
         FreeSpriteTilesByTag(TAG_ICON_GFX);  
-        Free(sHeatStartMenu);
-        sHeatStartMenu = NULL;
+        Free(sRotomPhone_StartMenu);
+        sRotomPhone_StartMenu = NULL;
     }
 
     ScriptUnfreezeObjectEvents();  
@@ -993,9 +993,9 @@ static void DoCleanUpAndChangeCallback(MainCallback callback)
 {
     if (!gPaletteFade.active)
     {
-        DestroyTask(FindTaskIdByFunc(Task_HeatStartMenu_HandleMainInput));
+        DestroyTask(FindTaskIdByFunc(Task_RotomPhone_StartMenu_HandleMainInput));
         PlayRainStoppingSoundEffect();
-        HeatStartMenu_ExitAndClearTilemap();
+        RotomPhone_StartMenu_ExitAndClearTilemap();
         CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(callback);
         gMain.savedCallback = CB2_ReturnToFieldWithOpenMenu;
@@ -1007,22 +1007,22 @@ static void DoCleanUpAndOpenTrainerCard(void)
     if (!gPaletteFade.active)
     {
         PlayRainStoppingSoundEffect();
-        HeatStartMenu_ExitAndClearTilemap();
+        RotomPhone_StartMenu_ExitAndClearTilemap();
         CleanupOverworldWindowsAndTilemaps();
         if (IsOverworldLinkActive() || InUnionRoom())
         {
             ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
-            DestroyTask(FindTaskIdByFunc(Task_HeatStartMenu_HandleMainInput));
+            DestroyTask(FindTaskIdByFunc(Task_RotomPhone_StartMenu_HandleMainInput));
         }
         else if (FlagGet(FLAG_SYS_FRONTIER_PASS))
         {
             ShowFrontierPass(CB2_ReturnToFieldWithOpenMenu); // Display frontier pass
-            DestroyTask(FindTaskIdByFunc(Task_HeatStartMenu_HandleMainInput));
+            DestroyTask(FindTaskIdByFunc(Task_RotomPhone_StartMenu_HandleMainInput));
         }
         else
         {
             ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
-            DestroyTask(FindTaskIdByFunc(Task_HeatStartMenu_HandleMainInput));
+            DestroyTask(FindTaskIdByFunc(Task_RotomPhone_StartMenu_HandleMainInput));
         }
     }
 }
@@ -1362,11 +1362,11 @@ static void DoCleanUpAndStartSaveMenu(void)
 {
     if (!gPaletteFade.active)
     {
-        HeatStartMenu_ExitAndClearTilemap();
+        RotomPhone_StartMenu_ExitAndClearTilemap();
         FreezeObjectEvents();
         LoadUserWindowBorderGfx(sSaveInfoWindowId, STD_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(STD_WINDOW_PALETTE_NUM));
         LockPlayerFieldControls();
-        DestroyTask(FindTaskIdByFunc(Task_HeatStartMenu_HandleMainInput));
+        DestroyTask(FindTaskIdByFunc(Task_RotomPhone_StartMenu_HandleMainInput));
         InitSave();
         CreateTask(Task_HandleSave, 0x80);
     }
@@ -1376,15 +1376,15 @@ static void DoCleanUpAndStartSafariZoneRetire(void)
 {
     if (!gPaletteFade.active)
     {
-        HeatStartMenu_ExitAndClearTilemap();
+        RotomPhone_StartMenu_ExitAndClearTilemap();
         FreezeObjectEvents();
         LockPlayerFieldControls();
-        DestroyTask(FindTaskIdByFunc(Task_HeatStartMenu_SafariZone_HandleMainInput));
+        DestroyTask(FindTaskIdByFunc(Task_RotomPhone_StartMenu_SafariZone_HandleMainInput));
         SafariZoneRetirePrompt();
     }
 }
  
-static void HeatStartMenu_OpenMenu(void)
+static void RotomPhone_StartMenu_OpenMenu(void)
 {
     switch (menuSelected)
     {
@@ -1411,13 +1411,13 @@ static void HeatStartMenu_OpenMenu(void)
 
 void GoToHandleInput(void)
 {
-    CreateTask(Task_HeatStartMenu_HandleMainInput, 80);
+    CreateTask(Task_RotomPhone_StartMenu_HandleMainInput, 80);
 }
 
-static void HeatStartMenu_HandleInput_DPADDOWN(void)
+static void RotomPhone_StartMenu_HandleInput_DPADDOWN(void)
 {
     // Needs to be set to 0 so that the selected icons change in the frontend
-    sHeatStartMenu->flag = 0;
+    sRotomPhone_StartMenu->flag = 0;
 
     switch (menuSelected)
     {
@@ -1438,12 +1438,12 @@ static void HeatStartMenu_HandleInput_DPADDOWN(void)
             menuSelected++;
         break;
     }
-    HeatStartMenu_UpdateMenuName();
+    RotomPhone_StartMenu_UpdateMenuName();
 }
 
-static void HeatStartMenu_HandleInput_DPADUP(void)
+static void RotomPhone_StartMenu_HandleInput_DPADUP(void)
 {
-    sHeatStartMenu->flag = 0;
+    sRotomPhone_StartMenu->flag = 0;
 
     switch (menuSelected)
     {
@@ -1467,47 +1467,47 @@ static void HeatStartMenu_HandleInput_DPADUP(void)
         }
         break;
     }
-    HeatStartMenu_UpdateMenuName();
+    RotomPhone_StartMenu_UpdateMenuName();
 }
 
-static void Task_HeatStartMenu_HandleMainInput(u8 taskId)
+static void Task_RotomPhone_StartMenu_HandleMainInput(u8 taskId)
 {
     u32 index;
-    if (sHeatStartMenu->loadState == 0 && !gPaletteFade.active)
+    if (sRotomPhone_StartMenu->loadState == 0 && !gPaletteFade.active)
     {
         index = IndexOfSpritePaletteTag(TAG_ICON_PAL);
         LoadPalette(sIconPal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP); 
     }
 
-    //HeatStartMenu_UpdateClockDisplay();
+    //RotomPhone_StartMenu_UpdateClockDisplay();
     if (JOY_NEW(A_BUTTON))
     {
-        if (sHeatStartMenu->loadState == 0)
+        if (sRotomPhone_StartMenu->loadState == 0)
         {
             if (menuSelected != MENU_SAVE)
                 FadeScreen(FADE_TO_BLACK, 0);
             
-            sHeatStartMenu->loadState = 1;
+            sRotomPhone_StartMenu->loadState = 1;
         }
     }
-    else if (JOY_NEW(B_BUTTON) && sHeatStartMenu->loadState == 0)
+    else if (JOY_NEW(B_BUTTON) && sRotomPhone_StartMenu->loadState == 0)
     {
         PlaySE(SE_SELECT);
-        HeatStartMenu_ExitAndClearTilemap();  
+        RotomPhone_StartMenu_ExitAndClearTilemap();  
         DestroyTask(taskId);
     }
-    else if (gMain.newKeys & DPAD_DOWN && sHeatStartMenu->loadState == 0)
+    else if (gMain.newKeys & DPAD_DOWN && sRotomPhone_StartMenu->loadState == 0)
     {
-        HeatStartMenu_HandleInput_DPADDOWN();
+        RotomPhone_StartMenu_HandleInput_DPADDOWN();
     }
-    else if (gMain.newKeys & DPAD_UP && sHeatStartMenu->loadState == 0)
+    else if (gMain.newKeys & DPAD_UP && sRotomPhone_StartMenu->loadState == 0)
     {
-        HeatStartMenu_HandleInput_DPADUP();
+        RotomPhone_StartMenu_HandleInput_DPADUP();
     }
-    else if (sHeatStartMenu->loadState == 1)
+    else if (sRotomPhone_StartMenu->loadState == 1)
     {
         if (menuSelected != MENU_SAVE)
-            HeatStartMenu_OpenMenu();
+            RotomPhone_StartMenu_OpenMenu();
         
         else
             DoCleanUpAndStartSaveMenu();
@@ -1515,9 +1515,9 @@ static void Task_HeatStartMenu_HandleMainInput(u8 taskId)
     }
 }
 
-static void HeatStartMenu_SafariZone_HandleInput_DPADDOWN(void)
+static void RotomPhone_StartMenu_SafariZone_HandleInput_DPADDOWN(void)
 {
-    sHeatStartMenu->flag = 0;
+    sRotomPhone_StartMenu->flag = 0;
 
     switch (menuSelected)
     {
@@ -1541,12 +1541,12 @@ static void HeatStartMenu_SafariZone_HandleInput_DPADDOWN(void)
         
         break;
     }
-    HeatStartMenu_UpdateMenuName();
+    RotomPhone_StartMenu_UpdateMenuName();
 }
 
-static void HeatStartMenu_SafariZone_HandleInput_DPADUP(void)
+static void RotomPhone_StartMenu_SafariZone_HandleInput_DPADUP(void)
 {
-    sHeatStartMenu->flag = 0;
+    sRotomPhone_StartMenu->flag = 0;
 
     switch (menuSelected)
     {
@@ -1569,47 +1569,47 @@ static void HeatStartMenu_SafariZone_HandleInput_DPADUP(void)
         
         break;
     }
-    HeatStartMenu_UpdateMenuName();
+    RotomPhone_StartMenu_UpdateMenuName();
 }
 
-static void Task_HeatStartMenu_SafariZone_HandleMainInput(u8 taskId)
+static void Task_RotomPhone_StartMenu_SafariZone_HandleMainInput(u8 taskId)
 {
     u32 index;
-    if (sHeatStartMenu->loadState == 0 && !gPaletteFade.active)
+    if (sRotomPhone_StartMenu->loadState == 0 && !gPaletteFade.active)
     {
         index = IndexOfSpritePaletteTag(TAG_ICON_PAL);
         LoadPalette(sIconPal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP); 
     }
 
-    //HeatStartMenu_UpdateClockDisplay();
+    //RotomPhone_StartMenu_UpdateClockDisplay();
     if (JOY_NEW(A_BUTTON))
     {
-        if (sHeatStartMenu->loadState == 0)
+        if (sRotomPhone_StartMenu->loadState == 0)
         {
             if (menuSelected != MENU_FLAG)
                 FadeScreen(FADE_TO_BLACK, 0);
             
-            sHeatStartMenu->loadState = 1;
+            sRotomPhone_StartMenu->loadState = 1;
         }
     }
-    else if (JOY_NEW(B_BUTTON) && sHeatStartMenu->loadState == 0)
+    else if (JOY_NEW(B_BUTTON) && sRotomPhone_StartMenu->loadState == 0)
     {
         PlaySE(SE_SELECT);
-        HeatStartMenu_ExitAndClearTilemap();  
+        RotomPhone_StartMenu_ExitAndClearTilemap();  
         DestroyTask(taskId);
     }
-    else if (gMain.newKeys & DPAD_DOWN && sHeatStartMenu->loadState == 0)
+    else if (gMain.newKeys & DPAD_DOWN && sRotomPhone_StartMenu->loadState == 0)
     {
-        HeatStartMenu_SafariZone_HandleInput_DPADDOWN();
+        RotomPhone_StartMenu_SafariZone_HandleInput_DPADDOWN();
     }
-    else if (gMain.newKeys & DPAD_UP && sHeatStartMenu->loadState == 0) 
+    else if (gMain.newKeys & DPAD_UP && sRotomPhone_StartMenu->loadState == 0) 
     {
-        HeatStartMenu_SafariZone_HandleInput_DPADUP();
+        RotomPhone_StartMenu_SafariZone_HandleInput_DPADUP();
     }
-    else if (sHeatStartMenu->loadState == 1)
+    else if (sRotomPhone_StartMenu->loadState == 1)
     {
         if (menuSelected != MENU_FLAG)
-            HeatStartMenu_OpenMenu();
+            RotomPhone_StartMenu_OpenMenu();
         
         else
             DoCleanUpAndStartSafariZoneRetire();
