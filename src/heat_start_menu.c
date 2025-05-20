@@ -138,7 +138,7 @@ struct HeatStartMenu {
 };
 
 static EWRAM_DATA struct HeatStartMenu *sHeatStartMenu = NULL;
-static EWRAM_DATA u8 menuSelected = 255;
+static EWRAM_DATA u8 menuSelected;
 static EWRAM_DATA u8 (*sSaveDialogCallback)(void) = NULL;
 static EWRAM_DATA u8 sSaveDialogTimer = 0;
 static EWRAM_DATA u8 sSaveInfoWindowId = 0;
@@ -148,11 +148,10 @@ static const u32 sStartMenuTiles[] = INCBIN_U32("graphics/heat_start_menu/bg.4bp
 static const u32 sStartMenuTilemap[] = INCBIN_U32("graphics/heat_start_menu/bg.bin.lz");
 static const u32 sStartMenuTilemapSafari[] = INCBIN_U32("graphics/heat_start_menu/bg_safari.bin.lz");
 static const u16 sStartMenuPalette[] = INCBIN_U16("graphics/heat_start_menu/bg.gbapal");
-static const u16 gStandardMenuPalette[] = INCBIN_U16("graphics/interface/std_menu.gbapal");
 
 //--SPRITE-GFX--
 #define TAG_ICON_GFX 1234
-#define TAG_ICON_PAL 0x4654
+#define TAG_ICON_PAL 0x4654 | BLEND_IMMUNE_FLAG
 
 static const u32 sIconGfx[] = INCBIN_U32("graphics/heat_start_menu/icons.4bpp.lz");
 static const u16 sIconPal[] = INCBIN_U16("graphics/heat_start_menu/icons.gbapal");
