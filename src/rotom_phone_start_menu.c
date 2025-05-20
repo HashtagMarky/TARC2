@@ -106,6 +106,7 @@ enum MenuItems
     MENU_SAVE,
     MENU_OPTIONS,
     MENU_FLAG,
+    MENU_COUNT,
 };
 
 enum FlagValues
@@ -589,6 +590,42 @@ static void SpriteCB_IconFlag(struct Sprite* sprite)
 // If you want to shorten the dates to Sat., Sun., etc., change this to 70
 #define CLOCK_WINDOW_WIDTH 100
 
+static struct RotomPhoneMenuOptions sRotomPhoneOptions[MENU_COUNT] =
+{
+    [MENU_POKEDEX] =
+    {
+        .menuName = COMPOUND_STRING("Pokédex"),
+    },
+    [MENU_PARTY] =
+    {
+        .menuName = COMPOUND_STRING("Party"),
+    },
+    [MENU_BAG] =
+    {
+        .menuName = COMPOUND_STRING("Bag"),
+    },
+    [MENU_POKETCH] =
+    {
+        .menuName = COMPOUND_STRING("PokéNav"),
+    },
+    [MENU_TRAINER_CARD] =
+    {
+        .menuName = COMPOUND_STRING("Trainer"),
+    },
+    [MENU_SAVE] =
+    {
+        .menuName = COMPOUND_STRING("Save"),
+    },
+    [MENU_OPTIONS] =
+    {
+        .menuName = COMPOUND_STRING("Settings"),
+    },
+    [MENU_FLAG] =
+    {
+        .menuName = COMPOUND_STRING("Retire"),
+    },
+};
+
 static const u8 gText_Friday[]    = _("Fri,");
 static const u8 gText_Saturday[]  = _("Sat,");
 static const u8 gText_Sunday[]    = _("Sun,");
@@ -822,7 +859,7 @@ static void RotomPhone_StartMenu_ShowTimeWindow(void)
     else
         StringExpandPlaceholders(gStringVar4, gText_CurrentTimeAM);
     
-	AddTextPrinterParameterized(sRotomPhone_StartMenu->sStartClockWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
+	AddTextPrinterParameterized(sRotomPhone_StartMenu->sStartClockWindowId, FONT_NORMAL, gStringVar4, 0, 1, 0xFF, NULL);
 	CopyWindowToVram(sRotomPhone_StartMenu->sStartClockWindowId, COPYWIN_GFX);
 }
 
@@ -864,51 +901,18 @@ static void RotomPhone_StartMenu_UpdateClockDisplay(void)
             StringExpandPlaceholders(gStringVar4, gText_CurrentTimeAMOff);
     }
     
-	AddTextPrinterParameterized(sRotomPhone_StartMenu->sStartClockWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
+	AddTextPrinterParameterized(sRotomPhone_StartMenu->sStartClockWindowId, FONT_NORMAL, gStringVar4, 0, 1, 0xFF, NULL);
 	CopyWindowToVram(sRotomPhone_StartMenu->sStartClockWindowId, COPYWIN_GFX);
 }
-
-static const u8 gText_Poketch[] = _("  PokeNav");
-static const u8 gText_Pokedex[] = _("  Pokédex");
-static const u8 gText_Party[]   = _("    Party ");
-static const u8 gText_Bag[]     = _("      Bag  ");
-static const u8 gText_Trainer[] = _("   Trainer");
-static const u8 gText_Save[]    = _("     Save  ");
-static const u8 gText_Options[] = _("   Options");
-static const u8 gText_Flag[]    = _("   Retire");
 
 static void RotomPhone_StartMenu_UpdateMenuName(void)
 {
     FillWindowPixelBuffer(sRotomPhone_StartMenu->sMenuNameWindowId, PIXEL_FILL(TEXT_COLOR_WHITE));
     PutWindowTilemap(sRotomPhone_StartMenu->sMenuNameWindowId);
-
-    switch(menuSelected)
-    {
-    case MENU_POKETCH:
-        AddTextPrinterParameterized(sRotomPhone_StartMenu->sMenuNameWindowId, 1, gText_Poketch, 1, 0, 0xFF, NULL);
-        break;
-    case MENU_POKEDEX:
-        AddTextPrinterParameterized(sRotomPhone_StartMenu->sMenuNameWindowId, 1, gText_Pokedex, 1, 0, 0xFF, NULL);
-        break;
-    case MENU_PARTY:
-        AddTextPrinterParameterized(sRotomPhone_StartMenu->sMenuNameWindowId, 1, gText_Party, 1, 0, 0xFF, NULL);
-        break;
-    case MENU_BAG:
-        AddTextPrinterParameterized(sRotomPhone_StartMenu->sMenuNameWindowId, 1, gText_Bag, 1, 0, 0xFF, NULL);
-        break;
-    case MENU_TRAINER_CARD:
-        AddTextPrinterParameterized(sRotomPhone_StartMenu->sMenuNameWindowId, 1, gText_Trainer, 1, 0, 0xFF, NULL);
-        break;
-    case MENU_SAVE:
-        AddTextPrinterParameterized(sRotomPhone_StartMenu->sMenuNameWindowId, 1, gText_Save, 1, 0, 0xFF, NULL);
-        break;
-    case MENU_OPTIONS:
-        AddTextPrinterParameterized(sRotomPhone_StartMenu->sMenuNameWindowId, 1, gText_Options, 1, 0, 0xFF, NULL);
-        break;
-    case MENU_FLAG:
-        AddTextPrinterParameterized(sRotomPhone_StartMenu->sMenuNameWindowId, 1, gText_Flag, 1, 0, 0xFF, NULL);
-        break;
-    }
+    const u8 *optionName = sRotomPhoneOptions[menuSelected].menuName;
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->sMenuNameWindowId, FONT_NORMAL, optionName,
+        GetStringCenterAlignXOffset(FONT_NORMAL, optionName, sWindowTemplate_MenuName.width * 8),
+        0, 0xFF, NULL);
     CopyWindowToVram(sRotomPhone_StartMenu->sMenuNameWindowId, COPYWIN_GFX);
 }
 
