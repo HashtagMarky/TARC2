@@ -225,7 +225,7 @@ static const struct SpritePalette sSpritePal_Icon[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_Icon[] = 
 {
-    {sIconGfx, 32*512/2 , TAG_ICON_GFX},
+    {sIconGfx, 16*256/2 , TAG_ICON_GFX},
     {NULL},
 };
 
@@ -234,17 +234,17 @@ static const struct OamData gOamIcon = {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = 0,
     .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(32x32),
+    .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
-    .size = SPRITE_SIZE(32x32),
+    .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
 };
 
 static const union AnimCmd gAnimCmdPoketch_NotSelected[] = {
-    ANIMCMD_FRAME(112, 0),
+    ANIMCMD_FRAME(28, 0),
     ANIMCMD_JUMP(0),
 };
 
@@ -259,12 +259,12 @@ static const union AnimCmd *const gIconPoketchAnim[] = {
 };
 
 static const union AnimCmd gAnimCmdPokedex_NotSelected[] = {
-    ANIMCMD_FRAME(128, 0),
+    ANIMCMD_FRAME(32, 0),
     ANIMCMD_JUMP(0),
 };
 
 static const union AnimCmd gAnimCmdPokedex_Selected[] = {
-    ANIMCMD_FRAME(16, 0),
+    ANIMCMD_FRAME(4, 0),
     ANIMCMD_JUMP(0),
 };
 
@@ -274,12 +274,12 @@ static const union AnimCmd *const gIconPokedexAnim[] = {
 };
 
 static const union AnimCmd gAnimCmdParty_NotSelected[] = {
-    ANIMCMD_FRAME(144, 0),
+    ANIMCMD_FRAME(36, 0),
     ANIMCMD_JUMP(0),
 };
 
 static const union AnimCmd gAnimCmdParty_Selected[] = {
-    ANIMCMD_FRAME(32, 0),
+    ANIMCMD_FRAME(8, 0),
     ANIMCMD_JUMP(0),
 };
 
@@ -289,12 +289,12 @@ static const union AnimCmd *const gIconPartyAnim[] = {
 };
 
 static const union AnimCmd gAnimCmdBag_NotSelected[] = {
-    ANIMCMD_FRAME(160, 0),
+    ANIMCMD_FRAME(40, 0),
     ANIMCMD_JUMP(0),
 };
 
 static const union AnimCmd gAnimCmdBag_Selected[] = {
-    ANIMCMD_FRAME(48, 0),
+    ANIMCMD_FRAME(12, 0),
     ANIMCMD_JUMP(0),
 };
 
@@ -304,12 +304,12 @@ static const union AnimCmd *const gIconBagAnim[] = {
 };
 
 static const union AnimCmd gAnimCmdTrainerCard_NotSelected[] = {
-    ANIMCMD_FRAME(176, 0),
+    ANIMCMD_FRAME(44, 0),
     ANIMCMD_JUMP(0),
 };
 
 static const union AnimCmd gAnimCmdTrainerCard_Selected[] = {
-    ANIMCMD_FRAME(64, 0),
+    ANIMCMD_FRAME(16, 0),
     ANIMCMD_JUMP(0),
 };
 
@@ -319,12 +319,12 @@ static const union AnimCmd *const gIconTrainerCardAnim[] = {
 };
 
 static const union AnimCmd gAnimCmdSave_NotSelected[] = {
-    ANIMCMD_FRAME(192, 0),
+    ANIMCMD_FRAME(48, 0),
     ANIMCMD_JUMP(0),
 };
 
 static const union AnimCmd gAnimCmdSave_Selected[] = {
-    ANIMCMD_FRAME(80, 0),
+    ANIMCMD_FRAME(20, 0),
     ANIMCMD_JUMP(0),
 };
 
@@ -334,12 +334,12 @@ static const union AnimCmd *const gIconSaveAnim[] = {
 };
 
 static const union AnimCmd gAnimCmdOptions_NotSelected[] = {
-    ANIMCMD_FRAME(208, 0),
+    ANIMCMD_FRAME(52, 0),
     ANIMCMD_JUMP(0),
 };
 
 static const union AnimCmd gAnimCmdOptions_Selected[] = {
-    ANIMCMD_FRAME(96, 0),
+    ANIMCMD_FRAME(24, 0),
     ANIMCMD_JUMP(0),
 };
 
@@ -349,12 +349,12 @@ static const union AnimCmd *const gIconOptionsAnim[] = {
 };
 
 static const union AnimCmd gAnimCmdFlag_NotSelected[] = {
-    ANIMCMD_FRAME(240, 0),
+    ANIMCMD_FRAME(60, 0),
     ANIMCMD_JUMP(0),
 };
 
 static const union AnimCmd gAnimCmdFlag_Selected[] = {
-    ANIMCMD_FRAME(224, 0),
+    ANIMCMD_FRAME(56, 0),
     ANIMCMD_JUMP(0),
 };
 
