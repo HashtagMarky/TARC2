@@ -1126,14 +1126,14 @@ static void RotomPhone_SmallStartMenu_HandleInput(bool32 down)
         }
     }
 
+    PlaySE(SE_SELECT);
     nextIndex = optionCurrent + offset;
     if (nextIndex >= ROTOM_PHONE_SMALL_OPTION_COUNT
         || nextIndex < ROTOM_PHONE_SMALL_OPTION_1
         || sRotomPhone_StartMenu->menuSmallOptions[nextIndex] == ROTOM_PHONE_MENU_COUNT)
-        nextIndex = ROTOM_PHONE_SMALL_OPTION_1;
+        return;
 
     menuSelected = sRotomPhone_StartMenu->menuSmallOptions[nextIndex];
-    PlaySE(SE_SELECT);
     RotomPhone_SmallStartMenu_UpdateMenuName();
 }
 
