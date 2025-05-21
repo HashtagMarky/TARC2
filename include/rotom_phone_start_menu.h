@@ -24,6 +24,7 @@ struct RotomPhoneMenuOptions
     bool32 (*unlockedFunc)(void);
     void (*selectedFunc)(void);
     const struct SpriteTemplate *iconTemplate;
+    s32 yOffset;
 };
 
 void RotomPhone_StartMenu_Init(void);
