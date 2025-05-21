@@ -142,14 +142,14 @@ struct RotomPhoneMenuOptions
 struct RotomPhone_StartMenu
 {
     MainCallback savedCallback;
-    u32 loadState;
-    u32 sStartClockWindowId;
-    u32 sMenuNameWindowId;
-    u32 sSafariBallsWindowId;
+    bool32 isLoading;
     bool32 spriteFlag; // some bool32 holding values for controlling the sprite anims and lifetime
     enum RotomPhoneMenuItems menuSmallOptions[ROTOM_PHONE_SMALL_OPTION_COUNT];
     u32 menuSmallSpriteId[ROTOM_PHONE_SMALL_OPTION_COUNT];
-    u8 windowIdSaveInfo;
+    u32 windowIdClock;
+    u32 windowIdMenuName;
+    u32 windowIdSafariBalls;
+    u32 windowIdSaveInfo;
 };
 
 static EWRAM_DATA struct RotomPhone_StartMenu *sRotomPhone_StartMenu = NULL;
@@ -702,13 +702,13 @@ static void RotomPhone_SetFirstSelectedMenu(void)
 
 static void ShowSafariBallsWindow(void)
 {
-    sRotomPhone_StartMenu->sSafariBallsWindowId = AddWindow(&sWindowTemplate_SafariBalls);
-    FillWindowPixelBuffer(sRotomPhone_StartMenu->sSafariBallsWindowId, PIXEL_FILL(TEXT_COLOR_WHITE));
-    PutWindowTilemap(sRotomPhone_StartMenu->sSafariBallsWindowId);
+    sRotomPhone_StartMenu->windowIdSafariBalls = AddWindow(&sWindowTemplate_SafariBalls);
+    FillWindowPixelBuffer(sRotomPhone_StartMenu->windowIdSafariBalls, PIXEL_FILL(TEXT_COLOR_WHITE));
+    PutWindowTilemap(sRotomPhone_StartMenu->windowIdSafariBalls);
     ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gText_SafariBallStock);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->sSafariBallsWindowId, FONT_NARROW, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(sRotomPhone_StartMenu->sSafariBallsWindowId, COPYWIN_GFX);
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdSafariBalls, FONT_NARROW, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sRotomPhone_StartMenu->windowIdSafariBalls, COPYWIN_GFX);
 }
 
 void RotomPhone_StartMenu_Init(void)
@@ -735,15 +735,15 @@ void RotomPhone_StartMenu_Init(void)
     }
 
     sRotomPhone_StartMenu->savedCallback = CB2_ReturnToFieldWithOpenMenu;
-    sRotomPhone_StartMenu->loadState = 0;
-    sRotomPhone_StartMenu->sStartClockWindowId = 0;
+    sRotomPhone_StartMenu->isLoading = FALSE;
+    sRotomPhone_StartMenu->windowIdClock = 0;
     sRotomPhone_StartMenu->spriteFlag = FALSE;
 
     RotomPhone_SmallStartMenu_LoadSprites();
     RotomPhone_SmallStartMenu_CreateAllSprites();
     RotomPhone_SmallStartMenu_LoadBgGfx();
     RotomPhone_SmallStartMenu_ShowTimeWindow();
-    sRotomPhone_StartMenu->sMenuNameWindowId = AddWindow(&sWindowTemplate_MenuName);
+    sRotomPhone_StartMenu->windowIdMenuName = AddWindow(&sWindowTemplate_MenuName);
 
     if (!sRotomPhoneOptions[menuSelected].unlockedFunc || !sRotomPhoneOptions[menuSelected].unlockedFunc())
         RotomPhone_SetFirstSelectedMenu();
@@ -831,10 +831,10 @@ static void RotomPhone_SmallStartMenu_ShowTimeWindow(void)
 
 	RtcCalcLocalTime();
     // print window
-    sRotomPhone_StartMenu->sStartClockWindowId = AddWindow(&sWindowTemplate_StartClock);
-    FillWindowPixelBuffer(sRotomPhone_StartMenu->sStartClockWindowId, PIXEL_FILL(TEXT_COLOR_WHITE));
-    PutWindowTilemap(sRotomPhone_StartMenu->sStartClockWindowId);
     FlagSet(FLAG_TEMP_5);
+    sRotomPhone_StartMenu->windowIdClock = AddWindow(&sWindowTemplate_StartClock);
+    FillWindowPixelBuffer(sRotomPhone_StartMenu->windowIdClock, PIXEL_FILL(TEXT_COLOR_WHITE));
+    PutWindowTilemap(sRotomPhone_StartMenu->windowIdClock);
 
     analogHour = (gLocalTime.hours >= 13 && gLocalTime.hours <= 24) ? gLocalTime.hours - 12 : gLocalTime.hours;
 
@@ -850,8 +850,8 @@ static void RotomPhone_SmallStartMenu_ShowTimeWindow(void)
     else
         StringExpandPlaceholders(gStringVar4, gText_CurrentTimeAM);
     
-	AddTextPrinterParameterized(sRotomPhone_StartMenu->sStartClockWindowId, FONT_NORMAL, gStringVar4, 0, 1, 0xFF, NULL);
-	CopyWindowToVram(sRotomPhone_StartMenu->sStartClockWindowId, COPYWIN_GFX);
+	AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdClock, FONT_NORMAL, gStringVar4, 0, 1, 0xFF, NULL);
+	CopyWindowToVram(sRotomPhone_StartMenu->windowIdClock, COPYWIN_GFX);
 }
 
 static void RotomPhone_SmallStartMenu_UpdateClockDisplay(void)
@@ -892,19 +892,19 @@ static void RotomPhone_SmallStartMenu_UpdateClockDisplay(void)
             StringExpandPlaceholders(gStringVar4, gText_CurrentTimeAMOff);
     }
     
-	AddTextPrinterParameterized(sRotomPhone_StartMenu->sStartClockWindowId, FONT_NORMAL, gStringVar4, 0, 1, 0xFF, NULL);
-	CopyWindowToVram(sRotomPhone_StartMenu->sStartClockWindowId, COPYWIN_GFX);
+	AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdClock, FONT_NORMAL, gStringVar4, 0, 1, 0xFF, NULL);
+	CopyWindowToVram(sRotomPhone_StartMenu->windowIdClock, COPYWIN_GFX);
 }
 
 static void RotomPhone_SmallStartMenu_UpdateMenuName(void)
 {
-    FillWindowPixelBuffer(sRotomPhone_StartMenu->sMenuNameWindowId, PIXEL_FILL(TEXT_COLOR_WHITE));
-    PutWindowTilemap(sRotomPhone_StartMenu->sMenuNameWindowId);
+    FillWindowPixelBuffer(sRotomPhone_StartMenu->windowIdMenuName, PIXEL_FILL(TEXT_COLOR_WHITE));
+    PutWindowTilemap(sRotomPhone_StartMenu->windowIdMenuName);
     const u8 *optionName = sRotomPhoneOptions[menuSelected].menuName;
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->sMenuNameWindowId, FONT_NORMAL, optionName,
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdMenuName, FONT_NORMAL, optionName,
         GetStringCenterAlignXOffset(FONT_NORMAL, optionName, sWindowTemplate_MenuName.width * 8),
         0, 0xFF, NULL);
-    CopyWindowToVram(sRotomPhone_StartMenu->sMenuNameWindowId, COPYWIN_GFX);
+    CopyWindowToVram(sRotomPhone_StartMenu->windowIdMenuName, COPYWIN_GFX);
 }
 
 static void RotomPhone_SmallStartMenu_ExitAndClearTilemap(void)
@@ -912,24 +912,24 @@ static void RotomPhone_SmallStartMenu_ExitAndClearTilemap(void)
     u32 i;
     u8 *buf = GetBgTilemapBuffer(0);
     
-    FillWindowPixelBuffer(sRotomPhone_StartMenu->sMenuNameWindowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    FillWindowPixelBuffer(sRotomPhone_StartMenu->sStartClockWindowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(sRotomPhone_StartMenu->windowIdMenuName, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(sRotomPhone_StartMenu->windowIdClock, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    ClearWindowTilemap(sRotomPhone_StartMenu->sMenuNameWindowId);
-    ClearWindowTilemap(sRotomPhone_StartMenu->sStartClockWindowId);
+    ClearWindowTilemap(sRotomPhone_StartMenu->windowIdMenuName);
+    ClearWindowTilemap(sRotomPhone_StartMenu->windowIdClock);
 
-    CopyWindowToVram(sRotomPhone_StartMenu->sMenuNameWindowId, COPYWIN_GFX);
-    CopyWindowToVram(sRotomPhone_StartMenu->sStartClockWindowId, COPYWIN_GFX);
+    CopyWindowToVram(sRotomPhone_StartMenu->windowIdMenuName, COPYWIN_GFX);
+    CopyWindowToVram(sRotomPhone_StartMenu->windowIdClock, COPYWIN_GFX);
 
-    RemoveWindow(sRotomPhone_StartMenu->sStartClockWindowId);
-    RemoveWindow(sRotomPhone_StartMenu->sMenuNameWindowId);
+    RemoveWindow(sRotomPhone_StartMenu->windowIdClock);
+    RemoveWindow(sRotomPhone_StartMenu->windowIdMenuName);
 
     if (GetSafariZoneFlag() == TRUE)
     {
-        FillWindowPixelBuffer(sRotomPhone_StartMenu->sSafariBallsWindowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-        ClearWindowTilemap(sRotomPhone_StartMenu->sSafariBallsWindowId); 
-        CopyWindowToVram(sRotomPhone_StartMenu->sSafariBallsWindowId, COPYWIN_GFX);
-        RemoveWindow(sRotomPhone_StartMenu->sSafariBallsWindowId);
+        FillWindowPixelBuffer(sRotomPhone_StartMenu->windowIdSafariBalls, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+        ClearWindowTilemap(sRotomPhone_StartMenu->windowIdSafariBalls); 
+        CopyWindowToVram(sRotomPhone_StartMenu->windowIdSafariBalls, COPYWIN_GFX);
+        RemoveWindow(sRotomPhone_StartMenu->windowIdSafariBalls);
     }
 
     for (i=0; i<2048; i++)
@@ -1140,7 +1140,7 @@ static void RotomPhone_SmallStartMenu_HandleInput(bool32 down)
 static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
 {
     u32 index;
-    if (sRotomPhone_StartMenu->loadState == 0 && !gPaletteFade.active)
+    if (sRotomPhone_StartMenu->isLoading == FALSE && !gPaletteFade.active)
     {
         index = IndexOfSpritePaletteTag(TAG_ICON_PAL);
         LoadPalette(sIconPal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP); 
@@ -1149,29 +1149,29 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     //RotomPhone_SmallStartMenu_UpdateClockDisplay();
     if (JOY_NEW(A_BUTTON))
     {
-        if (sRotomPhone_StartMenu->loadState == 0)
+        if (sRotomPhone_StartMenu->isLoading == FALSE)
         {
             if (menuSelected != ROTOM_PHONE_MENU_SAVE && menuSelected != ROTOM_PHONE_MENU_FLAG)
                 FadeScreen(FADE_TO_BLACK, 0);
             
-            sRotomPhone_StartMenu->loadState = 1;
+            sRotomPhone_StartMenu->isLoading = TRUE;
         }
     }
-    else if (JOY_NEW(B_BUTTON) && sRotomPhone_StartMenu->loadState == 0)
+    else if (JOY_NEW(B_BUTTON) && sRotomPhone_StartMenu->isLoading == FALSE)
     {
         PlaySE(SE_SELECT);
         RotomPhone_SmallStartMenu_ExitAndClearTilemap();  
         DestroyTask(taskId);
     }
-    else if (gMain.newKeys & DPAD_UP && sRotomPhone_StartMenu->loadState == 0)
+    else if (gMain.newKeys & DPAD_UP && sRotomPhone_StartMenu->isLoading == FALSE)
     {
         RotomPhone_SmallStartMenu_HandleInput(FALSE);
     }
-    else if (gMain.newKeys & DPAD_DOWN && sRotomPhone_StartMenu->loadState == 0)
+    else if (gMain.newKeys & DPAD_DOWN && sRotomPhone_StartMenu->isLoading == FALSE)
     {
         RotomPhone_SmallStartMenu_HandleInput(TRUE);
     }
-    else if (sRotomPhone_StartMenu->loadState == 1)
+    else if (sRotomPhone_StartMenu->isLoading == TRUE)
     {
         sRotomPhoneOptions[menuSelected].selectedFunc();
     }
