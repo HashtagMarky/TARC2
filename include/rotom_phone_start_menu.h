@@ -22,6 +22,7 @@ struct RotomPhoneMenuOptions
 {
     const u8 *menuName;
     bool32 (*unlockedFunc)(void);
+    void (*selectedFunc)(void);
     const struct SpriteTemplate *iconTemplate;
 };
 
