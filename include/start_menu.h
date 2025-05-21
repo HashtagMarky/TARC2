@@ -17,4 +17,13 @@ void AutoSaveDoSave(void);
 void InitSave_Global(void);
 u8 RunSaveCallback_Global(void);
 
+// Save status
+enum
+{
+    SAVE_IN_PROGRESS,
+    SAVE_SUCCESS,
+    SAVE_CANCELED,
+    SAVE_ERROR,
+};
+
 #endif // GUARD_START_MENU_H

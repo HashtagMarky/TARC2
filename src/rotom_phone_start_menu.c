@@ -111,14 +111,6 @@ enum RotomPhoneMenuItems
 };
 #define ROTOM_PHONE_MENU_FIRST_OPTION ROTOM_PHONE_MENU_COUNT - ROTOM_PHONE_MENU_COUNT
 
-enum RotomPhoneSaveStates
-{
-    SAVE_IN_PROGRESS,
-    SAVE_SUCCESS,
-    SAVE_CANCELED,
-    SAVE_ERROR,
-};
-
 enum RotomPhoneSmallOptions
 {
     ROTOM_PHONE_SMALL_OPTION_1,

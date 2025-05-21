@@ -79,13 +79,13 @@ enum
 };
 
 // Save status
-enum
-{
-    SAVE_IN_PROGRESS,
-    SAVE_SUCCESS,
-    SAVE_CANCELED,
-    SAVE_ERROR
-};
+// enum
+// {
+//     SAVE_IN_PROGRESS,
+//     SAVE_SUCCESS,
+//     SAVE_CANCELED,
+//     SAVE_ERROR
+// };
 
 // IWRAM common
 COMMON_DATA bool8 (*gMenuCallback)(void) = NULL;
