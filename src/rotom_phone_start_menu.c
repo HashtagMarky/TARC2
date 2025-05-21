@@ -163,11 +163,11 @@ struct RotomPhone_StartMenu
     u32 flag; // some u32 holding values for controlling the sprite anims and lifetime
     enum RotomPhoneMenuItems menuSmallOptions[ROTOM_PHONE_SMALL_OPTION_COUNT];
     u32 menuSmallSpriteId[ROTOM_PHONE_SMALL_OPTION_COUNT];
+    u8 windowIdSaveInfo;
 };
 
 static EWRAM_DATA struct RotomPhone_StartMenu *sRotomPhone_StartMenu = NULL;
-static EWRAM_DATA u8 menuSelected;
-static EWRAM_DATA u8 sSaveInfoWindowId = 0;
+static EWRAM_DATA enum RotomPhoneMenuItems menuSelected; // Separate memory allocation so it persist between destroying of menu.
 
 // --BG-GFX--
 static const u32 sStartMenuTiles[] = INCBIN_U32("graphics/rotom_phone_start_menu/bg.4bpp.lz");
@@ -1092,7 +1092,7 @@ static void RotomPhone_SelectedFunc_Save(void)
     {
         RotomPhone_SmallStartMenu_ExitAndClearTilemap();
         FreezeObjectEvents();
-        LoadUserWindowBorderGfx(sSaveInfoWindowId, STD_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(STD_WINDOW_PALETTE_NUM));
+        LoadUserWindowBorderGfx(sRotomPhone_StartMenu->windowIdSaveInfo, STD_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(STD_WINDOW_PALETTE_NUM));
         LockPlayerFieldControls();
         DestroyTask(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput));
         InitSave_Global();
