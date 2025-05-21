@@ -76,11 +76,12 @@ static bool32 RotomPhone_UnlockedFunc_Unlocked(void);
 static bool32 RotomPhone_UnlockedFunc_Pokedex(void);
 static bool32 RotomPhone_UnlockedFunc_Pokemon(void);
 static bool32 RotomPhone_UnlockedFunc_PokeNav(void);
+static bool32 RotomPhone_UnlockedFunc_Save(void);
+static bool32 RotomPhone_UnlockedFunc_SafariFlag(void);
 
 /* OTHER FUNCTIONS */
 static void RotomPhone_StartMenu_LoadSprites(void);
 static void RotomPhone_SmallStartMenu_CreateAllSprites(void);
-static void RotomPhone_SmallStartMenu_SafariZone_CreateAllSprites(void);
 static void RotomPhone_StartMenu_LoadBgGfx(void);
 static void RotomPhone_StartMenu_ShowTimeWindow(void);
 static void RotomPhone_StartMenu_UpdateClockDisplay(void);
@@ -116,16 +117,16 @@ enum RotomPhoneSaveStates
     SAVE_ERROR,
 };
 
-enum RotomPhoneSmallScreenSpriteNums
+enum RotomPhoneSmallOptions
 {
-    SMALL_SPRITE_NUM_1,
-    SMALL_SPRITE_NUM_2,
-    SMALL_SPRITE_NUM_3,
-    SMALL_SPRITE_NUM_4,
-    SMALL_SPRITE_NUM_5,
-    SMALL_SPRITE_NUM_6,
-    SMALL_SPRITE_NUM_7,
-    SMALL_SPRITE_COUNT,
+    ROTOM_PHONE_SMALL_OPTION_1,
+    ROTOM_PHONE_SMALL_OPTION_2,
+    ROTOM_PHONE_SMALL_OPTION_3,
+    ROTOM_PHONE_SMALL_OPTION_4,
+    ROTOM_PHONE_SMALL_OPTION_5,
+    ROTOM_PHONE_SMALL_OPTION_6,
+    ROTOM_PHONE_SMALL_OPTION_7,
+    ROTOM_PHONE_SMALL_OPTION_COUNT,
 };
 
 enum RotomPhoneSpriteAnims
@@ -135,15 +136,15 @@ enum RotomPhoneSpriteAnims
 };
 
 #define ICON_COORD_X 224
-static s32 sSmallSpriteCoordY[SMALL_SPRITE_COUNT] =
+static s32 sSmallSpriteCoordY[ROTOM_PHONE_SMALL_OPTION_COUNT] =
 {
-    [SMALL_SPRITE_NUM_1] = 14,
-    [SMALL_SPRITE_NUM_2] = 38,
-    [SMALL_SPRITE_NUM_3] = 60,
-    [SMALL_SPRITE_NUM_4] = 84,
-    [SMALL_SPRITE_NUM_5] = 109,
-    [SMALL_SPRITE_NUM_6] = 130,
-    [SMALL_SPRITE_NUM_7] = 150,
+    [ROTOM_PHONE_SMALL_OPTION_1] = 14,
+    [ROTOM_PHONE_SMALL_OPTION_2] = 38,
+    [ROTOM_PHONE_SMALL_OPTION_3] = 60,
+    [ROTOM_PHONE_SMALL_OPTION_4] = 84,
+    [ROTOM_PHONE_SMALL_OPTION_5] = 109,
+    [ROTOM_PHONE_SMALL_OPTION_6] = 130,
+    [ROTOM_PHONE_SMALL_OPTION_7] = 150,
 };
 
 /* STRUCTs */
@@ -155,7 +156,8 @@ struct RotomPhone_StartMenu
     u32 sMenuNameWindowId;
     u32 sSafariBallsWindowId;
     u32 flag; // some u32 holding values for controlling the sprite anims and lifetime
-    u32 menuSmallSpriteId[SMALL_SPRITE_COUNT];
+    enum RotomPhoneMenuItems menuSmallOptions[ROTOM_PHONE_SMALL_OPTION_COUNT];
+    u32 menuSmallSpriteId[ROTOM_PHONE_SMALL_OPTION_COUNT];
 };
 
 static EWRAM_DATA struct RotomPhone_StartMenu *sRotomPhone_StartMenu = NULL;
@@ -634,7 +636,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
     [ROTOM_PHONE_MENU_SAVE] =
     {
         .menuName = COMPOUND_STRING("Save"),
-        .unlockedFunc = RotomPhone_UnlockedFunc_Unlocked,
+        .unlockedFunc = RotomPhone_UnlockedFunc_Save,
         .iconTemplate = &gSpriteIconSave,
     },
     [ROTOM_PHONE_MENU_OPTIONS] =
@@ -646,7 +648,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
     [ROTOM_PHONE_MENU_FLAG] =
     {
         .menuName = COMPOUND_STRING("Retire"),
-        .unlockedFunc = RotomPhone_UnlockedFunc_Unlocked,
+        .unlockedFunc = RotomPhone_UnlockedFunc_SafariFlag,
         .iconTemplate = &gSpriteIconFlag,
     },
 };
@@ -731,6 +733,13 @@ void RotomPhone_StartMenu_Init(void)
     sRotomPhone_StartMenu->sStartClockWindowId = 0;
     sRotomPhone_StartMenu->flag = 0;
 
+    RotomPhone_StartMenu_LoadSprites();
+    RotomPhone_SmallStartMenu_CreateAllSprites();
+    RotomPhone_StartMenu_LoadBgGfx();
+    RotomPhone_StartMenu_ShowTimeWindow();
+    sRotomPhone_StartMenu->sMenuNameWindowId = AddWindow(&sWindowTemplate_MenuName);
+    RotomPhone_StartMenu_UpdateMenuName();
+
     if (GetSafariZoneFlag() == FALSE)
     { 
         if (FlagGet(FLAG_SYS_POKENAV_GET) == FALSE && menuSelected == 0)
@@ -742,12 +751,6 @@ void RotomPhone_StartMenu_Init(void)
         if (menuSelected == 255)
             SetSelectedMenu();
       
-        RotomPhone_StartMenu_LoadSprites();
-        RotomPhone_SmallStartMenu_CreateAllSprites();
-        RotomPhone_StartMenu_LoadBgGfx();
-        RotomPhone_StartMenu_ShowTimeWindow();
-        sRotomPhone_StartMenu->sMenuNameWindowId = AddWindow(&sWindowTemplate_MenuName);
-        RotomPhone_StartMenu_UpdateMenuName();
         CreateTask(Task_RotomPhone_StartMenu_HandleMainInput, 0);
     }
     else
@@ -755,13 +758,7 @@ void RotomPhone_StartMenu_Init(void)
         if (menuSelected == 255 || menuSelected == ROTOM_PHONE_MENU_POKENAV || menuSelected == ROTOM_PHONE_MENU_SAVE)
             menuSelected = ROTOM_PHONE_MENU_FLAG;
 
-        RotomPhone_StartMenu_LoadSprites();
-        RotomPhone_SmallStartMenu_SafariZone_CreateAllSprites();
-        RotomPhone_StartMenu_LoadBgGfx();
         ShowSafariBallsWindow();
-        RotomPhone_StartMenu_ShowTimeWindow();
-        sRotomPhone_StartMenu->sMenuNameWindowId = AddWindow(&sWindowTemplate_MenuName);
-        RotomPhone_StartMenu_UpdateMenuName();
         CreateTask(Task_RotomPhone_StartMenu_SafariZone_HandleMainInput, 0);
     }
 }
@@ -775,62 +772,39 @@ static void RotomPhone_StartMenu_LoadSprites(void)
     LoadCompressedSpriteSheet(sSpriteSheet_Icon);
 }
 
-static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menuItem, enum RotomPhoneSmallScreenSpriteNums spriteId, s32 xAdjust, s32 yAdjust)
+static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menuItem, enum RotomPhoneSmallOptions spriteId)
 {
     sRotomPhone_StartMenu->menuSmallSpriteId[spriteId] = CreateSprite(
         sRotomPhoneOptions[menuItem].iconTemplate,
-        ICON_COORD_X + xAdjust,
-        sSmallSpriteCoordY[spriteId] + yAdjust,
+        ICON_COORD_X,
+        sSmallSpriteCoordY[spriteId],
         0
     );
 }
 
 static void RotomPhone_SmallStartMenu_CreateAllSprites(void)
 {
-    if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
-    {
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_POKEDEX, SMALL_SPRITE_NUM_1, -1, -2);
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_PARTY, SMALL_SPRITE_NUM_2, 0, -3);
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_BAG, SMALL_SPRITE_NUM_3, 0, -2);
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_POKENAV, SMALL_SPRITE_NUM_4, 0, 1);
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_TRAINER_CARD, SMALL_SPRITE_NUM_5, 0, 0);
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_SAVE, SMALL_SPRITE_NUM_6, 0, 0);
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_OPTIONS, SMALL_SPRITE_NUM_7, 0, 0);
-    }
-    else if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
-    {
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_POKEDEX, SMALL_SPRITE_NUM_1, -1, 0);
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_PARTY, SMALL_SPRITE_NUM_2, 0, -1);
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_BAG, SMALL_SPRITE_NUM_3, 0, 1);
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_TRAINER_CARD, SMALL_SPRITE_NUM_4, 0, 2);
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_SAVE, SMALL_SPRITE_NUM_5, 0, -1);
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_OPTIONS, SMALL_SPRITE_NUM_6, 0, -2);
-    }
-    else if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
-    {
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_PARTY, SMALL_SPRITE_NUM_1, 0, 0);
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_BAG, SMALL_SPRITE_NUM_2, 0, 1);
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_TRAINER_CARD, SMALL_SPRITE_NUM_3, 0, 3);
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_SAVE, SMALL_SPRITE_NUM_4, 0, 1);
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_OPTIONS, SMALL_SPRITE_NUM_5, 0, -4);
-    }
-    else
-    {
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_BAG, SMALL_SPRITE_NUM_1, 0, 0);
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_TRAINER_CARD, SMALL_SPRITE_NUM_2, 0, 1);
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_SAVE, SMALL_SPRITE_NUM_3, 0, 3);
-        RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_OPTIONS, SMALL_SPRITE_NUM_4, 0, 1);
-    }
-}
+    enum RotomPhoneSmallOptions drawn = ROTOM_PHONE_SMALL_OPTION_1;
 
-static void RotomPhone_SmallStartMenu_SafariZone_CreateAllSprites(void)
-{
-    RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_FLAG, SMALL_SPRITE_NUM_1, 0, 0);
-    RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_POKEDEX, SMALL_SPRITE_NUM_2, -1, 0);
-    RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_PARTY, SMALL_SPRITE_NUM_3, 0, 0);
-    RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_BAG, SMALL_SPRITE_NUM_4, 0, 0);
-    RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_TRAINER_CARD, SMALL_SPRITE_NUM_5, 0, 0);
-    RotomPhone_SmallStartMenu_CreateSprite(ROTOM_PHONE_MENU_OPTIONS, SMALL_SPRITE_NUM_6, 0, 0);
+    for (enum RotomPhoneMenuItems menuId = ROTOM_PHONE_MENU_FIRST_OPTION; menuId < ROTOM_PHONE_MENU_COUNT && drawn < ROTOM_PHONE_SMALL_OPTION_COUNT; menuId++)
+    {
+        const struct RotomPhoneMenuOptions *menuOption = &sRotomPhoneOptions[menuId];
+
+        if (menuOption->unlockedFunc && menuOption->unlockedFunc())
+        {
+            enum RotomPhoneSmallOptions optionSlot = ROTOM_PHONE_SMALL_OPTION_1 + drawn;
+
+            RotomPhone_SmallStartMenu_CreateSprite(menuId, optionSlot);
+            sRotomPhone_StartMenu->menuSmallOptions[optionSlot] = menuId;
+            drawn++;
+        }
+    }
+
+    for (; drawn < ROTOM_PHONE_SMALL_OPTION_COUNT; drawn++)
+    {
+        sRotomPhone_StartMenu->menuSmallOptions[drawn] = ROTOM_PHONE_SMALL_OPTION_COUNT;
+        sRotomPhone_StartMenu->menuSmallSpriteId[drawn] = SPRITE_NONE;
+    }
 }
 
 static void RotomPhone_StartMenu_LoadBgGfx(void)
@@ -962,9 +936,9 @@ static void RotomPhone_StartMenu_ExitAndClearTilemap(void)
     }
     ScheduleBgCopyTilemapToVram(0);
 
-    for (u32 spriteId = SMALL_SPRITE_NUM_1; spriteId < SMALL_SPRITE_COUNT; spriteId++)
+    for (enum RotomPhoneSmallOptions spriteId = ROTOM_PHONE_SMALL_OPTION_1; spriteId < ROTOM_PHONE_SMALL_OPTION_COUNT; spriteId++)
     {
-        if (sRotomPhone_StartMenu->menuSmallSpriteId[spriteId])
+        if (sRotomPhone_StartMenu->menuSmallSpriteId[spriteId] != SPRITE_NONE)
         {
             FreeSpriteOamMatrix(&gSprites[sRotomPhone_StartMenu->menuSmallSpriteId[spriteId]]);
             DestroySprite(&gSprites[sRotomPhone_StartMenu->menuSmallSpriteId[spriteId]]);
@@ -1406,6 +1380,7 @@ static bool32 RotomPhone_UnlockedFunc_Unlocked(void)
 {
     return TRUE;
 }
+
 static bool32 RotomPhone_UnlockedFunc_Pokedex(void)
 {
     return FlagGet(FLAG_SYS_POKEDEX_GET);
@@ -1418,7 +1393,17 @@ static bool32 RotomPhone_UnlockedFunc_Pokemon(void)
 
 static bool32 RotomPhone_UnlockedFunc_PokeNav(void)
 {
-    return FlagGet(FLAG_SYS_POKENAV_GET);
+    return FlagGet(FLAG_SYS_POKENAV_GET) && !GetSafariZoneFlag();
+}
+
+static bool32 RotomPhone_UnlockedFunc_Save(void)
+{
+    return !GetSafariZoneFlag();
+}
+
+static bool32 RotomPhone_UnlockedFunc_SafariFlag(void)
+{
+    return GetSafariZoneFlag();
 }
 
 void GoToHandleInput(void)
