@@ -56,6 +56,11 @@
 #include "event_object_movement.h"
 #include "gba/isagbprint.h"
 
+/* CONFIGS */
+#define ROTOM_PHONE_UPDATE_CLOCK_DISPLAY    TRUE
+#define ROTOM_PHONE_SHORTENED_NAME          FALSE
+#define ROTOM_PHONE_24_HOUR_MODE            TRUE
+
 /* CALLBACKS */
 static void SpriteCB_IconPoketch(struct Sprite* sprite);
 static void SpriteCB_IconPokedex(struct Sprite* sprite);
@@ -93,7 +98,7 @@ static void RotomPhone_SmallStartMenu_LoadSprites(void);
 static void RotomPhone_SmallStartMenu_CreateAllSprites(void);
 static void RotomPhone_SmallStartMenu_LoadBgGfx(void);
 static void RotomPhone_SmallStartMenu_ShowTimeWindow(void);
-static void RotomPhone_SmallStartMenu_UpdateClockDisplay(void);
+static void RotomPhone_SmallStartMenu_PrintClockDisplay(void);
 static void RotomPhone_SmallStartMenu_UpdateMenuName(void);
 
 /* ENUMs */
@@ -186,7 +191,7 @@ static const struct WindowTemplate sWindowTemplate_StartClock = {
   .bg = 0, 
   .tilemapLeft = 2, 
   .tilemapTop = 17, 
-  .width = 12, // If you want to shorten the dates to Sat., Sun., etc., change this to 9
+  .width = 12,
   .height = 2, 
   .paletteNum = 15,
   .baseBlock = 0x30
@@ -591,9 +596,6 @@ static void SpriteCB_IconFlag(struct Sprite* sprite)
     } 
 }
 
-// If you want to shorten the dates to Sat., Sun., etc., change this to 70
-#define CLOCK_WINDOW_WIDTH 100
-
 static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
 {
     [ROTOM_PHONE_MENU_POKEDEX] =
@@ -662,31 +664,27 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
     },
 };
 
-static const u8 gText_Friday[]    = _("Fri,");
-static const u8 gText_Saturday[]  = _("Sat,");
-static const u8 gText_Sunday[]    = _("Sun,");
-static const u8 gText_Monday[]    = _("Mon,");
-static const u8 gText_Tuesday[]   = _("Tue,");
-static const u8 gText_Wednesday[] = _("Wed,");
-static const u8 gText_Thursday[]  = _("Thu,");
+static const u8 *const gDayNameStringsTableShortned[] =
+{
+    COMPOUND_STRING("Fri,"),
+    COMPOUND_STRING("Sat,"),
+    COMPOUND_STRING("Sun,"),
+    COMPOUND_STRING("Mon,"),
+    COMPOUND_STRING("Tue,"),
+    COMPOUND_STRING("Wed,"),
+    COMPOUND_STRING("Thu,"),
+};
 
 static const u8 *const gDayNameStringsTable[] =
 {
-    gText_Friday,
-    gText_Saturday,
-    gText_Sunday,
-    gText_Monday,
-    gText_Tuesday,
-    gText_Wednesday,
-    gText_Thursday
+    COMPOUND_STRING("Friday,"),
+    COMPOUND_STRING("Saturday,"),
+    COMPOUND_STRING("Sunday,"),
+    COMPOUND_STRING("Monday,"),
+    COMPOUND_STRING("Tuesday,"),
+    COMPOUND_STRING("Wednesday,"),
+    COMPOUND_STRING("Thursday,"),
 };
-
-static const u8 gText_CurrentTime[]      = _("  {STR_VAR_3} {CLEAR_TO 64}{STR_VAR_1}:{STR_VAR_2}");
-static const u8 gText_CurrentTimeOff[]   = _("  {STR_VAR_3} {CLEAR_TO 64}{STR_VAR_1} {STR_VAR_2}");
-static const u8 gText_CurrentTimeAM[]    = _("  {STR_VAR_3} {CLEAR_TO 51}{STR_VAR_1}:{STR_VAR_2} AM");
-static const u8 gText_CurrentTimeAMOff[] = _("  {STR_VAR_3} {CLEAR_TO 51}{STR_VAR_1} {STR_VAR_2} AM");
-static const u8 gText_CurrentTimePM[]    = _("  {STR_VAR_3} {CLEAR_TO 51}{STR_VAR_1}:{STR_VAR_2} PM");
-static const u8 gText_CurrentTimePMOff[] = _("  {STR_VAR_3} {CLEAR_TO 51}{STR_VAR_1} {STR_VAR_2} PM");
 
 static void RotomPhone_SetFirstSelectedMenu(void)
 {
@@ -827,73 +825,44 @@ static void RotomPhone_SmallStartMenu_LoadBgGfx(void)
 
 static void RotomPhone_SmallStartMenu_ShowTimeWindow(void)
 {
-    u8 analogHour;
-
-	RtcCalcLocalTime();
-    // print window
-    FlagSet(FLAG_TEMP_5);
     sRotomPhone_StartMenu->windowIdClock = AddWindow(&sWindowTemplate_StartClock);
     FillWindowPixelBuffer(sRotomPhone_StartMenu->windowIdClock, PIXEL_FILL(TEXT_COLOR_WHITE));
     PutWindowTilemap(sRotomPhone_StartMenu->windowIdClock);
 
-    analogHour = (gLocalTime.hours >= 13 && gLocalTime.hours <= 24) ? gLocalTime.hours - 12 : gLocalTime.hours;
-
-	StringCopy(gStringVar3, gDayNameStringsTable[(gLocalTime.days % 7)]);
-    ConvertIntToDecimalStringN(gStringVar1, gLocalTime.hours, STR_CONV_MODE_LEADING_ZEROS, 2);
-	ConvertIntToDecimalStringN(gStringVar2, gLocalTime.minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
-	ConvertIntToDecimalStringN(gStringVar1, analogHour, STR_CONV_MODE_LEADING_ZEROS, 2);
-    
-	StringExpandPlaceholders(gStringVar4, gText_CurrentTime);
-    if (gLocalTime.hours >= 13 && gLocalTime.hours <= 24)
-        StringExpandPlaceholders(gStringVar4, gText_CurrentTimePM);
-    
-    else
-        StringExpandPlaceholders(gStringVar4, gText_CurrentTimeAM);
-    
-	AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdClock, FONT_NORMAL, gStringVar4, 0, 1, 0xFF, NULL);
-	CopyWindowToVram(sRotomPhone_StartMenu->windowIdClock, COPYWIN_GFX);
+    RotomPhone_SmallStartMenu_PrintClockDisplay();
 }
 
-static void RotomPhone_SmallStartMenu_UpdateClockDisplay(void)
+static void RotomPhone_SmallStartMenu_PrintClockDisplay(void)
 {
-    u8 analogHour;
+    const u8 *const *weekdayNames = gDayNameStringsTable;
+    u8 weekdayFont = FONT_NARROW;
+    u8 yOffset = 1;
+    u8 xOffset = 0;
 
-	if (!FlagGet(FLAG_TEMP_5))
-		return;
-	RtcCalcLocalTime();
-    analogHour = (gLocalTime.hours >= 13 && gLocalTime.hours <= 24) ? gLocalTime.hours - 12 : gLocalTime.hours;
-    
-	StringCopy(gStringVar3, gDayNameStringsTable[(gLocalTime.days % 7)]);
-    ConvertIntToDecimalStringN(gStringVar1, gLocalTime.hours, STR_CONV_MODE_LEADING_ZEROS, 2);
-	ConvertIntToDecimalStringN(gStringVar2, gLocalTime.minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
-	    ConvertIntToDecimalStringN(gStringVar1, analogHour, STR_CONV_MODE_LEADING_ZEROS, 2);
-    if (gLocalTime.hours == 0)
-		ConvertIntToDecimalStringN(gStringVar1, 12, STR_CONV_MODE_LEADING_ZEROS, 2);
-    
-    if (gLocalTime.hours == 12)
-		ConvertIntToDecimalStringN(gStringVar1, 12, STR_CONV_MODE_LEADING_ZEROS, 2);
-
-	if (gLocalTime.seconds % 2)
-	{
-        StringExpandPlaceholders(gStringVar4, gText_CurrentTime);
-        if (gLocalTime.hours >= 12 && gLocalTime.hours <= 24)
-            StringExpandPlaceholders(gStringVar4, gText_CurrentTimePM);
-        
-        else
-            StringExpandPlaceholders(gStringVar4, gText_CurrentTimeAM);
+    if (ROTOM_PHONE_SHORTENED_NAME)
+    {
+        weekdayNames = gDayNameStringsTableShortned;
+        weekdayFont = FONT_NORMAL;
+        yOffset = 0;
+        xOffset = 3;
     }
-	else
-	{
-        StringExpandPlaceholders(gStringVar4, gText_CurrentTimeOff);
-        if (gLocalTime.hours >= 12 && gLocalTime.hours <= 24)
-            StringExpandPlaceholders(gStringVar4, gText_CurrentTimePMOff);
 
-        else
-            StringExpandPlaceholders(gStringVar4, gText_CurrentTimeAMOff);
-    }
-    
-	AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdClock, FONT_NORMAL, gStringVar4, 0, 1, 0xFF, NULL);
-	CopyWindowToVram(sRotomPhone_StartMenu->windowIdClock, COPYWIN_GFX);
+    if (ROTOM_PHONE_24_HOUR_MODE)
+        xOffset = 3;
+
+    StringCopy(gStringVar3, weekdayNames[(gLocalTime.days % WEEKDAY_COUNT)]);
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdClock, weekdayFont,
+        weekdayNames[(gLocalTime.days % WEEKDAY_COUNT)], 1 + xOffset, 1 - yOffset, TEXT_SKIP_DRAW, NULL
+    );
+
+    u8 time[24];
+    RtcCalcLocalTime();
+    FormatDecimalTimeWithoutSeconds(time, gLocalTime.hours, gLocalTime.minutes, ROTOM_PHONE_24_HOUR_MODE);
+	AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdClock, FONT_NORMAL, time,
+        GetStringRightAlignXOffset(FONT_NORMAL, time, sWindowTemplate_StartClock.width * 8) - 1 - xOffset,
+        1, TEXT_SKIP_DRAW, NULL
+    );
+    CopyWindowToVram(sRotomPhone_StartMenu->windowIdClock, COPYWIN_GFX);
 }
 
 static void RotomPhone_SmallStartMenu_UpdateMenuName(void)
@@ -903,7 +872,7 @@ static void RotomPhone_SmallStartMenu_UpdateMenuName(void)
     const u8 *optionName = sRotomPhoneOptions[menuSelected].menuName;
     AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdMenuName, FONT_NORMAL, optionName,
         GetStringCenterAlignXOffset(FONT_NORMAL, optionName, sWindowTemplate_MenuName.width * 8),
-        0, 0xFF, NULL);
+        1, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdMenuName, COPYWIN_GFX);
 }
 
@@ -1146,7 +1115,9 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
         LoadPalette(sIconPal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP); 
     }
 
-    //RotomPhone_SmallStartMenu_UpdateClockDisplay();
+    if (ROTOM_PHONE_UPDATE_CLOCK_DISPLAY)
+        RotomPhone_SmallStartMenu_PrintClockDisplay();
+    
     if (JOY_NEW(A_BUTTON))
     {
         if (sRotomPhone_StartMenu->isLoading == FALSE)
