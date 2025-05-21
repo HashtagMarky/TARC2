@@ -111,12 +111,6 @@ enum RotomPhoneMenuItems
 };
 #define ROTOM_PHONE_MENU_FIRST_OPTION ROTOM_PHONE_MENU_COUNT - ROTOM_PHONE_MENU_COUNT
 
-enum RotomPhoneFlagValues
-{
-    FLAG_VALUE_NOT_SET,
-    FLAG_VALUE_SET,
-};
-
 enum RotomPhoneSaveStates
 {
     SAVE_IN_PROGRESS,
@@ -487,9 +481,9 @@ static const struct SpriteTemplate gSpriteIconFlag = {
 
 static void SpriteCB_IconPoketch(struct Sprite* sprite)
 {
-    if (menuSelected == ROTOM_PHONE_MENU_POKENAV && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == ROTOM_PHONE_MENU_POKENAV && sRotomPhone_StartMenu->flag == FALSE)
     {
-        sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
+        sRotomPhone_StartMenu->flag = TRUE;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
@@ -502,9 +496,9 @@ static void SpriteCB_IconPoketch(struct Sprite* sprite)
 
 static void SpriteCB_IconPokedex(struct Sprite* sprite)
 {
-    if (menuSelected == ROTOM_PHONE_MENU_POKEDEX && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == ROTOM_PHONE_MENU_POKEDEX && sRotomPhone_StartMenu->flag == FALSE)
     {
-        sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
+        sRotomPhone_StartMenu->flag = TRUE;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
@@ -517,9 +511,9 @@ static void SpriteCB_IconPokedex(struct Sprite* sprite)
 
 static void SpriteCB_IconParty(struct Sprite* sprite)
 {
-    if (menuSelected == ROTOM_PHONE_MENU_PARTY && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == ROTOM_PHONE_MENU_PARTY && sRotomPhone_StartMenu->flag == FALSE)
     {
-        sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
+        sRotomPhone_StartMenu->flag = TRUE;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
@@ -532,9 +526,9 @@ static void SpriteCB_IconParty(struct Sprite* sprite)
 
 static void SpriteCB_IconBag(struct Sprite* sprite)
 {
-    if (menuSelected == ROTOM_PHONE_MENU_BAG && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == ROTOM_PHONE_MENU_BAG && sRotomPhone_StartMenu->flag == FALSE)
     {
-        sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
+        sRotomPhone_StartMenu->flag = TRUE;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
@@ -547,9 +541,9 @@ static void SpriteCB_IconBag(struct Sprite* sprite)
 
 static void SpriteCB_IconTrainerCard(struct Sprite* sprite)
 {
-    if (menuSelected == ROTOM_PHONE_MENU_TRAINER_CARD && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == ROTOM_PHONE_MENU_TRAINER_CARD && sRotomPhone_StartMenu->flag == FALSE)
     {
-        sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
+        sRotomPhone_StartMenu->flag = TRUE;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
@@ -562,9 +556,9 @@ static void SpriteCB_IconTrainerCard(struct Sprite* sprite)
 
 static void SpriteCB_IconSave(struct Sprite* sprite)
 {
-    if (menuSelected == ROTOM_PHONE_MENU_SAVE && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == ROTOM_PHONE_MENU_SAVE && sRotomPhone_StartMenu->flag == FALSE)
     {
-        sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
+        sRotomPhone_StartMenu->flag = TRUE;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
@@ -577,9 +571,9 @@ static void SpriteCB_IconSave(struct Sprite* sprite)
 
 static void SpriteCB_IconOptions(struct Sprite* sprite)
 {
-    if (menuSelected == ROTOM_PHONE_MENU_OPTIONS && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == ROTOM_PHONE_MENU_OPTIONS && sRotomPhone_StartMenu->flag == FALSE)
     {
-        sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
+        sRotomPhone_StartMenu->flag = TRUE;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
@@ -592,9 +586,9 @@ static void SpriteCB_IconOptions(struct Sprite* sprite)
 
 static void SpriteCB_IconFlag(struct Sprite* sprite)
 {
-    if (menuSelected == ROTOM_PHONE_MENU_FLAG && sRotomPhone_StartMenu->flag == FLAG_VALUE_NOT_SET)
+    if (menuSelected == ROTOM_PHONE_MENU_FLAG && sRotomPhone_StartMenu->flag == FALSE)
     {
-        sRotomPhone_StartMenu->flag = FLAG_VALUE_SET;
+        sRotomPhone_StartMenu->flag = TRUE;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
