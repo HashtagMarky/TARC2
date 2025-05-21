@@ -1464,7 +1464,7 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     {
         if (sRotomPhone_StartMenu->loadState == 0)
         {
-            if (menuSelected != ROTOM_PHONE_MENU_SAVE || menuSelected != ROTOM_PHONE_MENU_FLAG)
+            if (menuSelected != ROTOM_PHONE_MENU_SAVE && menuSelected != ROTOM_PHONE_MENU_FLAG)
                 FadeScreen(FADE_TO_BLACK, 0);
             
             sRotomPhone_StartMenu->loadState = 1;
