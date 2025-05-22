@@ -984,10 +984,10 @@ static void RotomPhone_SmallStartMenu_PrintDate(u8 taskId)
 
     RtcCalcLocalTime();
     StringCopy(textBuffer, COMPOUND_STRING("The date is "));
-    StringAppend(textBuffer, gSeasonNames[Ikigai_FetchSeason()]);
-    StringAppend(textBuffer, COMPOUND_STRING(" "));
     ConvertIntToDecimalStringN(textDate, Ikigai_GetDateFromDays(gLocalTime.days), STR_CONV_MODE_LEADING_ZEROS, 2);
     StringAppend(textBuffer, textDate);
+    StringAppend(textBuffer, COMPOUND_STRING(" "));
+    StringAppend(textBuffer, gSeasonNames[Ikigai_FetchSeason()]);
     StringAppend(textBuffer, COMPOUND_STRING(", Year "));
     ConvertIntToDecimalStringN(textYear, Ikigai_GetYearFromDays(gLocalTime.days), STR_CONV_MODE_LEFT_ALIGN, 3);
     StringAppend(textBuffer, textYear);
