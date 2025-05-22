@@ -929,7 +929,6 @@ static void RotomPhone_SmallStartMenu_PrintGreeting(void)
 
 static void RotomPhone_SmallStartMenu_PrintTime(void)
 {
-    const u8 *const *weekdayNames = gDayNameStringsTable;
     u8 textBuffer[80];
     u8 time[24];
     u8 fontId;
