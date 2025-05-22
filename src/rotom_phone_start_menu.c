@@ -104,6 +104,7 @@ static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void);
 static void RotomPhone_SmallStartMenu_PrintGreeting(void);
 static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId);
+static void RotomPhone_SmallStartMenu_PrintSafari(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintDate(u8 taskId);
 static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void);
 
@@ -142,7 +143,9 @@ enum RotomPhoneSpriteAnims
 enum RotomPhoneMessages
 {
     ROTOM_PHONE_MESSAGE_TIME,
+    ROTOM_PHONE_MESSAGE_SAFARI,
     ROTOM_PHONE_MESSAGE_DATE,
+    ROTOM_PHONE_MESSAGE_COUNT,
 };
 
 /* STRUCTs */
@@ -721,17 +724,6 @@ static void RotomPhone_SetFirstSelectedMenu(void)
     }
 }
 
-static void ShowSafariBallsWindow(void)
-{
-    sRotomPhone_StartMenu->windowIdSafariBalls = AddWindow(&sWindowTemplate_SafariBalls);
-    FillWindowPixelBuffer(sRotomPhone_StartMenu->windowIdSafariBalls, PIXEL_FILL(TEXT_COLOR_WHITE));
-    PutWindowTilemap(sRotomPhone_StartMenu->windowIdSafariBalls);
-    ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
-    StringExpandPlaceholders(gStringVar4, gText_SafariBallStock);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdSafariBalls, FONT_NARROW, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(sRotomPhone_StartMenu->windowIdSafariBalls, COPYWIN_GFX);
-}
-
 #define tRotomUpdateTimer gTasks[taskId].data[0]
 #define tRotomUpdateMessage gTasks[taskId].data[1]
 void RotomPhone_StartMenu_Init(void)
@@ -775,7 +767,7 @@ void RotomPhone_StartMenu_Init(void)
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 
     if (GetSafariZoneFlag())
-        ShowSafariBallsWindow();
+        tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_SAFARI;
 
     RotomPhone_SmallStartMenu_UpdateMenuPrompt();
 }
@@ -838,7 +830,7 @@ static void RotomPhone_SmallStartMenu_LoadBgGfx(void)
     u8* buf = GetBgTilemapBuffer(0); 
     LoadBgTilemap(0, 0, 0, 0);
     DecompressAndCopyTileDataToVram(0, sStartMenuTiles, 0, 0, 0);
-    if (GetSafariZoneFlag() == FALSE)
+    if (FlagGet(FLAG_SYS_POKEDEX_GET))
         LZDecompressWram(sStartMenuTilemap, buf);
 
     else
@@ -942,6 +934,10 @@ static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId)
         case ROTOM_PHONE_MESSAGE_TIME:
             RotomPhone_SmallStartMenu_PrintTime(taskId);
             break;
+
+        case ROTOM_PHONE_MESSAGE_SAFARI:
+            RotomPhone_SmallStartMenu_PrintSafari(taskId);
+            break;
         
         case ROTOM_PHONE_MESSAGE_DATE:
             RotomPhone_SmallStartMenu_PrintDate(taskId);
@@ -973,6 +969,35 @@ static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId)
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
     tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER;
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_DATE;
+    if (GetSafariZoneFlag())
+        tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_SAFARI;
+}
+
+static void RotomPhone_SmallStartMenu_PrintSafari(u8 taskId)
+{
+    u8 textBuffer[80];
+    u8 time[24];
+    u8 numBalls[2];
+    u8 nameItem[20];
+    u8 fontId;
+
+    ConvertIntToDecimalStringN(numBalls, gNumSafariBalls, STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringCopy(textBuffer, COMPOUND_STRING("You have "));
+    StringAppend(textBuffer, numBalls);
+    StringAppend(textBuffer, COMPOUND_STRING(" "));
+    CopyItemNameHandlePlural(ITEM_SAFARI_BALL, nameItem, gNumSafariBalls);
+    StringAppend(textBuffer, nameItem);
+    StringAppend(textBuffer, COMPOUND_STRING(" remaining."));
+    fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId,
+        sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId, textBuffer,
+        GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
+        ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
+    );
+    CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
+    tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER;
+    tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 }
 
 static void RotomPhone_SmallStartMenu_PrintDate(u8 taskId)
@@ -1051,14 +1076,6 @@ static void RotomPhone_SmallStartMenu_ExitAndClearTilemap(void)
 
     RemoveWindow(sRotomPhone_StartMenu->windowIdRotomSpeech_Top);
     RemoveWindow(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom);
-
-    if (GetSafariZoneFlag() == TRUE)
-    {
-        FillWindowPixelBuffer(sRotomPhone_StartMenu->windowIdSafariBalls, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-        ClearWindowTilemap(sRotomPhone_StartMenu->windowIdSafariBalls); 
-        CopyWindowToVram(sRotomPhone_StartMenu->windowIdSafariBalls, COPYWIN_GFX);
-        RemoveWindow(sRotomPhone_StartMenu->windowIdSafariBalls);
-    }
 
     for (i=0; i<2048; i++)
     {
