@@ -934,7 +934,7 @@ static void RotomPhone_SmallStartMenu_PrintGreeting(void)
 
 static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId)
 {
-    if (!tRotomUpdateTimer)
+    if (!tRotomUpdateTimer && FlagGet(FLAG_SYS_POKEDEX_GET))
     {
         switch (tRotomUpdateMessage)
         {
