@@ -978,11 +978,19 @@ static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId)
 static void RotomPhone_SmallStartMenu_PrintDate(u8 taskId)
 {
     u8 textBuffer[80];
+    u8 textDate[2];
+    u8 textYear[3];
     u8 fontId;
 
     RtcCalcLocalTime();
-    StringCopy(textBuffer, COMPOUND_STRING("The season is "));
+    StringCopy(textBuffer, COMPOUND_STRING("The date is "));
     StringAppend(textBuffer, gSeasonNames[Ikigai_FetchSeason()]);
+    StringAppend(textBuffer, COMPOUND_STRING(" "));
+    ConvertIntToDecimalStringN(textDate, Ikigai_GetDateFromDays(gLocalTime.days), STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringAppend(textBuffer, textDate);
+    StringAppend(textBuffer, COMPOUND_STRING(", Year "));
+    ConvertIntToDecimalStringN(textYear, Ikigai_GetYearFromDays(gLocalTime.days), STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringAppend(textBuffer, textYear);
     StringAppend(textBuffer, COMPOUND_STRING("."));
     fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
     AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId,
