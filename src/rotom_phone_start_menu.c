@@ -182,9 +182,7 @@ static const u16 sStartMenuPalette[] = INCBIN_U16("graphics/rotom_phone_start_me
 #define TAG_ICON_GFX 1234
 #define TAG_ICON_PAL 0x4654 | BLEND_IMMUNE_FLAG
 #define ICON_COORD_X 184
-#define ICON_COORD_Y_TOP 50
-#define ICON_HEIGHT 32
-#define ICON_GAP 3
+#define ICON_COORD_Y 50
 
 static const u32 sIconGfx[] = INCBIN_U32("graphics/rotom_phone_start_menu/icons.4bpp.lz");
 static const u16 sIconPal[] = INCBIN_U16("graphics/rotom_phone_start_menu/icons.gbapal");
@@ -793,7 +791,7 @@ static void RotomPhone_SmallStartMenu_LoadSprites(void)
 
 static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menuItem, enum RotomPhoneSmallOptions spriteId)
 {
-    s32 y = ICON_COORD_Y_TOP;
+    s32 y = ICON_COORD_Y;
     s32 x = ICON_COORD_X;
     u32 iconRow;
     u32 iconColumn;
@@ -802,17 +800,10 @@ static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menu
     iconRow = spriteId / 2;
     enum RotomPhoneSmallOptions optionSlotPrev = spriteId - 1;
 
-    DebugPrintf("%d, %d", iconColumn, iconRow);
-
-    // if (spriteId != ROTOM_PHONE_SMALL_OPTION_1 && sRotomPhone_StartMenu->menuSmallOptions[optionSlotPrev] != ROTOM_PHONE_MENU_COUNT)
-    //     y = ICON_HEIGHT + gSprites[sRotomPhone_StartMenu->menuSmallSpriteId[optionSlotPrev]].y - sRotomPhoneOptions[sRotomPhone_StartMenu->menuSmallOptions[optionSlotPrev]].yOffset;
-
-    // yOffset += sRotomPhoneOptions[menuItem].yOffset;
-
     sRotomPhone_StartMenu->menuSmallSpriteId[spriteId] = CreateSprite(
         sRotomPhoneOptions[menuItem].iconTemplate,
         ICON_COORD_X + (iconColumn * 24),
-        ICON_COORD_Y_TOP + (iconRow * 24),
+        ICON_COORD_Y + (iconRow * 24),
         0
     );
 }
