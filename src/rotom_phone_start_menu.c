@@ -56,11 +56,13 @@
 #include "event_object_movement.h"
 #include "gba/isagbprint.h"
 #include "random.h"
+#include "fake_rtc.h"
 
 /* CONFIGS */
 #define ROTOM_PHONE_UPDATE_CLOCK_DISPLAY    TRUE
 #define ROTOM_PHONE_SHORTENED_NAME          FALSE
 #define ROTOM_PHONE_24_HOUR_MODE            gSaveBlock2Ptr->optionsClockMode
+#define ROTOM_PHONE_MESSAGE_UPDATE_TIMER    (30 * 60) / FakeRtc_GetSecondsRatio()
 
 /* CALLBACKS */
 static void SpriteCB_IconPoketch(struct Sprite* sprite);
@@ -100,7 +102,9 @@ static void RotomPhone_SmallStartMenu_CreateAllSprites(void);
 static void RotomPhone_SmallStartMenu_LoadBgGfx(void);
 static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void);
 static void RotomPhone_SmallStartMenu_PrintGreeting(void);
-static void RotomPhone_SmallStartMenu_PrintTime(void);
+static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId);
+static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId);
+static void RotomPhone_SmallStartMenu_PrintDate(u8 taskId);
 static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void);
 
 /* ENUMs */
@@ -133,6 +137,12 @@ enum RotomPhoneSpriteAnims
 {
     SPRITE_INACTIVE,
     SPRITE_ACTIVE,
+};
+
+enum RotomPhoneMessages
+{
+    ROTOM_PHONE_MESSAGE_TIME,
+    ROTOM_PHONE_MESSAGE_DATE,
 };
 
 /* STRUCTs */
@@ -724,6 +734,8 @@ static void ShowSafariBallsWindow(void)
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdSafariBalls, COPYWIN_GFX);
 }
 
+#define tRotomUpdateTimer gTasks[taskId].data[0]
+#define tRotomUpdateMessage gTasks[taskId].data[1]
 void RotomPhone_StartMenu_Init(void)
 {
     if (!IsOverworldLinkActive())
@@ -760,7 +772,9 @@ void RotomPhone_StartMenu_Init(void)
     if (!sRotomPhoneOptions[menuSelected].unlockedFunc || !sRotomPhoneOptions[menuSelected].unlockedFunc())
         RotomPhone_SetFirstSelectedMenu();
 
-    CreateTask(Task_RotomPhone_SmallStartMenu_HandleMainInput, 0);
+    u8 taskId = CreateTask(Task_RotomPhone_SmallStartMenu_HandleMainInput, 0);
+    tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER;
+    tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 
     if (GetSafariZoneFlag())
         ShowSafariBallsWindow();
@@ -927,7 +941,25 @@ static void RotomPhone_SmallStartMenu_PrintGreeting(void)
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
 }
 
-static void RotomPhone_SmallStartMenu_PrintTime(void)
+static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId)
+{
+    if (!tRotomUpdateTimer)
+    {
+        switch (tRotomUpdateMessage)
+        {
+        default:
+        case ROTOM_PHONE_MESSAGE_TIME:
+            RotomPhone_SmallStartMenu_PrintTime(taskId);
+            break;
+        
+        case ROTOM_PHONE_MESSAGE_DATE:
+            RotomPhone_SmallStartMenu_PrintDate(taskId);
+            break;
+        }
+    }
+}
+
+static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId)
 {
     u8 textBuffer[80];
     u8 time[24];
@@ -948,6 +980,29 @@ static void RotomPhone_SmallStartMenu_PrintTime(void)
         ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
     );
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
+    tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER;
+    tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_DATE;
+}
+
+static void RotomPhone_SmallStartMenu_PrintDate(u8 taskId)
+{
+    u8 textBuffer[80];
+    u8 fontId;
+
+    RtcCalcLocalTime();
+    StringCopy(textBuffer, COMPOUND_STRING("The season is "));
+    StringAppend(textBuffer, gSeasonNames[Ikigai_FetchSeason()]);
+    StringAppend(textBuffer, COMPOUND_STRING("."));
+    fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId,
+        sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId, textBuffer,
+        GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
+        ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
+    );
+    CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
+    tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER;
+    tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 }
 
 static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void)
@@ -1215,11 +1270,13 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     if (sRotomPhone_StartMenu->isLoading == FALSE && !gPaletteFade.active)
     {
         index = IndexOfSpritePaletteTag(TAG_ICON_PAL);
-        LoadPalette(sIconPal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP); 
+        LoadPalette(sIconPal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
     }
 
-    if (ROTOM_PHONE_UPDATE_CLOCK_DISPLAY)
-        RotomPhone_SmallStartMenu_PrintTime();
+    RotomPhone_SmallStartMenu_CheckUpdateMessage(taskId);
+
+    if (tRotomUpdateTimer && sRotomPhone_StartMenu->isLoading == FALSE && !gPaletteFade.active)
+        tRotomUpdateTimer--;
     
     if (JOY_NEW(A_BUTTON))
     {
@@ -1250,3 +1307,5 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
         sRotomPhoneOptions[menuSelected].selectedFunc();
     }
 }
+#undef tRotomUpdateTimer
+#undef tRotomUpdateMessage
