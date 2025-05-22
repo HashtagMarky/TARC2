@@ -855,6 +855,7 @@ static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void)
     RotomPhone_SmallStartMenu_PrintClockDisplay();
 }
 
+static const u8 sText_ClearWindow[] = COMPOUND_STRING("{CLEAR_TO 190}");
 static void RotomPhone_SmallStartMenu_PrintClockDisplay(void)
 {
     const u8 *const *weekdayNames = gDayNameStringsTable;
@@ -900,7 +901,7 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void)
             StringCopy(textBuffer, COMPOUND_STRING("Do you want "));
         StringAppend(textBuffer, menuDescription);
         AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, FONT_SMALL_NARROWER,
-            COMPOUND_STRING("{CLEAR_TO 190}"), 0, 1, TEXT_SKIP_DRAW, NULL);
+            sText_ClearWindow, 0, 1, TEXT_SKIP_DRAW, NULL);
         AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, FONT_SMALL_NARROWER, textBuffer,
             GetStringCenterAlignXOffset(FONT_SMALL_NARROWER, textBuffer, sWindowTemplate_RotomSpeech_Bottom.width * 8),
             1, TEXT_SKIP_DRAW, NULL);
