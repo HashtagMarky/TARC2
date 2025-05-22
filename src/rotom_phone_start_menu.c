@@ -188,22 +188,26 @@ static const struct WindowTemplate sSaveInfoWindowTemplate = {
     .baseBlock = 8
 };
 
+#define ROTOM_SPEECH_WINDOW_WIDTH   18
+#define ROTOM_SPEECH_WINDOW_HEIGHT  2
+#define ROTOM_SPEECH_WINDOW_LEFT    1
+#define ROTOM_SPEECH_WINDOW_TOP     15
 static const struct WindowTemplate sWindowTemplate_RotomSpeech_Top = {
   .bg = 0, 
-  .tilemapLeft = 1, 
-  .tilemapTop = 15, 
-  .width = 18,
-  .height = 2, 
+  .tilemapLeft = ROTOM_SPEECH_WINDOW_LEFT, 
+  .tilemapTop = ROTOM_SPEECH_WINDOW_TOP, 
+  .width = ROTOM_SPEECH_WINDOW_WIDTH,
+  .height = ROTOM_SPEECH_WINDOW_HEIGHT, 
   .paletteNum = 15,
   .baseBlock = 0x30
 };
 
 static const struct WindowTemplate sWindowTemplate_RotomSpeech_Bottom = {
     .bg = 0, 
-    .tilemapLeft = 1, 
-    .tilemapTop = 17, 
-    .width = 18, 
-    .height = 2, 
+    .tilemapLeft = ROTOM_SPEECH_WINDOW_LEFT, 
+    .tilemapTop = ROTOM_SPEECH_WINDOW_TOP + 2, 
+    .width = ROTOM_SPEECH_WINDOW_WIDTH, 
+    .height = ROTOM_SPEECH_WINDOW_HEIGHT, 
     .paletteNum = 15,
     .baseBlock = 0x30 + (18*2)
 };
