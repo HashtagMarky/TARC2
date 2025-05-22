@@ -60,7 +60,7 @@
 /* CONFIGS */
 #define ROTOM_PHONE_UPDATE_CLOCK_DISPLAY    TRUE
 #define ROTOM_PHONE_SHORTENED_NAME          FALSE
-#define ROTOM_PHONE_24_HOUR_MODE            TRUE
+#define ROTOM_PHONE_24_HOUR_MODE            gSaveBlock2Ptr->optionsClockMode
 
 /* CALLBACKS */
 static void SpriteCB_IconPoketch(struct Sprite* sprite);
@@ -100,7 +100,7 @@ static void RotomPhone_SmallStartMenu_CreateAllSprites(void);
 static void RotomPhone_SmallStartMenu_LoadBgGfx(void);
 static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void);
 static void RotomPhone_SmallStartMenu_PrintGreeting(void);
-static void RotomPhone_SmallStartMenu_PrintClockDisplay(void);
+static void RotomPhone_SmallStartMenu_PrintTime(void);
 static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void);
 
 /* ENUMs */
@@ -691,13 +691,13 @@ static const u8 *const gDayNameStringsTableShortned[] =
 
 static const u8 *const gDayNameStringsTable[] =
 {
-    COMPOUND_STRING("Friday,"),
-    COMPOUND_STRING("Saturday,"),
-    COMPOUND_STRING("Sunday,"),
-    COMPOUND_STRING("Monday,"),
-    COMPOUND_STRING("Tuesday,"),
-    COMPOUND_STRING("Wednesday,"),
-    COMPOUND_STRING("Thursday,"),
+    COMPOUND_STRING("Friday"),
+    COMPOUND_STRING("Saturday"),
+    COMPOUND_STRING("Sunday"),
+    COMPOUND_STRING("Monday"),
+    COMPOUND_STRING("Tuesday"),
+    COMPOUND_STRING("Wednesday"),
+    COMPOUND_STRING("Thursday"),
 };
 
 static void RotomPhone_SetFirstSelectedMenu(void)
@@ -926,35 +926,26 @@ static void RotomPhone_SmallStartMenu_PrintGreeting(void)
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
 }
 
-static void RotomPhone_SmallStartMenu_PrintClockDisplay(void)
+static void RotomPhone_SmallStartMenu_PrintTime(void)
 {
     const u8 *const *weekdayNames = gDayNameStringsTable;
-    u8 weekdayFont = FONT_NARROW;
-    u8 yOffset = 1;
-    u8 xOffset = 0;
-
-    if (ROTOM_PHONE_SHORTENED_NAME)
-    {
-        weekdayNames = gDayNameStringsTableShortned;
-        weekdayFont = FONT_NORMAL;
-        yOffset = 0;
-        xOffset = 3;
-    }
-
-    if (ROTOM_PHONE_24_HOUR_MODE)
-        xOffset = 3;
-
-    StringCopy(gStringVar3, weekdayNames[(gLocalTime.days % WEEKDAY_COUNT)]);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, weekdayFont,
-        weekdayNames[(gLocalTime.days % WEEKDAY_COUNT)], 1 + xOffset, 1 - yOffset, TEXT_SKIP_DRAW, NULL
-    );
-
+    u8 textBuffer[80];
     u8 time[24];
+    u8 fontId;
+
     RtcCalcLocalTime();
     FormatDecimalTimeWithoutSeconds(time, gLocalTime.hours, gLocalTime.minutes, ROTOM_PHONE_24_HOUR_MODE);
-	AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, FONT_NORMAL, time,
-        GetStringRightAlignXOffset(FONT_NORMAL, time, ROTOM_SPEECH_WINDOW_WIDTH * 8) - 1 - xOffset,
-        1, TEXT_SKIP_DRAW, NULL
+    StringCopy(textBuffer, COMPOUND_STRING("It is "));
+    StringAppend(textBuffer, time);
+    StringAppend(textBuffer, COMPOUND_STRING(" on "));
+    StringAppend(textBuffer, gDayNameStringsTable[(gLocalTime.days % WEEKDAY_COUNT)]);
+    StringAppend(textBuffer, COMPOUND_STRING("."));
+    fontId = GetFontIdToFit(textBuffer, FONT_SMALL, 0, ROTOM_SPEECH_WINDOW_WIDTH * 8);
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId,
+        sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId, textBuffer,
+        GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH * 8),
+        ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
     );
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
 }
@@ -1228,7 +1219,7 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     }
 
     if (ROTOM_PHONE_UPDATE_CLOCK_DISPLAY)
-        RotomPhone_SmallStartMenu_PrintClockDisplay();
+        RotomPhone_SmallStartMenu_PrintTime();
     
     if (JOY_NEW(A_BUTTON))
     {
