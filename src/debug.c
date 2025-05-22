@@ -74,6 +74,7 @@
 #include "calendar.h"
 #include "dynamic_music.h"
 #include "ikigai_characters.h"
+#include "safari_zone.h"
 #include "ui_samuel_case.h"
 #include "vyraton.h"
 
@@ -101,6 +102,7 @@ enum IkigaiDebugMenu
     DEBUG_IKIGAI_PLAYER,
     DEBUG_IKIGAI_CHARACTER,
     DEBUG_IKIGAI_TEMPORAL,
+    DEBUG_IKIGAI_START_MENU,
     DEBUG_IKIGAI_SOUND,
 };
 
@@ -128,6 +130,14 @@ enum IkigaiTimeDebugSubmenu
     DEBUG_IKIGAI_TEMPORAL_CALENDAR_SHOW,
     DEBUG_IKIGAI_TEMPORAL_CALENDAR_WARP,
     DEBUG_IKIGAI_TEMPORAL_WEATHER,
+};
+
+enum IkigaiStartMenuSubmenu
+{
+    DEBUG_IKIGAI_START_MENU_TOGGLE_POKEDEX,
+    DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV,
+    DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON,
+    DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI,
 };
 
 enum IkigaiSoundSubmenu
@@ -479,6 +489,7 @@ static void DebugAction_OpenIkigaiMenu(u8 taskId);
 static void DebugAction_OpenSubmenuIkigai_Player(u8 taskId);
 static void DebugAction_OpenSubmenuIkigai_CharacterMenu(u8 taskId);
 static void DebugAction_OpenSubmenuIkigai_TemporalMenu(u8 taskId);
+static void DebugAction_OpenSubmenuIkigai_StartMenuMenu(u8 taskId);
 static void DebugAction_OpenSubmenuIkigai_SoundMenu(u8 taskId);
 
 static void DebugAction_OpenUtilitiesMenu(u8 taskId);
@@ -500,6 +511,7 @@ static void DebugTask_HandleMenuInput_Ikigai(u8 taskId);
 static void DebugTask_HandleSubmenuInput_Ikigai_Player(u8 taskId);
 static void DebugTask_HandleSubmenuInput_Ikigai_Character(u8 taskId);
 static void DebugTask_HandleSubmenuInput_Ikigai_Temporal(u8 taskId);
+static void DebugTask_HandleSubmenuInput_Ikigai_StartMenu(u8 taskId);
 static void DebugTask_HandleSubmenuInput_Ikigai_Sound(u8 taskId);
 static void DebugTask_HandleMenuInput_Utilities(u8 taskId);
 static void DebugTask_HandleMenuInput_PCBag(u8 taskId);
@@ -528,6 +540,8 @@ static void DebugAction_Ikigai_CalendarWarp(u8 taskId);
 static void DebugAction_Ikigai_Season(u8 taskId);
 static void DebugAction_Ikigai_SeasonsSelect(u8 taskId);
 static void DebugAction_Ikigai_PokemonCries(u8 taskId);
+static void DebugAction_Ikigai_TogglePokemonFlag(u8 taskId);
+static void DebugAction_Ikigai_ToggleSafariFlag(u8 taskId);
 
 static void DebugAction_Util_Fly(u8 taskId);
 static void DebugAction_Util_Warp_Warp(u8 taskId);
@@ -806,6 +820,7 @@ static const struct ListMenuItem sDebugMenu_Items_Ikigai[] =
     [DEBUG_IKIGAI_CHARACTER]               = {COMPOUND_STRING("Character Menu…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_IKIGAI_CHARACTER},
     [DEBUG_IKIGAI_TEMPORAL]                = {COMPOUND_STRING("Temporal Menu…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_IKIGAI_TEMPORAL},
     [DEBUG_IKIGAI_SOUND]                   = {COMPOUND_STRING("Sound Menu…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_IKIGAI_SOUND},
+    [DEBUG_IKIGAI_START_MENU]              = {COMPOUND_STRING("Rotom Phone Menu…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_IKIGAI_START_MENU},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Player[] =
@@ -832,6 +847,14 @@ static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Temporal[] =
     [DEBUG_IKIGAI_TEMPORAL_SET_CLOCK]       = {COMPOUND_STRING("Set Wall Clock…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_IKIGAI_TEMPORAL_SET_CLOCK},
     [DEBUG_IKIGAI_TEMPORAL_SET_SEASON]      = {COMPOUND_STRING("Set Season…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_IKIGAI_TEMPORAL_SET_SEASON},
     [DEBUG_IKIGAI_TEMPORAL_BASE_TIME_MENU]  = {COMPOUND_STRING("{FONT_GET_NARROW}Expansion Time Menu{RESET_FONT}…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_IKIGAI_TEMPORAL_BASE_TIME_MENU},
+};
+
+static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_StartMenu[] =
+{
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEDEX]    = {COMPOUND_STRING("Toggle {STR_VAR_1}Pokédex"),    DEBUG_IKIGAI_START_MENU_TOGGLE_POKEDEX},
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV]    = {COMPOUND_STRING("Toggle {STR_VAR_1}PokéNav"),    DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV},
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON]    = {COMPOUND_STRING("Toggle {STR_VAR_1}Pokémon"),    DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON},
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI]     = {COMPOUND_STRING("Toggle {STR_VAR_1}Safari"),     DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Sound[] =
@@ -1107,6 +1130,7 @@ static void (*const sDebugMenu_Actions_Ikigai[])(u8) =
     [DEBUG_IKIGAI_CHARACTER]               = DebugAction_OpenSubmenuIkigai_CharacterMenu,
     [DEBUG_IKIGAI_TEMPORAL]                = DebugAction_OpenSubmenuIkigai_TemporalMenu,
     [DEBUG_IKIGAI_SOUND]                   = DebugAction_OpenSubmenuIkigai_SoundMenu,
+    [DEBUG_IKIGAI_START_MENU]              = DebugAction_OpenSubmenuIkigai_StartMenuMenu,
 };
 
 static void (*const sDebugMenu_Actions_Ikigai_Player[])(u8) =
@@ -1133,6 +1157,14 @@ static void (*const sDebugMenu_Actions_Ikigai_Temporal[])(u8) =
     [DEBUG_IKIGAI_TEMPORAL_SET_CLOCK]      = DebugAction_TimeMenu_SetWallClock,
     [DEBUG_IKIGAI_TEMPORAL_SET_SEASON]     = DebugAction_Ikigai_Season,
     [DEBUG_IKIGAI_TEMPORAL_BASE_TIME_MENU] = DebugAction_Ikigai_OpenTimeMenu,
+};
+
+static void (*const sDebugMenu_Actions_Ikigai_StartMenu[])(u8) =
+{
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEDEX]    = DebugAction_FlagsVars_SwitchDex,
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV]    = DebugAction_FlagsVars_SwitchPokeNav,
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON]    = DebugAction_Ikigai_TogglePokemonFlag,
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI]     = DebugAction_Ikigai_ToggleSafariFlag,
 };
 
 static void (*const sDebugMenu_Actions_Ikigai_Sound[])(u8) =
@@ -1450,6 +1482,13 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Ikigai_Temporal =
     .items = sDebugMenu_Items_SubmenuIkigai_Temporal,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_SubmenuIkigai_Temporal),
+};
+
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Ikigai_StartMenu =
+{
+    .items = sDebugMenu_Items_SubmenuIkigai_StartMenu,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_SubmenuIkigai_StartMenu),
 };
 
 static const struct ListMenuTemplate sDebugMenu_ListTemplate_Ikigai_Sound =
@@ -1856,6 +1895,36 @@ static u8 Debug_CheckToggleFlags(u8 id)
     return result;
 }
 
+static u8 Debug_RotomPhoneFlags(u8 id)
+{
+    u8 result = FALSE;
+
+    switch (id)
+    {
+    case DEBUG_IKIGAI_START_MENU_TOGGLE_POKEDEX:
+        result = FlagGet(FLAG_SYS_POKEDEX_GET);
+        break;
+    
+    case DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON:
+        result = FlagGet(FLAG_SYS_POKEMON_GET);
+        break;
+    
+    case DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV:
+        result = FlagGet(FLAG_SYS_POKENAV_GET);
+        break;
+    
+    case DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI:
+        result = GetSafariZoneFlag();
+        break;
+    
+    default:
+        result = 0xFF;
+        break;
+    }
+
+    return result;
+}
+
 static void Debug_InitDebugBattleData(void)
 {
     u32 i;
@@ -1910,6 +1979,13 @@ static void Debug_GenerateListMenuNames(u32 totalItems)
                     flagResult = 0xFF;
                 name = sDebugMenu_Items_Battle_1[i].name;
             }
+            else if (sDebugMenuListData->listId == 2)
+            {
+                if (i >= sDebugMenu_ListTemplate_Ikigai_StartMenu.totalItems)
+                    return; // Idk why the complier needs this.
+                flagResult = Debug_RotomPhoneFlags(i);
+                name = sDebugMenu_Items_SubmenuIkigai_StartMenu[i].name;
+            }
 
             if (flagResult == 0xFF)
             {
@@ -1952,6 +2028,11 @@ static void Debug_RefreshListMenu(u8 taskId)
     {
         gMultiuseListMenuTemplate = sDebugMenu_ListTemplate_Battle_2;
         totalItems = 7;
+    }
+    else if (sDebugMenuListData->listId == 2)
+    {
+        gMultiuseListMenuTemplate = sDebugMenu_ListTemplate_Ikigai_StartMenu;
+        totalItems = gMultiuseListMenuTemplate.totalItems;
     }
 
     // Failsafe to prevent memory corruption
@@ -2052,6 +2133,37 @@ static void DebugTask_HandleSubmenuInput_Ikigai_Temporal(u8 taskId)
 static void DebugTask_HandleMenuInput_Ikigai_TimeFunction(u8 taskId)
 {
     DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_TimeMenu, DebugTask_HandleMenuInput_Ikigai, sDebugMenu_ListTemplate_Ikigai);
+}
+
+static void DebugTask_HandleSubmenuInput_Ikigai_StartMenu(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Actions_Ikigai_StartMenu[input]) != NULL)
+        {
+            func(taskId);
+            Debug_GenerateListMenuNames(gMultiuseListMenuTemplate.totalItems);
+            RedrawListMenu(gTasks[taskId].tMenuTaskId);
+
+            // Remove TRUE/FALSE window for functions that haven't been assigned flags
+            if (gTasks[taskId].tInput == 0xFF)
+            {
+                ClearStdWindowAndFrame(gTasks[taskId].tSubWindowId, TRUE);
+                RemoveWindow(gTasks[taskId].tSubWindowId);
+                Free(sDebugMenuListData);
+            }
+        }
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Ikigai, sDebugMenu_ListTemplate_Ikigai);
+    }
 }
 
 static void DebugTask_HandleSubmenuInput_Ikigai_Sound(u8 taskId)
@@ -2425,6 +2537,14 @@ static void DebugAction_OpenSubmenuIkigai_TemporalMenu(u8 taskId)
     Debug_ShowMenu(DebugTask_HandleSubmenuInput_Ikigai_Temporal, sDebugMenu_ListTemplate_Ikigai_Temporal);
 }
 
+static void DebugAction_OpenSubmenuIkigai_StartMenuMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    sDebugMenuListData->listId = 2;
+    Debug_RefreshListMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleSubmenuInput_Ikigai_StartMenu, gMultiuseListMenuTemplate);
+}
+
 static void DebugAction_OpenSubmenuIkigai_SoundMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
@@ -2459,6 +2579,7 @@ static void DebugAction_OpenFlagsVarsMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     sDebugMenuListData->listId = 0;
+    Debug_RefreshListMenu(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_FlagsVars, gMultiuseListMenuTemplate);
 }
 
@@ -2595,6 +2716,29 @@ static void DebugAction_Ikigai_SeasonsSelect(u8 taskId)
     {
         PlaySE(SE_SELECT);
         DebugAction_DestroyExtraWindow(taskId);
+    }
+}
+
+static void DebugAction_Ikigai_TogglePokemonFlag(u8 taskId)
+{
+    if (FlagGet(FLAG_SYS_POKEMON_GET))
+        PlaySE(SE_PC_OFF);
+    else
+        PlaySE(SE_PC_LOGIN);
+    FlagToggle(FLAG_SYS_POKEMON_GET);
+}
+
+static void DebugAction_Ikigai_ToggleSafariFlag(u8 taskId)
+{
+    if (GetSafariZoneFlag())
+    {
+        PlaySE(SE_PC_OFF);
+        ResetSafariZoneFlag();
+    }
+    else
+    {
+        PlaySE(SE_PC_LOGIN);
+        SetSafariZoneFlag();
     }
 }
 
