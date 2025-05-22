@@ -176,9 +176,10 @@ static EWRAM_DATA struct RotomPhone_StartMenu *sRotomPhone_StartMenu = NULL;
 static EWRAM_DATA enum RotomPhoneMenuItems menuSelected; // Separate memory allocation so it persist between destroying of menu.
 
 // --BG-GFX--
-static const u32 sStartMenuTiles[] = INCBIN_U32("graphics/rotom_phone_start_menu/rotom_phone_tiles.4bpp.lz");
-static const u32 sStartMenuTilemap[] = INCBIN_U32("graphics/rotom_phone_start_menu/rotom_phone_tiles.bin.lz");
-static const u32 sStartMenuTilemapSafari[] = INCBIN_U32("graphics/rotom_phone_start_menu/bg_safari.bin.lz");
+static const u32 sSmallRotomTiles[] = INCBIN_U32("graphics/rotom_phone_start_menu/rotom_phone_tiles.4bpp.lz");
+static const u32 sSmallRotomTilemap[] = INCBIN_U32("graphics/rotom_phone_start_menu/rotom_phone_tiles.bin.lz");
+static const u32 sFlipTiles[] = INCBIN_U32("graphics/rotom_phone_start_menu/flip_phone_tiles.4bpp.lz");
+static const u32 sFlipTilemap[] = INCBIN_U32("graphics/rotom_phone_start_menu/flip_phone_tiles.bin.lz");
 static const u16 sStartMenuPalette[] = INCBIN_U16("graphics/rotom_phone_start_menu/rotom_phone_tiles.gbapal");
 
 //--SPRITE-GFX--
@@ -788,6 +789,9 @@ static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menu
     u32 iconRow;
     u32 iconColumn;
 
+    if (!FlagGet(FLAG_SYS_POKEDEX_GET))
+        y += 19;
+
     iconColumn = spriteId % 2;
     iconRow = spriteId / 2;
 
@@ -828,12 +832,16 @@ static void RotomPhone_SmallStartMenu_LoadBgGfx(void)
 {
     u8* buf = GetBgTilemapBuffer(0); 
     LoadBgTilemap(0, 0, 0, 0);
-    DecompressAndCopyTileDataToVram(0, sStartMenuTiles, 0, 0, 0);
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
-        LZDecompressWram(sStartMenuTilemap, buf);
-
+    {
+        DecompressAndCopyTileDataToVram(0, sSmallRotomTiles, 0, 0, 0);
+        LZDecompressWram(sSmallRotomTilemap, buf);
+    }
     else
-        LZDecompressWram(sStartMenuTilemapSafari, buf);
+    {
+        DecompressAndCopyTileDataToVram(0, sFlipTiles, 0, 0, 0);
+        LZDecompressWram(sFlipTilemap, buf);
+    }
     
     LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     LoadPalette(sStartMenuPalette, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
