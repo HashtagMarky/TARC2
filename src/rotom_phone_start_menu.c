@@ -865,6 +865,7 @@ static void RotomPhone_SmallStartMenu_PrintGreeting(void)
 {
     u8 textBuffer[80];
     u8 random = Random() % 4;
+    u8 fontId;
 
     switch (random)
     {
@@ -916,10 +917,11 @@ static void RotomPhone_SmallStartMenu_PrintGreeting(void)
         StringAppend(textBuffer, COMPOUND_STRING("."));
         break;
     }
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, FONT_SMALL_NARROWER,
+    fontId = GetFontIdToFit(textBuffer, FONT_SMALL, 0, ROTOM_SPEECH_WINDOW_WIDTH * 8);
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId,
         sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, FONT_SMALL_NARROWER, textBuffer,
-        GetStringCenterAlignXOffset(FONT_SMALL_NARROWER, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH * 8),
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId, textBuffer,
+        GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH * 8),
         ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
 }
@@ -959,6 +961,7 @@ static void RotomPhone_SmallStartMenu_PrintClockDisplay(void)
 
 static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void)
 {
+    u8 fontId;
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
     {
         u8 textBuffer[80];
@@ -967,10 +970,11 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void)
         else
             StringCopy(textBuffer, COMPOUND_STRING("Do you want "));
         StringAppend(textBuffer, sRotomPhoneOptions[menuSelected].menuDescription);
-        AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, FONT_SMALL_NARROWER,
+        fontId = GetFontIdToFit(textBuffer, FONT_SMALL, 0, ROTOM_SPEECH_WINDOW_WIDTH * 8);
+        AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, fontId,
             sText_ClearWindow, 0, ROTOM_SPEECH_BOTTOM_ROW_Y, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, FONT_SMALL_NARROWER, textBuffer,
-            GetStringCenterAlignXOffset(FONT_SMALL_NARROWER, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH * 8),
+        AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, fontId, textBuffer,
+            GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH * 8),
             ROTOM_SPEECH_BOTTOM_ROW_Y, TEXT_SKIP_DRAW, NULL);
         CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
     }
