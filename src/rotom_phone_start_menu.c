@@ -99,6 +99,7 @@ static void RotomPhone_SmallStartMenu_LoadSprites(void);
 static void RotomPhone_SmallStartMenu_CreateAllSprites(void);
 static void RotomPhone_SmallStartMenu_LoadBgGfx(void);
 static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void);
+static void RotomPhone_SmallStartMenu_PrintGreeting(void);
 static void RotomPhone_SmallStartMenu_PrintClockDisplay(void);
 static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void);
 
@@ -844,6 +845,9 @@ static void RotomPhone_SmallStartMenu_LoadBgGfx(void)
 
 static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void)
 {
+    if (!FlagGet(FLAG_SYS_POKEDEX_GET))
+        return;
+
     sRotomPhone_StartMenu->windowIdRotomSpeech_Top = AddWindow(&sWindowTemplate_RotomSpeech_Top);
     FillWindowPixelBuffer(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, PIXEL_FILL(TEXT_COLOR_WHITE));
     PutWindowTilemap(sRotomPhone_StartMenu->windowIdRotomSpeech_Top);
@@ -852,10 +856,73 @@ static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void)
     FillWindowPixelBuffer(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, PIXEL_FILL(TEXT_COLOR_WHITE));
     PutWindowTilemap(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom);
 
-    RotomPhone_SmallStartMenu_PrintClockDisplay();
+    RotomPhone_SmallStartMenu_PrintGreeting();
 }
 
 static const u8 sText_ClearWindow[] = COMPOUND_STRING("{CLEAR_TO 190}");
+static void RotomPhone_SmallStartMenu_PrintGreeting(void)
+{
+    u8 textBuffer[80];
+    u8 random = Random() % 4;
+
+    switch (random)
+    {
+    default:
+    case 0:
+        switch (gTimeOfDay)
+        {
+        case TIME_MORNING:
+            StringCopy(textBuffer, COMPOUND_STRING("Good morning, "));
+            break;
+
+        default:
+        case TIME_DAY:
+            StringCopy(textBuffer, COMPOUND_STRING("Good day, "));
+            break;
+
+        case TIME_EVENING:
+            StringCopy(textBuffer, COMPOUND_STRING("Good evening, "));
+            break;
+
+        case TIME_NIGHT:
+            StringCopy(textBuffer, COMPOUND_STRING("Good night, "));
+            break;
+        }
+        break;
+    
+    case 1:
+        StringCopy(textBuffer, COMPOUND_STRING("Hello there, "));
+        break;
+    
+    case 2:
+        StringCopy(textBuffer, COMPOUND_STRING("Hi, "));
+        break;
+    
+    case 3:
+        StringCopy(textBuffer, COMPOUND_STRING("How are you, "));
+        break;
+    }
+
+    StringAppend(textBuffer, gSaveBlock3Ptr->characters.playerNickname);
+
+    switch (random)
+    {
+    case 3:
+        StringAppend(textBuffer, COMPOUND_STRING("?"));
+        break;
+    
+    default:
+        StringAppend(textBuffer, COMPOUND_STRING("."));
+        break;
+    }
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, FONT_SMALL_NARROWER,
+        sText_ClearWindow, 0, 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, FONT_SMALL_NARROWER, textBuffer,
+        GetStringCenterAlignXOffset(FONT_SMALL_NARROWER, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH * 8),
+        1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
+}
+
 static void RotomPhone_SmallStartMenu_PrintClockDisplay(void)
 {
     const u8 *const *weekdayNames = gDayNameStringsTable;
