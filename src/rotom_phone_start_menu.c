@@ -918,7 +918,7 @@ static void RotomPhone_SmallStartMenu_PrintGreeting(void)
         StringAppend(textBuffer, COMPOUND_STRING("."));
         break;
     }
-    fontId = GetFontIdToFit(textBuffer, FONT_SMALL, 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
+    fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
     AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId,
         sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId, textBuffer,
@@ -941,7 +941,7 @@ static void RotomPhone_SmallStartMenu_PrintTime(void)
     StringAppend(textBuffer, COMPOUND_STRING(" on "));
     StringAppend(textBuffer, gDayNameStringsTable[(gLocalTime.days % WEEKDAY_COUNT)]);
     StringAppend(textBuffer, COMPOUND_STRING("."));
-    fontId = GetFontIdToFit(textBuffer, FONT_SMALL, 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
+    fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
     AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId,
         sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId, textBuffer,
@@ -962,7 +962,7 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void)
         else
             StringCopy(textBuffer, COMPOUND_STRING("Do you want "));
         StringAppend(textBuffer, sRotomPhoneOptions[menuSelected].menuDescription);
-        fontId = GetFontIdToFit(textBuffer, FONT_SMALL, 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
+        fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
         AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, fontId,
             sText_ClearWindow, 0, ROTOM_SPEECH_BOTTOM_ROW_Y, TEXT_SKIP_DRAW, NULL);
         AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, fontId, textBuffer,
