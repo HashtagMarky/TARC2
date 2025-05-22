@@ -894,12 +894,11 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void)
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
     {
         u8 textBuffer[80];
-        const u8 *menuDescription = sRotomPhoneOptions[menuSelected].menuDescription;
         if (Random() % 2 == TRUE)
             StringCopy(textBuffer, COMPOUND_STRING("Would you like "));
         else
             StringCopy(textBuffer, COMPOUND_STRING("Do you want "));
-        StringAppend(textBuffer, menuDescription);
+        StringAppend(textBuffer, sRotomPhoneOptions[menuSelected].menuDescription);
         AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, FONT_SMALL_NARROWER,
             sText_ClearWindow, 0, 1, TEXT_SKIP_DRAW, NULL);
         AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, FONT_SMALL_NARROWER, textBuffer,
