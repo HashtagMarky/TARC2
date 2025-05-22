@@ -783,19 +783,18 @@ static void RotomPhone_SmallStartMenu_LoadSprites(void)
 
 static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menuItem, enum RotomPhoneSmallOptions spriteId)
 {
-    s32 y = ICON_COORD_Y;
     s32 x = ICON_COORD_X;
+    s32 y = ICON_COORD_Y;
     u32 iconRow;
     u32 iconColumn;
 
     iconColumn = spriteId % 2;
     iconRow = spriteId / 2;
-    enum RotomPhoneSmallOptions optionSlotPrev = spriteId - 1;
 
     sRotomPhone_StartMenu->menuSmallSpriteId[spriteId] = CreateSprite(
         sRotomPhoneOptions[menuItem].iconTemplate,
-        ICON_COORD_X + (iconColumn * 24),
-        ICON_COORD_Y + (iconRow * 24),
+        x + (iconColumn * 24),
+        y + (iconRow * 24),
         0
     );
 }
@@ -976,7 +975,6 @@ static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId)
 static void RotomPhone_SmallStartMenu_PrintSafari(u8 taskId)
 {
     u8 textBuffer[80];
-    u8 time[24];
     u8 numBalls[2];
     u8 nameItem[20];
     u8 fontId;
