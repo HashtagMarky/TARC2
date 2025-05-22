@@ -883,7 +883,7 @@ static void RotomPhone_SmallStartMenu_PrintClockDisplay(void)
     RtcCalcLocalTime();
     FormatDecimalTimeWithoutSeconds(time, gLocalTime.hours, gLocalTime.minutes, ROTOM_PHONE_24_HOUR_MODE);
 	AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, FONT_NORMAL, time,
-        GetStringRightAlignXOffset(FONT_NORMAL, time, sWindowTemplate_RotomSpeech_Top.width * 8) - 1 - xOffset,
+        GetStringRightAlignXOffset(FONT_NORMAL, time, ROTOM_SPEECH_WINDOW_WIDTH * 8) - 1 - xOffset,
         1, TEXT_SKIP_DRAW, NULL
     );
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
@@ -902,7 +902,7 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void)
         AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, FONT_SMALL_NARROWER,
             sText_ClearWindow, 0, 1, TEXT_SKIP_DRAW, NULL);
         AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, FONT_SMALL_NARROWER, textBuffer,
-            GetStringCenterAlignXOffset(FONT_SMALL_NARROWER, textBuffer, sWindowTemplate_RotomSpeech_Bottom.width * 8),
+            GetStringCenterAlignXOffset(FONT_SMALL_NARROWER, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH * 8),
             1, TEXT_SKIP_DRAW, NULL);
         CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
     }
@@ -912,7 +912,7 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void)
         // PutWindowTilemap(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom);
         // const u8 *optionName = sRotomPhoneOptions[menuSelected].menuName;
         // AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, FONT_NORMAL, optionName,
-        //     GetStringCenterAlignXOffset(FONT_NORMAL, optionName, sWindowTemplate_RotomSpeech_Bottom.width * 8),
+        //     GetStringCenterAlignXOffset(FONT_NORMAL, optionName, ROTOM_SPEECH_WINDOW_WIDTH * 8),
         //     1, TEXT_SKIP_DRAW, NULL);
         // CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
     }
