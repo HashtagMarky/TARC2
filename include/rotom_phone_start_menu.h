@@ -2,6 +2,5 @@
 #define GUARD_ROTOM_PHONE_START_H
 
 void RotomPhone_StartMenu_Init(void);
-void GoToHandleInput(void);
 
 #endif // GUARD_ROTOM_PHONE_START_H

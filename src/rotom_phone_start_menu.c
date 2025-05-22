@@ -1096,11 +1096,6 @@ static void RotomPhone_SelectedFunc_SafariFlag(void)
     }
 }
 
-void GoToHandleInput(void)
-{
-    CreateTask(Task_RotomPhone_SmallStartMenu_HandleMainInput, 80);
-}
-
 static void RotomPhone_SmallStartMenu_HandleInput(bool32 down)
 {
     sRotomPhone_StartMenu->spriteFlag = FALSE;
