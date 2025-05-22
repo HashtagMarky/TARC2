@@ -55,6 +55,7 @@
 #include "rtc.h"
 #include "event_object_movement.h"
 #include "gba/isagbprint.h"
+#include "random.h"
 
 /* CONFIGS */
 #define ROTOM_PHONE_UPDATE_CLOCK_DISPLAY    TRUE
@@ -99,7 +100,7 @@ static void RotomPhone_SmallStartMenu_CreateAllSprites(void);
 static void RotomPhone_SmallStartMenu_LoadBgGfx(void);
 static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void);
 static void RotomPhone_SmallStartMenu_PrintClockDisplay(void);
-static void RotomPhone_SmallStartMenu_UpdateMenuName(void);
+static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void);
 
 /* ENUMs */
 enum RotomPhoneMenuItems
@@ -137,6 +138,7 @@ enum RotomPhoneSpriteAnims
 struct RotomPhoneMenuOptions
 {
     const u8 *menuName;
+    const u8 *menuDescription;
     bool32 (*unlockedFunc)(void);
     void (*selectedFunc)(void);
     const struct SpriteTemplate *iconTemplate;
@@ -600,6 +602,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
     [ROTOM_PHONE_MENU_POKEDEX] =
     {
         .menuName = COMPOUND_STRING("Pokédex"),
+        .menuDescription = COMPOUND_STRING("to open the Pokédex?"),
         .unlockedFunc = RotomPhone_UnlockedFunc_Pokedex,
         .selectedFunc = RotomPhone_SelectedFunc_Pokedex,
         .iconTemplate = &gSpriteIconPokedex,
@@ -608,6 +611,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
     [ROTOM_PHONE_MENU_PARTY] =
     {
         .menuName = COMPOUND_STRING("Party"),
+        .menuDescription = COMPOUND_STRING("to view your Party?"),
         .unlockedFunc = RotomPhone_UnlockedFunc_Pokemon,
         .selectedFunc = RotomPhone_SelectedFunc_Pokemon,
         .iconTemplate = &gSpriteIconParty,
@@ -616,6 +620,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
     [ROTOM_PHONE_MENU_BAG] =
     {
         .menuName = COMPOUND_STRING("Bag"),
+        .menuDescription = COMPOUND_STRING("to check your Storage?"),
         .unlockedFunc = RotomPhone_UnlockedFunc_Unlocked,
         .selectedFunc = RotomPhone_SelectedFunc_Bag,
         .iconTemplate = &gSpriteIconBag,
@@ -624,6 +629,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
     [ROTOM_PHONE_MENU_POKENAV] =
     {
         .menuName = COMPOUND_STRING("PokéNav"),
+        .menuDescription = COMPOUND_STRING("to browse the PokéNav?"),
         .unlockedFunc = RotomPhone_UnlockedFunc_PokeNav,
         .selectedFunc = RotomPhone_SelectedFunc_PokeNav,
         .iconTemplate = &gSpriteIconPoketch,
@@ -632,6 +638,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
     [ROTOM_PHONE_MENU_TRAINER_CARD] =
     {
         .menuName = COMPOUND_STRING("Trainer"),
+        .menuDescription = COMPOUND_STRING("to view your ID Card?"),
         .unlockedFunc = RotomPhone_UnlockedFunc_Unlocked,
         .selectedFunc = RotomPhone_SelectedFunc_Trainer,
         .iconTemplate = &gSpriteIconTrainerCard,
@@ -640,6 +647,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
     [ROTOM_PHONE_MENU_SAVE] =
     {
         .menuName = COMPOUND_STRING("Save"),
+        .menuDescription = COMPOUND_STRING("to write in your Journal?"),
         .unlockedFunc = RotomPhone_UnlockedFunc_Save,
         .selectedFunc = RotomPhone_SelectedFunc_Save,
         .iconTemplate = &gSpriteIconSave,
@@ -648,6 +656,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
     [ROTOM_PHONE_MENU_OPTIONS] =
     {
         .menuName = COMPOUND_STRING("Settings"),
+        .menuDescription = COMPOUND_STRING("to change the Settings?"),
         .unlockedFunc = RotomPhone_UnlockedFunc_Unlocked,
         .selectedFunc = RotomPhone_SelectedFunc_Settings,
         .iconTemplate = &gSpriteIconOptions,
@@ -656,6 +665,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
     [ROTOM_PHONE_MENU_FLAG] =
     {
         .menuName = COMPOUND_STRING("Retire"),
+        .menuDescription = COMPOUND_STRING("to end the Safari?"),
         .unlockedFunc = RotomPhone_UnlockedFunc_SafariFlag,
         .selectedFunc = RotomPhone_SelectedFunc_SafariFlag,
         .iconTemplate = &gSpriteIconFlag,
@@ -740,7 +750,6 @@ void RotomPhone_StartMenu_Init(void)
     RotomPhone_SmallStartMenu_CreateAllSprites();
     RotomPhone_SmallStartMenu_LoadBgGfx();
     RotomPhone_SmallStartMenu_CreateSpeechWindows();
-    // sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom = AddWindow(&sWindowTemplate_RotomSpeech_Bottom);
 
     if (!sRotomPhoneOptions[menuSelected].unlockedFunc || !sRotomPhoneOptions[menuSelected].unlockedFunc())
         RotomPhone_SetFirstSelectedMenu();
@@ -750,7 +759,7 @@ void RotomPhone_StartMenu_Init(void)
     if (GetSafariZoneFlag())
         ShowSafariBallsWindow();
 
-    RotomPhone_SmallStartMenu_UpdateMenuName();
+    RotomPhone_SmallStartMenu_UpdateMenuPrompt();
 }
 
 static void RotomPhone_SmallStartMenu_LoadSprites(void)
@@ -875,29 +884,34 @@ static void RotomPhone_SmallStartMenu_PrintClockDisplay(void)
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
 }
 
-static void RotomPhone_SmallStartMenu_UpdateMenuName(void)
+static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void)
 {
-    const u8 *optionName = sRotomPhoneOptions[menuSelected].menuName;
-    const u8 *questionStart = COMPOUND_STRING("Would you like to open your ");
-    const u8 *questionMark = COMPOUND_STRING("?");
-    const u8 *clear = COMPOUND_STRING("{CLEAR_TO 190}");
-    u8 textBuffer[80];
-    StringCopy(textBuffer, questionStart);
-    StringAppend(textBuffer, optionName);
-    StringAppend(textBuffer, questionMark);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, FONT_SMALL_NARROWER, clear, 0, 1, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, FONT_SMALL_NARROWER, textBuffer,
-        GetStringCenterAlignXOffset(FONT_SMALL_NARROWER, textBuffer, sWindowTemplate_RotomSpeech_Bottom.width * 8),
-        1, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
-
-    // FillWindowPixelBuffer(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, PIXEL_FILL(TEXT_COLOR_WHITE));
-    // PutWindowTilemap(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom);
-    // const u8 *optionName = sRotomPhoneOptions[menuSelected].menuName;
-    // AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, FONT_NORMAL, optionName,
-    //     GetStringCenterAlignXOffset(FONT_NORMAL, optionName, sWindowTemplate_RotomSpeech_Bottom.width * 8),
-    //     1, TEXT_SKIP_DRAW, NULL);
-    // CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
+    if (FlagGet(FLAG_SYS_POKEDEX_GET))
+    {
+        u8 textBuffer[80];
+        const u8 *menuDescription = sRotomPhoneOptions[menuSelected].menuDescription;
+        if (Random() % 2 == TRUE)
+            StringCopy(textBuffer, COMPOUND_STRING("Would you like "));
+        else
+            StringCopy(textBuffer, COMPOUND_STRING("Do you want "));
+        StringAppend(textBuffer, menuDescription);
+        AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, FONT_SMALL_NARROWER,
+            COMPOUND_STRING("{CLEAR_TO 190}"), 0, 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, FONT_SMALL_NARROWER, textBuffer,
+            GetStringCenterAlignXOffset(FONT_SMALL_NARROWER, textBuffer, sWindowTemplate_RotomSpeech_Bottom.width * 8),
+            1, TEXT_SKIP_DRAW, NULL);
+        CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
+    }
+    else
+    {
+        // FillWindowPixelBuffer(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, PIXEL_FILL(TEXT_COLOR_WHITE));
+        // PutWindowTilemap(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom);
+        // const u8 *optionName = sRotomPhoneOptions[menuSelected].menuName;
+        // AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, FONT_NORMAL, optionName,
+        //     GetStringCenterAlignXOffset(FONT_NORMAL, optionName, sWindowTemplate_RotomSpeech_Bottom.width * 8),
+        //     1, TEXT_SKIP_DRAW, NULL);
+        // CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
+    }
 }
 
 static void RotomPhone_SmallStartMenu_ExitAndClearTilemap(void)
@@ -1125,7 +1139,7 @@ static void RotomPhone_SmallStartMenu_HandleInput(bool32 down)
 
     PlaySE(SE_SELECT);
     menuSelected = sRotomPhone_StartMenu->menuSmallOptions[nextIndex];
-    RotomPhone_SmallStartMenu_UpdateMenuName();
+    RotomPhone_SmallStartMenu_UpdateMenuPrompt();
 }
 
 static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
