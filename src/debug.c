@@ -75,6 +75,7 @@
 #include "dynamic_music.h"
 #include "ikigai_characters.h"
 #include "safari_zone.h"
+#include "start_menu.h"
 #include "ui_samuel_case.h"
 #include "vyraton.h"
 
@@ -138,6 +139,7 @@ enum IkigaiStartMenuSubmenu
     DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV,
     DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON,
     DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI,
+    DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START,
 };
 
 enum IkigaiSoundSubmenu
@@ -542,6 +544,7 @@ static void DebugAction_Ikigai_SeasonsSelect(u8 taskId);
 static void DebugAction_Ikigai_PokemonCries(u8 taskId);
 static void DebugAction_Ikigai_TogglePokemonFlag(u8 taskId);
 static void DebugAction_Ikigai_ToggleSafariFlag(u8 taskId);
+static void DebugAction_Ikigai_DefaultStartMenu(u8 taskId);
 
 static void DebugAction_Util_Fly(u8 taskId);
 static void DebugAction_Util_Warp_Warp(u8 taskId);
@@ -855,6 +858,7 @@ static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_StartMenu[] =
     [DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV]    = {COMPOUND_STRING("Toggle {STR_VAR_1}PokéNav"),    DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV},
     [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON]    = {COMPOUND_STRING("Toggle {STR_VAR_1}Pokémon"),    DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON},
     [DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI]     = {COMPOUND_STRING("Toggle {STR_VAR_1}Safari"),     DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI},
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START] = {COMPOUND_STRING("{FONT_GET_NARROW}Open Default Start Menu{RESET_FONT}…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Sound[] =
@@ -1165,6 +1169,7 @@ static void (*const sDebugMenu_Actions_Ikigai_StartMenu[])(u8) =
     [DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV]    = DebugAction_FlagsVars_SwitchPokeNav,
     [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON]    = DebugAction_Ikigai_TogglePokemonFlag,
     [DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI]     = DebugAction_Ikigai_ToggleSafariFlag,
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START] = DebugAction_Ikigai_DefaultStartMenu,
 };
 
 static void (*const sDebugMenu_Actions_Ikigai_Sound[])(u8) =
@@ -2740,6 +2745,12 @@ static void DebugAction_Ikigai_ToggleSafariFlag(u8 taskId)
         PlaySE(SE_PC_LOGIN);
         SetSafariZoneFlag();
     }
+}
+
+static void DebugAction_Ikigai_DefaultStartMenu(u8 taskId)
+{
+    Debug_DestroyMenu_Full(taskId);
+    ShowStartMenu();
 }
 
 static void DebugAction_Util_OpenTimeMenu(u8 taskId)
