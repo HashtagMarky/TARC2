@@ -842,7 +842,8 @@ static void RotomPhone_SmallStartMenu_LoadBgGfx(void)
     LoadPalette(sStartMenuPalette, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
     ScheduleBgCopyTilemapToVram(0);
 }
-
+#define ROTOM_SPEECH_TOP_ROW_Y      1
+#define ROTOM_SPEECH_BOTTOM_ROW_Y   1
 static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void)
 {
     if (!FlagGet(FLAG_SYS_POKEDEX_GET))
@@ -916,10 +917,10 @@ static void RotomPhone_SmallStartMenu_PrintGreeting(void)
         break;
     }
     AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, FONT_SMALL_NARROWER,
-        sText_ClearWindow, 0, 1, TEXT_SKIP_DRAW, NULL);
+        sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, FONT_SMALL_NARROWER, textBuffer,
         GetStringCenterAlignXOffset(FONT_SMALL_NARROWER, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH * 8),
-        1, TEXT_SKIP_DRAW, NULL);
+        ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
 }
 
@@ -967,10 +968,10 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void)
             StringCopy(textBuffer, COMPOUND_STRING("Do you want "));
         StringAppend(textBuffer, sRotomPhoneOptions[menuSelected].menuDescription);
         AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, FONT_SMALL_NARROWER,
-            sText_ClearWindow, 0, 1, TEXT_SKIP_DRAW, NULL);
+            sText_ClearWindow, 0, ROTOM_SPEECH_BOTTOM_ROW_Y, TEXT_SKIP_DRAW, NULL);
         AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, FONT_SMALL_NARROWER, textBuffer,
             GetStringCenterAlignXOffset(FONT_SMALL_NARROWER, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH * 8),
-            1, TEXT_SKIP_DRAW, NULL);
+            ROTOM_SPEECH_BOTTOM_ROW_Y, TEXT_SKIP_DRAW, NULL);
         CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
     }
     else
