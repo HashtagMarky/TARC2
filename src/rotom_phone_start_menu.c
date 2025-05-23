@@ -1077,6 +1077,7 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void)
             GetStringCenterAlignXOffset(fontId, sRotomPhoneOptions[menuSelected].menuName, sWindowTemplate_FlipPhone.width * 8),
             ROTOM_SPEECH_BOTTOM_ROW_Y, TEXT_SKIP_DRAW, NULL);
         CopyWindowToVram(sRotomPhone_StartMenu->windowIdFlipPhone, COPYWIN_GFX);
+        PlaySE(SE_BALL_TRAY_EXIT);
     }
 }
 
@@ -1268,14 +1269,12 @@ static void RotomPhone_SelectedFunc_SafariFlag(void)
     }
 }
 
-static void RotomPhone_SmallStartMenu_HandleInput(bool32 down)
+static void RotomPhone_SmallStartMenu_HandleInput(void)
 {
     sRotomPhone_StartMenu->spriteFlag = FALSE;
     enum RotomPhoneSmallOptions optionCurrent = ROTOM_PHONE_SMALL_OPTION_1;
     s32 offset;
     u32 nextIndex;
-
-    offset = down ? 1 : -1;
 
     for (enum RotomPhoneSmallOptions i = ROTOM_PHONE_SMALL_OPTION_1; i < ROTOM_PHONE_SMALL_OPTION_COUNT; i++)
     {
@@ -1286,6 +1285,15 @@ static void RotomPhone_SmallStartMenu_HandleInput(bool32 down)
         }
     }
 
+    if (JOY_NEW(DPAD_UP))
+        offset = -2;
+    else if (JOY_NEW(DPAD_LEFT))
+        offset = (optionCurrent % 2 == 1) ? -1 : ROTOM_PHONE_SMALL_OPTION_COUNT;
+    else  if (JOY_NEW(DPAD_RIGHT))
+        offset = (optionCurrent % 2 == 0) ? 1 : ROTOM_PHONE_SMALL_OPTION_COUNT;
+    else
+        offset = 2;
+
     nextIndex = optionCurrent + offset;
     if (nextIndex >= ROTOM_PHONE_SMALL_OPTION_COUNT
         || nextIndex < ROTOM_PHONE_SMALL_OPTION_1
@@ -1295,7 +1303,6 @@ static void RotomPhone_SmallStartMenu_HandleInput(bool32 down)
         return;
     }
 
-    PlaySE(SE_SELECT);
     menuSelected = sRotomPhone_StartMenu->menuSmallOptions[nextIndex];
     RotomPhone_SmallStartMenu_UpdateMenuPrompt();
 }
@@ -1330,13 +1337,9 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
         RotomPhone_SmallStartMenu_ExitAndClearTilemap();  
         DestroyTask(taskId);
     }
-    else if (gMain.newKeys & DPAD_UP && sRotomPhone_StartMenu->isLoading == FALSE)
+    else if (gMain.newKeys & DPAD_ANY && sRotomPhone_StartMenu->isLoading == FALSE)
     {
-        RotomPhone_SmallStartMenu_HandleInput(FALSE);
-    }
-    else if (gMain.newKeys & DPAD_DOWN && sRotomPhone_StartMenu->isLoading == FALSE)
-    {
-        RotomPhone_SmallStartMenu_HandleInput(TRUE);
+        RotomPhone_SmallStartMenu_HandleInput();
     }
     else if (sRotomPhone_StartMenu->isLoading == TRUE)
     {
