@@ -57,6 +57,7 @@
 #include "gba/isagbprint.h"
 #include "random.h"
 #include "fake_rtc.h"
+#include "region_map.h"
 
 /* CONFIGS */
 #define ROTOM_PHONE_UPDATE_CLOCK_DISPLAY    TRUE
@@ -110,6 +111,7 @@ static void RotomPhone_SmallStartMenu_PrintGoodbye(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintSafari(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintDate(u8 taskId);
+static void RotomPhone_SmallStartMenu_PrintAdventure(u8 taskId);
 static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId);
 
 /* ENUMs */
@@ -150,6 +152,7 @@ enum RotomPhoneMessages
     ROTOM_PHONE_MESSAGE_TIME,
     ROTOM_PHONE_MESSAGE_SAFARI,
     ROTOM_PHONE_MESSAGE_DATE,
+    ROTOM_PHONE_MESSAGE_ADVENTURE,
     ROTOM_PHONE_MESSAGE_COUNT,
 };
 
@@ -950,6 +953,20 @@ static void RotomPhone_SmallStartMenu_PrintGreeting(void)
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
 }
 
+static enum RotomPhoneMessages RotomPhone_SmallStartMenu_GetRandomMessage(void)
+{
+    enum RotomPhoneMessages messageRandom;
+    messageRandom = Random() % ROTOM_PHONE_MESSAGE_COUNT;
+    while (messageRandom == ROTOM_PHONE_MESSAGE_GOODBYE
+    || messageRandom == ROTOM_PHONE_MESSAGE_TIME
+    || messageRandom == ROTOM_PHONE_MESSAGE_SAFARI)
+    {
+        messageRandom = Random() % ROTOM_PHONE_MESSAGE_COUNT;
+    }
+
+    return messageRandom;
+}
+
 static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId)
 {
     if (!tRotomUpdateTimer && FlagGet(FLAG_SYS_POKEDEX_GET))
@@ -971,6 +988,10 @@ static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId)
         
         case ROTOM_PHONE_MESSAGE_DATE:
             RotomPhone_SmallStartMenu_PrintDate(taskId);
+            break;
+
+        case ROTOM_PHONE_MESSAGE_ADVENTURE:
+            RotomPhone_SmallStartMenu_PrintAdventure(taskId);
             break;
         }
         tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER;
@@ -1028,7 +1049,7 @@ static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId)
         ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
     );
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
-    tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_DATE;
+    tRotomUpdateMessage = RotomPhone_SmallStartMenu_GetRandomMessage();
     if (GetSafariZoneFlag())
         tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_SAFARI;
 }
@@ -1075,6 +1096,27 @@ static void RotomPhone_SmallStartMenu_PrintDate(u8 taskId)
     ConvertIntToDecimalStringN(textYear, Ikigai_GetYearFromDays(gLocalTime.days), STR_CONV_MODE_LEFT_ALIGN, 3);
     StringAppend(textBuffer, textYear);
     StringAppend(textBuffer, COMPOUND_STRING("."));
+    fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId,
+        sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId, textBuffer,
+        GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
+        ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
+    );
+    CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
+    tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
+}
+
+static void RotomPhone_SmallStartMenu_PrintAdventure(u8 taskId)
+{
+    u8 textBuffer[80];
+    u8 location[16];
+    u8 fontId;
+
+    StringCopy(textBuffer, COMPOUND_STRING("Let's go and explore "));
+    GetMapName(location, GetCurrentRegionMapSectionId(), 0);
+    StringAppend(textBuffer, location);
+    StringAppend(textBuffer, COMPOUND_STRING("!"));
     fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
     AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId,
         sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
