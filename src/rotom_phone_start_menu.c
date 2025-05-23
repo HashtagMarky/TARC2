@@ -107,7 +107,7 @@ static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintSafari(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintDate(u8 taskId);
-static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void);
+static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId);
 
 /* ENUMs */
 enum RotomPhoneMenuItems
@@ -728,6 +728,7 @@ static void RotomPhone_SetFirstSelectedMenu(void)
 
 #define tRotomUpdateTimer gTasks[taskId].data[0]
 #define tRotomUpdateMessage gTasks[taskId].data[1]
+#define tRotomMessageSoundEffect gTasks[taskId].data[2]
 void RotomPhone_StartMenu_Init(void)
 {
     if (!IsOverworldLinkActive())
@@ -773,7 +774,7 @@ void RotomPhone_StartMenu_Init(void)
         tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_SAFARI;
 
     RotomPhone_SmallStartMenu_PrintGreeting();
-    RotomPhone_SmallStartMenu_UpdateMenuPrompt();
+    RotomPhone_SmallStartMenu_UpdateMenuPrompt(taskId);
 }
 
 static void RotomPhone_SmallStartMenu_LoadSprites(void)
@@ -964,6 +965,7 @@ static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId)
             RotomPhone_SmallStartMenu_PrintDate(taskId);
             break;
         }
+        tRotomMessageSoundEffect = PMD_EVENT_SIGN_HATENA_02;
     }
 }
 
@@ -1049,7 +1051,7 @@ static void RotomPhone_SmallStartMenu_PrintDate(u8 taskId)
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 }
 
-static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void)
+static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId)
 {
     u8 fontId;
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
@@ -1077,7 +1079,7 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void)
             GetStringCenterAlignXOffset(fontId, sRotomPhoneOptions[menuSelected].menuName, sWindowTemplate_FlipPhone.width * 8),
             ROTOM_SPEECH_BOTTOM_ROW_Y, TEXT_SKIP_DRAW, NULL);
         CopyWindowToVram(sRotomPhone_StartMenu->windowIdFlipPhone, COPYWIN_GFX);
-        PlaySE(SE_BALL_TRAY_EXIT);
+        tRotomMessageSoundEffect = SE_BALL_TRAY_EXIT;
     }
 }
 
@@ -1269,7 +1271,7 @@ static void RotomPhone_SelectedFunc_SafariFlag(void)
     }
 }
 
-static void RotomPhone_SmallStartMenu_HandleInput(void)
+static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
 {
     sRotomPhone_StartMenu->spriteFlag = FALSE;
     enum RotomPhoneSmallOptions optionCurrent = ROTOM_PHONE_SMALL_OPTION_1;
@@ -1299,12 +1301,20 @@ static void RotomPhone_SmallStartMenu_HandleInput(void)
         || nextIndex < ROTOM_PHONE_SMALL_OPTION_1
         || sRotomPhone_StartMenu->menuSmallOptions[nextIndex] == ROTOM_PHONE_MENU_COUNT)
     {
-        PlaySE(SE_WALL_HIT);
+        if (FlagGet(FLAG_SYS_POKEDEX_GET))
+            tRotomMessageSoundEffect = PMD_EVENT_SIGN_ANGER_02;
+        else
+            tRotomMessageSoundEffect = SE_CLICK;
         return;
     }
 
     menuSelected = sRotomPhone_StartMenu->menuSmallOptions[nextIndex];
-    RotomPhone_SmallStartMenu_UpdateMenuPrompt();
+    if (FlagGet(FLAG_SYS_POKEDEX_GET))
+        tRotomMessageSoundEffect = PMD_EVENT_SIGN_ASE_01;
+    else
+        tRotomMessageSoundEffect = SE_CLICK;
+
+    RotomPhone_SmallStartMenu_UpdateMenuPrompt(taskId);
 }
 
 static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
@@ -1316,6 +1326,7 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
         LoadPalette(sIconPal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
     }
 
+    tRotomMessageSoundEffect = MUS_DUMMY;
     RotomPhone_SmallStartMenu_CheckUpdateMessage(taskId);
 
     if (tRotomUpdateTimer && sRotomPhone_StartMenu->isLoading == FALSE && !gPaletteFade.active)
@@ -1333,18 +1344,26 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     }
     else if (JOY_NEW(B_BUTTON) && sRotomPhone_StartMenu->isLoading == FALSE)
     {
-        PlaySE(SE_SELECT);
+        if (FlagGet(FLAG_SYS_POKEDEX_GET))
+            PlaySE(PMD_EVENT_SIGN_NOTICE_01);
+        else
+            PlaySE(SE_BALL_TRAY_ENTER);
         RotomPhone_SmallStartMenu_ExitAndClearTilemap();  
         DestroyTask(taskId);
+        return;
     }
     else if (gMain.newKeys & DPAD_ANY && sRotomPhone_StartMenu->isLoading == FALSE)
     {
-        RotomPhone_SmallStartMenu_HandleInput();
+        RotomPhone_SmallStartMenu_HandleInput(taskId);
     }
     else if (sRotomPhone_StartMenu->isLoading == TRUE)
     {
         sRotomPhoneOptions[menuSelected].selectedFunc();
     }
+
+    if (tRotomMessageSoundEffect)
+        PlaySE(tRotomMessageSoundEffect);
 }
 #undef tRotomUpdateTimer
 #undef tRotomUpdateMessage
+#undef tRotomMessageSoundEffect

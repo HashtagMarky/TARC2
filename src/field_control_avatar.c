@@ -230,8 +230,11 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         return TRUE;
     if (input->pressedStartButton)
     {
-        PlaySE(SE_WIN_OPEN);
         // ShowStartMenu();
+        if (FlagGet(FLAG_SYS_POKEDEX_GET))
+            PlaySE(PMD_EVENT_SIGN_NOTICE_01);
+        else
+            PlaySE(SE_BALL_TRAY_ENTER);
         RotomPhone_StartMenu_Init();
         return TRUE;
     }
