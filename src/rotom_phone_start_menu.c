@@ -63,6 +63,7 @@
 #define ROTOM_PHONE_SHORTENED_NAME          FALSE
 #define ROTOM_PHONE_24_HOUR_MODE            gSaveBlock2Ptr->optionsClockMode
 #define ROTOM_PHONE_MESSAGE_UPDATE_TIMER    (30 * 60) / FakeRtc_GetSecondsRatio()
+#define ROTOM_PHONE_MESSAGE_SHUTDOWN_TIME   60
 
 /* CALLBACKS */
 static void SpriteCB_IconPoketch(struct Sprite* sprite);
@@ -76,6 +77,7 @@ static void SpriteCB_IconFlag(struct Sprite* sprite);
 
 /* TASKs */
 static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId);
+static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId);
 static void Task_HandleSave(u8 taskId);
 
 /* UNLOCKED FUNC */
@@ -104,6 +106,7 @@ static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void);
 static void RotomPhone_SmallStartMenu_CreateFlipPhoneWindow(void);
 static void RotomPhone_SmallStartMenu_PrintGreeting(void);
 static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId);
+static void RotomPhone_SmallStartMenu_PrintGoodbye(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintSafari(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintDate(u8 taskId);
@@ -143,6 +146,7 @@ enum RotomPhoneSpriteAnims
 
 enum RotomPhoneMessages
 {
+    ROTOM_PHONE_MESSAGE_GOODBYE,
     ROTOM_PHONE_MESSAGE_TIME,
     ROTOM_PHONE_MESSAGE_SAFARI,
     ROTOM_PHONE_MESSAGE_DATE,
@@ -952,6 +956,10 @@ static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId)
     {
         switch (tRotomUpdateMessage)
         {
+        case ROTOM_PHONE_MESSAGE_GOODBYE:
+            RotomPhone_SmallStartMenu_PrintGoodbye(taskId);
+            break;
+        
         default:
         case ROTOM_PHONE_MESSAGE_TIME:
             RotomPhone_SmallStartMenu_PrintTime(taskId);
@@ -965,8 +973,38 @@ static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId)
             RotomPhone_SmallStartMenu_PrintDate(taskId);
             break;
         }
+        tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER;
         tRotomMessageSoundEffect = PMD_EVENT_SIGN_HATENA_02;
     }
+}
+
+static void RotomPhone_SmallStartMenu_PrintGoodbye(u8 taskId)
+{
+    u8 textBuffer[80];
+    u8 fontId;
+
+    StringCopy(textBuffer, COMPOUND_STRING("Goodbye "));
+    StringAppend(textBuffer, gSaveBlock3Ptr->characters.playerNickname);
+    StringAppend(textBuffer, COMPOUND_STRING("."));
+    fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId,
+        sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId, textBuffer,
+        GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
+        ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
+    );
+
+    StringCopy(textBuffer, COMPOUND_STRING("I'll see you later!"));
+    fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, fontId,
+        sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, fontId, textBuffer,
+        GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
+        ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
+    );
+
+    CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
+    CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
 }
 
 static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId)
@@ -990,7 +1028,6 @@ static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId)
         ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
     );
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
-    tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER;
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_DATE;
     if (GetSafariZoneFlag())
         tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_SAFARI;
@@ -1018,7 +1055,6 @@ static void RotomPhone_SmallStartMenu_PrintSafari(u8 taskId)
         ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
     );
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
-    tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER;
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 }
 
@@ -1047,7 +1083,6 @@ static void RotomPhone_SmallStartMenu_PrintDate(u8 taskId)
         ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
     );
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
-    tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER;
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 }
 
@@ -1345,11 +1380,19 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     else if (JOY_NEW(B_BUTTON) && sRotomPhone_StartMenu->isLoading == FALSE)
     {
         if (FlagGet(FLAG_SYS_POKEDEX_GET))
-            PlaySE(PMD_EVENT_SIGN_NOTICE_01);
+        {
+            PlaySE(PMD_EVENT_MOTION_HARAHERI);
+            tRotomUpdateTimer = FALSE;
+            tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_GOODBYE;
+            RotomPhone_SmallStartMenu_CheckUpdateMessage(taskId);
+            gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_RotomShutdown;
+        }
         else
+        {
             PlaySE(SE_BALL_TRAY_ENTER);
-        RotomPhone_SmallStartMenu_ExitAndClearTilemap();  
-        DestroyTask(taskId);
+            RotomPhone_SmallStartMenu_ExitAndClearTilemap();  
+            DestroyTask(taskId);
+        }
         return;
     }
     else if (gMain.newKeys & DPAD_ANY && sRotomPhone_StartMenu->isLoading == FALSE)
@@ -1363,6 +1406,16 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
 
     if (tRotomMessageSoundEffect)
         PlaySE(tRotomMessageSoundEffect);
+}
+
+static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId)
+{
+    tRotomUpdateTimer++;
+    if (tRotomUpdateTimer == ROTOM_PHONE_MESSAGE_UPDATE_TIMER + ROTOM_PHONE_MESSAGE_SHUTDOWN_TIME)
+    {
+        RotomPhone_SmallStartMenu_ExitAndClearTilemap();  
+        DestroyTask(taskId);
+    }
 }
 #undef tRotomUpdateTimer
 #undef tRotomUpdateMessage
