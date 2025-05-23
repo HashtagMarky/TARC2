@@ -101,6 +101,7 @@ static void RotomPhone_SmallStartMenu_LoadSprites(void);
 static void RotomPhone_SmallStartMenu_CreateAllSprites(void);
 static void RotomPhone_SmallStartMenu_LoadBgGfx(void);
 static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void);
+static void RotomPhone_SmallStartMenu_CreateFlipPhoneWindow(void);
 static void RotomPhone_SmallStartMenu_PrintGreeting(void);
 static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId);
@@ -168,7 +169,7 @@ struct RotomPhone_StartMenu
     u32 menuSmallSpriteId[ROTOM_PHONE_SMALL_OPTION_COUNT];
     u32 windowIdRotomSpeech_Top;
     u32 windowIdRotomSpeech_Bottom;
-    u32 windowIdSafariBalls;
+    u32 windowIdFlipPhone;
     u32 windowIdSaveInfo;
 };
 
@@ -223,17 +224,17 @@ static const struct WindowTemplate sWindowTemplate_RotomSpeech_Bottom = {
     .width = ROTOM_SPEECH_WINDOW_WIDTH, 
     .height = ROTOM_SPEECH_WINDOW_HEIGHT, 
     .paletteNum = 15,
-    .baseBlock = 0x30 + (18*2)
+    .baseBlock = 0x30 + (ROTOM_SPEECH_WINDOW_WIDTH*ROTOM_SPEECH_WINDOW_WIDTH)
 };
 
-static const struct WindowTemplate sWindowTemplate_SafariBalls = {
+static const struct WindowTemplate sWindowTemplate_FlipPhone = {
     .bg = 0,
-    .tilemapLeft = 2,
-    .tilemapTop = 1,
+    .tilemapLeft = 21,
+    .tilemapTop = 16,
     .width = 7,
-    .height = 4,
+    .height = 2,
     .paletteNum = 15,
-    .baseBlock = (0x30 + (12*2)) + (7*2)
+    .baseBlock = (0x30 + (ROTOM_SPEECH_WINDOW_WIDTH*ROTOM_SPEECH_WINDOW_WIDTH)) + (ROTOM_SPEECH_WINDOW_WIDTH*ROTOM_SPEECH_WINDOW_WIDTH)
 };
 
 static const struct SpritePalette sSpritePal_Icon[] =
@@ -759,6 +760,7 @@ void RotomPhone_StartMenu_Init(void)
     RotomPhone_SmallStartMenu_CreateAllSprites();
     RotomPhone_SmallStartMenu_LoadBgGfx();
     RotomPhone_SmallStartMenu_CreateSpeechWindows();
+    RotomPhone_SmallStartMenu_CreateFlipPhoneWindow();
 
     if (!sRotomPhoneOptions[menuSelected].unlockedFunc || !sRotomPhoneOptions[menuSelected].unlockedFunc())
         RotomPhone_SetFirstSelectedMenu();
@@ -770,6 +772,7 @@ void RotomPhone_StartMenu_Init(void)
     if (GetSafariZoneFlag())
         tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_SAFARI;
 
+    RotomPhone_SmallStartMenu_PrintGreeting();
     RotomPhone_SmallStartMenu_UpdateMenuPrompt();
 }
 
@@ -861,13 +864,24 @@ static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void)
     sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom = AddWindow(&sWindowTemplate_RotomSpeech_Bottom);
     FillWindowPixelBuffer(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, PIXEL_FILL(TEXT_COLOR_WHITE));
     PutWindowTilemap(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom);
+}
 
-    RotomPhone_SmallStartMenu_PrintGreeting();
+static void RotomPhone_SmallStartMenu_CreateFlipPhoneWindow(void)
+{
+    if (FlagGet(FLAG_SYS_POKEDEX_GET))
+        return;
+    
+    sRotomPhone_StartMenu->windowIdFlipPhone = AddWindow(&sWindowTemplate_FlipPhone);
+    FillWindowPixelBuffer(sRotomPhone_StartMenu->windowIdFlipPhone, PIXEL_FILL(TEXT_COLOR_WHITE));
+    PutWindowTilemap(sRotomPhone_StartMenu->windowIdFlipPhone);
 }
 
 static const u8 sText_ClearWindow[] = COMPOUND_STRING("{CLEAR_TO 190}");
 static void RotomPhone_SmallStartMenu_PrintGreeting(void)
 {
+    if (FlagGet(!FLAG_SYS_POKEDEX_GET))
+        return;
+    
     u8 textBuffer[80];
     u8 random = Random() % 4;
     u8 fontId;
@@ -1056,13 +1070,13 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(void)
     }
     else
     {
-        // FillWindowPixelBuffer(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, PIXEL_FILL(TEXT_COLOR_WHITE));
-        // PutWindowTilemap(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom);
-        // const u8 *optionName = sRotomPhoneOptions[menuSelected].menuName;
-        // AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, FONT_NORMAL, optionName,
-        //     GetStringCenterAlignXOffset(FONT_NORMAL, optionName, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
-        //     1, TEXT_SKIP_DRAW, NULL);
-        // CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
+        fontId = GetFontIdToFit(sRotomPhoneOptions[menuSelected].menuName, ReturnNormalTextFont(), 0, sWindowTemplate_FlipPhone.width * 8);
+        AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdFlipPhone, fontId,
+            sText_ClearWindow, 0, ROTOM_SPEECH_BOTTOM_ROW_Y, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdFlipPhone, fontId, sRotomPhoneOptions[menuSelected].menuName,
+            GetStringCenterAlignXOffset(fontId, sRotomPhoneOptions[menuSelected].menuName, sWindowTemplate_FlipPhone.width * 8),
+            ROTOM_SPEECH_BOTTOM_ROW_Y, TEXT_SKIP_DRAW, NULL);
+        CopyWindowToVram(sRotomPhone_StartMenu->windowIdFlipPhone, COPYWIN_GFX);
     }
 }
 
