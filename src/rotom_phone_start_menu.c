@@ -76,6 +76,7 @@ static void SpriteCB_IconTrainerCard(struct Sprite* sprite);
 static void SpriteCB_IconSave(struct Sprite* sprite);
 static void SpriteCB_IconOptions(struct Sprite* sprite);
 static void SpriteCB_IconFlag(struct Sprite* sprite);
+static void SpriteCB_IconFullScreen(struct Sprite* sprite);
 
 /* TASKs */
 static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId);
@@ -89,6 +90,7 @@ static bool32 RotomPhone_UnlockedFunc_Pokemon(void);
 static bool32 RotomPhone_UnlockedFunc_PokeNav(void);
 static bool32 RotomPhone_UnlockedFunc_Save(void);
 static bool32 RotomPhone_UnlockedFunc_SafariFlag(void);
+static bool32 RotomPhone_UnlockedFunc_FullScreen(void);
 
 /* SELECTED FUNC */
 static void RotomPhone_SelectedFunc_Pokedex(void);
@@ -99,6 +101,7 @@ static void RotomPhone_SelectedFunc_Trainer(void);
 static void RotomPhone_SelectedFunc_Save(void);
 static void RotomPhone_SelectedFunc_Settings(void);
 static void RotomPhone_SelectedFunc_SafariFlag(void);
+static void RotomPhone_SelectedFunc_FullScreen(void);
 
 /* OTHER FUNCTIONS */
 static void RotomPhone_SmallStartMenu_LoadSprites(void);
@@ -121,6 +124,7 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId);
 enum RotomPhoneMenuItems
 {
     ROTOM_PHONE_MENU_FLAG,
+    ROTOM_PHONE_MENU_FULL_SCREEN,
     ROTOM_PHONE_MENU_POKEDEX,
     ROTOM_PHONE_MENU_PARTY,
     ROTOM_PHONE_MENU_BAG,
@@ -256,7 +260,7 @@ static const struct SpritePalette sSpritePal_Icon[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_Icon[] = 
 {
-    {sIconGfx, 16*256/2 , TAG_ICON_GFX},
+    {sIconGfx, 16*288/2 , TAG_ICON_GFX},
     {NULL},
 };
 
@@ -394,6 +398,21 @@ static const union AnimCmd *const gIconFlagAnim[] = {
     gAnimCmdFlag_Selected,
 };
 
+static const union AnimCmd gAnimCmdFullScreen_NotSelected[] = {
+    ANIMCMD_FRAME(68, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gAnimCmdFullScreen_Selected[] = {
+    ANIMCMD_FRAME(64, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const gIconFullScreenAnim[] = {
+    gAnimCmdFullScreen_NotSelected,
+    gAnimCmdFullScreen_Selected,
+};
+
 static const union AffineAnimCmd sAffineAnimIcon_NoAnim[] =
 {
     AFFINEANIMCMD_FRAME(0,0, 0, 60),
@@ -505,6 +524,16 @@ static const struct SpriteTemplate gSpriteIconFlag = {
     .images = NULL,
     .affineAnims = sAffineAnimsIcon,
     .callback = SpriteCB_IconFlag,
+};
+
+static const struct SpriteTemplate gSpriteIconFullScreen = {
+    .tileTag = TAG_ICON_GFX,
+    .paletteTag = TAG_ICON_PAL,
+    .oam = &gOamIcon,
+    .anims = gIconFullScreenAnim,
+    .images = NULL,
+    .affineAnims = sAffineAnimsIcon,
+    .callback = SpriteCB_IconFullScreen,
 };
 
 static void SpriteCB_IconPoketch(struct Sprite* sprite)
@@ -627,6 +656,20 @@ static void SpriteCB_IconFlag(struct Sprite* sprite)
     } 
 }
 
+static void SpriteCB_IconFullScreen(struct Sprite* sprite)
+{
+    if (menuSelected == ROTOM_PHONE_MENU_FULL_SCREEN && sRotomPhone_StartMenu->spriteFlag == FALSE)
+    {
+        sRotomPhone_StartMenu->spriteFlag = TRUE;
+        StartSpriteAnim(sprite, SPRITE_ACTIVE);
+        StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
+    }
+    else if (menuSelected != ROTOM_PHONE_MENU_FULL_SCREEN)
+    {
+        StartSpriteAnim(sprite, SPRITE_INACTIVE);
+        StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
+    } 
+}
 
 static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
 {
@@ -693,6 +736,14 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .unlockedFunc = RotomPhone_UnlockedFunc_SafariFlag,
         .selectedFunc = RotomPhone_SelectedFunc_SafariFlag,
         .iconTemplate = &gSpriteIconFlag,
+    },
+    [ROTOM_PHONE_MENU_FULL_SCREEN] =
+    {
+        .menuName = COMPOUND_STRING("Full Screen"),
+        .menuDescription = COMPOUND_STRING("to enter Full Screen?"),
+        .unlockedFunc = RotomPhone_UnlockedFunc_FullScreen,
+        .selectedFunc = RotomPhone_SelectedFunc_FullScreen,
+        .iconTemplate = &gSpriteIconFullScreen,
     },
 };
 
@@ -1253,6 +1304,11 @@ static bool32 RotomPhone_UnlockedFunc_SafariFlag(void)
     return GetSafariZoneFlag();
 }
 
+static bool32 RotomPhone_UnlockedFunc_FullScreen(void)
+{
+    return FlagGet(FLAG_SYS_POKEDEX_GET) && !GetSafariZoneFlag();
+}
+
 static void RotomPhone_SelectedFunc_Pokedex(void)
 {
     DoCleanUpAndChangeCallback(CB2_OpenPokedex);
@@ -1326,6 +1382,17 @@ static void RotomPhone_SelectedFunc_SafariFlag(void)
         LockPlayerFieldControls();
         DestroyTask(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput));
         SafariZoneRetirePrompt();
+    }
+}
+
+static void RotomPhone_SelectedFunc_FullScreen(void)
+{
+    if (!gPaletteFade.active)
+    {
+        RotomPhone_SmallStartMenu_ExitAndClearTilemap();
+        FreezeObjectEvents();
+        LockPlayerFieldControls();
+        DestroyTask(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput));
     }
 }
 
@@ -1422,7 +1489,7 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     {
         RotomPhone_SmallStartMenu_HandleInput(taskId);
     }
-    else if (sRotomPhone_StartMenu->isLoading == TRUE)
+    else if (sRotomPhone_StartMenu->isLoading == TRUE && sRotomPhoneOptions[menuSelected].selectedFunc)
     {
         sRotomPhoneOptions[menuSelected].selectedFunc();
     }
