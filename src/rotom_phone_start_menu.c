@@ -889,6 +889,22 @@ static void RotomPhone_SmallStartMenu_CreateFlipPhoneWindow(void)
 }
 
 static const u8 sText_ClearWindow[] = COMPOUND_STRING("{CLEAR_TO 190}");
+static void RotomPhone_SmallStartMenu_PrintRotomSpeech(u8 textBuffer[80], bool32 top, bool32 copy)
+{
+    u8 fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
+    u32 windowId;
+    windowId = (top == TRUE) ? sRotomPhone_StartMenu->windowIdRotomSpeech_Top : sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom;
+
+    AddTextPrinterParameterized(windowId, fontId,
+        sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, fontId, textBuffer,
+        GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
+        ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
+    
+    if (copy)
+        CopyWindowToVram(windowId, COPYWIN_GFX);
+}
+
 static void RotomPhone_SmallStartMenu_PrintGreeting(void)
 {
     if (FlagGet(!FLAG_SYS_POKEDEX_GET))
@@ -896,7 +912,6 @@ static void RotomPhone_SmallStartMenu_PrintGreeting(void)
     
     u8 textBuffer[80];
     u8 random = Random() % 4;
-    u8 fontId;
 
     switch (random)
     {
@@ -948,13 +963,7 @@ static void RotomPhone_SmallStartMenu_PrintGreeting(void)
         StringAppend(textBuffer, COMPOUND_STRING("."));
         break;
     }
-    fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId,
-        sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId, textBuffer,
-        GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
-        ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
+    RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
 }
 
 static enum RotomPhoneMessages RotomPhone_SmallStartMenu_GetRandomMessage(void)
@@ -1014,27 +1023,14 @@ static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId)
 static void RotomPhone_SmallStartMenu_PrintGoodbye(u8 taskId)
 {
     u8 textBuffer[80];
-    u8 fontId;
 
     StringCopy(textBuffer, COMPOUND_STRING("Goodbye "));
     StringAppend(textBuffer, gSaveBlock3Ptr->characters.playerNickname);
     StringAppend(textBuffer, COMPOUND_STRING("."));
-    fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId,
-        sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId, textBuffer,
-        GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
-        ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
-    );
+    RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, FALSE);
 
     StringCopy(textBuffer, COMPOUND_STRING("I'll see you later!"));
-    fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, fontId,
-        sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, fontId, textBuffer,
-        GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
-        ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
-    );
+    RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, FALSE, FALSE);
 
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
@@ -1044,7 +1040,6 @@ static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId)
 {
     u8 textBuffer[80];
     u8 time[24];
-    u8 fontId;
 
     RtcCalcLocalTime();
     FormatDecimalTimeWithoutSeconds(time, gLocalTime.hours, gLocalTime.minutes, ROTOM_PHONE_24_HOUR_MODE);
@@ -1053,14 +1048,7 @@ static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId)
     StringAppend(textBuffer, COMPOUND_STRING(" on "));
     StringAppend(textBuffer, gDayNameStringsTable[(gLocalTime.days % WEEKDAY_COUNT)]);
     StringAppend(textBuffer, COMPOUND_STRING("."));
-    fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId,
-        sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId, textBuffer,
-        GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
-        ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
-    );
-    CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
+    RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
     tRotomUpdateMessage = RotomPhone_SmallStartMenu_GetRandomMessage();
     if (GetSafariZoneFlag())
         tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_SAFARI;
@@ -1071,7 +1059,6 @@ static void RotomPhone_SmallStartMenu_PrintSafari(u8 taskId)
     u8 textBuffer[80];
     u8 numBalls[2];
     u8 nameItem[20];
-    u8 fontId;
 
     ConvertIntToDecimalStringN(numBalls, gNumSafariBalls, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringCopy(textBuffer, COMPOUND_STRING("You have "));
@@ -1080,14 +1067,7 @@ static void RotomPhone_SmallStartMenu_PrintSafari(u8 taskId)
     CopyItemNameHandlePlural(ITEM_SAFARI_BALL, nameItem, gNumSafariBalls);
     StringAppend(textBuffer, nameItem);
     StringAppend(textBuffer, COMPOUND_STRING(" remaining."));
-    fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId,
-        sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId, textBuffer,
-        GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
-        ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
-    );
-    CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
+    RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 }
 
@@ -1096,7 +1076,6 @@ static void RotomPhone_SmallStartMenu_PrintDate(u8 taskId)
     u8 textBuffer[80];
     u8 textDate[2];
     u8 textYear[3];
-    u8 fontId;
 
     RtcCalcLocalTime();
     StringCopy(textBuffer, COMPOUND_STRING("The date is "));
@@ -1108,50 +1087,25 @@ static void RotomPhone_SmallStartMenu_PrintDate(u8 taskId)
     ConvertIntToDecimalStringN(textYear, Ikigai_GetYearFromDays(gLocalTime.days), STR_CONV_MODE_LEFT_ALIGN, 3);
     StringAppend(textBuffer, textYear);
     StringAppend(textBuffer, COMPOUND_STRING("."));
-    fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId,
-        sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId, textBuffer,
-        GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
-        ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
-    );
-    CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
+    RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 }
 
 static void RotomPhone_SmallStartMenu_PrintNoises(u8 taskId)
 {
     u8 textBuffer[80];
-    u8 location[16];
-    u8 fontId;
 
     StringCopy(textBuffer, COMPOUND_STRING("Meep-morp!"));
-    fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId,
-        sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId, textBuffer,
-        GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
-        ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
-    );
-    CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
+    RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 }
 
 static void RotomPhone_SmallStartMenu_PrintHaveFun(u8 taskId)
 {
     u8 textBuffer[80];
-    u8 location[16];
-    u8 fontId;
 
     StringCopy(textBuffer, COMPOUND_STRING("Let's have a lot of fun today!"));
-    fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId,
-        sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId, textBuffer,
-        GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
-        ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
-    );
-    CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
+    RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 }
 
@@ -1159,20 +1113,12 @@ static void RotomPhone_SmallStartMenu_PrintAdventure(u8 taskId)
 {
     u8 textBuffer[80];
     u8 location[16];
-    u8 fontId;
 
     StringCopy(textBuffer, COMPOUND_STRING("Let's go and explore "));
     GetMapName(location, GetCurrentRegionMapSectionId(), 0);
     StringAppend(textBuffer, location);
     StringAppend(textBuffer, COMPOUND_STRING("!"));
-    fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId,
-        sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, fontId, textBuffer,
-        GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
-        ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL
-    );
-    CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
+    RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 }
 
@@ -1187,13 +1133,7 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId)
         else
             StringCopy(textBuffer, COMPOUND_STRING("Do you want "));
         StringAppend(textBuffer, sRotomPhoneOptions[menuSelected].menuDescription);
-        fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
-        AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, fontId,
-            sText_ClearWindow, 0, ROTOM_SPEECH_BOTTOM_ROW_Y, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, fontId, textBuffer,
-            GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
-            ROTOM_SPEECH_BOTTOM_ROW_Y, TEXT_SKIP_DRAW, NULL);
-        CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
+        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, FALSE, TRUE);
     }
     else
     {
