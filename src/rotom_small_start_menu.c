@@ -58,6 +58,7 @@
 #include "random.h"
 #include "fake_rtc.h"
 #include "region_map.h"
+#include "sample_ui.h"
 
 /* CONFIGS */
 #define ROTOM_PHONE_UPDATE_CLOCK_DISPLAY    TRUE
@@ -1392,7 +1393,7 @@ static void RotomPhone_SelectedFunc_FullScreen(void)
         RotomPhone_SmallStartMenu_ExitAndClearTilemap();
         FreezeObjectEvents();
         LockPlayerFieldControls();
-        DestroyTask(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput));
+        gTasks[FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput)].func = Task_OpenRotomPhone_LargeStartMenu;
     }
 }
 
