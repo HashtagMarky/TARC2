@@ -169,7 +169,6 @@ struct RotomPhoneMenuOptions
     bool32 (*unlockedFunc)(void);
     void (*selectedFunc)(void);
     const struct SpriteTemplate *iconTemplate;
-    s32 yOffset;
 };
 
 struct RotomPhone_StartMenu
@@ -628,6 +627,7 @@ static void SpriteCB_IconFlag(struct Sprite* sprite)
     } 
 }
 
+
 static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
 {
     [ROTOM_PHONE_MENU_POKEDEX] =
@@ -637,7 +637,6 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .unlockedFunc = RotomPhone_UnlockedFunc_Pokedex,
         .selectedFunc = RotomPhone_SelectedFunc_Pokedex,
         .iconTemplate = &gSpriteIconPokedex,
-        .yOffset = 7,
     },
     [ROTOM_PHONE_MENU_PARTY] =
     {
@@ -646,7 +645,6 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .unlockedFunc = RotomPhone_UnlockedFunc_Pokemon,
         .selectedFunc = RotomPhone_SelectedFunc_Pokemon,
         .iconTemplate = &gSpriteIconParty,
-        .yOffset = 7,
     },
     [ROTOM_PHONE_MENU_BAG] =
     {
@@ -655,7 +653,6 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .unlockedFunc = RotomPhone_UnlockedFunc_Unlocked,
         .selectedFunc = RotomPhone_SelectedFunc_Bag,
         .iconTemplate = &gSpriteIconBag,
-        .yOffset = 4,
     },
     [ROTOM_PHONE_MENU_POKENAV] =
     {
@@ -664,7 +661,6 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .unlockedFunc = RotomPhone_UnlockedFunc_PokeNav,
         .selectedFunc = RotomPhone_SelectedFunc_PokeNav,
         .iconTemplate = &gSpriteIconPoketch,
-        .yOffset = 4,
     },
     [ROTOM_PHONE_MENU_TRAINER_CARD] =
     {
@@ -673,7 +669,6 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .unlockedFunc = RotomPhone_UnlockedFunc_Unlocked,
         .selectedFunc = RotomPhone_SelectedFunc_Trainer,
         .iconTemplate = &gSpriteIconTrainerCard,
-        .yOffset = 8,
     },
     [ROTOM_PHONE_MENU_SAVE] =
     {
@@ -682,7 +677,6 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .unlockedFunc = RotomPhone_UnlockedFunc_Save,
         .selectedFunc = RotomPhone_SelectedFunc_Save,
         .iconTemplate = &gSpriteIconSave,
-        .yOffset = 6,
     },
     [ROTOM_PHONE_MENU_OPTIONS] =
     {
@@ -691,7 +685,6 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .unlockedFunc = RotomPhone_UnlockedFunc_Unlocked,
         .selectedFunc = RotomPhone_SelectedFunc_Settings,
         .iconTemplate = &gSpriteIconOptions,
-        .yOffset = 9,
     },
     [ROTOM_PHONE_MENU_FLAG] =
     {
@@ -700,7 +693,6 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .unlockedFunc = RotomPhone_UnlockedFunc_SafariFlag,
         .selectedFunc = RotomPhone_SelectedFunc_SafariFlag,
         .iconTemplate = &gSpriteIconFlag,
-        .yOffset = 5,
     },
 };
 
