@@ -184,6 +184,15 @@ enum RotomPhoneMessages_Fun
     ROTOM_PHONE_MESSAGE_FUN_COUNT,
 };
 
+enum RotomPhoneMessages_Adventure
+{
+    ROTOM_PHONE_MESSAGE_ADVENTURE_TO_DO,
+    ROTOM_PHONE_MESSAGE_ADVENTURE_GET_LOST,
+    ROTOM_PHONE_MESSAGE_ADVENTURE_STEP_STORY,
+    ROTOM_PHONE_MESSAGE_ADVENTURE_PACK_CURIOSITY,
+    ROTOM_PHONE_MESSAGE_ADVENTURE_COUNT,
+};
+
 /* STRUCTs */
 struct RotomPhoneMenuOptions
 {
@@ -1215,12 +1224,33 @@ static void RotomPhone_SmallStartMenu_PrintHaveFun(u8 taskId)
 static void RotomPhone_SmallStartMenu_PrintAdventure(u8 taskId)
 {
     u8 textBuffer[80];
-    u8 location[16];
+    enum RotomPhoneMessages_Adventure messageRotom = Random() % ROTOM_PHONE_MESSAGE_ADVENTURE_COUNT;
 
-    StringCopy(textBuffer, COMPOUND_STRING("Let's go and explore "));
-    GetMapName(location, GetCurrentRegionMapSectionId(), 0);
-    StringAppend(textBuffer, location);
-    StringAppend(textBuffer, COMPOUND_STRING("!"));
+    switch (messageRotom)
+    {
+    default:
+    case ROTOM_PHONE_MESSAGE_ADVENTURE_TO_DO:
+        u8 location[16];
+        StringCopy(textBuffer, COMPOUND_STRING("What's there to do in "));
+        GetMapName(location, GetCurrentRegionMapSectionId(), 0);
+        StringAppend(textBuffer, location);
+        StringAppend(textBuffer, COMPOUND_STRING("?"));
+        break;
+    
+    case ROTOM_PHONE_MESSAGE_ADVENTURE_GET_LOST:
+        StringCopy(textBuffer, COMPOUND_STRING("Let's get lost, in the best way."));
+        break;
+    
+    case ROTOM_PHONE_MESSAGE_ADVENTURE_STEP_STORY:
+        StringCopy(textBuffer, COMPOUND_STRING("One more step, one more story."));
+        break;
+    
+    case ROTOM_PHONE_MESSAGE_ADVENTURE_PACK_CURIOSITY:
+        StringCopy(textBuffer, COMPOUND_STRING("Pack your curiosity, we're going exploring."));
+        break;
+    }
+
+    
     RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 }
