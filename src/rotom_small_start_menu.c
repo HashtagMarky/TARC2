@@ -175,6 +175,15 @@ enum RotomPhoneMessages_Greeting
     ROTOM_PHONE_MESSAGE_GREETING_COUNT,
 };
 
+enum RotomPhoneMessages_Goodbye
+{
+    ROTOM_PHONE_MESSAGE_GOODBYE_GOODBYE,
+    ROTOM_PHONE_MESSAGE_GOODBYE_SEE_YA,
+    ROTOM_PHONE_MESSAGE_GOODBYE_LOGGING_OFF,
+    ROTOM_PHONE_MESSAGE_GOODBYE_POWERING_DOWN,
+    ROTOM_PHONE_MESSAGE_GOODBYE_COUNT,
+};
+
 enum RotomPhoneMessages_Personality
 {
     ROTOM_PHONE_MESSAGE_PERSONALITY_MEEP_MORP,
@@ -1099,14 +1108,51 @@ static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId)
 static void RotomPhone_SmallStartMenu_PrintGoodbye(u8 taskId)
 {
     u8 textBuffer[80];
+    enum RotomPhoneMessages_Goodbye messageRotom = Random() % ROTOM_PHONE_MESSAGE_GOODBYE_COUNT;
 
-    StringCopy(textBuffer, COMPOUND_STRING("Goodbye "));
-    StringAppend(textBuffer, gSaveBlock3Ptr->characters.playerNickname);
-    StringAppend(textBuffer, COMPOUND_STRING("."));
-    RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, FALSE);
+    switch (messageRotom)
+    {
+    default:
+    case ROTOM_PHONE_MESSAGE_GOODBYE_GOODBYE:
+        StringCopy(textBuffer, COMPOUND_STRING("Goodbye, "));
+        StringAppend(textBuffer, gSaveBlock3Ptr->characters.playerNickname);
+        StringAppend(textBuffer, COMPOUND_STRING("."));
+        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, FALSE);
 
-    StringCopy(textBuffer, COMPOUND_STRING("I'll see you later!"));
-    RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, FALSE, FALSE);
+        StringCopy(textBuffer, COMPOUND_STRING("I'll see you later!"));
+        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, FALSE, FALSE);
+        break;
+    
+    case ROTOM_PHONE_MESSAGE_GOODBYE_SEE_YA:
+        StringCopy(textBuffer, COMPOUND_STRING("See ya later, "));
+        StringAppend(textBuffer, gSaveBlock3Ptr->characters.playerNickname);
+        StringAppend(textBuffer, COMPOUND_STRING("!"));
+        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, FALSE);
+
+        StringCopy(textBuffer, COMPOUND_STRING("Don't miss me too much."));
+        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, FALSE, FALSE);
+        break;
+    
+    case ROTOM_PHONE_MESSAGE_GOODBYE_LOGGING_OFF:
+        StringCopy(textBuffer, COMPOUND_STRING("Logging off for now…"));
+        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, FALSE);
+
+        StringCopy(textBuffer, COMPOUND_STRING("Catch you later, "));
+        StringAppend(textBuffer, gSaveBlock3Ptr->characters.playerNickname);
+        StringAppend(textBuffer, COMPOUND_STRING("."));
+        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, FALSE, FALSE);
+        break;
+    
+    case ROTOM_PHONE_MESSAGE_GOODBYE_POWERING_DOWN:
+        StringCopy(textBuffer, COMPOUND_STRING("3… 2… 1… Powering down…"));
+        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, FALSE);
+
+        StringCopy(textBuffer, COMPOUND_STRING("Until next time, "));
+        StringAppend(textBuffer, gSaveBlock3Ptr->characters.playerNickname);
+        StringAppend(textBuffer, COMPOUND_STRING("."));
+        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, FALSE, FALSE);
+        break;
+    }
 
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
     CopyWindowToVram(sRotomPhone_StartMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
