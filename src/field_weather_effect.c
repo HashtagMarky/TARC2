@@ -2544,7 +2544,7 @@ void SetSavedWeatherFromCurrMapHeader(void)
     if (!Ikigai_ShouldLoadVyratonWeather())
         gSaveBlock1Ptr->weather = TranslateWeatherNum(gMapHeader.weather);
     else
-        gSaveBlock1Ptr->weather = gSaveBlock1Ptr->weatherVyraton;
+        gSaveBlock1Ptr->weather = Ikigai_GetCurrentVyratonWeather(gTimeOfDay);
 
     UpdateRainCounter(gSaveBlock1Ptr->weather, oldWeather);
 }

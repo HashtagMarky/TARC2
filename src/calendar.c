@@ -1027,7 +1027,7 @@ static void CalendarUI_GetData(void)
     sCalendarUIState->season = Ikigai_GetSeasonFromDays(days);
     sCalendarUIState->date = Ikigai_GetDateFromDays(days);
     sCalendarUIState->time = GetTimeOfDay();
-    sCalendarUIState->weather = gSaveBlock1Ptr->weatherVyraton;
+    sCalendarUIState->weather = Ikigai_GetCurrentVyratonWeather(gTimeOfDay);
     sCalendarUIState->gymBattles = gSaveBlock3Ptr->numGymBattles;
     sCalendarUIState->buildProjects = gSaveBlock3Ptr->numBuildProjects;
 }

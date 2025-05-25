@@ -43,8 +43,8 @@ enum
 // Menu items
 enum
 {
-    MENUITEM_MAIN_TEXTSPEED,
     MENUITEM_MAIN_FONT,
+    MENUITEM_MAIN_TEXTSPEED,
     MENUITEM_MAIN_BUTTONMODE,
     MENUITEM_MAIN_SOUND,
     MENUITEM_MAIN_UNIT_SYSTEM,
@@ -1831,6 +1831,7 @@ static void DrawChoices_Font(int selection, int y)
     u8 styles[2] = {0};
     styles[selection] = 1;
 
+    gSaveBlock2Ptr->optionsCurrentFont = selection;
     DrawOptionMenuChoice(gText_OptionFontCompact, 104, y, styles[0], active);
     DrawOptionMenuChoice(gText_OptionFontSpread, GetStringRightAlignXOffset(1, gText_OptionFontSpread, 198), y, styles[1], active);
 }
