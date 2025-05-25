@@ -166,6 +166,15 @@ enum RotomPhoneMessages
     ROTOM_PHONE_MESSAGE_COUNT,
 };
 
+enum RotomPhoneMessages_Greeting
+{
+    ROTOM_PHONE_MESSAGE_GREETING_GOOD_DAY,
+    ROTOM_PHONE_MESSAGE_GREETING_HELLO,
+    ROTOM_PHONE_MESSAGE_GREETING_HI,
+    ROTOM_PHONE_MESSAGE_GREETING_HOW_ARE_YOU,
+    ROTOM_PHONE_MESSAGE_GREETING_COUNT,
+};
+
 enum RotomPhoneMessages_Personality
 {
     ROTOM_PHONE_MESSAGE_PERSONALITY_MEEP_MORP,
@@ -983,12 +992,12 @@ static void RotomPhone_SmallStartMenu_PrintGreeting(void)
         return;
     
     u8 textBuffer[80];
-    u8 random = Random() % 4;
+    enum RotomPhoneMessages_Greeting messageRotom = Random() % ROTOM_PHONE_MESSAGE_GREETING_COUNT;
 
-    switch (random)
+    switch (messageRotom)
     {
     default:
-    case 0:
+    case ROTOM_PHONE_MESSAGE_GREETING_GOOD_DAY:
         switch (gTimeOfDay)
         {
         case TIME_MORNING:
@@ -1010,31 +1019,26 @@ static void RotomPhone_SmallStartMenu_PrintGreeting(void)
         }
         break;
     
-    case 1:
+    case ROTOM_PHONE_MESSAGE_GREETING_HELLO:
         StringCopy(textBuffer, COMPOUND_STRING("Hello there, "));
         break;
     
-    case 2:
+    case ROTOM_PHONE_MESSAGE_GREETING_HI:
         StringCopy(textBuffer, COMPOUND_STRING("Hi, "));
         break;
     
-    case 3:
+    case ROTOM_PHONE_MESSAGE_GREETING_HOW_ARE_YOU:
         StringCopy(textBuffer, COMPOUND_STRING("How are you, "));
         break;
     }
 
     StringAppend(textBuffer, gSaveBlock3Ptr->characters.playerNickname);
 
-    switch (random)
-    {
-    case 3:
-        StringAppend(textBuffer, COMPOUND_STRING("?"));
-        break;
-    
-    default:
+    if (messageRotom != ROTOM_PHONE_MESSAGE_GREETING_HOW_ARE_YOU)
         StringAppend(textBuffer, COMPOUND_STRING("."));
-        break;
-    }
+    else
+        StringAppend(textBuffer, COMPOUND_STRING("?"));
+
     RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
 }
 
