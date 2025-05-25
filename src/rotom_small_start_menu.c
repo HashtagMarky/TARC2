@@ -117,7 +117,7 @@ static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintSafari(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintDate(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintHaveFun(u8 taskId);
-static void RotomPhone_SmallStartMenu_PrintNoises(u8 taskId);
+static void RotomPhone_SmallStartMenu_Personality(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintAdventure(u8 taskId);
 static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId);
 
@@ -160,10 +160,19 @@ enum RotomPhoneMessages
     ROTOM_PHONE_MESSAGE_TIME,
     ROTOM_PHONE_MESSAGE_SAFARI,
     ROTOM_PHONE_MESSAGE_DATE,
-    ROTOM_PHONE_MESSAGE_NOISES,
+    ROTOM_PHONE_MESSAGE_PERSONALITY,
     ROTOM_PHONE_MESSAGE_FUN,
     ROTOM_PHONE_MESSAGE_ADVENTURE,
     ROTOM_PHONE_MESSAGE_COUNT,
+};
+
+enum RotomPhoneMessages_Personality
+{
+    ROTOM_PHONE_MESSAGE_PERSONALITY_MEEP_MORP,
+    ROTOM_PHONE_MESSAGE_PERSONALITY_HANDS,
+    ROTOM_PHONE_MESSAGE_PERSONALITY_RINGTONE,
+    ROTOM_PHONE_MESSAGE_PERSONALITY_SCANNING,
+    ROTOM_PHONE_MESSAGE_PERSONALITY_COUNT,
 };
 
 /* STRUCTs */
@@ -1048,8 +1057,8 @@ static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId)
             RotomPhone_SmallStartMenu_PrintDate(taskId);
             break;
 
-        case ROTOM_PHONE_MESSAGE_NOISES:
-            RotomPhone_SmallStartMenu_PrintNoises(taskId);
+        case ROTOM_PHONE_MESSAGE_PERSONALITY:
+            RotomPhone_SmallStartMenu_Personality(taskId);
             break;
 
         case ROTOM_PHONE_MESSAGE_FUN:
@@ -1136,11 +1145,31 @@ static void RotomPhone_SmallStartMenu_PrintDate(u8 taskId)
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 }
 
-static void RotomPhone_SmallStartMenu_PrintNoises(u8 taskId)
+static void RotomPhone_SmallStartMenu_Personality(u8 taskId)
 {
     u8 textBuffer[80];
+    enum RotomPhoneMessages_Personality messageRotom = Random() % ROTOM_PHONE_MESSAGE_PERSONALITY_COUNT;
 
-    StringCopy(textBuffer, COMPOUND_STRING("Meep-morp!"));
+    switch (messageRotom)
+    {
+    default:
+    case ROTOM_PHONE_MESSAGE_PERSONALITY_MEEP_MORP:
+        StringCopy(textBuffer, COMPOUND_STRING("Meep-morp!"));
+        break;
+    
+    case ROTOM_PHONE_MESSAGE_PERSONALITY_HANDS:
+        StringCopy(textBuffer, COMPOUND_STRING("If I had hands, I'd give you a high-five!"));
+        break;
+    
+    case ROTOM_PHONE_MESSAGE_PERSONALITY_RINGTONE:
+        StringCopy(textBuffer, COMPOUND_STRING("I've got a new ringtone to show you!"));
+        break;
+    
+    case ROTOM_PHONE_MESSAGE_PERSONALITY_SCANNING:
+        StringCopy(textBuffer, COMPOUND_STRING("Scanning… Yup, you're still awesome!"));
+        break;
+    }
+    
     RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 }
