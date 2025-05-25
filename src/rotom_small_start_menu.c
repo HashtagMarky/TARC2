@@ -175,6 +175,15 @@ enum RotomPhoneMessages_Personality
     ROTOM_PHONE_MESSAGE_PERSONALITY_COUNT,
 };
 
+enum RotomPhoneMessages_Fun
+{
+    ROTOM_PHONE_MESSAGE_FUN_WINNING_GRINNING,
+    ROTOM_PHONE_MESSAGE_FUN_ANYMORE_BATTLES,
+    ROTOM_PHONE_MESSAGE_FUN_FUN_DETECTED,
+    ROTOM_PHONE_MESSAGE_FUN_SOMETHING_SILLY,
+    ROTOM_PHONE_MESSAGE_FUN_COUNT,
+};
+
 /* STRUCTs */
 struct RotomPhoneMenuOptions
 {
@@ -1177,8 +1186,28 @@ static void RotomPhone_SmallStartMenu_Personality(u8 taskId)
 static void RotomPhone_SmallStartMenu_PrintHaveFun(u8 taskId)
 {
     u8 textBuffer[80];
+    enum RotomPhoneMessages_Fun messageRotom = Random() % ROTOM_PHONE_MESSAGE_FUN_COUNT;
 
-    StringCopy(textBuffer, COMPOUND_STRING("Let's have a lot of fun today!"));
+    switch (messageRotom)
+    {
+    default:
+    case ROTOM_PHONE_MESSAGE_FUN_WINNING_GRINNING:
+        StringCopy(textBuffer, COMPOUND_STRING("If you're winning, I am grinning!"));
+        break;
+    
+    case ROTOM_PHONE_MESSAGE_FUN_ANYMORE_BATTLES:
+        StringCopy(textBuffer, COMPOUND_STRING("Do we have anymore battles today?"));
+        break;
+    
+    case ROTOM_PHONE_MESSAGE_FUN_FUN_DETECTED:
+        StringCopy(textBuffer, COMPOUND_STRING("Fun detected, AMPLIFYING!"));
+        break;
+    
+    case ROTOM_PHONE_MESSAGE_FUN_SOMETHING_SILLY:
+        StringCopy(textBuffer, COMPOUND_STRING("Wanna do something silly? I am in!"));
+        break;
+    }
+
     RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 }
