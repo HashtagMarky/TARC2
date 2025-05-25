@@ -69,6 +69,7 @@
 #define ROTOM_PHONE_NUM_MINUTES_TO_UPDATE   1
 #define ROTOM_PHONE_MESSAGE_UPDATE_TIMER    (30 * 60) / FakeRtc_GetSecondsRatio() * ROTOM_PHONE_NUM_MINUTES_TO_UPDATE
 #define ROTOM_PHONE_MESSAGE_SHUTDOWN_TIME   60
+#define ROTOM_PHONE_UPDATE_MESSAGE          TRUE
 
 /* CALLBACKS */
 static void SpriteCB_IconPoketch(struct Sprite* sprite);
@@ -1064,6 +1065,9 @@ static void RotomPhone_SmallStartMenu_PrintGreeting(void)
 
 static enum RotomPhoneMessages RotomPhone_SmallStartMenu_GetRandomMessage(void)
 {
+    if (!ROTOM_PHONE_UPDATE_MESSAGE)
+        return ROTOM_PHONE_MESSAGE_TIME;
+    
     enum RotomPhoneMessages messageRandom;
     messageRandom = Random() % ROTOM_PHONE_MESSAGE_COUNT;
     while (messageRandom == ROTOM_PHONE_MESSAGE_GOODBYE
@@ -1112,6 +1116,8 @@ static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId)
             break;
         }
         tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER;
+        if (!ROTOM_PHONE_UPDATE_MESSAGE && !GetSafariZoneFlag() && tRotomUpdateMessage != ROTOM_PHONE_MESSAGE_GOODBYE)
+            tRotomUpdateTimer *= 2;
         tRotomMessageSoundEffect = PMD_EVENT_SIGN_HATENA_02;
     }
 }
