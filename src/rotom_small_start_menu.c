@@ -248,6 +248,7 @@ struct RotomPhone_StartMenu
 
 static EWRAM_DATA struct RotomPhone_StartMenu *sRotomPhone_StartMenu = NULL;
 static EWRAM_DATA enum RotomPhoneMenuItems menuSelected; // Separate memory allocation so it persist between destroying of menu.
+EWRAM_DATA bool32 openedFullScreenRotomPhone;
 
 // --BG-GFX--
 static const u32 sSmallRotomTiles[] = INCBIN_U32("graphics/rotom_phone_start_menu/rotom_phone_tiles.4bpp.lz");
@@ -869,6 +870,7 @@ void RotomPhone_StartMenu_Init(void)
     sRotomPhone_StartMenu->isLoading = FALSE;
     sRotomPhone_StartMenu->windowIdRotomSpeech_Top = 0;
     sRotomPhone_StartMenu->spriteFlag = FALSE;
+    openedFullScreenRotomPhone = FALSE;
 
     RotomPhone_SmallStartMenu_LoadSprites();
     RotomPhone_SmallStartMenu_CreateAllSprites();
@@ -1585,6 +1587,7 @@ static void RotomPhone_SelectedFunc_FullScreen(void)
 {
     if (!gPaletteFade.active)
     {
+        openedFullScreenRotomPhone = TRUE;
         RotomPhone_SmallStartMenu_ExitAndClearTilemap();
         FreezeObjectEvents();
         LockPlayerFieldControls();
