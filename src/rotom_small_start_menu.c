@@ -59,6 +59,8 @@
 #include "fake_rtc.h"
 #include "region_map.h"
 #include "sample_ui.h"
+#include "debug.h"
+#include "vyraton.h"
 
 /* CONFIGS */
 #define ROTOM_PHONE_UPDATE_CLOCK_DISPLAY    TRUE
@@ -115,7 +117,7 @@ static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintGoodbye(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintSafari(u8 taskId);
-static void RotomPhone_SmallStartMenu_PrintDate(u8 taskId);
+static void RotomPhone_SmallStartMenu_PrintDateWeather(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintHaveFun(u8 taskId);
 static void RotomPhone_SmallStartMenu_Personality(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintAdventure(u8 taskId);
@@ -159,7 +161,7 @@ enum RotomPhoneMessages
     ROTOM_PHONE_MESSAGE_GOODBYE,
     ROTOM_PHONE_MESSAGE_TIME,
     ROTOM_PHONE_MESSAGE_SAFARI,
-    ROTOM_PHONE_MESSAGE_DATE,
+    ROTOM_PHONE_MESSAGE_DATE_WEATHER,
     ROTOM_PHONE_MESSAGE_PERSONALITY,
     ROTOM_PHONE_MESSAGE_FUN,
     ROTOM_PHONE_MESSAGE_ADVENTURE,
@@ -182,6 +184,15 @@ enum RotomPhoneMessages_Goodbye
     ROTOM_PHONE_MESSAGE_GOODBYE_LOGGING_OFF,
     ROTOM_PHONE_MESSAGE_GOODBYE_POWERING_DOWN,
     ROTOM_PHONE_MESSAGE_GOODBYE_COUNT,
+};
+
+enum RotomPhoneMessages_DateWeather
+{
+    ROTOM_PHONE_MESSAGE_DATE_WEATHER_DATE,
+    ROTOM_PHONE_MESSAGE_DATE_WEATHER_SEASON,
+    ROTOM_PHONE_MESSAGE_DATE_WEATHER_CURRENT_WEATHER,
+    ROTOM_PHONE_MESSAGE_DATE_WEATHER_NEXT_WEATHER,
+    ROTOM_PHONE_MESSAGE_DATE_WEATHER_COUNT,
 };
 
 enum RotomPhoneMessages_Personality
@@ -1084,8 +1095,8 @@ static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId)
             RotomPhone_SmallStartMenu_PrintSafari(taskId);
             break;
         
-        case ROTOM_PHONE_MESSAGE_DATE:
-            RotomPhone_SmallStartMenu_PrintDate(taskId);
+        case ROTOM_PHONE_MESSAGE_DATE_WEATHER:
+            RotomPhone_SmallStartMenu_PrintDateWeather(taskId);
             break;
 
         case ROTOM_PHONE_MESSAGE_PERSONALITY:
@@ -1193,22 +1204,62 @@ static void RotomPhone_SmallStartMenu_PrintSafari(u8 taskId)
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 }
 
-static void RotomPhone_SmallStartMenu_PrintDate(u8 taskId)
+static void RotomPhone_SmallStartMenu_PrintDateWeather(u8 taskId)
 {
     u8 textBuffer[80];
-    u8 textDate[2];
-    u8 textYear[3];
+    enum RotomPhoneMessages_DateWeather messageRotom = Random() % ROTOM_PHONE_MESSAGE_DATE_WEATHER_COUNT;
 
-    RtcCalcLocalTime();
-    StringCopy(textBuffer, COMPOUND_STRING("The date is "));
-    ConvertIntToDecimalStringN(textDate, Ikigai_GetDateFromDays(gLocalTime.days), STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringAppend(textBuffer, textDate);
-    StringAppend(textBuffer, COMPOUND_STRING(" "));
-    StringAppend(textBuffer, gSeasonNames[Ikigai_FetchSeason()]);
-    StringAppend(textBuffer, COMPOUND_STRING(", Year "));
-    ConvertIntToDecimalStringN(textYear, Ikigai_GetYearFromDays(gLocalTime.days), STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringAppend(textBuffer, textYear);
-    StringAppend(textBuffer, COMPOUND_STRING("."));
+    if (messageRotom == ROTOM_PHONE_MESSAGE_DATE_WEATHER_SEASON)
+    {
+        switch (Ikigai_FetchSeason())
+        {
+        default:
+        case SEASON_SPRING:
+            StringCopy(textBuffer, COMPOUND_STRING("Everything's blooming, including you!"));
+            break;
+        
+        case SEASON_SUMMER:
+            StringCopy(textBuffer, COMPOUND_STRING("It's hot, it's bright, it's calling!"));
+            break;
+        
+        case SEASON_AUTUMN:
+            StringCopy(textBuffer, COMPOUND_STRING("Time for cozy vives and crunchy leaves!"));
+            break;
+        
+        case SEASON_WINTER:
+            StringCopy(textBuffer, COMPOUND_STRING("Bundle up! Even my pixels get chilly."));
+            break;
+        }
+    }
+    else if (messageRotom == ROTOM_PHONE_MESSAGE_DATE_WEATHER_CURRENT_WEATHER)
+    {
+        StringCopy(textBuffer, COMPOUND_STRING("Looking like it is "));
+        StringAppend(textBuffer, GetWeatherName(GetCurrentWeather()));
+        StringAppend(textBuffer, COMPOUND_STRING(" right now."));
+    }
+    else if (messageRotom == ROTOM_PHONE_MESSAGE_DATE_WEATHER_NEXT_WEATHER && gTimeOfDay >= TIME_NIGHT)
+    {
+        StringCopy(textBuffer, COMPOUND_STRING("It feels like it will be "));
+        StringAppend(textBuffer, GetWeatherName(Ikigai_GetCurrentVyratonWeather(gTimeOfDay + 1)));
+        StringAppend(textBuffer, COMPOUND_STRING(" later."));
+    }
+    else
+    {
+        u8 textDate[2];
+        u8 textYear[3];
+
+        RtcCalcLocalTime();
+        StringCopy(textBuffer, COMPOUND_STRING("The date is "));
+        ConvertIntToDecimalStringN(textDate, Ikigai_GetDateFromDays(gLocalTime.days), STR_CONV_MODE_LEADING_ZEROS, 2);
+        StringAppend(textBuffer, textDate);
+        StringAppend(textBuffer, COMPOUND_STRING(" "));
+        StringAppend(textBuffer, gSeasonNames[Ikigai_FetchSeason()]);
+        StringAppend(textBuffer, COMPOUND_STRING(", Year "));
+        ConvertIntToDecimalStringN(textYear, Ikigai_GetYearFromDays(gLocalTime.days), STR_CONV_MODE_LEFT_ALIGN, 3);
+        StringAppend(textBuffer, textYear);
+        StringAppend(textBuffer, COMPOUND_STRING("."));
+    }
+
     RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 }
