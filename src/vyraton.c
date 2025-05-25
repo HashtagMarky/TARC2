@@ -28,7 +28,6 @@ static EWRAM_DATA enum Seasons season;
 
 void Ikigai_TimeAdvanceFunctions(void)
 {
-    Ikigai_UpdateVyratonWeather();
     Ikigai_SetBedtime();
 }
 
@@ -44,7 +43,7 @@ bool32 Ikigai_ShouldLoadVyratonWeather(void)
     );
 }
 
-void Ikigai_SetVyratonWeather(void)
+static u8 Ikigai_GetVyratonWeather(void)
 {
     enum Seasons season = Ikigai_FetchSeason();
     season = (season != SEASON_COUNT) ? season : SEASON_SPRING;
@@ -65,25 +64,64 @@ void Ikigai_SetVyratonWeather(void)
         cumulativeChance += tableWeather[i].chance;
         if (roll < cumulativeChance)
         {
-            gSaveBlock1Ptr->weatherVyraton = tableWeather[i].weather;
-            return;
+            return tableWeather[i].weather;
         }
     }
 
-    gSaveBlock1Ptr->weatherVyraton = WEATHER_NONE;
+    return WEATHER_NONE;
 }
 
-void Ikigai_UpdateVyratonWeather(void)
+static u8 Ikigai_GetNextVyratonWeather(u8 currentWeather)
 {
-    // RtcCalcLocalTime();
-    if (gLocalTime.minutes != 0
-        && (gLocalTime.hours != Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_DAY, FALSE)
-        || gLocalTime.hours != Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_EVENING, FALSE)
-        || gLocalTime.hours != Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_NIGHT, FALSE)))
-        return;
+    u8 newWeather = currentWeather;
+
+    while (newWeather == currentWeather)
+        newWeather = Ikigai_GetVyratonWeather();
+
+    return newWeather;
+}
+
+#define PERCENT_CHANCE_WEATHER_CHANGE 50
+void Ikigai_SetVyratonWeather(void)
+{
+    gSaveBlock1Ptr->weatherVyratonMorning = Ikigai_GetVyratonWeather();
+
+    // Day
+    if ((Random() % 100) < PERCENT_CHANCE_WEATHER_CHANGE)
+        gSaveBlock1Ptr->weatherVyratonDay = Ikigai_GetNextVyratonWeather(gSaveBlock1Ptr->weatherVyratonMorning);
+    else
+        gSaveBlock1Ptr->weatherVyratonDay = gSaveBlock1Ptr->weatherVyratonMorning;
+
+    // Evening
+    if ((Random() % 100) < PERCENT_CHANCE_WEATHER_CHANGE)
+        gSaveBlock1Ptr->weatherVyratonEvening = Ikigai_GetNextVyratonWeather(gSaveBlock1Ptr->weatherVyratonDay);
+    else
+        gSaveBlock1Ptr->weatherVyratonEvening = gSaveBlock1Ptr->weatherVyratonDay;
+
+    // Night
+    if ((Random() % 100) < PERCENT_CHANCE_WEATHER_CHANGE)
+        gSaveBlock1Ptr->weatherVyratonNight = Ikigai_GetNextVyratonWeather(gSaveBlock1Ptr->weatherVyratonEvening);
+    else
+        gSaveBlock1Ptr->weatherVyratonNight = gSaveBlock1Ptr->weatherVyratonEvening;
+}
+
+u8 Ikigai_GetCurrentVyratonWeather(enum TimeOfDay time)
+{
+    switch (time)
+    {
+    default:
+    case TIME_MORNING:
+        return gSaveBlock1Ptr->weatherVyratonMorning;
     
-    if (Random() % 2 == TRUE)
-        Ikigai_SetVyratonWeather();
+    case TIME_DAY:
+        return gSaveBlock1Ptr->weatherVyratonDay;
+    
+    case TIME_EVENING:
+        return gSaveBlock1Ptr->weatherVyratonEvening;
+        
+    case TIME_NIGHT:
+        return gSaveBlock1Ptr->weatherVyratonNight;
+    }
 }
 
 #define MIN_HOURS_REST 6

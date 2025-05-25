@@ -6,21 +6,25 @@
 
 static const struct IkigaiRandomWeather sIkigaiRandomWeatherSpring[] =
 {
+    { WEATHER_NONE, 100 },
     { WEATHER_RAIN, 100 },
 };
 
 static const struct IkigaiRandomWeather sIkigaiRandomWeatherSummer[] =
 {
+    { WEATHER_NONE, 100 },
     { WEATHER_SUNNY, 100 },
 };
 
 static const struct IkigaiRandomWeather sIkigaiRandomWeatherAutumn[] =
 {
+    { WEATHER_NONE, 100 },
     { WEATHER_SUNNY_CLOUDS, 100 },
 };
 
 static const struct IkigaiRandomWeather sIkigaiRandomWeatherWinter[] =
 {
+    { WEATHER_NONE, 100 },
     { WEATHER_SNOW, 100 },
 };
 

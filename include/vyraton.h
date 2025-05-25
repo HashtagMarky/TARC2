@@ -1,6 +1,8 @@
 #ifndef GUARD_VYRATON_H
 #define GUARD_VYRATON_H
 
+#include "rtc.h"
+
 
 void Ikigai_TimeAdvanceFunctions(void);
 
@@ -13,7 +15,7 @@ struct IkigaiRandomWeather
 
 bool32 Ikigai_ShouldLoadVyratonWeather(void);
 void Ikigai_SetVyratonWeather(void);
-void Ikigai_UpdateVyratonWeather(void);
+u8 Ikigai_GetCurrentVyratonWeather(enum TimeOfDay time);
 
 
 #define INVALID_METATILE            NUM_METATILES_TOTAL
