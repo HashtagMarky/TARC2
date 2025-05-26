@@ -227,10 +227,10 @@ enum RotomPhoneMessages_Adventure
 struct RotomPhoneMenuOptions
 {
     const u8 *menuName;
-    const u8 *menuDescription;
-    bool32 (*unlockedFunc)(void);
-    void (*selectedFunc)(void);
-    const struct SpriteTemplate *iconTemplate;
+    const u8 *rotomAction;
+    bool32 (*unlockedFuncSmall)(void);
+    void (*selectedFuncSmall)(void);
+    const struct SpriteTemplate *iconTemplateSmall;
 };
 
 struct RotomPhone_StartMenu
@@ -737,74 +737,74 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
     [ROTOM_PHONE_MENU_POKEDEX] =
     {
         .menuName = COMPOUND_STRING("Pokédex"),
-        .menuDescription = COMPOUND_STRING("to open the Pokédex?"),
-        .unlockedFunc = RotomPhone_SmallStartMenu_UnlockedFunc_Pokedex,
-        .selectedFunc = RotomPhone_SmallStartMenu_SelectedFunc_Pokedex,
-        .iconTemplate = &gSpriteIconPokedex,
+        .rotomAction = COMPOUND_STRING("to open the Pokédex?"),
+        .unlockedFuncSmall = RotomPhone_SmallStartMenu_UnlockedFunc_Pokedex,
+        .selectedFuncSmall = RotomPhone_SmallStartMenu_SelectedFunc_Pokedex,
+        .iconTemplateSmall = &gSpriteIconPokedex,
     },
     [ROTOM_PHONE_MENU_PARTY] =
     {
         .menuName = COMPOUND_STRING("Party"),
-        .menuDescription = COMPOUND_STRING("to view your Party?"),
-        .unlockedFunc = RotomPhone_SmallStartMenu_UnlockedFunc_Pokemon,
-        .selectedFunc = RotomPhone_SmallStartMenu_SelectedFunc_Pokemon,
-        .iconTemplate = &gSpriteIconParty,
+        .rotomAction = COMPOUND_STRING("to view your Party?"),
+        .unlockedFuncSmall = RotomPhone_SmallStartMenu_UnlockedFunc_Pokemon,
+        .selectedFuncSmall = RotomPhone_SmallStartMenu_SelectedFunc_Pokemon,
+        .iconTemplateSmall = &gSpriteIconParty,
     },
     [ROTOM_PHONE_MENU_BAG] =
     {
         .menuName = COMPOUND_STRING("Bag"),
-        .menuDescription = COMPOUND_STRING("to check your Storage?"),
-        .unlockedFunc = RotomPhone_SmallStartMenu_UnlockedFunc_Unlocked,
-        .selectedFunc = RotomPhone_SmallStartMenu_SelectedFunc_Bag,
-        .iconTemplate = &gSpriteIconBag,
+        .rotomAction = COMPOUND_STRING("to check your Storage?"),
+        .unlockedFuncSmall = RotomPhone_SmallStartMenu_UnlockedFunc_Unlocked,
+        .selectedFuncSmall = RotomPhone_SmallStartMenu_SelectedFunc_Bag,
+        .iconTemplateSmall = &gSpriteIconBag,
     },
     [ROTOM_PHONE_MENU_POKENAV] =
     {
         .menuName = COMPOUND_STRING("PokéNav"),
-        .menuDescription = COMPOUND_STRING("to browse the PokéNav?"),
-        .unlockedFunc = RotomPhone_SmallStartMenu_UnlockedFunc_PokeNav,
-        .selectedFunc = RotomPhone_SmallStartMenu_SelectedFunc_PokeNav,
-        .iconTemplate = &gSpriteIconPoketch,
+        .rotomAction = COMPOUND_STRING("to browse the PokéNav?"),
+        .unlockedFuncSmall = RotomPhone_SmallStartMenu_UnlockedFunc_PokeNav,
+        .selectedFuncSmall = RotomPhone_SmallStartMenu_SelectedFunc_PokeNav,
+        .iconTemplateSmall = &gSpriteIconPoketch,
     },
     [ROTOM_PHONE_MENU_TRAINER_CARD] =
     {
         .menuName = COMPOUND_STRING("Trainer"),
-        .menuDescription = COMPOUND_STRING("to view your ID Card?"),
-        .unlockedFunc = RotomPhone_SmallStartMenu_UnlockedFunc_Unlocked,
-        .selectedFunc = RotomPhone_SmallStartMenu_SelectedFunc_Trainer,
-        .iconTemplate = &gSpriteIconTrainerCard,
+        .rotomAction = COMPOUND_STRING("to view your ID Card?"),
+        .unlockedFuncSmall = RotomPhone_SmallStartMenu_UnlockedFunc_Unlocked,
+        .selectedFuncSmall = RotomPhone_SmallStartMenu_SelectedFunc_Trainer,
+        .iconTemplateSmall = &gSpriteIconTrainerCard,
     },
     [ROTOM_PHONE_MENU_SAVE] =
     {
         .menuName = COMPOUND_STRING("Save"),
-        .menuDescription = COMPOUND_STRING("to write in your Journal?"),
-        .unlockedFunc = RotomPhone_SmallStartMenu_UnlockedFunc_Save,
-        .selectedFunc = RotomPhone_SmallStartMenu_SelectedFunc_Save,
-        .iconTemplate = &gSpriteIconSave,
+        .rotomAction = COMPOUND_STRING("to write in your Journal?"),
+        .unlockedFuncSmall = RotomPhone_SmallStartMenu_UnlockedFunc_Save,
+        .selectedFuncSmall = RotomPhone_SmallStartMenu_SelectedFunc_Save,
+        .iconTemplateSmall = &gSpriteIconSave,
     },
     [ROTOM_PHONE_MENU_OPTIONS] =
     {
         .menuName = COMPOUND_STRING("Settings"),
-        .menuDescription = COMPOUND_STRING("to change the Settings?"),
-        .unlockedFunc = RotomPhone_SmallStartMenu_UnlockedFunc_Unlocked,
-        .selectedFunc = RotomPhone_SmallStartMenu_SelectedFunc_Settings,
-        .iconTemplate = &gSpriteIconOptions,
+        .rotomAction = COMPOUND_STRING("to change the Settings?"),
+        .unlockedFuncSmall = RotomPhone_SmallStartMenu_UnlockedFunc_Unlocked,
+        .selectedFuncSmall = RotomPhone_SmallStartMenu_SelectedFunc_Settings,
+        .iconTemplateSmall = &gSpriteIconOptions,
     },
     [ROTOM_PHONE_MENU_FLAG] =
     {
         .menuName = COMPOUND_STRING("Retire"),
-        .menuDescription = COMPOUND_STRING("to end the Safari?"),
-        .unlockedFunc = RotomPhone_SmallStartMenu_UnlockedFunc_SafariFlag,
-        .selectedFunc = RotomPhone_SmallStartMenu_SelectedFunc_SafariFlag,
-        .iconTemplate = &gSpriteIconFlag,
+        .rotomAction = COMPOUND_STRING("to end the Safari?"),
+        .unlockedFuncSmall = RotomPhone_SmallStartMenu_UnlockedFunc_SafariFlag,
+        .selectedFuncSmall = RotomPhone_SmallStartMenu_SelectedFunc_SafariFlag,
+        .iconTemplateSmall = &gSpriteIconFlag,
     },
     [ROTOM_PHONE_MENU_FULL_SCREEN] =
     {
         .menuName = COMPOUND_STRING("Full Screen"),
-        .menuDescription = COMPOUND_STRING("to enter Full Screen?"),
-        .unlockedFunc = RotomPhone_SmallStartMenu_UnlockedFunc_FullScreen,
-        .selectedFunc = RotomPhone_SmallStartMenu_SelectedFunc_FullScreen,
-        .iconTemplate = &gSpriteIconFullScreen,
+        .rotomAction = COMPOUND_STRING("to enter Full Screen?"),
+        .unlockedFuncSmall = RotomPhone_SmallStartMenu_UnlockedFunc_FullScreen,
+        .selectedFuncSmall = RotomPhone_SmallStartMenu_SelectedFunc_FullScreen,
+        .iconTemplateSmall = &gSpriteIconFullScreen,
     },
 };
 
@@ -855,7 +855,7 @@ static void RotomPhone_SetFirstSelectedMenu(void)
 {
     for (enum RotomPhoneMenuItems menuOption = ROTOM_PHONE_MENU_FIRST_OPTION; menuOption < ROTOM_PHONE_MENU_COUNT; menuOption++)
     {
-        if (sRotomPhoneOptions[menuOption].unlockedFunc && sRotomPhoneOptions[menuOption].unlockedFunc())
+        if (sRotomPhoneOptions[menuOption].unlockedFuncSmall && sRotomPhoneOptions[menuOption].unlockedFuncSmall())
         {
             menuSelected = menuOption;
             return;
@@ -901,7 +901,7 @@ void RotomPhone_SmallStartMenu_Init(void)
     RotomPhone_SmallStartMenu_CreateSpeechWindows();
     RotomPhone_SmallStartMenu_CreateFlipPhoneWindow();
 
-    if (!sRotomPhoneOptions[menuSelected].unlockedFunc || !sRotomPhoneOptions[menuSelected].unlockedFunc())
+    if (!sRotomPhoneOptions[menuSelected].unlockedFuncSmall || !sRotomPhoneOptions[menuSelected].unlockedFuncSmall())
         RotomPhone_SetFirstSelectedMenu();
 
     u8 taskId = CreateTask(Task_RotomPhone_SmallStartMenu_HandleMainInput, 0);
@@ -938,7 +938,7 @@ static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menu
     iconRow = spriteId / 2;
 
     sRotomPhone_SmallStartMenu->menuSmallSpriteId[spriteId] = CreateSprite(
-        sRotomPhoneOptions[menuItem].iconTemplate,
+        sRotomPhoneOptions[menuItem].iconTemplateSmall,
         x + (iconColumn * 24),
         y + (iconRow * 24),
         0
@@ -953,7 +953,7 @@ static void RotomPhone_SmallStartMenu_CreateAllSprites(void)
     {
         const struct RotomPhoneMenuOptions *menuOption = &sRotomPhoneOptions[menuId];
 
-        if (menuOption->unlockedFunc && menuOption->unlockedFunc())
+        if (menuOption->unlockedFuncSmall && menuOption->unlockedFuncSmall())
         {
             enum RotomPhoneSmallOptions optionSlot = ROTOM_PHONE_SMALL_OPTION_1 + drawn;
 
@@ -1397,7 +1397,7 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId)
             StringCopy(textBuffer, COMPOUND_STRING("Would you like "));
         else
             StringCopy(textBuffer, COMPOUND_STRING("Do you want "));
-        StringAppend(textBuffer, sRotomPhoneOptions[menuSelected].menuDescription);
+        StringAppend(textBuffer, sRotomPhoneOptions[menuSelected].rotomAction);
         RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, FALSE, TRUE);
     }
     else
@@ -1719,9 +1719,9 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     {
         RotomPhone_SmallStartMenu_HandleInput(taskId);
     }
-    else if (sRotomPhone_SmallStartMenu->isLoading == TRUE && sRotomPhoneOptions[menuSelected].selectedFunc)
+    else if (sRotomPhone_SmallStartMenu->isLoading == TRUE && sRotomPhoneOptions[menuSelected].selectedFuncSmall)
     {
-        sRotomPhoneOptions[menuSelected].selectedFunc();
+        sRotomPhoneOptions[menuSelected].selectedFuncSmall();
     }
 
     if (tRotomMessageSoundEffect)
