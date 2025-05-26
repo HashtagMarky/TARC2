@@ -789,6 +789,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .unlockedFuncSmall = RotomPhone_SmallStartMenu_UnlockedFunc_Pokemon,
         .selectedFuncSmall = RotomPhone_SmallStartMenu_SelectedFunc_Pokemon,
         .iconTemplateSmall = &gSpriteIconParty,
+        .selectedFuncLarge = RotomPhone_LargeStartMenu_SelectedFunc_Pokemon,
     },
     [ROTOM_PHONE_MENU_BAG] =
     {
@@ -797,6 +798,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .unlockedFuncSmall = RotomPhone_SmallStartMenu_UnlockedFunc_Unlocked,
         .selectedFuncSmall = RotomPhone_SmallStartMenu_SelectedFunc_Bag,
         .iconTemplateSmall = &gSpriteIconBag,
+        .selectedFuncLarge = RotomPhone_LargeStartMenu_SelectedFunc_Bag,
     },
     [ROTOM_PHONE_MENU_POKENAV] =
     {
@@ -805,6 +807,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .unlockedFuncSmall = RotomPhone_SmallStartMenu_UnlockedFunc_PokeNav,
         .selectedFuncSmall = RotomPhone_SmallStartMenu_SelectedFunc_PokeNav,
         .iconTemplateSmall = &gSpriteIconPoketch,
+        .selectedFuncLarge = RotomPhone_LargeStartMenu_SelectedFunc_PokeNav,
     },
     [ROTOM_PHONE_MENU_TRAINER_CARD] =
     {
@@ -829,6 +832,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .unlockedFuncSmall = RotomPhone_SmallStartMenu_UnlockedFunc_Unlocked,
         .selectedFuncSmall = RotomPhone_SmallStartMenu_SelectedFunc_Settings,
         .iconTemplateSmall = &gSpriteIconOptions,
+        .selectedFuncLarge = RotomPhone_LargeStartMenu_SelectedFunc_Settings,
     },
     [ROTOM_PHONE_MENU_FLAG] =
     {
@@ -2681,12 +2685,18 @@ static void Task_RotomPhone_LargeStartMenu_WaitFadeForSelection(u8 taskId)
         DestroyTask(taskId);
         sRotomPhoneOptions[menuSelectedLarge].selectedFuncLarge();
     }
+    else if (!gPaletteFade.active && !sRotomPhoneOptions[menuSelectedLarge].selectedFuncLarge)
+    {
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_MainInput;
+    }
 }
 
 static void RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(MainCallback callback)
 {
     if (!gPaletteFade.active)
     {
+        gMain.savedCallback = CB2_ReturnToFieldWithOpenMenu;
         RotomPhone_LargeStartMenu_FreeResources();
         SetMainCallback2(callback);
     }
@@ -2914,3 +2924,42 @@ static void RotomPhone_LargeStartMenu_SelectedFunc_Pokedex(void)
     RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_OpenPokedex);
 }
 
+static void RotomPhone_LargeStartMenu_SelectedFunc_Pokemon(void)
+{
+    RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_PartyMenuFromStartMenu);
+}
+
+static void RotomPhone_LargeStartMenu_SelectedFunc_Bag(void)
+{
+    RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_BagMenuFromStartMenu);
+}
+
+static void RotomPhone_LargeStartMenu_SelectedFunc_PokeNav(void)
+{
+    RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_InitPokeNav);
+}
+
+static void RotomPhone_LargeStartMenu_SelectedFunc_Trainer(void)
+{
+    
+}
+
+static void RotomPhone_LargeStartMenu_SelectedFunc_Save(void)
+{
+    
+}
+
+static void RotomPhone_LargeStartMenu_SelectedFunc_Settings(void)
+{
+    RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_InitOptionMenu);
+}
+
+static void RotomPhone_LargeStartMenu_SelectedFunc_SafariFlag(void)
+{
+    
+}
+
+static void RotomPhone_LargeStartMenu_SelectedFunc_FullScreen(void)
+{
+    
+}
