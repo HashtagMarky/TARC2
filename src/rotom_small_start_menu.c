@@ -61,6 +61,7 @@
 #include "sample_ui.h"
 #include "debug.h"
 #include "vyraton.h"
+#include "constants/weather.h"
 
 /* CONFIGS */
 #define ROTOM_PHONE_UPDATE_CLOCK_DISPLAY    TRUE
@@ -123,6 +124,7 @@ static void RotomPhone_SmallStartMenu_PrintHaveFun(u8 taskId);
 static void RotomPhone_SmallStartMenu_Personality(u8 taskId);
 static void RotomPhone_SmallStartMenu_PrintAdventure(u8 taskId);
 static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId);
+static const u8 *GetWeatherAction(u32 weatherId);
 
 /* ENUMs */
 enum RotomPhoneMenuItems
@@ -828,6 +830,26 @@ static const u8 *const gDayNameStringsTable[] =
     COMPOUND_STRING("Thursday"),
 };
 
+static const u8 sWeatherActions[WEATHER_COUNT][24] =
+{
+    [WEATHER_NONE]               = _("sunny"),
+    [WEATHER_SUNNY_CLOUDS]       = _("cloudy"),
+    [WEATHER_SUNNY]              = _("sunny"),
+    [WEATHER_RAIN]               = _("raining"),
+    [WEATHER_SNOW]               = _("snowing"),
+    [WEATHER_RAIN_THUNDERSTORM]  = _("thunderstorming"),
+    [WEATHER_FOG_HORIZONTAL]     = _("foggy"),
+    [WEATHER_VOLCANIC_ASH]       = _("ashens"),
+    [WEATHER_SANDSTORM]          = _("sandstorming"),
+    [WEATHER_FOG_DIAGONAL]       = _("foggy"),
+    [WEATHER_UNDERWATER]         = _("dark"),
+    [WEATHER_SHADE]              = _("shady"),
+    [WEATHER_DROUGHT]            = _("very hot"),
+    [WEATHER_DOWNPOUR]           = _("raining heavily"),
+    [WEATHER_FOG]                = _("foggy"),
+    [WEATHER_UNDERWATER_BUBBLES] = _("dark"),
+};
+
 static void RotomPhone_SetFirstSelectedMenu(void)
 {
     for (enum RotomPhoneMenuItems menuOption = ROTOM_PHONE_MENU_FIRST_OPTION; menuOption < ROTOM_PHONE_MENU_COUNT; menuOption++)
@@ -1242,13 +1264,13 @@ static void RotomPhone_SmallStartMenu_PrintDateWeather(u8 taskId)
     else if (messageRotom == ROTOM_PHONE_MESSAGE_DATE_WEATHER_CURRENT_WEATHER)
     {
         StringCopy(textBuffer, COMPOUND_STRING("Looking like it is "));
-        StringAppend(textBuffer, GetWeatherName(GetCurrentWeather()));
+        StringAppend(textBuffer, GetWeatherAction(GetCurrentWeather()));
         StringAppend(textBuffer, COMPOUND_STRING(" right now."));
     }
     else if (messageRotom == ROTOM_PHONE_MESSAGE_DATE_WEATHER_NEXT_WEATHER && gTimeOfDay >= TIME_NIGHT)
     {
         StringCopy(textBuffer, COMPOUND_STRING("It feels like it will be "));
-        StringAppend(textBuffer, GetWeatherName(Ikigai_GetCurrentVyratonWeather(gTimeOfDay + 1)));
+        StringAppend(textBuffer, GetWeatherAction(Ikigai_GetCurrentVyratonWeather(gTimeOfDay + 1)));
         StringAppend(textBuffer, COMPOUND_STRING(" later."));
     }
     else
@@ -1388,6 +1410,14 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId)
         CopyWindowToVram(sRotomPhone_StartMenu->windowIdFlipPhone, COPYWIN_GFX);
         tRotomMessageSoundEffect = SE_BALL_TRAY_EXIT;
     }
+}
+
+static const u8 *GetWeatherAction(u32 weatherId)
+{
+    if ((weatherId == WEATHER_NONE || weatherId == WEATHER_SUNNY) && gTimeOfDay == TIME_NIGHT)
+        weatherId = WEATHER_UNDERWATER;
+
+    return sWeatherActions[weatherId];
 }
 
 static void RotomPhone_SmallStartMenu_ExitAndClearTilemap(void)
