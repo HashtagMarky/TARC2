@@ -50,7 +50,7 @@
 //     REGION_NONE = 0xFF
 // };
 
-struct RotomPhoneLargeState
+struct RotomPhone_LargeStartMenuState
 {
     MainCallback savedCallback;
     u8 loadState;
@@ -79,7 +79,7 @@ enum WindowIds
     WIN_MON_INFO
 };
 
-static EWRAM_DATA struct RotomPhoneLargeState *sRotomPhone_StartMenu = NULL;
+static EWRAM_DATA struct RotomPhone_LargeStartMenuState *sRotomPhone_StartMenu = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 // We'll have an additional tilemap buffer for the sliding panel, which will live on BG2
 static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
@@ -194,7 +194,7 @@ static const u8 *const sModeNames[3] = {
     [MODE_OTHER]  = sModeNameOther
 };
 
-static const struct BgTemplate sRotomPhoneLargeBgTemplates[] =
+static const struct BgTemplate sRotomPhone_LargeStartMenuBgTemplates[] =
 {
     {
         .bg = 0,
@@ -221,7 +221,7 @@ static const struct BgTemplate sRotomPhoneLargeBgTemplates[] =
     }
 };
 
-static const struct WindowTemplate sRotomPhoneLargeWindowTemplates[] =
+static const struct WindowTemplate sRotomPhone_LargeStartMenuWindowTemplates[] =
 {
     [WIN_UI_HINTS] =
     {
@@ -246,22 +246,22 @@ static const struct WindowTemplate sRotomPhoneLargeWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u32 sRotomPhoneLargeTiles[] = INCBIN_U32("graphics/sample_ui/tiles.4bpp.lz");
+static const u32 sRotomPhone_LargeStartMenuTiles[] = INCBIN_U32("graphics/sample_ui/tiles.4bpp.lz");
 
 // New graphics for the buttons. Create these from 4bpp indexed PNGs, just like before.
-static const u32 sRotomPhoneLargeKantoButton[] = INCBIN_U32("graphics/sample_ui/kanto.4bpp");
-static const u32 sRotomPhoneLargeJohtoButton[] = INCBIN_U32("graphics/sample_ui/johto.4bpp");
-static const u32 sRotomPhoneLargeHoennButton[] = INCBIN_U32("graphics/sample_ui/hoenn.4bpp");
-static const u32 sRotomPhoneLargeSinnohButton[] = INCBIN_U32("graphics/sample_ui/sinnoh.4bpp");
-static const u32 sRotomPhoneLargeUnovaButton[] = INCBIN_U32("graphics/sample_ui/unova.4bpp");
-static const u32 sRotomPhoneLargeKalosButton[] = INCBIN_U32("graphics/sample_ui/kalos.4bpp");
+static const u32 sRotomPhone_LargeStartMenuKantoButton[] = INCBIN_U32("graphics/sample_ui/kanto.4bpp");
+static const u32 sRotomPhone_LargeStartMenuJohtoButton[] = INCBIN_U32("graphics/sample_ui/johto.4bpp");
+static const u32 sRotomPhone_LargeStartMenuHoennButton[] = INCBIN_U32("graphics/sample_ui/hoenn.4bpp");
+static const u32 sRotomPhone_LargeStartMenuSinnohButton[] = INCBIN_U32("graphics/sample_ui/sinnoh.4bpp");
+static const u32 sRotomPhone_LargeStartMenuUnovaButton[] = INCBIN_U32("graphics/sample_ui/unova.4bpp");
+static const u32 sRotomPhone_LargeStartMenuKalosButton[] = INCBIN_U32("graphics/sample_ui/kalos.4bpp");
 
-static const u32 sRotomPhoneLargeTilemap[] = INCBIN_U32("graphics/sample_ui/tilemap.bin.lz");
-static const u32 sRotomPhoneLargePanelTilemap[] = INCBIN_U32("graphics/sample_ui/panel_tilemap.bin.lz");
+static const u32 sRotomPhone_LargeStartMenuTilemap[] = INCBIN_U32("graphics/sample_ui/tilemap.bin.lz");
+static const u32 sRotomPhone_LargeStartMenuPanelTilemap[] = INCBIN_U32("graphics/sample_ui/panel_tilemap.bin.lz");
 
-static const u16 sRotomPhoneLargePalette[] = INCBIN_U16("graphics/sample_ui/00.gbapal");
-static const u16 sRotomPhoneLarge_KantoJohtoHoennPalette[] = INCBIN_U16("graphics/sample_ui/kanto_johto_hoenn.gbapal");
-static const u16 sRotomPhoneLarge_SinnohUnovaKalosPalette[] = INCBIN_U16("graphics/sample_ui/sinnoh_unova_kalos.gbapal");
+static const u16 sRotomPhone_LargeStartMenuPalette[] = INCBIN_U16("graphics/sample_ui/00.gbapal");
+static const u16 sRotomPhone_LargeStartMenu_KantoJohtoHoennPalette[] = INCBIN_U16("graphics/sample_ui/kanto_johto_hoenn.gbapal");
+static const u16 sRotomPhone_LargeStartMenu_SinnohUnovaKalosPalette[] = INCBIN_U16("graphics/sample_ui/sinnoh_unova_kalos.gbapal");
 
 /*
  * Define some palette tags for our buttons. We have two different button palettes, each being used for 3 of the region
@@ -281,12 +281,12 @@ static const u16 sRotomPhoneLarge_SinnohUnovaKalosPalette[] = INCBIN_U16("graphi
 #define PALETTE_TAG_SINNOH_UNOVA_KALOS 0x1001
 static const struct SpritePalette sKantoJohtoHoennButtonsSpritePalette =
 {
-    .data = sRotomPhoneLarge_KantoJohtoHoennPalette,
+    .data = sRotomPhone_LargeStartMenu_KantoJohtoHoennPalette,
     .tag = PALETTE_TAG_KANTO_JOHTO_HOENN
 };
 static  const struct SpritePalette sSinnohUnovaKalosButtonsSpritePalette =
 {
-    .data = sRotomPhoneLarge_SinnohUnovaKalosPalette,
+    .data = sRotomPhone_LargeStartMenu_SinnohUnovaKalosPalette,
     .tag = PALETTE_TAG_SINNOH_UNOVA_KALOS
 };
 
@@ -348,9 +348,9 @@ static const struct SpriteFrameImage sKantoButtonPicTable[] =
 {
     /*
      * `obj_frame_tiles' is a macro that auto-magically creates a SpriteFrameImage structure with the data set to our
-     * graphics data defined in the `sRotomPhoneLargeKantoButton' array and the size properly set to the size of this array.
+     * graphics data defined in the `sRotomPhone_LargeStartMenuKantoButton' array and the size properly set to the size of this array.
      */
-    obj_frame_tiles(sRotomPhoneLargeKantoButton)
+    obj_frame_tiles(sRotomPhone_LargeStartMenuKantoButton)
 };
 
 /*
@@ -444,7 +444,7 @@ static const struct SpriteTemplate sKantoButtonSpriteTemplate =
 
 static const struct SpriteFrameImage sJohtoButtonPicTable[] =
 {
-    obj_frame_tiles(sRotomPhoneLargeJohtoButton)
+    obj_frame_tiles(sRotomPhone_LargeStartMenuJohtoButton)
 };
 static const struct OamData sJohtoButtonOam =
 {
@@ -475,7 +475,7 @@ static const struct SpriteTemplate sJohtoButtonSpriteTemplate =
 
 static const struct SpriteFrameImage sHoennButtonPicTable[] =
 {
-    obj_frame_tiles(sRotomPhoneLargeHoennButton)
+    obj_frame_tiles(sRotomPhone_LargeStartMenuHoennButton)
 };
 static const struct OamData sHoennButtonOam =
 {
@@ -506,7 +506,7 @@ static const struct SpriteTemplate sHoennButtonSpriteTemplate =
 
 static const struct SpriteFrameImage sSinnohButtonPicTable[] =
 {
-    obj_frame_tiles(sRotomPhoneLargeSinnohButton)
+    obj_frame_tiles(sRotomPhone_LargeStartMenuSinnohButton)
 };
 static const struct OamData sSinnohButtonOam =
 {
@@ -537,7 +537,7 @@ static const struct SpriteTemplate sSinnohButtonSpriteTemplate =
 
 static const struct SpriteFrameImage sUnovaButtonPicTable[] =
 {
-    obj_frame_tiles(sRotomPhoneLargeUnovaButton)
+    obj_frame_tiles(sRotomPhone_LargeStartMenuUnovaButton)
 };
 static const struct OamData sUnovaButtonOam =
 {
@@ -568,7 +568,7 @@ static const struct SpriteTemplate sUnovaButtonSpriteTemplate =
 
 static const struct SpriteFrameImage sKalosButtonPicTable[] =
 {
-    obj_frame_tiles(sRotomPhoneLargeKalosButton)
+    obj_frame_tiles(sRotomPhone_LargeStartMenuKalosButton)
 };
 static const struct OamData sKalosButtonOam =
 {
@@ -604,7 +604,7 @@ enum FontColor
     FONT_RED,
     FONT_BLUE,
 };
-static const u8 sRotomPhoneLargeWindowFontColors[][3] =
+static const u8 sRotomPhone_LargeStartMenuWindowFontColors[][3] =
 {
     [FONT_BLACK]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY},
     [FONT_WHITE]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY},
@@ -613,30 +613,30 @@ static const u8 sRotomPhoneLargeWindowFontColors[][3] =
 };
 
 // Callbacks for the sample UI
-static void RotomPhoneLarge_SetupCB(void);
-static void RotomPhoneLarge_MainCB(void);
-static void RotomPhoneLarge_VBlankCB(void);
+static void RotomPhone_LargeStartMenu_SetupCB(void);
+static void RotomPhone_LargeStartMenu_MainCB(void);
+static void RotomPhone_LargeStartMenu_VBlankCB(void);
 
 // Sample UI tasks
-static void Task_RotomPhoneLarge_WaitFadeIn(u8 taskId);
-static void Task_RotomPhoneLarge_MainInput(u8 taskId);
-static void Task_RotomPhoneLarge_PanelInput(u8 taskId);
-static void Task_RotomPhoneLarge_PanelSlide(u8 taskId);
-static void Task_RotomPhoneLarge_WaitFadeAndBail(u8 taskId);
-static void Task_RotomPhoneLarge_WaitFadeAndExitGracefully(u8 taskId);
+static void Task_RotomPhone_LargeStartMenu_WaitFadeIn(u8 taskId);
+static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId);
+static void Task_RotomPhone_LargeStartMenu_PanelInput(u8 taskId);
+static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId);
+static void Task_RotomPhone_LargeStartMenu_WaitFadeAndBail(u8 taskId);
+static void Task_RotomPhone_LargeStartMenu_WaitFadeAndExitGracefully(u8 taskId);
 
 // Sample UI helper functions
-static void RotomPhoneLarge_Init(MainCallback callback);
-static void RotomPhoneLarge_ResetGpuRegsAndBgs(void);
-static bool8 RotomPhoneLarge_InitBgs(void);
-static void RotomPhoneLarge_FadeAndBail(void);
-static bool8 RotomPhoneLarge_LoadGraphics(void);
-static void RotomPhoneLarge_InitWindows(void);
-static void RotomPhoneLarge_PrintUiButtonHints(void);
-static void RotomPhoneLarge_CreateRegionButtons(void);
-static void RotomPhoneLarge_StartRegionButtonAnim(enum Region region);
-static void RotomPhoneLarge_StopRegionButtonAnim(enum Region region);
-static void RotomPhoneLarge_FreeResources(void);
+static void RotomPhone_LargeStartMenu_Init(MainCallback callback);
+static void RotomPhone_LargeStartMenu_ResetGpuRegsAndBgs(void);
+static bool8 RotomPhone_LargeStartMenu_InitBgs(void);
+static void RotomPhone_LargeStartMenu_FadeAndBail(void);
+static bool8 RotomPhone_LargeStartMenu_LoadGraphics(void);
+static void RotomPhone_LargeStartMenu_InitWindows(void);
+static void RotomPhone_LargeStartMenu_PrintUiButtonHints(void);
+static void RotomPhone_LargeStartMenu_CreateRegionButtons(void);
+static void RotomPhone_LargeStartMenu_StartRegionButtonAnim(enum Region region);
+static void RotomPhone_LargeStartMenu_StopRegionButtonAnim(enum Region region);
+static void RotomPhone_LargeStartMenu_FreeResources(void);
 
 
 void Task_OpenRotomPhone_LargeStartMenu(u8 taskId)
@@ -644,14 +644,14 @@ void Task_OpenRotomPhone_LargeStartMenu(u8 taskId)
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        RotomPhoneLarge_Init(CB2_ReturnToFieldWithOpenMenu);
+        RotomPhone_LargeStartMenu_Init(CB2_ReturnToFieldWithOpenMenu);
         DestroyTask(taskId);
     }
 }
 
-static void RotomPhoneLarge_Init(MainCallback callback)
+static void RotomPhone_LargeStartMenu_Init(MainCallback callback)
 {
-    sRotomPhone_StartMenu = AllocZeroed(sizeof(struct RotomPhoneLargeState));
+    sRotomPhone_StartMenu = AllocZeroed(sizeof(struct RotomPhone_LargeStartMenuState));
     if (sRotomPhone_StartMenu == NULL)
     {
         SetMainCallback2(callback);
@@ -661,21 +661,21 @@ static void RotomPhoneLarge_Init(MainCallback callback)
     sRotomPhone_StartMenu->loadState = 0;
     sRotomPhone_StartMenu->savedCallback = callback;
 
-    SetMainCallback2(RotomPhoneLarge_SetupCB);
+    SetMainCallback2(RotomPhone_LargeStartMenu_SetupCB);
 }
 
 // Credit: Jaizu, pret
-static void RotomPhoneLarge_ResetGpuRegsAndBgs(void)
+static void RotomPhone_LargeStartMenu_ResetGpuRegsAndBgs(void)
 {
     SampleUI_ResetGpuRegsAndBgs();
 }
 
-static void RotomPhoneLarge_SetupCB(void)
+static void RotomPhone_LargeStartMenu_SetupCB(void)
 {
     switch (gMain.state)
     {
     case 0:
-        RotomPhoneLarge_ResetGpuRegsAndBgs();
+        RotomPhone_LargeStartMenu_ResetGpuRegsAndBgs();
         SetVBlankHBlankCallbacksToNull();
         ClearScheduledBgCopiesToVram();
         gMain.state++;
@@ -689,42 +689,42 @@ static void RotomPhoneLarge_SetupCB(void)
         gMain.state++;
         break;
     case 2:
-        if (RotomPhoneLarge_InitBgs())
+        if (RotomPhone_LargeStartMenu_InitBgs())
         {
             sRotomPhone_StartMenu->loadState = 0;
             gMain.state++;
         }
         else
         {
-            RotomPhoneLarge_FadeAndBail();
+            RotomPhone_LargeStartMenu_FadeAndBail();
             return;
         }
         break;
     case 3:
-        if (RotomPhoneLarge_LoadGraphics() == TRUE)
+        if (RotomPhone_LargeStartMenu_LoadGraphics() == TRUE)
         {
             gMain.state++;
         }
         break;
     case 4:
-        RotomPhoneLarge_InitWindows();
+        RotomPhone_LargeStartMenu_InitWindows();
         gMain.state++;
         break;
     case 5:
         sRotomPhone_StartMenu->region = REGION_KANTO;
         sRotomPhone_StartMenu->selectedRegion = REGION_KANTO;
 
-        RotomPhoneLarge_PrintUiButtonHints();
+        RotomPhone_LargeStartMenu_PrintUiButtonHints();
 
         sRotomPhone_StartMenu->panelY = 0;
         sRotomPhone_StartMenu->panelIsOpen = FALSE;
 
         // Create sprites for the region buttons off screen
-        RotomPhoneLarge_CreateRegionButtons();
+        RotomPhone_LargeStartMenu_CreateRegionButtons();
         // Start button select animation for the current region, i.e. Kanto
-        RotomPhoneLarge_StartRegionButtonAnim(sRotomPhone_StartMenu->selectedRegion);
+        RotomPhone_LargeStartMenu_StartRegionButtonAnim(sRotomPhone_StartMenu->selectedRegion);
 
-        CreateTask(Task_RotomPhoneLarge_WaitFadeIn, 0);
+        CreateTask(Task_RotomPhone_LargeStartMenu_WaitFadeIn, 0);
         gMain.state++;
         break;
     case 6:
@@ -732,13 +732,13 @@ static void RotomPhoneLarge_SetupCB(void)
         gMain.state++;
         break;
     case 7:
-        SetVBlankCallback(RotomPhoneLarge_VBlankCB);
-        SetMainCallback2(RotomPhoneLarge_MainCB);
+        SetVBlankCallback(RotomPhone_LargeStartMenu_VBlankCB);
+        SetMainCallback2(RotomPhone_LargeStartMenu_MainCB);
         break;
     }
 }
 
-static void RotomPhoneLarge_MainCB(void)
+static void RotomPhone_LargeStartMenu_MainCB(void)
 {
     RunTasks();
     AnimateSprites();
@@ -747,28 +747,28 @@ static void RotomPhoneLarge_MainCB(void)
     UpdatePaletteFade();
 }
 
-static void RotomPhoneLarge_VBlankCB(void)
+static void RotomPhone_LargeStartMenu_VBlankCB(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-static void Task_RotomPhoneLarge_WaitFadeIn(u8 taskId)
+static void Task_RotomPhone_LargeStartMenu_WaitFadeIn(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        gTasks[taskId].func = Task_RotomPhoneLarge_MainInput;
+        gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_MainInput;
     }
 }
 
-static void Task_RotomPhoneLarge_MainInput(u8 taskId)
+static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_PC_OFF);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_RotomPhoneLarge_WaitFadeAndExitGracefully;
+        gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_WaitFadeAndExitGracefully;
     }
     if (JOY_NEW(A_BUTTON))
     {
@@ -781,21 +781,21 @@ static void Task_RotomPhoneLarge_MainInput(u8 taskId)
         {
             sRotomPhone_StartMenu->mode++;
         }
-        RotomPhoneLarge_PrintUiButtonHints();
+        RotomPhone_LargeStartMenu_PrintUiButtonHints();
     }
     if (JOY_NEW(START_BUTTON))
     {
-        gTasks[taskId].func = Task_RotomPhoneLarge_PanelSlide;
+        gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_PanelSlide;
         PlaySE(SE_SELECT);
     }
 }
 
-static void Task_RotomPhoneLarge_PanelInput(u8 taskId)
+static void Task_RotomPhone_LargeStartMenu_PanelInput(u8 taskId)
 {
     // Exit panel when Start or B is pressed
     if (JOY_NEW(START_BUTTON | B_BUTTON))
     {
-        gTasks[taskId].func = Task_RotomPhoneLarge_PanelSlide;
+        gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_PanelSlide;
         PlaySE(SE_SELECT);
     }
     else if (JOY_NEW(A_BUTTON))
@@ -803,17 +803,17 @@ static void Task_RotomPhoneLarge_PanelInput(u8 taskId)
         sRotomPhone_StartMenu->region = sRotomPhone_StartMenu->selectedRegion;
         // Sneakily swap out color 2 in BG1's palette for the new region-specific color
         LoadPalette(&sRegionBgColors[sRotomPhone_StartMenu->region], BG_PLTT_ID(0) + 2, 2);
-        RotomPhoneLarge_PrintUiButtonHints();
+        RotomPhone_LargeStartMenu_PrintUiButtonHints();
         PlaySE(SE_SELECT);
-        gTasks[taskId].func = Task_RotomPhoneLarge_PanelSlide;
+        gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_PanelSlide;
     }
     else if (JOY_NEW(DPAD_UP))
     {
         if (sRegionSelections[sRotomPhone_StartMenu->selectedRegion].upRegion != REGION_NONE)
         {
-            RotomPhoneLarge_StopRegionButtonAnim(sRotomPhone_StartMenu->selectedRegion);
+            RotomPhone_LargeStartMenu_StopRegionButtonAnim(sRotomPhone_StartMenu->selectedRegion);
             sRotomPhone_StartMenu->selectedRegion = sRegionSelections[sRotomPhone_StartMenu->selectedRegion].upRegion;
-            RotomPhoneLarge_StartRegionButtonAnim(sRotomPhone_StartMenu->selectedRegion);
+            RotomPhone_LargeStartMenu_StartRegionButtonAnim(sRotomPhone_StartMenu->selectedRegion);
             PlaySE(SE_SELECT);
         }
     }
@@ -821,9 +821,9 @@ static void Task_RotomPhoneLarge_PanelInput(u8 taskId)
     {
         if (sRegionSelections[sRotomPhone_StartMenu->selectedRegion].downRegion != REGION_NONE)
         {
-            RotomPhoneLarge_StopRegionButtonAnim(sRotomPhone_StartMenu->selectedRegion);
+            RotomPhone_LargeStartMenu_StopRegionButtonAnim(sRotomPhone_StartMenu->selectedRegion);
             sRotomPhone_StartMenu->selectedRegion = sRegionSelections[sRotomPhone_StartMenu->selectedRegion].downRegion;
-            RotomPhoneLarge_StartRegionButtonAnim(sRotomPhone_StartMenu->selectedRegion);
+            RotomPhone_LargeStartMenu_StartRegionButtonAnim(sRotomPhone_StartMenu->selectedRegion);
             PlaySE(SE_SELECT);
         }
     }
@@ -831,9 +831,9 @@ static void Task_RotomPhoneLarge_PanelInput(u8 taskId)
     {
         if (sRegionSelections[sRotomPhone_StartMenu->selectedRegion].leftRegion != REGION_NONE)
         {
-            RotomPhoneLarge_StopRegionButtonAnim(sRotomPhone_StartMenu->selectedRegion);
+            RotomPhone_LargeStartMenu_StopRegionButtonAnim(sRotomPhone_StartMenu->selectedRegion);
             sRotomPhone_StartMenu->selectedRegion = sRegionSelections[sRotomPhone_StartMenu->selectedRegion].leftRegion;
-            RotomPhoneLarge_StartRegionButtonAnim(sRotomPhone_StartMenu->selectedRegion);
+            RotomPhone_LargeStartMenu_StartRegionButtonAnim(sRotomPhone_StartMenu->selectedRegion);
             PlaySE(SE_SELECT);
         }
     }
@@ -841,15 +841,15 @@ static void Task_RotomPhoneLarge_PanelInput(u8 taskId)
     {
         if (sRegionSelections[sRotomPhone_StartMenu->selectedRegion].rightRegion != REGION_NONE)
         {
-            RotomPhoneLarge_StopRegionButtonAnim(sRotomPhone_StartMenu->selectedRegion);
+            RotomPhone_LargeStartMenu_StopRegionButtonAnim(sRotomPhone_StartMenu->selectedRegion);
             sRotomPhone_StartMenu->selectedRegion = sRegionSelections[sRotomPhone_StartMenu->selectedRegion].rightRegion;
-            RotomPhoneLarge_StartRegionButtonAnim(sRotomPhone_StartMenu->selectedRegion);
+            RotomPhone_LargeStartMenu_StartRegionButtonAnim(sRotomPhone_StartMenu->selectedRegion);
             PlaySE(SE_SELECT);
         }
     }
 }
 
-static void Task_RotomPhoneLarge_PanelSlide(u8 taskId)
+static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId)
 {
     #define PANEL_MAX_Y 95
     /*
@@ -876,7 +876,7 @@ static void Task_RotomPhoneLarge_PanelSlide(u8 taskId)
         {
             // Panel is done closing, so set state to closed and change task to read main input
             sRotomPhone_StartMenu->panelIsOpen = FALSE;
-            gTasks[taskId].func = Task_RotomPhoneLarge_MainInput;
+            gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_MainInput;
         }
     }
     // Panel is closed, so slide it up into view
@@ -896,33 +896,33 @@ static void Task_RotomPhoneLarge_PanelSlide(u8 taskId)
         {
             // Panel is done opening, so set state to open and change task to read panel input
             sRotomPhone_StartMenu->panelIsOpen = TRUE;
-            gTasks[taskId].func = Task_RotomPhoneLarge_PanelInput;
+            gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_PanelInput;
         }
     }
     #undef PANEL_MAX_Y
 }
 
-static void Task_RotomPhoneLarge_WaitFadeAndBail(u8 taskId)
+static void Task_RotomPhone_LargeStartMenu_WaitFadeAndBail(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         SetMainCallback2(sRotomPhone_StartMenu->savedCallback);
-        RotomPhoneLarge_FreeResources();
+        RotomPhone_LargeStartMenu_FreeResources();
         DestroyTask(taskId);
     }
 }
 
-static void Task_RotomPhoneLarge_WaitFadeAndExitGracefully(u8 taskId)
+static void Task_RotomPhone_LargeStartMenu_WaitFadeAndExitGracefully(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         SetMainCallback2(sRotomPhone_StartMenu->savedCallback);
-        RotomPhoneLarge_FreeResources();
+        RotomPhone_LargeStartMenu_FreeResources();
         DestroyTask(taskId);
     }
 }
 #define TILEMAP_BUFFER_SIZE (1024 * 2)
-static bool8 RotomPhoneLarge_InitBgs(void)
+static bool8 RotomPhone_LargeStartMenu_InitBgs(void)
 {
     ResetAllBgsCoordinates();
 
@@ -938,7 +938,7 @@ static bool8 RotomPhoneLarge_InitBgs(void)
     }
 
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, sRotomPhoneLargeBgTemplates, NELEMS(sRotomPhoneLargeBgTemplates));
+    InitBgsFromTemplates(0, sRotomPhone_LargeStartMenuBgTemplates, NELEMS(sRotomPhone_LargeStartMenuBgTemplates));
 
     SetBgTilemapBuffer(1, sBg1TilemapBuffer);
     SetBgTilemapBuffer(2, sBg2TilemapBuffer);
@@ -953,33 +953,33 @@ static bool8 RotomPhoneLarge_InitBgs(void)
 }
 #undef TILEMAP_BUFFER_SIZE
 
-static void RotomPhoneLarge_FadeAndBail(void)
+static void RotomPhone_LargeStartMenu_FadeAndBail(void)
 {
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-    CreateTask(Task_RotomPhoneLarge_WaitFadeAndBail, 0);
-    SetVBlankCallback(RotomPhoneLarge_VBlankCB);
-    SetMainCallback2(RotomPhoneLarge_MainCB);
+    CreateTask(Task_RotomPhone_LargeStartMenu_WaitFadeAndBail, 0);
+    SetVBlankCallback(RotomPhone_LargeStartMenu_VBlankCB);
+    SetMainCallback2(RotomPhone_LargeStartMenu_MainCB);
 }
 
-static bool8 RotomPhoneLarge_LoadGraphics(void)
+static bool8 RotomPhone_LargeStartMenu_LoadGraphics(void)
 {
     switch (sRotomPhone_StartMenu->loadState)
     {
     case 0:
         ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(1, sRotomPhoneLargeTiles, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, sRotomPhone_LargeStartMenuTiles, 0, 0, 0);
         sRotomPhone_StartMenu->loadState++;
         break;
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(sRotomPhoneLargeTilemap, sBg1TilemapBuffer);
-            LZDecompressWram(sRotomPhoneLargePanelTilemap, sBg2TilemapBuffer);
+            LZDecompressWram(sRotomPhone_LargeStartMenuTilemap, sBg1TilemapBuffer);
+            LZDecompressWram(sRotomPhone_LargeStartMenuPanelTilemap, sBg2TilemapBuffer);
             sRotomPhone_StartMenu->loadState++;
         }
         break;
     case 2:
-        LoadPalette(sRotomPhoneLargePalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+        LoadPalette(sRotomPhone_LargeStartMenuPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
         /*
          * We are going to dynamically change the BG color depending on the region. We set up our tiles so that the UI
          * BG color is stored in Palette 0, slot 2. So we hot swap that to our saved color for Kanto, since the UI
@@ -995,9 +995,9 @@ static bool8 RotomPhoneLarge_LoadGraphics(void)
     return FALSE;
 }
 
-static void RotomPhoneLarge_InitWindows(void)
+static void RotomPhone_LargeStartMenu_InitWindows(void)
 {
-    InitWindows(sRotomPhoneLargeWindowTemplates);
+    InitWindows(sRotomPhone_LargeStartMenuWindowTemplates);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
     FillWindowPixelBuffer(WIN_UI_HINTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
@@ -1008,32 +1008,32 @@ static void RotomPhoneLarge_InitWindows(void)
     CopyWindowToVram(WIN_MON_INFO, 3);
 }
 
-static const u8 sText_RotomPhoneLargeButtonHint1[] = _("{DPAD_UPDOWN}Change POKéMON");
-static const u8 sText_RotomPhoneLargeButtonHint2[] = _("{A_BUTTON}Mode: {STR_VAR_1}");
-static const u8 sText_RotomPhoneLargeButtonHint3[] = _("{START_BUTTON}Region");
-static const u8 sText_RotomPhoneLargeButtonHint4[] = _("{B_BUTTON}Exit");
-static void RotomPhoneLarge_PrintUiButtonHints(void)
+static const u8 sText_RotomPhone_LargeStartMenuButtonHint1[] = _("{DPAD_UPDOWN}Change POKéMON");
+static const u8 sText_RotomPhone_LargeStartMenuButtonHint2[] = _("{A_BUTTON}Mode: {STR_VAR_1}");
+static const u8 sText_RotomPhone_LargeStartMenuButtonHint3[] = _("{START_BUTTON}Region");
+static const u8 sText_RotomPhone_LargeStartMenuButtonHint4[] = _("{B_BUTTON}Exit");
+static void RotomPhone_LargeStartMenu_PrintUiButtonHints(void)
 {
     FillWindowPixelBuffer(WIN_UI_HINTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     StringCopy(gStringVar1, sModeNames[sRotomPhone_StartMenu->mode]);
-    StringExpandPlaceholders(gStringVar2, sText_RotomPhoneLargeButtonHint2);
+    StringExpandPlaceholders(gStringVar2, sText_RotomPhone_LargeStartMenuButtonHint2);
 
     AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_NORMAL, 0, 3, 0, 0,
-        sRotomPhoneLargeWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sRegionNames[sRotomPhone_StartMenu->region]);
+        sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sRegionNames[sRotomPhone_StartMenu->region]);
     AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 47, 0, 0, 0,
-        sRotomPhoneLargeWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_RotomPhoneLargeButtonHint1);
+        sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_RotomPhone_LargeStartMenuButtonHint1);
     AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 47, 10, 0, 0,
-        sRotomPhoneLargeWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar2);
+        sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar2);
     AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 47, 20, 0, 0,
-        sRotomPhoneLargeWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_RotomPhoneLargeButtonHint3);
+        sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_RotomPhone_LargeStartMenuButtonHint3);
     AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 47, 30, 0, 0,
-        sRotomPhoneLargeWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_RotomPhoneLargeButtonHint4);
+        sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_RotomPhone_LargeStartMenuButtonHint4);
 
     CopyWindowToVram(WIN_UI_HINTS, COPYWIN_GFX);
 }
 
-static void RotomPhoneLarge_CreateRegionButtons(void)
+static void RotomPhone_LargeStartMenu_CreateRegionButtons(void)
 {
     #define BUTTON_START_X 50
     #define BUTTON_START_Y 184
@@ -1072,7 +1072,7 @@ static void RotomPhoneLarge_CreateRegionButtons(void)
     #undef BUTTON_START_Y
 }
 
-static void RotomPhoneLarge_StartRegionButtonAnim(enum Region region)
+static void RotomPhone_LargeStartMenu_StartRegionButtonAnim(enum Region region)
 {
     /*
      * To start the button animation, the first thing we want to do is use the double-size affine mode. We need this for
@@ -1106,7 +1106,7 @@ static void RotomPhoneLarge_StartRegionButtonAnim(enum Region region)
         SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_DOUBLE);
 }
 
-static void RotomPhoneLarge_StopRegionButtonAnim(enum Region region)
+static void RotomPhone_LargeStartMenu_StopRegionButtonAnim(enum Region region)
 {
     /*
      * This function works just like the above function, but does everything in reverse.
@@ -1121,7 +1121,7 @@ static void RotomPhoneLarge_StopRegionButtonAnim(enum Region region)
         SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_OFF);
 }
 
-static void RotomPhoneLarge_FreeResources(void)
+static void RotomPhone_LargeStartMenu_FreeResources(void)
 {
     if (sRotomPhone_StartMenu != NULL)
     {
