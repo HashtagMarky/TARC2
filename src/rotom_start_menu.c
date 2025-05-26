@@ -124,6 +124,43 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId);
 static const u8 *GetWeatherAction(u32 weatherId);
 
 
+static void RotomPhone_LargeStartMenu_SetupCB(void);
+static void RotomPhone_LargeStartMenu_MainCB(void);
+static void RotomPhone_LargeStartMenu_VBlankCB(void);
+
+
+static void Task_RotomPhone_LargeStartMenu_WaitFadeIn(u8 taskId);
+static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId);
+static void Task_RotomPhone_LargeStartMenu_PanelInput(u8 taskId);
+static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId);
+static void Task_RotomPhone_LargeStartMenu_WaitFadeAndBail(u8 taskId);
+static void Task_RotomPhone_LargeStartMenu_WaitFadeAndExitGracefully(u8 taskId);
+static void Task_RotomPhone_LargeStartMenu_WaitFadeForSelection(u8 taskId);
+
+
+static void RotomPhone_LargeStartMenu_ResetGpuRegsAndBgs(void);
+static bool8 RotomPhone_LargeStartMenu_InitBgs(void);
+static void RotomPhone_LargeStartMenu_FadeAndBail(void);
+static bool8 RotomPhone_LargeStartMenu_LoadGraphics(void);
+static void RotomPhone_LargeStartMenu_InitWindows(void);
+static void RotomPhone_LargeStartMenu_PrintUiButtonHints(void);
+static void RotomPhone_LargeStartMenu_CreateRegionButtons(void);
+static void RotomPhone_LargeStartMenu_StartRegionButtonAnim(enum Region region);
+static void RotomPhone_LargeStartMenu_StopRegionButtonAnim(enum Region region);
+static void RotomPhone_LargeStartMenu_FreeResources(void);
+
+static void RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(MainCallback callback);
+static void RotomPhone_LargeStartMenu_SelectedFunc_Pokedex(void);
+static void RotomPhone_LargeStartMenu_SelectedFunc_Pokemon(void);
+static void RotomPhone_LargeStartMenu_SelectedFunc_Bag(void);
+static void RotomPhone_LargeStartMenu_SelectedFunc_PokeNav(void);
+static void RotomPhone_LargeStartMenu_SelectedFunc_Trainer(void);
+static void RotomPhone_LargeStartMenu_SelectedFunc_Save(void);
+static void RotomPhone_LargeStartMenu_SelectedFunc_Settings(void);
+static void RotomPhone_LargeStartMenu_SelectedFunc_SafariFlag(void);
+static void RotomPhone_LargeStartMenu_SelectedFunc_FullScreen(void);
+
+
 enum RotomPhoneMenuItems
 {
     ROTOM_PHONE_MENU_FLAG,
@@ -231,6 +268,7 @@ struct RotomPhoneMenuOptions
     bool32 (*unlockedFuncSmall)(void);
     void (*selectedFuncSmall)(void);
     const struct SpriteTemplate *iconTemplateSmall;
+    void (*selectedFuncLarge)(void);
 };
 
 struct RotomPhone_StartMenu
@@ -247,7 +285,8 @@ struct RotomPhone_StartMenu
 };
 
 static EWRAM_DATA struct RotomPhone_StartMenu *sRotomPhone_SmallStartMenu = NULL;
-static EWRAM_DATA enum RotomPhoneMenuItems menuSelected; // Separate memory allocation so it persist between destroying of menu.
+static EWRAM_DATA enum RotomPhoneMenuItems menuSelectedSmall; // Separate memory allocation so it persist between destroying of menu.
+static EWRAM_DATA enum RotomPhoneMenuItems menuSelectedLarge; // Separate memory allocation so it persist between destroying of menu.
 EWRAM_DATA bool32 openedFullScreenRotomPhone;
 
 
@@ -598,13 +637,13 @@ static const struct SpriteTemplate gSpriteIconFullScreen = {
 
 static void SpriteCB_RotomPhoneSmall_IconPoketch(struct Sprite* sprite)
 {
-    if (menuSelected == ROTOM_PHONE_MENU_POKENAV && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
+    if (menuSelectedSmall == ROTOM_PHONE_MENU_POKENAV && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
     {
         sRotomPhone_SmallStartMenu->spriteFlag = TRUE;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
-    else if (menuSelected != ROTOM_PHONE_MENU_POKENAV)
+    else if (menuSelectedSmall != ROTOM_PHONE_MENU_POKENAV)
     {
         StartSpriteAnim(sprite, SPRITE_INACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
@@ -613,13 +652,13 @@ static void SpriteCB_RotomPhoneSmall_IconPoketch(struct Sprite* sprite)
 
 static void SpriteCB_RotomPhoneSmall_IconPokedex(struct Sprite* sprite)
 {
-    if (menuSelected == ROTOM_PHONE_MENU_POKEDEX && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
+    if (menuSelectedSmall == ROTOM_PHONE_MENU_POKEDEX && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
     {
         sRotomPhone_SmallStartMenu->spriteFlag = TRUE;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
-    else if (menuSelected != ROTOM_PHONE_MENU_POKEDEX)
+    else if (menuSelectedSmall != ROTOM_PHONE_MENU_POKEDEX)
     {
         StartSpriteAnim(sprite, SPRITE_INACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
@@ -628,13 +667,13 @@ static void SpriteCB_RotomPhoneSmall_IconPokedex(struct Sprite* sprite)
 
 static void SpriteCB_RotomPhoneSmall_IconParty(struct Sprite* sprite)
 {
-    if (menuSelected == ROTOM_PHONE_MENU_PARTY && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
+    if (menuSelectedSmall == ROTOM_PHONE_MENU_PARTY && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
     {
         sRotomPhone_SmallStartMenu->spriteFlag = TRUE;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
-    else if (menuSelected != ROTOM_PHONE_MENU_PARTY)
+    else if (menuSelectedSmall != ROTOM_PHONE_MENU_PARTY)
     {
         StartSpriteAnim(sprite, SPRITE_INACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
@@ -643,13 +682,13 @@ static void SpriteCB_RotomPhoneSmall_IconParty(struct Sprite* sprite)
 
 static void SpriteCB_RotomPhoneSmall_IconBag(struct Sprite* sprite)
 {
-    if (menuSelected == ROTOM_PHONE_MENU_BAG && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
+    if (menuSelectedSmall == ROTOM_PHONE_MENU_BAG && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
     {
         sRotomPhone_SmallStartMenu->spriteFlag = TRUE;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
-    else if (menuSelected != ROTOM_PHONE_MENU_BAG)
+    else if (menuSelectedSmall != ROTOM_PHONE_MENU_BAG)
     {
         StartSpriteAnim(sprite, SPRITE_INACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
@@ -658,13 +697,13 @@ static void SpriteCB_RotomPhoneSmall_IconBag(struct Sprite* sprite)
 
 static void SpriteCB_RotomPhoneSmall_IconTrainerCard(struct Sprite* sprite)
 {
-    if (menuSelected == ROTOM_PHONE_MENU_TRAINER_CARD && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
+    if (menuSelectedSmall == ROTOM_PHONE_MENU_TRAINER_CARD && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
     {
         sRotomPhone_SmallStartMenu->spriteFlag = TRUE;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
-    else if (menuSelected != ROTOM_PHONE_MENU_TRAINER_CARD)
+    else if (menuSelectedSmall != ROTOM_PHONE_MENU_TRAINER_CARD)
     {
         StartSpriteAnim(sprite, SPRITE_INACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
@@ -673,13 +712,13 @@ static void SpriteCB_RotomPhoneSmall_IconTrainerCard(struct Sprite* sprite)
 
 static void SpriteCB_RotomPhoneSmall_IconSave(struct Sprite* sprite)
 {
-    if (menuSelected == ROTOM_PHONE_MENU_SAVE && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
+    if (menuSelectedSmall == ROTOM_PHONE_MENU_SAVE && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
     {
         sRotomPhone_SmallStartMenu->spriteFlag = TRUE;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
-    else if (menuSelected != ROTOM_PHONE_MENU_SAVE)
+    else if (menuSelectedSmall != ROTOM_PHONE_MENU_SAVE)
     {
         StartSpriteAnim(sprite, SPRITE_INACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
@@ -688,13 +727,13 @@ static void SpriteCB_RotomPhoneSmall_IconSave(struct Sprite* sprite)
 
 static void SpriteCB_RotomPhoneSmall_IconOptions(struct Sprite* sprite)
 {
-    if (menuSelected == ROTOM_PHONE_MENU_OPTIONS && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
+    if (menuSelectedSmall == ROTOM_PHONE_MENU_OPTIONS && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
     {
         sRotomPhone_SmallStartMenu->spriteFlag = TRUE;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
-    else if (menuSelected != ROTOM_PHONE_MENU_OPTIONS)
+    else if (menuSelectedSmall != ROTOM_PHONE_MENU_OPTIONS)
     {
         StartSpriteAnim(sprite, SPRITE_INACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
@@ -703,13 +742,13 @@ static void SpriteCB_RotomPhoneSmall_IconOptions(struct Sprite* sprite)
 
 static void SpriteCB_RotomPhoneSmall_IconFlag(struct Sprite* sprite)
 {
-    if (menuSelected == ROTOM_PHONE_MENU_FLAG && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
+    if (menuSelectedSmall == ROTOM_PHONE_MENU_FLAG && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
     {
         sRotomPhone_SmallStartMenu->spriteFlag = TRUE;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
-    else if (menuSelected != ROTOM_PHONE_MENU_FLAG)
+    else if (menuSelectedSmall != ROTOM_PHONE_MENU_FLAG)
     {
         StartSpriteAnim(sprite, SPRITE_INACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
@@ -718,13 +757,13 @@ static void SpriteCB_RotomPhoneSmall_IconFlag(struct Sprite* sprite)
 
 static void SpriteCB_RotomPhoneSmall_IconFullScreen(struct Sprite* sprite)
 {
-    if (menuSelected == ROTOM_PHONE_MENU_FULL_SCREEN && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
+    if (menuSelectedSmall == ROTOM_PHONE_MENU_FULL_SCREEN && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
     {
         sRotomPhone_SmallStartMenu->spriteFlag = TRUE;
         StartSpriteAnim(sprite, SPRITE_ACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
     }
-    else if (menuSelected != ROTOM_PHONE_MENU_FULL_SCREEN)
+    else if (menuSelectedSmall != ROTOM_PHONE_MENU_FULL_SCREEN)
     {
         StartSpriteAnim(sprite, SPRITE_INACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
@@ -741,6 +780,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .unlockedFuncSmall = RotomPhone_SmallStartMenu_UnlockedFunc_Pokedex,
         .selectedFuncSmall = RotomPhone_SmallStartMenu_SelectedFunc_Pokedex,
         .iconTemplateSmall = &gSpriteIconPokedex,
+        .selectedFuncLarge = RotomPhone_LargeStartMenu_SelectedFunc_Pokedex,
     },
     [ROTOM_PHONE_MENU_PARTY] =
     {
@@ -857,7 +897,7 @@ static void RotomPhone_SetFirstSelectedMenu(void)
     {
         if (sRotomPhoneOptions[menuOption].unlockedFuncSmall && sRotomPhoneOptions[menuOption].unlockedFuncSmall())
         {
-            menuSelected = menuOption;
+            menuSelectedSmall = menuOption;
             return;
         }
     }
@@ -901,7 +941,7 @@ void RotomPhone_SmallStartMenu_Init(void)
     RotomPhone_SmallStartMenu_CreateSpeechWindows();
     RotomPhone_SmallStartMenu_CreateFlipPhoneWindow();
 
-    if (!sRotomPhoneOptions[menuSelected].unlockedFuncSmall || !sRotomPhoneOptions[menuSelected].unlockedFuncSmall())
+    if (!sRotomPhoneOptions[menuSelectedSmall].unlockedFuncSmall || !sRotomPhoneOptions[menuSelectedSmall].unlockedFuncSmall())
         RotomPhone_SetFirstSelectedMenu();
 
     u8 taskId = CreateTask(Task_RotomPhone_SmallStartMenu_HandleMainInput, 0);
@@ -1397,16 +1437,16 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId)
             StringCopy(textBuffer, COMPOUND_STRING("Would you like "));
         else
             StringCopy(textBuffer, COMPOUND_STRING("Do you want "));
-        StringAppend(textBuffer, sRotomPhoneOptions[menuSelected].rotomAction);
+        StringAppend(textBuffer, sRotomPhoneOptions[menuSelectedSmall].rotomAction);
         RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, FALSE, TRUE);
     }
     else
     {
-        fontId = GetFontIdToFit(sRotomPhoneOptions[menuSelected].menuName, ReturnNormalTextFont(), 0, sWindowTemplate_FlipPhone.width * 8);
+        fontId = GetFontIdToFit(sRotomPhoneOptions[menuSelectedSmall].menuName, ReturnNormalTextFont(), 0, sWindowTemplate_FlipPhone.width * 8);
         AddTextPrinterParameterized(sRotomPhone_SmallStartMenu->windowIdFlipPhone, fontId,
             sText_ClearWindow, 0, ROTOM_SPEECH_BOTTOM_ROW_Y, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(sRotomPhone_SmallStartMenu->windowIdFlipPhone, fontId, sRotomPhoneOptions[menuSelected].menuName,
-            GetStringCenterAlignXOffset(fontId, sRotomPhoneOptions[menuSelected].menuName, sWindowTemplate_FlipPhone.width * 8),
+        AddTextPrinterParameterized(sRotomPhone_SmallStartMenu->windowIdFlipPhone, fontId, sRotomPhoneOptions[menuSelectedSmall].menuName,
+            GetStringCenterAlignXOffset(fontId, sRotomPhoneOptions[menuSelectedSmall].menuName, sWindowTemplate_FlipPhone.width * 8),
             ROTOM_SPEECH_BOTTOM_ROW_Y, TEXT_SKIP_DRAW, NULL);
         CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdFlipPhone, COPYWIN_GFX);
         tRotomMessageSoundEffect = SE_BALL_TRAY_EXIT;
@@ -1635,7 +1675,7 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
 
     for (enum RotomPhoneSmallOptions i = ROTOM_PHONE_SMALL_OPTION_1; i < ROTOM_PHONE_SMALL_OPTION_COUNT; i++)
     {
-        if (sRotomPhone_SmallStartMenu->menuSmallOptions[i] == menuSelected)
+        if (sRotomPhone_SmallStartMenu->menuSmallOptions[i] == menuSelectedSmall)
         {
             optionCurrent = i;
             break;
@@ -1663,7 +1703,7 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
         return;
     }
 
-    menuSelected = sRotomPhone_SmallStartMenu->menuSmallOptions[nextIndex];
+    menuSelectedSmall = sRotomPhone_SmallStartMenu->menuSmallOptions[nextIndex];
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
         tRotomMessageSoundEffect = PMD_EVENT_SIGN_ASE_01;
     else
@@ -1691,7 +1731,7 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     {
         if (sRotomPhone_SmallStartMenu->isLoading == FALSE)
         {
-            if (menuSelected != ROTOM_PHONE_MENU_SAVE && menuSelected != ROTOM_PHONE_MENU_FLAG)
+            if (menuSelectedSmall != ROTOM_PHONE_MENU_SAVE && menuSelectedSmall != ROTOM_PHONE_MENU_FLAG)
                 FadeScreen(FADE_TO_BLACK, 0);
             
             sRotomPhone_SmallStartMenu->isLoading = TRUE;
@@ -1719,9 +1759,9 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     {
         RotomPhone_SmallStartMenu_HandleInput(taskId);
     }
-    else if (sRotomPhone_SmallStartMenu->isLoading == TRUE && sRotomPhoneOptions[menuSelected].selectedFuncSmall)
+    else if (sRotomPhone_SmallStartMenu->isLoading == TRUE && sRotomPhoneOptions[menuSelectedSmall].selectedFuncSmall)
     {
-        sRotomPhoneOptions[menuSelected].selectedFuncSmall();
+        sRotomPhoneOptions[menuSelectedSmall].selectedFuncSmall();
     }
 
     if (tRotomMessageSoundEffect)
@@ -1770,7 +1810,6 @@ struct RotomPhone_LargeStartMenuState
     u8 loadState;
     u8 mode;
 
-    enum RotomPhoneMenuItems menuSelected;
     // Save the current dex region
     enum Region region;
     // This will store not the current dex region, but which region button is "hovering" in the panel
@@ -2327,32 +2366,7 @@ static const u8 sRotomPhone_LargeStartMenuWindowFontColors[][3] =
     [FONT_BLUE]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_BLUE,       TEXT_COLOR_LIGHT_GRAY},
 };
 
-// Callbacks for the sample UI
-static void RotomPhone_LargeStartMenu_SetupCB(void);
-static void RotomPhone_LargeStartMenu_MainCB(void);
-static void RotomPhone_LargeStartMenu_VBlankCB(void);
 
-// Sample UI tasks
-static void Task_RotomPhone_LargeStartMenu_WaitFadeIn(u8 taskId);
-static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId);
-static void Task_RotomPhone_LargeStartMenu_PanelInput(u8 taskId);
-static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId);
-static void Task_RotomPhone_LargeStartMenu_WaitFadeAndBail(u8 taskId);
-static void Task_RotomPhone_LargeStartMenu_WaitFadeAndExitGracefully(u8 taskId);
-static void Task_RotomPhone_LargeStartMenu_WaitFadeForSelection(u8 taskId);
-
-// Sample UI helper functions
-static void RotomPhone_LargeStartMenu_ResetGpuRegsAndBgs(void);
-static bool8 RotomPhone_LargeStartMenu_InitBgs(void);
-static void RotomPhone_LargeStartMenu_FadeAndBail(void);
-static bool8 RotomPhone_LargeStartMenu_LoadGraphics(void);
-static void RotomPhone_LargeStartMenu_InitWindows(void);
-static void RotomPhone_LargeStartMenu_PrintUiButtonHints(void);
-static void RotomPhone_LargeStartMenu_CreateRegionButtons(void);
-static void RotomPhone_LargeStartMenu_StartRegionButtonAnim(enum Region region);
-static void RotomPhone_LargeStartMenu_StopRegionButtonAnim(enum Region region);
-static void RotomPhone_LargeStartMenu_FreeResources(void);
-static void RotomPhoneLarge_DoCleanUpAndChangeCallback(MainCallback callback);
 
 
 void Task_OpenRotomPhone_LargeStartMenu(u8 taskId)
@@ -2431,8 +2445,6 @@ static void RotomPhone_LargeStartMenu_SetupCB(void)
         sRotomPhone_LargeStartMenu->region = REGION_KANTO;
         sRotomPhone_LargeStartMenu->selectedRegion = REGION_KANTO;
 
-        sRotomPhone_LargeStartMenu->menuSelected = ROTOM_PHONE_MENU_FIRST_OPTION;
-
         RotomPhone_LargeStartMenu_PrintUiButtonHints();
 
         sRotomPhone_LargeStartMenu->panelY = 0;
@@ -2492,26 +2504,26 @@ static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId)
     if (JOY_NEW(DPAD_LEFT))
     {
         PlaySE(SE_SELECT);
-        if (sRotomPhone_LargeStartMenu->menuSelected == ROTOM_PHONE_MENU_FIRST_OPTION)
+        if (menuSelectedLarge == ROTOM_PHONE_MENU_FIRST_OPTION)
         {
-            sRotomPhone_LargeStartMenu->menuSelected = ROTOM_PHONE_MENU_LAST_OPTION;
+            menuSelectedLarge = ROTOM_PHONE_MENU_LAST_OPTION;
         }
         else
         {
-            sRotomPhone_LargeStartMenu->menuSelected--;
+            menuSelectedLarge--;
         }
         RotomPhone_LargeStartMenu_PrintUiButtonHints();
     }
     if (JOY_NEW(DPAD_RIGHT))
     {
         PlaySE(SE_SELECT);
-        if (sRotomPhone_LargeStartMenu->menuSelected == ROTOM_PHONE_MENU_LAST_OPTION)
+        if (menuSelectedLarge == ROTOM_PHONE_MENU_LAST_OPTION)
         {
-            sRotomPhone_LargeStartMenu->menuSelected = ROTOM_PHONE_MENU_FIRST_OPTION;
+            menuSelectedLarge = ROTOM_PHONE_MENU_FIRST_OPTION;
         }
         else
         {
-            sRotomPhone_LargeStartMenu->menuSelected++;
+            menuSelectedLarge++;
         }
         RotomPhone_LargeStartMenu_PrintUiButtonHints();
     }
@@ -2664,10 +2676,14 @@ static void Task_RotomPhone_LargeStartMenu_WaitFadeAndExitGracefully(u8 taskId)
 
 static void Task_RotomPhone_LargeStartMenu_WaitFadeForSelection(u8 taskId)
 {
-    
+    if (!gPaletteFade.active && sRotomPhoneOptions[menuSelectedLarge].selectedFuncLarge)
+    {
+        DestroyTask(taskId);
+        sRotomPhoneOptions[menuSelectedLarge].selectedFuncLarge();
+    }
 }
 
-static void RotomPhoneLarge_DoCleanUpAndChangeCallback(MainCallback callback)
+static void RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(MainCallback callback)
 {
     if (!gPaletteFade.active)
     {
@@ -2774,7 +2790,7 @@ static void RotomPhone_LargeStartMenu_PrintUiButtonHints(void)
     StringExpandPlaceholders(gStringVar2, sText_RotomPhone_LargeStartMenuButtonHint2);
 
     AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_NORMAL, 0, 3, 0, 0,
-        sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sRotomPhoneOptions[sRotomPhone_LargeStartMenu->menuSelected].menuName);
+        sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sRotomPhoneOptions[menuSelectedLarge].menuName);
     AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 79, 0, 0, 0,
         sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_RotomPhone_LargeStartMenuButtonHint1);
     AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 79, 10, 0, 0,
@@ -2892,3 +2908,9 @@ static void RotomPhone_LargeStartMenu_FreeResources(void)
     FreeAllWindowBuffers();
     ResetSpriteData();
 }
+
+static void RotomPhone_LargeStartMenu_SelectedFunc_Pokedex(void)
+{
+    RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_OpenPokedex);
+}
+
