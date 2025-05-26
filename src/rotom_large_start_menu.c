@@ -626,7 +626,6 @@ static void Task_RotomPhone_LargeStartMenu_WaitFadeAndBail(u8 taskId);
 static void Task_RotomPhone_LargeStartMenu_WaitFadeAndExitGracefully(u8 taskId);
 
 // Sample UI helper functions
-static void RotomPhone_LargeStartMenu_Init(MainCallback callback);
 static void RotomPhone_LargeStartMenu_ResetGpuRegsAndBgs(void);
 static bool8 RotomPhone_LargeStartMenu_InitBgs(void);
 static void RotomPhone_LargeStartMenu_FadeAndBail(void);
@@ -644,22 +643,23 @@ void Task_OpenRotomPhone_LargeStartMenu(u8 taskId)
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        RotomPhone_LargeStartMenu_Init(CB2_ReturnToFieldWithOpenMenu);
+        RotomPhone_LargeStartMenu_Init();
         DestroyTask(taskId);
     }
 }
 
-static void RotomPhone_LargeStartMenu_Init(MainCallback callback)
+void RotomPhone_LargeStartMenu_Init(void)
 {
     sRotomPhone_StartMenu = AllocZeroed(sizeof(struct RotomPhone_LargeStartMenuState));
     if (sRotomPhone_StartMenu == NULL)
     {
-        SetMainCallback2(callback);
+        openedFullScreenRotomPhone = FALSE;
+        SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
         return;
     }
 
     sRotomPhone_StartMenu->loadState = 0;
-    sRotomPhone_StartMenu->savedCallback = callback;
+    sRotomPhone_StartMenu->savedCallback = CB2_ReturnToFieldWithOpenMenu;
 
     SetMainCallback2(RotomPhone_LargeStartMenu_SetupCB);
 }
@@ -906,6 +906,7 @@ static void Task_RotomPhone_LargeStartMenu_WaitFadeAndBail(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
+        openedFullScreenRotomPhone = FALSE;
         SetMainCallback2(sRotomPhone_StartMenu->savedCallback);
         RotomPhone_LargeStartMenu_FreeResources();
         DestroyTask(taskId);
@@ -916,6 +917,7 @@ static void Task_RotomPhone_LargeStartMenu_WaitFadeAndExitGracefully(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
+        openedFullScreenRotomPhone = FALSE;
         SetMainCallback2(sRotomPhone_StartMenu->savedCallback);
         RotomPhone_LargeStartMenu_FreeResources();
         DestroyTask(taskId);
