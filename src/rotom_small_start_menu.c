@@ -865,7 +865,7 @@ static void RotomPhone_SetFirstSelectedMenu(void)
 #define tRotomUpdateTimer gTasks[taskId].data[0]
 #define tRotomUpdateMessage gTasks[taskId].data[1]
 #define tRotomMessageSoundEffect gTasks[taskId].data[2]
-void RotomPhone_StartMenu_Init(void)
+void RotomPhone_SmallStartMenu_Init(void)
 {
     if (!IsOverworldLinkActive())
     {
