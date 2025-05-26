@@ -51,7 +51,7 @@
 #include "constants/songs.h"
 
 #include "sample_ui.h"
-#include "rotom_phone_start_menu.h"
+#include "rotom_start_menu.h"
 
 #if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_START_MENU)
 #define AddTextPrinterParameterized (AddTextPrinterFixedCaseParameterized)

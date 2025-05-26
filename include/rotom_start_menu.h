@@ -1,5 +1,5 @@
-#ifndef GUARD_ROTOM_PHONE_START_H
-#define GUARD_ROTOM_PHONE_START_H
+#ifndef GUARD_ROTOM_START_MENU_H
+#define GUARD_ROTOM_START_MENU_H
 
 #include "global.h"
 
@@ -9,4 +9,4 @@ void Task_OpenRotomPhone_LargeStartMenu(u8 taskId);
 
 extern EWRAM_DATA bool32 openedFullScreenRotomPhone;
 
-#endif // GUARD_ROTOM_PHONE_START_H
+#endif // GUARD_ROTOM_START_MENU_H
