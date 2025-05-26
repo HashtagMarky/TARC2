@@ -61,9 +61,6 @@ struct RotomPhoneLargeState
     // This will store not the current dex region, but which region button is "hovering" in the panel
     enum Region selectedRegion;
 
-    u8 monIconSpriteId;
-    u16 monIconDexNum;
-
     // Store the Y coordinate for the panel (for scrolling), and a flag if the panel is open or not
     u8 panelY;
     bool8 panelIsOpen;
@@ -636,8 +633,6 @@ static void RotomPhoneLarge_FadeAndBail(void);
 static bool8 RotomPhoneLarge_LoadGraphics(void);
 static void RotomPhoneLarge_InitWindows(void);
 static void RotomPhoneLarge_PrintUiButtonHints(void);
-static void RotomPhoneLarge_PrintUiMonInfo(void);
-static void RotomPhoneLarge_DrawMonIcon(u16 dexNum);
 static void RotomPhoneLarge_CreateRegionButtons(void);
 static void RotomPhoneLarge_StartRegionButtonAnim(enum Region region);
 static void RotomPhoneLarge_StopRegionButtonAnim(enum Region region);
@@ -718,14 +713,8 @@ static void RotomPhoneLarge_SetupCB(void)
     case 5:
         sRotomPhone_StartMenu->region = REGION_KANTO;
         sRotomPhone_StartMenu->selectedRegion = REGION_KANTO;
-        sRotomPhone_StartMenu->monIconDexNum = sDexRanges[sRotomPhone_StartMenu->region][0];
 
-        FreeMonIconPalettes();
-        LoadMonIconPalettes();
-
-        RotomPhoneLarge_DrawMonIcon(sRotomPhone_StartMenu->monIconDexNum);
         RotomPhoneLarge_PrintUiButtonHints();
-        RotomPhoneLarge_PrintUiMonInfo();
 
         sRotomPhone_StartMenu->panelY = 0;
         sRotomPhone_StartMenu->panelIsOpen = FALSE;
@@ -781,36 +770,6 @@ static void Task_RotomPhoneLarge_MainInput(u8 taskId)
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_RotomPhoneLarge_WaitFadeAndExitGracefully;
     }
-    if (JOY_REPEAT(DPAD_DOWN))
-    {
-        PlaySE(SE_SELECT);
-        FreeAndDestroyMonIconSprite(&gSprites[sRotomPhone_StartMenu->monIconSpriteId]);
-        if (sRotomPhone_StartMenu->monIconDexNum < sDexRanges[sRotomPhone_StartMenu->region][1])
-        {
-            sRotomPhone_StartMenu->monIconDexNum++;
-        }
-        else
-        {
-            sRotomPhone_StartMenu->monIconDexNum = sDexRanges[sRotomPhone_StartMenu->region][0];
-        }
-        RotomPhoneLarge_DrawMonIcon(sRotomPhone_StartMenu->monIconDexNum);
-        RotomPhoneLarge_PrintUiMonInfo();
-    }
-    if (JOY_REPEAT(DPAD_UP))
-    {
-        PlaySE(SE_SELECT);
-        FreeAndDestroyMonIconSprite(&gSprites[sRotomPhone_StartMenu->monIconSpriteId]);
-        if (sRotomPhone_StartMenu->monIconDexNum > sDexRanges[sRotomPhone_StartMenu->region][0])
-        {
-            sRotomPhone_StartMenu->monIconDexNum--;
-        }
-        else
-        {
-            sRotomPhone_StartMenu->monIconDexNum = sDexRanges[sRotomPhone_StartMenu->region][1];
-        }
-        RotomPhoneLarge_DrawMonIcon(sRotomPhone_StartMenu->monIconDexNum);
-        RotomPhoneLarge_PrintUiMonInfo();
-    }
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
@@ -823,7 +782,6 @@ static void Task_RotomPhoneLarge_MainInput(u8 taskId)
             sRotomPhone_StartMenu->mode++;
         }
         RotomPhoneLarge_PrintUiButtonHints();
-        RotomPhoneLarge_PrintUiMonInfo();
     }
     if (JOY_NEW(START_BUTTON))
     {
@@ -845,11 +803,7 @@ static void Task_RotomPhoneLarge_PanelInput(u8 taskId)
         sRotomPhone_StartMenu->region = sRotomPhone_StartMenu->selectedRegion;
         // Sneakily swap out color 2 in BG1's palette for the new region-specific color
         LoadPalette(&sRegionBgColors[sRotomPhone_StartMenu->region], BG_PLTT_ID(0) + 2, 2);
-        FreeAndDestroyMonIconSprite(&gSprites[sRotomPhone_StartMenu->monIconSpriteId]);
-        sRotomPhone_StartMenu->monIconDexNum = sDexRanges[sRotomPhone_StartMenu->region][0];
-        RotomPhoneLarge_DrawMonIcon(sRotomPhone_StartMenu->monIconDexNum);
         RotomPhoneLarge_PrintUiButtonHints();
-        RotomPhoneLarge_PrintUiMonInfo();
         PlaySE(SE_SELECT);
         gTasks[taskId].func = Task_RotomPhoneLarge_PanelSlide;
     }
@@ -1077,50 +1031,6 @@ static void RotomPhoneLarge_PrintUiButtonHints(void)
         sRotomPhoneLargeWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_RotomPhoneLargeButtonHint4);
 
     CopyWindowToVram(WIN_UI_HINTS, COPYWIN_GFX);
-}
-
-static const u8 sText_RotomPhoneLargeMonInfoSpecies[] = _("{NO}{STR_VAR_1} {STR_VAR_2}");
-static const u8 sText_RotomPhoneLargeMonStats[] = _("Put stats info here");
-static const u8 sText_RotomPhoneLargeMonOther[] = _("Put other info here");
-static void RotomPhoneLarge_PrintUiMonInfo(void)
-{
-    u16 speciesId = NationalPokedexNumToSpecies(sRotomPhone_StartMenu->monIconDexNum);
-
-    FillWindowPixelBuffer(WIN_MON_INFO, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    switch (sRotomPhone_StartMenu->mode)
-    {
-    case MODE_INFO: 
-        ConvertIntToDecimalStringN(gStringVar1, sRotomPhone_StartMenu->monIconDexNum, STR_CONV_MODE_LEADING_ZEROS, 3);
-        StringCopy(gStringVar2, GetSpeciesName(speciesId));
-        StringExpandPlaceholders(gStringVar3, sText_RotomPhoneLargeMonInfoSpecies);
-        StringCopy(gStringVar4, GetSpeciesPokedexDescription(speciesId));
-        AddTextPrinterParameterized4(WIN_MON_INFO, FONT_SHORT, 5, 3, 0, 0, sRotomPhoneLargeWindowFontColors[FONT_BLACK],
-            TEXT_SKIP_DRAW, gStringVar3);
-        AddTextPrinterParameterized4(WIN_MON_INFO, FONT_SMALL, 5, 25, 0, 0, sRotomPhoneLargeWindowFontColors[FONT_BLACK],
-            TEXT_SKIP_DRAW, gStringVar4);
-        break;
-    case MODE_STATS:
-        AddTextPrinterParameterized4(WIN_MON_INFO, FONT_SHORT, 5, 3, 0, 0, sRotomPhoneLargeWindowFontColors[FONT_BLACK],
-            TEXT_SKIP_DRAW, sText_RotomPhoneLargeMonStats);
-        break;
-    case MODE_OTHER:
-        AddTextPrinterParameterized4(WIN_MON_INFO, FONT_SHORT, 5, 3, 0, 0, sRotomPhoneLargeWindowFontColors[FONT_BLACK],
-            TEXT_SKIP_DRAW, sText_RotomPhoneLargeMonOther);
-        break;
-    default:
-        break;
-    }
-
-    CopyWindowToVram(WIN_MON_INFO, COPYWIN_GFX);
-}
-
-static void RotomPhoneLarge_DrawMonIcon(u16 dexNum)
-{
-    u16 speciesId = NationalPokedexNumToSpecies(dexNum);
-
-    sRotomPhone_StartMenu->monIconSpriteId =
-            CreateMonIcon(speciesId, SpriteCB_MonIcon, MON_ICON_X, MON_ICON_Y, 4, 0);
-    gSprites[sRotomPhone_StartMenu->monIconSpriteId].oam.priority = 0;
 }
 
 static void RotomPhoneLarge_CreateRegionButtons(void)
