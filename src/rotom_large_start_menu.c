@@ -624,6 +624,7 @@ static void Task_RotomPhone_LargeStartMenu_PanelInput(u8 taskId);
 static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId);
 static void Task_RotomPhone_LargeStartMenu_WaitFadeAndBail(u8 taskId);
 static void Task_RotomPhone_LargeStartMenu_WaitFadeAndExitGracefully(u8 taskId);
+static void Task_RotomPhone_LargeStartMenu_WaitFadeForSelection(u8 taskId);
 
 // Sample UI helper functions
 static void RotomPhone_LargeStartMenu_ResetGpuRegsAndBgs(void);
@@ -636,6 +637,7 @@ static void RotomPhone_LargeStartMenu_CreateRegionButtons(void);
 static void RotomPhone_LargeStartMenu_StartRegionButtonAnim(enum Region region);
 static void RotomPhone_LargeStartMenu_StopRegionButtonAnim(enum Region region);
 static void RotomPhone_LargeStartMenu_FreeResources(void);
+static void DoCleanUpAndChangeCallback(MainCallback callback);
 
 
 void Task_OpenRotomPhone_LargeStartMenu(u8 taskId)
@@ -773,15 +775,8 @@ static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId)
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        if (sRotomPhone_StartMenu->mode == MODE_OTHER)
-        {
-            sRotomPhone_StartMenu->mode = MODE_INFO;
-        }
-        else
-        {
-            sRotomPhone_StartMenu->mode++;
-        }
-        RotomPhone_LargeStartMenu_PrintUiButtonHints();
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_WaitFadeForSelection;
     }
     if (JOY_NEW(START_BUTTON))
     {
@@ -921,6 +916,21 @@ static void Task_RotomPhone_LargeStartMenu_WaitFadeAndExitGracefully(u8 taskId)
         SetMainCallback2(sRotomPhone_StartMenu->savedCallback);
         RotomPhone_LargeStartMenu_FreeResources();
         DestroyTask(taskId);
+    }
+}
+
+static void Task_RotomPhone_LargeStartMenu_WaitFadeForSelection(u8 taskId)
+{
+    if (!gPaletteFade.active)
+        
+}
+
+static void DoCleanUpAndChangeCallback(MainCallback callback)
+{
+    if (!gPaletteFade.active)
+    {
+        RotomPhone_LargeStartMenu_FreeResources();
+        SetMainCallback2(callback);
     }
 }
 #define TILEMAP_BUFFER_SIZE (1024 * 2)
