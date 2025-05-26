@@ -1267,7 +1267,7 @@ static void RotomPhone_SmallStartMenu_PrintDateWeather(u8 taskId)
         StringAppend(textBuffer, GetWeatherAction(GetCurrentWeather()));
         StringAppend(textBuffer, COMPOUND_STRING(" right now."));
     }
-    else if (messageRotom == ROTOM_PHONE_MESSAGE_DATE_WEATHER_NEXT_WEATHER && gTimeOfDay >= TIME_NIGHT)
+    else if (messageRotom == ROTOM_PHONE_MESSAGE_DATE_WEATHER_NEXT_WEATHER && gTimeOfDay < TIME_NIGHT)
     {
         StringCopy(textBuffer, COMPOUND_STRING("It feels like it will be "));
         StringAppend(textBuffer, GetWeatherAction(Ikigai_GetCurrentVyratonWeather(gTimeOfDay + 1)));
