@@ -138,6 +138,7 @@ enum RotomPhoneMenuItems
     ROTOM_PHONE_MENU_COUNT,
 };
 #define ROTOM_PHONE_MENU_FIRST_OPTION ROTOM_PHONE_MENU_COUNT - ROTOM_PHONE_MENU_COUNT
+#define ROTOM_PHONE_MENU_LAST_OPTION  ROTOM_PHONE_MENU_COUNT - 1
 
 enum RotomPhoneSmallOptions
 {
@@ -1769,6 +1770,7 @@ struct RotomPhone_LargeStartMenuState
     u8 loadState;
     u8 mode;
 
+    enum RotomPhoneMenuItems menuSelected;
     // Save the current dex region
     enum Region region;
     // This will store not the current dex region, but which region button is "hovering" in the panel
@@ -1939,9 +1941,9 @@ static const struct WindowTemplate sRotomPhone_LargeStartMenuWindowTemplates[] =
     [WIN_UI_HINTS] =
     {
         .bg = 0,
-        .tilemapLeft = 14,
+        .tilemapLeft = 10,
         .tilemapTop = 0,
-        .width = 16,
+        .width = 20,
         .height = 7,
         .paletteNum = 15,
         .baseBlock = 1
@@ -1954,7 +1956,7 @@ static const struct WindowTemplate sRotomPhone_LargeStartMenuWindowTemplates[] =
         .width = 26,
         .height = 10,
         .paletteNum = 15,
-        .baseBlock = 1 + (16 * 7)
+        .baseBlock = 1 + (20 * 7)
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -2429,6 +2431,8 @@ static void RotomPhone_LargeStartMenu_SetupCB(void)
         sRotomPhone_LargeStartMenu->region = REGION_KANTO;
         sRotomPhone_LargeStartMenu->selectedRegion = REGION_KANTO;
 
+        sRotomPhone_LargeStartMenu->menuSelected = ROTOM_PHONE_MENU_FIRST_OPTION;
+
         RotomPhone_LargeStartMenu_PrintUiButtonHints();
 
         sRotomPhone_LargeStartMenu->panelY = 0;
@@ -2484,6 +2488,32 @@ static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId)
         PlaySE(SE_PC_OFF);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_WaitFadeAndExitGracefully;
+    }
+    if (JOY_NEW(DPAD_LEFT))
+    {
+        PlaySE(SE_SELECT);
+        if (sRotomPhone_LargeStartMenu->menuSelected == ROTOM_PHONE_MENU_FIRST_OPTION)
+        {
+            sRotomPhone_LargeStartMenu->menuSelected = ROTOM_PHONE_MENU_LAST_OPTION;
+        }
+        else
+        {
+            sRotomPhone_LargeStartMenu->menuSelected--;
+        }
+        RotomPhone_LargeStartMenu_PrintUiButtonHints();
+    }
+    if (JOY_NEW(DPAD_RIGHT))
+    {
+        PlaySE(SE_SELECT);
+        if (sRotomPhone_LargeStartMenu->menuSelected == ROTOM_PHONE_MENU_LAST_OPTION)
+        {
+            sRotomPhone_LargeStartMenu->menuSelected = ROTOM_PHONE_MENU_FIRST_OPTION;
+        }
+        else
+        {
+            sRotomPhone_LargeStartMenu->menuSelected++;
+        }
+        RotomPhone_LargeStartMenu_PrintUiButtonHints();
     }
     if (JOY_NEW(A_BUTTON))
     {
@@ -2744,14 +2774,14 @@ static void RotomPhone_LargeStartMenu_PrintUiButtonHints(void)
     StringExpandPlaceholders(gStringVar2, sText_RotomPhone_LargeStartMenuButtonHint2);
 
     AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_NORMAL, 0, 3, 0, 0,
-        sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sRegionNames[sRotomPhone_LargeStartMenu->region]);
-    AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 47, 0, 0, 0,
+        sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sRotomPhoneOptions[sRotomPhone_LargeStartMenu->menuSelected].menuName);
+    AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 79, 0, 0, 0,
         sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_RotomPhone_LargeStartMenuButtonHint1);
-    AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 47, 10, 0, 0,
+    AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 79, 10, 0, 0,
         sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar2);
-    AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 47, 20, 0, 0,
+    AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 79, 20, 0, 0,
         sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_RotomPhone_LargeStartMenuButtonHint3);
-    AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 47, 30, 0, 0,
+    AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 79, 30, 0, 0,
         sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_RotomPhone_LargeStartMenuButtonHint4);
 
     CopyWindowToVram(WIN_UI_HINTS, COPYWIN_GFX);
