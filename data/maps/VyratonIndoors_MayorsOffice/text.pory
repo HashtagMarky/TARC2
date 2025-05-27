@@ -105,11 +105,25 @@ text VyratonIndoors_MayorsOffice_Text_GivePokedex
         Vyraton. Anyway, as was saying…\l
         I have something else for you!\p
 
-        I'm sure you'll be familiar with\n
-        this, as all seasoned trainers are…\l
-        I present you with…{PAUSE 40}{PLAY_FANFARE MUS_HG_OBTAIN_KEY_ITEM}{SHOW_ITEM_HEADER} a Pokédex!{WAIT_FANFARE}\p
-        {HIDE_ITEM_HEADER}It's a wonderful tool that will help\n
-        you learn more about your partner,\l
+        Now you might be familiar with this,\n
+        as all avid technology users are…\l
+        I present you with…{PAUSE 40}{PLAY_FANFARE MUS_HG_OBTAIN_KEY_ITEM}{SHOW_POKEDEX_HEADER} a Rotom!{WAIT_FANFARE}\p
+        {HIDE_POKEDEX_HEADER}But hold on, {PLAYER}…{PAUSE 40} this Rotom\n
+        won't help you in battle.\l
+        No, this Rotom is for something else!\p
+        Rotom love technology, so much so\n
+        that they can actually inhabit it.\p
+        If you let Rotom do so with your own\n
+        phone, you can do all sorts of things.\l
+        It even comes with a Pokédex app!\p
+        So in keeping up with the modern age,\n
+        I need not hand you a physical item.\p
+        You can access your very own Pokédex\n
+        via your brand-new Rotom-Phone!\l
+        No need for handwritten notes.\p
+
+        A Pokédex is wonderful a tool where\n
+        you can learn about your partner,\l
         and every other Pokémon you meet.\p
         Why don't you try and see what it\n
         says about {STR_VAR_1}.\l

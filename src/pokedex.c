@@ -5928,6 +5928,7 @@ void ShowPokedexHeaderMessage(void)
     struct WindowTemplate template;
     u16 species = gSpecialVar_0x8004;
     u8 textY = 0;
+    u8 textBuffer[0x64];
     bool8 handleFlash = FALSE;
 
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
@@ -5952,8 +5953,12 @@ void ShowPokedexHeaderMessage(void)
 
     ShowMonIconSprite(species, TRUE, handleFlash);
     StringCopy(gStringVar1, GetSpeciesName(species));
-    StringExpandPlaceholders(gStringVar2, COMPOUND_STRING("Some data on {STR_VAR_1} has been added\nto the POKéDEX!"));
-    AddTextPrinterParameterized(sHeaderBoxWindowId, 0, gStringVar2, PKMN_ICON_X + 2, textY, 0, NULL);
+    if (FlagGet(FLAG_SYS_POKEDEX_GET))
+        StringCopy(textBuffer, COMPOUND_STRING("Some data on {STR_VAR_1} has been added\nto the POKéDEX!"));
+    else
+        StringCopy(textBuffer, COMPOUND_STRING("Some data on {STR_VAR_1} has been added\nto your notes!"));
+    StringExpandPlaceholders(gStringVar2, textBuffer);
+    AddTextPrinterParameterized(sHeaderBoxWindowId, 0, gStringVar2, PKMN_ICON_X + 4, textY, 0, NULL);
 }
 
 void HidePokedexHeaderMessage(void)

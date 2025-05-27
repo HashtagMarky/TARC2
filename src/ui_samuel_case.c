@@ -604,7 +604,8 @@ void SamuelCase_Init(MainCallback callback)
     // RandomiseMonChoiceData(sStarterChoices_Page1_Male, ARRAY_COUNT(sStarterChoices_Page1_Male));
     // RandomiseMonChoiceData(sStarterChoices_Page2, ARRAY_COUNT(sStarterChoices_Page2));
 
-    SetIkigaiStarterPokedexFlags();
+    // As Pokedex isn't available yet:
+    // SetIkigaiStarterPokedexFlags();
 
     for(i=0; i < 9; i++)
     {

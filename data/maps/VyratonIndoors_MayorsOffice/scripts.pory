@@ -97,13 +97,8 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_OpenBriefcase
 
 script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex
 {
-    setflag(FLAG_SYS_POKEDEX_GET)
-	setflag(FLAG_SYS_NATIONAL_DEX)
-	special(EnableNationalPokedex)
-    clearflag(FLAG_DONT_TRANSITION_MUSIC)
-
     bufferpartymonnick(STR_VAR_1, 0)
-    setvar(VAR_0x8000, ITEM_POKEDEX)
+    setvar(VAR_0x8004, SPECIES_ROTOM)
     if (specialvar(VAR_RESULT, IsLeadMonNicknamedOrNotEnglish) == TRUE)
     {
         mnmbox(VyratonIndoors_MayorsOffice_Text_MeetNicknamedMon, localId=LOCALID_Samuel, lock=FALSE)
@@ -115,6 +110,12 @@ script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_TakePokedex
     call(VyratonIndoors_MayorsOffice_EventScript_MeetThomas)
     call(VyratonIndoors_MayorsOffice_EventScript_Samuel_ReceivePokdex)
     playerface(DIR_EAST)
+
+    setflag(FLAG_SYS_POKEDEX_GET)
+	setflag(FLAG_SYS_NATIONAL_DEX)
+	special(EnableNationalPokedex)
+    clearflag(FLAG_DONT_TRANSITION_MUSIC)
+    setcaughtmon(SPECIES_ROTOM)
 }
 
 script VyratonIndoors_MayorsOffice_EventScript_SamuelBriefcase_MeetPartner
@@ -137,7 +138,6 @@ script VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon
 {
     bufferpartymonnick(STR_VAR_1, 0)
     special(GetOverworldMonSpecies)
-    callnative(ClearPokedexFlags)
     callnative(ShowPokedexHeaderMessage)
     playfanfare(MUS_HG_RECEIVE_POKEMON)
     faceplayer
@@ -148,6 +148,7 @@ script VyratonIndoors_MayorsOffice_EventScript_StarterMon_DeterminedMon
     message(VyratonIndoors_MayorsOffice_Text_DeterminedMon)
     callnative(SetIkigaiStarterPokedexFlags)
     setcaughtmon(VAR_0x8004)
+    setcaughtmon(SPECIES_ROTOM)
     waitmessage
     waitbuttonpress
     waitfanfare
