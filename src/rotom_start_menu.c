@@ -2702,8 +2702,8 @@ static void RotomPhone_LargeStartMenu_InitWindows(void)
     FillWindowPixelBuffer(WIN_MON_INFO, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     PutWindowTilemap(WIN_UI_HINTS);
     PutWindowTilemap(WIN_MON_INFO);
-    CopyWindowToVram(WIN_UI_HINTS, 3);
-    CopyWindowToVram(WIN_MON_INFO, 3);
+    CopyWindowToVram(WIN_UI_HINTS, COPYWIN_FULL);
+    CopyWindowToVram(WIN_MON_INFO, COPYWIN_FULL);
 }
 
 static const u8 sText_RotomPhone_LargeStartMenuButtonHint1[] = _("{DPAD_UPDOWN}Change POKéMON");
