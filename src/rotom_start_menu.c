@@ -927,7 +927,8 @@ void RotomPhone_SmallStartMenu_Init(bool32 printGreeting)
         return;
     }
 
-    m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x80);
+    if (FlagGet(FLAG_SYS_POKEDEX_GET))
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x80);
 
     sRotomPhone_SmallStartMenu->savedCallback = CB2_ReturnToFieldWithOpenMenu;
     sRotomPhone_SmallStartMenu->isLoading = FALSE;
