@@ -1523,13 +1523,17 @@ static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(MainCallback ca
 
 static u8 RotomPhone_SmallStartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority)
 {
+    PlayRainStoppingSoundEffect();
     RotomPhone_SmallStartMenu_ExitAndClearTilemap();
+    CleanupOverworldWindowsAndTilemaps();
     return CreateTask(func, priority);
 }
 
 static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func)
 {
+    PlayRainStoppingSoundEffect();
     RotomPhone_SmallStartMenu_ExitAndClearTilemap();
+    CleanupOverworldWindowsAndTilemaps();
     gTasks[taskId].func = func;
 }
 
