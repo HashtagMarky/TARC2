@@ -96,6 +96,8 @@ static bool32 RotomPhone_SmallStartMenu_UnlockedFunc_SafariFlag(void);
 static bool32 RotomPhone_SmallStartMenu_UnlockedFunc_FullScreen(void);
 
 static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(MainCallback callback);
+static u8 RotomPhone_SmallStartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority);
+static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func);
 static void RotomPhone_SmallStartMenu_SelectedFunc_Pokedex(void);
 static void RotomPhone_SmallStartMenu_SelectedFunc_Pokemon(void);
 static void RotomPhone_SmallStartMenu_SelectedFunc_Bag(void);
@@ -150,6 +152,8 @@ static void RotomPhone_LargeStartMenu_StopRegionButtonAnim(enum Region region);
 static void RotomPhone_LargeStartMenu_FreeResources(void);
 
 static void RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(MainCallback callback);
+static u8 RotomPhone_LargeStartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority);
+static void RotomPhone_LargeStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func);
 static void RotomPhone_LargeStartMenu_SelectedFunc_Pokedex(void);
 static void RotomPhone_LargeStartMenu_SelectedFunc_Pokemon(void);
 static void RotomPhone_LargeStartMenu_SelectedFunc_Bag(void);
@@ -1522,6 +1526,18 @@ static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(MainCallback ca
     }
 }
 
+static u8 RotomPhone_SmallStartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority)
+{
+    RotomPhone_SmallStartMenu_ExitAndClearTilemap();
+    return CreateTask(func, priority);
+}
+
+static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func)
+{
+    RotomPhone_SmallStartMenu_ExitAndClearTilemap();
+    gTasks[taskId].func = func;
+}
+
 static void Task_RotomPhone_HandleSave(u8 taskId)
 {
     switch (RunSaveCallback_Global())
@@ -1539,8 +1555,7 @@ static void Task_RotomPhone_HandleSave(u8 taskId)
             }
             else
             {
-                RotomPhone_LargeStartMenu_FreeResources();
-                gTasks[taskId].func = Task_OpenRotomPhone_LargeStartMenu;
+                RotomPhone_LargeStartMenu_DoCleanUpAndChangeTaskFunc(taskId, Task_OpenRotomPhone_LargeStartMenu);
                 // RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_ReturnToField);
             }
             break;
@@ -1555,8 +1570,7 @@ static void Task_RotomPhone_HandleSave(u8 taskId)
             }
             else
             {
-                RotomPhone_LargeStartMenu_FreeResources();
-                gTasks[taskId].func = Task_OpenRotomPhone_LargeStartMenu;
+                RotomPhone_LargeStartMenu_DoCleanUpAndChangeTaskFunc(taskId, Task_OpenRotomPhone_LargeStartMenu);
                 // RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_ReturnToField);
             }
             break;
@@ -1682,10 +1696,7 @@ static void RotomPhone_SmallStartMenu_SelectedFunc_FullScreen(void)
     if (!gPaletteFade.active)
     {
         openedFullScreenRotomPhone = TRUE;
-        RotomPhone_SmallStartMenu_ExitAndClearTilemap();
-        FreezeObjectEvents();
-        LockPlayerFieldControls();
-        gTasks[FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput)].func = Task_OpenRotomPhone_LargeStartMenu;
+        RotomPhone_SmallStartMenu_DoCleanUpAndChangeTaskFunc(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput), Task_OpenRotomPhone_LargeStartMenu);
     }
 }
 
@@ -2719,6 +2730,18 @@ static void RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(MainCallback ca
         RotomPhone_LargeStartMenu_FreeResources();
         SetMainCallback2(callback);
     }
+}
+
+static u8 RotomPhone_LargeStartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority)
+{
+    RotomPhone_LargeStartMenu_FreeResources();
+    return CreateTask(func, priority);
+}
+
+static void RotomPhone_LargeStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func)
+{
+    RotomPhone_LargeStartMenu_FreeResources();
+    gTasks[taskId].func = func;
 }
 #define TILEMAP_BUFFER_SIZE (1024 * 2)
 static bool8 RotomPhone_LargeStartMenu_InitBgs(void)
