@@ -1916,7 +1916,7 @@ static const struct WindowTemplate sRotomPhone_LargeStartMenuWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u32 sRotomPhone_LargeStartMenuTiles[] = INCBIN_U32("graphics/sample_ui/tiles.4bpp.lz");
+static const u32 sRotomPhone_LargeStartMenuTiles[] = INCBIN_U32("graphics/rotom_phone_start_menu/rotom_phone_tiles.4bpp.lz");
 
 // New graphics for the buttons. Create these from 4bpp indexed PNGs, just like before.
 static const u32 sRotomPhone_LargeStartMenuKantoButton[] = INCBIN_U32("graphics/sample_ui/kanto.4bpp");
@@ -1926,10 +1926,10 @@ static const u32 sRotomPhone_LargeStartMenuSinnohButton[] = INCBIN_U32("graphics
 static const u32 sRotomPhone_LargeStartMenuUnovaButton[] = INCBIN_U32("graphics/sample_ui/unova.4bpp");
 static const u32 sRotomPhone_LargeStartMenuKalosButton[] = INCBIN_U32("graphics/sample_ui/kalos.4bpp");
 
-static const u32 sRotomPhone_LargeStartMenuTilemap[] = INCBIN_U32("graphics/sample_ui/tilemap.bin.lz");
-static const u32 sRotomPhone_LargeStartMenuPanelTilemap[] = INCBIN_U32("graphics/sample_ui/panel_tilemap.bin.lz");
+static const u32 sRotomPhone_LargeStartMenuTilemap[] = INCBIN_U32("graphics/rotom_phone_start_menu/full_screen.bin.lz");
+static const u32 sRotomPhone_LargeStartMenuPanelTilemap[] = INCBIN_U32("graphics/rotom_phone_start_menu/full_screen_panel.bin.lz");
 
-static const u16 sRotomPhone_LargeStartMenuPalette[] = INCBIN_U16("graphics/sample_ui/00.gbapal");
+static const u16 sRotomPhone_LargeStartMenuPalette[] = INCBIN_U16("graphics/rotom_phone_start_menu/rotom_phone_tiles.gbapal");
 static const u16 sRotomPhone_LargeStartMenu_KantoJohtoHoennPalette[] = INCBIN_U16("graphics/sample_ui/kanto_johto_hoenn.gbapal");
 static const u16 sRotomPhone_LargeStartMenu_SinnohUnovaKalosPalette[] = INCBIN_U16("graphics/sample_ui/sinnoh_unova_kalos.gbapal");
 
@@ -2467,7 +2467,7 @@ static void Task_RotomPhone_LargeStartMenu_PanelInput(u8 taskId)
     {
         sRotomPhone_LargeStartMenu->region = sRotomPhone_LargeStartMenu->selectedRegion;
         // Sneakily swap out color 2 in BG1's palette for the new region-specific color
-        LoadPalette(&sRegionBgColors[sRotomPhone_LargeStartMenu->region], BG_PLTT_ID(0) + 2, 2);
+        LoadPalette(&sRegionBgColors[sRotomPhone_LargeStartMenu->region], BG_PLTT_ID(0) + 6, 2);
         RotomPhone_LargeStartMenu_PrintUiButtonHints();
         PlaySE(SE_SELECT);
         gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_PanelSlide;
@@ -2683,7 +2683,7 @@ static bool8 RotomPhone_LargeStartMenu_LoadGraphics(void)
          * BG color is stored in Palette 0, slot 2. So we hot swap that to our saved color for Kanto, since the UI
          * starts in Kanto region. We will need to perform this mini-swap each time the user changes regions.
          */
-        LoadPalette(&sRegionBgColors[REGION_KANTO], BG_PLTT_ID(0) + 2, 2);
+        LoadPalette(&sRegionBgColors[REGION_KANTO], BG_PLTT_ID(0) + 6, 2);
         LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         sRotomPhone_LargeStartMenu->loadState++;
     default:
