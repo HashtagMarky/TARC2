@@ -2068,7 +2068,7 @@ void CB2_OpenPokedexPlusHGSS(void)
         SetVBlankCallback(VBlankCB_Pokedex);
         SetMainCallback2(CB2_Pokedex);
         CreatePokedexList(sPokedexView->dexMode, sPokedexView->dexOrder);
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x80);
+        // m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x80);
         break;
     }
 }
@@ -2328,7 +2328,7 @@ static void Task_ClosePokedex(u8 taskId)
         FreeWindowAndBgBuffers();
         DestroyTask(taskId);
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
+        // m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
         Free(sPokedexView);
     }
 }
