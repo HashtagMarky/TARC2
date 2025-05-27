@@ -2943,8 +2943,22 @@ static void RotomPhone_StartMenu_SelectedFunc_Trainer(void)
     }
     else
     {
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-        CreateTask(Task_RotomPhone_LargeStartMenu_WaitFadeIn, 0);
+        RotomPhone_LargeStartMenu_FreeResources();
+        if (IsOverworldLinkActive() || InUnionRoom())
+        {
+            ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
+            DestroyTask(FindTaskIdByFunc(Task_RotomPhone_LargeStartMenu_MainInput));
+        }
+        else if (FlagGet(FLAG_SYS_FRONTIER_PASS))
+        {
+            ShowFrontierPass(CB2_ReturnToFieldWithOpenMenu); // Display frontier pass
+            DestroyTask(FindTaskIdByFunc(Task_RotomPhone_LargeStartMenu_MainInput));
+        }
+        else
+        {
+            ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
+            DestroyTask(FindTaskIdByFunc(Task_RotomPhone_LargeStartMenu_MainInput));
+        }
     }
 }
 
