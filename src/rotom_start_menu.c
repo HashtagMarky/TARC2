@@ -85,7 +85,7 @@ static void SpriteCB_RotomPhoneSmall_IconFullScreen(struct Sprite* sprite);
 
 static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId);
-static void Task_HandleSave(u8 taskId);
+static void Task_RotomPhone_HandleSave(u8 taskId);
 
 static bool32 RotomPhone_SmallStartMenu_UnlockedFunc_Unlocked(void);
 static bool32 RotomPhone_SmallStartMenu_UnlockedFunc_Pokedex(void);
@@ -824,6 +824,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .unlockedFuncSmall = RotomPhone_SmallStartMenu_UnlockedFunc_Save,
         .selectedFuncSmall = RotomPhone_SmallStartMenu_SelectedFunc_Save,
         .iconTemplateSmall = &gSpriteIconSave,
+        .selectedFuncLarge = RotomPhone_LargeStartMenu_SelectedFunc_Save,
     },
     [ROTOM_PHONE_MENU_OPTIONS] =
     {
@@ -1521,7 +1522,7 @@ static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(MainCallback ca
     }
 }
 
-static void Task_HandleSave(u8 taskId)
+static void Task_RotomPhone_HandleSave(u8 taskId)
 {
     switch (RunSaveCallback_Global())
     {
@@ -1532,14 +1533,32 @@ static void Task_HandleSave(u8 taskId)
             ClearDialogWindowAndFrameToTransparent(0, TRUE);
             ScriptUnfreezeObjectEvents();  
             UnlockPlayerFieldControls();
-            DestroyTask(taskId);
+            if (!openedFullScreenRotomPhone)
+            {
+                DestroyTask(taskId);
+            }
+            else
+            {
+                RotomPhone_LargeStartMenu_FreeResources();
+                gTasks[taskId].func = Task_OpenRotomPhone_LargeStartMenu;
+                // RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_ReturnToField);
+            }
             break;
         case SAVE_ERROR:    // Close start menu
             ClearDialogWindowAndFrameToTransparent(0, TRUE);
             ScriptUnfreezeObjectEvents();
             UnlockPlayerFieldControls();
             SoftResetInBattlePyramid();
-            DestroyTask(taskId);
+            if (!openedFullScreenRotomPhone)
+            {
+                DestroyTask(taskId);
+            }
+            else
+            {
+                RotomPhone_LargeStartMenu_FreeResources();
+                gTasks[taskId].func = Task_OpenRotomPhone_LargeStartMenu;
+                // RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_ReturnToField);
+            }
             break;
     }
 }
@@ -1637,7 +1656,7 @@ static void RotomPhone_SmallStartMenu_SelectedFunc_Save(void)
         LockPlayerFieldControls();
         DestroyTask(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput));
         InitSave_Global();
-        CreateTask(Task_HandleSave, 0x80);
+        CreateTask(Task_RotomPhone_HandleSave, 0x80);
     }
 }
 
@@ -2946,7 +2965,8 @@ static void RotomPhone_LargeStartMenu_SelectedFunc_Trainer(void)
 
 static void RotomPhone_LargeStartMenu_SelectedFunc_Save(void)
 {
-    
+    InitSave_Global();
+    CreateTask(Task_RotomPhone_HandleSave, 0x80);
 }
 
 static void RotomPhone_LargeStartMenu_SelectedFunc_Settings(void)
