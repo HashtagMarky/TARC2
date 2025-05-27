@@ -235,7 +235,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
             PlaySE(PMD_EVENT_SIGN_NOTICE_01);
         else
             PlaySE(SE_BALL_TRAY_ENTER);
-        RotomPhone_SmallStartMenu_Init();
+        RotomPhone_SmallStartMenu_Init(TRUE);
         return TRUE;
     }
     

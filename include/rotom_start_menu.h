@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-void RotomPhone_SmallStartMenu_Init(void);
+void RotomPhone_SmallStartMenu_Init(bool32 printGreeting);
 void RotomPhone_LargeStartMenu_Init(void);
 void Task_OpenRotomPhone_LargeStartMenu(u8 taskId);
 

@@ -595,7 +595,7 @@ static bool8 FieldCB_ReturnToFieldStartMenu(void)
     // }
   
     if (!openedFullScreenRotomPhone)
-        RotomPhone_SmallStartMenu_Init();
+        RotomPhone_SmallStartMenu_Init(FALSE);
     else
         RotomPhone_LargeStartMenu_Init();
 

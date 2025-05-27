@@ -904,7 +904,7 @@ static enum RotomPhoneMenuItems RotomPhone_SetFirstSelectedMenu(void)
 #define tRotomUpdateTimer gTasks[taskId].data[0]
 #define tRotomUpdateMessage gTasks[taskId].data[1]
 #define tRotomMessageSoundEffect gTasks[taskId].data[2]
-void RotomPhone_SmallStartMenu_Init(void)
+void RotomPhone_SmallStartMenu_Init(bool32 printGreeting)
 {
     if (!IsOverworldLinkActive())
     {
@@ -951,7 +951,11 @@ void RotomPhone_SmallStartMenu_Init(void)
     if (GetSafariZoneFlag())
         tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_SAFARI;
 
-    RotomPhone_SmallStartMenu_PrintGreeting();
+    if (printGreeting)
+        RotomPhone_SmallStartMenu_PrintGreeting();
+    else
+        tRotomUpdateTimer = FALSE;
+
     RotomPhone_SmallStartMenu_UpdateMenuPrompt(taskId);
 }
 
