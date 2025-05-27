@@ -62,6 +62,8 @@
 #include "debug.h"
 #include "vyraton.h"
 #include "constants/weather.h"
+#include "gba/gba.h"
+#include "m4a.h"
 
 
 #define ROTOM_PHONE_UPDATE_CLOCK_DISPLAY    TRUE
@@ -938,6 +940,8 @@ void RotomPhone_SmallStartMenu_Init(void)
         return;
     }
 
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x80);
+
     sRotomPhone_SmallStartMenu->savedCallback = CB2_ReturnToFieldWithOpenMenu;
     sRotomPhone_SmallStartMenu->isLoading = FALSE;
     sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top = 0;
@@ -1552,6 +1556,7 @@ static void Task_RotomPhone_HandleSave(u8 taskId)
             if (!openedFullScreenRotomPhone)
             {
                 DestroyTask(taskId);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
             }
             else
             {
@@ -1567,6 +1572,7 @@ static void Task_RotomPhone_HandleSave(u8 taskId)
             if (!openedFullScreenRotomPhone)
             {
                 DestroyTask(taskId);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
             }
             else
             {
@@ -1808,6 +1814,7 @@ static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId)
     if (tRotomUpdateTimer == ROTOM_PHONE_MESSAGE_UPDATE_TIMER + ROTOM_PHONE_MESSAGE_SHUTDOWN_TIME)
     {
         RotomPhone_SmallStartMenu_ExitAndClearTilemap();  
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         DestroyTask(taskId);
     }
 }
