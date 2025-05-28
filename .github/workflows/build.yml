@@ -44,12 +44,16 @@ jobs:
       - name: Development ROM
         env:
           COMPARE: 0
+          NO_PORYSCRIPT: 1
         run: make -j${nproc} -O all
 
       - name: Production ROM
         env:
           RELEASE: 1
-        run: make -j${nproc} -O all
+          NO_PORYSCRIPT: 1
+        run: |
+          make clean
+          make -j${nproc} -O all
 
       - name: Test
         env:

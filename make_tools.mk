@@ -6,6 +6,9 @@ MAKEFLAGS += --no-print-directory
 # Inclusive list. If you don't want a tool to be built, don't add it here.
 TOOLS_DIR := tools
 TOOL_NAMES := aif2pcm bin2c gbafix gbagfx jsonproc mapjson mid2agb preproc ramscrgen rsfont scaninc trainerproc
+ifeq ($(NO_PORYSCRIPT),0)
+	TOOL_NAMES += poryscript
+endif
 CHECK_TOOL_NAMES = patchelf mgba-rom-test-hydra
 
 TOOLDIRS := $(TOOL_NAMES:%=$(TOOLS_DIR)/%)
