@@ -397,7 +397,7 @@ include spritesheet_rules.mk
 include json_data_rules.mk
 include audio_rules.mk
 
-# AUTO_GEN_TARGETS += $(patsubst %.pory,%.inc,$(shell find data/ -type f -name '*.pory'))
+AUTO_GEN_TARGETS += $(patsubst %.pory,%.inc,$(shell find data/ -type f -name '*.pory'))
 
 # NOTE: Tools must have been built prior (FIXME)
 # so you can't really call this rule directly
