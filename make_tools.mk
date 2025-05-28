@@ -7,7 +7,7 @@ MAKEFLAGS += --no-print-directory
 # Build without including Poryscript artifacts
 NO_PORYSCRIPT ?= 0
 TOOLS_DIR := tools
-TOOL_NAMES := aif2pcm bin2c gbafix gbagfx jsonproc mapjson mid2agb preproc ramscrgen rsfont scaninc trainerproc
+TOOL_NAMES := aif2pcm bin2c gbafix gbagfx jsonproc mapjson mid2agb preproc ramscrgen rsfont scaninc trainerproc poryscript
 ifeq ($(NO_PORYSCRIPT),0)
 TOOL_NAMES += poryscript
 endif
