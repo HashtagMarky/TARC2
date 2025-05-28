@@ -7,7 +7,7 @@ MAKEFLAGS += --no-print-directory
 TOOLS_DIR := tools
 TOOL_NAMES := aif2pcm bin2c gbafix gbagfx jsonproc mapjson mid2agb preproc ramscrgen rsfont scaninc trainerproc poryscript
 ifneq ($(NO_PORYSCRIPT),0)
-	TOOL_NAMES -= poryscript
+TOOL_NAMES -= poryscript
 endif
 CHECK_TOOL_NAMES = patchelf mgba-rom-test-hydra
 
