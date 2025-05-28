@@ -1712,7 +1712,7 @@
       "height": 1
     },
     {
-      "map_section": "MAPSEC_VYRATON",
+      "id": "MAPSEC_VYRATON",
       "name": "VYRATON",
       "x": 0,
       "y": 0,
