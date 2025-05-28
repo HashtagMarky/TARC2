@@ -3605,7 +3605,7 @@ static u8 ReformatItemDescription(u16 item, u8 *dest)
     u8 count = 0;
     u8 numLines = 1;
     u8 maxChars = 32;
-    u8 *desc = (u8 *)ItemId_GetDescription(item);
+    u8 *desc = (u8 *)GetItemDescription(item);
 
     while (*desc != EOS)
     {
@@ -3709,7 +3709,7 @@ void ShowItemDescription(u16 item)
     u8 *dst;
     bool8 handleFlash = FALSE;
 
-    if (ItemId_GetPocket(item) == POCKET_BERRIES)
+    if (GetItemPocket(item) == POCKET_BERRIES)
         headerType = 1;
 
     if (GetFlashLevel() > 0 || InBattlePyramid_())

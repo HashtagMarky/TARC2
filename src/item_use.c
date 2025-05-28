@@ -283,9 +283,9 @@ static void ItemUseOnFieldCB_Bike(u8 taskId)
 {
     if (GetItemSecondaryId(gSpecialVar_ItemId) == MACH_BIKE)
         GetOnOffBike(PLAYER_AVATAR_FLAG_MACH_BIKE);
-    else if (ItemId_GetSecondaryId(gSpecialVar_ItemId) == ACRO_BIKE)
+    else if (GetItemSecondaryId(gSpecialVar_ItemId) == ACRO_BIKE)
         GetOnOffBike(PLAYER_AVATAR_FLAG_ACRO_BIKE);
-    else if (ItemId_GetSecondaryId(gSpecialVar_ItemId) == BICYCLE)
+    else if (GetItemSecondaryId(gSpecialVar_ItemId) == BICYCLE)
         GetOnOffToggleableBike();
     
     FollowerNPC_HandleBike();
