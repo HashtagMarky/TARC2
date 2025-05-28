@@ -526,7 +526,7 @@ static void WindowFunc_DrawDialogueFrame(u8 bg, u8 l, u8 t, u8 w, u8 h, u8 palet
 
 static void WindowFunc_DrawNamePlate(u8 bg, u8 l, u8 t, u8 w, u8 h, u8 pal)
 {
-    int plateW = DLW_WIN_PLATE_SIZE, plateR = l + plateW, plateD = t + 2, platePal = DLG_WINDOW_PALETTE_NUM;
+    int plateW = DLW_WIN_PLATE_SIZE, plateR = l + plateW, UNUSED plateD = t + 2, platePal = DLG_WINDOW_PALETTE_NUM;
 
     //! top
     FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 10,                 l - 1,  t - 1, 1,      1, platePal);

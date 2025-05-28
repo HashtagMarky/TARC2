@@ -668,7 +668,7 @@ static void CreatePartyMonIcons()
     u8 i = 0;
     s16 x = ICON_BOX_1_START_X;
     s16 y = ICON_BOX_1_START_Y;
-    struct Pokemon *mon;
+    struct Pokemon UNUSED *mon;
     LoadMonIconPalettes();
     for(i = 0; i < gPlayerPartyCount; i++)
     {   
@@ -737,8 +737,8 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
     u8 mapDisplayHeader[24];
     u8 *withoutPrefixPtr, *playTimePtr;
     u8 yOffset = (gSaveBlock2Ptr->optionsCurrentFont == 0) ? 1 : 0;
-    u16 dexCount = 0; u8 badgeCount = 0;
-    u32 i = 0;
+    u16 UNUSED dexCount = 0; u8 UNUSED badgeCount = 0;
+    u32 UNUSED i = 0;
 
     FillWindowPixelBuffer(WINDOW_HEADER, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     FillWindowPixelBuffer(WINDOW_MIDDLE, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));

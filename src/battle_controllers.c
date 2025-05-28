@@ -51,7 +51,7 @@ static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite);
 static void MonFaintCelebration(u32 battler, u8 funcPart);
 static u32 ReturnAnimIdForBattler(bool32 isPlayerSide, u32 specificBattler);
 static void LaunchKOAnimation(u32 battlerId, u16 animId, bool32 isFront);
-static void AnimateMonAfterKnockout(u32 battler);
+static void UNUSED AnimateMonAfterKnockout(u32 battler);
 
 void HandleLinkBattleSetup(void)
 {
@@ -3156,7 +3156,7 @@ static void MonFaintCelebration(u32 battler, u8 funcPart)
     }
 }
 
-static void AnimateMonAfterKnockout(u32 battler)
+static void UNUSED AnimateMonAfterKnockout(u32 battler)
 {
     if (B_ANIMATE_MON_AFTER_KO == FALSE)
         return;

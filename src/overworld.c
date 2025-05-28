@@ -1594,8 +1594,8 @@ void UpdateTimeOfDay(void)
     s32 morningStart = Ikigai_GetSeasonalTimeHour(days, TIME_MORNING, FALSE);
     s32 morningEnd = Ikigai_GetSeasonalTimeHour(days, TIME_MORNING, TRUE);
     s32 morningMiddle = (morningStart + morningEnd) / 2;
-    s32 dayStart = Ikigai_GetSeasonalTimeHour(days, TIME_DAY, FALSE);
-    s32 dayEnd = Ikigai_GetSeasonalTimeHour(days, TIME_DAY, TRUE);
+    s32 UNUSED dayStart = Ikigai_GetSeasonalTimeHour(days, TIME_DAY, FALSE);
+    s32 UNUSED dayEnd = Ikigai_GetSeasonalTimeHour(days, TIME_DAY, TRUE);
     s32 eveningStart = Ikigai_GetSeasonalTimeHour(days, TIME_EVENING, FALSE);
     s32 eveningEnd = Ikigai_GetSeasonalTimeHour(days, TIME_EVENING, TRUE);
     s32 nightStart = Ikigai_GetSeasonalTimeHour(days, TIME_NIGHT, FALSE);

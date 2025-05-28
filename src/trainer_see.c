@@ -505,7 +505,7 @@ static u8 CheckTrainer(u8 objectEventId)
 {
     const u8 *scriptPtr, *trainerBattlePtr;
     u8 numTrainers = 1;
-    u8 sightFlag = GetObjectEventTrainerSightFlagByObjectEventId(objectEventId);
+    u8 UNUSED sightFlag = GetObjectEventTrainerSightFlagByObjectEventId(objectEventId);
 
     u8 approachDistance = GetTrainerApproachDistance(&gObjectEvents[objectEventId]);
     if (approachDistance == 0)
