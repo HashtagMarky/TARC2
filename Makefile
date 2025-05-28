@@ -39,6 +39,13 @@ ifeq (release,$(MAKECMDGOALS))
   export RELEASE := 1
 endif
 
+
+ifneq ($(shell git submodule status | grep '^-'),)
+$(info Initializing git submodules...)
+$(shell git submodule update --init --recursive --remote)
+endif
+
+
 # Default make rule
 all: rom
 
