@@ -35,26 +35,26 @@ jobs:
           extract: true
           out-file-path: 'tools'
 
-      # - name: Print tools
-      #   run: |
-      #     echo "Contents:"
-      #     ls
-      #     echo ""
-      #     echo "----------------------------------------"
-      #     echo "Contents of tools:"
-      #     ls tools
-      #     echo ""
-      #     echo "----------------------------------------"
-      #     echo "Contents of tools/poryscript-linux.zip:"
-      #     ls tools/poryscript-linux.zip
-      #     echo ""
-      #     echo "----------------------------------------"
-      #     echo "Contents of tools/poryscript-linux:"
-      #     ls tools/poryscript-linux
-      #     echo ""
-      #     echo "----------------------------------------"
-      #     echo "Contents of poryscript:"
-      #     ls tools/poryscript
+      - name: Print tools
+        run: |
+          echo "Contents:"
+          ls
+          echo ""
+          echo "----------------------------------------"
+          echo "Contents of tools:"
+          ls tools
+          echo ""
+          echo "----------------------------------------"
+          echo "Contents of tools/poryscript-linux.zip:"
+          ls tools/poryscript-linux.zip
+          echo ""
+          echo "----------------------------------------"
+          echo "Contents of tools/poryscript-linux:"
+          ls tools/poryscript-linux
+          echo ""
+          echo "----------------------------------------"
+          echo "Contents of poryscript:"
+          ls tools/poryscript
 
       - name: Poryscript Install
         run: |
