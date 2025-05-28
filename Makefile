@@ -41,10 +41,8 @@ endif
 
 # Removed 29/05/25
 ifneq ($(shell git submodule status | grep '^-'),)
-ifeq ($(NO_PORYSCRIPT),0)
 $(info Initializing git submodules...)
 $(shell git submodule update --init --recursive --remote)
-endif
 endif
 
 
