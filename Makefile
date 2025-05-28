@@ -129,7 +129,7 @@ O_LEVEL ?= g
 else
 O_LEVEL ?= 2
 endif
-CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST) -DRELEASE=$(RELEASE)
+CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST) -DRELEASE=$(RELEASE) -std=gnu17
 ARMCC := $(PREFIX)gcc
 PATH_ARMCC := PATH="$(PATH)" $(ARMCC)
 CC1 := $(shell $(PATH_ARMCC) --print-prog-name=cc1) -quiet
@@ -429,8 +429,10 @@ generated: $(AUTO_GEN_TARGETS)
 data/%.inc: data/%.pory; $(SCRIPT) -i $< -o $@ -fc tools/poryscript/font_config.json -cc tools/poryscript/command_config.json -l 198
 
 clean-generated:
-	-rm -f $(filter-out $(PORY_INC_FILES),$(AUTO_GEN_TARGETS))
-	-rm -f $(ALL_LEARNABLES_JSON)
+	@-rm -f $(filter-out $(PORY_INC_FILES),$(AUTO_GEN_TARGETS))
+	@echo "rm -f <AUTO_GEN_TARGETS> without <PORY_INC_FILES>"
+	@-rm -f $(ALL_LEARNABLES_JSON)
+	@echo "rm -f <ALL_LEARNABLES_JSON>"
 
 COMPETITIVE_PARTY_SYNTAX := $(shell PATH="$(PATH)"; echo 'COMPETITIVE_PARTY_SYNTAX' | $(CPP) $(CPPFLAGS) -imacros include/gba/defines.h -imacros include/config/general.h | tail -n1)
 ifeq ($(COMPETITIVE_PARTY_SYNTAX),1)
