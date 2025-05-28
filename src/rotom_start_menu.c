@@ -289,11 +289,11 @@ EWRAM_DATA bool32 openedFullScreenRotomPhone;
 
 
 // --BG-GFX--
-static const u32 sSmallRotomTiles[] = INCBIN_U32("graphics/rotom_phone_start_menu/rotom_phone_tiles.4bpp.lz");
-static const u32 sSmallRotomTilemap[] = INCBIN_U32("graphics/rotom_phone_start_menu/rotom_phone_tiles.bin.lz");
-static const u32 sFlipTiles[] = INCBIN_U32("graphics/rotom_phone_start_menu/flip_phone_tiles.4bpp.lz");
-static const u32 sFlipTilemap[] = INCBIN_U32("graphics/rotom_phone_start_menu/flip_phone_tiles.bin.lz");
-static const u16 sStartMenuPalette[] = INCBIN_U16("graphics/rotom_phone_start_menu/rotom_phone_tiles.gbapal");
+static const u32 sSmallRotomTiles[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.lz");
+static const u32 sSmallRotomTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.bin.lz");
+static const u32 sFlipTiles[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_tiles.4bpp.lz");
+static const u32 sFlipTilemap[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_tiles.bin.lz");
+static const u16 sStartMenuPalette[] = INCBIN_U16("graphics/rotom_start_menu/rotom_phone_tiles.gbapal");
 
 //--SPRITE-GFX--
 #define TAG_ICON_GFX 1234
@@ -301,8 +301,8 @@ static const u16 sStartMenuPalette[] = INCBIN_U16("graphics/rotom_phone_start_me
 #define ICON_COORD_X 184
 #define ICON_COORD_Y 50
 
-static const u32 sIconGfx[] = INCBIN_U32("graphics/rotom_phone_start_menu/icons.4bpp.lz");
-static const u16 sIconPal[] = INCBIN_U16("graphics/rotom_phone_start_menu/icons.gbapal");
+static const u32 sIconGfx[] = INCBIN_U32("graphics/rotom_start_menu/icons.4bpp.lz");
+static const u16 sIconPal[] = INCBIN_U16("graphics/rotom_start_menu/icons.gbapal");
 
 static const struct WindowTemplate sSaveInfoWindowTemplate = {
     .bg = 0,
@@ -1917,7 +1917,7 @@ static const struct WindowTemplate sRotomPhone_LargeStartMenuWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u32 sRotomPhone_LargeStartMenuTiles[] = INCBIN_U32("graphics/rotom_phone_start_menu/rotom_phone_tiles.4bpp.lz");
+static const u32 sRotomPhone_LargeStartMenuTiles[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.lz");
 
 // New graphics for the buttons. Create these from 4bpp indexed PNGs, just like before.
 static const u32 sRotomPhone_LargeStartMenuKantoButton[] = INCBIN_U32("graphics/sample_ui/kanto.4bpp");
@@ -1927,10 +1927,10 @@ static const u32 sRotomPhone_LargeStartMenuSinnohButton[] = INCBIN_U32("graphics
 static const u32 sRotomPhone_LargeStartMenuUnovaButton[] = INCBIN_U32("graphics/sample_ui/unova.4bpp");
 static const u32 sRotomPhone_LargeStartMenuKalosButton[] = INCBIN_U32("graphics/sample_ui/kalos.4bpp");
 
-static const u32 sRotomPhone_LargeStartMenuTilemap[] = INCBIN_U32("graphics/rotom_phone_start_menu/full_screen.bin.lz");
-static const u32 sRotomPhone_LargeStartMenuPanelTilemap[] = INCBIN_U32("graphics/rotom_phone_start_menu/full_screen_panel.bin.lz");
+static const u32 sRotomPhone_LargeStartMenuTilemap[] = INCBIN_U32("graphics/rotom_start_menu/full_screen.bin.lz");
+static const u32 sRotomPhone_LargeStartMenuPanelTilemap[] = INCBIN_U32("graphics/rotom_start_menu/full_screen_panel.bin.lz");
 
-static const u16 sRotomPhone_LargeStartMenuPalette[] = INCBIN_U16("graphics/rotom_phone_start_menu/rotom_phone_tiles.gbapal");
+static const u16 sRotomPhone_LargeStartMenuPalette[] = INCBIN_U16("graphics/rotom_start_menu/rotom_phone_tiles.gbapal");
 static const u16 sRotomPhone_LargeStartMenu_KantoJohtoHoennPalette[] = INCBIN_U16("graphics/sample_ui/kanto_johto_hoenn.gbapal");
 static const u16 sRotomPhone_LargeStartMenu_SinnohUnovaKalosPalette[] = INCBIN_U16("graphics/sample_ui/sinnoh_unova_kalos.gbapal");
 
