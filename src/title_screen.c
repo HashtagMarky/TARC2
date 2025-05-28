@@ -60,7 +60,7 @@ static void Task_TitleScreenPhase3(u8);
 static void CB2_GoToMainMenu(void);
 static void CB2_GoToClearSaveDataScreen(void);
 static void CB2_GoToResetRtcScreen(void);
-static void CB2_GoToSoundCheckScreen(void);
+static void UNUSED CB2_GoToSoundCheckScreen(void);
 static void CB2_GoToBerryFixScreen(void);
 static void CB2_GoToCopyrightScreen(void);
 static void UpdateLegendaryMarkingColor(u8);
@@ -1087,7 +1087,7 @@ static void CB2_GoToResetRtcScreen(void)
         SetMainCallback2(CB2_InitResetRtcScreen);
 }
 
-static void CB2_GoToSoundCheckScreen(void)
+static void UNUSED CB2_GoToSoundCheckScreen(void)
 {
     if (!UpdatePaletteFade())
         SetMainCallback2(CB2_StartSoundCheckMenu);

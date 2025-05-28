@@ -35,41 +35,11 @@ jobs:
           extract: true
           out-file-path: 'tools'
 
-      - name: Print tools
-        run: |
-          echo "Contents:"
-          ls
-          echo ""
-          echo "----------------------------------------"
-          echo "Contents of tools:"
-          ls tools
-          echo ""
-          echo "----------------------------------------"
-          echo "Contents of tools/poryscript-linux:"
-          ls tools/poryscript-linux
-          echo ""
-          echo "----------------------------------------"
-          echo "Contents of poryscript:"
-          ls tools/poryscript
-
       - name: Poryscript Install
         run: |
           sudo rm -rf tools/poryscript
           sudo mv tools/poryscript-linux tools/poryscript
           sudo chmod +x tools/poryscript/poryscript
-
-      - name: Print tools again
-        run: |
-          echo "Contents:"
-          ls
-          echo ""
-          echo "----------------------------------------"
-          echo "Contents of tools:"
-          ls tools
-          echo ""
-          echo "----------------------------------------"
-          echo "Contents of poryscript:"
-          ls tools/poryscript
 
       - name: ROM
         env:

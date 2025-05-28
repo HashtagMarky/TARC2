@@ -285,8 +285,8 @@ static void Task_HandleSSPathfinderSequence(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u8 objectEventId;
-    struct ObjectEvent *boatObject;
-    s16 x;
+    struct ObjectEvent UNUSED *boatObject;
+    s16 UNUSED x;
 
     switch (tState)
     {
@@ -324,7 +324,7 @@ static void Task_HandleSSPathfinderSequence(u8 taskId)
         }
         */
         TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_0x8004, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
-        boatObject = &gObjectEvents[objectEventId];
+        // boatObject = &gObjectEvents[objectEventId];
 
     //  if (gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 < -100)
         if (!gPaletteFade.active && tTimer > 100)

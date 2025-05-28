@@ -5143,7 +5143,7 @@ static void DebugAction_Ikigai_MUS_Expansion(u8 taskId)
 #undef tDigit
 
 // Start of MUSIC_EXPANSION_GEN5_MUSIC_REDUCE_SIZE == FALSE
-#define SOUND_LIST_BGM \
+#define SOUND_LIST_BGM_GEN_V_UNREDUCED \
     X(MUS_LITTLEROOT_TEST) \
     X(MUS_GSC_ROUTE38) \
     X(MUS_CAUGHT) \
@@ -6177,7 +6177,7 @@ static void DebugAction_Ikigai_MUS_Expansion(u8 taskId)
 // End of MUSIC_EXPANSION_GEN5_MUSIC_REDUCE_SIZE == FALSE
 
 // Start of MUSIC_EXPANSION_GEN5_MUSIC_REDUCE_SIZE == TRUE
-#define SOUND_LIST_BGM \
+#define SOUND_LIST_BGM_GEN_V_REDUCED \
     X(MUS_LITTLEROOT_TEST) \
     X(MUS_GSC_ROUTE38) \
     X(MUS_CAUGHT) \
@@ -7519,6 +7519,12 @@ static void DebugAction_Ikigai_MUS_Expansion(u8 taskId)
     X(PH_NURSE_SOLO) \
 
 // Create BGM list
+#if MUSIC_EXPANSION_GEN5_MUSIC_REDUCE_SIZE == FALSE
+    #define SOUND_LIST_BGM SOUND_LIST_BGM_GEN_V_UNREDUCED
+#else
+    #define SOUND_LIST_BGM SOUND_LIST_BGM_GEN_V_REDUCED
+#endif
+
 #define X(songId) static const u8 sBGMName_##songId[] = _(#songId);
 SOUND_LIST_BGM
 #undef X

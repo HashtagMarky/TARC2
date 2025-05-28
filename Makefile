@@ -390,6 +390,9 @@ size:
 	@$(MAKE)
 	@python3 map_analysis.py $(MAP_NAME)
 
+errors:
+	@$(MAKE) -s 2>&1 | grep -iE 'error|warning'
+
 # Other rules
 include graphics_file_rules.mk
 include map_data_rules.mk

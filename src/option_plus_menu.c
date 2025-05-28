@@ -199,11 +199,13 @@ static int XOptions_ProcessInput(int x, int selection);
 static int ProcessInput_Options_Two(int selection);
 static int ProcessInput_Options_Three(int selection);
 static int ProcessInput_Options_Four(int selection);
-static int ProcessInput_Options_Eleven(int selection);
+static int UNUSED ProcessInput_Options_Eleven(int selection);
 static int ProcessInput_Sound(int selection);
-static int ProcessInput_FrameType(int selection);
+static int UNUSED ProcessInput_FrameType(int selection);
 static int ProcessInput_Interface(int selection);
+#if (DEBUG_OPTIONS_MENU_GYM_INTERFACE && DEV_BUILD)
 static int DEBUG_ProcessInput_Interface_GymTypes(int selection);
+#endif
 static const u8 *const OptionTextDescription(void);
 static const u8 *const OptionTextRight(u8 menuItem);
 static u8 MenuItemCount(void);
@@ -217,16 +219,18 @@ static void DrawChoices_BattleScene(int selection, int y);
 static void DrawChoices_BattleStyle(int selection, int y);
 static void DrawChoices_Sound(int selection, int y);
 static void DrawChoices_ButtonMode(int selection, int y);
-static void DrawChoices_BarSpeed(int selection, int y); //HP and EXP
+static void UNUSED DrawChoices_BarSpeed(int selection, int y); //HP and EXP
 static void DrawChoices_Speedup(int selection, int y);
 static void DrawChoices_NameColour(int selection, int y);
 static void DrawChoices_UnitSystem(int selection, int y);
 static void DrawChoices_ClockMode(int selection, int y);
 static void DrawChoices_AutoSave(int selection, int y);
 static void DrawChoices_Font(int selection, int y);
-static void DrawChoices_FrameType(int selection, int y);
+static void UNUSED DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_Interface(int selection, int y);
+#if (DEBUG_OPTIONS_MENU_GYM_INTERFACE && DEV_BUILD)
 static void DEBUG_DrawChoices_Interface_GymTypes(int selection, int y);
+#endif
 static void DEBUG_RandomisePlayerForScreenshots(void);
 static void DrawChoices_MatchCall(int selection, int y);
 static void DrawChoices_AutoRun(int selection, int y);
@@ -734,9 +738,9 @@ static void DrawLeftSideOptionText(int selection, int y)
     u8 color_yellow[3];
     u8 color_gray[3];
     const u16 *selectedColorMenuUIPal = Ikigai_ReturnUIPalette();
-    u16 selectedTextColor = selectedColorMenuUIPal[1];
+    u16 UNUSED selectedTextColor = selectedColorMenuUIPal[1];
     const u16 *selectedColorScrollingBGPal = Ikigai_ReturnScrollingBackgroundPalette();
-    u16 selectedShadowColor = selectedColorScrollingBGPal[1];
+    u16 UNUSED selectedShadowColor = selectedColorScrollingBGPal[1];
 
     color_yellow[0] = TEXT_COLOR_TRANSPARENT;
     color_yellow[1] = TEXT_COLOR_OPTIONS_RED_DARK_FG;
@@ -757,9 +761,9 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
 {
     u8 color_red[3];
     u8 color_gray[3];
-    const u16 *selectedColorPal = Ikigai_ReturnUIPalette();
-    u16 selectedTextColor = selectedColorPal[2];
-    u16 selectedShadowColor = selectedColorPal[1];
+    const u16 UNUSED *selectedColorPal = Ikigai_ReturnUIPalette();
+    u16 UNUSED selectedTextColor = selectedColorPal[2];
+    u16 UNUSED selectedShadowColor = selectedColorPal[1];
 
     if (active)
     {
@@ -949,7 +953,7 @@ static bool8 OptionsMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, 
 
 void CB2_InitOptionPlusMenu(void)
 {
-    u32 i, taskId;
+    u32 i, UNUSED taskId;
     switch (gMain.state)
     {
     default:
@@ -1073,7 +1077,7 @@ void CB2_InitOptionPlusMenu(void)
         gMain.state++;
         break;
     case 10:
-        taskId = CreateTask(Task_OptionMenuFadeIn, 0);
+        CreateTask(Task_OptionMenuFadeIn, 0);
         
         sOptions->arrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 240 / 2, 20, 110, MENUITEM_MAIN_COUNT - 1, 110, 110, 0);
 
@@ -1125,7 +1129,7 @@ static void Task_OptionMenuFadeIn(u8 taskId)
 
 static void Task_OptionMenuProcessInput(u8 taskId)
 {
-    int i = 0;
+    int UNUSED i = 0;
     u8 optionsToDraw = min(OPTIONS_ON_SCREEN , MenuItemCount());
     if (JOY_NEW(A_BUTTON))
     {
@@ -1436,7 +1440,7 @@ static int ProcessInput_Options_Four(int selection)
     return XOptions_ProcessInput(4, selection);
 }
 
-static int ProcessInput_Options_Eleven(int selection)
+static int UNUSED ProcessInput_Options_Eleven(int selection)
 {
     return XOptions_ProcessInput(11, selection);
 }
@@ -1453,7 +1457,7 @@ static int ProcessInput_Sound(int selection)
     return selection;
 }
 
-static int ProcessInput_FrameType(int selection)
+static int UNUSED ProcessInput_FrameType(int selection)
 {
     if (JOY_NEW(DPAD_RIGHT))
     {
@@ -1508,6 +1512,7 @@ static int ProcessInput_Interface(int selection)
     return selection;
 }
 
+#if (DEBUG_OPTIONS_MENU_GYM_INTERFACE && DEV_BUILD)
 static int DEBUG_ProcessInput_Interface_GymTypes(int selection)
 {
     if (JOY_NEW(DPAD_RIGHT))
@@ -1538,6 +1543,7 @@ static int DEBUG_ProcessInput_Interface_GymTypes(int selection)
     Ikigai_LoadOptionsMenuText_Pal();
     return selection;
 }
+#endif
 
 static void DEBUG_RandomisePlayerForScreenshots(void)
 {
@@ -1685,10 +1691,11 @@ static void DrawChoices_ButtonMode(int selection, int y)
 }
 
 static const u8 sText_Normal[] = _("NORMAL");
-/*
-static void DrawChoices_BarSpeed(int selection, int y) //HP and EXP
+
+static void UNUSED DrawChoices_BarSpeed(int selection, int y) //HP and EXP
 {
-    bool8 active = CheckConditions(MENUITEM_BATTLE_EXP_BAR);
+    // bool8 active = CheckConditions(MENUITEM_BATTLE_EXP_BAR);
+    bool8 active = TRUE;
 
     if (selection == 0)
          DrawOptionMenuChoice(sText_Normal, 104, y, 1, active);
@@ -1701,7 +1708,7 @@ static void DrawChoices_BarSpeed(int selection, int y) //HP and EXP
     else
         DrawOptionMenuChoice(sText_Instant, 104, y, 1, active);
 }
-*/
+
 static void DrawChoices_Speedup(int selection, int y) 
 {
     bool8 active = TRUE;
@@ -1740,8 +1747,8 @@ static void DrawChoices_UnitSystem(int selection, int y)
 static void DrawChoices_ClockMode(int selection, int y)
 {
     bool8 active = CheckConditions(MENUITEM_MAIN_CLOCK_MODE);
-    u8 styles[2] = {0};
-    styles[selection] = 1;
+    u8 UNUSED styles[2] = {0};
+    // styles[selection] = 1;
 
     if (selection == 0)
         DrawOptionMenuChoice(COMPOUND_STRING("12"), 104, y, 1, active);
@@ -1761,7 +1768,7 @@ static void DrawChoices_AutoSave(int selection, int y)
     DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(1, gText_BattleSceneOff, 198), y, styles[1], active);
 }
 
-static void DrawChoices_FrameType(int selection, int y)
+static void UNUSED DrawChoices_FrameType(int selection, int y)
 {
     bool8 active = CheckConditions(MENUITEM_MAIN_FRAMETYPE);
     u8 text[16];
@@ -1818,12 +1825,14 @@ static void DrawChoices_Interface(int selection, int y)
     }
 }
 
+#if (DEBUG_OPTIONS_MENU_GYM_INTERFACE && DEV_BUILD)
 static void DEBUG_DrawChoices_Interface_GymTypes(int selection, int y)
 {
     bool8 active = CheckConditions(MENUITEM_MAIN_FRAMETYPE);
 
     DrawOptionMenuChoice(gTypesInfo[selection].name, 104, y, 1, active);
 }
+#endif
 
 static void DrawChoices_Font(int selection, int y)
 {
