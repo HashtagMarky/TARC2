@@ -29,13 +29,11 @@ jobs:
       - name: Development ROM
         env:
           COMPARE: 0
-          NO_PORYSCRIPT: 1
         run: make -j${nproc} -O all
 
       - name: Production ROM
         env:
           RELEASE: 1
-          NO_PORYSCRIPT: 1
         run: |
           make clean
           make -j${nproc} -O all
@@ -43,6 +41,5 @@ jobs:
       - name: Test
         env:
           TEST: 1
-          NO_PORYSCRIPT: 1
         run: |
           make -j${nproc} check

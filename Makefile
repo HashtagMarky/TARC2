@@ -23,8 +23,6 @@ DEBUG        ?= 0
 RELEASE     ?= 0
 # Build a release without cleaning first
 NOCLEAN     ?= 0
-# Build without including Poryscript artifacts
-NO_PORYSCRIPT     ?= 0
 
 ifeq (compare,$(MAKECMDGOALS))
   COMPARE := 1
@@ -410,9 +408,7 @@ include json_data_rules.mk
 include audio_rules.mk
 
 PORY_INC_FILES := $(patsubst %.pory,%.inc,$(shell find data/ -type f -name '*.pory'))
-ifeq ($(NO_PORYSCRIPT),0)
-	AUTO_GEN_TARGETS += $(PORY_INC_FILES)
-endif
+AUTO_GEN_TARGETS += $(PORY_INC_FILES)
 
 # NOTE: Tools must have been built prior (FIXME)
 # so you can't really call this rule directly
