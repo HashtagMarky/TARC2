@@ -397,7 +397,8 @@ include spritesheet_rules.mk
 include json_data_rules.mk
 include audio_rules.mk
 
-AUTO_GEN_TARGETS += $(patsubst %.pory,%.inc,$(shell find data/ -type f -name '*.pory'))
+PORY_INC_FILES := $(patsubst %.pory,%.inc,$(shell find data/ -type f -name '*.pory'))
+AUTO_GEN_TARGETS += $(PORY_INC_FILES)
 
 # NOTE: Tools must have been built prior (FIXME)
 # so you can't really call this rule directly
@@ -421,7 +422,7 @@ generated: $(AUTO_GEN_TARGETS)
 data/%.inc: data/%.pory; $(SCRIPT) -i $< -o $@ -fc tools/poryscript/font_config.json -cc tools/poryscript/command_config.json -l 198
 
 clean-generated:
-	-rm -f $(AUTO_GEN_TARGETS)
+	-rm -f $(filter-out $(PORY_INC_FILES),$(AUTO_GEN_TARGETS))
 	-rm -f $(ALL_LEARNABLES_JSON)
 
 COMPETITIVE_PARTY_SYNTAX := $(shell PATH="$(PATH)"; echo 'COMPETITIVE_PARTY_SYNTAX' | $(CPP) $(CPPFLAGS) -imacros include/gba/defines.h -imacros include/config/general.h | tail -n1)
