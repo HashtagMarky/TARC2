@@ -2982,6 +2982,8 @@ static void RotomPhone_StartMenu_SelectedFunc_Save(void)
     {
         InitSave_Global();
         CreateTask(Task_RotomPhone_HandleSave, 0x80);
+        // RotomPhone_LargeStartMenu_DoCleanUpAndCreateTask(Task_RotomPhone_HandleSave, 0x80);
+        // ^ May be able to use after developing Save screen.
     }
 }
 
