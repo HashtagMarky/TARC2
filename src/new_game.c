@@ -113,7 +113,7 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsBattleScene = OPTIONS_BATTLE_SCENE_FULL_ANIMATION;
     gSaveBlock2Ptr->optionsUnitSystem = UNITS_METRIC;  //tx_optionsPlus
     gSaveBlock2Ptr->optionsDisableMatchCall = FALSE;    //tx_optionsPlus
-    gSaveBlock2Ptr->optionsCurrentFont = FONT_SMALL;         //tx_optionsPlus
+    gSaveBlock2Ptr->optionsCurrentFont = 0;         //tx_optionsPlus
     gSaveBlock2Ptr->optionsSuppressNPCMugshots = FALSE;
     gSaveBlock2Ptr->optionsFollowerMugshots = MUGSHOT_FOLLOWER_ON;
     gSaveBlock2Ptr->optionsOverworldCatchSuccessMultiplyer = FALSE;
