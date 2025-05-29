@@ -1548,11 +1548,11 @@ void Script_ForceSaveGame(struct ScriptContext *ctx)
 
 void AutoSaveDoSave(void)
 {
-    u8 saveStatus;
+    u8 UNUSED saveStatus;
     SaveMapView();
     sSavingComplete = FALSE;
     IncrementGameStat(GAME_STAT_SAVED_GAME);
-    saveStatus = TrySavingData(SAVE_NORMAL);
+    // saveStatus = TrySavingData(SAVE_NORMAL);
     gDifferentSaveFile = FALSE;
     return;
 }

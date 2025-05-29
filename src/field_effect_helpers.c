@@ -1094,7 +1094,7 @@ u32 FldEff_ShakingGrass(void)
         sprite->oam.priority = gFieldEffectArguments[3];
         sprite->sWaitFldEff = FLDEFF_SHAKING_GRASS;
     }
-    
+
     return spriteId;
 }
 
@@ -1111,7 +1111,7 @@ u32 FldEff_ShakingGrass2(void)
         sprite->oam.priority = gFieldEffectArguments[3];
         sprite->sWaitFldEff = FLDEFF_SHAKING_LONG_GRASS;
     }
-    
+
     return spriteId;
 }
 
@@ -1144,7 +1144,7 @@ u32 FldEff_WaterSurfacing(void)
         sprite->oam.priority = gFieldEffectArguments[3];
         sprite->sWaitFldEff = FLDEFF_WATER_SURFACING;
     }
-    
+
     return spriteId;
 }
 
@@ -1964,8 +1964,8 @@ static void Task_Saving(u8 taskId)
 static bool8 Saving_Init(struct Task *task)
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-    s16 x = playerObjEvent->currentCoords.x;
-    s16 y = playerObjEvent->currentCoords.y;
+    s16 UNUSED x = playerObjEvent->currentCoords.x;
+    s16 UNUSED y = playerObjEvent->currentCoords.y;
     s16 x2;
     s16 y2;    
     s16 x_diff;

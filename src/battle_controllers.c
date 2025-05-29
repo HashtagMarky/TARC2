@@ -48,7 +48,6 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId);
 static void Task_StartSendOutAnim(u8 taskId);
 static void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);
 static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite);
-static void MonFaintCelebration(u32 battler, u8 funcPart);
 static u32 ReturnAnimIdForBattler(bool32 isPlayerSide, u32 specificBattler);
 static void LaunchKOAnimation(u32 battlerId, u16 animId, bool32 isFront);
 static void AnimateMonAfterKnockout(u32 battler);
@@ -1504,7 +1503,7 @@ void BtlController_EmitIntroTrainerBallThrow(u32 battler, u32 bufferId)
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
-void BtlController_EmitDrawPartyStatusSummary(u32 battler, u32 bufferId, struct HpAndStatus* hpAndStatus, u8 flags)
+void BtlController_EmitDrawPartyStatusSummary(u32 battler, u32 bufferId, struct HpAndStatus *hpAndStatus, u8 flags)
 {
     s32 i;
 
@@ -1544,7 +1543,7 @@ void BtlController_EmitSpriteInvisibility(u32 battler, u32 bufferId, bool8 isInv
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
-void BtlController_EmitBattleAnimation(u32 battler, u32 bufferId, u8 animationId, struct DisableStruct* disableStructPtr, u16 argument)
+void BtlController_EmitBattleAnimation(u32 battler, u32 bufferId, u8 animationId, struct DisableStruct *disableStructPtr, u16 argument)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_BATTLEANIMATION;
     gBattleResources->transferBuffer[1] = animationId;
@@ -2662,7 +2661,7 @@ void BtlController_HandleTrainerSlideBack(u32 battler, s16 data0, bool32 startAn
 
 void BtlController_HandleFaintAnimation(u32 battler)
 {
-    MonFaintCelebration(battler, 1);
+    SetHealthboxSpriteInvisible(gHealthboxSpriteIds[battler]);
     if (gBattleSpritesDataPtr->healthBoxesData[battler].animationState == 0)
     {
         if (gBattleSpritesDataPtr->battlerData[battler].behindSubstitute)
@@ -2693,7 +2692,7 @@ void BtlController_HandleFaintAnimation(u32 battler)
             // The player's sprite is removed in Controller_FaintPlayerMon. Controller_FaintOpponentMon only removes the healthbox once the sprite is removed by SpriteCB_FaintOpponentMon.
         }
     }
-    MonFaintCelebration(battler, 2);
+    AnimateMonAfterKnockout(battler);
 }
 
 #undef sSpeedX
@@ -3109,53 +3108,6 @@ void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE, bool32 up
     }
 }
 
-static void MonFaintCelebration(u32 battler, u8 funcPart)
-{
-    if (gSaveBlock2Ptr->optionsBattleScene != OPTIONS_BATTLE_SCENE_FULL_ANIMATION)
-        return;
-
-    if (funcPart == 1)
-    {
-        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[battler]);
-    }
-
-    if (funcPart == 2)
-    {
-        if (GetBattlerSide(battler) == B_SIDE_PLAYER)
-        {
-            if (gBattleMons[BATTLE_OPPOSITE(battler)].species != SPECIES_NONE)
-            {
-                LaunchAnimationTaskForFrontSprite(&gSprites[gBattlerSpriteIds[BATTLE_OPPOSITE(battler)]], gSpeciesInfo[gBattleMons[BATTLE_OPPOSITE(battler)].species].frontAnimId);
-                PlayCry_Normal(gBattleMons[BATTLE_OPPOSITE(battler)].species, CRY_PRIORITY_NORMAL);
-                if (HasTwoFramesAnimation(gBattleMons[BATTLE_OPPOSITE(battler)].species))
-                    StartSpriteAnim(&gSprites[gBattlerSpriteIds[BATTLE_OPPOSITE(battler)]], 1);
-            }
-
-            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species != SPECIES_NONE)
-            {
-                LaunchAnimationTaskForFrontSprite(&gSprites[gBattlerSpriteIds[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))]], gSpeciesInfo[gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species].frontAnimId);
-                PlayCry_Normal(gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species, CRY_PRIORITY_NORMAL);
-                if (HasTwoFramesAnimation(gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species))
-                    StartSpriteAnim(&gSprites[gBattlerSpriteIds[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))]], 1);
-            }
-        }
-        else if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
-        {
-            if (gBattleMons[BATTLE_OPPOSITE(battler)].species != SPECIES_NONE)
-            {
-                LaunchAnimationTaskForBackSprite(&gSprites[gBattlerSpriteIds[BATTLE_OPPOSITE(battler)]], GetSpeciesBackAnimSet(gBattleMons[BATTLE_OPPOSITE(battler)].species));
-                PlayCry_Normal(gBattleMons[BATTLE_OPPOSITE(battler)].species, CRY_PRIORITY_NORMAL);
-            }
-
-            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species != SPECIES_NONE)
-            {
-                LaunchAnimationTaskForBackSprite(&gSprites[gBattlerSpriteIds[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))]], GetSpeciesBackAnimSet(gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species));
-                PlayCry_Normal(gBattleMons[BATTLE_PARTNER(BATTLE_OPPOSITE(battler))].species, CRY_PRIORITY_NORMAL);
-            }
-        }
-    }
-}
-
 static void AnimateMonAfterKnockout(u32 battler)
 {
     if (B_ANIMATE_MON_AFTER_KO == FALSE)
@@ -3214,7 +3166,7 @@ bool32 TryShinyAnimAfterMonAnimUtil(u32 battler)
     if (gSprites[gBattlerSpriteIds[battler]].callback != SpriteCallbackDummy
      || gSprites[gBattlerSpriteIds[battler]].x2 != 0)
         return FALSE;
-    
+
     if (!gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim)
     {
         TryShinyAnimation(battler, GetBattlerMon(battler));
@@ -3256,7 +3208,7 @@ bool32 SwitchIn_HandleSoundAndEndUtil(u32 battler)
 {
     if (gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive || IsCryPlayingOrClearCrySongs())
         return FALSE;
-    
+
     if (gSprites[gBattlerSpriteIds[battler]].callback != SpriteCallbackDummy
      && gSprites[gBattlerSpriteIds[battler]].callback != SpriteCallbackDummy_2
      && GetBattlerSide(battler) == B_SIDE_OPPONENT)

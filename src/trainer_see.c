@@ -505,7 +505,7 @@ static u8 CheckTrainer(u8 objectEventId)
 {
     const u8 *scriptPtr, *trainerBattlePtr;
     u8 numTrainers = 1;
-    u8 sightFlag = GetObjectEventTrainerSightFlagByObjectEventId(objectEventId);
+    u8 UNUSED sightFlag = GetObjectEventTrainerSightFlagByObjectEventId(objectEventId);
 
     u8 approachDistance = GetTrainerApproachDistance(&gObjectEvents[objectEventId]);
     if (approachDistance == 0)
@@ -1176,15 +1176,15 @@ void PlayerFaceTrainerAfterBattle(void)
         objEvent = &gObjectEvents[gApproachingTrainers[gWhichTrainerToFaceAfterBattle].objectEventId];
         gPostBattleMovementScript[0] = GetFaceDirectionMovementAction(GetOppositeDirection(objEvent->facingDirection));
         gPostBattleMovementScript[1] = MOVEMENT_ACTION_STEP_END;
-        ScriptMovement_StartObjectMovementScript(OBJ_EVENT_ID_PLAYER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gPostBattleMovementScript);
+        ScriptMovement_StartObjectMovementScript(LOCALID_PLAYER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gPostBattleMovementScript);
     }
     else
     {
         objEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
         gPostBattleMovementScript[0] = GetFaceDirectionMovementAction(objEvent->facingDirection);
         gPostBattleMovementScript[1] = MOVEMENT_ACTION_STEP_END;
-        ScriptMovement_StartObjectMovementScript(OBJ_EVENT_ID_PLAYER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gPostBattleMovementScript);
+        ScriptMovement_StartObjectMovementScript(LOCALID_PLAYER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gPostBattleMovementScript);
     }
 
-    SetMovingNpcId(OBJ_EVENT_ID_PLAYER);
+    SetMovingNpcId(LOCALID_PLAYER);
 }

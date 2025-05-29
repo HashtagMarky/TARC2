@@ -37,6 +37,13 @@ ifeq (release,$(MAKECMDGOALS))
   export RELEASE := 1
 endif
 
+# Removed 29/05/25
+ifneq ($(shell git submodule status | grep '^-'),)
+$(info Initializing git submodules...)
+$(shell git submodule update --init --recursive --remote)
+endif
+
+
 # Default make rule
 all: rom
 
@@ -127,7 +134,7 @@ O_LEVEL ?= g
 else
 O_LEVEL ?= 2
 endif
-CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST) -DRELEASE=$(RELEASE)
+CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST) -DRELEASE=$(RELEASE) -std=gnu17
 ARMCC := $(PREFIX)gcc
 PATH_ARMCC := PATH="$(PATH)" $(ARMCC)
 CC1 := $(shell $(PATH_ARMCC) --print-prog-name=cc1) -quiet
@@ -390,6 +397,9 @@ size:
 	@$(MAKE)
 	@python3 map_analysis.py $(MAP_NAME)
 
+errors:
+	@$(MAKE) -s 2>&1 | grep -iE 'error|warning'
+
 # Other rules
 include graphics_file_rules.mk
 include map_data_rules.mk
@@ -397,7 +407,8 @@ include spritesheet_rules.mk
 include json_data_rules.mk
 include audio_rules.mk
 
-# AUTO_GEN_TARGETS += $(patsubst %.pory,%.inc,$(shell find data/ -type f -name '*.pory'))
+PORY_INC_FILES := $(patsubst %.pory,%.inc,$(shell find data/ -type f -name '*.pory'))
+AUTO_GEN_TARGETS += $(PORY_INC_FILES)
 
 # NOTE: Tools must have been built prior (FIXME)
 # so you can't really call this rule directly
@@ -421,8 +432,10 @@ generated: $(AUTO_GEN_TARGETS)
 data/%.inc: data/%.pory; $(SCRIPT) -i $< -o $@ -fc tools/poryscript/font_config.json -cc tools/poryscript/command_config.json -l 198
 
 clean-generated:
-	-rm -f $(AUTO_GEN_TARGETS)
-	-rm -f $(ALL_LEARNABLES_JSON)
+	@-rm -f $(filter-out $(PORY_INC_FILES),$(AUTO_GEN_TARGETS))
+	@echo "rm -f <AUTO_GEN_TARGETS> without <PORY_INC_FILES>"
+	@-rm -f $(ALL_LEARNABLES_JSON)
+	@echo "rm -f <ALL_LEARNABLES_JSON>"
 
 COMPETITIVE_PARTY_SYNTAX := $(shell PATH="$(PATH)"; echo 'COMPETITIVE_PARTY_SYNTAX' | $(CPP) $(CPPFLAGS) -imacros include/gba/defines.h -imacros include/config/general.h | tail -n1)
 ifeq ($(COMPETITIVE_PARTY_SYNTAX),1)

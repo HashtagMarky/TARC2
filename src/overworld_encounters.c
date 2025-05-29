@@ -552,7 +552,7 @@ u8 OverworldTrappedInBattle(void)
     if (heldItem == ITEM_NONE || heldItem == ITEM_ENIGMA_BERRY_E_READER)
         holdEffect = HOLD_EFFECT_NONE;
     else
-        holdEffect = ItemId_GetHoldEffect(heldItem);
+        holdEffect = GetItemHoldEffect(heldItem);
 
     if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN || holdEffect == HOLD_EFFECT_SHED_SHELL)
         return BATTLE_RUN_SUCCESS;

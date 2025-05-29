@@ -492,7 +492,7 @@ static u8 TryLoadSaveSlot(u16 sectorId, struct SaveSectorLocation *locations)
 static u8 CopySaveSlotData(u16 sectorId, struct SaveSectorLocation *locations)
 {
     u16 i;
-    u16 checksum;
+    u16 UNUSED checksum;
     u16 slotOffset = NUM_SECTORS_PER_SLOT * (gSaveCounter % NUM_SAVE_SLOTS);
     u16 id;
 
@@ -520,7 +520,7 @@ static u8 CopySaveSlotData(u16 sectorId, struct SaveSectorLocation *locations)
 static u8 GetSaveValidStatus(const struct SaveSectorLocation *locations)
 {
     u16 i;
-    u16 checksum;
+    u16 UNUSED checksum;
     u32 saveSlot1Counter = 0;
     u32 saveSlot2Counter = 0;
     u32 validSectorFlags = 0;
@@ -816,7 +816,7 @@ bool8 LinkFullSave_SetLastSectorSignature(void)
     return FALSE;
 }
 
-u8 WriteSaveBlock2(void)
+bool8 WriteSaveBlock2(void)
 {
     if (gFlashMemoryPresent != TRUE)
         return TRUE;
@@ -900,7 +900,7 @@ u8 LoadGameSave(u8 saveType)
 u16 GetSaveBlocksPointersBaseOffset(void)
 {
     u16 i, slotOffset;
-    struct SaveSector* sector;
+    struct SaveSector *sector;
 
     sector = gReadWriteSector = &gSaveDataBuffer;
     if (gFlashMemoryPresent != TRUE)

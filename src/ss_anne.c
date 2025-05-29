@@ -26,7 +26,7 @@ static void CreateSmokeSprite(void);
 static void SmokeSpriteCallback(struct Sprite *sprite);
 static void CreateWakeBehindBoat_SSPathfinder(void);
 static void WakeSpriteCallback_SSPathfinder(struct Sprite *sprite);
-static void SmokeSpriteCallback_SSPathfinder(struct Sprite *sprite);
+static void UNUSED SmokeSpriteCallback_SSPathfinder(struct Sprite *sprite);
 
 static const u16 sWakeTiles[] = INCBIN_U16("graphics/ss_anne/wake.4bpp");
 static const u16 sSmokeTiles[] = INCBIN_U16("graphics/ss_anne/smoke.4bpp");
@@ -248,13 +248,13 @@ static void CreateSmokeSprite(void)
     u8 objectEventId;
     struct ObjectEvent * boatObject;
     u16 x;
-    u8 spriteId;
+    u8 UNUSED spriteId;
 
     TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_0x8004, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     boatObject = &gObjectEvents[objectEventId];
     x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 25;
     if ((s16)x >= -32)
-        spriteId = CreateSprite(&sSmokeSpriteTemplate, x, 78, 8);
+        CreateSprite(&sSmokeSpriteTemplate, x, 78, 8);
     UpdatePalettesWithTime(PALETTES_ALL);
 }
 
@@ -314,17 +314,17 @@ void CreateSmokeSprite_SSPathfinder(void)
     u8 objectEventId;
     struct ObjectEvent *boatObject;
     u16 x;
-    u8 spriteId;
+    u8 UNUSED spriteId;
 
     TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_0x8004, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     boatObject = &gObjectEvents[objectEventId];
     x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 25;
     if ((s16)x >= -32)
-        spriteId = CreateSprite(&sSmokeSpriteTemplate_SSPathfinder, x, 46, 8); // Decreased y by 16
+        CreateSprite(&sSmokeSpriteTemplate_SSPathfinder, x, 46, 8); // Decreased y by 16
     UpdatePalettesWithTime(PALETTES_ALL);
 }
 
-static void SmokeSpriteCallback_SSPathfinder(struct Sprite *sprite)
+static void UNUSED SmokeSpriteCallback_SSPathfinder(struct Sprite *sprite)
 {
     if (sprite->animEnded)
         DestroySprite(sprite);

@@ -59,7 +59,7 @@ extern const u8 EventScript_ResetAllMapFlags[];
 extern const u8 EventScript_ResetIkigaiMapFlags[];
 
 static void ClearFrontierRecord(void);
-static void WarpToTruck(void);
+static void UNUSED WarpToTruck(void);
 static void ResetMiniGamesRecords(void);
 static void ResetItemFlags(void);
 static void ResetDexNav(void);
@@ -113,7 +113,7 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsBattleScene = OPTIONS_BATTLE_SCENE_FULL_ANIMATION;
     gSaveBlock2Ptr->optionsUnitSystem = UNITS_METRIC;  //tx_optionsPlus
     gSaveBlock2Ptr->optionsDisableMatchCall = FALSE;    //tx_optionsPlus
-    gSaveBlock2Ptr->optionsCurrentFont = FONT_SMALL;         //tx_optionsPlus
+    gSaveBlock2Ptr->optionsCurrentFont = 0;         //tx_optionsPlus
     gSaveBlock2Ptr->optionsSuppressNPCMugshots = FALSE;
     gSaveBlock2Ptr->optionsFollowerMugshots = MUGSHOT_FOLLOWER_ON;
     gSaveBlock2Ptr->optionsOverworldCatchSuccessMultiplyer = FALSE;
@@ -159,9 +159,9 @@ static void ClearFrontierRecord(void)
     gSaveBlock2Ptr->frontier.opponentNames[1][0] = EOS;
 }
 
-static void WarpToTruck(void)
+static void UNUSED WarpToTruck(void)
 {
-    SetWarpDestination(MAP_GROUP(INSIDE_OF_TRUCK), MAP_NUM(INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
+    SetWarpDestination(MAP_GROUP(MAP_INSIDE_OF_TRUCK), MAP_NUM(MAP_INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
     WarpIntoMap();
 }
 
@@ -173,7 +173,7 @@ static void WarpToShip(void)
     FlagSet(FLAG_HIDE_MAP_NAME_POPUP);
     FlagSet(FLAG_SUPPRESS_MUGSHOT);
     FlagSet(FLAG_SUPPRESS_FOLLOWER);
-    SetWarpDestination(MAP_GROUP(VYRATON_OUTDOORS_OCEAN), MAP_NUM(VYRATON_OUTDOORS_OCEAN), WARP_ID_NONE, 4, 2);
+    SetWarpDestination(MAP_GROUP(MAP_VYRATON_OUTDOORS_OCEAN), MAP_NUM(MAP_VYRATON_OUTDOORS_OCEAN), WARP_ID_NONE, 4, 2);
     WarpIntoMap();
 }
 

@@ -199,7 +199,7 @@ static void Task_NewGameSamuelSpeech_WaitToShowSamuel(u8);
 static void NewGameSamuelSpeech_StartFadeInTarget1OutTarget2(u8, u8);
 static void NewGameSamuelSpeech_StartFadePlatformOut(u8, u8);
 static void Task_NewGameSamuelSpeech_WaitForSpriteFadeInWelcome(u8);
-static void NewGameSamuelSpeech_ShowDialogueWindow(u8, u8);
+static void UNUSED NewGameSamuelSpeech_ShowDialogueWindow(u8, u8);
 static void NewGameSamuelSpeech_ClearWindow(u8);
 static void Task_NewGameSamuelSpeech_ThisIsAPokemon(u8);
 static void Task_NewGameSamuelSpeech_MainSpeech(u8);
@@ -245,7 +245,7 @@ static void SpriteCB_MovePlayerDownWhileShrinking(struct Sprite *);
 static void Task_NewGameSamuelSpeech_WaitForPlayerShrink(u8);
 static void Task_NewGameSamuelSpeech_FadePlayerToWhite(u8);
 static void Task_NewGameSamuelSpeech_Cleanup(u8);
-static void SpriteCB_Null();
+static void SpriteCB_Null(struct Sprite *);
 static void Task_NewGameSamuelSpeech_ReturnFromNamingScreenShowTextbox(u8);
 static void MainMenu_FormatSavegamePlayer(void);
 static void MainMenu_FormatSavegamePokedex(void);
@@ -1360,8 +1360,8 @@ static void Task_NewGameSamuelSpeech_Init(u8 taskId)
 void CB2_NewGameSamuelSpeech_FromNewMainMenu(void)
 {
     u8 taskId;
-    u8 spriteId;
-    u16 savedIme;
+    u8 UNUSED spriteId;
+    u16 UNUSED savedIme;
 
     ResetBgsAndClearDma3BusyFlags(0);
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
@@ -2473,7 +2473,7 @@ void CreateYesNoMenuParameterized(u8 x, u8 y, u16 baseTileNum, u16 baseBlock, u8
     CreateYesNoMenu(&template, baseTileNum, yesNoPalNum, 0);
 }
 
-static void NewGameSamuelSpeech_ShowDialogueWindow(u8 windowId, u8 copyToVram)
+static void UNUSED NewGameSamuelSpeech_ShowDialogueWindow(u8 windowId, u8 copyToVram)
 {
     CallWindowFunction(windowId, NewGameSamuelSpeech_CreateDialogueWindowBorder);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));

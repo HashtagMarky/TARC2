@@ -5396,18 +5396,17 @@ BattleScript_LocalBattleLost::
 	jumpifhalfword CMP_EQUAL, gTrainerBattleParameter + 2, TRAINER_SECRET_BASE, BattleScript_LocalBattleLostEnd
 	jumpifnowhiteout BattleScript_LocalBattleLostEnd_
 BattleScript_LocalBattleLostPrintWhiteOut::
+	getmoneyreward
 .if B_WHITEOUT_MONEY >= GEN_4
 	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_LocalBattleLostEnd
 	printstring STRINGID_PLAYERWHITEOUT
 	waitmessage B_WAIT_TIME_LONG
-	getmoneyreward
 	printstring STRINGID_PLAYERWHITEOUT2
 	waitmessage B_WAIT_TIME_LONG
 	end2
 BattleScript_LocalBattleLostEnd::
 	printstring STRINGID_PLAYERLOSTTOENEMYTRAINER
 	waitmessage B_WAIT_TIME_LONG
-	getmoneyreward
 	printstring STRINGID_PLAYERPAIDPRIZEMONEY
 	waitmessage B_WAIT_TIME_LONG
 	end2
@@ -5637,7 +5636,7 @@ BattleScript_DamagingWeather::
 	printfromtable gSandStormHailDmgStringIds
 	waitmessage B_WAIT_TIME_LONG
 	effectivenesssound
-	hitanimation BS_SCRIPTING
+	hitanimation BS_ATTACKER
 	goto BattleScript_DoTurnDmg
 
 BattleScript_FogEnded_Ret::
@@ -5717,7 +5716,7 @@ BattleScript_MagicRoomEnds::
 	setbyte gBattlerTarget, 0
 BattleScript_MagicRoomHealingItemsLoop:
 	copyarraywithindex gBattlerAttacker, gBattlerByTurnOrder, gBattlerTarget, 1
-	tryhealingitem
+	tryrestorehpberry
 	addbyte gBattlerTarget, 1
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_MagicRoomHealingItemsLoop
 	end2
@@ -6512,6 +6511,14 @@ BattleScript_WishButFullHp::
 	waitmessage B_WAIT_TIME_LONG
 	end2
 
+BattleScript_WishButHealBlocked::
+	printstring STRINGID_PKMNWISHCAMETRUE
+	waitmessage B_WAIT_TIME_LONG
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_HEALBLOCKPREVENTSUSAGE
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
 BattleScript_IngrainTurnHeal::
 	playanimation BS_ATTACKER, B_ANIM_INGRAIN_HEAL
 	printstring STRINGID_PKMNABSORBEDNUTRIENTS
@@ -6986,7 +6993,7 @@ BattleScript_DoTurnDmg:
 	datahpupdate BS_ATTACKER
 	tryfaintmon BS_ATTACKER
 	checkteamslost BattleScript_DoTurnDmgEnd
-	tryhealingitem
+	tryrestorehpberry
 BattleScript_DoTurnDmgEnd:
 	end2
 
@@ -7234,7 +7241,7 @@ BattleScript_YawnEnd:
 BattleScript_EmbargoEndTurn::
 	printstring STRINGID_EMBARGOENDS
 	waitmessage B_WAIT_TIME_LONG
-	tryhealingitem
+	tryrestorehpberry
 	end2
 
 BattleScript_TelekinesisEndTurn::
@@ -7526,7 +7533,7 @@ BattleScript_PickupActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_XFOUNDONEY
 	waitmessage B_WAIT_TIME_LONG
-	tryhealingitem
+	tryrestorehpberry
 BattleScript_PickupActivatesEnd:
 	end3
 
@@ -7536,7 +7543,7 @@ BattleScript_HarvestActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_HARVESTBERRY
 	waitmessage B_WAIT_TIME_LONG
-	tryhealingitem
+	tryrestorehpberry
 BattleScript_HarvestActivatesEnd:
 	end3
 
@@ -9998,7 +10005,11 @@ BattleScript_QuestionForfeitBattle::
 
 BattleScript_ForfeitBattleGaveMoney::
 	getmoneyreward
+.if B_WHITEOUT_MONEY >= GEN_4
 	printstring STRINGID_FORFEITBATTLEGAVEMONEY
+.else
+	printstring STRINGID_PLAYERWHITEOUT2
+.endif
 	waitmessage B_WAIT_TIME_LONG
 	end2
 
