@@ -794,8 +794,8 @@ static bool8 SamuelCaseLoadGraphics(void) // load tilesets, tilemaps, spriteshee
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(sCaseTilemapLeft, sBg1TilemapBuffer);
-            LZDecompressWram(sTextBgTilemapLeft, sBg2TilemapBuffer);
+            DecompressDataWithHeaderWram(sCaseTilemapLeft, sBg1TilemapBuffer);
+            DecompressDataWithHeaderWram(sTextBgTilemapLeft, sBg2TilemapBuffer);
             sSamuelCaseDataPtr->gfxLoadState++;
         }
         break;
@@ -1145,14 +1145,14 @@ static void Task_WaitFadeOutAndChangeGraphics(u8 taskId)
         sCasePageNum ^= 1;
         if (sCasePageNum == PAGE_ONE)
         {
-            LZDecompressWram(sCaseTilemapLeft, sBg1TilemapBuffer);
-            LZDecompressWram(sTextBgTilemapLeft, sBg2TilemapBuffer);
+            DecompressDataWithHeaderWram(sCaseTilemapLeft, sBg1TilemapBuffer);
+            DecompressDataWithHeaderWram(sTextBgTilemapLeft, sBg2TilemapBuffer);
             StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->handSpriteId], POKEBALL_HAND_ANIM_LEFT);
         }
         else
         {
-            LZDecompressWram(sCaseTilemapRight, sBg1TilemapBuffer);
-            LZDecompressWram(sTextBgTilemapRight, sBg2TilemapBuffer);
+            DecompressDataWithHeaderWram(sCaseTilemapRight, sBg1TilemapBuffer);
+            DecompressDataWithHeaderWram(sTextBgTilemapRight, sBg2TilemapBuffer);
             StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->handSpriteId], POKEBALL_HAND_ANIM_RIGHT);
         }
         ScheduleBgCopyTilemapToVram(1);

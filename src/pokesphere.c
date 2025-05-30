@@ -879,7 +879,7 @@ static bool8 PokeSphere_LoadGraphics(void)
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(sPokeSphereTilemapExplore, sBg1TilemapBuffer);
+            DecompressDataWithHeaderWram(sPokeSphereTilemapExplore, sBg1TilemapBuffer);
             IkigaiScrollingBackground_CreateTilemap(1, sBg2TilemapBuffer);
             sPokeSphereState->loadState++;
         }
@@ -907,7 +907,7 @@ static void Task_PokeSphereWaitFadeOutAndChangeBackground(u8 taskId)
             if (FreeTempTileDataBuffersIfPossible() != TRUE)
             {
                 PokeSphere_DestroyExplorePage();
-                LZDecompressWram(sPokeSphereTilemapProfile, sBg1TilemapBuffer);
+                DecompressDataWithHeaderWram(sPokeSphereTilemapProfile, sBg1TilemapBuffer);
             }
         }
         else if (sPokeSphereState->mode == MODE_EXPLORE)
@@ -915,7 +915,7 @@ static void Task_PokeSphereWaitFadeOutAndChangeBackground(u8 taskId)
             if (FreeTempTileDataBuffersIfPossible() != TRUE)
             {
                 PokeSphere_DestroyProfilePostPage();
-                LZDecompressWram(sPokeSphereTilemapExplore, sBg1TilemapBuffer);
+                DecompressDataWithHeaderWram(sPokeSphereTilemapExplore, sBg1TilemapBuffer);
             }
         }
         ScheduleBgCopyTilemapToVram(1);

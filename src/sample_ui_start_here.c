@@ -872,7 +872,7 @@ static bool8 SampleUi_LoadGraphics(void)
              * provided in the `src' (argument 1), and writes the decompressed data to a WRAM location given in `dest'
              * (argument 2). In our case `dest' is just the tilemap buffer we heap-allocated earlier.
              */
-            LZDecompressWram(sSampleUiTilemap, sBg1TilemapBuffer);
+            DecompressDataWithHeaderWram(sSampleUiTilemap, sBg1TilemapBuffer);
             sSampleUiState->loadState++;
         }
         break;

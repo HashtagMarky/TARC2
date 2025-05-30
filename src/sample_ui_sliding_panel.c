@@ -1042,8 +1042,8 @@ static bool8 SampleUi_LoadGraphics(void)
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(sSampleUiTilemap, sBg1TilemapBuffer);
-            LZDecompressWram(sSampleUiPanelTilemap, sBg2TilemapBuffer);
+            DecompressDataWithHeaderWram(sSampleUiTilemap, sBg1TilemapBuffer);
+            DecompressDataWithHeaderWram(sSampleUiPanelTilemap, sBg2TilemapBuffer);
             sSampleUiState->loadState++;
         }
         break;

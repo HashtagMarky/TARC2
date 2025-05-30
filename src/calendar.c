@@ -968,9 +968,9 @@ static bool8 CalendarUI_LoadGraphics(void)
                 tilemapCalendarUI = sCalendarUITilemap_FourWeeks;
             else
                 tilemapCalendarUI = sCalendarUITilemap_TwoWeeks;
-            LZDecompressWram(tilemapCalendarUI, sBg1TilemapBuffer);
+            DecompressDataWithHeaderWram(tilemapCalendarUI, sBg1TilemapBuffer);
             IkigaiScrollingBackground_CreateTilemap(1, sBg2TilemapBuffer);
-            LZDecompressWram(sCalendarUITilemapSupplement, sBg3TilemapBuffer);
+            DecompressDataWithHeaderWram(sCalendarUITilemapSupplement, sBg3TilemapBuffer);
             sCalendarUIState->loadState++;
         }
         break;

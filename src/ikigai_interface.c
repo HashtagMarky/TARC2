@@ -113,7 +113,7 @@ void IkigaiScrollingBackground_CreateTiles(u8 background)
 void IkigaiScrollingBackground_CreateTilemap(u8 paletteSlot, void *dest)
 {
     paletteSlot = paletteSlot > NELEMS(sIkigaiScrollingBgTilemaps) ? 0 : paletteSlot;
-    LZDecompressWram(sIkigaiScrollingBgTilemaps[paletteSlot], dest);
+    DecompressDataWithHeaderWram(sIkigaiScrollingBgTilemaps[paletteSlot], dest);
 }
 
 void IkigaiScrollingBackground_LoadPalette(u8 paletteSlot, enum IkigaiInterfacePalettes type)

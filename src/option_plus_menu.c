@@ -923,7 +923,7 @@ static bool8 OptionsMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, 
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(sOptionsPlusTilemap, sBg2TilemapBuffer);
+            DecompressDataWithHeaderWram(sOptionsPlusTilemap, sBg2TilemapBuffer);
             sOptions->gfxLoadState++;
         }
         break;
