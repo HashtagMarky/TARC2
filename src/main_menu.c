@@ -1338,8 +1338,8 @@ static void Task_NewGameSamuelSpeech_Init(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDY, 0);
 
     gSaveBlock2Ptr->optionsInterfaceColor = gIkigaiLegendaryScreen;
-    LZ77UnCompVram(ReturnShadowGfx(), (void *)VRAM);
-    LZ77UnCompVram(ReturnSpeechBgMap(), (void *)(BG_SCREEN_ADDR(7)));
+    DecompressDataWithHeaderVram(ReturnShadowGfx(), (void *)VRAM);
+    DecompressDataWithHeaderVram(ReturnSpeechBgMap(), (void *)(BG_SCREEN_ADDR(7)));
     LoadPalette(ReturnSpeechBgPals(), BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
     ScanlineEffect_Stop();
     ResetSpriteData();
@@ -1991,8 +1991,8 @@ static void CB2_NewGameSamuelSpeech_ReturnFromNamingScreen(void)
     DmaFill32(3, 0, OAM, OAM_SIZE);
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
     ResetPaletteFade();
-    LZ77UnCompVram(ReturnShadowGfx(), (u8 *)VRAM);
-    LZ77UnCompVram(ReturnSpeechBgMap(), (void *)(BG_SCREEN_ADDR(7)));
+    DecompressDataWithHeaderVram(ReturnShadowGfx(), (u8 *)VRAM);
+    DecompressDataWithHeaderVram(ReturnSpeechBgMap(), (u8 *)(BG_SCREEN_ADDR(7)));
     LoadPalette(ReturnSpeechBgPals(), BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
     ResetTasks();
     taskId = CreateTask(Task_NewGameSamuelSpeech_ReturnFromNamingScreenShowTextbox, 0);

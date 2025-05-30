@@ -2606,20 +2606,28 @@ static void DebugAction_Util_OpenTimeMenu(u8 taskId)
 
 static void DebugAction_TimeMenu_TimesOfDay(u8 taskId)
 {
-    Debug_DestroyMenu_Full(taskId);
     if (!OW_USE_FAKE_RTC)
+    {
         Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_FakeRTCNotEnabled);
+    }
     else
+    {
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_TimeMenu_TimesOfDay, sDebugMenu_ListTemplate_TimeMenu_TimesOfDay);
+    }
 }
 
 static void DebugAction_TimeMenu_Weekdays(u8 taskId)
 {
-    Debug_DestroyMenu_Full(taskId);
     if (!OW_USE_FAKE_RTC)
+    {
         Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_FakeRTCNotEnabled);
+    }
     else
+    {
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_TimeMenu_Weekdays, sDebugMenu_ListTemplate_TimeMenu_Weekdays);
+    }
 }
 
 static void DebugAction_OpenPlayerMenu(u8 taskId)
@@ -3078,7 +3086,6 @@ void BufferExpansionVersion(struct ScriptContext *ctx)
 
 static void DebugAction_TimeMenu_PrintTime(u8 taskId)
 {
-    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_TellTheTime);
 }
@@ -3104,7 +3111,6 @@ void DebugMenu_CalculateTime(struct ScriptContext *ctx)
 
 static void DebugAction_TimeMenu_PrintTimeOfDay(u8 taskId)
 {
-    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_PrintTimeOfDay);
 }
