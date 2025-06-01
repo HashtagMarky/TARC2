@@ -276,14 +276,14 @@ static const u16 sSamuelSpeechBgPals_Pink[][16] = {
     INCBIN_U16("graphics/samuel_speech/shadow_pink.gbapal")
 };
 
-static const u32 sSamuelSpeechShadowGfx_Green[] = INCBIN_U32("graphics/samuel_speech/shadow_green.4bpp.lz");
-static const u32 sSamuelSpeechBgMap_Green[] = INCBIN_U32("graphics/samuel_speech/shadow_green.bin.lz");
-static const u32 sSamuelSpeechShadowGfx_Blue[] = INCBIN_U32("graphics/samuel_speech/shadow_blue.4bpp.lz");
-static const u32 sSamuelSpeechBgMap_Blue[] = INCBIN_U32("graphics/samuel_speech/shadow_blue.bin.lz");
-static const u32 sSamuelSpeechShadowGfx_Orange[] = INCBIN_U32("graphics/samuel_speech/shadow_orange.4bpp.lz");
-static const u32 sSamuelSpeechBgMap_Orange[] = INCBIN_U32("graphics/samuel_speech/shadow_orange.bin.lz");
-static const u32 sSamuelSpeechShadowGfx_Pink[] = INCBIN_U32("graphics/samuel_speech/shadow_pink.4bpp.lz");
-static const u32 sSamuelSpeechBgMap_Pink[] = INCBIN_U32("graphics/samuel_speech/shadow_pink.bin.lz");
+static const u32 sSamuelSpeechShadowGfx_Green[] = INCBIN_U32("graphics/samuel_speech/shadow_green.4bpp.smol");
+static const u32 sSamuelSpeechBgMap_Green[] = INCBIN_U32("graphics/samuel_speech/shadow_green.bin.smolTM");
+static const u32 sSamuelSpeechShadowGfx_Blue[] = INCBIN_U32("graphics/samuel_speech/shadow_blue.4bpp.smol");
+static const u32 sSamuelSpeechBgMap_Blue[] = INCBIN_U32("graphics/samuel_speech/shadow_blue.bin.smolTM");
+static const u32 sSamuelSpeechShadowGfx_Orange[] = INCBIN_U32("graphics/samuel_speech/shadow_orange.4bpp.smol");
+static const u32 sSamuelSpeechBgMap_Orange[] = INCBIN_U32("graphics/samuel_speech/shadow_orange.bin.smolTM");
+static const u32 sSamuelSpeechShadowGfx_Pink[] = INCBIN_U32("graphics/samuel_speech/shadow_pink.4bpp.smol");
+static const u32 sSamuelSpeechBgMap_Pink[] = INCBIN_U32("graphics/samuel_speech/shadow_pink.bin.smolTM");
 
 static const u8 gText_SaveFileCorrupted[] = _("The save file is corrupted. The\nprevious save file will be loaded.");
 static const u8 gText_SaveFileErased[] = _("The save file has been erased\ndue to corruption or damage.");

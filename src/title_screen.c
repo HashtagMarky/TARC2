@@ -76,23 +76,23 @@ u8 gIkigaiLegendaryScreen;
 // const rom data
 static const u16 sUnusedUnknownPal[] = INCBIN_U16("graphics/title_screen/unused.gbapal");
 
-static const u32 sTitleScreenTornadusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/tornadus.4bpp.lz");
-static const u32 sTitleScreenTornadusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/tornadus.bin.lz");
-static const u32 sTitleScreenTornadusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/tornadus_border.4bpp.lz");
-static const u32 sTitleScreenThundurusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/thundurus.4bpp.lz");
-static const u32 sTitleScreenThundurusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/thundurus.bin.lz");
-static const u32 sTitleScreenThundurusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/thundurus_border.4bpp.lz");
-static const u32 sTitleScreenLandorusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/landorus.4bpp.lz");
-static const u32 sTitleScreenLandorusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/landorus.bin.lz");
-static const u32 sTitleScreenLandorusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/landorus_border.4bpp.lz");
-static const u32 sTitleScreenEnamorusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/enamorus.4bpp.lz");
-static const u32 sTitleScreenEnamorusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/enamorus.bin.lz");
-static const u32 sTitleScreenEnamorusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/enamorus_border.4bpp.lz");
-static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/logo_shine.4bpp.lz");
+static const u32 sTitleScreenTornadusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/tornadus.4bpp.smol");
+static const u32 sTitleScreenTornadusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/tornadus.bin.smolTM");
+static const u32 sTitleScreenTornadusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/tornadus_border.4bpp.smol");
+static const u32 sTitleScreenThundurusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/thundurus.4bpp.smol");
+static const u32 sTitleScreenThundurusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/thundurus.bin.smolTM");
+static const u32 sTitleScreenThundurusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/thundurus_border.4bpp.smol");
+static const u32 sTitleScreenLandorusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/landorus.4bpp.smol");
+static const u32 sTitleScreenLandorusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/landorus.bin.smolTM");
+static const u32 sTitleScreenLandorusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/landorus_border.4bpp.smol");
+static const u32 sTitleScreenEnamorusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/enamorus.4bpp.smol");
+static const u32 sTitleScreenEnamorusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/enamorus.bin.smolTM");
+static const u32 sTitleScreenEnamorusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/enamorus_border.4bpp.smol");
+static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/logo_shine.4bpp.smol");
 #if TITLE_SCREEN_VERSION_NUMBER == TRUE
-    static const u32 sTitleScreenLogoIkigaiVersionNumber[] = INCBIN_U32("graphics/title_screen/ikigai_version_number.4bpp.lz");
+    static const u32 sTitleScreenLogoIkigaiVersionNumber[] = INCBIN_U32("graphics/title_screen/ikigai_version_number.4bpp.smol");
 #else
-    static const u32 sTitleScreenLogoIkigaiVersionNumber[] = INCBIN_U32("graphics/title_screen/ikigai_version_number_blank.4bpp.lz");
+    static const u32 sTitleScreenLogoIkigaiVersionNumber[] = INCBIN_U32("graphics/title_screen/ikigai_version_number_blank.4bpp.smol");
 #endif
 static const u16 sTitleScreenLogoIkigaiVersionNumberPal_Blue[] = INCBIN_U16("graphics/title_screen/ikigai_title_screen_blue.gbapal");
 static const u16 sTitleScreenLogoIkigaiVersionNumberPal_Pink[] = INCBIN_U16("graphics/title_screen/ikigai_title_screen_pink.gbapal");
