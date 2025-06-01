@@ -475,7 +475,7 @@ u16 CreatePlayerMugshotTrainerCardSprite(u8 gender, enum MugshotEmoteIDs mugshot
     mugshotGfx = gFieldMugshots[mugshotId][mugshotEmotion].gfx;
     mugshotPal = gFieldMugshots[mugshotId][mugshotEmotion].pal;
 
-    LZ77UnCompWram(mugshotGfx, mugshotBuffer);
+    DecompressDataWithHeaderWram(mugshotGfx, mugshotBuffer);
 
     BlitBitmapRectToWindow(windowId, mugshotBuffer, 0, 0, TRAINER_PIC_WIDTH, TRAINER_PIC_HEIGHT, destX, destY, TRAINER_PIC_WIDTH, TRAINER_PIC_HEIGHT);
 

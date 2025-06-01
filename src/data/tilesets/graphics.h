@@ -1652,7 +1652,7 @@ const u16 gTilesetPalettes_IkigaiOffice[][16] =
     INCBIN_U16("data/tilesets/primary/ikigai_office/palettes/12.gbapal"),
 };
 
-const u32 gTilesetTiles_IkigaiOffice[] = INCBIN_U32("data/tilesets/primary/ikigai_office/tiles.4bpp.lz");
+const u32 gTilesetTiles_IkigaiOffice[] = INCBIN_U32("data/tilesets/primary/ikigai_office/tiles.4bpp.smol");
 
 const u16 gTilesetPalettes_SSPathfinderIndoors[][16] =
 {
@@ -1671,7 +1671,7 @@ const u16 gTilesetPalettes_SSPathfinderIndoors[][16] =
     INCBIN_U16("data/tilesets/primary/sspathfinder_indoors/palettes/12.gbapal"),
 };
 
-const u32 gTilesetTiles_SSPathfinderIndoors[] = INCBIN_U32("data/tilesets/primary/sspathfinder_indoors/tiles.4bpp.lz");
+const u32 gTilesetTiles_SSPathfinderIndoors[] = INCBIN_U32("data/tilesets/primary/sspathfinder_indoors/tiles.4bpp.smol");
 
 const u16 gTilesetPalettes_SSPathfinder_Cabin_Bathroom[][16] =
 {
@@ -1690,7 +1690,7 @@ const u16 gTilesetPalettes_SSPathfinder_Cabin_Bathroom[][16] =
     INCBIN_U16("data/tilesets/secondary/sspathfinder_cabin_bathroom/palettes/12.gbapal"),
 };
 
-const u32 gTilesetTiles_SSPathfinder_Cabin_Bathroom[] = INCBIN_U32("data/tilesets/secondary/sspathfinder_cabin_bathroom/tiles.4bpp.lz");
+const u32 gTilesetTiles_SSPathfinder_Cabin_Bathroom[] = INCBIN_U32("data/tilesets/secondary/sspathfinder_cabin_bathroom/tiles.4bpp.fastSmol");
 
 const u16 gTilesetPalettes_IkigaiOutdoors[][16] =
 {
@@ -1760,4 +1760,4 @@ const u16 gTilesetPalettes_IkigaiOutdoors_Winter[][16] =
     INCBIN_U16("data/tilesets/primary/ikigai_outdoors/palettes/12.gbapal"),
 };
 
-const u32 gTilesetTiles_IkigaiOutdoors[] = INCBIN_U32("data/tilesets/primary/ikigai_outdoors/tiles.4bpp.lz");
+const u32 gTilesetTiles_IkigaiOutdoors[] = INCBIN_U32("data/tilesets/primary/ikigai_outdoors/tiles.4bpp.smol");

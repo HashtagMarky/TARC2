@@ -1383,8 +1383,8 @@ void CB2_NewGameSamuelSpeech_FromNewMainMenu(void)
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
     ResetPaletteFade();
     gSaveBlock2Ptr->optionsInterfaceColor = gIkigaiLegendaryScreen;
-    LZ77UnCompVram(ReturnShadowGfx(), (u8 *)VRAM);
-    LZ77UnCompVram(ReturnSpeechBgMap(), (u8 *)(BG_SCREEN_ADDR(7)));
+    DecompressDataWithHeaderVram(ReturnShadowGfx(), (u8 *)VRAM);
+    DecompressDataWithHeaderVram(ReturnSpeechBgMap(), (u8 *)(BG_SCREEN_ADDR(7)));
     LoadPalette(ReturnSpeechBgPals(), BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
     // LoadPalette(sSamuelSpeechPlatformBlackPal, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(8));
     ResetTasks();

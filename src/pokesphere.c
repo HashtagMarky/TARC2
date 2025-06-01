@@ -225,24 +225,24 @@ static const struct WindowTemplate sPokeSphereWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u32 sPokeSphereTiles[] = INCBIN_U32("graphics/pokesphere/tiles.4bpp.lz");
+static const u32 sPokeSphereTiles[] = INCBIN_U32("graphics/pokesphere/tiles.4bpp.smol");
 static const u16 sPokeSpherePalette[] = INCBIN_U16("graphics/pokesphere/tiles.gbapal");
 
-static const u32 sPokeSphereTilemapExplore[] = INCBIN_U32("graphics/pokesphere/explore.bin.lz");
-static const u32 sPokeSphereTilemapProfile[] = INCBIN_U32("graphics/pokesphere/profile.bin.lz");
+static const u32 sPokeSphereTilemapExplore[] = INCBIN_U32("graphics/pokesphere/explore.bin.smolTM");
+static const u32 sPokeSphereTilemapProfile[] = INCBIN_U32("graphics/pokesphere/profile.bin.smolTM");
 
-static const u32 sPokeSphereExploreCursorGfx[] = INCBIN_U32("graphics/pokesphere/cursor.4bpp.lz");
+static const u32 sPokeSphereExploreCursorGfx[] = INCBIN_U32("graphics/pokesphere/cursor.4bpp.smol");
 static const u16 sPokeSphereExploreCursorPal[] = INCBIN_U16("graphics/pokesphere/cursor.gbapal");
 
-static const u32 sPokeSphereHeartIconGfx[] = INCBIN_U32("graphics/pokesphere/heart.4bpp.lz");
+static const u32 sPokeSphereHeartIconGfx[] = INCBIN_U32("graphics/pokesphere/heart.4bpp.smol");
 static const u16 sPokeSphereHeartIconPal[] = INCBIN_U16("graphics/pokesphere/heart.gbapal");
-static const u32 sPokeSphereInspiredIconGfx[] = INCBIN_U32("graphics/pokesphere/inspired.4bpp.lz");
+static const u32 sPokeSphereInspiredIconGfx[] = INCBIN_U32("graphics/pokesphere/inspired.4bpp.smol");
 static const u16 sPokeSphereInspiredIconPal[] = INCBIN_U16("graphics/pokesphere/inspired.gbapal");
-static const u32 sPokeSphereHumbleIconGfx[] = INCBIN_U32("graphics/pokesphere/humble.4bpp.lz");
+static const u32 sPokeSphereHumbleIconGfx[] = INCBIN_U32("graphics/pokesphere/humble.4bpp.smol");
 static const u16 sPokeSphereHumbleIconPal[] = INCBIN_U16("graphics/pokesphere/humble.gbapal");
-static const u32 sPokeSphereDominantIconGfx[] = INCBIN_U32("graphics/pokesphere/dominant.4bpp.lz");
+static const u32 sPokeSphereDominantIconGfx[] = INCBIN_U32("graphics/pokesphere/dominant.4bpp.smol");
 static const u16 sPokeSphereDominantIconPal[] = INCBIN_U16("graphics/pokesphere/dominant.gbapal");
-static const u32 sPokeSphereCynicalIconGfx[] = INCBIN_U32("graphics/pokesphere/cynical.4bpp.lz");
+static const u32 sPokeSphereCynicalIconGfx[] = INCBIN_U32("graphics/pokesphere/cynical.4bpp.smol");
 static const u16 sPokeSphereCynicalIconPal[] = INCBIN_U16("graphics/pokesphere/cynical.gbapal");
 
 #define TAG_POKESPHERE_CURSOR   21212
