@@ -1831,6 +1831,8 @@ const u16 gIntroCopyright_Pal[] = INCBIN_U16("graphics/intro/copyright.gbapal");
 const u32 gIntroCopyright_Gfx[] = INCBIN_U32("graphics/intro/copyright.4bpp.lz");
 const u32 gIntroCopyright_Tilemap[] = INCBIN_U32("graphics/intro/copyright.bin.lz");
 #else
+const u16 gIntroHMProductionsCopyright_Pal[] = INCBIN_U16("graphics/intro/hmprods_copyright.gbapal");
+const u16 gIntroHMProductionsCopyright_PalText[] = INCBIN_U16("graphics/intro/hmprods_copyright_text.gbapal");
 const u32 gIntroHMProductionsCopyright_Gfx[] = INCBIN_U32("graphics/intro/hmprods_copyright.4bpp.lz");
 const u32 gIntroHMProductionsCopyright_Tilemap[] = INCBIN_U32("graphics/intro/hmprods_copyright.bin.lz");
 #endif

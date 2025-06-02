@@ -1781,6 +1781,8 @@ extern const u32 gIntroCopyright_Tilemap[];
 #else
 extern const u32 gIntroHMProductionsCopyright_Gfx[];
 extern const u32 gIntroHMProductionsCopyright_Tilemap[];
+extern const u16 gIntroHMProductionsCopyright_Pal[16];
+extern const u16 gIntroHMProductionsCopyright_PalText[16];
 #endif
 extern const u16 gIntroCopyright_Pal[16];
 extern const u32 gIntroVolbeat_Gfx[];

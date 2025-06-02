@@ -1075,11 +1075,13 @@ static void LoadCopyrightGraphics(u16 tilesetAddress, u16 tilemapAddress, u16 pa
     #if HM_PRODUCTIONS_COPYRIGHT == FALSE
     LZ77UnCompVram(gIntroCopyright_Gfx, (void *)(VRAM + tilesetAddress));
     LZ77UnCompVram(gIntroCopyright_Tilemap, (void *)(VRAM + tilemapAddress));
+    LoadPalette(gIntroCopyright_Pal, paletteOffset, PLTT_SIZE_4BPP);
     #else
     LZ77UnCompVram(gIntroHMProductionsCopyright_Gfx, (void *)(VRAM + tilesetAddress));
     LZ77UnCompVram(gIntroHMProductionsCopyright_Tilemap, (void *)(VRAM + tilemapAddress));
+    LoadPalette(gIntroHMProductionsCopyright_Pal, paletteOffset, PLTT_SIZE_4BPP);
+    LoadPalette(gIntroHMProductionsCopyright_PalText, paletteOffset + 16, PLTT_SIZE_4BPP);
     #endif
-    LoadPalette(gIntroCopyright_Pal, paletteOffset, PLTT_SIZE_4BPP);
 }
 
 static void SerialCB_CopyrightScreen(void)
