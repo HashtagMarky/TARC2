@@ -26,17 +26,22 @@ jobs:
           sudo apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3
         # build-essential and git are already installed
 
+      - name: Sparkly Swirl
+        env:
+          TEST: 1
+        run: make -j${nproc} check TESTS='Sparkly Swirl cures the entire party'
+
       - name: Development ROM
         env:
           COMPARE: 0
         run: make -j${nproc} -O all
 
-      # - name: Production ROM
-      #   env:
-      #     RELEASE: 1
-      #   run: |
-      #     make clean
-      #     make -j${nproc} -O all
+      - name: Production ROM
+        env:
+          RELEASE: 1
+        run: |
+          make clean
+          make -j${nproc} -O all
 
       - name: Test
         env:
