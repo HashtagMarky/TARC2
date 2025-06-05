@@ -50,7 +50,6 @@
 #include "constants/field_effects.h"
 #include "constants/field_mugshots.h"
 #include "constants/items.h"
-#include "constants/map_types.h"
 #include "constants/mauville_old_man.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/rgb.h"
@@ -2319,7 +2318,7 @@ bool32 IsFollowerVisible(void)
 
 static bool8 SpeciesHasType(u16 species, u8 type)
 {
-    return gSpeciesInfo[species].types[0] == type || gSpeciesInfo[species].types[1] == type;
+    return GetSpeciesType(species, 0) == type || GetSpeciesType(species, 1) == type;
 }
 
 // Display an emote above an object event

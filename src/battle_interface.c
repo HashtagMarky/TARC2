@@ -1177,12 +1177,13 @@ void SwapHpBarsWithHpText(void)
 
     for (i = 0; i < gBattlersCount; i++)
     {
+        struct Pokemon *mon = GetBattlerMon(i);
         if (gSprites[gHealthboxSpriteIds[i]].callback == SpriteCallbackDummy
          && IsOnPlayerSide(i)
          && (GetBattlerCoordsIndex(i) != BATTLE_COORDS_SINGLES || !IsOnPlayerSide(i)))
         {
-            s32 currHp = GetMonData(GetBattlerMon(i), MON_DATA_HP);
-            s32 maxHp = GetMonData(GetBattlerMon(i), MON_DATA_MAX_HP);
+            s32 currHp = GetMonData(mon, MON_DATA_HP);
+            s32 maxHp = GetMonData(mon, MON_DATA_MAX_HP);
             bool8 noBars;
 
             gBattleSpritesDataPtr->battlerData[i].hpNumbersNoBars ^= 1;
@@ -1204,7 +1205,7 @@ void SwapHpBarsWithHpText(void)
                 else // text to bars
                 {
                     UpdateStatusIconInHealthbox(gHealthboxSpriteIds[i]);
-                    UpdateHealthboxAttribute(gHealthboxSpriteIds[i], GetBattlerMon(i), HEALTHBOX_HEALTH_BAR);
+                    UpdateHealthboxAttribute(gHealthboxSpriteIds[i], mon, HEALTHBOX_HEALTH_BAR);
                     CpuCopy32(GetHealthboxElementGfxPtr(HEALTHBOX_GFX_FRAME_END_BAR), (void *)(OBJ_VRAM0 + 0x680 + gSprites[gHealthboxSpriteIds[i]].oam.tileNum * TILE_SIZE_4BPP), 32);
                 }
             }
@@ -1215,7 +1216,7 @@ void SwapHpBarsWithHpText(void)
                     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
                     {
                         // Most likely a debug function.
-                        PrintSafariMonInfo(gHealthboxSpriteIds[i], GetBattlerMon(i));
+                        PrintSafariMonInfo(gHealthboxSpriteIds[i], mon);
                     }
                     else
                     {
@@ -1228,9 +1229,9 @@ void SwapHpBarsWithHpText(void)
                 else // text to bars
                 {
                     UpdateStatusIconInHealthbox(gHealthboxSpriteIds[i]);
-                    UpdateHealthboxAttribute(gHealthboxSpriteIds[i], GetBattlerMon(i), HEALTHBOX_HEALTH_BAR);
+                    UpdateHealthboxAttribute(gHealthboxSpriteIds[i], mon, HEALTHBOX_HEALTH_BAR);
                     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-                        UpdateHealthboxAttribute(gHealthboxSpriteIds[i], GetBattlerMon(i), HEALTHBOX_NICK);
+                        UpdateHealthboxAttribute(gHealthboxSpriteIds[i], mon, HEALTHBOX_NICK);
                 }
             }
             gSprites[gHealthboxSpriteIds[i]].hMain_Data7 ^= 1;
@@ -1807,9 +1808,9 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
 
     battler = gSprites[healthboxSpriteId].hMain_Battler;
     healthBarSpriteId = gSprites[healthboxSpriteId].hMain_HealthBarSpriteId;
+    status = GetMonData(GetBattlerMon(battler), MON_DATA_STATUS);
     if (IsOnPlayerSide(battler))
     {
-        status = GetMonData(GetBattlerMon(battler), MON_DATA_STATUS);
         switch (GetBattlerCoordsIndex(battler))
         {
         case BATTLE_COORDS_SINGLES:
@@ -1822,7 +1823,6 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
     }
     else
     {
-        status = GetMonData(GetBattlerMon(battler), MON_DATA_STATUS);
         tileNumAdder = 0x11;
     }
 
