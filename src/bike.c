@@ -8,7 +8,6 @@
 #include "overworld.h"
 #include "sound.h"
 #include "toggleable_transport.h"
-#include "constants/map_types.h"
 #include "constants/songs.h"
 
 // this file's functions
