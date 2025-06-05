@@ -137,6 +137,7 @@ enum IkigaiStartMenuSubmenu
 {
     DEBUG_IKIGAI_START_MENU_TOGGLE_POKEDEX,
     DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV,
+    DEBUG_IKIGAI_START_MENU_TOGGLE_DEXNAV,
     DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON,
     DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI,
     DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START,
@@ -546,6 +547,7 @@ static void DebugAction_Ikigai_SeasonsSelect(u8 taskId);
 static void DebugAction_Ikigai_PokemonCries(u8 taskId);
 static void DebugAction_Ikigai_TogglePokemonFlag(u8 taskId);
 static void DebugAction_Ikigai_ToggleSafariFlag(u8 taskId);
+static void DebugAction_Ikigai_ToggleDexNavFlag(u8 taskId);
 static void DebugAction_Ikigai_DefaultStartMenu(u8 taskId);
 
 static void DebugAction_Util_Fly(u8 taskId);
@@ -860,6 +862,7 @@ static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_StartMenu[] =
 {
     [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEDEX]    = {COMPOUND_STRING("Toggle {STR_VAR_1}Pokédex"),    DEBUG_IKIGAI_START_MENU_TOGGLE_POKEDEX},
     [DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV]    = {COMPOUND_STRING("Toggle {STR_VAR_1}PokéNav"),    DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV},
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_DEXNAV]     = {COMPOUND_STRING("Toggle {STR_VAR_1}DexNav"),     DEBUG_IKIGAI_START_MENU_TOGGLE_DEXNAV},
     [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON]    = {COMPOUND_STRING("Toggle {STR_VAR_1}Pokémon"),    DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON},
     [DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI]     = {COMPOUND_STRING("Toggle {STR_VAR_1}Safari"),     DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI},
     [DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START] = {COMPOUND_STRING("{FONT_GET_NARROW}Open Default Start Menu{RESET_FONT}…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START},
@@ -1173,6 +1176,7 @@ static void (*const sDebugMenu_Actions_Ikigai_StartMenu[])(u8) =
 {
     [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEDEX]    = DebugAction_FlagsVars_SwitchDex,
     [DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV]    = DebugAction_FlagsVars_SwitchPokeNav,
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_DEXNAV]     = DebugAction_Ikigai_ToggleDexNavFlag,
     [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON]    = DebugAction_Ikigai_TogglePokemonFlag,
     [DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI]     = DebugAction_Ikigai_ToggleSafariFlag,
     [DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START] = DebugAction_Ikigai_DefaultStartMenu,
@@ -1928,6 +1932,10 @@ static u8 Debug_RotomPhoneFlags(u8 id)
     
     case DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI:
         result = GetSafariZoneFlag();
+        break;
+
+    case DEBUG_IKIGAI_START_MENU_TOGGLE_DEXNAV:
+        result = FlagGet(DN_FLAG_DEXNAV_GET);
         break;
     
     default:
@@ -2753,6 +2761,15 @@ static void DebugAction_Ikigai_ToggleSafariFlag(u8 taskId)
         PlaySE(SE_PC_LOGIN);
         SetSafariZoneFlag();
     }
+}
+
+static void DebugAction_Ikigai_ToggleDexNavFlag(u8 taskId)
+{
+    if (FlagGet(DN_FLAG_DEXNAV_GET))
+        PlaySE(SE_PC_OFF);
+    else
+        PlaySE(SE_PC_LOGIN);
+    FlagToggle(DN_FLAG_DEXNAV_GET);
 }
 
 static void DebugAction_Ikigai_DefaultStartMenu(u8 taskId)
