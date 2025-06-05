@@ -1022,12 +1022,12 @@ static void RotomPhone_SmallStartMenu_LoadBgGfx(void)
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
     {
         DecompressAndCopyTileDataToVram(0, sSmallRotomTiles, 0, 0, 0);
-        LZDecompressWram(sSmallRotomTilemap, buf);
+        DecompressDataWithHeaderWram(sSmallRotomTilemap, buf);
     }
     else
     {
         DecompressAndCopyTileDataToVram(0, sFlipTiles, 0, 0, 0);
-        LZDecompressWram(sFlipTilemap, buf);
+        DecompressDataWithHeaderWram(sFlipTilemap, buf);
     }
     
     LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
@@ -2672,8 +2672,8 @@ static bool8 RotomPhone_LargeStartMenu_LoadGraphics(void)
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(sRotomPhone_LargeStartMenuTilemap, sBg1TilemapBuffer);
-            LZDecompressWram(sRotomPhone_LargeStartMenuPanelTilemap, sBg2TilemapBuffer);
+            DecompressDataWithHeaderWram(sRotomPhone_LargeStartMenuTilemap, sBg1TilemapBuffer);
+            DecompressDataWithHeaderWram(sRotomPhone_LargeStartMenuPanelTilemap, sBg2TilemapBuffer);
             sRotomPhone_LargeStartMenu->loadState++;
         }
         break;
