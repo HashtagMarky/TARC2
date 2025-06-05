@@ -76,23 +76,23 @@ u8 gIkigaiLegendaryScreen;
 // const rom data
 static const u16 sUnusedUnknownPal[] = INCBIN_U16("graphics/title_screen/unused.gbapal");
 
-static const u32 sTitleScreenTornadusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/tornadus.4bpp.lz");
-static const u32 sTitleScreenTornadusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/tornadus.bin.lz");
-static const u32 sTitleScreenTornadusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/tornadus_border.4bpp.lz");
-static const u32 sTitleScreenThundurusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/thundurus.4bpp.lz");
-static const u32 sTitleScreenThundurusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/thundurus.bin.lz");
-static const u32 sTitleScreenThundurusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/thundurus_border.4bpp.lz");
-static const u32 sTitleScreenLandorusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/landorus.4bpp.lz");
-static const u32 sTitleScreenLandorusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/landorus.bin.lz");
-static const u32 sTitleScreenLandorusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/landorus_border.4bpp.lz");
-static const u32 sTitleScreenEnamorusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/enamorus.4bpp.lz");
-static const u32 sTitleScreenEnamorusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/enamorus.bin.lz");
-static const u32 sTitleScreenEnamorusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/enamorus_border.4bpp.lz");
-static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/logo_shine.4bpp.lz");
+static const u32 sTitleScreenTornadusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/tornadus.4bpp.smol");
+static const u32 sTitleScreenTornadusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/tornadus.bin.smolTM");
+static const u32 sTitleScreenTornadusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/tornadus_border.4bpp.smol");
+static const u32 sTitleScreenThundurusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/thundurus.4bpp.smol");
+static const u32 sTitleScreenThundurusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/thundurus.bin.smolTM");
+static const u32 sTitleScreenThundurusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/thundurus_border.4bpp.smol");
+static const u32 sTitleScreenLandorusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/landorus.4bpp.smol");
+static const u32 sTitleScreenLandorusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/landorus.bin.smolTM");
+static const u32 sTitleScreenLandorusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/landorus_border.4bpp.smol");
+static const u32 sTitleScreenEnamorusGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/enamorus.4bpp.smol");
+static const u32 sTitleScreenEnamorusTilemap[] = INCBIN_U32("graphics/title_screen/forces_of_nature/enamorus.bin.smolTM");
+static const u32 sTitleScreenEnamorusBorderGfx[] = INCBIN_U32("graphics/title_screen/forces_of_nature/enamorus_border.4bpp.smol");
+static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/logo_shine.4bpp.smol");
 #if TITLE_SCREEN_VERSION_NUMBER == TRUE
-    static const u32 sTitleScreenLogoIkigaiVersionNumber[] = INCBIN_U32("graphics/title_screen/ikigai_version_number.4bpp.lz");
+    static const u32 sTitleScreenLogoIkigaiVersionNumber[] = INCBIN_U32("graphics/title_screen/ikigai_version_number.4bpp.smol");
 #else
-    static const u32 sTitleScreenLogoIkigaiVersionNumber[] = INCBIN_U32("graphics/title_screen/ikigai_version_number_blank.4bpp.lz");
+    static const u32 sTitleScreenLogoIkigaiVersionNumber[] = INCBIN_U32("graphics/title_screen/ikigai_version_number_blank.4bpp.smol");
 #endif
 static const u16 sTitleScreenLogoIkigaiVersionNumberPal_Blue[] = INCBIN_U16("graphics/title_screen/ikigai_title_screen_blue.gbapal");
 static const u16 sTitleScreenLogoIkigaiVersionNumberPal_Pink[] = INCBIN_U16("graphics/title_screen/ikigai_title_screen_pink.gbapal");
@@ -710,8 +710,8 @@ void CB2_InitTitleScreen(void)
         break;
     case 1:
         // bg2
-        LZ77UnCompVram(gTitleScreenPokemonLogoGfx, (void *)(BG_CHAR_ADDR(0)));
-        LZ77UnCompVram(gTitleScreenPokemonLogoTilemap, (void *)(BG_SCREEN_ADDR(9)));
+        DecompressDataWithHeaderVram(gTitleScreenPokemonLogoGfx, (void *)(BG_CHAR_ADDR(0)));
+        DecompressDataWithHeaderVram(gTitleScreenPokemonLogoTilemap, (void *)(BG_SCREEN_ADDR(9)));
         switch (gIkigaiLegendaryScreen)
         {
         case IKIGAI_INTERFACE_GREEN:
@@ -735,23 +735,23 @@ void CB2_InitTitleScreen(void)
         switch (gIkigaiLegendaryScreen)
         {
         case IKIGAI_INTERFACE_GREEN:
-            LZ77UnCompVram(sTitleScreenTornadusGfx, (void *)(BG_CHAR_ADDR(2)));
-            LZ77UnCompVram(sTitleScreenTornadusTilemap, (void *)(BG_SCREEN_ADDR(26)));
+            DecompressDataWithHeaderVram(sTitleScreenTornadusGfx, (void *)(BG_CHAR_ADDR(2)));
+            DecompressDataWithHeaderVram(sTitleScreenTornadusTilemap, (void *)(BG_SCREEN_ADDR(26)));
             break;
         
         case IKIGAI_INTERFACE_BLUE:
-            LZ77UnCompVram(sTitleScreenThundurusGfx, (void *)(BG_CHAR_ADDR(2)));
-            LZ77UnCompVram(sTitleScreenThundurusTilemap, (void *)(BG_SCREEN_ADDR(26)));
+            DecompressDataWithHeaderVram(sTitleScreenThundurusGfx, (void *)(BG_CHAR_ADDR(2)));
+            DecompressDataWithHeaderVram(sTitleScreenThundurusTilemap, (void *)(BG_SCREEN_ADDR(26)));
             break;
         
         case IKIGAI_INTERFACE_ORANGE:
-            LZ77UnCompVram(sTitleScreenLandorusGfx, (void *)(BG_CHAR_ADDR(2)));
-            LZ77UnCompVram(sTitleScreenLandorusTilemap, (void *)(BG_SCREEN_ADDR(26)));
+            DecompressDataWithHeaderVram(sTitleScreenLandorusGfx, (void *)(BG_CHAR_ADDR(2)));
+            DecompressDataWithHeaderVram(sTitleScreenLandorusTilemap, (void *)(BG_SCREEN_ADDR(26)));
             break;
         
         case IKIGAI_INTERFACE_PINK:
-            LZ77UnCompVram(sTitleScreenEnamorusGfx, (void *)(BG_CHAR_ADDR(2)));
-            LZ77UnCompVram(sTitleScreenEnamorusTilemap, (void *)(BG_SCREEN_ADDR(26)));
+            DecompressDataWithHeaderVram(sTitleScreenEnamorusGfx, (void *)(BG_CHAR_ADDR(2)));
+            DecompressDataWithHeaderVram(sTitleScreenEnamorusTilemap, (void *)(BG_SCREEN_ADDR(26)));
             break;
         }
 
@@ -759,23 +759,23 @@ void CB2_InitTitleScreen(void)
         switch (gIkigaiLegendaryScreen)
         {
         case IKIGAI_INTERFACE_GREEN:
-            LZ77UnCompVram(sTitleScreenTornadusBorderGfx, (void *)(BG_CHAR_ADDR(3)));
-            LZ77UnCompVram(gTitleScreenTornadusBorderTilemap, (void *)(BG_SCREEN_ADDR(27)));
+            DecompressDataWithHeaderVram(sTitleScreenTornadusBorderGfx, (void *)(BG_CHAR_ADDR(3)));
+            DecompressDataWithHeaderVram(gTitleScreenTornadusBorderTilemap, (void *)(BG_SCREEN_ADDR(27)));
             break;
         
         case IKIGAI_INTERFACE_BLUE:
-            LZ77UnCompVram(sTitleScreenThundurusBorderGfx, (void *)(BG_CHAR_ADDR(3)));
-            LZ77UnCompVram(gTitleScreenThundurusBorderTilemap, (void *)(BG_SCREEN_ADDR(27)));
+            DecompressDataWithHeaderVram(sTitleScreenThundurusBorderGfx, (void *)(BG_CHAR_ADDR(3)));
+            DecompressDataWithHeaderVram(gTitleScreenThundurusBorderTilemap, (void *)(BG_SCREEN_ADDR(27)));
             break;
         
         case IKIGAI_INTERFACE_ORANGE:
-            LZ77UnCompVram(sTitleScreenLandorusBorderGfx, (void *)(BG_CHAR_ADDR(3)));
-            LZ77UnCompVram(gTitleScreenLandorusBorderTilemap, (void *)(BG_SCREEN_ADDR(27)));
+            DecompressDataWithHeaderVram(sTitleScreenLandorusBorderGfx, (void *)(BG_CHAR_ADDR(3)));
+            DecompressDataWithHeaderVram(gTitleScreenLandorusBorderTilemap, (void *)(BG_SCREEN_ADDR(27)));
             break;
         
         case IKIGAI_INTERFACE_PINK:
-            LZ77UnCompVram(sTitleScreenEnamorusBorderGfx, (void *)(BG_CHAR_ADDR(3)));
-            LZ77UnCompVram(gTitleScreenEnamorusBorderTilemap, (void *)(BG_SCREEN_ADDR(27)));
+            DecompressDataWithHeaderVram(sTitleScreenEnamorusBorderGfx, (void *)(BG_CHAR_ADDR(3)));
+            DecompressDataWithHeaderVram(gTitleScreenEnamorusBorderTilemap, (void *)(BG_SCREEN_ADDR(27)));
             break;
         }
 

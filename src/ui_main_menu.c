@@ -209,11 +209,11 @@ static const struct HWWindowPosition HWinCoords[6] =
 //
 //  Graphic and Tilemap Pointers for Bgs
 //
-static const u32 sIconBoxGfx[] = INCBIN_U32("graphics/ui_main_menu/icon_shadow.4bpp.lz");
+static const u32 sIconBoxGfx[] = INCBIN_U32("graphics/ui_main_menu/icon_shadow.4bpp.smol");
 // Icon shadow becomes second colour in MainBgPalette File
 
-static const u32 sMainBgTilemap[] = INCBIN_U32("graphics/ui_main_menu/main_tiles.bin.lz");
-static const u32 sMainBgTiles[] = INCBIN_U32("graphics/ui_main_menu/main_tiles.4bpp.lz");
+static const u32 sMainBgTilemap[] = INCBIN_U32("graphics/ui_main_menu/main_tiles.bin.smolTM");
+static const u32 sMainBgTiles[] = INCBIN_U32("graphics/ui_main_menu/main_tiles.4bpp.smol");
 
 
 //
@@ -536,7 +536,7 @@ static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spr
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(sMainBgTilemap, sBg1TilemapBuffer);
+            DecompressDataWithHeaderWram(sMainBgTilemap, sBg1TilemapBuffer);
             sMainMenuDataPtr->gfxLoadState++;
         }
         break;
