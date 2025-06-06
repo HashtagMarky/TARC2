@@ -151,6 +151,7 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_Save(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_SafariFlag(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_FullScreen(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_DexNav(void);
+static bool32 RotomPhone_StartMenu_UnlockedFunc_Trainer(void);
 
 static void RotomPhone_StartMenu_SelectedFunc_Pokedex(void);
 static void RotomPhone_StartMenu_SelectedFunc_Pokemon(void);
@@ -166,11 +167,11 @@ static void RotomPhone_StartMenu_SelectedFunc_DexNav(void);
 
 enum RotomPhoneMenuItems
 {
-    ROTOM_PHONE_MENU_FLAG,
     ROTOM_PHONE_MENU_FULL_SCREEN,
+    ROTOM_PHONE_MENU_FLAG,
+    ROTOM_PHONE_MENU_POKEDEX,
     ROTOM_PHONE_MENU_PARTY,
     ROTOM_PHONE_MENU_DEXNAV,
-    ROTOM_PHONE_MENU_POKEDEX,
     ROTOM_PHONE_MENU_BAG,
     ROTOM_PHONE_MENU_POKENAV,
     ROTOM_PHONE_MENU_TRAINER_CARD,
@@ -854,7 +855,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
     {
         .menuName = COMPOUND_STRING("Trainer"),
         .rotomAction = COMPOUND_STRING("to view your ID Card?"),
-        .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Unlocked,
+        .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Trainer,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_Trainer,
         .iconTemplateSmall = &gSpriteIconTrainerCard,
     },
@@ -2892,7 +2893,10 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked(void)
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Pokedex(void)
 {
-    return FlagGet(FLAG_SYS_POKEDEX_GET);
+    if (!RotomPhone_StartMenu_IsFullScreen())
+        return FALSE;
+    else
+        return FlagGet(FLAG_SYS_POKEDEX_GET);
 }
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Pokemon(void)
@@ -2902,7 +2906,10 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_Pokemon(void)
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_PokeNav(void)
 {
-    return FlagGet(FLAG_SYS_POKENAV_GET) && !GetSafariZoneFlag();
+    if (!RotomPhone_StartMenu_IsFullScreen())
+        return FALSE;
+    else
+        return FlagGet(FLAG_SYS_POKENAV_GET);
 }
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Save(void)
@@ -2932,6 +2939,14 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_FullScreen(void)
 static bool32 RotomPhone_StartMenu_UnlockedFunc_DexNav(void)
 {
     return FlagGet(DN_FLAG_DEXNAV_GET);
+}
+
+static bool32 RotomPhone_StartMenu_UnlockedFunc_Trainer(void)
+{
+    if (!RotomPhone_StartMenu_IsFullScreen())
+        return FALSE;
+    else
+        return TRUE;
 }
 
 
