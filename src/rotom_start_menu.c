@@ -309,16 +309,6 @@ static const u16 sStartMenuPalette[] = INCBIN_U16("graphics/rotom_start_menu/rot
 static const u32 sIconGfx[] = INCBIN_U32("graphics/rotom_start_menu/icons.4bpp.lz");
 static const u16 sIconPal[] = INCBIN_U16("graphics/rotom_start_menu/icons.gbapal");
 
-static const struct WindowTemplate sSaveInfoWindowTemplate = {
-    .bg = 0,
-    .tilemapLeft = 1,
-    .tilemapTop = 1,
-    .width = 14,
-    .height = 10,
-    .paletteNum = 15,
-    .baseBlock = 8
-};
-
 #define ROTOM_SPEECH_WINDOW_WIDTH   18
 #define ROTOM_SPEECH_WINDOW_WIDTH_PXL ROTOM_SPEECH_WINDOW_WIDTH * 8
 #define ROTOM_SPEECH_WINDOW_HEIGHT  2
