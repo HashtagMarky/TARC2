@@ -65,6 +65,7 @@
 #include "gba/gba.h"
 #include "m4a.h"
 #include "dexnav.h"
+#include "wallclock.h"
 
 
 #define ROTOM_PHONE_UPDATE_CLOCK_DISPLAY    TRUE
@@ -2999,10 +3000,10 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_Trainer(void)
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Clock(void)
 {
-    if (FlagGet(FLAG_SYS_POKEDEX_GET))
-        return FALSE;
-    else
+    if (!FlagGet(FLAG_SYS_POKEDEX_GET) || (RotomPhone_StartMenu_IsFullScreen()))
         return TRUE;
+    else
+        return FALSE;
 }
 
 
@@ -3166,22 +3167,29 @@ static void RotomPhone_StartMenu_SelectedFunc_DexNav(void)
 
 static void RotomPhone_StartMenu_SelectedFunc_Clock(void)
 {
-    u8 taskId = FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput);
-    if (taskId == TASK_NONE)
-        return;
-    
-    u8 time[24];
-    RtcCalcLocalTime();
-    FormatDecimalTimeWithoutSeconds(time, gLocalTime.hours, gLocalTime.minutes, ROTOM_PHONE_24_HOUR_MODE);
-    u8 fontId = GetFontIdToFit(time, ReturnNormalTextFont(), 0, sWindowTemplate_FlipPhone.width * 8);
-    FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdFlipPhone, PIXEL_FILL(ROTOM_PHONE_BG_COLOUR));
-    AddTextPrinterParameterized4(sRotomPhone_SmallStartMenu->windowIdFlipPhone, fontId,
-    GetStringCenterAlignXOffset(fontId, time, sWindowTemplate_FlipPhone.width * 8),
-    ROTOM_SPEECH_BOTTOM_ROW_Y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_SMALL_PHONE], TEXT_SKIP_DRAW, time);
-    CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdFlipPhone, COPYWIN_GFX);
-    tRotomMessageSoundEffect = SE_BALL_TRAY_EXIT;
-    tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER;
-    sRotomPhone_SmallStartMenu->isLoading = FALSE;
+    if (!RotomPhone_StartMenu_IsFullScreen())
+    {
+        u8 taskId = FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput);
+        if (taskId == TASK_NONE)
+            return;
+        
+        u8 time[24];
+        RtcCalcLocalTime();
+        FormatDecimalTimeWithoutSeconds(time, gLocalTime.hours, gLocalTime.minutes, ROTOM_PHONE_24_HOUR_MODE);
+        u8 fontId = GetFontIdToFit(time, ReturnNormalTextFont(), 0, sWindowTemplate_FlipPhone.width * 8);
+        FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdFlipPhone, PIXEL_FILL(ROTOM_PHONE_BG_COLOUR));
+        AddTextPrinterParameterized4(sRotomPhone_SmallStartMenu->windowIdFlipPhone, fontId,
+        GetStringCenterAlignXOffset(fontId, time, sWindowTemplate_FlipPhone.width * 8),
+        ROTOM_SPEECH_BOTTOM_ROW_Y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_SMALL_PHONE], TEXT_SKIP_DRAW, time);
+        CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdFlipPhone, COPYWIN_GFX);
+        tRotomMessageSoundEffect = SE_BALL_TRAY_EXIT;
+        tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER;
+        sRotomPhone_SmallStartMenu->isLoading = FALSE;
+    }
+    else
+    {
+        RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_ViewWallClock);
+    }
 }
 #undef tRotomUpdateTimer
 #undef tRotomUpdateMessage
