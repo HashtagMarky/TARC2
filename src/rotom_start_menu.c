@@ -290,8 +290,12 @@ struct RotomPhone_StartMenu
 static EWRAM_DATA struct RotomPhone_StartMenu *sRotomPhone_SmallStartMenu = NULL;
 static EWRAM_DATA enum RotomPhoneMenuItems menuSelectedSmall; // Separate memory allocation so it persist between destroying of menu.
 static EWRAM_DATA enum RotomPhoneMenuItems menuSelectedLarge; // Separate memory allocation so it persist between destroying of menu.
-EWRAM_DATA bool32 openedFullScreenRotomPhone;
+static EWRAM_DATA bool32 menuFullScreen;
 
+bool32 RotomPhone_StartMenu_IsFullScreen(void)
+{
+    return menuFullScreen;
+}
 
 // --BG-GFX--
 static const u32 sSmallRotomTiles[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.lz");
@@ -997,7 +1001,7 @@ void RotomPhone_SmallStartMenu_Init(bool32 printGreeting)
     sRotomPhone_SmallStartMenu->isLoading = FALSE;
     sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top = 0;
     sRotomPhone_SmallStartMenu->spriteFlag = FALSE;
-    openedFullScreenRotomPhone = FALSE;
+    menuFullScreen = FALSE;
 
     RotomPhone_SmallStartMenu_LoadSprites();
     RotomPhone_SmallStartMenu_CreateAllSprites();
@@ -1608,7 +1612,7 @@ static void Task_RotomPhone_HandleSave(u8 taskId)
             ClearDialogWindowAndFrameToTransparent(0, TRUE);
             ScriptUnfreezeObjectEvents();  
             UnlockPlayerFieldControls();
-            if (!openedFullScreenRotomPhone)
+            if (!RotomPhone_StartMenu_IsFullScreen())
             {
                 DestroyTask(taskId);
                 m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
@@ -1624,7 +1628,7 @@ static void Task_RotomPhone_HandleSave(u8 taskId)
             ScriptUnfreezeObjectEvents();
             UnlockPlayerFieldControls();
             SoftResetInBattlePyramid();
-            if (!openedFullScreenRotomPhone)
+            if (!RotomPhone_StartMenu_IsFullScreen())
             {
                 DestroyTask(taskId);
                 m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
@@ -2343,7 +2347,7 @@ void RotomPhone_LargeStartMenu_Init(void)
     sRotomPhone_LargeStartMenu = AllocZeroed(sizeof(struct RotomPhone_LargeStartMenuState));
     if (sRotomPhone_LargeStartMenu == NULL)
     {
-        openedFullScreenRotomPhone = FALSE;
+        menuFullScreen = FALSE;
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
         return;
     }
@@ -2614,7 +2618,7 @@ static void Task_RotomPhone_LargeStartMenu_WaitFadeAndBail(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        openedFullScreenRotomPhone = FALSE;
+        menuFullScreen = FALSE;
         SetMainCallback2(sRotomPhone_LargeStartMenu->savedCallback);
         RotomPhone_LargeStartMenu_FreeResources();
         DestroyTask(taskId);
@@ -2625,7 +2629,7 @@ static void Task_RotomPhone_LargeStartMenu_WaitFadeAndExitGracefully(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        openedFullScreenRotomPhone = FALSE;
+        menuFullScreen = FALSE;
         SetMainCallback2(sRotomPhone_LargeStartMenu->savedCallback);
         RotomPhone_LargeStartMenu_FreeResources();
         DestroyTask(taskId);
@@ -2903,7 +2907,7 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_PokeNav(void)
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Save(void)
 {
-    if (!openedFullScreenRotomPhone)
+    if (!RotomPhone_StartMenu_IsFullScreen())
         return !GetSafariZoneFlag();
     else
         return TRUE;
@@ -2911,7 +2915,7 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_Save(void)
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_SafariFlag(void)
 {
-    if (!openedFullScreenRotomPhone)
+    if (!RotomPhone_StartMenu_IsFullScreen())
         return GetSafariZoneFlag();
     else
         return FALSE;
@@ -2919,7 +2923,7 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_SafariFlag(void)
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_FullScreen(void)
 {
-    if (!openedFullScreenRotomPhone)
+    if (!RotomPhone_StartMenu_IsFullScreen())
         return FlagGet(FLAG_SYS_POKEDEX_GET) && !GetSafariZoneFlag();
     else
         return FALSE;
@@ -2933,7 +2937,7 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_DexNav(void)
 
 static void RotomPhone_StartMenu_SelectedFunc_Pokedex(void)
 {
-    if (!openedFullScreenRotomPhone)
+    if (!RotomPhone_StartMenu_IsFullScreen())
         RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(CB2_OpenPokedex);
     else
         RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_OpenPokedex);
@@ -2941,7 +2945,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Pokedex(void)
 
 static void RotomPhone_StartMenu_SelectedFunc_Pokemon(void)
 {
-    if (!openedFullScreenRotomPhone)
+    if (!RotomPhone_StartMenu_IsFullScreen())
         RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(CB2_PartyMenuFromStartMenu);
     else
         RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_PartyMenuFromStartMenu);
@@ -2949,7 +2953,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Pokemon(void)
 
 static void RotomPhone_StartMenu_SelectedFunc_Bag(void)
 {
-    if (!openedFullScreenRotomPhone)
+    if (!RotomPhone_StartMenu_IsFullScreen())
         RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(CB2_BagMenuFromStartMenu);
     else
         RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_BagMenuFromStartMenu);
@@ -2957,7 +2961,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Bag(void)
 
 static void RotomPhone_StartMenu_SelectedFunc_PokeNav(void)
 {
-    if (!openedFullScreenRotomPhone)
+    if (!RotomPhone_StartMenu_IsFullScreen())
         RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(CB2_InitPokeNav);
     else
         RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_InitPokeNav);
@@ -2965,7 +2969,7 @@ static void RotomPhone_StartMenu_SelectedFunc_PokeNav(void)
 
 static void RotomPhone_StartMenu_SelectedFunc_Trainer(void)
 {
-    if (!openedFullScreenRotomPhone)
+    if (!RotomPhone_StartMenu_IsFullScreen())
     {
         if (!gPaletteFade.active)
         {
@@ -3012,7 +3016,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Trainer(void)
 
 static void RotomPhone_StartMenu_SelectedFunc_Save(void)
 {
-    if (!openedFullScreenRotomPhone)
+    if (!RotomPhone_StartMenu_IsFullScreen())
     {
         if (!gPaletteFade.active)
         {
@@ -3036,7 +3040,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Save(void)
 
 static void RotomPhone_StartMenu_SelectedFunc_Settings(void)
 {
-    if (!openedFullScreenRotomPhone)
+    if (!RotomPhone_StartMenu_IsFullScreen())
         RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(CB2_InitOptionMenu);
     else
         RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_InitOptionMenu);
@@ -3044,7 +3048,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Settings(void)
 
 static void RotomPhone_StartMenu_SelectedFunc_SafariFlag(void)
 {
-    if (!openedFullScreenRotomPhone)
+    if (!RotomPhone_StartMenu_IsFullScreen())
     {
         if (!gPaletteFade.active)
         {
@@ -3064,11 +3068,11 @@ static void RotomPhone_StartMenu_SelectedFunc_SafariFlag(void)
 
 static void RotomPhone_StartMenu_SelectedFunc_FullScreen(void)
 {
-    if (!openedFullScreenRotomPhone)
+    if (!RotomPhone_StartMenu_IsFullScreen())
     {
         if (!gPaletteFade.active)
         {
-            openedFullScreenRotomPhone = TRUE;
+            menuFullScreen = TRUE;
             RotomPhone_SmallStartMenu_DoCleanUpAndChangeTaskFunc(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput), Task_OpenRotomPhone_LargeStartMenu);
         }
     }
@@ -3081,7 +3085,7 @@ static void RotomPhone_StartMenu_SelectedFunc_FullScreen(void)
 
 static void RotomPhone_StartMenu_SelectedFunc_DexNav(void)
 {
-    if (!openedFullScreenRotomPhone)
+    if (!RotomPhone_StartMenu_IsFullScreen())
         RotomPhone_SmallStartMenu_DoCleanUpAndChangeTaskFunc(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput), Task_OpenDexNavFromStartMenu);
     else
     {
