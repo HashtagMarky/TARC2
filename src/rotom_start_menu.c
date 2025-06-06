@@ -330,7 +330,7 @@ static const struct WindowTemplate sWindowTemplate_RotomSpeech_Top = {
   .tilemapTop = ROTOM_SPEECH_WINDOW_TOP, 
   .width = ROTOM_SPEECH_WINDOW_WIDTH,
   .height = ROTOM_SPEECH_WINDOW_HEIGHT, 
-  .paletteNum = 15,
+  .paletteNum = 14,
   .baseBlock = 0x30
 };
 
@@ -340,7 +340,7 @@ static const struct WindowTemplate sWindowTemplate_RotomSpeech_Bottom = {
     .tilemapTop = ROTOM_SPEECH_WINDOW_TOP + 2, 
     .width = ROTOM_SPEECH_WINDOW_WIDTH, 
     .height = ROTOM_SPEECH_WINDOW_HEIGHT, 
-    .paletteNum = 15,
+    .paletteNum = 14,
     .baseBlock = 0x30 + (ROTOM_SPEECH_WINDOW_WIDTH*ROTOM_SPEECH_WINDOW_WIDTH)
 };
 
@@ -350,7 +350,7 @@ static const struct WindowTemplate sWindowTemplate_FlipPhone = {
     .tilemapTop = 16,
     .width = 7,
     .height = 2,
-    .paletteNum = 15,
+    .paletteNum = 14,
     .baseBlock = (0x30 + (ROTOM_SPEECH_WINDOW_WIDTH*ROTOM_SPEECH_WINDOW_WIDTH)) + (ROTOM_SPEECH_WINDOW_WIDTH*ROTOM_SPEECH_WINDOW_WIDTH)
 };
 
@@ -940,6 +940,26 @@ static const u8 sWeatherActions[WEATHER_COUNT][24] =
     [WEATHER_UNDERWATER_BUBBLES] = _("dark"),
 };
 
+#define ROTOM_PHONE_BG_COLOUR       6
+#define ROTOM_PHONE_TEXT_FG_COLOUR  2
+#define ROTOM_PHONE_TEXT_BG_COLOUR  5
+enum FontColor
+{
+    FONT_BLACK,
+    FONT_WHITE,
+    FONT_RED,
+    FONT_BLUE,
+    FONT_SMALL_PHONE,
+};
+static const u8 sRotomPhone_StartMenuFontColors[][3] =
+{
+    [FONT_BLACK]        = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY,       TEXT_COLOR_LIGHT_GRAY},
+    [FONT_WHITE]        = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,           TEXT_COLOR_DARK_GRAY},
+    [FONT_RED]          = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_RED,             TEXT_COLOR_LIGHT_GRAY},
+    [FONT_BLUE]         = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_BLUE,            TEXT_COLOR_LIGHT_GRAY},
+    [FONT_SMALL_PHONE]  = {ROTOM_PHONE_BG_COLOUR,   ROTOM_PHONE_TEXT_FG_COLOUR, ROTOM_PHONE_TEXT_BG_COLOUR}
+};
+
 
 static enum RotomPhoneMenuItems RotomPhone_SetFirstSelectedMenu(void)
 {
@@ -1083,7 +1103,6 @@ static void RotomPhone_SmallStartMenu_LoadBgGfx(void)
         DecompressDataWithHeaderWram(sFlipTilemap, buf);
     }
     
-    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     LoadPalette(sStartMenuPalette, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
     ScheduleBgCopyTilemapToVram(0);
 }
@@ -1095,11 +1114,11 @@ static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void)
         return;
 
     sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top = AddWindow(&sWindowTemplate_RotomSpeech_Top);
-    FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top, PIXEL_FILL(TEXT_COLOR_WHITE));
+    FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top, PIXEL_FILL(ROTOM_PHONE_BG_COLOUR));
     PutWindowTilemap(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top);
 
     sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom = AddWindow(&sWindowTemplate_RotomSpeech_Bottom);
-    FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom, PIXEL_FILL(TEXT_COLOR_WHITE));
+    FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom, PIXEL_FILL(ROTOM_PHONE_BG_COLOUR));
     PutWindowTilemap(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom);
 }
 
@@ -1109,7 +1128,6 @@ static void RotomPhone_SmallStartMenu_CreateFlipPhoneWindow(void)
         return;
     
     sRotomPhone_SmallStartMenu->windowIdFlipPhone = AddWindow(&sWindowTemplate_FlipPhone);
-    FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdFlipPhone, PIXEL_FILL(TEXT_COLOR_WHITE));
     PutWindowTilemap(sRotomPhone_SmallStartMenu->windowIdFlipPhone);
 }
 
@@ -1120,11 +1138,10 @@ static void RotomPhone_SmallStartMenu_PrintRotomSpeech(u8 textBuffer[80], bool32
     u32 windowId;
     windowId = (top == TRUE) ? sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top : sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom;
 
-    AddTextPrinterParameterized(windowId, fontId,
-        sText_ClearWindow, 0, ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(windowId, fontId, textBuffer,
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(ROTOM_PHONE_BG_COLOUR));
+    AddTextPrinterParameterized4(windowId, fontId,
         GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
-        ROTOM_SPEECH_TOP_ROW_Y, TEXT_SKIP_DRAW, NULL);
+        ROTOM_SPEECH_TOP_ROW_Y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_SMALL_PHONE], TEXT_SKIP_DRAW, textBuffer);
     
     if (copy)
         CopyWindowToVram(windowId, COPYWIN_GFX);
@@ -1501,11 +1518,10 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId)
     else
     {
         fontId = GetFontIdToFit(sRotomPhoneOptions[menuSelectedSmall].menuName, ReturnNormalTextFont(), 0, sWindowTemplate_FlipPhone.width * 8);
-        AddTextPrinterParameterized(sRotomPhone_SmallStartMenu->windowIdFlipPhone, fontId,
-            sText_ClearWindow, 0, ROTOM_SPEECH_BOTTOM_ROW_Y, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(sRotomPhone_SmallStartMenu->windowIdFlipPhone, fontId, sRotomPhoneOptions[menuSelectedSmall].menuName,
-            GetStringCenterAlignXOffset(fontId, sRotomPhoneOptions[menuSelectedSmall].menuName, sWindowTemplate_FlipPhone.width * 8),
-            ROTOM_SPEECH_BOTTOM_ROW_Y, TEXT_SKIP_DRAW, NULL);
+        FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdFlipPhone, PIXEL_FILL(ROTOM_PHONE_BG_COLOUR));
+        AddTextPrinterParameterized4(sRotomPhone_SmallStartMenu->windowIdFlipPhone, fontId,
+        GetStringCenterAlignXOffset(fontId, sRotomPhoneOptions[menuSelectedSmall].menuName, sWindowTemplate_FlipPhone.width * 8),
+        ROTOM_SPEECH_BOTTOM_ROW_Y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_SMALL_PHONE], TEXT_SKIP_DRAW, sRotomPhoneOptions[menuSelectedSmall].menuName);
         CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdFlipPhone, COPYWIN_GFX);
         tRotomMessageSoundEffect = SE_BALL_TRAY_EXIT;
     }
@@ -2321,23 +2337,6 @@ static const struct SpriteTemplate sKalosButtonSpriteTemplate =
     .callback = SpriteCallbackDummy,
 };
 
-enum FontColor
-{
-    FONT_BLACK,
-    FONT_WHITE,
-    FONT_RED,
-    FONT_BLUE,
-};
-static const u8 sRotomPhone_LargeStartMenuWindowFontColors[][3] =
-{
-    [FONT_BLACK]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY},
-    [FONT_WHITE]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY},
-    [FONT_RED]    = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED,        TEXT_COLOR_LIGHT_GRAY},
-    [FONT_BLUE]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_BLUE,       TEXT_COLOR_LIGHT_GRAY},
-};
-
-
-
 
 void Task_OpenRotomPhone_LargeStartMenu(u8 taskId)
 {
@@ -2772,15 +2771,15 @@ static void RotomPhone_LargeStartMenu_PrintUiButtonHints(void)
     StringExpandPlaceholders(gStringVar2, sText_RotomPhone_LargeStartMenuButtonHint2);
 
     AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_NORMAL, 0, 3, 0, 0,
-        sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sRotomPhoneOptions[menuSelectedLarge].menuName);
+        sRotomPhone_StartMenuFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sRotomPhoneOptions[menuSelectedLarge].menuName);
     AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 79, 0, 0, 0,
-        sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_RotomPhone_LargeStartMenuButtonHint1);
+        sRotomPhone_StartMenuFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_RotomPhone_LargeStartMenuButtonHint1);
     AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 79, 10, 0, 0,
-        sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar2);
+        sRotomPhone_StartMenuFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar2);
     AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 79, 20, 0, 0,
-        sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_RotomPhone_LargeStartMenuButtonHint3);
+        sRotomPhone_StartMenuFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_RotomPhone_LargeStartMenuButtonHint3);
     AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 79, 30, 0, 0,
-        sRotomPhone_LargeStartMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_RotomPhone_LargeStartMenuButtonHint4);
+        sRotomPhone_StartMenuFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_RotomPhone_LargeStartMenuButtonHint4);
 
     CopyWindowToVram(WIN_UI_HINTS, COPYWIN_GFX);
 }
