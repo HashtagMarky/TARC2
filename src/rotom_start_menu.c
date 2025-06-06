@@ -965,7 +965,7 @@ static enum RotomPhoneMenuItems RotomPhone_SetFirstSelectedMenu(void)
         }
     }
 
-    return ROTOM_PHONE_MENU_PARTY;
+    return ROTOM_PHONE_MENU_OPTIONS;
 }
 
 #define tRotomUpdateTimer gTasks[taskId].data[0]
