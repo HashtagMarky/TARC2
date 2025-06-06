@@ -86,6 +86,7 @@ static void SpriteCB_RotomPhoneSmall_IconOptions(struct Sprite* sprite);
 static void SpriteCB_RotomPhoneSmall_IconFlag(struct Sprite* sprite);
 static void SpriteCB_RotomPhoneSmall_IconFullScreen(struct Sprite* sprite);
 static void SpriteCB_RotomPhoneSmall_IconDexNav(struct Sprite* sprite);
+static void SpriteCB_RotomPhoneSmall_IconClock(struct Sprite* sprite);
 
 static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId);
@@ -152,6 +153,7 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_SafariFlag(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_FullScreen(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_DexNav(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Trainer(void);
+static bool32 RotomPhone_StartMenu_UnlockedFunc_Clock(void);
 
 static void RotomPhone_StartMenu_SelectedFunc_Pokedex(void);
 static void RotomPhone_StartMenu_SelectedFunc_Pokemon(void);
@@ -163,12 +165,14 @@ static void RotomPhone_StartMenu_SelectedFunc_Settings(void);
 static void RotomPhone_StartMenu_SelectedFunc_SafariFlag(void);
 static void RotomPhone_StartMenu_SelectedFunc_FullScreen(void);
 static void RotomPhone_StartMenu_SelectedFunc_DexNav(void);
+static void RotomPhone_StartMenu_SelectedFunc_Clock(void);
 
 
 enum RotomPhoneMenuItems
 {
     ROTOM_PHONE_MENU_FULL_SCREEN,
     ROTOM_PHONE_MENU_FLAG,
+    ROTOM_PHONE_MENU_CLOCK,
     ROTOM_PHONE_MENU_POKEDEX,
     ROTOM_PHONE_MENU_PARTY,
     ROTOM_PHONE_MENU_DEXNAV,
@@ -357,7 +361,7 @@ static const struct SpritePalette sSpritePal_Icon[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_Icon[] = 
 {
-    {sIconGfx, 16*320/2 , TAG_ICON_GFX},
+    {sIconGfx, 16*352/2 , TAG_ICON_GFX},
     {NULL},
 };
 
@@ -525,6 +529,21 @@ static const union AnimCmd *const gIconDexNavAnim[] = {
     gAnimCmdDexNav_Selected,
 };
 
+static const union AnimCmd gAnimCmdClock_NotSelected[] = {
+    ANIMCMD_FRAME(84, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gAnimCmdClock_Selected[] = {
+    ANIMCMD_FRAME(80, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const gIconClockAnim[] = {
+    gAnimCmdClock_NotSelected,
+    gAnimCmdClock_Selected,
+};
+
 static const union AffineAnimCmd sAffineAnimIcon_NoAnim[] =
 {
     AFFINEANIMCMD_FRAME(0,0, 0, 60),
@@ -656,6 +675,16 @@ static const struct SpriteTemplate gSpriteIconDexNav = {
     .images = NULL,
     .affineAnims = sAffineAnimsIcon,
     .callback = SpriteCB_RotomPhoneSmall_IconDexNav,
+};
+
+static const struct SpriteTemplate gSpriteIconClock = {
+    .tileTag = TAG_ICON_GFX,
+    .paletteTag = TAG_ICON_PAL,
+    .oam = &gOamIcon,
+    .anims = gIconClockAnim,
+    .images = NULL,
+    .affineAnims = sAffineAnimsIcon,
+    .callback = SpriteCB_RotomPhoneSmall_IconClock,
 };
 
 static void SpriteCB_RotomPhoneSmall_IconPoketch(struct Sprite* sprite)
@@ -808,6 +837,21 @@ static void SpriteCB_RotomPhoneSmall_IconDexNav(struct Sprite* sprite)
     }
 }
 
+static void SpriteCB_RotomPhoneSmall_IconClock(struct Sprite* sprite)
+{
+    if (menuSelectedSmall == ROTOM_PHONE_MENU_CLOCK && sRotomPhone_SmallStartMenu->spriteFlag == FALSE)
+    {
+        sRotomPhone_SmallStartMenu->spriteFlag = TRUE;
+        StartSpriteAnim(sprite, SPRITE_ACTIVE);
+        StartSpriteAffineAnim(sprite, SPRITE_ACTIVE);
+    }
+    else if (menuSelectedSmall != ROTOM_PHONE_MENU_CLOCK)
+    {
+        StartSpriteAnim(sprite, SPRITE_INACTIVE);
+        StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
+    } 
+}
+
 
 static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
 {
@@ -890,6 +934,14 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_FullScreen,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_FullScreen,
         .iconTemplateSmall = &gSpriteIconFullScreen,
+    },
+    [ROTOM_PHONE_MENU_CLOCK] =
+    {
+        .menuName = COMPOUND_STRING("Clock"),
+        .rotomAction = COMPOUND_STRING("to check the time?"),
+        .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Clock,
+        .selectedFunc = RotomPhone_StartMenu_SelectedFunc_Clock,
+        .iconTemplateSmall = &gSpriteIconClock,
     },
 };
 
@@ -1711,7 +1763,7 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     {
         if (sRotomPhone_SmallStartMenu->isLoading == FALSE)
         {
-            if (menuSelectedSmall != ROTOM_PHONE_MENU_SAVE && menuSelectedSmall != ROTOM_PHONE_MENU_FLAG)
+            if (menuSelectedSmall != ROTOM_PHONE_MENU_SAVE && menuSelectedSmall != ROTOM_PHONE_MENU_FLAG && menuSelectedSmall != ROTOM_PHONE_MENU_CLOCK)
                 FadeScreen(FADE_TO_BLACK, 0);
             
             sRotomPhone_SmallStartMenu->isLoading = TRUE;
@@ -1758,10 +1810,6 @@ static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId)
         DestroyTask(taskId);
     }
 }
-#undef tRotomUpdateTimer
-#undef tRotomUpdateMessage
-#undef tRotomMessageSoundEffect
-
 
 
 
@@ -2949,6 +2997,14 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_Trainer(void)
         return TRUE;
 }
 
+static bool32 RotomPhone_StartMenu_UnlockedFunc_Clock(void)
+{
+    if (FlagGet(FLAG_SYS_POKEDEX_GET))
+        return FALSE;
+    else
+        return TRUE;
+}
+
 
 static void RotomPhone_StartMenu_SelectedFunc_Pokedex(void)
 {
@@ -3107,3 +3163,26 @@ static void RotomPhone_StartMenu_SelectedFunc_DexNav(void)
         RotomPhone_LargeStartMenu_DoCleanUpAndCreateTask(Task_OpenDexNavFromStartMenu, 0);
     }
 }
+
+static void RotomPhone_StartMenu_SelectedFunc_Clock(void)
+{
+    u8 taskId = FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput);
+    if (taskId == TASK_NONE)
+        return;
+    
+    u8 time[24];
+    RtcCalcLocalTime();
+    FormatDecimalTimeWithoutSeconds(time, gLocalTime.hours, gLocalTime.minutes, ROTOM_PHONE_24_HOUR_MODE);
+    u8 fontId = GetFontIdToFit(time, ReturnNormalTextFont(), 0, sWindowTemplate_FlipPhone.width * 8);
+    FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdFlipPhone, PIXEL_FILL(ROTOM_PHONE_BG_COLOUR));
+    AddTextPrinterParameterized4(sRotomPhone_SmallStartMenu->windowIdFlipPhone, fontId,
+    GetStringCenterAlignXOffset(fontId, time, sWindowTemplate_FlipPhone.width * 8),
+    ROTOM_SPEECH_BOTTOM_ROW_Y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_SMALL_PHONE], TEXT_SKIP_DRAW, time);
+    CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdFlipPhone, COPYWIN_GFX);
+    tRotomMessageSoundEffect = SE_BALL_TRAY_EXIT;
+    tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER;
+    sRotomPhone_SmallStartMenu->isLoading = FALSE;
+}
+#undef tRotomUpdateTimer
+#undef tRotomUpdateMessage
+#undef tRotomMessageSoundEffect
