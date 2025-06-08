@@ -66,6 +66,7 @@
 #include "m4a.h"
 #include "dexnav.h"
 #include "wallclock.h"
+#include "comfy_anim.h"
 
 
 #define ROTOM_PHONE_UPDATE_CLOCK_DISPLAY    TRUE
@@ -1066,6 +1067,8 @@ static enum RotomPhoneMenuItems RotomPhone_SetFirstSelectedMenu(void)
 #define tRotomUpdateTimer gTasks[taskId].data[0]
 #define tRotomUpdateMessage gTasks[taskId].data[1]
 #define tRotomMessageSoundEffect gTasks[taskId].data[2]
+#define tRotomPanelComfyAnimId gTasks[taskId].data[3]
+#define tRotomPanelLastY gTasks[taskId].data[4]
 void RotomPhone_SmallStartMenu_Init(bool32 printGreeting)
 {
     if (!IsOverworldLinkActive())
@@ -2541,6 +2544,7 @@ static void RotomPhone_LargeStartMenu_SetupCB(void)
 static void RotomPhone_LargeStartMenu_MainCB(void)
 {
     RunTasks();
+    AdvanceComfyAnimations();
     AnimateSprites();
     BuildOamBuffer();
     DoScheduledBgTilemapCopiesToVram();
@@ -2601,6 +2605,7 @@ static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId)
     if (JOY_NEW(START_BUTTON))
     {
         gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_PanelSlide;
+        tRotomPanelComfyAnimId = INVALID_COMFY_ANIM;
         PlaySE(SE_SELECT);
     }
 }
@@ -2611,6 +2616,7 @@ static void Task_RotomPhone_LargeStartMenu_PanelInput(u8 taskId)
     if (JOY_NEW(START_BUTTON | B_BUTTON))
     {
         gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_PanelSlide;
+        tRotomPanelComfyAnimId = INVALID_COMFY_ANIM;
         PlaySE(SE_SELECT);
     }
     else if (JOY_NEW(A_BUTTON))
@@ -2666,7 +2672,10 @@ static void Task_RotomPhone_LargeStartMenu_PanelInput(u8 taskId)
 
 static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId)
 {
+    #define PANEL_MIN_Y 0
     #define PANEL_MAX_Y 95
+    #define PANEL_SLIDE_DOWN_FRAMES 50
+    #define PANEL_SLIDE_UP_FRAMES 40
     /*
      * Register BG2VOFS controls the vertical offset of background 2. Our sliding panel lives on BG2, so by setting the
      * value of this register we can change the starting Y position of the background. We increase it a bit each frame
@@ -2677,20 +2686,34 @@ static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId)
     // Panel is open, so slide it down out of view
     if (sRotomPhone_LargeStartMenu->panelIsOpen)
     {
-        if (sRotomPhone_LargeStartMenu->panelY > 0)
+        if (sRotomPhone_LargeStartMenu->panelY > PANEL_MIN_Y)
         {
-            sRotomPhone_LargeStartMenu->panelY -= 5;
-            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_KANTO]].y += 5;
-            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_JOHTO]].y += 5;
-            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_HOENN]].y += 5;
-            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_SINNOH]].y += 5;
-            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_UNOVA]].y += 5;
-            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_KALOS]].y += 5;
+            if (tRotomPanelComfyAnimId == INVALID_COMFY_ANIM)
+            {
+                struct ComfyAnimEasingConfig config;
+                InitComfyAnimConfig_Easing(&config);
+                config.durationFrames = PANEL_SLIDE_DOWN_FRAMES;
+                config.from = Q_24_8(PANEL_MAX_Y);
+                config.to = Q_24_8(PANEL_MIN_Y);
+                config.easingFunc = ComfyAnimEasing_EaseOutCubic;
+                tRotomPanelComfyAnimId = CreateComfyAnim_Easing(&config);
+            }
+            
+            tRotomPanelLastY = sRotomPhone_LargeStartMenu->panelY;
+            sRotomPhone_LargeStartMenu->panelY = ReadComfyAnimValueSmooth(&gComfyAnims[tRotomPanelComfyAnimId]);
+            s8 yDifference = tRotomPanelLastY - sRotomPhone_LargeStartMenu->panelY;
+            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_KANTO]].y += yDifference;
+            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_JOHTO]].y += yDifference;
+            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_HOENN]].y += yDifference;
+            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_SINNOH]].y += yDifference;
+            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_UNOVA]].y += yDifference;
+            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_KALOS]].y += yDifference;
         }
-        else if (sRotomPhone_LargeStartMenu->panelY == 0)
+        else if (sRotomPhone_LargeStartMenu->panelY == PANEL_MIN_Y)
         {
             // Panel is done closing, so set state to closed and change task to read main input
             sRotomPhone_LargeStartMenu->panelIsOpen = FALSE;
+            ReleaseComfyAnim(tRotomPanelComfyAnimId);
             gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_MainInput;
         }
     }
@@ -2699,22 +2722,39 @@ static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId)
     {
         if (sRotomPhone_LargeStartMenu->panelY < PANEL_MAX_Y)
         {
-            sRotomPhone_LargeStartMenu->panelY += 5;
-            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_KANTO]].y -= 5;
-            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_JOHTO]].y -= 5;
-            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_HOENN]].y -= 5;
-            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_SINNOH]].y -= 5;
-            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_UNOVA]].y -= 5;
-            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_KALOS]].y -= 5;
+            if (tRotomPanelComfyAnimId == INVALID_COMFY_ANIM)
+            {
+                struct ComfyAnimEasingConfig config;
+                InitComfyAnimConfig_Easing(&config);
+                config.durationFrames = PANEL_SLIDE_UP_FRAMES;
+                config.from = Q_24_8(PANEL_MIN_Y);
+                config.to = Q_24_8(PANEL_MAX_Y);
+                config.easingFunc = ComfyAnimEasing_EaseInOutCubic;
+                tRotomPanelComfyAnimId = CreateComfyAnim_Easing(&config);
+            }
+            
+            tRotomPanelLastY = sRotomPhone_LargeStartMenu->panelY;
+            sRotomPhone_LargeStartMenu->panelY = ReadComfyAnimValueSmooth(&gComfyAnims[tRotomPanelComfyAnimId]);
+            s8 yDifference = tRotomPanelLastY - sRotomPhone_LargeStartMenu->panelY;
+            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_KANTO]].y += yDifference;
+            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_JOHTO]].y += yDifference;
+            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_HOENN]].y += yDifference;
+            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_SINNOH]].y += yDifference;
+            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_UNOVA]].y += yDifference;
+            gSprites[sRotomPhone_LargeStartMenu->regionButtonSpriteIds[REGION_KALOS]].y += yDifference;
         }
         else if (sRotomPhone_LargeStartMenu->panelY == PANEL_MAX_Y)
         {
             // Panel is done opening, so set state to open and change task to read panel input
             sRotomPhone_LargeStartMenu->panelIsOpen = TRUE;
+            ReleaseComfyAnim(tRotomPanelComfyAnimId);
             gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_PanelInput;
         }
     }
+    #undef PANEL_MIN_Y
     #undef PANEL_MAX_Y
+    #undef PANEL_SLIDE_DOWN_FRAMES
+    #undef PANEL_SLIDE_UP_FRAMES
 }
 
 static void Task_RotomPhone_LargeStartMenu_WaitFadeAndBail(u8 taskId)
@@ -2984,6 +3024,7 @@ static void RotomPhone_LargeStartMenu_FreeResources(void)
         Free(sBg2TilemapBuffer);
     }
     FreeAllWindowBuffers();
+    ReleaseComfyAnims();
     ResetSpriteData();
 }
 
@@ -3263,3 +3304,5 @@ static void RotomPhone_StartMenu_SelectedFunc_Shortcut(void)
 #undef tRotomUpdateTimer
 #undef tRotomUpdateMessage
 #undef tRotomMessageSoundEffect
+#undef tRotomPanelComfyAnimId
+#undef tRotomPanelLastY
