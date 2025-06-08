@@ -190,7 +190,10 @@ enum RotomPhoneMenuItems
 };
 #define ROTOM_PHONE_MENU_FIRST_OPTION ROTOM_PHONE_MENU_COUNT - ROTOM_PHONE_MENU_COUNT
 #define ROTOM_PHONE_MENU_LAST_OPTION  ROTOM_PHONE_MENU_COUNT - 1
-static enum RotomPhoneMenuItems RotomPhone_StartMenu_GetShortcutOption(void);
+static enum RotomPhoneMenuItems RotomPhone_StartMenu_GetShortcutOption(void)
+{
+    return ROTOM_PHONE_MENU_POKEDEX;
+}
 
 enum RotomPhoneSmallOptions
 {
@@ -881,12 +884,6 @@ static void SpriteCB_RotomPhoneSmall_IconShortcut(struct Sprite* sprite)
         StartSpriteAnim(sprite, SPRITE_INACTIVE);
         StartSpriteAffineAnim(sprite, SPRITE_INACTIVE);
     } 
-}
-
-
-static enum RotomPhoneMenuItems RotomPhone_StartMenu_GetShortcutOption(void)
-{
-    return ROTOM_PHONE_MENU_POKEDEX;
 }
 
 
@@ -2998,7 +2995,7 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked(void)
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Pokedex(void)
 {
-    if (!RotomPhone_StartMenu_IsFullScreen())
+    if (!RotomPhone_StartMenu_IsFullScreen() && !GetSafariZoneFlag())
         return FALSE;
     else
         return FlagGet(FLAG_SYS_POKEDEX_GET);
@@ -3043,7 +3040,7 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_FullScreen(void)
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_DexNav(void)
 {
-    if (!RotomPhone_StartMenu_IsFullScreen())
+    if (!RotomPhone_StartMenu_IsFullScreen() && !GetSafariZoneFlag())
         return FALSE;
     else
         return FlagGet(DN_FLAG_DEXNAV_GET);
@@ -3067,7 +3064,7 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_Clock(void)
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Shortcut(void)
 {
-    if (FlagGet(FLAG_SYS_POKEDEX_GET) && (!RotomPhone_StartMenu_IsFullScreen()))
+    if (FlagGet(FLAG_SYS_POKEDEX_GET) && (!RotomPhone_StartMenu_IsFullScreen()) && !GetSafariZoneFlag())
         return TRUE;
     else
         return FALSE;
