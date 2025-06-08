@@ -167,8 +167,9 @@ static void UNUSED WarpToTruck(void)
 
 static void WarpToShip(void)
 {
+    FakeRtc_ManuallySetTime(0, Ikigai_GetSeasonalTimeHour(0, TIME_EVENING, TRUE), 0, 0);
+    RtcInitLocalTimeOffset(Ikigai_GetSeasonalTimeHour(0, TIME_EVENING, TRUE), 0);
     InitTimeBasedEvents();
-    FakeRtc_ManuallySetTime(0, Ikigai_GetSeasonalTimeHour(0, TIME_EVENING, TRUE) + IKIGAI_HOUR_OFFSET, 0, 0);
     FlagSet(FLAG_PAUSE_TIME);
     FlagSet(FLAG_HIDE_MAP_NAME_POPUP);
     FlagSet(FLAG_SUPPRESS_MUGSHOT);
