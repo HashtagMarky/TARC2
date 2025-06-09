@@ -149,6 +149,7 @@ static void RotomPhone_LargeStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, Task
 
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked(void);
+static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked_FullScreen(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Pokedex(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Pokemon(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_PokeNav(void);
@@ -156,7 +157,6 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_Save(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_SafariFlag(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_FullScreen(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_DexNav(void);
-static bool32 RotomPhone_StartMenu_UnlockedFunc_Trainer(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Clock(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Shortcut(void);
 
@@ -936,7 +936,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
     {
         .menuName = COMPOUND_STRING("Trainer"),
         .rotomAction = COMPOUND_STRING("to view your ID Card?"),
-        .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Trainer,
+        .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Unlocked_FullScreen,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_Trainer,
         .iconTemplateSmall = &gSpriteIconTrainerCard,
     },
@@ -2558,6 +2558,14 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked(void)
     return TRUE;
 }
 
+static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked_FullScreen(void)
+{
+    if (!RotomPhone_StartMenu_IsFullScreen())
+        return FALSE;
+    else
+        return TRUE;
+}
+
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Pokedex(void)
 {
     if (!RotomPhone_StartMenu_IsFullScreen() && !GetSafariZoneFlag())
@@ -2609,14 +2617,6 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_DexNav(void)
         return FALSE;
     else
         return FlagGet(DN_FLAG_DEXNAV_GET);
-}
-
-static bool32 RotomPhone_StartMenu_UnlockedFunc_Trainer(void)
-{
-    if (!RotomPhone_StartMenu_IsFullScreen())
-        return FALSE;
-    else
-        return TRUE;
 }
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Clock(void)
