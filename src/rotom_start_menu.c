@@ -160,6 +160,7 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_DexNav(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Clock(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Shortcut(void);
 
+static void RotomPhone_StartMenu_SelectedFunc_Shortcut(void);
 static void RotomPhone_StartMenu_SelectedFunc_Pokedex(void);
 static void RotomPhone_StartMenu_SelectedFunc_Pokemon(void);
 static void RotomPhone_StartMenu_SelectedFunc_Bag(void);
@@ -171,7 +172,7 @@ static void RotomPhone_StartMenu_SelectedFunc_SafariFlag(void);
 static void RotomPhone_StartMenu_SelectedFunc_FullScreen(void);
 static void RotomPhone_StartMenu_SelectedFunc_DexNav(void);
 static void RotomPhone_StartMenu_SelectedFunc_Clock(void);
-static void RotomPhone_StartMenu_SelectedFunc_Shortcut(void);
+static void RotomPhone_StartMenu_SelectedFunc_Daycare(void);
 
 
 enum RotomPhoneMenuItems
@@ -2638,6 +2639,11 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_Shortcut(void)
 }
 
 
+static void RotomPhone_StartMenu_SelectedFunc_Shortcut(void)
+{
+    sRotomPhoneOptions[RotomPhone_StartMenu_GetShortcutOption()].selectedFunc();
+}
+
 static void RotomPhone_StartMenu_SelectedFunc_Pokedex(void)
 {
     if (!RotomPhone_StartMenu_IsFullScreen())
@@ -2821,11 +2827,6 @@ static void RotomPhone_StartMenu_SelectedFunc_Clock(void)
     {
         RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_ViewWallClock);
     }
-}
-
-static void RotomPhone_StartMenu_SelectedFunc_Shortcut(void)
-{
-    sRotomPhoneOptions[RotomPhone_StartMenu_GetShortcutOption()].selectedFunc();
 }
 #undef tRotomUpdateTimer
 #undef tRotomUpdateMessage
