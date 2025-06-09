@@ -2171,18 +2171,11 @@ static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId)
 static void Task_RotomPhone_LargeStartMenu_PanelInput(u8 taskId)
 {
     // Exit panel when Start or B is pressed
-    if (JOY_NEW(START_BUTTON | B_BUTTON))
+    if (JOY_NEW(START_BUTTON | A_BUTTON | B_BUTTON))
     {
         gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_PanelSlide;
         tRotomPanelComfyAnimId = INVALID_COMFY_ANIM;
         PlaySE(SE_SELECT);
-    }
-    else if (JOY_NEW(A_BUTTON))
-    {
-        RotomPhone_LargeStartMenu_PrintUiButtonHints();
-        PlaySE(SE_SELECT);
-        gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_PanelSlide;
-        tRotomPanelComfyAnimId = INVALID_COMFY_ANIM;
     }
 }
 
@@ -2446,7 +2439,7 @@ static void UNUSED RotomPhone_LargeStartMenu_CreateRegionButtons(void)
      * and Sprite B to 0 for that. But now suppose you also want Sprite A to draw on top of Sprite B. For that, set
      * Sprite A's subpriority to 0 and Sprite B's subpriority to 1.
      */
-    
+
     // sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE] =
     //     CreateSprite(&sKantoButtonSpriteTemplate, BUTTON_START_X, BUTTON_START_Y, 0);
     // sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO] =
