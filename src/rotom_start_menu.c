@@ -2242,6 +2242,8 @@ static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId)
         else if (sRotomPhone_LargeStartMenu->panelY == PANEL_MIN_Y)
         {
             // Panel is done closing, so set state to closed and change task to read main input
+            if (sRotomPhoneOptions[menuSelectedLarge].selectedFunc)
+                sRotomPhoneOptions[menuSelectedLarge].selectedFunc();
             sRotomPhone_LargeStartMenu->panelIsOpen = FALSE;
             ReleaseComfyAnim(tRotomPanelComfyAnimId);
             gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_MainInput;
