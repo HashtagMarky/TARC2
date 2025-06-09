@@ -2178,8 +2178,8 @@ static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId)
         }
         else if (sRotomPhoneOptions[menuSelectedLarge].selectedFunc)
         {
-            sRotomPhoneOptions[menuSelectedLarge].selectedFunc();
             RotomPhone_LargeStartMenu_StartPanelSlide();
+            sRotomPhoneOptions[menuSelectedLarge].selectedFunc();
         }
     }
     if (JOY_NEW(START_BUTTON))
