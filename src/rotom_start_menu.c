@@ -2185,8 +2185,11 @@ static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId)
         } while (!sRotomPhoneOptions[menuSelectedLarge].unlockedFunc());
         RotomPhone_LargeStartMenu_PrintUiButtonHints();
     }
-    if (JOY_NEW(A_BUTTON))
+    if (JOY_NEW(A_BUTTON | START_BUTTON))
     {
+        if (JOY_NEW(START_BUTTON))
+            menuSelectedLarge = RotomPhone_StartMenu_GetShortcutOption();
+        
         PlaySE(SE_SELECT);
         if (!sRotomPhoneOptions[menuSelectedLarge].fullScreenPanel)
         {
@@ -2198,12 +2201,6 @@ static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId)
             RotomPhone_LargeStartMenu_StartPanelSlide();
             sRotomPhoneOptions[menuSelectedLarge].selectedFunc();
         }
-    }
-    if (JOY_NEW(START_BUTTON))
-    {
-        gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_PanelSlide;
-        tRotomPanelComfyAnimId = INVALID_COMFY_ANIM;
-        PlaySE(SE_SELECT);
     }
 }
 
