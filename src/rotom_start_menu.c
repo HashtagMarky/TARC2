@@ -67,6 +67,7 @@
 #include "dexnav.h"
 #include "wallclock.h"
 #include "comfy_anim.h"
+#include "pokemon_icon.h"
 
 
 #define ROTOM_PHONE_UPDATE_CLOCK_DISPLAY    TRUE
@@ -183,6 +184,7 @@ enum RotomPhoneMenuItems
     ROTOM_PHONE_MENU_CLOCK,
     ROTOM_PHONE_MENU_POKEDEX,
     ROTOM_PHONE_MENU_PARTY,
+    ROTOM_PHONE_MENU_DAYCARE,
     ROTOM_PHONE_MENU_DEXNAV,
     ROTOM_PHONE_MENU_BAG,
     ROTOM_PHONE_MENU_POKENAV,
@@ -988,6 +990,13 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Shortcut,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_Shortcut,
         .iconTemplateSmall = &gSpriteIconShortcut,
+    },
+    [ROTOM_PHONE_MENU_DAYCARE] =
+    {
+        .menuName = COMPOUND_STRING("Daycare"),
+        .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Unlocked_FullScreen,
+        .selectedFunc = RotomPhone_StartMenu_SelectedFunc_Daycare,
+        .fullScreenPanel = TRUE,
     },
 };
 
@@ -2099,6 +2108,13 @@ static void RotomPhone_LargeStartMenu_SetupCB(void)
         sRotomPhone_LargeStartMenu->panelY = 0;
         sRotomPhone_LargeStartMenu->panelIsOpen = FALSE;
 
+        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE] = SPRITE_NONE;
+        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO] = SPRITE_NONE;
+        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE] = SPRITE_NONE;
+        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_FOUR] = SPRITE_NONE;
+        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_FIVE] = SPRITE_NONE;
+        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_SIX] = SPRITE_NONE;
+
         CreateTask(Task_RotomPhone_LargeStartMenu_WaitFadeIn, 0);
         gMain.state++;
         break;
@@ -2233,12 +2249,18 @@ static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId)
             tRotomPanelLastY = sRotomPhone_LargeStartMenu->panelY;
             sRotomPhone_LargeStartMenu->panelY = ReadComfyAnimValueSmooth(&gComfyAnims[tRotomPanelComfyAnimId]);
             s8 yDifference = tRotomPanelLastY - sRotomPhone_LargeStartMenu->panelY;
-            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE]].y += yDifference;
-            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO]].y += yDifference;
-            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE]].y += yDifference;
-            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_FOUR]].y += yDifference;
-            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_FIVE]].y += yDifference;
-            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_SIX]].y += yDifference;
+            if (PANEL_SPRITE_ONE != SPRITE_NONE)
+                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE]].y += yDifference;
+            if (PANEL_SPRITE_TWO != SPRITE_NONE)
+                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO]].y += yDifference;
+            if (PANEL_SPRITE_THREE != SPRITE_NONE)
+                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE]].y += yDifference;
+            if (PANEL_SPRITE_FOUR != SPRITE_NONE)
+                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_FOUR]].y += yDifference;
+            if (PANEL_SPRITE_FIVE != SPRITE_NONE)
+                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_FIVE]].y += yDifference;
+            if (PANEL_SPRITE_SIX != SPRITE_NONE)
+                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_SIX]].y += yDifference;
         }
         else if (sRotomPhone_LargeStartMenu->panelY == PANEL_MIN_Y)
         {
@@ -2269,12 +2291,18 @@ static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId)
             tRotomPanelLastY = sRotomPhone_LargeStartMenu->panelY;
             sRotomPhone_LargeStartMenu->panelY = ReadComfyAnimValueSmooth(&gComfyAnims[tRotomPanelComfyAnimId]);
             s8 yDifference = tRotomPanelLastY - sRotomPhone_LargeStartMenu->panelY;
-            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE]].y += yDifference;
-            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO]].y += yDifference;
-            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE]].y += yDifference;
-            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_FOUR]].y += yDifference;
-            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_FIVE]].y += yDifference;
-            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_SIX]].y += yDifference;
+            if (PANEL_SPRITE_ONE != SPRITE_NONE)
+                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE]].y += yDifference;
+            if (PANEL_SPRITE_TWO != SPRITE_NONE)
+                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO]].y += yDifference;
+            if (PANEL_SPRITE_THREE != SPRITE_NONE)
+                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE]].y += yDifference;
+            if (PANEL_SPRITE_FOUR != SPRITE_NONE)
+                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_FOUR]].y += yDifference;
+            if (PANEL_SPRITE_FIVE != SPRITE_NONE)
+                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_FIVE]].y += yDifference;
+            if (PANEL_SPRITE_SIX != SPRITE_NONE)
+                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_SIX]].y += yDifference;
         }
         else if (sRotomPhone_LargeStartMenu->panelY == PANEL_MAX_Y)
         {
@@ -2827,6 +2855,42 @@ static void RotomPhone_StartMenu_SelectedFunc_Clock(void)
     {
         RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_ViewWallClock);
     }
+}
+
+static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
+{
+    #define MON_ICON_Y 210
+    #define MON_ICON_ONE_X 50
+    #define MON_ICON_TWO_X 190
+    if (RotomPhone_StartMenu_IsFullScreen() && sRotomPhone_LargeStartMenu->panelIsOpen == FALSE)
+    {
+        LoadMonIconPalettes();
+        u16 speciesOne = GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[0].mon, MON_DATA_SPECIES);
+        u16 speciesTwo = GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[1].mon, MON_DATA_SPECIES);
+
+        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE] =
+            CreateMonIcon(speciesOne, SpriteCB_MonIcon_FlippedHorizontal, MON_ICON_ONE_X, MON_ICON_Y, 4, 0);
+        gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE]].oam.priority = 0;
+        if (!speciesOne)
+            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE]].invisible = TRUE;
+        
+        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO] =
+            CreateMonIcon(speciesTwo, SpriteCB_MonIcon, MON_ICON_TWO_X, MON_ICON_Y, 4, 0);
+        gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO]].oam.priority = 0;
+        if (!speciesTwo)
+            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO]].invisible = TRUE;
+    }
+    else if (RotomPhone_StartMenu_IsFullScreen() && sRotomPhone_LargeStartMenu->panelIsOpen == TRUE)
+    {
+        FreeMonIconPalettes();
+        DestroySpriteAndFreeResources(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE]]);
+        DestroySpriteAndFreeResources(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO]]);
+        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE] = SPRITE_NONE;
+        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO] = SPRITE_NONE;
+    }
+    #undef MON_ICON_Y
+    #undef MON_ICON_ONE_X
+    #undef MON_ICON_TWO_X
 }
 #undef tRotomUpdateTimer
 #undef tRotomUpdateMessage
