@@ -68,6 +68,7 @@
 #include "wallclock.h"
 #include "comfy_anim.h"
 #include "pokemon_icon.h"
+#include "daycare.h"
 
 
 #define ROTOM_PHONE_UPDATE_CLOCK_DISPLAY    TRUE
@@ -2864,21 +2865,48 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
     #define MON_ICON_TWO_X 190
     if (RotomPhone_StartMenu_IsFullScreen() && sRotomPhone_LargeStartMenu->panelIsOpen == FALSE)
     {
-        LoadMonIconPalettes();
-        u16 speciesOne = GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[0].mon, MON_DATA_SPECIES);
-        u16 speciesTwo = GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[1].mon, MON_DATA_SPECIES);
+        struct BoxPokemon *daycareMonOne = &gSaveBlock1Ptr->daycare.mons[0].mon;
+        struct BoxPokemon *daycareMonTwo = &gSaveBlock1Ptr->daycare.mons[1].mon;
+        u16 speciesOne = GetBoxMonData(daycareMonOne, MON_DATA_SPECIES);
+        u16 speciesTwo = GetBoxMonData(daycareMonTwo, MON_DATA_SPECIES);
 
-        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE] =
-            CreateMonIcon(speciesOne, SpriteCB_MonIcon_FlippedHorizontal, MON_ICON_ONE_X, MON_ICON_Y, 4, 0);
-        gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE]].oam.priority = 0;
-        if (!speciesOne)
-            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE]].invisible = TRUE;
-        
-        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO] =
-            CreateMonIcon(speciesTwo, SpriteCB_MonIcon, MON_ICON_TWO_X, MON_ICON_Y, 4, 0);
-        gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO]].oam.priority = 0;
-        if (!speciesTwo)
-            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO]].invisible = TRUE;
+        // if (!speciesOne && !speciesTwo)
+        //     return;
+
+        u8 levelGain[2];
+        u8 level[3];
+        u8 nickname[POKEMON_NAME_LENGTH + 1];
+        LoadMonIconPalettes();
+
+        if (speciesOne)
+        {
+            gSpecialVar_Result = 0;
+            u32 monOneLevelGain = GetNumLevelsGainedFromDaycare();
+            u32 monOneLevel = GetBoxMonData(daycareMonOne, MON_DATA_LEVEL) + monOneLevelGain;
+            GetBoxMonData(daycareMonOne, MON_DATA_NICKNAME, nickname);
+
+            sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE] =
+                CreateMonIcon(speciesOne, SpriteCB_MonIcon_FlippedHorizontal, MON_ICON_ONE_X, MON_ICON_Y, 4, 0);
+            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE]].oam.priority = 0;
+
+            ConvertIntToDecimalStringN(levelGain, monOneLevelGain, STR_CONV_MODE_LEFT_ALIGN, 2);
+            ConvertIntToDecimalStringN(level, monOneLevelGain, STR_CONV_MODE_LEFT_ALIGN, 3);
+        }
+
+        if (speciesTwo)
+        {
+            gSpecialVar_Result = 1;
+            u32 monTwoLevelGain = GetNumLevelsGainedFromDaycare();
+            u32 monTwoLevel = GetBoxMonData(daycareMonTwo, MON_DATA_LEVEL) + monTwoLevelGain;
+            GetBoxMonData(daycareMonTwo, MON_DATA_NICKNAME, nickname);
+
+            sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO] =
+                CreateMonIcon(speciesTwo, SpriteCB_MonIcon, MON_ICON_TWO_X, MON_ICON_Y, 4, 0);
+            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO]].oam.priority = 0;
+
+            ConvertIntToDecimalStringN(levelGain, monTwoLevelGain, STR_CONV_MODE_LEFT_ALIGN, 2);
+            ConvertIntToDecimalStringN(level, monTwoLevelGain, STR_CONV_MODE_LEFT_ALIGN, 3);
+        } 
     }
     else if (RotomPhone_StartMenu_IsFullScreen() && sRotomPhone_LargeStartMenu->panelIsOpen == TRUE)
     {
