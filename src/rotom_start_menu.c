@@ -126,6 +126,7 @@ static void Task_RotomPhone_LargeStartMenu_WaitFadeIn(u8 taskId);
 static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId);
 static void Task_RotomPhone_LargeStartMenu_PanelInput(u8 taskId);
 static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId);
+static void RotomPhone_LargeStartMenu_StartPanelSlide(void);
 static void Task_RotomPhone_LargeStartMenu_WaitFadeAndBail(u8 taskId);
 static void Task_RotomPhone_LargeStartMenu_WaitFadeAndExitGracefully(u8 taskId);
 static void Task_RotomPhone_LargeStartMenu_WaitFadeForSelection(u8 taskId);
@@ -287,6 +288,7 @@ struct RotomPhoneMenuOptions
     bool32 (*unlockedFunc)(void);
     void (*selectedFunc)(void);
     const struct SpriteTemplate *iconTemplateSmall;
+    bool32 fullScreenPanel;
 };
 
 struct RotomPhone_StartMenu
@@ -1136,6 +1138,9 @@ static void RotomPhone_SmallStartMenu_LoadSprites(void)
 
 static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menuItem, enum RotomPhoneSmallOptions spriteId)
 {
+    if (sRotomPhoneOptions[menuItem].iconTemplateSmall == NULL)
+        return;
+    
     s32 x = ICON_COORD_X;
     s32 y = ICON_COORD_Y;
     u32 iconRow;
@@ -1603,6 +1608,14 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId)
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
     {
         u8 textBuffer[80];
+
+        if (sRotomPhoneOptions[menuSelectedSmall].rotomAction == NULL)
+        {
+            StringCopy(textBuffer, COMPOUND_STRING("Invalid Option"));
+            RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, FALSE, TRUE);
+            return;
+        }
+
         if (Random() % 2 == TRUE)
             StringCopy(textBuffer, COMPOUND_STRING("Would you like "));
         else
@@ -2157,8 +2170,16 @@ static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId)
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_WaitFadeForSelection;
+        if (!sRotomPhoneOptions[menuSelectedLarge].fullScreenPanel)
+        {
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_WaitFadeForSelection;
+        }
+        else if (sRotomPhoneOptions[menuSelectedLarge].selectedFunc)
+        {
+            sRotomPhoneOptions[menuSelectedLarge].selectedFunc();
+            RotomPhone_LargeStartMenu_StartPanelSlide();
+        }
     }
     if (JOY_NEW(START_BUTTON))
     {
@@ -2264,6 +2285,13 @@ static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId)
     #undef PANEL_MAX_Y
     #undef PANEL_SLIDE_DOWN_FRAMES
     #undef PANEL_SLIDE_UP_FRAMES
+}
+
+static void RotomPhone_LargeStartMenu_StartPanelSlide(void)
+{
+    u8 taskId = FindTaskIdByFunc(Task_RotomPhone_LargeStartMenu_MainInput);
+    gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_PanelSlide;
+    tRotomPanelComfyAnimId = INVALID_COMFY_ANIM;
 }
 
 static void Task_RotomPhone_LargeStartMenu_WaitFadeAndBail(u8 taskId)
