@@ -2874,6 +2874,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
     #define MON_TWO 1
 
     #define MON_ICON_Y 220
+    #define EGG_COMPATABILITY_ICON_Y 210
     #define MON_ICON_ONE_X 60
     #define MON_ICON_TWO_X 180
 
@@ -3016,6 +3017,19 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 
             CopyWindowToVram(windowId, COPYWIN_FULL);
         }
+
+        if (GetDaycareState() == DAYCARE_EGG_WAITING)
+        {
+            void (*spriteCB)(struct Sprite *sprite);
+            if (Random() % 2 == TRUE)
+                spriteCB = SpriteCB_MonIcon;
+            else
+                spriteCB = SpriteCB_MonIcon_FlippedHorizontal;
+
+            sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE] =
+                CreateMonIcon(SPECIES_EGG, spriteCB, (MON_ICON_ONE_X + MON_ICON_TWO_X) / 2, EGG_COMPATABILITY_ICON_Y, 4, 0);
+            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE]].oam.priority = 0;
+        }
     }
     else if (RotomPhone_StartMenu_IsFullScreen() && sRotomPhone_LargeStartMenu->panelIsOpen == TRUE)
     {
@@ -3047,11 +3061,18 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
             RemoveWindow(windowId);
             sRotomPhone_LargeStartMenu->panelWindowIds[PANEL_WIN_TWO] = WINDOW_NONE;
         }
+
+        if (GetDaycareState() == DAYCARE_EGG_WAITING)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE]]);
+            sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE] = SPRITE_NONE;
+        }
     }
     #undef MON_ONE
     #undef MON_TWO
 
     #undef MON_ICON_Y
+    #undef EGG_COMPATABILITY_ICON_Y
     #undef MON_ICON_ONE_X
     #undef MON_ICON_TWO_X
     
