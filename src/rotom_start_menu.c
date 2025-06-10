@@ -2008,9 +2008,21 @@ static const u32 sRotomPhone_LargeStartMenuPanelTilemap[] = INCBIN_U32("graphics
 
 static const u16 sRotomPhone_LargeStartMenuPalette[] = INCBIN_U16("graphics/rotom_start_menu/rotom_phone_tiles.gbapal");
 
+static const u32 sRotomPhone_DaycareCompatability_Gfx[] = INCBIN_U32("graphics/rotom_start_menu/panel/daycare_heart.4bpp.smol");
+static const u16 sRotomPhone_DaycareCompatability_Pal[] = INCBIN_U16("graphics/rotom_start_menu/panel/daycare_heart.gbapal");
+
 // Indices for the anim arrays
 #define DEFAULT_ANIM  0
 #define SELECTED_ANIM 0
+
+enum RotomPhoneDaycareCompatabilityAnims
+{
+    ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_NON,
+    ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_LOW,
+    ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_MED,
+    ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_MAX,
+    ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_COUNT,
+};
 
 static const union AnimCmd sButtonDefaultAnim[] =
 {
@@ -2034,6 +2046,45 @@ static const union AffineAnimCmd * const sButtonAffineAnims[] =
     [SELECTED_ANIM] = sButtonSelectedAnim
 };
 
+static const struct CompressedSpriteSheet iconCompatatbilitySheet = {
+    .data = sRotomPhone_DaycareCompatability_Gfx,
+    .size = 32 * 32 * ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_COUNT / 2,
+    .tag = TAG_ICON_GFX,
+};
+
+static const struct OamData iconCompatatbilityOam = {
+    .size = SPRITE_SIZE(32x32),
+    .shape = SPRITE_SHAPE(32x32),
+    .priority = 0,
+};
+
+static const union AnimCmd iconCompatatbilityAnim_Not[] = {
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd iconCompatatbilityAnim_Low[] = {
+    ANIMCMD_FRAME(16, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd iconCompatatbilityAnim_Med[] = {
+    ANIMCMD_FRAME(32, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd iconCompatatbilityAnim_Max[] = {
+    ANIMCMD_FRAME(48, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const iconCompatatbilityAnims[] =
+{
+    iconCompatatbilityAnim_Not,
+    iconCompatatbilityAnim_Low,
+    iconCompatatbilityAnim_Med,
+    iconCompatatbilityAnim_Max,
+};
 
 void Task_OpenRotomPhone_LargeStartMenu(u8 taskId)
 {
@@ -2878,6 +2929,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
     #define MON_ICON_ONE_X 60
     #define MON_ICON_TWO_X 180
     #define MON_COMPATABILITY_ICON_X (MON_ICON_ONE_X + MON_ICON_TWO_X) / 2
+    #define MON_ICON_PAL_SLOT_COMPATABILITY_ICON 0
 
     #define WIN_WIDTH 6
     #define WIN_HEIGHT 5
@@ -2903,6 +2955,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
         u8 nickname[POKEMON_NAME_LENGTH + 1];
         u8 textBuffer[24];
         u8 fontId;
+        u8 animId;
         u8 y;
 
         LoadMonIconPalettes();
@@ -3019,6 +3072,52 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
             CopyWindowToVram(windowId, COPYWIN_FULL);
         }
 
+        if (GetDaycareState() == DAYCARE_TWO_MONS)
+        {
+            struct SpritePalette iconCompatatbilityPal =
+            {
+                .data = sRotomPhone_DaycareCompatability_Pal,
+                .tag = gMonIconPaletteTable[MON_ICON_PAL_SLOT_COMPATABILITY_ICON].tag,
+            };
+
+            struct SpriteTemplate iconCompatatbility_SpriteTemplate =
+            {
+                .tileTag = TAG_ICON_GFX,
+                .paletteTag = gMonIconPaletteTable[MON_ICON_PAL_SLOT_COMPATABILITY_ICON].tag,
+                .oam = &iconCompatatbilityOam,
+                .callback = SpriteCallbackDummy,
+                .anims = iconCompatatbilityAnims,
+                .affineAnims = gDummySpriteAffineAnimTable,
+            };
+
+            LoadCompressedSpriteSheet(&iconCompatatbilitySheet);
+            LoadSpritePalette(&iconCompatatbilityPal);
+            sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE] =
+                CreateSprite(&iconCompatatbility_SpriteTemplate, MON_COMPATABILITY_ICON_X, EGG_COMPATABILITY_ICON_Y, 0);
+            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE]].oam.priority = 0;
+
+            switch (GetDaycareCompatibilityScore(&gSaveBlock1Ptr->daycare))
+            {
+            case PARENTS_INCOMPATIBLE:
+                animId = ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_NON;
+                break;
+            
+            case PARENTS_LOW_COMPATIBILITY:
+                animId = ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_LOW;
+                break;
+            
+            case PARENTS_MED_COMPATIBILITY:
+                animId = ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_MED;
+                break;
+            
+            case PARENTS_MAX_COMPATIBILITY:
+            default:
+                animId = ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_MAX;
+                break;
+            }
+            StartSpriteAnim(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE]], animId);
+        }
+
         if (GetDaycareState() == DAYCARE_EGG_WAITING)
         {
             void (*spriteCB)(struct Sprite *sprite);
@@ -3063,7 +3162,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
             sRotomPhone_LargeStartMenu->panelWindowIds[PANEL_WIN_TWO] = WINDOW_NONE;
         }
 
-        if (GetDaycareState() == DAYCARE_EGG_WAITING)
+        if (GetDaycareState() == DAYCARE_TWO_MONS || GetDaycareState() == DAYCARE_EGG_WAITING)
         {
             DestroySpriteAndFreeResources(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE]]);
             sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE] = SPRITE_NONE;
@@ -3076,6 +3175,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
     #undef EGG_COMPATABILITY_ICON_Y
     #undef MON_ICON_ONE_X
     #undef MON_ICON_TWO_X
+    #undef MON_ICON_PAL_SLOT_COMPATABILITY_ICON
     
     #undef WIN_WIDTH
     #undef WIN_HEIGHT
