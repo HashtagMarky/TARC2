@@ -139,7 +139,7 @@ static bool8 RotomPhone_LargeStartMenu_InitBgs(void);
 static void RotomPhone_LargeStartMenu_FadeAndBail(void);
 static bool8 RotomPhone_LargeStartMenu_LoadGraphics(void);
 static void RotomPhone_LargeStartMenu_InitWindows(void);
-static void RotomPhone_LargeStartMenu_PrintUiButtonHints(void);
+static void RotomPhone_LargeStartMenu_PrintTopBar(void);
 static void UNUSED RotomPhone_LargeStartMenu_CreateRegionButtons(void);
 static void UNUSED RotomPhone_LargeStartMenu_StartRegionButtonAnim(enum Region region);
 static void UNUSED RotomPhone_LargeStartMenu_StopRegionButtonAnim(enum Region region);
@@ -1925,8 +1925,7 @@ struct RotomPhone_LargeStartMenuState
 
 enum WindowIds
 {
-    WIN_UI_HINTS,
-    WIN_MON_INFO
+    WIN_UI_TOP_BAR,
 };
 
 static EWRAM_DATA struct RotomPhone_LargeStartMenuState *sRotomPhone_LargeStartMenu = NULL;
@@ -1970,28 +1969,24 @@ static const struct BgTemplate sRotomPhone_LargeStartMenuBgTemplates[] =
 
 static const struct WindowTemplate sRotomPhone_LargeStartMenuWindowTemplates[] =
 {
-    [WIN_UI_HINTS] =
+    [WIN_UI_TOP_BAR] =
     {
         .bg = 0,
-        .tilemapLeft = 10,
+        .tilemapLeft = 0,
         .tilemapTop = 0,
-        .width = 20,
-        .height = 7,
+        .width = 30,
+        .height = 2,
         .paletteNum = 15,
         .baseBlock = 1
     },
-    [WIN_MON_INFO] =
-    {
-        .bg = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 9,
-        .width = 26,
-        .height = 10,
-        .paletteNum = 15,
-        .baseBlock = 1 + (20 * 7)
-    },
     DUMMY_WIN_TEMPLATE
 };
+#define ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK                           \
+sRotomPhone_LargeStartMenuWindowTemplates[WIN_UI_TOP_BAR].baseBlock +   \
+(                                                                       \
+    sRotomPhone_LargeStartMenuWindowTemplates[WIN_UI_TOP_BAR].height *  \
+    sRotomPhone_LargeStartMenuWindowTemplates[WIN_UI_TOP_BAR].width     \
+)
 
 static const u32 sRotomPhone_LargeStartMenuTiles[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.lz");
 
@@ -2104,7 +2099,7 @@ static void RotomPhone_LargeStartMenu_SetupCB(void)
         if (!sRotomPhoneOptions[menuSelectedLarge].unlockedFunc || !sRotomPhoneOptions[menuSelectedLarge].unlockedFunc())
             menuSelectedLarge = RotomPhone_SetFirstSelectedMenu();
 
-        RotomPhone_LargeStartMenu_PrintUiButtonHints();
+        RotomPhone_LargeStartMenu_PrintTopBar();
 
         sRotomPhone_LargeStartMenu->panelY = 0;
         sRotomPhone_LargeStartMenu->panelIsOpen = FALSE;
@@ -2172,7 +2167,7 @@ static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId)
             else
                 menuSelectedLarge--;
         } while (!sRotomPhoneOptions[menuSelectedLarge].unlockedFunc());
-        RotomPhone_LargeStartMenu_PrintUiButtonHints();
+        RotomPhone_LargeStartMenu_PrintTopBar();
     }
     if (JOY_NEW(DPAD_RIGHT))
     {
@@ -2183,7 +2178,7 @@ static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId)
             else
                 menuSelectedLarge++;
         } while (!sRotomPhoneOptions[menuSelectedLarge].unlockedFunc());
-        RotomPhone_LargeStartMenu_PrintUiButtonHints();
+        RotomPhone_LargeStartMenu_PrintTopBar();
     }
     if (JOY_NEW(A_BUTTON | START_BUTTON))
     {
@@ -2453,22 +2448,21 @@ static void RotomPhone_LargeStartMenu_InitWindows(void)
     InitWindows(sRotomPhone_LargeStartMenuWindowTemplates);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
-    FillWindowPixelBuffer(WIN_UI_HINTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    FillWindowPixelBuffer(WIN_MON_INFO, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    PutWindowTilemap(WIN_UI_HINTS);
-    PutWindowTilemap(WIN_MON_INFO);
-    CopyWindowToVram(WIN_UI_HINTS, COPYWIN_FULL);
-    CopyWindowToVram(WIN_MON_INFO, COPYWIN_FULL);
+    FillWindowPixelBuffer(WIN_UI_TOP_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    PutWindowTilemap(WIN_UI_TOP_BAR);
+    CopyWindowToVram(WIN_UI_TOP_BAR, COPYWIN_FULL);
 }
 
-static void RotomPhone_LargeStartMenu_PrintUiButtonHints(void)
+static void RotomPhone_LargeStartMenu_PrintTopBar(void)
 {
-    FillWindowPixelBuffer(WIN_UI_HINTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WIN_UI_TOP_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_NORMAL, 0, 3, 0, 0,
+    AddTextPrinterParameterized4(WIN_UI_TOP_BAR, FONT_NORMAL,
+        GetStringCenterAlignXOffset(FONT_NORMAL, sRotomPhoneOptions[menuSelectedLarge].menuName, sRotomPhone_LargeStartMenuWindowTemplates[WIN_UI_TOP_BAR].width * 8),
+        0, 0, 0,
         sRotomPhone_StartMenuFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sRotomPhoneOptions[menuSelectedLarge].menuName);
 
-    CopyWindowToVram(WIN_UI_HINTS, COPYWIN_GFX);
+    CopyWindowToVram(WIN_UI_TOP_BAR, COPYWIN_GFX);
 }
 
 static void UNUSED RotomPhone_LargeStartMenu_CreateRegionButtons(void)
