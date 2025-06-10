@@ -2877,6 +2877,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
     #define EGG_COMPATABILITY_ICON_Y 210
     #define MON_ICON_ONE_X 60
     #define MON_ICON_TWO_X 180
+    #define MON_COMPATABILITY_ICON_X (MON_ICON_ONE_X + MON_ICON_TWO_X) / 2
 
     #define WIN_WIDTH 6
     #define WIN_HEIGHT 5
@@ -3027,7 +3028,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
                 spriteCB = SpriteCB_MonIcon_FlippedHorizontal;
 
             sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE] =
-                CreateMonIcon(SPECIES_EGG, spriteCB, (MON_ICON_ONE_X + MON_ICON_TWO_X) / 2, EGG_COMPATABILITY_ICON_Y, 4, 0);
+                CreateMonIcon(SPECIES_EGG, spriteCB, MON_COMPATABILITY_ICON_X, EGG_COMPATABILITY_ICON_Y, 4, 0);
             gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE]].oam.priority = 0;
         }
     }
