@@ -2870,65 +2870,196 @@ static void RotomPhone_StartMenu_SelectedFunc_Clock(void)
 
 static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 {
-    #define MON_ICON_Y 210
-    #define MON_ICON_ONE_X 50
-    #define MON_ICON_TWO_X 190
+    #define MON_ONE 0
+    #define MON_TWO 1
+
+    #define MON_ICON_Y 220
+    #define MON_ICON_ONE_X 60
+    #define MON_ICON_TWO_X 180
+
+    #define WIN_WIDTH 6
+    #define WIN_HEIGHT 5
+    #define WIN_TOP 21
+
+    #define TEXT_LINE_SPACE 14
+
+    struct DaycareMon *daycareMonOne = &gSaveBlock1Ptr->daycare.mons[MON_ONE];
+    struct DaycareMon *daycareMonTwo = &gSaveBlock1Ptr->daycare.mons[MON_TWO];
+    struct BoxPokemon *daycareBoxMonOne = &daycareMonOne->mon;
+    struct BoxPokemon *daycareBoxMonTwo = &daycareMonTwo->mon;
+    u16 speciesOne = GetBoxMonData(daycareBoxMonOne, MON_DATA_SPECIES);
+    u16 speciesTwo = GetBoxMonData(daycareBoxMonTwo, MON_DATA_SPECIES);
+    u8 windowId;
+
     if (RotomPhone_StartMenu_IsFullScreen() && sRotomPhone_LargeStartMenu->panelIsOpen == FALSE)
     {
-        struct BoxPokemon *daycareMonOne = &gSaveBlock1Ptr->daycare.mons[0].mon;
-        struct BoxPokemon *daycareMonTwo = &gSaveBlock1Ptr->daycare.mons[1].mon;
-        u16 speciesOne = GetBoxMonData(daycareMonOne, MON_DATA_SPECIES);
-        u16 speciesTwo = GetBoxMonData(daycareMonTwo, MON_DATA_SPECIES);
-
-        // if (!speciesOne && !speciesTwo)
-        //     return;
+        if (!speciesOne && !speciesTwo)
+            return;
 
         u8 levelGain[2];
         u8 level[3];
         u8 nickname[POKEMON_NAME_LENGTH + 1];
+        u8 textBuffer[24];
+        u8 fontId;
+        u8 y;
+
         LoadMonIconPalettes();
 
         if (speciesOne)
         {
-            gSpecialVar_Result = 0;
-            u32 monOneLevelGain = GetNumLevelsGainedFromDaycare();
-            u32 monOneLevel = GetBoxMonData(daycareMonOne, MON_DATA_LEVEL) + monOneLevelGain;
-            GetBoxMonData(daycareMonOne, MON_DATA_NICKNAME, nickname);
+            u32 monOneLevel = GetLevelAfterDaycareSteps(daycareBoxMonOne, daycareMonOne->steps);
+            u32 monOneLevelGain = GetNumLevelsGainedFromSteps(daycareMonOne);
+            GetBoxMonData(daycareBoxMonOne, MON_DATA_NICKNAME, nickname);
 
             sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE] =
                 CreateMonIcon(speciesOne, SpriteCB_MonIcon_FlippedHorizontal, MON_ICON_ONE_X, MON_ICON_Y, 4, 0);
             gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE]].oam.priority = 0;
 
+            ConvertIntToDecimalStringN(level, monOneLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
             ConvertIntToDecimalStringN(levelGain, monOneLevelGain, STR_CONV_MODE_LEFT_ALIGN, 2);
-            ConvertIntToDecimalStringN(level, monOneLevelGain, STR_CONV_MODE_LEFT_ALIGN, 3);
+
+            struct WindowTemplate winTemplate = CreateWindowTemplate(
+                2,
+                3,
+                WIN_TOP,
+                WIN_WIDTH,
+                WIN_HEIGHT,
+                15,
+                ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK
+            );
+            sRotomPhone_LargeStartMenu->panelWindowIds[PANEL_WIN_ONE] = AddWindow(&winTemplate);
+            windowId = sRotomPhone_LargeStartMenu->panelWindowIds[PANEL_WIN_ONE];
+            FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+            PutWindowTilemap(windowId);
+
+            y = 0;
+            StringCopy(textBuffer, nickname);
+            fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, winTemplate.width * 8);
+            AddTextPrinterParameterized4(windowId, fontId,
+                0,
+                y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_WHITE], TEXT_SKIP_DRAW, textBuffer
+            );
+
+            y += TEXT_LINE_SPACE;
+            StringCopy(textBuffer, COMPOUND_STRING("Level: "));
+            StringAppend(textBuffer, level);
+            fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, winTemplate.width * 8);
+            AddTextPrinterParameterized4(windowId, fontId,
+                0,
+                y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_WHITE], TEXT_SKIP_DRAW, textBuffer
+            );
+
+            y += TEXT_LINE_SPACE - 1;
+            StringCopy(textBuffer, COMPOUND_STRING("Gain: +"));
+            StringAppend(textBuffer, levelGain);
+            fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, winTemplate.width * 8);
+            AddTextPrinterParameterized4(windowId, fontId,
+                0,
+                y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_WHITE], TEXT_SKIP_DRAW, textBuffer
+            );
+
+            CopyWindowToVram(windowId, COPYWIN_FULL);
         }
 
         if (speciesTwo)
         {
-            gSpecialVar_Result = 1;
-            u32 monTwoLevelGain = GetNumLevelsGainedFromDaycare();
-            u32 monTwoLevel = GetBoxMonData(daycareMonTwo, MON_DATA_LEVEL) + monTwoLevelGain;
-            GetBoxMonData(daycareMonTwo, MON_DATA_NICKNAME, nickname);
+            u32 monTwoLevel = GetLevelAfterDaycareSteps(daycareBoxMonTwo, daycareMonTwo->steps);
+            u32 monTwoLevelGain = GetNumLevelsGainedFromSteps(daycareMonTwo);
+            GetBoxMonData(daycareBoxMonTwo, MON_DATA_NICKNAME, nickname);
 
             sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO] =
                 CreateMonIcon(speciesTwo, SpriteCB_MonIcon, MON_ICON_TWO_X, MON_ICON_Y, 4, 0);
             gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO]].oam.priority = 0;
 
+            ConvertIntToDecimalStringN(level, monTwoLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
             ConvertIntToDecimalStringN(levelGain, monTwoLevelGain, STR_CONV_MODE_LEFT_ALIGN, 2);
-            ConvertIntToDecimalStringN(level, monTwoLevelGain, STR_CONV_MODE_LEFT_ALIGN, 3);
-        } 
+
+            struct WindowTemplate winTemplate = CreateWindowTemplate(
+                2,
+                21,
+                WIN_TOP,
+                WIN_WIDTH,
+                WIN_HEIGHT,
+                15,
+                ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK + (WIN_WIDTH * WIN_HEIGHT)
+            );
+            sRotomPhone_LargeStartMenu->panelWindowIds[PANEL_WIN_TWO] = AddWindow(&winTemplate);
+            windowId = sRotomPhone_LargeStartMenu->panelWindowIds[PANEL_WIN_TWO];
+            FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+            PutWindowTilemap(windowId);
+
+            y = 0;
+            StringCopy(textBuffer, nickname);
+            fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, winTemplate.width * 8);
+            AddTextPrinterParameterized4(windowId, fontId,
+                GetStringRightAlignXOffset(fontId, textBuffer, WIN_WIDTH * 8),
+                y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_WHITE], TEXT_SKIP_DRAW, textBuffer
+            );
+
+            y += TEXT_LINE_SPACE;
+            StringCopy(textBuffer, COMPOUND_STRING("Level: "));
+            StringAppend(textBuffer, level);
+            fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, winTemplate.width * 8);
+            AddTextPrinterParameterized4(windowId, fontId,
+                GetStringRightAlignXOffset(fontId, textBuffer, WIN_WIDTH * 8),
+                y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_WHITE], TEXT_SKIP_DRAW, textBuffer
+            );
+
+            y += TEXT_LINE_SPACE - 1;
+            StringCopy(textBuffer, COMPOUND_STRING("Gain: +"));
+            StringAppend(textBuffer, levelGain);
+            fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, winTemplate.width * 8);
+            AddTextPrinterParameterized4(windowId, fontId,
+                GetStringRightAlignXOffset(fontId, textBuffer, WIN_WIDTH * 8),
+                y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_WHITE], TEXT_SKIP_DRAW, textBuffer
+            );
+
+            CopyWindowToVram(windowId, COPYWIN_FULL);
+        }
     }
     else if (RotomPhone_StartMenu_IsFullScreen() && sRotomPhone_LargeStartMenu->panelIsOpen == TRUE)
     {
+        if (!speciesOne && !speciesTwo)
+            return;
+
         FreeMonIconPalettes();
-        DestroySpriteAndFreeResources(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE]]);
-        DestroySpriteAndFreeResources(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO]]);
-        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE] = SPRITE_NONE;
-        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO] = SPRITE_NONE;
+
+        if (speciesOne)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE]]);
+            sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE] = SPRITE_NONE;
+
+            windowId = sRotomPhone_LargeStartMenu->panelWindowIds[PANEL_WIN_ONE];
+            FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+            CopyWindowToVram(windowId, COPYWIN_FULL);
+            RemoveWindow(windowId);
+            sRotomPhone_LargeStartMenu->panelWindowIds[PANEL_WIN_ONE] = WINDOW_NONE;
+        }
+
+        if (speciesTwo)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO]]);
+            sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO] = SPRITE_NONE;
+
+            windowId = sRotomPhone_LargeStartMenu->panelWindowIds[PANEL_WIN_TWO];
+            FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+            CopyWindowToVram(windowId, COPYWIN_FULL);
+            RemoveWindow(windowId);
+            sRotomPhone_LargeStartMenu->panelWindowIds[PANEL_WIN_TWO] = WINDOW_NONE;
+        }
     }
+    #undef MON_ONE
+    #undef MON_TWO
+
     #undef MON_ICON_Y
     #undef MON_ICON_ONE_X
     #undef MON_ICON_TWO_X
+    
+    #undef WIN_WIDTH
+    #undef WIN_HEIGHT
+    #undef WIN_TOP
+
+    #undef TEXT_LINE_SPACE
 }
 #undef tRotomUpdateTimer
 #undef tRotomUpdateMessage
