@@ -1910,6 +1910,17 @@ enum SlidingPanelSprites
     PANEL_SPRITE_COUNT,
 };
 
+enum SlidingPanelWindows
+{
+    PANEL_WIN_ONE,
+    PANEL_WIN_TWO,
+    PANEL_WIN_THREE,
+    PANEL_WIN_FOUR,
+    PANEL_WIN_FIVE,
+    PANEL_WIN_SIX,
+    PANEL_WIN_COUNT,
+};
+
 struct RotomPhone_LargeStartMenuState
 {
     MainCallback savedCallback;
@@ -1921,6 +1932,7 @@ struct RotomPhone_LargeStartMenuState
     bool8 panelIsOpen;
 
     u8 panelSpriteIds[PANEL_SPRITE_COUNT];
+    u8 panelWindowIds[PANEL_WIN_COUNT];
 };
 
 enum WindowIds
@@ -2110,6 +2122,13 @@ static void RotomPhone_LargeStartMenu_SetupCB(void)
         sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_FOUR] = SPRITE_NONE;
         sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_FIVE] = SPRITE_NONE;
         sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_SIX] = SPRITE_NONE;
+
+        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_WIN_ONE] = WINDOW_NONE;
+        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_WIN_TWO] = WINDOW_NONE;
+        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_WIN_THREE] = WINDOW_NONE;
+        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_WIN_FOUR] = WINDOW_NONE;
+        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_WIN_FIVE] = WINDOW_NONE;
+        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_WIN_SIX] = WINDOW_NONE;
 
         CreateTask(Task_RotomPhone_LargeStartMenu_WaitFadeIn, 0);
         gMain.state++;
