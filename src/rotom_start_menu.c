@@ -2213,7 +2213,7 @@ static void Task_RotomPhone_LargeStartMenu_PanelInput(u8 taskId)
 static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId)
 {
     #define PANEL_MIN_Y 0
-    #define PANEL_MAX_Y 95
+    #define PANEL_MAX_Y 96
     #define PANEL_SLIDE_DOWN_FRAMES 50
     #define PANEL_SLIDE_UP_FRAMES 40
     /*
