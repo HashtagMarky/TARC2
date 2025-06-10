@@ -2882,20 +2882,20 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
     #define WIN_TOP 21
 
     #define TEXT_LINE_SPACE 14
-
-    struct DaycareMon *daycareMonOne = &gSaveBlock1Ptr->daycare.mons[MON_ONE];
-    struct DaycareMon *daycareMonTwo = &gSaveBlock1Ptr->daycare.mons[MON_TWO];
-    struct BoxPokemon *daycareBoxMonOne = &daycareMonOne->mon;
-    struct BoxPokemon *daycareBoxMonTwo = &daycareMonTwo->mon;
-    u16 speciesOne = GetBoxMonData(daycareBoxMonOne, MON_DATA_SPECIES);
-    u16 speciesTwo = GetBoxMonData(daycareBoxMonTwo, MON_DATA_SPECIES);
+    
     u8 windowId;
 
     if (RotomPhone_StartMenu_IsFullScreen() && sRotomPhone_LargeStartMenu->panelIsOpen == FALSE)
     {
-        if (!speciesOne && !speciesTwo)
+        if (GetDaycareState() == DAYCARE_NO_MONS)
             return;
 
+        struct DaycareMon *daycareMonOne = &gSaveBlock1Ptr->daycare.mons[MON_ONE];
+        struct DaycareMon *daycareMonTwo = &gSaveBlock1Ptr->daycare.mons[MON_TWO];
+        struct BoxPokemon *daycareBoxMonOne = &daycareMonOne->mon;
+        struct BoxPokemon *daycareBoxMonTwo = &daycareMonTwo->mon;
+        u16 speciesOne = GetBoxMonData(daycareBoxMonOne, MON_DATA_SPECIES);
+        u16 speciesTwo = GetBoxMonData(daycareBoxMonTwo, MON_DATA_SPECIES);
         u8 levelGain[2];
         u8 level[3];
         u8 nickname[POKEMON_NAME_LENGTH + 1];
@@ -2905,7 +2905,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 
         LoadMonIconPalettes();
 
-        if (speciesOne)
+        if (GetDaycareState() != DAYCARE_NO_MONS)
         {
             u32 monOneLevel = GetLevelAfterDaycareSteps(daycareBoxMonOne, daycareMonOne->steps);
             u32 monOneLevelGain = GetNumLevelsGainedFromSteps(daycareMonOne);
@@ -2961,7 +2961,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
             CopyWindowToVram(windowId, COPYWIN_FULL);
         }
 
-        if (speciesTwo)
+        if (GetDaycareState() != DAYCARE_NO_MONS && GetDaycareState() != DAYCARE_ONE_MON)
         {
             u32 monTwoLevel = GetLevelAfterDaycareSteps(daycareBoxMonTwo, daycareMonTwo->steps);
             u32 monTwoLevelGain = GetNumLevelsGainedFromSteps(daycareMonTwo);
@@ -3019,12 +3019,12 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
     }
     else if (RotomPhone_StartMenu_IsFullScreen() && sRotomPhone_LargeStartMenu->panelIsOpen == TRUE)
     {
-        if (!speciesOne && !speciesTwo)
+        if (GetDaycareState() == DAYCARE_NO_MONS)
             return;
 
         FreeMonIconPalettes();
 
-        if (speciesOne)
+        if (GetDaycareState() != DAYCARE_NO_MONS)
         {
             DestroySpriteAndFreeResources(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE]]);
             sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE] = SPRITE_NONE;
@@ -3036,7 +3036,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
             sRotomPhone_LargeStartMenu->panelWindowIds[PANEL_WIN_ONE] = WINDOW_NONE;
         }
 
-        if (speciesTwo)
+        if (GetDaycareState() != DAYCARE_NO_MONS && GetDaycareState() != DAYCARE_ONE_MON)
         {
             DestroySpriteAndFreeResources(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO]]);
             sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO] = SPRITE_NONE;
