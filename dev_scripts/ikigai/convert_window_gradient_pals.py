@@ -22,7 +22,7 @@ def extract_two_colors(pal_path: Path) -> tuple[str, str]:
 
 def main():
     script_dir = Path(__file__).resolve().parent
-    palette_dir = script_dir / "graphics/text_window/ikigai_palettes/message_box"
+    palette_dir = script_dir.parent.parent / "graphics/text_window/ikigai_palettes/message_box"
     pal_files = list(palette_dir.glob("*.pal"))
     process_script = script_dir / "window_gradient_pals.py"
 

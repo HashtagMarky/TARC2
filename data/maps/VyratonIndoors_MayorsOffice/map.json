@@ -1,7 +1,7 @@
 {
   "id": "MAP_VYRATON_INDOORS_MAYORS_OFFICE",
   "name": "VyratonIndoors_MayorsOffice",
-  "layout": "LAYOUT_VYRATON_MAYOR_OFFICE",
+  "layout": "LAYOUT_VYRATON_MAYOR_OFFICE_LEVEL_1",
   "music": "MUS_HG_GOLDENROD",
   "region_map_section": "MAPSEC_VYRATON",
   "requires_flash": false,
@@ -12,7 +12,7 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_SAMUEL",
@@ -67,9 +67,7 @@
       "flag": "FLAG_HIDE_MAYORS_OFFICE_STARTER"
     }
   ],
-  "warp_events": [
-
-  ],
+  "warp_events": [],
   "coord_events": [
     {
       "type": "trigger",
@@ -108,7 +106,5 @@
       "script": "VyratonIndoors_MayorsOffice_EventScript_IkigaiIntro_DontGoTooFar"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }
