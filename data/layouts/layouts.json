@@ -4442,14 +4442,14 @@
       "blockdata_filepath": "data/layouts/VyratonOutdoors_Ocean/map_east.bin"
     },
     {
-      "id": "LAYOUT_VYRATON_MAYOR_OFFICE",
-      "name": "Vyraton_MayorsOffice_Layout",
+      "id": "LAYOUT_VYRATON_MAYOR_OFFICE_LEVEL_1",
+      "name": "Vyraton_MayorsOffice_Layout_Level_1",
       "width": 20,
       "height": 15,
       "primary_tileset": "gTileset_IkigaiOffice",
       "secondary_tileset": "gTileset_PokemonSchool",
-      "border_filepath": "data/layouts/VyratonIndoors_MayorsOffice/border.bin",
-      "blockdata_filepath": "data/layouts/VyratonIndoors_MayorsOffice/map.bin"
+      "border_filepath": "data/layouts/Vyraton_MayorsOffice_Layout_Level_1/border.bin",
+      "blockdata_filepath": "data/layouts/Vyraton_MayorsOffice_Layout_Level_1/map.bin"
     },
     {
       "id": "LAYOUT_VYRATON_INDOORS_SSPATHFINDER",
@@ -4470,6 +4470,16 @@
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/VyratonCentre/border.bin",
       "blockdata_filepath": "data/layouts/VyratonCentre/map.bin"
+    },
+    {
+      "id": "LAYOUT_VYRATON_MAYORS_OFFICE_LAYOUT_LEVEL_3",
+      "name": "Vyraton_MayorsOffice_Layout_Level_3",
+      "width": 20,
+      "height": 15,
+      "primary_tileset": "gTileset_IkigaiOffice",
+      "secondary_tileset": "gTileset_PokemonSchool",
+      "border_filepath": "data/layouts/Vyraton_MayorsOffice_Layout_Level_3/border.bin",
+      "blockdata_filepath": "data/layouts/Vyraton_MayorsOffice_Layout_Level_3/map.bin"
     }
   ]
 }
