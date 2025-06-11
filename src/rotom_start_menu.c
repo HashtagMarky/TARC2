@@ -302,6 +302,7 @@ struct RotomPhone_StartMenu
     bool32 spriteFlag; // some bool32 holding values for controlling the sprite anims and lifetime
     enum RotomPhoneMenuItems menuSmallOptions[ROTOM_PHONE_SMALL_OPTION_COUNT];
     u32 menuSmallSpriteId[ROTOM_PHONE_SMALL_OPTION_COUNT];
+    u32 menuSmallFlashSpriteId[ROTOM_PHONE_SMALL_OPTION_COUNT];
     u32 windowIdRotomSpeech_Top;
     u32 windowIdRotomSpeech_Bottom;
     u32 windowIdFlipPhone;
@@ -1114,6 +1115,20 @@ void RotomPhone_SmallStartMenu_Init(bool32 printGreeting)
     sRotomPhone_SmallStartMenu->spriteFlag = FALSE;
     menuFullScreen = FALSE;
 
+    sRotomPhone_SmallStartMenu->menuSmallSpriteId[ROTOM_PHONE_SMALL_OPTION_1] = SPRITE_NONE;
+    sRotomPhone_SmallStartMenu->menuSmallSpriteId[ROTOM_PHONE_SMALL_OPTION_2] = SPRITE_NONE;
+    sRotomPhone_SmallStartMenu->menuSmallSpriteId[ROTOM_PHONE_SMALL_OPTION_3] = SPRITE_NONE;
+    sRotomPhone_SmallStartMenu->menuSmallSpriteId[ROTOM_PHONE_SMALL_OPTION_4] = SPRITE_NONE;
+    sRotomPhone_SmallStartMenu->menuSmallSpriteId[ROTOM_PHONE_SMALL_OPTION_5] = SPRITE_NONE;
+    sRotomPhone_SmallStartMenu->menuSmallSpriteId[ROTOM_PHONE_SMALL_OPTION_6] = SPRITE_NONE;
+
+    sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[ROTOM_PHONE_SMALL_OPTION_1] = SPRITE_NONE;
+    sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[ROTOM_PHONE_SMALL_OPTION_2] = SPRITE_NONE;
+    sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[ROTOM_PHONE_SMALL_OPTION_3] = SPRITE_NONE;
+    sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[ROTOM_PHONE_SMALL_OPTION_4] = SPRITE_NONE;
+    sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[ROTOM_PHONE_SMALL_OPTION_5] = SPRITE_NONE;
+    sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[ROTOM_PHONE_SMALL_OPTION_6] = SPRITE_NONE;
+
     RotomPhone_SmallStartMenu_LoadSprites();
     RotomPhone_SmallStartMenu_CreateAllSprites();
     RotomPhone_SmallStartMenu_LoadBgGfx();
@@ -1156,12 +1171,22 @@ static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menu
     s32 y = ICON_COORD_Y;
     u32 iconRow;
     u32 iconColumn;
+    bool32 flash = FALSE;
 
     if (!FlagGet(FLAG_SYS_POKEDEX_GET))
         y += 19;
 
     iconColumn = spriteId % 2;
     iconRow = spriteId / 2;
+
+    if (GetFlashLevel() > 0 || InBattlePyramid_())
+        flash = TRUE;
+
+    if (flash)
+    {
+        SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJWIN_ON);
+        SetGpuRegBits(REG_OFFSET_WINOUT, WINOUT_WINOBJ_OBJ);
+    }
 
     sRotomPhone_SmallStartMenu->menuSmallSpriteId[spriteId] = CreateSprite(
         sRotomPhoneOptions[menuItem].iconTemplateSmall,
@@ -1170,8 +1195,22 @@ static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menu
         0
     );
 
+    if (flash)
+    {
+        sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[spriteId] = CreateSprite(
+            sRotomPhoneOptions[menuItem].iconTemplateSmall,
+            x + (iconColumn * 24),
+            y + (iconRow * 24),
+            0
+        );
+        gSprites[sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[spriteId]].oam.objMode = ST_OAM_OBJ_WINDOW;
+    }
+
     if (sRotomPhoneOptions[menuItem].iconTemplateSmall == sRotomPhoneOptions[ROTOM_PHONE_MENU_SHORTCUT].iconTemplateSmall)
+    {
         gSprites[sRotomPhone_SmallStartMenu->menuSmallSpriteId[spriteId]].anims = sRotomPhoneOptions[RotomPhone_StartMenu_GetShortcutOption()].iconTemplateSmall->anims;
+        gSprites[sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[spriteId]].anims = sRotomPhoneOptions[RotomPhone_StartMenu_GetShortcutOption()].iconTemplateSmall->anims;
+    }
 }
 
 static void RotomPhone_SmallStartMenu_CreateAllSprites(void)
@@ -1195,7 +1234,6 @@ static void RotomPhone_SmallStartMenu_CreateAllSprites(void)
     for (; drawn < ROTOM_PHONE_SMALL_OPTION_COUNT; drawn++)
     {
         sRotomPhone_SmallStartMenu->menuSmallOptions[drawn] = ROTOM_PHONE_MENU_COUNT;
-        sRotomPhone_SmallStartMenu->menuSmallSpriteId[drawn] = SPRITE_NONE;
     }
 }
 
@@ -1694,6 +1732,11 @@ static void RotomPhone_SmallStartMenu_ExitAndClearTilemap(void)
         {
             FreeSpriteOamMatrix(&gSprites[sRotomPhone_SmallStartMenu->menuSmallSpriteId[spriteId]]);
             DestroySprite(&gSprites[sRotomPhone_SmallStartMenu->menuSmallSpriteId[spriteId]]);
+        }
+        if (sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[spriteId] != SPRITE_NONE)
+        {
+            FreeSpriteOamMatrix(&gSprites[sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[spriteId]]);
+            DestroySprite(&gSprites[sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[spriteId]]);
         }
     }
 
