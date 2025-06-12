@@ -1079,21 +1079,14 @@ static void LoadCopyrightGraphics(u16 tilesetAddress, u16 tilemapAddress, u16 pa
     {
         DecompressDataWithHeaderVram(gIntroAntiPiracy_Gfx, (void *)(VRAM + tilesetAddress));
         DecompressDataWithHeaderVram(gIntroAntiPiracy_Tilemap, (void *)(VRAM + tilemapAddress));
-        LoadPalette(gIntroHMProductionsCopyright_Pal, paletteOffset, PLTT_SIZE_4BPP);
     }
     else
     {
-        #if HM_PRODUCTIONS_COPYRIGHT == FALSE
-        DecompressDataWithHeaderVram(gIntroCopyright_Gfx, (void *)(VRAM + tilesetAddress));
-        DecompressDataWithHeaderVram(gIntroCopyright_Tilemap, (void *)(VRAM + tilemapAddress));
-        LoadPalette(gIntroCopyright_Pal, paletteOffset, PLTT_SIZE_4BPP);
-        #else
         DecompressDataWithHeaderVram(gIntroHMProductionsCopyright_Gfx, (void *)(VRAM + tilesetAddress));
         DecompressDataWithHeaderVram(gIntroHMProductionsCopyright_Tilemap, (void *)(VRAM + tilemapAddress));
-        LoadPalette(gIntroHMProductionsCopyright_Pal, paletteOffset, PLTT_SIZE_4BPP);
-        LoadPalette(gIntroHMProductionsCopyright_PalText, paletteOffset + 16, PLTT_SIZE_4BPP);
-        #endif
     }
+    LoadPalette(gIntroHMProductionsCopyright_Pal, paletteOffset, PLTT_SIZE_4BPP);
+    LoadPalette(gIntroHMProductionsCopyright_PalText, paletteOffset + 16, PLTT_SIZE_4BPP);
 }
 
 static void SerialCB_CopyrightScreen(void)
