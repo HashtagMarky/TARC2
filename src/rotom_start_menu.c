@@ -1115,19 +1115,11 @@ void RotomPhone_SmallStartMenu_Init(bool32 printGreeting)
     sRotomPhone_SmallStartMenu->spriteFlag = FALSE;
     menuFullScreen = FALSE;
 
-    sRotomPhone_SmallStartMenu->menuSmallSpriteId[ROTOM_PHONE_SMALL_OPTION_1] = SPRITE_NONE;
-    sRotomPhone_SmallStartMenu->menuSmallSpriteId[ROTOM_PHONE_SMALL_OPTION_2] = SPRITE_NONE;
-    sRotomPhone_SmallStartMenu->menuSmallSpriteId[ROTOM_PHONE_SMALL_OPTION_3] = SPRITE_NONE;
-    sRotomPhone_SmallStartMenu->menuSmallSpriteId[ROTOM_PHONE_SMALL_OPTION_4] = SPRITE_NONE;
-    sRotomPhone_SmallStartMenu->menuSmallSpriteId[ROTOM_PHONE_SMALL_OPTION_5] = SPRITE_NONE;
-    sRotomPhone_SmallStartMenu->menuSmallSpriteId[ROTOM_PHONE_SMALL_OPTION_6] = SPRITE_NONE;
-
-    sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[ROTOM_PHONE_SMALL_OPTION_1] = SPRITE_NONE;
-    sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[ROTOM_PHONE_SMALL_OPTION_2] = SPRITE_NONE;
-    sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[ROTOM_PHONE_SMALL_OPTION_3] = SPRITE_NONE;
-    sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[ROTOM_PHONE_SMALL_OPTION_4] = SPRITE_NONE;
-    sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[ROTOM_PHONE_SMALL_OPTION_5] = SPRITE_NONE;
-    sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[ROTOM_PHONE_SMALL_OPTION_6] = SPRITE_NONE;
+    for (enum RotomPhoneSmallOptions smallOptions = ROTOM_PHONE_SMALL_OPTION_1; smallOptions < ROTOM_PHONE_SMALL_OPTION_COUNT; smallOptions++)
+    {
+        sRotomPhone_SmallStartMenu->menuSmallSpriteId[smallOptions] = SPRITE_NONE;
+        sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[smallOptions] = SPRITE_NONE;
+    }
 
     RotomPhone_SmallStartMenu_LoadSprites();
     RotomPhone_SmallStartMenu_CreateAllSprites();
@@ -2212,19 +2204,15 @@ static void RotomPhone_LargeStartMenu_SetupCB(void)
         sRotomPhone_LargeStartMenu->panelY = 0;
         sRotomPhone_LargeStartMenu->panelIsOpen = FALSE;
 
-        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE] = SPRITE_NONE;
-        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO] = SPRITE_NONE;
-        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE] = SPRITE_NONE;
-        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_FOUR] = SPRITE_NONE;
-        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_FIVE] = SPRITE_NONE;
-        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_SIX] = SPRITE_NONE;
+        for (enum SlidingPanelSprites spritePanel = PANEL_SPRITE_ONE; spritePanel < PANEL_SPRITE_COUNT; spritePanel++)
+        {
+            sRotomPhone_LargeStartMenu->panelSpriteIds[spritePanel] = SPRITE_NONE;
+        }
 
-        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_WIN_ONE] = WINDOW_NONE;
-        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_WIN_TWO] = WINDOW_NONE;
-        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_WIN_THREE] = WINDOW_NONE;
-        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_WIN_FOUR] = WINDOW_NONE;
-        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_WIN_FIVE] = WINDOW_NONE;
-        sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_WIN_SIX] = WINDOW_NONE;
+        for (enum SlidingPanelWindows windowPanel = PANEL_WIN_ONE; windowPanel < PANEL_WIN_COUNT; windowPanel++)
+        {
+            sRotomPhone_LargeStartMenu->panelWindowIds[windowPanel] = SPRITE_NONE;
+        }
 
         CreateTask(Task_RotomPhone_LargeStartMenu_WaitFadeIn, 0);
         gMain.state++;
