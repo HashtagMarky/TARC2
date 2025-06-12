@@ -231,6 +231,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (input->pressedStartButton)
     {
         // ShowStartMenu();
+        ResetDexNavSearch();
         if (FlagGet(FLAG_SYS_POKEDEX_GET))
             PlaySE(PMD_EVENT_SIGN_NOTICE_01);
         else
