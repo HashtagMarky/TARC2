@@ -137,6 +137,8 @@ enum {
     COPYRIGHT_START_FADE = 140,
     COPYRIGHT_START_INTRO,
 };
+#define COPYRIGHT_DURATION 120
+#define WARNING_DURATION 240
 
 #define COLOSSEUM_GAME_CODE 0x65366347 // "Gc6e" in ASCII
 
@@ -1116,7 +1118,7 @@ static u8 SetUpCopyrightScreen(void)
         CpuFill32(0, (void *)OAM, OAM_SIZE);
         CpuFill16(0, (void *)(PLTT + 2), PLTT_SIZE - 2);
         ResetPaletteFade();
-        LoadCopyrightGraphics(0, 0x3800, BG_PLTT_ID(0), TRUE);
+        LoadCopyrightGraphics(0, 0x3800, BG_PLTT_ID(0), FALSE);
         ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
@@ -1146,7 +1148,7 @@ static u8 SetUpCopyrightScreen(void)
         gMain.state++;
     case 3:
         sCopyrightCounter++;
-        if (!gPaletteFade.active && (gMain.newKeys != 0 || sCopyrightCounter >= 240))
+        if (!gPaletteFade.active && (gMain.newKeys != 0 || sCopyrightCounter >= COPYRIGHT_DURATION))
             gMain.state++;
         break;
     case 4:
@@ -1156,7 +1158,7 @@ static u8 SetUpCopyrightScreen(void)
     case 5:
         if (!UpdatePaletteFade())
         {
-            LoadCopyrightGraphics(0, 0x3800, BG_PLTT_ID(0), FALSE);
+            LoadCopyrightGraphics(0, 0x3800, BG_PLTT_ID(0), TRUE);
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITEALPHA);
             gMain.state++;
         }
@@ -1171,7 +1173,7 @@ static u8 SetUpCopyrightScreen(void)
         break;
     case 7:
         sCopyrightCounter++;
-        if (!gPaletteFade.active && (gMain.newKeys != 0 || sCopyrightCounter >= 240))
+        if (!gPaletteFade.active && (gMain.newKeys != 0 || sCopyrightCounter >= WARNING_DURATION))
             gMain.state = COPYRIGHT_START_FADE;
         break;
         gMain.state++;
