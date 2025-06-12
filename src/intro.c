@@ -1077,9 +1077,9 @@ static void LoadCopyrightGraphics(u16 tilesetAddress, u16 tilemapAddress, u16 pa
 {
     if (isAntiPiracy == TRUE)
     {
-        DecompressDataWithHeaderVram(gIntroAntiPiracy_Gfx, (void *)(VRAM + 0));
-        DecompressDataWithHeaderVram(gIntroAntiPiracy_Tilemap, (void *)(VRAM + 0x3800));
-        LoadPalette(gIntroAntiPiracy_Pal, BG_PLTT_ID(0), 6 * PLTT_SIZE_4BPP);
+        DecompressDataWithHeaderVram(gIntroAntiPiracy_Gfx, (void *)(VRAM + tilesetAddress));
+        DecompressDataWithHeaderVram(gIntroAntiPiracy_Tilemap, (void *)(VRAM + tilemapAddress));
+        LoadPalette(gIntroHMProductionsCopyright_Pal, paletteOffset, PLTT_SIZE_4BPP);
     }
     else
     {
