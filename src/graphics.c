@@ -1833,13 +1833,13 @@ const u32 gIntroCopyright_Tilemap[] = INCBIN_U32("graphics/intro/copyright.bin.s
 #else
 const u16 gIntroHMProductionsCopyright_Pal[] = INCBIN_U16("graphics/intro/hmprods_copyright.gbapal");
 const u16 gIntroHMProductionsCopyright_PalText[] = INCBIN_U16("graphics/intro/hmprods_copyright_text.gbapal");
-const u32 gIntroHMProductionsCopyright_Gfx[] = INCBIN_U32("graphics/intro/hmprods_copyright.4bpp.lz");
-const u32 gIntroHMProductionsCopyright_Tilemap[] = INCBIN_U32("graphics/intro/hmprods_copyright.bin.lz");
+const u32 gIntroHMProductionsCopyright_Gfx[] = INCBIN_U32("graphics/intro/hmprods_copyright.4bpp.smol");
+const u32 gIntroHMProductionsCopyright_Tilemap[] = INCBIN_U32("graphics/intro/hmprods_copyright.bin.smolTM");
 #endif
 
 const u16 gIntroAntiPiracy_Pal[] = INCBIN_U16("graphics/intro/antipiracy/palette.gbapal");
-const u32 gIntroAntiPiracy_Gfx[] = INCBIN_U32("graphics/intro/antipiracy/tileset.4bpp.lz");
-const u32 gIntroAntiPiracy_Tilemap[] = INCBIN_U32("graphics/intro/antipiracy/tilemap.bin.lz");
+const u32 gIntroAntiPiracy_Gfx[] = INCBIN_U32("graphics/intro/antipiracy/tileset.4bpp.smol");
+const u32 gIntroAntiPiracy_Tilemap[] = INCBIN_U32("graphics/intro/antipiracy/tilemap.bin.smolTM");
 
 const u16 gPokedexAreaScreenAreaUnknown_Pal[] = INCBIN_U16("graphics/pokedex/area_unknown.gbapal");
 const u32 gPokedexAreaScreenAreaUnknown_Gfx[] = INCBIN_U32("graphics/pokedex/area_unknown.4bpp.smol");
