@@ -1785,6 +1785,9 @@ extern const u16 gIntroHMProductionsCopyright_Pal[16];
 extern const u16 gIntroHMProductionsCopyright_PalText[16];
 #endif
 extern const u16 gIntroCopyright_Pal[16];
+extern const u32 gIntroAntiPiracy_Gfx[];
+extern const u32 gIntroAntiPiracy_Tilemap[];
+extern const u16 gIntroAntiPiracy_Pal[96];
 extern const u32 gIntroVolbeat_Gfx[];
 extern const u16 gIntroVolbeat_Pal[];
 extern const u32 gIntroTorchic_Gfx[];

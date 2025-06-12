@@ -1837,6 +1837,10 @@ const u32 gIntroHMProductionsCopyright_Gfx[] = INCBIN_U32("graphics/intro/hmprod
 const u32 gIntroHMProductionsCopyright_Tilemap[] = INCBIN_U32("graphics/intro/hmprods_copyright.bin.lz");
 #endif
 
+const u16 gIntroAntiPiracy_Pal[] = INCBIN_U16("graphics/intro/antipiracy/palette.gbapal");
+const u32 gIntroAntiPiracy_Gfx[] = INCBIN_U32("graphics/intro/antipiracy/tileset.4bpp.lz");
+const u32 gIntroAntiPiracy_Tilemap[] = INCBIN_U32("graphics/intro/antipiracy/tilemap.bin.lz");
+
 const u16 gPokedexAreaScreenAreaUnknown_Pal[] = INCBIN_U16("graphics/pokedex/area_unknown.gbapal");
 const u32 gPokedexAreaScreenAreaUnknown_Gfx[] = INCBIN_U32("graphics/pokedex/area_unknown.4bpp.smol");
 

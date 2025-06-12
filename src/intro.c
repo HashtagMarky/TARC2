@@ -187,6 +187,8 @@ static EWRAM_DATA u16 sIntroCharacterGender = 0;
 static EWRAM_DATA u16 sFlygonYOffset = 0;
 #endif
 
+static EWRAM_DATA u16 sCopyrightCounter = 0;
+
 COMMON_DATA u32 gIntroFrameCounter = 0;
 COMMON_DATA struct GcmbStruct gMultibootProgramStruct = {0};
 
@@ -1070,18 +1072,27 @@ static void MainCB2_EndIntro(void)
 }
 #endif
 
-static void LoadCopyrightGraphics(u16 tilesetAddress, u16 tilemapAddress, u16 paletteOffset)
+static void LoadCopyrightGraphics(u16 tilesetAddress, u16 tilemapAddress, u16 paletteOffset, u8 isAntiPiracy)
 {
-    #if HM_PRODUCTIONS_COPYRIGHT == FALSE
-    DecompressDataWithHeaderVram(gIntroCopyright_Gfx, (void *)(VRAM + tilesetAddress));
-    DecompressDataWithHeaderVram(gIntroCopyright_Tilemap, (void *)(VRAM + tilemapAddress));
-    LoadPalette(gIntroCopyright_Pal, paletteOffset, PLTT_SIZE_4BPP);
-    #else
-    DecompressDataWithHeaderVram(gIntroHMProductionsCopyright_Gfx, (void *)(VRAM + tilesetAddress));
-    DecompressDataWithHeaderVram(gIntroHMProductionsCopyright_Tilemap, (void *)(VRAM + tilemapAddress));
-    LoadPalette(gIntroHMProductionsCopyright_Pal, paletteOffset, PLTT_SIZE_4BPP);
-    LoadPalette(gIntroHMProductionsCopyright_PalText, paletteOffset + 16, PLTT_SIZE_4BPP);
-    #endif
+    if (isAntiPiracy == TRUE)
+    {
+        DecompressDataWithHeaderVram(gIntroAntiPiracy_Gfx, (void *)(VRAM + 0));
+        DecompressDataWithHeaderVram(gIntroAntiPiracy_Tilemap, (void *)(VRAM + 0x3800));
+        LoadPalette(gIntroAntiPiracy_Pal, BG_PLTT_ID(0), 6 * PLTT_SIZE_4BPP);
+    }
+    else
+    {
+        #if HM_PRODUCTIONS_COPYRIGHT == FALSE
+        DecompressDataWithHeaderVram(gIntroCopyright_Gfx, (void *)(VRAM + tilesetAddress));
+        DecompressDataWithHeaderVram(gIntroCopyright_Tilemap, (void *)(VRAM + tilemapAddress));
+        LoadPalette(gIntroCopyright_Pal, paletteOffset, PLTT_SIZE_4BPP);
+        #else
+        DecompressDataWithHeaderVram(gIntroHMProductionsCopyright_Gfx, (void *)(VRAM + tilesetAddress));
+        DecompressDataWithHeaderVram(gIntroHMProductionsCopyright_Tilemap, (void *)(VRAM + tilemapAddress));
+        LoadPalette(gIntroHMProductionsCopyright_Pal, paletteOffset, PLTT_SIZE_4BPP);
+        LoadPalette(gIntroHMProductionsCopyright_PalText, paletteOffset + 16, PLTT_SIZE_4BPP);
+        #endif
+    }
 }
 
 static void SerialCB_CopyrightScreen(void)
@@ -1106,7 +1117,7 @@ static u8 SetUpCopyrightScreen(void)
         CpuFill32(0, (void *)OAM, OAM_SIZE);
         CpuFill16(0, (void *)(PLTT + 2), PLTT_SIZE - 2);
         ResetPaletteFade();
-        LoadCopyrightGraphics(0, 0x3800, BG_PLTT_ID(0));
+        LoadCopyrightGraphics(0, 0x3800, BG_PLTT_ID(0), TRUE);
         ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
@@ -1130,11 +1141,41 @@ static u8 SetUpCopyrightScreen(void)
         UpdatePaletteFade();
         gMain.state++;
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
-        #if SKIP_COPYRIGHT == TRUE
-        if (gMain.newKeys != 0 && !gPaletteFade.active)
-            gMain.state = 140;
-        #endif
+    case 2:
+        if (UpdatePaletteFade())
+            break;
+        gMain.state++;
+    case 3:
+        sCopyrightCounter++;
+        if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON) || JOY_NEW(SELECT_BUTTON) || JOY_NEW(START_BUTTON) || sCopyrightCounter >= 240)
+            gMain.state++;
         break;
+    case 4:
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
+        gMain.state++;
+        break;
+    case 5:
+        if (!UpdatePaletteFade())
+        {
+            LoadCopyrightGraphics(0, 0x3800, BG_PLTT_ID(0), FALSE);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITEALPHA);
+            gMain.state++;
+        }
+        break;
+    case 6:
+        if (!UpdatePaletteFade())
+        {
+            ResetPaletteFade();
+            sCopyrightCounter = 0;
+            gMain.state++;
+        }
+        break;
+    case 7:
+        sCopyrightCounter++;
+        if (sCopyrightCounter >= 90 || JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON) || JOY_NEW(SELECT_BUTTON) || JOY_NEW(START_BUTTON))
+            gMain.state = 140;
+        break;
+        gMain.state++;
     case 140:
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
         if (gMultibootProgramStruct.gcmb_field_2 != 1)
