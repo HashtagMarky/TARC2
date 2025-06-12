@@ -116,14 +116,6 @@ extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct SpritePalette gBattleAnimPaletteTable[];
 extern const struct SpriteTemplate gAncientPowerRockSpriteTemplate;
 
-// Previous enum did not work as of RHH Upcoming merge on 19/10/2024, updated 24/10/2024 */
-enum {
-    COPYRIGHT_INITIALIZE,
-    COPYRIGHT_EMULATOR_BLEND,
-    COPYRIGHT_START_FADE = 140,
-    COPYRIGHT_START_INTRO,
-};
-
 #define TAG_VOLBEAT   1500
 #define TAG_TORCHIC   1501
 #define TAG_MANECTRIC 1502
@@ -138,6 +130,13 @@ enum {
 #define TAG_FLYGON_SILHOUETTE 2002
 #define TAG_RAYQUAZA_ORB      2003
 #endif
+
+enum {
+    COPYRIGHT_INITIALIZE,
+    COPYRIGHT_EMULATOR_BLEND,
+    COPYRIGHT_START_FADE = 140,
+    COPYRIGHT_START_INTRO,
+};
 
 #define COLOSSEUM_GAME_CODE 0x65366347 // "Gc6e" in ASCII
 
@@ -1104,7 +1103,7 @@ static u8 SetUpCopyrightScreen(void)
 {
     switch (gMain.state)
     {
-    case 0:
+    case COPYRIGHT_INITIALIZE:
         SetVBlankCallback(NULL);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
@@ -1135,7 +1134,7 @@ static u8 SetUpCopyrightScreen(void)
         GameCubeMultiBoot_Init(&gMultibootProgramStruct);
     // REG_DISPCNT needs to be overwritten the second time, because otherwise the intro won't show up on VBA 1.7.2 and John GBA Lite emulators.
     // The REG_DISPCNT overwrite is NOT needed in m-GBA, No$GBA, VBA 1.8.0, My Boy and Pizza Boy GBA emulators.
-    case 1:
+    case COPYRIGHT_EMULATOR_BLEND:
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
     default:
         UpdatePaletteFade();
@@ -1147,7 +1146,7 @@ static u8 SetUpCopyrightScreen(void)
         gMain.state++;
     case 3:
         sCopyrightCounter++;
-        if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON) || JOY_NEW(SELECT_BUTTON) || JOY_NEW(START_BUTTON) || sCopyrightCounter >= 240)
+        if (!gPaletteFade.active && (gMain.newKeys != 0 || sCopyrightCounter >= 240))
             gMain.state++;
         break;
     case 4:
@@ -1172,11 +1171,11 @@ static u8 SetUpCopyrightScreen(void)
         break;
     case 7:
         sCopyrightCounter++;
-        if (sCopyrightCounter >= 90 || JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON) || JOY_NEW(SELECT_BUTTON) || JOY_NEW(START_BUTTON))
-            gMain.state = 140;
+        if (!gPaletteFade.active && (gMain.newKeys != 0 || sCopyrightCounter >= 240))
+            gMain.state = COPYRIGHT_START_FADE;
         break;
         gMain.state++;
-    case 140:
+    case COPYRIGHT_START_FADE:
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
         if (gMultibootProgramStruct.gcmb_field_2 != 1)
         {
@@ -1188,7 +1187,7 @@ static u8 SetUpCopyrightScreen(void)
             gMain.state++;
         }
         break;
-    case 141:
+    case COPYRIGHT_START_INTRO:
         if (UpdatePaletteFade())
             break;
 #if EXPANSION_INTRO == TRUE
