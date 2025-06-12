@@ -14,6 +14,8 @@ void DynPal_InitAllDynamicPalettes();
 // Load a dynamic palette in-game (usually overriding a ROM palette)
 void DynPal_LoadPaletteByOffset(u16* paletteData, u16 paletteOffset);
 void DynPal_LoadPaletteByTag(u16* paletteData, u16 paletteTag);
+void DynPal_LoadOverworldSkinPaletteByOffset(u16 paletteOffset);
+void DynPal_LoadOverworldSkinPaletteByTag(u16 paletteTag, u16 paletteOffset);
 
 // Menu for intro & script specials
 void DynPal_ShowMenuSingleton(s16 dynPalType, u8 taskId, TaskFunc nFuncFinish, TaskFunc nFuncCancel, bool8 isOverworld);

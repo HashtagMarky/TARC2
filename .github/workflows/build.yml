@@ -42,4 +42,5 @@ jobs:
         env:
           TEST: 1
         run: |
+          make clean
           make -j${nproc} check

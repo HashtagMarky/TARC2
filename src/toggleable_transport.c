@@ -34,17 +34,17 @@
 
 #define TAG_TT_ICON             0x9000
 
-static const u32 sToggleableTransportIconGfx_RunningShoes[]         = INCBIN_U32("graphics/toggleable_transport/running_shoes/running_shoes.4bpp.lz");
+static const u32 sToggleableTransportIconGfx_RunningShoes[]         = INCBIN_U32("graphics/toggleable_transport/running_shoes/running_shoes.4bpp.smol");
 static const u16 sToggleableTransportIconPal_RunningShoesSet[]      = INCBIN_U16("graphics/toggleable_transport/running_shoes/running_shoes_set.gbapal");
 static const u16 sToggleableTransportIconPal_RunningShoesUnset[]    = INCBIN_U16("graphics/toggleable_transport/running_shoes/running_shoes_unset.gbapal");
-static const u32 sToggleableTransportIconGfx_FastLapras[]           = INCBIN_U32("graphics/toggleable_transport/lapras/fast_lapras.4bpp.lz");
-static const u32 sToggleableTransportIconGfx_SlowLapras[]           = INCBIN_U32("graphics/toggleable_transport/lapras/slow_lapras.4bpp.lz");
+static const u32 sToggleableTransportIconGfx_FastLapras[]           = INCBIN_U32("graphics/toggleable_transport/lapras/fast_lapras.4bpp.smol");
+static const u32 sToggleableTransportIconGfx_SlowLapras[]           = INCBIN_U32("graphics/toggleable_transport/lapras/slow_lapras.4bpp.smol");
 static const u16 sToggleableTransportIconPal_Lapras[]               = INCBIN_U16("graphics/toggleable_transport/lapras/lapras.gbapal");
-static const u32 sToggleableTransportIconGfx_MachBike[]             = INCBIN_U32("graphics/toggleable_transport/bikes/mach_bike.4bpp.lz");
+static const u32 sToggleableTransportIconGfx_MachBike[]             = INCBIN_U32("graphics/toggleable_transport/bikes/mach_bike.4bpp.smol");
 static const u16 sToggleableTransportIconPal_MachBike[]             = INCBIN_U16("graphics/toggleable_transport/bikes/mach_bike.gbapal");
-static const u32 sToggleableTransportIconGfx_AcroBike[]             = INCBIN_U32("graphics/toggleable_transport/bikes/acro_bike.4bpp.lz");
+static const u32 sToggleableTransportIconGfx_AcroBike[]             = INCBIN_U32("graphics/toggleable_transport/bikes/acro_bike.4bpp.smol");
 static const u16 sToggleableTransportIconPal_AcroBike[]             = INCBIN_U16("graphics/toggleable_transport/bikes/acro_bike.gbapal");
-static const u32 sToggleableTransportIconGfx_Bicycle[]              = INCBIN_U32("graphics/toggleable_transport/bikes/bicycle.4bpp.lz");
+static const u32 sToggleableTransportIconGfx_Bicycle[]              = INCBIN_U32("graphics/toggleable_transport/bikes/bicycle.4bpp.smol");
 static const u16 sToggleableTransportIconPal_BicycleSet[]           = INCBIN_U16("graphics/toggleable_transport/bikes/bicycle_set.gbapal");
 static const u16 sToggleableTransportIconPal_BicycleUnset[]         = INCBIN_U16("graphics/toggleable_transport/bikes/bicycle_unset.gbapal");
 

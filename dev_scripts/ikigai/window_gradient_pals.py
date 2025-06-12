@@ -23,7 +23,7 @@ def format_palette(colors):
     return "\n".join(f"{r} {g} {b}" for r, g, b in colors)
 
 def save_palette(filepath, colors):
-    filepath = f"graphics/{filepath}"
+    filepath = f"../../graphics/{filepath}"
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
 
     header = ["JASC-PAL", "0100", "16"]

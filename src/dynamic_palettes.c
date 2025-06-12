@@ -387,6 +387,24 @@ void DynPal_LoadPaletteByTag(u16* paletteData, u16 paletteTag)
     LoadSpritePalette(&dest);
 }
 
+// Load the palette of overworld skintones to a known offset
+void DynPal_LoadOverworldSkinPaletteByOffset(u16 paletteOffset)
+{
+    u16* paletteData = sDynPalPlayerOverworld;
+    // Standard palette loading expects the palette to be in ROM (const). Circumvent that
+    for (u32 colour = 0; colour < 3; colour++)
+    {
+        gPlttBufferFaded[paletteOffset + colour] = paletteData[colour + 1];
+        gPlttBufferUnfaded[paletteOffset + colour] = paletteData[colour + 1];
+    }
+}
+
+// Load the palette of overworld skintones to a known offset
+void DynPal_LoadOverworldSkinPaletteByTag(u16 paletteTag, u16 paletteOffset)
+{
+    DynPal_LoadOverworldSkinPaletteByOffset(OBJ_PLTT_ID(IndexOfSpritePaletteTag(paletteTag)) + paletteOffset);
+}
+
 // Write palette indices to save block (can send 0xFF to exclude that tone list)
 static void DynPal_SetToneIndices(u8 partATone, u8 partBTone, u8 partCTone)
 {

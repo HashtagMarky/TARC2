@@ -47,6 +47,7 @@
 #include "naming_screen.h"
 #include "tv.h"
 #include "ikigai_interface.h"
+#include "dynamic_palettes.h"
 
  /*
     9 Starter Selection Samuel Case
@@ -281,16 +282,16 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
 //
 //  Graphics Pointers to Tilemaps, Tilesets, Spritesheets, Palettes
 //
-static const u32 sCaseTiles[]   = INCBIN_U32("graphics/ui_samuel_case/case_tiles.4bpp.lz");
-static const u32 sCaseTilemapLeft[] = INCBIN_U32("graphics/ui_samuel_case/case_tiles_left.bin.lz");
-static const u32 sCaseTilemapRight[] = INCBIN_U32("graphics/ui_samuel_case/case_tiles_right.bin.lz");
+static const u32 sCaseTiles[]   = INCBIN_U32("graphics/ui_samuel_case/case_tiles.4bpp.smol");
+static const u32 sCaseTilemapLeft[] = INCBIN_U32("graphics/ui_samuel_case/case_tiles_left.bin.smolTM");
+static const u32 sCaseTilemapRight[] = INCBIN_U32("graphics/ui_samuel_case/case_tiles_right.bin.smolTM");
 static const u16 sCasePalette[] = INCBIN_U16("graphics/ui_samuel_case/case_tiles.gbapal");
 
-static const u32 sTextBgTiles[]   = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles.4bpp.lz");
-static const u32 sTextBgTilemapLeft[] = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles_left.bin.lz");
-static const u32 sTextBgTilemapRight[] = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles_right.bin.lz");
+static const u32 sTextBgTiles[]   = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles.4bpp.smol");
+static const u32 sTextBgTilemapLeft[] = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles_left.bin.smolTM");
+static const u32 sTextBgTilemapRight[] = INCBIN_U32("graphics/ui_samuel_case/text_bg_tiles_right.bin.smolTM");
 
-static const u32 sPokeballHand_Gfx[] = INCBIN_U32("graphics/ui_samuel_case/pokeball_hand.4bpp.lz");
+static const u32 sPokeballHand_Gfx[] = INCBIN_U32("graphics/ui_samuel_case/pokeball_hand.4bpp.smol");
 static const u16 sPokeballHand_Pal[] = INCBIN_U16("graphics/ui_samuel_case/pokeball_hand.gbapal");
 
 //
@@ -794,14 +795,15 @@ static bool8 SamuelCaseLoadGraphics(void) // load tilesets, tilemaps, spriteshee
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(sCaseTilemapLeft, sBg1TilemapBuffer);
-            LZDecompressWram(sTextBgTilemapLeft, sBg2TilemapBuffer);
+            DecompressDataWithHeaderWram(sCaseTilemapLeft, sBg1TilemapBuffer);
+            DecompressDataWithHeaderWram(sTextBgTilemapLeft, sBg2TilemapBuffer);
             sSamuelCaseDataPtr->gfxLoadState++;
         }
         break;
     case 2:
         LoadCompressedSpriteSheet(&sSpriteSheet_PokeballHand);
         LoadSpritePalette(&sSpritePal_PokeballHand);
+        DynPal_LoadOverworldSkinPaletteByTag(TAG_POKEBALL_CURSOR, 11);
         LoadPalette(sCasePalette, 32, 32);
         IkigaiScrollingBackground_LoadPalette(1, IKIGAI_PAL_DEFAULT);
         sSamuelCaseDataPtr->gfxLoadState++;
@@ -1145,14 +1147,14 @@ static void Task_WaitFadeOutAndChangeGraphics(u8 taskId)
         sCasePageNum ^= 1;
         if (sCasePageNum == PAGE_ONE)
         {
-            LZDecompressWram(sCaseTilemapLeft, sBg1TilemapBuffer);
-            LZDecompressWram(sTextBgTilemapLeft, sBg2TilemapBuffer);
+            DecompressDataWithHeaderWram(sCaseTilemapLeft, sBg1TilemapBuffer);
+            DecompressDataWithHeaderWram(sTextBgTilemapLeft, sBg2TilemapBuffer);
             StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->handSpriteId], POKEBALL_HAND_ANIM_LEFT);
         }
         else
         {
-            LZDecompressWram(sCaseTilemapRight, sBg1TilemapBuffer);
-            LZDecompressWram(sTextBgTilemapRight, sBg2TilemapBuffer);
+            DecompressDataWithHeaderWram(sCaseTilemapRight, sBg1TilemapBuffer);
+            DecompressDataWithHeaderWram(sTextBgTilemapRight, sBg2TilemapBuffer);
             StartSpriteAnim(&gSprites[sSamuelCaseDataPtr->handSpriteId], POKEBALL_HAND_ANIM_RIGHT);
         }
         ScheduleBgCopyTilemapToVram(1);

@@ -7,24 +7,24 @@
 #include "palette.h"
 
 
-static const u32 IkigaiScrollingBgTiles[]               = INCBIN_U32("graphics/ikigai_interface/scroll_tiles.4bpp.lz");
+static const u32 IkigaiScrollingBgTiles[]               = INCBIN_U32("graphics/ikigai_interface/scroll_tiles.4bpp.smol");
 
-static const u32 IkigaiScrollingBgTilemap_PalZero[]     = INCBIN_U32("graphics/ikigai_interface/tilemaps/zero.bin.lz");
-static const u32 IkigaiScrollingBgTilemap_PalOne[]      = INCBIN_U32("graphics/ikigai_interface/tilemaps/one.bin.lz");
-static const u32 IkigaiScrollingBgTilemap_PalTwo[]      = INCBIN_U32("graphics/ikigai_interface/tilemaps/two.bin.lz");
-static const u32 IkigaiScrollingBgTilemap_PalThree[]    = INCBIN_U32("graphics/ikigai_interface/tilemaps/three.bin.lz");
-static const u32 IkigaiScrollingBgTilemap_PalFour[]     = INCBIN_U32("graphics/ikigai_interface/tilemaps/four.bin.lz");
-static const u32 IkigaiScrollingBgTilemap_PalFive[]     = INCBIN_U32("graphics/ikigai_interface/tilemaps/five.bin.lz");
-static const u32 IkigaiScrollingBgTilemap_PalSix[]      = INCBIN_U32("graphics/ikigai_interface/tilemaps/six.bin.lz");
-static const u32 IkigaiScrollingBgTilemap_PalSeven[]    = INCBIN_U32("graphics/ikigai_interface/tilemaps/seven.bin.lz");
-static const u32 IkigaiScrollingBgTilemap_PalEight[]    = INCBIN_U32("graphics/ikigai_interface/tilemaps/eight.bin.lz");
-static const u32 IkigaiScrollingBgTilemap_PalNine[]     = INCBIN_U32("graphics/ikigai_interface/tilemaps/nine.bin.lz");
-static const u32 IkigaiScrollingBgTilemap_PalTen[]      = INCBIN_U32("graphics/ikigai_interface/tilemaps/ten.bin.lz");
-static const u32 IkigaiScrollingBgTilemap_PalEleven[]   = INCBIN_U32("graphics/ikigai_interface/tilemaps/eleven.bin.lz");
-static const u32 IkigaiScrollingBgTilemap_PalTwelve[]   = INCBIN_U32("graphics/ikigai_interface/tilemaps/twelve.bin.lz");
-static const u32 IkigaiScrollingBgTilemap_PalThirteen[] = INCBIN_U32("graphics/ikigai_interface/tilemaps/thirteen.bin.lz");
-static const u32 IkigaiScrollingBgTilemap_PalFourteen[] = INCBIN_U32("graphics/ikigai_interface/tilemaps/fourteen.bin.lz");
-static const u32 IkigaiScrollingBgTilemap_PalFifteen[]  = INCBIN_U32("graphics/ikigai_interface/tilemaps/fifteen.bin.lz");
+static const u32 IkigaiScrollingBgTilemap_PalZero[]     = INCBIN_U32("graphics/ikigai_interface/tilemaps/zero.bin.smolTM");
+static const u32 IkigaiScrollingBgTilemap_PalOne[]      = INCBIN_U32("graphics/ikigai_interface/tilemaps/one.bin.smolTM");
+static const u32 IkigaiScrollingBgTilemap_PalTwo[]      = INCBIN_U32("graphics/ikigai_interface/tilemaps/two.bin.smolTM");
+static const u32 IkigaiScrollingBgTilemap_PalThree[]    = INCBIN_U32("graphics/ikigai_interface/tilemaps/three.bin.smolTM");
+static const u32 IkigaiScrollingBgTilemap_PalFour[]     = INCBIN_U32("graphics/ikigai_interface/tilemaps/four.bin.smolTM");
+static const u32 IkigaiScrollingBgTilemap_PalFive[]     = INCBIN_U32("graphics/ikigai_interface/tilemaps/five.bin.smolTM");
+static const u32 IkigaiScrollingBgTilemap_PalSix[]      = INCBIN_U32("graphics/ikigai_interface/tilemaps/six.bin.smolTM");
+static const u32 IkigaiScrollingBgTilemap_PalSeven[]    = INCBIN_U32("graphics/ikigai_interface/tilemaps/seven.bin.smolTM");
+static const u32 IkigaiScrollingBgTilemap_PalEight[]    = INCBIN_U32("graphics/ikigai_interface/tilemaps/eight.bin.smolTM");
+static const u32 IkigaiScrollingBgTilemap_PalNine[]     = INCBIN_U32("graphics/ikigai_interface/tilemaps/nine.bin.smolTM");
+static const u32 IkigaiScrollingBgTilemap_PalTen[]      = INCBIN_U32("graphics/ikigai_interface/tilemaps/ten.bin.smolTM");
+static const u32 IkigaiScrollingBgTilemap_PalEleven[]   = INCBIN_U32("graphics/ikigai_interface/tilemaps/eleven.bin.smolTM");
+static const u32 IkigaiScrollingBgTilemap_PalTwelve[]   = INCBIN_U32("graphics/ikigai_interface/tilemaps/twelve.bin.smolTM");
+static const u32 IkigaiScrollingBgTilemap_PalThirteen[] = INCBIN_U32("graphics/ikigai_interface/tilemaps/thirteen.bin.smolTM");
+static const u32 IkigaiScrollingBgTilemap_PalFourteen[] = INCBIN_U32("graphics/ikigai_interface/tilemaps/fourteen.bin.smolTM");
+static const u32 IkigaiScrollingBgTilemap_PalFifteen[]  = INCBIN_U32("graphics/ikigai_interface/tilemaps/fifteen.bin.smolTM");
 
 static const u16 IkigaiScrollingBgPal_Default[] = INCBIN_U16("graphics/ikigai_interface/scroll_bg_palettes/default.gbapal");
 static const u16 IkigaiScrollingBgPal_Tornadus[] = INCBIN_U16("graphics/ikigai_interface/scroll_bg_palettes/tornadus.gbapal");
@@ -113,7 +113,7 @@ void IkigaiScrollingBackground_CreateTiles(u8 background)
 void IkigaiScrollingBackground_CreateTilemap(u8 paletteSlot, void *dest)
 {
     paletteSlot = paletteSlot > NELEMS(sIkigaiScrollingBgTilemaps) ? 0 : paletteSlot;
-    LZDecompressWram(sIkigaiScrollingBgTilemaps[paletteSlot], dest);
+    DecompressDataWithHeaderWram(sIkigaiScrollingBgTilemaps[paletteSlot], dest);
 }
 
 void IkigaiScrollingBackground_LoadPalette(u8 paletteSlot, enum IkigaiInterfacePalettes type)
