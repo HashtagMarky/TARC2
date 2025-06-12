@@ -1827,13 +1827,14 @@ const u16 gSummaryScreen_MoveEffect_Contest_Tilemap[] = INCBIN_U16("graphics/sum
 const u16 gSummaryScreen_MoveEffect_Cancel_Tilemap[] = INCBIN_U16("graphics/summary_screen/effect_cancel.bin");
 
 const u16 gIntroCopyright_Pal[] = INCBIN_U16("graphics/intro/copyright.gbapal");
-#if HM_PRODUCTIONS_COPYRIGHT == FALSE
 const u32 gIntroCopyright_Gfx[] = INCBIN_U32("graphics/intro/copyright.4bpp.smol");
 const u32 gIntroCopyright_Tilemap[] = INCBIN_U32("graphics/intro/copyright.bin.smolTM");
-#else
+const u16 gIntroHMProductionsCopyright_Pal[] = INCBIN_U16("graphics/intro/hmprods_copyright.gbapal");
+const u16 gIntroHMProductionsCopyright_PalText[] = INCBIN_U16("graphics/intro/hmprods_copyright_text.gbapal");
 const u32 gIntroHMProductionsCopyright_Gfx[] = INCBIN_U32("graphics/intro/hmprods_copyright.4bpp.smol");
 const u32 gIntroHMProductionsCopyright_Tilemap[] = INCBIN_U32("graphics/intro/hmprods_copyright.bin.smolTM");
-#endif
+const u32 gIntroAntiPiracy_Gfx[] = INCBIN_U32("graphics/intro/anti-piracy.4bpp.smol");
+const u32 gIntroAntiPiracy_Tilemap[] = INCBIN_U32("graphics/intro/anti-piracy.bin.smolTM");
 
 const u16 gPokedexAreaScreenAreaUnknown_Pal[] = INCBIN_U16("graphics/pokedex/area_unknown.gbapal");
 const u32 gPokedexAreaScreenAreaUnknown_Gfx[] = INCBIN_U32("graphics/pokedex/area_unknown.4bpp.smol");

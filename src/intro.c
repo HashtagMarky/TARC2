@@ -116,14 +116,6 @@ extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct SpritePalette gBattleAnimPaletteTable[];
 extern const struct SpriteTemplate gAncientPowerRockSpriteTemplate;
 
-// Previous enum did not work as of RHH Upcoming merge on 19/10/2024, updated 24/10/2024 */
-enum {
-    COPYRIGHT_INITIALIZE,
-    COPYRIGHT_EMULATOR_BLEND,
-    COPYRIGHT_START_FADE = 140,
-    COPYRIGHT_START_INTRO,
-};
-
 #define TAG_VOLBEAT   1500
 #define TAG_TORCHIC   1501
 #define TAG_MANECTRIC 1502
@@ -138,6 +130,15 @@ enum {
 #define TAG_FLYGON_SILHOUETTE 2002
 #define TAG_RAYQUAZA_ORB      2003
 #endif
+
+enum {
+    COPYRIGHT_INITIALIZE,
+    COPYRIGHT_EMULATOR_BLEND,
+    COPYRIGHT_START_FADE = 140,
+    COPYRIGHT_START_INTRO,
+};
+#define COPYRIGHT_DURATION 120
+#define WARNING_DURATION 240
 
 #define COLOSSEUM_GAME_CODE 0x65366347 // "Gc6e" in ASCII
 
@@ -186,6 +187,8 @@ enum {
 static EWRAM_DATA u16 sIntroCharacterGender = 0;
 static EWRAM_DATA u16 sFlygonYOffset = 0;
 #endif
+
+static EWRAM_DATA u16 sCopyrightCounter = 0;
 
 COMMON_DATA u32 gIntroFrameCounter = 0;
 COMMON_DATA struct GcmbStruct gMultibootProgramStruct = {0};
@@ -1070,16 +1073,20 @@ static void MainCB2_EndIntro(void)
 }
 #endif
 
-static void LoadCopyrightGraphics(u16 tilesetAddress, u16 tilemapAddress, u16 paletteOffset)
+static void LoadCopyrightGraphics(u16 tilesetAddress, u16 tilemapAddress, u16 paletteOffset, u8 isAntiPiracy)
 {
-    #if HM_PRODUCTIONS_COPYRIGHT == FALSE
-    DecompressDataWithHeaderVram(gIntroCopyright_Gfx, (void *)(VRAM + tilesetAddress));
-    DecompressDataWithHeaderVram(gIntroCopyright_Tilemap, (void *)(VRAM + tilemapAddress));
-    #else
-    DecompressDataWithHeaderVram(gIntroHMProductionsCopyright_Gfx, (void *)(VRAM + tilesetAddress));
-    DecompressDataWithHeaderVram(gIntroHMProductionsCopyright_Tilemap, (void *)(VRAM + tilemapAddress));
-    #endif
-    LoadPalette(gIntroCopyright_Pal, paletteOffset, PLTT_SIZE_4BPP);
+    if (isAntiPiracy == TRUE)
+    {
+        DecompressDataWithHeaderVram(gIntroAntiPiracy_Gfx, (void *)(VRAM + tilesetAddress));
+        DecompressDataWithHeaderVram(gIntroAntiPiracy_Tilemap, (void *)(VRAM + tilemapAddress));
+    }
+    else
+    {
+        DecompressDataWithHeaderVram(gIntroHMProductionsCopyright_Gfx, (void *)(VRAM + tilesetAddress));
+        DecompressDataWithHeaderVram(gIntroHMProductionsCopyright_Tilemap, (void *)(VRAM + tilemapAddress));
+    }
+    LoadPalette(gIntroHMProductionsCopyright_Pal, paletteOffset, PLTT_SIZE_4BPP);
+    LoadPalette(gIntroHMProductionsCopyright_PalText, paletteOffset + 16, PLTT_SIZE_4BPP);
 }
 
 static void SerialCB_CopyrightScreen(void)
@@ -1091,7 +1098,7 @@ static u8 SetUpCopyrightScreen(void)
 {
     switch (gMain.state)
     {
-    case 0:
+    case COPYRIGHT_INITIALIZE:
         SetVBlankCallback(NULL);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
@@ -1104,7 +1111,7 @@ static u8 SetUpCopyrightScreen(void)
         CpuFill32(0, (void *)OAM, OAM_SIZE);
         CpuFill16(0, (void *)(PLTT + 2), PLTT_SIZE - 2);
         ResetPaletteFade();
-        LoadCopyrightGraphics(0, 0x3800, BG_PLTT_ID(0));
+        LoadCopyrightGraphics(0, 0x3800, BG_PLTT_ID(0), FALSE);
         ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
@@ -1122,18 +1129,48 @@ static u8 SetUpCopyrightScreen(void)
         GameCubeMultiBoot_Init(&gMultibootProgramStruct);
     // REG_DISPCNT needs to be overwritten the second time, because otherwise the intro won't show up on VBA 1.7.2 and John GBA Lite emulators.
     // The REG_DISPCNT overwrite is NOT needed in m-GBA, No$GBA, VBA 1.8.0, My Boy and Pizza Boy GBA emulators.
-    case 1:
+    case COPYRIGHT_EMULATOR_BLEND:
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
     default:
         UpdatePaletteFade();
         gMain.state++;
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
-        #if SKIP_COPYRIGHT == TRUE
-        if (gMain.newKeys != 0 && !gPaletteFade.active)
-            gMain.state = 140;
-        #endif
+    case 2:
+        if (UpdatePaletteFade())
+            break;
+        gMain.state++;
+    case 3:
+        sCopyrightCounter++;
+        if (!gPaletteFade.active && (gMain.newKeys != 0 || sCopyrightCounter >= COPYRIGHT_DURATION))
+            gMain.state++;
         break;
-    case 140:
+    case 4:
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
+        gMain.state++;
+        break;
+    case 5:
+        if (!UpdatePaletteFade())
+        {
+            LoadCopyrightGraphics(0, 0x3800, BG_PLTT_ID(0), TRUE);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITEALPHA);
+            gMain.state++;
+        }
+        break;
+    case 6:
+        if (!UpdatePaletteFade())
+        {
+            ResetPaletteFade();
+            sCopyrightCounter = 0;
+            gMain.state++;
+        }
+        break;
+    case 7:
+        sCopyrightCounter++;
+        if (!gPaletteFade.active && (gMain.newKeys != 0 || sCopyrightCounter >= WARNING_DURATION))
+            gMain.state = COPYRIGHT_START_FADE;
+        break;
+        gMain.state++;
+    case COPYRIGHT_START_FADE:
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
         if (gMultibootProgramStruct.gcmb_field_2 != 1)
         {
@@ -1145,7 +1182,7 @@ static u8 SetUpCopyrightScreen(void)
             gMain.state++;
         }
         break;
-    case 141:
+    case COPYRIGHT_START_INTRO:
         if (UpdatePaletteFade())
             break;
 #if EXPANSION_INTRO == TRUE
