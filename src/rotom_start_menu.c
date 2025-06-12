@@ -1131,7 +1131,7 @@ void RotomPhone_SmallStartMenu_Init(bool32 printGreeting)
         menuSelectedSmall = RotomPhone_SetFirstSelectedMenu();
 
     u8 taskId = CreateTask(Task_RotomPhone_SmallStartMenu_HandleMainInput, 0);
-    tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER;
+    tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER / ROTOM_PHONE_NUM_MINUTES_TO_UPDATE;
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 
     if (GetSafariZoneFlag())
