@@ -40,10 +40,10 @@ enum {
 #define VERSION_BANNER_RIGHT_X 217
 #define VERSION_BANNER_Y 2
 #define VERSION_BANNER_Y_GOAL 72
-#define START_BANNER_X 190
-#define START_BANNER_Y 111
-#define START_COPYRIGHT_X 188
-#define START_COPYRIGHT_Y 148
+#define START_BANNER_X 202
+#define START_BANNER_Y 133
+#define START_COPYRIGHT_X 191
+#define START_COPYRIGHT_Y 153
 #define IKIGAI_VERSION_NUMBER_X 205
 #define IKIGAI_VERSION_NUMBER_Y 34
 
@@ -509,7 +509,7 @@ static void SpriteCB_PressStartCopyrightBanner(struct Sprite *sprite)
     if (sprite->sAnimate == TRUE)
     {
         // Alternate between hidden and shown every 16th frame
-        if (++sprite->sTimer & 16)
+        if (++sprite->sTimer & 48)
             sprite->invisible = FALSE;
         else
             sprite->invisible = TRUE;
