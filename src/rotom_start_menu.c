@@ -1942,7 +1942,7 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
 
 static void Task_RotomPhone_SmallStartMenu_FlipPhoneOpen(u8 taskId)
 {
-    AdvanceComfyAnimations();
+    TryAdvanceComfyAnim(&gComfyAnims[tFlipComfyAnimId]);
     if (tFlipPhoneY == FLIP_PHONE_OFFSCREEN_Y)
     {
         struct ComfyAnimEasingConfig config;
@@ -1952,7 +1952,7 @@ static void Task_RotomPhone_SmallStartMenu_FlipPhoneOpen(u8 taskId)
         config.to = Q_24_8(0);
         config.easingFunc = ComfyAnimEasing_EaseOutQuad;
         tFlipComfyAnimId = CreateComfyAnim_Easing(&config);
-        AdvanceComfyAnimations();
+        TryAdvanceComfyAnim(&gComfyAnims[tFlipComfyAnimId]);
 
         tFlipPhoneY = ReadComfyAnimValueSmooth(&gComfyAnims[tFlipComfyAnimId]);
     }
@@ -1963,15 +1963,14 @@ static void Task_RotomPhone_SmallStartMenu_FlipPhoneOpen(u8 taskId)
     }
     else
     {
-        DecompressDataWithHeaderWram(sFlipPhoneOpenTilemap, GetBgTilemapBuffer(0));
-        ScheduleBgCopyTilemapToVram(0);
+        ReleaseComfyAnim(tFlipComfyAnimId);
         RotomPhone_SmallStartMenu_ContinueInit(TRUE);
     }
 }
 
 static void Task_RotomPhone_SmallStartMenu_FlipPhoneClose(u8 taskId)
 {
-    AdvanceComfyAnimations();
+    TryAdvanceComfyAnim(&gComfyAnims[tFlipComfyAnimId]);
     if (tFlipPhoneY == FALSE)
     {
         struct ComfyAnimEasingConfig config;
@@ -1981,7 +1980,7 @@ static void Task_RotomPhone_SmallStartMenu_FlipPhoneClose(u8 taskId)
         config.to = Q_24_8(FLIP_PHONE_OFFSCREEN_Y);
         config.easingFunc = ComfyAnimEasing_EaseOutQuad;
         tFlipComfyAnimId = CreateComfyAnim_Easing(&config);
-        AdvanceComfyAnimations();
+        TryAdvanceComfyAnim(&gComfyAnims[tFlipComfyAnimId]);
 
         RotomPhone_SmallStartMenu_RemoveWindows();
         RotomPhone_SmallStartMenu_DestroySprites();
@@ -2003,6 +2002,7 @@ static void Task_RotomPhone_SmallStartMenu_FlipPhoneClose(u8 taskId)
     else
     {
         SetGpuReg(REG_OFFSET_BG0VOFS, 0);
+        ReleaseComfyAnim(tFlipComfyAnimId);
         DestroyTask(taskId);
     }
 }
