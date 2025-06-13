@@ -1278,6 +1278,7 @@ static void RotomPhone_SmallStartMenu_CreateFlipPhoneWindow(void)
         return;
     
     sRotomPhone_SmallStartMenu->windowIdFlipPhone = AddWindow(&sWindowTemplate_FlipPhone);
+    FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdFlipPhone, PIXEL_FILL(FLIP_PHONE_BG_COLOUR));
     PutWindowTilemap(sRotomPhone_SmallStartMenu->windowIdFlipPhone);
 }
 
