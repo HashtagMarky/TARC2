@@ -322,9 +322,10 @@ bool32 RotomPhone_StartMenu_IsFullScreen(void)
 // --BG-GFX--
 static const u32 sSmallRotomTiles[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.smol");
 static const u32 sSmallRotomTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.bin.smolTM");
+static const u16 sSmallRotomPhonePal[] = INCBIN_U16("graphics/rotom_start_menu/rotom_phone.gbapal");
 static const u32 sFlipTiles[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_tiles.4bpp.smol");
 static const u32 sFlipTilemap[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_tiles.bin.smolTM");
-static const u16 sSmallStartPhonePal[] = INCBIN_U16("graphics/rotom_start_menu/rotom_phone_tiles.gbapal");
+static const u16 sFlipPhonePal[] = INCBIN_U16("graphics/rotom_start_menu/flip_phone.gbapal");
 
 //--SPRITE-GFX--
 #define TAG_ICON_GFX 1234
@@ -363,7 +364,7 @@ static const struct WindowTemplate sWindowTemplate_RotomSpeech_Bottom = {
 static const struct WindowTemplate sWindowTemplate_FlipPhone = {
     .bg = 0,
     .tilemapLeft = 21,
-    .tilemapTop = 16,
+    .tilemapTop = 17,
     .width = 7,
     .height = 2,
     .paletteNum = 14,
@@ -1044,6 +1045,9 @@ static const u8 sWeatherActions[WEATHER_COUNT][24] =
     [WEATHER_UNDERWATER_BUBBLES] = _("dark"),
 };
 
+#define FLIP_PHONE_BG_COLOUR       7
+#define FLIP_PHONE_TEXT_FG_COLOUR  3
+#define FLIP_PHONE_TEXT_BG_COLOUR  6
 #define ROTOM_PHONE_BG_COLOUR       6
 #define ROTOM_PHONE_TEXT_FG_COLOUR  2
 #define ROTOM_PHONE_TEXT_BG_COLOUR  5
@@ -1053,15 +1057,17 @@ enum FontColor
     FONT_WHITE,
     FONT_RED,
     FONT_BLUE,
-    FONT_SMALL_PHONE,
+    FONT_FLIP_PHONE,
+    FONT_SMALL_ROTOM_PHONE,
 };
 static const u8 sRotomPhone_StartMenuFontColors[][3] =
 {
-    [FONT_BLACK]        = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY,       TEXT_COLOR_LIGHT_GRAY},
-    [FONT_WHITE]        = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,           TEXT_COLOR_DARK_GRAY},
-    [FONT_RED]          = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_RED,             TEXT_COLOR_LIGHT_GRAY},
-    [FONT_BLUE]         = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_BLUE,            TEXT_COLOR_LIGHT_GRAY},
-    [FONT_SMALL_PHONE]  = {TEXT_COLOR_TRANSPARENT,  ROTOM_PHONE_TEXT_FG_COLOUR, ROTOM_PHONE_TEXT_BG_COLOUR}
+    [FONT_BLACK]                = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY,       TEXT_COLOR_LIGHT_GRAY},
+    [FONT_WHITE]                = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,           TEXT_COLOR_DARK_GRAY},
+    [FONT_RED]                  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_RED,             TEXT_COLOR_LIGHT_GRAY},
+    [FONT_BLUE]                 = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_BLUE,            TEXT_COLOR_LIGHT_GRAY},
+    [FONT_FLIP_PHONE]           = {FLIP_PHONE_BG_COLOUR,    FLIP_PHONE_TEXT_FG_COLOUR,  FLIP_PHONE_TEXT_BG_COLOUR},
+    [FONT_SMALL_ROTOM_PHONE]    = {TEXT_COLOR_TRANSPARENT,  ROTOM_PHONE_TEXT_FG_COLOUR, ROTOM_PHONE_TEXT_BG_COLOUR},
 };
 
 
@@ -1232,19 +1238,22 @@ static void RotomPhone_SmallStartMenu_CreateAllSprites(void)
 static void RotomPhone_SmallStartMenu_LoadBgGfx(void)
 {
     u8* buf = GetBgTilemapBuffer(0); 
+    const u16 *pal;
     LoadBgTilemap(0, 0, 0, 0);
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
     {
         DecompressAndCopyTileDataToVram(0, sSmallRotomTiles, 0, 0, 0);
         DecompressDataWithHeaderWram(sSmallRotomTilemap, buf);
+        pal = sSmallRotomPhonePal;
     }
     else
     {
         DecompressAndCopyTileDataToVram(0, sFlipTiles, 0, 0, 0);
         DecompressDataWithHeaderWram(sFlipTilemap, buf);
+        pal = sFlipPhonePal;
     }
     
-    LoadPalette(sSmallStartPhonePal, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+    LoadPalette(pal, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
     ScheduleBgCopyTilemapToVram(0);
 }
 #define ROTOM_SPEECH_TOP_ROW_Y      1
@@ -1282,7 +1291,7 @@ static void RotomPhone_SmallStartMenu_PrintRotomSpeech(u8 textBuffer[80], bool32
     FillWindowPixelBuffer(windowId, PIXEL_FILL(ROTOM_PHONE_BG_COLOUR));
     AddTextPrinterParameterized4(windowId, fontId,
         GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
-        ROTOM_SPEECH_TOP_ROW_Y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_SMALL_PHONE], TEXT_SKIP_DRAW, textBuffer);
+        ROTOM_SPEECH_TOP_ROW_Y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_SMALL_ROTOM_PHONE], TEXT_SKIP_DRAW, textBuffer);
     
     if (copy)
         CopyWindowToVram(windowId, COPYWIN_GFX);
@@ -1678,10 +1687,10 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId)
             StringCopy(menuName, sRotomPhoneOptions[RotomPhone_StartMenu_GetShortcutOption()].menuName);
 
         fontId = GetFontIdToFit(menuName, ReturnNormalTextFont(), 0, sWindowTemplate_FlipPhone.width * 8);
-        FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdFlipPhone, PIXEL_FILL(ROTOM_PHONE_BG_COLOUR));
+        FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdFlipPhone, PIXEL_FILL(FLIP_PHONE_BG_COLOUR));
         AddTextPrinterParameterized4(sRotomPhone_SmallStartMenu->windowIdFlipPhone, fontId,
         GetStringCenterAlignXOffset(fontId, menuName, sWindowTemplate_FlipPhone.width * 8),
-        ROTOM_SPEECH_BOTTOM_ROW_Y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_SMALL_PHONE], TEXT_SKIP_DRAW, menuName);
+        ROTOM_SPEECH_BOTTOM_ROW_Y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_FLIP_PHONE], TEXT_SKIP_DRAW, menuName);
         CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdFlipPhone, COPYWIN_GFX);
         tRotomMessageSoundEffect = SE_BALL_TRAY_EXIT;
     }
@@ -2937,10 +2946,10 @@ static void RotomPhone_StartMenu_SelectedFunc_Clock(void)
         RtcCalcLocalTime();
         FormatDecimalTimeWithoutSeconds(time, gLocalTime.hours, gLocalTime.minutes, ROTOM_PHONE_24_HOUR_MODE);
         u8 fontId = GetFontIdToFit(time, ReturnNormalTextFont(), 0, sWindowTemplate_FlipPhone.width * 8);
-        FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdFlipPhone, PIXEL_FILL(ROTOM_PHONE_BG_COLOUR));
+        FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdFlipPhone, PIXEL_FILL(FLIP_PHONE_BG_COLOUR));
         AddTextPrinterParameterized4(sRotomPhone_SmallStartMenu->windowIdFlipPhone, fontId,
         GetStringCenterAlignXOffset(fontId, time, sWindowTemplate_FlipPhone.width * 8),
-        ROTOM_SPEECH_BOTTOM_ROW_Y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_SMALL_PHONE], TEXT_SKIP_DRAW, time);
+        ROTOM_SPEECH_BOTTOM_ROW_Y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_FLIP_PHONE], TEXT_SKIP_DRAW, time);
         CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdFlipPhone, COPYWIN_GFX);
         tRotomMessageSoundEffect = SE_BALL_TRAY_EXIT;
         tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER;
