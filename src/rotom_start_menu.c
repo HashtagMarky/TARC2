@@ -95,9 +95,9 @@ static void SpriteCB_RotomPhoneSmall_IconClock(struct Sprite* sprite);
 static void SpriteCB_RotomPhoneSmall_IconShortcut(struct Sprite* sprite);
 
 static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit);
-static void Task_RotomPhone_SmallStartMenu_SlideFlipPhone(u8 taskId);
-static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId);
+static void Task_RotomPhone_SmallStartMenu_FlipPhoneOpen(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_FlipPhoneClose(u8 taskId);
+static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId);
 static void Task_RotomPhone_HandleSave(u8 taskId);
 
@@ -1145,7 +1145,7 @@ void RotomPhone_SmallStartMenu_Init(bool32 firstInit)
     if (!FlagGet(FLAG_SYS_POKEDEX_GET) && firstInit)
     {
         SetGpuReg(REG_OFFSET_BG0VOFS, -FLIP_PHONE_OFFSCREEN_Y);
-        taskId = CreateTask(Task_RotomPhone_SmallStartMenu_SlideFlipPhone, 0);
+        taskId = CreateTask(Task_RotomPhone_SmallStartMenu_FlipPhoneOpen, 0);
         tFlipPhoneY = FLIP_PHONE_OFFSCREEN_Y;
         return;
     }
@@ -1166,7 +1166,7 @@ static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit)
 
     if (!FlagGet(FLAG_SYS_POKEDEX_GET) && firstInit)
     {
-        taskId = FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_SlideFlipPhone);
+        taskId = FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_FlipPhoneOpen);
 
         gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_HandleMainInput;
     }
@@ -1937,7 +1937,7 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
     RotomPhone_SmallStartMenu_UpdateMenuPrompt(taskId);
 }
 
-static void Task_RotomPhone_SmallStartMenu_SlideFlipPhone(u8 taskId)
+static void Task_RotomPhone_SmallStartMenu_FlipPhoneOpen(u8 taskId)
 {
     if (tFlipPhoneY > 0)
     {
@@ -1949,6 +1949,34 @@ static void Task_RotomPhone_SmallStartMenu_SlideFlipPhone(u8 taskId)
         DecompressDataWithHeaderWram(sFlipPhoneOpenTilemap, GetBgTilemapBuffer(0));
         ScheduleBgCopyTilemapToVram(0);
         RotomPhone_SmallStartMenu_ContinueInit(TRUE);
+    }
+}
+
+static void Task_RotomPhone_SmallStartMenu_FlipPhoneClose(u8 taskId)
+{
+    if (tFlipPhoneY == FALSE)
+    {
+        RotomPhone_SmallStartMenu_RemoveWindows();
+        RotomPhone_SmallStartMenu_DestroySprites();
+        DecompressDataWithHeaderWram(sFlipPhoneClosedTilemap, GetBgTilemapBuffer(0));
+        ScheduleBgCopyTilemapToVram(0);
+        tFlipPhoneY += 4;
+        SetGpuReg(REG_OFFSET_BG0VOFS, -tFlipPhoneY);
+    }
+    else if (tFlipPhoneY < FLIP_PHONE_OFFSCREEN_Y)
+    {
+        tFlipPhoneY += 4;
+        SetGpuReg(REG_OFFSET_BG0VOFS, -tFlipPhoneY);
+    }
+    else if (tFlipPhoneY == FLIP_PHONE_OFFSCREEN_Y)
+    {
+        tFlipPhoneY += 4;
+        RotomPhone_SmallStartMenu_ExitAndClearTilemap();
+    }
+    else
+    {
+        SetGpuReg(REG_OFFSET_BG0VOFS, 0);
+        DestroyTask(taskId);
     }
 }
 
@@ -2006,34 +2034,6 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
 
     if (tRotomMessageSoundEffect)
         PlaySE(tRotomMessageSoundEffect);
-}
-
-static void Task_RotomPhone_SmallStartMenu_FlipPhoneClose(u8 taskId)
-{
-    if (tFlipPhoneY == FALSE)
-    {
-        RotomPhone_SmallStartMenu_RemoveWindows();
-        RotomPhone_SmallStartMenu_DestroySprites();
-        DecompressDataWithHeaderWram(sFlipPhoneClosedTilemap, GetBgTilemapBuffer(0));
-        ScheduleBgCopyTilemapToVram(0);
-        tFlipPhoneY += 4;
-        SetGpuReg(REG_OFFSET_BG0VOFS, -tFlipPhoneY);
-    }
-    else if (tFlipPhoneY < FLIP_PHONE_OFFSCREEN_Y)
-    {
-        tFlipPhoneY += 4;
-        SetGpuReg(REG_OFFSET_BG0VOFS, -tFlipPhoneY);
-    }
-    else if (tFlipPhoneY == FLIP_PHONE_OFFSCREEN_Y)
-    {
-        tFlipPhoneY += 4;
-        RotomPhone_SmallStartMenu_ExitAndClearTilemap();
-    }
-    else
-    {
-        SetGpuReg(REG_OFFSET_BG0VOFS, 0);
-        DestroyTask(taskId);
-    }
 }
 
 static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId)
