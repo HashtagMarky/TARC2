@@ -1166,6 +1166,7 @@ static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit)
     RotomPhone_SmallStartMenu_CreateAllSprites();
     RotomPhone_SmallStartMenu_CreateSpeechWindows();
     RotomPhone_SmallStartMenu_CreateFlipPhoneWindow();
+    ScheduleBgCopyTilemapToVram(0);
 
     if (!sRotomPhoneOptions[menuSelectedSmall].unlockedFunc || !sRotomPhoneOptions[menuSelectedSmall].unlockedFunc())
         menuSelectedSmall = RotomPhone_SetFirstSelectedMenu();
