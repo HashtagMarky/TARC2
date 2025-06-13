@@ -79,6 +79,7 @@
 #define ROTOM_PHONE_UPDATE_MESSAGE          TRUE
 #define ROTOM_PHONE_UPDATE_MESSAGE_SOUND    TRUE
 #define FLIP_PHONE_OFFSCREEN_Y 96
+#define FLIP_PHONE_SLIDE_DURATION 30
 
 
 static void SpriteCB_RotomPhoneSmall_IconPoketch(struct Sprite* sprite);
@@ -1095,6 +1096,7 @@ static enum RotomPhoneMenuItems RotomPhone_SetFirstSelectedMenu(void)
 #define tRotomPanelComfyAnimId gTasks[taskId].data[3]
 #define tRotomPanelLastY gTasks[taskId].data[4]
 #define tFlipPhoneY gTasks[taskId].data[5]
+#define tFlipComfyAnimId gTasks[taskId].data[6]
 void RotomPhone_SmallStartMenu_Init(bool32 firstInit)
 {
     u8 taskId;
@@ -1814,6 +1816,7 @@ static void RotomPhone_SmallStartMenu_ExitAndClearTilemap(void)
         sRotomPhone_SmallStartMenu = NULL;
     }
 
+    ReleaseComfyAnims();
     ScriptUnfreezeObjectEvents();  
     UnlockPlayerFieldControls();
 }
@@ -1939,9 +1942,23 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
 
 static void Task_RotomPhone_SmallStartMenu_FlipPhoneOpen(u8 taskId)
 {
-    if (tFlipPhoneY > 0)
+    AdvanceComfyAnimations();
+    if (tFlipPhoneY == FLIP_PHONE_OFFSCREEN_Y)
     {
-        tFlipPhoneY -= 4;
+        struct ComfyAnimEasingConfig config;
+        InitComfyAnimConfig_Easing(&config);
+        config.durationFrames = FLIP_PHONE_SLIDE_DURATION;
+        config.from = Q_24_8(FLIP_PHONE_OFFSCREEN_Y);
+        config.to = Q_24_8(0);
+        config.easingFunc = ComfyAnimEasing_EaseOutQuad;
+        tFlipComfyAnimId = CreateComfyAnim_Easing(&config);
+        AdvanceComfyAnimations();
+
+        tFlipPhoneY = ReadComfyAnimValueSmooth(&gComfyAnims[tFlipComfyAnimId]);
+    }
+    else if (tFlipPhoneY > 0)
+    {
+        tFlipPhoneY = ReadComfyAnimValueSmooth(&gComfyAnims[tFlipComfyAnimId]);
         SetGpuReg(REG_OFFSET_BG0VOFS, -tFlipPhoneY);
     }
     else
@@ -1954,23 +1971,33 @@ static void Task_RotomPhone_SmallStartMenu_FlipPhoneOpen(u8 taskId)
 
 static void Task_RotomPhone_SmallStartMenu_FlipPhoneClose(u8 taskId)
 {
+    AdvanceComfyAnimations();
     if (tFlipPhoneY == FALSE)
     {
+        struct ComfyAnimEasingConfig config;
+        InitComfyAnimConfig_Easing(&config);
+        config.durationFrames = FLIP_PHONE_SLIDE_DURATION;
+        config.from = Q_24_8(0);
+        config.to = Q_24_8(FLIP_PHONE_OFFSCREEN_Y);
+        config.easingFunc = ComfyAnimEasing_EaseOutQuad;
+        tFlipComfyAnimId = CreateComfyAnim_Easing(&config);
+        AdvanceComfyAnimations();
+
         RotomPhone_SmallStartMenu_RemoveWindows();
         RotomPhone_SmallStartMenu_DestroySprites();
         DecompressDataWithHeaderWram(sFlipPhoneClosedTilemap, GetBgTilemapBuffer(0));
         ScheduleBgCopyTilemapToVram(0);
-        tFlipPhoneY += 4;
+        tFlipPhoneY = ReadComfyAnimValueSmooth(&gComfyAnims[tFlipComfyAnimId]);
         SetGpuReg(REG_OFFSET_BG0VOFS, -tFlipPhoneY);
     }
     else if (tFlipPhoneY < FLIP_PHONE_OFFSCREEN_Y)
     {
-        tFlipPhoneY += 4;
+        tFlipPhoneY = ReadComfyAnimValueSmooth(&gComfyAnims[tFlipComfyAnimId]);
         SetGpuReg(REG_OFFSET_BG0VOFS, -tFlipPhoneY);
     }
     else if (tFlipPhoneY == FLIP_PHONE_OFFSCREEN_Y)
     {
-        tFlipPhoneY += 4;
+        tFlipPhoneY++;
         RotomPhone_SmallStartMenu_ExitAndClearTilemap();
     }
     else
