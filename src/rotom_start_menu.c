@@ -324,7 +324,7 @@ static const u32 sSmallRotomTiles[] = INCBIN_U32("graphics/rotom_start_menu/roto
 static const u32 sSmallRotomTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.bin.smolTM");
 static const u32 sFlipTiles[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_tiles.4bpp.smol");
 static const u32 sFlipTilemap[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_tiles.bin.smolTM");
-static const u16 sStartMenuPalette[] = INCBIN_U16("graphics/rotom_start_menu/rotom_phone_tiles.gbapal");
+static const u16 sSmallStartPhonePal[] = INCBIN_U16("graphics/rotom_start_menu/rotom_phone_tiles.gbapal");
 
 //--SPRITE-GFX--
 #define TAG_ICON_GFX 1234
@@ -1244,7 +1244,7 @@ static void RotomPhone_SmallStartMenu_LoadBgGfx(void)
         DecompressDataWithHeaderWram(sFlipTilemap, buf);
     }
     
-    LoadPalette(sStartMenuPalette, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+    LoadPalette(sSmallStartPhonePal, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
     ScheduleBgCopyTilemapToVram(0);
 }
 #define ROTOM_SPEECH_TOP_ROW_Y      1
@@ -2089,38 +2089,38 @@ static const struct CompressedSpriteSheet iconCompatatbilitySheet = {
     .tag = TAG_ICON_GFX,
 };
 
-static const struct OamData iconCompatatbilityOam = {
+static const struct OamData sOam_IconDaycareCompatatbility = {
     .size = SPRITE_SIZE(32x32),
     .shape = SPRITE_SHAPE(32x32),
     .priority = 0,
 };
 
-static const union AnimCmd iconCompatatbilityAnim_Not[] = {
+static const union AnimCmd sAnim_IconDaycareCompatatbility_Not[] = {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd iconCompatatbilityAnim_Low[] = {
+static const union AnimCmd sAnim_IconDaycareCompatatbility_Low[] = {
     ANIMCMD_FRAME(16, 0),
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd iconCompatatbilityAnim_Med[] = {
+static const union AnimCmd sAnim_IconDaycareCompatatbility_Med[] = {
     ANIMCMD_FRAME(32, 0),
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd iconCompatatbilityAnim_Max[] = {
+static const union AnimCmd sAnim_IconDaycareCompatatbility_Max[] = {
     ANIMCMD_FRAME(48, 0),
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const iconCompatatbilityAnims[] =
+static const union AnimCmd *const sAnims_IconDaycareCompatatbility[] =
 {
-    iconCompatatbilityAnim_Not,
-    iconCompatatbilityAnim_Low,
-    iconCompatatbilityAnim_Med,
-    iconCompatatbilityAnim_Max,
+    sAnim_IconDaycareCompatatbility_Not,
+    sAnim_IconDaycareCompatatbility_Low,
+    sAnim_IconDaycareCompatatbility_Med,
+    sAnim_IconDaycareCompatatbility_Max,
 };
 
 void Task_OpenRotomPhone_LargeStartMenu(u8 taskId)
@@ -3117,9 +3117,9 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
             {
                 .tileTag = TAG_ICON_GFX,
                 .paletteTag = gMonIconPaletteTable[MON_ICON_PAL_SLOT_COMPATABILITY_ICON].tag,
-                .oam = &iconCompatatbilityOam,
+                .oam = &sOam_IconDaycareCompatatbility,
                 .callback = SpriteCallbackDummy,
-                .anims = iconCompatatbilityAnims,
+                .anims = sAnims_IconDaycareCompatatbility,
                 .affineAnims = gDummySpriteAffineAnimTable,
             };
 
