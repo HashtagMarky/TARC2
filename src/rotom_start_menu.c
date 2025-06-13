@@ -1956,6 +1956,11 @@ static void Task_RotomPhone_SmallStartMenu_FlipPhoneOpen(u8 taskId)
 
         tFlipPhoneY = ReadComfyAnimValueSmooth(&gComfyAnims[tFlipComfyAnimId]);
     }
+    else if (GetEasingComfyAnim_CurrentFrame(&gComfyAnims[tFlipComfyAnimId]) == FLIP_PHONE_SLIDE_DURATION / 2)
+    {
+        DecompressDataWithHeaderWram(sFlipPhoneOpenTilemap, GetBgTilemapBuffer(0));
+        ScheduleBgCopyTilemapToVram(0);
+    }
     else if (tFlipPhoneY > 0)
     {
         tFlipPhoneY = ReadComfyAnimValueSmooth(&gComfyAnims[tFlipComfyAnimId]);

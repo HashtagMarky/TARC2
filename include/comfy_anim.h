@@ -104,6 +104,7 @@ u32 CreateComfyAnim_Spring(struct ComfyAnimSpringConfig *config);
 void ReleaseComfyAnim(u32 comfyAnimId);
 void ReleaseComfyAnims(void);
 int ReadComfyAnimValueSmooth(struct ComfyAnim *anim);
+u32 GetEasingComfyAnim_CurrentFrame(struct ComfyAnim *anim);
 
 // Collection of standard easing functions
 s32 ComfyAnimEasing_Linear(s32 t);

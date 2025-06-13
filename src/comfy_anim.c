@@ -288,3 +288,12 @@ s32 ComfyAnimEasing_EaseInOutBack(s32 t /* Q_24_8 */)
         return (MathUtil_Mul32(a, b) + Q_24_8(2)) >> 1;
     }
 }
+
+u32 GetEasingComfyAnim_CurrentFrame(struct ComfyAnim *anim)
+{
+    switch (anim->config.type)
+    {
+        default: return 0;
+        case COMFY_ANIM_TYPE_EASING: return anim->state.easingState.curFrame;
+    }
+}
