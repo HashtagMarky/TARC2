@@ -1127,6 +1127,10 @@ void RotomPhone_SmallStartMenu_Init(bool32 printGreeting)
         sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[smallOptions] = SPRITE_NONE;
     }
 
+    sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top = WINDOW_NONE;
+    sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom = WINDOW_NONE;
+    sRotomPhone_SmallStartMenu->windowIdFlipPhone = WINDOW_NONE;
+
     RotomPhone_SmallStartMenu_LoadSprites();
     RotomPhone_SmallStartMenu_CreateAllSprites();
     RotomPhone_SmallStartMenu_LoadBgGfx();
@@ -1710,17 +1714,29 @@ static void RotomPhone_SmallStartMenu_ExitAndClearTilemap(void)
     u32 i;
     u8 *buf = GetBgTilemapBuffer(0);
     
-    FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    if (sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom != WINDOW_NONE)
+    {
+        FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+        ClearWindowTilemap(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom);
+        CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
+        RemoveWindow(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom);
+    }
 
-    ClearWindowTilemap(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom);
-    ClearWindowTilemap(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top);
+    if (sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top != WINDOW_NONE)
+    {
+        FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+        ClearWindowTilemap(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top);
+        CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
+        RemoveWindow(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top);
+    }
 
-    CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
-    CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
-
-    RemoveWindow(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top);
-    RemoveWindow(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom);
+    if (sRotomPhone_SmallStartMenu->windowIdFlipPhone != WINDOW_NONE)
+    {
+        FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdFlipPhone, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+        ClearWindowTilemap(sRotomPhone_SmallStartMenu->windowIdFlipPhone);
+        CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdFlipPhone, COPYWIN_GFX);
+        RemoveWindow(sRotomPhone_SmallStartMenu->windowIdFlipPhone);
+    }
 
     for (i=0; i<2048; i++)
     {
