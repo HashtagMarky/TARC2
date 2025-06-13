@@ -98,6 +98,7 @@ static void SpriteCB_RotomPhoneSmall_IconShortcut(struct Sprite* sprite);
 static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit);
 static void Task_RotomPhone_SmallStartMenu_FlipPhoneOpen(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_FlipPhoneClose(u8 taskId);
+static void Task_RotomPhone_SmallStartMenu_FlipPhoneCloseToSave(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId);
 static void Task_RotomPhone_HandleSave(u8 taskId);
@@ -1097,6 +1098,7 @@ static enum RotomPhoneMenuItems RotomPhone_SetFirstSelectedMenu(void)
 #define tRotomPanelLastY gTasks[taskId].data[4]
 #define tFlipPhoneY gTasks[taskId].data[5]
 #define tFlipComfyAnimId gTasks[taskId].data[6]
+#define tRotomPhoneCloseToSave gTasks[taskId].data[7]
 void RotomPhone_SmallStartMenu_Init(bool32 firstInit)
 {
     u8 taskId;
@@ -2009,6 +2011,21 @@ static void Task_RotomPhone_SmallStartMenu_FlipPhoneClose(u8 taskId)
         SetGpuReg(REG_OFFSET_BG0VOFS, 0);
         ReleaseComfyAnim(tFlipComfyAnimId);
         DestroyTask(taskId);
+    }
+}
+
+static void Task_RotomPhone_SmallStartMenu_FlipPhoneCloseToSave(u8 taskId)
+{
+    if (!FuncIsActiveTask(Task_RotomPhone_SmallStartMenu_FlipPhoneClose) && tRotomPhoneCloseToSave == FALSE)
+    {
+        CreateTask(Task_RotomPhone_SmallStartMenu_FlipPhoneClose, 0);
+        tRotomPhoneCloseToSave = TRUE;
+    }
+    else if (!FuncIsActiveTask(Task_RotomPhone_SmallStartMenu_FlipPhoneClose) && tRotomPhoneCloseToSave == TRUE)
+    {
+        LoadMessageBoxAndBorderGfx();
+        InitSave_Global();
+        gTasks[taskId].func = Task_RotomPhone_HandleSave;
     }
 }
 
@@ -3002,13 +3019,10 @@ static void RotomPhone_StartMenu_SelectedFunc_Save(void)
     {
         if (!gPaletteFade.active)
         {
-            RotomPhone_SmallStartMenu_ExitAndClearTilemap();
-            FreezeObjectEvents();
-            LoadUserWindowBorderGfx(sRotomPhone_SmallStartMenu->windowIdSaveInfo, STD_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(STD_WINDOW_PALETTE_NUM));
             LockPlayerFieldControls();
-            DestroyTask(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput));
-            InitSave_Global();
-            CreateTask(Task_RotomPhone_HandleSave, 0x80);
+            u8 taskId = FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput);
+            gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_FlipPhoneCloseToSave;
+            tRotomPhoneCloseToSave = FALSE;
         }
     }
     else
@@ -3372,3 +3386,4 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 #undef tRotomPanelComfyAnimId
 #undef tRotomPanelLastY
 #undef tFlipPhoneY
+#undef tRotomPhoneCloseToSave
