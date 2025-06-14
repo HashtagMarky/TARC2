@@ -318,11 +318,10 @@ bool32 RotomPhone_StartMenu_IsFullScreen(void)
 // --BG-GFX--
 static const u32 sSmallRotomTiles[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.smol");
 static const u32 sSmallRotomTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.bin.smolTM");
-static const u16 sSmallRotomPhonePal[] = INCBIN_U16("graphics/rotom_start_menu/rotom_phone.gbapal");
-static const u32 sFlipTiles[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_tiles.4bpp.smol");
+static const u32 sFlipPhoneTiles[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_tiles.4bpp.smol");
 static const u32 sFlipPhoneOpenTilemap[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_open.bin.smolTM");
 static const u32 sFlipPhoneClosedTilemap[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_closed.bin.smolTM");
-static const u16 sFlipPhonePal[] = INCBIN_U16("graphics/rotom_start_menu/flip_phone.gbapal");
+static const u16 sPhoneMenuPal[] = INCBIN_U16("graphics/rotom_start_menu/phones.gbapal");
 
 //--SPRITE-GFX--
 #define TAG_ICON_GFX 1234
@@ -345,7 +344,7 @@ static const struct WindowTemplate sWindowTemplate_RotomSpeech_Top = {
   .width = ROTOM_SPEECH_WINDOW_WIDTH,
   .height = ROTOM_SPEECH_WINDOW_HEIGHT, 
   .paletteNum = 14,
-  .baseBlock = 0x30
+  .baseBlock = 0x50
 };
 
 static const struct WindowTemplate sWindowTemplate_RotomSpeech_Bottom = {
@@ -355,7 +354,7 @@ static const struct WindowTemplate sWindowTemplate_RotomSpeech_Bottom = {
     .width = ROTOM_SPEECH_WINDOW_WIDTH, 
     .height = ROTOM_SPEECH_WINDOW_HEIGHT, 
     .paletteNum = 14,
-    .baseBlock = 0x30 + (ROTOM_SPEECH_WINDOW_WIDTH*ROTOM_SPEECH_WINDOW_WIDTH)
+    .baseBlock = 0x50 + (ROTOM_SPEECH_WINDOW_WIDTH*ROTOM_SPEECH_WINDOW_WIDTH)
 };
 
 static const struct WindowTemplate sWindowTemplate_FlipPhone = {
@@ -365,7 +364,7 @@ static const struct WindowTemplate sWindowTemplate_FlipPhone = {
     .width = 7,
     .height = 2,
     .paletteNum = 14,
-    .baseBlock = (0x30 + (ROTOM_SPEECH_WINDOW_WIDTH*ROTOM_SPEECH_WINDOW_WIDTH)) + (ROTOM_SPEECH_WINDOW_WIDTH*ROTOM_SPEECH_WINDOW_WIDTH)
+    .baseBlock = 0x50
 };
 
 static const struct SpritePalette sSpritePal_Icon[] =
@@ -911,15 +910,13 @@ static void RotomPhone_SmallStartMenu_CreateAllSprites(void)
 
 static void RotomPhone_SmallStartMenu_LoadBgGfx(bool32 firstInit)
 {
-    u8* buf = GetBgTilemapBuffer(0); 
-    const u16 *pal;
+    u8* buf = GetBgTilemapBuffer(0);
     const u32 *tilemap;
     LoadBgTilemap(0, 0, 0, 0);
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
     {
         DecompressAndCopyTileDataToVram(0, sSmallRotomTiles, 0, 0, 0);
         DecompressDataWithHeaderWram(sSmallRotomTilemap, buf);
-        pal = sSmallRotomPhonePal;
     }
     else
     {
@@ -928,12 +925,11 @@ static void RotomPhone_SmallStartMenu_LoadBgGfx(bool32 firstInit)
         else
             tilemap = sFlipPhoneOpenTilemap;
         
-        DecompressAndCopyTileDataToVram(0, sFlipTiles, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(0, sFlipPhoneTiles, 0, 0, 0);
         DecompressDataWithHeaderWram(tilemap, buf);
-        pal = sFlipPhonePal;
     }
     
-    LoadPalette(pal, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+    LoadPalette(sPhoneMenuPal, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
     ScheduleBgCopyTilemapToVram(0);
 }
 #define ROTOM_SPEECH_TOP_ROW_Y      1
