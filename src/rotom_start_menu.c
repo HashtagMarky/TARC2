@@ -1932,8 +1932,8 @@ sRotomPhone_LargeStartMenuWindowTemplates[WIN_UI_TOP_BAR].baseBlock +   \
 static const u32 sRotomPhone_LargeStartMenuTiles[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.smol");
 
 // New graphics for the buttons. Create these from 4bpp indexed PNGs, just like before.
-static const u32 sRotomPhone_LargeStartMenuTilemap[] = INCBIN_U32("graphics/rotom_start_menu/full_screen.bin.smolTM");
-static const u32 sRotomPhone_LargeStartMenuPanelTilemap[] = INCBIN_U32("graphics/rotom_start_menu/full_screen_panel.bin.smolTM");
+static const u32 sRotomPhone_LargeStartMenuTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_full_screen.bin.smolTM");
+static const u32 sRotomPhone_LargeStartMenuPanelTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_full_screen_panel.bin.smolTM");
 
 static const u16 sRotomPhone_LargeStartMenuPalette[] = INCBIN_U16("graphics/rotom_start_menu/rotom_phone_tiles.gbapal");
 
