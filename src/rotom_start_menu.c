@@ -1089,7 +1089,7 @@ static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId)
         if (!ROTOM_PHONE_UPDATE_MESSAGE && !GetSafariZoneFlag() && tRotomUpdateMessage != ROTOM_PHONE_MESSAGE_GOODBYE)
             tRotomUpdateTimer *= 2;
         
-        if (ROTOM_PHONE_UPDATE_MESSAGE_SOUND)
+        if (ROTOM_PHONE_UPDATE_MESSAGE_SOUND && tRotomUpdateMessage != ROTOM_PHONE_MESSAGE_GOODBYE)
             tRotomMessageSoundEffect = PMD_EVENT_SIGN_HATENA_02;
     }
 }
