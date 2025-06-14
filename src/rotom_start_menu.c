@@ -1523,7 +1523,8 @@ static void RotomPhone_SmallStartMenu_ExitAndClearTilemap(void)
 
     if (sRotomPhone_SmallStartMenu != NULL)
     {
-        FreeSpriteTilesByTag(TAG_ICON_GFX);  
+        FreeSpriteTilesByTag(TAG_ICON_GFX); 
+        FreeSpriteTilesByTag(TAG_ICON_GFX + 1);  
         Free(sRotomPhone_SmallStartMenu);
         sRotomPhone_SmallStartMenu = NULL;
     }
