@@ -1976,7 +1976,7 @@ static const union AffineAnimCmd * const sButtonAffineAnims[] =
     [SELECTED_ANIM] = sButtonSelectedAnim
 };
 
-static const struct CompressedSpriteSheet iconCompatatbilitySheet = {
+static const struct CompressedSpriteSheet sSpriteSheet_CompatabilityIcon = {
     .data = sRotomPhone_DaycareCompatability_Gfx,
     .size = 32 * 32 * ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_COUNT / 2,
     .tag = TAG_ICON_GFX,
@@ -3000,7 +3000,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
                 .affineAnims = gDummySpriteAffineAnimTable,
             };
 
-            LoadCompressedSpriteSheet(&iconCompatatbilitySheet);
+            LoadCompressedSpriteSheet(&sSpriteSheet_CompatabilityIcon);
             LoadSpritePalette(&iconCompatatbilityPal);
             sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE] =
                 CreateSprite(&iconCompatatbility_SpriteTemplate, MON_COMPATABILITY_ICON_X, EGG_COMPATABILITY_ICON_Y, 0);
