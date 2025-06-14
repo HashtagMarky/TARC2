@@ -82,19 +82,6 @@
 #define FLIP_PHONE_SLIDE_DURATION 30
 
 
-static void SpriteCB_RotomPhoneSmall_IconPoketch(struct Sprite* sprite);
-static void SpriteCB_RotomPhoneSmall_IconPokedex(struct Sprite* sprite);
-static void SpriteCB_RotomPhoneSmall_IconParty(struct Sprite* sprite);
-static void SpriteCB_RotomPhoneSmall_IconBag(struct Sprite* sprite);
-static void SpriteCB_RotomPhoneSmall_IconTrainerCard(struct Sprite* sprite);
-static void SpriteCB_RotomPhoneSmall_IconSave(struct Sprite* sprite);
-static void SpriteCB_RotomPhoneSmall_IconOptions(struct Sprite* sprite);
-static void SpriteCB_RotomPhoneSmall_IconFlag(struct Sprite* sprite);
-static void SpriteCB_RotomPhoneSmall_IconFullScreen(struct Sprite* sprite);
-static void SpriteCB_RotomPhoneSmall_IconDexNav(struct Sprite* sprite);
-static void SpriteCB_RotomPhoneSmall_IconClock(struct Sprite* sprite);
-static void SpriteCB_RotomPhoneSmall_IconShortcut(struct Sprite* sprite);
-
 static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit);
 static void Task_RotomPhone_SmallStartMenu_FlipPhoneOpen(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_FlipPhoneClose(u8 taskId);
