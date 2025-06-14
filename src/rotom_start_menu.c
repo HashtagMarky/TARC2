@@ -87,7 +87,9 @@ static void Task_RotomPhone_SmallStartMenu_FlipPhoneOpen(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_FlipPhoneClose(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_FlipPhoneCloseToSave(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId);
+static void RotomPhone_SmallStartMenu_RotomShutdownPreparation(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId);
+static void Task_RotomPhone_SmallStartMenu_RotomShutdownToSave(u8 taskId);
 static void Task_RotomPhone_HandleSave(u8 taskId);
 
 static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(MainCallback callback);
@@ -1143,6 +1145,12 @@ static void RotomPhone_SmallStartMenu_PrintGoodbye(u8 taskId)
         break;
     }
 
+    if (FuncIsActiveTask(Task_RotomPhone_SmallStartMenu_RotomShutdownToSave))
+    {
+        StringCopy(textBuffer, COMPOUND_STRING("Preparing to record progress…"));
+        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, FALSE);
+    }
+
     CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
     CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
 }
@@ -1696,11 +1704,8 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     {
         if (FlagGet(FLAG_SYS_POKEDEX_GET))
         {
-            PlaySE(PMD_EVENT_MOTION_HARAHERI);
-            tRotomUpdateTimer = FALSE;
-            tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_GOODBYE;
-            RotomPhone_SmallStartMenu_CheckUpdateMessage(taskId);
             gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_RotomShutdown;
+            RotomPhone_SmallStartMenu_RotomShutdownPreparation(taskId);
         }
         else
         {
@@ -1723,6 +1728,14 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
         PlaySE(tRotomMessageSoundEffect);
 }
 
+static void RotomPhone_SmallStartMenu_RotomShutdownPreparation(u8 taskId)
+{
+    PlaySE(PMD_EVENT_MOTION_HARAHERI);
+    tRotomUpdateTimer = FALSE;
+    tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_GOODBYE;
+    RotomPhone_SmallStartMenu_CheckUpdateMessage(taskId);
+}
+
 static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId)
 {
     tRotomUpdateTimer++;
@@ -1730,6 +1743,21 @@ static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId)
     {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(taskId, FALSE);
+    }
+}
+
+static void Task_RotomPhone_SmallStartMenu_RotomShutdownToSave(u8 taskId)
+{
+    if (!FuncIsActiveTask(Task_RotomPhone_SmallStartMenu_RotomShutdown) && tRotomPhoneCloseToSave == FALSE)
+    {
+        CreateTask(Task_RotomPhone_SmallStartMenu_RotomShutdown, 0);
+        tRotomPhoneCloseToSave = TRUE;
+    }
+    else if (!FuncIsActiveTask(Task_RotomPhone_SmallStartMenu_RotomShutdown) && tRotomPhoneCloseToSave == TRUE)
+    {
+        LoadMessageBoxAndBorderGfx();
+        InitSave_Global();
+        gTasks[taskId].func = Task_RotomPhone_HandleSave;
     }
 }
 
@@ -2643,7 +2671,15 @@ static void RotomPhone_StartMenu_SelectedFunc_Save(void)
         {
             LockPlayerFieldControls();
             u8 taskId = FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput);
-            gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_FlipPhoneCloseToSave;
+            if (FlagGet(FLAG_SYS_POKEDEX_GET))
+            {
+                gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_RotomShutdownToSave;
+                RotomPhone_SmallStartMenu_RotomShutdownPreparation(taskId);
+            }
+            else
+            {
+                gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_FlipPhoneCloseToSave;
+            }
             tRotomPhoneCloseToSave = FALSE;
         }
     }
