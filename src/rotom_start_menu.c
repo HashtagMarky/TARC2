@@ -106,7 +106,7 @@ static void Task_RotomPhone_HandleSave(u8 taskId);
 static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(MainCallback callback);
 static u8 RotomPhone_SmallStartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority);
 static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func);
-static void RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(u8 taskId);
+static void RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(u8 taskId, bool32 overworldCleanup);
 
 static void RotomPhone_SmallStartMenu_LoadSprites(void);
 static void RotomPhone_SmallStartMenu_CreateAllSprites(void);
@@ -1472,7 +1472,7 @@ static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(MainCallback ca
 {
     if (!gPaletteFade.active)
     {
-        RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput));
+        RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput), TRUE);
         SetMainCallback2(callback);
         gMain.savedCallback = CB2_ReturnToFieldWithOpenMenu;
     }
@@ -1494,11 +1494,12 @@ static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, Task
     gTasks[taskId].func = func;
 }
 
-static void RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(u8 taskId)
+static void RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(u8 taskId, bool32 overworldCleanup)
 {
     PlayRainStoppingSoundEffect();
     RotomPhone_SmallStartMenu_ExitAndClearTilemap();
-    CleanupOverworldWindowsAndTilemaps();
+    if (overworldCleanup)
+        CleanupOverworldWindowsAndTilemaps();
     DestroyTask(taskId);
 }
 
@@ -1741,7 +1742,7 @@ static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId)
     if (tRotomUpdateTimer == ROTOM_PHONE_MESSAGE_UPDATE_TIMER + ROTOM_PHONE_MESSAGE_SHUTDOWN_TIME)
     {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
-        RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(taskId);
+        RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(taskId, FALSE);
     }
 }
 
@@ -2626,7 +2627,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Trainer(void)
     {
         if (!gPaletteFade.active)
         {
-            RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput));
+            RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput), TRUE);
             if (IsOverworldLinkActive() || InUnionRoom())
                 ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
             else if (FlagGet(FLAG_SYS_FRONTIER_PASS))
