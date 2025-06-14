@@ -97,6 +97,7 @@ static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, Task
 static void RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(u8 taskId, bool32 overworldCleanup);
 
 static void RotomPhone_SmallStartMenu_LoadSprites(void);
+static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(void);
 static void RotomPhone_SmallStartMenu_CreateAllSprites(void);
 static void RotomPhone_SmallStartMenu_LoadBgGfx(bool32 firstInit);
 static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void);
@@ -297,6 +298,8 @@ struct RotomPhone_StartMenu
     bool32 isLoading;
     bool32 spriteFlag; // some bool32 holding values for controlling the sprite anims and lifetime
     enum RotomPhoneMenuItems menuSmallOptions[ROTOM_PHONE_SMALL_OPTION_COUNT];
+    u32 menuSmallRotomFaceSpriteId;
+    u32 menuSmallRotomFaceFlashSpriteId;
     u32 menuSmallSpriteId[ROTOM_PHONE_SMALL_OPTION_COUNT];
     u32 menuSmallFlashSpriteId[ROTOM_PHONE_SMALL_OPTION_COUNT];
     u32 windowIdRotomSpeech_Top;
@@ -322,6 +325,7 @@ static const u32 sFlipPhoneTiles[] = INCBIN_U32("graphics/rotom_start_menu/flip_
 static const u32 sFlipPhoneOpenTilemap[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_open.bin.smolTM");
 static const u32 sFlipPhoneClosedTilemap[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_closed.bin.smolTM");
 static const u16 sPhoneMenuPal[] = INCBIN_U16("graphics/rotom_start_menu/phones.gbapal");
+static const u32 sRotomPhoneFace[] = INCBIN_U32("graphics/rotom_start_menu/rotom_face.4bpp.smol");
 
 //--SPRITE-GFX--
 #define TAG_ICON_GFX 1234
@@ -379,6 +383,12 @@ static const struct CompressedSpriteSheet sSpriteSheet_Icon[] =
     {NULL},
 };
 
+static const struct CompressedSpriteSheet sSpriteSheet_RotomFace[] = 
+{
+    {sRotomPhoneFace, 64*64/2 , TAG_ICON_GFX + 1},
+    {NULL},
+};
+
 static const struct OamData gOamIcon = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -391,6 +401,12 @@ static const struct OamData gOamIcon = {
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
+};
+
+static const struct OamData sRotomFace_Oam = {
+    .size = SPRITE_SIZE(64x64),
+    .shape = SPRITE_SHAPE(64x64),
+    .priority = 0,
 };
 
 static const union AnimCmd sAnimCmdPoketch_NotSelected[] = {
@@ -543,6 +559,15 @@ static const struct SpriteTemplate sSpriteTemplate_RotomSmallIcon = {
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_RotomSmallFace = {
+    .tileTag = TAG_ICON_GFX + 1,
+    .paletteTag = TAG_ICON_PAL,
+    .oam = &sRotomFace_Oam,
+    .callback = SpriteCallbackDummy,
+    .anims = gDummySpriteAnimTable,
+    .affineAnims = gDummySpriteAffineAnimTable,
 };
 
 
@@ -764,6 +789,8 @@ void RotomPhone_SmallStartMenu_Init(bool32 firstInit)
     sRotomPhone_SmallStartMenu->spriteFlag = FALSE;
     menuFullScreen = FALSE;
 
+    sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId = SPRITE_NONE;
+    sRotomPhone_SmallStartMenu->menuSmallRotomFaceFlashSpriteId = SPRITE_NONE;
     for (enum RotomPhoneSmallOptions smallOptions = ROTOM_PHONE_SMALL_OPTION_1; smallOptions < ROTOM_PHONE_SMALL_OPTION_COUNT; smallOptions++)
     {
         sRotomPhone_SmallStartMenu->menuSmallSpriteId[smallOptions] = SPRITE_NONE;
@@ -793,6 +820,7 @@ static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit)
     u8 taskId;
 
     RotomPhone_SmallStartMenu_CreateAllSprites();
+    RotomPhone_SmallStartMenu_CreateRotomFaceSprite();
     RotomPhone_SmallStartMenu_CreateSpeechWindows();
     RotomPhone_SmallStartMenu_CreateFlipPhoneWindow();
     ScheduleBgCopyTilemapToVram(0);
@@ -831,6 +859,43 @@ static void RotomPhone_SmallStartMenu_LoadSprites(void)
     index = IndexOfSpritePaletteTag(TAG_ICON_PAL);
     LoadPalette(sIconPal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP); 
     LoadCompressedSpriteSheet(sSpriteSheet_Icon);
+    LoadCompressedSpriteSheet(sSpriteSheet_RotomFace);
+}
+
+static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(void)
+{
+    if (!FlagGet(FLAG_SYS_POKEDEX_GET))
+        return;
+
+    bool32 flash = FALSE;
+    u32 x = 196;
+    u32 y = 132;
+
+    if (GetFlashLevel() > 0 || InBattlePyramid_())
+        flash = TRUE;
+
+    if (flash)
+    {
+        SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJWIN_ON);
+        SetGpuRegBits(REG_OFFSET_WINOUT, WINOUT_WINOBJ_OBJ);
+    }
+
+    sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId = CreateSprite(
+        &sSpriteTemplate_RotomSmallFace,
+        x,
+        y,
+        0
+    );
+
+    if (flash)
+    {
+        sRotomPhone_SmallStartMenu->menuSmallRotomFaceFlashSpriteId = CreateSprite(
+            &sSpriteTemplate_RotomSmallFace,
+            x,
+            y,
+            0
+        );
+    }
 }
 
 static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menuItem, enum RotomPhoneSmallOptions spriteId)
@@ -1416,6 +1481,16 @@ static void RotomPhone_SmallStartMenu_RemoveWindows(void)
 
 static void RotomPhone_SmallStartMenu_DestroySprites(void)
 {
+    if (sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId != SPRITE_NONE)
+    {
+        FreeSpriteOamMatrix(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId]);
+        DestroySpriteAndFreeResources(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId]);
+    }
+    if (sRotomPhone_SmallStartMenu->menuSmallRotomFaceFlashSpriteId != SPRITE_NONE)
+    {
+        FreeSpriteOamMatrix(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceFlashSpriteId]);
+        DestroySpriteAndFreeResources(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceFlashSpriteId]);
+    }
     for (enum RotomPhoneSmallOptions spriteId = ROTOM_PHONE_SMALL_OPTION_1; spriteId < ROTOM_PHONE_SMALL_OPTION_COUNT; spriteId++)
     {
         if (sRotomPhone_SmallStartMenu->menuSmallSpriteId[spriteId] != SPRITE_NONE)
