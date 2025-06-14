@@ -317,7 +317,8 @@ bool32 RotomPhone_StartMenu_IsFullScreen(void)
 
 // --BG-GFX--
 static const u32 sSmallRotomTiles[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.smol");
-static const u32 sSmallRotomTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.bin.smolTM");
+static const u32 sSmallRotomTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone.bin.smolTM");
+static const u32 sSmallRotomSpeechTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_speech.bin.smolTM");
 static const u32 sFlipPhoneTiles[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_tiles.4bpp.smol");
 static const u32 sFlipPhoneOpenTilemap[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_open.bin.smolTM");
 static const u32 sFlipPhoneClosedTilemap[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_closed.bin.smolTM");
@@ -686,9 +687,9 @@ static const u8 sWeatherActions[WEATHER_COUNT][24] =
 #define FLIP_PHONE_BG_COLOUR       7
 #define FLIP_PHONE_TEXT_FG_COLOUR  3
 #define FLIP_PHONE_TEXT_BG_COLOUR  6
-#define ROTOM_PHONE_BG_COLOUR       6
-#define ROTOM_PHONE_TEXT_FG_COLOUR  2
-#define ROTOM_PHONE_TEXT_BG_COLOUR  5
+#define ROTOM_PHONE_BG_COLOUR       8
+#define ROTOM_PHONE_TEXT_FG_COLOUR  3
+#define ROTOM_PHONE_TEXT_BG_COLOUR  6
 enum FontColor
 {
     FONT_BLACK,
