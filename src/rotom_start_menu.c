@@ -302,7 +302,6 @@ struct RotomPhone_StartMenu
     u32 windowIdRotomSpeech_Top;
     u32 windowIdRotomSpeech_Bottom;
     u32 windowIdFlipPhone;
-    u32 windowIdSaveInfo;
 };
 
 static EWRAM_DATA struct RotomPhone_StartMenu *sRotomPhone_SmallStartMenu = NULL;
