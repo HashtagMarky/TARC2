@@ -333,8 +333,8 @@ static const u32 sRotomPhoneFace[] = INCBIN_U32("graphics/rotom_start_menu/rotom
 #define ICON_COORD_X 184
 #define ICON_COORD_Y 50
 
-static const u32 sIconGfx[] = INCBIN_U32("graphics/rotom_start_menu/icons.4bpp.smol");
-static const u16 sIconPal[] = INCBIN_U16("graphics/rotom_start_menu/icons.gbapal");
+static const u32 sIconsSmallGfx[] = INCBIN_U32("graphics/rotom_start_menu/icons.4bpp.smol");
+static const u16 sIconsRotomFacePal[] = INCBIN_U16("graphics/rotom_start_menu/icons.gbapal");
 
 #define ROTOM_SPEECH_WINDOW_WIDTH   18
 #define ROTOM_SPEECH_WINDOW_WIDTH_PXL ROTOM_SPEECH_WINDOW_WIDTH * 8
@@ -373,13 +373,13 @@ static const struct WindowTemplate sWindowTemplate_FlipPhone = {
 
 static const struct SpritePalette sSpritePal_Icon[] =
 {
-    {sIconPal, TAG_ICON_PAL},
+    {sIconsRotomFacePal, TAG_ICON_PAL},
     {NULL},
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_Icon[] = 
+static const struct CompressedSpriteSheet sSpriteSheet_IconsSmall[] = 
 {
-    {sIconGfx, 16*352/2 , TAG_ICON_GFX},
+    {sIconsSmallGfx, 16*352/2 , TAG_ICON_GFX},
     {NULL},
 };
 
@@ -857,8 +857,8 @@ static void RotomPhone_SmallStartMenu_LoadSprites(void)
     u32 index;
     LoadSpritePalette(sSpritePal_Icon);
     index = IndexOfSpritePaletteTag(TAG_ICON_PAL);
-    LoadPalette(sIconPal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP); 
-    LoadCompressedSpriteSheet(sSpriteSheet_Icon);
+    LoadPalette(sIconsRotomFacePal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP); 
+    LoadCompressedSpriteSheet(sSpriteSheet_IconsSmall);
     LoadCompressedSpriteSheet(sSpriteSheet_RotomFace);
 }
 
@@ -1736,7 +1736,7 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     if (sRotomPhone_SmallStartMenu->isLoading == FALSE && !gPaletteFade.active)
     {
         index = IndexOfSpritePaletteTag(TAG_ICON_PAL);
-        LoadPalette(sIconPal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
+        LoadPalette(sIconsRotomFacePal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
     }
 
     tRotomMessageSoundEffect = MUS_DUMMY;
