@@ -79,13 +79,13 @@
 #define ROTOM_PHONE_MESSAGE_SHUTDOWN_TIME   60
 #define ROTOM_PHONE_UPDATE_MESSAGE          TRUE
 #define ROTOM_PHONE_UPDATE_MESSAGE_SOUND    TRUE
-#define FLIP_PHONE_OFFSCREEN_Y 96
+#define PHONE_OFFSCREEN_Y 96
 #define FLIP_PHONE_SLIDE_DURATION 30
 
 
 static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit);
-static void Task_RotomPhone_SmallStartMenu_FlipPhoneOpen(u8 taskId);
-static void Task_RotomPhone_SmallStartMenu_FlipPhoneClose(u8 taskId);
+static void Task_RotomPhone_SmallStartMenu_PhoneSlideOpen(u8 taskId);
+static void Task_RotomPhone_SmallStartMenu_PhoneSlideClose(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId);
 static void RotomPhone_SmallStartMenu_RotomShutdownPreparation(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId);
@@ -813,9 +813,9 @@ static enum RotomPhoneMenuItems RotomPhone_SetFirstSelectedMenu(void)
 #define tRotomMessageSoundEffect gTasks[taskId].data[2]
 #define tRotomPanelComfyAnimId gTasks[taskId].data[3]
 #define tRotomPanelLastY gTasks[taskId].data[4]
-#define tFlipPhoneY gTasks[taskId].data[5]
-#define tFlipComfyAnimId gTasks[taskId].data[6]
-#define tRotomPhoneCloseToSave gTasks[taskId].data[7]
+#define tPhoneY gTasks[taskId].data[5]
+#define tPhoneComfyAnimId gTasks[taskId].data[6]
+#define tPhoneCloseToSave gTasks[taskId].data[7]
 void RotomPhone_SmallStartMenu_Init(bool32 firstInit)
 {
     u8 taskId;
@@ -865,20 +865,20 @@ void RotomPhone_SmallStartMenu_Init(bool32 firstInit)
     RotomPhone_SmallStartMenu_LoadBgGfx(firstInit);
     RotomPhone_SmallStartMenu_LoadSprites();
 
-    if (!FlagGet(FLAG_SYS_POKEDEX_GET) && firstInit)
+    if (firstInit)
     {
-        SetGpuReg(REG_OFFSET_BG0VOFS, -FLIP_PHONE_OFFSCREEN_Y);
-        taskId = CreateTask(Task_RotomPhone_SmallStartMenu_FlipPhoneOpen, 0);
-        tFlipPhoneY = FLIP_PHONE_OFFSCREEN_Y;
+        SetGpuReg(REG_OFFSET_BG0VOFS, -PHONE_OFFSCREEN_Y);
+        taskId = CreateTask(Task_RotomPhone_SmallStartMenu_PhoneSlideOpen, 0);
+        tPhoneY = PHONE_OFFSCREEN_Y;
         return;
     }
 
-    RotomPhone_SmallStartMenu_ContinueInit(firstInit);
+    RotomPhone_SmallStartMenu_ContinueInit(FALSE);
 }
 
 static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit)
 {
-    u8 taskId;
+    u8 taskId = FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_PhoneSlideOpen);
 
     RotomPhone_SmallStartMenu_CreateAllSprites();
     RotomPhone_SmallStartMenu_CreateRotomFaceSprite();
@@ -889,16 +889,7 @@ static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit)
     if (!sRotomPhoneOptions[menuSelectedSmall].unlockedFunc || !sRotomPhoneOptions[menuSelectedSmall].unlockedFunc())
         menuSelectedSmall = RotomPhone_SetFirstSelectedMenu();
 
-    if (!FlagGet(FLAG_SYS_POKEDEX_GET) && firstInit)
-    {
-        taskId = FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_FlipPhoneOpen);
-
-        gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_HandleMainInput;
-    }
-    else
-    {
-        taskId = CreateTask(Task_RotomPhone_SmallStartMenu_HandleMainInput, 0);
-    }
+    gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_HandleMainInput;
     tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER / ROTOM_PHONE_NUM_MINUTES_TO_UPDATE;
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 
@@ -1064,6 +1055,8 @@ static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void)
 {
     if (!FlagGet(FLAG_SYS_POKEDEX_GET))
         return;
+
+    DecompressDataWithHeaderWram(sSmallRotomSpeechTilemap, GetBgTilemapBuffer(0));
 
     sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top = AddWindow(&sWindowTemplate_RotomSpeech_Top);
     FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top, PIXEL_FILL(ROTOM_PHONE_BG_COLOUR));
@@ -1720,74 +1713,78 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
     RotomPhone_SmallStartMenu_UpdateMenuPrompt(taskId);
 }
 
-static void Task_RotomPhone_SmallStartMenu_FlipPhoneOpen(u8 taskId)
+static void Task_RotomPhone_SmallStartMenu_PhoneSlideOpen(u8 taskId)
 {
-    TryAdvanceComfyAnim(&gComfyAnims[tFlipComfyAnimId]);
-    if (tFlipPhoneY == FLIP_PHONE_OFFSCREEN_Y)
+    TryAdvanceComfyAnim(&gComfyAnims[tPhoneComfyAnimId]);
+    if (tPhoneY == PHONE_OFFSCREEN_Y)
     {
         struct ComfyAnimEasingConfig config;
         InitComfyAnimConfig_Easing(&config);
         config.durationFrames = FLIP_PHONE_SLIDE_DURATION;
-        config.from = Q_24_8(FLIP_PHONE_OFFSCREEN_Y);
+        config.from = Q_24_8(PHONE_OFFSCREEN_Y);
         config.to = Q_24_8(0);
         config.easingFunc = ComfyAnimEasing_EaseOutQuad;
-        tFlipComfyAnimId = CreateComfyAnim_Easing(&config);
-        TryAdvanceComfyAnim(&gComfyAnims[tFlipComfyAnimId]);
+        tPhoneComfyAnimId = CreateComfyAnim_Easing(&config);
+        TryAdvanceComfyAnim(&gComfyAnims[tPhoneComfyAnimId]);
 
-        tFlipPhoneY = ReadComfyAnimValueSmooth(&gComfyAnims[tFlipComfyAnimId]);
+        tPhoneY = ReadComfyAnimValueSmooth(&gComfyAnims[tPhoneComfyAnimId]);
     }
-    else if (GetEasingComfyAnim_CurrentFrame(&gComfyAnims[tFlipComfyAnimId]) == FLIP_PHONE_SLIDE_DURATION / 2)
+    else if (GetEasingComfyAnim_CurrentFrame(&gComfyAnims[tPhoneComfyAnimId]) == FLIP_PHONE_SLIDE_DURATION / 2
+        && !FlagGet(FLAG_SYS_POKEDEX_GET))
     {
         DecompressDataWithHeaderWram(sFlipPhoneOpenTilemap, GetBgTilemapBuffer(0));
         ScheduleBgCopyTilemapToVram(0);
     }
-    else if (tFlipPhoneY > 0)
+    else if (tPhoneY > 0)
     {
-        tFlipPhoneY = ReadComfyAnimValueSmooth(&gComfyAnims[tFlipComfyAnimId]);
-        SetGpuReg(REG_OFFSET_BG0VOFS, -tFlipPhoneY);
+        tPhoneY = ReadComfyAnimValueSmooth(&gComfyAnims[tPhoneComfyAnimId]);
+        SetGpuReg(REG_OFFSET_BG0VOFS, -tPhoneY);
     }
     else
     {
-        ReleaseComfyAnim(tFlipComfyAnimId);
+        ReleaseComfyAnim(tPhoneComfyAnimId);
         RotomPhone_SmallStartMenu_ContinueInit(TRUE);
     }
 }
 
-static void Task_RotomPhone_SmallStartMenu_FlipPhoneClose(u8 taskId)
+static void Task_RotomPhone_SmallStartMenu_PhoneSlideClose(u8 taskId)
 {
-    TryAdvanceComfyAnim(&gComfyAnims[tFlipComfyAnimId]);
-    if (tFlipPhoneY == FALSE)
+    TryAdvanceComfyAnim(&gComfyAnims[tPhoneComfyAnimId]);
+    if (tPhoneY == FALSE)
     {
         struct ComfyAnimEasingConfig config;
         InitComfyAnimConfig_Easing(&config);
         config.durationFrames = FLIP_PHONE_SLIDE_DURATION;
         config.from = Q_24_8(0);
-        config.to = Q_24_8(FLIP_PHONE_OFFSCREEN_Y);
+        config.to = Q_24_8(PHONE_OFFSCREEN_Y);
         config.easingFunc = ComfyAnimEasing_EaseOutQuad;
-        tFlipComfyAnimId = CreateComfyAnim_Easing(&config);
-        TryAdvanceComfyAnim(&gComfyAnims[tFlipComfyAnimId]);
+        tPhoneComfyAnimId = CreateComfyAnim_Easing(&config);
+        TryAdvanceComfyAnim(&gComfyAnims[tPhoneComfyAnimId]);
 
         RotomPhone_SmallStartMenu_RemoveWindows();
         RotomPhone_SmallStartMenu_DestroySprites();
-        DecompressDataWithHeaderWram(sFlipPhoneClosedTilemap, GetBgTilemapBuffer(0));
+        if (FlagGet(FLAG_SYS_POKEDEX_GET))
+            DecompressDataWithHeaderWram(sSmallRotomTilemap, GetBgTilemapBuffer(0));
+        else
+            DecompressDataWithHeaderWram(sFlipPhoneClosedTilemap, GetBgTilemapBuffer(0));
         ScheduleBgCopyTilemapToVram(0);
-        tFlipPhoneY = ReadComfyAnimValueSmooth(&gComfyAnims[tFlipComfyAnimId]);
-        SetGpuReg(REG_OFFSET_BG0VOFS, -tFlipPhoneY);
+        tPhoneY = ReadComfyAnimValueSmooth(&gComfyAnims[tPhoneComfyAnimId]);
+        SetGpuReg(REG_OFFSET_BG0VOFS, -tPhoneY);
     }
-    else if (tFlipPhoneY < FLIP_PHONE_OFFSCREEN_Y)
+    else if (tPhoneY < PHONE_OFFSCREEN_Y)
     {
-        tFlipPhoneY = ReadComfyAnimValueSmooth(&gComfyAnims[tFlipComfyAnimId]);
-        SetGpuReg(REG_OFFSET_BG0VOFS, -tFlipPhoneY);
+        tPhoneY = ReadComfyAnimValueSmooth(&gComfyAnims[tPhoneComfyAnimId]);
+        SetGpuReg(REG_OFFSET_BG0VOFS, -tPhoneY);
     }
-    else if (tFlipPhoneY == FLIP_PHONE_OFFSCREEN_Y)
+    else if (tPhoneY == PHONE_OFFSCREEN_Y)
     {
-        tFlipPhoneY++;
+        tPhoneY++;
         RotomPhone_SmallStartMenu_ExitAndClearTilemap();
     }
     else
     {
         SetGpuReg(REG_OFFSET_BG0VOFS, 0);
-        ReleaseComfyAnim(tFlipComfyAnimId);
+        ReleaseComfyAnim(tPhoneComfyAnimId);
         DestroyTask(taskId);
     }
 }
@@ -1827,8 +1824,8 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
         else
         {
             PlaySE(SE_BALL_TRAY_ENTER);
-            tFlipPhoneY = FALSE;
-            gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_FlipPhoneClose;
+            tPhoneY = FALSE;
+            gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_PhoneSlideClose;
         }
         return;
     }
@@ -1859,7 +1856,7 @@ static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId)
     if (tRotomUpdateTimer == ROTOM_PHONE_MESSAGE_UPDATE_TIMER + ROTOM_PHONE_MESSAGE_SHUTDOWN_TIME)
     {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
-        RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(taskId, FALSE);
+        gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_PhoneSlideClose;
     }
 }
 
@@ -1869,14 +1866,18 @@ static void Task_RotomPhone_SmallStartMenu_CloseAndSave(u8 taskId)
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
         func = Task_RotomPhone_SmallStartMenu_RotomShutdown;
     else
-        func = Task_RotomPhone_SmallStartMenu_FlipPhoneClose;
+        func = Task_RotomPhone_SmallStartMenu_PhoneSlideClose;
 
-    if (!FuncIsActiveTask(func) && tRotomPhoneCloseToSave == FALSE)
+    if (!FuncIsActiveTask(Task_RotomPhone_SmallStartMenu_RotomShutdown)
+        && !FuncIsActiveTask(Task_RotomPhone_SmallStartMenu_PhoneSlideClose)
+        && tPhoneCloseToSave == FALSE)
     {
         CreateTask(func, 0);
-        tRotomPhoneCloseToSave = TRUE;
+        tPhoneCloseToSave = TRUE;
     }
-    else if (!FuncIsActiveTask(func) && tRotomPhoneCloseToSave == TRUE)
+    else if (!FuncIsActiveTask(Task_RotomPhone_SmallStartMenu_RotomShutdown)
+        && !FuncIsActiveTask(Task_RotomPhone_SmallStartMenu_PhoneSlideClose)
+        && tPhoneCloseToSave == TRUE)
     {
         LoadMessageBoxAndBorderGfx();
         InitSave_Global();
@@ -2794,7 +2795,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Save(void)
             LockPlayerFieldControls();
             u8 taskId = FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput);
             gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_CloseAndSave;
-            tRotomPhoneCloseToSave = FALSE;
+            tPhoneCloseToSave = FALSE;
             if (FlagGet(FLAG_SYS_POKEDEX_GET))
                 RotomPhone_SmallStartMenu_RotomShutdownPreparation(taskId);
         }
@@ -3159,5 +3160,5 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 #undef tRotomMessageSoundEffect
 #undef tRotomPanelComfyAnimId
 #undef tRotomPanelLastY
-#undef tFlipPhoneY
-#undef tRotomPhoneCloseToSave
+#undef tPhoneY
+#undef tPhoneCloseToSave
