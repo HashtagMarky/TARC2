@@ -98,7 +98,7 @@ static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, Task
 static void RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(u8 taskId, bool32 overworldCleanup);
 
 static void RotomPhone_SmallStartMenu_LoadSprites(void);
-static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(void);
+static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(bool32 rotomLoad);
 static void RotomPhone_SmallStartMenu_CreateAllSprites(void);
 static void RotomPhone_SmallStartMenu_LoadBgGfx(bool32 firstInit);
 static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void);
@@ -913,6 +913,7 @@ static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit)
     u8 taskId = FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_PhoneSlideOpen);
 
     RotomPhone_SmallStartMenu_CreateAllSprites();
+    RotomPhone_SmallStartMenu_CreateRotomFaceSprite(FALSE);
     RotomPhone_SmallStartMenu_CreateSpeechWindows();
     RotomPhone_SmallStartMenu_CreateFlipPhoneWindow();
     ScheduleBgCopyTilemapToVram(0);
@@ -949,7 +950,7 @@ static void RotomPhone_SmallStartMenu_LoadSprites(void)
     LoadCompressedSpriteSheet(sSpriteSheet_RotomFace);
 }
 
-static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(void)
+static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(bool32 rotomLoad)
 {
     if (!FlagGet(FLAG_SYS_POKEDEX_GET) || sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId != SPRITE_NONE)
         return;
@@ -973,7 +974,8 @@ static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(void)
         y,
         0
     );
-    gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId].callback = SpriteCB_RotomPhoneSmall_RotomFace_Load;
+    if (rotomLoad)
+        gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId].callback = SpriteCB_RotomPhoneSmall_RotomFace_Load;
 
     if (flash)
     {
@@ -1780,7 +1782,7 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideOpen(u8 taskId)
     {
         ReleaseComfyAnim(tPhoneComfyAnimId);
         if (FlagGet(FLAG_SYS_POKEDEX_GET))
-            RotomPhone_SmallStartMenu_CreateRotomFaceSprite();
+            RotomPhone_SmallStartMenu_CreateRotomFaceSprite(TRUE);
         else
             RotomPhone_SmallStartMenu_ContinueInit(TRUE);
     }
@@ -1887,7 +1889,9 @@ static void RotomPhone_SmallStartMenu_RotomShutdownPreparation(u8 taskId)
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_GOODBYE;
     tRotomUpdateTimer = FALSE;
     RotomPhone_SmallStartMenu_CheckUpdateMessage(taskId);
-    gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId].callback = SpriteCB_RotomPhoneSmall_RotomFace_Unload;
+    struct Sprite *sprite = &gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId];
+    sprite->callback = SpriteCB_RotomPhoneSmall_RotomFace_Unload;
+    sFrameNumCB = 0x80;
 }
 
 static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId)
