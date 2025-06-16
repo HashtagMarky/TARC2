@@ -328,13 +328,19 @@ struct RotomSpriteFadeColors
 enum IconRotomFacePaletteIndex
 {
     PAL_ROTOM_FACE = 6,
+    PAL_ROTOM_ARC = 8,
 };
 
 static const struct RotomSpriteFadeColors sFadeColoursSmall[] = {
     [PAL_ROTOM_FACE] =
     {
-        .colourFrom = RGB2GBA(178, 174, 203),
-        .colourTo = RGB2GBA(255, 255, 96),
+        .colourFrom = RGB2GBA(72, 72, 72),
+        .colourTo = RGB2GBA(178, 174, 203),
+    },
+    [PAL_ROTOM_ARC] =
+    {
+        .colourFrom = RGB2GBA(72, 72, 72),
+        .colourTo = RGB2GBA(216, 208, 224),
     }
 };
 
@@ -612,6 +618,32 @@ static const union AnimCmd *const sSmallIconAnims[ROTOM_PHONE_MENU_COUNT * 2] = 
     sAnimCmdOptions_Selected,
 };
 
+#define sFrameNumCB sprite->data[0]
+static void SpriteCB_RotomPhoneSmall_RotomFace_Load(struct Sprite* sprite)
+{
+    if (sFrameNumCB == 0x80)
+    {
+        sprite->callback = SpriteCallbackDummy;
+        RotomPhone_SmallStartMenu_ContinueInit(TRUE);
+    }
+
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_FACE, sFrameNumCB);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_ARC, sFrameNumCB);
+    sFrameNumCB += 2;
+}
+
+static void SpriteCB_RotomPhoneSmall_RotomFace_Unload(struct Sprite* sprite)
+{
+    if (sFrameNumCB == 0xFF)
+    {
+        sprite->callback = SpriteCallbackDummy;
+    }
+
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_FACE, sFrameNumCB);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_ARC, sFrameNumCB);
+    sFrameNumCB += 2;
+}
+
 static const struct SpriteTemplate sSpriteTemplate_RotomSmallIcon = {
     .tileTag = TAG_ICON_GFX,
     .paletteTag = TAG_ICON_PAL,
@@ -881,7 +913,6 @@ static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit)
     u8 taskId = FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_PhoneSlideOpen);
 
     RotomPhone_SmallStartMenu_CreateAllSprites();
-    RotomPhone_SmallStartMenu_CreateRotomFaceSprite();
     RotomPhone_SmallStartMenu_CreateSpeechWindows();
     RotomPhone_SmallStartMenu_CreateFlipPhoneWindow();
     ScheduleBgCopyTilemapToVram(0);
@@ -920,7 +951,7 @@ static void RotomPhone_SmallStartMenu_LoadSprites(void)
 
 static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(void)
 {
-    if (!FlagGet(FLAG_SYS_POKEDEX_GET))
+    if (!FlagGet(FLAG_SYS_POKEDEX_GET) || sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId != SPRITE_NONE)
         return;
 
     bool32 flash = FALSE;
@@ -942,6 +973,7 @@ static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(void)
         y,
         0
     );
+    gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId].callback = SpriteCB_RotomPhoneSmall_RotomFace_Load;
 
     if (flash)
     {
@@ -1747,7 +1779,10 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideOpen(u8 taskId)
     else
     {
         ReleaseComfyAnim(tPhoneComfyAnimId);
-        RotomPhone_SmallStartMenu_ContinueInit(TRUE);
+        if (FlagGet(FLAG_SYS_POKEDEX_GET))
+            RotomPhone_SmallStartMenu_CreateRotomFaceSprite();
+        else
+            RotomPhone_SmallStartMenu_ContinueInit(TRUE);
     }
 }
 
