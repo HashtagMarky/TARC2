@@ -79,8 +79,8 @@
 #define ROTOM_PHONE_MESSAGE_SHUTDOWN_TIME   60
 #define ROTOM_PHONE_UPDATE_MESSAGE          TRUE
 #define ROTOM_PHONE_UPDATE_MESSAGE_SOUND    TRUE
-#define PHONE_OFFSCREEN_Y (FlagGet(FLAG_SYS_POKEDEX_GET) ? 98 : 96)
-#define FLIP_PHONE_SLIDE_DURATION 30
+#define PHONE_OFFSCREEN_Y                   (FlagGet(FLAG_SYS_POKEDEX_GET) ? 98 : 96)
+#define PHONE_SLIDE_DURATION                30
 
 
 static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit);
@@ -1720,7 +1720,7 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideOpen(u8 taskId)
     {
         struct ComfyAnimEasingConfig config;
         InitComfyAnimConfig_Easing(&config);
-        config.durationFrames = FLIP_PHONE_SLIDE_DURATION;
+        config.durationFrames = PHONE_SLIDE_DURATION;
         config.from = Q_24_8(PHONE_OFFSCREEN_Y);
         config.to = Q_24_8(0);
         config.easingFunc = ComfyAnimEasing_EaseOutQuad;
@@ -1729,7 +1729,7 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideOpen(u8 taskId)
 
         tPhoneY = ReadComfyAnimValueSmooth(&gComfyAnims[tPhoneComfyAnimId]);
     }
-    else if (GetEasingComfyAnim_CurrentFrame(&gComfyAnims[tPhoneComfyAnimId]) == FLIP_PHONE_SLIDE_DURATION / 2
+    else if (GetEasingComfyAnim_CurrentFrame(&gComfyAnims[tPhoneComfyAnimId]) == PHONE_SLIDE_DURATION / 2
         && !FlagGet(FLAG_SYS_POKEDEX_GET))
     {
         DecompressDataWithHeaderWram(sFlipPhoneOpenTilemap, GetBgTilemapBuffer(0));
@@ -1754,7 +1754,7 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideClose(u8 taskId)
     {
         struct ComfyAnimEasingConfig config;
         InitComfyAnimConfig_Easing(&config);
-        config.durationFrames = FLIP_PHONE_SLIDE_DURATION;
+        config.durationFrames = PHONE_SLIDE_DURATION;
         config.from = Q_24_8(0);
         config.to = Q_24_8(PHONE_OFFSCREEN_Y);
         config.easingFunc = ComfyAnimEasing_EaseOutQuad;
