@@ -232,9 +232,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     {
         // ShowStartMenu();
         ResetDexNavSearch();
-        if (FlagGet(FLAG_SYS_POKEDEX_GET))
-            PlaySE(PMD_EVENT_SIGN_NOTICE_01);
-        else
+        if (!FlagGet(FLAG_SYS_POKEDEX_GET))
             PlaySE(SE_BALL_TRAY_ENTER);
         RotomPhone_SmallStartMenu_Init(TRUE);
         return TRUE;

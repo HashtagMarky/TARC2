@@ -975,7 +975,10 @@ static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(bool32 rotomLoad)
         0
     );
     if (rotomLoad)
+    {
+        PlaySE(PMD_EVENT_SIGN_HATENA_03);
         gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId].callback = SpriteCB_RotomPhoneSmall_RotomFace_Load;
+    }
 
     if (flash)
     {
@@ -1133,7 +1136,7 @@ static void RotomPhone_SmallStartMenu_PrintRotomSpeech(u8 textBuffer[80], bool32
 
 static void RotomPhone_SmallStartMenu_PrintGreeting(void)
 {
-    if (FlagGet(!FLAG_SYS_POKEDEX_GET))
+    if (!FlagGet(FLAG_SYS_POKEDEX_GET))
         return;
     
     u8 textBuffer[80];
@@ -1185,6 +1188,7 @@ static void RotomPhone_SmallStartMenu_PrintGreeting(void)
         StringAppend(textBuffer, COMPOUND_STRING("?"));
 
     RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
+    PlaySE(PMD_EVENT_SIGN_NOTICE_01);
 }
 
 static enum RotomPhoneMessages RotomPhone_SmallStartMenu_GetRandomMessage(void)
