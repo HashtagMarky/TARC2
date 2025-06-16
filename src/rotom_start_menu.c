@@ -1574,24 +1574,24 @@ static void RotomPhone_SmallStartMenu_DestroySprites(void)
     if (sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId != SPRITE_NONE)
     {
         FreeSpriteOamMatrix(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId]);
-        DestroySpriteAndFreeResources(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId]);
+        DestroySprite(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId]);
     }
     if (sRotomPhone_SmallStartMenu->menuSmallRotomFaceFlashSpriteId != SPRITE_NONE)
     {
         FreeSpriteOamMatrix(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceFlashSpriteId]);
-        DestroySpriteAndFreeResources(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceFlashSpriteId]);
+        DestroySprite(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceFlashSpriteId]);
     }
     for (enum RotomPhoneSmallOptions spriteId = ROTOM_PHONE_SMALL_OPTION_1; spriteId < ROTOM_PHONE_SMALL_OPTION_COUNT; spriteId++)
     {
         if (sRotomPhone_SmallStartMenu->menuSmallSpriteId[spriteId] != SPRITE_NONE)
         {
             FreeSpriteOamMatrix(&gSprites[sRotomPhone_SmallStartMenu->menuSmallSpriteId[spriteId]]);
-            DestroySpriteAndFreeResources(&gSprites[sRotomPhone_SmallStartMenu->menuSmallSpriteId[spriteId]]);
+            DestroySprite(&gSprites[sRotomPhone_SmallStartMenu->menuSmallSpriteId[spriteId]]);
         }
         if (sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[spriteId] != SPRITE_NONE)
         {
             FreeSpriteOamMatrix(&gSprites[sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[spriteId]]);
-            DestroySpriteAndFreeResources(&gSprites[sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[spriteId]]);
+            DestroySprite(&gSprites[sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[spriteId]]);
         }
     }
 }
