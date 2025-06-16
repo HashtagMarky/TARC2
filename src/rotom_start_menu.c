@@ -634,7 +634,7 @@ static void SpriteCB_RotomPhoneSmall_RotomFace_Load(struct Sprite* sprite)
 
 static void SpriteCB_RotomPhoneSmall_RotomFace_Unload(struct Sprite* sprite)
 {
-    if (sFrameNumCB == 0xFF)
+    if (sFrameNumCB == 256)
     {
         sprite->callback = SpriteCallbackDummy;
     }
@@ -1887,12 +1887,16 @@ static void RotomPhone_SmallStartMenu_RotomShutdownPreparation(u8 taskId)
     tRotomUpdateTimer = FALSE;
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_GOODBYE;
     RotomPhone_SmallStartMenu_CheckUpdateMessage(taskId);
+    gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId].callback = SpriteCB_RotomPhoneSmall_RotomFace_Unload;
 }
 
 static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId)
 {
-    tRotomUpdateTimer++;
-    if (tRotomUpdateTimer == ROTOM_PHONE_MESSAGE_UPDATE_TIMER + ROTOM_PHONE_MESSAGE_SHUTDOWN_TIME)
+    if (tRotomUpdateTimer != ROTOM_PHONE_MESSAGE_UPDATE_TIMER + ROTOM_PHONE_MESSAGE_SHUTDOWN_TIME)
+        tRotomUpdateTimer++;
+    
+    if (tRotomUpdateTimer == ROTOM_PHONE_MESSAGE_UPDATE_TIMER + ROTOM_PHONE_MESSAGE_SHUTDOWN_TIME
+        && gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId].callback == SpriteCallbackDummy)
     {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_PhoneSlideClose;
