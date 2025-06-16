@@ -1884,19 +1884,15 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
 static void RotomPhone_SmallStartMenu_RotomShutdownPreparation(u8 taskId)
 {
     PlaySE(PMD_EVENT_MOTION_HARAHERI);
-    tRotomUpdateTimer = FALSE;
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_GOODBYE;
+    tRotomUpdateTimer = FALSE;
     RotomPhone_SmallStartMenu_CheckUpdateMessage(taskId);
     gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId].callback = SpriteCB_RotomPhoneSmall_RotomFace_Unload;
 }
 
 static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId)
 {
-    if (tRotomUpdateTimer != ROTOM_PHONE_MESSAGE_UPDATE_TIMER + ROTOM_PHONE_MESSAGE_SHUTDOWN_TIME)
-        tRotomUpdateTimer++;
-    
-    if (tRotomUpdateTimer == ROTOM_PHONE_MESSAGE_UPDATE_TIMER + ROTOM_PHONE_MESSAGE_SHUTDOWN_TIME
-        && gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId].callback == SpriteCallbackDummy)
+    if (gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId].callback == SpriteCallbackDummy)
     {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_PhoneSlideClose;
