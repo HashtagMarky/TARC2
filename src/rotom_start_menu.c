@@ -889,7 +889,11 @@ static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit)
     if (!sRotomPhoneOptions[menuSelectedSmall].unlockedFunc || !sRotomPhoneOptions[menuSelectedSmall].unlockedFunc())
         menuSelectedSmall = RotomPhone_SetFirstSelectedMenu();
 
-    gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_HandleMainInput;
+    if (firstInit)
+        gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_HandleMainInput;
+    else
+        taskId = CreateTask(Task_RotomPhone_SmallStartMenu_HandleMainInput, 0);
+
     tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER / ROTOM_PHONE_NUM_MINUTES_TO_UPDATE;
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
 
