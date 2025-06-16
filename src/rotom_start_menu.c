@@ -415,7 +415,7 @@ static const struct WindowTemplate sWindowTemplate_RotomSpeech_Top = {
   .width = ROTOM_SPEECH_WINDOW_WIDTH,
   .height = ROTOM_SPEECH_WINDOW_HEIGHT, 
   .paletteNum = 14,
-  .baseBlock = 0x50
+  .baseBlock = 0xFF
 };
 
 static const struct WindowTemplate sWindowTemplate_RotomSpeech_Bottom = {
@@ -425,7 +425,7 @@ static const struct WindowTemplate sWindowTemplate_RotomSpeech_Bottom = {
     .width = ROTOM_SPEECH_WINDOW_WIDTH, 
     .height = ROTOM_SPEECH_WINDOW_HEIGHT, 
     .paletteNum = 14,
-    .baseBlock = 0x50 + (ROTOM_SPEECH_WINDOW_WIDTH*ROTOM_SPEECH_WINDOW_WIDTH)
+    .baseBlock = 0xFF + (ROTOM_SPEECH_WINDOW_WIDTH*ROTOM_SPEECH_WINDOW_WIDTH)
 };
 
 static const struct WindowTemplate sWindowTemplate_FlipPhone = {
@@ -435,7 +435,7 @@ static const struct WindowTemplate sWindowTemplate_FlipPhone = {
     .width = 7,
     .height = 2,
     .paletteNum = 14,
-    .baseBlock = 0x50
+    .baseBlock = 0xFF
 };
 
 static const struct SpritePalette sSpritePal_Icon[] =
@@ -801,12 +801,12 @@ static const u8 sWeatherActions[WEATHER_COUNT][24] =
     [WEATHER_UNDERWATER_BUBBLES] = _("dark"),
 };
 
-#define FLIP_PHONE_BG_COLOUR       7
-#define FLIP_PHONE_TEXT_FG_COLOUR  3
-#define FLIP_PHONE_TEXT_BG_COLOUR  6
-#define ROTOM_PHONE_BG_COLOUR       8
-#define ROTOM_PHONE_TEXT_FG_COLOUR  3
-#define ROTOM_PHONE_TEXT_BG_COLOUR  6
+#define FLIP_PHONE_BG_COLOUR       12
+#define FLIP_PHONE_TEXT_FG_COLOUR  4
+#define FLIP_PHONE_TEXT_BG_COLOUR  9
+#define ROTOM_PHONE_BG_COLOUR       14
+#define ROTOM_PHONE_TEXT_FG_COLOUR  4
+#define ROTOM_PHONE_TEXT_BG_COLOUR  9
 enum FontColor
 {
     FONT_BLACK,
