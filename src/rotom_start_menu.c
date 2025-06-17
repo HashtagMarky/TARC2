@@ -3209,3 +3209,4 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 #undef tRotomPanelLastY
 #undef tPhoneY
 #undef tPhoneCloseToSave
+#undef sFrameNumCB
