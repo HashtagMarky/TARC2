@@ -327,21 +327,40 @@ struct RotomSpriteFadeColors
 
 enum IconRotomFacePaletteIndex
 {
-    PAL_ROTOM_FACE = 6,
-    PAL_ROTOM_ARC = 8,
+    PAL_ROTOM_OUTLINE = 11,
+    PAL_ROTOM_EYE_WHITE,
+    PAL_ROTOM_EYE_TOP,
+    PAL_ROTOM_EYE_BOTTOM,
+    PAL_ROTOM_ARC,
 };
 
-static const struct RotomSpriteFadeColors sFadeColoursSmall[] = {
-    [PAL_ROTOM_FACE] =
+static const struct RotomSpriteFadeColors sFadeColoursSmall[] =
+{
+    [PAL_ROTOM_OUTLINE] =
     {
         .colourFrom = RGB2GBA(72, 72, 72),
-        .colourTo = RGB2GBA(178, 174, 203),
+        .colourTo = RGB2GBA(36, 36, 36),
+    },
+    [PAL_ROTOM_EYE_WHITE] =
+    {
+        .colourFrom = RGB2GBA(72, 72, 72),
+        .colourTo = RGB2GBA(245, 245, 245),
+    },
+    [PAL_ROTOM_EYE_TOP] =
+    {
+        .colourFrom = RGB2GBA(72, 72, 72),
+        .colourTo = RGB2GBA(43, 111, 198),
+    },
+    [PAL_ROTOM_EYE_BOTTOM] =
+    {
+        .colourFrom = RGB2GBA(72, 72, 72),
+        .colourTo = RGB2GBA(76, 174, 217),
     },
     [PAL_ROTOM_ARC] =
     {
         .colourFrom = RGB2GBA(72, 72, 72),
-        .colourTo = RGB2GBA(216, 208, 224),
-    }
+        .colourTo = RGB2GBA(178, 231, 255),
+    },
 };
 
 static u8 UpdateRotomSpriteFadeColours(struct Sprite* sprite, u8 index, u8 frameNum)
@@ -397,8 +416,8 @@ static const u32 sRotomPhoneFace[] = INCBIN_U32("graphics/rotom_start_menu/rotom
 //--SPRITE-GFX--
 #define TAG_ICON_GFX 1234
 #define TAG_ICON_PAL 0x4654 | BLEND_IMMUNE_FLAG
-#define ICON_COORD_X 184
-#define ICON_COORD_Y 50
+#define ICON_COORD_X 190
+#define ICON_COORD_Y 58
 
 static const u32 sIconsSmallGfx[] = INCBIN_U32("graphics/rotom_start_menu/icons.4bpp.smol");
 static const u16 sIconsRotomFacePal[] = INCBIN_U16("graphics/rotom_start_menu/icons.gbapal");
@@ -446,7 +465,7 @@ static const struct SpritePalette sSpritePal_Icon[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_IconsSmall[] = 
 {
-    {sIconsSmallGfx, 16*352/2 , TAG_ICON_GFX},
+    {sIconsSmallGfx, 32*352/2 , TAG_ICON_GFX},
     {NULL},
 };
 
@@ -456,18 +475,10 @@ static const struct CompressedSpriteSheet sSpriteSheet_RotomFace[] =
     {NULL},
 };
 
-static const struct OamData gOamIcon = {
-    .y = 0,
-    .affineMode = ST_OAM_AFFINE_DOUBLE,
-    .objMode = 0,
-    .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(16x16),
-    .x = 0,
-    .matrixNum = 0,
-    .size = SPRITE_SIZE(16x16),
-    .tileNum = 0,
+static const struct OamData gRotomIcons_Oam = {
+    .size = SPRITE_SIZE(32x32),
+    .shape = SPRITE_SHAPE(32x32),
     .priority = 0,
-    .paletteNum = 0,
 };
 
 static const struct OamData sRotomFace_Oam = {
@@ -476,146 +487,75 @@ static const struct OamData sRotomFace_Oam = {
     .priority = 0,
 };
 
-static const union AnimCmd sAnimCmdPoketch_NotSelected[] = {
-    ANIMCMD_FRAME(28, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnimCmdPoketch_Selected[] = {
+static const union AnimCmd sAnimCmd_RotomPhone_Blank[] = {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd sAnimCmdPokedex_NotSelected[] = {
-    ANIMCMD_FRAME(32, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnimCmdPokedex_Selected[] = {
-    ANIMCMD_FRAME(4, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnimCmdParty_NotSelected[] = {
-    ANIMCMD_FRAME(36, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnimCmdParty_Selected[] = {
-    ANIMCMD_FRAME(8, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnimCmdBag_NotSelected[] = {
-    ANIMCMD_FRAME(40, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnimCmdBag_Selected[] = {
-    ANIMCMD_FRAME(12, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnimCmdTrainerCard_NotSelected[] = {
-    ANIMCMD_FRAME(44, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnimCmdTrainerCard_Selected[] = {
+static const union AnimCmd sAnimCmd_RotomPhone_FullScreen[] = {
     ANIMCMD_FRAME(16, 0),
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd sAnimCmdSave_NotSelected[] = {
+static const union AnimCmd sAnimCmd_RotomPhone_Flag[] = {
+    ANIMCMD_FRAME(32, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnimCmd_RotomPhone_Clock[] = {
     ANIMCMD_FRAME(48, 0),
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd sAnimCmdSave_Selected[] = {
-    ANIMCMD_FRAME(20, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd *const gIconSaveAnim[] = {
-};
-
-static const union AnimCmd sAnimCmdOptions_NotSelected[] = {
-    ANIMCMD_FRAME(52, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnimCmdOptions_Selected[] = {
-    ANIMCMD_FRAME(24, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnimCmdFlag_NotSelected[] = {
-    ANIMCMD_FRAME(60, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnimCmdFlag_Selected[] = {
-    ANIMCMD_FRAME(56, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnimCmdFullScreen_NotSelected[] = {
-    ANIMCMD_FRAME(68, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnimCmdFullScreen_Selected[] = {
+static const union AnimCmd sAnimCmd_RotomPhone_Pokedex[] = {
     ANIMCMD_FRAME(64, 0),
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd sAnimCmdDexNav_NotSelected[] = {
-    ANIMCMD_FRAME(76, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnimCmdDexNav_Selected[] = {
-    ANIMCMD_FRAME(72, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnimCmdClock_NotSelected[] = {
-    ANIMCMD_FRAME(84, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnimCmdClock_Selected[] = {
+static const union AnimCmd sAnimCmd_RotomPhone_Party[] = {
     ANIMCMD_FRAME(80, 0),
     ANIMCMD_JUMP(0),
 };
 
+static const union AnimCmd sAnimCmd_RotomPhone_DexNav[] = {
+    ANIMCMD_FRAME(96, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnimCmd_RotomPhone_Bag[] = {
+    ANIMCMD_FRAME(112, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnimCmd_RotomPhone_PokeNav[] = {
+    ANIMCMD_FRAME(128, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnimCmd_RotomPhone_Save[] = {
+    ANIMCMD_FRAME(144, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnimCmd_RotomPhone_Options[] = {
+    ANIMCMD_FRAME(160, 0),
+    ANIMCMD_JUMP(0),
+};
+
 static const union AnimCmd *const sSmallIconAnims[ROTOM_PHONE_MENU_COUNT * 2] = {
-    sAnimCmdFullScreen_NotSelected,
-    sAnimCmdFullScreen_Selected,
-    sAnimCmdFlag_NotSelected,
-    sAnimCmdFlag_Selected,
-    sAnimCmdFullScreen_NotSelected, // Shortcut
-    sAnimCmdFullScreen_Selected,
-    sAnimCmdClock_NotSelected,
-    sAnimCmdClock_Selected,
-    sAnimCmdPokedex_NotSelected,
-    sAnimCmdPokedex_Selected,
-    sAnimCmdParty_NotSelected,
-    sAnimCmdParty_Selected,
-    sAnimCmdFullScreen_NotSelected, // Daycare
-    sAnimCmdFullScreen_Selected,
-    sAnimCmdDexNav_NotSelected,
-    sAnimCmdDexNav_Selected,
-    sAnimCmdBag_NotSelected,
-    sAnimCmdBag_Selected,
-    sAnimCmdPoketch_NotSelected,
-    sAnimCmdPoketch_Selected,
-    sAnimCmdTrainerCard_NotSelected,
-    sAnimCmdTrainerCard_Selected,
-    sAnimCmdSave_NotSelected,
-    sAnimCmdSave_Selected,
-    sAnimCmdOptions_NotSelected,
-    sAnimCmdOptions_Selected,
+    sAnimCmd_RotomPhone_FullScreen,
+    sAnimCmd_RotomPhone_Flag,
+    sAnimCmd_RotomPhone_Blank,          // ROTOM_PHONE_MENU_SHORTCUT
+    sAnimCmd_RotomPhone_Clock,
+    sAnimCmd_RotomPhone_Pokedex,
+    sAnimCmd_RotomPhone_Party,
+    sAnimCmd_RotomPhone_Blank,          // ROTOM_PHONE_MENU_DAYCARE
+    sAnimCmd_RotomPhone_DexNav,
+    sAnimCmd_RotomPhone_Bag,
+    sAnimCmd_RotomPhone_PokeNav,
+    sAnimCmd_RotomPhone_Blank,          // ROTOM_PHONE_MENU_TRAINER_CARD
+    sAnimCmd_RotomPhone_Save,
+    sAnimCmd_RotomPhone_Options,
 };
 
 #define sFrameNumCB sprite->data[0]
@@ -627,8 +567,11 @@ static void SpriteCB_RotomPhoneSmall_RotomFace_Load(struct Sprite* sprite)
         RotomPhone_SmallStartMenu_ContinueInit(TRUE);
     }
 
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_FACE, sFrameNumCB);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_OUTLINE, sFrameNumCB);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_WHITE, sFrameNumCB);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_TOP, sFrameNumCB);
     UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_ARC, sFrameNumCB);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_BOTTOM, sFrameNumCB);
     sFrameNumCB += 2;
 }
 
@@ -639,15 +582,18 @@ static void SpriteCB_RotomPhoneSmall_RotomFace_Unload(struct Sprite* sprite)
         sprite->callback = SpriteCallbackDummy;
     }
 
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_FACE, sFrameNumCB);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_OUTLINE, sFrameNumCB);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_WHITE, sFrameNumCB);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_TOP, sFrameNumCB);
     UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_ARC, sFrameNumCB);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_BOTTOM, sFrameNumCB);
     sFrameNumCB += 2;
 }
 
 static const struct SpriteTemplate sSpriteTemplate_RotomSmallIcon = {
     .tileTag = TAG_ICON_GFX,
     .paletteTag = TAG_ICON_PAL,
-    .oam = &gOamIcon,
+    .oam = &gRotomIcons_Oam,
     .anims = sSmallIconAnims,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -996,6 +942,8 @@ static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menu
     bool32 flash = FALSE;
     s32 x = ICON_COORD_X;
     s32 y = ICON_COORD_Y;
+    s32 xAdd = 24;
+    s32 yAdd = 22;
     u32 iconRow;
     u32 iconColumn;
     u32 animNum;
@@ -1003,11 +951,12 @@ static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menu
         animNum = menuItem;
     else
         animNum = RotomPhone_StartMenu_GetShortcutOption();
-    
-    animNum *= 2;
 
     if (!FlagGet(FLAG_SYS_POKEDEX_GET))
-        y += 19;
+    {
+        y += 24;
+        yAdd = 25;
+    }
 
     iconColumn = spriteId % 2;
     iconRow = spriteId / 2;
@@ -1023,8 +972,8 @@ static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menu
 
     sRotomPhone_SmallStartMenu->menuSmallSpriteId[spriteId] = CreateSprite(
         &sSpriteTemplate_RotomSmallIcon,
-        x + (iconColumn * 24),
-        y + (iconRow * 24),
+        x + (iconColumn * xAdd),
+        y + (iconRow * yAdd),
         0
     );
     StartSpriteAnim(&gSprites[sRotomPhone_SmallStartMenu->menuSmallSpriteId[spriteId]], animNum);
@@ -1033,8 +982,8 @@ static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menu
     {
         sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[spriteId] = CreateSprite(
             &sSpriteTemplate_RotomSmallIcon,
-            x + (iconColumn * 24),
-            y + (iconRow * 24),
+            x + (iconColumn * xAdd),
+            y + (iconRow * yAdd),
             0
         );
         gSprites[sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[spriteId]].oam.objMode = ST_OAM_OBJ_WINDOW;
