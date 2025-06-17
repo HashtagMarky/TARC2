@@ -365,40 +365,37 @@ static const struct RotomSpriteFadeColors sFadeColoursSmall[] =
 
 static u8 UpdateRotomSpriteFadeColours(struct Sprite* sprite, u8 index, u8 frameNum)
 {
-    if ((frameNum % 4) == 0) // Change colour every 4th frame
+    s32 intensity = (((Cos(frameNum, 128) + 128) * 10) / 250);
+    s32 r;
+    s32 g;
+    s32 b;
+    u16 colour;
+
+    if (intensity == 0)
     {
-        s32 intensity = (((Cos(frameNum, 128) + 128) * 10) / 250);
-        s32 r;
-        s32 g;
-        s32 b;
-        u16 colour;
-
-        if (intensity == 0)
-        {
-            colour = sFadeColoursSmall[index].colourTo;
-        }
-        else
-        {
-            if (GET_R(sFadeColoursSmall[index].colourFrom) <= GET_R(sFadeColoursSmall[index].colourTo))
-                r = (GET_R(sFadeColoursSmall[index].colourTo) - (((GET_R(sFadeColoursSmall[index].colourTo) - GET_R(sFadeColoursSmall[index].colourFrom)) * intensity) / 10));
-            else
-                r = (GET_R(sFadeColoursSmall[index].colourTo) + (((GET_R(sFadeColoursSmall[index].colourFrom) - GET_R(sFadeColoursSmall[index].colourTo)) * intensity) / 10));
-
-            if (GET_G(sFadeColoursSmall[index].colourFrom) <= GET_G(sFadeColoursSmall[index].colourTo))
-                g = (GET_G(sFadeColoursSmall[index].colourTo) - (((GET_G(sFadeColoursSmall[index].colourTo) - GET_G(sFadeColoursSmall[index].colourFrom)) * intensity) / 10));
-            else
-                g = (GET_G(sFadeColoursSmall[index].colourTo) + (((GET_G(sFadeColoursSmall[index].colourFrom) - GET_G(sFadeColoursSmall[index].colourTo)) * intensity) / 10));
-
-            if (GET_B(sFadeColoursSmall[index].colourFrom) <= GET_B(sFadeColoursSmall[index].colourTo))
-                b = (GET_B(sFadeColoursSmall[index].colourTo) - (((GET_B(sFadeColoursSmall[index].colourTo) - GET_B(sFadeColoursSmall[index].colourFrom)) * intensity) / 10));
-            else
-                b = (GET_B(sFadeColoursSmall[index].colourTo) + (((GET_B(sFadeColoursSmall[index].colourFrom) - GET_B(sFadeColoursSmall[index].colourTo)) * intensity) / 10));
-
-            colour = RGB(r, g, b);
-        }
-        
-        LoadPalette(&colour, OBJ_PLTT_ID(IndexOfSpritePaletteTag(sprite->template->paletteTag)) + index, sizeof(colour));
+        colour = sFadeColoursSmall[index].colourTo;
     }
+    else
+    {
+        if (GET_R(sFadeColoursSmall[index].colourFrom) <= GET_R(sFadeColoursSmall[index].colourTo))
+            r = (GET_R(sFadeColoursSmall[index].colourTo) - (((GET_R(sFadeColoursSmall[index].colourTo) - GET_R(sFadeColoursSmall[index].colourFrom)) * intensity) / 10));
+        else
+            r = (GET_R(sFadeColoursSmall[index].colourTo) + (((GET_R(sFadeColoursSmall[index].colourFrom) - GET_R(sFadeColoursSmall[index].colourTo)) * intensity) / 10));
+
+        if (GET_G(sFadeColoursSmall[index].colourFrom) <= GET_G(sFadeColoursSmall[index].colourTo))
+            g = (GET_G(sFadeColoursSmall[index].colourTo) - (((GET_G(sFadeColoursSmall[index].colourTo) - GET_G(sFadeColoursSmall[index].colourFrom)) * intensity) / 10));
+        else
+            g = (GET_G(sFadeColoursSmall[index].colourTo) + (((GET_G(sFadeColoursSmall[index].colourFrom) - GET_G(sFadeColoursSmall[index].colourTo)) * intensity) / 10));
+
+        if (GET_B(sFadeColoursSmall[index].colourFrom) <= GET_B(sFadeColoursSmall[index].colourTo))
+            b = (GET_B(sFadeColoursSmall[index].colourTo) - (((GET_B(sFadeColoursSmall[index].colourTo) - GET_B(sFadeColoursSmall[index].colourFrom)) * intensity) / 10));
+        else
+            b = (GET_B(sFadeColoursSmall[index].colourTo) + (((GET_B(sFadeColoursSmall[index].colourFrom) - GET_B(sFadeColoursSmall[index].colourTo)) * intensity) / 10));
+
+        colour = RGB(r, g, b);
+    }
+    
+    LoadPalette(&colour, OBJ_PLTT_ID(IndexOfSpritePaletteTag(sprite->template->paletteTag)) + index, sizeof(colour));
 
     return frameNum != 0xFF ? ++frameNum : 0;
 }
