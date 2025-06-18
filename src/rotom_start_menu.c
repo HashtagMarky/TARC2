@@ -81,6 +81,7 @@
 #define ROTOM_PHONE_UPDATE_MESSAGE_SOUND    TRUE
 #define PHONE_OFFSCREEN_Y                   (FlagGet(FLAG_SYS_POKEDEX_GET) ? 98 : 96)
 #define PHONE_SLIDE_DURATION                30
+#define ROTOM_FACE_UPDATE_PERCENT           100
 
 
 static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit);
@@ -210,11 +211,21 @@ enum RotomPhoneSmallOptions
     ROTOM_PHONE_SMALL_OPTION_COUNT,
 };
 
-enum RotomPhoneSpriteAnims
+enum RotomPhoneFaceExpressions
 {
-    SPRITE_INACTIVE,
-    SPRITE_ACTIVE,
+    ROTOM_FACE_HAPPY_UP,
+    ROTOM_FACE_SHOCKED_UP,
+    ROTOM_FACE_HAPPY,
+    ROTOM_FACE_SHOCKED,
+    ROTOM_FACE_DAZED,
+    ROTOM_FACE_AWE,
+    ROTOM_FACE_SHEEPISH,
+    ROTOM_FACE_CONFUSED,
+    ROTOM_FACE_HAPPY_WITH,
+    ROTOM_FACE_SHOCKED_WITH,
+    ROTOM_FACE_COUNT,
 };
+#define ROTOM_FACE_LOOK_UP_ANIMS 2
 
 enum RotomPhoneMessages
 {
@@ -468,7 +479,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_IconsSmall[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_RotomFace[] = 
 {
-    {sRotomPhoneFace, 64*64/2 , TAG_ICON_GFX + 1},
+    {sRotomPhoneFace, 64*768/2 , TAG_ICON_GFX + 1},
     {NULL},
 };
 
@@ -539,7 +550,7 @@ static const union AnimCmd sAnimCmd_RotomPhone_Options[] = {
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const sSmallIconAnims[ROTOM_PHONE_MENU_COUNT * 2] = {
+static const union AnimCmd *const sSmallIconAnims[ROTOM_PHONE_MENU_COUNT] = {
     sAnimCmd_RotomPhone_FullScreen,
     sAnimCmd_RotomPhone_Flag,
     sAnimCmd_RotomPhone_Blank,          // ROTOM_PHONE_MENU_SHORTCUT
@@ -553,6 +564,69 @@ static const union AnimCmd *const sSmallIconAnims[ROTOM_PHONE_MENU_COUNT * 2] = 
     sAnimCmd_RotomPhone_Blank,          // ROTOM_PHONE_MENU_TRAINER_CARD
     sAnimCmd_RotomPhone_Save,
     sAnimCmd_RotomPhone_Options,
+};
+
+static const union AnimCmd sAnimCmd_RotomFace_Happy[] = {
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnimCmd_RotomFace_Shocked[] = {
+    ANIMCMD_FRAME(64, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnimCmd_RotomFace_Dazed[] = {
+    ANIMCMD_FRAME(128, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnimCmd_RotomFace_Awe[] = {
+    ANIMCMD_FRAME(192, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnimCmd_RotomFace_Sheepish[] = {
+    ANIMCMD_FRAME(256, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnimCmd_RotomFace_Confused[] = {
+    ANIMCMD_FRAME(320, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnimCmd_RotomFace_HappyWith[] = {
+    ANIMCMD_FRAME(384, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnimCmd_RotomFace_ShockedWith[] = {
+    ANIMCMD_FRAME(448, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnimCmd_RotomFace_HappyUp[] = {
+    ANIMCMD_FRAME(512, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnimCmd_RotomFace_ShockedUp[] = {
+    ANIMCMD_FRAME(576, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const sRotomFaceAnims[ROTOM_FACE_COUNT] = {
+    sAnimCmd_RotomFace_HappyUp,
+    sAnimCmd_RotomFace_ShockedUp,
+    sAnimCmd_RotomFace_Happy,
+    sAnimCmd_RotomFace_Shocked,
+    sAnimCmd_RotomFace_Dazed,
+    sAnimCmd_RotomFace_Awe,
+    sAnimCmd_RotomFace_Sheepish,
+    sAnimCmd_RotomFace_Confused,
+    sAnimCmd_RotomFace_HappyWith,
+    sAnimCmd_RotomFace_ShockedWith,
 };
 
 #define sFrameNumCB sprite->data[0]
@@ -602,7 +676,7 @@ static const struct SpriteTemplate sSpriteTemplate_RotomSmallFace = {
     .paletteTag = TAG_ICON_PAL,
     .oam = &sRotomFace_Oam,
     .callback = SpriteCallbackDummy,
-    .anims = gDummySpriteAnimTable,
+    .anims = sRotomFaceAnims,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
@@ -921,6 +995,7 @@ static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(bool32 rotomLoad)
     {
         PlaySE(PMD_EVENT_SIGN_HATENA_03);
         gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId].callback = SpriteCB_RotomPhoneSmall_RotomFace_Load;
+        StartSpriteAnim(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId], ROTOM_FACE_HAPPY);
     }
 
     if (flash)
@@ -1195,6 +1270,16 @@ static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId)
         
         if (ROTOM_PHONE_UPDATE_MESSAGE_SOUND && tRotomUpdateMessage != ROTOM_PHONE_MESSAGE_GOODBYE)
             tRotomMessageSoundEffect = PMD_EVENT_SIGN_HATENA_02;
+        
+        if ((Random() % 100) < ROTOM_FACE_UPDATE_PERCENT)
+        {
+            u32 rotomFace;
+            do {
+                rotomFace = Random() % (ROTOM_FACE_COUNT - ROTOM_FACE_LOOK_UP_ANIMS);
+                rotomFace += ROTOM_FACE_LOOK_UP_ANIMS;
+            } while (rotomFace == gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId].animNum);
+            StartSpriteAnim(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId], rotomFace);
+        }
     }
 }
 
@@ -1698,6 +1783,12 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
     else
         tRotomMessageSoundEffect = SE_CLICK;
 
+    u32 rotomFace;
+    do {
+        rotomFace = Random() % ROTOM_FACE_LOOK_UP_ANIMS;
+    } while (rotomFace == gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId].animNum);
+    StartSpriteAnim(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId], rotomFace);
+
     RotomPhone_SmallStartMenu_UpdateMenuPrompt(taskId);
 }
 
@@ -1841,6 +1932,7 @@ static void RotomPhone_SmallStartMenu_RotomShutdownPreparation(u8 taskId)
     RotomPhone_SmallStartMenu_CheckUpdateMessage(taskId);
     struct Sprite *sprite = &gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId];
     sprite->callback = SpriteCB_RotomPhoneSmall_RotomFace_Unload;
+    StartSpriteAnim(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId], ROTOM_FACE_HAPPY_WITH);
     sFrameNumCB = 0x80;
 }
 
