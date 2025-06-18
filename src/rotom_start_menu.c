@@ -79,6 +79,7 @@
 #define ROTOM_PHONE_MESSAGE_SHUTDOWN_TIME   0
 #define ROTOM_PHONE_UPDATE_MESSAGE          TRUE
 #define ROTOM_PHONE_UPDATE_MESSAGE_SOUND    TRUE
+#define ROTOM_PHONE_SCROLL_PAUSES_UPDATE    TRUE
 #define PHONE_OFFSCREEN_Y                   (FlagGet(FLAG_SYS_POKEDEX_GET) ? 98 : 96)
 #define PHONE_SLIDE_DURATION                30
 #define ROTOM_FACE_UPDATE_PERCENT           100
@@ -1742,6 +1743,10 @@ static void Task_RotomPhone_HandleSave(u8 taskId)
 
 static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
 {
+    if (tRotomUpdateTimer < ROTOM_PHONE_MESSAGE_UPDATE_TIMER / ROTOM_PHONE_NUM_MINUTES_TO_UPDATE
+        && ROTOM_PHONE_SCROLL_PAUSES_UPDATE)
+        tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER / ROTOM_PHONE_NUM_MINUTES_TO_UPDATE;
+
     sRotomPhone_SmallStartMenu->spriteFlag = FALSE;
     enum RotomPhoneSmallOptions optionCurrent = ROTOM_PHONE_SMALL_OPTION_1;
     s32 offset;
