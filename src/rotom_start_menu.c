@@ -1744,6 +1744,7 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
 {
     sRotomPhone_SmallStartMenu->spriteFlag = FALSE;
     enum RotomPhoneSmallOptions optionCurrent = ROTOM_PHONE_SMALL_OPTION_1;
+    enum RotomPhoneFaceExpressions rotomFace;
     s32 offset;
     u32 nextIndex;
 
@@ -1783,7 +1784,6 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
     else
         tRotomMessageSoundEffect = SE_CLICK;
 
-    u32 rotomFace;
     do {
         rotomFace = Random() % ROTOM_FACE_LOOK_UP_ANIMS;
     } while (rotomFace == gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId].animNum);
