@@ -187,11 +187,12 @@ static const u32 sFlipPhoneClosedTilemap[] = INCBIN_U32("graphics/rotom_start_me
 static const u16 sPhoneMenuPal[] = INCBIN_U16("graphics/rotom_start_menu/phones.gbapal");
 static const u32 sRotomPhoneFace[] = INCBIN_U32("graphics/rotom_start_menu/rotom_face.4bpp.smol");
 
-//--SPRITE-GFX--
+//--GFX--
 #define TAG_ICON_GFX 1234
 #define TAG_ICON_PAL 0x4654 | BLEND_IMMUNE_FLAG
 #define ICON_COORD_X 190
 #define ICON_COORD_Y 58
+#define SMALL_PHONE_BG_NUM 14
 
 static const u32 sIconsSmallGfx[] = INCBIN_U32("graphics/rotom_start_menu/icons.4bpp.smol");
 static const u16 sIconsRotomFacePal[] = INCBIN_U16("graphics/rotom_start_menu/icons.gbapal");
@@ -445,7 +446,7 @@ static const struct WindowTemplate sWindowTemplate_RotomSpeech_Top = {
   .tilemapTop = ROTOM_SPEECH_WINDOW_TOP, 
   .width = ROTOM_SPEECH_WINDOW_WIDTH,
   .height = ROTOM_SPEECH_WINDOW_HEIGHT, 
-  .paletteNum = 14,
+  .paletteNum = SMALL_PHONE_BG_NUM,
   .baseBlock = 0xFF
 };
 
@@ -455,7 +456,7 @@ static const struct WindowTemplate sWindowTemplate_RotomSpeech_Bottom = {
     .tilemapTop = ROTOM_SPEECH_WINDOW_TOP + 2, 
     .width = ROTOM_SPEECH_WINDOW_WIDTH, 
     .height = ROTOM_SPEECH_WINDOW_HEIGHT, 
-    .paletteNum = 14,
+    .paletteNum = SMALL_PHONE_BG_NUM,
     .baseBlock = 0xFF + (ROTOM_SPEECH_WINDOW_WIDTH*ROTOM_SPEECH_WINDOW_WIDTH)
 };
 
@@ -465,7 +466,7 @@ static const struct WindowTemplate sWindowTemplate_FlipPhone = {
     .tilemapTop = 17,
     .width = 7,
     .height = 2,
-    .paletteNum = 14,
+    .paletteNum = SMALL_PHONE_BG_NUM,
     .baseBlock = 0xFF
 };
 
@@ -1126,7 +1127,7 @@ static void RotomPhone_SmallStartMenu_LoadBgGfx(bool32 firstInit)
         DecompressDataWithHeaderWram(tilemap, buf);
     }
     
-    LoadPalette(sPhoneMenuPal, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+    LoadPalette(sPhoneMenuPal, BG_PLTT_ID(SMALL_PHONE_BG_NUM), PLTT_SIZE_4BPP);
     ScheduleBgCopyTilemapToVram(0);
 }
 #define ROTOM_SPEECH_TOP_ROW_Y      1
@@ -1754,9 +1755,6 @@ static void Task_RotomPhone_HandleSave(u8 taskId)
             break;
     }
 }
-
-#define STD_WINDOW_BASE_TILE_NUM 0x214
-#define STD_WINDOW_PALETTE_NUM 14
 
 static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
 {
