@@ -91,6 +91,7 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId);
 static void RotomPhone_SmallStartMenu_RotomShutdownPreparation(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_CloseAndSave(u8 taskId);
+static void Task_RotomPhone_SmallStartMenu_CloseForSafari(u8 taskId);
 static void Task_RotomPhone_HandleSave(u8 taskId);
 
 static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(MainCallback callback);
@@ -1974,6 +1975,22 @@ static void Task_RotomPhone_SmallStartMenu_CloseAndSave(u8 taskId)
     }
 }
 
+static void Task_RotomPhone_SmallStartMenu_CloseForSafari(u8 taskId)
+{
+    if (!FuncIsActiveTask(Task_RotomPhone_SmallStartMenu_PhoneSlideClose)
+        && tPhoneCloseToSave == FALSE)
+    {
+        CreateTask(Task_RotomPhone_SmallStartMenu_PhoneSlideClose, 0);
+        tPhoneCloseToSave = TRUE;
+    }
+    else if (!FuncIsActiveTask(Task_RotomPhone_SmallStartMenu_PhoneSlideClose)
+        && tPhoneCloseToSave == TRUE)
+    {
+        DestroyTask(taskId);
+        SafariZoneRetirePrompt();
+    }
+}
+
 
 /*
  * The code in this file assumes you have read and understood everything in `sample_ui_start_here.c'. The comments here
@@ -2912,11 +2929,9 @@ static void RotomPhone_StartMenu_SelectedFunc_SafariFlag(void)
     {
         if (!gPaletteFade.active)
         {
-            RotomPhone_SmallStartMenu_ExitAndClearTilemap();
             FreezeObjectEvents();
             LockPlayerFieldControls();
-            DestroyTask(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput));
-            SafariZoneRetirePrompt();
+            gTasks[FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput)].func = Task_RotomPhone_SmallStartMenu_CloseForSafari;
         }
     }
     else
