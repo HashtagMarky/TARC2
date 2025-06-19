@@ -1066,8 +1066,12 @@ static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menu
 static void RotomPhone_SmallStartMenu_CreateAllSprites(void)
 {
     enum RotomPhoneSmallOptions drawn = ROTOM_PHONE_SMALL_OPTION_1;
+    u32 drawnCount = ROTOM_PHONE_SMALL_OPTION_COUNT;
+    if (!FlagGet(FLAG_SYS_POKEDEX_GET))
+        drawnCount -= 2;
+    
 
-    for (enum RotomPhoneMenuItems menuId = ROTOM_PHONE_MENU_FIRST_OPTION; menuId < ROTOM_PHONE_MENU_COUNT && drawn < ROTOM_PHONE_SMALL_OPTION_COUNT; menuId++)
+    for (enum RotomPhoneMenuItems menuId = ROTOM_PHONE_MENU_FIRST_OPTION; menuId < ROTOM_PHONE_MENU_COUNT && drawn < drawnCount; menuId++)
     {
         const struct RotomPhoneMenuOptions *menuOption = &sRotomPhoneOptions[menuId];
 
