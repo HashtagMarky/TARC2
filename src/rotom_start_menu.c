@@ -193,6 +193,7 @@ static const u32 sRotomPhoneFace[] = INCBIN_U32("graphics/rotom_start_menu/rotom
 #define ICON_COORD_X 190
 #define ICON_COORD_Y 58
 #define SMALL_PHONE_BG_NUM 14
+#define ROTOM_PHONE_BASE_COLOUR_INDEX 5
 
 static const u32 sIconsSmallGfx[] = INCBIN_U32("graphics/rotom_start_menu/icons.4bpp.smol");
 static const u16 sIconsRotomFacePal[] = INCBIN_U16("graphics/rotom_start_menu/icons.gbapal");
@@ -354,8 +355,8 @@ bool32 RotomPhone_StartMenu_IsFullScreen(void)
 
 struct RotomSpriteFadeColors
 {
-    u16 colourFrom;
-    u16 colourTo;
+    u16 (*colourFrom)(u8 palSlot);
+    u16 (*colourTo)(u8 palSlot);
 };
 
 enum IconRotomFacePaletteIndex
@@ -369,37 +370,50 @@ enum IconRotomFacePaletteIndex
     PAL_ROTOM_ARC,
 };
 
+static u16 RotomPhone_GetPhoneBackgroundColour(u8 palSlot)
+{
+    return gPlttBufferFaded[BG_PLTT_ID(SMALL_PHONE_BG_NUM) + ROTOM_PHONE_BASE_COLOUR_INDEX];
+}
+
+static u16 RotomPhone_GetOriginalFaceIconPaletteColour(u8 palSlot)
+{
+    return sIconsRotomFacePal[palSlot];
+}
+
 static const struct RotomSpriteFadeColors sFadeColoursSmall[] =
 {
     [PAL_ROTOM_OUTLINE] =
     {
-        .colourFrom = RGB2GBA(72, 72, 72),
-        .colourTo = RGB2GBA(36, 36, 36),
+        .colourFrom = RotomPhone_GetPhoneBackgroundColour,
+        .colourTo = RotomPhone_GetOriginalFaceIconPaletteColour,
     },
     [PAL_ROTOM_EYE_WHITE] =
     {
-        .colourFrom = RGB2GBA(72, 72, 72),
-        .colourTo = RGB2GBA(245, 245, 245),
+        .colourFrom = RotomPhone_GetPhoneBackgroundColour,
+        .colourTo = RotomPhone_GetOriginalFaceIconPaletteColour,
     },
     [PAL_ROTOM_EYE_TOP] =
     {
-        .colourFrom = RGB2GBA(72, 72, 72),
-        .colourTo = RGB2GBA(43, 111, 198),
+        .colourFrom = RotomPhone_GetPhoneBackgroundColour,
+        .colourTo = RotomPhone_GetOriginalFaceIconPaletteColour,
     },
     [PAL_ROTOM_EYE_BOTTOM] =
     {
-        .colourFrom = RGB2GBA(72, 72, 72),
-        .colourTo = RGB2GBA(76, 174, 217),
+        .colourFrom = RotomPhone_GetPhoneBackgroundColour,
+        .colourTo = RotomPhone_GetOriginalFaceIconPaletteColour,
     },
     [PAL_ROTOM_ARC] =
     {
-        .colourFrom = RGB2GBA(72, 72, 72),
-        .colourTo = RGB2GBA(178, 231, 255),
+        .colourFrom = RotomPhone_GetPhoneBackgroundColour,
+        .colourTo = RotomPhone_GetOriginalFaceIconPaletteColour,
     },
 };
 
 static u8 UpdateRotomSpriteFadeColours(struct Sprite* sprite, u8 index, u8 frameNum)
 {
+    if (!sFadeColoursSmall[index].colourTo || !sFadeColoursSmall[index].colourFrom)
+        return frameNum;
+    
     s32 intensity = (((Cos(frameNum, 128) + 128) * 10) / 250);
     s32 r;
     s32 g;
@@ -408,24 +422,24 @@ static u8 UpdateRotomSpriteFadeColours(struct Sprite* sprite, u8 index, u8 frame
 
     if (intensity == 0)
     {
-        colour = sFadeColoursSmall[index].colourTo;
+        colour = sFadeColoursSmall[index].colourTo(index);
     }
     else
     {
-        if (GET_R(sFadeColoursSmall[index].colourFrom) <= GET_R(sFadeColoursSmall[index].colourTo))
-            r = (GET_R(sFadeColoursSmall[index].colourTo) - (((GET_R(sFadeColoursSmall[index].colourTo) - GET_R(sFadeColoursSmall[index].colourFrom)) * intensity) / 10));
+        if (GET_R(sFadeColoursSmall[index].colourFrom(index)) <= GET_R(sFadeColoursSmall[index].colourTo(index)))
+            r = (GET_R(sFadeColoursSmall[index].colourTo(index)) - (((GET_R(sFadeColoursSmall[index].colourTo(index)) - GET_R(sFadeColoursSmall[index].colourFrom(index))) * intensity) / 10));
         else
-            r = (GET_R(sFadeColoursSmall[index].colourTo) + (((GET_R(sFadeColoursSmall[index].colourFrom) - GET_R(sFadeColoursSmall[index].colourTo)) * intensity) / 10));
+            r = (GET_R(sFadeColoursSmall[index].colourTo(index)) + (((GET_R(sFadeColoursSmall[index].colourFrom(index)) - GET_R(sFadeColoursSmall[index].colourTo(index))) * intensity) / 10));
 
-        if (GET_G(sFadeColoursSmall[index].colourFrom) <= GET_G(sFadeColoursSmall[index].colourTo))
-            g = (GET_G(sFadeColoursSmall[index].colourTo) - (((GET_G(sFadeColoursSmall[index].colourTo) - GET_G(sFadeColoursSmall[index].colourFrom)) * intensity) / 10));
+        if (GET_G(sFadeColoursSmall[index].colourFrom(index)) <= GET_G(sFadeColoursSmall[index].colourTo(index)))
+            g = (GET_G(sFadeColoursSmall[index].colourTo(index)) - (((GET_G(sFadeColoursSmall[index].colourTo(index)) - GET_G(sFadeColoursSmall[index].colourFrom(index))) * intensity) / 10));
         else
-            g = (GET_G(sFadeColoursSmall[index].colourTo) + (((GET_G(sFadeColoursSmall[index].colourFrom) - GET_G(sFadeColoursSmall[index].colourTo)) * intensity) / 10));
+            g = (GET_G(sFadeColoursSmall[index].colourTo(index)) + (((GET_G(sFadeColoursSmall[index].colourFrom(index)) - GET_G(sFadeColoursSmall[index].colourTo(index))) * intensity) / 10));
 
-        if (GET_B(sFadeColoursSmall[index].colourFrom) <= GET_B(sFadeColoursSmall[index].colourTo))
-            b = (GET_B(sFadeColoursSmall[index].colourTo) - (((GET_B(sFadeColoursSmall[index].colourTo) - GET_B(sFadeColoursSmall[index].colourFrom)) * intensity) / 10));
+        if (GET_B(sFadeColoursSmall[index].colourFrom(index)) <= GET_B(sFadeColoursSmall[index].colourTo(index)))
+            b = (GET_B(sFadeColoursSmall[index].colourTo(index)) - (((GET_B(sFadeColoursSmall[index].colourTo(index)) - GET_B(sFadeColoursSmall[index].colourFrom(index))) * intensity) / 10));
         else
-            b = (GET_B(sFadeColoursSmall[index].colourTo) + (((GET_B(sFadeColoursSmall[index].colourFrom) - GET_B(sFadeColoursSmall[index].colourTo)) * intensity) / 10));
+            b = (GET_B(sFadeColoursSmall[index].colourTo(index)) + (((GET_B(sFadeColoursSmall[index].colourFrom(index)) - GET_B(sFadeColoursSmall[index].colourTo(index))) * intensity) / 10));
 
         colour = RGB(r, g, b);
     }
