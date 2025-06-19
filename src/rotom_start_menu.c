@@ -376,7 +376,7 @@ static u16 RotomPhone_GetPhoneBackgroundColour(u8 palSlot)
     return gPlttBufferFaded[BG_PLTT_ID(SMALL_PHONE_BG_NUM) + ROTOM_PHONE_BASE_COLOUR_INDEX];
 }
 
-static u16 RotomPhone_GetOriginalFaceIconPaletteColour(u8 palSlot)
+static u16 RotomPhone_GetFaceIconPaletteOriginalColour(u8 palSlot)
 {
     return sIconsRotomFacePal[palSlot];
 }
@@ -386,27 +386,27 @@ static const struct RotomSpriteFadeColors sFadeColoursSmall[] =
     [PAL_ROTOM_OUTLINE] =
     {
         .colourFrom = RotomPhone_GetPhoneBackgroundColour,
-        .colourTo = RotomPhone_GetOriginalFaceIconPaletteColour,
+        .colourTo = RotomPhone_GetFaceIconPaletteOriginalColour,
     },
     [PAL_ROTOM_EYE_WHITE] =
     {
         .colourFrom = RotomPhone_GetPhoneBackgroundColour,
-        .colourTo = RotomPhone_GetOriginalFaceIconPaletteColour,
+        .colourTo = RotomPhone_GetFaceIconPaletteOriginalColour,
     },
     [PAL_ROTOM_EYE_TOP] =
     {
         .colourFrom = RotomPhone_GetPhoneBackgroundColour,
-        .colourTo = RotomPhone_GetOriginalFaceIconPaletteColour,
+        .colourTo = RotomPhone_GetFaceIconPaletteOriginalColour,
     },
     [PAL_ROTOM_EYE_BOTTOM] =
     {
         .colourFrom = RotomPhone_GetPhoneBackgroundColour,
-        .colourTo = RotomPhone_GetOriginalFaceIconPaletteColour,
+        .colourTo = RotomPhone_GetFaceIconPaletteOriginalColour,
     },
     [PAL_ROTOM_ARC] =
     {
         .colourFrom = RotomPhone_GetPhoneBackgroundColour,
-        .colourTo = RotomPhone_GetOriginalFaceIconPaletteColour,
+        .colourTo = RotomPhone_GetFaceIconPaletteOriginalColour,
     },
 };
 
