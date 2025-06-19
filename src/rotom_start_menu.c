@@ -868,6 +868,7 @@ static enum RotomPhoneMenuItems RotomPhone_SetFirstSelectedMenu(void)
 #define tPhoneY gTasks[taskId].data[5]
 #define tPhoneComfyAnimId gTasks[taskId].data[6]
 #define tPhoneCloseToSave gTasks[taskId].data[7]
+#define tPhoneHighlightTimer gTasks[taskId].data[8]
 void RotomPhone_SmallStartMenu_Init(bool32 firstInit)
 {
     u8 taskId;
@@ -966,6 +967,14 @@ static void RotomPhone_SmallStartMenu_LoadSprites(void)
     LoadSpritePalette(sSpritePal_Icon);
     index = IndexOfSpritePaletteTag(TAG_ICON_PAL);
     LoadPalette(sIconsRotomFacePal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP); 
+    if (!FlagGet(FLAG_SYS_POKEDEX_GET))
+    {
+        for (u32 i = 1; i < PAL_ICON_WHITE; i++)
+        {
+            LoadPalette(&sIconsRotomFacePal[PAL_ICON_GREY], OBJ_PLTT_ID(index) + i, sizeof(u16)); 
+        }
+    }
+    
     LoadCompressedSpriteSheet(sSpriteSheet_IconsSmall);
     LoadCompressedSpriteSheet(sSpriteSheet_RotomFace);
 }
@@ -1785,6 +1794,20 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
         return;
     }
 
+    if (menuSelectedSmall != sRotomPhone_SmallStartMenu->menuSmallOptions[nextIndex]
+        && sRotomPhone_SmallStartMenu->isLoading == FALSE && !gPaletteFade.active)
+    {
+        u32 index = IndexOfSpritePaletteTag(TAG_ICON_PAL);
+        LoadPalette(sIconsRotomFacePal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
+        if (!FlagGet(FLAG_SYS_POKEDEX_GET))
+        {
+            for (u32 i = 1; i < PAL_ICON_WHITE; i++)
+            {
+                LoadPalette(&sIconsRotomFacePal[PAL_ICON_GREY], OBJ_PLTT_ID(index) + i, sizeof(u16)); 
+            }
+        }
+        tPhoneHighlightTimer = 0;
+    }
     menuSelectedSmall = sRotomPhone_SmallStartMenu->menuSmallOptions[nextIndex];
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
         tRotomMessageSoundEffect = PMD_EVENT_SIGN_ASE_01;
@@ -1880,13 +1903,6 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideClose(u8 taskId)
 
 static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
 {
-    u32 index;
-    if (sRotomPhone_SmallStartMenu->isLoading == FALSE && !gPaletteFade.active)
-    {
-        index = IndexOfSpritePaletteTag(TAG_ICON_PAL);
-        LoadPalette(sIconsRotomFacePal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
-    }
-
     tRotomMessageSoundEffect = MUS_DUMMY;
     RotomPhone_SmallStartMenu_CheckUpdateMessage(taskId);
 
@@ -1926,6 +1942,12 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     {
         sRotomPhoneOptions[menuSelectedSmall].selectedFunc();
     }
+
+    tPhoneHighlightTimer = UpdateRotomSpriteFadeColours(
+        &gSprites[sRotomPhone_SmallStartMenu->menuSmallSpriteId[ROTOM_PHONE_MENU_FIRST_OPTION]], // Uses first option as all sprites will use the same palette
+        sRotomPhoneOptions[menuSelectedSmall].iconPalSlot, 
+        tPhoneHighlightTimer
+    );
 
     if (tRotomMessageSoundEffect && !IsSEPlaying())
         PlaySE(tRotomMessageSoundEffect);
@@ -3268,4 +3290,5 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 #undef tRotomPanelLastY
 #undef tPhoneY
 #undef tPhoneCloseToSave
+#undef tPhoneHighlightTimer
 #undef sFrameNumCB
