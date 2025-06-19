@@ -381,6 +381,23 @@ static u16 RotomPhone_GetFaceIconPaletteOriginalColour(u8 palSlot)
     return sIconsRotomFacePal[palSlot];
 }
 
+static u16 RotomPhone_GetFaceIconPaletteHighlightColour(u8 palSlot)
+{
+    u16 colour = RotomPhone_GetFaceIconPaletteOriginalColour(palSlot);
+
+    s32 r = GET_R(colour);
+    s32 g = GET_G(colour);
+    s32 b = GET_B(colour);
+
+    const s32 lighten = 8;
+
+    r = (r + lighten > 31) ? 31 : r + lighten;
+    g = (g + lighten > 31) ? 31 : g + lighten;
+    b = (b + lighten > 31) ? 31 : b + lighten;
+
+    return RGB(r, g, b);
+}
+
 static const struct RotomSpriteFadeColors sFadeColoursSmall[] =
 {
     [PAL_ROTOM_OUTLINE] =
