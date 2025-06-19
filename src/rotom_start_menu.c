@@ -72,6 +72,7 @@
 #include "trig.h"
 
 
+#define ROTOM_PHONE_NOT_FLIP_PHONE          FlagGet(FLAG_SYS_POKEDEX_GET)
 #define ROTOM_PHONE_UPDATE_CLOCK_DISPLAY    TRUE
 #define ROTOM_PHONE_24_HOUR_MODE            gSaveBlock2Ptr->optionsClockMode
 #define ROTOM_PHONE_NUM_MINUTES_TO_UPDATE   1
@@ -79,7 +80,7 @@
 #define ROTOM_PHONE_MESSAGE_SHUTDOWN_TIME   0
 #define ROTOM_PHONE_UPDATE_MESSAGE          TRUE
 #define ROTOM_PHONE_UPDATE_MESSAGE_SOUND    TRUE
-#define PHONE_OFFSCREEN_Y                   (FlagGet(FLAG_SYS_POKEDEX_GET) ? 98 : 96)
+#define PHONE_OFFSCREEN_Y                   (ROTOM_PHONE_NOT_FLIP_PHONE ? 98 : 96)
 #define PHONE_SLIDE_DURATION                30
 #define ROTOM_FACE_UPDATE_PERCENT           100
 
@@ -894,7 +895,7 @@ void RotomPhone_SmallStartMenu_Init(bool32 firstInit)
         return;
     }
 
-    if (FlagGet(FLAG_SYS_POKEDEX_GET) && ROTOM_PHONE_UPDATE_MESSAGE_SOUND)
+    if (ROTOM_PHONE_NOT_FLIP_PHONE && ROTOM_PHONE_UPDATE_MESSAGE_SOUND)
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x80);
 
     sRotomPhone_SmallStartMenu->savedCallback = CB2_ReturnToFieldWithOpenMenu;
@@ -967,7 +968,7 @@ static void RotomPhone_SmallStartMenu_LoadSprites(void)
     LoadSpritePalette(sSpritePal_Icon);
     index = IndexOfSpritePaletteTag(TAG_ICON_PAL);
     LoadPalette(sIconsRotomFacePal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP); 
-    if (!FlagGet(FLAG_SYS_POKEDEX_GET))
+    if (!ROTOM_PHONE_NOT_FLIP_PHONE)
     {
         for (u32 i = 1; i < PAL_ICON_WHITE; i++)
         {
@@ -981,7 +982,7 @@ static void RotomPhone_SmallStartMenu_LoadSprites(void)
 
 static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(bool32 rotomLoad)
 {
-    if (!FlagGet(FLAG_SYS_POKEDEX_GET) || sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId != SPRITE_NONE)
+    if (!ROTOM_PHONE_NOT_FLIP_PHONE || sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId != SPRITE_NONE)
         return;
 
     bool32 flash = FALSE;
@@ -1036,7 +1037,7 @@ static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menu
     else
         animNum = RotomPhone_StartMenu_GetShortcutOption();
 
-    if (!FlagGet(FLAG_SYS_POKEDEX_GET))
+    if (!ROTOM_PHONE_NOT_FLIP_PHONE)
     {
         y += 24;
         yAdd = 25;
@@ -1079,7 +1080,7 @@ static void RotomPhone_SmallStartMenu_CreateAllSprites(void)
 {
     enum RotomPhoneSmallOptions drawn = ROTOM_PHONE_SMALL_OPTION_1;
     u32 drawnCount = ROTOM_PHONE_SMALL_OPTION_COUNT;
-    if (!FlagGet(FLAG_SYS_POKEDEX_GET))
+    if (!ROTOM_PHONE_NOT_FLIP_PHONE)
         drawnCount -= 2;
     
 
@@ -1094,6 +1095,7 @@ static void RotomPhone_SmallStartMenu_CreateAllSprites(void)
             RotomPhone_SmallStartMenu_CreateSprite(menuId, optionSlot);
             sRotomPhone_SmallStartMenu->menuSmallOptions[optionSlot] = menuId;
             drawn++;
+            DebugPrintf("%d, %d", menuId, optionSlot);
         }
     }
 
@@ -1108,7 +1110,7 @@ static void RotomPhone_SmallStartMenu_LoadBgGfx(bool32 firstInit)
     u8* buf = GetBgTilemapBuffer(0);
     const u32 *tilemap;
     LoadBgTilemap(0, 0, 0, 0);
-    if (FlagGet(FLAG_SYS_POKEDEX_GET))
+    if (ROTOM_PHONE_NOT_FLIP_PHONE)
     {
         DecompressAndCopyTileDataToVram(0, sSmallRotomTiles, 0, 0, 0);
         DecompressDataWithHeaderWram(sSmallRotomTilemap, buf);
@@ -1131,7 +1133,7 @@ static void RotomPhone_SmallStartMenu_LoadBgGfx(bool32 firstInit)
 #define ROTOM_SPEECH_BOTTOM_ROW_Y   1
 static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void)
 {
-    if (!FlagGet(FLAG_SYS_POKEDEX_GET))
+    if (!ROTOM_PHONE_NOT_FLIP_PHONE)
         return;
 
     DecompressDataWithHeaderWram(sSmallRotomSpeechTilemap, GetBgTilemapBuffer(0));
@@ -1147,7 +1149,7 @@ static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void)
 
 static void RotomPhone_SmallStartMenu_CreateFlipPhoneWindow(void)
 {
-    if (FlagGet(FLAG_SYS_POKEDEX_GET))
+    if (ROTOM_PHONE_NOT_FLIP_PHONE)
         return;
     
     sRotomPhone_SmallStartMenu->windowIdFlipPhone = AddWindow(&sWindowTemplate_FlipPhone);
@@ -1173,7 +1175,7 @@ static void RotomPhone_SmallStartMenu_PrintRotomSpeech(u8 textBuffer[80], bool32
 
 static void RotomPhone_SmallStartMenu_PrintGreeting(void)
 {
-    if (!FlagGet(FLAG_SYS_POKEDEX_GET))
+    if (!ROTOM_PHONE_NOT_FLIP_PHONE)
         return;
     
     u8 textBuffer[80];
@@ -1247,7 +1249,7 @@ static enum RotomPhoneMessages RotomPhone_SmallStartMenu_GetRandomMessage(void)
 
 static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId)
 {
-    if (!tRotomUpdateTimer && FlagGet(FLAG_SYS_POKEDEX_GET))
+    if (!tRotomUpdateTimer && ROTOM_PHONE_NOT_FLIP_PHONE)
     {
         switch (tRotomUpdateMessage)
         {
@@ -1548,7 +1550,7 @@ static void RotomPhone_SmallStartMenu_PrintAdventure(u8 taskId)
 static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId)
 {
     u8 fontId;
-    if (FlagGet(FLAG_SYS_POKEDEX_GET))
+    if (ROTOM_PHONE_NOT_FLIP_PHONE)
     {
         u8 textBuffer[80];
 
@@ -1787,7 +1789,7 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
         || nextIndex < ROTOM_PHONE_SMALL_OPTION_1
         || sRotomPhone_SmallStartMenu->menuSmallOptions[nextIndex] == ROTOM_PHONE_MENU_COUNT)
     {
-        if (FlagGet(FLAG_SYS_POKEDEX_GET))
+        if (ROTOM_PHONE_NOT_FLIP_PHONE)
             tRotomMessageSoundEffect = PMD_EVENT_SIGN_ANGER_02;
         else
             tRotomMessageSoundEffect = SE_CLICK;
@@ -1799,7 +1801,7 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
     {
         u32 index = IndexOfSpritePaletteTag(TAG_ICON_PAL);
         LoadPalette(sIconsRotomFacePal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
-        if (!FlagGet(FLAG_SYS_POKEDEX_GET))
+        if (!ROTOM_PHONE_NOT_FLIP_PHONE)
         {
             for (u32 i = 1; i < PAL_ICON_WHITE; i++)
             {
@@ -1809,7 +1811,7 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
         tPhoneHighlightTimer = 0;
     }
     menuSelectedSmall = sRotomPhone_SmallStartMenu->menuSmallOptions[nextIndex];
-    if (FlagGet(FLAG_SYS_POKEDEX_GET))
+    if (ROTOM_PHONE_NOT_FLIP_PHONE)
         tRotomMessageSoundEffect = PMD_EVENT_SIGN_ASE_01;
     else
         tRotomMessageSoundEffect = SE_CLICK;
@@ -1839,7 +1841,7 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideOpen(u8 taskId)
         tPhoneY = ReadComfyAnimValueSmooth(&gComfyAnims[tPhoneComfyAnimId]);
     }
     else if (GetEasingComfyAnim_CurrentFrame(&gComfyAnims[tPhoneComfyAnimId]) == PHONE_SLIDE_DURATION / 2
-        && !FlagGet(FLAG_SYS_POKEDEX_GET))
+        && !ROTOM_PHONE_NOT_FLIP_PHONE)
     {
         DecompressDataWithHeaderWram(sFlipPhoneOpenTilemap, GetBgTilemapBuffer(0));
         ScheduleBgCopyTilemapToVram(0);
@@ -1852,7 +1854,7 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideOpen(u8 taskId)
     else
     {
         ReleaseComfyAnim(tPhoneComfyAnimId);
-        if (FlagGet(FLAG_SYS_POKEDEX_GET))
+        if (ROTOM_PHONE_NOT_FLIP_PHONE)
             RotomPhone_SmallStartMenu_CreateRotomFaceSprite(TRUE);
         else
             RotomPhone_SmallStartMenu_ContinueInit(TRUE);
@@ -1875,7 +1877,7 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideClose(u8 taskId)
 
         RotomPhone_SmallStartMenu_RemoveWindows();
         RotomPhone_SmallStartMenu_DestroySprites();
-        if (FlagGet(FLAG_SYS_POKEDEX_GET))
+        if (ROTOM_PHONE_NOT_FLIP_PHONE)
             DecompressDataWithHeaderWram(sSmallRotomTilemap, GetBgTilemapBuffer(0));
         else
             DecompressDataWithHeaderWram(sFlipPhoneClosedTilemap, GetBgTilemapBuffer(0));
@@ -1921,7 +1923,7 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     }
     else if (JOY_NEW(B_BUTTON) && sRotomPhone_SmallStartMenu->isLoading == FALSE)
     {
-        if (FlagGet(FLAG_SYS_POKEDEX_GET))
+        if (ROTOM_PHONE_NOT_FLIP_PHONE)
         {
             gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_RotomShutdown;
             RotomPhone_SmallStartMenu_RotomShutdownPreparation(taskId);
@@ -1977,7 +1979,7 @@ static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId)
 static void Task_RotomPhone_SmallStartMenu_CloseAndSave(u8 taskId)
 {
     TaskFunc func;
-    if (FlagGet(FLAG_SYS_POKEDEX_GET))
+    if (ROTOM_PHONE_NOT_FLIP_PHONE)
         func = Task_RotomPhone_SmallStartMenu_RotomShutdown;
     else
         func = Task_RotomPhone_SmallStartMenu_PhoneSlideClose;
@@ -2822,7 +2824,7 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_SafariFlag(void)
 static bool32 RotomPhone_StartMenu_UnlockedFunc_FullScreen(void)
 {
     if (!RotomPhone_StartMenu_IsFullScreen())
-        return FlagGet(FLAG_SYS_POKEDEX_GET) && !GetSafariZoneFlag();
+        return ROTOM_PHONE_NOT_FLIP_PHONE && !GetSafariZoneFlag();
     else
         return FALSE;
 }
@@ -2837,7 +2839,7 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_DexNav(void)
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Clock(void)
 {
-    if (!FlagGet(FLAG_SYS_POKEDEX_GET) || (RotomPhone_StartMenu_IsFullScreen()))
+    if (!ROTOM_PHONE_NOT_FLIP_PHONE || (RotomPhone_StartMenu_IsFullScreen()))
         return TRUE;
     else
         return FALSE;
@@ -2845,7 +2847,7 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_Clock(void)
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Shortcut(void)
 {
-    if (FlagGet(FLAG_SYS_POKEDEX_GET) && (!RotomPhone_StartMenu_IsFullScreen()) && !GetSafariZoneFlag())
+    if (ROTOM_PHONE_NOT_FLIP_PHONE && (!RotomPhone_StartMenu_IsFullScreen()) && !GetSafariZoneFlag())
         return TRUE;
     else
         return FALSE;
@@ -2926,7 +2928,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Save(void)
             u8 taskId = FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput);
             gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_CloseAndSave;
             tPhoneCloseToSave = FALSE;
-            if (FlagGet(FLAG_SYS_POKEDEX_GET))
+            if (ROTOM_PHONE_NOT_FLIP_PHONE)
                 RotomPhone_SmallStartMenu_RotomShutdownPreparation(taskId);
         }
     }
