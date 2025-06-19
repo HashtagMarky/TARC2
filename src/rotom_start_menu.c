@@ -361,7 +361,8 @@ struct RotomSpriteFadeColors
 
 enum IconRotomFacePaletteIndex
 {
-    PAL_ICON_GREY = 1,
+    PAL_FACE_ICON_TRANSPARENT,
+    PAL_ICON_GREY,
     PAL_ICON_WHITE = 10,
     PAL_ROTOM_OUTLINE = 11,
     PAL_ROTOM_EYE_WHITE,
@@ -411,7 +412,7 @@ static const struct RotomSpriteFadeColors sFadeColoursSmall[] =
 
 static u8 UpdateRotomSpriteFadeColours(struct Sprite* sprite, u8 index, u8 frameNum)
 {
-    if (!sFadeColoursSmall[index].colourTo || !sFadeColoursSmall[index].colourFrom)
+    if (index == PAL_FACE_ICON_TRANSPARENT)
         return frameNum;
     
     s32 intensity = (((Cos(frameNum, 128) + 128) * 10) / 250);
