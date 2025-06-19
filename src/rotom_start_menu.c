@@ -185,8 +185,8 @@ enum RotomPhoneMenuItems
     ROTOM_PHONE_MENU_POKEDEX,
     ROTOM_PHONE_MENU_PARTY,
     ROTOM_PHONE_MENU_DAYCARE,
-    ROTOM_PHONE_MENU_DEXNAV,
     ROTOM_PHONE_MENU_BAG,
+    ROTOM_PHONE_MENU_DEXNAV,
     ROTOM_PHONE_MENU_POKENAV,
     ROTOM_PHONE_MENU_TRAINER_CARD,
     ROTOM_PHONE_MENU_SAVE,
@@ -558,8 +558,8 @@ static const union AnimCmd *const sSmallIconAnims[ROTOM_PHONE_MENU_COUNT] = {
     sAnimCmd_RotomPhone_Pokedex,
     sAnimCmd_RotomPhone_Party,
     sAnimCmd_RotomPhone_Blank,          // ROTOM_PHONE_MENU_DAYCARE
-    sAnimCmd_RotomPhone_DexNav,
     sAnimCmd_RotomPhone_Bag,
+    sAnimCmd_RotomPhone_DexNav,
     sAnimCmd_RotomPhone_PokeNav,
     sAnimCmd_RotomPhone_Blank,          // ROTOM_PHONE_MENU_TRAINER_CARD
     sAnimCmd_RotomPhone_Save,
