@@ -177,6 +177,25 @@ static void RotomPhone_StartMenu_SelectedFunc_DexNav(void);
 static void RotomPhone_StartMenu_SelectedFunc_Clock(void);
 static void RotomPhone_StartMenu_SelectedFunc_Daycare(void);
 
+// --BG-GFX--
+static const u32 sSmallRotomTiles[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.smol");
+static const u32 sSmallRotomTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone.bin.smolTM");
+static const u32 sSmallRotomSpeechTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_speech.bin.smolTM");
+static const u32 sFlipPhoneTiles[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_tiles.4bpp.smol");
+static const u32 sFlipPhoneOpenTilemap[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_open.bin.smolTM");
+static const u32 sFlipPhoneClosedTilemap[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_closed.bin.smolTM");
+static const u16 sPhoneMenuPal[] = INCBIN_U16("graphics/rotom_start_menu/phones.gbapal");
+static const u32 sRotomPhoneFace[] = INCBIN_U32("graphics/rotom_start_menu/rotom_face.4bpp.smol");
+
+//--SPRITE-GFX--
+#define TAG_ICON_GFX 1234
+#define TAG_ICON_PAL 0x4654 | BLEND_IMMUNE_FLAG
+#define ICON_COORD_X 190
+#define ICON_COORD_Y 58
+
+static const u32 sIconsSmallGfx[] = INCBIN_U32("graphics/rotom_start_menu/icons.4bpp.smol");
+static const u16 sIconsRotomFacePal[] = INCBIN_U16("graphics/rotom_start_menu/icons.gbapal");
+
 
 enum RotomPhoneMenuItems
 {
@@ -414,25 +433,6 @@ static u8 UpdateRotomSpriteFadeColours(struct Sprite* sprite, u8 index, u8 frame
 
     return frameNum != 0xFF ? ++frameNum : 0;
 }
-
-// --BG-GFX--
-static const u32 sSmallRotomTiles[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.smol");
-static const u32 sSmallRotomTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone.bin.smolTM");
-static const u32 sSmallRotomSpeechTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_speech.bin.smolTM");
-static const u32 sFlipPhoneTiles[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_tiles.4bpp.smol");
-static const u32 sFlipPhoneOpenTilemap[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_open.bin.smolTM");
-static const u32 sFlipPhoneClosedTilemap[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_closed.bin.smolTM");
-static const u16 sPhoneMenuPal[] = INCBIN_U16("graphics/rotom_start_menu/phones.gbapal");
-static const u32 sRotomPhoneFace[] = INCBIN_U32("graphics/rotom_start_menu/rotom_face.4bpp.smol");
-
-//--SPRITE-GFX--
-#define TAG_ICON_GFX 1234
-#define TAG_ICON_PAL 0x4654 | BLEND_IMMUNE_FLAG
-#define ICON_COORD_X 190
-#define ICON_COORD_Y 58
-
-static const u32 sIconsSmallGfx[] = INCBIN_U32("graphics/rotom_start_menu/icons.4bpp.smol");
-static const u16 sIconsRotomFacePal[] = INCBIN_U16("graphics/rotom_start_menu/icons.gbapal");
 
 #define ROTOM_SPEECH_WINDOW_WIDTH   18
 #define ROTOM_SPEECH_WINDOW_WIDTH_PXL ROTOM_SPEECH_WINDOW_WIDTH * 8
