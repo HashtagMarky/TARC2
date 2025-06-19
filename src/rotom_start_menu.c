@@ -339,6 +339,8 @@ struct RotomSpriteFadeColors
 
 enum IconRotomFacePaletteIndex
 {
+    PAL_ICON_GREY = 1,
+    PAL_ICON_WHITE = 10,
     PAL_ROTOM_OUTLINE = 11,
     PAL_ROTOM_EYE_WHITE,
     PAL_ROTOM_EYE_TOP,
