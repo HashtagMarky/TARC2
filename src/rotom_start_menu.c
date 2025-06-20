@@ -339,9 +339,10 @@ struct RotomPhone_StartMenu
 };
 
 static EWRAM_DATA struct RotomPhone_StartMenu *sRotomPhone_SmallStartMenu = NULL;
-static EWRAM_DATA enum RotomPhoneMenuItems menuSelectedSmall; // Separate memory allocation so it persist between destroying of menu.
-static EWRAM_DATA enum RotomPhoneMenuItems menuSelectedLarge; // Separate memory allocation so it persist between destroying of menu.
 static EWRAM_DATA bool32 menuFullScreen;
+// Separate memory allocation so it persist between destroying of menu.
+static EWRAM_DATA enum RotomPhoneMenuItems menuSelectedSmall;
+static EWRAM_DATA enum RotomPhoneMenuItems menuSelectedLarge;
 
 bool32 RotomPhone_StartMenu_IsFullScreen(void)
 {
@@ -1924,7 +1925,8 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     }
 
     tPhoneHighlightTimer = UpdateRotomSpriteFadeColours(
-        &gSprites[sRotomPhone_SmallStartMenu->menuSmallSpriteId[ROTOM_PHONE_MENU_FIRST_OPTION]], // Uses first option as all sprites will use the same palette
+        // Uses first option as all sprites will use the same palette
+        &gSprites[sRotomPhone_SmallStartMenu->menuSmallSpriteId[ROTOM_PHONE_MENU_FIRST_OPTION]],
         sRotomPhoneOptions[menuSelectedSmall].iconPalSlot, 
         tPhoneHighlightTimer
     );
@@ -1996,11 +1998,6 @@ static void Task_RotomPhone_SmallStartMenu_CloseForSafari(u8 taskId)
 }
 
 
-/*
- * The code in this file assumes you have read and understood everything in `sample_ui_start_here.c'. The comments here
- * will only cover new/changed code.
- */
-
 enum SlidingPanelSprites
 {
     PANEL_SPRITE_ONE,
@@ -2029,7 +2026,6 @@ struct RotomPhone_LargeStartMenuState
     u8 loadState;
     u8 mode;
 
-    // Store the Y coordinate for the panel (for scrolling), and a flag if the panel is open or not
     u8 panelY;
     bool8 panelIsOpen;
 
@@ -2044,15 +2040,7 @@ enum WindowIds
 
 static EWRAM_DATA struct RotomPhone_LargeStartMenuState *sRotomPhone_LargeStartMenu = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
-// We'll have an additional tilemap buffer for the sliding panel, which will live on BG2
 static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
-
-/*
- * Define some colors for the main bg, we will use the palette loading function to hotswap them when the user changes
- * regions. These colors are encoded using BGR555 encoding. If you'd like to change these colors, you may find this
- * online BGR555 color picker helpful. Make sure to use Big Endian mode:
- * https://orangeglo.github.io/BGR555/
- */
 
 static const struct BgTemplate sRotomPhone_LargeStartMenuBgTemplates[] =
 {
@@ -2069,11 +2057,6 @@ static const struct BgTemplate sRotomPhone_LargeStartMenuBgTemplates[] =
         .priority = 2
     },
     {
-        /*
-         * We'll add another BG for our sliding button panel. For this BG we'll be using the same tileset so we set the
-         * charblock to 3, just like BG1. Priority is 0 so the sliding panel draws on top of everything else, including
-         * the text in the dex info window.
-         */
         .bg = 2,
         .charBaseIndex = 3,
         .mapBaseIndex = 29,
@@ -2104,7 +2087,6 @@ sRotomPhone_LargeStartMenuWindowTemplates[WIN_UI_TOP_BAR].baseBlock +   \
 
 static const u32 sRotomPhone_LargeStartMenuTiles[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.smol");
 
-// New graphics for the buttons. Create these from 4bpp indexed PNGs, just like before.
 static const u32 sRotomPhone_LargeStartMenuTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_full_screen.bin.smolTM");
 static const u32 sRotomPhone_LargeStartMenuPanelTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_full_screen_panel.bin.smolTM");
 
@@ -2113,9 +2095,6 @@ static const u16 sRotomPhone_LargeStartMenuPalette[] = INCBIN_U16("graphics/roto
 static const u32 sRotomPhone_DaycareCompatability_Gfx[] = INCBIN_U32("graphics/rotom_start_menu/panel/daycare_heart.4bpp.smol");
 static const u16 sRotomPhone_DaycareCompatability_Pal[] = INCBIN_U16("graphics/rotom_start_menu/panel/daycare_heart.gbapal");
 
-// Indices for the anim arrays
-#define DEFAULT_ANIM  0
-#define SELECTED_ANIM 0
 
 enum RotomPhoneDaycareCompatabilityAnims
 {
@@ -2124,28 +2103,6 @@ enum RotomPhoneDaycareCompatabilityAnims
     ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_MED,
     ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_MAX,
     ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_COUNT,
-};
-
-static const union AnimCmd sButtonDefaultAnim[] =
-{
-    ANIMCMD_FRAME(0, 30),
-    ANIMCMD_END
-};
-
-static const union AnimCmd *const sButtonAnims[] =
-{
-    [DEFAULT_ANIM] = sButtonDefaultAnim
-};
-
-static const union AffineAnimCmd sButtonSelectedAnim[] =
-{
-    AFFINEANIMCMD_FRAME(2, 2, 0, 15),
-    AFFINEANIMCMD_FRAME(-2, -2, 0, 15),
-    AFFINEANIMCMD_JUMP(0)
-};
-static const union AffineAnimCmd * const sButtonAffineAnims[] =
-{
-    [SELECTED_ANIM] = sButtonSelectedAnim
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_CompatabilityIcon = {
@@ -2214,7 +2171,6 @@ void RotomPhone_LargeStartMenu_Init(void)
     SetMainCallback2(RotomPhone_LargeStartMenu_SetupCB);
 }
 
-// Credit: Jaizu, pret
 static void RotomPhone_LargeStartMenu_ResetGpuRegsAndBgs(void)
 {
     SampleUI_ResetGpuRegsAndBgs();
@@ -2369,7 +2325,6 @@ static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId)
 
 static void Task_RotomPhone_LargeStartMenu_PanelInput(u8 taskId)
 {
-    // Exit panel when Start or B is pressed
     if (JOY_NEW(START_BUTTON | A_BUTTON | B_BUTTON))
     {
         gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_PanelSlide;
@@ -2384,14 +2339,9 @@ static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId)
     #define PANEL_MAX_Y 96
     #define PANEL_SLIDE_DOWN_FRAMES 50
     #define PANEL_SLIDE_UP_FRAMES 40
-    /*
-     * Register BG2VOFS controls the vertical offset of background 2. Our sliding panel lives on BG2, so by setting the
-     * value of this register we can change the starting Y position of the background. We increase it a bit each frame
-     * to make the BG look like it is sliding into view.
-     */
+    
     SetGpuReg(REG_OFFSET_BG2VOFS, sRotomPhone_LargeStartMenu->panelY);
 
-    // Panel is open, so slide it down out of view
     if (sRotomPhone_LargeStartMenu->panelIsOpen)
     {
         if (sRotomPhone_LargeStartMenu->panelY > PANEL_MIN_Y)
@@ -2425,7 +2375,6 @@ static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId)
         }
         else if (sRotomPhone_LargeStartMenu->panelY == PANEL_MIN_Y)
         {
-            // Panel is done closing, so set state to closed and change task to read main input
             if (sRotomPhoneOptions[menuSelectedLarge].selectedFunc)
                 sRotomPhoneOptions[menuSelectedLarge].selectedFunc();
             sRotomPhone_LargeStartMenu->panelIsOpen = FALSE;
@@ -2433,7 +2382,6 @@ static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId)
             gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_MainInput;
         }
     }
-    // Panel is closed, so slide it up into view
     else
     {
         if (sRotomPhone_LargeStartMenu->panelY < PANEL_MAX_Y)
@@ -2467,7 +2415,6 @@ static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId)
         }
         else if (sRotomPhone_LargeStartMenu->panelY == PANEL_MAX_Y)
         {
-            // Panel is done opening, so set state to open and change task to read panel input
             sRotomPhone_LargeStartMenu->panelIsOpen = TRUE;
             ReleaseComfyAnim(tRotomPanelComfyAnimId);
             gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_PanelInput;
@@ -2602,11 +2549,6 @@ static bool8 RotomPhone_LargeStartMenu_LoadGraphics(void)
         break;
     case 2:
         LoadPalette(sRotomPhone_LargeStartMenuPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-        /*
-         * We are going to dynamically change the BG color depending on the region. We set up our tiles so that the UI
-         * BG color is stored in Palette 0, slot 2. So we hot swap that to our saved color for Kanto, since the UI
-         * starts in Kanto region. We will need to perform this mini-swap each time the user changes regions.
-         */
         LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         sRotomPhone_LargeStartMenu->loadState++;
     default:
@@ -2786,22 +2728,22 @@ static void RotomPhone_StartMenu_SelectedFunc_Trainer(void)
         {
             RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput), TRUE);
             if (IsOverworldLinkActive() || InUnionRoom())
-                ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
+                ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu);
             else if (FlagGet(FLAG_SYS_FRONTIER_PASS))
-                ShowFrontierPass(CB2_ReturnToFieldWithOpenMenu); // Display frontier pass
+                ShowFrontierPass(CB2_ReturnToFieldWithOpenMenu);
             else
-                ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
+                ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu);
         }
     }
     else
     {
         RotomPhone_LargeStartMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_LargeStartMenu_MainInput));
         if (IsOverworldLinkActive() || InUnionRoom())
-            ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
+            ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu);
         else if (FlagGet(FLAG_SYS_FRONTIER_PASS))
-            ShowFrontierPass(CB2_ReturnToFieldWithOpenMenu); // Display frontier pass
+            ShowFrontierPass(CB2_ReturnToFieldWithOpenMenu);
         else
-            ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
+            ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu);
     }
 }
 
