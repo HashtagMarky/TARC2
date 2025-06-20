@@ -353,15 +353,15 @@ bool32 RotomPhone_StartMenu_IsFullScreen(void)
 enum IconRotomFacePaletteIndex
 {
     PAL_FACE_ICON_TRANSPARENT,
+    PAL_ICON_RED,
+    PAL_ICON_GREEN,
+    PAL_ICON_BLUE,
+    PAL_ICON_YELLOW,
+    PAL_ICON_PURPLE,
+    PAL_ICON_PINK,
+    PAL_ICON_ORANGE,
+    PAL_ICON_BROWN,
     PAL_ICON_GREY,
-    PAL_ICON_COLOUR_2,
-    PAL_ICON_COLOUR_3,
-    PAL_ICON_COLOUR_4,
-    PAL_ICON_COLOUR_5,
-    PAL_ICON_COLOUR_6,
-    PAL_ICON_COLOUR_7,
-    PAL_ICON_COLOUR_8,
-    PAL_ICON_COLOUR_9,
     PAL_ICON_WHITE,
     PAL_ROTOM_OUTLINE,
     PAL_ROTOM_EYE_WHITE,
@@ -385,19 +385,21 @@ static u16 RotomPhone_GetFaceIconPaletteOriginalColour(u8 palSlot)
 
 static u16 RotomPhone_GetFaceIconPaletteHighlightColour(u8 palSlot)
 {
+    #define MAX_RGB_COMPONENT 28
+    #define LIGHTEN_FACTOR    8
     u16 colour = RotomPhone_GetFaceIconPaletteOriginalColour(palSlot);
 
     s32 r = GET_R(colour);
     s32 g = GET_G(colour);
     s32 b = GET_B(colour);
 
-    const s32 lighten = 8;
-
-    r = (r + lighten > 31) ? 31 : r + lighten;
-    g = (g + lighten > 31) ? 31 : g + lighten;
-    b = (b + lighten > 31) ? 31 : b + lighten;
+    r = (r + LIGHTEN_FACTOR > MAX_RGB_COMPONENT) ? MAX_RGB_COMPONENT : r + LIGHTEN_FACTOR;
+    g = (g + LIGHTEN_FACTOR > MAX_RGB_COMPONENT) ? MAX_RGB_COMPONENT : g + LIGHTEN_FACTOR;
+    b = (b + LIGHTEN_FACTOR > MAX_RGB_COMPONENT) ? MAX_RGB_COMPONENT : b + LIGHTEN_FACTOR;
 
     return RGB(r, g, b);
+    #undef MAX_RGB_COMPONENT
+    #undef LIGHTEN_FACTOR
 }
 
 static u8 UpdateRotomSpriteFadeColours(struct Sprite* sprite, enum IconRotomFacePaletteIndex index, u8 frameNum)
@@ -718,7 +720,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to open the Pokédex?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Pokedex,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_Pokedex,
-        .iconPalSlot = PAL_ICON_COLOUR_3,
+        .iconPalSlot = PAL_ICON_RED,
     },
     [ROTOM_PHONE_MENU_DEXNAV] =
     {
@@ -726,7 +728,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to use the DexNav?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_DexNav,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_DexNav,
-        .iconPalSlot = PAL_ICON_COLOUR_3,
+        .iconPalSlot = PAL_ICON_ORANGE,
     },
     [ROTOM_PHONE_MENU_PARTY] =
     {
@@ -734,7 +736,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to view your Party?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Pokemon,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_Pokemon,
-        .iconPalSlot = PAL_ICON_COLOUR_7,
+        .iconPalSlot = PAL_ICON_YELLOW,
     },
     [ROTOM_PHONE_MENU_BAG] =
     {
@@ -742,7 +744,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to check your Storage?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Unlocked,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_Bag,
-        .iconPalSlot = PAL_ICON_COLOUR_4,
+        .iconPalSlot = PAL_ICON_BLUE,
     },
     [ROTOM_PHONE_MENU_POKENAV] =
     {
@@ -750,7 +752,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to browse the PokéNav?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_PokeNav,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_PokeNav,
-        .iconPalSlot = PAL_ICON_COLOUR_3,
+        .iconPalSlot = PAL_ICON_ORANGE,
     },
     [ROTOM_PHONE_MENU_TRAINER_CARD] =
     {
@@ -765,7 +767,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to write in your Journal?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Save,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_Save,
-        .iconPalSlot = PAL_ICON_COLOUR_6,
+        .iconPalSlot = PAL_ICON_PURPLE,
     },
     [ROTOM_PHONE_MENU_OPTIONS] =
     {
@@ -773,7 +775,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to change the Settings?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Unlocked,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_Settings,
-        .iconPalSlot = PAL_ICON_GREY,
+        .iconPalSlot = PAL_ICON_GREEN,
     },
     [ROTOM_PHONE_MENU_FLAG] =
     {
@@ -781,7 +783,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to end the Safari?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_SafariFlag,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_SafariFlag,
-        .iconPalSlot = PAL_ICON_COLOUR_8,
+        .iconPalSlot = PAL_ICON_GREY,
     },
     [ROTOM_PHONE_MENU_FULL_SCREEN] =
     {
@@ -789,7 +791,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to enter Full Screen?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_FullScreen,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_FullScreen,
-        .iconPalSlot = PAL_ICON_COLOUR_8,
+        .iconPalSlot = PAL_ICON_GREY,
     },
     [ROTOM_PHONE_MENU_CLOCK] =
     {
@@ -797,7 +799,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to check the time?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Clock,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_Clock,
-        .iconPalSlot = PAL_ICON_COLOUR_8,
+        .iconPalSlot = PAL_ICON_GREY,
     },
     [ROTOM_PHONE_MENU_SHORTCUT] =
     {
@@ -1004,9 +1006,9 @@ static void RotomPhone_SmallStartMenu_LoadSprites(void)
     LoadPalette(sIconsRotomFacePal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP); 
     if (!ROTOM_PHONE_NOT_FLIP_PHONE)
     {
-        for (u32 i = 1; i < PAL_ICON_WHITE; i++)
+        for (enum IconRotomFacePaletteIndex colour = PAL_FACE_ICON_TRANSPARENT + 1; colour < PAL_ICON_WHITE; colour++)
         {
-            LoadPalette(&sIconsRotomFacePal[PAL_ICON_GREY], OBJ_PLTT_ID(index) + i, sizeof(u16)); 
+            LoadPalette(&sIconsRotomFacePal[PAL_ICON_GREY], OBJ_PLTT_ID(index) + colour, sizeof(u16)); 
         }
     }
     
@@ -1792,9 +1794,9 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
         LoadPalette(sIconsRotomFacePal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
         if (!ROTOM_PHONE_NOT_FLIP_PHONE)
         {
-            for (u32 i = 1; i < PAL_ICON_WHITE; i++)
+            for (enum IconRotomFacePaletteIndex colour = PAL_FACE_ICON_TRANSPARENT + 1; colour < PAL_ICON_WHITE; colour++)
             {
-                LoadPalette(&sIconsRotomFacePal[PAL_ICON_GREY], OBJ_PLTT_ID(index) + i, sizeof(u16)); 
+                LoadPalette(&sIconsRotomFacePal[PAL_ICON_GREY], OBJ_PLTT_ID(index) + colour, sizeof(u16)); 
             }
         }
         tPhoneHighlightTimer = 0;
