@@ -958,11 +958,6 @@ static void InitSave(void)
     sSavingComplete = FALSE;
 }
 
-void InitSave_Global(void)
-{
-    InitSave();
-}
-
 static u8 RunSaveCallback(void)
 {
     // True if text is still printing
@@ -973,11 +968,6 @@ static u8 RunSaveCallback(void)
 
     sSavingComplete = FALSE;
     return sSaveDialogCallback();
-}
-
-u8 RunSaveCallback_Global(void)
-{
-    return RunSaveCallback();
 }
 
 void SaveGame(void)

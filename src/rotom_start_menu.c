@@ -70,6 +70,7 @@
 #include "pokemon_icon.h"
 #include "daycare.h"
 #include "trig.h"
+#include "start_menu.h"
 
 
 #define ROTOM_PHONE_NOT_FLIP_PHONE          FlagGet(FLAG_SYS_POKEDEX_GET)
@@ -93,7 +94,6 @@ static void RotomPhone_SmallStartMenu_RotomShutdownPreparation(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_CloseAndSave(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_CloseForSafari(u8 taskId);
-static void Task_RotomPhone_HandleSave(u8 taskId);
 
 static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(MainCallback callback);
 static u8 RotomPhone_SmallStartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority);
@@ -1742,47 +1742,6 @@ static void RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(u8 taskId, bool32 
     DestroyTask(taskId);
 }
 
-static void Task_RotomPhone_HandleSave(u8 taskId)
-{
-    switch (RunSaveCallback_Global())
-    {
-        case SAVE_IN_PROGRESS:
-            break;
-        case SAVE_SUCCESS:
-        case SAVE_CANCELED: // Back to start menu
-            ClearDialogWindowAndFrameToTransparent(0, TRUE);
-            ScriptUnfreezeObjectEvents();  
-            UnlockPlayerFieldControls();
-            if (!RotomPhone_StartMenu_IsFullScreen())
-            {
-                DestroyTask(taskId);
-                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
-            }
-            else
-            {
-                RotomPhone_LargeStartMenu_DoCleanUpAndChangeTaskFunc(taskId, Task_OpenRotomPhone_LargeStartMenu);
-                // RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_ReturnToField);
-            }
-            break;
-        case SAVE_ERROR:    // Close start menu
-            ClearDialogWindowAndFrameToTransparent(0, TRUE);
-            ScriptUnfreezeObjectEvents();
-            UnlockPlayerFieldControls();
-            SoftResetInBattlePyramid();
-            if (!RotomPhone_StartMenu_IsFullScreen())
-            {
-                DestroyTask(taskId);
-                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
-            }
-            else
-            {
-                RotomPhone_LargeStartMenu_DoCleanUpAndChangeTaskFunc(taskId, Task_OpenRotomPhone_LargeStartMenu);
-                // RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_ReturnToField);
-            }
-            break;
-    }
-}
-
 static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
 {
     sRotomPhone_SmallStartMenu->spriteFlag = FALSE;
@@ -2021,8 +1980,8 @@ static void Task_RotomPhone_SmallStartMenu_CloseAndSave(u8 taskId)
         && tPhoneCloseToSave == TRUE)
     {
         LoadMessageBoxAndBorderGfx();
-        InitSave_Global();
-        gTasks[taskId].func = Task_RotomPhone_HandleSave;
+        DestroyTask(taskId);
+        SaveGame();
     }
 }
 
@@ -2959,9 +2918,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Save(void)
     }
     else
     {
-        InitSave_Global();
-        CreateTask(Task_RotomPhone_HandleSave, 0x80);
-        // RotomPhone_LargeStartMenu_DoCleanUpAndCreateTask(Task_RotomPhone_HandleSave, 0x80);
+        SaveGame();
         // ^ May be able to use after developing Save screen.
     }
 }

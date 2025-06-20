@@ -14,9 +14,6 @@ void HideStartMenu(void);
 void AppendToList(u8 *list, u8 *pos, u8 newEntry);
 void AutoSaveDoSave(void);
 
-void InitSave_Global(void);
-u8 RunSaveCallback_Global(void);
-
 // Save status
 enum
 {
