@@ -140,9 +140,6 @@ static void RotomPhone_LargeStartMenu_FadeAndBail(void);
 static bool8 RotomPhone_LargeStartMenu_LoadGraphics(void);
 static void RotomPhone_LargeStartMenu_InitWindows(void);
 static void RotomPhone_LargeStartMenu_PrintTopBar(void);
-static void UNUSED RotomPhone_LargeStartMenu_CreateRegionButtons(void);
-static void UNUSED RotomPhone_LargeStartMenu_StartRegionButtonAnim(enum Region region);
-static void UNUSED RotomPhone_LargeStartMenu_StopRegionButtonAnim(enum Region region);
 static void RotomPhone_LargeStartMenu_FreeResources(void);
 
 static void RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(MainCallback callback);
@@ -2639,97 +2636,6 @@ static void RotomPhone_LargeStartMenu_PrintTopBar(void)
         sRotomPhone_StartMenuFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sRotomPhoneOptions[menuSelectedLarge].menuName);
 
     CopyWindowToVram(WIN_UI_TOP_BAR, COPYWIN_GFX);
-}
-
-static void UNUSED RotomPhone_LargeStartMenu_CreateRegionButtons(void)
-{
-    #define BUTTON_START_X 50
-    #define BUTTON_START_Y 184
-    /*
-     * Load the palettes for our sprites into VRAM. Note here we are passing the SpritePalette palette templates we
-     * defined earlier. If a palette with the tag given in one of these templates is already loaded, the
-     * `LoadSpritePalette' method will skip the actual load step. Otherwise, it finds the first free palette slot and
-     * loads the palette there. Note that if you have manually loaded other palettes into OBJ palette memory without
-     * tagging them in the sprite system, this loading code may clobber your palette. Also, the `LoadSpritePalette'
-     * method returns the palette index it ended up using. If it returns 0xFF that means the load failed. So if you want
-     * you can check the result to make sure your load was successful and handle the problem if it wasn't. In our case,
-     * we just assume the load succeeded.
-     */
-
-    // LoadSpritePalette(&sKantoJohtoHoennButtonsSpritePalette);
-    // LoadSpritePalette(&sSinnohUnovaKalosButtonsSpritePalette);
-
-    /*
-     * Create a sprite for each button at the given X/Y position. We set subpriority to 0 so they draw on top. Sprite
-     * subpriorities provide you a way to have multiple different "priorities" within the same layer. So for example,
-     * say you want Sprite A and Sprite B to draw on top of a BG with priority 1. You can set the priority of Sprite A
-     * and Sprite B to 0 for that. But now suppose you also want Sprite A to draw on top of Sprite B. For that, set
-     * Sprite A's subpriority to 0 and Sprite B's subpriority to 1.
-     */
-
-    // sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_ONE] =
-    //     CreateSprite(&sKantoButtonSpriteTemplate, BUTTON_START_X, BUTTON_START_Y, 0);
-    // sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_TWO] =
-    //     CreateSprite(&sJohtoButtonSpriteTemplate, BUTTON_START_X + 70, BUTTON_START_Y, 0);
-    // sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_THREE] =
-    //     CreateSprite(&sHoennButtonSpriteTemplate, BUTTON_START_X + 2*70, BUTTON_START_Y, 0);
-    // sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_FOUR] =
-    //     CreateSprite(&sSinnohButtonSpriteTemplate, BUTTON_START_X, BUTTON_START_Y + 40, 0);
-    // sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_FIVE] =
-    //     CreateSprite(&sUnovaButtonSpriteTemplate, BUTTON_START_X + 70, BUTTON_START_Y + 40, 0);
-    // sRotomPhone_LargeStartMenu->panelSpriteIds[PANEL_SPRITE_SIX] =
-    //     CreateSprite(&sKalosButtonSpriteTemplate, BUTTON_START_X + 2*70, BUTTON_START_Y + 40, 0);
-    #undef BUTTON_START_X
-    #undef BUTTON_START_Y
-}
-
-static void UNUSED RotomPhone_LargeStartMenu_StartRegionButtonAnim(enum Region region)
-{
-    /*
-     * To start the button animation, the first thing we want to do is use the double-size affine mode. We need this for
-     * our case since we are growing the sprites. Otherwise, the sprite image itself will grow but the bounds will stay
-     * the same, and the sprite will look like it's getting cut off. We'll set the sprite to double sized while the
-     * affine shrink/grow is running so that there is plenty of room to draw the bigger sprite.
-     *
-     * For more details on this "clipping artifact", please see the relevant TONC page:
-     *      https://www.coranac.com/tonc/text/affobj.htm#sec-artifact
-     */
-    gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[region]].oam.affineMode = ST_OAM_AFFINE_DOUBLE;
-
-    /*
-     * Starts the given affine anim on the given sprite. In this case, animate the sprite associated with the given
-     * region ID, and use the only affine anim we defined. `SELECTED_ANIM' is just an index into our AffineAnimCmd table
-     * we defined way earlier.
-     */
-    StartSpriteAffineAnim(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[region]], SELECTED_ANIM);
-
-    /*
-     * The `CalcCenterToCornerVec' function is used by the game to calculate a vector that points from the sprite's
-     * logical center point to its top-left corner. The game then adds this vector to your provided sprite positions.
-     * This creates the illusion that the coordinates you provide for a sprite are based on the center of the sprite,
-     * even though the GBA hardware actually uses top-left-corner based sprite coordinates.
-     *
-     * This last bit is crucial since we activated double-sizing. We need to recalculate the sprite's offset vector now
-     * that we have changed its size. Otherwise the sprite position will appear to change. Try commenting out this call
-     * and see what happens when you select a button.
-     */
-    CalcCenterToCornerVec(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[region]],
-        SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_DOUBLE);
-}
-
-static void UNUSED RotomPhone_LargeStartMenu_StopRegionButtonAnim(enum Region region)
-{
-    /*
-     * This function works just like the above function, but does everything in reverse.
-     */
-
-    // Disable double-size mode
-    gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[region]].oam.affineMode = ST_OAM_AFFINE_OFF;
-    // Return our sprite to the regular static anim
-    StartSpriteAnim(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[region]], DEFAULT_ANIM);
-    // Recalculate the offset vector for a regular sized sprite
-    CalcCenterToCornerVec(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[region]],
-        SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_OFF);
 }
 
 static void RotomPhone_LargeStartMenu_FreeResources(void)
