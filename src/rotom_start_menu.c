@@ -74,6 +74,7 @@
 
 
 #define ROTOM_PHONE_NOT_FLIP_PHONE          FlagGet(FLAG_SYS_POKEDEX_GET)
+#define ROTOM_PHONE_GREY_ICONS              FALSE
 #define ROTOM_PHONE_UPDATE_CLOCK_DISPLAY    TRUE
 #define ROTOM_PHONE_24_HOUR_MODE            gSaveBlock2Ptr->optionsClockMode
 #define ROTOM_PHONE_NUM_MINUTES_TO_UPDATE   1
@@ -377,7 +378,7 @@ static u16 RotomPhone_GetPhoneBackgroundColour(u8 palSlot)
 
 static u16 RotomPhone_GetFaceIconPaletteOriginalColour(u8 palSlot)
 {
-    if (ROTOM_PHONE_NOT_FLIP_PHONE)
+    if (ROTOM_PHONE_NOT_FLIP_PHONE && !(ROTOM_PHONE_GREY_ICONS && palSlot < PAL_ICON_WHITE))
         return sIconsRotomFacePal[palSlot];
     else
         return sIconsRotomFacePal[PAL_ICON_GREY];
@@ -1004,7 +1005,7 @@ static void RotomPhone_SmallStartMenu_LoadSprites(void)
     LoadSpritePalette(sSpritePal_Icon);
     index = IndexOfSpritePaletteTag(TAG_ICON_PAL);
     LoadPalette(sIconsRotomFacePal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP); 
-    if (!ROTOM_PHONE_NOT_FLIP_PHONE)
+    if (!ROTOM_PHONE_NOT_FLIP_PHONE || ROTOM_PHONE_GREY_ICONS)
     {
         for (enum IconRotomFacePaletteIndex colour = PAL_FACE_ICON_TRANSPARENT + 1; colour < PAL_ICON_WHITE; colour++)
         {
@@ -1792,7 +1793,7 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
     {
         u32 index = IndexOfSpritePaletteTag(TAG_ICON_PAL);
         LoadPalette(sIconsRotomFacePal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
-        if (!ROTOM_PHONE_NOT_FLIP_PHONE)
+        if (!ROTOM_PHONE_NOT_FLIP_PHONE || ROTOM_PHONE_GREY_ICONS)
         {
             for (enum IconRotomFacePaletteIndex colour = PAL_FACE_ICON_TRANSPARENT + 1; colour < PAL_ICON_WHITE; colour++)
             {
