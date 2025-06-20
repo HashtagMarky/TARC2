@@ -718,6 +718,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to open the Pokédex?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Pokedex,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_Pokedex,
+        .iconPalSlot = PAL_ICON_COLOUR_3,
     },
     [ROTOM_PHONE_MENU_DEXNAV] =
     {
@@ -725,6 +726,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to use the DexNav?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_DexNav,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_DexNav,
+        .iconPalSlot = PAL_ICON_COLOUR_3,
     },
     [ROTOM_PHONE_MENU_PARTY] =
     {
@@ -732,6 +734,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to view your Party?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Pokemon,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_Pokemon,
+        .iconPalSlot = PAL_ICON_COLOUR_7,
     },
     [ROTOM_PHONE_MENU_BAG] =
     {
@@ -739,6 +742,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to check your Storage?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Unlocked,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_Bag,
+        .iconPalSlot = PAL_ICON_COLOUR_4,
     },
     [ROTOM_PHONE_MENU_POKENAV] =
     {
@@ -746,6 +750,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to browse the PokéNav?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_PokeNav,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_PokeNav,
+        .iconPalSlot = PAL_ICON_COLOUR_3,
     },
     [ROTOM_PHONE_MENU_TRAINER_CARD] =
     {
@@ -760,6 +765,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to write in your Journal?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Save,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_Save,
+        .iconPalSlot = PAL_ICON_COLOUR_6,
     },
     [ROTOM_PHONE_MENU_OPTIONS] =
     {
@@ -767,6 +773,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to change the Settings?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Unlocked,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_Settings,
+        .iconPalSlot = PAL_ICON_GREY,
     },
     [ROTOM_PHONE_MENU_FLAG] =
     {
@@ -774,6 +781,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to end the Safari?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_SafariFlag,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_SafariFlag,
+        .iconPalSlot = PAL_ICON_COLOUR_8,
     },
     [ROTOM_PHONE_MENU_FULL_SCREEN] =
     {
@@ -781,6 +789,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to enter Full Screen?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_FullScreen,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_FullScreen,
+        .iconPalSlot = PAL_ICON_COLOUR_8,
     },
     [ROTOM_PHONE_MENU_CLOCK] =
     {
@@ -788,6 +797,7 @@ static struct RotomPhoneMenuOptions sRotomPhoneOptions[ROTOM_PHONE_MENU_COUNT] =
         .rotomAction = COMPOUND_STRING("to check the time?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Clock,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_Clock,
+        .iconPalSlot = PAL_ICON_COLOUR_8,
     },
     [ROTOM_PHONE_MENU_SHORTCUT] =
     {
