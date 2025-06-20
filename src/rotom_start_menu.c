@@ -373,7 +373,7 @@ enum IconRotomFacePaletteIndex
 
 static u16 RotomPhone_GetPhoneBackgroundColour(u8 palSlot)
 {
-    return gPlttBufferFaded[BG_PLTT_ID(SMALL_PHONE_BG_NUM) + ROTOM_PHONE_BASE_COLOUR_INDEX];
+    return sPhoneMenuPal[ROTOM_PHONE_BASE_COLOUR_INDEX];
 }
 
 static u16 RotomPhone_GetFaceIconPaletteOriginalColour(u8 palSlot)
