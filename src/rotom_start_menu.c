@@ -331,7 +331,6 @@ struct RotomPhone_StartMenu
 {
     MainCallback savedCallback;
     bool32 isLoading;
-    bool32 spriteFlag; // some bool32 holding values for controlling the sprite anims and lifetime
     enum RotomPhoneMenuItems menuSmallOptions[ROTOM_PHONE_SMALL_OPTION_COUNT];
     u32 menuSmallRotomFaceSpriteId;
     u32 menuSmallRotomFaceFlashSpriteId;
@@ -929,7 +928,6 @@ void RotomPhone_SmallStartMenu_Init(bool32 firstInit)
     sRotomPhone_SmallStartMenu->savedCallback = CB2_ReturnToFieldWithOpenMenu;
     sRotomPhone_SmallStartMenu->isLoading = FALSE;
     sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top = 0;
-    sRotomPhone_SmallStartMenu->spriteFlag = FALSE;
     menuFullScreen = FALSE;
 
     sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId = SPRITE_NONE;
@@ -1744,7 +1742,6 @@ static void RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(u8 taskId, bool32 
 
 static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
 {
-    sRotomPhone_SmallStartMenu->spriteFlag = FALSE;
     enum RotomPhoneSmallOptions optionCurrent = ROTOM_PHONE_SMALL_OPTION_1;
     enum RotomPhoneFaceExpressions rotomFace;
     s32 offset;
