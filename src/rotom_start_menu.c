@@ -1884,6 +1884,7 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideClose(u8 taskId)
 
 static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
 {
+    u32 iconPal = sRotomPhoneOptions[menuSelectedSmall].iconPalSlot;
     tRotomMessageSoundEffect = MUS_DUMMY;
     RotomPhone_SmallStartMenu_CheckUpdateMessage(taskId);
 
@@ -1924,10 +1925,12 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
         sRotomPhoneOptions[menuSelectedSmall].selectedFunc();
     }
 
+    if (menuSelectedSmall == ROTOM_PHONE_MENU_SHORTCUT)
+        iconPal = sRotomPhoneOptions[RotomPhone_StartMenu_GetShortcutOption()].iconPalSlot;
     tPhoneHighlightTimer = UpdateRotomSpriteFadeColours(
         // Uses first option as all sprites will use the same palette
         &gSprites[sRotomPhone_SmallStartMenu->menuSmallSpriteId[ROTOM_PHONE_MENU_FIRST_OPTION]],
-        sRotomPhoneOptions[menuSelectedSmall].iconPalSlot, 
+        iconPal, 
         tPhoneHighlightTimer
     );
 
