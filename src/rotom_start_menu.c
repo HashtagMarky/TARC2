@@ -2720,6 +2720,16 @@ static void RotomPhone_StartMenu_SelectedFunc_PokeNav(void)
         RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_InitPokeNav);
 }
 
+static void RotomPhone_StartMenu_ChooseTrainerCard(void)
+{
+    if (IsOverworldLinkActive() || InUnionRoom())
+        ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
+    else if (FlagGet(FLAG_SYS_FRONTIER_PASS))
+        ShowFrontierPass(CB2_ReturnToFieldWithOpenMenu); // Display frontier pass
+    else
+        ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
+}
+
 static void RotomPhone_StartMenu_SelectedFunc_Trainer(void)
 {
     if (!RotomPhone_StartMenu_IsFullScreen())
@@ -2727,23 +2737,13 @@ static void RotomPhone_StartMenu_SelectedFunc_Trainer(void)
         if (!gPaletteFade.active)
         {
             RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput), TRUE);
-            if (IsOverworldLinkActive() || InUnionRoom())
-                ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu);
-            else if (FlagGet(FLAG_SYS_FRONTIER_PASS))
-                ShowFrontierPass(CB2_ReturnToFieldWithOpenMenu);
-            else
-                ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu);
+            RotomPhone_StartMenu_ChooseTrainerCard();
         }
     }
     else
     {
         RotomPhone_LargeStartMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_LargeStartMenu_MainInput));
-        if (IsOverworldLinkActive() || InUnionRoom())
-            ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu);
-        else if (FlagGet(FLAG_SYS_FRONTIER_PASS))
-            ShowFrontierPass(CB2_ReturnToFieldWithOpenMenu);
-        else
-            ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu);
+        RotomPhone_StartMenu_ChooseTrainerCard();
     }
 }
 
