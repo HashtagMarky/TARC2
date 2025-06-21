@@ -102,7 +102,7 @@ static void Task_RotomPhone_SmallStartMenu_CloseAndSave(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_CloseForSafari(u8 taskId);
 
 static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(MainCallback callback);
-static u8 RotomPhone_SmallStartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority);
+static u8 UNUSED RotomPhone_SmallStartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority);
 static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func);
 static void RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(u8 taskId, bool32 overworldCleanup);
 
@@ -150,7 +150,7 @@ static void RotomPhone_LargeStartMenu_FreeResources(void);
 
 static void RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(MainCallback callback);
 static u8 RotomPhone_LargeStartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority);
-static void RotomPhone_LargeStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func);
+static void UNUSED RotomPhone_LargeStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func);
 static void RotomPhone_LargeStartMenu_DoCleanUpAndDestroyTask(u8 taskId);
 
 
@@ -1886,7 +1886,7 @@ static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(MainCallback ca
     }
 }
 
-static u8 RotomPhone_SmallStartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority)
+static u8 UNUSED RotomPhone_SmallStartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority)
 {
     PlayRainStoppingSoundEffect();
     RotomPhone_SmallStartMenu_ExitAndClearTilemap();
@@ -2540,7 +2540,7 @@ static u8 RotomPhone_LargeStartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 pri
     return CreateTask(func, priority);
 }
 
-static void RotomPhone_LargeStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func)
+static void UNUSED RotomPhone_LargeStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func)
 {
     RotomPhone_LargeStartMenu_FreeResources();
     gTasks[taskId].func = func;
