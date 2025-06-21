@@ -1146,7 +1146,6 @@ static void RotomPhone_SmallStartMenu_CreateAllSprites(void)
             RotomPhone_SmallStartMenu_CreateSprite(menuId, optionSlot);
             sRotomPhone_SmallStartMenu->menuSmallOptions[optionSlot] = menuId;
             drawn++;
-            DebugPrintf("%d, %d", menuId, optionSlot);
         }
     }
 
