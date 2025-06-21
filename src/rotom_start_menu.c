@@ -2566,17 +2566,16 @@ static void RotomPhone_LargeStartMenu_DoCleanUpAndDestroyTask(u8 taskId)
     DestroyTask(taskId);
 }
 
-#define TILEMAP_BUFFER_SIZE (1024 * 2)
 static bool8 RotomPhone_LargeStartMenu_InitBgs(void)
 {
     ResetAllBgsCoordinates();
 
-    sBg1TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
+    sBg1TilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
     if (sBg1TilemapBuffer == NULL)
     {
         return FALSE;
     }
-    sBg2TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
+    sBg2TilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
     if (sBg2TilemapBuffer == NULL)
     {
         return FALSE;
@@ -2596,7 +2595,6 @@ static bool8 RotomPhone_LargeStartMenu_InitBgs(void)
 
     return TRUE;
 }
-#undef TILEMAP_BUFFER_SIZE
 
 static void RotomPhone_LargeStartMenu_FadeAndBail(void)
 {
