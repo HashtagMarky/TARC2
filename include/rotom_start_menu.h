@@ -12,6 +12,7 @@
 #define ROTOM_PHONE_MESSAGE_SHUTDOWN_TIME   0
 #define ROTOM_PHONE_UPDATE_MESSAGE          TRUE
 #define ROTOM_PHONE_UPDATE_MESSAGE_SOUND    TRUE
+#define ROTOM_FACE_UPDATE_PERCENT           100
 
 void RotomPhone_SmallStartMenu_Init(bool32 firstInit);
 void RotomPhone_LargeStartMenu_Init(void);

@@ -74,12 +74,18 @@
 
 
 #define PHONE_OFFSCREEN_Y                   (ROTOM_PHONE_NOT_FLIP_PHONE ? 98 : 96)
-#define PHONE_SLIDE_DURATION                30
-#define ROTOM_FACE_UPDATE_PERCENT           100
+#define PHONE_BASE_COLOUR_INDEX             5
+#define PHONE_BG_PAL_SLOT                   14
+#define TAG_ROTOM_FACE_GFX                  1234
+#define TAG_PHONE_ICON_GFX                  1235
+#define TAG_ROTOM_FACE_ICON_PAL             0x4654 | BLEND_IMMUNE_FLAG
+
+#define PHONE_COMFY_SLIDE_DURATION          30
 #define FACE_ICON_COMFY_SPRING_MASS         200
 #define FACE_ICON_COMFY_SPRING_TENSION      25
 #define FACE_ICON_COMFY_SPRING_FRICTION     800
 #define FACE_ICON_COMFY_SPRING_CLAMP_AFTER  1
+
 #define FADE_COLOUR_MAX                     0xFF
 #define FADE_COLOUR_MID                     0x80
 #define FADE_COLOUR_MIN                     0x00
@@ -191,13 +197,6 @@ static const u32 sRotomPhone_LargeStartMenuPanelTilemap[] = INCBIN_U32("graphics
 static const u16 sRotomPhone_LargeStartMenuPalette[] =      INCBIN_U16("graphics/rotom_start_menu/rotom_phone_tiles.gbapal");
 static const u32 sRotomPhone_DaycareCompatability_Gfx[] =   INCBIN_U32("graphics/rotom_start_menu/panel/daycare_heart.4bpp.smol");
 static const u16 sRotomPhone_DaycareCompatability_Pal[] =   INCBIN_U16("graphics/rotom_start_menu/panel/daycare_heart.gbapal");
-
-
-#define TAG_FACE_GFX 1234
-#define TAG_ICON_GFX 1235
-#define TAG_FACE_ICON_PAL 0x4654 | BLEND_IMMUNE_FLAG
-#define SMALL_PHONE_BG_NUM 14
-#define ROTOM_PHONE_BASE_COLOUR_INDEX 5
 
 
 enum RotomPhoneMenuItems
@@ -421,7 +420,7 @@ enum RotomPhoneDaycareCompatabilityAnims
 
 static u16 RotomPhone_GetPhoneBackgroundColour(u8 palSlot)
 {
-    return sPhoneMenuPal[ROTOM_PHONE_BASE_COLOUR_INDEX];
+    return sPhoneMenuPal[PHONE_BASE_COLOUR_INDEX];
 }
 
 static u16 RotomPhone_GetFaceIconPaletteOriginalColour(u8 palSlot)
@@ -513,14 +512,15 @@ static void UpdateRotomSpriteFadeColours(struct Sprite* sprite, enum IconRotomFa
 #define ROTOM_SPEECH_WINDOW_HEIGHT  2
 #define ROTOM_SPEECH_WINDOW_LEFT    1
 #define ROTOM_SPEECH_WINDOW_TOP     15
+#define PHONE_STARTING_BASE_BLOCK   0xFF
 static const struct WindowTemplate sWindowTemplate_RotomSpeech_Top = {
   .bg = 0, 
   .tilemapLeft = ROTOM_SPEECH_WINDOW_LEFT, 
   .tilemapTop = ROTOM_SPEECH_WINDOW_TOP, 
   .width = ROTOM_SPEECH_WINDOW_WIDTH,
   .height = ROTOM_SPEECH_WINDOW_HEIGHT, 
-  .paletteNum = SMALL_PHONE_BG_NUM,
-  .baseBlock = 0xFF
+  .paletteNum = PHONE_BG_PAL_SLOT,
+  .baseBlock = PHONE_STARTING_BASE_BLOCK
 };
 
 static const struct WindowTemplate sWindowTemplate_RotomSpeech_Bottom = {
@@ -529,8 +529,8 @@ static const struct WindowTemplate sWindowTemplate_RotomSpeech_Bottom = {
     .tilemapTop = ROTOM_SPEECH_WINDOW_TOP + 2, 
     .width = ROTOM_SPEECH_WINDOW_WIDTH, 
     .height = ROTOM_SPEECH_WINDOW_HEIGHT, 
-    .paletteNum = SMALL_PHONE_BG_NUM,
-    .baseBlock = 0xFF + (ROTOM_SPEECH_WINDOW_WIDTH*ROTOM_SPEECH_WINDOW_WIDTH)
+    .paletteNum = PHONE_BG_PAL_SLOT,
+    .baseBlock = PHONE_STARTING_BASE_BLOCK + (ROTOM_SPEECH_WINDOW_WIDTH*ROTOM_SPEECH_WINDOW_WIDTH)
 };
 
 static const struct WindowTemplate sWindowTemplate_FlipPhone = {
@@ -539,8 +539,8 @@ static const struct WindowTemplate sWindowTemplate_FlipPhone = {
     .tilemapTop = 17,
     .width = 7,
     .height = 2,
-    .paletteNum = SMALL_PHONE_BG_NUM,
-    .baseBlock = 0xFF
+    .paletteNum = PHONE_BG_PAL_SLOT,
+    .baseBlock = PHONE_STARTING_BASE_BLOCK
 };
 
 enum WindowIds
@@ -593,19 +593,19 @@ sRotomPhone_LargeStartMenuWindowTemplates[WIN_UI_TOP_BAR].baseBlock +   \
 
 static const struct SpritePalette sSpritePal_Icon[] =
 {
-    {sIconsRotomFacePal, TAG_FACE_ICON_PAL},
+    {sIconsRotomFacePal, TAG_ROTOM_FACE_ICON_PAL},
     {NULL},
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_IconsSmall[] = 
 {
-    {sIconsSmallGfx, 32*352/2 , TAG_ICON_GFX},
+    {sIconsSmallGfx, 32*352/2 , TAG_PHONE_ICON_GFX},
     {NULL},
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_RotomFace[] = 
 {
-    {sRotomPhoneFace, 64*768/2 , TAG_FACE_GFX},
+    {sRotomPhoneFace, 64*768/2 , TAG_ROTOM_FACE_GFX},
     {NULL},
 };
 
@@ -758,7 +758,7 @@ static const union AnimCmd *const sRotomFaceAnims[ROTOM_FACE_COUNT] = {
 static const struct CompressedSpriteSheet sSpriteSheet_CompatabilityIcon = {
     .data = sRotomPhone_DaycareCompatability_Gfx,
     .size = 32 * 32 * ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_COUNT / 2,
-    .tag = TAG_ICON_GFX,
+    .tag = TAG_PHONE_ICON_GFX,
 };
 
 static const struct OamData sOam_IconDaycareCompatatbility = {
@@ -834,8 +834,8 @@ static void SpriteCB_RotomPhoneSmall_RotomFace_Unload(struct Sprite* sprite)
 }
 
 static const struct SpriteTemplate sSpriteTemplate_RotomSmallIcon = {
-    .tileTag = TAG_ICON_GFX,
-    .paletteTag = TAG_FACE_ICON_PAL,
+    .tileTag = TAG_PHONE_ICON_GFX,
+    .paletteTag = TAG_ROTOM_FACE_ICON_PAL,
     .oam = &gRotomIcons_Oam,
     .anims = sSmallIconAnims,
     .images = NULL,
@@ -844,8 +844,8 @@ static const struct SpriteTemplate sSpriteTemplate_RotomSmallIcon = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_RotomSmallFace = {
-    .tileTag = TAG_FACE_GFX,
-    .paletteTag = TAG_FACE_ICON_PAL,
+    .tileTag = TAG_ROTOM_FACE_GFX,
+    .paletteTag = TAG_ROTOM_FACE_ICON_PAL,
     .oam = &sRotomFace_Oam,
     .callback = SpriteCallbackDummy,
     .anims = sRotomFaceAnims,
@@ -1152,7 +1152,7 @@ static void RotomPhone_SmallStartMenu_LoadSprites(void)
 {
     u32 index;
     LoadSpritePalette(sSpritePal_Icon);
-    index = IndexOfSpritePaletteTag(TAG_FACE_ICON_PAL);
+    index = IndexOfSpritePaletteTag(TAG_ROTOM_FACE_ICON_PAL);
     LoadPalette(sIconsRotomFacePal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP); 
     if (!ROTOM_PHONE_NOT_FLIP_PHONE || ROTOM_PHONE_GREY_ICONS)
     {
@@ -1322,9 +1322,10 @@ static void RotomPhone_SmallStartMenu_LoadBgGfx(bool32 firstInit)
         DecompressDataWithHeaderWram(tilemap, buf);
     }
     
-    LoadPalette(sPhoneMenuPal, BG_PLTT_ID(SMALL_PHONE_BG_NUM), PLTT_SIZE_4BPP);
+    LoadPalette(sPhoneMenuPal, BG_PLTT_ID(PHONE_BG_PAL_SLOT), PLTT_SIZE_4BPP);
     ScheduleBgCopyTilemapToVram(0);
 }
+
 #define ROTOM_SPEECH_TOP_ROW_Y      1
 #define ROTOM_SPEECH_BOTTOM_ROW_Y   1
 static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void)
@@ -1864,8 +1865,8 @@ static void RotomPhone_SmallStartMenu_ExitAndClearTilemap(void)
 
     if (sRotomPhone_SmallStartMenu != NULL)
     {
-        FreeSpriteTilesByTag(TAG_ICON_GFX); 
-        FreeSpriteTilesByTag(TAG_FACE_GFX);  
+        FreeSpriteTilesByTag(TAG_PHONE_ICON_GFX); 
+        FreeSpriteTilesByTag(TAG_ROTOM_FACE_GFX);  
         Free(sRotomPhone_SmallStartMenu);
         sRotomPhone_SmallStartMenu = NULL;
     }
@@ -1950,7 +1951,7 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
     if (menuSelectedSmall != sRotomPhone_SmallStartMenu->menuSmallOptions[nextIndex]
         && sRotomPhone_SmallStartMenu->isLoading == FALSE && !gPaletteFade.active)
     {
-        u32 index = IndexOfSpritePaletteTag(TAG_FACE_ICON_PAL);
+        u32 index = IndexOfSpritePaletteTag(TAG_ROTOM_FACE_ICON_PAL);
         LoadPalette(sIconsRotomFacePal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
         if (!ROTOM_PHONE_NOT_FLIP_PHONE || ROTOM_PHONE_GREY_ICONS)
         {
@@ -1983,7 +1984,7 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideOpen(u8 taskId)
     {
         struct ComfyAnimEasingConfig config;
         InitComfyAnimConfig_Easing(&config);
-        config.durationFrames = PHONE_SLIDE_DURATION;
+        config.durationFrames = PHONE_COMFY_SLIDE_DURATION;
         config.from = Q_24_8(PHONE_OFFSCREEN_Y);
         config.to = Q_24_8(0);
         config.easingFunc = ComfyAnimEasing_EaseOutQuad;
@@ -1992,7 +1993,7 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideOpen(u8 taskId)
 
         tPhoneY = ReadComfyAnimValueSmooth(&gComfyAnims[tPhoneComfyAnimId]);
     }
-    else if (GetEasingComfyAnim_CurrentFrame(&gComfyAnims[tPhoneComfyAnimId]) == PHONE_SLIDE_DURATION / 2
+    else if (GetEasingComfyAnim_CurrentFrame(&gComfyAnims[tPhoneComfyAnimId]) == PHONE_COMFY_SLIDE_DURATION / 2
         && !ROTOM_PHONE_NOT_FLIP_PHONE)
     {
         DecompressDataWithHeaderWram(sFlipPhoneOpenTilemap, GetBgTilemapBuffer(0));
@@ -2020,7 +2021,7 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideClose(u8 taskId)
     {
         struct ComfyAnimEasingConfig config;
         InitComfyAnimConfig_Easing(&config);
-        config.durationFrames = PHONE_SLIDE_DURATION;
+        config.durationFrames = PHONE_COMFY_SLIDE_DURATION;
         config.from = Q_24_8(0);
         config.to = Q_24_8(PHONE_OFFSCREEN_Y);
         config.easingFunc = ComfyAnimEasing_EaseOutQuad;
@@ -2607,7 +2608,7 @@ static bool8 RotomPhone_LargeStartMenu_LoadGraphics(void)
         }
         break;
     case 2:
-        LoadPalette(sRotomPhone_LargeStartMenuPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+        LoadPalette(sRotomPhone_LargeStartMenuPalette, BG_PLTT_ID(PHONE_BG_PAL_SLOT), PLTT_SIZE_4BPP);
         LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         sRotomPhone_LargeStartMenu->loadState++;
     default:
@@ -3067,7 +3068,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 
             struct SpriteTemplate iconCompatatbility_SpriteTemplate =
             {
-                .tileTag = TAG_ICON_GFX,
+                .tileTag = TAG_PHONE_ICON_GFX,
                 .paletteTag = gMonIconPaletteTable[MON_ICON_PAL_SLOT_COMPATABILITY_ICON].tag,
                 .oam = &sOam_IconDaycareCompatatbility,
                 .callback = SpriteCallbackDummy,
@@ -3168,6 +3169,47 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 
     #undef TEXT_LINE_SPACE
 }
+#undef PHONE_OFFSCREEN_Y
+#undef TAG_ROTOM_FACE_GFX
+#undef TAG_PHONE_ICON_GFX
+#undef TAG_ROTOM_FACE_ICON_PAL
+#undef PHONE_BG_PAL_SLOT
+#undef PHONE_BASE_COLOUR_INDEX
+
+#undef PHONE_COMFY_SLIDE_DURATION
+#undef FACE_ICON_COMFY_SPRING_MASS
+#undef FACE_ICON_COMFY_SPRING_TENSION
+#undef FACE_ICON_COMFY_SPRING_FRICTION
+#undef FACE_ICON_COMFY_SPRING_CLAMP_AFTER
+
+#undef FADE_COLOUR_MAX
+#undef FADE_COLOUR_MID
+#undef FADE_COLOUR_MIN
+
+#undef ROTOM_PHONE_MENU_FIRST_OPTION
+#undef ROTOM_PHONE_MENU_LAST_OPTION
+
+#undef ROTOM_FACE_LOOK_UP_ANIMS
+
+#undef ROTOM_SPEECH_WINDOW_WIDTH
+#undef ROTOM_SPEECH_WINDOW_WIDTH_PXL
+#undef ROTOM_SPEECH_WINDOW_HEIGHT
+#undef ROTOM_SPEECH_WINDOW_LEFT
+#undef ROTOM_SPEECH_WINDOW_TOP
+#undef PHONE_STARTING_BASE_BLOCK
+
+#undef ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK
+
+#undef FLIP_PHONE_BG_COLOUR
+#undef FLIP_PHONE_TEXT_FG_COLOUR
+#undef FLIP_PHONE_TEXT_BG_COLOUR
+#undef ROTOM_PHONE_BG_COLOUR
+#undef ROTOM_PHONE_TEXT_FG_COLOUR
+#undef ROTOM_PHONE_TEXT_BG_COLOUR
+
+#undef ROTOM_SPEECH_TOP_ROW_Y
+#undef ROTOM_SPEECH_BOTTOM_ROW_Y
+
 #undef tRotomUpdateTimer
 #undef tRotomUpdateMessage
 #undef tRotomMessageSoundEffect
