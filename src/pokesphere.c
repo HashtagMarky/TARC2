@@ -978,6 +978,7 @@ static void PokeSphere_CreateExplorePage(void)
 
 static void PokeSphere_DestroyExplorePage(void)
 {
+    ReleaseComfyAnims();
     PokeSphere_Explore_DestroyObjectEvents();
     PokeSphere_Explore_DestroyCursor();
     FreeAllSpritePalettes();
@@ -998,6 +999,7 @@ static void PokeSphere_CreateProfilePostPage(void)
 
 static void PokeSphere_DestroyProfilePostPage(void)
 {
+    ReleaseComfyAnims();
     DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, MUGSHOT_1);
     DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, MUGSHOT_2);
     DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterTypeHeartSpriteId]);
@@ -1091,6 +1093,7 @@ static void PokeSphere_CycleCharacters(bool32 increment)
 
 static void PokeSphere_ReloadProfile(void)
 {
+    ReleaseComfyAnims();
     PokeSphere_PrintNames();
     DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, MUGSHOT_1);
     DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, MUGSHOT_2);
