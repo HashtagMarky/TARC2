@@ -16,7 +16,7 @@
 
 void RotomPhone_OverworldMenu_Init(bool32 firstInit);
 void RotomPhone_FullScreenMenu_Init(void);
-void Task_OpenRotomPhone_FullScreenMenu(u8 taskId);
+void Task_RotomPhone_FullScreenMenu_Open(u8 taskId);
 bool32 RotomPhone_StartMenu_IsFullScreen(void);
 
 #endif // GUARD_ROTOM_START_MENU_H

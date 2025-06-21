@@ -2206,7 +2206,7 @@ static void Task_RotomPhone_OverworldMenu_CloseForSafari(u8 taskId)
 
 
 
-void Task_OpenRotomPhone_FullScreenMenu(u8 taskId)
+void Task_RotomPhone_FullScreenMenu_Open(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -2862,7 +2862,7 @@ static void RotomPhone_StartMenu_SelectedFunc_FullScreen(void)
     if (!RotomPhone_StartMenu_IsFullScreen())
     {
         if (!gPaletteFade.active)
-            RotomPhone_OverworldMenu_DoCleanUpAndChangeTaskFunc(FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput), Task_OpenRotomPhone_FullScreenMenu);
+            RotomPhone_OverworldMenu_DoCleanUpAndChangeTaskFunc(FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput), Task_RotomPhone_FullScreenMenu_Open);
     }
     else
     {
