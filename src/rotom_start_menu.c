@@ -199,6 +199,32 @@ static const u32 sRotomPhone_DaycareCompatability_Gfx[] =   INCBIN_U32("graphics
 static const u16 sRotomPhone_DaycareCompatability_Pal[] =   INCBIN_U16("graphics/rotom_start_menu/panel/daycare_heart.gbapal");
 
 
+#define FLIP_PHONE_BG_COLOUR        12
+#define FLIP_PHONE_TEXT_FG_COLOUR   4
+#define FLIP_PHONE_TEXT_BG_COLOUR   9
+#define ROTOM_PHONE_BG_COLOUR       14
+#define ROTOM_PHONE_TEXT_FG_COLOUR  4
+#define ROTOM_PHONE_TEXT_BG_COLOUR  9
+enum FontColor
+{
+    FONT_BLACK,
+    FONT_WHITE,
+    FONT_RED,
+    FONT_BLUE,
+    FONT_FLIP_PHONE,
+    FONT_SMALL_ROTOM_PHONE,
+};
+static const u8 sRotomPhone_StartMenuFontColors[][3] =
+{
+    [FONT_BLACK]                = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY,       TEXT_COLOR_LIGHT_GRAY},
+    [FONT_WHITE]                = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,           TEXT_COLOR_DARK_GRAY},
+    [FONT_RED]                  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_RED,             TEXT_COLOR_LIGHT_GRAY},
+    [FONT_BLUE]                 = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_BLUE,            TEXT_COLOR_LIGHT_GRAY},
+    [FONT_FLIP_PHONE]           = {FLIP_PHONE_BG_COLOUR,    FLIP_PHONE_TEXT_FG_COLOUR,  FLIP_PHONE_TEXT_BG_COLOUR},
+    [FONT_SMALL_ROTOM_PHONE]    = {TEXT_COLOR_TRANSPARENT,  ROTOM_PHONE_TEXT_FG_COLOUR, ROTOM_PHONE_TEXT_BG_COLOUR},
+};
+
+
 enum RotomPhoneMenuItems
 {
     RP_MENU_FULL_SCREEN,
@@ -998,31 +1024,6 @@ static const u8 sWeatherActions[WEATHER_COUNT][24] =
     [WEATHER_DOWNPOUR]           = _("raining heavily"),
     [WEATHER_FOG]                = _("foggy"),
     [WEATHER_UNDERWATER_BUBBLES] = _("dark"),
-};
-
-#define FLIP_PHONE_BG_COLOUR        12
-#define FLIP_PHONE_TEXT_FG_COLOUR   4
-#define FLIP_PHONE_TEXT_BG_COLOUR   9
-#define ROTOM_PHONE_BG_COLOUR       14
-#define ROTOM_PHONE_TEXT_FG_COLOUR  4
-#define ROTOM_PHONE_TEXT_BG_COLOUR  9
-enum FontColor
-{
-    FONT_BLACK,
-    FONT_WHITE,
-    FONT_RED,
-    FONT_BLUE,
-    FONT_FLIP_PHONE,
-    FONT_SMALL_ROTOM_PHONE,
-};
-static const u8 sRotomPhone_StartMenuFontColors[][3] =
-{
-    [FONT_BLACK]                = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY,       TEXT_COLOR_LIGHT_GRAY},
-    [FONT_WHITE]                = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,           TEXT_COLOR_DARK_GRAY},
-    [FONT_RED]                  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_RED,             TEXT_COLOR_LIGHT_GRAY},
-    [FONT_BLUE]                 = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_BLUE,            TEXT_COLOR_LIGHT_GRAY},
-    [FONT_FLIP_PHONE]           = {FLIP_PHONE_BG_COLOUR,    FLIP_PHONE_TEXT_FG_COLOUR,  FLIP_PHONE_TEXT_BG_COLOUR},
-    [FONT_SMALL_ROTOM_PHONE]    = {TEXT_COLOR_TRANSPARENT,  ROTOM_PHONE_TEXT_FG_COLOUR, ROTOM_PHONE_TEXT_BG_COLOUR},
 };
 
 
