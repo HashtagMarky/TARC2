@@ -1966,7 +1966,9 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     {
         if (sRotomPhone_SmallStartMenu->isLoading == FALSE)
         {
-            if (menuSelectedSmall != ROTOM_PHONE_MENU_SAVE && menuSelectedSmall != ROTOM_PHONE_MENU_FLAG && menuSelectedSmall != ROTOM_PHONE_MENU_CLOCK)
+            if (menuSelectedSmall == ROTOM_PHONE_MENU_FULL_SCREEN)
+                FadeScreen(FADE_TO_WHITE, 0);
+            else if (menuSelectedSmall != ROTOM_PHONE_MENU_SAVE && menuSelectedSmall != ROTOM_PHONE_MENU_FLAG && menuSelectedSmall != ROTOM_PHONE_MENU_CLOCK)
                 FadeScreen(FADE_TO_BLACK, 0);
             
             sRotomPhone_SmallStartMenu->isLoading = TRUE;
@@ -2313,12 +2315,16 @@ static void RotomPhone_LargeStartMenu_SetupCB(void)
         gMain.state++;
         break;
     case 6:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        if (!RotomPhone_StartMenu_IsFullScreen())
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITE);
+        else
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
     case 7:
         SetVBlankCallback(RotomPhone_LargeStartMenu_VBlankCB);
         SetMainCallback2(RotomPhone_LargeStartMenu_MainCB);
+        menuFullScreen = TRUE;
         break;
     }
 }
@@ -2873,10 +2879,7 @@ static void RotomPhone_StartMenu_SelectedFunc_FullScreen(void)
     if (!RotomPhone_StartMenu_IsFullScreen())
     {
         if (!gPaletteFade.active)
-        {
-            menuFullScreen = TRUE;
             RotomPhone_SmallStartMenu_DoCleanUpAndChangeTaskFunc(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput), Task_OpenRotomPhone_LargeStartMenu);
-        }
     }
     else
     {
