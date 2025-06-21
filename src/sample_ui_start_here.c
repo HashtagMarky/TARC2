@@ -763,16 +763,16 @@ static bool8 SampleUi_InitBgs(void)
      * 1 screenblock is 2 KiB, so that should be a good size for our tilemap buffer. We don't need more than one
      * screenblock since BG1's size setting is 0, which tells the GBA we are using a 32x32 tile background:
      *      (32 tile * 32 tile * 2 bytes/tile = 2048)
+     * This is the value of BG_SCREEN_SIZE.
      * For more info on tilemap entries and how they work:
      * https://www.coranac.com/tonc/text/regbg.htm#sec-map
      */
-    const u32 TILEMAP_BUFFER_SIZE = (1024 * 2);
 
     // BG registers may have scroll values left over from the previous screen. Reset all scroll values to 0.
     ResetAllBgsCoordinates();
 
     // Allocate our tilemap buffer on the heap
-    sBg1TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
+    sBg1TilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
     if (sBg1TilemapBuffer == NULL)
     {
         // Bail if the allocation fails

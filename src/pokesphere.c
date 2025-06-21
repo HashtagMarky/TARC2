@@ -829,13 +829,13 @@ static void Task_PokeSphereWaitFadeAndExitGracefully(u8 taskId)
         DestroyTask(taskId);
     }
 }
-#define TILEMAP_BUFFER_SIZE (1024 * 2)
+
 static bool8 PokeSphere_InitBgs(void)
 {
     ResetAllBgsCoordinates();
 
-    sBg1TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
-    sBg2TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
+    sBg1TilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
+    sBg2TilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
     if (sBg1TilemapBuffer == NULL || sBg2TilemapBuffer == NULL)
     {
         return FALSE;
@@ -856,7 +856,6 @@ static bool8 PokeSphere_InitBgs(void)
 
     return TRUE;
 }
-#undef TILEMAP_BUFFER_SIZE
 
 static void PokeSphere_FadeAndBail(void)
 {
