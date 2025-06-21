@@ -410,10 +410,10 @@ static u16 RotomPhone_GetFaceIconPaletteHighlightColour(u8 palSlot)
     #undef LIGHTEN_FACTOR
 }
 
-static u8 UpdateRotomSpriteFadeColours(struct Sprite* sprite, enum IconRotomFacePaletteIndex index, u8 frameNum)
+static void UpdateRotomSpriteFadeColours(struct Sprite* sprite, enum IconRotomFacePaletteIndex index, u8 frameNum)
 {
     if (index == PAL_FACE_ICON_TRANSPARENT)
-        return frameNum;
+        return;
     
     s32 intensity = (((Cos(frameNum, 128) + 128) * 10) / 250);
     s32 r;
@@ -465,8 +465,6 @@ static u8 UpdateRotomSpriteFadeColours(struct Sprite* sprite, enum IconRotomFace
     }
     
     LoadPalette(&colour, OBJ_PLTT_ID(IndexOfSpritePaletteTag(sprite->template->paletteTag)) + index, sizeof(colour));
-
-    return frameNum != FADE_COLOUR_MAX ? ++frameNum : FADE_COLOUR_MIN;
 }
 
 #define ROTOM_SPEECH_WINDOW_WIDTH   18
