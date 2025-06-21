@@ -73,15 +73,6 @@
 #include "start_menu.h"
 
 
-#define ROTOM_PHONE_NOT_FLIP_PHONE          FlagGet(FLAG_SYS_POKEDEX_GET)
-#define ROTOM_PHONE_GREY_ICONS              FALSE
-#define ROTOM_PHONE_UPDATE_CLOCK_DISPLAY    TRUE
-#define ROTOM_PHONE_24_HOUR_MODE            gSaveBlock2Ptr->optionsClockMode
-#define ROTOM_PHONE_NUM_MINUTES_TO_UPDATE   1
-#define ROTOM_PHONE_MESSAGE_UPDATE_TIMER    (30 * 60) / FakeRtc_GetSecondsRatio() * ROTOM_PHONE_NUM_MINUTES_TO_UPDATE
-#define ROTOM_PHONE_MESSAGE_SHUTDOWN_TIME   0
-#define ROTOM_PHONE_UPDATE_MESSAGE          TRUE
-#define ROTOM_PHONE_UPDATE_MESSAGE_SOUND    TRUE
 #define PHONE_OFFSCREEN_Y                   (ROTOM_PHONE_NOT_FLIP_PHONE ? 98 : 96)
 #define PHONE_SLIDE_DURATION                30
 #define ROTOM_FACE_UPDATE_PERCENT           100
@@ -183,34 +174,30 @@ static void RotomPhone_StartMenu_SelectedFunc_DexNav(void);
 static void RotomPhone_StartMenu_SelectedFunc_Clock(void);
 static void RotomPhone_StartMenu_SelectedFunc_Daycare(void);
 
-// --BG-GFX--
-static const u32 sSmallRotomTiles[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.smol");
-static const u32 sSmallRotomTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone.bin.smolTM");
-static const u32 sSmallRotomSpeechTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_speech.bin.smolTM");
-static const u32 sFlipPhoneTiles[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_tiles.4bpp.smol");
-static const u32 sFlipPhoneOpenTilemap[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_open.bin.smolTM");
-static const u32 sFlipPhoneClosedTilemap[] = INCBIN_U32("graphics/rotom_start_menu/flip_phone_closed.bin.smolTM");
-static const u16 sPhoneMenuPal[] = INCBIN_U16("graphics/rotom_start_menu/phones.gbapal");
-static const u32 sRotomPhoneFace[] = INCBIN_U32("graphics/rotom_start_menu/rotom_face.4bpp.smol");
 
-//--GFX--
-#define TAG_ICON_GFX 1234
-#define TAG_ICON_PAL 0x4654 | BLEND_IMMUNE_FLAG
-#define ICON_COORD_X 190
-#define ICON_COORD_Y 58
+static const u32 sSmallRotomTiles[] =                       INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.smol");
+static const u32 sSmallRotomTilemap[] =                     INCBIN_U32("graphics/rotom_start_menu/rotom_phone.bin.smolTM");
+static const u32 sSmallRotomSpeechTilemap[] =               INCBIN_U32("graphics/rotom_start_menu/rotom_phone_speech.bin.smolTM");
+static const u32 sFlipPhoneTiles[] =                        INCBIN_U32("graphics/rotom_start_menu/flip_phone_tiles.4bpp.smol");
+static const u32 sFlipPhoneOpenTilemap[] =                  INCBIN_U32("graphics/rotom_start_menu/flip_phone_open.bin.smolTM");
+static const u32 sFlipPhoneClosedTilemap[] =                INCBIN_U32("graphics/rotom_start_menu/flip_phone_closed.bin.smolTM");
+static const u16 sPhoneMenuPal[] =                          INCBIN_U16("graphics/rotom_start_menu/phones.gbapal");
+static const u32 sRotomPhoneFace[] =                        INCBIN_U32("graphics/rotom_start_menu/rotom_face.4bpp.smol");
+static const u32 sIconsSmallGfx[] =                         INCBIN_U32("graphics/rotom_start_menu/icons.4bpp.smol");
+static const u16 sIconsRotomFacePal[] =                     INCBIN_U16("graphics/rotom_start_menu/icons.gbapal");
+static const u32 sRotomPhone_LargeStartMenuTiles[] =        INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.smol");
+static const u32 sRotomPhone_LargeStartMenuTilemap[] =      INCBIN_U32("graphics/rotom_start_menu/rotom_full_screen.bin.smolTM");
+static const u32 sRotomPhone_LargeStartMenuPanelTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_full_screen_panel.bin.smolTM");
+static const u16 sRotomPhone_LargeStartMenuPalette[] =      INCBIN_U16("graphics/rotom_start_menu/rotom_phone_tiles.gbapal");
+static const u32 sRotomPhone_DaycareCompatability_Gfx[] =   INCBIN_U32("graphics/rotom_start_menu/panel/daycare_heart.4bpp.smol");
+static const u16 sRotomPhone_DaycareCompatability_Pal[] =   INCBIN_U16("graphics/rotom_start_menu/panel/daycare_heart.gbapal");
+
+
+#define TAG_FACE_GFX 1234
+#define TAG_ICON_GFX 1235
+#define TAG_FACE_ICON_PAL 0x4654 | BLEND_IMMUNE_FLAG
 #define SMALL_PHONE_BG_NUM 14
 #define ROTOM_PHONE_BASE_COLOUR_INDEX 5
-
-static const u32 sIconsSmallGfx[] = INCBIN_U32("graphics/rotom_start_menu/icons.4bpp.smol");
-static const u16 sIconsRotomFacePal[] = INCBIN_U16("graphics/rotom_start_menu/icons.gbapal");
-
-
-static const u32 sRotomPhone_LargeStartMenuTiles[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.smol");
-static const u32 sRotomPhone_LargeStartMenuTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_full_screen.bin.smolTM");
-static const u32 sRotomPhone_LargeStartMenuPanelTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_full_screen_panel.bin.smolTM");
-static const u16 sRotomPhone_LargeStartMenuPalette[] = INCBIN_U16("graphics/rotom_start_menu/rotom_phone_tiles.gbapal");
-static const u32 sRotomPhone_DaycareCompatability_Gfx[] = INCBIN_U32("graphics/rotom_start_menu/panel/daycare_heart.4bpp.smol");
-static const u16 sRotomPhone_DaycareCompatability_Pal[] = INCBIN_U16("graphics/rotom_start_menu/panel/daycare_heart.gbapal");
 
 
 enum RotomPhoneMenuItems
@@ -606,7 +593,7 @@ sRotomPhone_LargeStartMenuWindowTemplates[WIN_UI_TOP_BAR].baseBlock +   \
 
 static const struct SpritePalette sSpritePal_Icon[] =
 {
-    {sIconsRotomFacePal, TAG_ICON_PAL},
+    {sIconsRotomFacePal, TAG_FACE_ICON_PAL},
     {NULL},
 };
 
@@ -618,7 +605,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_IconsSmall[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_RotomFace[] = 
 {
-    {sRotomPhoneFace, 64*768/2 , TAG_ICON_GFX + 1},
+    {sRotomPhoneFace, 64*768/2 , TAG_FACE_GFX},
     {NULL},
 };
 
@@ -848,7 +835,7 @@ static void SpriteCB_RotomPhoneSmall_RotomFace_Unload(struct Sprite* sprite)
 
 static const struct SpriteTemplate sSpriteTemplate_RotomSmallIcon = {
     .tileTag = TAG_ICON_GFX,
-    .paletteTag = TAG_ICON_PAL,
+    .paletteTag = TAG_FACE_ICON_PAL,
     .oam = &gRotomIcons_Oam,
     .anims = sSmallIconAnims,
     .images = NULL,
@@ -857,8 +844,8 @@ static const struct SpriteTemplate sSpriteTemplate_RotomSmallIcon = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_RotomSmallFace = {
-    .tileTag = TAG_ICON_GFX + 1,
-    .paletteTag = TAG_ICON_PAL,
+    .tileTag = TAG_FACE_GFX,
+    .paletteTag = TAG_FACE_ICON_PAL,
     .oam = &sRotomFace_Oam,
     .callback = SpriteCallbackDummy,
     .anims = sRotomFaceAnims,
@@ -1165,7 +1152,7 @@ static void RotomPhone_SmallStartMenu_LoadSprites(void)
 {
     u32 index;
     LoadSpritePalette(sSpritePal_Icon);
-    index = IndexOfSpritePaletteTag(TAG_ICON_PAL);
+    index = IndexOfSpritePaletteTag(TAG_FACE_ICON_PAL);
     LoadPalette(sIconsRotomFacePal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP); 
     if (!ROTOM_PHONE_NOT_FLIP_PHONE || ROTOM_PHONE_GREY_ICONS)
     {
@@ -1235,8 +1222,8 @@ static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(bool32 rotomLoad)
 static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menuItem, enum RotomPhoneSmallOptions spriteId)
 {
     bool32 flash = FALSE;
-    s32 x = ICON_COORD_X;
-    s32 y = ICON_COORD_Y;
+    s32 x = 190;
+    s32 y = 58;
     s32 xAdd = 24;
     s32 yAdd = 22;
     u32 iconRow;
@@ -1878,7 +1865,7 @@ static void RotomPhone_SmallStartMenu_ExitAndClearTilemap(void)
     if (sRotomPhone_SmallStartMenu != NULL)
     {
         FreeSpriteTilesByTag(TAG_ICON_GFX); 
-        FreeSpriteTilesByTag(TAG_ICON_GFX + 1);  
+        FreeSpriteTilesByTag(TAG_FACE_GFX);  
         Free(sRotomPhone_SmallStartMenu);
         sRotomPhone_SmallStartMenu = NULL;
     }
@@ -1963,7 +1950,7 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
     if (menuSelectedSmall != sRotomPhone_SmallStartMenu->menuSmallOptions[nextIndex]
         && sRotomPhone_SmallStartMenu->isLoading == FALSE && !gPaletteFade.active)
     {
-        u32 index = IndexOfSpritePaletteTag(TAG_ICON_PAL);
+        u32 index = IndexOfSpritePaletteTag(TAG_FACE_ICON_PAL);
         LoadPalette(sIconsRotomFacePal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
         if (!ROTOM_PHONE_NOT_FLIP_PHONE || ROTOM_PHONE_GREY_ICONS)
         {
