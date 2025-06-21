@@ -91,67 +91,67 @@
 #define FADE_COLOUR_MIN                     0x00
 
 
-static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit);
-static void Task_RotomPhone_SmallStartMenu_PhoneSlideOpen(u8 taskId);
-static void Task_RotomPhone_SmallStartMenu_PhoneSlideClose(u8 taskId);
-static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId);
-static void RotomPhone_SmallStartMenu_UpdateIconPaletteFade(u8 taskId);
-static void RotomPhone_SmallStartMenu_RotomShutdownPreparation(u8 taskId);
-static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId);
-static void Task_RotomPhone_SmallStartMenu_CloseAndSave(u8 taskId);
-static void Task_RotomPhone_SmallStartMenu_CloseForSafari(u8 taskId);
+static void RotomPhone_OverworldMenu_ContinueInit(bool32 firstInit);
+static void Task_RotomPhone_OverworldMenu_PhoneSlideOpen(u8 taskId);
+static void Task_RotomPhone_OverworldMenu_PhoneSlideClose(u8 taskId);
+static void Task_RotomPhone_OverworldMenu_HandleMainInput(u8 taskId);
+static void RotomPhone_OverworldMenu_UpdateIconPaletteFade(u8 taskId);
+static void RotomPhone_OverworldMenu_RotomShutdownPreparation(u8 taskId);
+static void Task_RotomPhone_OverworldMenu_RotomShutdown(u8 taskId);
+static void Task_RotomPhone_OverworldMenu_CloseAndSave(u8 taskId);
+static void Task_RotomPhone_OverworldMenu_CloseForSafari(u8 taskId);
 
-static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(MainCallback callback);
-static u8 UNUSED RotomPhone_SmallStartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority);
-static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func);
-static void RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(u8 taskId, bool32 overworldCleanup);
+static void RotomPhone_OverworldMenu_DoCleanUpAndChangeCallback(MainCallback callback);
+static u8 UNUSED RotomPhone_OverworldMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority);
+static void RotomPhone_OverworldMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func);
+static void RotomPhone_OverworldMenu_DoCleanUpAndDestroyTask(u8 taskId, bool32 overworldCleanup);
 
-static void RotomPhone_SmallStartMenu_LoadSprites(void);
-static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(bool32 rotomLoad);
-static void RotomPhone_SmallStartMenu_CreateAllSprites(void);
-static void RotomPhone_SmallStartMenu_LoadBgGfx(bool32 firstInit);
-static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void);
-static void RotomPhone_SmallStartMenu_CreateFlipPhoneWindow(void);
-static void RotomPhone_SmallStartMenu_PrintGreeting(void);
-static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId);
-static void RotomPhone_SmallStartMenu_PrintGoodbye(u8 taskId);
-static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId);
-static void RotomPhone_SmallStartMenu_PrintSafari(u8 taskId);
-static void RotomPhone_SmallStartMenu_PrintDateWeather(u8 taskId);
-static void RotomPhone_SmallStartMenu_PrintHaveFun(u8 taskId);
-static void RotomPhone_SmallStartMenu_Personality(u8 taskId);
-static void RotomPhone_SmallStartMenu_PrintAdventure(u8 taskId);
-static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId);
+static void RotomPhone_OverworldMenu_LoadSprites(void);
+static void RotomPhone_OverworldMenu_CreateRotomFaceSprite(bool32 rotomLoad);
+static void RotomPhone_OverworldMenu_CreateAllSprites(void);
+static void RotomPhone_OverworldMenu_LoadBgGfx(bool32 firstInit);
+static void RotomPhone_OverworldMenu_CreateSpeechWindows(void);
+static void RotomPhone_OverworldMenu_CreateFlipPhoneWindow(void);
+static void RotomPhone_OverworldMenu_PrintGreeting(void);
+static void RotomPhone_OverworldMenu_CheckUpdateMessage(u8 taskId);
+static void RotomPhone_OverworldMenu_PrintGoodbye(u8 taskId);
+static void RotomPhone_OverworldMenu_PrintTime(u8 taskId);
+static void RotomPhone_OverworldMenu_PrintSafari(u8 taskId);
+static void RotomPhone_OverworldMenu_PrintDateWeather(u8 taskId);
+static void RotomPhone_OverworldMenu_PrintHaveFun(u8 taskId);
+static void RotomPhone_OverworldMenu_Personality(u8 taskId);
+static void RotomPhone_OverworldMenu_PrintAdventure(u8 taskId);
+static void RotomPhone_OverworldMenu_UpdateMenuPrompt(u8 taskId);
 static const u8 *GetWeatherAction(u32 weatherId);
 
 
-static void RotomPhone_LargeStartMenu_SetupCB(void);
-static void RotomPhone_LargeStartMenu_MainCB(void);
-static void RotomPhone_LargeStartMenu_VBlankCB(void);
+static void RotomPhone_FullScreenMenu_SetupCB(void);
+static void RotomPhone_FullScreenMenu_MainCB(void);
+static void RotomPhone_FullScreenMenu_VBlankCB(void);
 
 
-static void Task_RotomPhone_LargeStartMenu_WaitFadeIn(u8 taskId);
-static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId);
-static void Task_RotomPhone_LargeStartMenu_PanelInput(u8 taskId);
-static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId);
-static void RotomPhone_LargeStartMenu_StartPanelSlide(void);
-static void Task_RotomPhone_LargeStartMenu_WaitFadeAndBail(u8 taskId);
-static void Task_RotomPhone_LargeStartMenu_WaitFadeAndExitGracefully(u8 taskId);
-static void Task_RotomPhone_LargeStartMenu_WaitFadeForSelection(u8 taskId);
+static void Task_RotomPhone_FullScreenMenu_WaitFadeIn(u8 taskId);
+static void Task_RotomPhone_FullScreenMenu_MainInput(u8 taskId);
+static void Task_RotomPhone_FullScreenMenu_PanelInput(u8 taskId);
+static void Task_RotomPhone_FullScreenMenu_PanelSlide(u8 taskId);
+static void RotomPhone_FullScreenMenu_StartPanelSlide(void);
+static void Task_RotomPhone_FullScreenMenu_WaitFadeAndBail(u8 taskId);
+static void Task_RotomPhone_FullScreenMenu_WaitFadeAndExitGracefully(u8 taskId);
+static void Task_RotomPhone_FullScreenMenu_WaitFadeForSelection(u8 taskId);
 
 
-static void RotomPhone_LargeStartMenu_ResetGpuRegsAndBgs(void);
-static bool8 RotomPhone_LargeStartMenu_InitBgs(void);
-static void RotomPhone_LargeStartMenu_FadeAndBail(void);
-static bool8 RotomPhone_LargeStartMenu_LoadGraphics(void);
-static void RotomPhone_LargeStartMenu_InitWindows(void);
-static void RotomPhone_LargeStartMenu_PrintTopBar(void);
-static void RotomPhone_LargeStartMenu_FreeResources(void);
+static void RotomPhone_FullScreenMenu_ResetGpuRegsAndBgs(void);
+static bool8 RotomPhone_FullScreenMenu_InitBgs(void);
+static void RotomPhone_FullScreenMenu_FadeAndBail(void);
+static bool8 RotomPhone_FullScreenMenu_LoadGraphics(void);
+static void RotomPhone_FullScreenMenu_InitWindows(void);
+static void RotomPhone_FullScreenMenu_PrintTopBar(void);
+static void RotomPhone_FullScreenMenu_FreeResources(void);
 
-static void RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(MainCallback callback);
-static u8 RotomPhone_LargeStartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority);
-static void UNUSED RotomPhone_LargeStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func);
-static void RotomPhone_LargeStartMenu_DoCleanUpAndDestroyTask(u8 taskId);
+static void RotomPhone_FullScreenMenu_DoCleanUpAndChangeCallback(MainCallback callback);
+static u8 RotomPhone_FullScreenMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority);
+static void UNUSED RotomPhone_FullScreenMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func);
+static void RotomPhone_FullScreenMenu_DoCleanUpAndDestroyTask(u8 taskId);
 
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked(void);
@@ -191,10 +191,10 @@ static const u16 sPhoneMenuPal[] =                          INCBIN_U16("graphics
 static const u32 sRotomPhoneFace[] =                        INCBIN_U32("graphics/rotom_start_menu/rotom_face.4bpp.smol");
 static const u32 sIconsSmallGfx[] =                         INCBIN_U32("graphics/rotom_start_menu/icons.4bpp.smol");
 static const u16 sIconsRotomFacePal[] =                     INCBIN_U16("graphics/rotom_start_menu/icons.gbapal");
-static const u32 sRotomPhone_LargeStartMenuTiles[] =        INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.smol");
-static const u32 sRotomPhone_LargeStartMenuTilemap[] =      INCBIN_U32("graphics/rotom_start_menu/rotom_full_screen.bin.smolTM");
-static const u32 sRotomPhone_LargeStartMenuPanelTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_full_screen_panel.bin.smolTM");
-static const u16 sRotomPhone_LargeStartMenuPalette[] =      INCBIN_U16("graphics/rotom_start_menu/rotom_phone_tiles.gbapal");
+static const u32 sRotomPhone_FullScreenMenuTiles[] =        INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.smol");
+static const u32 sRotomPhone_FullScreenMenuTilemap[] =      INCBIN_U32("graphics/rotom_start_menu/rotom_full_screen.bin.smolTM");
+static const u32 sRotomPhone_FullScreenMenuPanelTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_full_screen_panel.bin.smolTM");
+static const u16 sRotomPhone_FullScreenMenuPalette[] =      INCBIN_U16("graphics/rotom_start_menu/rotom_phone_tiles.gbapal");
 static const u32 sRotomPhone_DaycareCompatability_Gfx[] =   INCBIN_U32("graphics/rotom_start_menu/panel/daycare_heart.4bpp.smol");
 static const u16 sRotomPhone_DaycareCompatability_Pal[] =   INCBIN_U16("graphics/rotom_start_menu/panel/daycare_heart.gbapal");
 
@@ -417,7 +417,7 @@ struct RotomPhone_StartMenu
     u32 windowIdFlipPhone;
 };
 
-struct RotomPhone_LargeStartMenuState
+struct RotomPhone_FullScreenMenuState
 {
     u8 loadState;
     u8 mode;
@@ -429,12 +429,12 @@ struct RotomPhone_LargeStartMenuState
     u8 panelWindowIds[RP_PANEL_WIN_COUNT];
 };
 
-static EWRAM_DATA struct RotomPhone_StartMenu *sRotomPhone_SmallStartMenu = NULL;
+static EWRAM_DATA struct RotomPhone_StartMenu *sRotomPhone_OverworldMenu = NULL;
 static EWRAM_DATA bool32 menuFullScreen;
 // Separate memory allocation so it persist between destroying of menu.
 static EWRAM_DATA enum RotomPhoneMenuItems menuSelectedSmall;
 static EWRAM_DATA enum RotomPhoneMenuItems menuSelectedLarge;
-static EWRAM_DATA struct RotomPhone_LargeStartMenuState *sRotomPhone_LargeStartMenu = NULL;
+static EWRAM_DATA struct RotomPhone_FullScreenMenuState *sRotomPhone_FullScreenMenu = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
 
@@ -574,7 +574,7 @@ enum WindowIds
     WIN_UI_TOP_BAR,
 };
 
-static const struct BgTemplate sRotomPhone_LargeStartMenuBgTemplates[] =
+static const struct BgTemplate sRotomPhone_FullScreenMenuBgTemplates[] =
 {
     {
         .bg = 0,
@@ -596,7 +596,7 @@ static const struct BgTemplate sRotomPhone_LargeStartMenuBgTemplates[] =
     }
 };
 
-static const struct WindowTemplate sRotomPhone_LargeStartMenuWindowTemplates[] =
+static const struct WindowTemplate sRotomPhone_FullScreenMenuWindowTemplates[] =
 {
     [WIN_UI_TOP_BAR] =
     {
@@ -611,10 +611,10 @@ static const struct WindowTemplate sRotomPhone_LargeStartMenuWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 #define ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK                           \
-sRotomPhone_LargeStartMenuWindowTemplates[WIN_UI_TOP_BAR].baseBlock +   \
+sRotomPhone_FullScreenMenuWindowTemplates[WIN_UI_TOP_BAR].baseBlock +   \
 (                                                                       \
-    sRotomPhone_LargeStartMenuWindowTemplates[WIN_UI_TOP_BAR].height *  \
-    sRotomPhone_LargeStartMenuWindowTemplates[WIN_UI_TOP_BAR].width     \
+    sRotomPhone_FullScreenMenuWindowTemplates[WIN_UI_TOP_BAR].height *  \
+    sRotomPhone_FullScreenMenuWindowTemplates[WIN_UI_TOP_BAR].width     \
 )
 
 static const struct SpritePalette sSpritePal_Icon[] =
@@ -829,7 +829,7 @@ static void SpriteCB_RotomPhoneSmall_RotomFace_Load(struct Sprite* sprite)
     {
         ReleaseComfyAnim(sFrameNumComfyAnimId);
         sprite->callback = SpriteCallbackDummy;
-        RotomPhone_SmallStartMenu_ContinueInit(TRUE);
+        RotomPhone_OverworldMenu_ContinueInit(TRUE);
         return;
     }
 
@@ -1049,7 +1049,7 @@ static enum RotomPhoneMenuItems RotomPhone_SetFirstSelectedMenu(void)
 #define tPhoneComfyAnimId gTasks[taskId].data[6]
 #define tPhoneCloseToSave gTasks[taskId].data[7]
 #define tPhoneHighlightComfyAnimId gTasks[taskId].data[8]
-void RotomPhone_SmallStartMenu_Init(bool32 firstInit)
+void RotomPhone_OverworldMenu_Init(bool32 firstInit)
 {
     u8 taskId;
 
@@ -1063,12 +1063,12 @@ void RotomPhone_SmallStartMenu_Init(bool32 firstInit)
     HideMapNamePopUpWindow();
     LockPlayerFieldControls();
 
-    if (sRotomPhone_SmallStartMenu == NULL)
+    if (sRotomPhone_OverworldMenu == NULL)
     {
-        sRotomPhone_SmallStartMenu = AllocZeroed(sizeof(struct RotomPhone_StartMenu));
+        sRotomPhone_OverworldMenu = AllocZeroed(sizeof(struct RotomPhone_StartMenu));
     }
 
-    if (sRotomPhone_SmallStartMenu == NULL)
+    if (sRotomPhone_OverworldMenu == NULL)
     {
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
         return;
@@ -1077,53 +1077,53 @@ void RotomPhone_SmallStartMenu_Init(bool32 firstInit)
     if (RP_NOT_FLIP_PHONE && RP_UPDATE_MESSAGE_SOUND)
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x80);
 
-    sRotomPhone_SmallStartMenu->isLoading = FALSE;
-    sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top = 0;
+    sRotomPhone_OverworldMenu->isLoading = FALSE;
+    sRotomPhone_OverworldMenu->windowIdRotomSpeech_Top = 0;
     menuFullScreen = FALSE;
 
-    sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId = SPRITE_NONE;
-    sRotomPhone_SmallStartMenu->menuSmallRotomFaceFlashSpriteId = SPRITE_NONE;
+    sRotomPhone_OverworldMenu->menuSmallRotomFaceSpriteId = SPRITE_NONE;
+    sRotomPhone_OverworldMenu->menuSmallRotomFaceFlashSpriteId = SPRITE_NONE;
     for (enum RotomPhoneSmallOptions smallOptions = RP_SMALL_OPTION_1; smallOptions < RP_SMALL_OPTION_COUNT; smallOptions++)
     {
-        sRotomPhone_SmallStartMenu->menuSmallSpriteId[smallOptions] = SPRITE_NONE;
-        sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[smallOptions] = SPRITE_NONE;
+        sRotomPhone_OverworldMenu->menuSmallSpriteId[smallOptions] = SPRITE_NONE;
+        sRotomPhone_OverworldMenu->menuSmallFlashSpriteId[smallOptions] = SPRITE_NONE;
     }
 
-    sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top = WINDOW_NONE;
-    sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom = WINDOW_NONE;
-    sRotomPhone_SmallStartMenu->windowIdFlipPhone = WINDOW_NONE;
+    sRotomPhone_OverworldMenu->windowIdRotomSpeech_Top = WINDOW_NONE;
+    sRotomPhone_OverworldMenu->windowIdRotomSpeech_Bottom = WINDOW_NONE;
+    sRotomPhone_OverworldMenu->windowIdFlipPhone = WINDOW_NONE;
 
-    RotomPhone_SmallStartMenu_LoadBgGfx(firstInit);
-    RotomPhone_SmallStartMenu_LoadSprites();
+    RotomPhone_OverworldMenu_LoadBgGfx(firstInit);
+    RotomPhone_OverworldMenu_LoadSprites();
 
     if (firstInit)
     {
         SetGpuReg(REG_OFFSET_BG0VOFS, -PHONE_OFFSCREEN_Y);
-        taskId = CreateTask(Task_RotomPhone_SmallStartMenu_PhoneSlideOpen, 0);
+        taskId = CreateTask(Task_RotomPhone_OverworldMenu_PhoneSlideOpen, 0);
         tPhoneY = PHONE_OFFSCREEN_Y;
         return;
     }
 
-    RotomPhone_SmallStartMenu_ContinueInit(FALSE);
+    RotomPhone_OverworldMenu_ContinueInit(FALSE);
 }
 
-static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit)
+static void RotomPhone_OverworldMenu_ContinueInit(bool32 firstInit)
 {
-    u8 taskId = FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_PhoneSlideOpen);
+    u8 taskId = FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_PhoneSlideOpen);
 
-    RotomPhone_SmallStartMenu_CreateAllSprites();
-    RotomPhone_SmallStartMenu_CreateRotomFaceSprite(FALSE);
-    RotomPhone_SmallStartMenu_CreateSpeechWindows();
-    RotomPhone_SmallStartMenu_CreateFlipPhoneWindow();
+    RotomPhone_OverworldMenu_CreateAllSprites();
+    RotomPhone_OverworldMenu_CreateRotomFaceSprite(FALSE);
+    RotomPhone_OverworldMenu_CreateSpeechWindows();
+    RotomPhone_OverworldMenu_CreateFlipPhoneWindow();
     ScheduleBgCopyTilemapToVram(0);
 
     if (!sRotomPhoneOptions[menuSelectedSmall].unlockedFunc || !sRotomPhoneOptions[menuSelectedSmall].unlockedFunc())
         menuSelectedSmall = RotomPhone_SetFirstSelectedMenu();
 
     if (firstInit)
-        gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_HandleMainInput;
+        gTasks[taskId].func = Task_RotomPhone_OverworldMenu_HandleMainInput;
     else
-        taskId = CreateTask(Task_RotomPhone_SmallStartMenu_HandleMainInput, 0);
+        taskId = CreateTask(Task_RotomPhone_OverworldMenu_HandleMainInput, 0);
 
     struct ComfyAnimSpringConfig config;
     InitComfyAnimConfig_Spring(&config);
@@ -1142,14 +1142,14 @@ static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit)
         tRotomUpdateMessage = RP_MESSAGE_SAFARI;
 
     if (firstInit)
-        RotomPhone_SmallStartMenu_PrintGreeting();
+        RotomPhone_OverworldMenu_PrintGreeting();
     else
         tRotomUpdateTimer = FALSE;
 
-    RotomPhone_SmallStartMenu_UpdateMenuPrompt(taskId);
+    RotomPhone_OverworldMenu_UpdateMenuPrompt(taskId);
 }
 
-static void RotomPhone_SmallStartMenu_LoadSprites(void)
+static void RotomPhone_OverworldMenu_LoadSprites(void)
 {
     u32 index;
     LoadSpritePalette(sSpritePal_Icon);
@@ -1167,9 +1167,9 @@ static void RotomPhone_SmallStartMenu_LoadSprites(void)
     LoadCompressedSpriteSheet(sSpriteSheet_RotomFace);
 }
 
-static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(bool32 rotomLoad)
+static void RotomPhone_OverworldMenu_CreateRotomFaceSprite(bool32 rotomLoad)
 {
-    if (!RP_NOT_FLIP_PHONE || sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId != SPRITE_NONE)
+    if (!RP_NOT_FLIP_PHONE || sRotomPhone_OverworldMenu->menuSmallRotomFaceSpriteId != SPRITE_NONE)
         return;
 
     bool32 flash = FALSE;
@@ -1185,7 +1185,7 @@ static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(bool32 rotomLoad)
         SetGpuRegBits(REG_OFFSET_WINOUT, WINOUT_WINOBJ_OBJ);
     }
 
-    sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId = CreateSprite(
+    sRotomPhone_OverworldMenu->menuSmallRotomFaceSpriteId = CreateSprite(
         &sSpriteTemplate_RotomSmallFace,
         x,
         y,
@@ -1194,7 +1194,7 @@ static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(bool32 rotomLoad)
     if (rotomLoad)
     {
         PlaySE(PMD_EVENT_SIGN_HATENA_03);
-        struct Sprite *sprite = &gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId];
+        struct Sprite *sprite = &gSprites[sRotomPhone_OverworldMenu->menuSmallRotomFaceSpriteId];
         sprite->callback = SpriteCB_RotomPhoneSmall_RotomFace_Load;
         StartSpriteAnim(sprite, RP_FACE_HAPPY);
 
@@ -1211,7 +1211,7 @@ static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(bool32 rotomLoad)
 
     if (flash)
     {
-        sRotomPhone_SmallStartMenu->menuSmallRotomFaceFlashSpriteId = CreateSprite(
+        sRotomPhone_OverworldMenu->menuSmallRotomFaceFlashSpriteId = CreateSprite(
             &sSpriteTemplate_RotomSmallFace,
             x,
             y,
@@ -1220,7 +1220,7 @@ static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(bool32 rotomLoad)
     }
 }
 
-static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menuItem, enum RotomPhoneSmallOptions spriteId)
+static void RotomPhone_OverworldMenu_CreateSprite(enum RotomPhoneMenuItems menuItem, enum RotomPhoneSmallOptions spriteId)
 {
     bool32 flash = FALSE;
     s32 x = 190;
@@ -1253,28 +1253,28 @@ static void RotomPhone_SmallStartMenu_CreateSprite(enum RotomPhoneMenuItems menu
         SetGpuRegBits(REG_OFFSET_WINOUT, WINOUT_WINOBJ_OBJ);
     }
 
-    sRotomPhone_SmallStartMenu->menuSmallSpriteId[spriteId] = CreateSprite(
+    sRotomPhone_OverworldMenu->menuSmallSpriteId[spriteId] = CreateSprite(
         &sSpriteTemplate_RotomSmallIcon,
         x + (iconColumn * xAdd),
         y + (iconRow * yAdd),
         0
     );
-    StartSpriteAnim(&gSprites[sRotomPhone_SmallStartMenu->menuSmallSpriteId[spriteId]], animNum);
+    StartSpriteAnim(&gSprites[sRotomPhone_OverworldMenu->menuSmallSpriteId[spriteId]], animNum);
 
     if (flash)
     {
-        sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[spriteId] = CreateSprite(
+        sRotomPhone_OverworldMenu->menuSmallFlashSpriteId[spriteId] = CreateSprite(
             &sSpriteTemplate_RotomSmallIcon,
             x + (iconColumn * xAdd),
             y + (iconRow * yAdd),
             0
         );
-        gSprites[sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[spriteId]].oam.objMode = ST_OAM_OBJ_WINDOW;
-        StartSpriteAnim(&gSprites[sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[spriteId]], animNum);
+        gSprites[sRotomPhone_OverworldMenu->menuSmallFlashSpriteId[spriteId]].oam.objMode = ST_OAM_OBJ_WINDOW;
+        StartSpriteAnim(&gSprites[sRotomPhone_OverworldMenu->menuSmallFlashSpriteId[spriteId]], animNum);
     }
 }
 
-static void RotomPhone_SmallStartMenu_CreateAllSprites(void)
+static void RotomPhone_OverworldMenu_CreateAllSprites(void)
 {
     enum RotomPhoneSmallOptions drawn = RP_SMALL_OPTION_1;
     u32 drawnCount = RP_SMALL_OPTION_COUNT;
@@ -1290,19 +1290,19 @@ static void RotomPhone_SmallStartMenu_CreateAllSprites(void)
         {
             enum RotomPhoneSmallOptions optionSlot = RP_SMALL_OPTION_1 + drawn;
 
-            RotomPhone_SmallStartMenu_CreateSprite(menuId, optionSlot);
-            sRotomPhone_SmallStartMenu->menuSmallOptions[optionSlot] = menuId;
+            RotomPhone_OverworldMenu_CreateSprite(menuId, optionSlot);
+            sRotomPhone_OverworldMenu->menuSmallOptions[optionSlot] = menuId;
             drawn++;
         }
     }
 
     for (; drawn < RP_SMALL_OPTION_COUNT; drawn++)
     {
-        sRotomPhone_SmallStartMenu->menuSmallOptions[drawn] = RP_MENU_COUNT;
+        sRotomPhone_OverworldMenu->menuSmallOptions[drawn] = RP_MENU_COUNT;
     }
 }
 
-static void RotomPhone_SmallStartMenu_LoadBgGfx(bool32 firstInit)
+static void RotomPhone_OverworldMenu_LoadBgGfx(bool32 firstInit)
 {
     u8* buf = GetBgTilemapBuffer(0);
     const u32 *tilemap;
@@ -1329,38 +1329,38 @@ static void RotomPhone_SmallStartMenu_LoadBgGfx(bool32 firstInit)
 
 #define ROTOM_SPEECH_TOP_ROW_Y      1
 #define ROTOM_SPEECH_BOTTOM_ROW_Y   1
-static void RotomPhone_SmallStartMenu_CreateSpeechWindows(void)
+static void RotomPhone_OverworldMenu_CreateSpeechWindows(void)
 {
     if (!RP_NOT_FLIP_PHONE)
         return;
 
     DecompressDataWithHeaderWram(sSmallRotomSpeechTilemap, GetBgTilemapBuffer(0));
 
-    sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top = AddWindow(&sWindowTemplate_RotomSpeech_Top);
-    FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top, PIXEL_FILL(ROTOM_PHONE_BG_COLOUR));
-    PutWindowTilemap(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top);
+    sRotomPhone_OverworldMenu->windowIdRotomSpeech_Top = AddWindow(&sWindowTemplate_RotomSpeech_Top);
+    FillWindowPixelBuffer(sRotomPhone_OverworldMenu->windowIdRotomSpeech_Top, PIXEL_FILL(ROTOM_PHONE_BG_COLOUR));
+    PutWindowTilemap(sRotomPhone_OverworldMenu->windowIdRotomSpeech_Top);
 
-    sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom = AddWindow(&sWindowTemplate_RotomSpeech_Bottom);
-    FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom, PIXEL_FILL(ROTOM_PHONE_BG_COLOUR));
-    PutWindowTilemap(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom);
+    sRotomPhone_OverworldMenu->windowIdRotomSpeech_Bottom = AddWindow(&sWindowTemplate_RotomSpeech_Bottom);
+    FillWindowPixelBuffer(sRotomPhone_OverworldMenu->windowIdRotomSpeech_Bottom, PIXEL_FILL(ROTOM_PHONE_BG_COLOUR));
+    PutWindowTilemap(sRotomPhone_OverworldMenu->windowIdRotomSpeech_Bottom);
 }
 
-static void RotomPhone_SmallStartMenu_CreateFlipPhoneWindow(void)
+static void RotomPhone_OverworldMenu_CreateFlipPhoneWindow(void)
 {
     if (RP_NOT_FLIP_PHONE)
         return;
     
-    sRotomPhone_SmallStartMenu->windowIdFlipPhone = AddWindow(&sWindowTemplate_FlipPhone);
-    FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdFlipPhone, PIXEL_FILL(FLIP_PHONE_BG_COLOUR));
-    PutWindowTilemap(sRotomPhone_SmallStartMenu->windowIdFlipPhone);
+    sRotomPhone_OverworldMenu->windowIdFlipPhone = AddWindow(&sWindowTemplate_FlipPhone);
+    FillWindowPixelBuffer(sRotomPhone_OverworldMenu->windowIdFlipPhone, PIXEL_FILL(FLIP_PHONE_BG_COLOUR));
+    PutWindowTilemap(sRotomPhone_OverworldMenu->windowIdFlipPhone);
 }
 
 static const u8 sText_ClearWindow[] = COMPOUND_STRING("{CLEAR_TO 190}");
-static void RotomPhone_SmallStartMenu_PrintRotomSpeech(u8 textBuffer[80], bool32 top, bool32 copy)
+static void RotomPhone_OverworldMenu_PrintRotomSpeech(u8 textBuffer[80], bool32 top, bool32 copy)
 {
     u8 fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, ROTOM_SPEECH_WINDOW_WIDTH_PXL);
     u32 windowId;
-    windowId = (top == TRUE) ? sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top : sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom;
+    windowId = (top == TRUE) ? sRotomPhone_OverworldMenu->windowIdRotomSpeech_Top : sRotomPhone_OverworldMenu->windowIdRotomSpeech_Bottom;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(ROTOM_PHONE_BG_COLOUR));
     AddTextPrinterParameterized4(windowId, fontId,
@@ -1371,7 +1371,7 @@ static void RotomPhone_SmallStartMenu_PrintRotomSpeech(u8 textBuffer[80], bool32
         CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-static void RotomPhone_SmallStartMenu_PrintGreeting(void)
+static void RotomPhone_OverworldMenu_PrintGreeting(void)
 {
     if (!RP_NOT_FLIP_PHONE)
         return;
@@ -1424,11 +1424,11 @@ static void RotomPhone_SmallStartMenu_PrintGreeting(void)
     else
         StringAppend(textBuffer, COMPOUND_STRING("?"));
 
-    RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
+    RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
     PlaySE(PMD_EVENT_SIGN_NOTICE_01);
 }
 
-static enum RotomPhoneMessages RotomPhone_SmallStartMenu_GetRandomMessage(void)
+static enum RotomPhoneMessages RotomPhone_OverworldMenu_GetRandomMessage(void)
 {
     if (!RP_UPDATE_MESSAGE)
         return RP_MESSAGE_TIME;
@@ -1445,39 +1445,39 @@ static enum RotomPhoneMessages RotomPhone_SmallStartMenu_GetRandomMessage(void)
     return messageRandom;
 }
 
-static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId)
+static void RotomPhone_OverworldMenu_CheckUpdateMessage(u8 taskId)
 {
     if (!tRotomUpdateTimer && RP_NOT_FLIP_PHONE)
     {
         switch (tRotomUpdateMessage)
         {
         case RP_MESSAGE_GOODBYE:
-            RotomPhone_SmallStartMenu_PrintGoodbye(taskId);
+            RotomPhone_OverworldMenu_PrintGoodbye(taskId);
             break;
         
         default:
         case RP_MESSAGE_TIME:
-            RotomPhone_SmallStartMenu_PrintTime(taskId);
+            RotomPhone_OverworldMenu_PrintTime(taskId);
             break;
 
         case RP_MESSAGE_SAFARI:
-            RotomPhone_SmallStartMenu_PrintSafari(taskId);
+            RotomPhone_OverworldMenu_PrintSafari(taskId);
             break;
         
         case RP_MESSAGE_DATE_WEATHER:
-            RotomPhone_SmallStartMenu_PrintDateWeather(taskId);
+            RotomPhone_OverworldMenu_PrintDateWeather(taskId);
             break;
 
         case RP_MESSAGE_PERSONALITY:
-            RotomPhone_SmallStartMenu_Personality(taskId);
+            RotomPhone_OverworldMenu_Personality(taskId);
             break;
 
         case RP_MESSAGE_FUN:
-            RotomPhone_SmallStartMenu_PrintHaveFun(taskId);
+            RotomPhone_OverworldMenu_PrintHaveFun(taskId);
             break;
 
         case RP_MESSAGE_ADVENTURE:
-            RotomPhone_SmallStartMenu_PrintAdventure(taskId);
+            RotomPhone_OverworldMenu_PrintAdventure(taskId);
             break;
         }
         tRotomUpdateTimer = RP_MESSAGE_UPDATE_TIMER;
@@ -1493,13 +1493,13 @@ static void RotomPhone_SmallStartMenu_CheckUpdateMessage(u8 taskId)
             do {
                 rotomFace = Random() % (RP_FACE_COUNT - RP_FACE_LOOK_UP_ANIMS);
                 rotomFace += RP_FACE_LOOK_UP_ANIMS;
-            } while (rotomFace == gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId].animNum);
-            StartSpriteAnim(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId], rotomFace);
+            } while (rotomFace == gSprites[sRotomPhone_OverworldMenu->menuSmallRotomFaceSpriteId].animNum);
+            StartSpriteAnim(&gSprites[sRotomPhone_OverworldMenu->menuSmallRotomFaceSpriteId], rotomFace);
         }
     }
 }
 
-static void RotomPhone_SmallStartMenu_PrintGoodbye(u8 taskId)
+static void RotomPhone_OverworldMenu_PrintGoodbye(u8 taskId)
 {
     u8 textBuffer[80];
     enum RotomPhoneMessages_Goodbye messageRotom = Random() % RP_MESSAGE_GOODBYE_COUNT;
@@ -1511,54 +1511,54 @@ static void RotomPhone_SmallStartMenu_PrintGoodbye(u8 taskId)
         StringCopy(textBuffer, COMPOUND_STRING("Goodbye, "));
         StringAppend(textBuffer, gSaveBlock3Ptr->characters.playerNickname);
         StringAppend(textBuffer, COMPOUND_STRING("."));
-        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, FALSE);
+        RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, TRUE, FALSE);
 
         StringCopy(textBuffer, COMPOUND_STRING("I'll see you later!"));
-        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, FALSE, FALSE);
+        RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, FALSE, FALSE);
         break;
     
     case RP_MESSAGE_GOODBYE_SEE_YA:
         StringCopy(textBuffer, COMPOUND_STRING("See ya later, "));
         StringAppend(textBuffer, gSaveBlock3Ptr->characters.playerNickname);
         StringAppend(textBuffer, COMPOUND_STRING("!"));
-        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, FALSE);
+        RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, TRUE, FALSE);
 
         StringCopy(textBuffer, COMPOUND_STRING("Don't miss me too much."));
-        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, FALSE, FALSE);
+        RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, FALSE, FALSE);
         break;
     
     case RP_MESSAGE_GOODBYE_LOGGING_OFF:
         StringCopy(textBuffer, COMPOUND_STRING("Logging off for now…"));
-        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, FALSE);
+        RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, TRUE, FALSE);
 
         StringCopy(textBuffer, COMPOUND_STRING("Catch you later, "));
         StringAppend(textBuffer, gSaveBlock3Ptr->characters.playerNickname);
         StringAppend(textBuffer, COMPOUND_STRING("."));
-        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, FALSE, FALSE);
+        RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, FALSE, FALSE);
         break;
     
     case RP_MESSAGE_GOODBYE_POWERING_DOWN:
         StringCopy(textBuffer, COMPOUND_STRING("3… 2… 1… Powering down…"));
-        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, FALSE);
+        RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, TRUE, FALSE);
 
         StringCopy(textBuffer, COMPOUND_STRING("Until next time, "));
         StringAppend(textBuffer, gSaveBlock3Ptr->characters.playerNickname);
         StringAppend(textBuffer, COMPOUND_STRING("."));
-        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, FALSE, FALSE);
+        RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, FALSE, FALSE);
         break;
     }
 
-    if (FuncIsActiveTask(Task_RotomPhone_SmallStartMenu_CloseAndSave))
+    if (FuncIsActiveTask(Task_RotomPhone_OverworldMenu_CloseAndSave))
     {
         StringCopy(textBuffer, COMPOUND_STRING("Preparing to record progress…"));
-        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, FALSE);
+        RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, TRUE, FALSE);
     }
 
-    CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
-    CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
+    CopyWindowToVram(sRotomPhone_OverworldMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
+    CopyWindowToVram(sRotomPhone_OverworldMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
 }
 
-static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId)
+static void RotomPhone_OverworldMenu_PrintTime(u8 taskId)
 {
     u8 textBuffer[80];
     u8 time[24];
@@ -1570,13 +1570,13 @@ static void RotomPhone_SmallStartMenu_PrintTime(u8 taskId)
     StringAppend(textBuffer, COMPOUND_STRING(" on "));
     StringAppend(textBuffer, gDayNameStringsTable[(gLocalTime.days % WEEKDAY_COUNT)]);
     StringAppend(textBuffer, COMPOUND_STRING("."));
-    RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
-    tRotomUpdateMessage = RotomPhone_SmallStartMenu_GetRandomMessage();
+    RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
+    tRotomUpdateMessage = RotomPhone_OverworldMenu_GetRandomMessage();
     if (GetSafariZoneFlag())
         tRotomUpdateMessage = RP_MESSAGE_SAFARI;
 }
 
-static void RotomPhone_SmallStartMenu_PrintSafari(u8 taskId)
+static void RotomPhone_OverworldMenu_PrintSafari(u8 taskId)
 {
     u8 textBuffer[80];
     u8 numBalls[2];
@@ -1589,11 +1589,11 @@ static void RotomPhone_SmallStartMenu_PrintSafari(u8 taskId)
     CopyItemNameHandlePlural(ITEM_SAFARI_BALL, nameItem, gNumSafariBalls);
     StringAppend(textBuffer, nameItem);
     StringAppend(textBuffer, COMPOUND_STRING(" remaining."));
-    RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
+    RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
     tRotomUpdateMessage = RP_MESSAGE_TIME;
 }
 
-static void RotomPhone_SmallStartMenu_PrintDateWeather(u8 taskId)
+static void RotomPhone_OverworldMenu_PrintDateWeather(u8 taskId)
 {
     u8 textBuffer[80];
     enum RotomPhoneMessages_DateWeather messageRotom = Random() % RP_MESSAGE_DATE_WEATHER_COUNT;
@@ -1649,11 +1649,11 @@ static void RotomPhone_SmallStartMenu_PrintDateWeather(u8 taskId)
         StringAppend(textBuffer, COMPOUND_STRING("."));
     }
 
-    RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
+    RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
     tRotomUpdateMessage = RP_MESSAGE_TIME;
 }
 
-static void RotomPhone_SmallStartMenu_Personality(u8 taskId)
+static void RotomPhone_OverworldMenu_Personality(u8 taskId)
 {
     u8 textBuffer[80];
     enum RotomPhoneMessages_Personality messageRotom = Random() % RP_MESSAGE_PERSONALITY_COUNT;
@@ -1678,11 +1678,11 @@ static void RotomPhone_SmallStartMenu_Personality(u8 taskId)
         break;
     }
     
-    RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
+    RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
     tRotomUpdateMessage = RP_MESSAGE_TIME;
 }
 
-static void RotomPhone_SmallStartMenu_PrintHaveFun(u8 taskId)
+static void RotomPhone_OverworldMenu_PrintHaveFun(u8 taskId)
 {
     u8 textBuffer[80];
     enum RotomPhoneMessages_Fun messageRotom = Random() % RP_MESSAGE_FUN_COUNT;
@@ -1707,11 +1707,11 @@ static void RotomPhone_SmallStartMenu_PrintHaveFun(u8 taskId)
         break;
     }
 
-    RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
+    RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
     tRotomUpdateMessage = RP_MESSAGE_TIME;
 }
 
-static void RotomPhone_SmallStartMenu_PrintAdventure(u8 taskId)
+static void RotomPhone_OverworldMenu_PrintAdventure(u8 taskId)
 {
     u8 textBuffer[80];
     enum RotomPhoneMessages_Adventure messageRotom = Random() % RP_MESSAGE_ADVENTURE_COUNT;
@@ -1741,11 +1741,11 @@ static void RotomPhone_SmallStartMenu_PrintAdventure(u8 taskId)
     }
 
     
-    RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
+    RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
     tRotomUpdateMessage = RP_MESSAGE_TIME;
 }
 
-static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId)
+static void RotomPhone_OverworldMenu_UpdateMenuPrompt(u8 taskId)
 {
     u8 fontId;
     if (RP_NOT_FLIP_PHONE)
@@ -1755,7 +1755,7 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId)
         if (sRotomPhoneOptions[menuSelectedSmall].rotomAction == NULL)
         {
             StringCopy(textBuffer, COMPOUND_STRING("Invalid Option"));
-            RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, FALSE, TRUE);
+            RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, FALSE, TRUE);
             return;
         }
 
@@ -1768,7 +1768,7 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId)
             StringAppend(textBuffer, sRotomPhoneOptions[RotomPhone_StartMenu_GetShortcutOption()].rotomAction);
         else
             StringAppend(textBuffer, sRotomPhoneOptions[menuSelectedSmall].rotomAction);
-        RotomPhone_SmallStartMenu_PrintRotomSpeech(textBuffer, FALSE, TRUE);
+        RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, FALSE, TRUE);
     }
     else
     {
@@ -1778,11 +1778,11 @@ static void RotomPhone_SmallStartMenu_UpdateMenuPrompt(u8 taskId)
             StringCopy(menuName, sRotomPhoneOptions[RotomPhone_StartMenu_GetShortcutOption()].menuName);
 
         fontId = GetFontIdToFit(menuName, ReturnNormalTextFont(), 0, sWindowTemplate_FlipPhone.width * 8);
-        FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdFlipPhone, PIXEL_FILL(FLIP_PHONE_BG_COLOUR));
-        AddTextPrinterParameterized4(sRotomPhone_SmallStartMenu->windowIdFlipPhone, fontId,
+        FillWindowPixelBuffer(sRotomPhone_OverworldMenu->windowIdFlipPhone, PIXEL_FILL(FLIP_PHONE_BG_COLOUR));
+        AddTextPrinterParameterized4(sRotomPhone_OverworldMenu->windowIdFlipPhone, fontId,
         GetStringCenterAlignXOffset(fontId, menuName, sWindowTemplate_FlipPhone.width * 8),
         ROTOM_SPEECH_BOTTOM_ROW_Y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_FLIP_PHONE], TEXT_SKIP_DRAW, menuName);
-        CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdFlipPhone, COPYWIN_GFX);
+        CopyWindowToVram(sRotomPhone_OverworldMenu->windowIdFlipPhone, COPYWIN_GFX);
         tRotomMessageSoundEffect = SE_BALL_TRAY_EXIT;
     }
 }
@@ -1795,66 +1795,66 @@ static const u8 *GetWeatherAction(u32 weatherId)
     return sWeatherActions[weatherId];
 }
 
-static void RotomPhone_SmallStartMenu_RemoveWindows(void)
+static void RotomPhone_OverworldMenu_RemoveWindows(void)
 {
-    if (sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom != WINDOW_NONE)
+    if (sRotomPhone_OverworldMenu->windowIdRotomSpeech_Bottom != WINDOW_NONE)
     {
-        FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-        ClearWindowTilemap(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom);
-        CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
-        RemoveWindow(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Bottom);
+        FillWindowPixelBuffer(sRotomPhone_OverworldMenu->windowIdRotomSpeech_Bottom, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+        ClearWindowTilemap(sRotomPhone_OverworldMenu->windowIdRotomSpeech_Bottom);
+        CopyWindowToVram(sRotomPhone_OverworldMenu->windowIdRotomSpeech_Bottom, COPYWIN_GFX);
+        RemoveWindow(sRotomPhone_OverworldMenu->windowIdRotomSpeech_Bottom);
     }
 
-    if (sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top != WINDOW_NONE)
+    if (sRotomPhone_OverworldMenu->windowIdRotomSpeech_Top != WINDOW_NONE)
     {
-        FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-        ClearWindowTilemap(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top);
-        CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
-        RemoveWindow(sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top);
+        FillWindowPixelBuffer(sRotomPhone_OverworldMenu->windowIdRotomSpeech_Top, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+        ClearWindowTilemap(sRotomPhone_OverworldMenu->windowIdRotomSpeech_Top);
+        CopyWindowToVram(sRotomPhone_OverworldMenu->windowIdRotomSpeech_Top, COPYWIN_GFX);
+        RemoveWindow(sRotomPhone_OverworldMenu->windowIdRotomSpeech_Top);
     }
 
-    if (sRotomPhone_SmallStartMenu->windowIdFlipPhone != WINDOW_NONE)
+    if (sRotomPhone_OverworldMenu->windowIdFlipPhone != WINDOW_NONE)
     {
-        FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdFlipPhone, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-        ClearWindowTilemap(sRotomPhone_SmallStartMenu->windowIdFlipPhone);
-        CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdFlipPhone, COPYWIN_GFX);
-        RemoveWindow(sRotomPhone_SmallStartMenu->windowIdFlipPhone);
+        FillWindowPixelBuffer(sRotomPhone_OverworldMenu->windowIdFlipPhone, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+        ClearWindowTilemap(sRotomPhone_OverworldMenu->windowIdFlipPhone);
+        CopyWindowToVram(sRotomPhone_OverworldMenu->windowIdFlipPhone, COPYWIN_GFX);
+        RemoveWindow(sRotomPhone_OverworldMenu->windowIdFlipPhone);
     }
 }
 
-static void RotomPhone_SmallStartMenu_DestroySprites(void)
+static void RotomPhone_OverworldMenu_DestroySprites(void)
 {
-    if (sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId != SPRITE_NONE)
+    if (sRotomPhone_OverworldMenu->menuSmallRotomFaceSpriteId != SPRITE_NONE)
     {
-        FreeSpriteOamMatrix(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId]);
-        DestroySprite(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId]);
+        FreeSpriteOamMatrix(&gSprites[sRotomPhone_OverworldMenu->menuSmallRotomFaceSpriteId]);
+        DestroySprite(&gSprites[sRotomPhone_OverworldMenu->menuSmallRotomFaceSpriteId]);
     }
-    if (sRotomPhone_SmallStartMenu->menuSmallRotomFaceFlashSpriteId != SPRITE_NONE)
+    if (sRotomPhone_OverworldMenu->menuSmallRotomFaceFlashSpriteId != SPRITE_NONE)
     {
-        FreeSpriteOamMatrix(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceFlashSpriteId]);
-        DestroySprite(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceFlashSpriteId]);
+        FreeSpriteOamMatrix(&gSprites[sRotomPhone_OverworldMenu->menuSmallRotomFaceFlashSpriteId]);
+        DestroySprite(&gSprites[sRotomPhone_OverworldMenu->menuSmallRotomFaceFlashSpriteId]);
     }
     for (enum RotomPhoneSmallOptions spriteId = RP_SMALL_OPTION_1; spriteId < RP_SMALL_OPTION_COUNT; spriteId++)
     {
-        if (sRotomPhone_SmallStartMenu->menuSmallSpriteId[spriteId] != SPRITE_NONE)
+        if (sRotomPhone_OverworldMenu->menuSmallSpriteId[spriteId] != SPRITE_NONE)
         {
-            FreeSpriteOamMatrix(&gSprites[sRotomPhone_SmallStartMenu->menuSmallSpriteId[spriteId]]);
-            DestroySprite(&gSprites[sRotomPhone_SmallStartMenu->menuSmallSpriteId[spriteId]]);
+            FreeSpriteOamMatrix(&gSprites[sRotomPhone_OverworldMenu->menuSmallSpriteId[spriteId]]);
+            DestroySprite(&gSprites[sRotomPhone_OverworldMenu->menuSmallSpriteId[spriteId]]);
         }
-        if (sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[spriteId] != SPRITE_NONE)
+        if (sRotomPhone_OverworldMenu->menuSmallFlashSpriteId[spriteId] != SPRITE_NONE)
         {
-            FreeSpriteOamMatrix(&gSprites[sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[spriteId]]);
-            DestroySprite(&gSprites[sRotomPhone_SmallStartMenu->menuSmallFlashSpriteId[spriteId]]);
+            FreeSpriteOamMatrix(&gSprites[sRotomPhone_OverworldMenu->menuSmallFlashSpriteId[spriteId]]);
+            DestroySprite(&gSprites[sRotomPhone_OverworldMenu->menuSmallFlashSpriteId[spriteId]]);
         }
     }
 }
 
-static void RotomPhone_SmallStartMenu_ExitAndClearTilemap(void)
+static void RotomPhone_OverworldMenu_ExitAndClearTilemap(void)
 {
     u32 i;
     u8 *buf = GetBgTilemapBuffer(0);
 
-    RotomPhone_SmallStartMenu_RemoveWindows();
+    RotomPhone_OverworldMenu_RemoveWindows();
 
     for (i=0; i<2048; i++)
     {
@@ -1862,14 +1862,14 @@ static void RotomPhone_SmallStartMenu_ExitAndClearTilemap(void)
     }
     ScheduleBgCopyTilemapToVram(0);
 
-    RotomPhone_SmallStartMenu_DestroySprites();
+    RotomPhone_OverworldMenu_DestroySprites();
 
-    if (sRotomPhone_SmallStartMenu != NULL)
+    if (sRotomPhone_OverworldMenu != NULL)
     {
         FreeSpriteTilesByTag(TAG_PHONE_ICON_GFX); 
         FreeSpriteTilesByTag(TAG_ROTOM_FACE_GFX);  
-        Free(sRotomPhone_SmallStartMenu);
-        sRotomPhone_SmallStartMenu = NULL;
+        Free(sRotomPhone_OverworldMenu);
+        sRotomPhone_OverworldMenu = NULL;
     }
 
     ReleaseComfyAnims();
@@ -1877,42 +1877,42 @@ static void RotomPhone_SmallStartMenu_ExitAndClearTilemap(void)
     UnlockPlayerFieldControls();
 }
 
-static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(MainCallback callback)
+static void RotomPhone_OverworldMenu_DoCleanUpAndChangeCallback(MainCallback callback)
 {
     if (!gPaletteFade.active)
     {
-        RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput), TRUE);
+        RotomPhone_OverworldMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput), TRUE);
         SetMainCallback2(callback);
         gMain.savedCallback = CB2_ReturnToFieldWithOpenMenu;
     }
 }
 
-static u8 UNUSED RotomPhone_SmallStartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority)
+static u8 UNUSED RotomPhone_OverworldMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority)
 {
     PlayRainStoppingSoundEffect();
-    RotomPhone_SmallStartMenu_ExitAndClearTilemap();
+    RotomPhone_OverworldMenu_ExitAndClearTilemap();
     CleanupOverworldWindowsAndTilemaps();
     return CreateTask(func, priority);
 }
 
-static void RotomPhone_SmallStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func)
+static void RotomPhone_OverworldMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func)
 {
     PlayRainStoppingSoundEffect();
-    RotomPhone_SmallStartMenu_ExitAndClearTilemap();
+    RotomPhone_OverworldMenu_ExitAndClearTilemap();
     CleanupOverworldWindowsAndTilemaps();
     gTasks[taskId].func = func;
 }
 
-static void RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(u8 taskId, bool32 overworldCleanup)
+static void RotomPhone_OverworldMenu_DoCleanUpAndDestroyTask(u8 taskId, bool32 overworldCleanup)
 {
     PlayRainStoppingSoundEffect();
-    RotomPhone_SmallStartMenu_ExitAndClearTilemap();
+    RotomPhone_OverworldMenu_ExitAndClearTilemap();
     if (overworldCleanup)
         CleanupOverworldWindowsAndTilemaps();
     DestroyTask(taskId);
 }
 
-static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
+static void RotomPhone_OverworldMenu_HandleInput(u8 taskId)
 {
     enum RotomPhoneSmallOptions optionCurrent = RP_SMALL_OPTION_1;
     enum RotomPhoneFaceExpressions rotomFace;
@@ -1921,7 +1921,7 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
 
     for (enum RotomPhoneSmallOptions i = RP_SMALL_OPTION_1; i < RP_SMALL_OPTION_COUNT; i++)
     {
-        if (sRotomPhone_SmallStartMenu->menuSmallOptions[i] == menuSelectedSmall)
+        if (sRotomPhone_OverworldMenu->menuSmallOptions[i] == menuSelectedSmall)
         {
             optionCurrent = i;
             break;
@@ -1940,7 +1940,7 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
     nextIndex = optionCurrent + offset;
     if (nextIndex >= RP_SMALL_OPTION_COUNT
         || nextIndex < RP_SMALL_OPTION_1
-        || sRotomPhone_SmallStartMenu->menuSmallOptions[nextIndex] == RP_MENU_COUNT)
+        || sRotomPhone_OverworldMenu->menuSmallOptions[nextIndex] == RP_MENU_COUNT)
     {
         if (RP_NOT_FLIP_PHONE)
             tRotomMessageSoundEffect = PMD_EVENT_SIGN_ANGER_02;
@@ -1949,8 +1949,8 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
         return;
     }
 
-    if (menuSelectedSmall != sRotomPhone_SmallStartMenu->menuSmallOptions[nextIndex]
-        && sRotomPhone_SmallStartMenu->isLoading == FALSE && !gPaletteFade.active)
+    if (menuSelectedSmall != sRotomPhone_OverworldMenu->menuSmallOptions[nextIndex]
+        && sRotomPhone_OverworldMenu->isLoading == FALSE && !gPaletteFade.active)
     {
         u32 index = IndexOfSpritePaletteTag(TAG_ROTOM_FACE_ICON_PAL);
         LoadPalette(sIconsRotomFacePal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
@@ -1964,7 +1964,7 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
     }
     gComfyAnims[tPhoneHighlightComfyAnimId].config.data.spring.to = Q_24_8(FADE_COLOUR_MAX);
     gComfyAnims[tPhoneHighlightComfyAnimId].position = 0;
-    menuSelectedSmall = sRotomPhone_SmallStartMenu->menuSmallOptions[nextIndex];
+    menuSelectedSmall = sRotomPhone_OverworldMenu->menuSmallOptions[nextIndex];
     if (RP_NOT_FLIP_PHONE)
         tRotomMessageSoundEffect = PMD_EVENT_SIGN_ASE_01;
     else
@@ -1972,13 +1972,13 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
 
     do {
         rotomFace = Random() % RP_FACE_LOOK_UP_ANIMS;
-    } while (rotomFace == gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId].animNum);
-    StartSpriteAnim(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId], rotomFace);
+    } while (rotomFace == gSprites[sRotomPhone_OverworldMenu->menuSmallRotomFaceSpriteId].animNum);
+    StartSpriteAnim(&gSprites[sRotomPhone_OverworldMenu->menuSmallRotomFaceSpriteId], rotomFace);
 
-    RotomPhone_SmallStartMenu_UpdateMenuPrompt(taskId);
+    RotomPhone_OverworldMenu_UpdateMenuPrompt(taskId);
 }
 
-static void Task_RotomPhone_SmallStartMenu_PhoneSlideOpen(u8 taskId)
+static void Task_RotomPhone_OverworldMenu_PhoneSlideOpen(u8 taskId)
 {
     TryAdvanceComfyAnim(&gComfyAnims[tPhoneComfyAnimId]);
     if (tPhoneY == PHONE_OFFSCREEN_Y)
@@ -2009,13 +2009,13 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideOpen(u8 taskId)
     {
         ReleaseComfyAnim(tPhoneComfyAnimId);
         if (RP_NOT_FLIP_PHONE)
-            RotomPhone_SmallStartMenu_CreateRotomFaceSprite(TRUE);
+            RotomPhone_OverworldMenu_CreateRotomFaceSprite(TRUE);
         else
-            RotomPhone_SmallStartMenu_ContinueInit(TRUE);
+            RotomPhone_OverworldMenu_ContinueInit(TRUE);
     }
 }
 
-static void Task_RotomPhone_SmallStartMenu_PhoneSlideClose(u8 taskId)
+static void Task_RotomPhone_OverworldMenu_PhoneSlideClose(u8 taskId)
 {
     TryAdvanceComfyAnim(&gComfyAnims[tPhoneComfyAnimId]);
     if (tPhoneY == FALSE)
@@ -2029,8 +2029,8 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideClose(u8 taskId)
         tPhoneComfyAnimId = CreateComfyAnim_Easing(&config);
         TryAdvanceComfyAnim(&gComfyAnims[tPhoneComfyAnimId]);
 
-        RotomPhone_SmallStartMenu_RemoveWindows();
-        RotomPhone_SmallStartMenu_DestroySprites();
+        RotomPhone_OverworldMenu_RemoveWindows();
+        RotomPhone_OverworldMenu_DestroySprites();
         if (RP_NOT_FLIP_PHONE)
             DecompressDataWithHeaderWram(sSmallRotomTilemap, GetBgTilemapBuffer(0));
         else
@@ -2047,7 +2047,7 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideClose(u8 taskId)
     else if (tPhoneY == PHONE_OFFSCREEN_Y)
     {
         tPhoneY++;
-        RotomPhone_SmallStartMenu_ExitAndClearTilemap();
+        RotomPhone_OverworldMenu_ExitAndClearTilemap();
     }
     else
     {
@@ -2057,7 +2057,7 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideClose(u8 taskId)
     }
 }
 
-static void RotomPhone_SmallStartMenu_UpdateIconPaletteFade(u8 taskId)
+static void RotomPhone_OverworldMenu_UpdateIconPaletteFade(u8 taskId)
 {
     if (gPaletteFade.active)
         return;
@@ -2071,7 +2071,7 @@ static void RotomPhone_SmallStartMenu_UpdateIconPaletteFade(u8 taskId)
     u32 frameNum = ReadComfyAnimValueSmooth(&gComfyAnims[tPhoneHighlightComfyAnimId]);
     UpdateRotomSpriteFadeColours(
         // Uses first option as all sprites will use the same palette
-        &gSprites[sRotomPhone_SmallStartMenu->menuSmallSpriteId[RP_MENU_FIRST_OPTION]],
+        &gSprites[sRotomPhone_OverworldMenu->menuSmallSpriteId[RP_MENU_FIRST_OPTION]],
         iconPal, 
         frameNum
     );
@@ -2082,47 +2082,47 @@ static void RotomPhone_SmallStartMenu_UpdateIconPaletteFade(u8 taskId)
         gComfyAnims[tPhoneHighlightComfyAnimId].config.data.spring.to = Q_24_8(FADE_COLOUR_MAX);
 }
 
-static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
+static void Task_RotomPhone_OverworldMenu_HandleMainInput(u8 taskId)
 {
     tRotomMessageSoundEffect = MUS_DUMMY;
-    RotomPhone_SmallStartMenu_CheckUpdateMessage(taskId);
-    RotomPhone_SmallStartMenu_UpdateIconPaletteFade(taskId);
+    RotomPhone_OverworldMenu_CheckUpdateMessage(taskId);
+    RotomPhone_OverworldMenu_UpdateIconPaletteFade(taskId);
 
-    if (tRotomUpdateTimer && sRotomPhone_SmallStartMenu->isLoading == FALSE && !gPaletteFade.active)
+    if (tRotomUpdateTimer && sRotomPhone_OverworldMenu->isLoading == FALSE && !gPaletteFade.active)
         tRotomUpdateTimer--;
     
     if (JOY_NEW(A_BUTTON))
     {
-        if (sRotomPhone_SmallStartMenu->isLoading == FALSE)
+        if (sRotomPhone_OverworldMenu->isLoading == FALSE)
         {
             if (menuSelectedSmall == RP_MENU_FULL_SCREEN)
                 FadeScreen(FADE_TO_WHITE, 0);
             else if (menuSelectedSmall != RP_MENU_SAVE && menuSelectedSmall != RP_MENU_FLAG && menuSelectedSmall != RP_MENU_CLOCK)
                 FadeScreen(FADE_TO_BLACK, 0);
             
-            sRotomPhone_SmallStartMenu->isLoading = TRUE;
+            sRotomPhone_OverworldMenu->isLoading = TRUE;
         }
     }
-    else if (JOY_NEW(B_BUTTON) && sRotomPhone_SmallStartMenu->isLoading == FALSE)
+    else if (JOY_NEW(B_BUTTON) && sRotomPhone_OverworldMenu->isLoading == FALSE)
     {
         if (RP_NOT_FLIP_PHONE)
         {
-            gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_RotomShutdown;
-            RotomPhone_SmallStartMenu_RotomShutdownPreparation(taskId);
+            gTasks[taskId].func = Task_RotomPhone_OverworldMenu_RotomShutdown;
+            RotomPhone_OverworldMenu_RotomShutdownPreparation(taskId);
         }
         else
         {
             PlaySE(SE_BALL_TRAY_ENTER);
             tPhoneY = FALSE;
-            gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_PhoneSlideClose;
+            gTasks[taskId].func = Task_RotomPhone_OverworldMenu_PhoneSlideClose;
         }
         return;
     }
-    else if (gMain.newKeys & DPAD_ANY && sRotomPhone_SmallStartMenu->isLoading == FALSE)
+    else if (gMain.newKeys & DPAD_ANY && sRotomPhone_OverworldMenu->isLoading == FALSE)
     {
-        RotomPhone_SmallStartMenu_HandleInput(taskId);
+        RotomPhone_OverworldMenu_HandleInput(taskId);
     }
-    else if (sRotomPhone_SmallStartMenu->isLoading == TRUE && sRotomPhoneOptions[menuSelectedSmall].selectedFunc)
+    else if (sRotomPhone_OverworldMenu->isLoading == TRUE && sRotomPhoneOptions[menuSelectedSmall].selectedFunc)
     {
         sRotomPhoneOptions[menuSelectedSmall].selectedFunc();
     }
@@ -2131,15 +2131,15 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
         PlaySE(tRotomMessageSoundEffect);
 }
 
-static void RotomPhone_SmallStartMenu_RotomShutdownPreparation(u8 taskId)
+static void RotomPhone_OverworldMenu_RotomShutdownPreparation(u8 taskId)
 {
     PlaySE(PMD_EVENT_MOTION_HARAHERI);
     tRotomUpdateMessage = RP_MESSAGE_GOODBYE;
     tRotomUpdateTimer = FALSE;
-    RotomPhone_SmallStartMenu_CheckUpdateMessage(taskId);
-    struct Sprite *sprite = &gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId];
+    RotomPhone_OverworldMenu_CheckUpdateMessage(taskId);
+    struct Sprite *sprite = &gSprites[sRotomPhone_OverworldMenu->menuSmallRotomFaceSpriteId];
     sprite->callback = SpriteCB_RotomPhoneSmall_RotomFace_Unload;
-    StartSpriteAnim(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId], RP_FACE_HAPPY_WITH);
+    StartSpriteAnim(&gSprites[sRotomPhone_OverworldMenu->menuSmallRotomFaceSpriteId], RP_FACE_HAPPY_WITH);
     
     struct ComfyAnimSpringConfig config;
     InitComfyAnimConfig_Spring(&config);
@@ -2152,32 +2152,32 @@ static void RotomPhone_SmallStartMenu_RotomShutdownPreparation(u8 taskId)
     sFrameNumComfyAnimId = CreateComfyAnim_Spring(&config);
 }
 
-static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId)
+static void Task_RotomPhone_OverworldMenu_RotomShutdown(u8 taskId)
 {
-    if (gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId].callback == SpriteCallbackDummy)
+    if (gSprites[sRotomPhone_OverworldMenu->menuSmallRotomFaceSpriteId].callback == SpriteCallbackDummy)
     {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
-        gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_PhoneSlideClose;
+        gTasks[taskId].func = Task_RotomPhone_OverworldMenu_PhoneSlideClose;
     }
 }
 
-static void Task_RotomPhone_SmallStartMenu_CloseAndSave(u8 taskId)
+static void Task_RotomPhone_OverworldMenu_CloseAndSave(u8 taskId)
 {
     TaskFunc func;
     if (RP_NOT_FLIP_PHONE)
-        func = Task_RotomPhone_SmallStartMenu_RotomShutdown;
+        func = Task_RotomPhone_OverworldMenu_RotomShutdown;
     else
-        func = Task_RotomPhone_SmallStartMenu_PhoneSlideClose;
+        func = Task_RotomPhone_OverworldMenu_PhoneSlideClose;
 
-    if (!FuncIsActiveTask(Task_RotomPhone_SmallStartMenu_RotomShutdown)
-        && !FuncIsActiveTask(Task_RotomPhone_SmallStartMenu_PhoneSlideClose)
+    if (!FuncIsActiveTask(Task_RotomPhone_OverworldMenu_RotomShutdown)
+        && !FuncIsActiveTask(Task_RotomPhone_OverworldMenu_PhoneSlideClose)
         && tPhoneCloseToSave == FALSE)
     {
         CreateTask(func, 0);
         tPhoneCloseToSave = TRUE;
     }
-    else if (!FuncIsActiveTask(Task_RotomPhone_SmallStartMenu_RotomShutdown)
-        && !FuncIsActiveTask(Task_RotomPhone_SmallStartMenu_PhoneSlideClose)
+    else if (!FuncIsActiveTask(Task_RotomPhone_OverworldMenu_RotomShutdown)
+        && !FuncIsActiveTask(Task_RotomPhone_OverworldMenu_PhoneSlideClose)
         && tPhoneCloseToSave == TRUE)
     {
         LoadMessageBoxAndBorderGfx();
@@ -2186,15 +2186,15 @@ static void Task_RotomPhone_SmallStartMenu_CloseAndSave(u8 taskId)
     }
 }
 
-static void Task_RotomPhone_SmallStartMenu_CloseForSafari(u8 taskId)
+static void Task_RotomPhone_OverworldMenu_CloseForSafari(u8 taskId)
 {
-    if (!FuncIsActiveTask(Task_RotomPhone_SmallStartMenu_PhoneSlideClose)
+    if (!FuncIsActiveTask(Task_RotomPhone_OverworldMenu_PhoneSlideClose)
         && tPhoneCloseToSave == FALSE)
     {
-        CreateTask(Task_RotomPhone_SmallStartMenu_PhoneSlideClose, 0);
+        CreateTask(Task_RotomPhone_OverworldMenu_PhoneSlideClose, 0);
         tPhoneCloseToSave = TRUE;
     }
-    else if (!FuncIsActiveTask(Task_RotomPhone_SmallStartMenu_PhoneSlideClose)
+    else if (!FuncIsActiveTask(Task_RotomPhone_OverworldMenu_PhoneSlideClose)
         && tPhoneCloseToSave == TRUE)
     {
         DestroyTask(taskId);
@@ -2204,42 +2204,42 @@ static void Task_RotomPhone_SmallStartMenu_CloseForSafari(u8 taskId)
 
 
 
-void Task_OpenRotomPhone_LargeStartMenu(u8 taskId)
+void Task_OpenRotomPhone_FullScreenMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        RotomPhone_LargeStartMenu_Init();
+        RotomPhone_FullScreenMenu_Init();
         DestroyTask(taskId);
     }
 }
 
-void RotomPhone_LargeStartMenu_Init(void)
+void RotomPhone_FullScreenMenu_Init(void)
 {
-    sRotomPhone_LargeStartMenu = AllocZeroed(sizeof(struct RotomPhone_LargeStartMenuState));
-    if (sRotomPhone_LargeStartMenu == NULL)
+    sRotomPhone_FullScreenMenu = AllocZeroed(sizeof(struct RotomPhone_FullScreenMenuState));
+    if (sRotomPhone_FullScreenMenu == NULL)
     {
         menuFullScreen = FALSE;
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
         return;
     }
 
-    sRotomPhone_LargeStartMenu->loadState = 0;
+    sRotomPhone_FullScreenMenu->loadState = 0;
 
-    SetMainCallback2(RotomPhone_LargeStartMenu_SetupCB);
+    SetMainCallback2(RotomPhone_FullScreenMenu_SetupCB);
 }
 
-static void RotomPhone_LargeStartMenu_ResetGpuRegsAndBgs(void)
+static void RotomPhone_FullScreenMenu_ResetGpuRegsAndBgs(void)
 {
     SampleUI_ResetGpuRegsAndBgs();
 }
 
-static void RotomPhone_LargeStartMenu_SetupCB(void)
+static void RotomPhone_FullScreenMenu_SetupCB(void)
 {
     switch (gMain.state)
     {
     case 0:
-        RotomPhone_LargeStartMenu_ResetGpuRegsAndBgs();
+        RotomPhone_FullScreenMenu_ResetGpuRegsAndBgs();
         SetVBlankHBlankCallbacksToNull();
         ClearScheduledBgCopiesToVram();
         gMain.state++;
@@ -2253,42 +2253,42 @@ static void RotomPhone_LargeStartMenu_SetupCB(void)
         gMain.state++;
         break;
     case 2:
-        if (RotomPhone_LargeStartMenu_InitBgs())
+        if (RotomPhone_FullScreenMenu_InitBgs())
         {
-            sRotomPhone_LargeStartMenu->loadState = 0;
+            sRotomPhone_FullScreenMenu->loadState = 0;
             gMain.state++;
         }
         else
         {
-            RotomPhone_LargeStartMenu_FadeAndBail();
+            RotomPhone_FullScreenMenu_FadeAndBail();
             return;
         }
         break;
     case 3:
-        if (RotomPhone_LargeStartMenu_LoadGraphics() == TRUE)
+        if (RotomPhone_FullScreenMenu_LoadGraphics() == TRUE)
         {
             gMain.state++;
         }
         break;
     case 4:
-        RotomPhone_LargeStartMenu_InitWindows();
+        RotomPhone_FullScreenMenu_InitWindows();
         gMain.state++;
         break;
     case 5:
-        sRotomPhone_LargeStartMenu->panelY = 0;
-        sRotomPhone_LargeStartMenu->panelIsOpen = FALSE;
+        sRotomPhone_FullScreenMenu->panelY = 0;
+        sRotomPhone_FullScreenMenu->panelIsOpen = FALSE;
 
         for (enum SlidingPanelSprites spritePanel = RP_PANEL_SPRITE_ONE; spritePanel < RP_PANEL_SPRITE_COUNT; spritePanel++)
         {
-            sRotomPhone_LargeStartMenu->panelSpriteIds[spritePanel] = SPRITE_NONE;
+            sRotomPhone_FullScreenMenu->panelSpriteIds[spritePanel] = SPRITE_NONE;
         }
 
         for (enum SlidingPanelWindows windowPanel = RP_PANEL_WIN_ONE; windowPanel < RP_PANEL_WIN_COUNT; windowPanel++)
         {
-            sRotomPhone_LargeStartMenu->panelWindowIds[windowPanel] = SPRITE_NONE;
+            sRotomPhone_FullScreenMenu->panelWindowIds[windowPanel] = SPRITE_NONE;
         }
 
-        CreateTask(Task_RotomPhone_LargeStartMenu_WaitFadeIn, 0);
+        CreateTask(Task_RotomPhone_FullScreenMenu_WaitFadeIn, 0);
         gMain.state++;
         break;
     case 6:
@@ -2299,20 +2299,20 @@ static void RotomPhone_LargeStartMenu_SetupCB(void)
         gMain.state++;
         break;
     case 7:
-        SetVBlankCallback(RotomPhone_LargeStartMenu_VBlankCB);
-        SetMainCallback2(RotomPhone_LargeStartMenu_MainCB);
+        SetVBlankCallback(RotomPhone_FullScreenMenu_VBlankCB);
+        SetMainCallback2(RotomPhone_FullScreenMenu_MainCB);
         gMain.state++;
     case 8:
         menuFullScreen = TRUE;
         if (!sRotomPhoneOptions[menuSelectedLarge].unlockedFunc || !sRotomPhoneOptions[menuSelectedLarge].unlockedFunc())
             menuSelectedLarge = RotomPhone_SetFirstSelectedMenu();
 
-        RotomPhone_LargeStartMenu_PrintTopBar();
+        RotomPhone_FullScreenMenu_PrintTopBar();
         break;
     }
 }
 
-static void RotomPhone_LargeStartMenu_MainCB(void)
+static void RotomPhone_FullScreenMenu_MainCB(void)
 {
     RunTasks();
     AdvanceComfyAnimations();
@@ -2322,28 +2322,28 @@ static void RotomPhone_LargeStartMenu_MainCB(void)
     UpdatePaletteFade();
 }
 
-static void RotomPhone_LargeStartMenu_VBlankCB(void)
+static void RotomPhone_FullScreenMenu_VBlankCB(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-static void Task_RotomPhone_LargeStartMenu_WaitFadeIn(u8 taskId)
+static void Task_RotomPhone_FullScreenMenu_WaitFadeIn(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_MainInput;
+        gTasks[taskId].func = Task_RotomPhone_FullScreenMenu_MainInput;
     }
 }
 
-static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId)
+static void Task_RotomPhone_FullScreenMenu_MainInput(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_PC_OFF);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_WaitFadeAndExitGracefully;
+        gTasks[taskId].func = Task_RotomPhone_FullScreenMenu_WaitFadeAndExitGracefully;
     }
     if (JOY_NEW(DPAD_LEFT))
     {
@@ -2354,7 +2354,7 @@ static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId)
             else
                 menuSelectedLarge--;
         } while (!sRotomPhoneOptions[menuSelectedLarge].unlockedFunc());
-        RotomPhone_LargeStartMenu_PrintTopBar();
+        RotomPhone_FullScreenMenu_PrintTopBar();
     }
     if (JOY_NEW(DPAD_RIGHT))
     {
@@ -2365,7 +2365,7 @@ static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId)
             else
                 menuSelectedLarge++;
         } while (!sRotomPhoneOptions[menuSelectedLarge].unlockedFunc());
-        RotomPhone_LargeStartMenu_PrintTopBar();
+        RotomPhone_FullScreenMenu_PrintTopBar();
     }
     if (JOY_NEW(A_BUTTON | START_BUTTON))
     {
@@ -2376,38 +2376,38 @@ static void Task_RotomPhone_LargeStartMenu_MainInput(u8 taskId)
         if (!sRotomPhoneOptions[menuSelectedLarge].fullScreenPanel)
         {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_WaitFadeForSelection;
+            gTasks[taskId].func = Task_RotomPhone_FullScreenMenu_WaitFadeForSelection;
         }
         else if (sRotomPhoneOptions[menuSelectedLarge].selectedFunc)
         {
-            RotomPhone_LargeStartMenu_StartPanelSlide();
+            RotomPhone_FullScreenMenu_StartPanelSlide();
             sRotomPhoneOptions[menuSelectedLarge].selectedFunc();
         }
     }
 }
 
-static void Task_RotomPhone_LargeStartMenu_PanelInput(u8 taskId)
+static void Task_RotomPhone_FullScreenMenu_PanelInput(u8 taskId)
 {
     if (JOY_NEW(START_BUTTON | A_BUTTON | B_BUTTON))
     {
-        gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_PanelSlide;
+        gTasks[taskId].func = Task_RotomPhone_FullScreenMenu_PanelSlide;
         tRotomPanelComfyAnimId = INVALID_COMFY_ANIM;
         PlaySE(SE_SELECT);
     }
 }
 
-static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId)
+static void Task_RotomPhone_FullScreenMenu_PanelSlide(u8 taskId)
 {
     #define PANEL_MIN_Y 0
     #define PANEL_MAX_Y 96
     #define PANEL_SLIDE_DOWN_FRAMES 50
     #define PANEL_SLIDE_UP_FRAMES 40
     
-    SetGpuReg(REG_OFFSET_BG2VOFS, sRotomPhone_LargeStartMenu->panelY);
+    SetGpuReg(REG_OFFSET_BG2VOFS, sRotomPhone_FullScreenMenu->panelY);
 
-    if (sRotomPhone_LargeStartMenu->panelIsOpen)
+    if (sRotomPhone_FullScreenMenu->panelIsOpen)
     {
-        if (sRotomPhone_LargeStartMenu->panelY > PANEL_MIN_Y)
+        if (sRotomPhone_FullScreenMenu->panelY > PANEL_MIN_Y)
         {
             if (tRotomPanelComfyAnimId == INVALID_COMFY_ANIM)
             {
@@ -2420,34 +2420,34 @@ static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId)
                 tRotomPanelComfyAnimId = CreateComfyAnim_Easing(&config);
             }
             
-            tRotomPanelLastY = sRotomPhone_LargeStartMenu->panelY;
-            sRotomPhone_LargeStartMenu->panelY = ReadComfyAnimValueSmooth(&gComfyAnims[tRotomPanelComfyAnimId]);
-            s8 yDifference = tRotomPanelLastY - sRotomPhone_LargeStartMenu->panelY;
+            tRotomPanelLastY = sRotomPhone_FullScreenMenu->panelY;
+            sRotomPhone_FullScreenMenu->panelY = ReadComfyAnimValueSmooth(&gComfyAnims[tRotomPanelComfyAnimId]);
+            s8 yDifference = tRotomPanelLastY - sRotomPhone_FullScreenMenu->panelY;
             if (RP_PANEL_SPRITE_ONE != SPRITE_NONE)
-                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_ONE]].y += yDifference;
+                gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_ONE]].y += yDifference;
             if (RP_PANEL_SPRITE_TWO != SPRITE_NONE)
-                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_TWO]].y += yDifference;
+                gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_TWO]].y += yDifference;
             if (RP_PANEL_SPRITE_THREE != SPRITE_NONE)
-                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_THREE]].y += yDifference;
+                gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_THREE]].y += yDifference;
             if (RP_PANEL_SPRITE_FOUR != SPRITE_NONE)
-                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_FOUR]].y += yDifference;
+                gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_FOUR]].y += yDifference;
             if (RP_PANEL_SPRITE_FIVE != SPRITE_NONE)
-                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_FIVE]].y += yDifference;
+                gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_FIVE]].y += yDifference;
             if (RP_PANEL_SPRITE_SIX != SPRITE_NONE)
-                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_SIX]].y += yDifference;
+                gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_SIX]].y += yDifference;
         }
-        else if (sRotomPhone_LargeStartMenu->panelY == PANEL_MIN_Y)
+        else if (sRotomPhone_FullScreenMenu->panelY == PANEL_MIN_Y)
         {
             if (sRotomPhoneOptions[menuSelectedLarge].selectedFunc)
                 sRotomPhoneOptions[menuSelectedLarge].selectedFunc();
-            sRotomPhone_LargeStartMenu->panelIsOpen = FALSE;
+            sRotomPhone_FullScreenMenu->panelIsOpen = FALSE;
             ReleaseComfyAnim(tRotomPanelComfyAnimId);
-            gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_MainInput;
+            gTasks[taskId].func = Task_RotomPhone_FullScreenMenu_MainInput;
         }
     }
     else
     {
-        if (sRotomPhone_LargeStartMenu->panelY < PANEL_MAX_Y)
+        if (sRotomPhone_FullScreenMenu->panelY < PANEL_MAX_Y)
         {
             if (tRotomPanelComfyAnimId == INVALID_COMFY_ANIM)
             {
@@ -2460,27 +2460,27 @@ static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId)
                 tRotomPanelComfyAnimId = CreateComfyAnim_Easing(&config);
             }
             
-            tRotomPanelLastY = sRotomPhone_LargeStartMenu->panelY;
-            sRotomPhone_LargeStartMenu->panelY = ReadComfyAnimValueSmooth(&gComfyAnims[tRotomPanelComfyAnimId]);
-            s8 yDifference = tRotomPanelLastY - sRotomPhone_LargeStartMenu->panelY;
+            tRotomPanelLastY = sRotomPhone_FullScreenMenu->panelY;
+            sRotomPhone_FullScreenMenu->panelY = ReadComfyAnimValueSmooth(&gComfyAnims[tRotomPanelComfyAnimId]);
+            s8 yDifference = tRotomPanelLastY - sRotomPhone_FullScreenMenu->panelY;
             if (RP_PANEL_SPRITE_ONE != SPRITE_NONE)
-                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_ONE]].y += yDifference;
+                gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_ONE]].y += yDifference;
             if (RP_PANEL_SPRITE_TWO != SPRITE_NONE)
-                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_TWO]].y += yDifference;
+                gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_TWO]].y += yDifference;
             if (RP_PANEL_SPRITE_THREE != SPRITE_NONE)
-                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_THREE]].y += yDifference;
+                gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_THREE]].y += yDifference;
             if (RP_PANEL_SPRITE_FOUR != SPRITE_NONE)
-                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_FOUR]].y += yDifference;
+                gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_FOUR]].y += yDifference;
             if (RP_PANEL_SPRITE_FIVE != SPRITE_NONE)
-                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_FIVE]].y += yDifference;
+                gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_FIVE]].y += yDifference;
             if (RP_PANEL_SPRITE_SIX != SPRITE_NONE)
-                gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_SIX]].y += yDifference;
+                gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_SIX]].y += yDifference;
         }
-        else if (sRotomPhone_LargeStartMenu->panelY == PANEL_MAX_Y)
+        else if (sRotomPhone_FullScreenMenu->panelY == PANEL_MAX_Y)
         {
-            sRotomPhone_LargeStartMenu->panelIsOpen = TRUE;
+            sRotomPhone_FullScreenMenu->panelIsOpen = TRUE;
             ReleaseComfyAnim(tRotomPanelComfyAnimId);
-            gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_PanelInput;
+            gTasks[taskId].func = Task_RotomPhone_FullScreenMenu_PanelInput;
         }
     }
     #undef PANEL_MIN_Y
@@ -2489,34 +2489,34 @@ static void Task_RotomPhone_LargeStartMenu_PanelSlide(u8 taskId)
     #undef PANEL_SLIDE_UP_FRAMES
 }
 
-static void RotomPhone_LargeStartMenu_StartPanelSlide(void)
+static void RotomPhone_FullScreenMenu_StartPanelSlide(void)
 {
-    u8 taskId = FindTaskIdByFunc(Task_RotomPhone_LargeStartMenu_MainInput);
-    gTasks[taskId].func = Task_RotomPhone_LargeStartMenu_PanelSlide;
+    u8 taskId = FindTaskIdByFunc(Task_RotomPhone_FullScreenMenu_MainInput);
+    gTasks[taskId].func = Task_RotomPhone_FullScreenMenu_PanelSlide;
     tRotomPanelComfyAnimId = INVALID_COMFY_ANIM;
 }
 
-static void Task_RotomPhone_LargeStartMenu_WaitFadeAndBail(u8 taskId)
+static void Task_RotomPhone_FullScreenMenu_WaitFadeAndBail(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         menuFullScreen = FALSE;
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
-        RotomPhone_LargeStartMenu_DoCleanUpAndDestroyTask(taskId);
+        RotomPhone_FullScreenMenu_DoCleanUpAndDestroyTask(taskId);
     }
 }
 
-static void Task_RotomPhone_LargeStartMenu_WaitFadeAndExitGracefully(u8 taskId)
+static void Task_RotomPhone_FullScreenMenu_WaitFadeAndExitGracefully(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         menuFullScreen = FALSE;
         SetMainCallback2(CB2_ReturnToField);
-        RotomPhone_LargeStartMenu_DoCleanUpAndDestroyTask(taskId);
+        RotomPhone_FullScreenMenu_DoCleanUpAndDestroyTask(taskId);
     }
 }
 
-static void Task_RotomPhone_LargeStartMenu_WaitFadeForSelection(u8 taskId)
+static void Task_RotomPhone_FullScreenMenu_WaitFadeForSelection(u8 taskId)
 {
     if (!gPaletteFade.active && sRotomPhoneOptions[menuSelectedLarge].selectedFunc)
     {
@@ -2525,35 +2525,35 @@ static void Task_RotomPhone_LargeStartMenu_WaitFadeForSelection(u8 taskId)
     }
 }
 
-static void RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(MainCallback callback)
+static void RotomPhone_FullScreenMenu_DoCleanUpAndChangeCallback(MainCallback callback)
 {
     if (!gPaletteFade.active)
     {
         gMain.savedCallback = CB2_ReturnToFieldWithOpenMenu;
-        RotomPhone_LargeStartMenu_FreeResources();
+        RotomPhone_FullScreenMenu_FreeResources();
         SetMainCallback2(callback);
     }
 }
 
-static u8 RotomPhone_LargeStartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority)
+static u8 RotomPhone_FullScreenMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority)
 {
-    RotomPhone_LargeStartMenu_FreeResources();
+    RotomPhone_FullScreenMenu_FreeResources();
     return CreateTask(func, priority);
 }
 
-static void UNUSED RotomPhone_LargeStartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func)
+static void UNUSED RotomPhone_FullScreenMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func)
 {
-    RotomPhone_LargeStartMenu_FreeResources();
+    RotomPhone_FullScreenMenu_FreeResources();
     gTasks[taskId].func = func;
 }
 
-static void RotomPhone_LargeStartMenu_DoCleanUpAndDestroyTask(u8 taskId)
+static void RotomPhone_FullScreenMenu_DoCleanUpAndDestroyTask(u8 taskId)
 {
-    RotomPhone_LargeStartMenu_FreeResources();
+    RotomPhone_FullScreenMenu_FreeResources();
     DestroyTask(taskId);
 }
 
-static bool8 RotomPhone_LargeStartMenu_InitBgs(void)
+static bool8 RotomPhone_FullScreenMenu_InitBgs(void)
 {
     ResetAllBgsCoordinates();
 
@@ -2569,7 +2569,7 @@ static bool8 RotomPhone_LargeStartMenu_InitBgs(void)
     }
 
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, sRotomPhone_LargeStartMenuBgTemplates, NELEMS(sRotomPhone_LargeStartMenuBgTemplates));
+    InitBgsFromTemplates(0, sRotomPhone_FullScreenMenuBgTemplates, NELEMS(sRotomPhone_FullScreenMenuBgTemplates));
 
     SetBgTilemapBuffer(1, sBg1TilemapBuffer);
     SetBgTilemapBuffer(2, sBg2TilemapBuffer);
@@ -2583,45 +2583,45 @@ static bool8 RotomPhone_LargeStartMenu_InitBgs(void)
     return TRUE;
 }
 
-static void RotomPhone_LargeStartMenu_FadeAndBail(void)
+static void RotomPhone_FullScreenMenu_FadeAndBail(void)
 {
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-    CreateTask(Task_RotomPhone_LargeStartMenu_WaitFadeAndBail, 0);
-    SetVBlankCallback(RotomPhone_LargeStartMenu_VBlankCB);
-    SetMainCallback2(RotomPhone_LargeStartMenu_MainCB);
+    CreateTask(Task_RotomPhone_FullScreenMenu_WaitFadeAndBail, 0);
+    SetVBlankCallback(RotomPhone_FullScreenMenu_VBlankCB);
+    SetMainCallback2(RotomPhone_FullScreenMenu_MainCB);
 }
 
-static bool8 RotomPhone_LargeStartMenu_LoadGraphics(void)
+static bool8 RotomPhone_FullScreenMenu_LoadGraphics(void)
 {
-    switch (sRotomPhone_LargeStartMenu->loadState)
+    switch (sRotomPhone_FullScreenMenu->loadState)
     {
     case 0:
         ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(1, sRotomPhone_LargeStartMenuTiles, 0, 0, 0);
-        sRotomPhone_LargeStartMenu->loadState++;
+        DecompressAndCopyTileDataToVram(1, sRotomPhone_FullScreenMenuTiles, 0, 0, 0);
+        sRotomPhone_FullScreenMenu->loadState++;
         break;
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            DecompressDataWithHeaderWram(sRotomPhone_LargeStartMenuTilemap, sBg1TilemapBuffer);
-            DecompressDataWithHeaderWram(sRotomPhone_LargeStartMenuPanelTilemap, sBg2TilemapBuffer);
-            sRotomPhone_LargeStartMenu->loadState++;
+            DecompressDataWithHeaderWram(sRotomPhone_FullScreenMenuTilemap, sBg1TilemapBuffer);
+            DecompressDataWithHeaderWram(sRotomPhone_FullScreenMenuPanelTilemap, sBg2TilemapBuffer);
+            sRotomPhone_FullScreenMenu->loadState++;
         }
         break;
     case 2:
-        LoadPalette(sRotomPhone_LargeStartMenuPalette, BG_PLTT_ID(PHONE_BG_PAL_SLOT), PLTT_SIZE_4BPP);
+        LoadPalette(sRotomPhone_FullScreenMenuPalette, BG_PLTT_ID(PHONE_BG_PAL_SLOT), PLTT_SIZE_4BPP);
         LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
-        sRotomPhone_LargeStartMenu->loadState++;
+        sRotomPhone_FullScreenMenu->loadState++;
     default:
-        sRotomPhone_LargeStartMenu->loadState = 0;
+        sRotomPhone_FullScreenMenu->loadState = 0;
         return TRUE;
     }
     return FALSE;
 }
 
-static void RotomPhone_LargeStartMenu_InitWindows(void)
+static void RotomPhone_FullScreenMenu_InitWindows(void)
 {
-    InitWindows(sRotomPhone_LargeStartMenuWindowTemplates);
+    InitWindows(sRotomPhone_FullScreenMenuWindowTemplates);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
     FillWindowPixelBuffer(WIN_UI_TOP_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
@@ -2629,23 +2629,23 @@ static void RotomPhone_LargeStartMenu_InitWindows(void)
     CopyWindowToVram(WIN_UI_TOP_BAR, COPYWIN_FULL);
 }
 
-static void RotomPhone_LargeStartMenu_PrintTopBar(void)
+static void RotomPhone_FullScreenMenu_PrintTopBar(void)
 {
     FillWindowPixelBuffer(WIN_UI_TOP_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     AddTextPrinterParameterized4(WIN_UI_TOP_BAR, FONT_NORMAL,
-        GetStringCenterAlignXOffset(FONT_NORMAL, sRotomPhoneOptions[menuSelectedLarge].menuName, sRotomPhone_LargeStartMenuWindowTemplates[WIN_UI_TOP_BAR].width * 8),
+        GetStringCenterAlignXOffset(FONT_NORMAL, sRotomPhoneOptions[menuSelectedLarge].menuName, sRotomPhone_FullScreenMenuWindowTemplates[WIN_UI_TOP_BAR].width * 8),
         0, 0, 0,
         sRotomPhone_StartMenuFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sRotomPhoneOptions[menuSelectedLarge].menuName);
 
     CopyWindowToVram(WIN_UI_TOP_BAR, COPYWIN_GFX);
 }
 
-static void RotomPhone_LargeStartMenu_FreeResources(void)
+static void RotomPhone_FullScreenMenu_FreeResources(void)
 {
-    if (sRotomPhone_LargeStartMenu != NULL)
+    if (sRotomPhone_FullScreenMenu != NULL)
     {
-        Free(sRotomPhone_LargeStartMenu);
+        Free(sRotomPhone_FullScreenMenu);
     }
     if (sBg1TilemapBuffer != NULL)
     {
@@ -2752,33 +2752,33 @@ static void RotomPhone_StartMenu_SelectedFunc_Shortcut(void)
 static void RotomPhone_StartMenu_SelectedFunc_Pokedex(void)
 {
     if (!RotomPhone_StartMenu_IsFullScreen())
-        RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(CB2_OpenPokedex);
+        RotomPhone_OverworldMenu_DoCleanUpAndChangeCallback(CB2_OpenPokedex);
     else
-        RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_OpenPokedex);
+        RotomPhone_FullScreenMenu_DoCleanUpAndChangeCallback(CB2_OpenPokedex);
 }
 
 static void RotomPhone_StartMenu_SelectedFunc_Pokemon(void)
 {
     if (!RotomPhone_StartMenu_IsFullScreen())
-        RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(CB2_PartyMenuFromStartMenu);
+        RotomPhone_OverworldMenu_DoCleanUpAndChangeCallback(CB2_PartyMenuFromStartMenu);
     else
-        RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_PartyMenuFromStartMenu);
+        RotomPhone_FullScreenMenu_DoCleanUpAndChangeCallback(CB2_PartyMenuFromStartMenu);
 }
 
 static void RotomPhone_StartMenu_SelectedFunc_Bag(void)
 {
     if (!RotomPhone_StartMenu_IsFullScreen())
-        RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(CB2_BagMenuFromStartMenu);
+        RotomPhone_OverworldMenu_DoCleanUpAndChangeCallback(CB2_BagMenuFromStartMenu);
     else
-        RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_BagMenuFromStartMenu);
+        RotomPhone_FullScreenMenu_DoCleanUpAndChangeCallback(CB2_BagMenuFromStartMenu);
 }
 
 static void RotomPhone_StartMenu_SelectedFunc_PokeNav(void)
 {
     if (!RotomPhone_StartMenu_IsFullScreen())
-        RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(CB2_InitPokeNav);
+        RotomPhone_OverworldMenu_DoCleanUpAndChangeCallback(CB2_InitPokeNav);
     else
-        RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_InitPokeNav);
+        RotomPhone_FullScreenMenu_DoCleanUpAndChangeCallback(CB2_InitPokeNav);
 }
 
 static void RotomPhone_StartMenu_ChooseTrainerCard(void)
@@ -2797,13 +2797,13 @@ static void RotomPhone_StartMenu_SelectedFunc_Trainer(void)
     {
         if (!gPaletteFade.active)
         {
-            RotomPhone_SmallStartMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput), TRUE);
+            RotomPhone_OverworldMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput), TRUE);
             RotomPhone_StartMenu_ChooseTrainerCard();
         }
     }
     else
     {
-        RotomPhone_LargeStartMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_LargeStartMenu_MainInput));
+        RotomPhone_FullScreenMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_FullScreenMenu_MainInput));
         RotomPhone_StartMenu_ChooseTrainerCard();
     }
 }
@@ -2815,11 +2815,11 @@ static void RotomPhone_StartMenu_SelectedFunc_Save(void)
         if (!gPaletteFade.active)
         {
             LockPlayerFieldControls();
-            u8 taskId = FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput);
-            gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_CloseAndSave;
+            u8 taskId = FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput);
+            gTasks[taskId].func = Task_RotomPhone_OverworldMenu_CloseAndSave;
             tPhoneCloseToSave = FALSE;
             if (RP_NOT_FLIP_PHONE)
-                RotomPhone_SmallStartMenu_RotomShutdownPreparation(taskId);
+                RotomPhone_OverworldMenu_RotomShutdownPreparation(taskId);
         }
     }
     else
@@ -2832,9 +2832,9 @@ static void RotomPhone_StartMenu_SelectedFunc_Save(void)
 static void RotomPhone_StartMenu_SelectedFunc_Settings(void)
 {
     if (!RotomPhone_StartMenu_IsFullScreen())
-        RotomPhone_SmallStartMenu_DoCleanUpAndChangeCallback(CB2_InitOptionMenu);
+        RotomPhone_OverworldMenu_DoCleanUpAndChangeCallback(CB2_InitOptionMenu);
     else
-        RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_InitOptionMenu);
+        RotomPhone_FullScreenMenu_DoCleanUpAndChangeCallback(CB2_InitOptionMenu);
 }
 
 static void RotomPhone_StartMenu_SelectedFunc_SafariFlag(void)
@@ -2845,13 +2845,13 @@ static void RotomPhone_StartMenu_SelectedFunc_SafariFlag(void)
         {
             FreezeObjectEvents();
             LockPlayerFieldControls();
-            gTasks[FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput)].func = Task_RotomPhone_SmallStartMenu_CloseForSafari;
+            gTasks[FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput)].func = Task_RotomPhone_OverworldMenu_CloseForSafari;
         }
     }
     else
     {
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-        CreateTask(Task_RotomPhone_LargeStartMenu_WaitFadeIn, 0);
+        CreateTask(Task_RotomPhone_FullScreenMenu_WaitFadeIn, 0);
     }
 }
 
@@ -2860,22 +2860,22 @@ static void RotomPhone_StartMenu_SelectedFunc_FullScreen(void)
     if (!RotomPhone_StartMenu_IsFullScreen())
     {
         if (!gPaletteFade.active)
-            RotomPhone_SmallStartMenu_DoCleanUpAndChangeTaskFunc(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput), Task_OpenRotomPhone_LargeStartMenu);
+            RotomPhone_OverworldMenu_DoCleanUpAndChangeTaskFunc(FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput), Task_OpenRotomPhone_FullScreenMenu);
     }
     else
     {
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-        CreateTask(Task_RotomPhone_LargeStartMenu_WaitFadeIn, 0);
+        CreateTask(Task_RotomPhone_FullScreenMenu_WaitFadeIn, 0);
     }
 }
 
 static void RotomPhone_StartMenu_SelectedFunc_DexNav(void)
 {
     if (!RotomPhone_StartMenu_IsFullScreen())
-        RotomPhone_SmallStartMenu_DoCleanUpAndChangeTaskFunc(FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput), Task_OpenDexNavFromStartMenu);
+        RotomPhone_OverworldMenu_DoCleanUpAndChangeTaskFunc(FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput), Task_OpenDexNavFromStartMenu);
     else
     {
-        RotomPhone_LargeStartMenu_DoCleanUpAndCreateTask(Task_OpenDexNavFromStartMenu, 0);
+        RotomPhone_FullScreenMenu_DoCleanUpAndCreateTask(Task_OpenDexNavFromStartMenu, 0);
     }
 }
 
@@ -2883,7 +2883,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Clock(void)
 {
     if (!RotomPhone_StartMenu_IsFullScreen())
     {
-        u8 taskId = FindTaskIdByFunc(Task_RotomPhone_SmallStartMenu_HandleMainInput);
+        u8 taskId = FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput);
         if (taskId == TASK_NONE)
             return;
         
@@ -2891,18 +2891,18 @@ static void RotomPhone_StartMenu_SelectedFunc_Clock(void)
         RtcCalcLocalTime();
         FormatDecimalTimeWithoutSeconds(time, gLocalTime.hours, gLocalTime.minutes, RP_24_HOUR_MODE);
         u8 fontId = GetFontIdToFit(time, ReturnNormalTextFont(), 0, sWindowTemplate_FlipPhone.width * 8);
-        FillWindowPixelBuffer(sRotomPhone_SmallStartMenu->windowIdFlipPhone, PIXEL_FILL(FLIP_PHONE_BG_COLOUR));
-        AddTextPrinterParameterized4(sRotomPhone_SmallStartMenu->windowIdFlipPhone, fontId,
+        FillWindowPixelBuffer(sRotomPhone_OverworldMenu->windowIdFlipPhone, PIXEL_FILL(FLIP_PHONE_BG_COLOUR));
+        AddTextPrinterParameterized4(sRotomPhone_OverworldMenu->windowIdFlipPhone, fontId,
         GetStringCenterAlignXOffset(fontId, time, sWindowTemplate_FlipPhone.width * 8),
         ROTOM_SPEECH_BOTTOM_ROW_Y, 0, 0, sRotomPhone_StartMenuFontColors[FONT_FLIP_PHONE], TEXT_SKIP_DRAW, time);
-        CopyWindowToVram(sRotomPhone_SmallStartMenu->windowIdFlipPhone, COPYWIN_GFX);
+        CopyWindowToVram(sRotomPhone_OverworldMenu->windowIdFlipPhone, COPYWIN_GFX);
         tRotomMessageSoundEffect = SE_BALL_TRAY_EXIT;
         tRotomUpdateTimer = RP_MESSAGE_UPDATE_TIMER;
-        sRotomPhone_SmallStartMenu->isLoading = FALSE;
+        sRotomPhone_OverworldMenu->isLoading = FALSE;
     }
     else
     {
-        RotomPhone_LargeStartMenu_DoCleanUpAndChangeCallback(CB2_ViewWallClock);
+        RotomPhone_FullScreenMenu_DoCleanUpAndChangeCallback(CB2_ViewWallClock);
     }
 }
 
@@ -2926,7 +2926,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
     
     u8 windowId;
 
-    if (RotomPhone_StartMenu_IsFullScreen() && sRotomPhone_LargeStartMenu->panelIsOpen == FALSE)
+    if (RotomPhone_StartMenu_IsFullScreen() && sRotomPhone_FullScreenMenu->panelIsOpen == FALSE)
     {
         if (GetDaycareState() == DAYCARE_NO_MONS)
             return;
@@ -2953,9 +2953,9 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
             u32 monOneLevelGain = GetNumLevelsGainedFromSteps(daycareMonOne);
             GetBoxMonData(daycareBoxMonOne, MON_DATA_NICKNAME, nickname);
 
-            sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_ONE] =
+            sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_ONE] =
                 CreateMonIcon(speciesOne, SpriteCB_MonIcon_FlippedHorizontal, MON_ICON_ONE_X, MON_ICON_Y, 4, 0);
-            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_ONE]].oam.priority = 0;
+            gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_ONE]].oam.priority = 0;
 
             ConvertIntToDecimalStringN(level, monOneLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
             ConvertIntToDecimalStringN(levelGain, monOneLevelGain, STR_CONV_MODE_LEFT_ALIGN, 2);
@@ -2969,8 +2969,8 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
                 15,
                 ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK
             );
-            sRotomPhone_LargeStartMenu->panelWindowIds[RP_PANEL_WIN_ONE] = AddWindow(&winTemplate);
-            windowId = sRotomPhone_LargeStartMenu->panelWindowIds[RP_PANEL_WIN_ONE];
+            sRotomPhone_FullScreenMenu->panelWindowIds[RP_PANEL_WIN_ONE] = AddWindow(&winTemplate);
+            windowId = sRotomPhone_FullScreenMenu->panelWindowIds[RP_PANEL_WIN_ONE];
             FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
             PutWindowTilemap(windowId);
 
@@ -3009,9 +3009,9 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
             u32 monTwoLevelGain = GetNumLevelsGainedFromSteps(daycareMonTwo);
             GetBoxMonData(daycareBoxMonTwo, MON_DATA_NICKNAME, nickname);
 
-            sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_TWO] =
+            sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_TWO] =
                 CreateMonIcon(speciesTwo, SpriteCB_MonIcon, MON_ICON_TWO_X, MON_ICON_Y, 4, 0);
-            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_TWO]].oam.priority = 0;
+            gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_TWO]].oam.priority = 0;
 
             ConvertIntToDecimalStringN(level, monTwoLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
             ConvertIntToDecimalStringN(levelGain, monTwoLevelGain, STR_CONV_MODE_LEFT_ALIGN, 2);
@@ -3025,8 +3025,8 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
                 15,
                 ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK + (WIN_WIDTH * WIN_HEIGHT)
             );
-            sRotomPhone_LargeStartMenu->panelWindowIds[RP_PANEL_WIN_TWO] = AddWindow(&winTemplate);
-            windowId = sRotomPhone_LargeStartMenu->panelWindowIds[RP_PANEL_WIN_TWO];
+            sRotomPhone_FullScreenMenu->panelWindowIds[RP_PANEL_WIN_TWO] = AddWindow(&winTemplate);
+            windowId = sRotomPhone_FullScreenMenu->panelWindowIds[RP_PANEL_WIN_TWO];
             FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
             PutWindowTilemap(windowId);
 
@@ -3079,9 +3079,9 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 
             LoadCompressedSpriteSheet(&sSpriteSheet_CompatabilityIcon);
             LoadSpritePalette(&iconCompatatbilityPal);
-            sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_THREE] =
+            sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_THREE] =
                 CreateSprite(&iconCompatatbility_SpriteTemplate, MON_COMPATABILITY_ICON_X, EGG_COMPATABILITY_ICON_Y, 0);
-            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_THREE]].oam.priority = 0;
+            gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_THREE]].oam.priority = 0;
 
             switch (GetDaycareCompatibilityScore(&gSaveBlock1Ptr->daycare))
             {
@@ -3102,7 +3102,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
                 animId = RP_DAYCARE_COMPATABILITY_ANIM_MAX;
                 break;
             }
-            StartSpriteAnim(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_THREE]], animId);
+            StartSpriteAnim(&gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_THREE]], animId);
         }
 
         if (GetDaycareState() == DAYCARE_EGG_WAITING)
@@ -3113,12 +3113,12 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
             else
                 spriteCB = SpriteCB_MonIcon_FlippedHorizontal;
 
-            sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_THREE] =
+            sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_THREE] =
                 CreateMonIcon(SPECIES_EGG, spriteCB, MON_COMPATABILITY_ICON_X, EGG_COMPATABILITY_ICON_Y, 4, 0);
-            gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_THREE]].oam.priority = 0;
+            gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_THREE]].oam.priority = 0;
         }
     }
-    else if (RotomPhone_StartMenu_IsFullScreen() && sRotomPhone_LargeStartMenu->panelIsOpen == TRUE)
+    else if (RotomPhone_StartMenu_IsFullScreen() && sRotomPhone_FullScreenMenu->panelIsOpen == TRUE)
     {
         if (GetDaycareState() == DAYCARE_NO_MONS)
             return;
@@ -3127,32 +3127,32 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 
         if (GetDaycareState() != DAYCARE_NO_MONS)
         {
-            DestroySpriteAndFreeResources(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_ONE]]);
-            sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_ONE] = SPRITE_NONE;
+            DestroySpriteAndFreeResources(&gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_ONE]]);
+            sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_ONE] = SPRITE_NONE;
 
-            windowId = sRotomPhone_LargeStartMenu->panelWindowIds[RP_PANEL_WIN_ONE];
+            windowId = sRotomPhone_FullScreenMenu->panelWindowIds[RP_PANEL_WIN_ONE];
             FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
             CopyWindowToVram(windowId, COPYWIN_FULL);
             RemoveWindow(windowId);
-            sRotomPhone_LargeStartMenu->panelWindowIds[RP_PANEL_WIN_ONE] = WINDOW_NONE;
+            sRotomPhone_FullScreenMenu->panelWindowIds[RP_PANEL_WIN_ONE] = WINDOW_NONE;
         }
 
         if (GetDaycareState() != DAYCARE_NO_MONS && GetDaycareState() != DAYCARE_ONE_MON)
         {
-            DestroySpriteAndFreeResources(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_TWO]]);
-            sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_TWO] = SPRITE_NONE;
+            DestroySpriteAndFreeResources(&gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_TWO]]);
+            sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_TWO] = SPRITE_NONE;
 
-            windowId = sRotomPhone_LargeStartMenu->panelWindowIds[RP_PANEL_WIN_TWO];
+            windowId = sRotomPhone_FullScreenMenu->panelWindowIds[RP_PANEL_WIN_TWO];
             FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
             CopyWindowToVram(windowId, COPYWIN_FULL);
             RemoveWindow(windowId);
-            sRotomPhone_LargeStartMenu->panelWindowIds[RP_PANEL_WIN_TWO] = WINDOW_NONE;
+            sRotomPhone_FullScreenMenu->panelWindowIds[RP_PANEL_WIN_TWO] = WINDOW_NONE;
         }
 
         if (GetDaycareState() == DAYCARE_TWO_MONS || GetDaycareState() == DAYCARE_EGG_WAITING)
         {
-            DestroySpriteAndFreeResources(&gSprites[sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_THREE]]);
-            sRotomPhone_LargeStartMenu->panelSpriteIds[RP_PANEL_SPRITE_THREE] = SPRITE_NONE;
+            DestroySpriteAndFreeResources(&gSprites[sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_THREE]]);
+            sRotomPhone_FullScreenMenu->panelSpriteIds[RP_PANEL_SPRITE_THREE] = SPRITE_NONE;
         }
     }
     #undef MON_ONE
