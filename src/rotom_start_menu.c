@@ -98,6 +98,7 @@ static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit);
 static void Task_RotomPhone_SmallStartMenu_PhoneSlideOpen(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_PhoneSlideClose(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId);
+static void RotomPhone_SmallStartMenu_UpdateIconPaletteFade(u8 taskId);
 static void RotomPhone_SmallStartMenu_RotomShutdownPreparation(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId);
 static void Task_RotomPhone_SmallStartMenu_CloseAndSave(u8 taskId);
@@ -1927,12 +1928,10 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideClose(u8 taskId)
     }
 }
 
-static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
+static void RotomPhone_SmallStartMenu_UpdateIconPaletteFade(u8 taskId)
 {
     u32 iconPal = sRotomPhoneOptions[menuSelectedSmall].iconPalSlot;
-    tRotomMessageSoundEffect = MUS_DUMMY;
-    RotomPhone_SmallStartMenu_CheckUpdateMessage(taskId);
-    
+
     if (menuSelectedSmall == ROTOM_PHONE_MENU_SHORTCUT)
         iconPal = sRotomPhoneOptions[RotomPhone_StartMenu_GetShortcutOption()].iconPalSlot;
     
@@ -1944,10 +1943,18 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
         iconPal, 
         frameNum
     );
+
     if (frameNum == FADE_COLOUR_MAX)
         gComfyAnims[tPhoneHighlightComfyAnimId].config.data.spring.to = Q_24_8(FADE_COLOUR_MIN);
     else if (frameNum == FADE_COLOUR_MIN)
         gComfyAnims[tPhoneHighlightComfyAnimId].config.data.spring.to = Q_24_8(FADE_COLOUR_MAX);
+}
+
+static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
+{
+    tRotomMessageSoundEffect = MUS_DUMMY;
+    RotomPhone_SmallStartMenu_CheckUpdateMessage(taskId);
+    RotomPhone_SmallStartMenu_UpdateIconPaletteFade(taskId);
 
     if (tRotomUpdateTimer && sRotomPhone_SmallStartMenu->isLoading == FALSE && !gPaletteFade.active)
         tRotomUpdateTimer--;
