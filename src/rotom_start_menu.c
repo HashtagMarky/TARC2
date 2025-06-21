@@ -205,6 +205,14 @@ static const u32 sIconsSmallGfx[] = INCBIN_U32("graphics/rotom_start_menu/icons.
 static const u16 sIconsRotomFacePal[] = INCBIN_U16("graphics/rotom_start_menu/icons.gbapal");
 
 
+static const u32 sRotomPhone_LargeStartMenuTiles[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.smol");
+static const u32 sRotomPhone_LargeStartMenuTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_full_screen.bin.smolTM");
+static const u32 sRotomPhone_LargeStartMenuPanelTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_full_screen_panel.bin.smolTM");
+static const u16 sRotomPhone_LargeStartMenuPalette[] = INCBIN_U16("graphics/rotom_start_menu/rotom_phone_tiles.gbapal");
+static const u32 sRotomPhone_DaycareCompatability_Gfx[] = INCBIN_U32("graphics/rotom_start_menu/panel/daycare_heart.4bpp.smol");
+static const u16 sRotomPhone_DaycareCompatability_Pal[] = INCBIN_U16("graphics/rotom_start_menu/panel/daycare_heart.gbapal");
+
+
 enum RotomPhoneMenuItems
 {
     ROTOM_PHONE_MENU_FULL_SCREEN,
@@ -322,6 +330,28 @@ enum RotomPhoneMessages_Adventure
     ROTOM_PHONE_MESSAGE_ADVENTURE_COUNT,
 };
 
+enum SlidingPanelSprites
+{
+    PANEL_SPRITE_ONE,
+    PANEL_SPRITE_TWO,
+    PANEL_SPRITE_THREE,
+    PANEL_SPRITE_FOUR,
+    PANEL_SPRITE_FIVE,
+    PANEL_SPRITE_SIX,
+    PANEL_SPRITE_COUNT,
+};
+
+enum SlidingPanelWindows
+{
+    PANEL_WIN_ONE,
+    PANEL_WIN_TWO,
+    PANEL_WIN_THREE,
+    PANEL_WIN_FOUR,
+    PANEL_WIN_FIVE,
+    PANEL_WIN_SIX,
+    PANEL_WIN_COUNT,
+};
+
 
 struct RotomPhoneMenuOptions
 {
@@ -346,11 +376,26 @@ struct RotomPhone_StartMenu
     u32 windowIdFlipPhone;
 };
 
+struct RotomPhone_LargeStartMenuState
+{
+    u8 loadState;
+    u8 mode;
+
+    u8 panelY;
+    bool8 panelIsOpen;
+
+    u8 panelSpriteIds[PANEL_SPRITE_COUNT];
+    u8 panelWindowIds[PANEL_WIN_COUNT];
+};
+
 static EWRAM_DATA struct RotomPhone_StartMenu *sRotomPhone_SmallStartMenu = NULL;
 static EWRAM_DATA bool32 menuFullScreen;
 // Separate memory allocation so it persist between destroying of menu.
 static EWRAM_DATA enum RotomPhoneMenuItems menuSelectedSmall;
 static EWRAM_DATA enum RotomPhoneMenuItems menuSelectedLarge;
+static EWRAM_DATA struct RotomPhone_LargeStartMenuState *sRotomPhone_LargeStartMenu = NULL;
+static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
+static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
 
 bool32 RotomPhone_StartMenu_IsFullScreen(void)
 {
@@ -376,6 +421,15 @@ enum IconRotomFacePaletteIndex
     PAL_ROTOM_EYE_TOP,
     PAL_ROTOM_EYE_BOTTOM,
     PAL_ROTOM_ARC,
+};
+
+enum RotomPhoneDaycareCompatabilityAnims
+{
+    ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_NON,
+    ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_LOW,
+    ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_MED,
+    ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_MAX,
+    ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_COUNT,
 };
 
 static u16 RotomPhone_GetPhoneBackgroundColour(u8 palSlot)
@@ -501,6 +555,54 @@ static const struct WindowTemplate sWindowTemplate_FlipPhone = {
     .paletteNum = SMALL_PHONE_BG_NUM,
     .baseBlock = 0xFF
 };
+
+enum WindowIds
+{
+    WIN_UI_TOP_BAR,
+};
+
+static const struct BgTemplate sRotomPhone_LargeStartMenuBgTemplates[] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 31,
+        .priority = 1
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 30,
+        .priority = 2
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 29,
+        .priority = 0
+    }
+};
+
+static const struct WindowTemplate sRotomPhone_LargeStartMenuWindowTemplates[] =
+{
+    [WIN_UI_TOP_BAR] =
+    {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 30,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 1
+    },
+    DUMMY_WIN_TEMPLATE
+};
+#define ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK                           \
+sRotomPhone_LargeStartMenuWindowTemplates[WIN_UI_TOP_BAR].baseBlock +   \
+(                                                                       \
+    sRotomPhone_LargeStartMenuWindowTemplates[WIN_UI_TOP_BAR].height *  \
+    sRotomPhone_LargeStartMenuWindowTemplates[WIN_UI_TOP_BAR].width     \
+)
 
 static const struct SpritePalette sSpritePal_Icon[] =
 {
@@ -664,6 +766,46 @@ static const union AnimCmd *const sRotomFaceAnims[ROTOM_FACE_COUNT] = {
     sAnimCmd_RotomFace_Confused,
     sAnimCmd_RotomFace_HappyWith,
     sAnimCmd_RotomFace_ShockedWith,
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_CompatabilityIcon = {
+    .data = sRotomPhone_DaycareCompatability_Gfx,
+    .size = 32 * 32 * ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_COUNT / 2,
+    .tag = TAG_ICON_GFX,
+};
+
+static const struct OamData sOam_IconDaycareCompatatbility = {
+    .size = SPRITE_SIZE(32x32),
+    .shape = SPRITE_SHAPE(32x32),
+    .priority = 0,
+};
+
+static const union AnimCmd sAnim_IconDaycareCompatatbility_Not[] = {
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_IconDaycareCompatatbility_Low[] = {
+    ANIMCMD_FRAME(16, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_IconDaycareCompatatbility_Med[] = {
+    ANIMCMD_FRAME(32, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_IconDaycareCompatatbility_Max[] = {
+    ANIMCMD_FRAME(48, 0),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const sAnims_IconDaycareCompatatbility[] =
+{
+    sAnim_IconDaycareCompatatbility_Not,
+    sAnim_IconDaycareCompatatbility_Low,
+    sAnim_IconDaycareCompatatbility_Med,
+    sAnim_IconDaycareCompatatbility_Max,
 };
 
 #define sFrameNumComfyAnimId sprite->data[0]
@@ -2072,151 +2214,6 @@ static void Task_RotomPhone_SmallStartMenu_CloseForSafari(u8 taskId)
 }
 
 
-enum SlidingPanelSprites
-{
-    PANEL_SPRITE_ONE,
-    PANEL_SPRITE_TWO,
-    PANEL_SPRITE_THREE,
-    PANEL_SPRITE_FOUR,
-    PANEL_SPRITE_FIVE,
-    PANEL_SPRITE_SIX,
-    PANEL_SPRITE_COUNT,
-};
-
-enum SlidingPanelWindows
-{
-    PANEL_WIN_ONE,
-    PANEL_WIN_TWO,
-    PANEL_WIN_THREE,
-    PANEL_WIN_FOUR,
-    PANEL_WIN_FIVE,
-    PANEL_WIN_SIX,
-    PANEL_WIN_COUNT,
-};
-
-struct RotomPhone_LargeStartMenuState
-{
-    u8 loadState;
-    u8 mode;
-
-    u8 panelY;
-    bool8 panelIsOpen;
-
-    u8 panelSpriteIds[PANEL_SPRITE_COUNT];
-    u8 panelWindowIds[PANEL_WIN_COUNT];
-};
-
-enum WindowIds
-{
-    WIN_UI_TOP_BAR,
-};
-
-static EWRAM_DATA struct RotomPhone_LargeStartMenuState *sRotomPhone_LargeStartMenu = NULL;
-static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
-static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
-
-static const struct BgTemplate sRotomPhone_LargeStartMenuBgTemplates[] =
-{
-    {
-        .bg = 0,
-        .charBaseIndex = 0,
-        .mapBaseIndex = 31,
-        .priority = 1
-    },
-    {
-        .bg = 1,
-        .charBaseIndex = 3,
-        .mapBaseIndex = 30,
-        .priority = 2
-    },
-    {
-        .bg = 2,
-        .charBaseIndex = 3,
-        .mapBaseIndex = 29,
-        .priority = 0
-    }
-};
-
-static const struct WindowTemplate sRotomPhone_LargeStartMenuWindowTemplates[] =
-{
-    [WIN_UI_TOP_BAR] =
-    {
-        .bg = 0,
-        .tilemapLeft = 0,
-        .tilemapTop = 0,
-        .width = 30,
-        .height = 2,
-        .paletteNum = 15,
-        .baseBlock = 1
-    },
-    DUMMY_WIN_TEMPLATE
-};
-#define ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK                           \
-sRotomPhone_LargeStartMenuWindowTemplates[WIN_UI_TOP_BAR].baseBlock +   \
-(                                                                       \
-    sRotomPhone_LargeStartMenuWindowTemplates[WIN_UI_TOP_BAR].height *  \
-    sRotomPhone_LargeStartMenuWindowTemplates[WIN_UI_TOP_BAR].width     \
-)
-
-static const u32 sRotomPhone_LargeStartMenuTiles[] = INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.smol");
-
-static const u32 sRotomPhone_LargeStartMenuTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_full_screen.bin.smolTM");
-static const u32 sRotomPhone_LargeStartMenuPanelTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_full_screen_panel.bin.smolTM");
-
-static const u16 sRotomPhone_LargeStartMenuPalette[] = INCBIN_U16("graphics/rotom_start_menu/rotom_phone_tiles.gbapal");
-
-static const u32 sRotomPhone_DaycareCompatability_Gfx[] = INCBIN_U32("graphics/rotom_start_menu/panel/daycare_heart.4bpp.smol");
-static const u16 sRotomPhone_DaycareCompatability_Pal[] = INCBIN_U16("graphics/rotom_start_menu/panel/daycare_heart.gbapal");
-
-
-enum RotomPhoneDaycareCompatabilityAnims
-{
-    ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_NON,
-    ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_LOW,
-    ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_MED,
-    ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_MAX,
-    ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_COUNT,
-};
-
-static const struct CompressedSpriteSheet sSpriteSheet_CompatabilityIcon = {
-    .data = sRotomPhone_DaycareCompatability_Gfx,
-    .size = 32 * 32 * ROTOM_PHONE_DAYCARE_COMPATABILITY_ANIM_COUNT / 2,
-    .tag = TAG_ICON_GFX,
-};
-
-static const struct OamData sOam_IconDaycareCompatatbility = {
-    .size = SPRITE_SIZE(32x32),
-    .shape = SPRITE_SHAPE(32x32),
-    .priority = 0,
-};
-
-static const union AnimCmd sAnim_IconDaycareCompatatbility_Not[] = {
-    ANIMCMD_FRAME(0, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnim_IconDaycareCompatatbility_Low[] = {
-    ANIMCMD_FRAME(16, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnim_IconDaycareCompatatbility_Med[] = {
-    ANIMCMD_FRAME(32, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd sAnim_IconDaycareCompatatbility_Max[] = {
-    ANIMCMD_FRAME(48, 0),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd *const sAnims_IconDaycareCompatatbility[] =
-{
-    sAnim_IconDaycareCompatatbility_Not,
-    sAnim_IconDaycareCompatatbility_Low,
-    sAnim_IconDaycareCompatatbility_Med,
-    sAnim_IconDaycareCompatatbility_Max,
-};
 
 void Task_OpenRotomPhone_LargeStartMenu(u8 taskId)
 {
