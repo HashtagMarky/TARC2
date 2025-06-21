@@ -907,7 +907,7 @@ static enum RotomPhoneMenuItems RotomPhone_SetFirstSelectedMenu(void)
 #define tPhoneY gTasks[taskId].data[5]
 #define tPhoneComfyAnimId gTasks[taskId].data[6]
 #define tPhoneCloseToSave gTasks[taskId].data[7]
-#define tPhoneHighlightTimer gTasks[taskId].data[8]
+#define tPhoneHighlightComfyAnimId gTasks[taskId].data[8]
 void RotomPhone_SmallStartMenu_Init(bool32 firstInit)
 {
     u8 taskId;
@@ -984,6 +984,16 @@ static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit)
         gTasks[taskId].func = Task_RotomPhone_SmallStartMenu_HandleMainInput;
     else
         taskId = CreateTask(Task_RotomPhone_SmallStartMenu_HandleMainInput, 0);
+
+    struct ComfyAnimSpringConfig config;
+    InitComfyAnimConfig_Spring(&config);
+    config.from = Q_24_8(0x00);
+    config.to = Q_24_8(0xFF);
+    config.mass = Q_24_8(200);
+    config.tension = Q_24_8(25);
+    config.friction = Q_24_8(800);
+    config.clampAfter = 1;
+    tPhoneHighlightComfyAnimId = CreateComfyAnim_Spring(&config);
 
     tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER / ROTOM_PHONE_NUM_MINUTES_TO_UPDATE;
     tRotomUpdateMessage = ROTOM_PHONE_MESSAGE_TIME;
@@ -1799,8 +1809,9 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
                 LoadPalette(&sIconsRotomFacePal[PAL_ICON_GREY], OBJ_PLTT_ID(index) + colour, sizeof(u16)); 
             }
         }
-        tPhoneHighlightTimer = 0;
     }
+    gComfyAnims[tPhoneHighlightComfyAnimId].config.data.spring.to = Q_24_8(0xFF);
+    gComfyAnims[tPhoneHighlightComfyAnimId].position = 0;
     menuSelectedSmall = sRotomPhone_SmallStartMenu->menuSmallOptions[nextIndex];
     if (ROTOM_PHONE_NOT_FLIP_PHONE)
         tRotomMessageSoundEffect = PMD_EVENT_SIGN_ASE_01;
@@ -1899,6 +1910,22 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     u32 iconPal = sRotomPhoneOptions[menuSelectedSmall].iconPalSlot;
     tRotomMessageSoundEffect = MUS_DUMMY;
     RotomPhone_SmallStartMenu_CheckUpdateMessage(taskId);
+    
+    if (menuSelectedSmall == ROTOM_PHONE_MENU_SHORTCUT)
+        iconPal = sRotomPhoneOptions[RotomPhone_StartMenu_GetShortcutOption()].iconPalSlot;
+    
+    TryAdvanceComfyAnim(&gComfyAnims[tPhoneHighlightComfyAnimId]);
+    u32 frameNum = ReadComfyAnimValueSmooth(&gComfyAnims[tPhoneHighlightComfyAnimId]);
+    UpdateRotomSpriteFadeColours(
+        // Uses first option as all sprites will use the same palette
+        &gSprites[sRotomPhone_SmallStartMenu->menuSmallSpriteId[ROTOM_PHONE_MENU_FIRST_OPTION]],
+        iconPal, 
+        frameNum
+    );
+    if (frameNum == 0xFF)
+        gComfyAnims[tPhoneHighlightComfyAnimId].config.data.spring.to = Q_24_8(0x00);
+    else if (frameNum == 0x00)
+        gComfyAnims[tPhoneHighlightComfyAnimId].config.data.spring.to = Q_24_8(0xFF);
 
     if (tRotomUpdateTimer && sRotomPhone_SmallStartMenu->isLoading == FALSE && !gPaletteFade.active)
         tRotomUpdateTimer--;
@@ -1936,16 +1963,6 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
     {
         sRotomPhoneOptions[menuSelectedSmall].selectedFunc();
     }
-
-    if (menuSelectedSmall == ROTOM_PHONE_MENU_SHORTCUT)
-        iconPal = sRotomPhoneOptions[RotomPhone_StartMenu_GetShortcutOption()].iconPalSlot;
-    UpdateRotomSpriteFadeColours(
-        // Uses first option as all sprites will use the same palette
-        &gSprites[sRotomPhone_SmallStartMenu->menuSmallSpriteId[ROTOM_PHONE_MENU_FIRST_OPTION]],
-        iconPal, 
-        tPhoneHighlightTimer
-    );
-    tPhoneHighlightTimer += 4;
 
     if (tRotomMessageSoundEffect && !IsSEPlaying())
         PlaySE(tRotomMessageSoundEffect);
@@ -3135,5 +3152,5 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 #undef tRotomPanelLastY
 #undef tPhoneY
 #undef tPhoneCloseToSave
-#undef tPhoneHighlightTimer
+#undef tPhoneHighlightComfyAnimId
 #undef sFrameNumCB
