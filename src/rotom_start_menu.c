@@ -85,6 +85,13 @@
 #define PHONE_OFFSCREEN_Y                   (ROTOM_PHONE_NOT_FLIP_PHONE ? 98 : 96)
 #define PHONE_SLIDE_DURATION                30
 #define ROTOM_FACE_UPDATE_PERCENT           100
+#define FACE_ICON_COMFY_SPRING_MASS         200
+#define FACE_ICON_COMFY_SPRING_TENSION      25
+#define FACE_ICON_COMFY_SPRING_FRICTION     800
+#define FACE_ICON_COMFY_SPRING_CLAMP_AFTER  1
+#define FADE_COLOUR_MAX                     0xFF
+#define FADE_COLOUR_MID                     0x80
+#define FADE_COLOUR_MIN                     0x00
 
 
 static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit);
@@ -459,7 +466,7 @@ static u8 UpdateRotomSpriteFadeColours(struct Sprite* sprite, enum IconRotomFace
     
     LoadPalette(&colour, OBJ_PLTT_ID(IndexOfSpritePaletteTag(sprite->template->paletteTag)) + index, sizeof(colour));
 
-    return frameNum != 0xFF ? ++frameNum : 0;
+    return frameNum != FADE_COLOUR_MAX ? ++frameNum : FADE_COLOUR_MIN;
 }
 
 #define ROTOM_SPEECH_WINDOW_WIDTH   18
@@ -993,12 +1000,12 @@ static void RotomPhone_SmallStartMenu_ContinueInit(bool32 firstInit)
 
     struct ComfyAnimSpringConfig config;
     InitComfyAnimConfig_Spring(&config);
-    config.from = Q_24_8(0x00);
-    config.to = Q_24_8(0xFF);
-    config.mass = Q_24_8(200);
-    config.tension = Q_24_8(25);
-    config.friction = Q_24_8(800);
-    config.clampAfter = 1;
+    config.from = Q_24_8(FADE_COLOUR_MIN);
+    config.to = Q_24_8(FADE_COLOUR_MAX);
+    config.mass = Q_24_8(FACE_ICON_COMFY_SPRING_MASS);
+    config.tension = Q_24_8(FACE_ICON_COMFY_SPRING_TENSION);
+    config.friction = Q_24_8(FACE_ICON_COMFY_SPRING_FRICTION);
+    config.clampAfter = FACE_ICON_COMFY_SPRING_CLAMP_AFTER;
     tPhoneHighlightComfyAnimId = CreateComfyAnim_Spring(&config);
 
     tRotomUpdateTimer = ROTOM_PHONE_MESSAGE_UPDATE_TIMER / ROTOM_PHONE_NUM_MINUTES_TO_UPDATE;
@@ -1066,12 +1073,12 @@ static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(bool32 rotomLoad)
 
         struct ComfyAnimSpringConfig config;
         InitComfyAnimConfig_Spring(&config);
-        config.from = Q_24_8(0x00);
-        config.to = Q_24_8(0x80);
-        config.mass = Q_24_8(200);
-        config.tension = Q_24_8(25);
-        config.friction = Q_24_8(800);
-        config.clampAfter = 1;
+        config.from = Q_24_8(FADE_COLOUR_MIN);
+        config.to = Q_24_8(FADE_COLOUR_MID);
+        config.mass = Q_24_8(FACE_ICON_COMFY_SPRING_MASS);
+        config.tension = Q_24_8(FACE_ICON_COMFY_SPRING_TENSION);
+        config.friction = Q_24_8(FACE_ICON_COMFY_SPRING_FRICTION);
+        config.clampAfter = FACE_ICON_COMFY_SPRING_CLAMP_AFTER;
         sFrameNumComfyAnimId = CreateComfyAnim_Spring(&config);
     }
 
@@ -1827,7 +1834,7 @@ static void RotomPhone_SmallStartMenu_HandleInput(u8 taskId)
             }
         }
     }
-    gComfyAnims[tPhoneHighlightComfyAnimId].config.data.spring.to = Q_24_8(0xFF);
+    gComfyAnims[tPhoneHighlightComfyAnimId].config.data.spring.to = Q_24_8(FADE_COLOUR_MAX);
     gComfyAnims[tPhoneHighlightComfyAnimId].position = 0;
     menuSelectedSmall = sRotomPhone_SmallStartMenu->menuSmallOptions[nextIndex];
     if (ROTOM_PHONE_NOT_FLIP_PHONE)
@@ -1939,10 +1946,10 @@ static void Task_RotomPhone_SmallStartMenu_HandleMainInput(u8 taskId)
         iconPal, 
         frameNum
     );
-    if (frameNum == 0xFF)
-        gComfyAnims[tPhoneHighlightComfyAnimId].config.data.spring.to = Q_24_8(0x00);
-    else if (frameNum == 0x00)
-        gComfyAnims[tPhoneHighlightComfyAnimId].config.data.spring.to = Q_24_8(0xFF);
+    if (frameNum == FADE_COLOUR_MAX)
+        gComfyAnims[tPhoneHighlightComfyAnimId].config.data.spring.to = Q_24_8(FADE_COLOUR_MIN);
+    else if (frameNum == FADE_COLOUR_MIN)
+        gComfyAnims[tPhoneHighlightComfyAnimId].config.data.spring.to = Q_24_8(FADE_COLOUR_MAX);
 
     if (tRotomUpdateTimer && sRotomPhone_SmallStartMenu->isLoading == FALSE && !gPaletteFade.active)
         tRotomUpdateTimer--;
@@ -1997,12 +2004,12 @@ static void RotomPhone_SmallStartMenu_RotomShutdownPreparation(u8 taskId)
     
     struct ComfyAnimSpringConfig config;
     InitComfyAnimConfig_Spring(&config);
-    config.from = Q_24_8(0x80);
-    config.to = Q_24_8(0xFF);
-    config.mass = Q_24_8(200);
-    config.tension = Q_24_8(25);
-    config.friction = Q_24_8(800);
-    config.clampAfter = 1;
+    config.from = Q_24_8(FADE_COLOUR_MID);
+    config.to = Q_24_8(FADE_COLOUR_MAX);
+    config.mass = Q_24_8(FACE_ICON_COMFY_SPRING_MASS);
+    config.tension = Q_24_8(FACE_ICON_COMFY_SPRING_TENSION);
+    config.friction = Q_24_8(FACE_ICON_COMFY_SPRING_FRICTION);
+    config.clampAfter = FACE_ICON_COMFY_SPRING_CLAMP_AFTER;
     sFrameNumComfyAnimId = CreateComfyAnim_Spring(&config);
 }
 
