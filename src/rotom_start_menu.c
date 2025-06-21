@@ -200,6 +200,153 @@ static const u16 sRotomPhone_FullScreenMenuPalette[] =      INCBIN_U16("graphics
 static const u32 sRotomPhone_DaycareCompatability_Gfx[] =   INCBIN_U32("graphics/rotom_start_menu/panel/daycare_heart.4bpp.smol");
 static const u16 sRotomPhone_DaycareCompatability_Pal[] =   INCBIN_U16("graphics/rotom_start_menu/panel/daycare_heart.gbapal");
 
+enum RotomPhone_Overworld_FaceIconPaletteIndex
+{
+    PAL_FACE_ICON_TRANSPARENT,
+    PAL_ICON_RED,
+    PAL_ICON_GREEN,
+    PAL_ICON_BLUE,
+    PAL_ICON_YELLOW,
+    PAL_ICON_PURPLE,
+    PAL_ICON_PINK,
+    PAL_ICON_ORANGE,
+    PAL_ICON_BROWN,
+    PAL_ICON_GREY,
+    PAL_ICON_WHITE,
+    PAL_ROTOM_OUTLINE,
+    PAL_ROTOM_EYE_WHITE,
+    PAL_ROTOM_EYE_TOP,
+    PAL_ROTOM_EYE_BOTTOM,
+    PAL_ROTOM_ARC,
+};
+
+static u16 RotomPhone_StartMenu_GetPhoneBackgroundColour(u8 palSlot)
+{
+    return sRotomFlipPhone_OverworldPalette[PHONE_BASE_COLOUR_INDEX];
+}
+
+static u16 RotomPhone_StartMenu_GetFaceIconPaletteOriginalColour(u8 palSlot)
+{
+    if (RP_NOT_FLIP_PHONE && !(RP_GREY_ICONS && palSlot < PAL_ICON_WHITE))
+        return sRotomPhone_OverworldRotomFaceIconsPal[palSlot];
+    else
+        return sRotomPhone_OverworldRotomFaceIconsPal[PAL_ICON_GREY];
+}
+
+static u16 RotomPhone_StartMenu_GetFaceIconPaletteHighlightColour(u8 palSlot)
+{
+    #define MAX_RGB_COMPONENT 28
+    #define LIGHTEN_FACTOR    8
+    u16 colour = RotomPhone_StartMenu_GetFaceIconPaletteOriginalColour(palSlot);
+
+    s32 r = GET_R(colour);
+    s32 g = GET_G(colour);
+    s32 b = GET_B(colour);
+
+    r = (r + LIGHTEN_FACTOR > MAX_RGB_COMPONENT) ? MAX_RGB_COMPONENT : r + LIGHTEN_FACTOR;
+    g = (g + LIGHTEN_FACTOR > MAX_RGB_COMPONENT) ? MAX_RGB_COMPONENT : g + LIGHTEN_FACTOR;
+    b = (b + LIGHTEN_FACTOR > MAX_RGB_COMPONENT) ? MAX_RGB_COMPONENT : b + LIGHTEN_FACTOR;
+
+    return RGB(r, g, b);
+    #undef MAX_RGB_COMPONENT
+    #undef LIGHTEN_FACTOR
+}
+
+static void RotomPhone_StartMenu_UpdateSpriteFadeColours(struct Sprite* sprite, enum RotomPhone_Overworld_FaceIconPaletteIndex index, u8 frameNum)
+{
+    if (index == PAL_FACE_ICON_TRANSPARENT)
+        return;
+    
+    s32 intensity = (((Cos(frameNum, 128) + 128) * 10) / 250);
+    s32 r;
+    s32 g;
+    s32 b;
+    u16 colour;
+    u16 colourTo;
+    u16 colourFrom;
+
+    switch (index)
+    {
+    case PAL_ROTOM_OUTLINE:
+    case PAL_ROTOM_EYE_WHITE:
+    case PAL_ROTOM_EYE_TOP:
+    case PAL_ROTOM_EYE_BOTTOM:
+    case PAL_ROTOM_ARC:
+        colourFrom = RotomPhone_StartMenu_GetPhoneBackgroundColour(index);
+        colourTo = RotomPhone_StartMenu_GetFaceIconPaletteOriginalColour(index);
+        break;
+    
+    default:
+        colourFrom = RotomPhone_StartMenu_GetFaceIconPaletteOriginalColour(index);
+        colourTo = RotomPhone_StartMenu_GetFaceIconPaletteHighlightColour(index);
+        break;
+    }
+
+    if (intensity == 0)
+    {
+        colour = colourTo;
+    }
+    else
+    {
+        if (GET_R(colourFrom) <= GET_R(colourTo))
+            r = (GET_R(colourTo) - (((GET_R(colourTo) - GET_R(colourFrom)) * intensity) / 10));
+        else
+            r = (GET_R(colourTo) + (((GET_R(colourFrom) - GET_R(colourTo)) * intensity) / 10));
+
+        if (GET_G(colourFrom) <= GET_G(colourTo))
+            g = (GET_G(colourTo) - (((GET_G(colourTo) - GET_G(colourFrom)) * intensity) / 10));
+        else
+            g = (GET_G(colourTo) + (((GET_G(colourFrom) - GET_G(colourTo)) * intensity) / 10));
+
+        if (GET_B(colourFrom) <= GET_B(colourTo))
+            b = (GET_B(colourTo) - (((GET_B(colourTo) - GET_B(colourFrom)) * intensity) / 10));
+        else
+            b = (GET_B(colourTo) + (((GET_B(colourFrom) - GET_B(colourTo)) * intensity) / 10));
+
+        colour = RGB(r, g, b);
+    }
+    
+    LoadPalette(&colour, OBJ_PLTT_ID(IndexOfSpritePaletteTag(sprite->template->paletteTag)) + index, sizeof(colour));
+}
+
+#define sFrameNumComfyAnimId sprite->data[0]
+static void SpriteCB_RotomPhone_OverworldMenu_RotomFace_Load(struct Sprite* sprite)
+{
+    TryAdvanceComfyAnim(&gComfyAnims[sFrameNumComfyAnimId]);
+    if (gComfyAnims[sFrameNumComfyAnimId].completed)
+    {
+        ReleaseComfyAnim(sFrameNumComfyAnimId);
+        sprite->callback = SpriteCallbackDummy;
+        RotomPhone_OverworldMenu_ContinueInit(TRUE);
+        return;
+    }
+
+    u32 frameNum = ReadComfyAnimValueSmooth(&gComfyAnims[sFrameNumComfyAnimId]);
+    RotomPhone_StartMenu_UpdateSpriteFadeColours(sprite, PAL_ROTOM_OUTLINE, frameNum);
+    RotomPhone_StartMenu_UpdateSpriteFadeColours(sprite, PAL_ROTOM_EYE_WHITE, frameNum);
+    RotomPhone_StartMenu_UpdateSpriteFadeColours(sprite, PAL_ROTOM_EYE_TOP, frameNum);
+    RotomPhone_StartMenu_UpdateSpriteFadeColours(sprite, PAL_ROTOM_ARC, frameNum);
+    RotomPhone_StartMenu_UpdateSpriteFadeColours(sprite, PAL_ROTOM_EYE_BOTTOM, frameNum);
+}
+
+static void SpriteCB_RotomPhone_OverworldMenu_RotomFace_Unload(struct Sprite* sprite)
+{
+    TryAdvanceComfyAnim(&gComfyAnims[sFrameNumComfyAnimId]);
+    if (gComfyAnims[sFrameNumComfyAnimId].completed)
+    {
+        ReleaseComfyAnim(sFrameNumComfyAnimId);
+        sprite->callback = SpriteCallbackDummy;
+        return;
+    }
+
+    u32 frameNum = ReadComfyAnimValueSmooth(&gComfyAnims[sFrameNumComfyAnimId]);
+    RotomPhone_StartMenu_UpdateSpriteFadeColours(sprite, PAL_ROTOM_OUTLINE, frameNum);
+    RotomPhone_StartMenu_UpdateSpriteFadeColours(sprite, PAL_ROTOM_EYE_WHITE, frameNum);
+    RotomPhone_StartMenu_UpdateSpriteFadeColours(sprite, PAL_ROTOM_EYE_TOP, frameNum);
+    RotomPhone_StartMenu_UpdateSpriteFadeColours(sprite, PAL_ROTOM_ARC, frameNum);
+    RotomPhone_StartMenu_UpdateSpriteFadeColours(sprite, PAL_ROTOM_EYE_BOTTOM, frameNum);
+}
+
 
 #define FLIP_PHONE_TEXT_BG_COLOUR       12
 #define FLIP_PHONE_TEXT_FG_COLOUR       4
@@ -366,26 +513,6 @@ enum RotomPhone_FullScreen_SlidingPanelWindows
     RP_PANEL_WIN_COUNT,
 };
 
-enum RotomPhone_Overworld_FaceIconPaletteIndex
-{
-    PAL_FACE_ICON_TRANSPARENT,
-    PAL_ICON_RED,
-    PAL_ICON_GREEN,
-    PAL_ICON_BLUE,
-    PAL_ICON_YELLOW,
-    PAL_ICON_PURPLE,
-    PAL_ICON_PINK,
-    PAL_ICON_ORANGE,
-    PAL_ICON_BROWN,
-    PAL_ICON_GREY,
-    PAL_ICON_WHITE,
-    PAL_ROTOM_OUTLINE,
-    PAL_ROTOM_EYE_WHITE,
-    PAL_ROTOM_EYE_TOP,
-    PAL_ROTOM_EYE_BOTTOM,
-    PAL_ROTOM_ARC,
-};
-
 enum RotomPhone_FullScreen_DaycareCompatabilityAnims
 {
     RP_DAYCARE_COMPATABILITY_ANIM_NON,
@@ -395,16 +522,6 @@ enum RotomPhone_FullScreen_DaycareCompatabilityAnims
     RP_DAYCARE_COMPATABILITY_ANIM_COUNT,
 };
 
-
-struct RotomPhoneMenuOptions
-{
-    const u8 *menuName;
-    const u8 *rotomAction;
-    bool32 (*unlockedFunc)(void);
-    void (*selectedFunc)(void);
-    u32 iconPalSlot;
-    bool32 fullScreenPanel;
-};
 
 struct RotomPhone_StartMenu
 {
@@ -445,95 +562,6 @@ bool32 RotomPhone_StartMenu_IsFullScreen(void)
     return menuFullScreen;
 }
 
-
-static u16 RotomPhone_GetPhoneBackgroundColour(u8 palSlot)
-{
-    return sRotomFlipPhone_OverworldPalette[PHONE_BASE_COLOUR_INDEX];
-}
-
-static u16 RotomPhone_GetFaceIconPaletteOriginalColour(u8 palSlot)
-{
-    if (RP_NOT_FLIP_PHONE && !(RP_GREY_ICONS && palSlot < PAL_ICON_WHITE))
-        return sRotomPhone_OverworldRotomFaceIconsPal[palSlot];
-    else
-        return sRotomPhone_OverworldRotomFaceIconsPal[PAL_ICON_GREY];
-}
-
-static u16 RotomPhone_GetFaceIconPaletteHighlightColour(u8 palSlot)
-{
-    #define MAX_RGB_COMPONENT 28
-    #define LIGHTEN_FACTOR    8
-    u16 colour = RotomPhone_GetFaceIconPaletteOriginalColour(palSlot);
-
-    s32 r = GET_R(colour);
-    s32 g = GET_G(colour);
-    s32 b = GET_B(colour);
-
-    r = (r + LIGHTEN_FACTOR > MAX_RGB_COMPONENT) ? MAX_RGB_COMPONENT : r + LIGHTEN_FACTOR;
-    g = (g + LIGHTEN_FACTOR > MAX_RGB_COMPONENT) ? MAX_RGB_COMPONENT : g + LIGHTEN_FACTOR;
-    b = (b + LIGHTEN_FACTOR > MAX_RGB_COMPONENT) ? MAX_RGB_COMPONENT : b + LIGHTEN_FACTOR;
-
-    return RGB(r, g, b);
-    #undef MAX_RGB_COMPONENT
-    #undef LIGHTEN_FACTOR
-}
-
-static void UpdateRotomSpriteFadeColours(struct Sprite* sprite, enum RotomPhone_Overworld_FaceIconPaletteIndex index, u8 frameNum)
-{
-    if (index == PAL_FACE_ICON_TRANSPARENT)
-        return;
-    
-    s32 intensity = (((Cos(frameNum, 128) + 128) * 10) / 250);
-    s32 r;
-    s32 g;
-    s32 b;
-    u16 colour;
-    u16 colourTo;
-    u16 colourFrom;
-
-    switch (index)
-    {
-    case PAL_ROTOM_OUTLINE:
-    case PAL_ROTOM_EYE_WHITE:
-    case PAL_ROTOM_EYE_TOP:
-    case PAL_ROTOM_EYE_BOTTOM:
-    case PAL_ROTOM_ARC:
-        colourFrom = RotomPhone_GetPhoneBackgroundColour(index);
-        colourTo = RotomPhone_GetFaceIconPaletteOriginalColour(index);
-        break;
-    
-    default:
-        colourFrom = RotomPhone_GetFaceIconPaletteOriginalColour(index);
-        colourTo = RotomPhone_GetFaceIconPaletteHighlightColour(index);
-        break;
-    }
-
-    if (intensity == 0)
-    {
-        colour = colourTo;
-    }
-    else
-    {
-        if (GET_R(colourFrom) <= GET_R(colourTo))
-            r = (GET_R(colourTo) - (((GET_R(colourTo) - GET_R(colourFrom)) * intensity) / 10));
-        else
-            r = (GET_R(colourTo) + (((GET_R(colourFrom) - GET_R(colourTo)) * intensity) / 10));
-
-        if (GET_G(colourFrom) <= GET_G(colourTo))
-            g = (GET_G(colourTo) - (((GET_G(colourTo) - GET_G(colourFrom)) * intensity) / 10));
-        else
-            g = (GET_G(colourTo) + (((GET_G(colourFrom) - GET_G(colourTo)) * intensity) / 10));
-
-        if (GET_B(colourFrom) <= GET_B(colourTo))
-            b = (GET_B(colourTo) - (((GET_B(colourTo) - GET_B(colourFrom)) * intensity) / 10));
-        else
-            b = (GET_B(colourTo) + (((GET_B(colourFrom) - GET_B(colourTo)) * intensity) / 10));
-
-        colour = RGB(r, g, b);
-    }
-    
-    LoadPalette(&colour, OBJ_PLTT_ID(IndexOfSpritePaletteTag(sprite->template->paletteTag)) + index, sizeof(colour));
-}
 
 #define ROTOM_SPEECH_WINDOW_WIDTH   18
 #define ROTOM_SPEECH_WINDOW_WIDTH_PXL ROTOM_SPEECH_WINDOW_WIDTH * 8
@@ -823,44 +851,6 @@ static const union AnimCmd *const sAnims_IconDaycareCompatatbility[] =
     sAnim_IconDaycareCompatatbility_Max,
 };
 
-#define sFrameNumComfyAnimId sprite->data[0]
-static void SpriteCB_RotomPhone_OverworldMenu_RotomFace_Load(struct Sprite* sprite)
-{
-    TryAdvanceComfyAnim(&gComfyAnims[sFrameNumComfyAnimId]);
-    if (gComfyAnims[sFrameNumComfyAnimId].completed)
-    {
-        ReleaseComfyAnim(sFrameNumComfyAnimId);
-        sprite->callback = SpriteCallbackDummy;
-        RotomPhone_OverworldMenu_ContinueInit(TRUE);
-        return;
-    }
-
-    u32 frameNum = ReadComfyAnimValueSmooth(&gComfyAnims[sFrameNumComfyAnimId]);
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_OUTLINE, frameNum);
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_WHITE, frameNum);
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_TOP, frameNum);
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_ARC, frameNum);
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_BOTTOM, frameNum);
-}
-
-static void SpriteCB_RotomPhone_OverworldMenu_RotomFace_Unload(struct Sprite* sprite)
-{
-    TryAdvanceComfyAnim(&gComfyAnims[sFrameNumComfyAnimId]);
-    if (gComfyAnims[sFrameNumComfyAnimId].completed)
-    {
-        ReleaseComfyAnim(sFrameNumComfyAnimId);
-        sprite->callback = SpriteCallbackDummy;
-        return;
-    }
-
-    u32 frameNum = ReadComfyAnimValueSmooth(&gComfyAnims[sFrameNumComfyAnimId]);
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_OUTLINE, frameNum);
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_WHITE, frameNum);
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_TOP, frameNum);
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_ARC, frameNum);
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_BOTTOM, frameNum);
-}
-
 static const struct SpriteTemplate sSpriteTemplate_OverworldIcon = {
     .tileTag = TAG_PHONE_ICON_GFX,
     .paletteTag = TAG_ROTOM_FACE_ICON_PAL,
@@ -881,7 +871,16 @@ static const struct SpriteTemplate sSpriteTemplate_RotomFace = {
 };
 
 
-static struct RotomPhoneMenuOptions sRotomPhoneOptions[RP_MENU_COUNT] =
+struct RotomPhone_MenuOptions
+{
+    const u8 *menuName;
+    const u8 *rotomAction;
+    bool32 (*unlockedFunc)(void);
+    void (*selectedFunc)(void);
+    u32 iconPalSlot;
+    bool32 fullScreenPanel;
+};
+static struct RotomPhone_MenuOptions sRotomPhoneOptions[RP_MENU_COUNT] =
 {
     [RP_MENU_POKEDEX] =
     {
@@ -1286,7 +1285,7 @@ static void RotomPhone_OverworldMenu_CreateAllSprites(void)
 
     for (enum RotomPhone_MenuItems menuId = RP_MENU_FIRST_OPTION; menuId < RP_MENU_COUNT && drawn < drawnCount; menuId++)
     {
-        const struct RotomPhoneMenuOptions *menuOption = &sRotomPhoneOptions[menuId];
+        const struct RotomPhone_MenuOptions *menuOption = &sRotomPhoneOptions[menuId];
 
         if (menuOption->unlockedFunc && menuOption->unlockedFunc())
         {
@@ -2071,7 +2070,7 @@ static void RotomPhone_OverworldMenu_UpdateIconPaletteFade(u8 taskId)
     
     TryAdvanceComfyAnim(&gComfyAnims[tPhoneHighlightComfyAnimId]);
     u32 frameNum = ReadComfyAnimValueSmooth(&gComfyAnims[tPhoneHighlightComfyAnimId]);
-    UpdateRotomSpriteFadeColours(
+    RotomPhone_StartMenu_UpdateSpriteFadeColours(
         // Uses first option as all sprites will use the same palette
         &gSprites[sRotomPhone_OverworldMenu->menuOverworldIconSpriteId[RP_MENU_FIRST_OPTION]],
         iconPal, 
