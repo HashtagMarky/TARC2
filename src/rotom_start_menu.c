@@ -1930,6 +1930,9 @@ static void Task_RotomPhone_SmallStartMenu_PhoneSlideClose(u8 taskId)
 
 static void RotomPhone_SmallStartMenu_UpdateIconPaletteFade(u8 taskId)
 {
+    if (gPaletteFade.active)
+        return;
+    
     u32 iconPal = sRotomPhoneOptions[menuSelectedSmall].iconPalSlot;
 
     if (menuSelectedSmall == ROTOM_PHONE_MENU_SHORTCUT)
