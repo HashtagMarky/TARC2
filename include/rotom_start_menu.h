@@ -3,16 +3,16 @@
 
 #include "global.h"
 
-#define ROTOM_PHONE_NOT_FLIP_PHONE          FlagGet(FLAG_SYS_POKEDEX_GET)
-#define ROTOM_PHONE_GREY_ICONS              FALSE
-#define ROTOM_PHONE_UPDATE_CLOCK_DISPLAY    TRUE
-#define ROTOM_PHONE_24_HOUR_MODE            gSaveBlock2Ptr->optionsClockMode
-#define ROTOM_PHONE_NUM_MINUTES_TO_UPDATE   1
-#define ROTOM_PHONE_MESSAGE_UPDATE_TIMER    (30 * 60) / FakeRtc_GetSecondsRatio() * ROTOM_PHONE_NUM_MINUTES_TO_UPDATE
-#define ROTOM_PHONE_MESSAGE_SHUTDOWN_TIME   0
-#define ROTOM_PHONE_UPDATE_MESSAGE          TRUE
-#define ROTOM_PHONE_UPDATE_MESSAGE_SOUND    TRUE
-#define ROTOM_FACE_UPDATE_PERCENT           100
+#define RP_NOT_FLIP_PHONE          FlagGet(FLAG_SYS_POKEDEX_GET)
+#define RP_GREY_ICONS              FALSE
+#define RP_UPDATE_CLOCK_DISPLAY    TRUE
+#define RP_24_HOUR_MODE            gSaveBlock2Ptr->optionsClockMode
+#define RP_NUM_MINUTES_TO_UPDATE   1
+#define RP_MESSAGE_UPDATE_TIMER    (30 * 60) / FakeRtc_GetSecondsRatio() * RP_NUM_MINUTES_TO_UPDATE
+#define RP_MESSAGE_SHUTDOWN_TIME   0
+#define RP_UPDATE_MESSAGE          TRUE
+#define RP_UPDATE_MESSAGE_SOUND    TRUE
+#define RP_FACE_UPDATE_PERCENT     100
 
 void RotomPhone_SmallStartMenu_Init(bool32 firstInit);
 void RotomPhone_LargeStartMenu_Init(void);
