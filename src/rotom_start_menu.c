@@ -335,7 +335,6 @@ struct RotomPhoneMenuOptions
 
 struct RotomPhone_StartMenu
 {
-    MainCallback savedCallback;
     bool32 isLoading;
     enum RotomPhoneMenuItems menuSmallOptions[ROTOM_PHONE_SMALL_OPTION_COUNT];
     u32 menuSmallRotomFaceSpriteId;
@@ -948,7 +947,6 @@ void RotomPhone_SmallStartMenu_Init(bool32 firstInit)
     if (ROTOM_PHONE_NOT_FLIP_PHONE && ROTOM_PHONE_UPDATE_MESSAGE_SOUND)
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x80);
 
-    sRotomPhone_SmallStartMenu->savedCallback = CB2_ReturnToFieldWithOpenMenu;
     sRotomPhone_SmallStartMenu->isLoading = FALSE;
     sRotomPhone_SmallStartMenu->windowIdRotomSpeech_Top = 0;
     menuFullScreen = FALSE;
@@ -2098,7 +2096,6 @@ enum SlidingPanelWindows
 
 struct RotomPhone_LargeStartMenuState
 {
-    MainCallback savedCallback;
     u8 loadState;
     u8 mode;
 
@@ -2242,7 +2239,6 @@ void RotomPhone_LargeStartMenu_Init(void)
     }
 
     sRotomPhone_LargeStartMenu->loadState = 0;
-    sRotomPhone_LargeStartMenu->savedCallback = CB2_ReturnToFieldWithOpenMenu;
 
     SetMainCallback2(RotomPhone_LargeStartMenu_SetupCB);
 }
@@ -2518,7 +2514,7 @@ static void Task_RotomPhone_LargeStartMenu_WaitFadeAndBail(u8 taskId)
     if (!gPaletteFade.active)
     {
         menuFullScreen = FALSE;
-        SetMainCallback2(sRotomPhone_LargeStartMenu->savedCallback);
+        SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
         RotomPhone_LargeStartMenu_DoCleanUpAndDestroyTask(taskId);
     }
 }
@@ -2528,7 +2524,7 @@ static void Task_RotomPhone_LargeStartMenu_WaitFadeAndExitGracefully(u8 taskId)
     if (!gPaletteFade.active)
     {
         menuFullScreen = FALSE;
-        SetMainCallback2(sRotomPhone_LargeStartMenu->savedCallback);
+        SetMainCallback2(CB2_ReturnToField);
         RotomPhone_LargeStartMenu_DoCleanUpAndDestroyTask(taskId);
     }
 }
