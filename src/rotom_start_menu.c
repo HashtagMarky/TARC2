@@ -2289,11 +2289,6 @@ static void RotomPhone_LargeStartMenu_SetupCB(void)
         gMain.state++;
         break;
     case 5:
-        if (!sRotomPhoneOptions[menuSelectedLarge].unlockedFunc || !sRotomPhoneOptions[menuSelectedLarge].unlockedFunc())
-            menuSelectedLarge = RotomPhone_SetFirstSelectedMenu();
-
-        RotomPhone_LargeStartMenu_PrintTopBar();
-
         sRotomPhone_LargeStartMenu->panelY = 0;
         sRotomPhone_LargeStartMenu->panelIsOpen = FALSE;
 
@@ -2320,7 +2315,13 @@ static void RotomPhone_LargeStartMenu_SetupCB(void)
     case 7:
         SetVBlankCallback(RotomPhone_LargeStartMenu_VBlankCB);
         SetMainCallback2(RotomPhone_LargeStartMenu_MainCB);
+        gMain.state++;
+    case 8:
         menuFullScreen = TRUE;
+        if (!sRotomPhoneOptions[menuSelectedLarge].unlockedFunc || !sRotomPhoneOptions[menuSelectedLarge].unlockedFunc())
+            menuSelectedLarge = RotomPhone_SetFirstSelectedMenu();
+
+        RotomPhone_LargeStartMenu_PrintTopBar();
         break;
     }
 }
