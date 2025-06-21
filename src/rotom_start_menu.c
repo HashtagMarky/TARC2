@@ -661,36 +661,42 @@ static const union AnimCmd *const sRotomFaceAnims[ROTOM_FACE_COUNT] = {
     sAnimCmd_RotomFace_ShockedWith,
 };
 
-#define sFrameNumCB sprite->data[0]
+#define sFrameNumComfyAnimId sprite->data[0]
 static void SpriteCB_RotomPhoneSmall_RotomFace_Load(struct Sprite* sprite)
 {
-    if (sFrameNumCB == 0x80)
+    TryAdvanceComfyAnim(&gComfyAnims[sFrameNumComfyAnimId]);
+    if (gComfyAnims[sFrameNumComfyAnimId].completed)
     {
+        ReleaseComfyAnim(sFrameNumComfyAnimId);
         sprite->callback = SpriteCallbackDummy;
         RotomPhone_SmallStartMenu_ContinueInit(TRUE);
+        return;
     }
 
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_OUTLINE, sFrameNumCB);
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_WHITE, sFrameNumCB);
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_TOP, sFrameNumCB);
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_ARC, sFrameNumCB);
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_BOTTOM, sFrameNumCB);
-    sFrameNumCB += 4;
+    u32 frameNum = ReadComfyAnimValueSmooth(&gComfyAnims[sFrameNumComfyAnimId]);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_OUTLINE, frameNum);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_WHITE, frameNum);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_TOP, frameNum);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_ARC, frameNum);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_BOTTOM, frameNum);
 }
 
 static void SpriteCB_RotomPhoneSmall_RotomFace_Unload(struct Sprite* sprite)
 {
-    if (sFrameNumCB == 256)
+    TryAdvanceComfyAnim(&gComfyAnims[sFrameNumComfyAnimId]);
+    if (gComfyAnims[sFrameNumComfyAnimId].completed)
     {
+        ReleaseComfyAnim(sFrameNumComfyAnimId);
         sprite->callback = SpriteCallbackDummy;
+        return;
     }
 
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_OUTLINE, sFrameNumCB);
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_WHITE, sFrameNumCB);
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_TOP, sFrameNumCB);
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_ARC, sFrameNumCB);
-    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_BOTTOM, sFrameNumCB);
-    sFrameNumCB += 4;
+    u32 frameNum = ReadComfyAnimValueSmooth(&gComfyAnims[sFrameNumComfyAnimId]);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_OUTLINE, frameNum);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_WHITE, frameNum);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_TOP, frameNum);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_ARC, frameNum);
+    UpdateRotomSpriteFadeColours(sprite, PAL_ROTOM_EYE_BOTTOM, frameNum);
 }
 
 static const struct SpriteTemplate sSpriteTemplate_RotomSmallIcon = {
@@ -1054,8 +1060,19 @@ static void RotomPhone_SmallStartMenu_CreateRotomFaceSprite(bool32 rotomLoad)
     if (rotomLoad)
     {
         PlaySE(PMD_EVENT_SIGN_HATENA_03);
-        gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId].callback = SpriteCB_RotomPhoneSmall_RotomFace_Load;
-        StartSpriteAnim(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId], ROTOM_FACE_HAPPY);
+        struct Sprite *sprite = &gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId];
+        sprite->callback = SpriteCB_RotomPhoneSmall_RotomFace_Load;
+        StartSpriteAnim(sprite, ROTOM_FACE_HAPPY);
+
+        struct ComfyAnimSpringConfig config;
+        InitComfyAnimConfig_Spring(&config);
+        config.from = Q_24_8(0x00);
+        config.to = Q_24_8(0x80);
+        config.mass = Q_24_8(200);
+        config.tension = Q_24_8(25);
+        config.friction = Q_24_8(800);
+        config.clampAfter = 1;
+        sFrameNumComfyAnimId = CreateComfyAnim_Spring(&config);
     }
 
     if (flash)
@@ -1977,7 +1994,16 @@ static void RotomPhone_SmallStartMenu_RotomShutdownPreparation(u8 taskId)
     struct Sprite *sprite = &gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId];
     sprite->callback = SpriteCB_RotomPhoneSmall_RotomFace_Unload;
     StartSpriteAnim(&gSprites[sRotomPhone_SmallStartMenu->menuSmallRotomFaceSpriteId], ROTOM_FACE_HAPPY_WITH);
-    sFrameNumCB = 0x80;
+    
+    struct ComfyAnimSpringConfig config;
+    InitComfyAnimConfig_Spring(&config);
+    config.from = Q_24_8(0x80);
+    config.to = Q_24_8(0xFF);
+    config.mass = Q_24_8(200);
+    config.tension = Q_24_8(25);
+    config.friction = Q_24_8(800);
+    config.clampAfter = 1;
+    sFrameNumComfyAnimId = CreateComfyAnim_Spring(&config);
 }
 
 static void Task_RotomPhone_SmallStartMenu_RotomShutdown(u8 taskId)
@@ -3153,4 +3179,4 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 #undef tPhoneY
 #undef tPhoneCloseToSave
 #undef tPhoneHighlightComfyAnimId
-#undef sFrameNumCB
+#undef sFrameNumComfyAnimId
