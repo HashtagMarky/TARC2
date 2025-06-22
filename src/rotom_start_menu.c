@@ -1033,6 +1033,7 @@ static const u8 *RotomPhone_OverworldMenu_GetWeatherAction(u32 weatherId)
 }
 
 
+// Rotom Phone Overworld Menu
 #define tRotomUpdateTimer gTasks[taskId].data[0]
 #define tRotomUpdateMessage gTasks[taskId].data[1]
 #define tRotomMessageSoundEffect gTasks[taskId].data[2]
@@ -1897,7 +1898,7 @@ static void RotomPhone_OverworldMenu_DoCleanUpAndDestroyTask(u8 taskId, bool32 o
     DestroyTask(taskId);
 }
 
-static void RotomPhone_OverworldMenu_HandleInput(u8 taskId)
+static void RotomPhone_OverworldMenu_HandleDPAD(u8 taskId)
 {
     enum RotomPhone_Overworld_Options optionCurrent = RP_OW_OPTION_1;
     enum RotomPhone_FaceExpressions rotomFace;
@@ -2105,7 +2106,7 @@ static void Task_RotomPhone_OverworldMenu_HandleMainInput(u8 taskId)
     }
     else if (gMain.newKeys & DPAD_ANY && sRotomPhone_StartMenu->menuOverworldLoading == FALSE)
     {
-        RotomPhone_OverworldMenu_HandleInput(taskId);
+        RotomPhone_OverworldMenu_HandleDPAD(taskId);
     }
     else if (sRotomPhone_StartMenu->menuOverworldLoading == TRUE && sRotomPhoneOptions[menuSelectedOverworld].selectedFunc)
     {
@@ -2188,7 +2189,7 @@ static void Task_RotomPhone_OverworldMenu_CloseForSafari(u8 taskId)
 }
 
 
-
+// Rotom Phone Full Screen Menu
 void Task_RotomPhone_FullScreenMenu_Open(u8 taskId)
 {
     if (!gPaletteFade.active)
@@ -2646,6 +2647,7 @@ static void RotomPhone_FullScreenMenu_FreeResources(void)
 }
 
 
+// Rotom Phone Start Menu
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked(void)
 {
     return TRUE;
