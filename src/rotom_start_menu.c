@@ -2606,6 +2606,7 @@ static void RotomPhone_FullScreenMenu_FreeResources(void)
     if (sRotomPhone_StartMenu != NULL)
     {
         Free(sRotomPhone_StartMenu);
+        sRotomPhone_StartMenu = NULL;
     }
     if (sBg1TilemapBuffer != NULL)
     {
