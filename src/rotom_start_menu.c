@@ -122,13 +122,11 @@ static void RotomPhone_OverworldMenu_PrintHaveFun(u8 taskId);
 static void RotomPhone_OverworldMenu_Personality(u8 taskId);
 static void RotomPhone_OverworldMenu_PrintAdventure(u8 taskId);
 static void RotomPhone_OverworldMenu_UpdateMenuPrompt(u8 taskId);
-static const u8 *GetWeatherAction(u32 weatherId);
 
 
 static void RotomPhone_FullScreenMenu_SetupCB(void);
 static void RotomPhone_FullScreenMenu_MainCB(void);
 static void RotomPhone_FullScreenMenu_VBlankCB(void);
-
 
 static void Task_RotomPhone_FullScreenMenu_WaitFadeIn(u8 taskId);
 static void Task_RotomPhone_FullScreenMenu_MainInput(u8 taskId);
@@ -138,7 +136,6 @@ static void RotomPhone_FullScreenMenu_StartPanelSlide(void);
 static void Task_RotomPhone_FullScreenMenu_WaitFadeAndBail(u8 taskId);
 static void Task_RotomPhone_FullScreenMenu_WaitFadeAndExitGracefully(u8 taskId);
 static void Task_RotomPhone_FullScreenMenu_WaitFadeForSelection(u8 taskId);
-
 
 static void RotomPhone_FullScreenMenu_ResetGpuRegsAndBgs(void);
 static bool8 RotomPhone_FullScreenMenu_InitBgs(void);
@@ -980,18 +977,7 @@ static struct RotomPhone_MenuOptions sRotomPhoneOptions[RP_MENU_COUNT] =
     },
 };
 
-static const u8 *const gDayNameStringsTableShortned[] =
-{
-    COMPOUND_STRING("Fri,"),
-    COMPOUND_STRING("Sat,"),
-    COMPOUND_STRING("Sun,"),
-    COMPOUND_STRING("Mon,"),
-    COMPOUND_STRING("Tue,"),
-    COMPOUND_STRING("Wed,"),
-    COMPOUND_STRING("Thu,"),
-};
-
-static const u8 *const gDayNameStringsTable[] =
+static const u8 *const sRotomPhone_Overworld_DayNames[] =
 {
     COMPOUND_STRING("Friday"),
     COMPOUND_STRING("Saturday"),
@@ -1002,25 +988,33 @@ static const u8 *const gDayNameStringsTable[] =
     COMPOUND_STRING("Thursday"),
 };
 
-static const u8 sWeatherActions[WEATHER_COUNT][24] =
+static const u8 *const sRotomPhone_Overworld_WeatherActions[WEATHER_COUNT] =
 {
-    [WEATHER_NONE]               = _("sunny"),
-    [WEATHER_SUNNY_CLOUDS]       = _("cloudy"),
-    [WEATHER_SUNNY]              = _("sunny"),
-    [WEATHER_RAIN]               = _("raining"),
-    [WEATHER_SNOW]               = _("snowing"),
-    [WEATHER_RAIN_THUNDERSTORM]  = _("thunderstorming"),
-    [WEATHER_FOG_HORIZONTAL]     = _("foggy"),
-    [WEATHER_VOLCANIC_ASH]       = _("ashens"),
-    [WEATHER_SANDSTORM]          = _("sandstorming"),
-    [WEATHER_FOG_DIAGONAL]       = _("foggy"),
-    [WEATHER_UNDERWATER]         = _("dark"),
-    [WEATHER_SHADE]              = _("shady"),
-    [WEATHER_DROUGHT]            = _("very hot"),
-    [WEATHER_DOWNPOUR]           = _("raining heavily"),
-    [WEATHER_FOG]                = _("foggy"),
-    [WEATHER_UNDERWATER_BUBBLES] = _("dark"),
+    [WEATHER_NONE]               = COMPOUND_STRING("sunny"),
+    [WEATHER_SUNNY_CLOUDS]       = COMPOUND_STRING("cloudy"),
+    [WEATHER_SUNNY]              = COMPOUND_STRING("sunny"),
+    [WEATHER_RAIN]               = COMPOUND_STRING("raining"),
+    [WEATHER_SNOW]               = COMPOUND_STRING("snowing"),
+    [WEATHER_RAIN_THUNDERSTORM]  = COMPOUND_STRING("thunderstorming"),
+    [WEATHER_FOG_HORIZONTAL]     = COMPOUND_STRING("foggy"),
+    [WEATHER_VOLCANIC_ASH]       = COMPOUND_STRING("ashens"),
+    [WEATHER_SANDSTORM]          = COMPOUND_STRING("sandstorming"),
+    [WEATHER_FOG_DIAGONAL]       = COMPOUND_STRING("foggy"),
+    [WEATHER_UNDERWATER]         = COMPOUND_STRING("watery"),
+    [WEATHER_SHADE]              = COMPOUND_STRING("shady"),
+    [WEATHER_DROUGHT]            = COMPOUND_STRING("very hot"),
+    [WEATHER_DOWNPOUR]           = COMPOUND_STRING("raining heavily"),
+    [WEATHER_FOG]                = COMPOUND_STRING("foggy"),
+    [WEATHER_UNDERWATER_BUBBLES] = COMPOUND_STRING("watery"),
 };
+static const u8 sText_WeatherDark[] = _("dark");
+static const u8 *RotomPhone_OverworldMenu_GetWeatherAction(u32 weatherId)
+{
+    if ((weatherId == WEATHER_NONE || weatherId == WEATHER_SUNNY) && gTimeOfDay == TIME_NIGHT)
+        return sText_WeatherDark;
+
+    return sRotomPhone_Overworld_WeatherActions[weatherId];
+}
 
 
 static enum RotomPhone_MenuItems RotomPhone_SetFirstSelectedMenu(void)
@@ -1564,7 +1558,7 @@ static void RotomPhone_OverworldMenu_PrintTime(u8 taskId)
     StringCopy(textBuffer, COMPOUND_STRING("It is "));
     StringAppend(textBuffer, time);
     StringAppend(textBuffer, COMPOUND_STRING(" on "));
-    StringAppend(textBuffer, gDayNameStringsTable[(gLocalTime.days % WEEKDAY_COUNT)]);
+    StringAppend(textBuffer, sRotomPhone_Overworld_DayNames[(gLocalTime.days % WEEKDAY_COUNT)]);
     StringAppend(textBuffer, COMPOUND_STRING("."));
     RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
     tRotomUpdateMessage = RotomPhone_OverworldMenu_GetRandomMessage();
@@ -1619,13 +1613,13 @@ static void RotomPhone_OverworldMenu_PrintDateWeather(u8 taskId)
     else if (messageRotom == RP_MESSAGE_DATE_WEATHER_CURRENT_WEATHER)
     {
         StringCopy(textBuffer, COMPOUND_STRING("Looking like it is "));
-        StringAppend(textBuffer, GetWeatherAction(GetCurrentWeather()));
+        StringAppend(textBuffer, RotomPhone_OverworldMenu_GetWeatherAction(GetCurrentWeather()));
         StringAppend(textBuffer, COMPOUND_STRING(" right now."));
     }
     else if (messageRotom == RP_MESSAGE_DATE_WEATHER_NEXT_WEATHER && gTimeOfDay < TIME_NIGHT)
     {
         StringCopy(textBuffer, COMPOUND_STRING("It feels like it will be "));
-        StringAppend(textBuffer, GetWeatherAction(Ikigai_GetCurrentVyratonWeather(gTimeOfDay + 1)));
+        StringAppend(textBuffer, RotomPhone_OverworldMenu_GetWeatherAction(Ikigai_GetCurrentVyratonWeather(gTimeOfDay + 1)));
         StringAppend(textBuffer, COMPOUND_STRING(" later."));
     }
     else
@@ -1781,14 +1775,6 @@ static void RotomPhone_OverworldMenu_UpdateMenuPrompt(u8 taskId)
         CopyWindowToVram(sRotomPhone_StartMenu->menuOverworldFlipPhoneWindowId, COPYWIN_GFX);
         tRotomMessageSoundEffect = SE_BALL_TRAY_EXIT;
     }
-}
-
-static const u8 *GetWeatherAction(u32 weatherId)
-{
-    if ((weatherId == WEATHER_NONE || weatherId == WEATHER_SUNNY) && gTimeOfDay == TIME_NIGHT)
-        weatherId = WEATHER_UNDERWATER;
-
-    return sWeatherActions[weatherId];
 }
 
 static void RotomPhone_OverworldMenu_RemoveWindows(void)
