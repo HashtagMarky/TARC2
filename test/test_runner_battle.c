@@ -16,6 +16,8 @@
 #include "constants/characters.h"
 #include "constants/trainers.h"
 
+#include "dynamic_palettes.h"
+
 #if defined(__INTELLISENSE__)
 #undef TestRunner_Battle_RecordAbilityPopUp
 #undef TestRunner_Battle_RecordAnimation
@@ -160,6 +162,7 @@ static void BattleTest_SetUp(void *data)
 {
     const struct BattleTest *test = data;
     memset(STATE, 0, sizeof(*STATE));
+    DynPal_InitAllDynamicPalettes();
     TestInitConfigData();
     InvokeTestFunction(test);
     STATE->parameters = STATE->parametersCount;

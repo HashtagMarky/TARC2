@@ -829,13 +829,13 @@ static void Task_PokeSphereWaitFadeAndExitGracefully(u8 taskId)
         DestroyTask(taskId);
     }
 }
-#define TILEMAP_BUFFER_SIZE (1024 * 2)
+
 static bool8 PokeSphere_InitBgs(void)
 {
     ResetAllBgsCoordinates();
 
-    sBg1TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
-    sBg2TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
+    sBg1TilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
+    sBg2TilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
     if (sBg1TilemapBuffer == NULL || sBg2TilemapBuffer == NULL)
     {
         return FALSE;
@@ -856,7 +856,6 @@ static bool8 PokeSphere_InitBgs(void)
 
     return TRUE;
 }
-#undef TILEMAP_BUFFER_SIZE
 
 static void PokeSphere_FadeAndBail(void)
 {
@@ -979,6 +978,7 @@ static void PokeSphere_CreateExplorePage(void)
 
 static void PokeSphere_DestroyExplorePage(void)
 {
+    ReleaseComfyAnims();
     PokeSphere_Explore_DestroyObjectEvents();
     PokeSphere_Explore_DestroyCursor();
     FreeAllSpritePalettes();
@@ -999,6 +999,7 @@ static void PokeSphere_CreateProfilePostPage(void)
 
 static void PokeSphere_DestroyProfilePostPage(void)
 {
+    ReleaseComfyAnims();
     DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, MUGSHOT_1);
     DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, MUGSHOT_2);
     DestroySpriteAndFreeResources(&gSprites[sPokeSphereState->characterTypeHeartSpriteId]);
@@ -1092,6 +1093,7 @@ static void PokeSphere_CycleCharacters(bool32 increment)
 
 static void PokeSphere_ReloadProfile(void)
 {
+    ReleaseComfyAnims();
     PokeSphere_PrintNames();
     DestroyFieldMugshotSprite(sPokeSphereState->characterMugshotSpriteId, MUGSHOT_1);
     DestroyFieldMugshotSprite(sPokeSphereState->partnerMugshotSpriteId, MUGSHOT_2);
@@ -1226,12 +1228,6 @@ static void PokeSphereExploreCursorCallback(struct Sprite *sprite)
 
     sprite->x = ReadComfyAnimValueSmooth(xAnim);
     sprite->y = ReadComfyAnimValueSmooth(yAnim);
-
-    if (sprite->x == 0 && sprite->y == 0)
-    {
-        sprite->x = sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].x + EXPLORE_CURSOR_X_OFFSET;
-        sprite->y = sExplorePageSpriteCords[sPokeSphereState->exploreCursorPosition].y + EXPLORE_CURSOR_Y_OFFSET;
-    }
 }
 
 static void PokeSphere_Explore_DestroyCursor(void)

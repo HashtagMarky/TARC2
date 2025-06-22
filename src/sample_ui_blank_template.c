@@ -282,12 +282,12 @@ static void Task_SampleUiWaitFadeAndExitGracefully(u8 taskId)
         DestroyTask(taskId);
     }
 }
-#define TILEMAP_BUFFER_SIZE (1024 * 2)
+
 static bool8 SampleUi_InitBgs(void)
 {
     ResetAllBgsCoordinates();
 
-    sBg1TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
+    sBg1TilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
     if (sBg1TilemapBuffer == NULL)
     {
         return FALSE;
@@ -304,7 +304,6 @@ static bool8 SampleUi_InitBgs(void)
 
     return TRUE;
 }
-#undef TILEMAP_BUFFER_SIZE
 
 static void SampleUi_FadeAndBail(void)
 {

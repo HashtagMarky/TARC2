@@ -903,14 +903,14 @@ static void Task_CalendarUIWaitFadeAndExitGracefully(u8 taskId)
         }
     }
 }
-#define TILEMAP_BUFFER_SIZE (1024 * 2)
+
 static bool8 CalendarUI_InitBgs(void)
 {
     ResetAllBgsCoordinates();
 
-    sBg1TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
-    sBg2TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
-    sBg3TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
+    sBg1TilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
+    sBg2TilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
+    sBg3TilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
     if (sBg1TilemapBuffer == NULL || sBg2TilemapBuffer == NULL || sBg3TilemapBuffer == NULL)
     {
         return FALSE;
@@ -935,7 +935,6 @@ static bool8 CalendarUI_InitBgs(void)
 
     return TRUE;
 }
-#undef TILEMAP_BUFFER_SIZE
 
 static void CalendarUI_FadeAndBail(void)
 {
