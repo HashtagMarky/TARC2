@@ -2,8 +2,8 @@
 #define GUARD_BATTLE_UTIL_H
 
 #include "move.h"
-#include "constants/battle.h"
 #include "constants/battle_string_ids.h"
+#include "constants/hold_effects.h"
 
 #define MOVE_LIMITATION_ZEROMOVE                (1 << 0)
 #define MOVE_LIMITATION_PP                      (1 << 1)
