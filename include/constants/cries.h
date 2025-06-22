@@ -1,7 +1,8 @@
 #ifndef GUARD_CONSTANTS_CRIES_H
 #define GUARD_CONSTANTS_CRIES_H
 
-enum {
+enum PokemonCry
+{
     CRY_NONE,
 #if (P_CRIES_GENERIC && P_CRIES_ENABLED == FALSE)
     CRY_GENERIC_SMALLEST,

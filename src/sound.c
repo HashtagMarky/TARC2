@@ -557,11 +557,11 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     SetPokemonCryPriority((priority * GetSpeciesCryMultiplier(species)) / 1000);
     #endif //(P_CRIES_GENERIC && P_CRIES_ENABLED == FALSE)
 
-    species = GetCryIdBySpecies(species);
-    if (species != CRY_NONE)
+    enum PokemonCry cryId = GetCryIdBySpecies(species);
+    if (cryId != CRY_NONE)
     {
-        species--;
-        gMPlay_PokemonCry = SetPokemonCryTone(reverse ? &gCryTable_Reverse[species] : &gCryTable[species]);
+        cryId--;
+        gMPlay_PokemonCry = SetPokemonCryTone(reverse ? &gCryTable_Reverse[cryId] : &gCryTable[cryId]);
     }
 }
 
