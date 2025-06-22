@@ -152,24 +152,24 @@ static void RotomPhone_StartMenu_SelectedFunc_Clock(void);
 static void RotomPhone_StartMenu_SelectedFunc_Daycare(void);
 
 
-static const u32 sRotomPhone_OverworldTiles[] =             INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.smol");
-static const u32 sRotomPhone_OverworldTilemap[] =           INCBIN_U32("graphics/rotom_start_menu/rotom_phone.bin.smolTM");
-static const u32 sRotomPhone_OverworldSpeechTilemap[] =     INCBIN_U32("graphics/rotom_start_menu/rotom_phone_speech.bin.smolTM");
-static const u32 sFlipPhone_OverworldTiles[] =              INCBIN_U32("graphics/rotom_start_menu/flip_phone_tiles.4bpp.smol");
-static const u32 sFlipPhone_OverworldOpenTilemap[] =        INCBIN_U32("graphics/rotom_start_menu/flip_phone_open.bin.smolTM");
-static const u32 sFlipPhone_OverworldClosedTilemap[] =      INCBIN_U32("graphics/rotom_start_menu/flip_phone_closed.bin.smolTM");
-static const u16 sRotomFlipPhone_OverworldPalette[] =       INCBIN_U16("graphics/rotom_start_menu/phones.gbapal");
+static const u32 sRotomPhone_OverworldTiles[] =             INCBIN_U32("graphics/rotom_start_menu/overworld/rotom_phone_tiles.4bpp.smol");
+static const u32 sRotomPhone_OverworldTilemap[] =           INCBIN_U32("graphics/rotom_start_menu/overworld/rotom_phone.bin.smolTM");
+static const u32 sRotomPhone_OverworldSpeechTilemap[] =     INCBIN_U32("graphics/rotom_start_menu/overworld/rotom_phone_speech.bin.smolTM");
+static const u32 sFlipPhone_OverworldTiles[] =              INCBIN_U32("graphics/rotom_start_menu/overworld/flip_phone_tiles.4bpp.smol");
+static const u32 sFlipPhone_OverworldOpenTilemap[] =        INCBIN_U32("graphics/rotom_start_menu/overworld/flip_phone_open.bin.smolTM");
+static const u32 sFlipPhone_OverworldClosedTilemap[] =      INCBIN_U32("graphics/rotom_start_menu/overworld/flip_phone_closed.bin.smolTM");
+static const u16 sRotomFlipPhone_OverworldPalette[] =       INCBIN_U16("graphics/rotom_start_menu/overworld/phones.gbapal");
 
+static const u16 sRotomPhone_OverworldRotomFaceIconsPal[] = INCBIN_U16("graphics/rotom_start_menu/rotom_face.gbapal");
 static const u32 sRotomPhone_OverworldRotomFaceGfx[] =      INCBIN_U32("graphics/rotom_start_menu/rotom_face.4bpp.smol");
-static const u32 sRotomFlipPhone_OverworldIconsGfx[] =      INCBIN_U32("graphics/rotom_start_menu/icons.4bpp.smol");
-static const u16 sRotomPhone_OverworldRotomFaceIconsPal[] = INCBIN_U16("graphics/rotom_start_menu/icons.gbapal");
+static const u32 sRotomFlipPhone_OverworldIconsGfx[] =      INCBIN_U32("graphics/rotom_start_menu/overworld/icons.4bpp.smol");
 
-static const u32 sRotomPhone_FullScreenMenuTiles[] =        INCBIN_U32("graphics/rotom_start_menu/rotom_phone_tiles.4bpp.smol");
-static const u32 sRotomPhone_FullScreenMenuTilemap[] =      INCBIN_U32("graphics/rotom_start_menu/rotom_full_screen.bin.smolTM");
-static const u32 sRotomPhone_FullScreenMenuPanelTilemap[] = INCBIN_U32("graphics/rotom_start_menu/rotom_full_screen_panel.bin.smolTM");
-static const u16 sRotomPhone_FullScreenMenuPalette[] =      INCBIN_U16("graphics/rotom_start_menu/rotom_phone_tiles.gbapal");
-static const u32 sRotomPhone_DaycareCompatability_Gfx[] =   INCBIN_U32("graphics/rotom_start_menu/panel/daycare_heart.4bpp.smol");
-static const u16 sRotomPhone_DaycareCompatability_Pal[] =   INCBIN_U16("graphics/rotom_start_menu/panel/daycare_heart.gbapal");
+static const u32 sRotomPhone_FullScreenMenuTiles[] =        INCBIN_U32("graphics/rotom_start_menu/overworld/rotom_phone_tiles.4bpp.smol");
+static const u32 sRotomPhone_FullScreenMenuTilemap[] =      INCBIN_U32("graphics/rotom_start_menu/full_screen/rotom_phone.bin.smolTM");
+static const u32 sRotomPhone_FullScreenMenuPanelTilemap[] = INCBIN_U32("graphics/rotom_start_menu/full_screen/rotom_phone_panel.bin.smolTM");
+static const u16 sRotomPhone_FullScreenMenuPalette[] =      INCBIN_U16("graphics/rotom_start_menu/overworld/rotom_phone_tiles.gbapal");
+static const u32 sRotomPhone_DaycareCompatability_Gfx[] =   INCBIN_U32("graphics/rotom_start_menu/full_screen/panel/daycare/heart.4bpp.smol");
+static const u16 sRotomPhone_DaycareCompatability_Pal[] =   INCBIN_U16("graphics/rotom_start_menu/full_screen/panel/daycare/heart.gbapal");
 
 enum RotomPhone_Overworld_FaceIconPaletteIndex
 {
