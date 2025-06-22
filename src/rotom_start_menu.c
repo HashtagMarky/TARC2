@@ -555,6 +555,13 @@ bool32 RotomPhone_StartMenu_IsFullScreen(void)
 }
 
 
+enum RotomPhone_FullScreen_WindowIds
+{
+    RP_FS_WIN_TOP_BAR,
+    RP_FS_WIN_COUNT,
+};
+#define RP_FS_WIN_LAST RP_FS_WIN_COUNT - 1
+
 #define ROTOM_SPEECH_WINDOW_WIDTH   18
 #define ROTOM_SPEECH_WINDOW_WIDTH_PXL ROTOM_SPEECH_WINDOW_WIDTH * 8
 #define ROTOM_SPEECH_WINDOW_HEIGHT  2
@@ -591,10 +598,26 @@ static const struct WindowTemplate sWindowTemplate_FlipPhone = {
     .baseBlock = PHONE_STARTING_BASE_BLOCK
 };
 
-enum WindowIds
+static const struct WindowTemplate sRotomPhone_FullScreenMenuWindowTemplates[] =
 {
-    WIN_UI_TOP_BAR,
+    [RP_FS_WIN_TOP_BAR] =
+    {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 30,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 1
+    },
+    DUMMY_WIN_TEMPLATE
 };
+#define ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK                           \
+sRotomPhone_FullScreenMenuWindowTemplates[RP_FS_WIN_LAST].baseBlock +   \
+(                                                                       \
+    sRotomPhone_FullScreenMenuWindowTemplates[RP_FS_WIN_LAST].height *  \
+    sRotomPhone_FullScreenMenuWindowTemplates[RP_FS_WIN_LAST].width     \
+)
 
 static const struct BgTemplate sRotomPhone_FullScreenMenuBgTemplates[] =
 {
@@ -618,26 +641,6 @@ static const struct BgTemplate sRotomPhone_FullScreenMenuBgTemplates[] =
     }
 };
 
-static const struct WindowTemplate sRotomPhone_FullScreenMenuWindowTemplates[] =
-{
-    [WIN_UI_TOP_BAR] =
-    {
-        .bg = 0,
-        .tilemapLeft = 0,
-        .tilemapTop = 0,
-        .width = 30,
-        .height = 2,
-        .paletteNum = 15,
-        .baseBlock = 1
-    },
-    DUMMY_WIN_TEMPLATE
-};
-#define ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK                           \
-sRotomPhone_FullScreenMenuWindowTemplates[WIN_UI_TOP_BAR].baseBlock +   \
-(                                                                       \
-    sRotomPhone_FullScreenMenuWindowTemplates[WIN_UI_TOP_BAR].height *  \
-    sRotomPhone_FullScreenMenuWindowTemplates[WIN_UI_TOP_BAR].width     \
-)
 
 static const struct SpritePalette sSpritePal_RotomFaceIcons[] =
 {
@@ -2606,21 +2609,21 @@ static void RotomPhone_FullScreenMenu_InitWindows(void)
     InitWindows(sRotomPhone_FullScreenMenuWindowTemplates);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
-    FillWindowPixelBuffer(WIN_UI_TOP_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    PutWindowTilemap(WIN_UI_TOP_BAR);
-    CopyWindowToVram(WIN_UI_TOP_BAR, COPYWIN_FULL);
+    FillWindowPixelBuffer(RP_FS_WIN_TOP_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    PutWindowTilemap(RP_FS_WIN_TOP_BAR);
+    CopyWindowToVram(RP_FS_WIN_TOP_BAR, COPYWIN_FULL);
 }
 
 static void RotomPhone_FullScreenMenu_PrintTopBar(void)
 {
-    FillWindowPixelBuffer(WIN_UI_TOP_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(RP_FS_WIN_TOP_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    AddTextPrinterParameterized4(WIN_UI_TOP_BAR, FONT_NORMAL,
-        GetStringCenterAlignXOffset(FONT_NORMAL, sRotomPhoneOptions[menuSelectedFullScreen].menuName, sRotomPhone_FullScreenMenuWindowTemplates[WIN_UI_TOP_BAR].width * 8),
+    AddTextPrinterParameterized4(RP_FS_WIN_TOP_BAR, FONT_NORMAL,
+        GetStringCenterAlignXOffset(FONT_NORMAL, sRotomPhoneOptions[menuSelectedFullScreen].menuName, sRotomPhone_FullScreenMenuWindowTemplates[RP_FS_WIN_TOP_BAR].width * 8),
         0, 0, 0,
         sRotomPhone_StartMenu_FontColours[FONT_WHITE], TEXT_SKIP_DRAW, sRotomPhoneOptions[menuSelectedFullScreen].menuName);
 
-    CopyWindowToVram(WIN_UI_TOP_BAR, COPYWIN_GFX);
+    CopyWindowToVram(RP_FS_WIN_TOP_BAR, COPYWIN_GFX);
 }
 
 static void RotomPhone_FullScreenMenu_FreeResources(void)
