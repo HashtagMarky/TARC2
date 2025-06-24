@@ -1128,7 +1128,7 @@ static void RotomPhone_OverworldMenu_LoadSprites(void)
     LoadCompressedSpriteSheet(sSpriteSheet_OverworldIcons);
     LoadCompressedSpriteSheet(sSpriteSheet_OverworldRotomFace);
 
-    memcpy(menuLoadedSpritePalette, sRotomPhone_OverworldRotomFaceIconsPal, sizeof(sRotomPhone_OverworldRotomFaceIconsPal));
+    memcpy(menuLoadedSpritePalette, sRotomPhone_OverworldRotomFaceIconsPal, PLTT_SIZE_4BPP);
     if (!RP_CONFIG_NOT_FLIP_PHONE || RP_CONFIG_GREY_ICONS)
     {
         for (enum RotomPhone_Overworld_FaceIconPaletteIndex colour = PAL_FACE_ICON_TRANSPARENT + 1; colour < PAL_ICON_WHITE; colour++)
