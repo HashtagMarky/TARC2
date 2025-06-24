@@ -132,6 +132,7 @@ static void RotomPhone_FullScreenMenu_LoadSprites(void);
 
 
 static void RotomPhone_StartMenu_CreateRotomFaceSprite(bool32 rotomFade);
+static void RotomPhone_StartMenu_UpdateRotomFaceAnim(bool32 input);
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked_FullScreen(void);
@@ -1458,16 +1459,7 @@ static void RotomPhone_OverworldMenu_CheckUpdateMessage(u8 taskId)
         if (RP_CONFIG_UPDATE_MESSAGE_SOUND && tRotomUpdateMessage != RP_MESSAGE_GOODBYE)
             tRotomMessageSoundEffect = PMD_EVENT_SIGN_HATENA_02;
         
-        if ((Random() % 100) < RP_CONFIG_FACE_UPDATE_PERCENT)
-        {
-            u32 rotomFace;
-            do {
-                rotomFace = Random() % (RP_FACE_COUNT - RP_FACE_LOOK_UP_ANIMS);
-                rotomFace += RP_FACE_LOOK_UP_ANIMS;
-            } while (rotomFace == gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId].animNum);
-            StartSpriteAnim(&gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId], rotomFace);
-            rotomFaceExpression = rotomFace;
-        }
+        RotomPhone_StartMenu_UpdateRotomFaceAnim(FALSE);
     }
 }
 
@@ -1879,7 +1871,6 @@ static void RotomPhone_OverworldMenu_DoCleanUpAndDestroyTask(u8 taskId, bool32 o
 static void RotomPhone_OverworldMenu_HandleDPAD(u8 taskId)
 {
     enum RotomPhone_Overworld_Options optionCurrent = RP_OW_OPTION_1;
-    enum RotomPhone_FaceExpressions rotomFace;
     s32 offset;
     u32 nextIndex;
 
@@ -1939,11 +1930,7 @@ static void RotomPhone_OverworldMenu_HandleDPAD(u8 taskId)
     else
         tRotomMessageSoundEffect = SE_CLICK;
 
-    do {
-        rotomFace = Random() % RP_FACE_LOOK_UP_ANIMS;
-    } while (rotomFace == gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId].animNum);
-    StartSpriteAnim(&gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId], rotomFace);
-
+    RotomPhone_StartMenu_UpdateRotomFaceAnim(TRUE);
     RotomPhone_OverworldMenu_UpdateMenuPrompt(taskId);
 }
 
@@ -2736,6 +2723,30 @@ static void RotomPhone_StartMenu_CreateRotomFaceSprite(bool32 rotomFade)
             y,
             0
         );
+    }
+}
+
+static void RotomPhone_StartMenu_UpdateRotomFaceAnim(bool32 input)
+{
+    enum RotomPhone_FaceExpressions rotomFace;
+    if (!input)
+    {
+        if ((Random() % 100) < RP_CONFIG_FACE_UPDATE_PERCENT)
+        {
+            do {
+                rotomFace = Random() % (RP_FACE_COUNT - RP_FACE_LOOK_UP_ANIMS);
+                rotomFace += RP_FACE_LOOK_UP_ANIMS;
+            } while (rotomFace == gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId].animNum);
+            StartSpriteAnim(&gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId], rotomFace);
+            rotomFaceExpression = rotomFace;
+        }
+    }
+    else
+    {
+        do {
+            rotomFace = Random() % RP_FACE_LOOK_UP_ANIMS;
+        } while (rotomFace == gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId].animNum);
+        StartSpriteAnim(&gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId], rotomFace);
     }
 }
 
