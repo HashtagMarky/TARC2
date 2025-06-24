@@ -608,7 +608,7 @@ static const struct WindowTemplate sRotomPhone_FullScreenMenuWindowTemplates[] =
     {
         .bg = 0,
         .tilemapLeft = 13,
-        .tilemapTop = 3,
+        .tilemapTop = 4,
         .width = 4,
         .height = 2,
         .paletteNum = 14,
@@ -618,7 +618,7 @@ static const struct WindowTemplate sRotomPhone_FullScreenMenuWindowTemplates[] =
     {
         .bg = 0,
         .tilemapLeft = 12,
-        .tilemapTop = 5,
+        .tilemapTop = 6,
         .width = 6,
         .height = 2,
         .paletteNum = 14,
