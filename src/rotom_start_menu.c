@@ -47,6 +47,10 @@
 #include "constants/weather.h"
 
 
+#define NUM_FRAMES_FOR_MINUTES_UPDATE       (60 * 60) / FakeRtc_GetSecondsRatio() * RP_CONFIG_NUM_MINUTES_TO_UPDATE
+#define ROTOM_PHONE_OW_MESSGAGE_TIMER       NUM_FRAMES_FOR_MINUTES_UPDATE / 2
+#define ROTOM_PHONE_FS_MESSGAGE_TIMER       NUM_FRAMES_FOR_MINUTES_UPDATE
+
 #define PHONE_OFFSCREEN_Y                   (RP_CONFIG_NOT_FLIP_PHONE ? 98 : 96)
 #define PHONE_BASE_COLOUR_INDEX             5
 #define PHONE_BG_PAL_SLOT                   14
@@ -1121,7 +1125,7 @@ static void RotomPhone_OverworldMenu_ContinueInit(bool32 firstInit)
     config.clampAfter = FACE_ICON_COMFY_SPRING_CLAMP_AFTER;
     tPhoneHighlightComfyAnimId = CreateComfyAnim_Spring(&config);
 
-    tRotomUpdateTimer = RP_CONFIG_MESSAGE_UPDATE_TIMER / RP_CONFIG_NUM_MINUTES_TO_UPDATE;
+    tRotomUpdateTimer = ROTOM_PHONE_OW_MESSGAGE_TIMER / RP_CONFIG_NUM_MINUTES_TO_UPDATE;
     tRotomUpdateMessage = RP_MESSAGE_TIME;
 
     if (GetSafariZoneFlag())
@@ -1430,7 +1434,7 @@ static void RotomPhone_OverworldMenu_CheckUpdateMessage(u8 taskId)
             RotomPhone_OverworldMenu_PrintAdventure(taskId);
             break;
         }
-        tRotomUpdateTimer = RP_CONFIG_MESSAGE_UPDATE_TIMER;
+        tRotomUpdateTimer = ROTOM_PHONE_OW_MESSGAGE_TIMER;
         if (!RP_CONFIG_UPDATE_MESSAGE && !GetSafariZoneFlag() && tRotomUpdateMessage != RP_MESSAGE_GOODBYE)
             tRotomUpdateTimer *= 2;
         
@@ -2930,7 +2934,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Clock(void)
         ROTOM_SPEECH_BOTTOM_ROW_Y, 0, 0, sRotomPhone_StartMenu_FontColours[FONT_OW_FLIP_PHONE], TEXT_SKIP_DRAW, time);
         CopyWindowToVram(sRotomPhone_StartMenu->menuOverworldFlipPhoneWindowId, COPYWIN_GFX);
         tRotomMessageSoundEffect = SE_BALL_TRAY_EXIT;
-        tRotomUpdateTimer = RP_CONFIG_MESSAGE_UPDATE_TIMER;
+        tRotomUpdateTimer = ROTOM_PHONE_OW_MESSGAGE_TIMER;
         sRotomPhone_StartMenu->menuOverworldLoading = FALSE;
     }
     else
