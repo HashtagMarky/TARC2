@@ -161,9 +161,6 @@ static const u32 sRotomPhone_OverworldSpeechTilemap[] =     INCBIN_U32("graphics
 static const u32 sFlipPhone_OverworldTiles[] =              INCBIN_U32("graphics/rotom_start_menu/overworld/flip_phone_tiles.4bpp.smol");
 static const u32 sFlipPhone_OverworldOpenTilemap[] =        INCBIN_U32("graphics/rotom_start_menu/overworld/flip_phone_open.bin.smolTM");
 static const u32 sFlipPhone_OverworldClosedTilemap[] =      INCBIN_U32("graphics/rotom_start_menu/overworld/flip_phone_closed.bin.smolTM");
-
-static const u16 sRotomPhone_OverworldRotomFaceIconsPal[] = INCBIN_U16("graphics/rotom_start_menu/rotom_face.gbapal");
-static const u32 sRotomPhone_OverworldRotomFaceGfx[] =      INCBIN_U32("graphics/rotom_start_menu/rotom_face.4bpp.smol");
 static const u32 sRotomFlipPhone_OverworldIconsGfx[] =      INCBIN_U32("graphics/rotom_start_menu/overworld/icons.4bpp.smol");
 
 static const u32 sRotomPhone_FullScreenMenuTiles[] =        INCBIN_U32("graphics/rotom_start_menu/full_screen/rotom_phone_tiles.4bpp.smol");
@@ -173,6 +170,8 @@ static const u32 sRotomPhone_DaycareCompatability_Gfx[] =   INCBIN_U32("graphics
 static const u16 sRotomPhone_DaycareCompatability_Pal[] =   INCBIN_U16("graphics/rotom_start_menu/full_screen/panel/daycare/heart.gbapal");
 
 static const u16 sRotomPhone_StartMenuPalette[] =           INCBIN_U16("graphics/rotom_start_menu/rotom_phone_start_menu.gbapal");
+static const u16 sRotomPhone_StartMenuRotomFaceIconsPal[] = INCBIN_U16("graphics/rotom_start_menu/rotom_face.gbapal");
+static const u32 sRotomPhone_StartMenuRotomFaceGfx[] =      INCBIN_U32("graphics/rotom_start_menu/rotom_face.4bpp.smol");
 
 static EWRAM_DATA u16 ALIGNED(4) menuLoadedSpritePalette[PLTT_SIZE_4BPP];
 static EWRAM_DATA u16 ALIGNED(4) menuLoadedBackgroundPalette[PLTT_SIZE_4BPP];
@@ -624,13 +623,13 @@ static const struct BgTemplate sRotomPhone_FullScreenMenuBgTemplates[] =
 
 static const struct SpritePalette sSpritePal_RotomFaceIcons[] =
 {
-    {sRotomPhone_OverworldRotomFaceIconsPal, TAG_ROTOM_FACE_ICON_PAL},
+    {sRotomPhone_StartMenuRotomFaceIconsPal, TAG_ROTOM_FACE_ICON_PAL},
     {NULL},
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_OverworldRotomFace[] = 
 {
-    {sRotomPhone_OverworldRotomFaceGfx, 64*768/2 , TAG_ROTOM_FACE_GFX},
+    {sRotomPhone_StartMenuRotomFaceGfx, 64*768/2 , TAG_ROTOM_FACE_GFX},
     {NULL},
 };
 
@@ -1129,12 +1128,12 @@ static void RotomPhone_OverworldMenu_LoadSprites(void)
     LoadCompressedSpriteSheet(sSpriteSheet_OverworldIcons);
     LoadCompressedSpriteSheet(sSpriteSheet_OverworldRotomFace);
 
-    memcpy(menuLoadedSpritePalette, sRotomPhone_OverworldRotomFaceIconsPal, PLTT_SIZE_4BPP);
+    memcpy(menuLoadedSpritePalette, sRotomPhone_StartMenuRotomFaceIconsPal, PLTT_SIZE_4BPP);
     if (!RP_CONFIG_NOT_FLIP_PHONE || RP_CONFIG_GREY_ICONS)
     {
         for (enum RotomPhone_Overworld_FaceIconPaletteIndex colour = PAL_FACE_ICON_TRANSPARENT + 1; colour < PAL_ICON_WHITE; colour++)
         {
-            memcpy(&menuLoadedSpritePalette[colour], &sRotomPhone_OverworldRotomFaceIconsPal[PAL_ICON_GREY], sizeof(u16)); 
+            memcpy(&menuLoadedSpritePalette[colour], &sRotomPhone_StartMenuRotomFaceIconsPal[PAL_ICON_GREY], sizeof(u16)); 
         }
     }
     LoadPalette(menuLoadedSpritePalette, OBJ_PLTT_ID(IndexOfSpritePaletteTag(TAG_ROTOM_FACE_ICON_PAL)), PLTT_SIZE_4BPP);
