@@ -2305,6 +2305,7 @@ static void Task_RotomPhone_FullScreenMenu_MainInput(u8 taskId)
     {
         tRotomUpdateTimer = 0;
         RotomPhone_FullScreenMenu_PrintTime();
+        RotomPhone_StartMenu_UpdateRotomFaceAnim(FALSE);
     }
     
     if (JOY_NEW(B_BUTTON))
@@ -2323,6 +2324,7 @@ static void Task_RotomPhone_FullScreenMenu_MainInput(u8 taskId)
                 menuSelectedFullScreen--;
         } while (!sRotomPhoneOptions[menuSelectedFullScreen].unlockedFunc());
         RotomPhone_FullScreenMenu_PrintMenuName();
+        RotomPhone_StartMenu_UpdateRotomFaceAnim(TRUE);
     }
     if (JOY_NEW(DPAD_RIGHT))
     {
@@ -2334,6 +2336,7 @@ static void Task_RotomPhone_FullScreenMenu_MainInput(u8 taskId)
                 menuSelectedFullScreen++;
         } while (!sRotomPhoneOptions[menuSelectedFullScreen].unlockedFunc());
         RotomPhone_FullScreenMenu_PrintMenuName();
+        RotomPhone_StartMenu_UpdateRotomFaceAnim(TRUE);
     }
     if (JOY_NEW(A_BUTTON | START_BUTTON))
     {
