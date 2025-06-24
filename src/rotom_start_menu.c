@@ -130,7 +130,7 @@ static void RotomPhone_FullScreenMenu_DoCleanUpAndDestroyTask(u8 taskId);
 
 static void RotomPhone_FullScreenMenu_LoadSprites(void);
 
-
+static void RotomPhone_FullScreenMenu_TimerUpdates(u8 taskId);
 static void RotomPhone_StartMenu_CreateRotomFaceSprite(bool32 rotomFade);
 static void RotomPhone_StartMenu_UpdateRotomFaceAnim(bool32 input);
 
@@ -2300,13 +2300,7 @@ static void Task_RotomPhone_FullScreenMenu_WaitFadeIn(u8 taskId)
 
 static void Task_RotomPhone_FullScreenMenu_MainInput(u8 taskId)
 {
-    tRotomUpdateTimer++;
-    if (tRotomUpdateTimer == ROTOM_PHONE_FS_MESSGAGE_TIMER)
-    {
-        tRotomUpdateTimer = 0;
-        RotomPhone_FullScreenMenu_PrintTime();
-        RotomPhone_StartMenu_UpdateRotomFaceAnim(FALSE);
-    }
+    RotomPhone_FullScreenMenu_TimerUpdates(taskId);
     
     if (JOY_NEW(B_BUTTON))
     {
@@ -2359,6 +2353,8 @@ static void Task_RotomPhone_FullScreenMenu_MainInput(u8 taskId)
 
 static void Task_RotomPhone_FullScreenMenu_PanelInput(u8 taskId)
 {
+    RotomPhone_FullScreenMenu_TimerUpdates(taskId);
+    
     if (JOY_NEW(START_BUTTON | A_BUTTON | B_BUTTON))
     {
         gTasks[taskId].func = Task_RotomPhone_FullScreenMenu_PanelSlide;
@@ -2662,6 +2658,17 @@ static void RotomPhone_FullScreenMenu_LoadSprites(void)
 
 
 // Rotom Phone Start Menu
+static void RotomPhone_FullScreenMenu_TimerUpdates(u8 taskId)
+{
+    tRotomUpdateTimer++;
+    if (tRotomUpdateTimer == ROTOM_PHONE_FS_MESSGAGE_TIMER)
+    {
+        tRotomUpdateTimer = 0;
+        RotomPhone_FullScreenMenu_PrintTime();
+        RotomPhone_StartMenu_UpdateRotomFaceAnim(FALSE);
+    }
+}
+
 static void RotomPhone_StartMenu_CreateRotomFaceSprite(bool32 rotomFade)
 {
     if (!RP_CONFIG_NOT_FLIP_PHONE || sRotomPhone_StartMenu->menuRotomFaceSpriteId != SPRITE_NONE)
