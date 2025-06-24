@@ -173,8 +173,10 @@ static const u16 sRotomPhone_StartMenuPalette[] =           INCBIN_U16("graphics
 static const u16 sRotomPhone_StartMenuRotomFaceIconsPal[] = INCBIN_U16("graphics/rotom_start_menu/rotom_face.gbapal");
 static const u32 sRotomPhone_StartMenuRotomFaceGfx[] =      INCBIN_U32("graphics/rotom_start_menu/rotom_face.4bpp.smol");
 
+#if RP_CONFIG_PALETTE_BUFFER
 static EWRAM_DATA u16 ALIGNED(4) menuLoadedSpritePalette[PLTT_SIZE_4BPP];
 static EWRAM_DATA u16 ALIGNED(4) menuLoadedBackgroundPalette[PLTT_SIZE_4BPP];
+#endif
 
 enum RotomPhone_Overworld_FaceIconPaletteIndex
 {
@@ -198,12 +200,23 @@ enum RotomPhone_Overworld_FaceIconPaletteIndex
 
 static u16 RotomPhone_StartMenu_GetPhoneBackgroundColour(u8 palSlot)
 {
+#if RP_CONFIG_PALETTE_BUFFER
     return menuLoadedBackgroundPalette[PHONE_BASE_COLOUR_INDEX];
+#else
+    return sRotomPhone_StartMenuPalette[PHONE_BASE_COLOUR_INDEX];
+#endif
 }
 
 static u16 RotomPhone_StartMenu_GetFaceIconPaletteOriginalColour(u8 palSlot)
 {
+#if RP_CONFIG_PALETTE_BUFFER
     return menuLoadedSpritePalette[palSlot];
+#else
+    if (RP_CONFIG_NOT_FLIP_PHONE && !(RP_CONFIG_GREY_ICONS && palSlot < PAL_ICON_WHITE))
+        return sRotomPhone_StartMenuRotomFaceIconsPal[palSlot];
+    else
+        return sRotomPhone_StartMenuRotomFaceIconsPal[PAL_ICON_GREY];
+#endif
 }
 
 static u16 RotomPhone_StartMenu_GetFaceIconPaletteHighlightColour(u8 palSlot)
@@ -1128,6 +1141,7 @@ static void RotomPhone_OverworldMenu_LoadSprites(void)
     LoadCompressedSpriteSheet(sSpriteSheet_OverworldIcons);
     LoadCompressedSpriteSheet(sSpriteSheet_OverworldRotomFace);
 
+#if RP_CONFIG_PALETTE_BUFFER
     memcpy(menuLoadedSpritePalette, sRotomPhone_StartMenuRotomFaceIconsPal, PLTT_SIZE_4BPP);
     if (!RP_CONFIG_NOT_FLIP_PHONE || RP_CONFIG_GREY_ICONS)
     {
@@ -1137,6 +1151,17 @@ static void RotomPhone_OverworldMenu_LoadSprites(void)
         }
     }
     LoadPalette(menuLoadedSpritePalette, OBJ_PLTT_ID(IndexOfSpritePaletteTag(TAG_ROTOM_FACE_ICON_PAL)), PLTT_SIZE_4BPP);
+#else
+    u32 index = IndexOfSpritePaletteTag(TAG_ROTOM_FACE_ICON_PAL);
+    LoadPalette(sRotomPhone_StartMenuRotomFaceIconsPal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP); 
+    if (!RP_CONFIG_NOT_FLIP_PHONE || RP_CONFIG_GREY_ICONS)
+    {
+        for (enum RotomPhone_Overworld_FaceIconPaletteIndex colour = PAL_FACE_ICON_TRANSPARENT + 1; colour < PAL_ICON_WHITE; colour++)
+        {
+            LoadPalette(&sRotomPhone_StartMenuRotomFaceIconsPal[PAL_ICON_GREY], OBJ_PLTT_ID(index) + colour, sizeof(u16));
+        }
+    }
+#endif
 }
 
 static void RotomPhone_OverworldMenu_CreateSprite(enum RotomPhone_MenuItems menuItem, enum RotomPhone_Overworld_Options spriteId)
@@ -1241,9 +1266,14 @@ static void RotomPhone_OverworldMenu_LoadBgGfx(bool32 firstInit)
         DecompressAndCopyTileDataToVram(0, sFlipPhone_OverworldTiles, 0, 0, 0);
         DecompressDataWithHeaderWram(tilemap, buf);
     }
-    
+
+#if RP_CONFIG_PALETTE_BUFFER
     memcpy(menuLoadedBackgroundPalette, sRotomPhone_StartMenuPalette, PLTT_SIZE_4BPP);
     LoadPalette(menuLoadedBackgroundPalette, BG_PLTT_ID(PHONE_BG_PAL_SLOT), PLTT_SIZE_4BPP);
+#else
+    LoadPalette(sRotomPhone_StartMenuPalette, BG_PLTT_ID(PHONE_BG_PAL_SLOT), PLTT_SIZE_4BPP);
+#endif
+
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -1864,7 +1894,21 @@ static void RotomPhone_OverworldMenu_HandleDPAD(u8 taskId)
 
     if (menuSelectedOverworld != sRotomPhone_StartMenu->menuOverworldOptions[nextIndex]
         && sRotomPhone_StartMenu->menuOverworldLoading == FALSE && !gPaletteFade.active)
+    {
+#if RP_CONFIG_PALETTE_BUFFER
         LoadPalette(menuLoadedSpritePalette, OBJ_PLTT_ID(IndexOfSpritePaletteTag(TAG_ROTOM_FACE_ICON_PAL)), PLTT_SIZE_4BPP);
+#else
+        u32 index = IndexOfSpritePaletteTag(TAG_ROTOM_FACE_ICON_PAL);
+        LoadPalette(sRotomPhone_StartMenuRotomFaceIconsPal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
+        if (!RP_CONFIG_NOT_FLIP_PHONE || RP_CONFIG_GREY_ICONS)
+        {
+            for (enum RotomPhone_Overworld_FaceIconPaletteIndex colour = PAL_FACE_ICON_TRANSPARENT + 1; colour < PAL_ICON_WHITE; colour++)
+            {
+                LoadPalette(&sRotomPhone_StartMenuRotomFaceIconsPal[PAL_ICON_GREY], OBJ_PLTT_ID(index) + colour, sizeof(u16)); 
+            }
+        }
+#endif
+    }
     
     gComfyAnims[tPhoneHighlightComfyAnimId].config.data.spring.to = Q_24_8(FADE_COLOUR_MAX);
     gComfyAnims[tPhoneHighlightComfyAnimId].position = 0;
@@ -2517,7 +2561,11 @@ static bool8 RotomPhone_FullScreenMenu_LoadGraphics(void)
         }
         break;
     case 2:
+#if RP_CONFIG_PALETTE_BUFFER
         LoadPalette(menuLoadedBackgroundPalette, BG_PLTT_ID(PHONE_BG_PAL_SLOT), PLTT_SIZE_4BPP);
+#else
+        LoadPalette(sRotomPhone_StartMenuPalette, BG_PLTT_ID(PHONE_BG_PAL_SLOT), PLTT_SIZE_4BPP);
+#endif
         LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         sRotomPhone_StartMenu->menuFullScreenLoadState++;
     default:
