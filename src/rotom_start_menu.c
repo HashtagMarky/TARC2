@@ -119,7 +119,8 @@ static bool8 RotomPhone_FullScreenMenu_InitBgs(void);
 static void RotomPhone_FullScreenMenu_FadeAndBail(void);
 static bool8 RotomPhone_FullScreenMenu_LoadGraphics(void);
 static void RotomPhone_FullScreenMenu_InitWindows(void);
-static void RotomPhone_FullScreenMenu_PrintTopBar(void);
+static void RotomPhone_FullScreenMenu_PrintTime(void);
+static void RotomPhone_FullScreenMenu_PrintMenuName(void);
 static void RotomPhone_FullScreenMenu_FreeResources(void);
 
 static void RotomPhone_FullScreenMenu_DoCleanUpAndChangeCallback(MainCallback callback);
@@ -339,12 +340,15 @@ static void SpriteCB_RotomPhone_OverworldMenu_RotomFace_Unload(struct Sprite* sp
 }
 
 
-#define FLIP_PHONE_TEXT_BG_COLOUR       12
-#define FLIP_PHONE_TEXT_FG_COLOUR       4
-#define FLIP_PHONE_TEXT_SHADOW_COLOUR   9
-#define ROTOM_PHONE_TEXT_BG_COLOUR      14
-#define ROTOM_PHONE_TEXT_FG_COLOUR      4
-#define ROTOM_PHONE_TEXT_SHADOW_COLOUR  9
+#define OW_FLIP_PHONE_TEXT_BG_COLOUR       12
+#define OW_FLIP_PHONE_TEXT_FG_COLOUR       4
+#define OW_FLIP_PHONE_TEXT_SHADOW_COLOUR   9
+#define OW_ROTOM_PHONE_TEXT_BG_COLOUR      14
+#define OW_ROTOM_PHONE_TEXT_FG_COLOUR      4
+#define OW_ROTOM_PHONE_TEXT_SHADOW_COLOUR  9
+#define FS_ROTOM_PHONE_TEXT_BG_COLOUR      14
+#define FS_ROTOM_PHONE_TEXT_FG_COLOUR      5
+#define FS_ROTOM_PHONE_TEXT_SHADOW_COLOUR  10
 enum FontColor
 {
     FONT_BLACK,
@@ -353,15 +357,17 @@ enum FontColor
     FONT_BLUE,
     FONT_OW_FLIP_PHONE,
     FONT_OW_ROTOM_PHONE,
+    FONT_FS_ROTOM_PHONE,
 };
 static const u8 sRotomPhone_StartMenu_FontColours[][3] =
 {
-    [FONT_BLACK]            = {TEXT_COLOR_TRANSPARENT,      TEXT_COLOR_DARK_GRAY,       TEXT_COLOR_LIGHT_GRAY},
-    [FONT_WHITE]            = {TEXT_COLOR_TRANSPARENT,      TEXT_COLOR_WHITE,           TEXT_COLOR_DARK_GRAY},
-    [FONT_RED]              = {TEXT_COLOR_TRANSPARENT,      TEXT_COLOR_RED,             TEXT_COLOR_LIGHT_GRAY},
-    [FONT_BLUE]             = {TEXT_COLOR_TRANSPARENT,      TEXT_COLOR_BLUE,            TEXT_COLOR_LIGHT_GRAY},
-    [FONT_OW_FLIP_PHONE]    = {FLIP_PHONE_TEXT_BG_COLOUR,   FLIP_PHONE_TEXT_FG_COLOUR,  FLIP_PHONE_TEXT_SHADOW_COLOUR},
-    [FONT_OW_ROTOM_PHONE]   = {TEXT_COLOR_TRANSPARENT,      ROTOM_PHONE_TEXT_FG_COLOUR, ROTOM_PHONE_TEXT_SHADOW_COLOUR},
+    [FONT_BLACK]            = {TEXT_COLOR_TRANSPARENT,          TEXT_COLOR_DARK_GRAY,           TEXT_COLOR_LIGHT_GRAY},
+    [FONT_WHITE]            = {TEXT_COLOR_TRANSPARENT,          TEXT_COLOR_WHITE,               TEXT_COLOR_DARK_GRAY},
+    [FONT_RED]              = {TEXT_COLOR_TRANSPARENT,          TEXT_COLOR_RED,                 TEXT_COLOR_LIGHT_GRAY},
+    [FONT_BLUE]             = {TEXT_COLOR_TRANSPARENT,          TEXT_COLOR_BLUE,                TEXT_COLOR_LIGHT_GRAY},
+    [FONT_OW_FLIP_PHONE]    = {OW_FLIP_PHONE_TEXT_BG_COLOUR,    OW_FLIP_PHONE_TEXT_FG_COLOUR,   OW_FLIP_PHONE_TEXT_SHADOW_COLOUR},
+    [FONT_OW_ROTOM_PHONE]   = {TEXT_COLOR_TRANSPARENT,          OW_ROTOM_PHONE_TEXT_FG_COLOUR,  OW_ROTOM_PHONE_TEXT_SHADOW_COLOUR},
+    [FONT_FS_ROTOM_PHONE]   = {TEXT_COLOR_TRANSPARENT,          FS_ROTOM_PHONE_TEXT_FG_COLOUR,  FS_ROTOM_PHONE_TEXT_SHADOW_COLOUR},
 };
 
 
@@ -553,7 +559,8 @@ bool32 RotomPhone_StartMenu_IsFullScreen(void)
 
 enum RotomPhone_FullScreen_WindowIds
 {
-    RP_FS_WIN_TOP_BAR,
+    RP_FS_WIN_TIME,
+    RP_FS_WIN_MENU_NAME,
     RP_FS_WIN_COUNT,
 };
 #define RP_FS_WIN_LAST RP_FS_WIN_COUNT - 1
@@ -596,15 +603,25 @@ static const struct WindowTemplate sWindowTemplate_FlipPhone = {
 
 static const struct WindowTemplate sRotomPhone_FullScreenMenuWindowTemplates[] =
 {
-    [RP_FS_WIN_TOP_BAR] =
+    [RP_FS_WIN_TIME] =
     {
         .bg = 0,
-        .tilemapLeft = 0,
-        .tilemapTop = 0,
-        .width = 30,
+        .tilemapLeft = 13,
+        .tilemapTop = 3,
+        .width = 4,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 14,
         .baseBlock = 1
+    },
+    [RP_FS_WIN_MENU_NAME] =
+    {
+        .bg = 0,
+        .tilemapLeft = 12,
+        .tilemapTop = 5,
+        .width = 6,
+        .height = 2,
+        .paletteNum = 14,
+        .baseBlock = 1 + (4 * 8)
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -1291,11 +1308,11 @@ static void RotomPhone_OverworldMenu_CreateSpeechWindows(void)
     DecompressDataWithHeaderWram(sRotomPhone_OverworldSpeechTilemap, GetBgTilemapBuffer(0));
 
     sRotomPhone_StartMenu->menuOverworldRotomSpeechTopWindowId = AddWindow(&sWindowTemplate_RotomSpeech_Top);
-    FillWindowPixelBuffer(sRotomPhone_StartMenu->menuOverworldRotomSpeechTopWindowId, PIXEL_FILL(ROTOM_PHONE_TEXT_BG_COLOUR));
+    FillWindowPixelBuffer(sRotomPhone_StartMenu->menuOverworldRotomSpeechTopWindowId, PIXEL_FILL(OW_ROTOM_PHONE_TEXT_BG_COLOUR));
     PutWindowTilemap(sRotomPhone_StartMenu->menuOverworldRotomSpeechTopWindowId);
 
     sRotomPhone_StartMenu->menuOverworldRotomSpeechBottomWindowId = AddWindow(&sWindowTemplate_RotomSpeech_Bottom);
-    FillWindowPixelBuffer(sRotomPhone_StartMenu->menuOverworldRotomSpeechBottomWindowId, PIXEL_FILL(ROTOM_PHONE_TEXT_BG_COLOUR));
+    FillWindowPixelBuffer(sRotomPhone_StartMenu->menuOverworldRotomSpeechBottomWindowId, PIXEL_FILL(OW_ROTOM_PHONE_TEXT_BG_COLOUR));
     PutWindowTilemap(sRotomPhone_StartMenu->menuOverworldRotomSpeechBottomWindowId);
 }
 
@@ -1305,7 +1322,7 @@ static void RotomPhone_OverworldMenu_CreateFlipPhoneWindow(void)
         return;
     
     sRotomPhone_StartMenu->menuOverworldFlipPhoneWindowId = AddWindow(&sWindowTemplate_FlipPhone);
-    FillWindowPixelBuffer(sRotomPhone_StartMenu->menuOverworldFlipPhoneWindowId, PIXEL_FILL(FLIP_PHONE_TEXT_BG_COLOUR));
+    FillWindowPixelBuffer(sRotomPhone_StartMenu->menuOverworldFlipPhoneWindowId, PIXEL_FILL(OW_FLIP_PHONE_TEXT_BG_COLOUR));
     PutWindowTilemap(sRotomPhone_StartMenu->menuOverworldFlipPhoneWindowId);
 }
 
@@ -1316,7 +1333,7 @@ static void RotomPhone_OverworldMenu_PrintRotomSpeech(u8 textBuffer[80], bool32 
     u32 windowId;
     windowId = (top == TRUE) ? sRotomPhone_StartMenu->menuOverworldRotomSpeechTopWindowId : sRotomPhone_StartMenu->menuOverworldRotomSpeechBottomWindowId;
 
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(ROTOM_PHONE_TEXT_BG_COLOUR));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(OW_ROTOM_PHONE_TEXT_BG_COLOUR));
     AddTextPrinterParameterized4(windowId, fontId,
         GetStringCenterAlignXOffset(fontId, textBuffer, ROTOM_SPEECH_WINDOW_WIDTH_PXL),
         ROTOM_SPEECH_TOP_ROW_Y, 0, 0, sRotomPhone_StartMenu_FontColours[FONT_OW_ROTOM_PHONE], TEXT_SKIP_DRAW, textBuffer);
@@ -1733,7 +1750,7 @@ static void RotomPhone_OverworldMenu_UpdateMenuPrompt(u8 taskId)
             StringCopy(menuName, sRotomPhoneOptions[RotomPhone_StartMenu_GetShortcutOption()].menuName);
 
         fontId = GetFontIdToFit(menuName, ReturnNormalTextFont(), 0, sWindowTemplate_FlipPhone.width * 8);
-        FillWindowPixelBuffer(sRotomPhone_StartMenu->menuOverworldFlipPhoneWindowId, PIXEL_FILL(FLIP_PHONE_TEXT_BG_COLOUR));
+        FillWindowPixelBuffer(sRotomPhone_StartMenu->menuOverworldFlipPhoneWindowId, PIXEL_FILL(OW_FLIP_PHONE_TEXT_BG_COLOUR));
         AddTextPrinterParameterized4(sRotomPhone_StartMenu->menuOverworldFlipPhoneWindowId, fontId,
         GetStringCenterAlignXOffset(fontId, menuName, sWindowTemplate_FlipPhone.width * 8),
         ROTOM_SPEECH_BOTTOM_ROW_Y, 0, 0, sRotomPhone_StartMenu_FontColours[FONT_OW_FLIP_PHONE], TEXT_SKIP_DRAW, menuName);
@@ -2261,7 +2278,8 @@ static void RotomPhone_FullScreenMenu_SetupCB(void)
         if (!sRotomPhoneOptions[menuSelectedFullScreen].unlockedFunc || !sRotomPhoneOptions[menuSelectedFullScreen].unlockedFunc())
             menuSelectedFullScreen = RotomPhone_StartMenu_SetFirstSelectedMenu();
 
-        RotomPhone_FullScreenMenu_PrintTopBar();
+        RotomPhone_FullScreenMenu_PrintTime();
+        RotomPhone_FullScreenMenu_PrintMenuName();
         RotomPhone_FullScreenMenu_LoadSprites();
         RotomPhone_StartMenu_CreateRotomFaceSprite(FALSE);
         break;
@@ -2295,6 +2313,13 @@ static void Task_RotomPhone_FullScreenMenu_WaitFadeIn(u8 taskId)
 
 static void Task_RotomPhone_FullScreenMenu_MainInput(u8 taskId)
 {
+    tRotomUpdateTimer++;
+    if (tRotomUpdateTimer == ROTOM_PHONE_FS_MESSGAGE_TIMER)
+    {
+        tRotomUpdateTimer = 0;
+        RotomPhone_FullScreenMenu_PrintTime();
+    }
+    
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_PC_OFF);
@@ -2310,7 +2335,7 @@ static void Task_RotomPhone_FullScreenMenu_MainInput(u8 taskId)
             else
                 menuSelectedFullScreen--;
         } while (!sRotomPhoneOptions[menuSelectedFullScreen].unlockedFunc());
-        RotomPhone_FullScreenMenu_PrintTopBar();
+        RotomPhone_FullScreenMenu_PrintMenuName();
     }
     if (JOY_NEW(DPAD_RIGHT))
     {
@@ -2321,7 +2346,7 @@ static void Task_RotomPhone_FullScreenMenu_MainInput(u8 taskId)
             else
                 menuSelectedFullScreen++;
         } while (!sRotomPhoneOptions[menuSelectedFullScreen].unlockedFunc());
-        RotomPhone_FullScreenMenu_PrintTopBar();
+        RotomPhone_FullScreenMenu_PrintMenuName();
     }
     if (JOY_NEW(A_BUTTON | START_BUTTON))
     {
@@ -2570,7 +2595,6 @@ static bool8 RotomPhone_FullScreenMenu_LoadGraphics(void)
 #else
         LoadPalette(sRotomPhone_StartMenuPalette, BG_PLTT_ID(PHONE_BG_PAL_SLOT), PLTT_SIZE_4BPP);
 #endif
-        LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         sRotomPhone_StartMenu->menuFullScreenLoadState++;
     default:
         sRotomPhone_StartMenu->menuFullScreenLoadState = 0;
@@ -2584,23 +2608,40 @@ static void RotomPhone_FullScreenMenu_InitWindows(void)
     InitWindows(sRotomPhone_FullScreenMenuWindowTemplates);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
-    FillWindowPixelBuffer(RP_FS_WIN_TOP_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    PutWindowTilemap(RP_FS_WIN_TOP_BAR);
-    CopyWindowToVram(RP_FS_WIN_TOP_BAR, COPYWIN_FULL);
+    FillWindowPixelBuffer(RP_FS_WIN_TIME, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    PutWindowTilemap(RP_FS_WIN_TIME);
+    CopyWindowToVram(RP_FS_WIN_TIME, COPYWIN_FULL);
+    FillWindowPixelBuffer(RP_FS_WIN_MENU_NAME, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    PutWindowTilemap(RP_FS_WIN_MENU_NAME);
+    CopyWindowToVram(RP_FS_WIN_MENU_NAME, COPYWIN_FULL);
 }
 
-static void RotomPhone_FullScreenMenu_PrintTopBar(void)
+static void RotomPhone_FullScreenMenu_PrintTime(void)
 {
-    return;
+    u8 time[24];
+    RtcCalcLocalTime();
+    FormatDecimalTimeWithoutSeconds(time, gLocalTime.hours, gLocalTime.minutes, RP_CONFIG_24_HOUR_MODE);
 
-    FillWindowPixelBuffer(RP_FS_WIN_TOP_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(RP_FS_WIN_TIME, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    AddTextPrinterParameterized4(RP_FS_WIN_TOP_BAR, FONT_NORMAL,
-        GetStringCenterAlignXOffset(FONT_NORMAL, sRotomPhoneOptions[menuSelectedFullScreen].menuName, sRotomPhone_FullScreenMenuWindowTemplates[RP_FS_WIN_TOP_BAR].width * 8),
+    AddTextPrinterParameterized4(RP_FS_WIN_TIME, FONT_NORMAL,
+        GetStringCenterAlignXOffset(FONT_NORMAL, time, sRotomPhone_FullScreenMenuWindowTemplates[RP_FS_WIN_TIME].width * 8),
         0, 0, 0,
-        sRotomPhone_StartMenu_FontColours[FONT_WHITE], TEXT_SKIP_DRAW, sRotomPhoneOptions[menuSelectedFullScreen].menuName);
+        sRotomPhone_StartMenu_FontColours[FONT_FS_ROTOM_PHONE], TEXT_SKIP_DRAW, time);
 
-    CopyWindowToVram(RP_FS_WIN_TOP_BAR, COPYWIN_GFX);
+    CopyWindowToVram(RP_FS_WIN_TIME, COPYWIN_GFX);
+}
+
+static void RotomPhone_FullScreenMenu_PrintMenuName(void)
+{
+    FillWindowPixelBuffer(RP_FS_WIN_MENU_NAME, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+
+    AddTextPrinterParameterized4(RP_FS_WIN_MENU_NAME, ReturnNarrowerTextFont(),
+        GetStringCenterAlignXOffset(ReturnNarrowerTextFont(), sRotomPhoneOptions[menuSelectedFullScreen].menuName, sRotomPhone_FullScreenMenuWindowTemplates[RP_FS_WIN_MENU_NAME].width * 8),
+        0, 0, 0,
+        sRotomPhone_StartMenu_FontColours[FONT_FS_ROTOM_PHONE], TEXT_SKIP_DRAW, sRotomPhoneOptions[menuSelectedFullScreen].menuName);
+
+    CopyWindowToVram(RP_FS_WIN_MENU_NAME, COPYWIN_GFX);
 }
 
 static void RotomPhone_FullScreenMenu_FreeResources(void)
@@ -2928,7 +2969,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Clock(void)
         RtcCalcLocalTime();
         FormatDecimalTimeWithoutSeconds(time, gLocalTime.hours, gLocalTime.minutes, RP_CONFIG_24_HOUR_MODE);
         u8 fontId = GetFontIdToFit(time, ReturnNormalTextFont(), 0, sWindowTemplate_FlipPhone.width * 8);
-        FillWindowPixelBuffer(sRotomPhone_StartMenu->menuOverworldFlipPhoneWindowId, PIXEL_FILL(FLIP_PHONE_TEXT_BG_COLOUR));
+        FillWindowPixelBuffer(sRotomPhone_StartMenu->menuOverworldFlipPhoneWindowId, PIXEL_FILL(OW_FLIP_PHONE_TEXT_BG_COLOUR));
         AddTextPrinterParameterized4(sRotomPhone_StartMenu->menuOverworldFlipPhoneWindowId, fontId,
         GetStringCenterAlignXOffset(fontId, time, sWindowTemplate_FlipPhone.width * 8),
         ROTOM_SPEECH_BOTTOM_ROW_Y, 0, 0, sRotomPhone_StartMenu_FontColours[FONT_OW_FLIP_PHONE], TEXT_SKIP_DRAW, time);
@@ -3238,12 +3279,12 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 
 #undef ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK
 
-#undef FLIP_PHONE_TEXT_BG_COLOUR
-#undef FLIP_PHONE_TEXT_FG_COLOUR
-#undef FLIP_PHONE_TEXT_SHADOW_COLOUR
-#undef ROTOM_PHONE_TEXT_BG_COLOUR
-#undef ROTOM_PHONE_TEXT_FG_COLOUR
-#undef ROTOM_PHONE_TEXT_SHADOW_COLOUR
+#undef OW_FLIP_PHONE_TEXT_BG_COLOUR
+#undef OW_FLIP_PHONE_TEXT_FG_COLOUR
+#undef OW_FLIP_PHONE_TEXT_SHADOW_COLOUR
+#undef OW_ROTOM_PHONE_TEXT_BG_COLOUR
+#undef OW_ROTOM_PHONE_TEXT_FG_COLOUR
+#undef OW_ROTOM_PHONE_TEXT_SHADOW_COLOUR
 
 #undef ROTOM_SPEECH_TOP_ROW_Y
 #undef ROTOM_SPEECH_BOTTOM_ROW_Y
