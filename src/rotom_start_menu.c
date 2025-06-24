@@ -2354,7 +2354,7 @@ static void Task_RotomPhone_FullScreenMenu_MainInput(u8 taskId)
 static void Task_RotomPhone_FullScreenMenu_PanelInput(u8 taskId)
 {
     RotomPhone_FullScreenMenu_TimerUpdates(taskId);
-    
+
     if (JOY_NEW(START_BUTTON | A_BUTTON | B_BUTTON))
     {
         gTasks[taskId].func = Task_RotomPhone_FullScreenMenu_PanelSlide;
@@ -2704,6 +2704,7 @@ static void RotomPhone_StartMenu_CreateRotomFaceSprite(bool32 rotomFade)
         y,
         0
     );
+
     if (rotomFade)
     {
         PlaySE(PMD_EVENT_SIGN_HATENA_03);
@@ -2722,8 +2723,12 @@ static void RotomPhone_StartMenu_CreateRotomFaceSprite(bool32 rotomFade)
         config.clampAfter = FACE_ICON_COMFY_SPRING_CLAMP_AFTER;
         sFrameNumComfyAnimId = CreateComfyAnim_Spring(&config);
     }
+
     if (RotomPhone_StartMenu_IsFullScreen())
+    {
         StartSpriteAnim(&gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId], rotomFaceExpression);
+        gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId].oam.priority = 1;
+    }
 
     if (flash)
     {
