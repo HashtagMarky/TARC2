@@ -347,7 +347,7 @@ static void SpriteCB_RotomPhone_OverworldMenu_RotomFace_Unload(struct Sprite* sp
 #define OW_ROTOM_PHONE_TEXT_BG_COLOUR      14
 #define OW_ROTOM_PHONE_TEXT_FG_COLOUR      4
 #define OW_ROTOM_PHONE_TEXT_SHADOW_COLOUR  9
-#define FS_ROTOM_PHONE_TEXT_BG_COLOUR      14
+#define FS_ROTOM_PHONE_TEXT_BG_COLOUR      12
 #define FS_ROTOM_PHONE_TEXT_FG_COLOUR      5
 #define FS_ROTOM_PHONE_TEXT_SHADOW_COLOUR  10
 enum FontColor
@@ -611,7 +611,7 @@ static const struct WindowTemplate sRotomPhone_FullScreenMenuWindowTemplates[] =
         .tilemapTop = 4,
         .width = 4,
         .height = 2,
-        .paletteNum = 14,
+        .paletteNum = PHONE_BG_PAL_SLOT,
         .baseBlock = 1
     },
     [RP_FS_WIN_MENU_NAME] =
@@ -621,17 +621,12 @@ static const struct WindowTemplate sRotomPhone_FullScreenMenuWindowTemplates[] =
         .tilemapTop = 6,
         .width = 6,
         .height = 2,
-        .paletteNum = 14,
+        .paletteNum = PHONE_BG_PAL_SLOT,
         .baseBlock = 1 + (4 * 8)
     },
     DUMMY_WIN_TEMPLATE
 };
-#define ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK                           \
-sRotomPhone_FullScreenMenuWindowTemplates[RP_FS_WIN_LAST].baseBlock +   \
-(                                                                       \
-    sRotomPhone_FullScreenMenuWindowTemplates[RP_FS_WIN_LAST].height *  \
-    sRotomPhone_FullScreenMenuWindowTemplates[RP_FS_WIN_LAST].width     \
-)
+#define ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK 0xFF
 
 static const struct BgTemplate sRotomPhone_FullScreenMenuBgTemplates[] =
 {
@@ -3022,9 +3017,9 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
     #define MON_COMPATABILITY_ICON_X (MON_ICON_ONE_X + MON_ICON_TWO_X) / 2
     #define MON_ICON_PAL_SLOT_COMPATABILITY_ICON 0
 
-    #define WIN_WIDTH 6
-    #define WIN_HEIGHT 5
-    #define WIN_TOP 21
+    #define WIN_WIDTH 8
+    #define WIN_HEIGHT 4
+    #define WIN_TOP 22
 
     #define TEXT_LINE_SPACE 14
     
@@ -3066,16 +3061,16 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 
             struct WindowTemplate winTemplate = CreateWindowTemplate(
                 2,
-                3,
+                4,
                 WIN_TOP,
                 WIN_WIDTH,
                 WIN_HEIGHT,
-                15,
+                PHONE_BG_PAL_SLOT,
                 ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK
             );
             sRotomPhone_StartMenu->menuFullScreenPanelWindowId[RP_PANEL_WIN_ONE] = AddWindow(&winTemplate);
             windowId = sRotomPhone_StartMenu->menuFullScreenPanelWindowId[RP_PANEL_WIN_ONE];
-            FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+            FillWindowPixelBuffer(windowId, PIXEL_FILL(FS_ROTOM_PHONE_TEXT_BG_COLOUR));
             PutWindowTilemap(windowId);
 
             y = 0;
@@ -3083,25 +3078,19 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
             fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, winTemplate.width * 8);
             AddTextPrinterParameterized4(windowId, fontId,
                 0,
-                y, 0, 0, sRotomPhone_StartMenu_FontColours[FONT_WHITE], TEXT_SKIP_DRAW, textBuffer
+                y, 0, 0, sRotomPhone_StartMenu_FontColours[FONT_FS_ROTOM_PHONE], TEXT_SKIP_DRAW, textBuffer
             );
 
             y += TEXT_LINE_SPACE;
             StringCopy(textBuffer, COMPOUND_STRING("Level: "));
             StringAppend(textBuffer, level);
-            fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, winTemplate.width * 8);
-            AddTextPrinterParameterized4(windowId, fontId,
-                0,
-                y, 0, 0, sRotomPhone_StartMenu_FontColours[FONT_WHITE], TEXT_SKIP_DRAW, textBuffer
-            );
-
-            y += TEXT_LINE_SPACE - 1;
-            StringCopy(textBuffer, COMPOUND_STRING("Gain: +"));
+            StringAppend(textBuffer, COMPOUND_STRING(" (+"));
             StringAppend(textBuffer, levelGain);
+            StringAppend(textBuffer, COMPOUND_STRING(")"));
             fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, winTemplate.width * 8);
             AddTextPrinterParameterized4(windowId, fontId,
                 0,
-                y, 0, 0, sRotomPhone_StartMenu_FontColours[FONT_WHITE], TEXT_SKIP_DRAW, textBuffer
+                y, 0, 0, sRotomPhone_StartMenu_FontColours[FONT_FS_ROTOM_PHONE], TEXT_SKIP_DRAW, textBuffer
             );
 
             CopyWindowToVram(windowId, COPYWIN_FULL);
@@ -3122,16 +3111,16 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 
             struct WindowTemplate winTemplate = CreateWindowTemplate(
                 2,
-                21,
+                18,
                 WIN_TOP,
                 WIN_WIDTH,
                 WIN_HEIGHT,
-                15,
+                PHONE_BG_PAL_SLOT,
                 ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK + (WIN_WIDTH * WIN_HEIGHT)
             );
             sRotomPhone_StartMenu->menuFullScreenPanelWindowId[RP_PANEL_WIN_TWO] = AddWindow(&winTemplate);
             windowId = sRotomPhone_StartMenu->menuFullScreenPanelWindowId[RP_PANEL_WIN_TWO];
-            FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+            FillWindowPixelBuffer(windowId, PIXEL_FILL(FS_ROTOM_PHONE_TEXT_BG_COLOUR));
             PutWindowTilemap(windowId);
 
             y = 0;
@@ -3139,25 +3128,19 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
             fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, winTemplate.width * 8);
             AddTextPrinterParameterized4(windowId, fontId,
                 GetStringRightAlignXOffset(fontId, textBuffer, WIN_WIDTH * 8),
-                y, 0, 0, sRotomPhone_StartMenu_FontColours[FONT_WHITE], TEXT_SKIP_DRAW, textBuffer
+                y, 0, 0, sRotomPhone_StartMenu_FontColours[FONT_FS_ROTOM_PHONE], TEXT_SKIP_DRAW, textBuffer
             );
 
             y += TEXT_LINE_SPACE;
             StringCopy(textBuffer, COMPOUND_STRING("Level: "));
             StringAppend(textBuffer, level);
-            fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, winTemplate.width * 8);
-            AddTextPrinterParameterized4(windowId, fontId,
-                GetStringRightAlignXOffset(fontId, textBuffer, WIN_WIDTH * 8),
-                y, 0, 0, sRotomPhone_StartMenu_FontColours[FONT_WHITE], TEXT_SKIP_DRAW, textBuffer
-            );
-
-            y += TEXT_LINE_SPACE - 1;
-            StringCopy(textBuffer, COMPOUND_STRING("Gain: +"));
+            StringAppend(textBuffer, COMPOUND_STRING(" (+"));
             StringAppend(textBuffer, levelGain);
+            StringAppend(textBuffer, COMPOUND_STRING(")"));
             fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, winTemplate.width * 8);
             AddTextPrinterParameterized4(windowId, fontId,
                 GetStringRightAlignXOffset(fontId, textBuffer, WIN_WIDTH * 8),
-                y, 0, 0, sRotomPhone_StartMenu_FontColours[FONT_WHITE], TEXT_SKIP_DRAW, textBuffer
+                y, 0, 0, sRotomPhone_StartMenu_FontColours[FONT_FS_ROTOM_PHONE], TEXT_SKIP_DRAW, textBuffer
             );
 
             CopyWindowToVram(windowId, COPYWIN_FULL);
