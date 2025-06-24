@@ -524,6 +524,7 @@ static EWRAM_DATA struct RotomPhone_StartMenu_State *sRotomPhone_StartMenu = NUL
 // Separate memory allocation so it persist between destroying of menu.
 static EWRAM_DATA enum RotomPhone_MenuItems menuSelectedOverworld;
 static EWRAM_DATA enum RotomPhone_MenuItems menuSelectedFullScreen;
+static EWRAM_DATA enum RotomPhone_FaceExpressions rotomFaceExpression;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
 
@@ -1415,6 +1416,7 @@ static void RotomPhone_OverworldMenu_CheckUpdateMessage(u8 taskId)
                 rotomFace += RP_FACE_LOOK_UP_ANIMS;
             } while (rotomFace == gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId].animNum);
             StartSpriteAnim(&gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId], rotomFace);
+            rotomFaceExpression = rotomFace;
         }
     }
 }
@@ -2627,7 +2629,8 @@ static void RotomPhone_StartMenu_CreateRotomFaceSprite(bool32 rotomFade)
         PlaySE(PMD_EVENT_SIGN_HATENA_03);
         struct Sprite *sprite = &gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId];
         sprite->callback = SpriteCB_RotomPhone_OverworldMenu_RotomFace_Load;
-        StartSpriteAnim(sprite, RP_FACE_HAPPY);
+        rotomFaceExpression = RP_FACE_HAPPY;
+        StartSpriteAnim(sprite, rotomFaceExpression);
 
         struct ComfyAnimSpringConfig config;
         InitComfyAnimConfig_Spring(&config);
@@ -2639,6 +2642,8 @@ static void RotomPhone_StartMenu_CreateRotomFaceSprite(bool32 rotomFade)
         config.clampAfter = FACE_ICON_COMFY_SPRING_CLAMP_AFTER;
         sFrameNumComfyAnimId = CreateComfyAnim_Spring(&config);
     }
+    if (RotomPhone_StartMenu_IsFullScreen())
+        StartSpriteAnim(&gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId], rotomFaceExpression);
 
     if (flash)
     {
