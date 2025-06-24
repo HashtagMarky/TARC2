@@ -3214,7 +3214,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 
         if (GetDaycareState() != DAYCARE_NO_MONS)
         {
-            DestroySpriteAndFreeResources(&gSprites[sRotomPhone_StartMenu->menuFullScreenPanelSpriteId[RP_PANEL_SPRITE_ONE]]);
+            FreeAndDestroyMonIconSprite(&gSprites[sRotomPhone_StartMenu->menuFullScreenPanelSpriteId[RP_PANEL_SPRITE_ONE]]);
             sRotomPhone_StartMenu->menuFullScreenPanelSpriteId[RP_PANEL_SPRITE_ONE] = SPRITE_NONE;
 
             windowId = sRotomPhone_StartMenu->menuFullScreenPanelWindowId[RP_PANEL_WIN_ONE];
@@ -3226,7 +3226,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 
         if (GetDaycareState() != DAYCARE_NO_MONS && GetDaycareState() != DAYCARE_ONE_MON)
         {
-            DestroySpriteAndFreeResources(&gSprites[sRotomPhone_StartMenu->menuFullScreenPanelSpriteId[RP_PANEL_SPRITE_TWO]]);
+            FreeAndDestroyMonIconSprite(&gSprites[sRotomPhone_StartMenu->menuFullScreenPanelSpriteId[RP_PANEL_SPRITE_TWO]]);
             sRotomPhone_StartMenu->menuFullScreenPanelSpriteId[RP_PANEL_SPRITE_TWO] = SPRITE_NONE;
 
             windowId = sRotomPhone_StartMenu->menuFullScreenPanelWindowId[RP_PANEL_WIN_TWO];
@@ -3238,7 +3238,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 
         if (GetDaycareState() == DAYCARE_TWO_MONS || GetDaycareState() == DAYCARE_EGG_WAITING)
         {
-            DestroySpriteAndFreeResources(&gSprites[sRotomPhone_StartMenu->menuFullScreenPanelSpriteId[RP_PANEL_SPRITE_THREE]]);
+            FreeAndDestroyMonIconSprite(&gSprites[sRotomPhone_StartMenu->menuFullScreenPanelSpriteId[RP_PANEL_SPRITE_THREE]]);
             sRotomPhone_StartMenu->menuFullScreenPanelSpriteId[RP_PANEL_SPRITE_THREE] = SPRITE_NONE;
         }
     }
