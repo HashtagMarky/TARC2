@@ -189,7 +189,7 @@ enum RotomPhone_Overworld_FaceIconPaletteIndex
     PAL_ICON_PINK,
     PAL_ICON_ORANGE,
     PAL_ICON_BROWN,
-    PAL_ICON_GREY,
+    PAL_ICON_MONOCHROME,    // Similar to Phone Background Colour
     PAL_ICON_WHITE,
     PAL_ROTOM_OUTLINE,
     PAL_ROTOM_EYE_WHITE,
@@ -212,10 +212,10 @@ static u16 RotomPhone_StartMenu_GetFaceIconPaletteOriginalColour(u8 palSlot)
 #if RP_CONFIG_PALETTE_BUFFER
     return menuLoadedSpritePalette[palSlot];
 #else
-    if (RP_CONFIG_NOT_FLIP_PHONE && !(RP_CONFIG_GREY_ICONS && palSlot < PAL_ICON_WHITE))
+    if (RP_CONFIG_NOT_FLIP_PHONE && !(RP_CONFIG_MONOCHROME_ICONS && palSlot < PAL_ICON_WHITE))
         return sRotomPhone_StartMenuRotomFaceIconsPal[palSlot];
     else
-        return sRotomPhone_StartMenuRotomFaceIconsPal[PAL_ICON_GREY];
+        return sRotomPhone_StartMenuRotomFaceIconsPal[PAL_ICON_MONOCHROME];
 #endif
 }
 
@@ -938,7 +938,7 @@ static struct RotomPhone_MenuOptions sRotomPhoneOptions[RP_MENU_COUNT] =
         .rotomSpeech = COMPOUND_STRING("to end the Safari?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_SafariFlag,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_SafariFlag,
-        .owIconPalSlot = PAL_ICON_GREY,
+        .owIconPalSlot = PAL_ICON_MONOCHROME,
     },
     [RP_MENU_FULL_SCREEN] =
     {
@@ -946,7 +946,7 @@ static struct RotomPhone_MenuOptions sRotomPhoneOptions[RP_MENU_COUNT] =
         .rotomSpeech = COMPOUND_STRING("to enter Full Screen?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_FullScreen,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_FullScreen,
-        .owIconPalSlot = PAL_ICON_GREY,
+        .owIconPalSlot = PAL_ICON_MONOCHROME,
     },
     [RP_MENU_CLOCK] =
     {
@@ -954,7 +954,7 @@ static struct RotomPhone_MenuOptions sRotomPhoneOptions[RP_MENU_COUNT] =
         .rotomSpeech = COMPOUND_STRING("to check the time?"),
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_Clock,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_Clock,
-        .owIconPalSlot = PAL_ICON_GREY,
+        .owIconPalSlot = PAL_ICON_MONOCHROME,
     },
     [RP_MENU_SHORTCUT] =
     {
@@ -1143,22 +1143,22 @@ static void RotomPhone_OverworldMenu_LoadSprites(void)
 
 #if RP_CONFIG_PALETTE_BUFFER
     memcpy(menuLoadedSpritePalette, sRotomPhone_StartMenuRotomFaceIconsPal, PLTT_SIZE_4BPP);
-    if (!RP_CONFIG_NOT_FLIP_PHONE || RP_CONFIG_GREY_ICONS)
+    if (!RP_CONFIG_NOT_FLIP_PHONE || RP_CONFIG_MONOCHROME_ICONS)
     {
         for (enum RotomPhone_Overworld_FaceIconPaletteIndex colour = PAL_FACE_ICON_TRANSPARENT + 1; colour < PAL_ICON_WHITE; colour++)
         {
-            memcpy(&menuLoadedSpritePalette[colour], &sRotomPhone_StartMenuRotomFaceIconsPal[PAL_ICON_GREY], sizeof(u16)); 
+            memcpy(&menuLoadedSpritePalette[colour], &sRotomPhone_StartMenuRotomFaceIconsPal[PAL_ICON_MONOCHROME], sizeof(u16)); 
         }
     }
     LoadPalette(menuLoadedSpritePalette, OBJ_PLTT_ID(IndexOfSpritePaletteTag(TAG_ROTOM_FACE_ICON_PAL)), PLTT_SIZE_4BPP);
 #else
     u32 index = IndexOfSpritePaletteTag(TAG_ROTOM_FACE_ICON_PAL);
     LoadPalette(sRotomPhone_StartMenuRotomFaceIconsPal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP); 
-    if (!RP_CONFIG_NOT_FLIP_PHONE || RP_CONFIG_GREY_ICONS)
+    if (!RP_CONFIG_NOT_FLIP_PHONE || RP_CONFIG_MONOCHROME_ICONS)
     {
         for (enum RotomPhone_Overworld_FaceIconPaletteIndex colour = PAL_FACE_ICON_TRANSPARENT + 1; colour < PAL_ICON_WHITE; colour++)
         {
-            LoadPalette(&sRotomPhone_StartMenuRotomFaceIconsPal[PAL_ICON_GREY], OBJ_PLTT_ID(index) + colour, sizeof(u16));
+            LoadPalette(&sRotomPhone_StartMenuRotomFaceIconsPal[PAL_ICON_MONOCHROME], OBJ_PLTT_ID(index) + colour, sizeof(u16));
         }
     }
 #endif
@@ -1900,11 +1900,11 @@ static void RotomPhone_OverworldMenu_HandleDPAD(u8 taskId)
 #else
         u32 index = IndexOfSpritePaletteTag(TAG_ROTOM_FACE_ICON_PAL);
         LoadPalette(sRotomPhone_StartMenuRotomFaceIconsPal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
-        if (!RP_CONFIG_NOT_FLIP_PHONE || RP_CONFIG_GREY_ICONS)
+        if (!RP_CONFIG_NOT_FLIP_PHONE || RP_CONFIG_MONOCHROME_ICONS)
         {
             for (enum RotomPhone_Overworld_FaceIconPaletteIndex colour = PAL_FACE_ICON_TRANSPARENT + 1; colour < PAL_ICON_WHITE; colour++)
             {
-                LoadPalette(&sRotomPhone_StartMenuRotomFaceIconsPal[PAL_ICON_GREY], OBJ_PLTT_ID(index) + colour, sizeof(u16)); 
+                LoadPalette(&sRotomPhone_StartMenuRotomFaceIconsPal[PAL_ICON_MONOCHROME], OBJ_PLTT_ID(index) + colour, sizeof(u16)); 
             }
         }
 #endif
