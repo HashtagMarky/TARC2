@@ -19,4 +19,15 @@ void RotomPhone_FullScreenMenu_Init(void);
 void Task_RotomPhone_FullScreenMenu_Open(u8 taskId);
 bool32 RotomPhone_StartMenu_IsFullScreen(void);
 
+struct RotomPhone_MenuOptions
+{
+    const u8 *menuName;
+    const u8 *rotomSpeech;
+    bool32 (*unlockedFunc)(void);
+    void (*selectedFunc)(void);
+    u32 owIconPalSlot;
+    bool32 fullScreenPanel;
+};
+extern const struct RotomPhone_MenuOptions gRotomPhoneOptions[];
+
 #endif // GUARD_ROTOM_START_MENU_H
