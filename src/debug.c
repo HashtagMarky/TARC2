@@ -23,6 +23,7 @@
 #include "field_message_box.h"
 #include "field_screen_effect.h"
 #include "field_weather.h"
+#include "follower_npc.h"
 #include "international_string_util.h"
 #include "item.h"
 #include "item_icon.h"
@@ -58,6 +59,7 @@
 #include "constants/battle_ai.h"
 #include "constants/battle_frontier.h"
 #include "constants/coins.h"
+#include "constants/event_objects.h"
 #include "constants/expansion.h"
 #include "constants/flags.h"
 #include "constants/items.h"
@@ -71,158 +73,15 @@
 #include "fake_rtc.h"
 #include "save.h"
 
-#include "calendar.h"
-#include "dynamic_music.h"
-#include "ikigai_characters.h"
-#include "ui_samuel_case.h"
-#include "vyraton.h"
-
-#define FLAG_DEBUG_SOUND_OVERWORLD_PLAY TRUE
-
-// *******************************
-enum DebugMenu
+enum FollowerNPCCreateDebugMenu
 {
-    DEBUG_MENU_ITEM_IKIGAI,
-    DEBUG_MENU_ITEM_UTILITIES,
-    DEBUG_MENU_ITEM_PCBAG,
-    DEBUG_MENU_ITEM_PARTY,
-    DEBUG_MENU_ITEM_GIVE,
-    DEBUG_MENU_ITEM_PLAYER,
-    DEBUG_MENU_ITEM_SCRIPTS,
-    DEBUG_MENU_ITEM_FLAGVAR,
-    //DEBUG_MENU_ITEM_BATTLE,
-    DEBUG_MENU_ITEM_SOUND,
-    DEBUG_MENU_ITEM_ROMINFO,
-    DEBUG_MENU_ITEM_CANCEL,
-};
-
-enum IkigaiDebugMenu
-{
-    DEBUG_IKIGAI_PLAYER,
-    DEBUG_IKIGAI_CHARACTER,
-    DEBUG_IKIGAI_TEMPORAL,
-    DEBUG_IKIGAI_SOUND,
-};
-
-enum IkigaiPlayerDebugSubmenu
-{
-    DEBUG_IKIGAI_PLAYER_GYM_TYPE,
-    DEBUG_IKIGAI_PLAYER_BODY,
-    DEBUG_IKIGAI_PLAYER_NAME,
-    DEBUG_IKIGAI_PLAYER_NICKNAME,
-    DEBUG_IKIGAI_PLAYER_DYNPALS,
-};
-
-enum IkigaiCharacterDebugSubmenu
-{
-    DEBUG_IKIGAI_CHARACTER_POKESPHERE,
-    DEBUG_IKIGAI_CHARACTER_MET,
-};
-
-enum IkigaiTimeDebugSubmenu
-{
-    DEBUG_IKIGAI_TEMPORAL_BASE_TIME_MENU,
-    DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK,
-    DEBUG_IKIGAI_TEMPORAL_SET_CLOCK,
-    DEBUG_IKIGAI_TEMPORAL_SET_SEASON,
-    DEBUG_IKIGAI_TEMPORAL_CALENDAR_SHOW,
-    DEBUG_IKIGAI_TEMPORAL_CALENDAR_WARP,
-    DEBUG_IKIGAI_TEMPORAL_WEATHER,
-};
-
-enum IkigaiSoundSubmenu
-{
-    DEBUG_IKIGAI_SOUND_CRIES,
-    DEBUG_IKIGAI_SOUND_MUSIC_EXPANSION,
-    DEBUG_IKIGAI_SOUND_DYNAMIC_MUSIC,
-};
-
-enum UtilDebugMenu
-{
-    DEBUG_UTIL_MENU_ITEM_FLY,
-    DEBUG_UTIL_MENU_ITEM_WARP,
-    DEBUG_UTIL_MENU_ITEM_WEATHER,
-    DEBUG_UTIL_MENU_ITEM_FONT_TEST,
-    DEBUG_UTIL_MENU_ITEM_TIME_MENU,
-    DEBUG_UTIL_MENU_ITEM_WATCHCREDITS,
-    DEBUG_UTIL_MENU_ITEM_CHEAT,
-    DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS,
-    DEBUG_UTIL_MENU_ITEM_EWRAM_COUNTERS,
-    DEBUG_UTIL_MENU_ITEM_STEVEN_MULTI // Please keep this at the bottom <3
-};
-
-enum TimeMenuDebugMenu
-{
-    DEBUG_TIME_MENU_ITEM_PRINTTIME,
-    DEBUG_TIME_MENU_ITEM_PRINTTIMEOFDAY,
-    DEBUG_TIME_MENU_ITEM_TIMESOFDAY,
-    DEBUG_TIME_MENU_ITEM_WEEKDAYS,
-    DEBUG_TIME_MENU_ITEM_CHECKWALLCLOCK,
-    DEBUG_TIME_MENU_ITEM_SETWALLCLOCK,
-};
-
-enum TimeMenuTimeOfDay
-{
-    DEBUG_TIME_MENU_ITEM_MORNING,
-    DEBUG_TIME_MENU_ITEM_DAY,
-    DEBUG_TIME_MENU_ITEM_EVENING,
-    DEBUG_TIME_MENU_ITEM_NIGHT,
-};
-
-enum TimeMenuWeekdays
-{
-    DEBUG_TIME_MENU_ITEM_SUNDAY,
-    DEBUG_TIME_MENU_ITEM_MONDAY,
-    DEBUG_TIME_MENU_ITEM_TUESDAY,
-    DEBUG_TIME_MENU_ITEM_WEDNESDAY,
-    DEBUG_TIME_MENU_ITEM_THURSDAY,
-    DEBUG_TIME_MENU_ITEM_FRIDAY,
-    DEBUG_TIME_MENU_ITEM_SATURDAY,
-};
-
-enum GivePCBagDebugMenu
-{
-    DEBUG_PCBAG_MENU_ITEM_ACCESS_PC,
-    DEBUG_PCBAG_MENU_ITEM_FILL,
-    DEBUG_PCBAG_MENU_ITEM_CLEAR_BAG,
-    DEBUG_PCBAG_MENU_ITEM_CLEAR_BOXES,
-};
-
-enum GivePCBagFillDebugMenu
-{
-    DEBUG_PCBAG_MENU_ITEM_FILL_PC_BOXES_FAST,
-    DEBUG_PCBAG_MENU_ITEM_FILL_PC_BOXES_SLOW,
-    DEBUG_PCBAG_MENU_ITEM_FILL_PC_ITEMS,
-    DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_ITEMS,
-    DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_BALLS,
-    DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_TMHM,
-    DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_BERRIES,
-    DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_KEY_ITEMS,
-};
-
-enum PartyDebugMenu
-{
-    DEBUG_PARTY_MENU_ITEM_MOVE_REMINDER,
-    DEBUG_PARTY_MENU_ITEM_HATCH_AN_EGG,
-    DEBUG_PARTY_MENU_ITEM_HEAL_PARTY,
-    DEBUG_PARTY_MENU_ITEM_INFLICT_STATUS1,
-    DEBUG_PARTY_MENU_ITEM_CHECK_EVS,
-    DEBUG_PARTY_MENU_ITEM_CHECK_IVS,
-    DEBUG_PARTY_MENU_ITEM_CLEAR_PARTY,
-    DEBUG_PARTY_MENU_ITEM_SET_PARTY,
-    DEBUG_PARTY_MENU_ITEM_BATTLE_SINGLE,
-};
-
-enum ScriptDebugMenu
-{
-    DEBUG_UTIL_MENU_ITEM_SCRIPT_1,
-    DEBUG_UTIL_MENU_ITEM_SCRIPT_2,
-    DEBUG_UTIL_MENU_ITEM_SCRIPT_3,
-    DEBUG_UTIL_MENU_ITEM_SCRIPT_4,
-    DEBUG_UTIL_MENU_ITEM_SCRIPT_5,
-    DEBUG_UTIL_MENU_ITEM_SCRIPT_6,
-    DEBUG_UTIL_MENU_ITEM_SCRIPT_7,
-    DEBUG_UTIL_MENU_ITEM_SCRIPT_8,
+    DEBUG_FNPC_BRENDAN,
+    DEBUG_FNPC_MAY,
+    DEBUG_FNPC_STEVEN,
+    DEBUG_FNPC_WALLY,
+    DEBUG_FNPC_RED,
+    DEBUG_FNPC_LEAF,
+    DEBUG_FNPC_COUNT,
 };
 
 enum FlagsVarsDebugMenu
@@ -294,92 +153,6 @@ enum DebugBattleTerrain
     DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_9,
 };
 
-enum GiveDebugMenu
-{
-    DEBUG_GIVE_MENU_ITEM_ITEM_X,
-    DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE,
-    DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX,
-    DEBUG_GIVE_MENU_ITEM_MAX_MONEY,
-    DEBUG_GIVE_MENU_ITEM_MAX_COINS,
-    DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS,
-    DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG,
-};
-
-enum SoundDebugMenu
-{
-    DEBUG_SOUND_MENU_ITEM_SE,
-    DEBUG_SOUND_MENU_ITEM_MUS,
-    DEBUG_SOUND_MENU_ITEM_DYNAMIC_MUSIC,
-};
-
-enum BerryFunctionsMenu
-{
-    DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL,
-    DEBUG_BERRY_FUNCTIONS_MENU_READY,
-    DEBUG_BERRY_FUNCTIONS_MENU_NEXT_STAGE,
-    DEBUG_BERRY_FUNCTIONS_MENU_WEEDS,
-    DEBUG_BERRY_FUNCTIONS_MENU_PESTS,
-};
-
-enum DynamicMusicDebugMenu
-{
-    DEBUG_DYNAMIC_MUSIC_MENU_ACCORDION,
-    DEBUG_DYNAMIC_MUSIC_MENU_KEYTAR,
-    DEBUG_DYNAMIC_MUSIC_MENU_ERHU,
-    DEBUG_DYNAMIC_MUSIC_MENU_GUITAR,
-    DEBUG_DYNAMIC_MUSIC_MENU_WHISTLE,
-    DEBUG_DYNAMIC_MUSIC_MENU_FLUTE,
-    DEBUG_DYNAMIC_MUSIC_MENU_ALL_INSTRUMENTS,
-    DEBUG_DYNAMIC_MUSIC_MENU_PLAYING_INSTRUMENTS,
-    DEBUG_DYNAMIC_MUSIC_MENU_TRACKS,
-    DEBUG_DYNAMIC_MUSIC_MENU_MOVEMENT_MUSIC,
-};
-
-enum DynamicMusicInstrumentDebugMenu
-{
-    DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_REMOVE,
-    DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_RESTORE,
-    DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_PLAY_ONLY,
-};
-
-enum DynamicMusicTrackListDebugMenu
-{
-    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_ALL,
-    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_00,
-    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_01,
-    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_02,
-    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_03,
-    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_04,
-    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_05,
-    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_06,
-    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_07,
-    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_08,
-    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_09,
-    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_10,
-    DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_11,
-};
-
-enum DynamicMusicTracksDebugMenu
-{
-    DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_REMOVE,
-    DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_RESTORE,
-    DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_PLAY_ONLY,
-};
-
-enum PlayerDebugMenu
-{
-    DEBUG_PLAYER_MENU_ITEM_PLAYER_NAME,
-    DEBUG_PLAYER_MENU_ITEM_PLAYER_GENDER,
-    DEBUG_PLAYER_MENU_ITEM_PLAYER_ID,
-};
-
-enum ROMInfoDebugMenu
-{
-    DEBUG_ROM_INFO_MENU_ITEM_SAVEBLOCK,
-    DEBUG_ROM_INFO_MENU_ITEM_ROM_SPACE,
-    DEBUG_ROM_INFO_MENU_ITEM_EXPANSION_VER,
-};
-
 // *******************************
 // Constants
 #define DEBUG_MENU_FONT FONT_NORMAL
@@ -414,9 +187,22 @@ enum ROMInfoDebugMenu
 #define DEBUG_NUMBER_ICON_X 210
 #define DEBUG_NUMBER_ICON_Y 50
 
-#define DEBUG_MAX_MENU_ITEMS 50
+#define DEBUG_MAX_MENU_ITEMS 20
+#define DEBUG_MAX_SUB_MENU_LEVELS 4
 
 // *******************************
+struct DebugMenuOption;
+
+typedef void (*DebugFunc)(u8 taskId);
+typedef void (*DebugSubmenuFunc)(u8 taskId, const struct DebugMenuOption *items);
+
+struct DebugMenuOption
+{
+    const u8 *text;
+    const void *action;
+    const void *actionParams;
+};
+
 struct DebugMonData
 {
     u16 species;
@@ -434,23 +220,15 @@ struct DebugMonData
 
 struct DebugMenuListData
 {
-    struct ListMenuItem listItems[20 + 1];
+    const struct DebugMenuOption *subMenuItems[DEBUG_MAX_SUB_MENU_LEVELS];
+    struct ListMenuItem listItems[DEBUG_MAX_MENU_ITEMS + 1];
     u8 itemNames[DEBUG_MAX_MENU_ITEMS + 1][26];
     u8 listId;
-};
-
-struct DebugBattleData
-{
-    u8 submenu;
-    u8 battleType;
-    enum BattleEnvironment battleTerrain;
-    bool8 aiFlags[AI_FLAG_COUNT];
 };
 
 // EWRAM
 static EWRAM_DATA struct DebugMonData *sDebugMonData = NULL;
 static EWRAM_DATA struct DebugMenuListData *sDebugMenuListData = NULL;
-static EWRAM_DATA struct DebugBattleData *sDebugBattleData = NULL;
 EWRAM_DATA bool8 gIsDebugBattle = FALSE;
 EWRAM_DATA u64 gDebugAIFlags = 0;
 EWRAM_DATA u8 sInstrument = 0;
@@ -458,78 +236,20 @@ EWRAM_DATA u8 sTrackNum = 0;
 
 // *******************************
 // Define functions
-static void Debug_ReShowMainMenu(void);
-static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMtemplate);
+static void Debug_ShowMenu(DebugFunc HandleInput, const struct DebugMenuOption *items);
 static void Debug_DestroyMenu(u8 taskId);
-static void Debug_DestroyMenu_Full(u8 taskId);
 static void DebugAction_Cancel(u8 taskId);
 static void DebugAction_DestroyExtraWindow(u8 taskId);
-static void Debug_InitDebugBattleData(void);
 static void Debug_RefreshListMenu(u8 taskId);
-static void Debug_RedrawListMenu(u8 taskId);
 
-static void DebugAction_Util_Script_1(u8 taskId);
-static void DebugAction_Util_Script_2(u8 taskId);
-static void DebugAction_Util_Script_3(u8 taskId);
-static void DebugAction_Util_Script_4(u8 taskId);
-static void DebugAction_Util_Script_5(u8 taskId);
-static void DebugAction_Util_Script_6(u8 taskId);
-static void DebugAction_Util_Script_7(u8 taskId);
-static void DebugAction_Util_Script_8(u8 taskId);
+static void DebugAction_OpenSubMenu(u8 taskId, const struct DebugMenuOption *items);
+static void DebugAction_OpenSubMenuFlagsVars(u8 taskId);
+static void DebugAction_OpenSubMenuFakeRTC(u8 taskId, const struct DebugMenuOption *items);
+static void DebugAction_OpenSubMenuCreateFollowerNPC(u8 taskId, const struct DebugMenuOption *items);
+static void DebugAction_ExecuteScript(u8 taskId, const u8 *script);
 
-static void DebugAction_OpenIkigaiMenu(u8 taskId);
-static void DebugAction_OpenSubmenuIkigai_Player(u8 taskId);
-static void DebugAction_OpenSubmenuIkigai_CharacterMenu(u8 taskId);
-static void DebugAction_OpenSubmenuIkigai_TemporalMenu(u8 taskId);
-static void DebugAction_OpenSubmenuIkigai_SoundMenu(u8 taskId);
-
-static void DebugAction_OpenUtilitiesMenu(u8 taskId);
-static void DebugAction_OpenPCBagMenu(u8 taskId);
-static void DebugAction_OpenPartyMenu(u8 taskId);
-static void DebugAction_OpenScriptsMenu(u8 taskId);
-static void DebugAction_OpenFlagsVarsMenu(u8 taskId);
-static void DebugAction_OpenGiveMenu(u8 taskId);
-static void DebugAction_OpenSoundMenu(u8 taskId);
-static void DebugAction_OpenDynamicMusicMenu(u8 taskId);
-static void DebugAction_OpenDynamicMusicInstrumentMenu(u8 taskId);
-static void DebugAction_OpenDynamicMusicIsolateTrackMenu(u8 taskId);
-static void DebugAction_Ikigai_MUS_Expansion(u8 taskId);
-static void DebugAction_OpenPlayerMenu(u8 taskId);
-static void DebugAction_OpenROMInfoMenu(u8 taskId);
-
-static void DebugTask_HandleMenuInput_Main(u8 taskId);
-static void DebugTask_HandleMenuInput_Ikigai(u8 taskId);
-static void DebugTask_HandleSubmenuInput_Ikigai_Player(u8 taskId);
-static void DebugTask_HandleSubmenuInput_Ikigai_Character(u8 taskId);
-static void DebugTask_HandleSubmenuInput_Ikigai_Temporal(u8 taskId);
-static void DebugTask_HandleSubmenuInput_Ikigai_Sound(u8 taskId);
-static void DebugTask_HandleMenuInput_Utilities(u8 taskId);
-static void DebugTask_HandleMenuInput_PCBag(u8 taskId);
-static void DebugTask_HandleMenuInput_PCBag_Fill(u8 taskId);
-static void DebugTask_HandleMenuInput_Party(u8 taskId);
-static void DebugTask_HandleMenuInput_Scripts(u8 taskId);
+static void DebugTask_HandleMenuInput_General(u8 taskId);
 static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId);
-static void DebugTask_HandleMenuInput_Battle(u8 taskId);
-static void DebugTask_HandleMenuInput_Give(u8 taskId);
-static void DebugTask_HandleMenuInput_Sound(u8 taskId);
-static void DebugTask_HandleMenuInput_BerryFunctions(u8 taskId);
-static void DebugTask_HandleMenuInput_DynamicMusic(u8 taskId);
-static void DebugTask_HandleMenuInput_DynamicMusicInstruments(u8 taskId);
-static void DebugTask_HandleMenuInput_DynamicMusicIsolateTracksList(u8 taskId);
-static void DebugTask_HandleMenuInput_DynamicMusicIsolateTracksFuncs(u8 taskId);
-
-static void Debug_Display_IkigaiGymInfo(u32 species, u32 digit, u8 windowId);
-static void DebugAction_Ikigai_GymType(u8 taskId);
-static void DebugAction_Ikigai_GymType_SelectId(u8 taskId);
-static void DebugAction_Ikigai_PlayerDynPals(u8 taskId);
-static void DebugAction_Ikigai_OpenPokeSphere(u8 taskId);
-static void DebugAction_Ikigai_MeetAllCharacter(u8 taskId);
-static void DebugAction_Ikigai_OpenTimeMenu(u8 taskId);
-static void DebugAction_Ikigai_ShowCalendar(u8 taskId);
-static void DebugAction_Ikigai_CalendarWarp(u8 taskId);
-static void DebugAction_Ikigai_Season(u8 taskId);
-static void DebugAction_Ikigai_SeasonsSelect(u8 taskId);
-static void DebugAction_Ikigai_PokemonCries(u8 taskId);
 
 static void DebugAction_Util_Fly(u8 taskId);
 static void DebugAction_Util_Warp_Warp(u8 taskId);
@@ -538,25 +258,15 @@ static void DebugAction_Util_Warp_SelectMap(u8 taskId);
 static void DebugAction_Util_Warp_SelectWarp(u8 taskId);
 static void DebugAction_Util_Weather(u8 taskId);
 static void DebugAction_Util_Weather_SelectId(u8 taskId);
-static void DebugAction_Util_FontTest(u8 taskId);
-static void DebugAction_TimeMenu_CheckWallClock(u8 taskId);
-static void DebugAction_TimeMenu_SetWallClock(u8 taskId);
 static void DebugAction_Util_WatchCredits(u8 taskId);
 static void DebugAction_Util_CheatStart(u8 taskId);
-static void DebugAction_Util_BerryFunctions(u8 taskId);
-static void DebugAction_Util_CheckEWRAMCounters(u8 taskId);
-static void DebugAction_Util_Steven_Multi(u8 taskId);
-static void DebugAction_Util_OpenTimeMenu(u8 taskId);
-
-static void DebugAction_TimeMenu_PrintTime(u8 taskId);
-static void DebugAction_TimeMenu_PrintTimeOfDay(u8 taskId);
-static void DebugAction_TimeMenu_TimesOfDay(u8 taskId);
-static void DebugAction_TimeMenu_Weekdays(u8 taskId);
 
 static void DebugAction_TimeMenu_ChangeTimeOfDay(u8 taskId);
 static void DebugAction_TimeMenu_ChangeWeekdays(u8 taskId);
 
-static void DebugAction_OpenPCBagFillMenu(u8 taskId);
+static void DebugAction_CreateFollowerNPC(u8 taskId);
+static void DebugAction_DestroyFollowerNPC(u8 taskId);
+
 static void DebugAction_PCBag_Fill_PCBoxes_Fast(u8 taskId);
 static void DebugAction_PCBag_Fill_PCBoxes_Slow(u8 taskId);
 static void DebugAction_PCBag_Fill_PCItemStorage(u8 taskId);
@@ -565,16 +275,10 @@ static void DebugAction_PCBag_Fill_PocketPokeBalls(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketBerries(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketKeyItems(u8 taskId);
-static void DebugAction_PCBag_AccessPC(u8 taskId);
 static void DebugAction_PCBag_ClearBag(u8 taskId);
 static void DebugAction_PCBag_ClearBoxes(u8 taskId);
 
-static void DebugAction_Party_MoveReminder(u8 taskId);
-static void DebugAction_Party_HatchAnEgg(u8 taskId);
 static void DebugAction_Party_HealParty(u8 taskId);
-static void DebugAction_Party_InflictStatus1(u8 taskId);
-static void DebugAction_Party_CheckEVs(u8 taskId);
-static void DebugAction_Party_CheckIVs(u8 taskId);
 static void DebugAction_Party_ClearParty(u8 taskId);
 static void DebugAction_Party_SetParty(u8 taskId);
 static void DebugAction_Party_BattleSingle(u8 taskId);
@@ -601,8 +305,6 @@ static void DebugAction_FlagsVars_BagUseOnOff(u8 taskId);
 static void DebugAction_FlagsVars_CatchingOnOff(u8 taskId);
 static void DebugAction_FlagsVars_RunningShoes(u8 taskId);
 static void DebugAction_FlagsVars_Bicycle(u8 taskId);
-
-static void Debug_InitializeBattle(u8 taskId);
 
 static void DebugAction_Give_Item(u8 taskId);
 static void DebugAction_Give_Item_SelectId(u8 taskId);
@@ -653,10 +355,6 @@ static void DebugAction_Player_Nickname(u8 taskId);
 static void DebugAction_Player_Gender(u8 taskId);
 static void DebugAction_Player_Id(u8 taskId);
 
-static void DebugAction_ROMInfo_CheckSaveBlock(u8 taskId);
-static void DebugAction_ROMInfo_CheckROMSpace(u8 taskId);
-static void DebugAction_ROMInfo_ExpansionVersion(u8 taskId);
-
 extern const u8 Debug_FlagsNotSetOverworldConfigMessage[];
 extern const u8 Debug_FlagsNotSetBattleConfigMessage[];
 extern const u8 Debug_FlagsAndVarNotSetBattleConfigMessage[];
@@ -688,6 +386,8 @@ extern const u8 Debug_CheckROMSpace[];
 extern const u8 Debug_BoxFilledMessage[];
 extern const u8 Debug_ShowExpansionVersion[];
 extern const u8 Debug_EventScript_EWRAMCounters[];
+extern const u8 Debug_Follower_NPC_Event_Script[];
+extern const u8 Debug_Follower_NPC_Not_Enabled[];
 extern const u8 Debug_EventScript_Steven_Multi[];
 extern const u8 Debug_EventScript_PrintTimeOfDay[];
 extern const u8 Debug_EventScript_TellTheTime[];
@@ -702,17 +402,14 @@ extern const u8 FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon[];
 
 // Text
 // General
+static const u8 sDebugText_Arrow[] =          _("{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_True[] =          _("TRUE");
 static const u8 sDebugText_False[] =         _("FALSE");
 static const u8 sDebugText_Colored_True[] =  _("{COLOR GREEN}TRUE");
 static const u8 sDebugText_Colored_False[] = _("{COLOR RED}FALSE");
 static const u8 sDebugText_Dashes[] =        _("---");
 static const u8 sDebugText_Empty[] =         _("");
-static const u8 sDebugText_Continue[] =      _("Continue…{CLEAR_TO 110}{RIGHT_ARROW}");
-// Ikigai Menu
-static const u8 sDebugText_Ikigai_Gym_Type[] =               _("Gym Type: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 110}\n\n{STR_VAR_2}{CLEAR_TO 110}");
-static const u8 sDebugText_Ikigai_Gym_PokemonLevel[] =       _("Level:{CLEAR_TO 110}\n{STR_VAR_1}{CLEAR_TO 110}\n{CLEAR_TO 110}\n{STR_VAR_2}{CLEAR_TO 110}");
-static const u8 sDebugText_Ikigai_Season_ID[] =              _("Season ID: {STR_VAR_3}\n{STR_VAR_1}\n{STR_VAR_2}");
+static const u8 sDebugText_Continue[] =      _("Continue…");
 // Util Menu
 static const u8 sDebugText_Util_WarpToMap_SelectMapGroup[] = _("Group: {STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n\n{STR_VAR_3}{CLEAR_TO 90}");
 static const u8 sDebugText_Util_WarpToMap_SelectMap[] =      _("Map: {STR_VAR_1}{CLEAR_TO 90}\nMapSec:{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}\n{STR_VAR_3}{CLEAR_TO 90}");
@@ -739,21 +436,23 @@ static const u8 *const gTimeOfDayStringsTable[TIMES_OF_DAY_COUNT] = {
     COMPOUND_STRING("Night"),
 };
 
+// Follower NPC
+
+static const u8 *const gFollowerNPCStringsTable[DEBUG_FNPC_COUNT] = {
+    COMPOUND_STRING("Brendan"),
+    COMPOUND_STRING("May"),
+    COMPOUND_STRING("Steven"),
+    COMPOUND_STRING("Wally"),
+    COMPOUND_STRING("Red"),
+    COMPOUND_STRING("Leaf"),
+};
+
 // Flags/Vars Menu
-static const u8 sDebugText_FlagsVars_Flag[] =                _("Flag: {STR_VAR_1}{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}\n{STR_VAR_3}");
 static const u8 sDebugText_FlagsVars_VariableHex[] =         _("{STR_VAR_1}{CLEAR_TO 90}\n0x{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_FlagsVars_Variable[] =            _("Var: {STR_VAR_1}{CLEAR_TO 90}\nVal: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_2}");
 static const u8 sDebugText_FlagsVars_VariableValueSet[] =    _("Var: {STR_VAR_1}{CLEAR_TO 90}\nVal: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_2}");
 // Give Menu
-static const u8 sDebugText_ItemQuantity[] =             _("Quantity:{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n\n{STR_VAR_2}");
-static const u8 sDebugText_ItemID[] =                   _("Item ID: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 90}\n\n{STR_VAR_2}");
-static const u8 sDebugText_PokemonID[] =                _("Species: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 90}\n\n{STR_VAR_2}{CLEAR_TO 90}");
-static const u8 sDebugText_PokemonLevel[] =             _("Level:{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_PokemonShiny[] =             _("Shiny:{CLEAR_TO 90}\n   {STR_VAR_2}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{CLEAR_TO 90}");
-static const u8 sDebugText_PokemonAbility[] =           _("Ability Num: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
-static const u8 sDebugText_PokemonTeraType[] =          _("Tera Type: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
-static const u8 sDebugText_PokemonDynamaxLevel[] =      _("Dmax Lvl:{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
-static const u8 sDebugText_PokemonGmaxFactor[] =        _("Gmax Factor:{CLEAR_TO 90}\n   {STR_VAR_2}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{CLEAR_TO 90}");
 static const u8 sDebugText_IVs[] =                      _("IV {STR_VAR_1}:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_EVs[] =                      _("EV {STR_VAR_1}:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 // Sound Menu
@@ -787,561 +486,203 @@ static const s32 sPowersOfTen[] =
 };
 
 // *******************************
-// List Menu Items
-static const struct ListMenuItem sDebugMenu_Items_Main[] =
+// Menu Actions. Make sure that submenus are defined before the menus that call them.
+static const struct DebugMenuOption sDebugMenu_Actions_TimeMenu_TimesOfDay[] =
 {
-    [DEBUG_MENU_ITEM_IKIGAI]        = {COMPOUND_STRING("Ikigai Debug…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_MENU_ITEM_IKIGAI},
-    [DEBUG_MENU_ITEM_UTILITIES]     = {COMPOUND_STRING("Utilities…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_MENU_ITEM_UTILITIES},
-    [DEBUG_MENU_ITEM_PCBAG]         = {COMPOUND_STRING("PC/Bag…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_MENU_ITEM_PCBAG},
-    [DEBUG_MENU_ITEM_PARTY]         = {COMPOUND_STRING("Party…{CLEAR_TO 110}{RIGHT_ARROW}"),        DEBUG_MENU_ITEM_PARTY},
-    [DEBUG_MENU_ITEM_GIVE]          = {COMPOUND_STRING("Give X…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_MENU_ITEM_GIVE},
-    [DEBUG_MENU_ITEM_PLAYER]        = {COMPOUND_STRING("Player…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_MENU_ITEM_PLAYER},
-    [DEBUG_MENU_ITEM_SCRIPTS]       = {COMPOUND_STRING("Scripts…{CLEAR_TO 110}{RIGHT_ARROW}"),      DEBUG_MENU_ITEM_SCRIPTS},
-    [DEBUG_MENU_ITEM_FLAGVAR]       = {COMPOUND_STRING("Flags & Vars…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_MENU_ITEM_FLAGVAR},
-    //[DEBUG_MENU_ITEM_BATTLE]        = {COMPOUND_STRING("Battle Test{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_MENU_ITEM_BATTLE},
-    [DEBUG_MENU_ITEM_SOUND]         = {COMPOUND_STRING("Sound…{CLEAR_TO 110}{RIGHT_ARROW}"),        DEBUG_MENU_ITEM_SOUND},
-    [DEBUG_MENU_ITEM_ROMINFO]       = {COMPOUND_STRING("ROM Info…{CLEAR_TO 110}{RIGHT_ARROW}"),     DEBUG_MENU_ITEM_ROMINFO},
-    [DEBUG_MENU_ITEM_CANCEL]        = {COMPOUND_STRING("Cancel"),                                   DEBUG_MENU_ITEM_CANCEL},
+    [TIME_MORNING] = { gTimeOfDayStringsTable[TIME_MORNING], DebugAction_TimeMenu_ChangeTimeOfDay },
+    [TIME_DAY]     = { gTimeOfDayStringsTable[TIME_DAY],     DebugAction_TimeMenu_ChangeTimeOfDay },
+    [TIME_EVENING] = { gTimeOfDayStringsTable[TIME_EVENING], DebugAction_TimeMenu_ChangeTimeOfDay },
+    [TIME_NIGHT]   = { gTimeOfDayStringsTable[TIME_NIGHT],   DebugAction_TimeMenu_ChangeTimeOfDay },
+    { NULL }
 };
 
-static const struct ListMenuItem sDebugMenu_Items_Ikigai[] =
+static const struct DebugMenuOption sDebugMenu_Actions_TimeMenu_Weekdays[] =
 {
-    [DEBUG_IKIGAI_PLAYER]                  = {COMPOUND_STRING("Player Menu…{CLEAR_TO 110}{RIGHT_ARROW}"),      DEBUG_IKIGAI_PLAYER},
-    [DEBUG_IKIGAI_CHARACTER]               = {COMPOUND_STRING("Character Menu…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_IKIGAI_CHARACTER},
-    [DEBUG_IKIGAI_TEMPORAL]                = {COMPOUND_STRING("Temporal Menu…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_IKIGAI_TEMPORAL},
-    [DEBUG_IKIGAI_SOUND]                   = {COMPOUND_STRING("Sound Menu…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_IKIGAI_SOUND},
+    [WEEKDAY_SUN] = { gDayNameStringsTable[WEEKDAY_SUN], DebugAction_TimeMenu_ChangeWeekdays },
+    [WEEKDAY_MON] = { gDayNameStringsTable[WEEKDAY_MON], DebugAction_TimeMenu_ChangeWeekdays },
+    [WEEKDAY_TUE] = { gDayNameStringsTable[WEEKDAY_TUE], DebugAction_TimeMenu_ChangeWeekdays },
+    [WEEKDAY_WED] = { gDayNameStringsTable[WEEKDAY_WED], DebugAction_TimeMenu_ChangeWeekdays },
+    [WEEKDAY_THU] = { gDayNameStringsTable[WEEKDAY_THU], DebugAction_TimeMenu_ChangeWeekdays },
+    [WEEKDAY_FRI] = { gDayNameStringsTable[WEEKDAY_FRI], DebugAction_TimeMenu_ChangeWeekdays },
+    [WEEKDAY_SAT] = { gDayNameStringsTable[WEEKDAY_SAT], DebugAction_TimeMenu_ChangeWeekdays },
+    { NULL }
 };
 
-static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Player[] =
+static const struct DebugMenuOption sDebugMenu_Actions_FollowerNPCMenu_Create[] =
 {
-    [DEBUG_IKIGAI_PLAYER_GYM_TYPE]         = {COMPOUND_STRING("Gym Type…{CLEAR_TO 110}{RIGHT_ARROW}"),              DEBUG_IKIGAI_PLAYER_GYM_TYPE},
-    [DEBUG_IKIGAI_PLAYER_BODY]             = {COMPOUND_STRING("Toggle Player Body"),                                DEBUG_IKIGAI_PLAYER_BODY},
-    [DEBUG_IKIGAI_PLAYER_NAME]             = {COMPOUND_STRING("Player Name…{CLEAR_TO 110}{RIGHT_ARROW}"),           DEBUG_IKIGAI_PLAYER_NAME},
-    [DEBUG_IKIGAI_PLAYER_NICKNAME]         = {COMPOUND_STRING("Player Nickname…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_IKIGAI_PLAYER_NICKNAME},
-    [DEBUG_IKIGAI_PLAYER_DYNPALS]          = {COMPOUND_STRING("Player DynPal Menu…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_IKIGAI_PLAYER_DYNPALS},
+    [DEBUG_FNPC_BRENDAN] = { gFollowerNPCStringsTable[DEBUG_FNPC_BRENDAN], DebugAction_CreateFollowerNPC },
+    [DEBUG_FNPC_MAY] =     { gFollowerNPCStringsTable[DEBUG_FNPC_MAY],     DebugAction_CreateFollowerNPC },
+    [DEBUG_FNPC_STEVEN] =  { gFollowerNPCStringsTable[DEBUG_FNPC_STEVEN],  DebugAction_CreateFollowerNPC },
+    [DEBUG_FNPC_WALLY] =   { gFollowerNPCStringsTable[DEBUG_FNPC_WALLY],   DebugAction_CreateFollowerNPC },
+    [DEBUG_FNPC_RED] =     { gFollowerNPCStringsTable[DEBUG_FNPC_RED],     DebugAction_CreateFollowerNPC },
+    [DEBUG_FNPC_LEAF] =    { gFollowerNPCStringsTable[DEBUG_FNPC_LEAF],    DebugAction_CreateFollowerNPC },
+    { NULL }
 };
 
-static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Character[] =
+static const struct DebugMenuOption sDebugMenu_Actions_TimeMenu[] =
 {
-    [DEBUG_IKIGAI_CHARACTER_POKESPHERE]    = {COMPOUND_STRING("Open PokéSphere"),                              DEBUG_IKIGAI_CHARACTER_POKESPHERE},
-    [DEBUG_IKIGAI_CHARACTER_MET]           = {COMPOUND_STRING("Meet All Characters"),                          DEBUG_IKIGAI_CHARACTER_MET},
+    { COMPOUND_STRING("Get time…"),         DebugAction_ExecuteScript, Debug_EventScript_TellTheTime },
+    { COMPOUND_STRING("Get time of day…"),  DebugAction_ExecuteScript, Debug_EventScript_PrintTimeOfDay },
+    { COMPOUND_STRING("Set time of day…"),  DebugAction_OpenSubMenuFakeRTC, sDebugMenu_Actions_TimeMenu_TimesOfDay },
+    { COMPOUND_STRING("Set weekday…"),      DebugAction_OpenSubMenuFakeRTC, sDebugMenu_Actions_TimeMenu_Weekdays },
+    { COMPOUND_STRING("Check wall clock…"), DebugAction_ExecuteScript, PlayersHouse_2F_EventScript_CheckWallClock },
+    { COMPOUND_STRING("Set wall clock…"),   DebugAction_ExecuteScript, PlayersHouse_2F_EventScript_SetWallClock },
+    { NULL }
 };
 
-static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Temporal[] =
+static const struct DebugMenuOption sDebugMenu_Actions_BerryFunctions[] =
 {
-    [DEBUG_IKIGAI_TEMPORAL_CALENDAR_SHOW]   = {COMPOUND_STRING("Show Calendar"),                                DEBUG_IKIGAI_TEMPORAL_CALENDAR_SHOW},
-    [DEBUG_IKIGAI_TEMPORAL_CALENDAR_WARP]   = {COMPOUND_STRING("Calendar Warp"),                                DEBUG_IKIGAI_TEMPORAL_CALENDAR_WARP},
-    [DEBUG_IKIGAI_TEMPORAL_WEATHER]         = {COMPOUND_STRING("Set Weather…{CLEAR_TO 110}{RIGHT_ARROW}"),      DEBUG_IKIGAI_TEMPORAL_WEATHER},
-    [DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK]     = {COMPOUND_STRING("Check Wall Clock…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK},
-    [DEBUG_IKIGAI_TEMPORAL_SET_CLOCK]       = {COMPOUND_STRING("Set Wall Clock…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_IKIGAI_TEMPORAL_SET_CLOCK},
-    [DEBUG_IKIGAI_TEMPORAL_SET_SEASON]      = {COMPOUND_STRING("Set Season…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_IKIGAI_TEMPORAL_SET_SEASON},
-    [DEBUG_IKIGAI_TEMPORAL_BASE_TIME_MENU]  = {COMPOUND_STRING("{FONT_GET_NARROW}Expansion Time Menu{RESET_FONT}…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_IKIGAI_TEMPORAL_BASE_TIME_MENU},
+    { COMPOUND_STRING("Clear map trees"),      DebugAction_BerryFunctions_ClearAll },
+    { COMPOUND_STRING("Ready map trees"),      DebugAction_BerryFunctions_Ready },
+    { COMPOUND_STRING("Grow map trees"),       DebugAction_BerryFunctions_NextStage },
+    { COMPOUND_STRING("Give map trees pests"), DebugAction_BerryFunctions_Pests },
+    { COMPOUND_STRING("Give map trees weeds"), DebugAction_BerryFunctions_Weeds },
+    { NULL }
 };
 
-static const struct ListMenuItem sDebugMenu_Items_SubmenuIkigai_Sound[] =
+static const struct DebugMenuOption sDebugMenu_Actions_FollowerNPCMenu[] =
 {
-    [DEBUG_IKIGAI_SOUND_MUSIC_EXPANSION]    = {COMPOUND_STRING("Music Expansion…{CLEAR_TO 110}{RIGHT_ARROW}"),  DEBUG_IKIGAI_SOUND_MUSIC_EXPANSION},
-    [DEBUG_IKIGAI_SOUND_DYNAMIC_MUSIC]      = {COMPOUND_STRING("Dynamic Music…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_IKIGAI_SOUND_DYNAMIC_MUSIC},
-    [DEBUG_IKIGAI_SOUND_CRIES]              = {COMPOUND_STRING("Pokémon Cries…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_IKIGAI_SOUND_CRIES},
+    { COMPOUND_STRING("Create Follower"),  DebugAction_OpenSubMenuCreateFollowerNPC, sDebugMenu_Actions_FollowerNPCMenu_Create },
+    { COMPOUND_STRING("Destroy Follower"), DebugAction_DestroyFollowerNPC },
+    { NULL }
 };
 
-static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
+static const struct DebugMenuOption sDebugMenu_Actions_Utilities[] =
 {
-    [DEBUG_UTIL_MENU_ITEM_FLY]             = {COMPOUND_STRING("Fly to map…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_UTIL_MENU_ITEM_FLY},
-    [DEBUG_UTIL_MENU_ITEM_WARP]            = {COMPOUND_STRING("Warp to map warp…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_UTIL_MENU_ITEM_WARP},
-    [DEBUG_UTIL_MENU_ITEM_WEATHER]         = {COMPOUND_STRING("Set weather…{CLEAR_TO 110}{RIGHT_ARROW}"),      DEBUG_UTIL_MENU_ITEM_WEATHER},
-    [DEBUG_UTIL_MENU_ITEM_FONT_TEST]       = {COMPOUND_STRING("Font Test…{CLEAR_TO 110}{RIGHT_ARROW}"),        DEBUG_UTIL_MENU_ITEM_FONT_TEST},
-    [DEBUG_UTIL_MENU_ITEM_TIME_MENU]       = {COMPOUND_STRING("Time Functions…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_UTIL_MENU_ITEM_TIME_MENU},
-    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]    = {COMPOUND_STRING("Watch credits…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_UTIL_MENU_ITEM_WATCHCREDITS},
-    [DEBUG_UTIL_MENU_ITEM_CHEAT]           = {COMPOUND_STRING("Cheat start"),                                  DEBUG_UTIL_MENU_ITEM_CHEAT},
-    [DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS] = {COMPOUND_STRING("Berry Functions…{CLEAR_TO 110}{RIGHT_ARROW}"),  DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS},
-    [DEBUG_UTIL_MENU_ITEM_EWRAM_COUNTERS]  = {COMPOUND_STRING("EWRAM Counters…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_UTIL_MENU_ITEM_EWRAM_COUNTERS},
-    [DEBUG_UTIL_MENU_ITEM_STEVEN_MULTI]    = {COMPOUND_STRING("Steven Multi"),                                 DEBUG_UTIL_MENU_ITEM_STEVEN_MULTI},
+    { COMPOUND_STRING("Fly to map…"),       DebugAction_Util_Fly },
+    { COMPOUND_STRING("Warp to map warp…"), DebugAction_Util_Warp_Warp },
+    { COMPOUND_STRING("Set weather…"),      DebugAction_Util_Weather },
+    { COMPOUND_STRING("Font Test…"),        DebugAction_ExecuteScript, Debug_EventScript_FontTest },
+    { COMPOUND_STRING("Time Functions…"),   DebugAction_OpenSubMenu, sDebugMenu_Actions_TimeMenu, },
+    { COMPOUND_STRING("Watch credits…"),    DebugAction_Util_WatchCredits },
+    { COMPOUND_STRING("Cheat start"),       DebugAction_Util_CheatStart },
+    { COMPOUND_STRING("Berry Functions…"),  DebugAction_OpenSubMenu, sDebugMenu_Actions_BerryFunctions },
+    { COMPOUND_STRING("EWRAM Counters…"),   DebugAction_ExecuteScript, Debug_EventScript_EWRAMCounters },
+    { COMPOUND_STRING("Follower NPC…"),     DebugAction_OpenSubMenu, sDebugMenu_Actions_FollowerNPCMenu },
+    { COMPOUND_STRING("Steven Multi"),      DebugAction_ExecuteScript, Debug_EventScript_Steven_Multi },
+    { NULL }
 };
 
-static const struct ListMenuItem sDebugMenu_Items_TimeMenu[] =
+static const struct DebugMenuOption sDebugMenu_Actions_PCBag_Fill[] =
 {
-    [DEBUG_TIME_MENU_ITEM_PRINTTIME]      = {COMPOUND_STRING("Print current time…"),                      DEBUG_TIME_MENU_ITEM_PRINTTIME},
-    [DEBUG_TIME_MENU_ITEM_PRINTTIMEOFDAY] = {COMPOUND_STRING("{FONT_GET_NARROW}Print current time of day…"),  DEBUG_TIME_MENU_ITEM_PRINTTIMEOFDAY},
-    [DEBUG_TIME_MENU_ITEM_TIMESOFDAY]     = {COMPOUND_STRING("{FONT_GET_NARROW}Change current time of day…"), DEBUG_TIME_MENU_ITEM_TIMESOFDAY},
-    [DEBUG_TIME_MENU_ITEM_WEEKDAYS]       = {COMPOUND_STRING("Change current weekday…"),                  DEBUG_TIME_MENU_ITEM_WEEKDAYS},
-    [DEBUG_TIME_MENU_ITEM_CHECKWALLCLOCK] = {COMPOUND_STRING("Check wall clock…"),                        DEBUG_TIME_MENU_ITEM_CHECKWALLCLOCK},
-    [DEBUG_TIME_MENU_ITEM_SETWALLCLOCK]   = {COMPOUND_STRING("Set wall clock…"),                          DEBUG_TIME_MENU_ITEM_SETWALLCLOCK},
+    { COMPOUND_STRING("Fill PC Boxes Fast"),        DebugAction_PCBag_Fill_PCBoxes_Fast },
+    { COMPOUND_STRING("Fill PC Boxes Slow (LAG!)"), DebugAction_PCBag_Fill_PCBoxes_Slow },
+    { COMPOUND_STRING("Fill PC Items") ,            DebugAction_PCBag_Fill_PCItemStorage },
+    { COMPOUND_STRING("Fill Pocket Items"),         DebugAction_PCBag_Fill_PocketItems },
+    { COMPOUND_STRING("Fill Pocket Poké Balls"),    DebugAction_PCBag_Fill_PocketPokeBalls },
+    { COMPOUND_STRING("Fill Pocket TMHM"),          DebugAction_PCBag_Fill_PocketTMHM },
+    { COMPOUND_STRING("Fill Pocket Berries"),       DebugAction_PCBag_Fill_PocketBerries },
+    { COMPOUND_STRING("Fill Pocket Key Items"),     DebugAction_PCBag_Fill_PocketKeyItems },
+    { NULL }
 };
 
-static const struct ListMenuItem sDebugMenu_Items_TimeMenu_TimesOfDay[] =
+static const struct DebugMenuOption sDebugMenu_Actions_PCBag[] =
 {
-    [DEBUG_TIME_MENU_ITEM_MORNING] = {gTimeOfDayStringsTable[TIME_MORNING], DEBUG_TIME_MENU_ITEM_MORNING},
-    [DEBUG_TIME_MENU_ITEM_DAY] = {gTimeOfDayStringsTable[TIME_DAY],         DEBUG_TIME_MENU_ITEM_DAY},
-    [DEBUG_TIME_MENU_ITEM_EVENING] = {gTimeOfDayStringsTable[TIME_EVENING], DEBUG_TIME_MENU_ITEM_EVENING},
-    [DEBUG_TIME_MENU_ITEM_NIGHT] = {gTimeOfDayStringsTable[TIME_NIGHT],     DEBUG_TIME_MENU_ITEM_NIGHT},
+    { COMPOUND_STRING("Access PC"),           DebugAction_ExecuteScript, EventScript_PC },
+    { COMPOUND_STRING("Fill…"),               DebugAction_OpenSubMenu, sDebugMenu_Actions_PCBag_Fill },
+    { COMPOUND_STRING("Clear Bag"),           DebugAction_PCBag_ClearBag },
+    { COMPOUND_STRING("Clear Storage Boxes"), DebugAction_PCBag_ClearBoxes },
+    { NULL }
 };
 
-static const struct ListMenuItem sDebugMenu_Items_TimeMenu_Weekdays[] =
+static const struct DebugMenuOption sDebugMenu_Actions_Party[] =
 {
-    [DEBUG_TIME_MENU_ITEM_SUNDAY] = {gDayNameStringsTable[WEEKDAY_SUN],    DEBUG_TIME_MENU_ITEM_SUNDAY},
-    [DEBUG_TIME_MENU_ITEM_MONDAY] = {gDayNameStringsTable[WEEKDAY_MON],    DEBUG_TIME_MENU_ITEM_MONDAY},
-    [DEBUG_TIME_MENU_ITEM_TUESDAY] = {gDayNameStringsTable[WEEKDAY_TUE],   DEBUG_TIME_MENU_ITEM_TUESDAY},
-    [DEBUG_TIME_MENU_ITEM_WEDNESDAY] = {gDayNameStringsTable[WEEKDAY_WED], DEBUG_TIME_MENU_ITEM_WEDNESDAY},
-    [DEBUG_TIME_MENU_ITEM_THURSDAY] = {gDayNameStringsTable[WEEKDAY_THU],  DEBUG_TIME_MENU_ITEM_THURSDAY},
-    [DEBUG_TIME_MENU_ITEM_FRIDAY] = {gDayNameStringsTable[WEEKDAY_FRI],    DEBUG_TIME_MENU_ITEM_FRIDAY},
-    [DEBUG_TIME_MENU_ITEM_SATURDAY] = {gDayNameStringsTable[WEEKDAY_SAT],  DEBUG_TIME_MENU_ITEM_SATURDAY},
+    { COMPOUND_STRING("Move Reminder"),      DebugAction_ExecuteScript, FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon },
+    { COMPOUND_STRING("Hatch an Egg"),       DebugAction_ExecuteScript, Debug_HatchAnEgg },
+    { COMPOUND_STRING("Heal party"),         DebugAction_Party_HealParty },
+    { COMPOUND_STRING("Inflict Status1"),    DebugAction_ExecuteScript, Debug_EventScript_InflictStatus1 },
+    { COMPOUND_STRING("Check EVs"),          DebugAction_ExecuteScript, Debug_EventScript_CheckEVs },
+    { COMPOUND_STRING("Check IVs"),          DebugAction_ExecuteScript, Debug_EventScript_CheckIVs },
+    { COMPOUND_STRING("Clear Party"),        DebugAction_Party_ClearParty },
+    { COMPOUND_STRING("Set Party"),          DebugAction_Party_SetParty },
+    { COMPOUND_STRING("Start Debug Battle"), DebugAction_Party_BattleSingle },
+    { NULL }
 };
 
-static const struct ListMenuItem sDebugMenu_Items_PCBag[] =
+static const struct DebugMenuOption sDebugMenu_Actions_Give[] =
 {
-    [DEBUG_PCBAG_MENU_ITEM_ACCESS_PC]   = {COMPOUND_STRING("Access PC"),                        DEBUG_PCBAG_MENU_ITEM_ACCESS_PC},
-    [DEBUG_PCBAG_MENU_ITEM_FILL]        = {COMPOUND_STRING("Fill…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_PCBAG_MENU_ITEM_FILL},
-    [DEBUG_PCBAG_MENU_ITEM_CLEAR_BAG]   = {COMPOUND_STRING("Clear Bag"),                        DEBUG_PCBAG_MENU_ITEM_CLEAR_BAG},
-    [DEBUG_PCBAG_MENU_ITEM_CLEAR_BOXES] = {COMPOUND_STRING("Clear Storage Boxes"),              DEBUG_PCBAG_MENU_ITEM_CLEAR_BOXES},
+    { COMPOUND_STRING("Give item XYZ…"),    DebugAction_Give_Item },
+    { COMPOUND_STRING("Pokémon (Basic)"),   DebugAction_Give_PokemonSimple },
+    { COMPOUND_STRING("Pokémon (Complex)"), DebugAction_Give_PokemonComplex },
+    { COMPOUND_STRING("Max Money"),         DebugAction_Give_MaxMoney },
+    { COMPOUND_STRING("Max Coins"),         DebugAction_Give_MaxCoins },
+    { COMPOUND_STRING("Max Battle Points"), DebugAction_Give_MaxBattlePoints },
+    { COMPOUND_STRING("Daycare Egg"),       DebugAction_Give_DayCareEgg },
+    { NULL }
 };
 
-static const struct ListMenuItem sDebugMenu_Items_PCBag_Fill[] =
+static const struct DebugMenuOption sDebugMenu_Actions_Player[] =
 {
-    [DEBUG_PCBAG_MENU_ITEM_FILL_PC_BOXES_FAST]    = {COMPOUND_STRING("Fill PC Boxes Fast"),        DEBUG_PCBAG_MENU_ITEM_FILL_PC_BOXES_FAST},
-    [DEBUG_PCBAG_MENU_ITEM_FILL_PC_BOXES_SLOW]    = {COMPOUND_STRING("Fill PC Boxes Slow (LAG!)"), DEBUG_PCBAG_MENU_ITEM_FILL_PC_BOXES_SLOW},
-    [DEBUG_PCBAG_MENU_ITEM_FILL_PC_ITEMS]         = {COMPOUND_STRING("Fill PC Items") ,            DEBUG_PCBAG_MENU_ITEM_FILL_PC_ITEMS},
-    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_ITEMS]     = {COMPOUND_STRING("Fill Pocket Items"),         DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_ITEMS},
-    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_BALLS]     = {COMPOUND_STRING("Fill Pocket Poké Balls"),    DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_BALLS},
-    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_TMHM]      = {COMPOUND_STRING("Fill Pocket TMHM"),          DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_TMHM},
-    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_BERRIES]   = {COMPOUND_STRING("Fill Pocket Berries"),       DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_BERRIES},
-    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_KEY_ITEMS] = {COMPOUND_STRING("Fill Pocket Key Items"),     DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_KEY_ITEMS},
+    { COMPOUND_STRING("Player name"),    DebugAction_Player_Name },
+    { COMPOUND_STRING("Toggle gender"),  DebugAction_Player_Gender },
+    { COMPOUND_STRING("New Trainer ID"), DebugAction_Player_Id },
+    { NULL }
 };
 
-static const struct ListMenuItem sDebugMenu_Items_Party[] =
+static const struct DebugMenuOption sDebugMenu_Actions_Scripts[] =
 {
-    [DEBUG_PARTY_MENU_ITEM_MOVE_REMINDER]   = {COMPOUND_STRING("Move Reminder"),       DEBUG_PARTY_MENU_ITEM_MOVE_REMINDER},
-    [DEBUG_PARTY_MENU_ITEM_HATCH_AN_EGG]    = {COMPOUND_STRING("Hatch an Egg"),        DEBUG_PARTY_MENU_ITEM_HATCH_AN_EGG},
-    [DEBUG_PARTY_MENU_ITEM_HEAL_PARTY]      = {COMPOUND_STRING("Heal party"),          DEBUG_PARTY_MENU_ITEM_HEAL_PARTY},
-    [DEBUG_PARTY_MENU_ITEM_INFLICT_STATUS1] = {COMPOUND_STRING("Inflict Status1"),     DEBUG_PARTY_MENU_ITEM_INFLICT_STATUS1},
-    [DEBUG_PARTY_MENU_ITEM_CHECK_EVS]       = {COMPOUND_STRING("Check EVs"),           DEBUG_PARTY_MENU_ITEM_CHECK_EVS},
-    [DEBUG_PARTY_MENU_ITEM_CHECK_IVS]       = {COMPOUND_STRING("Check IVs"),           DEBUG_PARTY_MENU_ITEM_CHECK_IVS},
-    [DEBUG_PARTY_MENU_ITEM_CLEAR_PARTY]     = {COMPOUND_STRING("Clear Party"),         DEBUG_PARTY_MENU_ITEM_CLEAR_PARTY},
-    [DEBUG_PARTY_MENU_ITEM_SET_PARTY]       = {COMPOUND_STRING("Set Party"),           DEBUG_PARTY_MENU_ITEM_SET_PARTY},
-    [DEBUG_PARTY_MENU_ITEM_BATTLE_SINGLE]   = {COMPOUND_STRING("Start Debug Battle"),  DEBUG_PARTY_MENU_ITEM_BATTLE_SINGLE},
+    { COMPOUND_STRING("Script 1"), DebugAction_ExecuteScript, Debug_EventScript_Script_1 },
+    { COMPOUND_STRING("Script 2"), DebugAction_ExecuteScript, Debug_EventScript_Script_2 },
+    { COMPOUND_STRING("Script 3"), DebugAction_ExecuteScript, Debug_EventScript_Script_3 },
+    { COMPOUND_STRING("Script 4"), DebugAction_ExecuteScript, Debug_EventScript_Script_4 },
+    { COMPOUND_STRING("Script 5"), DebugAction_ExecuteScript, Debug_EventScript_Script_5 },
+    { COMPOUND_STRING("Script 6"), DebugAction_ExecuteScript, Debug_EventScript_Script_6 },
+    { COMPOUND_STRING("Script 7"), DebugAction_ExecuteScript, Debug_EventScript_Script_7 },
+    { COMPOUND_STRING("Script 8"), DebugAction_ExecuteScript, Debug_EventScript_Script_8 },
+    { NULL }
 };
 
-static const struct ListMenuItem sDebugMenu_Items_Scripts[] =
+static const struct DebugMenuOption sDebugMenu_Actions_Sound[] =
 {
-    [DEBUG_UTIL_MENU_ITEM_SCRIPT_1] = {COMPOUND_STRING("Script 1"), DEBUG_UTIL_MENU_ITEM_SCRIPT_1},
-    [DEBUG_UTIL_MENU_ITEM_SCRIPT_2] = {COMPOUND_STRING("Script 2"), DEBUG_UTIL_MENU_ITEM_SCRIPT_2},
-    [DEBUG_UTIL_MENU_ITEM_SCRIPT_3] = {COMPOUND_STRING("Script 3"), DEBUG_UTIL_MENU_ITEM_SCRIPT_3},
-    [DEBUG_UTIL_MENU_ITEM_SCRIPT_4] = {COMPOUND_STRING("Script 4"), DEBUG_UTIL_MENU_ITEM_SCRIPT_4},
-    [DEBUG_UTIL_MENU_ITEM_SCRIPT_5] = {COMPOUND_STRING("Script 5"), DEBUG_UTIL_MENU_ITEM_SCRIPT_5},
-    [DEBUG_UTIL_MENU_ITEM_SCRIPT_6] = {COMPOUND_STRING("Script 6"), DEBUG_UTIL_MENU_ITEM_SCRIPT_6},
-    [DEBUG_UTIL_MENU_ITEM_SCRIPT_7] = {COMPOUND_STRING("Script 7"), DEBUG_UTIL_MENU_ITEM_SCRIPT_7},
-    [DEBUG_UTIL_MENU_ITEM_SCRIPT_8] = {COMPOUND_STRING("Script 8"), DEBUG_UTIL_MENU_ITEM_SCRIPT_8},
+    { COMPOUND_STRING("SFX…"),   DebugAction_Sound_SE },
+    { COMPOUND_STRING("Music…"), DebugAction_Sound_MUS },
+    { NULL }
 };
 
-static const struct ListMenuItem sDebugMenu_Items_FlagsVars[] =
+static const struct DebugMenuOption sDebugMenu_Actions_ROMInfo2[] =
 {
-    [DEBUG_FLAGVAR_MENU_ITEM_FLAGS]                = {COMPOUND_STRING("Set Flag XYZ…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_FLAGVAR_MENU_ITEM_FLAGS},
-    [DEBUG_FLAGVAR_MENU_ITEM_VARS]                 = {COMPOUND_STRING("Set Var XYZ…{CLEAR_TO 110}{RIGHT_ARROW}"),  DEBUG_FLAGVAR_MENU_ITEM_VARS},
-    [DEBUG_FLAGVAR_MENU_ITEM_DEXFLAGS_ALL]         = {COMPOUND_STRING("Pokédex Flags All"),                        DEBUG_FLAGVAR_MENU_ITEM_DEXFLAGS_ALL},
-    [DEBUG_FLAGVAR_MENU_ITEM_DEXFLAGS_RESET]       = {COMPOUND_STRING("Pokédex Flags Reset"),                      DEBUG_FLAGVAR_MENU_ITEM_DEXFLAGS_RESET},
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKEDEX]       = {COMPOUND_STRING("Toggle {STR_VAR_1}Pokédex"),                DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKEDEX},
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_NATDEX]        = {COMPOUND_STRING("Toggle {STR_VAR_1}National Dex"),           DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_NATDEX},
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKENAV]       = {COMPOUND_STRING("Toggle {STR_VAR_1}PokéNav"),                DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKENAV},
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_MATCH_CALL]    = {COMPOUND_STRING("Toggle {STR_VAR_1}Match Call"),             DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_MATCH_CALL},
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RUN_SHOES]     = {COMPOUND_STRING("Toggle {STR_VAR_1}Running Shoes"),          DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RUN_SHOES},
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BICYCLE]       = {COMPOUND_STRING("Toggle {STR_VAR_1}Bicycle"),                DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BICYCLE},
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_LOCATIONS]     = {COMPOUND_STRING("Toggle {STR_VAR_1}Fly Flags"),              DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_LOCATIONS},
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BADGES_ALL]    = {COMPOUND_STRING("Toggle {STR_VAR_1}All badges"),             DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BADGES_ALL},
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_GAME_CLEAR]    = {COMPOUND_STRING("Toggle {STR_VAR_1}Game clear"),             DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_GAME_CLEAR},
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_FRONTIER_PASS] = {COMPOUND_STRING("Toggle {STR_VAR_1}Frontier Pass"),          DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_FRONTIER_PASS},
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_COLLISION]     = {COMPOUND_STRING("Toggle {STR_VAR_1}Collision OFF"),          DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_COLLISION},
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_ENCOUNTER]     = {COMPOUND_STRING("Toggle {STR_VAR_1}Encounter OFF"),          DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_ENCOUNTER},
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_TRAINER_SEE]   = {COMPOUND_STRING("Toggle {STR_VAR_1}Trainer See OFF"),        DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_TRAINER_SEE},
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BAG_USE]       = {COMPOUND_STRING("Toggle {STR_VAR_1}Bag Use OFF"),            DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BAG_USE},
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_CATCHING]      = {COMPOUND_STRING("Toggle {STR_VAR_1}Catching OFF"),           DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_CATCHING},
+    { COMPOUND_STRING("Save Block space"),  DebugAction_ExecuteScript, Debug_CheckSaveBlock },
+    { COMPOUND_STRING("ROM space"),         DebugAction_ExecuteScript, Debug_CheckROMSpace },
+    { COMPOUND_STRING("Expansion Version"), DebugAction_ExecuteScript, Debug_ShowExpansionVersion },
+    { NULL }
 };
 
-static const struct ListMenuItem sDebugMenu_Items_Battle_0[] =
+static const struct DebugMenuOption sDebugMenu_Actions_Flags[] =
 {
-    [DEBUG_BATTLE_0_MENU_ITEM_WILD]        = {COMPOUND_STRING("Wild…{CLEAR_TO 110}{RIGHT_ARROW}"),        DEBUG_BATTLE_0_MENU_ITEM_WILD},
-    [DEBUG_BATTLE_0_MENU_ITEM_WILD_DOUBLE] = {COMPOUND_STRING("Wild Double…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_BATTLE_0_MENU_ITEM_WILD_DOUBLE},
-    [DEBUG_BATTLE_0_MENU_ITEM_SINGLE]      = {COMPOUND_STRING("Single…{CLEAR_TO 110}{RIGHT_ARROW}"),      DEBUG_BATTLE_0_MENU_ITEM_SINGLE},
-    [DEBUG_BATTLE_0_MENU_ITEM_DOUBLE]      = {COMPOUND_STRING("Double…{CLEAR_TO 110}{RIGHT_ARROW}"),      DEBUG_BATTLE_0_MENU_ITEM_DOUBLE},
-    [DEBUG_BATTLE_0_MENU_ITEM_MULTI]       = {COMPOUND_STRING("Multi…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_BATTLE_0_MENU_ITEM_MULTI},
+    [DEBUG_FLAGVAR_MENU_ITEM_FLAGS]                = { COMPOUND_STRING("Set Flag XYZ…"),                     DebugAction_FlagsVars_Flags },
+    [DEBUG_FLAGVAR_MENU_ITEM_VARS]                 = { COMPOUND_STRING("Set Var XYZ…"),                      DebugAction_FlagsVars_Vars },
+    [DEBUG_FLAGVAR_MENU_ITEM_DEXFLAGS_ALL]         = { COMPOUND_STRING("Pokédex Flags All"),                 DebugAction_FlagsVars_PokedexFlags_All },
+    [DEBUG_FLAGVAR_MENU_ITEM_DEXFLAGS_RESET]       = { COMPOUND_STRING("Pokédex Flags Reset"),               DebugAction_FlagsVars_PokedexFlags_Reset },
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKEDEX]       = { COMPOUND_STRING("Toggle {STR_VAR_1}Pokédex"),         DebugAction_FlagsVars_SwitchDex },
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_NATDEX]        = { COMPOUND_STRING("Toggle {STR_VAR_1}National Dex"),    DebugAction_FlagsVars_SwitchNatDex },
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKENAV]       = { COMPOUND_STRING("Toggle {STR_VAR_1}PokéNav"),         DebugAction_FlagsVars_SwitchPokeNav },
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_MATCH_CALL]    = { COMPOUND_STRING("Toggle {STR_VAR_1}Match Call"),      DebugAction_FlagsVars_SwitchMatchCall },
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RUN_SHOES]     = { COMPOUND_STRING("Toggle {STR_VAR_1}Running Shoes"),   DebugAction_FlagsVars_RunningShoes },
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_LOCATIONS]     = { COMPOUND_STRING("Toggle {STR_VAR_1}Fly Flags"),       DebugAction_FlagsVars_ToggleFlyFlags },
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BADGES_ALL]    = { COMPOUND_STRING("Toggle {STR_VAR_1}All badges"),      DebugAction_FlagsVars_ToggleBadgeFlags },
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_GAME_CLEAR]    = { COMPOUND_STRING("Toggle {STR_VAR_1}Game clear"),      DebugAction_FlagsVars_ToggleGameClear },
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_FRONTIER_PASS] = { COMPOUND_STRING("Toggle {STR_VAR_1}Frontier Pass"),   DebugAction_FlagsVars_ToggleFrontierPass },
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_COLLISION]     = { COMPOUND_STRING("Toggle {STR_VAR_1}Collision OFF"),   DebugAction_FlagsVars_CollisionOnOff },
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_ENCOUNTER]     = { COMPOUND_STRING("Toggle {STR_VAR_1}Encounter OFF"),   DebugAction_FlagsVars_EncounterOnOff },
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_TRAINER_SEE]   = { COMPOUND_STRING("Toggle {STR_VAR_1}Trainer See OFF"), DebugAction_FlagsVars_TrainerSeeOnOff },
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BAG_USE]       = { COMPOUND_STRING("Toggle {STR_VAR_1}Bag Use OFF"),     DebugAction_FlagsVars_BagUseOnOff },
+    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_CATCHING]      = { COMPOUND_STRING("Toggle {STR_VAR_1}Catching OFF"),    DebugAction_FlagsVars_CatchingOnOff },
+    { NULL }
 };
 
-static const struct ListMenuItem sDebugMenu_Items_Battle_1[] =
+static const struct DebugMenuOption sDebugMenu_Actions_Main[] =
 {
-    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_00] = {COMPOUND_STRING("{STR_VAR_1}Check bad move"),        DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_00},
-    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_01] = {COMPOUND_STRING("{STR_VAR_1}Try to faint"),          DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_01},
-    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_02] = {COMPOUND_STRING("{STR_VAR_1}Check viability"),       DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_02},
-    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_03] = {COMPOUND_STRING("{STR_VAR_1}Setup first turn"),      DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_03},
-    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_04] = {COMPOUND_STRING("{STR_VAR_1}Risky"),                 DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_04},
-    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_05] = {COMPOUND_STRING("{STR_VAR_1}Prefer strongest move"), DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_05},
-    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_06] = {COMPOUND_STRING("{STR_VAR_1}Prefer Baton Pass"),     DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_06},
-    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_07] = {COMPOUND_STRING("{STR_VAR_1}Double battle"),         DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_07},
-    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_08] = {COMPOUND_STRING("{STR_VAR_1}HP aware"),              DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_08},
-    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_09] = {COMPOUND_STRING("{STR_VAR_1}Negate Unaware"),        DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_09},
-    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_10] = {COMPOUND_STRING("{STR_VAR_1}Will suicide"),          DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_10},
-    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_11] = {COMPOUND_STRING("{STR_VAR_1}Help partner"),          DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_11},
-    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_12] = {COMPOUND_STRING("{STR_VAR_1}Prefer status moves"),   DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_12},
-    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_13] = {COMPOUND_STRING("{STR_VAR_1}Stall"),                 DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_13},
-    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_14] = {COMPOUND_STRING("{STR_VAR_1}Screener"),              DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_14},
-    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_15] = {COMPOUND_STRING("{STR_VAR_1}Smart switching"),       DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_15},
-    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_16] = {COMPOUND_STRING("{STR_VAR_1}Ace pokemon"),           DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_16},
-    [DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_17] = {COMPOUND_STRING("{STR_VAR_1}Omniscient"),            DEBUG_BATTLE_1_MENU_ITEM_AI_FLAG_17},
-    [DEBUG_BATTLE_1_MENU_ITEM_CONTINUE]   = {sDebugText_Continue,                                 DEBUG_BATTLE_1_MENU_ITEM_CONTINUE},
-};
-
-static const struct ListMenuItem sDebugMenu_Items_Battle_2[] =
-{
-    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_0] = {COMPOUND_STRING("Grass…{CLEAR_TO 110}{RIGHT_ARROW}"),      DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_0},
-    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_1] = {COMPOUND_STRING("Long grass…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_1},
-    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_2] = {COMPOUND_STRING("Sand…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_2},
-    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_3] = {COMPOUND_STRING("Underwater…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_3},
-    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_4] = {COMPOUND_STRING("Water…{CLEAR_TO 110}{RIGHT_ARROW}"),      DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_4},
-    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_5] = {COMPOUND_STRING("Pond…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_5},
-    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_6] = {COMPOUND_STRING("Mountain…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_6},
-    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_7] = {COMPOUND_STRING("Cave…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_7},
-    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_8] = {COMPOUND_STRING("Building…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_8},
-    [DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_9] = {COMPOUND_STRING("Plain…{CLEAR_TO 110}{RIGHT_ARROW}"),      DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_9},
-};
-
-static const struct ListMenuItem sDebugMenu_Items_Give[] =
-{
-    [DEBUG_GIVE_MENU_ITEM_ITEM_X]            = {COMPOUND_STRING("Give item XYZ…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_GIVE_MENU_ITEM_ITEM_X},
-    [DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE]    = {COMPOUND_STRING("Pokémon (Basic){CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE},
-    [DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX]   = {COMPOUND_STRING("Pokémon (Complex){CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX},
-    [DEBUG_GIVE_MENU_ITEM_MAX_MONEY]         = {COMPOUND_STRING("Max Money"),                                    DEBUG_GIVE_MENU_ITEM_MAX_MONEY},
-    [DEBUG_GIVE_MENU_ITEM_MAX_COINS]         = {COMPOUND_STRING("Max Coins"),                                    DEBUG_GIVE_MENU_ITEM_MAX_COINS},
-    [DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS] = {COMPOUND_STRING("Max Battle Points"),                            DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS},
-    [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]       = {COMPOUND_STRING("Daycare Egg"),                                  DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG},
-};
-
-static const struct ListMenuItem sDebugMenu_Items_Sound[] =
-{
-    [DEBUG_SOUND_MENU_ITEM_SE]  = {COMPOUND_STRING("SFX…{CLEAR_TO 110}{RIGHT_ARROW}"),                          DEBUG_SOUND_MENU_ITEM_SE},
-    [DEBUG_SOUND_MENU_ITEM_MUS] = {COMPOUND_STRING("Music…{CLEAR_TO 110}{RIGHT_ARROW}"),                        DEBUG_SOUND_MENU_ITEM_MUS},
-    [DEBUG_SOUND_MENU_ITEM_DYNAMIC_MUSIC] = {COMPOUND_STRING("Dynamic Music…{CLEAR_TO 110}{RIGHT_ARROW}"),      DEBUG_SOUND_MENU_ITEM_DYNAMIC_MUSIC},
-};
-
-static const struct ListMenuItem sDebugMenu_Items_BerryFunctions[] =
-{
-    [DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL]  = {COMPOUND_STRING("Clear map trees"),      DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL},
-    [DEBUG_BERRY_FUNCTIONS_MENU_READY]      = {COMPOUND_STRING("Ready map trees"),      DEBUG_BERRY_FUNCTIONS_MENU_READY},
-    [DEBUG_BERRY_FUNCTIONS_MENU_NEXT_STAGE] = {COMPOUND_STRING("Grow map trees"),       DEBUG_BERRY_FUNCTIONS_MENU_NEXT_STAGE},
-    [DEBUG_BERRY_FUNCTIONS_MENU_PESTS]      = {COMPOUND_STRING("Give map trees pests"), DEBUG_BERRY_FUNCTIONS_MENU_PESTS},
-    [DEBUG_BERRY_FUNCTIONS_MENU_WEEDS]      = {COMPOUND_STRING("Give map trees weeds"), DEBUG_BERRY_FUNCTIONS_MENU_WEEDS},
-};
-
-static const struct ListMenuItem sDebugMenu_Items_DynamicMusic[] =
-{
-    [DEBUG_DYNAMIC_MUSIC_MENU_ACCORDION]            = {COMPOUND_STRING("Accordion…{CLEAR_TO 110}{RIGHT_ARROW}"),            DEBUG_DYNAMIC_MUSIC_MENU_ACCORDION},
-    [DEBUG_DYNAMIC_MUSIC_MENU_KEYTAR]               = {COMPOUND_STRING("Keytar…{CLEAR_TO 110}{RIGHT_ARROW}"),               DEBUG_DYNAMIC_MUSIC_MENU_KEYTAR},
-    [DEBUG_DYNAMIC_MUSIC_MENU_ERHU]                 = {COMPOUND_STRING("Erhu…{CLEAR_TO 110}{RIGHT_ARROW}"),                 DEBUG_DYNAMIC_MUSIC_MENU_ERHU},
-    [DEBUG_DYNAMIC_MUSIC_MENU_GUITAR]               = {COMPOUND_STRING("Guitar…{CLEAR_TO 110}{RIGHT_ARROW}"),               DEBUG_DYNAMIC_MUSIC_MENU_GUITAR},
-    [DEBUG_DYNAMIC_MUSIC_MENU_WHISTLE]              = {COMPOUND_STRING("Whistle…{CLEAR_TO 110}{RIGHT_ARROW}"),              DEBUG_DYNAMIC_MUSIC_MENU_WHISTLE},
-    [DEBUG_DYNAMIC_MUSIC_MENU_FLUTE]                = {COMPOUND_STRING("Flute…{CLEAR_TO 110}{RIGHT_ARROW}"),                DEBUG_DYNAMIC_MUSIC_MENU_FLUTE},
-    [DEBUG_DYNAMIC_MUSIC_MENU_ALL_INSTRUMENTS]      = {COMPOUND_STRING("All Instruments…{CLEAR_TO 110}{RIGHT_ARROW}"),      DEBUG_DYNAMIC_MUSIC_MENU_ALL_INSTRUMENTS},
-    [DEBUG_DYNAMIC_MUSIC_MENU_PLAYING_INSTRUMENTS]  = {COMPOUND_STRING("Playing Instruments…{CLEAR_TO 110}{RIGHT_ARROW}"),  DEBUG_DYNAMIC_MUSIC_MENU_PLAYING_INSTRUMENTS},
-    [DEBUG_DYNAMIC_MUSIC_MENU_TRACKS]               = {COMPOUND_STRING("Isolate Tracks…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_DYNAMIC_MUSIC_MENU_TRACKS},
-    [DEBUG_DYNAMIC_MUSIC_MENU_MOVEMENT_MUSIC]       = {COMPOUND_STRING("Dynamic Movement Music"),                           DEBUG_DYNAMIC_MUSIC_MENU_MOVEMENT_MUSIC},
-};
-
-static const struct ListMenuItem sDebugMenu_Items_DynamicMusic_Instruments[] =
-{
-    [DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_REMOVE]    = {COMPOUND_STRING("Remove Instrument"),    DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_REMOVE},
-    [DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_RESTORE]   = {COMPOUND_STRING("Restore Instrument"),   DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_RESTORE},
-    [DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_PLAY_ONLY] = {COMPOUND_STRING("Play Only Instrument"), DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_PLAY_ONLY},
-};
-
-static const struct ListMenuItem sDebugMenu_Items_DynamicMusic_TrackList[] =
-{
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_ALL]       = {COMPOUND_STRING("All Tracks…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_ALL},
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_00]        = {COMPOUND_STRING("Track 00…{CLEAR_TO 110}{RIGHT_ARROW}"),     DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_00},
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_01]        = {COMPOUND_STRING("Track 01…{CLEAR_TO 110}{RIGHT_ARROW}"),     DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_01},
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_02]        = {COMPOUND_STRING("Track 02…{CLEAR_TO 110}{RIGHT_ARROW}"),     DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_02},
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_03]        = {COMPOUND_STRING("Track 03…{CLEAR_TO 110}{RIGHT_ARROW}"),     DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_03},
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_04]        = {COMPOUND_STRING("Track 04…{CLEAR_TO 110}{RIGHT_ARROW}"),     DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_04},
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_05]        = {COMPOUND_STRING("Track 05…{CLEAR_TO 110}{RIGHT_ARROW}"),     DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_05},
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_06]        = {COMPOUND_STRING("Track 06…{CLEAR_TO 110}{RIGHT_ARROW}"),     DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_06},
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_07]        = {COMPOUND_STRING("Track 07…{CLEAR_TO 110}{RIGHT_ARROW}"),     DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_07},
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_08]        = {COMPOUND_STRING("Track 08…{CLEAR_TO 110}{RIGHT_ARROW}"),     DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_08},
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_09]        = {COMPOUND_STRING("Track 09…{CLEAR_TO 110}{RIGHT_ARROW}"),     DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_09},
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_10]        = {COMPOUND_STRING("Track 10…{CLEAR_TO 110}{RIGHT_ARROW}"),     DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_10},
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_11]        = {COMPOUND_STRING("Track 11…{CLEAR_TO 110}{RIGHT_ARROW}"),     DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_11},
-};
-
-static const struct ListMenuItem sDebugMenu_Items_DynamicMusic_IsolateTracks[] =
-{
-    [DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_REMOVE]        = {COMPOUND_STRING("Remove Track"),     DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_REMOVE},
-    [DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_RESTORE]       = {COMPOUND_STRING("Restore Track"),    DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_RESTORE},
-    [DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_PLAY_ONLY]     = {COMPOUND_STRING("Play Only Track"),  DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_PLAY_ONLY},
-};
-
-
-static const struct ListMenuItem sDebugMenu_Items_Player[] =
-{
-    [DEBUG_PLAYER_MENU_ITEM_PLAYER_NAME]   = {COMPOUND_STRING("Player name"),    DEBUG_PLAYER_MENU_ITEM_PLAYER_NAME},
-    [DEBUG_PLAYER_MENU_ITEM_PLAYER_GENDER] = {COMPOUND_STRING("Toggle gender"),  DEBUG_PLAYER_MENU_ITEM_PLAYER_GENDER},
-    [DEBUG_PLAYER_MENU_ITEM_PLAYER_ID]     = {COMPOUND_STRING("New Trainer ID"), DEBUG_PLAYER_MENU_ITEM_PLAYER_ID},
-};
-
-static const struct ListMenuItem sDebugMenu_Items_ROMInfo[] =
-{
-    [DEBUG_ROM_INFO_MENU_ITEM_SAVEBLOCK]     = {COMPOUND_STRING("Save Block space"),  DEBUG_ROM_INFO_MENU_ITEM_SAVEBLOCK},
-    [DEBUG_ROM_INFO_MENU_ITEM_ROM_SPACE]     = {COMPOUND_STRING("ROM space"),         DEBUG_ROM_INFO_MENU_ITEM_ROM_SPACE},
-    [DEBUG_ROM_INFO_MENU_ITEM_EXPANSION_VER] = {COMPOUND_STRING("Expansion Version"), DEBUG_ROM_INFO_MENU_ITEM_EXPANSION_VER},
-};
-
-// *******************************
-// Menu Actions
-static void (*const sDebugMenu_Actions_Main[])(u8) =
-{
-    [DEBUG_MENU_ITEM_IKIGAI]        = DebugAction_OpenIkigaiMenu,
-    [DEBUG_MENU_ITEM_UTILITIES]     = DebugAction_OpenUtilitiesMenu,
-    [DEBUG_MENU_ITEM_PCBAG]         = DebugAction_OpenPCBagMenu,
-    [DEBUG_MENU_ITEM_PARTY]         = DebugAction_OpenPartyMenu,
-    [DEBUG_MENU_ITEM_GIVE]          = DebugAction_OpenGiveMenu,
-    [DEBUG_MENU_ITEM_PLAYER]        = DebugAction_OpenPlayerMenu,
-    [DEBUG_MENU_ITEM_SCRIPTS]       = DebugAction_OpenScriptsMenu,
-    [DEBUG_MENU_ITEM_FLAGVAR]       = DebugAction_OpenFlagsVarsMenu,
-    //[DEBUG_MENU_ITEM_BATTLE]        = DebugAction_OpenBattleMenu,
-    [DEBUG_MENU_ITEM_SOUND]         = DebugAction_OpenSoundMenu,
-    [DEBUG_MENU_ITEM_ROMINFO]       = DebugAction_OpenROMInfoMenu,
-    [DEBUG_MENU_ITEM_CANCEL]        = DebugAction_Cancel
-};
-
-static void (*const sDebugMenu_Actions_Ikigai[])(u8) =
-{
-    [DEBUG_IKIGAI_PLAYER]                  = DebugAction_OpenSubmenuIkigai_Player,
-    [DEBUG_IKIGAI_CHARACTER]               = DebugAction_OpenSubmenuIkigai_CharacterMenu,
-    [DEBUG_IKIGAI_TEMPORAL]                = DebugAction_OpenSubmenuIkigai_TemporalMenu,
-    [DEBUG_IKIGAI_SOUND]                   = DebugAction_OpenSubmenuIkigai_SoundMenu,
-};
-
-static void (*const sDebugMenu_Actions_Ikigai_Player[])(u8) =
-{
-    [DEBUG_IKIGAI_PLAYER_GYM_TYPE]         = DebugAction_Ikigai_GymType,
-    [DEBUG_IKIGAI_PLAYER_BODY]             = DebugAction_Player_Gender,
-    [DEBUG_IKIGAI_PLAYER_NAME]             = DebugAction_Player_Name,
-    [DEBUG_IKIGAI_PLAYER_NICKNAME]         = DebugAction_Player_Nickname,
-    [DEBUG_IKIGAI_PLAYER_DYNPALS]          = DebugAction_Ikigai_PlayerDynPals,
-};
-
-static void (*const sDebugMenu_Actions_Ikigai_Character[])(u8) =
-{
-    [DEBUG_IKIGAI_CHARACTER_POKESPHERE]    = DebugAction_Ikigai_OpenPokeSphere,
-    [DEBUG_IKIGAI_CHARACTER_MET]           = DebugAction_Ikigai_MeetAllCharacter,
-};
-
-static void (*const sDebugMenu_Actions_Ikigai_Temporal[])(u8) =
-{
-    [DEBUG_IKIGAI_TEMPORAL_CALENDAR_SHOW]  = DebugAction_Ikigai_ShowCalendar,
-    [DEBUG_IKIGAI_TEMPORAL_CALENDAR_WARP]  = DebugAction_Ikigai_CalendarWarp,
-    [DEBUG_IKIGAI_TEMPORAL_WEATHER]        = DebugAction_Util_Weather,
-    [DEBUG_IKIGAI_TEMPORAL_CHECK_CLOCK]    = DebugAction_TimeMenu_CheckWallClock,
-    [DEBUG_IKIGAI_TEMPORAL_SET_CLOCK]      = DebugAction_TimeMenu_SetWallClock,
-    [DEBUG_IKIGAI_TEMPORAL_SET_SEASON]     = DebugAction_Ikigai_Season,
-    [DEBUG_IKIGAI_TEMPORAL_BASE_TIME_MENU] = DebugAction_Ikigai_OpenTimeMenu,
-};
-
-static void (*const sDebugMenu_Actions_Ikigai_Sound[])(u8) =
-{
-    [DEBUG_IKIGAI_SOUND_MUSIC_EXPANSION]   = DebugAction_Ikigai_MUS_Expansion,
-    [DEBUG_IKIGAI_SOUND_DYNAMIC_MUSIC]     = DebugAction_OpenDynamicMusicMenu,
-    [DEBUG_IKIGAI_SOUND_CRIES]             = DebugAction_Ikigai_PokemonCries,
-};
-
-static void (*const sDebugMenu_Actions_Utilities[])(u8) =
-{
-    [DEBUG_UTIL_MENU_ITEM_FLY]             = DebugAction_Util_Fly,
-    [DEBUG_UTIL_MENU_ITEM_WARP]            = DebugAction_Util_Warp_Warp,
-    [DEBUG_UTIL_MENU_ITEM_WEATHER]         = DebugAction_Util_Weather,
-    [DEBUG_UTIL_MENU_ITEM_FONT_TEST]       = DebugAction_Util_FontTest,
-    [DEBUG_UTIL_MENU_ITEM_TIME_MENU]       = DebugAction_Util_OpenTimeMenu,
-    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]    = DebugAction_Util_WatchCredits,
-    [DEBUG_UTIL_MENU_ITEM_CHEAT]           = DebugAction_Util_CheatStart,
-    [DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS] = DebugAction_Util_BerryFunctions,
-    [DEBUG_UTIL_MENU_ITEM_EWRAM_COUNTERS]  = DebugAction_Util_CheckEWRAMCounters,
-    [DEBUG_UTIL_MENU_ITEM_STEVEN_MULTI]    = DebugAction_Util_Steven_Multi,
-};
-
-static void (*const sDebugMenu_Actions_PCBag[])(u8) =
-{
-    [DEBUG_PCBAG_MENU_ITEM_ACCESS_PC]             = DebugAction_PCBag_AccessPC,
-    [DEBUG_PCBAG_MENU_ITEM_FILL]                  = DebugAction_OpenPCBagFillMenu,
-    [DEBUG_PCBAG_MENU_ITEM_CLEAR_BAG]             = DebugAction_PCBag_ClearBag,
-    [DEBUG_PCBAG_MENU_ITEM_CLEAR_BOXES]           = DebugAction_PCBag_ClearBoxes,
-};
-
-static void (*const sDebugMenu_Actions_PCBag_Fill[])(u8) =
-{
-    [DEBUG_PCBAG_MENU_ITEM_FILL_PC_BOXES_FAST]    = DebugAction_PCBag_Fill_PCBoxes_Fast,
-    [DEBUG_PCBAG_MENU_ITEM_FILL_PC_BOXES_SLOW]    = DebugAction_PCBag_Fill_PCBoxes_Slow,
-    [DEBUG_PCBAG_MENU_ITEM_FILL_PC_ITEMS]         = DebugAction_PCBag_Fill_PCItemStorage,
-    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_ITEMS]     = DebugAction_PCBag_Fill_PocketItems,
-    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_BALLS]     = DebugAction_PCBag_Fill_PocketPokeBalls,
-    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_TMHM]      = DebugAction_PCBag_Fill_PocketTMHM,
-    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_BERRIES]   = DebugAction_PCBag_Fill_PocketBerries,
-    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_KEY_ITEMS] = DebugAction_PCBag_Fill_PocketKeyItems,
-};
-
-static void (*const sDebugMenu_Actions_Party[])(u8) =
-{
-    [DEBUG_PARTY_MENU_ITEM_MOVE_REMINDER]   = DebugAction_Party_MoveReminder,
-    [DEBUG_PARTY_MENU_ITEM_HATCH_AN_EGG]    = DebugAction_Party_HatchAnEgg,
-    [DEBUG_PARTY_MENU_ITEM_HEAL_PARTY]      = DebugAction_Party_HealParty,
-    [DEBUG_PARTY_MENU_ITEM_INFLICT_STATUS1] = DebugAction_Party_InflictStatus1,
-    [DEBUG_PARTY_MENU_ITEM_CHECK_EVS]       = DebugAction_Party_CheckEVs,
-    [DEBUG_PARTY_MENU_ITEM_CHECK_IVS]       = DebugAction_Party_CheckIVs,
-    [DEBUG_PARTY_MENU_ITEM_CLEAR_PARTY]     = DebugAction_Party_ClearParty,
-    [DEBUG_PARTY_MENU_ITEM_SET_PARTY]       = DebugAction_Party_SetParty,
-    [DEBUG_PARTY_MENU_ITEM_BATTLE_SINGLE]   = DebugAction_Party_BattleSingle,
-};
-
-static void (*const sDebugMenu_Actions_Scripts[])(u8) =
-{
-    [DEBUG_UTIL_MENU_ITEM_SCRIPT_1] = DebugAction_Util_Script_1,
-    [DEBUG_UTIL_MENU_ITEM_SCRIPT_2] = DebugAction_Util_Script_2,
-    [DEBUG_UTIL_MENU_ITEM_SCRIPT_3] = DebugAction_Util_Script_3,
-    [DEBUG_UTIL_MENU_ITEM_SCRIPT_4] = DebugAction_Util_Script_4,
-    [DEBUG_UTIL_MENU_ITEM_SCRIPT_5] = DebugAction_Util_Script_5,
-    [DEBUG_UTIL_MENU_ITEM_SCRIPT_6] = DebugAction_Util_Script_6,
-    [DEBUG_UTIL_MENU_ITEM_SCRIPT_7] = DebugAction_Util_Script_7,
-    [DEBUG_UTIL_MENU_ITEM_SCRIPT_8] = DebugAction_Util_Script_8,
-};
-
-static void (*const sDebugMenu_Actions_Flags[])(u8) =
-{
-    [DEBUG_FLAGVAR_MENU_ITEM_FLAGS]                = DebugAction_FlagsVars_Flags,
-    [DEBUG_FLAGVAR_MENU_ITEM_VARS]                 = DebugAction_FlagsVars_Vars,
-    [DEBUG_FLAGVAR_MENU_ITEM_DEXFLAGS_ALL]         = DebugAction_FlagsVars_PokedexFlags_All,
-    [DEBUG_FLAGVAR_MENU_ITEM_DEXFLAGS_RESET]       = DebugAction_FlagsVars_PokedexFlags_Reset,
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKEDEX]       = DebugAction_FlagsVars_SwitchDex,
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_NATDEX]        = DebugAction_FlagsVars_SwitchNatDex,
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKENAV]       = DebugAction_FlagsVars_SwitchPokeNav,
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_MATCH_CALL]    = DebugAction_FlagsVars_SwitchMatchCall,
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RUN_SHOES]     = DebugAction_FlagsVars_RunningShoes,
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BICYCLE]       = DebugAction_FlagsVars_Bicycle,
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_LOCATIONS]     = DebugAction_FlagsVars_ToggleFlyFlags,
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BADGES_ALL]    = DebugAction_FlagsVars_ToggleBadgeFlags,
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_GAME_CLEAR]    = DebugAction_FlagsVars_ToggleGameClear,
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_FRONTIER_PASS] = DebugAction_FlagsVars_ToggleFrontierPass,
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_COLLISION]     = DebugAction_FlagsVars_CollisionOnOff,
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_ENCOUNTER]     = DebugAction_FlagsVars_EncounterOnOff,
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_TRAINER_SEE]   = DebugAction_FlagsVars_TrainerSeeOnOff,
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BAG_USE]       = DebugAction_FlagsVars_BagUseOnOff,
-    [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_CATCHING]      = DebugAction_FlagsVars_CatchingOnOff,
-};
-static void (*const sDebugMenu_Actions_Give[])(u8) =
-{
-    [DEBUG_GIVE_MENU_ITEM_ITEM_X]            = DebugAction_Give_Item,
-    [DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE]    = DebugAction_Give_PokemonSimple,
-    [DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX]   = DebugAction_Give_PokemonComplex,
-    [DEBUG_GIVE_MENU_ITEM_MAX_MONEY]         = DebugAction_Give_MaxMoney,
-    [DEBUG_GIVE_MENU_ITEM_MAX_COINS]         = DebugAction_Give_MaxCoins,
-    [DEBUG_GIVE_MENU_ITEM_MAX_BATTLE_POINTS] = DebugAction_Give_MaxBattlePoints,
-    [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]       = DebugAction_Give_DayCareEgg,
-};
-
-static void (*const sDebugMenu_Actions_Sound[])(u8) =
-{
-    [DEBUG_SOUND_MENU_ITEM_SE]  = DebugAction_Sound_SE,
-    [DEBUG_SOUND_MENU_ITEM_MUS] = DebugAction_Sound_MUS,
-    [DEBUG_SOUND_MENU_ITEM_DYNAMIC_MUSIC] = DebugAction_OpenDynamicMusicMenu,
-};
-
-static void (*const sDebugMenu_Actions_BerryFunctions[])(u8) =
-{
-    [DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL]  = DebugAction_BerryFunctions_ClearAll,
-    [DEBUG_BERRY_FUNCTIONS_MENU_READY]      = DebugAction_BerryFunctions_Ready,
-    [DEBUG_BERRY_FUNCTIONS_MENU_NEXT_STAGE] = DebugAction_BerryFunctions_NextStage,
-    [DEBUG_BERRY_FUNCTIONS_MENU_PESTS]      = DebugAction_BerryFunctions_Pests,
-    [DEBUG_BERRY_FUNCTIONS_MENU_WEEDS]      = DebugAction_BerryFunctions_Weeds,
-};
-
-static void (*const sDebugMenu_Actions_DynamicMusic[])(u8) =
-{
-    [DEBUG_DYNAMIC_MUSIC_MENU_ACCORDION]            = DebugAction_OpenDynamicMusicInstrumentMenu,
-    [DEBUG_DYNAMIC_MUSIC_MENU_KEYTAR]               = DebugAction_OpenDynamicMusicInstrumentMenu,
-    [DEBUG_DYNAMIC_MUSIC_MENU_ERHU]                 = DebugAction_OpenDynamicMusicInstrumentMenu,
-    [DEBUG_DYNAMIC_MUSIC_MENU_GUITAR]               = DebugAction_OpenDynamicMusicInstrumentMenu,
-    [DEBUG_DYNAMIC_MUSIC_MENU_WHISTLE]              = DebugAction_OpenDynamicMusicInstrumentMenu,
-    [DEBUG_DYNAMIC_MUSIC_MENU_FLUTE]                = DebugAction_OpenDynamicMusicInstrumentMenu,
-    [DEBUG_DYNAMIC_MUSIC_MENU_ALL_INSTRUMENTS]      = DebugAction_OpenDynamicMusicInstrumentMenu,
-    [DEBUG_DYNAMIC_MUSIC_MENU_PLAYING_INSTRUMENTS]  = DebugAction_OpenDynamicMusicInstrumentMenu,
-    [DEBUG_DYNAMIC_MUSIC_MENU_TRACKS]               = DebugAction_OpenDynamicMusicIsolateTrackMenu,
-    [DEBUG_DYNAMIC_MUSIC_MENU_MOVEMENT_MUSIC]       = DebugAction_DynamicMusic_Movement,
-};
-
-static void (*const sDebugMenu_Actions_DynamicMusic_Instruments[])(u8) =
-{
-    [DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_REMOVE]    = DebugAction_DynamicMusic_InstrumentRemove,
-    [DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_RESTORE]   = DebugAction_DynamicMusic_InstrumentRestore,
-    [DEBUG_DYNAMIC_MUSIC_INSTRUMENT_MENU_PLAY_ONLY] = DebugAction_DynamicMusic_InstrumentPlayOnly,
-};
-
-static void (*const sDebugMenu_Actions_DynamicMusic_TrackList[])(u8) =
-{
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_ALL]       = DebugAction_DynamicMusic_OpenTrackFuncMenu,
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_00]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_01]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_02]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_03]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_04]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_05]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_06]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_07]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_08]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_09]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_10]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
-    [DEBUG_DYNAMIC_MUSIC_TRACK_LIST_MENU_11]        = DebugAction_DynamicMusic_OpenTrackFuncMenu,
-};
-
-static void (*const sDebugMenu_Actions_DynamicMusic_Tracks[])(u8) =
-{
-    [DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_REMOVE]        = DebugAction_DynamicMusic_TrackRemove,
-    [DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_RESTORE]       = DebugAction_DynamicMusic_TrackRestore,
-    [DEBUG_DYNAMIC_MUSIC_TRACKS_MENU_PLAY_ONLY]     = DebugAction_DynamicMusic_TrackPlayOnly,
-};
-
-static void (*const sDebugMenu_Actions_TimeMenu[])(u8) =
-{
-    [DEBUG_TIME_MENU_ITEM_PRINTTIME] = DebugAction_TimeMenu_PrintTime,
-    [DEBUG_TIME_MENU_ITEM_PRINTTIMEOFDAY] = DebugAction_TimeMenu_PrintTimeOfDay,
-    [DEBUG_TIME_MENU_ITEM_TIMESOFDAY] = DebugAction_TimeMenu_TimesOfDay,
-    [DEBUG_TIME_MENU_ITEM_WEEKDAYS] = DebugAction_TimeMenu_Weekdays,
-    [DEBUG_TIME_MENU_ITEM_CHECKWALLCLOCK]  = DebugAction_TimeMenu_CheckWallClock,
-    [DEBUG_TIME_MENU_ITEM_SETWALLCLOCK]    = DebugAction_TimeMenu_SetWallClock,
-};
-
-static void (*const sDebugMenu_Actions_TimeMenu_TimesOfDay[])(u8) =
-{
-    [DEBUG_TIME_MENU_ITEM_MORNING] = DebugAction_TimeMenu_ChangeTimeOfDay,
-    [DEBUG_TIME_MENU_ITEM_DAY] = DebugAction_TimeMenu_ChangeTimeOfDay,
-    [DEBUG_TIME_MENU_ITEM_EVENING] = DebugAction_TimeMenu_ChangeTimeOfDay,
-    [DEBUG_TIME_MENU_ITEM_NIGHT] = DebugAction_TimeMenu_ChangeTimeOfDay,
-};
-
-static void (*const sDebugMenu_Actions_TimeMenu_Weekdays[])(u8) =
-{
-    [DEBUG_TIME_MENU_ITEM_SUNDAY] = DebugAction_TimeMenu_ChangeWeekdays,
-    [DEBUG_TIME_MENU_ITEM_MONDAY] = DebugAction_TimeMenu_ChangeWeekdays,
-    [DEBUG_TIME_MENU_ITEM_TUESDAY] = DebugAction_TimeMenu_ChangeWeekdays,
-    [DEBUG_TIME_MENU_ITEM_WEDNESDAY] = DebugAction_TimeMenu_ChangeWeekdays,
-    [DEBUG_TIME_MENU_ITEM_THURSDAY] = DebugAction_TimeMenu_ChangeWeekdays,
-    [DEBUG_TIME_MENU_ITEM_FRIDAY] = DebugAction_TimeMenu_ChangeWeekdays,
-    [DEBUG_TIME_MENU_ITEM_SATURDAY] = DebugAction_TimeMenu_ChangeWeekdays,
-};
-
-static void (*const sDebugMenu_Actions_Player[])(u8) =
-{
-    [DEBUG_PLAYER_MENU_ITEM_PLAYER_NAME]   = DebugAction_Player_Name,
-    [DEBUG_PLAYER_MENU_ITEM_PLAYER_GENDER] = DebugAction_Player_Gender,
-    [DEBUG_PLAYER_MENU_ITEM_PLAYER_ID]     = DebugAction_Player_Id,
-};
-
-static void (*const sDebugMenu_Actions_ROMInfo[])(u8) =
-{
-    [DEBUG_ROM_INFO_MENU_ITEM_SAVEBLOCK]     = DebugAction_ROMInfo_CheckSaveBlock,
-    [DEBUG_ROM_INFO_MENU_ITEM_ROM_SPACE]     = DebugAction_ROMInfo_CheckROMSpace,
-    [DEBUG_ROM_INFO_MENU_ITEM_EXPANSION_VER] = DebugAction_ROMInfo_ExpansionVersion,
+    { COMPOUND_STRING("Utilities…"),    DebugAction_OpenSubMenu, sDebugMenu_Actions_Utilities, },
+    { COMPOUND_STRING("PC/Bag…"),       DebugAction_OpenSubMenu, sDebugMenu_Actions_PCBag, },
+    { COMPOUND_STRING("Party…"),        DebugAction_OpenSubMenu, sDebugMenu_Actions_Party, },
+    { COMPOUND_STRING("Give X…"),       DebugAction_OpenSubMenu, sDebugMenu_Actions_Give, },
+    { COMPOUND_STRING("Player…"),       DebugAction_OpenSubMenu, sDebugMenu_Actions_Player, },
+    { COMPOUND_STRING("Scripts…"),      DebugAction_OpenSubMenu, sDebugMenu_Actions_Scripts, },
+    { COMPOUND_STRING("Flags & Vars…"), DebugAction_OpenSubMenuFlagsVars, sDebugMenu_Actions_Flags, },
+    { COMPOUND_STRING("Sound…"),        DebugAction_OpenSubMenu, sDebugMenu_Actions_Sound, },
+    { COMPOUND_STRING("ROM Info…"),     DebugAction_OpenSubMenu, sDebugMenu_Actions_ROMInfo2, },
+    { COMPOUND_STRING("Cancel"),        DebugAction_Cancel, },
+    { NULL }
 };
 
 // *******************************
@@ -1401,242 +742,68 @@ static const struct WindowTemplate sDebugMenuWindowTemplateSound =
     .baseBlock = 1,
 };
 
-static const struct WindowTemplate sDebugMenuWindowTemplateFlagsVars =
-{
-    .bg = 0,
-    .tilemapLeft = 30 - DEBUG_MENU_WIDTH_FLAGVAR - 1,
-    .tilemapTop = 1,
-    .width = DEBUG_MENU_WIDTH_FLAGVAR,
-    .height = DEBUG_MENU_HEIGHT_FLAGVAR,
-    .paletteNum = 15,
-    .baseBlock = 1 + DEBUG_MENU_WIDTH_MAIN * DEBUG_MENU_HEIGHT_MAIN * 2,
-};
-
-static const struct WindowTemplate sDebugMenuWindowTemplateSeason =
-{
-    .bg = 0,
-    .tilemapLeft = 30 - DEBUG_MENU_WIDTH_SEASON - 1,
-    .tilemapTop = 1,
-    .width = DEBUG_MENU_WIDTH_SEASON,
-    .height = 2 * DEBUG_MENU_HEIGHT_SEASON,
-    .paletteNum = 15,
-    .baseBlock = 1,
-};
-
-// *******************************
-// List Menu Templates
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Main =
-{
-    .items = sDebugMenu_Items_Main,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Main),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Ikigai =
-{
-    .items = sDebugMenu_Items_Ikigai,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Ikigai),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Ikigai_Player =
-{
-    .items = sDebugMenu_Items_SubmenuIkigai_Player,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_SubmenuIkigai_Player),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Ikigai_Character =
-{
-    .items = sDebugMenu_Items_SubmenuIkigai_Character,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_SubmenuIkigai_Character),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Ikigai_Temporal =
-{
-    .items = sDebugMenu_Items_SubmenuIkigai_Temporal,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_SubmenuIkigai_Temporal),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Ikigai_Sound =
-{
-    .items = sDebugMenu_Items_SubmenuIkigai_Sound,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_SubmenuIkigai_Sound),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Utilities =
-{
-    .items = sDebugMenu_Items_Utilities,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Utilities),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_PCBag =
-{
-    .items = sDebugMenu_Items_PCBag,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_PCBag),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_PCBag_Fill =
-{
-    .items = sDebugMenu_Items_PCBag_Fill,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_PCBag_Fill),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Party =
-{
-    .items = sDebugMenu_Items_Party,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Party),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Scripts =
-{
-    .items = sDebugMenu_Items_Scripts,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Scripts),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_FlagsVars =
-{
-    .items = sDebugMenu_Items_FlagsVars,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_FlagsVars),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Battle_0 =
-{
-    .items = sDebugMenu_Items_Battle_0,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Battle_0),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Battle_1 =
-{
-    .items = sDebugMenu_Items_Battle_1,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Battle_1),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Battle_2 =
-{
-    .items = sDebugMenu_Items_Battle_2,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Battle_2),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Give =
-{
-    .items = sDebugMenu_Items_Give,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Give),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Sound =
-{
-    .items = sDebugMenu_Items_Sound,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Sound),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_BerryFunctions =
-{
-    .items = sDebugMenu_Items_BerryFunctions,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_BerryFunctions),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_DynamicMusic =
-{
-    .items = sDebugMenu_Items_DynamicMusic,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_DynamicMusic),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_DynamicMusic_Instruments =
-{
-    .items = sDebugMenu_Items_DynamicMusic_Instruments,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_DynamicMusic_Instruments),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_DynamicMusic_IsolateTracksList =
-{
-    .items = sDebugMenu_Items_DynamicMusic_TrackList,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_DynamicMusic_TrackList),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_DynamicMusic_IsolateTracksFunc =
-{
-    .items = sDebugMenu_Items_DynamicMusic_IsolateTracks,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_DynamicMusic_IsolateTracks),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_TimeMenu =
-{
-    .items = sDebugMenu_Items_TimeMenu,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_TimeMenu),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_TimeMenu_TimesOfDay =
-{
-    .items = sDebugMenu_Items_TimeMenu_TimesOfDay,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_TimeMenu_TimesOfDay),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_TimeMenu_Weekdays =
-{
-    .items = sDebugMenu_Items_TimeMenu_Weekdays,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_TimeMenu_Weekdays),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Player =
-{
-    .items = sDebugMenu_Items_Player,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Player),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_ROMInfo =
-{
-    .items = sDebugMenu_Items_ROMInfo,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_ROMInfo),
-};
+static bool32 Debug_SaveCallbackMenu(struct DebugMenuOption *callbackItems);
 
 // *******************************
 // Functions universal
 void Debug_ShowMainMenu(void)
 {
-    sDebugBattleData = AllocZeroed(sizeof(*sDebugBattleData));
     sDebugMenuListData = AllocZeroed(sizeof(*sDebugMenuListData));
-    Debug_InitDebugBattleData();
-
-    Debug_ShowMenu(DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
+    sDebugMenuListData->listId = 0;
+    Debug_ShowMenu(DebugTask_HandleMenuInput_General, sDebugMenu_Actions_Main);
 }
 
-static void Debug_ReShowMainMenu(void)
+#define tMenuTaskId          data[0]
+#define tWindowId            data[1]
+#define tSubWindowId         data[2]
+#define tInput               data[3]
+#define tDigit               data[4]
+
+static bool32 Debug_SaveCallbackMenu(struct DebugMenuOption *callbackItems)
 {
-    Debug_ShowMenu(DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
+    bool32 success = FALSE;
+    for (u32 i = 0; i < DEBUG_MAX_SUB_MENU_LEVELS; i++)
+    {
+        if (sDebugMenuListData->subMenuItems[i] == NULL)
+        {
+            sDebugMenuListData->subMenuItems[i] = callbackItems;
+            success = TRUE;
+            break;
+        }
+    }
+    return success;
 }
 
-#define tMenuTaskId   data[0]
-#define tWindowId     data[1]
-#define tSubWindowId  data[2]
-#define tInput        data[3]
-#define tDigit        data[4]
+static u32 Debug_RemoveCallbackMenu(void)
+{
+    u32 freeCallbackLevel = 0;
+    for (u32 i = DEBUG_MAX_SUB_MENU_LEVELS; i > 0; i--)
+    {
+        if (sDebugMenuListData->subMenuItems[i - 1] != NULL)
+        {
+            sDebugMenuListData->subMenuItems[i - 1] = NULL;
+            freeCallbackLevel = i - 1;
+            break;
+        }
+    }
+    return freeCallbackLevel;
+}
 
-static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMtemplate)
+static const struct DebugMenuOption *Debug_GetCurrentCallbackMenu(void)
+{
+    const struct DebugMenuOption *callbackItems = NULL;
+    for (u32 i = DEBUG_MAX_SUB_MENU_LEVELS; i > 0; i--)
+    {
+        if (sDebugMenuListData->subMenuItems[i - 1] != NULL)
+        {
+            callbackItems = sDebugMenuListData->subMenuItems[i - 1];
+            break;
+        }
+    }
+    return callbackItems;
+}
+
+static void Debug_ShowMenuFromTemplate(void (*HandleInput)(u8), struct ListMenuTemplate LMtemplate)
 {
     struct ListMenuTemplate menuTemplate;
     u8 windowId;
@@ -1651,6 +818,75 @@ static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMte
 
     // create list menu
     menuTemplate = LMtemplate;
+    menuTemplate.maxShowed = DEBUG_MENU_HEIGHT_MAIN;
+    menuTemplate.windowId = windowId;
+    menuTemplate.header_X = 0;
+    menuTemplate.item_X = 8;
+    menuTemplate.cursor_X = 0;
+    menuTemplate.upText_Y = 1;
+    menuTemplate.cursorPal = 2;
+    menuTemplate.fillValue = 1;
+    menuTemplate.cursorShadowPal = 3;
+    menuTemplate.lettersSpacing = 1;
+    menuTemplate.itemVerticalPadding = 0;
+    menuTemplate.scrollMultiple = LIST_NO_MULTIPLE_SCROLL;
+    menuTemplate.fontId = DEBUG_MENU_FONT;
+    menuTemplate.cursorKind = 0;
+    menuTaskId = ListMenuInit(&menuTemplate, 0, 0);
+
+    // create input handler task
+    inputTaskId = CreateTask(HandleInput, 3);
+    gTasks[inputTaskId].tMenuTaskId = menuTaskId;
+    gTasks[inputTaskId].tWindowId = windowId;
+    gTasks[inputTaskId].tSubWindowId = 0;
+
+    Debug_RefreshListMenu(inputTaskId);
+
+    // draw everything
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+
+static bool32 IsSubMenuAction(const void *action)
+{
+    return action == DebugAction_OpenSubMenu
+        || action == DebugAction_OpenSubMenuFlagsVars
+        || action == DebugAction_OpenSubMenuFakeRTC
+        || action == DebugAction_OpenSubMenuCreateFollowerNPC;
+}
+
+static void Debug_ShowMenu(DebugFunc HandleInput, const struct DebugMenuOption *items)
+{
+    struct ListMenuTemplate menuTemplate = {0};
+    u8 windowId;
+    u8 menuTaskId;
+    u8 inputTaskId;
+
+    if (items != NULL)
+        Debug_SaveCallbackMenu((struct DebugMenuOption *)items);
+    else
+        items = Debug_GetCurrentCallbackMenu();
+
+    // create window
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+    windowId = AddWindow(&sDebugMenuWindowTemplateMain);
+    DrawStdWindowFrame(windowId, FALSE);
+
+    u32 i = 0;
+    for (i = 0; items[i].text != NULL; i++)
+    {
+        sDebugMenuListData->listItems[i].id = i;
+        StringExpandPlaceholders(gStringVar4, items[i].text);
+        if (IsSubMenuAction(items[i].action))
+            StringAppend(gStringVar4, sDebugText_Arrow);
+        StringCopy(&sDebugMenuListData->itemNames[i][0], gStringVar4);
+        sDebugMenuListData->listItems[i].name = &sDebugMenuListData->itemNames[i][0];
+    }
+
+    // create list menu
+    menuTemplate.items = sDebugMenuListData->listItems;
+    menuTemplate.moveCursorFunc = ListMenuDefaultCursorMoveFunc;
+    menuTemplate.totalItems = i;
     menuTemplate.maxShowed = DEBUG_MENU_HEIGHT_MAIN;
     menuTemplate.windowId = windowId;
     menuTemplate.header_X = 0;
@@ -1699,7 +935,6 @@ static void Debug_DestroyMenu_Full(u8 taskId)
     DestroyTask(taskId);
     UnfreezeObjectEvents();
     Free(sDebugMenuListData);
-    Free(sDebugBattleData);
 }
 
 static void Debug_DestroyMenu_Full_Script(u8 taskId, const u8 *script)
@@ -1755,7 +990,6 @@ static void DebugAction_DestroyExtraWindow(u8 taskId)
     ScriptContext_Enable();
     UnfreezeObjectEvents();
 }
-
 
 static const u16 sLocationFlags[] =
 {
@@ -1864,17 +1098,6 @@ static u8 Debug_CheckToggleFlags(u8 id)
     return result;
 }
 
-static void Debug_InitDebugBattleData(void)
-{
-    u32 i;
-    sDebugBattleData->submenu       = 0;
-    sDebugBattleData->battleType    = 0xFF;
-    sDebugBattleData->battleTerrain = 0xFF;
-
-    for (i = 0; i < AI_FLAG_COUNT; i++)
-        sDebugBattleData->aiFlags[i] = FALSE;
-}
-
 static void Debug_GenerateListMenuNames(u32 totalItems)
 {
     const u8 sColor_Red[] = _("{COLOR RED}");
@@ -1885,56 +1108,27 @@ static void Debug_GenerateListMenuNames(u32 totalItems)
     // Copy item names for all entries but the last (which is Cancel)
     for (i = 0; i < totalItems; i++)
     {
-        if (sDebugMenuListData->listId == 1 && sDebugBattleData->submenu > 1)
+        if (sDebugMenuListData->listId == 1)
         {
-            u16 species;
-            if (i == 6)
-            {
-                name = sDebugText_Continue;
-                StringCopy(&sDebugMenuListData->itemNames[i][0], name);
-            }
-            else if (GetMonData(&gEnemyParty[i], MON_DATA_SANITY_HAS_SPECIES))
-            {
-                species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES);
-                StringCopy(gStringVar1, GetSpeciesName(species));
-                StringCopy(&sDebugMenuListData->itemNames[i][0], gStringVar1);
-            }
-            else
-            {
-                StringCopy(&sDebugMenuListData->itemNames[i][0], sDebugText_Dashes);
-            }
+            flagResult = Debug_CheckToggleFlags(i);
+            name = sDebugMenu_Actions_Flags[i].text;
+        }
+
+        if (flagResult == 0xFF)
+        {
+            StringCopy(&sDebugMenuListData->itemNames[i][0], name);
+        }
+        else if (flagResult)
+        {
+            StringCopy(gStringVar1, sColor_Green);
+            StringExpandPlaceholders(gStringVar4, name);
+            StringCopy(&sDebugMenuListData->itemNames[i][0], gStringVar4);
         }
         else
         {
-            if (sDebugMenuListData->listId == 0)
-            {
-                flagResult = Debug_CheckToggleFlags(i);
-                name = sDebugMenu_Items_FlagsVars[i].name;
-            }
-            else if (sDebugMenuListData->listId == 1)
-            {
-                flagResult = sDebugBattleData->aiFlags[i];
-                if (i == totalItems - 1)
-                    flagResult = 0xFF;
-                name = sDebugMenu_Items_Battle_1[i].name;
-            }
-
-            if (flagResult == 0xFF)
-            {
-                StringCopy(&sDebugMenuListData->itemNames[i][0], name);
-            }
-            else if (flagResult)
-            {
-                StringCopy(gStringVar1, sColor_Green);
-                StringExpandPlaceholders(gStringVar4, name);
-                StringCopy(&sDebugMenuListData->itemNames[i][0], gStringVar4);
-            }
-            else
-            {
-                StringCopy(gStringVar1, sColor_Red);
-                StringExpandPlaceholders(gStringVar4, name);
-                StringCopy(&sDebugMenuListData->itemNames[i][0], gStringVar4);
-            }
+            StringCopy(gStringVar1, sColor_Red);
+            StringExpandPlaceholders(gStringVar4, name);
+            StringCopy(&sDebugMenuListData->itemNames[i][0], gStringVar4);
         }
 
         sDebugMenuListData->listItems[i].name = &sDebugMenuListData->itemNames[i][0];
@@ -1946,20 +1140,14 @@ static void Debug_RefreshListMenu(u8 taskId)
 {
     u8 totalItems = 0;
 
-    if (sDebugMenuListData->listId == 0)
+    if (sDebugMenuListData->listId == 1)
     {
-        gMultiuseListMenuTemplate = sDebugMenu_ListTemplate_FlagsVars;
-        totalItems = gMultiuseListMenuTemplate.totalItems;
-    }
-    else if (sDebugMenuListData->listId == 1 && sDebugBattleData->submenu <= 1)
-    {
-        gMultiuseListMenuTemplate = sDebugMenu_ListTemplate_Battle_1;
-        totalItems = gMultiuseListMenuTemplate.totalItems;
-    }
-    else if (sDebugMenuListData->listId == 1 && sDebugBattleData->submenu > 1)
-    {
-        gMultiuseListMenuTemplate = sDebugMenu_ListTemplate_Battle_2;
-        totalItems = 7;
+        for (u32 i = 0; i < ARRAY_COUNT(sDebugMenu_Actions_Flags); i++)
+        {
+            sDebugMenuListData->listItems[i].id = i;
+            sDebugMenuListData->listItems[i].name = sDebugMenu_Actions_Flags[i].text;
+        }
+        totalItems = gMultiuseListMenuTemplate.totalItems = ARRAY_COUNT(sDebugMenu_Actions_Flags) - 1;
     }
 
     // Failsafe to prevent memory corruption
@@ -1996,135 +1184,63 @@ static void Debug_RedrawListMenu(u8 taskId)
     gTasks[taskId].tMenuTaskId = ListMenuInit(&gMultiuseListMenuTemplate, scrollOffset, selectedRow);
 }
 
-
-// *******************************
-// Handle Inputs
-static void DebugTask_HandleMenuInput_Main(u8 taskId)
+static void DebugTask_HandleMenuInput_General(u8 taskId)
 {
-    void (*func)(u8);
+    const struct DebugMenuOption *options = Debug_GetCurrentCallbackMenu();
     u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
+    struct DebugMenuOption option = options[input];
 
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        if ((func = sDebugMenu_Actions_Main[input]) != NULL)
-            func(taskId);
+        if (option.action != NULL)
+        {
+            if (IsSubMenuAction(option.action))
+                ((DebugSubmenuFunc)option.action)(taskId, option.actionParams);
+            else if (option.action == DebugAction_ExecuteScript)
+                Debug_DestroyMenu_Full_Script(taskId, (const u8 *)option.actionParams);
+            else
+                ((DebugFunc)option.action)(taskId);
+        }
     }
     else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        Debug_DestroyMenu_Full(taskId);
-        ScriptContext_Enable();
+        if (Debug_GetCurrentCallbackMenu() != NULL && Debug_RemoveCallbackMenu() != 0)
+        {
+            Debug_DestroyMenu(taskId);
+            if (sDebugMenuListData->listId == 1)
+                Debug_ShowMenu(DebugTask_HandleMenuInput_FlagsVars, NULL);
+            else
+                Debug_ShowMenu(DebugTask_HandleMenuInput_General, NULL);
+        }
+        else
+        {
+            Debug_DestroyMenu_Full(taskId);
+            ScriptContext_Enable();
+        }
     }
 }
 
-static void DebugTask_HandleMenuInput_General(u8 taskId, const void (*const actions[])(u8), void (*callbackInput)(u8), struct ListMenuTemplate callbackMenuTemplate)
-{
-    void (*func)(u8);
-    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
-
-    if (JOY_NEW(A_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        if ((func = actions[input]) != NULL)
-            func(taskId);
-    }
-    else if (JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
-        Debug_ShowMenu(callbackInput, callbackMenuTemplate);
-    }
-}
-
-static void DebugTask_HandleMenuInput_Ikigai(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Ikigai, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
-}
-
-static void DebugTask_HandleSubmenuInput_Ikigai_Player(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Ikigai_Player, DebugTask_HandleMenuInput_Ikigai, sDebugMenu_ListTemplate_Ikigai);
-}
-
-static void DebugTask_HandleSubmenuInput_Ikigai_Character(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Ikigai_Character, DebugTask_HandleMenuInput_Ikigai, sDebugMenu_ListTemplate_Ikigai);
-}
-
-static void DebugTask_HandleSubmenuInput_Ikigai_Temporal(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Ikigai_Temporal, DebugTask_HandleMenuInput_Ikigai, sDebugMenu_ListTemplate_Ikigai);
-}
-
-static void DebugTask_HandleMenuInput_Ikigai_TimeFunction(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_TimeMenu, DebugTask_HandleMenuInput_Ikigai, sDebugMenu_ListTemplate_Ikigai);
-}
-
-static void DebugTask_HandleSubmenuInput_Ikigai_Sound(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Ikigai_Sound, DebugTask_HandleMenuInput_Ikigai, sDebugMenu_ListTemplate_Ikigai);
-}
-
-static void DebugTask_HandleMenuInput_Utilities(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Utilities, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
-}
-
-static void DebugTask_HandleMenuInput_PCBag(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_PCBag, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
-}
-
-static void DebugTask_HandleMenuInput_PCBag_Fill(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_PCBag_Fill, DebugTask_HandleMenuInput_PCBag, sDebugMenu_ListTemplate_PCBag);
-}
-
-static void DebugTask_HandleMenuInput_Party(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Party, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
-}
-
-static void DebugTask_HandleMenuInput_Scripts(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Scripts, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
-}
-
-static void DebugTask_HandleMenuInput_TimeMenu(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_TimeMenu, DebugTask_HandleMenuInput_Utilities, sDebugMenu_ListTemplate_Utilities);
-}
-
-static void DebugTask_HandleMenuInput_TimeMenu_TimesOfDay(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_TimeMenu_TimesOfDay, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
-}
-
-static void DebugTask_HandleMenuInput_TimeMenu_Weekdays(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_TimeMenu_Weekdays, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
-}
 
 static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId)
 {
-    void (*func)(u8);
+    DebugSubmenuFunc func;
     u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
 
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        if ((func = sDebugMenu_Actions_Flags[input]) != NULL)
+        if ((func = sDebugMenu_Actions_Flags[input].action) != NULL)
         {
             if (input == DEBUG_FLAGVAR_MENU_ITEM_FLAGS || input == DEBUG_FLAGVAR_MENU_ITEM_VARS)
             {
                 Debug_RedrawListMenu(taskId);
-                func(taskId);
+                func(taskId, sDebugMenu_Actions_Flags[input].actionParams);
             }
             else
             {
-                func(taskId);
+                func(taskId, sDebugMenu_Actions_Flags[input].actionParams);
                 Debug_GenerateListMenuNames(gMultiuseListMenuTemplate.totalItems);
                 RedrawListMenu(gTasks[taskId].tMenuTaskId);
             }
@@ -2142,477 +1258,25 @@ static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Debug_DestroyMenu(taskId);
-        Debug_ReShowMainMenu();
+        Debug_ShowMainMenu();
     }
 }
 
-static void DebugTask_HandleBattleMenuReDraw(u8 taskId)
+static void DebugAction_OpenSubMenuFlagsVars(u8 taskId)
 {
+    Debug_DestroyMenu(taskId);
+    sDebugMenuListData->listId = 1;
     Debug_RefreshListMenu(taskId);
-    switch (sDebugBattleData->submenu)
-    {
-    case 0:
-        Debug_DestroyMenu(taskId);
-        Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, sDebugMenu_ListTemplate_Battle_0);
-        break;
-    case 1:
-        Debug_DestroyMenu(taskId);
-        Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, gMultiuseListMenuTemplate);
-        break;
-    case 2:
-        Debug_DestroyMenu(taskId);
-        Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, sDebugMenu_ListTemplate_Battle_2);
-        break;
-    case 3:
-        Debug_DestroyMenu(taskId);
-        Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, gMultiuseListMenuTemplate);
-        break;
-    }
+    Debug_ShowMenuFromTemplate(DebugTask_HandleMenuInput_FlagsVars, gMultiuseListMenuTemplate);
 }
 
-static void DebugTask_HandleMenuInput_Battle(u8 taskId)
-{
-    u16 idx;
-    u8 listTaskId = gTasks[taskId].tMenuTaskId;
-    ListMenu_ProcessInput(listTaskId);
-
-    ListMenuGetCurrentItemArrayId(listTaskId, &idx);
-
-    if (JOY_NEW(A_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-
-        switch (sDebugBattleData->submenu)
-        {
-        case 0: // Battle type
-            sDebugBattleData->battleType = idx;
-            sDebugBattleData->submenu++;
-            Debug_DestroyMenu(taskId);
-
-            if (sDebugBattleData->battleType == DEBUG_BATTLE_0_MENU_ITEM_WILD // Skip AI Flag selection if wild battle
-             || sDebugBattleData->battleType == DEBUG_BATTLE_0_MENU_ITEM_WILD_DOUBLE)
-            {
-                sDebugBattleData->submenu++;
-                Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, sDebugMenu_ListTemplate_Battle_2);
-            }
-            else
-            {
-                Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, gMultiuseListMenuTemplate);
-            }
-            break;
-        case 1: // AI Flags
-            if (idx == sDebugMenu_ListTemplate_Battle_1.totalItems - 1)
-            {
-                sDebugBattleData->submenu++;
-                Debug_DestroyMenu(taskId);
-                Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, sDebugMenu_ListTemplate_Battle_2);
-            }
-            else
-            {
-                sDebugBattleData->aiFlags[idx] = !sDebugBattleData->aiFlags[idx];
-                Debug_RedrawListMenu(taskId);
-            }
-
-            break;
-        case 2: // Terrain
-            sDebugBattleData->submenu++;
-            sDebugBattleData->battleTerrain = idx;
-            Debug_DestroyMenu(taskId);
-            Debug_ShowMenu(DebugTask_HandleMenuInput_Battle, gMultiuseListMenuTemplate);
-            break;
-        case 3: // Enemy pokemon
-            if (idx == 6)
-                Debug_InitializeBattle(taskId);
-            break;
-        }
-    }
-    else if (JOY_NEW(B_BUTTON))
-    {
-        switch (sDebugBattleData->submenu)
-        {
-        case 0: // Return to Main menu
-            PlaySE(SE_SELECT);
-            Debug_DestroyMenu(taskId);
-            Debug_ReShowMainMenu();
-            break;
-        case 2: // Skip AI Flag selection if wild battle
-            if (sDebugBattleData->battleType == DEBUG_BATTLE_0_MENU_ITEM_WILD
-             || sDebugBattleData->battleType == DEBUG_BATTLE_0_MENU_ITEM_WILD_DOUBLE)
-            {
-                sDebugBattleData->submenu = 0;
-            }
-            else
-                sDebugBattleData->submenu--;
-            DebugTask_HandleBattleMenuReDraw(taskId);
-            break;
-        default:
-            sDebugBattleData->submenu--;
-            DebugTask_HandleBattleMenuReDraw(taskId);
-            break;
-        }
-    }
-}
-
-static void Debug_InitializeBattle(u8 taskId)
-{
-    u32 i;
-    gBattleTypeFlags = 0;
-
-    // Set main battle flags
-    switch (sDebugBattleData->battleType)
-    {
-    case DEBUG_BATTLE_0_MENU_ITEM_WILD:
-        break;
-    case DEBUG_BATTLE_0_MENU_ITEM_SINGLE:
-        gBattleTypeFlags = (BATTLE_TYPE_TRAINER);
-        break;
-    case DEBUG_BATTLE_0_MENU_ITEM_DOUBLE:
-        gBattleTypeFlags = (BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TRAINER);
-        break;
-    case DEBUG_BATTLE_0_MENU_ITEM_MULTI:
-        gBattleTypeFlags = (BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TRAINER | BATTLE_TYPE_INGAME_PARTNER);
-        break;
-    }
-
-    // Set terrain
-    gBattleEnvironment = sDebugBattleData->battleTerrain;
-
-    // Populate enemy party
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        ZeroMonData(&gEnemyParty[i]);
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES))
-            gEnemyParty[i] = gPlayerParty[i];
-    }
-
-    // Set AI flags
-    for (i = 0; i < ARRAY_COUNT(sDebugBattleData->aiFlags); i++)
-    {
-        if (sDebugBattleData->aiFlags[i])
-            gDebugAIFlags |= (1 << i);
-    }
-
-    gIsDebugBattle = TRUE;
-    BattleSetup_StartTrainerBattle_Debug();
-
-
-    Debug_DestroyMenu_Full(taskId);
-}
-
-static void DebugTask_HandleMenuInput_Give(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Give, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
-}
-
-static void DebugTask_HandleMenuInput_Sound(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Sound, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
-}
-
-static void DebugTask_HandleMenuInput_BerryFunctions(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_BerryFunctions, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
-}
-
-static void DebugTask_HandleMenuInput_DynamicMusic(u8 taskId)
-{
-    void (*func)(u8);
-    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
-
-    if (JOY_NEW(A_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        if ((func = sDebugMenu_Actions_DynamicMusic[input]) != NULL)
-        {
-            sInstrument = DebugAction_DynamicMusic_ReturnInstrumentFromMenuItem(input);
-            DynamicMusicInstrumentMenu_BufferInstrument(input);
-            func(taskId);
-        }
-    }
-    else if (JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_PC_OFF);
-        Debug_DestroyMenu_Full(taskId);
-        ScriptContext_Enable();
-    }
-}
-
-static void DebugTask_HandleMenuInput_DynamicMusicInstruments(u8 taskId)
-{
-    void (*func)(u8);
-    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
-
-    if (JOY_NEW(A_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        if ((func = sDebugMenu_Actions_DynamicMusic_Instruments[input]) != NULL)
-            func(taskId);
-    }
-    else if (JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
-        Debug_ShowMenu(DebugTask_HandleMenuInput_DynamicMusic, sDebugMenu_ListTemplate_DynamicMusic);
-    }
-}
-
-static void DebugTask_HandleMenuInput_DynamicMusicIsolateTracksList(u8 taskId)
-{
-    void (*func)(u8);
-    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
-
-    if (JOY_NEW(A_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        if ((func = sDebugMenu_Actions_DynamicMusic_TrackList[input]) != NULL)
-        {
-            sTrackNum = input;
-            func(taskId);
-        }
-    }
-    else if (JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
-        Debug_ShowMenu(DebugTask_HandleMenuInput_DynamicMusic, sDebugMenu_ListTemplate_DynamicMusic);
-    }
-}
-
-static void DebugTask_HandleMenuInput_DynamicMusicIsolateTracksFuncs(u8 taskId)
-{
-    void (*func)(u8);
-    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
-
-    if (JOY_NEW(A_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        if ((func = sDebugMenu_Actions_DynamicMusic_Tracks[input]) != NULL)
-            func(taskId);
-    }
-    else if (JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
-        Debug_ShowMenu(DebugTask_HandleMenuInput_DynamicMusicIsolateTracksList, sDebugMenu_ListTemplate_DynamicMusic_IsolateTracksList);
-    }
-}
-
-static void DebugTask_HandleMenuInput_Player(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Player, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
-}
-
-static void DebugTask_HandleMenuInput_ROMInfo(u8 taskId)
-{
-    DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_ROMInfo, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
-}
-
-// *******************************
-// Open sub-menus
-static void DebugAction_OpenIkigaiMenu(u8 taskId)
+static void DebugAction_OpenSubMenu(u8 taskId, const struct DebugMenuOption *items)
 {
     Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_Ikigai, sDebugMenu_ListTemplate_Ikigai);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_General, items);
 }
 
-static void DebugAction_OpenSubmenuIkigai_Player(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleSubmenuInput_Ikigai_Player, sDebugMenu_ListTemplate_Ikigai_Player);
-}
-
-static void DebugAction_OpenSubmenuIkigai_CharacterMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleSubmenuInput_Ikigai_Character, sDebugMenu_ListTemplate_Ikigai_Character);
-}
-
-static void DebugAction_OpenSubmenuIkigai_TemporalMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleSubmenuInput_Ikigai_Temporal, sDebugMenu_ListTemplate_Ikigai_Temporal);
-}
-
-static void DebugAction_OpenSubmenuIkigai_SoundMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleSubmenuInput_Ikigai_Sound, sDebugMenu_ListTemplate_Ikigai_Sound);
-}
-
-static void DebugAction_OpenUtilitiesMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_Utilities, sDebugMenu_ListTemplate_Utilities);
-}
-
-static void DebugAction_OpenPCBagMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_PCBag, sDebugMenu_ListTemplate_PCBag);
-}
-
-static void DebugAction_OpenPartyMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_Party, sDebugMenu_ListTemplate_Party);
-}
-
-static void DebugAction_OpenScriptsMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_Scripts, sDebugMenu_ListTemplate_Scripts);
-}
-
-static void DebugAction_OpenFlagsVarsMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    sDebugMenuListData->listId = 0;
-    Debug_ShowMenu(DebugTask_HandleMenuInput_FlagsVars, gMultiuseListMenuTemplate);
-}
-
-static void DebugAction_OpenGiveMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
-}
-
-static void DebugAction_OpenSoundMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_Sound, sDebugMenu_ListTemplate_Sound);
-}
-
-static void DebugAction_Util_BerryFunctions(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_BerryFunctions, sDebugMenu_ListTemplate_BerryFunctions);
-}
-
-static void DebugAction_OpenDynamicMusicMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_DynamicMusic, sDebugMenu_ListTemplate_DynamicMusic);
-}
-
-static void DebugAction_OpenDynamicMusicInstrumentMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_DynamicMusicInstruments, sDebugMenu_ListTemplate_DynamicMusic_Instruments);
-}
-
-static void DebugAction_OpenDynamicMusicIsolateTrackMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_DynamicMusicIsolateTracksList, sDebugMenu_ListTemplate_DynamicMusic_IsolateTracksList);
-}
-
-static void DebugAction_DynamicMusic_OpenTrackFuncMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_DynamicMusicIsolateTracksFuncs, sDebugMenu_ListTemplate_DynamicMusic_IsolateTracksFunc);
-}
-
-// *******************************
-// Actions Ikigai Debug
-
-static void DebugAction_Ikigai_OpenPokeSphere(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_OpenPokeSphere);
-}
-
-static void DebugAction_Ikigai_MeetAllCharacter(u8 taskId)
-{
-    IkigaiCharacter_SetAllMetFlags();
-    Debug_DestroyMenu_Full(taskId);
-    ScriptContext_Enable();
-}
-
-static void DebugAction_Ikigai_OpenTimeMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_Ikigai_TimeFunction, sDebugMenu_ListTemplate_TimeMenu);
-}
-
-static void DebugAction_Ikigai_ShowCalendar(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_OpenCalendar);
-}
-
-static void DebugAction_Ikigai_CalendarWarp(u8 taskId)
-{
-    Debug_DestroyMenu_Full(taskId);
-    DoCalendarWarpHome();
-}
-
-static void DebugAction_Ikigai_Season(u8 taskId)
-{
-    u8 windowId;
-
-    ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
-    RemoveWindow(gTasks[taskId].tWindowId);
-
-    HideMapNamePopUpWindow();
-    LoadMessageBoxAndBorderGfx();
-    windowId = AddWindow(&sDebugMenuWindowTemplateSeason);
-    DrawStdWindowFrame(windowId, FALSE);
-
-    CopyWindowToVram(windowId, COPYWIN_FULL);
-
-    //Display initial ID
-    StringCopy(gStringVar2, gText_DigitIndicator[0]);
-    ConvertIntToDecimalStringN(gStringVar3, SEASON_SPRING, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringCopyPadded(gStringVar1, gSeasonNames[SEASON_SPRING], CHAR_SPACE, 30);
-    StringExpandPlaceholders(gStringVar4, sDebugText_Ikigai_Season_ID);
-    AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
-
-    gTasks[taskId].func = DebugAction_Ikigai_SeasonsSelect;
-    gTasks[taskId].tSubWindowId = windowId;
-    gTasks[taskId].tInput = 0;
-    gTasks[taskId].tDigit = 0;
-}
-
-static void DebugAction_Ikigai_SeasonsSelect(u8 taskId)
-{
-    if (JOY_NEW(DPAD_ANY))
-    {
-        PlaySE(SE_SELECT);
-        Debug_HandleInput_Numeric(taskId, SEASON_SPRING, SEASON_COUNT - 1, 1);
-
-        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
-        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 2);
-
-        StringCopyPadded(gStringVar1, gSeasonNames[gTasks[taskId].tInput], CHAR_SPACE, 30);
-
-        StringExpandPlaceholders(gStringVar4, sDebugText_Ikigai_Season_ID);
-        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
-    }
-
-    if (JOY_NEW(A_BUTTON))
-    {
-        Ikigai_SetToYearOneSeason(gTasks[taskId].tInput);
-
-        PlaySE(SE_SELECT);
-        DebugAction_DestroyExtraWindow(taskId);
-        RtcCalcLocalTime();
-        Ikigai_SetVyratonWeather();
-        SetSavedWeatherFromCurrMapHeader();
-        SetWeather(GetSavedWeather());
-        SetMainCallback2(CB2_LoadMap);
-    }
-    else if (JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        DebugAction_DestroyExtraWindow(taskId);
-    }
-}
-
-static void DebugAction_Util_OpenTimeMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_TimeMenu, sDebugMenu_ListTemplate_TimeMenu);
-}
-
-static void DebugAction_TimeMenu_TimesOfDay(u8 taskId)
+static void DebugAction_OpenSubMenuFakeRTC(u8 taskId, const struct DebugMenuOption *items)
 {
     if (!OW_USE_FAKE_RTC)
     {
@@ -2620,34 +1284,27 @@ static void DebugAction_TimeMenu_TimesOfDay(u8 taskId)
     }
     else
     {
-        Debug_DestroyMenu_Full(taskId);
-        Debug_ShowMenu(DebugTask_HandleMenuInput_TimeMenu_TimesOfDay, sDebugMenu_ListTemplate_TimeMenu_TimesOfDay);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_General, items);
     }
 }
 
-static void DebugAction_TimeMenu_Weekdays(u8 taskId)
+static void DebugAction_ExecuteScript(u8 taskId, const u8 *script)
 {
-    if (!OW_USE_FAKE_RTC)
+    Debug_DestroyMenu_Full_Script(taskId, script);
+}
+
+static void DebugAction_OpenSubMenuCreateFollowerNPC(u8 taskId, const struct DebugMenuOption *items)
+{
+    if (FNPC_ENABLE_NPC_FOLLOWERS)
     {
-        Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_FakeRTCNotEnabled);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_General, items);
     }
     else
     {
-        Debug_DestroyMenu_Full(taskId);
-        Debug_ShowMenu(DebugTask_HandleMenuInput_TimeMenu_Weekdays, sDebugMenu_ListTemplate_TimeMenu_Weekdays);
+        Debug_DestroyMenu_Full_Script(taskId, Debug_Follower_NPC_Not_Enabled);
     }
-}
-
-static void DebugAction_OpenPlayerMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_Player, sDebugMenu_ListTemplate_Player);
-}
-
-static void DebugAction_OpenROMInfoMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_ROMInfo, sDebugMenu_ListTemplate_ROMInfo);
 }
 
 // *******************************
@@ -2851,11 +1508,6 @@ void CheckPokemonStorageSize(struct ScriptContext *ctx)
     ConvertIntToDecimalStringN(gStringVar3, maxPkmnStorageSize - currPkmnStorageSize, STR_CONV_MODE_LEFT_ALIGN, 6);
 }
 
-static void DebugAction_ROMInfo_CheckSaveBlock(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_CheckSaveBlock);
-}
-
 enum RoundMode
 {
     ROUND_CEILING,
@@ -2904,41 +1556,6 @@ void CheckROMSize(struct ScriptContext *ctx)
     ConvertQ22_10ToDecimalString(gStringVar2, currROMFreeKB, 2, ROUND_FLOOR);
 }
 
-static void DebugAction_ROMInfo_CheckROMSpace(u8 taskId)
-{
-    Debug_DestroyMenu_Full(taskId);
-    LockPlayerFieldControls();
-    ScriptContext_SetupScript(Debug_CheckROMSpace);
-}
-
-static const u8 sWeatherNames[WEATHER_COUNT][24] = {
-    [WEATHER_NONE]               = _("NONE"),
-    [WEATHER_SUNNY_CLOUDS]       = _("SUNNY CLOUDS"),
-    [WEATHER_SUNNY]              = _("SUNNY"),
-    [WEATHER_RAIN]               = _("RAIN"),
-    [WEATHER_SNOW]               = _("SNOW"),
-    [WEATHER_RAIN_THUNDERSTORM]  = _("RAIN THUNDERSTORM"),
-    [WEATHER_FOG_HORIZONTAL]     = _("FOG HORIZONTAL"),
-    [WEATHER_VOLCANIC_ASH]       = _("VOLCANIC ASH"),
-    [WEATHER_SANDSTORM]          = _("SANDSTORM"),
-    [WEATHER_FOG_DIAGONAL]       = _("FOG DIAGONAL"),
-    [WEATHER_UNDERWATER]         = _("UNDERWATER"),
-    [WEATHER_SHADE]              = _("SHADE"),
-    [WEATHER_DROUGHT]            = _("DROUGHT"),
-    [WEATHER_DOWNPOUR]           = _("DOWNPOUR"),
-    [WEATHER_UNDERWATER_BUBBLES] = _("UNDERWATER BUBBLES"),
-    [WEATHER_ABNORMAL]           = _("ABNORMAL(NOT WORKING)"),
-    [WEATHER_ROUTE119_CYCLE]     = _("ROUTE119 CYCLE"),
-    [WEATHER_ROUTE123_CYCLE]     = _("ROUTE123 CYCLE"),
-    [WEATHER_FOG]                = _("FOG"),
-};
-
-const u8 *GetWeatherName(u32 weatherId)
-{
-    return sWeatherNames[weatherId];
-}
-
-static const u8 sDebugText_WeatherNotDefined[] = _("NOT DEFINED!!!");
 static void DebugAction_Util_Weather(u8 taskId)
 {
     u8 windowId;
@@ -2956,7 +1573,7 @@ static void DebugAction_Util_Weather(u8 taskId)
     //Display initial ID
     StringCopy(gStringVar2, gText_DigitIndicator[0]);
     ConvertIntToDecimalStringN(gStringVar3, 1, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringCopyPadded(gStringVar1, sWeatherNames[0], CHAR_SPACE, 30);
+    StringCopyPadded(gStringVar1, GetWeatherName(0), CHAR_SPACE, 30);
     StringExpandPlaceholders(gStringVar4, sDebugText_Util_Weather_ID);
     AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
 
@@ -2976,10 +1593,7 @@ static void DebugAction_Util_Weather_SelectId(u8 taskId)
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 2);
 
-        if (gTasks[taskId].tInput <= 15 || gTasks[taskId].tInput >= 20)
-            StringCopyPadded(gStringVar1, sWeatherNames[gTasks[taskId].tInput], CHAR_SPACE, 30);
-        else
-            StringCopyPadded(gStringVar1, sDebugText_WeatherNotDefined, CHAR_SPACE, 30);
+        StringCopyPadded(gStringVar1, GetWeatherName(gTasks[taskId].tInput), CHAR_SPACE, 30);
 
         StringExpandPlaceholders(gStringVar4, sDebugText_Util_Weather_ID);
         AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
@@ -2998,21 +1612,6 @@ static void DebugAction_Util_Weather_SelectId(u8 taskId)
         PlaySE(SE_SELECT);
         DebugAction_DestroyExtraWindow(taskId);
     }
-}
-
-static void DebugAction_Util_FontTest(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_FontTest);
-}
-
-static void DebugAction_TimeMenu_CheckWallClock(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, PlayersHouse_2F_EventScript_CheckWallClock);
-}
-
-static void DebugAction_TimeMenu_SetWallClock(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, PlayersHouse_2F_EventScript_SetWallClock);
 }
 
 static void DebugAction_Util_WatchCredits(u8 taskId)
@@ -3063,18 +1662,6 @@ static void DebugAction_Util_CheatStart(u8 taskId)
     Debug_DestroyMenu_Full_Script(taskId, Debug_CheatStart);
 }
 
-static void DebugAction_ROMInfo_ExpansionVersion(u8 taskId)
-{
-    Debug_DestroyMenu_Full(taskId);
-    LockPlayerFieldControls();
-    ScriptContext_SetupScript(Debug_ShowExpansionVersion);
-}
-
-static void DebugAction_Util_Steven_Multi(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_Steven_Multi);
-}
-
 void BufferExpansionVersion(struct ScriptContext *ctx)
 {
     static const u8 sText_Released[] = _("\nRelease Build");
@@ -3090,12 +1677,6 @@ void BufferExpansionVersion(struct ScriptContext *ctx)
         string = StringCopy(string, sText_Released);
     else
         string = StringCopy(string, sText_Unreleased);
-}
-
-static void DebugAction_TimeMenu_PrintTime(u8 taskId)
-{
-    LockPlayerFieldControls();
-    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_TellTheTime);
 }
 
 void DebugMenu_CalculateTime(struct ScriptContext *ctx)
@@ -3117,73 +1698,20 @@ void DebugMenu_CalculateTime(struct ScriptContext *ctx)
     }
 }
 
-static void DebugAction_TimeMenu_PrintTimeOfDay(u8 taskId)
-{
-    LockPlayerFieldControls();
-    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_PrintTimeOfDay);
-}
-
 void DebugMenu_CalculateTimeOfDay(struct ScriptContext *ctx)
 {
-    switch (GetTimeOfDay())
+    enum TimeOfDay timeOfDay = GetTimeOfDay();
+    switch (timeOfDay)
     {
         case TIME_MORNING:
-            StringExpandPlaceholders(gStringVar1, gTimeOfDayStringsTable[TIME_MORNING]);
-            break;
         case TIME_DAY:
-            StringExpandPlaceholders(gStringVar1, gTimeOfDayStringsTable[TIME_DAY]);
-            break;
         case TIME_EVENING:
-            StringExpandPlaceholders(gStringVar1, gTimeOfDayStringsTable[TIME_EVENING]);
-            break;
         case TIME_NIGHT:
-            StringExpandPlaceholders(gStringVar1, gTimeOfDayStringsTable[TIME_NIGHT]);
+            StringExpandPlaceholders(gStringVar1, gTimeOfDayStringsTable[timeOfDay]);
             break;
-        default:
+        case TIMES_OF_DAY_COUNT:
             break;
     }
-}
-
-// *******************************
-// Actions Scripts
-static void DebugAction_Util_Script_1(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_Script_1);
-}
-
-static void DebugAction_Util_Script_2(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_Script_2);
-}
-
-static void DebugAction_Util_Script_3(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_Script_3);
-}
-
-static void DebugAction_Util_Script_4(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_Script_4);
-}
-
-static void DebugAction_Util_Script_5(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_Script_5);
-}
-
-static void DebugAction_Util_Script_6(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_Script_6);
-}
-
-static void DebugAction_Util_Script_7(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_Script_7);
-}
-
-static void DebugAction_Util_Script_8(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_Script_8);
 }
 
 // *******************************
@@ -3198,7 +1726,7 @@ static void Debug_Display_FlagInfo(u32 flag, u32 digit, u8 windowId)
     else
         StringCopyPadded(gStringVar2, sDebugText_False, CHAR_SPACE, 15);
     StringCopy(gStringVar3, gText_DigitIndicator[digit]);
-    StringExpandPlaceholders(gStringVar4, sDebugText_FlagsVars_Flag);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Flag: {STR_VAR_1}{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}\n{STR_VAR_3}"));
     AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
 }
 
@@ -3229,6 +1757,7 @@ static void DebugAction_FlagsVars_FlagsSelect(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON))
     {
+        PlaySE(SE_SELECT);
         FlagToggle(gTasks[taskId].tInput);
     }
     else if (JOY_NEW(B_BUTTON))
@@ -3238,7 +1767,6 @@ static void DebugAction_FlagsVars_FlagsSelect(u8 taskId)
         return;
     }
 
-    // PlaySE(SE_SELECT);
     Debug_HandleInput_Numeric(taskId, 1, FLAGS_COUNT - 1, DEBUG_NUMBER_DIGITS_FLAGS);
 
     if (JOY_NEW(DPAD_ANY) || JOY_NEW(A_BUTTON))
@@ -3646,7 +2174,7 @@ static void Debug_Display_ItemInfo(u32 itemId, u32 digit, u8 windowId)
     WrapFontIdToFit(gStringVar1, end, DEBUG_MENU_FONT, WindowWidthPx(windowId));
     StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
     ConvertIntToDecimalStringN(gStringVar3, itemId, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
-    StringExpandPlaceholders(gStringVar4, sDebugText_ItemID);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Item ID: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 90}\n\n{STR_VAR_2}"));
     AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
 }
 
@@ -3690,7 +2218,7 @@ static void Debug_Display_ItemQuantity(u32 quantity, u32 digit, u8 windowId)
     StringCopy(gStringVar2, gText_DigitIndicator[digit]);
     ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEM_QUANTITY);
     StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
-    StringExpandPlaceholders(gStringVar4, sDebugText_ItemQuantity);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Quantity:{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n\n{STR_VAR_2}"));
     AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
 }
 
@@ -3892,7 +2420,7 @@ static void Debug_Display_SpeciesInfo(u32 species, u32 digit, u8 windowId)
     WrapFontIdToFit(gStringVar1, end, DEBUG_MENU_FONT, WindowWidthPx(windowId));
     StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
     ConvertIntToDecimalStringN(gStringVar3, species, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
-    StringExpandPlaceholders(gStringVar4, sDebugText_PokemonID);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Species: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 90}\n\n{STR_VAR_2}{CLEAR_TO 90}"));
     AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
 }
 
@@ -4038,7 +2566,7 @@ static void Debug_Display_Level(u32 level, u32 digit, u8 windowId)
     StringCopy(gStringVar2, gText_DigitIndicator[digit]);
     ConvertIntToDecimalStringN(gStringVar1, level, STR_CONV_MODE_LEADING_ZEROS, 3);
     StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
-    StringExpandPlaceholders(gStringVar4, sDebugText_PokemonLevel);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Level:{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}"));
     AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
 }
 
@@ -4170,7 +2698,7 @@ static void Debug_Display_Ability(u32 abilityId, u32 digit, u8 windowId)//(u32 n
     StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
     u8 *end = StringCopy(gStringVar1, gAbilitiesInfo[abilityId].name);
     WrapFontIdToFit(gStringVar1, end, DEBUG_MENU_FONT, WindowWidthPx(windowId));
-    StringExpandPlaceholders(gStringVar4, sDebugText_PokemonAbility);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Ability Num: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}"));
     AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
 }
 
@@ -4215,6 +2743,16 @@ static void DebugAction_Give_Pokemon_SelectNature(u8 taskId)
     }
 }
 
+static void Debug_Display_TeraType(u32 typeId, u32 digit, u8 windowId)
+{
+    StringCopy(gStringVar2, gText_DigitIndicator[digit]);
+    ConvertIntToDecimalStringN(gStringVar3, typeId, STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
+    StringCopy(gStringVar1, gTypesInfo[typeId].name);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Tera Type: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}"));
+    AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
+}
+
 static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
 {
     u8 abilityCount = NUM_ABILITY_SLOTS - 1; //-1 for proper iteration
@@ -4251,12 +2789,7 @@ static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
         gTasks[taskId].tInput = 0;
         gTasks[taskId].tDigit = 0;
 
-        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
-        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 2);
-        StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
-        StringCopy(gStringVar1, gTypesInfo[0].name);
-        StringExpandPlaceholders(gStringVar4, sDebugText_PokemonTeraType);
-        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
+        Debug_Display_TeraType(gTasks[taskId].tInput, gTasks[taskId].tDigit, gTasks[taskId].tSubWindowId);
 
         gTasks[taskId].func = DebugAction_Give_Pokemon_SelectTeraType;
     }
@@ -4266,6 +2799,15 @@ static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
         Free(sDebugMonData);
         DebugAction_DestroyExtraWindow(taskId);
     }
+}
+
+static void Debug_Display_DynamaxLevel(u32 level, u32 digit, u8 windowId)
+{
+    StringCopy(gStringVar2, gText_DigitIndicator[digit]);
+    ConvertIntToDecimalStringN(gStringVar1, level, STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Dmax Lvl:{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}"));
+    AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
 }
 
 static void DebugAction_Give_Pokemon_SelectTeraType(u8 taskId)
@@ -4287,12 +2829,7 @@ static void DebugAction_Give_Pokemon_SelectTeraType(u8 taskId)
                 gTasks[taskId].tInput = 0;
         }
 
-        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
-        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 2);
-        StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
-        StringCopy(gStringVar1, gTypesInfo[gTasks[taskId].tInput].name);
-        StringExpandPlaceholders(gStringVar4, sDebugText_PokemonTeraType);
-        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
+        Debug_Display_TeraType(gTasks[taskId].tInput, gTasks[taskId].tDigit, gTasks[taskId].tSubWindowId);
     }
 
     if (JOY_NEW(A_BUTTON))
@@ -4301,11 +2838,7 @@ static void DebugAction_Give_Pokemon_SelectTeraType(u8 taskId)
         gTasks[taskId].tInput = 0;
         gTasks[taskId].tDigit = 0;
 
-        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
-        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 2);
-        StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
-        StringExpandPlaceholders(gStringVar4, sDebugText_PokemonDynamaxLevel);
-        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
+        Debug_Display_DynamaxLevel(gTasks[taskId].tInput, gTasks[taskId].tDigit, gTasks[taskId].tSubWindowId);
 
         gTasks[taskId].func = DebugAction_Give_Pokemon_SelectDynamaxLevel;
     }
@@ -4317,18 +2850,18 @@ static void DebugAction_Give_Pokemon_SelectTeraType(u8 taskId)
     }
 }
 
+static void Debug_Display_GigantamaxFactor(u32 input, u8 windowId)
+{
+    Debug_Display_TrueFalse(input, windowId, COMPOUND_STRING("Gmax Factor:{CLEAR_TO 90}\n   {STR_VAR_2}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{CLEAR_TO 90}"));
+}
+
 static void DebugAction_Give_Pokemon_SelectDynamaxLevel(u8 taskId)
 {
     if (JOY_NEW(DPAD_ANY))
     {
         PlaySE(SE_SELECT);
         Debug_HandleInput_Numeric(taskId, 0, MAX_DYNAMAX_LEVEL, 2);
-
-        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
-        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 2);
-        StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
-        StringExpandPlaceholders(gStringVar4, sDebugText_PokemonDynamaxLevel);
-        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
+        Debug_Display_DynamaxLevel(gTasks[taskId].tInput, gTasks[taskId].tDigit, gTasks[taskId].tSubWindowId);
     }
 
     if (JOY_NEW(A_BUTTON))
@@ -4336,7 +2869,7 @@ static void DebugAction_Give_Pokemon_SelectDynamaxLevel(u8 taskId)
         sDebugMonData->dynamaxLevel = gTasks[taskId].tInput;
         gTasks[taskId].tInput = 0;
         gTasks[taskId].tDigit = 0;
-        Debug_Display_TrueFalse(gTasks[taskId].tInput, gTasks[taskId].tSubWindowId, sDebugText_PokemonGmaxFactor);
+        Debug_Display_GigantamaxFactor(gTasks[taskId].tInput, gTasks[taskId].tSubWindowId);
         gTasks[taskId].func = DebugAction_Give_Pokemon_SelectGigantamaxFactor;
     }
     else if (JOY_NEW(B_BUTTON))
@@ -4365,7 +2898,7 @@ static void DebugAction_Give_Pokemon_SelectGigantamaxFactor(u8 taskId)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].tInput ^= JOY_NEW(DPAD_UP | DPAD_DOWN) > 0;
-        Debug_Display_TrueFalse(gTasks[taskId].tInput, gTasks[taskId].tSubWindowId, sDebugText_PokemonGmaxFactor);
+        Debug_Display_GigantamaxFactor(gTasks[taskId].tInput, gTasks[taskId].tSubWindowId);
     }
 
     if (JOY_NEW(A_BUTTON))
@@ -4728,16 +3261,16 @@ static void DebugAction_TimeMenu_ChangeTimeOfDay(u8 taskId)
     RtcCalcLocalTime();
     switch (input)
     {
-        case DEBUG_TIME_MENU_ITEM_MORNING:
+        case TIME_MORNING:
             FakeRtc_ForwardTimeTo(Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_MORNING, FALSE), 0, 0);
             break;
-        case DEBUG_TIME_MENU_ITEM_DAY:
+        case TIME_DAY:
             FakeRtc_ForwardTimeTo(Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_DAY, FALSE), 0, 0);
             break;
-        case DEBUG_TIME_MENU_ITEM_EVENING:
+        case TIME_EVENING:
             FakeRtc_ForwardTimeTo(Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_EVENING, FALSE), 0, 0);
             break;
-        case DEBUG_TIME_MENU_ITEM_NIGHT:
+        case TIME_NIGHT:
             FakeRtc_ForwardTimeTo(Ikigai_GetSeasonalTimeHour(gLocalTime.days, TIME_NIGHT, FALSE), 0, 0);
             break;
     }
@@ -4752,49 +3285,14 @@ static void DebugAction_TimeMenu_ChangeWeekdays(u8 taskId)
     u32 daysToAdd = 0;
 
     DebugAction_DestroyExtraWindow(taskId);
-    switch(input)
-    {
-        case DEBUG_TIME_MENU_ITEM_SUNDAY:
-            daysToAdd = ((WEEKDAY_SUN - rtc->dayOfWeek) + WEEKDAY_COUNT) % WEEKDAY_COUNT;
-            FakeRtc_AdvanceTimeBy(daysToAdd, 0, 0, 0);
-            break;
-        case DEBUG_TIME_MENU_ITEM_MONDAY:
-            daysToAdd = ((WEEKDAY_MON - rtc->dayOfWeek) + WEEKDAY_COUNT) % WEEKDAY_COUNT;
-            FakeRtc_AdvanceTimeBy(daysToAdd, 0, 0, 0);
-            break;
-        case DEBUG_TIME_MENU_ITEM_TUESDAY:
-            daysToAdd = ((WEEKDAY_TUE - rtc->dayOfWeek) + WEEKDAY_COUNT) % WEEKDAY_COUNT;
-            FakeRtc_AdvanceTimeBy(daysToAdd, 0, 0, 0);
-            break;
-        case DEBUG_TIME_MENU_ITEM_WEDNESDAY:
-            daysToAdd = ((WEEKDAY_WED - rtc->dayOfWeek) + WEEKDAY_COUNT) % WEEKDAY_COUNT;
-            FakeRtc_AdvanceTimeBy(daysToAdd, 0, 0, 0);
-            break;
-        case DEBUG_TIME_MENU_ITEM_THURSDAY:
-            daysToAdd = ((WEEKDAY_THU - rtc->dayOfWeek) + WEEKDAY_COUNT) % WEEKDAY_COUNT;
-            FakeRtc_AdvanceTimeBy(daysToAdd, 0, 0, 0);
-            break;
-        case DEBUG_TIME_MENU_ITEM_FRIDAY:
-            daysToAdd = ((WEEKDAY_FRI - rtc->dayOfWeek) + WEEKDAY_COUNT) % WEEKDAY_COUNT;
-            FakeRtc_AdvanceTimeBy(daysToAdd, 0, 0, 0);
-            break;
-        case DEBUG_TIME_MENU_ITEM_SATURDAY:
-            daysToAdd = ((WEEKDAY_SAT - rtc->dayOfWeek) + WEEKDAY_COUNT) % WEEKDAY_COUNT;
-            FakeRtc_AdvanceTimeBy(daysToAdd, 0, 0, 0);
-            break;
-        }
+    daysToAdd = ((input - rtc->dayOfWeek) + WEEKDAY_COUNT) % WEEKDAY_COUNT;
+    FakeRtc_AdvanceTimeBy(daysToAdd, 0, 0, 0);
     Debug_DestroyMenu_Full(taskId);
     SetMainCallback2(CB2_LoadMap);
 }
 
 // *******************************
 // Actions PCBag
-
-static void DebugAction_OpenPCBagFillMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_PCBag_Fill, sDebugMenu_ListTemplate_PCBag_Fill);
-}
 
 static void DebugAction_PCBag_Fill_PCBoxes_Fast(u8 taskId) //Credit: Sierraffinity
 {
@@ -4924,11 +3422,6 @@ static void DebugAction_PCBag_Fill_PocketKeyItems(u8 taskId)
         if (GetItemPocket(itemId) == POCKET_KEY_ITEMS && CheckBagHasSpace(itemId, 1))
             AddBagItem(itemId, 1);
     }
-}
-
-static void DebugAction_PCBag_AccessPC(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, EventScript_PC);
 }
 
 static void DebugAction_PCBag_ClearBag(u8 taskId)
@@ -5154,6 +3647,49 @@ static void DebugAction_Ikigai_MUS_Expansion(u8 taskId)
     gTasks[taskId].tInput = MUSIC_EXPANSION_START + 1;
     gTasks[taskId].tDigit = 0;
     gTasks[taskId].tCurrentSong = gTasks[taskId].tInput;
+}
+
+static const u32 gDebugFollowerNPCGraphics[] = 
+{
+    OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL,
+    OBJ_EVENT_GFX_RIVAL_MAY_NORMAL,
+    OBJ_EVENT_GFX_STEVEN,
+    OBJ_EVENT_GFX_WALLY,
+    OBJ_EVENT_GFX_RED,
+    OBJ_EVENT_GFX_LEAF,
+};
+
+static void DebugAction_CreateFollowerNPC(u8 taskId)
+{
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
+    u32 gfx = gDebugFollowerNPCGraphics[input];
+
+    Debug_DestroyMenu_Full(taskId);
+    LockPlayerFieldControls();
+    DestroyFollowerNPC();
+    SetFollowerNPCData(FNPC_DATA_BATTLE_PARTNER, PARTNER_STEVEN);
+    CreateFollowerNPC(gfx, FNPC_ALL, Debug_Follower_NPC_Event_Script);
+    if (gfx != OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL && gfx != OBJ_EVENT_GFX_RIVAL_MAY_NORMAL)
+    {
+        u32 flags = GetFollowerNPCData(FNPC_DATA_FOLLOWER_FLAGS);
+        SetFollowerNPCData(FNPC_DATA_FOLLOWER_FLAGS, (flags &= ~FNPC_RUNNING));
+    }
+    UnlockPlayerFieldControls();
+}
+
+static void DebugAction_DestroyFollowerNPC(u8 taskId)
+{
+    if (FNPC_ENABLE_NPC_FOLLOWERS)
+    {
+        Debug_DestroyMenu_Full(taskId);
+        LockPlayerFieldControls();
+        DestroyFollowerNPC();
+        UnlockPlayerFieldControls();
+    }
+    else
+    {
+        Debug_DestroyMenu_Full_Script(taskId, Debug_Follower_NPC_Not_Enabled);
+    }
 }
 
 #undef tCurrentSong
@@ -7726,37 +6262,12 @@ static void DebugAction_DynamicMusic_Movement(u8 taskId)
 // *******************************
 // Actions Party/Boxes
 
-static void DebugAction_Party_MoveReminder(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon);
-}
-
-static void DebugAction_Party_HatchAnEgg(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_HatchAnEgg);
-}
-
 static void DebugAction_Party_HealParty(u8 taskId)
 {
     PlaySE(SE_USE_ITEM);
     HealPlayerParty();
     ScriptContext_Enable();
     Debug_DestroyMenu_Full(taskId);
-}
-
-static void DebugAction_Party_InflictStatus1(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_InflictStatus1);
-}
-
-static void DebugAction_Party_CheckEVs(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_CheckEVs);
-}
-
-static void DebugAction_Party_CheckIVs(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_CheckIVs);
 }
 
 static void DebugAction_Party_ClearParty(u8 taskId)
@@ -7811,11 +6322,6 @@ void CheckEWRAMCounters(struct ScriptContext *ctx)
 {
     ConvertIntToDecimalStringN(gStringVar1, gFollowerSteps, STR_CONV_MODE_LEFT_ALIGN, 5);
     ConvertIntToDecimalStringN(gStringVar2, gChainFishingDexNavStreak, STR_CONV_MODE_LEFT_ALIGN, 5);
-}
-
-static void DebugAction_Util_CheckEWRAMCounters(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_EWRAMCounters);
 }
 
 static u32 DebugAction_DynamicMusic_ReturnInstrumentFromMenuItem(u32 input)

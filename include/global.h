@@ -220,11 +220,11 @@ struct IkigaiCharacterData
     u8 conversed[ROUND_BITS_TO_BYTES(CHARACTER_RESIDENT_COUNT)];
 };
 
-struct NPCFollowerMapData
+struct NPCFollowerPadding
 {
-    u8 id;
-    u8 number;
-    u8 group;
+    u8 padding1;
+    u8 padding2;
+    u8 padding3;
 };
 
 struct NPCFollower
@@ -236,7 +236,7 @@ struct NPCFollower
     u8 objId;
     u8 currentSprite;
     u8 delayedState;
-    struct NPCFollowerMapData map;
+    struct NPCFollowerPadding padding;
     struct Coords16 log;
     const u8 *script;
     u16 flag;
@@ -726,7 +726,8 @@ struct Roamer
     /*0x12*/ u8 tough;
     /*0x13*/ bool8 active;
     /*0x14*/ u8 statusB; // Stores frostbite
-    /*0x14*/ u8 filler[0x7];
+    /*0x15*/ bool8 shiny;
+    /*0x16*/ u8 filler[0x6];
 };
 
 struct RamScriptData
