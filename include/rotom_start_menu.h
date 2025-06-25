@@ -20,3 +20,22 @@ void Task_RotomPhone_FullScreenMenu_Open(u8 taskId);
 bool32 RotomPhone_StartMenu_IsFullScreen(void);
 
 #endif // GUARD_ROTOM_START_MENU_H
+
+
+/*      --  Credits & Requirements  --
+
+The Rotom Start Menu uses ShantyTown's ComfyAnim Library,
+many thanks to them for creating this public resource.
+It will need to be added to your project in order to use
+this if not already:
+https://github.com/huderlem/pokeemerald/tree/comfy_anims
+
+This Rotom Start Menu was built upon two other public
+resources. Grant-Lucas' Sample UI (Sliding Panel) and
+Vol's Start Menu provided a basis for both aspects of
+this start menu to be made. Many thanks, and a lot of
+credit goes to them as well.
+
+
+        --  How to Add a New Option --
+*/
