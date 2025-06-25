@@ -347,7 +347,7 @@ static void SpriteCB_RotomPhone_OverworldMenu_RotomFace_Unload(struct Sprite* sp
 #define OW_ROTOM_PHONE_TEXT_BG_COLOUR      14
 #define OW_ROTOM_PHONE_TEXT_FG_COLOUR      4
 #define OW_ROTOM_PHONE_TEXT_SHADOW_COLOUR  9
-#define FS_ROTOM_PHONE_TEXT_BG_COLOUR      12
+#define FS_ROTOM_PHONE_TEXT_BG_COLOUR      14
 #define FS_ROTOM_PHONE_TEXT_FG_COLOUR      5
 #define FS_ROTOM_PHONE_TEXT_SHADOW_COLOUR  10
 enum FontColor
@@ -2607,7 +2607,7 @@ static void RotomPhone_FullScreenMenu_PrintTime(void)
 
     AddTextPrinterParameterized4(RP_FS_WIN_TIME, FONT_NORMAL,
         GetStringCenterAlignXOffset(FONT_NORMAL, time, sRotomPhone_FullScreenMenuWindowTemplates[RP_FS_WIN_TIME].width * 8),
-        0, 0, 0,
+        1, 0, 0,
         sRotomPhone_StartMenu_FontColours[FONT_FS_ROTOM_PHONE], TEXT_SKIP_DRAW, time);
 
     CopyWindowToVram(RP_FS_WIN_TIME, COPYWIN_GFX);
