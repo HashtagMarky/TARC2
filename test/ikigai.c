@@ -9,8 +9,8 @@ TEST("Character Descriptions Fit in PokéSphere")
 {
     u32 i;
     const u32 fontId = FONT_SHORT_NARROWER, widthPx = 136 - 10;
-    u32 character = CHARACTER_FIRST;
-    for (i = CHARACTER_FIRST; i < CHARACTER_COUNT_TOTAL; i++)
+    u32 character = CHARACTER_DEFAULT;
+    for (i = CHARACTER_DEFAULT; i < CHARACTER_COUNT_TOTAL; i++)
     {
         if (gIkigaiCharactersInfo[i].highlights == NULL)
             continue;
