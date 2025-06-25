@@ -73,6 +73,14 @@
 #include "fake_rtc.h"
 #include "save.h"
 
+#include "calendar.h"
+#include "dynamic_music.h"
+#include "ikigai_characters.h"
+#include "ui_samuel_case.h"
+#include "vyraton.h"
+
+#define FLAG_DEBUG_SOUND_OVERWORLD_PLAY TRUE
+
 enum FollowerNPCCreateDebugMenu
 {
     DEBUG_FNPC_BRENDAN,
@@ -351,9 +359,13 @@ static u32 DebugAction_DynamicMusic_ReturnInstrumentFromMenuItem(u32 input);
 static void DynamicMusicInstrumentMenu_BufferInstrument(u32 input);
 
 static void DebugAction_Player_Name(u8 taskId);
-static void DebugAction_Player_Nickname(u8 taskId);
 static void DebugAction_Player_Gender(u8 taskId);
 static void DebugAction_Player_Id(u8 taskId);
+
+// Ikigai Declarations
+static const struct DebugMenuOption sDebugMenu_Actions_Ikigai[];
+static void DebugAction_Ikigai_GymType(u8 taskId);
+static void DebugAction_Player_Nickname(u8 taskId);
 
 extern const u8 Debug_FlagsNotSetOverworldConfigMessage[];
 extern const u8 Debug_FlagsNotSetBattleConfigMessage[];
@@ -672,6 +684,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Flags[] =
 
 static const struct DebugMenuOption sDebugMenu_Actions_Main[] =
 {
+    { COMPOUND_STRING("Ikigai Debug…"), DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai, },
     { COMPOUND_STRING("Utilities…"),    DebugAction_OpenSubMenu, sDebugMenu_Actions_Utilities, },
     { COMPOUND_STRING("PC/Bag…"),       DebugAction_OpenSubMenu, sDebugMenu_Actions_PCBag, },
     { COMPOUND_STRING("Party…"),        DebugAction_OpenSubMenu, sDebugMenu_Actions_Party, },
@@ -682,6 +695,28 @@ static const struct DebugMenuOption sDebugMenu_Actions_Main[] =
     { COMPOUND_STRING("Sound…"),        DebugAction_OpenSubMenu, sDebugMenu_Actions_Sound, },
     { COMPOUND_STRING("ROM Info…"),     DebugAction_OpenSubMenu, sDebugMenu_Actions_ROMInfo2, },
     { COMPOUND_STRING("Cancel"),        DebugAction_Cancel, },
+    { NULL }
+};
+
+// *******************************
+// Ikigai Debug Menu Actions
+static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_Player[] =
+{
+    { COMPOUND_STRING("Gym Type"),              DebugAction_Ikigai_GymType },
+    { COMPOUND_STRING("Toggle Player Body"),    DebugAction_Player_Gender },
+    { COMPOUND_STRING("Player Name"),           DebugAction_Player_Name },
+    { COMPOUND_STRING("Player Nickname"),       DebugAction_Player_Nickname },
+    { COMPOUND_STRING("Player DynPals"),        DebugAction_ExecuteScript, DynPal_OpenFullMenu },
+    { NULL }
+};
+
+
+static const struct DebugMenuOption sDebugMenu_Actions_Ikigai[] =
+{
+    { COMPOUND_STRING("Player Menu"),       DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Player },
+    { COMPOUND_STRING("Character Menu"),    DebugAction_OpenSubMenu, sDebugMenu_Actions_FollowerNPCMenu_Create },
+    { COMPOUND_STRING("Temporal Menu"),     DebugAction_OpenSubMenu, sDebugMenu_Actions_FollowerNPCMenu_Create},
+    { COMPOUND_STRING("Sound Menu"),        DebugAction_OpenSubMenu, sDebugMenu_Actions_FollowerNPCMenu_Create},
     { NULL }
 };
 
@@ -1648,11 +1683,6 @@ static void DebugAction_Player_Id(u8 taskId)
     ScriptContext_Enable();
 }
 
-static void DebugAction_Ikigai_PlayerDynPals(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, DynPal_OpenFullMenu);
-}
-
 static void DebugAction_Util_CheatStart(u8 taskId)
 {
     if (!FlagGet(FLAG_SYS_CLOCK_SET))
@@ -2321,43 +2351,8 @@ static void Debug_Display_IkigaiGymInfo(u32 type, u32 digit, u8 windowId)
     else
         StringCopy(gStringVar3, COMPOUND_STRING("None"));
     StringAppend(gStringVar3, COMPOUND_STRING("{CLEAR_TO 110}"));
-    StringExpandPlaceholders(gStringVar4, sDebugText_Ikigai_Gym_Type);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Gym Type: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 110}\n\n{STR_VAR_2}{CLEAR_TO 110}"));
     AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
-}
-
-static void DebugAction_Ikigai_GymType(u8 taskId)
-{
-    u8 windowId;
-
-    //Mon data struct
-    sDebugMonData = AllocZeroed(sizeof(struct DebugMonData));
-    ResetMonDataStruct(sDebugMonData);
-
-    //Window initialization
-    ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
-    RemoveWindow(gTasks[taskId].tWindowId);
-
-    HideMapNamePopUpWindow();
-    LoadMessageBoxAndBorderGfx();
-    windowId = AddWindow(&sDebugMenuWindowTemplateGymType);
-    DrawStdWindowFrame(windowId, FALSE);
-
-    CopyWindowToVram(windowId, COPYWIN_FULL);
-
-    // Display initial Pokémon
-    Debug_Display_IkigaiGymInfo(TYPE_NORMAL, 0, windowId);
-
-    //Set task data
-    gTasks[taskId].func = DebugAction_Ikigai_GymType_SelectId;
-    gTasks[taskId].tSubWindowId = windowId;
-    gTasks[taskId].tInput = TYPE_NORMAL;
-    gTasks[taskId].tDigit = 0;
-    gTasks[taskId].tIsComplex = FALSE;
-
-    FreeMonIconPalettes();
-    LoadMonIconPalette(gIkigaiStarters[gTasks[taskId].tInput][gSaveBlock2Ptr->playerGender]);
-    gTasks[taskId].tSpriteId = CreateMonIcon(gIkigaiStarters[gTasks[taskId].tInput][gSaveBlock2Ptr->playerGender], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0);
-    gSprites[gTasks[taskId].tSpriteId].oam.priority = 0;
 }
 
 static void DebugAction_Ikigai_GymType_SelectId(u8 taskId)
@@ -2398,7 +2393,7 @@ static void DebugAction_Ikigai_GymType_SelectId(u8 taskId)
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 3);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
-        StringExpandPlaceholders(gStringVar4, sDebugText_Ikigai_Gym_PokemonLevel);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Level:{CLEAR_TO 110}\n{STR_VAR_1}{CLEAR_TO 110}\n{CLEAR_TO 110}\n{STR_VAR_2}{CLEAR_TO 110}"));
         AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
 
         gTasks[taskId].func = DebugAction_Give_Pokemon_SelectLevel;
@@ -2411,6 +2406,41 @@ static void DebugAction_Ikigai_GymType_SelectId(u8 taskId)
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].tSpriteId]);
         DebugAction_DestroyExtraWindow(taskId);
     }
+}
+
+static void DebugAction_Ikigai_GymType(u8 taskId)
+{
+    u8 windowId;
+
+    //Mon data struct
+    sDebugMonData = AllocZeroed(sizeof(struct DebugMonData));
+    ResetMonDataStruct(sDebugMonData);
+
+    //Window initialization
+    ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
+    RemoveWindow(gTasks[taskId].tWindowId);
+
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+    windowId = AddWindow(&sDebugMenuWindowTemplateGymType);
+    DrawStdWindowFrame(windowId, FALSE);
+
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+
+    // Display initial Pokémon
+    Debug_Display_IkigaiGymInfo(TYPE_NORMAL, 0, windowId);
+
+    //Set task data
+    gTasks[taskId].func = DebugAction_Ikigai_GymType_SelectId;
+    gTasks[taskId].tSubWindowId = windowId;
+    gTasks[taskId].tInput = TYPE_NORMAL;
+    gTasks[taskId].tDigit = 0;
+    gTasks[taskId].tIsComplex = FALSE;
+
+    FreeMonIconPalettes();
+    LoadMonIconPalette(gIkigaiStarters[gTasks[taskId].tInput][gSaveBlock2Ptr->playerGender]);
+    gTasks[taskId].tSpriteId = CreateMonIcon(gIkigaiStarters[gTasks[taskId].tInput][gSaveBlock2Ptr->playerGender], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0);
+    gSprites[gTasks[taskId].tSpriteId].oam.priority = 0;
 }
 
 static void Debug_Display_SpeciesInfo(u32 species, u32 digit, u8 windowId)
@@ -6324,72 +6354,72 @@ void CheckEWRAMCounters(struct ScriptContext *ctx)
     ConvertIntToDecimalStringN(gStringVar2, gChainFishingDexNavStreak, STR_CONV_MODE_LEFT_ALIGN, 5);
 }
 
-static u32 DebugAction_DynamicMusic_ReturnInstrumentFromMenuItem(u32 input)
-{
-    if (input == DEBUG_DYNAMIC_MUSIC_MENU_ACCORDION)
-        return INSTRUMENT_ACCORDION;
+// static u32 DebugAction_DynamicMusic_ReturnInstrumentFromMenuItem(u32 input)
+// {
+//     if (input == DEBUG_DYNAMIC_MUSIC_MENU_ACCORDION)
+//         return INSTRUMENT_ACCORDION;
     
-    if (input == DEBUG_DYNAMIC_MUSIC_MENU_KEYTAR)
-        return INSTRUMENT_KEYTAR;
+//     if (input == DEBUG_DYNAMIC_MUSIC_MENU_KEYTAR)
+//         return INSTRUMENT_KEYTAR;
     
-    if (input == DEBUG_DYNAMIC_MUSIC_MENU_ERHU)
-        return INSTRUMENT_ERHU;
+//     if (input == DEBUG_DYNAMIC_MUSIC_MENU_ERHU)
+//         return INSTRUMENT_ERHU;
     
-    if (input == DEBUG_DYNAMIC_MUSIC_MENU_GUITAR)
-        return INSTRUMENT_GUITAR;
+//     if (input == DEBUG_DYNAMIC_MUSIC_MENU_GUITAR)
+//         return INSTRUMENT_GUITAR;
     
-    if (input == DEBUG_DYNAMIC_MUSIC_MENU_WHISTLE)
-        return INSTRUMENT_WHISTLE;
+//     if (input == DEBUG_DYNAMIC_MUSIC_MENU_WHISTLE)
+//         return INSTRUMENT_WHISTLE;
     
-    if (input == DEBUG_DYNAMIC_MUSIC_MENU_FLUTE)
-        return INSTRUMENT_FLUTE;
+//     if (input == DEBUG_DYNAMIC_MUSIC_MENU_FLUTE)
+//         return INSTRUMENT_FLUTE;
     
-    if (input == DEBUG_DYNAMIC_MUSIC_MENU_ALL_INSTRUMENTS)
-        return INSTRUMENT_ALL;
+//     if (input == DEBUG_DYNAMIC_MUSIC_MENU_ALL_INSTRUMENTS)
+//         return INSTRUMENT_ALL;
     
-    if (input == DEBUG_DYNAMIC_MUSIC_MENU_PLAYING_INSTRUMENTS)
-        return INSTRUMENT_COUNT + 1;
+//     if (input == DEBUG_DYNAMIC_MUSIC_MENU_PLAYING_INSTRUMENTS)
+//         return INSTRUMENT_COUNT + 1;
 
-    if (input == DEBUG_DYNAMIC_MUSIC_MENU_TRACKS)
-        return INSTRUMENT_COUNT + 2;
+//     if (input == DEBUG_DYNAMIC_MUSIC_MENU_TRACKS)
+//         return INSTRUMENT_COUNT + 2;
     
-    return INSTRUMENT_COUNT;
-}
+//     return INSTRUMENT_COUNT;
+// }
 
-static void DynamicMusicInstrumentMenu_BufferInstrument(u32 input)
-{
-    switch (input)
-    {
-    case DEBUG_DYNAMIC_MUSIC_MENU_ACCORDION:
-        StringCopy(gStringVar1, COMPOUND_STRING("Accordion"));
-        break;
+// static void DynamicMusicInstrumentMenu_BufferInstrument(u32 input)
+// {
+//     switch (input)
+//     {
+//     case DEBUG_DYNAMIC_MUSIC_MENU_ACCORDION:
+//         StringCopy(gStringVar1, COMPOUND_STRING("Accordion"));
+//         break;
     
-    case DEBUG_DYNAMIC_MUSIC_MENU_KEYTAR:
-        StringCopy(gStringVar1, COMPOUND_STRING("Keytar"));
-        break;
+//     case DEBUG_DYNAMIC_MUSIC_MENU_KEYTAR:
+//         StringCopy(gStringVar1, COMPOUND_STRING("Keytar"));
+//         break;
     
-    case DEBUG_DYNAMIC_MUSIC_MENU_ERHU:
-        StringCopy(gStringVar1, COMPOUND_STRING("Erhu"));
-        break;
+//     case DEBUG_DYNAMIC_MUSIC_MENU_ERHU:
+//         StringCopy(gStringVar1, COMPOUND_STRING("Erhu"));
+//         break;
     
-    case DEBUG_DYNAMIC_MUSIC_MENU_GUITAR:
-        StringCopy(gStringVar1, COMPOUND_STRING("Guitar"));
-        break;
+//     case DEBUG_DYNAMIC_MUSIC_MENU_GUITAR:
+//         StringCopy(gStringVar1, COMPOUND_STRING("Guitar"));
+//         break;
     
-    case DEBUG_DYNAMIC_MUSIC_MENU_WHISTLE:
-        StringCopy(gStringVar1, COMPOUND_STRING("Whistle"));
-        break;
+//     case DEBUG_DYNAMIC_MUSIC_MENU_WHISTLE:
+//         StringCopy(gStringVar1, COMPOUND_STRING("Whistle"));
+//         break;
     
-    case DEBUG_DYNAMIC_MUSIC_MENU_FLUTE:
-        StringCopy(gStringVar1, COMPOUND_STRING("Flute"));
-        break;
+//     case DEBUG_DYNAMIC_MUSIC_MENU_FLUTE:
+//         StringCopy(gStringVar1, COMPOUND_STRING("Flute"));
+//         break;
     
-    case DEBUG_DYNAMIC_MUSIC_MENU_ALL_INSTRUMENTS:
-        StringCopy(gStringVar1, COMPOUND_STRING("All Instruments"));
-        break;
+//     case DEBUG_DYNAMIC_MUSIC_MENU_ALL_INSTRUMENTS:
+//         StringCopy(gStringVar1, COMPOUND_STRING("All Instruments"));
+//         break;
     
-    case DEBUG_DYNAMIC_MUSIC_MENU_PLAYING_INSTRUMENTS:
-        StringCopy(gStringVar1, COMPOUND_STRING("Played Instruments"));
-        break;
-    }
-}
+//     case DEBUG_DYNAMIC_MUSIC_MENU_PLAYING_INSTRUMENTS:
+//         StringCopy(gStringVar1, COMPOUND_STRING("Played Instruments"));
+//         break;
+//     }
+// }
