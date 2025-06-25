@@ -3116,7 +3116,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
             StringAppend(textBuffer, COMPOUND_STRING(" (+"));
             StringAppend(textBuffer, levelGain);
             StringAppend(textBuffer, COMPOUND_STRING(")"));
-            fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, winTemplate.width * 8);
+            fontId = GetFontIdToFit(textBuffer, ReturnNarrowerTextFont(), 0, winTemplate.width * 8);
             AddTextPrinterParameterized4(windowId, fontId,
                 0,
                 y, 0, 0, sRotomPhone_StartMenu_FontColours[FONT_FS_ROTOM_PHONE], TEXT_SKIP_DRAW, textBuffer
@@ -3166,7 +3166,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
             StringAppend(textBuffer, COMPOUND_STRING(" (+"));
             StringAppend(textBuffer, levelGain);
             StringAppend(textBuffer, COMPOUND_STRING(")"));
-            fontId = GetFontIdToFit(textBuffer, ReturnNormalTextFont(), 0, winTemplate.width * 8);
+            fontId = GetFontIdToFit(textBuffer, ReturnNarrowerTextFont(), 0, winTemplate.width * 8);
             AddTextPrinterParameterized4(windowId, fontId,
                 GetStringRightAlignXOffset(fontId, textBuffer, WIN_WIDTH * 8),
                 y, 0, 0, sRotomPhone_StartMenu_FontColours[FONT_FS_ROTOM_PHONE], TEXT_SKIP_DRAW, textBuffer
