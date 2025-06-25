@@ -626,7 +626,7 @@ static const struct WindowTemplate sRotomPhone_FullScreenMenuWindowTemplates[] =
     },
     DUMMY_WIN_TEMPLATE
 };
-#define ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK 0xFF
+#define ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK 0xA0
 
 static const struct BgTemplate sRotomPhone_FullScreenMenuBgTemplates[] =
 {
@@ -3021,14 +3021,55 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
     #define WIN_HEIGHT 4
     #define WIN_TOP 22
 
+    #define WIN_WIDTH_NO_MONS 18
+    #define WIN_HEIGHT_NO_MONS 4
+    #define WIN_TOP_NO_MONS 23
+
     #define TEXT_LINE_SPACE 14
     
     u8 windowId;
 
     if (RotomPhone_StartMenu_IsFullScreen() && sRotomPhone_StartMenu->menuFullScreenPanelOpen == FALSE)
     {
+        u8 textBuffer[0x80];
+        u8 fontId;
+        u8 y;
+
         if (GetDaycareState() == DAYCARE_NO_MONS)
+        {
+            struct WindowTemplate winTemplate = CreateWindowTemplate(
+                2,
+                6,
+                WIN_TOP_NO_MONS,
+                WIN_WIDTH_NO_MONS,
+                WIN_HEIGHT_NO_MONS,
+                PHONE_BG_PAL_SLOT,
+                ROTOM_FULL_SCREEN_NEXT_WIN_BASE_BLOCK
+            );
+            sRotomPhone_StartMenu->menuFullScreenPanelWindowId[RP_PANEL_WIN_ONE] = AddWindow(&winTemplate);
+            windowId = sRotomPhone_StartMenu->menuFullScreenPanelWindowId[RP_PANEL_WIN_ONE];
+            FillWindowPixelBuffer(windowId, PIXEL_FILL(FS_ROTOM_PHONE_TEXT_BG_COLOUR));
+            PutWindowTilemap(windowId);
+
+            y = 0;
+            StringCopy(textBuffer, COMPOUND_STRING("Leave a Pokémon in the Daycare"));
+            fontId = GetFontIdToFit(textBuffer, ReturnNarrowTextFont(), 0, winTemplate.width * 8);
+            AddTextPrinterParameterized4(windowId, fontId,
+                GetStringCenterAlignXOffset(fontId, textBuffer, WIN_WIDTH_NO_MONS * 8),
+                y, 0, 0, sRotomPhone_StartMenu_FontColours[FONT_FS_ROTOM_PHONE], TEXT_SKIP_DRAW, textBuffer
+            );
+
+            y += TEXT_LINE_SPACE;
+            StringCopy(textBuffer, COMPOUND_STRING("to use this app."));
+            fontId = GetFontIdToFit(textBuffer, ReturnNarrowTextFont(), 0, winTemplate.width * 8);
+            AddTextPrinterParameterized4(windowId, fontId,
+                GetStringCenterAlignXOffset(fontId, textBuffer, WIN_WIDTH_NO_MONS * 8),
+                y, 0, 0, sRotomPhone_StartMenu_FontColours[FONT_FS_ROTOM_PHONE], TEXT_SKIP_DRAW, textBuffer
+            );
+
+            CopyWindowToVram(windowId, COPYWIN_FULL);
             return;
+        }
 
         struct DaycareMon *daycareMonOne = &gSaveBlock1Ptr->daycare.mons[MON_ONE];
         struct DaycareMon *daycareMonTwo = &gSaveBlock1Ptr->daycare.mons[MON_TWO];
@@ -3039,10 +3080,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
         u8 levelGain[2];
         u8 level[3];
         u8 nickname[POKEMON_NAME_LENGTH + 1];
-        u8 textBuffer[24];
-        u8 fontId;
         u8 animId;
-        u8 y;
 
         LoadMonIconPalettes();
 
@@ -3208,7 +3246,14 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
     else if (RotomPhone_StartMenu_IsFullScreen() && sRotomPhone_StartMenu->menuFullScreenPanelOpen == TRUE)
     {
         if (GetDaycareState() == DAYCARE_NO_MONS)
+        {
+            windowId = sRotomPhone_StartMenu->menuFullScreenPanelWindowId[RP_PANEL_WIN_ONE];
+            FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+            CopyWindowToVram(windowId, COPYWIN_FULL);
+            RemoveWindow(windowId);
+            sRotomPhone_StartMenu->menuFullScreenPanelWindowId[RP_PANEL_WIN_ONE] = WINDOW_NONE;
             return;
+        }
 
         FreeMonIconPalettes();
 
@@ -3254,6 +3299,10 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
     #undef WIN_WIDTH
     #undef WIN_HEIGHT
     #undef WIN_TOP
+
+    #undef WIN_WIDTH_NO_MONS
+    #undef WIN_HEIGHT_NO_MONS
+    #undef WIN_TOP_NO_MONS
 
     #undef TEXT_LINE_SPACE
 }
