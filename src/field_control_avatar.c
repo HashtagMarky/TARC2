@@ -231,10 +231,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (input->pressedStartButton)
     {
         // ShowStartMenu();
-        ResetDexNavSearch();
-        if (!FlagGet(FLAG_SYS_POKEDEX_GET))
-            PlaySE(SE_BALL_TRAY_ENTER);
-        RotomPhone_OverworldMenu_Init(TRUE);
+        RotomPhone_StartMenu_Open(TRUE);
         return TRUE;
     }
 

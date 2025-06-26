@@ -14,10 +14,7 @@
 #define RP_CONFIG_UPDATE_MESSAGE_SOUND    TRUE
 #define RP_CONFIG_FACE_UPDATE_PERCENT     100
 
-void RotomPhone_OverworldMenu_Init(bool32 firstInit);
-void RotomPhone_FullScreenMenu_Init(void);
-void Task_RotomPhone_FullScreenMenu_Open(u8 taskId);
-bool32 RotomPhone_StartMenu_IsFullScreen(void);
+void RotomPhone_StartMenu_Open(bool32 firstInit);
 
 #endif // GUARD_ROTOM_START_MENU_H
 

@@ -69,6 +69,7 @@
 #define FADE_COLOUR_MIN                     0x00
 
 
+static void RotomPhone_OverworldMenu_Init(bool32 firstInit);
 static void RotomPhone_OverworldMenu_ContinueInit(bool32 firstInit);
 static void Task_RotomPhone_OverworldMenu_PhoneSlideOpen(u8 taskId);
 static void Task_RotomPhone_OverworldMenu_PhoneSlideClose(u8 taskId);
@@ -101,6 +102,8 @@ static void RotomPhone_OverworldMenu_PrintAdventure(u8 taskId);
 static void RotomPhone_OverworldMenu_UpdateMenuPrompt(u8 taskId);
 
 
+static void Task_RotomPhone_FullScreenMenu_Open(u8 taskId);
+static void RotomPhone_FullScreenMenu_Init(void);
 static void RotomPhone_FullScreenMenu_SetupCB(void);
 static void RotomPhone_FullScreenMenu_MainCB(void);
 static void RotomPhone_FullScreenMenu_VBlankCB(void);
@@ -129,8 +132,10 @@ static void UNUSED RotomPhone_FullScreenMenu_DoCleanUpAndChangeTaskFunc(u8 taskI
 static void RotomPhone_FullScreenMenu_DoCleanUpAndDestroyTask(u8 taskId);
 
 static void RotomPhone_FullScreenMenu_LoadSprites(void);
-
 static void RotomPhone_FullScreenMenu_TimerUpdates(u8 taskId);
+
+
+static bool32 RotomPhone_StartMenu_IsFullScreen(void);
 static void RotomPhone_StartMenu_CreateRotomFaceSprite(bool32 rotomFade);
 static void RotomPhone_StartMenu_UpdateRotomFaceAnim(bool32 input);
 
@@ -159,6 +164,27 @@ static void RotomPhone_StartMenu_SelectedFunc_FullScreen(void);
 static void RotomPhone_StartMenu_SelectedFunc_DexNav(void);
 static void RotomPhone_StartMenu_SelectedFunc_Clock(void);
 static void RotomPhone_StartMenu_SelectedFunc_Daycare(void);
+
+
+// Init Rotom Start Menu
+void RotomPhone_StartMenu_Open(bool32 firstInit)
+{
+#ifdef RHH_EXPANSION && DEXNAV_ENABLED
+    ResetDexNavSearch();
+#endif
+
+    if (!RotomPhone_StartMenu_IsFullScreen())
+    {
+        if (!RP_CONFIG_NOT_FLIP_PHONE && firstInit)
+            PlaySE(SE_BALL_TRAY_ENTER);
+
+        RotomPhone_OverworldMenu_Init(firstInit);
+    }   
+    else
+    {
+        RotomPhone_FullScreenMenu_Init();
+    }
+}
 
 
 static const u32 sRotomPhone_OverworldTiles[] =             INCBIN_U32("graphics/rotom_start_menu/overworld/rotom_phone_tiles.4bpp.smol");
@@ -552,7 +578,7 @@ static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
 
 static EWRAM_DATA bool32 sRotomPhone_FullScreen;
-bool32 RotomPhone_StartMenu_IsFullScreen(void)
+static bool32 RotomPhone_StartMenu_IsFullScreen(void)
 {
     return sRotomPhone_FullScreen;
 }
@@ -1051,7 +1077,7 @@ static const u8 *RotomPhone_OverworldMenu_GetWeatherAction(u32 weatherId)
 #define tPhoneComfyAnimId gTasks[taskId].data[6]
 #define tPhoneCloseToSave gTasks[taskId].data[7]
 #define tPhoneHighlightComfyAnimId gTasks[taskId].data[8]
-void RotomPhone_OverworldMenu_Init(bool32 firstInit)
+static void RotomPhone_OverworldMenu_Init(bool32 firstInit)
 {
     u8 taskId;
 
@@ -2154,7 +2180,7 @@ static void Task_RotomPhone_OverworldMenu_CloseForSafari(u8 taskId)
 
 
 // Rotom Phone Full Screen Menu
-void Task_RotomPhone_FullScreenMenu_Open(u8 taskId)
+static void Task_RotomPhone_FullScreenMenu_Open(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -2164,7 +2190,7 @@ void Task_RotomPhone_FullScreenMenu_Open(u8 taskId)
     }
 }
 
-void RotomPhone_FullScreenMenu_Init(void)
+static void RotomPhone_FullScreenMenu_Init(void)
 {
     sRotomPhone_StartMenu = AllocZeroed(sizeof(struct RotomPhone_StartMenu_State));
     if (sRotomPhone_StartMenu == NULL)
