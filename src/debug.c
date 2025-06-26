@@ -199,7 +199,7 @@ enum DebugBattleTerrain
 #define DEBUG_NUMBER_ICON_Y 50
 
 #define DEBUG_MAX_MENU_ITEMS 20
-#define DEBUG_MAX_SUB_MENU_LEVELS 4
+#define DEBUG_MAX_SUB_MENU_LEVELS 6
 
 // *******************************
 struct DebugMenuOption;
