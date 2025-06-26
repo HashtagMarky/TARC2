@@ -369,6 +369,8 @@ static void DebugAction_Player_Nickname(u8 taskId);
 static void DebugAction_Ikigai_MeetAllCharacter(u8 taskId);
 static void DebugAction_Ikigai_Season(u8 taskId);
 static void DebugAction_Ikigai_CalendarWarp(u8 taskId);
+static void DebugAction_Ikigai_MUS_Expansion(u8 taskId);
+static void DebugAction_Ikigai_PokemonCries(u8 taskId);
 
 extern const u8 Debug_FlagsNotSetOverworldConfigMessage[];
 extern const u8 Debug_FlagsNotSetBattleConfigMessage[];
@@ -730,13 +732,21 @@ static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_Temporal[] =
     { NULL }
 };
 
+static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_Sound[] =
+{
+    { COMPOUND_STRING("SFX…"),              DebugAction_Sound_SE },
+    { COMPOUND_STRING("Music…"),            DebugAction_Sound_MUS },
+    { COMPOUND_STRING("Music Expansion…"),  DebugAction_Ikigai_MUS_Expansion },
+    { COMPOUND_STRING("Pokémon Cries…"),    DebugAction_Ikigai_PokemonCries },
+    { NULL }
+};
 
 static const struct DebugMenuOption sDebugMenu_Actions_Ikigai[] =
 {
     { COMPOUND_STRING("Player Menu…"),      DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Player },
     { COMPOUND_STRING("Character Menu…"),   DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Character },
     { COMPOUND_STRING("Temporal Menu…"),    DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Temporal},
-    { COMPOUND_STRING("Sound Menu…"),       DebugAction_OpenSubMenu, sDebugMenu_Actions_FollowerNPCMenu_Create},
+    { COMPOUND_STRING("Sound Menu…"),       DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Sound},
     { NULL }
 };
 
@@ -3595,116 +3605,6 @@ static void DebugAction_Sound_MUS(u8 taskId)
     gTasks[taskId].tCurrentSong = gTasks[taskId].tInput;
 }
 
-static void DebugAction_Sound_MUS_SelectId(u8 taskId)
-{
-    if (JOY_NEW(DPAD_ANY))
-    {
-        const u8 *bgmName;
-        Debug_HandleInput_Numeric(taskId, START_MUS, END_MUS, DEBUG_NUMBER_DIGITS_ITEMS);
-
-        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
-        bgmName = sBGMNames[gTasks[taskId].tInput - START_MUS];
-        if (bgmName == NULL)
-            bgmName = sDebugText_Dashes;
-        StringCopyPadded(gStringVar1, bgmName, CHAR_SPACE, 35);
-        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
-        StringExpandPlaceholders(gStringVar4, sDebugText_Sound_Music_ID);
-        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
-    }
-
-    if (JOY_NEW(A_BUTTON))
-    {
-        gTasks[taskId].tCurrentSong = gTasks[taskId].tInput;
-        if (FLAG_DEBUG_SOUND_OVERWORLD_PLAY)
-        {
-            FadeOutAndPlayNewMapMusic(gTasks[taskId].tInput, 1);
-        }
-        else
-        {
-            m4aSongNumStop(gTasks[taskId].tCurrentSong);
-            m4aSongNumStart(gTasks[taskId].tInput);
-        }
-    }
-    else if (JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        // m4aSongNumStop(gTasks[taskId].tCurrentSong);   //Uncomment if music should stop after leaving menu
-        DebugAction_DestroyExtraWindow(taskId);
-    }
-    else if (JOY_NEW(START_BUTTON))
-    {
-        m4aSongNumStop(gTasks[taskId].tCurrentSong);
-    }
-}
-
-static void DebugAction_Ikigai_MUS_Expansion_SelectId(u8 taskId)
-{
-    if (JOY_NEW(DPAD_ANY))
-    {
-        Debug_HandleInput_Numeric(taskId, MUSIC_EXPANSION_START + 1, END_MUS, DEBUG_NUMBER_DIGITS_ITEMS);
-
-        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
-        StringCopyPadded(gStringVar1, sBGMNames[gTasks[taskId].tInput - START_MUS], CHAR_SPACE, 35);
-        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
-        StringExpandPlaceholders(gStringVar4, sDebugText_Sound_Music_ID);
-        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
-    }
-
-    if (JOY_NEW(A_BUTTON))
-    {
-        gTasks[taskId].tCurrentSong = gTasks[taskId].tInput;
-        if (FLAG_DEBUG_SOUND_OVERWORLD_PLAY)
-        {
-            FadeOutAndPlayNewMapMusic(gTasks[taskId].tInput, 1);
-        }
-        else
-        {
-            m4aSongNumStop(gTasks[taskId].tCurrentSong);
-            m4aSongNumStart(gTasks[taskId].tInput);
-        }
-    }
-    else if (JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        // m4aSongNumStop(gTasks[taskId].tCurrentSong);   //Uncomment if music should stop after leaving menu
-        DebugAction_DestroyExtraWindow(taskId);
-    }
-    else if (JOY_NEW(START_BUTTON))
-    {
-        m4aSongNumStop(gTasks[taskId].tCurrentSong);
-    }
-}
-
-static void DebugAction_Ikigai_MUS_Expansion(u8 taskId)
-{
-    u8 windowId;
-
-    ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
-    RemoveWindow(gTasks[taskId].tWindowId);
-
-    HideMapNamePopUpWindow();
-    LoadMessageBoxAndBorderGfx();
-    windowId = AddWindow(&sDebugMenuWindowTemplateSound);
-    DrawStdWindowFrame(windowId, FALSE);
-
-    CopyWindowToVram(windowId, COPYWIN_FULL);
-
-    // Display initial song
-    StringCopy(gStringVar2, gText_DigitIndicator[0]);
-    ConvertIntToDecimalStringN(gStringVar3, MUSIC_EXPANSION_START + 1, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
-    StringCopyPadded(gStringVar1, sBGMNames[MUSIC_EXPANSION_START - MUS_LITTLEROOT_TEST + 1], CHAR_SPACE, 35);
-    StringExpandPlaceholders(gStringVar4, sDebugText_Sound_Music_ID);
-    AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
-
-    StopMapMusic(); //Stop map music to better hear new music
-
-    gTasks[taskId].func = DebugAction_Ikigai_MUS_Expansion_SelectId;
-    gTasks[taskId].tSubWindowId = windowId;
-    gTasks[taskId].tInput = MUSIC_EXPANSION_START + 1;
-    gTasks[taskId].tDigit = 0;
-    gTasks[taskId].tCurrentSong = gTasks[taskId].tInput;
-}
-
 static const u32 gDebugFollowerNPCGraphics[] = 
 {
     OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL,
@@ -6452,6 +6352,116 @@ static void DebugAction_Ikigai_CalendarWarp(u8 taskId)
 {
     Debug_DestroyMenu_Full(taskId);
     DoCalendarWarpHome();
+}
+
+static void DebugAction_Sound_MUS_SelectId(u8 taskId)
+{
+    if (JOY_NEW(DPAD_ANY))
+    {
+        const u8 *bgmName;
+        Debug_HandleInput_Numeric(taskId, START_MUS, END_MUS, DEBUG_NUMBER_DIGITS_ITEMS);
+
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
+        bgmName = sBGMNames[gTasks[taskId].tInput - START_MUS];
+        if (bgmName == NULL)
+            bgmName = sDebugText_Dashes;
+        StringCopyPadded(gStringVar1, bgmName, CHAR_SPACE, 35);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
+        StringExpandPlaceholders(gStringVar4, sDebugText_Sound_Music_ID);
+        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        gTasks[taskId].tCurrentSong = gTasks[taskId].tInput;
+        if (FLAG_DEBUG_SOUND_OVERWORLD_PLAY)
+        {
+            FadeOutAndPlayNewMapMusic(gTasks[taskId].tInput, 1);
+        }
+        else
+        {
+            m4aSongNumStop(gTasks[taskId].tCurrentSong);
+            m4aSongNumStart(gTasks[taskId].tInput);
+        }
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        // m4aSongNumStop(gTasks[taskId].tCurrentSong);   //Uncomment if music should stop after leaving menu
+        DebugAction_DestroyExtraWindow(taskId);
+    }
+    else if (JOY_NEW(START_BUTTON))
+    {
+        m4aSongNumStop(gTasks[taskId].tCurrentSong);
+    }
+}
+
+static void DebugAction_Ikigai_MUS_Expansion_SelectId(u8 taskId)
+{
+    if (JOY_NEW(DPAD_ANY))
+    {
+        Debug_HandleInput_Numeric(taskId, MUSIC_EXPANSION_START + 1, END_MUS, DEBUG_NUMBER_DIGITS_ITEMS);
+
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
+        StringCopyPadded(gStringVar1, sBGMNames[gTasks[taskId].tInput - START_MUS], CHAR_SPACE, 35);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
+        StringExpandPlaceholders(gStringVar4, sDebugText_Sound_Music_ID);
+        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        gTasks[taskId].tCurrentSong = gTasks[taskId].tInput;
+        if (FLAG_DEBUG_SOUND_OVERWORLD_PLAY)
+        {
+            FadeOutAndPlayNewMapMusic(gTasks[taskId].tInput, 1);
+        }
+        else
+        {
+            m4aSongNumStop(gTasks[taskId].tCurrentSong);
+            m4aSongNumStart(gTasks[taskId].tInput);
+        }
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        // m4aSongNumStop(gTasks[taskId].tCurrentSong);   //Uncomment if music should stop after leaving menu
+        DebugAction_DestroyExtraWindow(taskId);
+    }
+    else if (JOY_NEW(START_BUTTON))
+    {
+        m4aSongNumStop(gTasks[taskId].tCurrentSong);
+    }
+}
+
+static void DebugAction_Ikigai_MUS_Expansion(u8 taskId)
+{
+    u8 windowId;
+
+    ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
+    RemoveWindow(gTasks[taskId].tWindowId);
+
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+    windowId = AddWindow(&sDebugMenuWindowTemplateSound);
+    DrawStdWindowFrame(windowId, FALSE);
+
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+
+    // Display initial song
+    StringCopy(gStringVar2, gText_DigitIndicator[0]);
+    ConvertIntToDecimalStringN(gStringVar3, MUSIC_EXPANSION_START + 1, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
+    StringCopyPadded(gStringVar1, sBGMNames[MUSIC_EXPANSION_START - MUS_LITTLEROOT_TEST + 1], CHAR_SPACE, 35);
+    StringExpandPlaceholders(gStringVar4, sDebugText_Sound_Music_ID);
+    AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
+
+    StopMapMusic(); //Stop map music to better hear new music
+
+    gTasks[taskId].func = DebugAction_Ikigai_MUS_Expansion_SelectId;
+    gTasks[taskId].tSubWindowId = windowId;
+    gTasks[taskId].tInput = MUSIC_EXPANSION_START + 1;
+    gTasks[taskId].tDigit = 0;
+    gTasks[taskId].tCurrentSong = gTasks[taskId].tInput;
 }
 
 // static u32 DebugAction_DynamicMusic_ReturnInstrumentFromMenuItem(u32 input)
