@@ -705,17 +705,17 @@ static const struct DebugMenuOption sDebugMenu_Actions_Main[] =
 // Ikigai Debug Menu Actions
 static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_Player[] =
 {
-    { COMPOUND_STRING("Gym Typek…"),            DebugAction_Ikigai_GymType },
+    { COMPOUND_STRING("Gym Type…"),             DebugAction_Ikigai_GymType },
     { COMPOUND_STRING("Toggle Player Body"),    DebugAction_Player_Gender },
-    { COMPOUND_STRING("Player Namek…"),         DebugAction_Player_Name },
-    { COMPOUND_STRING("Player Nicknamek…"),     DebugAction_Player_Nickname },
-    { COMPOUND_STRING("Player DynPalsk…"),      DebugAction_ExecuteScript, DynPal_OpenFullMenu },
+    { COMPOUND_STRING("Player Name"),           DebugAction_Player_Name },
+    { COMPOUND_STRING("Player Nickname"),       DebugAction_Player_Nickname },
+    { COMPOUND_STRING("Player DynPals…"),       DebugAction_ExecuteScript, DynPal_OpenFullMenu },
     { NULL }
 };
 
 static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_Character[] =
 {
-    { COMPOUND_STRING("Open PokéSpherek…"),     DebugAction_ExecuteScript, Debug_OpenPokeSphere },
+    { COMPOUND_STRING("Open PokéSphere"),       DebugAction_ExecuteScript, Debug_OpenPokeSphere },
     { COMPOUND_STRING("Meet All Characters"),   DebugAction_Ikigai_MeetAllCharacter },
     { NULL }
 };
@@ -724,8 +724,8 @@ static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_Temporal[] =
 {
     { COMPOUND_STRING("Time Functions…"),   DebugAction_OpenSubMenu, sDebugMenu_Actions_TimeMenu, },
     { COMPOUND_STRING("Set Season…"),       DebugAction_Ikigai_Season },
-    { COMPOUND_STRING("Show Calendar…"),    DebugAction_ExecuteScript, Debug_OpenCalendar },
-    { COMPOUND_STRING("Calendar Warp…"),    DebugAction_Ikigai_CalendarWarp },
+    { COMPOUND_STRING("Show Calendar"),     DebugAction_ExecuteScript, Debug_OpenCalendar },
+    { COMPOUND_STRING("Calendar Warp"),     DebugAction_Ikigai_CalendarWarp },
     { COMPOUND_STRING("Set Weather…"),      DebugAction_Util_Weather },
     { NULL }
 };
@@ -733,10 +733,10 @@ static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_Temporal[] =
 
 static const struct DebugMenuOption sDebugMenu_Actions_Ikigai[] =
 {
-    { COMPOUND_STRING("Player Menu"),       DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Player },
-    { COMPOUND_STRING("Character Menu"),    DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Character },
-    { COMPOUND_STRING("Temporal Menu"),     DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Temporal},
-    { COMPOUND_STRING("Sound Menu"),        DebugAction_OpenSubMenu, sDebugMenu_Actions_FollowerNPCMenu_Create},
+    { COMPOUND_STRING("Player Menu…"),      DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Player },
+    { COMPOUND_STRING("Character Menu…"),   DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Character },
+    { COMPOUND_STRING("Temporal Menu…"),    DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Temporal},
+    { COMPOUND_STRING("Sound Menu…"),       DebugAction_OpenSubMenu, sDebugMenu_Actions_FollowerNPCMenu_Create},
     { NULL }
 };
 
