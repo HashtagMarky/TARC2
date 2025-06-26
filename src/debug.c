@@ -239,8 +239,7 @@ static EWRAM_DATA struct DebugMonData *sDebugMonData = NULL;
 static EWRAM_DATA struct DebugMenuListData *sDebugMenuListData = NULL;
 EWRAM_DATA bool8 gIsDebugBattle = FALSE;
 EWRAM_DATA u64 gDebugAIFlags = 0;
-EWRAM_DATA u8 sInstrument = 0;
-EWRAM_DATA u8 sTrackNum = 0;
+static EWRAM_DATA u32 sDynamicMusicInput;
 
 // *******************************
 // Define functions
@@ -347,17 +346,6 @@ static void DebugAction_BerryFunctions_NextStage(u8 taskId);
 static void DebugAction_BerryFunctions_Pests(u8 taskId);
 static void DebugAction_BerryFunctions_Weeds(u8 taskId);
 
-static void DebugAction_DynamicMusic_InstrumentRemove(u8 taskId);
-static void DebugAction_DynamicMusic_InstrumentRestore(u8 taskId);
-static void DebugAction_DynamicMusic_InstrumentPlayOnly(u8 taskId);
-static void DebugAction_DynamicMusic_OpenTrackFuncMenu(u8 taskid);
-static void DebugAction_DynamicMusic_TrackRemove(u8 taskId);
-static void DebugAction_DynamicMusic_TrackRestore(u8 taskId);
-static void DebugAction_DynamicMusic_TrackPlayOnly(u8 taskId);
-static void DebugAction_DynamicMusic_Movement(u8 taskId);
-static u32 DebugAction_DynamicMusic_ReturnInstrumentFromMenuItem(u32 input);
-static void DynamicMusicInstrumentMenu_BufferInstrument(u32 input);
-
 static void DebugAction_Player_Name(u8 taskId);
 static void DebugAction_Player_Gender(u8 taskId);
 static void DebugAction_Player_Id(u8 taskId);
@@ -371,6 +359,14 @@ static void DebugAction_Ikigai_Season(u8 taskId);
 static void DebugAction_Ikigai_CalendarWarp(u8 taskId);
 static void DebugAction_Ikigai_MUS_Expansion(u8 taskId);
 static void DebugAction_Ikigai_PokemonCries(u8 taskId);
+static void DebugAction_OpenSubMenuDynamicMusic(u8 taskId, const struct DebugMenuOption *items);
+static void DebugAction_DynamicMusic_InstrumentRemove(u8 taskId);
+static void DebugAction_DynamicMusic_InstrumentRestore(u8 taskId);
+static void DebugAction_DynamicMusic_InstrumentPlayOnly(u8 taskId);
+static void DebugAction_DynamicMusic_TrackRemove(u8 taskId);
+static void DebugAction_DynamicMusic_TrackRestore(u8 taskId);
+static void DebugAction_DynamicMusic_TrackPlayOnly(u8 taskId);
+static void DebugAction_DynamicMusic_Movement(u8 taskId);
 
 extern const u8 Debug_FlagsNotSetOverworldConfigMessage[];
 extern const u8 Debug_FlagsNotSetBattleConfigMessage[];
@@ -733,11 +729,61 @@ static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_Temporal[] =
     { NULL }
 };
 
+static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_DynamicMusic_Instruments[] =
+{
+    { COMPOUND_STRING("Remove Instrument"),     DebugAction_DynamicMusic_InstrumentRemove },
+    { COMPOUND_STRING("Restore Instrument"),    DebugAction_DynamicMusic_InstrumentRestore },
+    { COMPOUND_STRING("Play Only Instrument"),  DebugAction_DynamicMusic_InstrumentPlayOnly },
+    { NULL }
+};
+
+static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks[] =
+{
+    { COMPOUND_STRING("Remove Track"),     DebugAction_DynamicMusic_TrackRemove },
+    { COMPOUND_STRING("Restore Track"),    DebugAction_DynamicMusic_TrackRestore },
+    { COMPOUND_STRING("Play Only Track"),  DebugAction_DynamicMusic_TrackPlayOnly },
+    { NULL }
+};
+
+static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_DynamicMusic_SelectTrack[] =
+{
+    { COMPOUND_STRING("All Tracks…"),   DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
+    { COMPOUND_STRING("Track 00…"),     DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
+    { COMPOUND_STRING("Track 01…"),     DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
+    { COMPOUND_STRING("Track 02…"),     DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
+    { COMPOUND_STRING("Track 03…"),     DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
+    { COMPOUND_STRING("Track 04…"),     DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
+    { COMPOUND_STRING("Track 05…"),     DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
+    { COMPOUND_STRING("Track 06…"),     DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
+    { COMPOUND_STRING("Track 07…"),     DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
+    { COMPOUND_STRING("Track 08…"),     DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
+    { COMPOUND_STRING("Track 09…"),     DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
+    { COMPOUND_STRING("Track 10…"),     DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
+    { COMPOUND_STRING("Track 11…"),     DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
+    { NULL }
+};
+
+static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_DynamicMusic[] =
+{
+    [INSTRUMENT_ACCORDION] =    { COMPOUND_STRING("Accordian…"),                DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Instruments },
+    [INSTRUMENT_KEYTAR] =       { COMPOUND_STRING("Keytar…"),                   DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Instruments },
+    [INSTRUMENT_ERHU] =         { COMPOUND_STRING("Erhu…"),                     DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Instruments },
+    [INSTRUMENT_GUITAR] =       { COMPOUND_STRING("Guitar…"),                   DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Instruments },
+    [INSTRUMENT_WHISTLE] =      { COMPOUND_STRING("Whistle…"),                  DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Instruments },
+    [INSTRUMENT_FLUTE] =        { COMPOUND_STRING("Flute…"),                    DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Instruments },
+    [INSTRUMENT_ALL] =          { COMPOUND_STRING("All Instruments…"),          DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Instruments },
+    [INSTRUMENT_COUNT] =        { COMPOUND_STRING("Playing Instruments…"),      DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Instruments },
+                                { COMPOUND_STRING("Isolate Tracks…"),           DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_DynamicMusic_SelectTrack },
+                                { COMPOUND_STRING("Dynamic Movement Music"),    DebugAction_DynamicMusic_Movement },
+    { NULL }
+};
+
 static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_Sound[] =
 {
     { COMPOUND_STRING("SFX…"),              DebugAction_Sound_SE },
     { COMPOUND_STRING("Music…"),            DebugAction_Sound_MUS },
     { COMPOUND_STRING("Music Expansion…"),  DebugAction_Ikigai_MUS_Expansion },
+    { COMPOUND_STRING("Dynamic Music…"),    DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_DynamicMusic},
     { COMPOUND_STRING("Pokémon Cries…"),    DebugAction_Ikigai_PokemonCries },
     { NULL }
 };
@@ -928,7 +974,8 @@ static bool32 IsSubMenuAction(const void *action)
     return action == DebugAction_OpenSubMenu
         || action == DebugAction_OpenSubMenuFlagsVars
         || action == DebugAction_OpenSubMenuFakeRTC
-        || action == DebugAction_OpenSubMenuCreateFollowerNPC;
+        || action == DebugAction_OpenSubMenuCreateFollowerNPC
+        || action == DebugAction_OpenSubMenuDynamicMusic;
 }
 
 static void Debug_ShowMenu(DebugFunc HandleInput, const struct DebugMenuOption *items)
@@ -6106,108 +6153,6 @@ static void DebugAction_BerryFunctions_Weeds(u8 taskId)
     Debug_DestroyMenu_Full(taskId);
 }
 
-static void DebugAction_DynamicMusic_InstrumentRemove(u8 taskId)
-{
-    if (sInstrument <= INSTRUMENT_ALL)
-    {
-        DynamicMusic_RemoveInstrument(sInstrument);
-    }
-    else if (sInstrument == INSTRUMENT_COUNT + 1)
-    {
-        DynamicMusic_RemoveAllInstrumentNotPlaying();
-    }
-
-    // Debug_DestroyMenu_Full(taskId);
-    // ScriptContext_Enable();
-}
-
-static void DebugAction_DynamicMusic_InstrumentRestore(u8 taskId)
-{
-    if (sInstrument <= INSTRUMENT_ALL)
-    {
-        DynamicMusic_RestoreInstrument(sInstrument);
-    }
-    else if (sInstrument == INSTRUMENT_COUNT + 1)
-    {
-        DynamicMusic_RestoreAllInstrumentPlaying();
-    }
-
-    // Debug_DestroyMenu_Full(taskId);
-    // ScriptContext_Enable();
-}
-
-static void DebugAction_DynamicMusic_InstrumentPlayOnly(u8 taskId)
-{
-    m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
-    if (sInstrument <= INSTRUMENT_ALL)
-    {
-        DynamicMusic_PlayOnlyInstrument(sInstrument);
-    }
-    else if (sInstrument == INSTRUMENT_COUNT + 1)
-    {
-        DynamicMusic_PlayOnlyInstrumentPlaying();
-    }
-
-    // Debug_DestroyMenu_Full(taskId);
-    // ScriptContext_Enable();
-}
-
-static void DebugAction_DynamicMusic_TrackRemove(u8 taskId)
-{
-    u16 trackBits = 1 << (sTrackNum - 1);
-    if (sTrackNum == 0)
-        trackBits = TRACKS_ALL;
-    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0);
-    // Debug_DestroyMenu_Full(taskId);
-    // ScriptContext_Enable();
-}
-
-static void DebugAction_DynamicMusic_TrackRestore(u8 taskId)
-{
-    u16 trackBits = 1 << (sTrackNum - 1);
-    if (sTrackNum == 0)
-        trackBits = TRACKS_ALL;
-    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0x100);
-    // Debug_DestroyMenu_Full(taskId);
-    // ScriptContext_Enable();
-}
-
-static void DebugAction_DynamicMusic_TrackPlayOnly(u8 taskId)
-{
-    u16 trackBits = 1 << (sTrackNum - 1);
-    if (sTrackNum == 0)
-        trackBits = TRACKS_ALL;
-    m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0);
-    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0x100);
-    // Debug_DestroyMenu_Full(taskId);
-    // ScriptContext_Enable();
-}
-
-static void DebugAction_DynamicMusic_Movement(u8 taskId)
-{
-    if (FindTaskIdByFunc(Task_UpdateMovementDynamicMusicWait) == TASK_NONE
-        && FindTaskIdByFunc(Task_UpdateMovementDynamicMusic) == TASK_NONE)
-    {
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
-        UpdateMovementDynamicMusic();
-        Debug_DestroyMenu_Full(taskId);
-        ScriptContext_Enable();
-        return;
-    }
-    else if (FindTaskIdByFunc(Task_UpdateMovementDynamicMusicWait) != TASK_NONE)
-    {
-        DestroyTask(FindTaskIdByFunc(Task_UpdateMovementDynamicMusicWait));
-    }
-    else if (FindTaskIdByFunc(Task_UpdateMovementDynamicMusic) != TASK_NONE)
-    {
-        DestroyTask(FindTaskIdByFunc(Task_UpdateMovementDynamicMusic));
-    }
-
-    m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
-    Debug_DestroyMenu_Full(taskId);
-    ScriptContext_Enable();
-}
-
 // *******************************
 // Actions Party/Boxes
 
@@ -6465,75 +6410,111 @@ static void DebugAction_Ikigai_MUS_Expansion(u8 taskId)
     gTasks[taskId].tCurrentSong = gTasks[taskId].tInput;
 }
 
-// static u32 DebugAction_DynamicMusic_ReturnInstrumentFromMenuItem(u32 input)
-// {
-//     if (input == DEBUG_DYNAMIC_MUSIC_MENU_ACCORDION)
-//         return INSTRUMENT_ACCORDION;
-    
-//     if (input == DEBUG_DYNAMIC_MUSIC_MENU_KEYTAR)
-//         return INSTRUMENT_KEYTAR;
-    
-//     if (input == DEBUG_DYNAMIC_MUSIC_MENU_ERHU)
-//         return INSTRUMENT_ERHU;
-    
-//     if (input == DEBUG_DYNAMIC_MUSIC_MENU_GUITAR)
-//         return INSTRUMENT_GUITAR;
-    
-//     if (input == DEBUG_DYNAMIC_MUSIC_MENU_WHISTLE)
-//         return INSTRUMENT_WHISTLE;
-    
-//     if (input == DEBUG_DYNAMIC_MUSIC_MENU_FLUTE)
-//         return INSTRUMENT_FLUTE;
-    
-//     if (input == DEBUG_DYNAMIC_MUSIC_MENU_ALL_INSTRUMENTS)
-//         return INSTRUMENT_ALL;
-    
-//     if (input == DEBUG_DYNAMIC_MUSIC_MENU_PLAYING_INSTRUMENTS)
-//         return INSTRUMENT_COUNT + 1;
+static void DebugAction_OpenSubMenuDynamicMusic(u8 taskId, const struct DebugMenuOption *items)
+{
+    sDynamicMusicInput = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_General, items);
+}
 
-//     if (input == DEBUG_DYNAMIC_MUSIC_MENU_TRACKS)
-//         return INSTRUMENT_COUNT + 2;
-    
-//     return INSTRUMENT_COUNT;
-// }
+static void DebugAction_DynamicMusic_InstrumentRemove(u8 taskId)
+{
+    if (sDynamicMusicInput < INSTRUMENT_COUNT)
+        DynamicMusic_RemoveInstrument(sDynamicMusicInput);
+    else if (sDynamicMusicInput == INSTRUMENT_COUNT)
+        DynamicMusic_RemoveAllInstrumentNotPlaying();
 
-// static void DynamicMusicInstrumentMenu_BufferInstrument(u32 input)
-// {
-//     switch (input)
-//     {
-//     case DEBUG_DYNAMIC_MUSIC_MENU_ACCORDION:
-//         StringCopy(gStringVar1, COMPOUND_STRING("Accordion"));
-//         break;
+    Debug_DestroyMenu_Full(taskId);
+    ScriptContext_Enable();
+}
+
+static void DebugAction_DynamicMusic_InstrumentRestore(u8 taskId)
+{
+    if (sDynamicMusicInput < INSTRUMENT_COUNT)
+        DynamicMusic_RestoreInstrument(sDynamicMusicInput);
+    else if (sDynamicMusicInput == INSTRUMENT_COUNT)
+        DynamicMusic_RestoreAllInstrumentPlaying();
+
+    Debug_DestroyMenu_Full(taskId);
+    ScriptContext_Enable();
+}
+
+static void DebugAction_DynamicMusic_InstrumentPlayOnly(u8 taskId)
+{
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
+    if (sDynamicMusicInput < INSTRUMENT_COUNT)
+        DynamicMusic_PlayOnlyInstrument(sDynamicMusicInput);
+    else if (sDynamicMusicInput == INSTRUMENT_COUNT)
+        DynamicMusic_PlayOnlyInstrumentPlaying();
+
+    Debug_DestroyMenu_Full(taskId);
+    ScriptContext_Enable();
+}
+
+static void DebugAction_DynamicMusic_TrackRemove(u8 taskId)
+{
+    u16 trackBits;
+    if (sDynamicMusicInput == 0)
+        trackBits = TRACKS_ALL;
+    else
+        trackBits = 1 << (sDynamicMusicInput - 1);
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0);
+
+    Debug_DestroyMenu_Full(taskId);
+    ScriptContext_Enable();
+}
+
+static void DebugAction_DynamicMusic_TrackRestore(u8 taskId)
+{
+    u16 trackBits;
+    if (sDynamicMusicInput == 0)
+        trackBits = TRACKS_ALL;
+    else
+        trackBits = 1 << (sDynamicMusicInput - 1);
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0x100);
+
+    Debug_DestroyMenu_Full(taskId);
+    ScriptContext_Enable();
+}
+
+static void DebugAction_DynamicMusic_TrackPlayOnly(u8 taskId)
+{
+    u16 trackBits;
+    if (sDynamicMusicInput == 0)
+        trackBits = TRACKS_ALL;
+    else
+        trackBits = 1 << (sDynamicMusicInput - 1);
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0);
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0x100);
     
-//     case DEBUG_DYNAMIC_MUSIC_MENU_KEYTAR:
-//         StringCopy(gStringVar1, COMPOUND_STRING("Keytar"));
-//         break;
-    
-//     case DEBUG_DYNAMIC_MUSIC_MENU_ERHU:
-//         StringCopy(gStringVar1, COMPOUND_STRING("Erhu"));
-//         break;
-    
-//     case DEBUG_DYNAMIC_MUSIC_MENU_GUITAR:
-//         StringCopy(gStringVar1, COMPOUND_STRING("Guitar"));
-//         break;
-    
-//     case DEBUG_DYNAMIC_MUSIC_MENU_WHISTLE:
-//         StringCopy(gStringVar1, COMPOUND_STRING("Whistle"));
-//         break;
-    
-//     case DEBUG_DYNAMIC_MUSIC_MENU_FLUTE:
-//         StringCopy(gStringVar1, COMPOUND_STRING("Flute"));
-//         break;
-    
-//     case DEBUG_DYNAMIC_MUSIC_MENU_ALL_INSTRUMENTS:
-//         StringCopy(gStringVar1, COMPOUND_STRING("All Instruments"));
-//         break;
-    
-//     case DEBUG_DYNAMIC_MUSIC_MENU_PLAYING_INSTRUMENTS:
-//         StringCopy(gStringVar1, COMPOUND_STRING("Played Instruments"));
-//         break;
-//     }
-// }
+    Debug_DestroyMenu_Full(taskId);
+    ScriptContext_Enable();
+}
+
+static void DebugAction_DynamicMusic_Movement(u8 taskId)
+{
+    if (FindTaskIdByFunc(Task_UpdateMovementDynamicMusicWait) == TASK_NONE
+        && FindTaskIdByFunc(Task_UpdateMovementDynamicMusic) == TASK_NONE)
+    {
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
+        UpdateMovementDynamicMusic();
+        Debug_DestroyMenu_Full(taskId);
+        ScriptContext_Enable();
+        return;
+    }
+    else if (FindTaskIdByFunc(Task_UpdateMovementDynamicMusicWait) != TASK_NONE)
+    {
+        DestroyTask(FindTaskIdByFunc(Task_UpdateMovementDynamicMusicWait));
+    }
+    else if (FindTaskIdByFunc(Task_UpdateMovementDynamicMusic) != TASK_NONE)
+    {
+        DestroyTask(FindTaskIdByFunc(Task_UpdateMovementDynamicMusic));
+    }
+
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
+    Debug_DestroyMenu_Full(taskId);
+    ScriptContext_Enable();
+}
 
 #undef tCurrentSong
 
