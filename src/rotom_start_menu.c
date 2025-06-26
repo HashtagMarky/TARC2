@@ -169,7 +169,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void);
 // Init Rotom Start Menu
 void RotomPhone_StartMenu_Open(bool32 firstInit)
 {
-#ifdef RHH_EXPANSION && DEXNAV_ENABLED
+#ifdef RHH_EXPANSION
     ResetDexNavSearch();
 #endif
 
