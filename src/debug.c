@@ -367,6 +367,8 @@ static const struct DebugMenuOption sDebugMenu_Actions_Ikigai[];
 static void DebugAction_Ikigai_GymType(u8 taskId);
 static void DebugAction_Player_Nickname(u8 taskId);
 static void DebugAction_Ikigai_MeetAllCharacter(u8 taskId);
+static void DebugAction_Ikigai_Season(u8 taskId);
+static void DebugAction_Ikigai_CalendarWarp(u8 taskId);
 
 extern const u8 Debug_FlagsNotSetOverworldConfigMessage[];
 extern const u8 Debug_FlagsNotSetBattleConfigMessage[];
@@ -718,12 +720,22 @@ static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_Character[] =
     { NULL }
 };
 
+static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_Temporal[] =
+{
+    { COMPOUND_STRING("Time Functions…"),   DebugAction_OpenSubMenu, sDebugMenu_Actions_TimeMenu, },
+    { COMPOUND_STRING("Set Season…"),       DebugAction_Ikigai_Season },
+    { COMPOUND_STRING("Show Calendar…"),    DebugAction_ExecuteScript, Debug_OpenCalendar },
+    { COMPOUND_STRING("Calendar Warp…"),    DebugAction_Ikigai_CalendarWarp },
+    { COMPOUND_STRING("Set Weather…"),      DebugAction_Util_Weather },
+    { NULL }
+};
+
 
 static const struct DebugMenuOption sDebugMenu_Actions_Ikigai[] =
 {
     { COMPOUND_STRING("Player Menu"),       DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Player },
     { COMPOUND_STRING("Character Menu"),    DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Character },
-    { COMPOUND_STRING("Temporal Menu"),     DebugAction_OpenSubMenu, sDebugMenu_Actions_FollowerNPCMenu_Create},
+    { COMPOUND_STRING("Temporal Menu"),     DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Temporal},
     { COMPOUND_STRING("Sound Menu"),        DebugAction_OpenSubMenu, sDebugMenu_Actions_FollowerNPCMenu_Create},
     { NULL }
 };
@@ -781,6 +793,17 @@ static const struct WindowTemplate sDebugMenuWindowTemplateSound =
     .tilemapTop = 1,
     .width = DEBUG_MENU_WIDTH_SOUND,
     .height = DEBUG_MENU_HEIGHT_SOUND,
+    .paletteNum = 15,
+    .baseBlock = 1,
+};
+
+static const struct WindowTemplate sDebugMenuWindowTemplateSeason =
+{
+    .bg = 0,
+    .tilemapLeft = 30 - DEBUG_MENU_WIDTH_SEASON - 1,
+    .tilemapTop = 1,
+    .width = DEBUG_MENU_WIDTH_SEASON,
+    .height = 2 * DEBUG_MENU_HEIGHT_SEASON,
     .paletteNum = 15,
     .baseBlock = 1,
 };
@@ -3725,14 +3748,6 @@ static void DebugAction_DestroyFollowerNPC(u8 taskId)
     }
 }
 
-#undef tCurrentSong
-
-#undef tMenuTaskId
-#undef tWindowId
-#undef tSubWindowId
-#undef tInput
-#undef tDigit
-
 // Start of MUSIC_EXPANSION_GEN5_MUSIC_REDUCE_SIZE == FALSE
 #define SOUND_LIST_BGM_GEN_V_UNREDUCED              \
     X(MUS_LITTLEROOT_TEST)          \
@@ -6370,6 +6385,75 @@ static void DebugAction_Ikigai_MeetAllCharacter(u8 taskId)
     Debug_DestroyMenu_Full(taskId);
 }
 
+static const u8 sDebugText_Ikigai_Season_ID[] = _("Season ID: {STR_VAR_3}\n{STR_VAR_1}\n{STR_VAR_2}");
+static void DebugAction_Ikigai_SeasonsSelect(u8 taskId)
+{
+    if (JOY_NEW(DPAD_ANY))
+    {
+        PlaySE(SE_SELECT);
+        Debug_HandleInput_Numeric(taskId, SEASON_SPRING, SEASON_COUNT - 1, 1);
+
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 2);
+
+        StringCopyPadded(gStringVar1, gSeasonNames[gTasks[taskId].tInput], CHAR_SPACE, 30);
+
+        StringExpandPlaceholders(gStringVar4, sDebugText_Ikigai_Season_ID);
+        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        Ikigai_SetToYearOneSeason(gTasks[taskId].tInput);
+
+        PlaySE(SE_SELECT);
+        DebugAction_DestroyExtraWindow(taskId);
+        RtcCalcLocalTime();
+        Ikigai_SetVyratonWeather();
+        SetSavedWeatherFromCurrMapHeader();
+        SetWeather(GetSavedWeather());
+        SetMainCallback2(CB2_LoadMap);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        DebugAction_DestroyExtraWindow(taskId);
+    }
+}
+
+static void DebugAction_Ikigai_Season(u8 taskId)
+{
+    u8 windowId;
+
+    ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
+    RemoveWindow(gTasks[taskId].tWindowId);
+
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+    windowId = AddWindow(&sDebugMenuWindowTemplateSeason);
+    DrawStdWindowFrame(windowId, FALSE);
+
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+
+    //Display initial ID
+    StringCopy(gStringVar2, gText_DigitIndicator[0]);
+    ConvertIntToDecimalStringN(gStringVar3, SEASON_SPRING, STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringCopyPadded(gStringVar1, gSeasonNames[SEASON_SPRING], CHAR_SPACE, 30);
+    StringExpandPlaceholders(gStringVar4, sDebugText_Ikigai_Season_ID);
+    AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
+
+    gTasks[taskId].func = DebugAction_Ikigai_SeasonsSelect;
+    gTasks[taskId].tSubWindowId = windowId;
+    gTasks[taskId].tInput = 0;
+    gTasks[taskId].tDigit = 0;
+}
+
+static void DebugAction_Ikigai_CalendarWarp(u8 taskId)
+{
+    Debug_DestroyMenu_Full(taskId);
+    DoCalendarWarpHome();
+}
+
 // static u32 DebugAction_DynamicMusic_ReturnInstrumentFromMenuItem(u32 input)
 // {
 //     if (input == DEBUG_DYNAMIC_MUSIC_MENU_ACCORDION)
@@ -6439,3 +6523,11 @@ static void DebugAction_Ikigai_MeetAllCharacter(u8 taskId)
 //         break;
 //     }
 // }
+
+#undef tCurrentSong
+
+#undef tMenuTaskId
+#undef tWindowId
+#undef tSubWindowId
+#undef tInput
+#undef tDigit
