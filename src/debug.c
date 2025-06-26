@@ -753,7 +753,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_DynamicMusic_Track
 
 static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_DynamicMusic_SelectTrack[] =
 {
-    { COMPOUND_STRING("All Tracks…"),   DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
+    { COMPOUND_STRING("All Tracks…"),   DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
     { COMPOUND_STRING("Track 00…"),     DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
     { COMPOUND_STRING("Track 01…"),     DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
     { COMPOUND_STRING("Track 02…"),     DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
