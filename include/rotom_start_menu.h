@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-#define RP_CONFIG_NOT_FLIP_PHONE          FlagGet(FLAG_SYS_POKEDEX_GET)
+#define RP_CONFIG_USE_ROTOM_PHONE         FlagGet(FLAG_SYS_POKEDEX_GET)
 #define RP_CONFIG_MONOCHROME_ICONS        FALSE
 #define RP_CONFIG_PALETTE_BUFFER          TRUE
 #define RP_CONFIG_UPDATE_CLOCK_DISPLAY    TRUE
