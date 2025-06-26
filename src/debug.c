@@ -366,6 +366,7 @@ static void DebugAction_Player_Id(u8 taskId);
 static const struct DebugMenuOption sDebugMenu_Actions_Ikigai[];
 static void DebugAction_Ikigai_GymType(u8 taskId);
 static void DebugAction_Player_Nickname(u8 taskId);
+static void DebugAction_Ikigai_MeetAllCharacter(u8 taskId);
 
 extern const u8 Debug_FlagsNotSetOverworldConfigMessage[];
 extern const u8 Debug_FlagsNotSetBattleConfigMessage[];
@@ -710,11 +711,18 @@ static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_Player[] =
     { NULL }
 };
 
+static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_Character[] =
+{
+    { COMPOUND_STRING("Open PokéSphere"),       DebugAction_ExecuteScript, Debug_OpenPokeSphere },
+    { COMPOUND_STRING("Meet All Characters"),   DebugAction_Ikigai_MeetAllCharacter },
+    { NULL }
+};
+
 
 static const struct DebugMenuOption sDebugMenu_Actions_Ikigai[] =
 {
     { COMPOUND_STRING("Player Menu"),       DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Player },
-    { COMPOUND_STRING("Character Menu"),    DebugAction_OpenSubMenu, sDebugMenu_Actions_FollowerNPCMenu_Create },
+    { COMPOUND_STRING("Character Menu"),    DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Character },
     { COMPOUND_STRING("Temporal Menu"),     DebugAction_OpenSubMenu, sDebugMenu_Actions_FollowerNPCMenu_Create},
     { COMPOUND_STRING("Sound Menu"),        DebugAction_OpenSubMenu, sDebugMenu_Actions_FollowerNPCMenu_Create},
     { NULL }
@@ -1658,11 +1666,6 @@ static void DebugAction_Util_WatchCredits(u8 taskId)
 static void DebugAction_Player_Name(u8 taskId)
 {
     DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldContinueScript);
-}
-
-static void DebugAction_Player_Nickname(u8 taskId)
-{
-    DoNamingScreen(NAMING_SCREEN_PLAYER_NICKNAME, gSaveBlock3Ptr->characters.playerNickname, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldContinueScript);
 }
 
 static void DebugAction_Player_Gender(u8 taskId)
@@ -6352,6 +6355,19 @@ void CheckEWRAMCounters(struct ScriptContext *ctx)
 {
     ConvertIntToDecimalStringN(gStringVar1, gFollowerSteps, STR_CONV_MODE_LEFT_ALIGN, 5);
     ConvertIntToDecimalStringN(gStringVar2, gChainFishingDexNavStreak, STR_CONV_MODE_LEFT_ALIGN, 5);
+}
+
+// Actions Ikigai Debug
+static void DebugAction_Player_Nickname(u8 taskId)
+{
+    DoNamingScreen(NAMING_SCREEN_PLAYER_NICKNAME, gSaveBlock3Ptr->characters.playerNickname, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldContinueScript);
+}
+
+static void DebugAction_Ikigai_MeetAllCharacter(u8 taskId)
+{
+    IkigaiCharacter_SetAllMetFlags();
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
 }
 
 // static u32 DebugAction_DynamicMusic_ReturnInstrumentFromMenuItem(u32 input)
