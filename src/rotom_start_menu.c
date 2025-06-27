@@ -57,13 +57,13 @@
 #define TAG_ROTOM_FACE_GFX                  1234
 #define TAG_PHONE_ICON_GFX                  1235
 #define TAG_ROTOM_FACE_ICON_PAL             0x4654 | BLEND_IMMUNE_FLAG
-#define FULL_SCREEN_COLUMN_ONE_X            20
-#define FULL_SCREEN_COLUMN_TWO_X            80
-#define FULL_SCREEN_COLUMN_THREE_X          130
-#define FULL_SCREEN_COLUMN_FOUR_X           180
-#define FULL_SCREEN_ROW_ONE_Y               20
+#define FULL_SCREEN_COLUMN_ONE_X            34
+#define FULL_SCREEN_COLUMN_TWO_X            72
+#define FULL_SCREEN_COLUMN_THREE_X          168
+#define FULL_SCREEN_COLUMN_FOUR_X           206
+#define FULL_SCREEN_ROW_ONE_Y               40
 #define FULL_SCREEN_ROW_TWO_Y               80
-#define FULL_SCREEN_ROW_THREE_Y             130
+#define FULL_SCREEN_ROW_THREE_Y             120
 
 #define PHONE_COMFY_SLIDE_DURATION          30
 #define FACE_ICON_COMFY_SPRING_MASS         200
@@ -625,7 +625,7 @@ static const struct RotomPhone_FullScreen_OptionsInfo sFullScreenOptionInfo[RP_F
     },
     [RP_FS_OPTION_9] =
     {
-        .x = FULL_SCREEN_COLUMN_ONE_X + 32,
+        .x = FULL_SCREEN_COLUMN_ONE_X + 16,
         .y = FULL_SCREEN_ROW_THREE_Y,
         .optionUp = RP_FS_OPTION_5,
         .optionDown = RP_FS_OPTION_COUNT,
@@ -634,7 +634,7 @@ static const struct RotomPhone_FullScreen_OptionsInfo sFullScreenOptionInfo[RP_F
     },
     [RP_FS_OPTION_10] =
     {
-        .x = FULL_SCREEN_COLUMN_THREE_X + 32,
+        .x = FULL_SCREEN_COLUMN_FOUR_X - 16,
         .y = FULL_SCREEN_ROW_THREE_Y,
         .optionUp = RP_FS_OPTION_6,
         .optionDown = RP_FS_OPTION_COUNT,
