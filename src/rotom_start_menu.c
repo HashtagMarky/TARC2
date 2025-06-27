@@ -2804,6 +2804,7 @@ static void RotomPhone_FullScreenMenu_CreateIconSprites(void)
                 1
             );
             sRotomPhone_StartMenu->menuFullScreenOptions[optionSlot] = menuId;
+            gSprites[sRotomPhone_StartMenu->menuFullScreenIconSpriteId[optionSlot]].oam.priority = 2;
             drawn++;
         }
     }
