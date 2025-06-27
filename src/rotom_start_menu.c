@@ -132,6 +132,7 @@ static void UNUSED RotomPhone_FullScreenMenu_DoCleanUpAndChangeTaskFunc(u8 taskI
 static void RotomPhone_FullScreenMenu_DoCleanUpAndDestroyTask(u8 taskId);
 
 static void RotomPhone_FullScreenMenu_LoadSprites(void);
+static void RotomPhone_FullScreenMenu_CreateAllSprites(void);
 static void RotomPhone_FullScreenMenu_TimerUpdates(u8 taskId);
 
 
@@ -515,6 +516,21 @@ enum RotomPhone_Overworld_MessagesAdventure
     RP_MESSAGE_ADVENTURE_COUNT,
 };
 
+enum RotomPhone_FullScreen_Options
+{
+    RP_FS_OPTION_1,
+    RP_FS_OPTION_2,
+    RP_FS_OPTION_3,
+    RP_FS_OPTION_4,
+    RP_FS_OPTION_5,
+    RP_FS_OPTION_6,
+    RP_FS_OPTION_7,
+    RP_FS_OPTION_8,
+    RP_FS_OPTION_9,
+    RP_FS_OPTION_10,
+    RP_FS_OPTION_COUNT,
+};
+
 enum RotomPhone_FullScreen_SlidingPanelSprites
 {
     RP_PANEL_SPRITE_ONE,
@@ -564,6 +580,7 @@ struct RotomPhone_StartMenu_State
     // Full Screen Menu
     u32 menuFullScreenLoadState;
     bool32 menuFullScreenPanelOpen;
+    u32 menuFullScreenSpriteId[RP_FS_OPTION_COUNT];
     u32 menuFullScreenPanelY;
     u32 menuFullScreenPanelSpriteId[RP_PANEL_SPRITE_COUNT];
     u32 menuFullScreenPanelWindowId[RP_PANEL_WIN_COUNT];
@@ -2289,6 +2306,7 @@ static void RotomPhone_FullScreenMenu_SetupCB(void)
         RotomPhone_FullScreenMenu_PrintMenuName();
         RotomPhone_FullScreenMenu_LoadSprites();
         RotomPhone_StartMenu_CreateRotomFaceSprite(FALSE);
+        RotomPhone_FullScreenMenu_CreateAllSprites();
         break;
     }
 }
@@ -2609,6 +2627,52 @@ static bool8 RotomPhone_FullScreenMenu_LoadGraphics(void)
     return FALSE;
 }
 
+static void RotomPhone_FullScreenMenu_CreateSprite(enum RotomPhone_MenuItems menuItem, enum RotomPhone_FullScreen_Options spriteId)
+{
+    s32 x = 190;
+    s32 y = 58;
+    s32 xAdd = 24;
+    s32 yAdd = 22;
+    u32 iconRow;
+    u32 iconColumn;
+
+    iconColumn = spriteId % 2;
+    iconRow = spriteId / 2;
+
+    sRotomPhone_StartMenu->menuFullScreenSpriteId[spriteId] = CreateSprite(
+        &sSpriteTemplate_OverworldIcon,
+        x + (iconColumn * xAdd),
+        y + (iconRow * yAdd),
+        0
+    );
+    StartSpriteAnim(&gSprites[sRotomPhone_StartMenu->menuFullScreenSpriteId[spriteId]], menuItem);
+}
+
+static void RotomPhone_FullScreenMenu_CreateAllSprites(void)
+{
+    enum RotomPhone_FullScreen_Options drawn = RP_FS_OPTION_1;
+    u32 drawnCount = RP_FS_OPTION_COUNT;
+
+    for (enum RotomPhone_MenuItems menuId = RP_MENU_FIRST_OPTION; menuId < RP_MENU_COUNT && drawn < drawnCount; menuId++)
+    {
+        const struct RotomPhone_MenuOptions *menuOption = &sRotomPhoneOptions[menuId];
+
+        if (menuOption->unlockedFunc && menuOption->unlockedFunc())
+        {
+            enum RotomPhone_FullScreen_Options optionSlot = RP_FS_OPTION_1 + drawn;
+
+            RotomPhone_FullScreenMenu_CreateSprite(menuId, optionSlot);
+            sRotomPhone_StartMenu->menuFullScreenSpriteId[optionSlot] = menuId;
+            drawn++;
+        }
+    }
+
+    for (; drawn < RP_FS_OPTION_COUNT; drawn++)
+    {
+        sRotomPhone_StartMenu->menuFullScreenSpriteId[drawn] = RP_MENU_COUNT;
+    }
+}
+
 static void RotomPhone_FullScreenMenu_InitWindows(void)
 {
     InitWindows(sRotomPhone_FullScreenMenuWindowTemplates);
@@ -2673,6 +2737,7 @@ static void RotomPhone_FullScreenMenu_FreeResources(void)
 static void RotomPhone_FullScreenMenu_LoadSprites(void)
 {
     LoadSpritePalette(sSpritePal_RotomFaceIcons);
+    LoadCompressedSpriteSheet(sSpriteSheet_OverworldIcons);
     LoadCompressedSpriteSheet(sSpriteSheet_OverworldRotomFace);
 }
 
