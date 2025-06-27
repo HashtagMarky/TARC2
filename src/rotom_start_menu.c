@@ -2500,7 +2500,7 @@ static void RotomPhone_FullScreenMenu_HandleDPAD(u8 taskId)
     else
         optionNew = sFullScreenOptionInfo[optionCurrent].optionDown;
 
-    if (optionNew >= RP_FS_OPTION_COUNT)
+    if (optionNew == RP_FS_OPTION_COUNT)
     {
         tRotomMessageSoundEffect = PMD_EVENT_SIGN_ANGER_02;
         return;
