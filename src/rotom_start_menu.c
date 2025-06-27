@@ -116,7 +116,7 @@ static void RotomPhone_FullScreenMenu_MainCB(void);
 static void RotomPhone_FullScreenMenu_VBlankCB(void);
 
 static void Task_RotomPhone_FullScreenMenu_WaitFadeIn(u8 taskId);
-static void Task_RotomPhone_FullScreenMenu_MainInput(u8 taskId);
+static void Task_RotomPhone_FullScreenMenu_HandleMainInput(u8 taskId);
 static void Task_RotomPhone_FullScreenMenu_PanelInput(u8 taskId);
 static void Task_RotomPhone_FullScreenMenu_PanelSlide(u8 taskId);
 static void RotomPhone_FullScreenMenu_StartPanelSlide(void);
@@ -2460,11 +2460,11 @@ static void Task_RotomPhone_FullScreenMenu_WaitFadeIn(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        gTasks[taskId].func = Task_RotomPhone_FullScreenMenu_MainInput;
+        gTasks[taskId].func = Task_RotomPhone_FullScreenMenu_HandleMainInput;
     }
 }
 
-static void Task_RotomPhone_FullScreenMenu_MainInput(u8 taskId)
+static void Task_RotomPhone_FullScreenMenu_HandleMainInput(u8 taskId)
 {
     RotomPhone_FullScreenMenu_TimerUpdates(taskId);
     
@@ -2575,7 +2575,7 @@ static void Task_RotomPhone_FullScreenMenu_PanelSlide(u8 taskId)
                 sRotomPhoneOptions[menuSelectedFullScreen].selectedFunc();
             sRotomPhone_StartMenu->menuFullScreenPanelOpen = FALSE;
             ReleaseComfyAnim(tRotomPanelComfyAnimId);
-            gTasks[taskId].func = Task_RotomPhone_FullScreenMenu_MainInput;
+            gTasks[taskId].func = Task_RotomPhone_FullScreenMenu_HandleMainInput;
         }
     }
     else
@@ -2624,7 +2624,7 @@ static void Task_RotomPhone_FullScreenMenu_PanelSlide(u8 taskId)
 
 static void RotomPhone_FullScreenMenu_StartPanelSlide(void)
 {
-    u8 taskId = FindTaskIdByFunc(Task_RotomPhone_FullScreenMenu_MainInput);
+    u8 taskId = FindTaskIdByFunc(Task_RotomPhone_FullScreenMenu_HandleMainInput);
     gTasks[taskId].func = Task_RotomPhone_FullScreenMenu_PanelSlide;
     tRotomPanelComfyAnimId = INVALID_COMFY_ANIM;
 }
@@ -3104,7 +3104,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Trainer(void)
     }
     else
     {
-        RotomPhone_FullScreenMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_FullScreenMenu_MainInput));
+        RotomPhone_FullScreenMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_FullScreenMenu_HandleMainInput));
         RotomPhone_StartMenu_ChooseTrainerCard();
     }
 }
