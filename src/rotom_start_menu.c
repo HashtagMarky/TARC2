@@ -70,6 +70,10 @@
 #define FACE_ICON_COMFY_SPRING_TENSION      25
 #define FACE_ICON_COMFY_SPRING_FRICTION     800
 #define FACE_ICON_COMFY_SPRING_CLAMP_AFTER  1
+#define CURSOR_COMFY_SPRING_MASS            15
+#define CURSOR_COMFY_SPRING_TENSION         100
+#define CURSOR_COMFY_SPRING_FRICTION        850
+#define CURSOR_COMFY_SPRING_CLAMP_AFTER     1
 
 #define FADE_COLOUR_MAX                     0xFF
 #define FADE_COLOUR_MID                     0x80
@@ -2815,24 +2819,115 @@ static void RotomPhone_FullScreenMenu_CreateIconSprites(void)
     }
 }
 
+#define ROTOM_CURSOR_X_OFFSET 10
+#define ROTOM_CURSOR_Y_OFFSET 6
+#define sComfyAnimIdX         sprite->data[0]
+#define sComfyAnimIdY         sprite->data[1]
+static void RotomPhone_FullScreenMenu_CursorCallback(struct Sprite *sprite)
+{
+    struct ComfyAnim *xAnim = &gComfyAnims[sComfyAnimIdX];
+    struct ComfyAnim *yAnim = &gComfyAnims[sComfyAnimIdY];
+    struct ComfyAnimSpringConfig *xConfig = &xAnim->config.data.spring;
+    struct ComfyAnimSpringConfig *yConfig = &yAnim->config.data.spring;
+    enum RotomPhone_FullScreen_Options optionCurrent = RP_FS_OPTION_1;
+    s32 xOffset;
+
+    if (sprite->x > DISPLAY_WIDTH / 2)
+    {
+        sprite->hFlip = TRUE;
+        xOffset = -ROTOM_CURSOR_X_OFFSET;
+    }
+    else
+    {
+        sprite->hFlip = FALSE;
+        xOffset = ROTOM_CURSOR_X_OFFSET;
+    }
+
+    for (enum RotomPhone_FullScreen_Options i = RP_FS_OPTION_1; i < RP_FS_OPTION_COUNT; i++)
+    {
+        if (sRotomPhone_StartMenu->menuFullScreenOptions[i] == menuSelectedFullScreen)
+        {
+            optionCurrent = i;
+            break;
+        }
+    }
+
+    xConfig->to = Q_24_8(sFullScreenOptionInfo[optionCurrent].x + xOffset);
+    yConfig->to = Q_24_8(sFullScreenOptionInfo[optionCurrent].y + ROTOM_CURSOR_Y_OFFSET);
+
+    sprite->x = ReadComfyAnimValueSmooth(xAnim);
+    sprite->y = ReadComfyAnimValueSmooth(yAnim);
+
+    UpdateMonIconFrame(sprite);
+}
+
 static void RotomPhone_FullScreenMenu_CreateCursorSprite(void)
 {
-    u8 taskId;
-
-    if (FuncIsActiveTask(Task_RotomPhone_FullScreenMenu_WaitFadeIn))
-        taskId = FindTaskIdByFunc(Task_RotomPhone_FullScreenMenu_WaitFadeIn);
-    else if (FuncIsActiveTask(Task_RotomPhone_FullScreenMenu_HandleMainInput))
-        taskId = FindTaskIdByFunc(Task_RotomPhone_FullScreenMenu_HandleMainInput);
-    else
-        return;
-
+    struct Sprite *sprite;
+    enum RotomPhone_FullScreen_Options optionCurrent = RP_FS_OPTION_1;
+    u8 x;
+    u8 y;
+    u8 xOffset;
     LoadMonIconPalette(SPECIES_ROTOM);
-    sRotomPhone_StartMenu->menuFullScreenCursorSpriteId = CreateMonIcon(SPECIES_ROTOM, SpriteCB_MonIcon,
-        sFullScreenOptionInfo[RP_FS_OPTION_1].x, sFullScreenOptionInfo[RP_FS_OPTION_1].y, 0,
-        Random32()
+
+    for (enum RotomPhone_FullScreen_Options i = RP_FS_OPTION_1; i < RP_FS_OPTION_COUNT; i++)
+    {
+        if (sRotomPhone_StartMenu->menuFullScreenOptions[i] == menuSelectedFullScreen)
+        {
+            optionCurrent = i;
+            break;
+        }
+    }
+
+    switch (optionCurrent)
+    {
+        case RP_FS_OPTION_3:
+        case RP_FS_OPTION_4:
+        case RP_FS_OPTION_7:
+        case RP_FS_OPTION_8:
+        case RP_FS_OPTION_10:
+            xOffset = -ROTOM_CURSOR_X_OFFSET;
+            break;
+        
+        default:
+            xOffset = ROTOM_CURSOR_X_OFFSET;
+            break;
+    }
+    
+    x = sFullScreenOptionInfo[optionCurrent].x + xOffset;
+    y = sFullScreenOptionInfo[optionCurrent].y + ROTOM_CURSOR_Y_OFFSET;
+    sRotomPhone_StartMenu->menuFullScreenCursorSpriteId = CreateMonIcon(SPECIES_ROTOM, RotomPhone_FullScreenMenu_CursorCallback,
+        x,
+        y,
+        0, Random32()
     );
-    gSprites[sRotomPhone_StartMenu->menuFullScreenCursorSpriteId].oam.priority = 0;
+    sprite = &gSprites[sRotomPhone_StartMenu->menuFullScreenCursorSpriteId];
+    sprite->oam.priority = 0;
+
+    struct ComfyAnimSpringConfig xConfig;
+    struct ComfyAnimSpringConfig yConfig;
+    InitComfyAnimConfig_Spring(&xConfig);
+    InitComfyAnimConfig_Spring(&yConfig);
+
+    xConfig.from = Q_24_8(x);
+    xConfig.to = Q_24_8(x);
+    xConfig.mass = Q_24_8(CURSOR_COMFY_SPRING_MASS);
+    xConfig.tension = Q_24_8(CURSOR_COMFY_SPRING_TENSION);
+    xConfig.friction = Q_24_8(CURSOR_COMFY_SPRING_FRICTION);
+    xConfig.clampAfter = CURSOR_COMFY_SPRING_CLAMP_AFTER;
+
+    yConfig.from = Q_24_8(y);
+    yConfig.to = Q_24_8(y);
+    yConfig.mass = Q_24_8(CURSOR_COMFY_SPRING_MASS);
+    yConfig.tension = Q_24_8(CURSOR_COMFY_SPRING_TENSION);
+    yConfig.friction = Q_24_8(CURSOR_COMFY_SPRING_FRICTION);
+    yConfig.clampAfter = CURSOR_COMFY_SPRING_CLAMP_AFTER;
+    
+    sComfyAnimIdX = CreateComfyAnim_Spring(&xConfig);
+    sComfyAnimIdY = CreateComfyAnim_Spring(&yConfig);
 }
+#undef ROTOM_CURSOR_X_OFFSET
+#undef ROTOM_CURSOR_Y_OFFSET
 
 static void RotomPhone_FullScreenMenu_InitWindows(void)
 {
@@ -3577,6 +3672,11 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 #undef FACE_ICON_COMFY_SPRING_FRICTION
 #undef FACE_ICON_COMFY_SPRING_CLAMP_AFTER
 
+#undef CURSOR_COMFY_SPRING_MASS
+#undef CURSOR_COMFY_SPRING_TENSION
+#undef CURSOR_COMFY_SPRING_FRICTION
+#undef CURSOR_COMFY_SPRING_CLAMP_AFTER
+
 #undef FADE_COLOUR_MAX
 #undef FADE_COLOUR_MID
 #undef FADE_COLOUR_MIN
@@ -3614,3 +3714,5 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 #undef tPhoneCloseToSave
 #undef tPhoneHighlightComfyAnimId
 #undef sFrameNumComfyAnimId
+#undef sComfyAnimIdX
+#undef sComfyAnimIdY
