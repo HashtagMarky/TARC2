@@ -2469,6 +2469,42 @@ static void Task_RotomPhone_FullScreenMenu_WaitFadeIn(u8 taskId)
     }
 }
 
+static void RotomPhone_FullScreenMenu_HandleDPAD(u8 taskId)
+{
+    enum RotomPhone_FullScreen_Options optionCurrent = RP_FS_OPTION_1;
+    enum RotomPhone_FullScreen_Options optionNew;
+
+    for (enum RotomPhone_FullScreen_Options i = RP_FS_OPTION_1; i < RP_FS_OPTION_COUNT; i++)
+    {
+        if (sRotomPhone_StartMenu->menuFullScreenOptions[i] == menuSelectedFullScreen)
+        {
+            optionCurrent = i;
+            break;
+        }
+    }
+
+    if (JOY_NEW(DPAD_UP))
+        optionNew = sFullScreenOptionInfo[optionCurrent].optionUp;
+    else if (JOY_NEW(DPAD_LEFT))
+        optionNew = sFullScreenOptionInfo[optionCurrent].optionLeft;
+    else  if (JOY_NEW(DPAD_RIGHT))
+        optionNew = sFullScreenOptionInfo[optionCurrent].optionRight;
+    else
+        optionNew = sFullScreenOptionInfo[optionCurrent].optionDown;
+
+    if (optionNew >= RP_FS_OPTION_COUNT)
+    {
+        tRotomMessageSoundEffect = PMD_EVENT_SIGN_ANGER_02;
+        return;
+    }
+
+    menuSelectedFullScreen = sRotomPhone_StartMenu->menuFullScreenOptions[optionNew];
+    tRotomMessageSoundEffect = PMD_EVENT_SIGN_ASE_01;
+
+    RotomPhone_StartMenu_UpdateRotomFaceAnim(TRUE);
+    RotomPhone_FullScreenMenu_PrintMenuName();
+}
+
 static void Task_RotomPhone_FullScreenMenu_HandleMainInput(u8 taskId)
 {
     tRotomMessageSoundEffect = MUS_DUMMY;
@@ -2480,29 +2516,9 @@ static void Task_RotomPhone_FullScreenMenu_HandleMainInput(u8 taskId)
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_RotomPhone_FullScreenMenu_WaitFadeAndExitGracefully;
     }
-    if (JOY_NEW(DPAD_LEFT))
+    if (JOY_NEW(DPAD_ANY))
     {
-        PlaySE(SE_SELECT);
-        do {
-            if (menuSelectedFullScreen == RP_MENU_FIRST_OPTION)
-                menuSelectedFullScreen = RP_MENU_LAST_OPTION;
-            else
-                menuSelectedFullScreen--;
-        } while (!sRotomPhoneOptions[menuSelectedFullScreen].unlockedFunc());
-        RotomPhone_FullScreenMenu_PrintMenuName();
-        RotomPhone_StartMenu_UpdateRotomFaceAnim(TRUE);
-    }
-    if (JOY_NEW(DPAD_RIGHT))
-    {
-        PlaySE(SE_SELECT);
-        do {
-            if (menuSelectedFullScreen == RP_MENU_LAST_OPTION)
-                menuSelectedFullScreen = RP_MENU_FIRST_OPTION;
-            else
-                menuSelectedFullScreen++;
-        } while (!sRotomPhoneOptions[menuSelectedFullScreen].unlockedFunc());
-        RotomPhone_FullScreenMenu_PrintMenuName();
-        RotomPhone_StartMenu_UpdateRotomFaceAnim(TRUE);
+        RotomPhone_FullScreenMenu_HandleDPAD(taskId);
     }
     if (JOY_NEW(A_BUTTON | START_BUTTON))
     {
