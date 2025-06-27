@@ -2429,10 +2429,6 @@ static void RotomPhone_FullScreenMenu_SetupCB(void)
         gMain.state++;
         break;
     case 7:
-        SetVBlankCallback(RotomPhone_FullScreenMenu_VBlankCB);
-        SetMainCallback2(RotomPhone_FullScreenMenu_MainCB);
-        gMain.state++;
-    case 8:
         sRotomPhone_FullScreen = TRUE;
         if (!sRotomPhoneOptions[menuSelectedFullScreen].unlockedFunc || !sRotomPhoneOptions[menuSelectedFullScreen].unlockedFunc())
             menuSelectedFullScreen = RotomPhone_StartMenu_SetFirstSelectedMenu();
@@ -2443,6 +2439,11 @@ static void RotomPhone_FullScreenMenu_SetupCB(void)
         RotomPhone_StartMenu_CreateRotomFaceSprite(FALSE);
         RotomPhone_FullScreenMenu_CreateIconSprites();
         RotomPhone_FullScreenMenu_CreateCursorSprite();
+        gMain.state++;
+        break;
+    case 8:
+        SetVBlankCallback(RotomPhone_FullScreenMenu_VBlankCB);
+        SetMainCallback2(RotomPhone_FullScreenMenu_MainCB);
         break;
     }
 }
