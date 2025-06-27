@@ -698,6 +698,7 @@ struct RotomPhone_StartMenu_State
     u32 menuFullScreenLoadState;
     bool32 menuFullScreenPanelOpen;
     enum RotomPhone_MenuItems menuFullScreenOptions[RP_FS_OPTION_COUNT];
+    enum RotomPhone_MenuItems menuFullScreenFirstOnscreenOption;
     u32 menuFullScreenIconSpriteId[RP_FS_OPTION_COUNT];
     u32 menuFullScreenCursorSpriteId;
     u32 menuFullScreenPanelY;
@@ -2437,6 +2438,8 @@ static void RotomPhone_FullScreenMenu_SetupCB(void)
         if (!sRotomPhoneOptions[menuSelectedFullScreen].unlockedFunc || !sRotomPhoneOptions[menuSelectedFullScreen].unlockedFunc())
             menuSelectedFullScreen = RotomPhone_StartMenu_SetFirstSelectedMenu();
 
+        sRotomPhone_StartMenu->menuFullScreenFirstOnscreenOption = RotomPhone_StartMenu_SetFirstSelectedMenu();
+
         RotomPhone_FullScreenMenu_PrintTime();
         RotomPhone_FullScreenMenu_PrintMenuName();
         RotomPhone_FullScreenMenu_LoadSprites();
@@ -2477,6 +2480,30 @@ static void Task_RotomPhone_FullScreenMenu_WaitFadeIn(u8 taskId)
     }
 }
 
+static bool32 RotomPhone_FullScreenMenu_CanScrollRight(void)
+{
+    u8 start = sRotomPhone_StartMenu->menuFullScreenFirstOnscreenOption + 10;
+
+    for (u8 i = start; i < RP_MENU_COUNT; i++)
+    {
+        if (sRotomPhoneOptions[i].unlockedFunc && sRotomPhoneOptions[i].unlockedFunc())
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+static void RotomPhone_FullScreenMenu_HandleScroll(u8 taskId, bool32 scrollRight)
+{
+    tRotomMessageSoundEffect = PMD_EVENT_SIGN_NOTICE_01;
+    if (scrollRight)
+        sRotomPhone_StartMenu->menuFullScreenFirstOnscreenOption += 10;
+    else
+        sRotomPhone_StartMenu->menuFullScreenFirstOnscreenOption -= 10;
+    RotomPhone_FullScreenMenu_CreateIconSprites();
+}
+
+
 static void RotomPhone_FullScreenMenu_HandleDPAD(u8 taskId)
 {
     enum RotomPhone_FullScreen_Options optionCurrent = RP_FS_OPTION_1;
@@ -2506,9 +2533,44 @@ static void RotomPhone_FullScreenMenu_HandleDPAD(u8 taskId)
         return;
     }
 
-    menuSelectedFullScreen = sRotomPhone_StartMenu->menuFullScreenOptions[optionNew];
     tRotomMessageSoundEffect = PMD_EVENT_SIGN_ASE_01;
 
+    if (sRotomPhone_StartMenu->menuFullScreenOptions[optionNew] == RP_MENU_COUNT)
+    {
+        if (JOY_NEW(DPAD_UP | DPAD_DOWN))
+        {
+            tRotomMessageSoundEffect = PMD_EVENT_SIGN_ANGER_02;
+            return;
+        }
+
+        if (JOY_NEW(DPAD_LEFT))
+        {
+            if (sRotomPhone_StartMenu->menuFullScreenFirstOnscreenOption == RotomPhone_StartMenu_SetFirstSelectedMenu())
+            {
+                tRotomMessageSoundEffect = PMD_EVENT_SIGN_ANGER_02;
+                return;
+            }
+            else
+            {
+                RotomPhone_FullScreenMenu_HandleScroll(taskId, FALSE);
+            }
+        }
+
+        if (JOY_NEW(DPAD_RIGHT))
+        {
+            if (!RotomPhone_FullScreenMenu_CanScrollRight())
+            {
+                tRotomMessageSoundEffect = PMD_EVENT_SIGN_ANGER_02;
+                return;
+            }
+            else
+            {
+                RotomPhone_FullScreenMenu_HandleScroll(taskId, TRUE);
+            }
+        }
+    }
+
+    menuSelectedFullScreen = sRotomPhone_StartMenu->menuFullScreenOptions[optionNew];
     RotomPhone_StartMenu_UpdateRotomFaceAnim(TRUE);
     RotomPhone_FullScreenMenu_PrintMenuName();
 }
@@ -2793,7 +2855,7 @@ static void RotomPhone_FullScreenMenu_CreateIconSprites(void)
     enum RotomPhone_FullScreen_Options drawn = RP_FS_OPTION_1;
     u32 drawnCount = RP_FS_OPTION_COUNT;
 
-    for (enum RotomPhone_MenuItems menuId = RP_MENU_FIRST_OPTION; menuId < RP_MENU_COUNT && drawn < drawnCount; menuId++)
+    for (enum RotomPhone_MenuItems menuId = sRotomPhone_StartMenu->menuFullScreenFirstOnscreenOption; menuId < RP_MENU_COUNT && drawn < drawnCount; menuId++)
     {
         const struct RotomPhone_MenuOptions *menuOption = &sRotomPhoneOptions[menuId];
 
