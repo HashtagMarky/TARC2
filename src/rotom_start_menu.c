@@ -57,6 +57,13 @@
 #define TAG_ROTOM_FACE_GFX                  1234
 #define TAG_PHONE_ICON_GFX                  1235
 #define TAG_ROTOM_FACE_ICON_PAL             0x4654 | BLEND_IMMUNE_FLAG
+#define FULL_SCREEN_COLUMN_ONE_X            20
+#define FULL_SCREEN_COLUMN_TWO_X            80
+#define FULL_SCREEN_COLUMN_THREE_X          130
+#define FULL_SCREEN_COLUMN_FOUR_X           180
+#define FULL_SCREEN_ROW_ONE_Y               20
+#define FULL_SCREEN_ROW_TWO_Y               80
+#define FULL_SCREEN_ROW_THREE_Y             130
 
 #define PHONE_COMFY_SLIDE_DURATION          30
 #define FACE_ICON_COMFY_SPRING_MASS         200
@@ -529,6 +536,110 @@ enum RotomPhone_FullScreen_Options
     RP_FS_OPTION_9,
     RP_FS_OPTION_10,
     RP_FS_OPTION_COUNT,
+};
+
+struct RotomPhone_FullScreen_OptionsInfo
+{
+    u32 x;
+    u32 y;
+    enum RotomPhone_FullScreen_Options optionUp;
+    enum RotomPhone_FullScreen_Options optionDown;
+    enum RotomPhone_FullScreen_Options optionLeft;
+    enum RotomPhone_FullScreen_Options optionRight;
+};
+
+static const struct RotomPhone_FullScreen_OptionsInfo sFullScreenOptionInfo[RP_FS_OPTION_COUNT] =
+{
+    [RP_FS_OPTION_1] =
+    {
+        .x = FULL_SCREEN_COLUMN_ONE_X,
+        .y = FULL_SCREEN_ROW_ONE_Y,
+        .optionUp = RP_FS_OPTION_COUNT,
+        .optionDown = RP_FS_OPTION_5,
+        .optionLeft = RP_FS_OPTION_COUNT,
+        .optionRight = RP_FS_OPTION_2,
+    },
+    [RP_FS_OPTION_2] =
+    {
+        .x = FULL_SCREEN_COLUMN_TWO_X,
+        .y = FULL_SCREEN_ROW_ONE_Y,
+        .optionUp = RP_FS_OPTION_COUNT,
+        .optionDown = RP_FS_OPTION_6,
+        .optionLeft = RP_FS_OPTION_1,
+        .optionRight = RP_FS_OPTION_3,
+    },
+    [RP_FS_OPTION_3] =
+    {
+        .x = FULL_SCREEN_COLUMN_THREE_X,
+        .y = FULL_SCREEN_ROW_ONE_Y,
+        .optionUp = RP_FS_OPTION_COUNT,
+        .optionDown = RP_FS_OPTION_7,
+        .optionLeft = RP_FS_OPTION_2,
+        .optionRight = RP_FS_OPTION_4,
+    },
+    [RP_FS_OPTION_4] =
+    {
+        .x = FULL_SCREEN_COLUMN_FOUR_X,
+        .y = FULL_SCREEN_ROW_ONE_Y,
+        .optionUp = RP_FS_OPTION_COUNT,
+        .optionDown = RP_FS_OPTION_8,
+        .optionLeft = RP_FS_OPTION_3,
+        .optionRight = RP_FS_OPTION_COUNT,
+    },
+    [RP_FS_OPTION_5] =
+    {
+        .x = FULL_SCREEN_COLUMN_ONE_X,
+        .y = FULL_SCREEN_ROW_TWO_Y,
+        .optionUp = RP_FS_OPTION_1,
+        .optionDown = RP_FS_OPTION_9,
+        .optionLeft = RP_FS_OPTION_COUNT,
+        .optionRight = RP_FS_OPTION_6,
+    },
+    [RP_FS_OPTION_6] =
+    {
+        .x = FULL_SCREEN_COLUMN_TWO_X,
+        .y = FULL_SCREEN_ROW_TWO_Y,
+        .optionUp = RP_FS_OPTION_2,
+        .optionDown = RP_FS_OPTION_10,
+        .optionLeft = RP_FS_OPTION_5,
+        .optionRight = RP_FS_OPTION_7,
+    },
+    [RP_FS_OPTION_7] =
+    {
+        .x = FULL_SCREEN_COLUMN_THREE_X,
+        .y = FULL_SCREEN_ROW_TWO_Y,
+        .optionUp = RP_FS_OPTION_3,
+        .optionDown = RP_FS_OPTION_COUNT,
+        .optionLeft = RP_FS_OPTION_6,
+        .optionRight = RP_FS_OPTION_8,
+    },
+    [RP_FS_OPTION_8] =
+    {
+        .x = FULL_SCREEN_COLUMN_FOUR_X,
+        .y = FULL_SCREEN_ROW_TWO_Y,
+        .optionUp = RP_FS_OPTION_4,
+        .optionDown = RP_FS_OPTION_COUNT,
+        .optionLeft = RP_FS_OPTION_7,
+        .optionRight = RP_FS_OPTION_COUNT,
+    },
+    [RP_FS_OPTION_9] =
+    {
+        .x = FULL_SCREEN_COLUMN_ONE_X + 32,
+        .y = FULL_SCREEN_ROW_THREE_Y,
+        .optionUp = RP_FS_OPTION_5,
+        .optionDown = RP_FS_OPTION_COUNT,
+        .optionLeft = RP_FS_OPTION_COUNT,
+        .optionRight = RP_FS_OPTION_10,
+    },
+    [RP_FS_OPTION_10] =
+    {
+        .x = FULL_SCREEN_COLUMN_THREE_X + 32,
+        .y = FULL_SCREEN_ROW_THREE_Y,
+        .optionUp = RP_FS_OPTION_6,
+        .optionDown = RP_FS_OPTION_COUNT,
+        .optionLeft = RP_FS_OPTION_9,
+        .optionRight = RP_FS_OPTION_COUNT,
+    },
 };
 
 enum RotomPhone_FullScreen_SlidingPanelSprites
@@ -2627,27 +2738,6 @@ static bool8 RotomPhone_FullScreenMenu_LoadGraphics(void)
     return FALSE;
 }
 
-static void RotomPhone_FullScreenMenu_CreateSprite(enum RotomPhone_MenuItems menuItem, enum RotomPhone_FullScreen_Options spriteId)
-{
-    s32 x = 190;
-    s32 y = 58;
-    s32 xAdd = 24;
-    s32 yAdd = 22;
-    u32 iconRow;
-    u32 iconColumn;
-
-    iconColumn = spriteId % 2;
-    iconRow = spriteId / 2;
-
-    sRotomPhone_StartMenu->menuFullScreenSpriteId[spriteId] = CreateSprite(
-        &sSpriteTemplate_OverworldIcon,
-        x + (iconColumn * xAdd),
-        y + (iconRow * yAdd),
-        0
-    );
-    StartSpriteAnim(&gSprites[sRotomPhone_StartMenu->menuFullScreenSpriteId[spriteId]], menuItem);
-}
-
 static void RotomPhone_FullScreenMenu_CreateAllSprites(void)
 {
     enum RotomPhone_FullScreen_Options drawn = RP_FS_OPTION_1;
@@ -2661,7 +2751,13 @@ static void RotomPhone_FullScreenMenu_CreateAllSprites(void)
         {
             enum RotomPhone_FullScreen_Options optionSlot = RP_FS_OPTION_1 + drawn;
 
-            RotomPhone_FullScreenMenu_CreateSprite(menuId, optionSlot);
+            sRotomPhone_StartMenu->menuFullScreenSpriteId[optionSlot] = CreateSprite(
+                &sSpriteTemplate_OverworldIcon,
+                sFullScreenOptionInfo[optionSlot].x,
+                sFullScreenOptionInfo[optionSlot].y,
+                0
+            );
+            StartSpriteAnim(&gSprites[sRotomPhone_StartMenu->menuFullScreenSpriteId[optionSlot]], menuId);
             sRotomPhone_StartMenu->menuFullScreenSpriteId[optionSlot] = menuId;
             drawn++;
         }
@@ -3402,6 +3498,13 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 #undef TAG_ROTOM_FACE_ICON_PAL
 #undef PHONE_BG_PAL_SLOT
 #undef PHONE_BASE_COLOUR_INDEX
+#undef FULL_SCREEN_COLUMN_ONE_X
+#undef FULL_SCREEN_COLUMN_TWO_X
+#undef FULL_SCREEN_COLUMN_THREE_X
+#undef FULL_SCREEN_COLUMN_FOUR_X
+#undef FULL_SCREEN_ROW_ONE_Y
+#undef FULL_SCREEN_ROW_TWO_Y
+#undef FULL_SCREEN_ROW_THREE_Y
 
 #undef PHONE_COMFY_SLIDE_DURATION
 #undef FACE_ICON_COMFY_SPRING_MASS
