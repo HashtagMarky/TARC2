@@ -692,7 +692,8 @@ struct RotomPhone_StartMenu_State
     // Full Screen Menu
     u32 menuFullScreenLoadState;
     bool32 menuFullScreenPanelOpen;
-    u32 menuFullScreenSpriteId[RP_FS_OPTION_COUNT];
+    enum RotomPhone_MenuItems menuFullScreenOptions[RP_FS_OPTION_COUNT];
+    u32 menuFullScreenIconSpriteId[RP_FS_OPTION_COUNT];
     u32 menuFullScreenPanelY;
     u32 menuFullScreenPanelSpriteId[RP_PANEL_SPRITE_COUNT];
     u32 menuFullScreenPanelWindowId[RP_PANEL_WIN_COUNT];
@@ -2398,6 +2399,10 @@ static void RotomPhone_FullScreenMenu_SetupCB(void)
     case 5:
         sRotomPhone_StartMenu->menuFullScreenPanelY = 0;
         sRotomPhone_StartMenu->menuFullScreenPanelOpen = FALSE;
+        for (enum RotomPhone_FullScreen_Options fullScreenOptions = RP_OW_OPTION_1; fullScreenOptions < RP_FS_OPTION_COUNT; fullScreenOptions++)
+        {
+            sRotomPhone_StartMenu->menuFullScreenIconSpriteId[fullScreenOptions] = SPRITE_NONE;
+        }
         sRotomPhone_StartMenu->menuRotomFaceSpriteId = SPRITE_NONE;
         sRotomPhone_StartMenu->menuRotomFaceFlashSpriteId = SPRITE_NONE;
 
@@ -2768,20 +2773,20 @@ static void RotomPhone_FullScreenMenu_CreateIconSprites(void)
         {
             enum RotomPhone_FullScreen_Options optionSlot = RP_FS_OPTION_1 + drawn;
 
-            sRotomPhone_StartMenu->menuFullScreenSpriteId[optionSlot] = CreateSprite(
+            sRotomPhone_StartMenu->menuFullScreenIconSpriteId[optionSlot] = CreateSprite(
                 &sSpriteTemplate_FullScreenIcon,
                 sFullScreenOptionInfo[optionSlot].x,
                 sFullScreenOptionInfo[optionSlot].y,
                 0
             );
-            sRotomPhone_StartMenu->menuFullScreenSpriteId[optionSlot] = menuId;
+            sRotomPhone_StartMenu->menuFullScreenOptions[optionSlot] = menuId;
             drawn++;
         }
     }
 
     for (; drawn < RP_FS_OPTION_COUNT; drawn++)
     {
-        sRotomPhone_StartMenu->menuFullScreenSpriteId[drawn] = RP_MENU_COUNT;
+        sRotomPhone_StartMenu->menuFullScreenOptions[drawn] = RP_MENU_COUNT;
     }
 }
 
