@@ -3001,7 +3001,6 @@ static void RotomPhone_FullScreenMenu_CreateCursorSprite(void)
         0, Random32()
     );
     sprite = &gSprites[sRotomPhone_StartMenu->menuFullScreenCursorSpriteId];
-    sprite->oam.priority = 0;
 
     struct ComfyAnimSpringConfig xConfig;
     struct ComfyAnimSpringConfig yConfig;
