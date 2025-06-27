@@ -834,7 +834,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_OverworldIcons[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_FullScreenIcons[] = 
 {
-    {sRotomPhone_FullScreenMenuIconsGfx, 32*32/2 , TAG_PHONE_ICON_GFX},
+    {sRotomPhone_FullScreenMenuIconsGfx, 32*352/2 , TAG_PHONE_ICON_GFX},
     {NULL},
 };
 
@@ -1038,7 +1038,7 @@ static const struct SpriteTemplate sSpriteTemplate_FullScreenIcon = {
     .tileTag = TAG_PHONE_ICON_GFX,
     .paletteTag = TAG_ROTOM_FACE_ICON_PAL,
     .oam = &sOam_RotomPhoneIcons,
-    .anims = gDummySpriteAnimTable,
+    .anims = sAnims_OverworldIcons,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
@@ -2908,6 +2908,7 @@ static void RotomPhone_FullScreenMenu_CreateIconSprites(void)
             );
             sRotomPhone_StartMenu->menuFullScreenOptions[optionSlot] = menuId;
             gSprites[sRotomPhone_StartMenu->menuFullScreenIconSpriteId[optionSlot]].oam.priority = 2;
+            StartSpriteAnim(&gSprites[sRotomPhone_StartMenu->menuFullScreenIconSpriteId[optionSlot]], menuId);
             drawn++;
         }
     }
