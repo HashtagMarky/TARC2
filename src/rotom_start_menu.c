@@ -812,7 +812,7 @@ static const struct SpritePalette sSpritePal_RotomFaceIcons[] =
     {NULL},
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_OverworldRotomFace[] = 
+static const struct CompressedSpriteSheet sSpriteSheet_RotomFace[] = 
 {
     {sRotomPhone_StartMenuRotomFaceGfx, 64*768/2 , TAG_ROTOM_FACE_GFX},
     {NULL},
@@ -1326,7 +1326,7 @@ static void RotomPhone_OverworldMenu_LoadSprites(void)
 {
     LoadSpritePalette(sSpritePal_RotomFaceIcons);
     LoadCompressedSpriteSheet(sSpriteSheet_OverworldIcons);
-    LoadCompressedSpriteSheet(sSpriteSheet_OverworldRotomFace);
+    LoadCompressedSpriteSheet(sSpriteSheet_RotomFace);
 
 #if RP_CONFIG_PALETTE_BUFFER
     memcpy(menuLoadedSpritePalette, sRotomPhone_StartMenuRotomFaceIconsPal, PLTT_SIZE_4BPP);
@@ -2850,7 +2850,7 @@ static void RotomPhone_FullScreenMenu_LoadSprites(void)
 {
     LoadSpritePalette(sSpritePal_RotomFaceIcons);
     LoadCompressedSpriteSheet(sSpriteSheet_FullScreenIcons);
-    LoadCompressedSpriteSheet(sSpriteSheet_OverworldRotomFace);
+    LoadCompressedSpriteSheet(sSpriteSheet_RotomFace);
 }
 
 
