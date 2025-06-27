@@ -93,7 +93,7 @@ static void RotomPhone_OverworldMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskF
 static void RotomPhone_OverworldMenu_DoCleanUpAndDestroyTask(u8 taskId, bool32 overworldCleanup);
 
 static void RotomPhone_OverworldMenu_LoadSprites(void);
-static void RotomPhone_OverworldMenu_CreateAllSprites(void);
+static void RotomPhone_OverworldMenu_CreateAllIconSprites(void);
 static void RotomPhone_OverworldMenu_LoadBgGfx(bool32 firstInit);
 static void RotomPhone_OverworldMenu_CreateSpeechWindows(void);
 static void RotomPhone_OverworldMenu_CreateFlipPhoneWindow(void);
@@ -139,7 +139,7 @@ static void UNUSED RotomPhone_FullScreenMenu_DoCleanUpAndChangeTaskFunc(u8 taskI
 static void RotomPhone_FullScreenMenu_DoCleanUpAndDestroyTask(u8 taskId);
 
 static void RotomPhone_FullScreenMenu_LoadSprites(void);
-static void RotomPhone_FullScreenMenu_CreateAllSprites(void);
+static void RotomPhone_FullScreenMenu_CreateIconSprites(void);
 static void RotomPhone_FullScreenMenu_TimerUpdates(u8 taskId);
 
 
@@ -1267,7 +1267,7 @@ static void RotomPhone_OverworldMenu_ContinueInit(bool32 firstInit)
 {
     u8 taskId = FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_PhoneSlideOpen);
 
-    RotomPhone_OverworldMenu_CreateAllSprites();
+    RotomPhone_OverworldMenu_CreateAllIconSprites();
     RotomPhone_StartMenu_CreateRotomFaceSprite(FALSE);
     RotomPhone_OverworldMenu_CreateSpeechWindows();
     RotomPhone_OverworldMenu_CreateFlipPhoneWindow();
@@ -1334,7 +1334,7 @@ static void RotomPhone_OverworldMenu_LoadSprites(void)
 #endif
 }
 
-static void RotomPhone_OverworldMenu_CreateSprite(enum RotomPhone_MenuItems menuItem, enum RotomPhone_Overworld_Options spriteId)
+static void RotomPhone_OverworldMenu_CreateIconSprite(enum RotomPhone_MenuItems menuItem, enum RotomPhone_Overworld_Options spriteId)
 {
     bool32 flash = FALSE;
     s32 x = 190;
@@ -1388,7 +1388,7 @@ static void RotomPhone_OverworldMenu_CreateSprite(enum RotomPhone_MenuItems menu
     }
 }
 
-static void RotomPhone_OverworldMenu_CreateAllSprites(void)
+static void RotomPhone_OverworldMenu_CreateAllIconSprites(void)
 {
     enum RotomPhone_Overworld_Options drawn = RP_OW_OPTION_1;
     u32 drawnCount = RP_OW_OPTION_COUNT;
@@ -1404,7 +1404,7 @@ static void RotomPhone_OverworldMenu_CreateAllSprites(void)
         {
             enum RotomPhone_Overworld_Options optionSlot = RP_OW_OPTION_1 + drawn;
 
-            RotomPhone_OverworldMenu_CreateSprite(menuId, optionSlot);
+            RotomPhone_OverworldMenu_CreateIconSprite(menuId, optionSlot);
             sRotomPhone_StartMenu->menuOverworldOptions[optionSlot] = menuId;
             drawn++;
         }
@@ -2417,7 +2417,7 @@ static void RotomPhone_FullScreenMenu_SetupCB(void)
         RotomPhone_FullScreenMenu_PrintMenuName();
         RotomPhone_FullScreenMenu_LoadSprites();
         RotomPhone_StartMenu_CreateRotomFaceSprite(FALSE);
-        RotomPhone_FullScreenMenu_CreateAllSprites();
+        RotomPhone_FullScreenMenu_CreateIconSprites();
         break;
     }
 }
@@ -2738,7 +2738,7 @@ static bool8 RotomPhone_FullScreenMenu_LoadGraphics(void)
     return FALSE;
 }
 
-static void RotomPhone_FullScreenMenu_CreateAllSprites(void)
+static void RotomPhone_FullScreenMenu_CreateIconSprites(void)
 {
     enum RotomPhone_FullScreen_Options drawn = RP_FS_OPTION_1;
     u32 drawnCount = RP_FS_OPTION_COUNT;
