@@ -2471,6 +2471,7 @@ static void Task_RotomPhone_FullScreenMenu_WaitFadeIn(u8 taskId)
 
 static void Task_RotomPhone_FullScreenMenu_HandleMainInput(u8 taskId)
 {
+    tRotomMessageSoundEffect = MUS_DUMMY;
     RotomPhone_FullScreenMenu_TimerUpdates(taskId);
     
     if (JOY_NEW(B_BUTTON))
@@ -2520,6 +2521,9 @@ static void Task_RotomPhone_FullScreenMenu_HandleMainInput(u8 taskId)
             sRotomPhoneOptions[menuSelectedFullScreen].selectedFunc();
         }
     }
+
+    if (tRotomMessageSoundEffect && !IsSEPlaying())
+        PlaySE(tRotomMessageSoundEffect);
 }
 
 static void Task_RotomPhone_FullScreenMenu_PanelInput(u8 taskId)
