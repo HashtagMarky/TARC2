@@ -2480,16 +2480,36 @@ static void Task_RotomPhone_FullScreenMenu_WaitFadeIn(u8 taskId)
     }
 }
 
-static bool32 RotomPhone_FullScreenMenu_CanScrollRight(void)
+static enum RotomPhone_MenuItems RotomPhone_FullScreenMenu_GetNextUnlockedOffset(u32 startIndex, s32 direction)
 {
-    u8 start = sRotomPhone_StartMenu->menuFullScreenFirstOnscreenOption + 10;
+    u32 unlockedCount = 0;
+    u32 i = startIndex;
 
-    for (u8 i = start; i < RP_MENU_COUNT; i++)
+    while (i < RP_MENU_COUNT && i >= 0)
     {
         if (sRotomPhoneOptions[i].unlockedFunc && sRotomPhoneOptions[i].unlockedFunc())
-            return TRUE;
+        {
+            unlockedCount++;
+            if (unlockedCount == RP_FS_OPTION_COUNT)
+                break;
+        }
+        i += direction;
     }
+    return i;
+}
 
+static bool32 RotomPhone_FullScreenMenu_CanScrollRight(void)
+{
+    u32 unlockedSeen = 0;
+    for (u32 i = sRotomPhone_StartMenu->menuFullScreenFirstOnscreenOption; i < RP_MENU_COUNT; i++)
+    {
+        if (sRotomPhoneOptions[i].unlockedFunc && sRotomPhoneOptions[i].unlockedFunc())
+        {
+            unlockedSeen++;
+            if (unlockedSeen > RP_FS_OPTION_COUNT)
+                return TRUE;
+        }
+    }
     return FALSE;
 }
 
@@ -2505,10 +2525,18 @@ static void RotomPhone_FullScreenMenu_HandleScroll(u8 taskId, bool32 scrollRight
             sRotomPhone_StartMenu->menuFullScreenIconSpriteId[spriteId] = SPRITE_NONE;
         }
     }
+
     if (scrollRight)
-        sRotomPhone_StartMenu->menuFullScreenFirstOnscreenOption += RP_FS_OPTION_COUNT;
+    {
+        sRotomPhone_StartMenu->menuFullScreenFirstOnscreenOption = RotomPhone_FullScreenMenu_GetNextUnlockedOffset(
+            sRotomPhone_StartMenu->menuFullScreenFirstOnscreenOption + 1, +1);
+    }
     else
-        sRotomPhone_StartMenu->menuFullScreenFirstOnscreenOption -= RP_FS_OPTION_COUNT;
+    {
+        sRotomPhone_StartMenu->menuFullScreenFirstOnscreenOption = RotomPhone_FullScreenMenu_GetNextUnlockedOffset(
+            sRotomPhone_StartMenu->menuFullScreenFirstOnscreenOption - 1, -1);
+    }
+
     RotomPhone_FullScreenMenu_CreateIconSprites();
 }
 
