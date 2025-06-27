@@ -2496,10 +2496,19 @@ static bool32 RotomPhone_FullScreenMenu_CanScrollRight(void)
 static void RotomPhone_FullScreenMenu_HandleScroll(u8 taskId, bool32 scrollRight)
 {
     tRotomMessageSoundEffect = PMD_EVENT_SIGN_NOTICE_01;
+    for (enum RotomPhone_FullScreen_Options spriteId = RP_FS_OPTION_1; spriteId < RP_FS_OPTION_COUNT; spriteId++)
+    {
+        if (sRotomPhone_StartMenu->menuFullScreenIconSpriteId[spriteId] != SPRITE_NONE)
+        {
+            FreeSpriteOamMatrix(&gSprites[sRotomPhone_StartMenu->menuFullScreenIconSpriteId[spriteId]]);
+            DestroySprite(&gSprites[sRotomPhone_StartMenu->menuFullScreenIconSpriteId[spriteId]]);
+            sRotomPhone_StartMenu->menuFullScreenIconSpriteId[spriteId] = SPRITE_NONE;
+        }
+    }
     if (scrollRight)
-        sRotomPhone_StartMenu->menuFullScreenFirstOnscreenOption += 10;
+        sRotomPhone_StartMenu->menuFullScreenFirstOnscreenOption += RP_FS_OPTION_COUNT;
     else
-        sRotomPhone_StartMenu->menuFullScreenFirstOnscreenOption -= 10;
+        sRotomPhone_StartMenu->menuFullScreenFirstOnscreenOption -= RP_FS_OPTION_COUNT;
     RotomPhone_FullScreenMenu_CreateIconSprites();
 }
 
@@ -2526,16 +2535,16 @@ static void RotomPhone_FullScreenMenu_HandleDPAD(u8 taskId)
         optionNew = sFullScreenOptionInfo[optionCurrent].optionRight;
     else
         optionNew = sFullScreenOptionInfo[optionCurrent].optionDown;
+    
+    tRotomMessageSoundEffect = PMD_EVENT_SIGN_ASE_01;
 
-    if (optionNew == RP_FS_OPTION_COUNT)
+    if (sRotomPhone_StartMenu->menuFullScreenOptions[optionNew] == RP_MENU_COUNT)
     {
         tRotomMessageSoundEffect = PMD_EVENT_SIGN_ANGER_02;
         return;
     }
 
-    tRotomMessageSoundEffect = PMD_EVENT_SIGN_ASE_01;
-
-    if (sRotomPhone_StartMenu->menuFullScreenOptions[optionNew] == RP_MENU_COUNT)
+    if (optionNew == RP_FS_OPTION_COUNT)
     {
         if (JOY_NEW(DPAD_UP | DPAD_DOWN))
         {
