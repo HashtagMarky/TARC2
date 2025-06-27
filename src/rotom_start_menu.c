@@ -140,6 +140,7 @@ static void RotomPhone_FullScreenMenu_DoCleanUpAndDestroyTask(u8 taskId);
 
 static void RotomPhone_FullScreenMenu_LoadSprites(void);
 static void RotomPhone_FullScreenMenu_CreateIconSprites(void);
+static void RotomPhone_FullScreenMenu_CreateCursorSprite(void);
 static void RotomPhone_FullScreenMenu_TimerUpdates(u8 taskId);
 
 
@@ -694,6 +695,7 @@ struct RotomPhone_StartMenu_State
     bool32 menuFullScreenPanelOpen;
     enum RotomPhone_MenuItems menuFullScreenOptions[RP_FS_OPTION_COUNT];
     u32 menuFullScreenIconSpriteId[RP_FS_OPTION_COUNT];
+    u32 menuFullScreenCursorSpriteId;
     u32 menuFullScreenPanelY;
     u32 menuFullScreenPanelSpriteId[RP_PANEL_SPRITE_COUNT];
     u32 menuFullScreenPanelWindowId[RP_PANEL_WIN_COUNT];
@@ -2440,6 +2442,7 @@ static void RotomPhone_FullScreenMenu_SetupCB(void)
         RotomPhone_FullScreenMenu_LoadSprites();
         RotomPhone_StartMenu_CreateRotomFaceSprite(FALSE);
         RotomPhone_FullScreenMenu_CreateIconSprites();
+        RotomPhone_FullScreenMenu_CreateCursorSprite();
         break;
     }
 }
@@ -2797,7 +2800,7 @@ static void RotomPhone_FullScreenMenu_CreateIconSprites(void)
                 &sSpriteTemplate_FullScreenIcon,
                 sFullScreenOptionInfo[optionSlot].x,
                 sFullScreenOptionInfo[optionSlot].y,
-                0
+                1
             );
             sRotomPhone_StartMenu->menuFullScreenOptions[optionSlot] = menuId;
             drawn++;
@@ -2808,6 +2811,25 @@ static void RotomPhone_FullScreenMenu_CreateIconSprites(void)
     {
         sRotomPhone_StartMenu->menuFullScreenOptions[drawn] = RP_MENU_COUNT;
     }
+}
+
+static void RotomPhone_FullScreenMenu_CreateCursorSprite(void)
+{
+    u8 taskId;
+
+    if (FuncIsActiveTask(Task_RotomPhone_FullScreenMenu_WaitFadeIn))
+        taskId = FindTaskIdByFunc(Task_RotomPhone_FullScreenMenu_WaitFadeIn);
+    else if (FuncIsActiveTask(Task_RotomPhone_FullScreenMenu_HandleMainInput))
+        taskId = FindTaskIdByFunc(Task_RotomPhone_FullScreenMenu_HandleMainInput);
+    else
+        return;
+
+    LoadMonIconPalette(SPECIES_ROTOM);
+    sRotomPhone_StartMenu->menuFullScreenCursorSpriteId = CreateMonIcon(SPECIES_ROTOM, SpriteCB_MonIcon,
+        sFullScreenOptionInfo[RP_FS_OPTION_1].x, sFullScreenOptionInfo[RP_FS_OPTION_1].y, 0,
+        Random32()
+    );
+    gSprites[sRotomPhone_StartMenu->menuFullScreenCursorSpriteId].oam.priority = 0;
 }
 
 static void RotomPhone_FullScreenMenu_InitWindows(void)
