@@ -97,11 +97,6 @@ static void Task_RotomPhone_OverworldMenu_RotomShutdown(u8 taskId);
 static void Task_RotomPhone_OverworldMenu_CloseAndSave(u8 taskId);
 static void Task_RotomPhone_OverworldMenu_CloseForSafari(u8 taskId);
 
-static void RotomPhone_StartMenu_DoCleanUpAndChangeCallback(MainCallback callback);
-static u8 RotomPhone_StartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority);
-static void RotomPhone_StartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func);
-static void RotomPhone_StartMenu_DoCleanUpAndDestroyTask(u8 taskId, bool32 overworldCleanup);
-
 static void RotomPhone_OverworldMenu_LoadSprites(void);
 static void RotomPhone_OverworldMenu_CreateAllIconSprites(void);
 static void RotomPhone_OverworldMenu_LoadBgGfx(bool32 firstInit);
@@ -154,6 +149,11 @@ static bool32 RotomPhone_StartMenu_IsRotomReality(void);
 static void RotomPhone_StartMenu_CreateRotomFaceSprite(bool32 rotomFade);
 static void RotomPhone_StartMenu_UpdateRotomFaceAnim(bool32 input);
 static void RotomPhone_StartMenu_RotomShutdownPreparation(u8 taskId, bool32 overworld);
+
+static void RotomPhone_StartMenu_DoCleanUpAndChangeCallback(MainCallback callback);
+static u8 RotomPhone_StartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority);
+static void RotomPhone_StartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func);
+static void RotomPhone_StartMenu_DoCleanUpAndDestroyTask(u8 taskId, bool32 overworldCleanup);
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked(void);
 static bool32 UNUSED RotomPhone_StartMenu_UnlockedFunc_Unlocked_Overworld(void);
@@ -2101,13 +2101,12 @@ static u8 RotomPhone_StartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority
         PlayRainStoppingSoundEffect();
         RotomPhone_OverworldMenu_ExitAndClearTilemap();
         CleanupOverworldWindowsAndTilemaps();
-        return CreateTask(func, priority);
     }
     else
     {
         RotomPhone_RotomRealityMenu_FreeResources();
-        return CreateTask(func, priority);
     }
+    return CreateTask(func, priority);
 }
 
 static void RotomPhone_StartMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func)
@@ -3460,34 +3459,22 @@ static void RotomPhone_StartMenu_SelectedFunc_Shortcut(void)
 
 static void RotomPhone_StartMenu_SelectedFunc_Pokedex(void)
 {
-    if (!RotomPhone_StartMenu_IsRotomReality())
-        RotomPhone_StartMenu_DoCleanUpAndChangeCallback(CB2_OpenPokedex);
-    else
-        RotomPhone_StartMenu_DoCleanUpAndChangeCallback(CB2_OpenPokedex);
+    RotomPhone_StartMenu_DoCleanUpAndChangeCallback(CB2_OpenPokedex);
 }
 
 static void RotomPhone_StartMenu_SelectedFunc_Pokemon(void)
 {
-    if (!RotomPhone_StartMenu_IsRotomReality())
-        RotomPhone_StartMenu_DoCleanUpAndChangeCallback(CB2_PartyMenuFromStartMenu);
-    else
-        RotomPhone_StartMenu_DoCleanUpAndChangeCallback(CB2_PartyMenuFromStartMenu);
+    RotomPhone_StartMenu_DoCleanUpAndChangeCallback(CB2_PartyMenuFromStartMenu);
 }
 
 static void RotomPhone_StartMenu_SelectedFunc_Bag(void)
 {
-    if (!RotomPhone_StartMenu_IsRotomReality())
-        RotomPhone_StartMenu_DoCleanUpAndChangeCallback(CB2_BagMenuFromStartMenu);
-    else
-        RotomPhone_StartMenu_DoCleanUpAndChangeCallback(CB2_BagMenuFromStartMenu);
+    RotomPhone_StartMenu_DoCleanUpAndChangeCallback(CB2_BagMenuFromStartMenu);
 }
 
 static void RotomPhone_StartMenu_SelectedFunc_PokeNav(void)
 {
-    if (!RotomPhone_StartMenu_IsRotomReality())
-        RotomPhone_StartMenu_DoCleanUpAndChangeCallback(CB2_InitPokeNav);
-    else
-        RotomPhone_StartMenu_DoCleanUpAndChangeCallback(CB2_InitPokeNav);
+    RotomPhone_StartMenu_DoCleanUpAndChangeCallback(CB2_InitPokeNav);
 }
 
 static void RotomPhone_StartMenu_ChooseTrainerCard(void)
@@ -3502,17 +3489,9 @@ static void RotomPhone_StartMenu_ChooseTrainerCard(void)
 
 static void RotomPhone_StartMenu_SelectedFunc_Trainer(void)
 {
-    if (!RotomPhone_StartMenu_IsRotomReality())
+    if (!gPaletteFade.active)
     {
-        if (!gPaletteFade.active)
-        {
-            RotomPhone_StartMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput), TRUE);
-            RotomPhone_StartMenu_ChooseTrainerCard();
-        }
-    }
-    else
-    {
-        RotomPhone_StartMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_RotomRealityMenu_HandleMainInput), FALSE);
+        RotomPhone_StartMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput), TRUE);
         RotomPhone_StartMenu_ChooseTrainerCard();
     }
 }
@@ -3540,10 +3519,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Save(void)
 
 static void RotomPhone_StartMenu_SelectedFunc_Settings(void)
 {
-    if (!RotomPhone_StartMenu_IsRotomReality())
-        RotomPhone_StartMenu_DoCleanUpAndChangeCallback(CB2_InitOptionMenu);
-    else
-        RotomPhone_StartMenu_DoCleanUpAndChangeCallback(CB2_InitOptionMenu);
+    RotomPhone_StartMenu_DoCleanUpAndChangeCallback(CB2_InitOptionMenu);
 }
 
 static void RotomPhone_StartMenu_SelectedFunc_SafariFlag(void)

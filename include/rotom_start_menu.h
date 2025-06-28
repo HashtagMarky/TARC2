@@ -155,16 +155,11 @@ flag, or save game options.
     will have an if (RotomPhone_StartMenu_IsRotomReality()) statement as the
     function will need to be different whether on the overworld or not. There
     are different clean up functions depending on how the menu option needs to
-    be opened. Note the ones marked as UNUSED will need to have it removed.
-    The functions included are:
-        RotomPhone_OverworldMenu_DoCleanUpAndChangeCallback
-        UNUSED RotomPhone_OverworldMenu_DoCleanUpAndCreateTask
-        RotomPhone_OverworldMenu_DoCleanUpAndChangeTaskFunc
-        RotomPhone_OverworldMenu_DoCleanUpAndDestroyTask
-        RotomPhone_RotomRealityMenu_DoCleanUpAndChangeCallback
-        RotomPhone_RotomRealityMenu_DoCleanUpAndCreateTask
-        UNUSED RotomPhone_RotomRealityMenu_DoCleanUpAndChangeTaskFunc
-        RotomPhone_RotomRealityMenu_DoCleanUpAndDestroyTask
+    be opened. The functions included are:
+        RotomPhone_StartMenu_DoCleanUpAndChangeCallback
+        RotomPhone_StartMenu_DoCleanUpAndCreateTask
+        RotomPhone_StartMenu_DoCleanUpAndChangeTaskFunc
+        RotomPhone_StartMenu_DoCleanUpAndDestroyTask
     
     u32 owIconPalSlot;
     The palette index the icon uses other than PAL_ICON_WHITE in it's overworld
