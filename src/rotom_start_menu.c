@@ -2674,6 +2674,7 @@ static void Task_RotomPhone_FullScreenMenu_HandleMainInput(u8 taskId)
 
 static void Task_RotomPhone_FullScreenMenu_PanelInput(u8 taskId)
 {
+    tRotomMessageSoundEffect = MUS_DUMMY;
     RotomPhone_FullScreenMenu_TimerUpdates(taskId);
 
     if (JOY_NEW(START_BUTTON | A_BUTTON | B_BUTTON))
@@ -2682,10 +2683,16 @@ static void Task_RotomPhone_FullScreenMenu_PanelInput(u8 taskId)
         tRotomPanelComfyAnimId = INVALID_COMFY_ANIM;
         PlaySE(PMD_EFF_ANIM_2);
     }
+
+    if (tRotomMessageSoundEffect && !IsSEPlaying())
+        PlaySE(tRotomMessageSoundEffect);
 }
 
 static void Task_RotomPhone_FullScreenMenu_PanelSlide(u8 taskId)
 {
+    tRotomMessageSoundEffect = MUS_DUMMY;
+    RotomPhone_FullScreenMenu_TimerUpdates(taskId);
+
     #define PANEL_MIN_Y 0
     #define PANEL_MAX_Y 96
     #define PANEL_SLIDE_DOWN_FRAMES 50
@@ -2775,6 +2782,9 @@ static void Task_RotomPhone_FullScreenMenu_PanelSlide(u8 taskId)
     #undef PANEL_MAX_Y
     #undef PANEL_SLIDE_DOWN_FRAMES
     #undef PANEL_SLIDE_UP_FRAMES
+
+    if (tRotomMessageSoundEffect && !IsSEPlaying())
+        PlaySE(tRotomMessageSoundEffect);
 }
 
 static void RotomPhone_FullScreenMenu_StartPanelSlide(void)
