@@ -735,6 +735,10 @@ static bool32 RotomPhone_StartMenu_IsRotomReality(void)
 {
     return sRotomPhone_RotomReality;
 }
+void RotomPhone_StartMenu_DisableRotomReality(void)
+{
+    sRotomPhone_RotomReality = FALSE;
+}
 
 
 enum RotomPhone_RotomReality_WindowIds
