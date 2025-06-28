@@ -2762,18 +2762,11 @@ static void Task_RotomPhone_RotomRealityMenu_PanelSlide(u8 taskId)
             tRotomPanelLastY = sRotomPhone_StartMenu->menuRotomRealityPanelY;
             sRotomPhone_StartMenu->menuRotomRealityPanelY = ReadComfyAnimValueSmooth(&gComfyAnims[tRotomPanelComfyAnimId]);
             s8 yDifference = tRotomPanelLastY - sRotomPhone_StartMenu->menuRotomRealityPanelY;
-            if (RP_RR_PANEL_SPRITE_ONE != SPRITE_NONE)
-                gSprites[sRotomPhone_StartMenu->menuRotomRealityPanelSpriteId[RP_RR_PANEL_SPRITE_ONE]].y += yDifference;
-            if (RP_RR_PANEL_SPRITE_TWO != SPRITE_NONE)
-                gSprites[sRotomPhone_StartMenu->menuRotomRealityPanelSpriteId[RP_RR_PANEL_SPRITE_TWO]].y += yDifference;
-            if (RP_RR_PANEL_SPRITE_THREE != SPRITE_NONE)
-                gSprites[sRotomPhone_StartMenu->menuRotomRealityPanelSpriteId[RP_RR_PANEL_SPRITE_THREE]].y += yDifference;
-            if (RP_RR_PANEL_SPRITE_FOUR != SPRITE_NONE)
-                gSprites[sRotomPhone_StartMenu->menuRotomRealityPanelSpriteId[RP_RR_PANEL_SPRITE_FOUR]].y += yDifference;
-            if (RP_RR_PANEL_SPRITE_FIVE != SPRITE_NONE)
-                gSprites[sRotomPhone_StartMenu->menuRotomRealityPanelSpriteId[RP_RR_PANEL_SPRITE_FIVE]].y += yDifference;
-            if (RP_RR_PANEL_SPRITE_SIX != SPRITE_NONE)
-                gSprites[sRotomPhone_StartMenu->menuRotomRealityPanelSpriteId[RP_RR_PANEL_SPRITE_SIX]].y += yDifference;
+            for (enum RotomPhone_RotomReality_SlidingPanelSprites spritePanel = RP_RR_PANEL_SPRITE_ONE; spritePanel < RP_RR_PANEL_SPRITE_COUNT; spritePanel ++)
+            {
+                if (sRotomPhone_StartMenu->menuRotomRealityPanelSpriteId[spritePanel] != SPRITE_NONE)
+                    gSprites[sRotomPhone_StartMenu->menuRotomRealityPanelSpriteId[spritePanel]].y += yDifference;
+            }
         }
         else if (sRotomPhone_StartMenu->menuRotomRealityPanelY == PANEL_MIN_Y)
         {
@@ -2802,18 +2795,11 @@ static void Task_RotomPhone_RotomRealityMenu_PanelSlide(u8 taskId)
             tRotomPanelLastY = sRotomPhone_StartMenu->menuRotomRealityPanelY;
             sRotomPhone_StartMenu->menuRotomRealityPanelY = ReadComfyAnimValueSmooth(&gComfyAnims[tRotomPanelComfyAnimId]);
             s8 yDifference = tRotomPanelLastY - sRotomPhone_StartMenu->menuRotomRealityPanelY;
-            if (RP_RR_PANEL_SPRITE_ONE != SPRITE_NONE)
-                gSprites[sRotomPhone_StartMenu->menuRotomRealityPanelSpriteId[RP_RR_PANEL_SPRITE_ONE]].y += yDifference;
-            if (RP_RR_PANEL_SPRITE_TWO != SPRITE_NONE)
-                gSprites[sRotomPhone_StartMenu->menuRotomRealityPanelSpriteId[RP_RR_PANEL_SPRITE_TWO]].y += yDifference;
-            if (RP_RR_PANEL_SPRITE_THREE != SPRITE_NONE)
-                gSprites[sRotomPhone_StartMenu->menuRotomRealityPanelSpriteId[RP_RR_PANEL_SPRITE_THREE]].y += yDifference;
-            if (RP_RR_PANEL_SPRITE_FOUR != SPRITE_NONE)
-                gSprites[sRotomPhone_StartMenu->menuRotomRealityPanelSpriteId[RP_RR_PANEL_SPRITE_FOUR]].y += yDifference;
-            if (RP_RR_PANEL_SPRITE_FIVE != SPRITE_NONE)
-                gSprites[sRotomPhone_StartMenu->menuRotomRealityPanelSpriteId[RP_RR_PANEL_SPRITE_FIVE]].y += yDifference;
-            if (RP_RR_PANEL_SPRITE_SIX != SPRITE_NONE)
-                gSprites[sRotomPhone_StartMenu->menuRotomRealityPanelSpriteId[RP_RR_PANEL_SPRITE_SIX]].y += yDifference;
+            for (enum RotomPhone_RotomReality_SlidingPanelSprites spritePanel = RP_RR_PANEL_SPRITE_ONE; spritePanel < RP_RR_PANEL_SPRITE_COUNT; spritePanel ++)
+            {
+                if (sRotomPhone_StartMenu->menuRotomRealityPanelSpriteId[spritePanel] != SPRITE_NONE)
+                    gSprites[sRotomPhone_StartMenu->menuRotomRealityPanelSpriteId[spritePanel]].y += yDifference;
+            }
         }
         else if (sRotomPhone_StartMenu->menuRotomRealityPanelY == PANEL_MAX_Y)
         {
