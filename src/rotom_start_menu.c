@@ -1501,10 +1501,13 @@ static void RotomPhone_OverworldMenu_CreateAllIconSprites(void)
     }
 }
 
-static void RotomPhone_OverworldMenu_LoadBgPalette(void)
+static void RotomPhone_OverworldMenu_LoadBgPalette(bool32 firstLoad)
 {
 #if RP_CONFIG_PALETTE_BUFFER
-    memcpy(menuLoadedBackgroundPalette, sRotomPhone_StartMenuPalette, PLTT_SIZE_4BPP);
+    if (firstLoad)
+    {
+        memcpy(menuLoadedBackgroundPalette, sRotomPhone_StartMenuPalette, PLTT_SIZE_4BPP);
+    }
     LoadPalette(menuLoadedBackgroundPalette, BG_PLTT_ID(PHONE_BG_PAL_SLOT), PLTT_SIZE_4BPP);
 #else
     LoadPalette(sRotomPhone_StartMenuPalette, BG_PLTT_ID(PHONE_BG_PAL_SLOT), PLTT_SIZE_4BPP);
@@ -1532,7 +1535,7 @@ static void RotomPhone_OverworldMenu_LoadBgGfx(bool32 firstInit)
         DecompressDataWithHeaderWram(tilemap, buf);
     }
 
-    RotomPhone_OverworldMenu_LoadBgPalette();
+    RotomPhone_OverworldMenu_LoadBgPalette(TRUE);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -3215,6 +3218,23 @@ static void RotomPhone_RotomRealityMenu_FreeResources(void)
     ResetSpriteData();
 }
 
+static void RotomPhone_RotomRealityMenu_LoadIconSpritePalette(void)
+{
+#if RP_CONFIG_PALETTE_BUFFER
+    LoadPalette(menuLoadedSpritePalette, OBJ_PLTT_ID(IndexOfSpritePaletteTag(TAG_ROTOM_FACE_ICON_PAL)), PLTT_SIZE_4BPP);
+#else
+    u32 index = IndexOfSpritePaletteTag(TAG_ROTOM_FACE_ICON_PAL);
+    LoadPalette(sRotomPhone_StartMenuRotomFaceIconsPal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP); 
+    if (!RP_CONFIG_USE_ROTOM_PHONE || RP_CONFIG_MONOCHROME_ICONS)
+    {
+        for (enum RotomPhone_Overworld_FaceIconPaletteIndex colour = PAL_FACE_ICON_TRANSPARENT + 1; colour < PAL_ICON_WHITE; colour++)
+        {
+            LoadPalette(&sRotomPhone_StartMenuRotomFaceIconsPal[PAL_ICON_MONOCHROME], OBJ_PLTT_ID(index) + colour, sizeof(u16));
+        }
+    }
+#endif
+}
+
 static void RotomPhone_RotomRealityMenu_LoadSprites(void)
 {
     LoadSpritePalette(sSpritePal_RotomFaceIcons);
@@ -3222,6 +3242,8 @@ static void RotomPhone_RotomRealityMenu_LoadSprites(void)
     LoadCompressedSpriteSheet(sSpriteSheet_RotomRealityShortcutIcon);
     LoadCompressedSpriteSheet(sSpriteSheet_RotomRealityIcons);
     LoadCompressedSpriteSheet(sSpriteSheet_RotomFace);
+    
+    RotomPhone_RotomRealityMenu_LoadIconSpritePalette();
 }
 
 

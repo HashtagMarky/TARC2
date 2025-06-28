@@ -52,9 +52,15 @@ flag, or save game options.
     RP_CONFIG_PALETTE_BUFFER
     Uses two bytes of EWRAM in order to store the background and
     sprite palettes used in the Rotom Phone. It is recommended to
-    turn this on if you want to have various colour phones or
+    turn keep this on if you want to have various colour phones or
     change the monochrome sprite colour. When doing so you will
-    only have to make adjustments to these palettes once.
+    only have to make adjustments to these palettes once. To see
+    how the palettes are initialised, see these functions,
+    particularly the ones with bool32 firstLoad as a parameter:
+        RotomPhone_OverworldMenu_LoadIconSpritePalette
+        RotomPhone_OverworldMenu_LoadBgPalette
+        RotomPhone_RotomRealityMenu_LoadIconSpritePalette
+        RotomPhone_RotomRealityMenu_LoadBgPalette
 
     RP_CONFIG_FULL_SCREEN_SHORTCUT
     Allows for the START BUTTON to be used on the rotom reality
