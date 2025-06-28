@@ -3592,6 +3592,7 @@ static void RotomPhone_StartMenu_SelectedFunc_DexNav(void)
         RotomPhone_OverworldMenu_DoCleanUpAndChangeTaskFunc(FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput), Task_OpenDexNavFromStartMenu);
     else
     {
+        sRotomPhone_RotomReality = FALSE;
         RotomPhone_RotomRealityMenu_DoCleanUpAndCreateTask(Task_OpenDexNavFromStartMenu, 0);
     }
 }
