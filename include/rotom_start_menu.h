@@ -1,4 +1,7 @@
-/*      --  Credits & Requirements  --
+/*  Rotom Phone Start Menu by HashtagMarky
+
+
+        --  Credits & Requirements  --
 
 This Rotom Start Menu was built upon two public resources.
 Vol's Start Menu and the Sample UI (Sliding Panel) provided
@@ -108,6 +111,73 @@ flag, or save game options.
 
     
         --  How to Add a New Option --
+
+1.  When adding a new menu option, the first thing you must do
+    is to ‘define’ it. Add the new option in enum RotomPhone_MenuOptions,
+    the order of which will determine where your option appears.
+    Only the first four unlocked menu options will appear on the
+    generic flip phone, six on the overworld Rotom Phone and up
+    to ten on each page of the Rotom Reality Menu.
+
+2.  Next create the Overworld (20x20 on a 32x32 canvas) and the
+    Rotom Reality Icons (32x32). This can be done easily by adding
+    to the respection 'icons.png' in graphics/rotom_start_menu/overworld
+    or graphics/rotom_start_menu/rotom_reality. In the current setup,
+    the palettes of the overworld icons are important, and their
+    indexes have been defined in enum RotomPhone_Overworld_FaceIconPaletteIndex.
+    Each overworld icon should use PAL_ICON_WHITE (index 10) and one
+    other colour in the indexes 1 - 9. Then define a new animation
+    for this icon, and add it to sAnims_OverworldIcons and
+    sAnims_RotomRealityIcons, makinf sure the table is in the same
+    order as enum RotomPhone_MenuOptions.
+
+3.  Then give this option an entry in sRotomPhoneOptions, see below
+    for a brief overview of each field in struct RotomPhone_MenuOptions:
+
+    const u8 *menuName;
+    The name of the menu option.
+
+    const u8 *rotomSpeech;
+    The words Rotom will use to describe opening/entering the menu option.
+    These words will be automatically appended to either "Do you want" or
+    "Would you like".
+
+    bool32 (*unlockedFunc)(void);
+    A boolean function that determines whether the menu option is unlocked.
+    Custom functions can be made but some pre-existing generic ones include:
+        RotomPhone_StartMenu_UnlockedFunc_Unlocked
+        RotomPhone_StartMenu_UnlockedFunc_Unlocked_Overworld
+        RotomPhone_StartMenu_UnlockedFunc_Unlocked_RotomReality
+
+    void (*selectedFunc)(void);
+    The function that is run in order to open the menu option. These usually
+    will have an if (RotomPhone_StartMenu_IsRotomReality()) statement as the
+    function will need to be different whether on the overworld or not. There
+    are different clean up functions depending on how the menu option needs to
+    be opened. Note the ones marked as UNUSED will need to have it removed.
+    The functions included are:
+        RotomPhone_OverworldMenu_DoCleanUpAndChangeCallback
+        UNUSED RotomPhone_OverworldMenu_DoCleanUpAndCreateTask
+        RotomPhone_OverworldMenu_DoCleanUpAndChangeTaskFunc
+        RotomPhone_OverworldMenu_DoCleanUpAndDestroyTask
+        RotomPhone_RotomRealityMenu_DoCleanUpAndChangeCallback
+        RotomPhone_RotomRealityMenu_DoCleanUpAndCreateTask
+        UNUSED RotomPhone_RotomRealityMenu_DoCleanUpAndChangeTaskFunc
+        RotomPhone_RotomRealityMenu_DoCleanUpAndDestroyTask
+    
+    u32 owIconPalSlot;
+    The palette index the icon uses other than PAL_ICON_WHITE in it's overworld
+    icon. enum RotomPhone_Overworld_FaceIconPaletteIndex exists to help facilitate
+    this.
+
+    bool32 rotomRealityPanel;
+    A boolean value that determines whether the menu option will use the sliding
+    panel in the Rotom Reality Menu rather than opening a new UI Screen. If this is
+    TRUE, the selectedFunc will have to include some variation of the
+    if (RotomPhone_StartMenu_IsRotomReality() && sRotomPhone_StartMenu->menuRotomRealityPanelOpen)
+    statement. See RotomPhone_StartMenu_SelectedFunc_Daycare for an example of a
+    selectedFunc for an option that exists exists only on the Rotom Reality Menu and
+    uses the sliding panel for its selectedFunc.
 */
 
 #ifndef GUARD_ROTOM_START_MENU_H
