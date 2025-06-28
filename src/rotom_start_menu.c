@@ -2291,6 +2291,8 @@ static void RotomPhone_StartMenu_RotomShutdownPreparation(u8 taskId, bool32 over
     struct Sprite *sprite = &gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId];
     sprite->callback = SpriteCB_RotomPhone_OverworldMenu_RotomFace_Unload;
     StartSpriteAnim(&gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId], RP_FACE_HAPPY_WITH);
+    if (sRotomPhone_StartMenu->menuRotomFaceFlashSpriteId != SPRITE_NONE)
+        StartSpriteAnim(&gSprites[sRotomPhone_StartMenu->menuRotomFaceFlashSpriteId], RP_FACE_HAPPY_WITH);
     
     struct ComfyAnimSpringConfig config;
     InitComfyAnimConfig_Spring(&config);
@@ -3223,6 +3225,7 @@ static void RotomPhone_StartMenu_CreateRotomFaceSprite(bool32 rotomFade)
             y,
             0
         );
+        gSprites[sRotomPhone_StartMenu->menuRotomFaceFlashSpriteId].oam.objMode = ST_OAM_OBJ_WINDOW;
     }
 }
 
@@ -3238,6 +3241,8 @@ static void RotomPhone_StartMenu_UpdateRotomFaceAnim(bool32 input)
                 rotomFace += RP_FACE_LOOK_UP_ANIMS;
             } while (rotomFace == gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId].animNum);
             StartSpriteAnim(&gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId], rotomFace);
+            if (sRotomPhone_StartMenu->menuRotomFaceFlashSpriteId != SPRITE_NONE)
+                StartSpriteAnim(&gSprites[sRotomPhone_StartMenu->menuRotomFaceFlashSpriteId], rotomFace);
             rotomFaceExpression = rotomFace;
         }
     }
@@ -3247,6 +3252,8 @@ static void RotomPhone_StartMenu_UpdateRotomFaceAnim(bool32 input)
             rotomFace = Random() % RP_FACE_LOOK_UP_ANIMS;
         } while (rotomFace == gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId].animNum);
         StartSpriteAnim(&gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId], rotomFace);
+        if (sRotomPhone_StartMenu->menuRotomFaceFlashSpriteId != SPRITE_NONE)
+            StartSpriteAnim(&gSprites[sRotomPhone_StartMenu->menuRotomFaceFlashSpriteId], rotomFace);
     }
 }
 
