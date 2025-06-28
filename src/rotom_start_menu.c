@@ -1120,7 +1120,9 @@ struct RotomPhone_MenuOptions
     void (*selectedFunc)(void);
     u32 owIconPalSlot;
     bool32 rotomRealityPanel;
+    bool32 exitFromMenuOption;
 };
+static void RotomPhone_StartMenu_SelectedFunc_CheckExitFromMenuOption(enum RotomPhone_MenuItems menuItem);
 static const struct RotomPhone_MenuOptions sRotomPhoneOptions[RP_MENU_COUNT] =
 {
     [RP_MENU_POKEDEX] =
@@ -1138,6 +1140,7 @@ static const struct RotomPhone_MenuOptions sRotomPhoneOptions[RP_MENU_COUNT] =
         .unlockedFunc = RotomPhone_StartMenu_UnlockedFunc_DexNav,
         .selectedFunc = RotomPhone_StartMenu_SelectedFunc_DexNav,
         .owIconPalSlot = PAL_ICON_ORANGE,
+        .exitFromMenuOption = TRUE,
     },
     [RP_MENU_PARTY] =
     {
@@ -2315,6 +2318,7 @@ static void Task_RotomPhone_OverworldMenu_HandleMainInput(u8 taskId)
     else if (sRotomPhone_StartMenu->menuOverworldLoading == TRUE && sRotomPhoneOptions[menuSelectedOverworld].selectedFunc)
     {
         sRotomPhoneOptions[menuSelectedOverworld].selectedFunc();
+        RotomPhone_StartMenu_SelectedFunc_CheckExitFromMenuOption(menuSelectedOverworld);
     }
 
     if (tRotomMessageSoundEffect && !IsSEPlaying())
@@ -2868,6 +2872,7 @@ static void Task_RotomPhone_RotomRealityMenu_WaitFadeForSelection(u8 taskId)
     {
         DestroyTask(taskId);
         sRotomPhoneOptions[menuSelectedRotomReality].selectedFunc();
+        RotomPhone_StartMenu_SelectedFunc_CheckExitFromMenuOption(menuSelectedRotomReality);
     }
 }
 
@@ -3452,6 +3457,12 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_Shortcut(void)
 }
 
 
+static void RotomPhone_StartMenu_SelectedFunc_CheckExitFromMenuOption(enum RotomPhone_MenuItems menuItem)
+{
+    if (sRotomPhoneOptions[menuItem].exitFromMenuOption)
+        sRotomPhone_RotomReality = FALSE;
+}
+
 static void RotomPhone_StartMenu_SelectedFunc_Shortcut(void)
 {
     sRotomPhoneOptions[RP_GET_SHORTCUT_OPTION].selectedFunc();
@@ -3585,7 +3596,6 @@ static void RotomPhone_StartMenu_SelectedFunc_DexNav(void)
         RotomPhone_OverworldMenu_DoCleanUpAndChangeTaskFunc(FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput), Task_OpenDexNavFromStartMenu);
     else
     {
-        sRotomPhone_RotomReality = FALSE;
         RotomPhone_RotomRealityMenu_DoCleanUpAndCreateTask(Task_OpenDexNavFromStartMenu, 0);
     }
 }
