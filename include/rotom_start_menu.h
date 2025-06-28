@@ -144,9 +144,10 @@ flag, or save game options.
 
     bool32 (*unlockedFunc)(void);
     A boolean function that determines whether the menu option is unlocked.
-    Custom functions can be made but some pre-existing generic ones include:
+    Custom functions can be made but some pre-existing generic ones exist.
+    Note the ones marked as UNUSED will need to have it removed:
         RotomPhone_StartMenu_UnlockedFunc_Unlocked
-        RotomPhone_StartMenu_UnlockedFunc_Unlocked_Overworld
+        UNUSED RotomPhone_StartMenu_UnlockedFunc_Unlocked_Overworld
         RotomPhone_StartMenu_UnlockedFunc_Unlocked_RotomReality
 
     void (*selectedFunc)(void);
