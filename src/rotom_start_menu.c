@@ -2478,7 +2478,7 @@ static void RotomPhone_RotomRealityMenu_SetupCB(void)
 
         for (enum RotomPhone_RotomReality_SlidingPanelWindows windowPanel = RP_RR_PANEL_WIN_ONE; windowPanel < RP_RR_PANEL_WIN_COUNT; windowPanel++)
         {
-            sRotomPhone_StartMenu->menuRotomRealityPanelWindowId[windowPanel] = SPRITE_NONE;
+            sRotomPhone_StartMenu->menuRotomRealityPanelWindowId[windowPanel] = WINDOW_NONE;
         }
 
         CreateTask(Task_RotomPhone_RotomRealityMenu_WaitFadeIn, 0);
