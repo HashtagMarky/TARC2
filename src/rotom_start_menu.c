@@ -2229,6 +2229,7 @@ static void Task_RotomPhone_OverworldMenu_HandleMainInput(u8 taskId)
             else if (menuSelectedOverworld != RP_MENU_SAVE && menuSelectedOverworld != RP_MENU_FLAG && menuSelectedOverworld != RP_MENU_CLOCK)
                 FadeScreen(FADE_TO_BLACK, 0);
             
+            PlaySE(PMD_DS_SYS_01);
             sRotomPhone_StartMenu->menuOverworldLoading = TRUE;
         }
     }
@@ -2619,7 +2620,7 @@ static void Task_RotomPhone_FullScreenMenu_HandleMainInput(u8 taskId)
     
     if (JOY_NEW(B_BUTTON))
     {
-        PlaySE(SE_PC_OFF);
+        PlaySE(PMD_EVENT_MOTION_HARAHERI);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_RotomPhone_FullScreenMenu_WaitFadeAndExitGracefully;
     }
@@ -2632,7 +2633,7 @@ static void Task_RotomPhone_FullScreenMenu_HandleMainInput(u8 taskId)
         if (JOY_NEW(START_BUTTON))
             menuSelectedFullScreen = RotomPhone_StartMenu_GetShortcutOption();
         
-        PlaySE(SE_SELECT);
+        PlaySE(PMD_DS_SYS_01);
         if (!sRotomPhoneOptions[menuSelectedFullScreen].fullScreenPanel)
         {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
@@ -2657,7 +2658,7 @@ static void Task_RotomPhone_FullScreenMenu_PanelInput(u8 taskId)
     {
         gTasks[taskId].func = Task_RotomPhone_FullScreenMenu_PanelSlide;
         tRotomPanelComfyAnimId = INVALID_COMFY_ANIM;
-        PlaySE(SE_SELECT);
+        PlaySE(PMD_EFF_ANIM_2);
     }
 }
 
@@ -3104,6 +3105,8 @@ static void RotomPhone_FullScreenMenu_TimerUpdates(u8 taskId)
     if (tRotomUpdateTimer == ROTOM_PHONE_FS_MESSGAGE_TIMER)
     {
         tRotomUpdateTimer = 0;
+        if (RP_CONFIG_UPDATE_MESSAGE_SOUND)
+            tRotomMessageSoundEffect = PMD_EVENT_SIGN_HATENA_02;
         RotomPhone_FullScreenMenu_PrintTime();
         RotomPhone_StartMenu_UpdateRotomFaceAnim(FALSE);
     }
