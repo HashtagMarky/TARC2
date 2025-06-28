@@ -60,6 +60,8 @@
 #include "constants/region_map_sections.h"
 #include "gba/m4a_internal.h"
 
+#include "rotom_start_menu.h"
+
 #if DEXNAV_ENABLED
 STATIC_ASSERT(DN_FLAG_SEARCHING != 0, DNFlagSearching_Must_Not_Be_Zero);
 STATIC_ASSERT(DN_FLAG_DETECTOR_MODE != 0, DNFlagDetectorMode_Must_Not_Be_Zero);
@@ -1884,6 +1886,7 @@ static void Task_DexNavExitAndSearch(u8 taskId)
 {
     DexNavGuiFreeResources();
     DestroyTask(taskId);
+    RotomPhone_StartMenu_DisableRotomReality();
     SetMainCallback1(CB1_DexNavSearchCallback);
     SetMainCallback2(CB2_ReturnToField);
 }

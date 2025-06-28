@@ -41,6 +41,8 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+#include "rotom_start_menu.h"
+
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 
 EWRAM_DATA s32 gFieldEffectArguments[8] = {0};
@@ -1424,6 +1426,7 @@ static void SpriteCB_HallOfFameMonitor(struct Sprite *sprite)
 
 void ReturnToFieldFromFlyMapSelect(void)
 {
+    RotomPhone_StartMenu_DisableRotomReality();
     SetMainCallback2(CB2_ReturnToField);
     gFieldCallback = FieldCallback_UseFly;
 }
