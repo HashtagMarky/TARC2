@@ -98,7 +98,7 @@ static void Task_RotomPhone_OverworldMenu_CloseAndSave(u8 taskId);
 static void Task_RotomPhone_OverworldMenu_CloseForSafari(u8 taskId);
 
 static void RotomPhone_StartMenu_DoCleanUpAndChangeCallback(MainCallback callback);
-static u8 UNUSED RotomPhone_OverworldMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority);
+static u8 RotomPhone_StartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority);
 static void RotomPhone_OverworldMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func);
 static void RotomPhone_OverworldMenu_DoCleanUpAndDestroyTask(u8 taskId, bool32 overworldCleanup);
 
@@ -143,7 +143,6 @@ static void RotomPhone_RotomRealityMenu_PrintTime(void);
 static void RotomPhone_RotomRealityMenu_PrintMenuName(void);
 static void RotomPhone_RotomRealityMenu_FreeResources(void);
 
-static u8 RotomPhone_RotomRealityMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority);
 static void UNUSED RotomPhone_RotomRealityMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func);
 static void RotomPhone_RotomRealityMenu_DoCleanUpAndDestroyTask(u8 taskId);
 
@@ -2098,12 +2097,20 @@ static void RotomPhone_StartMenu_DoCleanUpAndChangeCallback(MainCallback callbac
     }
 }
 
-static u8 UNUSED RotomPhone_OverworldMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority)
+static u8 RotomPhone_StartMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority)
 {
-    PlayRainStoppingSoundEffect();
-    RotomPhone_OverworldMenu_ExitAndClearTilemap();
-    CleanupOverworldWindowsAndTilemaps();
-    return CreateTask(func, priority);
+    if (!RotomPhone_StartMenu_IsRotomReality())
+    {
+        PlayRainStoppingSoundEffect();
+        RotomPhone_OverworldMenu_ExitAndClearTilemap();
+        CleanupOverworldWindowsAndTilemaps();
+        return CreateTask(func, priority);
+    }
+    else
+    {
+        RotomPhone_RotomRealityMenu_FreeResources();
+        return CreateTask(func, priority);
+    }
 }
 
 static void RotomPhone_OverworldMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func)
@@ -2879,12 +2886,6 @@ static void Task_RotomPhone_RotomRealityMenu_WaitFadeForSelection(u8 taskId)
     }
 }
 
-static u8 RotomPhone_RotomRealityMenu_DoCleanUpAndCreateTask(TaskFunc func, u8 priority)
-{
-    RotomPhone_RotomRealityMenu_FreeResources();
-    return CreateTask(func, priority);
-}
-
 static void UNUSED RotomPhone_RotomRealityMenu_DoCleanUpAndChangeTaskFunc(u8 taskId, TaskFunc func)
 {
     RotomPhone_RotomRealityMenu_FreeResources();
@@ -3584,9 +3585,7 @@ static void RotomPhone_StartMenu_SelectedFunc_DexNav(void)
     if (!RotomPhone_StartMenu_IsRotomReality())
         RotomPhone_OverworldMenu_DoCleanUpAndChangeTaskFunc(FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput), Task_OpenDexNavFromStartMenu);
     else
-    {
-        RotomPhone_RotomRealityMenu_DoCleanUpAndCreateTask(Task_OpenDexNavFromStartMenu, 0);
-    }
+        RotomPhone_StartMenu_DoCleanUpAndCreateTask(Task_OpenDexNavFromStartMenu, 0);
 }
 
 static void RotomPhone_StartMenu_SelectedFunc_Clock(void)
