@@ -57,7 +57,8 @@
 #define TAG_ROTOM_FACE_GFX                  1234
 #define TAG_PHONE_OW_ICON_GFX               1235
 #define TAG_PHONE_FS_ICON_GFX               1236
-#define TAG_PHONE_FS_DAYCARE_ICON           1237
+#define TAG_PHONE_FS_SHORTCUT_ICON          1237
+#define TAG_PHONE_FS_DAYCARE_ICON           1238
 #define TAG_ROTOM_FACE_ICON_PAL             0x4654 | BLEND_IMMUNE_FLAG
 #define FULL_SCREEN_COLUMN_ONE_X            34
 #define FULL_SCREEN_COLUMN_TWO_X            72
@@ -145,6 +146,7 @@ static void RotomPhone_FullScreenMenu_DoCleanUpAndDestroyTask(u8 taskId);
 
 static void RotomPhone_FullScreenMenu_LoadSprites(void);
 static void RotomPhone_FullScreenMenu_CreateIconSprites(void);
+static void RotomPhone_FullScreenMenu_CreateShortcutIcon(void);
 static void RotomPhone_FullScreenMenu_CreateCursorSprite(void);
 static void RotomPhone_FullScreenMenu_TimerUpdates(u8 taskId);
 
@@ -214,6 +216,8 @@ static const u32 sRotomPhone_FullScreenMenuTiles[] =        INCBIN_U32("graphics
 static const u32 sRotomPhone_FullScreenMenuTilemap[] =      INCBIN_U32("graphics/rotom_start_menu/full_screen/rotom_phone.bin.smolTM");
 static const u32 sRotomPhone_FullScreenMenuPanelTilemap[] = INCBIN_U32("graphics/rotom_start_menu/full_screen/rotom_phone_panel.bin.smolTM");
 static const u32 sRotomPhone_FullScreenMenuIconsGfx[] =     INCBIN_U32("graphics/rotom_start_menu/full_screen/icons.4bpp.smol");
+static const u32 sRotomPhone_FullScreenMenuShortcutGfx[] =  INCBIN_U32("graphics/rotom_start_menu/full_screen/shortcut.4bpp.smol");
+static const u16 sRotomPhone_FullScreenMenuShortcutPal[] =  INCBIN_U16("graphics/rotom_start_menu/full_screen/shortcut.gbapal");
 static const u32 sRotomPhone_DaycareCompatability_Gfx[] =   INCBIN_U32("graphics/rotom_start_menu/full_screen/panel/daycare/heart.4bpp.smol");
 static const u16 sRotomPhone_DaycareCompatability_Pal[] =   INCBIN_U16("graphics/rotom_start_menu/full_screen/panel/daycare/heart.gbapal");
 
@@ -702,6 +706,7 @@ struct RotomPhone_StartMenu_State
     enum RotomPhone_MenuItems menuFullScreenOptions[RP_FS_OPTION_COUNT];
     enum RotomPhone_MenuItems menuFullScreenFirstOnscreenOption;
     u32 menuFullScreenIconSpriteId[RP_FS_OPTION_COUNT];
+    u32 menuFullScreenShortcutIconSpriteId;
     u32 menuFullScreenCursorSpriteId;
     u32 menuFullScreenPanelY;
     u32 menuFullScreenPanelSpriteId[RP_PANEL_SPRITE_COUNT];
@@ -1000,6 +1005,34 @@ static const union AnimCmd *const sRotomFaceAnims[RP_FACE_COUNT] = {
     sAnimCmd_RotomFace_Confused,
     sAnimCmd_RotomFace_HappyWith,
     sAnimCmd_RotomFace_ShockedWith,
+};
+
+static const struct SpritePalette sSpritePal_FullScreenShortcutIcon[] =
+{
+    {sRotomPhone_FullScreenMenuShortcutPal, TAG_PHONE_FS_SHORTCUT_ICON},
+    {NULL},
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_FullScreenShortcutIcon[] = 
+{
+    {sRotomPhone_FullScreenMenuShortcutGfx, 16*16/2 , TAG_PHONE_FS_SHORTCUT_ICON},
+    {NULL},
+};
+
+static const struct OamData sOam_FullScreenShortcutIcon = {
+    .size = SPRITE_SIZE(16x16),
+    .shape = SPRITE_SHAPE(16x16),
+    .priority = 1,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_FullScreenShortcutIcon = {
+    .tileTag = TAG_PHONE_FS_SHORTCUT_ICON,
+    .paletteTag = TAG_PHONE_FS_SHORTCUT_ICON,
+    .oam = &sOam_FullScreenShortcutIcon,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_CompatabilityIcon = {
@@ -2469,6 +2502,7 @@ static void RotomPhone_FullScreenMenu_SetupCB(void)
         RotomPhone_FullScreenMenu_LoadSprites();
         RotomPhone_StartMenu_CreateRotomFaceSprite(FALSE);
         RotomPhone_FullScreenMenu_CreateIconSprites();
+        RotomPhone_FullScreenMenu_CreateShortcutIcon();
         RotomPhone_FullScreenMenu_CreateCursorSprite();
         gMain.state++;
         break;
@@ -2964,6 +2998,53 @@ static void RotomPhone_FullScreenMenu_CreateIconSprites(void)
     }
 }
 
+#define SHORTCUT_ICON_X_OFFSET 12
+#define SHORTCUT_ICON_Y_OFFSET 11
+static void RotomPhone_FullScreenMenu_ShortcutIconCallback(struct Sprite *sprite)
+{
+    s32 xOffset;
+    u32 optionCurrent;
+
+    for (enum RotomPhone_FullScreen_Options i = RP_FS_OPTION_1; i < RP_FS_OPTION_COUNT; i++)
+    {
+        if (sRotomPhone_StartMenu->menuFullScreenOptions[i] == RotomPhone_StartMenu_GetShortcutOption())
+        {
+            optionCurrent = i;
+
+            switch (optionCurrent)
+            {
+                case RP_FS_OPTION_3:
+                case RP_FS_OPTION_4:
+                case RP_FS_OPTION_7:
+                case RP_FS_OPTION_8:
+                case RP_FS_OPTION_10:
+                    xOffset = -SHORTCUT_ICON_X_OFFSET;
+                    break;
+                
+                default:
+                    xOffset = SHORTCUT_ICON_X_OFFSET;
+                    break;
+            }
+            
+            sprite->x = sFullScreenOptionInfo[i].x + xOffset;
+            sprite->y = sFullScreenOptionInfo[i].y - SHORTCUT_ICON_Y_OFFSET;
+            sprite->invisible = FALSE;
+
+            return;
+        }
+    }
+
+    sprite->invisible = TRUE;
+}
+
+static void RotomPhone_FullScreenMenu_CreateShortcutIcon(void)
+{
+    sRotomPhone_StartMenu->menuFullScreenShortcutIconSpriteId = CreateSprite(&sSpriteTemplate_FullScreenShortcutIcon, 0, 0, 1);
+    gSprites[sRotomPhone_StartMenu->menuFullScreenShortcutIconSpriteId].callback = RotomPhone_FullScreenMenu_ShortcutIconCallback;
+}
+#undef SHORTCUT_ICON_X_OFFSET
+#undef SHORTCUT_ICON_Y_OFFSET
+
 #define ROTOM_CURSOR_X_OFFSET 10
 #define ROTOM_CURSOR_Y_OFFSET 6
 #define sComfyAnimIdX         sprite->data[0]
@@ -3137,6 +3218,8 @@ static void RotomPhone_FullScreenMenu_FreeResources(void)
 static void RotomPhone_FullScreenMenu_LoadSprites(void)
 {
     LoadSpritePalette(sSpritePal_RotomFaceIcons);
+    LoadSpritePalette(sSpritePal_FullScreenShortcutIcon);
+    LoadCompressedSpriteSheet(sSpriteSheet_FullScreenShortcutIcon);
     LoadCompressedSpriteSheet(sSpriteSheet_FullScreenIcons);
     LoadCompressedSpriteSheet(sSpriteSheet_RotomFace);
 }
@@ -3809,6 +3892,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 #undef TAG_ROTOM_FACE_GFX
 #undef TAG_PHONE_OW_ICON_GFX
 #undef TAG_PHONE_FS_ICON_GFX
+#undef TAG_PHONE_FS_SHORTCUT_ICON
 #undef TAG_PHONE_FS_DAYCARE_ICON
 #undef TAG_ROTOM_FACE_ICON_PAL
 #undef PHONE_BG_PAL_SLOT
