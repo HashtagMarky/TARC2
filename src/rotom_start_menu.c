@@ -46,6 +46,10 @@
 #include "constants/songs.h"
 #include "constants/weather.h"
 
+#ifdef RHH_EXPANSION
+#include "constants/expansion.h"
+#endif
+
 
 #define NUM_FRAMES_FOR_MINUTES_UPDATE       (60 * 60) / FakeRtc_GetSecondsRatio() * RP_CONFIG_NUM_MINUTES_TO_UPDATE
 #define ROTOM_PHONE_OW_MESSGAGE_TIMER       NUM_FRAMES_FOR_MINUTES_UPDATE / 2
@@ -186,7 +190,10 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void);
 // Init Rotom Start Menu
 void RotomPhone_StartMenu_Open(bool32 firstInit)
 {
-#ifdef RHH_EXPANSION
+#if defined(RHH_EXPANSION) && \
+           (EXPANSION_VERSION_MAJOR > 1 || \
+           (EXPANSION_VERSION_MAJOR == 1 && EXPANSION_VERSION_MINOR > 11) || \
+           (EXPANSION_VERSION_MAJOR == 1 && EXPANSION_VERSION_MINOR == 11 && EXPANSION_VERSION_PATCH >= 0))
     ResetDexNavSearch();
 #endif
 
@@ -3578,6 +3585,7 @@ static void RotomPhone_StartMenu_SelectedFunc_DexNav(void)
         RotomPhone_OverworldMenu_DoCleanUpAndChangeTaskFunc(FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput), Task_OpenDexNavFromStartMenu);
     else
     {
+        sRotomPhone_RotomReality = FALSE;
         RotomPhone_RotomRealityMenu_DoCleanUpAndCreateTask(Task_OpenDexNavFromStartMenu, 0);
     }
 }
