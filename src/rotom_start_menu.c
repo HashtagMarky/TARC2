@@ -824,7 +824,7 @@ static const struct SpritePalette sSpritePal_RotomFaceIcons[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_RotomFace[] = 
 {
-    {sRotomPhone_StartMenuRotomFaceGfx, 64*768/2 , TAG_ROTOM_FACE_GFX},
+    {sRotomPhone_StartMenuRotomFaceGfx, 64*640/2 , TAG_ROTOM_FACE_GFX},
     {NULL},
 };
 
