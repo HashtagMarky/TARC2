@@ -88,7 +88,6 @@ static void Task_RotomPhone_OverworldMenu_PhoneSlideOpen(u8 taskId);
 static void Task_RotomPhone_OverworldMenu_PhoneSlideClose(u8 taskId);
 static void Task_RotomPhone_OverworldMenu_HandleMainInput(u8 taskId);
 static void RotomPhone_OverworldMenu_UpdateIconPaletteFade(u8 taskId);
-static void RotomPhone_OverworldMenu_RotomShutdownPreparation(u8 taskId);
 static void Task_RotomPhone_OverworldMenu_RotomShutdown(u8 taskId);
 static void Task_RotomPhone_OverworldMenu_CloseAndSave(u8 taskId);
 static void Task_RotomPhone_OverworldMenu_CloseForSafari(u8 taskId);
@@ -153,6 +152,7 @@ static void RotomPhone_FullScreenMenu_TimerUpdates(u8 taskId);
 static bool32 RotomPhone_StartMenu_IsFullScreen(void);
 static void RotomPhone_StartMenu_CreateRotomFaceSprite(bool32 rotomFade);
 static void RotomPhone_StartMenu_UpdateRotomFaceAnim(bool32 input);
+static void RotomPhone_StartMenu_RotomShutdownPreparation(u8 taskId, bool32 overworld);
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked_FullScreen(void);
@@ -1246,7 +1246,7 @@ static const u8 *RotomPhone_OverworldMenu_GetWeatherAction(u32 weatherId)
 #define tRotomPanelLastY gTasks[taskId].data[4]
 #define tPhoneY gTasks[taskId].data[5]
 #define tPhoneComfyAnimId gTasks[taskId].data[6]
-#define tPhoneCloseToSave gTasks[taskId].data[7]
+#define tPhoneCloseParameterSaveSafariFade gTasks[taskId].data[7]
 #define tPhoneHighlightComfyAnimId gTasks[taskId].data[8]
 static void RotomPhone_OverworldMenu_Init(bool32 firstInit)
 {
@@ -2256,7 +2256,7 @@ static void Task_RotomPhone_OverworldMenu_HandleMainInput(u8 taskId)
         if (RP_CONFIG_USE_ROTOM_PHONE)
         {
             gTasks[taskId].func = Task_RotomPhone_OverworldMenu_RotomShutdown;
-            RotomPhone_OverworldMenu_RotomShutdownPreparation(taskId);
+            RotomPhone_StartMenu_RotomShutdownPreparation(taskId, TRUE);
         }
         else
         {
@@ -2279,12 +2279,15 @@ static void Task_RotomPhone_OverworldMenu_HandleMainInput(u8 taskId)
         PlaySE(tRotomMessageSoundEffect);
 }
 
-static void RotomPhone_OverworldMenu_RotomShutdownPreparation(u8 taskId)
+static void RotomPhone_StartMenu_RotomShutdownPreparation(u8 taskId, bool32 overworld)
 {
     PlaySE(PMD_EVENT_MOTION_HARAHERI);
     tRotomUpdateMessage = RP_MESSAGE_GOODBYE;
     tRotomUpdateTimer = FALSE;
-    RotomPhone_OverworldMenu_CheckUpdateMessage(taskId);
+
+    if (overworld)
+        RotomPhone_OverworldMenu_CheckUpdateMessage(taskId);
+    
     struct Sprite *sprite = &gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId];
     sprite->callback = SpriteCB_RotomPhone_OverworldMenu_RotomFace_Unload;
     StartSpriteAnim(&gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId], RP_FACE_HAPPY_WITH);
@@ -2319,14 +2322,14 @@ static void Task_RotomPhone_OverworldMenu_CloseAndSave(u8 taskId)
 
     if (!FuncIsActiveTask(Task_RotomPhone_OverworldMenu_RotomShutdown)
         && !FuncIsActiveTask(Task_RotomPhone_OverworldMenu_PhoneSlideClose)
-        && tPhoneCloseToSave == FALSE)
+        && tPhoneCloseParameterSaveSafariFade == FALSE)
     {
         CreateTask(func, 0);
-        tPhoneCloseToSave = TRUE;
+        tPhoneCloseParameterSaveSafariFade = TRUE;
     }
     else if (!FuncIsActiveTask(Task_RotomPhone_OverworldMenu_RotomShutdown)
         && !FuncIsActiveTask(Task_RotomPhone_OverworldMenu_PhoneSlideClose)
-        && tPhoneCloseToSave == TRUE)
+        && tPhoneCloseParameterSaveSafariFade == TRUE)
     {
         LoadMessageBoxAndBorderGfx();
         DestroyTask(taskId);
@@ -2337,13 +2340,13 @@ static void Task_RotomPhone_OverworldMenu_CloseAndSave(u8 taskId)
 static void Task_RotomPhone_OverworldMenu_CloseForSafari(u8 taskId)
 {
     if (!FuncIsActiveTask(Task_RotomPhone_OverworldMenu_PhoneSlideClose)
-        && tPhoneCloseToSave == FALSE)
+        && tPhoneCloseParameterSaveSafariFade == FALSE)
     {
         CreateTask(Task_RotomPhone_OverworldMenu_PhoneSlideClose, 0);
-        tPhoneCloseToSave = TRUE;
+        tPhoneCloseParameterSaveSafariFade = TRUE;
     }
     else if (!FuncIsActiveTask(Task_RotomPhone_OverworldMenu_PhoneSlideClose)
-        && tPhoneCloseToSave == TRUE)
+        && tPhoneCloseParameterSaveSafariFade == TRUE)
     {
         DestroyTask(taskId);
         SafariZoneRetirePrompt();
@@ -2639,8 +2642,9 @@ static void Task_RotomPhone_FullScreenMenu_HandleMainInput(u8 taskId)
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(PMD_EVENT_MOTION_HARAHERI);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_RotomPhone_FullScreenMenu_WaitFadeAndExitGracefully;
+        RotomPhone_StartMenu_RotomShutdownPreparation(taskId, FALSE);
+        tPhoneCloseParameterSaveSafariFade = FALSE;
     }
     if (JOY_NEW(DPAD_ANY))
     {
@@ -2792,9 +2796,19 @@ static void Task_RotomPhone_FullScreenMenu_WaitFadeAndBail(u8 taskId)
 
 static void Task_RotomPhone_FullScreenMenu_WaitFadeAndExitGracefully(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (tPhoneCloseParameterSaveSafariFade == FALSE && gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId].callback == SpriteCallbackDummy)
     {
+        gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId].invisible = TRUE;
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        tPhoneCloseParameterSaveSafariFade = TRUE;
+        return;
+    }
+    
+    if (!gPaletteFade.active && gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId].callback == SpriteCallbackDummy)
+    {
+        m4aSongNumStop(PMD_EVENT_MOTION_HARAHERI);
         sRotomPhone_FullScreen = FALSE;
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         SetMainCallback2(CB2_ReturnToField);
         RotomPhone_FullScreenMenu_DoCleanUpAndDestroyTask(taskId);
     }
@@ -3382,9 +3396,9 @@ static void RotomPhone_StartMenu_SelectedFunc_Save(void)
             LockPlayerFieldControls();
             u8 taskId = FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput);
             gTasks[taskId].func = Task_RotomPhone_OverworldMenu_CloseAndSave;
-            tPhoneCloseToSave = FALSE;
+            tPhoneCloseParameterSaveSafariFade = FALSE;
             if (RP_CONFIG_USE_ROTOM_PHONE)
-                RotomPhone_OverworldMenu_RotomShutdownPreparation(taskId);
+                RotomPhone_StartMenu_RotomShutdownPreparation(taskId, TRUE);
         }
     }
     else
@@ -3410,7 +3424,9 @@ static void RotomPhone_StartMenu_SelectedFunc_SafariFlag(void)
         {
             FreezeObjectEvents();
             LockPlayerFieldControls();
-            gTasks[FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput)].func = Task_RotomPhone_OverworldMenu_CloseForSafari;
+            u8 taskId = FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput);
+            gTasks[taskId].func = Task_RotomPhone_OverworldMenu_CloseForSafari;
+            tPhoneCloseParameterSaveSafariFade = FALSE;
         }
     }
     else
@@ -3833,7 +3849,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 #undef tRotomPanelComfyAnimId
 #undef tRotomPanelLastY
 #undef tPhoneY
-#undef tPhoneCloseToSave
+#undef tPhoneCloseParameterSaveSafariFade
 #undef tPhoneHighlightComfyAnimId
 #undef sFrameNumComfyAnimId
 #undef sComfyAnimIdX
