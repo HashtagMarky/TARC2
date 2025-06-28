@@ -55,7 +55,9 @@
 #define PHONE_BASE_COLOUR_INDEX             5
 #define PHONE_BG_PAL_SLOT                   14
 #define TAG_ROTOM_FACE_GFX                  1234
-#define TAG_PHONE_ICON_GFX                  1235
+#define TAG_PHONE_OW_ICON_GFX               1235
+#define TAG_PHONE_FS_ICON_GFX               1236
+#define TAG_PHONE_FS_DAYCARE_ICON           1237
 #define TAG_ROTOM_FACE_ICON_PAL             0x4654 | BLEND_IMMUNE_FLAG
 #define FULL_SCREEN_COLUMN_ONE_X            34
 #define FULL_SCREEN_COLUMN_TWO_X            72
@@ -828,13 +830,13 @@ static const struct CompressedSpriteSheet sSpriteSheet_RotomFace[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_OverworldIcons[] = 
 {
-    {sRotomFlipPhone_OverworldIconsGfx, 32*352/2 , TAG_PHONE_ICON_GFX},
+    {sRotomFlipPhone_OverworldIconsGfx, 32*352/2 , TAG_PHONE_OW_ICON_GFX},
     {NULL},
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_FullScreenIcons[] = 
 {
-    {sRotomPhone_FullScreenMenuIconsGfx, 32*352/2 , TAG_PHONE_ICON_GFX},
+    {sRotomPhone_FullScreenMenuIconsGfx, 32*352/2 , TAG_PHONE_FS_ICON_GFX},
     {NULL},
 };
 
@@ -987,7 +989,7 @@ static const union AnimCmd *const sRotomFaceAnims[RP_FACE_COUNT] = {
 static const struct CompressedSpriteSheet sSpriteSheet_CompatabilityIcon = {
     .data = sRotomPhone_DaycareCompatability_Gfx,
     .size = 32 * 32 * RP_DAYCARE_COMPATABILITY_ANIM_COUNT / 2,
-    .tag = TAG_PHONE_ICON_GFX,
+    .tag = TAG_PHONE_FS_DAYCARE_ICON,
 };
 
 static const struct OamData sOam_IconDaycareCompatatbility = {
@@ -1025,7 +1027,7 @@ static const union AnimCmd *const sAnims_IconDaycareCompatatbility[] =
 };
 
 static const struct SpriteTemplate sSpriteTemplate_OverworldIcon = {
-    .tileTag = TAG_PHONE_ICON_GFX,
+    .tileTag = TAG_PHONE_OW_ICON_GFX,
     .paletteTag = TAG_ROTOM_FACE_ICON_PAL,
     .oam = &sOam_RotomPhoneIcons,
     .anims = sAnims_OverworldIcons,
@@ -1035,7 +1037,7 @@ static const struct SpriteTemplate sSpriteTemplate_OverworldIcon = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_FullScreenIcon = {
-    .tileTag = TAG_PHONE_ICON_GFX,
+    .tileTag = TAG_PHONE_FS_ICON_GFX,
     .paletteTag = TAG_ROTOM_FACE_ICON_PAL,
     .oam = &sOam_RotomPhoneIcons,
     .anims = sAnims_OverworldIcons,
@@ -1995,7 +1997,7 @@ static void RotomPhone_OverworldMenu_ExitAndClearTilemap(void)
 
     if (sRotomPhone_StartMenu != NULL)
     {
-        FreeSpriteTilesByTag(TAG_PHONE_ICON_GFX); 
+        FreeSpriteTilesByTag(TAG_PHONE_OW_ICON_GFX); 
         FreeSpriteTilesByTag(TAG_ROTOM_FACE_GFX);  
         Free(sRotomPhone_StartMenu);
         sRotomPhone_StartMenu = NULL;
@@ -3642,7 +3644,7 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 
             struct SpriteTemplate iconCompatatbility_SpriteTemplate =
             {
-                .tileTag = TAG_PHONE_ICON_GFX,
+                .tileTag = TAG_PHONE_FS_DAYCARE_ICON,
                 .paletteTag = gMonIconPaletteTable[MON_ICON_PAL_SLOT_COMPATABILITY_ICON].tag,
                 .oam = &sOam_IconDaycareCompatatbility,
                 .callback = SpriteCallbackDummy,
@@ -3756,7 +3758,9 @@ static void RotomPhone_StartMenu_SelectedFunc_Daycare(void)
 }
 #undef PHONE_OFFSCREEN_Y
 #undef TAG_ROTOM_FACE_GFX
-#undef TAG_PHONE_ICON_GFX
+#undef TAG_PHONE_OW_ICON_GFX
+#undef TAG_PHONE_FS_ICON_GFX
+#undef TAG_PHONE_FS_DAYCARE_ICON
 #undef TAG_ROTOM_FACE_ICON_PAL
 #undef PHONE_BG_PAL_SLOT
 #undef PHONE_BASE_COLOUR_INDEX

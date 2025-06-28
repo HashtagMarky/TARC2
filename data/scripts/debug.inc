@@ -149,10 +149,17 @@ Debug_OpenCalendar::
 	end
 
 Debug_EventScript_Script_1::
+	givemon SPECIES_TURTWIG, 5
+	givemon SPECIES_CHIMCHAR, 5
+	givemon SPECIES_PIPLUP, 5
+	givemon SPECIES_DITTO, 100
+	call Route117_PokemonDayCare_EventScript_DaycareWoman
 	release
 	end
 
 Debug_EventScript_Script_2::
+	initclock 12 00
+	setflag OW_FLAG_PAUSE_TIME
 	release
 	end
 
