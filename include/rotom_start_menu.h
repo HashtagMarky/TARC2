@@ -56,6 +56,11 @@ flag, or save game options.
     change the monochrome sprite colour. When doing so you will
     only have to make adjustments to these palettes once.
 
+    RP_CONFIG_FULL_SCREEN_SHORTCUT
+    Allows for the START BUTTON to be used on the full screen
+    menu to automatically open the shortcut. This menu option
+    is denoted with a star.
+
     RP_CONFIG_24_HOUR_MODE
     A boolean option to display 24 hour time when TRUE, and
     12 hour time when FALSE.
@@ -96,6 +101,7 @@ flag, or save game options.
 #define RP_CONFIG_USE_ROTOM_PHONE         FlagGet(FLAG_SYS_POKEDEX_GET)
 #define RP_CONFIG_MONOCHROME_ICONS        FALSE
 #define RP_CONFIG_PALETTE_BUFFER          TRUE
+#define RP_CONFIG_FULL_SCREEN_SHORTCUT    TRUE
 #define RP_CONFIG_24_HOUR_MODE            gSaveBlock2Ptr->optionsClockMode
 #define RP_CONFIG_NUM_MINUTES_TO_UPDATE   1
 #define RP_CONFIG_UPDATE_MESSAGE          TRUE

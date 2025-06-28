@@ -2689,8 +2689,15 @@ static void Task_RotomPhone_FullScreenMenu_HandleMainInput(u8 taskId)
     }
     if (JOY_NEW(A_BUTTON | START_BUTTON))
     {
-        if (JOY_NEW(START_BUTTON))
+        if (JOY_NEW(START_BUTTON) && RP_CONFIG_FULL_SCREEN_SHORTCUT)
+        {
             menuSelectedFullScreen = RP_GET_SHORTCUT_OPTION;
+            RotomPhone_FullScreenMenu_PrintMenuName();
+        }
+        else if (JOY_NEW(START_BUTTON) && !RP_CONFIG_FULL_SCREEN_SHORTCUT)
+        {
+            return;
+        }
         
         PlaySE(PMD_DS_SYS_01);
         if (!sRotomPhoneOptions[menuSelectedFullScreen].fullScreenPanel)
@@ -3040,6 +3047,9 @@ static void RotomPhone_FullScreenMenu_ShortcutIconCallback(struct Sprite *sprite
 
 static void RotomPhone_FullScreenMenu_CreateShortcutIcon(void)
 {
+    if (!RP_CONFIG_FULL_SCREEN_SHORTCUT)
+        return;
+    
     sRotomPhone_StartMenu->menuFullScreenShortcutIconSpriteId = CreateSprite(&sSpriteTemplate_FullScreenShortcutIcon, 0, 0, 1);
     gSprites[sRotomPhone_StartMenu->menuFullScreenShortcutIconSpriteId].callback = RotomPhone_FullScreenMenu_ShortcutIconCallback;
 }
