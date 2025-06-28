@@ -923,6 +923,22 @@ static const union AnimCmd *const sAnims_OverworldIcons[RP_MENU_COUNT] = {
     sAnimCmd_OverworldIcon_Options,
 };
 
+static const union AnimCmd *const sAnims_FullScreenIcons[RP_MENU_COUNT] = {
+    sAnimCmd_OverworldIcon_FullScreen,
+    sAnimCmd_OverworldIcon_Flag,
+    sAnimCmd_OverworldIcon_Blank,          // RP_MENU_SHORTCUT
+    sAnimCmd_OverworldIcon_Clock,
+    sAnimCmd_OverworldIcon_Pokedex,
+    sAnimCmd_OverworldIcon_Party,
+    sAnimCmd_OverworldIcon_Blank,          // RP_MENU_DAYCARE
+    sAnimCmd_OverworldIcon_Bag,
+    sAnimCmd_OverworldIcon_DexNav,
+    sAnimCmd_OverworldIcon_PokeNav,
+    sAnimCmd_OverworldIcon_Blank,          // RP_MENU_TRAINER_CARD
+    sAnimCmd_OverworldIcon_Save,
+    sAnimCmd_OverworldIcon_Options,
+};
+
 static const union AnimCmd sAnimCmd_RotomFace_Happy[] = {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_JUMP(0),
@@ -1040,7 +1056,7 @@ static const struct SpriteTemplate sSpriteTemplate_FullScreenIcon = {
     .tileTag = TAG_PHONE_FS_ICON_GFX,
     .paletteTag = TAG_ROTOM_FACE_ICON_PAL,
     .oam = &sOam_RotomPhoneIcons,
-    .anims = sAnims_OverworldIcons,
+    .anims = sAnims_FullScreenIcons,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
