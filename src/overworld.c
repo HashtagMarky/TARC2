@@ -1722,7 +1722,7 @@ u8 UpdateSpritePaletteWithTime(u8 paletteNum)
         TimeMixPalettes(1, &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteNum)], &gPlttBufferFaded[OBJ_PLTT_ID(paletteNum)], &gTimeBlend.startBlend, &gTimeBlend.endBlend, gTimeBlend.weight);
     return paletteNum;
 }
-
+#include "rotom_start_menu.h"
 static void OverworldBasic(void)
 {
     ScriptContext_RunScript();
@@ -1759,6 +1759,7 @@ static void OverworldBasic(void)
     }
     TryUpdateOverworldDayNightMusic();
     Ikigai_CheckBedtime();
+    RotomPhone_StartMenu_DisableRotomReality();
 }
 
 // This CB2 is used when starting

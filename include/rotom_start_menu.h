@@ -41,9 +41,6 @@ this if not already:
     more easily accessed by RP_GET_SHORTCUT_OPTION. These can
     be set by the developer, or the function can be made to
     dynamically change based on player selection.
-4.  When opening any menu, if you can return to the field directly
-    from it you must use RotomPhone_StartMenu_DisableRotomReality
-    to allow the overworld menu to be used again.
 
 
 
