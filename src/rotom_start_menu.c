@@ -161,6 +161,7 @@ static void RotomPhone_StartMenu_UpdateRotomFaceAnim(bool32 input);
 static void RotomPhone_StartMenu_RotomShutdownPreparation(u8 taskId, bool32 overworld);
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked(void);
+static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked_Overworld(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked_RotomReality(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Pokedex(void);
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Pokemon(void);
@@ -3377,6 +3378,14 @@ static void RotomPhone_StartMenu_UpdateRotomFaceAnim(bool32 input)
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked(void)
 {
     return TRUE;
+}
+
+static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked_Overworld(void)
+{
+    if (!RotomPhone_StartMenu_IsRotomReality())
+        return TRUE;
+    else
+        return FALSE;
 }
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked_RotomReality(void)
