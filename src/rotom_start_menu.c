@@ -643,7 +643,7 @@ static const struct RotomPhone_FullScreen_OptionsInfo sFullScreenOptionInfo[RP_F
     {
         .x = FULL_SCREEN_COLUMN_FOUR_X - 16,
         .y = FULL_SCREEN_ROW_THREE_Y,
-        .optionUp = RP_FS_OPTION_6,
+        .optionUp = RP_FS_OPTION_7,
         .optionDown = RP_FS_OPTION_COUNT,
         .optionLeft = RP_FS_OPTION_9,
         .optionRight = RP_FS_OPTION_COUNT,
