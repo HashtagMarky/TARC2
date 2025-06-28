@@ -3382,18 +3382,12 @@ static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked(void)
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked_Overworld(void)
 {
-    if (!RotomPhone_StartMenu_IsRotomReality())
-        return TRUE;
-    else
-        return FALSE;
+    return !RotomPhone_StartMenu_IsRotomReality();
 }
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Unlocked_RotomReality(void)
 {
-    if (!RotomPhone_StartMenu_IsRotomReality())
-        return FALSE;
-    else
-        return TRUE;
+    return RotomPhone_StartMenu_IsRotomReality();
 }
 
 static bool32 RotomPhone_StartMenu_UnlockedFunc_Pokedex(void)
