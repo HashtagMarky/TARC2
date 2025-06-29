@@ -22,6 +22,6 @@ void Task_OpenSampleUi_BlankTemplate(u8 taskId);
 void SampleUI_ResetGpuRegsAndBgs(void);
 
 
-void RotomPhone_SaveScreen_Init(void);
+void RotomPhone_SaveScreen_SetupCB(void);
 
 #endif

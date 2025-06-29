@@ -2897,7 +2897,7 @@ static void Task_RotomPhone_RotomRealityMenu_WaitFadeAndExitGracefullyForSave(u8
     if (tPhoneCloseParameterSaveSafariFade == FALSE && gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId].callback == SpriteCallbackDummy)
     {
         gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId].invisible = TRUE;
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
         tPhoneCloseParameterSaveSafariFade = TRUE;
         return;
     }
@@ -2907,10 +2907,8 @@ static void Task_RotomPhone_RotomRealityMenu_WaitFadeAndExitGracefullyForSave(u8
         m4aSongNumStop(PMD_EVENT_MOTION_HARAHERI);
         sRotomPhone_RotomReality = FALSE;
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
-        RotomPhone_StartMenu_DoCleanUpAndDestroyTask(taskId, FALSE);
-        RotomPhone_SaveScreen_Init();
-        // DestroyTask(taskId);
-        // RotomPhone_StartMenu_DoCleanUpAndChangeCallback(RotomPhone_SaveScreen_SetupCB);
+        DestroyTask(taskId);
+        RotomPhone_StartMenu_DoCleanUpAndChangeCallback(RotomPhone_SaveScreen_SetupCB);
     }
 }
 

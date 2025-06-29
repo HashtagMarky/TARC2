@@ -29,17 +29,11 @@
 #include "pokedex.h"
 #include "gpu_regs.h"
 
-struct RotomPhone_SaveScreenState
-{
-    u8 loadState;
-};
-
 enum WindowIds
 {
     RP_SS_WIN_DIALOG,
 };
 
-static EWRAM_DATA struct RotomPhone_SaveScreenState *sRotomPhone_SaveScreenState = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 
 static const struct BgTemplate sRotomPhone_SaveScreen_BgTemplates[] =
@@ -79,19 +73,7 @@ static const u32 sRotomPhone_SaveScreenTilemap[] = INCBIN_U32("graphics/sample_u
 
 static const u16 sRotomPhone_SaveScreenPalette[] = INCBIN_U16("graphics/sample_ui/00.gbapal");
 
-enum FontColor
-{
-    FONT_WHITE,
-    FONT_RED
-};
-static const u8 sRotomPhone_SaveScreenWindowFontColors[][3] =
-{
-    [FONT_WHITE]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY},
-    [FONT_RED]    = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED,        TEXT_COLOR_LIGHT_GRAY},
-};
-
 // Callbacks for the sample UI
-static void RotomPhone_SaveScreen_SetupCB(void);
 static void RotomPhone_SaveScreen_MainCB(void);
 static void RotomPhone_SaveScreen_VBlankCB(void);
 
@@ -102,44 +84,18 @@ static void Task_RotomPhone_SaveScreen_WaitFadeAndBail(u8 taskId);
 static void Task_RotomPhone_SaveScreen_WaitFadeAndExit(u8 taskId);
 
 // Sample UI helper functions
-// static void RotomPhone_SaveScreen_Init(void);
 static void RotomPhone_SaveScreen_ResetGpuRegsAndBgs(void);
 static bool8 RotomPhone_SaveScreen_InitBgs(void);
 static void RotomPhone_SaveScreen_FadeAndBail(void);
-static bool8 RotomPhone_SaveScreen_LoadGraphics(void);
 static void RotomPhone_SaveScreen_InitWindows(void);
 static void RotomPhone_SaveScreen_FreeResources(void);
-
-// Declared in sample_ui.h
-void Task_OpenRotomPhone_SaveScreen_BlankTemplate2(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-        CleanupOverworldWindowsAndTilemaps();
-        RotomPhone_SaveScreen_Init();
-        DestroyTask(taskId);
-    }
-}
-
-void RotomPhone_SaveScreen_Init(void)
-{
-    SetMainCallback2(CB2_ReturnToField);
-    sRotomPhone_SaveScreenState = AllocZeroed(sizeof(struct RotomPhone_SaveScreenState));
-    if (sRotomPhone_SaveScreenState == NULL)
-    {
-        return;
-    }
-
-    sRotomPhone_SaveScreenState->loadState = 0;
-    SetMainCallback2(RotomPhone_SaveScreen_SetupCB);
-}
 
 static void RotomPhone_SaveScreen_ResetGpuRegsAndBgs(void)
 {
     SampleUI_ResetGpuRegsAndBgs();
 }
 
-static void RotomPhone_SaveScreen_SetupCB(void)
+void RotomPhone_SaveScreen_SetupCB(void)
 {
     switch (gMain.state)
     {
@@ -160,7 +116,6 @@ static void RotomPhone_SaveScreen_SetupCB(void)
     case 2:
         if (RotomPhone_SaveScreen_InitBgs())
         {
-            sRotomPhone_SaveScreenState->loadState = 0;
             gMain.state++;
         }
         else
@@ -170,24 +125,40 @@ static void RotomPhone_SaveScreen_SetupCB(void)
         }
         break;
     case 3:
-        if (RotomPhone_SaveScreen_LoadGraphics() == TRUE)
-        {
-            gMain.state++;
-        }
-        break;
-    case 4:
-        RotomPhone_SaveScreen_InitWindows();
+        ResetTempTileDataBuffers();
+        DecompressAndCopyTileDataToVram(1, sRotomPhone_SaveScreenTiles, 0, 0, 0);
         gMain.state++;
         break;
+    case 4:
+        if (FreeTempTileDataBuffersIfPossible() != TRUE)
+        {
+            DecompressDataWithHeaderWram(sRotomPhone_SaveScreenTilemap, sBg1TilemapBuffer);
+            gMain.state++;
+        }
+        else
+        {
+            RotomPhone_SaveScreen_FadeAndBail();
+            return;
+        }
+        break;
     case 5:
-        CreateTask(Task_RotomPhone_SaveScreen_WaitFadeIn, 0);
+        LoadPalette(sRotomPhone_SaveScreenPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+        LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         gMain.state++;
         break;
     case 6:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        RotomPhone_SaveScreen_InitWindows();
         gMain.state++;
         break;
     case 7:
+        CreateTask(Task_RotomPhone_SaveScreen_WaitFadeIn, 0);
+        gMain.state++;
+        break;
+    case 8:
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITE);
+        gMain.state++;
+        break;
+    case 9:
         SetVBlankCallback(RotomPhone_SaveScreen_VBlankCB);
         SetMainCallback2(RotomPhone_SaveScreen_MainCB);
         break;
@@ -273,37 +244,10 @@ static bool8 RotomPhone_SaveScreen_InitBgs(void)
 
 static void RotomPhone_SaveScreen_FadeAndBail(void)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
     CreateTask(Task_RotomPhone_SaveScreen_WaitFadeAndBail, 0);
     SetVBlankCallback(RotomPhone_SaveScreen_VBlankCB);
     SetMainCallback2(RotomPhone_SaveScreen_MainCB);
-}
-
-static bool8 RotomPhone_SaveScreen_LoadGraphics(void)
-{
-    switch (sRotomPhone_SaveScreenState->loadState)
-    {
-    case 0:
-        ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(1, sRotomPhone_SaveScreenTiles, 0, 0, 0);
-        sRotomPhone_SaveScreenState->loadState++;
-        break;
-    case 1:
-        if (FreeTempTileDataBuffersIfPossible() != TRUE)
-        {
-            DecompressDataWithHeaderWram(sRotomPhone_SaveScreenTilemap, sBg1TilemapBuffer);
-            sRotomPhone_SaveScreenState->loadState++;
-        }
-        break;
-    case 2:
-        LoadPalette(sRotomPhone_SaveScreenPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-        LoadPalette(GetTextWindowPalette(gSaveBlock2Ptr->optionsInterfaceColor + DEFAULT_TEXT_BOX_FRAME_PALETTES), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
-        sRotomPhone_SaveScreenState->loadState++;
-    default:
-        sRotomPhone_SaveScreenState->loadState = 0;
-        return TRUE;
-    }
-    return FALSE;
 }
 
 static void RotomPhone_SaveScreen_InitWindows(void)
@@ -318,10 +262,6 @@ static void RotomPhone_SaveScreen_InitWindows(void)
 
 static void RotomPhone_SaveScreen_FreeResources(void)
 {
-    if (sRotomPhone_SaveScreenState != NULL)
-    {
-        Free(sRotomPhone_SaveScreenState);
-    }
     if (sBg1TilemapBuffer != NULL)
     {
         Free(sBg1TilemapBuffer);
