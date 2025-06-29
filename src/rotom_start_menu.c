@@ -3508,7 +3508,9 @@ static void RotomPhone_StartMenu_SelectedFunc_Save(void)
     }
     else
     {
-        SaveGame();
+        RotomPhone_RotomRealityMenu_FreeResources();
+        RotomPhone_SaveScreen_Init();
+        // SaveGame();
         // ^ May be able to use after developing Save screen.
     }
 }
