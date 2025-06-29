@@ -127,6 +127,7 @@ static void Task_RotomPhone_RotomRealityMenu_PanelSlide(u8 taskId);
 static void RotomPhone_RotomRealityMenu_StartPanelSlide(void);
 static void Task_RotomPhone_RotomRealityMenu_WaitFadeAndBail(u8 taskId);
 static void Task_RotomPhone_RotomRealityMenu_WaitFadeAndExitGracefully(u8 taskId);
+static void Task_RotomPhone_RotomRealityMenu_WaitFadeAndExitGracefullyForSave(u8 taskId);
 static void Task_RotomPhone_RotomRealityMenu_WaitFadeForSelection(u8 taskId);
 
 static void RotomPhone_RotomRealityMenu_ResetGpuRegsAndBgs(void);
@@ -2083,7 +2084,7 @@ static void RotomPhone_StartMenu_DoCleanUpAndChangeCallback(MainCallback callbac
         if (!RotomPhone_StartMenu_IsRotomReality())
             RotomPhone_StartMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput), TRUE);
         else
-            RotomPhone_RotomRealityMenu_FreeResources();
+            RotomPhone_StartMenu_DoCleanUpAndDestroyTask(FindTaskIdByFunc(Task_RotomPhone_RotomRealityMenu_WaitFadeForSelection), FALSE);
         
         gMain.savedCallback = CB2_ReturnToFieldWithOpenMenu;
         SetMainCallback2(callback);
@@ -2708,7 +2709,6 @@ static void Task_RotomPhone_RotomRealityMenu_HandleMainInput(u8 taskId)
     
     if (JOY_NEW(B_BUTTON))
     {
-        PlaySE(PMD_EVENT_MOTION_HARAHERI);
         gTasks[taskId].func = Task_RotomPhone_RotomRealityMenu_WaitFadeAndExitGracefully;
         RotomPhone_StartMenu_RotomShutdownPreparation(taskId, FALSE);
         tPhoneCloseParameterSaveSafariFade = FALSE;
@@ -2729,15 +2729,23 @@ static void Task_RotomPhone_RotomRealityMenu_HandleMainInput(u8 taskId)
             return;
         }
         
-        PlaySE(PMD_DS_SYS_01);
-        if (!sRotomPhoneOptions[menuSelectedRotomReality].rotomRealityPanel)
+        if (menuSelectedRotomReality != RP_MENU_SAVE)
         {
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            gTasks[taskId].func = Task_RotomPhone_RotomRealityMenu_WaitFadeForSelection;
+            PlaySE(PMD_DS_SYS_01);
+
+            if (!sRotomPhoneOptions[menuSelectedRotomReality].rotomRealityPanel)
+            {
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+                gTasks[taskId].func = Task_RotomPhone_RotomRealityMenu_WaitFadeForSelection;
+            }
+            else if (sRotomPhoneOptions[menuSelectedRotomReality].selectedFunc)
+            {
+                RotomPhone_RotomRealityMenu_StartPanelSlide();
+                sRotomPhoneOptions[menuSelectedRotomReality].selectedFunc();
+            }
         }
-        else if (sRotomPhoneOptions[menuSelectedRotomReality].selectedFunc)
+        else
         {
-            RotomPhone_RotomRealityMenu_StartPanelSlide();
             sRotomPhoneOptions[menuSelectedRotomReality].selectedFunc();
         }
     }
@@ -2881,6 +2889,28 @@ static void Task_RotomPhone_RotomRealityMenu_WaitFadeAndExitGracefully(u8 taskId
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         SetMainCallback2(CB2_ReturnToField);
         RotomPhone_StartMenu_DoCleanUpAndDestroyTask(taskId, FALSE);
+    }
+}
+
+static void Task_RotomPhone_RotomRealityMenu_WaitFadeAndExitGracefullyForSave(u8 taskId)
+{
+    if (tPhoneCloseParameterSaveSafariFade == FALSE && gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId].callback == SpriteCallbackDummy)
+    {
+        gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId].invisible = TRUE;
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        tPhoneCloseParameterSaveSafariFade = TRUE;
+        return;
+    }
+    
+    if (!gPaletteFade.active && gSprites[sRotomPhone_StartMenu->menuRotomFaceSpriteId].callback == SpriteCallbackDummy)
+    {
+        m4aSongNumStop(PMD_EVENT_MOTION_HARAHERI);
+        sRotomPhone_RotomReality = FALSE;
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
+        RotomPhone_StartMenu_DoCleanUpAndDestroyTask(taskId, FALSE);
+        RotomPhone_SaveScreen_Init();
+        // DestroyTask(taskId);
+        // RotomPhone_StartMenu_DoCleanUpAndChangeCallback(RotomPhone_SaveScreen_SetupCB);
     }
 }
 
@@ -3494,25 +3524,21 @@ static void RotomPhone_StartMenu_SelectedFunc_Trainer(void)
 
 static void RotomPhone_StartMenu_SelectedFunc_Save(void)
 {
+    u8 taskId;
     if (!RotomPhone_StartMenu_IsRotomReality())
     {
-        if (!gPaletteFade.active)
-        {
-            LockPlayerFieldControls();
-            u8 taskId = FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput);
-            gTasks[taskId].func = Task_RotomPhone_OverworldMenu_CloseAndSave;
-            tPhoneCloseParameterSaveSafariFade = FALSE;
-            if (RP_CONFIG_USE_ROTOM_PHONE)
-                RotomPhone_StartMenu_RotomShutdownPreparation(taskId, TRUE);
-        }
+        taskId = FindTaskIdByFunc(Task_RotomPhone_OverworldMenu_HandleMainInput);
+        gTasks[taskId].func = Task_RotomPhone_OverworldMenu_CloseAndSave;
+        if (RP_CONFIG_USE_ROTOM_PHONE)
+            RotomPhone_StartMenu_RotomShutdownPreparation(taskId, TRUE);
     }
     else
     {
-        RotomPhone_RotomRealityMenu_FreeResources();
-        RotomPhone_SaveScreen_Init();
-        // SaveGame();
-        // ^ May be able to use after developing Save screen.
+        taskId = FindTaskIdByFunc(Task_RotomPhone_RotomRealityMenu_HandleMainInput);
+        gTasks[taskId].func = Task_RotomPhone_RotomRealityMenu_WaitFadeAndExitGracefullyForSave;
+        RotomPhone_StartMenu_RotomShutdownPreparation(taskId, FALSE);
     }
+    tPhoneCloseParameterSaveSafariFade = FALSE;
 }
 
 static void RotomPhone_StartMenu_SelectedFunc_Settings(void)
