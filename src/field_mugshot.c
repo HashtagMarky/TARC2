@@ -1,5 +1,6 @@
 #include "global.h"
 #include "gba/defines.h"
+#include "bg.h"
 #include "data.h"
 #include "decompress.h"
 #include "malloc.h"
@@ -338,8 +339,7 @@ void CreateFieldMugshot(enum MugshotType mugshotType, enum MugshotIDs mugshotId,
     LoadSpritePalette(&pal);
     if (mugshotId == MUGSHOT_KOLE || mugshotId == MUGSHOT_ANKA)
         DynPal_LoadPaletteByTag(sDynPalPlayerMugshot, TAG_MUGSHOT);
-    while (REG_VCOUNT >= 160);          // Wait until VBlank starts
-    while (REG_VCOUNT < 160);           // Wait until VBlank ends
+    WaitForFreshVBlank();
     LoadCompressedSpriteSheet(&sheet);
 
     sFieldMugshotSpriteId = CreateSprite(&sFieldMugshotMsgBox_SpriteTemplate, x, y, 0);
@@ -430,8 +430,7 @@ u8 CreateFieldMugshotSprite(enum MugshotIDs mugshotId, enum MugshotEmoteIDs mugs
     }
 
     LoadSpritePalette(&pal);
-    while (REG_VCOUNT >= 160);          // Wait until VBlank starts
-    while (REG_VCOUNT < 160);           // Wait until VBlank ends
+    WaitForFreshVBlank();
     LoadCompressedSpriteSheet(&sheet);
 
     if (mugshotId == MUGSHOT_KOLE || mugshotId == MUGSHOT_ANKA)

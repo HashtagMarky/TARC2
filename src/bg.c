@@ -1242,3 +1242,9 @@ bool32 IsTileMapOutsideWram(u32 bg)
     else
         return FALSE;
 }
+
+void WaitForFreshVBlank(void)
+{
+    while (REG_VCOUNT >= 160);
+    while (REG_VCOUNT < 160);
+}
