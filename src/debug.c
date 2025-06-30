@@ -804,22 +804,22 @@ static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_Sound[] =
 
 enum IkigaiStartMenuSubmenu
 {
+    DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START,
+    DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI,
     DEBUG_IKIGAI_START_MENU_TOGGLE_POKEDEX,
+    DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON,
     DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV,
     DEBUG_IKIGAI_START_MENU_TOGGLE_DEXNAV,
-    DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON,
-    DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI,
-    DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START,
 };
 
 static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_StartMenu[] =
 {
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START]  = { COMPOUND_STRING("Open Vanilla Start Menu"),     DebugAction_Ikigai_DefaultStartMenu },
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI]         = { COMPOUND_STRING("Toggle {STR_VAR_1}Safari"),    DebugAction_Ikigai_ToggleSafariFlag },
     [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEDEX]        = { COMPOUND_STRING("Toggle {STR_VAR_1}Pokédex"),   DebugAction_FlagsVars_SwitchDex },
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON]        = { COMPOUND_STRING("Toggle {STR_VAR_1}Pokémon"),   DebugAction_Ikigai_TogglePokemonFlag },
     [DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV]        = { COMPOUND_STRING("Toggle {STR_VAR_1}PokeNav"),   DebugAction_FlagsVars_SwitchPokeNav },
     [DEBUG_IKIGAI_START_MENU_TOGGLE_DEXNAV]         = { COMPOUND_STRING("Toggle {STR_VAR_1}DexNav"),    DebugAction_Ikigai_ToggleDexNavFlag },
-    [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON]        = { COMPOUND_STRING("Toggle {STR_VAR_1}Pokémon"),   DebugAction_Ikigai_TogglePokemonFlag },
-    [DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI]         = { COMPOUND_STRING("Toggle {STR_VAR_1}Safari"),    DebugAction_Ikigai_ToggleSafariFlag },
-    [DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START]  = { COMPOUND_STRING("Open Vanilla Start Menu"),     DebugAction_Ikigai_DefaultStartMenu },
     { NULL }
 };
 
