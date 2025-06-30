@@ -241,6 +241,7 @@ static void RotomPhone_SaveScreen_InitWindows(void)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     PutWindowTilemap(windowId);
     CopyWindowToVram(windowId, COPYWIN_FULL);
+    LoadUserWindowBorderGfx(windowId + 1, STD_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(STD_WINDOW_PALETTE_NUM));
 }
 
 static void RotomPhone_SaveScreen_FreeResources(void)
