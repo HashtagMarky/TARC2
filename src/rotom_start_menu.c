@@ -128,9 +128,9 @@ static void Task_RotomPhone_RotomRealityMenu_WaitFadeAndExitGracefully(u8 taskId
 static void Task_RotomPhone_RotomRealityMenu_WaitFadeAndExitGracefullyForSave(u8 taskId);
 static void Task_RotomPhone_RotomRealityMenu_WaitFadeForSelection(u8 taskId);
 
-static bool8 RotomPhone_RotomRealityMenu_InitBgs(void);
+static bool32 RotomPhone_RotomRealityMenu_InitBgs(void);
 static void RotomPhone_RotomRealityMenu_FadeAndBail(void);
-static bool8 RotomPhone_RotomRealityMenu_LoadGraphics(void);
+static bool32 RotomPhone_RotomRealityMenu_LoadGraphics(void);
 static void RotomPhone_RotomRealityMenu_InitWindows(void);
 static void RotomPhone_RotomRealityMenu_PrintTime(void);
 static void RotomPhone_RotomRealityMenu_PrintMenuName(void);
@@ -147,7 +147,7 @@ static void Task_RotomPhone_SaveScreen_WaitFadeIn(u8 taskId);
 static void Task_RotomPhone_SaveScreen_WaitSaveGame(u8 taskId);
 static void Task_RotomPhone_SaveScreen_WaitFadeAndExit(u8 taskId);
 
-static bool8 RotomPhone_SaveScreen_InitBgs(void);
+static bool32 RotomPhone_SaveScreen_InitBgs(void);
 static void RotomPhone_SaveScreen_FadeAndBail(void);
 static void RotomPhone_SaveScreen_InitWindows(void);
 
@@ -2924,7 +2924,7 @@ static void Task_RotomPhone_RotomRealityMenu_WaitFadeForSelection(u8 taskId)
     }
 }
 
-static bool8 RotomPhone_RotomRealityMenu_InitBgs(void)
+static bool32 RotomPhone_RotomRealityMenu_InitBgs(void)
 {
     ResetAllBgsCoordinates();
 
@@ -2971,7 +2971,7 @@ static void RotomPhone_RotomRealityMenu_LoadBgPalette(void)
 #endif
 }
 
-static bool8 RotomPhone_RotomRealityMenu_LoadGraphics(void)
+static bool32 RotomPhone_RotomRealityMenu_LoadGraphics(void)
 {
     switch (sRotomPhone_StartMenu->menuRotomRealityLoadState)
     {
@@ -3360,7 +3360,7 @@ static void Task_RotomPhone_SaveScreen_WaitFadeAndExit(u8 taskId)
     }
 }
 
-static bool8 RotomPhone_SaveScreen_InitBgs(void)
+static bool32 RotomPhone_SaveScreen_InitBgs(void)
 {
     ResetAllBgsCoordinates();
 
