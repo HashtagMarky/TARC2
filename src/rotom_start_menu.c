@@ -1329,6 +1329,11 @@ static void RotomPhone_OverworldMenu_Init(bool32 firstInit)
     }
 
     HideMapNamePopUpWindow();
+
+    // Wait for VBlank to start and end in order to prevent graphical issues.
+    while (REG_VCOUNT >= 160);
+    while (REG_VCOUNT < 160);
+
     LockPlayerFieldControls();
 
     if (sRotomPhone_StartMenu == NULL)
