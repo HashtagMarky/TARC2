@@ -29,6 +29,9 @@
 #include "pokedex.h"
 #include "gpu_regs.h"
 
+#include "start_menu.h"
+#include "m4a.h"
+
 enum WindowIds
 {
     RP_SS_WIN_DIALOG,
@@ -80,7 +83,6 @@ static void RotomPhone_SaveScreen_VBlankCB(void);
 // Sample UI tasks
 static void Task_RotomPhone_SaveScreen_WaitFadeIn(u8 taskId);
 static void Task_RotomPhone_SaveScreen_WaitSaveGame(u8 taskId);
-static void Task_RotomPhone_SaveScreen_WaitFadeAndBail(u8 taskId);
 static void Task_RotomPhone_SaveScreen_WaitFadeAndExit(u8 taskId);
 
 // Sample UI helper functions
@@ -180,7 +182,7 @@ static void RotomPhone_SaveScreen_VBlankCB(void)
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
-#include "start_menu.h"
+
 static void Task_RotomPhone_SaveScreen_WaitFadeIn(u8 taskId)
 {
     if (!gPaletteFade.active)
@@ -200,22 +202,13 @@ static void Task_RotomPhone_SaveScreen_WaitSaveGame(u8 taskId)
     
 }
 
-static void Task_RotomPhone_SaveScreen_WaitFadeAndBail(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-        SetMainCallback2(CB2_ReturnToField);
-        RotomPhone_SaveScreen_FreeResources();
-        DestroyTask(taskId);
-    }
-}
-
 static void Task_RotomPhone_SaveScreen_WaitFadeAndExit(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         SetMainCallback2(CB2_ReturnToField);
         RotomPhone_SaveScreen_FreeResources();
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         DestroyTask(taskId);
     }
 }
@@ -244,8 +237,8 @@ static bool8 RotomPhone_SaveScreen_InitBgs(void)
 
 static void RotomPhone_SaveScreen_FadeAndBail(void)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
-    CreateTask(Task_RotomPhone_SaveScreen_WaitFadeAndBail, 0);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    CreateTask(Task_RotomPhone_SaveScreen_WaitFadeAndExit, 0);
     SetVBlankCallback(RotomPhone_SaveScreen_VBlankCB);
     SetMainCallback2(RotomPhone_SaveScreen_MainCB);
 }

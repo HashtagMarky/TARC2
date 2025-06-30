@@ -2906,7 +2906,6 @@ static void Task_RotomPhone_RotomRealityMenu_WaitFadeAndExitGracefullyForSave(u8
     {
         m4aSongNumStop(PMD_EVENT_MOTION_HARAHERI);
         sRotomPhone_RotomReality = FALSE;
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         DestroyTask(taskId);
         RotomPhone_StartMenu_DoCleanUpAndChangeCallback(RotomPhone_SaveScreen_SetupCB);
     }
