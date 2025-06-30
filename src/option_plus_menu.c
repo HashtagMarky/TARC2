@@ -1501,8 +1501,7 @@ static int ProcessInput_Interface(int selection)
     
     gSaveBlock2Ptr->optionsInterfaceColor = selection;
     DEBUG_RandomisePlayerForScreenshots();
-    while (REG_VCOUNT >= 160);          // Wait until VBlank starts
-    while (REG_VCOUNT < 160);           // Wait until VBlank ends
+    WaitForFreshVBlank();
     LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
     LoadPalette(GetWindowFrameTilesPal(selection)->pal, 0x70, 0x20);
     // Reloads Palettes in case of Interface Changes
@@ -1533,8 +1532,7 @@ static int DEBUG_ProcessInput_Interface_GymTypes(int selection)
     gSaveBlock2Ptr->optionsInterfaceColor = IKIGAI_INTERFACE_GYM_TYPE_COLOUR;
     gSaveBlock2Ptr->ikigaiGymType = selection;
     DEBUG_RandomisePlayerForScreenshots();
-    while (REG_VCOUNT >= 160);          // Wait until VBlank starts
-    while (REG_VCOUNT < 160);           // Wait until VBlank ends
+    WaitForFreshVBlank();
     LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
     LoadPalette(GetWindowFrameTilesPal(IKIGAI_INTERFACE_GYM_TYPE_COLOUR)->pal, 0x70, 0x20);
     // Reloads Palettes in case of Interface Changes

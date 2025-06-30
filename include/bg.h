@@ -95,4 +95,6 @@ u32 GetTileMapIndexFromCoords(s32 x, s32 y, s32 screenSize, u32 screenWidth, u32
 void CopyTileMapEntry(const u16 *src, u16 *dest, s32 palette1, s32 tileOffset, s32 palette2);
 bool32 IsTileMapOutsideWram(u32 bg);
 
+void WaitForFreshVBlank(void);
+
 #endif // GUARD_BG_H
