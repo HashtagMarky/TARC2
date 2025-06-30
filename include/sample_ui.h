@@ -21,7 +21,4 @@ void Task_OpenSampleUi_BlankTemplate(u8 taskId);
 // Common Sample UI Functions
 void SampleUI_ResetGpuRegsAndBgs(void);
 
-
-void RotomPhone_SaveScreen_SetupCB(void);
-
 #endif
