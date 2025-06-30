@@ -32,11 +32,6 @@
 #include "start_menu.h"
 #include "m4a.h"
 
-enum WindowIds
-{
-    RP_SS_WIN_DIALOG,
-};
-
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 
 static const struct BgTemplate sRotomPhone_SaveScreen_BgTemplates[] =
@@ -55,19 +50,14 @@ static const struct BgTemplate sRotomPhone_SaveScreen_BgTemplates[] =
     }
 };
 
-static const struct WindowTemplate sRotomPhone_SaveScreen_WindowTemplates[] =
-{
-    [RP_SS_WIN_DIALOG] =
-    {
-        .bg = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 15,
-        .width = 26,
-        .height = 4,
-        .paletteNum = 15,
-        .baseBlock = 0xAA
-    },
-    DUMMY_WIN_TEMPLATE
+static const struct WindowTemplate sRotomPhone_SaveScreen_Dialogue = {
+    .bg = 0,
+    .tilemapLeft = 2,
+    .tilemapTop = 15,
+    .width = 26,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0xAA
 };
 
 static const u32 sRotomPhone_SaveScreenTiles[] = INCBIN_U32("graphics/sample_ui/tiles.4bpp.smol");
@@ -245,12 +235,12 @@ static void RotomPhone_SaveScreen_FadeAndBail(void)
 
 static void RotomPhone_SaveScreen_InitWindows(void)
 {
-    InitWindows(sRotomPhone_SaveScreen_WindowTemplates);
+    u8 windowId = AddWindow(&sRotomPhone_SaveScreen_Dialogue);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
-    FillWindowPixelBuffer(RP_SS_WIN_DIALOG, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    PutWindowTilemap(RP_SS_WIN_DIALOG);
-    CopyWindowToVram(RP_SS_WIN_DIALOG, 3);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void RotomPhone_SaveScreen_FreeResources(void)
