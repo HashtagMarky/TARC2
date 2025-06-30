@@ -374,6 +374,12 @@ static void DebugAction_DynamicMusic_TrackRemove(u8 taskId);
 static void DebugAction_DynamicMusic_TrackRestore(u8 taskId);
 static void DebugAction_DynamicMusic_TrackPlayOnly(u8 taskId);
 static void DebugAction_DynamicMusic_Movement(u8 taskId);
+static void DebugTask_HandleMenuInput_RotomStartMenu(u8 taskId);
+static void DebugAction_OpenSubMenuRotomStartMenu(u8 taskId);
+static void DebugAction_Ikigai_TogglePokemonFlag(u8 taskId);
+static void DebugAction_Ikigai_ToggleSafariFlag(u8 taskId);
+static void DebugAction_Ikigai_ToggleDexNavFlag(u8 taskId);
+static void DebugAction_Ikigai_DefaultStartMenu(u8 taskId);
 
 extern const u8 Debug_FlagsNotSetOverworldConfigMessage[];
 extern const u8 Debug_FlagsNotSetBattleConfigMessage[];
@@ -753,16 +759,6 @@ static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_DynamicMusic_Track
     { NULL }
 };
 
-static void (*const sDebugMenu_Actions_Ikigai_StartMenu[])(u8) =
-{
-    [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEDEX]    = DebugAction_FlagsVars_SwitchDex,
-    [DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV]    = DebugAction_FlagsVars_SwitchPokeNav,
-    [DEBUG_IKIGAI_START_MENU_TOGGLE_DEXNAV]     = DebugAction_Ikigai_ToggleDexNavFlag,
-    [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON]    = DebugAction_Ikigai_TogglePokemonFlag,
-    [DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI]     = DebugAction_Ikigai_ToggleSafariFlag,
-    [DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START] = DebugAction_Ikigai_DefaultStartMenu,
-};
-
 static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_DynamicMusic_SelectTrack[] =
 {
     { COMPOUND_STRING("All Tracks…"),   DebugAction_OpenSubMenuDynamicMusic, sDebugMenu_Actions_Ikigai_DynamicMusic_Tracks},
@@ -806,12 +802,34 @@ static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_Sound[] =
     { NULL }
 };
 
+enum IkigaiStartMenuSubmenu
+{
+    DEBUG_IKIGAI_START_MENU_TOGGLE_POKEDEX,
+    DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV,
+    DEBUG_IKIGAI_START_MENU_TOGGLE_DEXNAV,
+    DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON,
+    DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI,
+    DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START,
+};
+
+static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_StartMenu[] =
+{
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEDEX]        = { COMPOUND_STRING("Toggle {STR_VAR_1}Pokédex"),   DebugAction_FlagsVars_SwitchDex },
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV]        = { COMPOUND_STRING("Toggle {STR_VAR_1}PokeNav"),   DebugAction_FlagsVars_SwitchPokeNav },
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_DEXNAV]         = { COMPOUND_STRING("Toggle {STR_VAR_1}DexNav"),    DebugAction_Ikigai_ToggleDexNavFlag },
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON]        = { COMPOUND_STRING("Toggle {STR_VAR_1}Pokémon"),   DebugAction_Ikigai_TogglePokemonFlag },
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI]         = { COMPOUND_STRING("Toggle {STR_VAR_1}Safari"),    DebugAction_Ikigai_ToggleSafariFlag },
+    [DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START]  = { COMPOUND_STRING("Open Vanilla Start Menu"),     DebugAction_Ikigai_DefaultStartMenu },
+    { NULL }
+};
+
 static const struct DebugMenuOption sDebugMenu_Actions_Ikigai[] =
 {
     { COMPOUND_STRING("Player Menu…"),      DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Player },
     { COMPOUND_STRING("Character Menu…"),   DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Character },
-    { COMPOUND_STRING("Temporal Menu…"),    DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Temporal},
-    { COMPOUND_STRING("Sound Menu…"),       DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Sound},
+    { COMPOUND_STRING("Temporal Menu…"),    DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Temporal },
+    { COMPOUND_STRING("Sound Menu…"),       DebugAction_OpenSubMenu, sDebugMenu_Actions_Ikigai_Sound },
+    { COMPOUND_STRING("Rotom Start Menu…"), DebugAction_OpenSubMenuRotomStartMenu, sDebugMenu_Actions_Ikigai_StartMenu },
     { NULL }
 };
 
@@ -993,7 +1011,8 @@ static bool32 IsSubMenuAction(const void *action)
         || action == DebugAction_OpenSubMenuFlagsVars
         || action == DebugAction_OpenSubMenuFakeRTC
         || action == DebugAction_OpenSubMenuCreateFollowerNPC
-        || action == DebugAction_OpenSubMenuDynamicMusic;
+        || action == DebugAction_OpenSubMenuDynamicMusic
+        || action == DebugAction_OpenSubMenuRotomStartMenu;
 }
 
 static void Debug_ShowMenu(DebugFunc HandleInput, const struct DebugMenuOption *items)
@@ -1294,7 +1313,7 @@ static void Debug_GenerateListMenuNames(u32 totalItems)
             // if (i >= sDebugMenu_ListTemplate_Ikigai_StartMenu.totalItems)
             //     return; // Idk why the complier needs this.
             flagResult = Debug_RotomPhoneFlags(i);
-            name = sDebugMenu_Items_SubmenuIkigai_StartMenu[i].name;
+            name = sDebugMenu_Actions_Ikigai_StartMenu[i].text;
         }
 
         if (flagResult == 0xFF)
@@ -1334,8 +1353,12 @@ static void Debug_RefreshListMenu(u8 taskId)
     }
     else if (sDebugMenuListData->listId == 2)
     {
-        gMultiuseListMenuTemplate = sDebugMenu_ListTemplate_Ikigai_StartMenu;
-        totalItems = gMultiuseListMenuTemplate.totalItems;
+        for (u32 i = 0; i < ARRAY_COUNT(sDebugMenu_Actions_Ikigai_StartMenu); i++)
+        {
+            sDebugMenuListData->listItems[i].id = i;
+            sDebugMenuListData->listItems[i].name = sDebugMenu_Actions_Ikigai_StartMenu[i].text;
+        }
+        totalItems = gMultiuseListMenuTemplate.totalItems = ARRAY_COUNT(sDebugMenu_Actions_Ikigai_StartMenu) - 1;
     }
 
     // Failsafe to prevent memory corruption
@@ -1399,6 +1422,8 @@ static void DebugTask_HandleMenuInput_General(u8 taskId)
             Debug_DestroyMenu(taskId);
             if (sDebugMenuListData->listId == 1)
                 Debug_ShowMenu(DebugTask_HandleMenuInput_FlagsVars, NULL);
+            else if (sDebugMenuListData->listId == 2)
+                Debug_ShowMenu(DebugTask_HandleMenuInput_RotomStartMenu, NULL);
             else
                 Debug_ShowMenu(DebugTask_HandleMenuInput_General, NULL);
         }
@@ -6648,6 +6673,53 @@ static void DebugAction_DynamicMusic_Movement(u8 taskId)
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
     Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
+}
+
+static void DebugTask_HandleMenuInput_RotomStartMenu(u8 taskId)
+{
+    DebugSubmenuFunc func;
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Actions_Ikigai_StartMenu[input].action) != NULL)
+        {
+            if (input == DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START)
+            {
+                Debug_RedrawListMenu(taskId);
+                func(taskId, sDebugMenu_Actions_Ikigai_StartMenu[input].actionParams);
+            }
+            else
+            {
+                func(taskId, sDebugMenu_Actions_Ikigai_StartMenu[input].actionParams);
+                Debug_GenerateListMenuNames(gMultiuseListMenuTemplate.totalItems);
+                RedrawListMenu(gTasks[taskId].tMenuTaskId);
+            }
+
+            // Remove TRUE/FALSE window for functions that haven't been assigned flags
+            if (gTasks[taskId].tInput == 0xFF)
+            {
+                ClearStdWindowAndFrame(gTasks[taskId].tSubWindowId, TRUE);
+                RemoveWindow(gTasks[taskId].tSubWindowId);
+                Free(sDebugMenuListData);
+            }
+        }
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMainMenu();
+    }
+}
+
+static void DebugAction_OpenSubMenuRotomStartMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    sDebugMenuListData->listId = 2;
+    Debug_RefreshListMenu(taskId);
+    Debug_ShowMenuFromTemplate(DebugTask_HandleMenuInput_RotomStartMenu, gMultiuseListMenuTemplate);
 }
 
 static void DebugAction_Ikigai_TogglePokemonFlag(u8 taskId)
