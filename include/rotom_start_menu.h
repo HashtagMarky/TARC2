@@ -131,10 +131,14 @@ flag, or save game options.
     the palettes of the overworld icons are important, and their
     indexes have been defined in enum RotomPhone_Overworld_FaceIconPaletteIndex.
     Each overworld icon should use PAL_ICON_WHITE (index 10) and one
-    other colour in the indexes 1 - 9. Then define a new animation
-    for this icon, and add it to sAnims_OverworldIcons and
-    sAnims_RotomRealityIcons, makinf sure the table is in the same
-    order as enum RotomPhone_MenuOptions.
+    other colour in the indexes 1 - 9. For the Rotom Reality there,
+    are two icon files, 'icons_1.png' and 'icons_2.png'. These have
+    a lot more freedom and can use any combination of colours, apart
+    from PAL_ROTOM_OUTLINE (index 11) upwards in 'icons_1.png'.
+    
+    Then define a new animation for this icon, and add it to
+    sAnims_StartMenu_Icons making sure you keep track of what
+    icon belongs to what animation.
 
 3.  Then give this option an entry in sRotomPhoneOptions, see below
     for a brief overview of each field in struct RotomPhone_MenuOptions:
@@ -179,6 +183,14 @@ flag, or save game options.
     statement. See RotomPhone_StartMenu_SelectedFunc_Daycare for an example of a
     selectedFunc for an option that exists exists only on the Rotom Reality Menu and
     uses the sliding panel for its selectedFunc.
+
+    enum RotomPhone_IconAnims owAnim;
+    The value that denotes what index the animation for the menu option's Overworld
+    icon is in sAnims_StartMenu_Icons.
+
+    enum RotomPhone_IconAnims rrAnim;
+    The value that denotes what index the animation for the menu option's Rotom Reality
+    icon is in sAnims_StartMenu_Icons.
 */
 
 #ifndef GUARD_ROTOM_START_MENU_H
