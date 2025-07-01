@@ -300,7 +300,8 @@ static const u16 *RotomPhone_StartMenu_GetPhoneColour(void)
 }
 
 #if RP_CONFIG_PALETTE_BUFFER
-static EWRAM_DATA u16 ALIGNED(4) menuLoadedSpritePalette[PLTT_SIZE_4BPP];
+static EWRAM_DATA u16 ALIGNED(4) menuLoadedSpritePalette_One[PLTT_SIZE_4BPP];
+static EWRAM_DATA u16 ALIGNED(4) menuLoadedSpritePalette_Two[PLTT_SIZE_4BPP];
 static EWRAM_DATA u16 ALIGNED(4) menuLoadedBackgroundPalette[PLTT_SIZE_4BPP];
 #endif
 
@@ -336,7 +337,7 @@ static u16 RotomPhone_StartMenu_GetPhoneBackgroundColour(u8 palSlot)
 static u16 RotomPhone_StartMenu_GetFaceIconPaletteOriginalColour(u8 palSlot)
 {
 #if RP_CONFIG_PALETTE_BUFFER
-    return menuLoadedSpritePalette[palSlot];
+    return menuLoadedSpritePalette_One[palSlot];
 #else
     if (RP_CONFIG_USE_ROTOM_PHONE && !(RP_CONFIG_MONOCHROME_ICONS && palSlot < PAL_ICON_WHITE))
         return sRotomPhone_StartMenuRotomFaceIconsPal[palSlot];
@@ -1530,16 +1531,25 @@ static void RotomPhone_OverworldMenu_LoadIconSpritePalette(bool32 firstLoad)
 #if RP_CONFIG_PALETTE_BUFFER
     if (firstLoad)
     {
-        memcpy(menuLoadedSpritePalette, sRotomPhone_StartMenuRotomFaceIconsPal, PLTT_SIZE_4BPP);
+        memcpy(menuLoadedSpritePalette_One, sRotomPhone_StartMenuRotomFaceIconsPal, PLTT_SIZE_4BPP);
         if (!RP_CONFIG_USE_ROTOM_PHONE || RP_CONFIG_MONOCHROME_ICONS)
         {
             for (enum RotomPhone_Overworld_FaceIconPaletteIndex colour = PAL_FACE_ICON_TRANSPARENT + 1; colour < PAL_ICON_WHITE; colour++)
             {
-                memcpy(&menuLoadedSpritePalette[colour], &sRotomPhone_StartMenuRotomFaceIconsPal[PAL_ICON_MONOCHROME], sizeof(u16)); 
+                memcpy(&menuLoadedSpritePalette_One[colour], &sRotomPhone_StartMenuRotomFaceIconsPal[PAL_ICON_MONOCHROME], sizeof(u16)); 
+            }
+        }
+
+        memcpy(menuLoadedSpritePalette_Two, sRotomPhone_StartMenuRotomFaceIconsPal, PLTT_SIZE_4BPP);
+        if (!RP_CONFIG_USE_ROTOM_PHONE || RP_CONFIG_MONOCHROME_ICONS)
+        {
+            for (enum RotomPhone_Overworld_FaceIconPaletteIndex colour = PAL_FACE_ICON_TRANSPARENT + 1; colour < PAL_ICON_WHITE; colour++)
+            {
+                memcpy(&menuLoadedSpritePalette_Two[colour], &sRotomPhone_StartMenuRotomFaceIconsPal[PAL_ICON_MONOCHROME], sizeof(u16)); 
             }
         }
     }
-    LoadPalette(menuLoadedSpritePalette, OBJ_PLTT_ID(IndexOfSpritePaletteTag(TAG_ROTOM_FACE_ICON_PAL)), PLTT_SIZE_4BPP);
+    LoadPalette(menuLoadedSpritePalette_One, OBJ_PLTT_ID(IndexOfSpritePaletteTag(TAG_ROTOM_FACE_ICON_PAL)), PLTT_SIZE_4BPP);
 #else
     u32 index = IndexOfSpritePaletteTag(TAG_ROTOM_FACE_ICON_PAL);
     LoadPalette(sRotomPhone_StartMenuRotomFaceIconsPal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP); 
@@ -3359,8 +3369,8 @@ static void RotomPhone_RotomRealityMenu_PrintMenuName(void)
 static void RotomPhone_RotomRealityMenu_LoadIconSpritePalette(void)
 {
 #if RP_CONFIG_PALETTE_BUFFER
-    LoadPalette(menuLoadedSpritePalette, OBJ_PLTT_ID(IndexOfSpritePaletteTag(TAG_ROTOM_FACE_ICON_PAL)), PLTT_SIZE_4BPP);
-    LoadPalette(menuLoadedSpritePalette, OBJ_PLTT_ID(IndexOfSpritePaletteTag(TAG_PHONE_RR_ICON_GFX_2)), PLTT_SIZE_4BPP);
+    LoadPalette(menuLoadedSpritePalette_One, OBJ_PLTT_ID(IndexOfSpritePaletteTag(TAG_ROTOM_FACE_ICON_PAL)), PLTT_SIZE_4BPP);
+    LoadPalette(menuLoadedSpritePalette_Two, OBJ_PLTT_ID(IndexOfSpritePaletteTag(TAG_PHONE_RR_ICON_GFX_2)), PLTT_SIZE_4BPP);
 #else
     u32 index;
     

@@ -62,7 +62,7 @@ flag, or save game options.
     purposes.
 
     RP_CONFIG_PHONE_COLOUR
-    The colour of the Rotom Phone that is diaplayed.
+    The colour of the Rotom Phone that is displayed.
 
     RP_CONFIG_MONOCHROME_ICONS
     Whether each icon uses it's individual colours when on the
