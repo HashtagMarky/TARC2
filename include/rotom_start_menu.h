@@ -71,9 +71,9 @@ flag, or save game options.
     RP_CONFIG_PALETTE_BUFFER
     Uses two bytes of EWRAM in order to store the background and
     sprite palettes used in the Rotom Phone. It is recommended to
-    turn keep this on if you want to have various colour phones or
-    change the monochrome sprite colour. When doing so you will
-    only have to make adjustments to these palettes once. To see
+    turn this on if you want to have various colour phone icons or
+    change the monochrome sprite colour in code. When doing so you
+    will only have to make adjustments to these palettes once. To see
     how the palettes are initialised, see these functions,
     particularly the ones with bool32 firstLoad as a parameter:
         RotomPhone_OverworldMenu_LoadIconSpritePalette
@@ -207,7 +207,7 @@ enum RotomPhone_Colours
 #define RP_CONFIG_PHONE_COLOUR            ROTOM_PHONE_BLACK
 #define RP_CONFIG_USE_ROTOM_PHONE         FlagGet(FLAG_SYS_POKEDEX_GET)
 #define RP_CONFIG_MONOCHROME_ICONS        FALSE
-#define RP_CONFIG_PALETTE_BUFFER          TRUE
+#define RP_CONFIG_PALETTE_BUFFER          FALSE
 #define RP_CONFIG_ROTOM_REALITY_SHORTCUT  TRUE
 #define RP_CONFIG_24_HOUR_MODE            gSaveBlock2Ptr->optionsClockMode
 #define RP_CONFIG_NUM_MINUTES_TO_UPDATE   1
