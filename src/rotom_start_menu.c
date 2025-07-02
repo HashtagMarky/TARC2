@@ -2547,6 +2547,7 @@ static void Task_RotomPhone_OverworldMenu_CloseAndSave(u8 taskId)
         && !FuncIsActiveTask(Task_RotomPhone_OverworldMenu_PhoneSlideClose)
         && tPhoneCloseParameterSaveSafariFade == TRUE)
     {
+        LockPlayerFieldControls();
         LoadMessageBoxAndBorderGfx();
         SaveGame();
         gTasks[taskId].func = Task_RotomPhone_StartMenu_WaitSaveGame;
