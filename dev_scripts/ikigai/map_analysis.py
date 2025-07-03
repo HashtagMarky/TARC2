@@ -39,7 +39,7 @@ def parse_map_file(map_file):
     return pd.DataFrame(entries, columns=["Section", "Address", "Size (bytes)", "Symbol/File"])
 
 # Parse single .map file
-df = parse_map_file("../../pokeikigai.map")
+df = parse_map_file("pokeikigai.map")
 
 # Save to CSV instead of Excel
 output_file = "pokeikigai_map_analysis.csv"
