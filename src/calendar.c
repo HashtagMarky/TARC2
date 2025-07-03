@@ -873,6 +873,8 @@ static void Task_CalendarUIWaitFadeAndBail(u8 taskId)
                 gTasks[taskId].func = Task_WarpAndLoadMap_Save;
             else
                 gTasks[taskId].func = Task_WarpAndLoadMap;
+
+            FlagClear(FLAG_SYS_BEDTIME);
         }
         else
         {
@@ -895,6 +897,8 @@ static void Task_CalendarUIWaitFadeAndExitGracefully(u8 taskId)
                 gTasks[taskId].func = Task_WarpAndLoadMap_Save;
             else
                 gTasks[taskId].func = Task_WarpAndLoadMap;
+
+            FlagClear(FLAG_SYS_BEDTIME);
         }
         else
         {
