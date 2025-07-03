@@ -245,58 +245,48 @@ static const u32 sRotomPhone_SaveScreenTiles[] =                INCBIN_U32("grap
 static const u32 sRotomPhone_SaveScreenTilemap[] =              INCBIN_U32("graphics/rotom_start_menu/save_screen/save_screen.bin.smolTM");
 static const u16 sRotomPhone_SaveScreenPalette[] =              INCBIN_U16("graphics/rotom_start_menu/save_screen/save_screen.gbapal");
 
+static const u16 sRotomPhonePalette_Rotom[] =                   INCBIN_U16("graphics/rotom_start_menu/palettes/rotom.gbapal");
 static const u16 sRotomPhonePalette_Black[] =                   INCBIN_U16("graphics/rotom_start_menu/palettes/black.gbapal");
-static const u16 sRotomPhonePalette_Red[] =                     INCBIN_U16("graphics/rotom_start_menu/palettes/red.gbapal");
-static const u16 sRotomPhonePalette_Yellow[] =                  INCBIN_U16("graphics/rotom_start_menu/palettes/yellow.gbapal");
-static const u16 sRotomPhonePalette_Green[] =                   INCBIN_U16("graphics/rotom_start_menu/palettes/green.gbapal");
-static const u16 sRotomPhonePalette_Purple[] =                  INCBIN_U16("graphics/rotom_start_menu/palettes/purple.gbapal");
 static const u16 sRotomPhonePalette_Blue[] =                    INCBIN_U16("graphics/rotom_start_menu/palettes/blue.gbapal");
-static const u16 sRotomPhonePalette_Turquoise[] =               INCBIN_U16("graphics/rotom_start_menu/palettes/turquoise.gbapal");
-static const u16 sRotomPhonePalette_Rose[] =                    INCBIN_U16("graphics/rotom_start_menu/palettes/rose.gbapal");
 static const u16 sRotomPhonePalette_Brown[] =                   INCBIN_U16("graphics/rotom_start_menu/palettes/brown.gbapal");
-static const u16 sRotomPhonePalette_DarkGreen[] =               INCBIN_U16("graphics/rotom_start_menu/palettes/dark_green.gbapal");
-static const u16 sRotomPhonePalette_WineRed[] =                 INCBIN_U16("graphics/rotom_start_menu/palettes/wine_red.gbapal");
+static const u16 sRotomPhonePalette_Forest[] =                  INCBIN_U16("graphics/rotom_start_menu/palettes/forest.gbapal");
+static const u16 sRotomPhonePalette_Green[] =                   INCBIN_U16("graphics/rotom_start_menu/palettes/green.gbapal");
+static const u16 sRotomPhonePalette_Lavender[] =                INCBIN_U16("graphics/rotom_start_menu/palettes/lavender.gbapal");
 static const u16 sRotomPhonePalette_Navy[] =                    INCBIN_U16("graphics/rotom_start_menu/palettes/navy.gbapal");
+static const u16 sRotomPhonePalette_Pink[] =                    INCBIN_U16("graphics/rotom_start_menu/palettes/pink.gbapal");
+static const u16 sRotomPhonePalette_Purple[] =                  INCBIN_U16("graphics/rotom_start_menu/palettes/purple.gbapal");
+static const u16 sRotomPhonePalette_Red[] =                     INCBIN_U16("graphics/rotom_start_menu/palettes/red.gbapal");
+static const u16 sRotomPhonePalette_Rose[] =                    INCBIN_U16("graphics/rotom_start_menu/palettes/rose.gbapal");
+static const u16 sRotomPhonePalette_Turquoise[] =               INCBIN_U16("graphics/rotom_start_menu/palettes/turquoise.gbapal");
 static const u16 sRotomPhonePalette_White[] =                   INCBIN_U16("graphics/rotom_start_menu/palettes/white.gbapal");
+static const u16 sRotomPhonePalette_Yellow[] =                  INCBIN_U16("graphics/rotom_start_menu/palettes/yellow.gbapal");
+
 
 static const u16 *const sRotomPhone_StartMenu_Palettes[ROTOM_PHONE_COLOUR_COUNT] =
 {
+    [ROTOM_PHONE_ROTOM] =       sRotomPhonePalette_Rotom,
     [ROTOM_PHONE_BLACK] =       sRotomPhonePalette_Black,
-    [ROTOM_PHONE_RED] =         sRotomPhonePalette_Red,
-    [ROTOM_PHONE_YELLOW] =      sRotomPhonePalette_Yellow,
-    [ROTOM_PHONE_GREEN] =       sRotomPhonePalette_Green,
-    [ROTOM_PHONE_PURPLE] =      sRotomPhonePalette_Purple,
     [ROTOM_PHONE_BLUE] =        sRotomPhonePalette_Blue,
-    [ROTOM_PHONE_TURQUOISE] =   sRotomPhonePalette_Turquoise,
-    [ROTOM_PHONE_ROSE] =        sRotomPhonePalette_Rose,
     [ROTOM_PHONE_BROWN] =       sRotomPhonePalette_Brown,
-    [ROTOM_PHONE_DARK_GREEN] =  sRotomPhonePalette_DarkGreen,
-    [ROTOM_PHONE_WINE_RED] =    sRotomPhonePalette_WineRed,
+    [ROTOM_PHONE_FOREST] =      sRotomPhonePalette_Forest,
+    [ROTOM_PHONE_GREEN] =       sRotomPhonePalette_Green,
+    [ROTOM_PHONE_LAVENDER] =    sRotomPhonePalette_Lavender,
     [ROTOM_PHONE_NAVY] =        sRotomPhonePalette_Navy,
+    [ROTOM_PHONE_PINK] =        sRotomPhonePalette_Pink,
+    [ROTOM_PHONE_PURPLE] =      sRotomPhonePalette_Purple,
+    [ROTOM_PHONE_RED] =         sRotomPhonePalette_Red,
+    [ROTOM_PHONE_ROSE] =        sRotomPhonePalette_Rose,
+    [ROTOM_PHONE_TURQUOISE] =   sRotomPhonePalette_Turquoise,
     [ROTOM_PHONE_WHITE] =       sRotomPhonePalette_White,
+    [ROTOM_PHONE_YELLOW] =      sRotomPhonePalette_Yellow,
 };
 
 static const u16 *RotomPhone_StartMenu_GetPhoneColour(void)
 {
-    switch (RP_CONFIG_PHONE_COLOUR)
-    {
-        case ROTOM_PHONE_BLACK:
-        case ROTOM_PHONE_RED:
-        case ROTOM_PHONE_YELLOW:
-        case ROTOM_PHONE_GREEN:
-        case ROTOM_PHONE_PURPLE:
-        case ROTOM_PHONE_BLUE:
-        case ROTOM_PHONE_TURQUOISE:
-        case ROTOM_PHONE_ROSE:
-        case ROTOM_PHONE_BROWN:
-        case ROTOM_PHONE_DARK_GREEN:
-        case ROTOM_PHONE_WINE_RED:
-        case ROTOM_PHONE_NAVY:
-        case ROTOM_PHONE_WHITE:
-            return sRotomPhone_StartMenu_Palettes[RP_CONFIG_PHONE_COLOUR];
-        default:
-            return sRotomPhone_StartMenu_Palettes[ROTOM_PHONE_COLOUR_COUNT - ROTOM_PHONE_COLOUR_COUNT];
-    }
+    if (RP_CONFIG_PHONE_COLOUR >= ROTOM_PHONE_IKIGAI)
+        return sRotomPhone_StartMenu_Palettes[ROTOM_PHONE_ROTOM];
+    
+    return sRotomPhone_StartMenu_Palettes[RP_CONFIG_PHONE_COLOUR];
 }
 
 #if RP_CONFIG_PALETTE_BUFFER
@@ -463,13 +453,13 @@ static void SpriteCB_RotomPhone_OverworldMenu_RotomFace_Unload(struct Sprite* sp
 
 
 #define OW_FLIP_PHONE_TEXT_BG_COLOUR       12
-#define OW_FLIP_PHONE_TEXT_FG_COLOUR       4
-#define OW_FLIP_PHONE_TEXT_SHADOW_COLOUR   9
+#define OW_FLIP_PHONE_TEXT_FG_COLOUR       1
+#define OW_FLIP_PHONE_TEXT_SHADOW_COLOUR   10
 #define OW_ROTOM_PHONE_TEXT_BG_COLOUR      14
-#define OW_ROTOM_PHONE_TEXT_FG_COLOUR      4
-#define OW_ROTOM_PHONE_TEXT_SHADOW_COLOUR  9
+#define OW_ROTOM_PHONE_TEXT_FG_COLOUR      1
+#define OW_ROTOM_PHONE_TEXT_SHADOW_COLOUR  10
 #define RR_ROTOM_PHONE_TEXT_BG_COLOUR      14
-#define RR_ROTOM_PHONE_TEXT_FG_COLOUR      5
+#define RR_ROTOM_PHONE_TEXT_FG_COLOUR      1
 #define RR_ROTOM_PHONE_TEXT_SHADOW_COLOUR  10
 enum FontColor
 {
