@@ -1985,15 +1985,24 @@ static void RotomPhone_OverworldMenu_PrintDateWeather(u8 taskId)
         u8 textYear[3];
 
         RtcCalcLocalTime();
+        u8 days = Ikigai_GetDateFromDays(gLocalTime.days);
+        enum Seasons season = Ikigai_FetchSeason();
+        u8 year = Ikigai_GetYearFromDays(gLocalTime.days);
+
         StringCopy(textBuffer, COMPOUND_STRING("The date is "));
-        ConvertIntToDecimalStringN(textDate, Ikigai_GetDateFromDays(gLocalTime.days), STR_CONV_MODE_LEADING_ZEROS, 2);
+        ConvertIntToDecimalStringN(textDate, days, STR_CONV_MODE_LEADING_ZEROS, 2);
         StringAppend(textBuffer, textDate);
         StringAppend(textBuffer, COMPOUND_STRING(" "));
-        StringAppend(textBuffer, gSeasonNames[Ikigai_FetchSeason()]);
+        StringAppend(textBuffer, gSeasonNames[season]);
         StringAppend(textBuffer, COMPOUND_STRING(", Year "));
-        ConvertIntToDecimalStringN(textYear, Ikigai_GetYearFromDays(gLocalTime.days), STR_CONV_MODE_LEFT_ALIGN, 3);
+        ConvertIntToDecimalStringN(textYear, year, STR_CONV_MODE_LEFT_ALIGN, 3);
         StringAppend(textBuffer, textYear);
         StringAppend(textBuffer, COMPOUND_STRING("."));
+
+        if (days == 0 || season == SEASON_COUNT || year == 0)
+        {
+            StringCopy(textBuffer, COMPOUND_STRING("Today is the start of your career!"));
+        }  
     }
 
     RotomPhone_OverworldMenu_PrintRotomSpeech(textBuffer, TRUE, TRUE);
