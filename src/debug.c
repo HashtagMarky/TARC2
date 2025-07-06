@@ -380,6 +380,7 @@ static void DebugAction_Ikigai_TogglePokemonFlag(u8 taskId);
 static void DebugAction_Ikigai_ToggleSafariFlag(u8 taskId);
 static void DebugAction_Ikigai_ToggleDexNavFlag(u8 taskId);
 static void DebugAction_Ikigai_DefaultStartMenu(u8 taskId);
+extern const u8 Route117_PokemonDayCare_EventScript_DaycareWoman[];
 
 extern const u8 Debug_FlagsNotSetOverworldConfigMessage[];
 extern const u8 Debug_FlagsNotSetBattleConfigMessage[];
@@ -804,22 +805,24 @@ static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_Sound[] =
 
 enum IkigaiStartMenuSubmenu
 {
-    DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START,
+    DEBUG_IKIGAI_START_MENU_OPEN_DEFAULT_START,
     DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI,
     DEBUG_IKIGAI_START_MENU_TOGGLE_POKEDEX,
     DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON,
     DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV,
     DEBUG_IKIGAI_START_MENU_TOGGLE_DEXNAV,
+    DEBUG_IKIGAI_START_MENU_DAYCARE,
 };
 
 static const struct DebugMenuOption sDebugMenu_Actions_Ikigai_StartMenu[] =
 {
-    [DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START]  = { COMPOUND_STRING("Open Vanilla Start Menu"),     DebugAction_Ikigai_DefaultStartMenu },
+    [DEBUG_IKIGAI_START_MENU_OPEN_DEFAULT_START]    = { COMPOUND_STRING("Open Vanilla Start Menu"),     DebugAction_Ikigai_DefaultStartMenu },
     [DEBUG_IKIGAI_START_MENU_TOGGLE_SAFARI]         = { COMPOUND_STRING("Toggle {STR_VAR_1}Safari"),    DebugAction_Ikigai_ToggleSafariFlag },
     [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEDEX]        = { COMPOUND_STRING("Toggle {STR_VAR_1}Pokédex"),   DebugAction_FlagsVars_SwitchDex },
     [DEBUG_IKIGAI_START_MENU_TOGGLE_POKEMON]        = { COMPOUND_STRING("Toggle {STR_VAR_1}Pokémon"),   DebugAction_Ikigai_TogglePokemonFlag },
     [DEBUG_IKIGAI_START_MENU_TOGGLE_POKENAV]        = { COMPOUND_STRING("Toggle {STR_VAR_1}PokeNav"),   DebugAction_FlagsVars_SwitchPokeNav },
     [DEBUG_IKIGAI_START_MENU_TOGGLE_DEXNAV]         = { COMPOUND_STRING("Toggle {STR_VAR_1}DexNav"),    DebugAction_Ikigai_ToggleDexNavFlag },
+    [DEBUG_IKIGAI_START_MENU_DAYCARE]               = { COMPOUND_STRING("Talk to Daycare Woman"),       DebugAction_ExecuteScript,  Route117_PokemonDayCare_EventScript_DaycareWoman },
     { NULL }
 };
 
@@ -6685,7 +6688,7 @@ static void DebugTask_HandleMenuInput_RotomStartMenu(u8 taskId)
         PlaySE(SE_SELECT);
         if ((func = sDebugMenu_Actions_Ikigai_StartMenu[input].action) != NULL)
         {
-            if (input == DEBUG_IKIGAI_START_MENU_TOGGLE_DEFAULT_START)
+            if (input == DEBUG_IKIGAI_START_MENU_OPEN_DEFAULT_START)
             {
                 Debug_RedrawListMenu(taskId);
                 func(taskId, sDebugMenu_Actions_Ikigai_StartMenu[input].actionParams);
