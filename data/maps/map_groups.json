@@ -35,7 +35,8 @@
     "gMapGroup_IndoorRoute119",
     "gMapGroup_IndoorRoute124",
     "gMapGroup_VyratonOutdoors",
-    "gMapGroup_VyratonIndoors"
+    "gMapGroup_VyratonIndoors",
+    "gMapGroup_Echofern"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
@@ -631,5 +632,8 @@
   "gMapGroup_VyratonIndoors": [
     "VyratonIndoors_SSPathfinder",
     "VyratonIndoors_MayorsOffice"
+  ],
+  "gMapGroup_Echofern": [
+    "EchofernVillage"
   ]
 }

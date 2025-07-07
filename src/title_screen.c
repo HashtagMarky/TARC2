@@ -1149,6 +1149,8 @@ static void UpdateLegendaryMarkingColor(u8 frameNum)
 
 static u8 ChooseIkigaiLegendary(void)
 {
+    return 0;
+    
     if (gSaveBlock2Ptr->optionsTitleScreenRandomise == TRUE
     || gSaveBlock2Ptr->optionsInterfaceColor == IKIGAI_INTERFACE_GYM_TYPE_COLOUR
     || gSaveFileStatus != SAVE_STATUS_OK)

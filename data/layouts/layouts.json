@@ -4480,6 +4480,16 @@
       "secondary_tileset": "gTileset_PokemonSchool",
       "border_filepath": "data/layouts/Vyraton_MayorsOffice_Layout_Level_3/border.bin",
       "blockdata_filepath": "data/layouts/Vyraton_MayorsOffice_Layout_Level_3/map.bin"
+    },
+    {
+      "id": "LAYOUT_ECHOFERN_VILLAGE",
+      "name": "EchofernVillage_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/EchofernVillage/border.bin",
+      "blockdata_filepath": "data/layouts/EchofernVillage/map.bin"
     }
   ]
 }

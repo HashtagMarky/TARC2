@@ -1180,3 +1180,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/VyratonIndoors_MayorsOffice/text.inc"
 
 	.include "data/maps/VyratonCentre/scripts.inc"
+
+	.include "data/maps/EchofernVillage/scripts.inc"

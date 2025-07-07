@@ -64,7 +64,8 @@ static void ResetMiniGamesRecords(void);
 static void ResetItemFlags(void);
 static void ResetDexNav(void);
 
-static void WarpToShip(void);
+static void UNUSED WarpToShip(void);
+static void WarpToEchofern(void);
 
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
 EWRAM_DATA bool8 gEnableContestDebugging = FALSE;
@@ -165,7 +166,7 @@ static void UNUSED WarpToTruck(void)
     WarpIntoMap();
 }
 
-static void WarpToShip(void)
+static void UNUSED WarpToShip(void)
 {
     FakeRtc_ManuallySetTime(0, Ikigai_GetSeasonalTimeHour(0, TIME_EVENING, TRUE), 0, 0);
     RtcInitLocalTimeOffset(Ikigai_GetSeasonalTimeHour(0, TIME_EVENING, TRUE), 0);
@@ -175,6 +176,19 @@ static void WarpToShip(void)
     FlagSet(FLAG_SUPPRESS_MUGSHOT);
     FlagSet(FLAG_SUPPRESS_FOLLOWER);
     SetWarpDestination(MAP_GROUP(MAP_VYRATON_OUTDOORS_OCEAN), MAP_NUM(MAP_VYRATON_OUTDOORS_OCEAN), WARP_ID_NONE, 4, 2);
+    WarpIntoMap();
+}
+
+static void WarpToEchofern(void)
+{
+    FakeRtc_ManuallySetTime(0, 18, 0, 0);
+    RtcInitLocalTimeOffset(18, 0);
+    InitTimeBasedEvents();
+    FlagSet(FLAG_PAUSE_TIME);
+    FlagSet(FLAG_HIDE_MAP_NAME_POPUP);
+    FlagSet(FLAG_SUPPRESS_MUGSHOT);
+    FlagSet(FLAG_SUPPRESS_FOLLOWER);
+    SetWarpDestination(MAP_GROUP(MAP_ECHOFERN_VILLAGE), MAP_NUM(MAP_ECHOFERN_VILLAGE), WARP_ID_NONE, -1, -1);
     WarpIntoMap();
 }
 
@@ -242,7 +256,8 @@ void NewGameInitData(void)
     ResetFanClub();
     ResetLotteryCorner();
     // WarpToTruck();
-    WarpToShip();
+    // WarpToShip();
+    WarpToEchofern();
     RunScriptImmediately(EventScript_ResetAllMapFlags);
     RunScriptImmediately(EventScript_ResetIkigaiMapFlags);
     ResetMiniGamesRecords();
