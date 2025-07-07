@@ -41,6 +41,7 @@
 #include "ui_main_menu.h"
 #include "window.h"
 #include "mystery_gift_menu.h"
+#include "trig.h"
 
 /*
  * Main menu state machine
@@ -201,7 +202,7 @@ static void NewGameSamuelSpeech_StartFadePlatformOut(u8, u8);
 static void Task_NewGameSamuelSpeech_WaitForSpriteFadeInWelcome(u8);
 static void UNUSED NewGameSamuelSpeech_ShowDialogueWindow(u8, u8);
 static void NewGameSamuelSpeech_ClearWindow(u8);
-static void Task_NewGameSamuelSpeech_ThisIsAPokemon(u8);
+static void UNUSED Task_NewGameSamuelSpeech_ThisIsAPokemon(u8);
 static void Task_NewGameSamuelSpeech_MainSpeech(u8);
 static void NewGameSamuelSpeech_WaitForThisIsPokemonText(struct TextPrinterTemplate *, u16);
 static void Task_NewGameSamuelSpeech_AndYouAre(u8);
@@ -253,15 +254,19 @@ static void MainMenu_FormatSavegameTime(void);
 static void MainMenu_FormatSavegameBadges(void);
 static void NewGameSamuelSpeech_CreateDialogueWindowBorder(u8, u8, u8, u8, u8, u8);
 
-static const u32 *ReturnShadowGfx(void);
-static const u32 *ReturnSpeechBgMap(void);
-static const void *ReturnSpeechBgPals(void);
+static const u32 UNUSED *ReturnShadowGfx(void);
+static const u32 UNUSED *ReturnSpeechBgMap(void);
+static const void UNUSED *ReturnSpeechBgPals(void);
 
 // .rodata
 
-static const u16 sSamuelSpeechBgPals_Green[][16] = {
-    INCBIN_U16("graphics/samuel_speech/shadow_green.gbapal"),
-    INCBIN_U16("graphics/samuel_speech/shadow_green.gbapal")
+static const u16 sSamuelSpeechBgPals_Celebi[][16] = {
+    INCBIN_U16("graphics/samuel_speech/celebi_tiles.gbapal"),
+    INCBIN_U16("graphics/samuel_speech/celebi_tiles.gbapal")
+};
+static const u16 sSamuelSpeechBgPals_Celebi_Black[][16] = {
+    INCBIN_U16("graphics/samuel_speech/celebi_black.gbapal"),
+    INCBIN_U16("graphics/samuel_speech/celebi_black.gbapal")
 };
 static const u16 sSamuelSpeechBgPals_Blue[][16] = {
     INCBIN_U16("graphics/samuel_speech/shadow_blue.gbapal"),
@@ -276,8 +281,8 @@ static const u16 sSamuelSpeechBgPals_Pink[][16] = {
     INCBIN_U16("graphics/samuel_speech/shadow_pink.gbapal")
 };
 
-static const u32 sSamuelSpeechShadowGfx_Green[] = INCBIN_U32("graphics/samuel_speech/shadow_green.4bpp.smol");
-static const u32 sSamuelSpeechBgMap_Green[] = INCBIN_U32("graphics/samuel_speech/shadow_green.bin.smolTM");
+static const u32 sSamuelSpeechCelebi_Tiles[] = INCBIN_U32("graphics/samuel_speech/celebi_tiles.4bpp.smol");
+static const u32 sSamuelSpeechCelebi_Tilemap[] = INCBIN_U32("graphics/samuel_speech/celebi_tiles.bin.smolTM");
 static const u32 sSamuelSpeechShadowGfx_Blue[] = INCBIN_U32("graphics/samuel_speech/shadow_blue.4bpp.smol");
 static const u32 sSamuelSpeechBgMap_Blue[] = INCBIN_U32("graphics/samuel_speech/shadow_blue.bin.smolTM");
 static const u32 sSamuelSpeechShadowGfx_Orange[] = INCBIN_U32("graphics/samuel_speech/shadow_orange.4bpp.smol");
@@ -619,7 +624,7 @@ static u32 InitMainMenu(bool8 returningFromOptionsMenu)
     SetGpuReg(REG_OFFSET_BG2HOFS, 0);
     SetGpuReg(REG_OFFSET_BG2VOFS, 0);
     SetGpuReg(REG_OFFSET_BG1HOFS, 0);
-    SetGpuReg(REG_OFFSET_BG1VOFS, 0);
+    SetGpuReg(REG_OFFSET_BG1VOFS, 80);
     SetGpuReg(REG_OFFSET_BG0HOFS, 0);
     SetGpuReg(REG_OFFSET_BG0VOFS, 0);
 
@@ -1323,6 +1328,7 @@ static void HighlightSelectedMainMenuItem(u8 menuType, u8 selectedMenuItem, s16 
 #define tBrendanSpriteId data[12]
 #define tMaySpriteId data[13]
 #define tDynPalLoadCycle data[14]
+#define tTARC data[15]
 
 static void Task_NewGameSamuelSpeech_Init(u8 taskId)
 { 
@@ -1338,9 +1344,9 @@ static void Task_NewGameSamuelSpeech_Init(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDY, 0);
 
     gSaveBlock2Ptr->optionsInterfaceColor = gIkigaiLegendaryScreen;
-    DecompressDataWithHeaderVram(ReturnShadowGfx(), (void *)VRAM);
-    DecompressDataWithHeaderVram(ReturnSpeechBgMap(), (void *)(BG_SCREEN_ADDR(7)));
-    LoadPalette(ReturnSpeechBgPals(), BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+    DecompressDataWithHeaderVram(sSamuelSpeechCelebi_Tiles, (void *)VRAM);
+    DecompressDataWithHeaderVram(sSamuelSpeechCelebi_Tilemap, (void *)(BG_SCREEN_ADDR(7)));
+    LoadPalette(sSamuelSpeechBgPals_Celebi_Black, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
     ScanlineEffect_Stop();
     ResetSpriteData();
     FreeAllSpritePalettes();
@@ -1351,8 +1357,8 @@ static void Task_NewGameSamuelSpeech_Init(u8 taskId)
     gTasks[taskId].func = Task_NewGameSamuelSpeech_WaitToShowSamuel;
     gTasks[taskId].tPlayerSpriteId = SPRITE_NONE;
     gTasks[taskId].data[3] = 0xFF;
-    gTasks[taskId].tTimer = 40;
-    PlayBGM(MUS_DP_HALL_OF_FAME);
+    gTasks[taskId].tTimer = 0;
+    PlayBGM(PMD_EVENT_DREAM_01);
     ShowBg(0);
     ShowBg(1);
 }
@@ -1375,7 +1381,7 @@ void CB2_NewGameSamuelSpeech_FromNewMainMenu(void)
     SetGpuReg(REG_OFFSET_BG2HOFS, 0);
     SetGpuReg(REG_OFFSET_BG2VOFS, 0);
     SetGpuReg(REG_OFFSET_BG1HOFS, 0);
-    SetGpuReg(REG_OFFSET_BG1VOFS, 0);
+    SetGpuReg(REG_OFFSET_BG1VOFS, 80);
     SetGpuReg(REG_OFFSET_BG0HOFS, 0);
     SetGpuReg(REG_OFFSET_BG0VOFS, 0);
     DmaFill16(3, 0, VRAM, VRAM_SIZE);
@@ -1383,9 +1389,9 @@ void CB2_NewGameSamuelSpeech_FromNewMainMenu(void)
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
     ResetPaletteFade();
     gSaveBlock2Ptr->optionsInterfaceColor = gIkigaiLegendaryScreen;
-    DecompressDataWithHeaderVram(ReturnShadowGfx(), (u8 *)VRAM);
-    DecompressDataWithHeaderVram(ReturnSpeechBgMap(), (u8 *)(BG_SCREEN_ADDR(7)));
-    LoadPalette(ReturnSpeechBgPals(), BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+    DecompressDataWithHeaderVram(sSamuelSpeechCelebi_Tiles, (u8 *)VRAM);
+    DecompressDataWithHeaderVram(sSamuelSpeechCelebi_Tilemap, (u8 *)(BG_SCREEN_ADDR(7)));
+    LoadPalette(sSamuelSpeechBgPals_Celebi_Black, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
     // LoadPalette(sSamuelSpeechPlatformBlackPal, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(8));
     ResetTasks();
     taskId = CreateTask(Task_NewGameSamuelSpeech_WaitToShowSamuel, 0);
@@ -1398,7 +1404,7 @@ void CB2_NewGameSamuelSpeech_FromNewMainMenu(void)
     FreeAllSpritePalettes();
     ResetAllPicSprites();
     AddSamuelSpeechObjects(taskId);
-    PlayBGM(MUS_DP_HALL_OF_FAME);
+    PlayBGM(PMD_EVENT_DREAM_01);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     SetGpuReg(REG_OFFSET_WIN0H, 0);
     SetGpuReg(REG_OFFSET_WIN0V, 0);
@@ -1442,7 +1448,7 @@ static void Task_NewGameSamuelSpeech_WaitToShowSamuel(u8 taskId)
         gSprites[spriteId2].oam.objMode = ST_OAM_OBJ_BLEND;
         NewGameSamuelSpeech_StartFadeInTarget1OutTarget2(taskId, 3);
         NewGameSamuelSpeech_StartFadePlatformOut(taskId, 20);
-        gTasks[taskId].tTimer = 40;
+        gTasks[taskId].tTimer = 0;
         gTasks[taskId].func = Task_NewGameSamuelSpeech_WaitForSpriteFadeInWelcome;
     }
 }
@@ -1468,12 +1474,13 @@ static void Task_NewGameSamuelSpeech_WaitForSpriteFadeInWelcome(u8 taskId)
             NewGameSamuelSpeech_ClearWindow(0);
             StringExpandPlaceholders(gStringVar4, gText_Samuel_Welcome);
             AddTextPrinterForMessage(TRUE);
-            gTasks[taskId].func = Task_NewGameSamuelSpeech_ThisIsAPokemon;
+            gTasks[taskId].func = Task_NewGameSamuelSpeech_MainSpeech;
+            gTasks[taskId].tTARC = 0;
         }
     }
 }
 
-static void Task_NewGameSamuelSpeech_ThisIsAPokemon(u8 taskId)
+static void UNUSED Task_NewGameSamuelSpeech_ThisIsAPokemon(u8 taskId)
 {
     if (!gPaletteFade.active && !RunTextPrintersAndIsPrinter0Active())
     {
@@ -1482,6 +1489,57 @@ static void Task_NewGameSamuelSpeech_ThisIsAPokemon(u8 taskId)
         AddTextPrinterWithCallbackForMessage(TRUE, NewGameSamuelSpeech_WaitForThisIsPokemonText);
         sSamuelSpeechMainTaskId = taskId;
     }
+}
+
+static u16 GetCelebiBackgroundColour(u8 palSlot)
+{
+    return RGB_BLACK;
+}
+
+static u16 GetCelebiOriginalColour(u8 palSlot)
+{
+    return sSamuelSpeechBgPals_Celebi[0][palSlot];
+}
+
+static void UpdateCelebiBackgroundColour(u8 palSlot, u8 frameNum)
+{
+    if (palSlot == 0)
+        return;
+    
+    s32 intensity = (((Cos(frameNum, 128) + 128) * 10) / 250);
+    s32 r;
+    s32 g;
+    s32 b;
+    u16 colour;
+    u16 colourTo = GetCelebiOriginalColour(palSlot);
+    u16 colourFrom = GetCelebiBackgroundColour(palSlot);
+
+    if (intensity == 0)
+    {
+        colour = colourTo;
+    }
+    else
+    {
+        if (GET_R(colourFrom) <= GET_R(colourTo))
+            r = (GET_R(colourTo) - (((GET_R(colourTo) - GET_R(colourFrom)) * intensity) / 10));
+        else
+            r = (GET_R(colourTo) + (((GET_R(colourFrom) - GET_R(colourTo)) * intensity) / 10));
+
+        if (GET_G(colourFrom) <= GET_G(colourTo))
+            g = (GET_G(colourTo) - (((GET_G(colourTo) - GET_G(colourFrom)) * intensity) / 10));
+        else
+            g = (GET_G(colourTo) + (((GET_G(colourFrom) - GET_G(colourTo)) * intensity) / 10));
+
+        if (GET_B(colourFrom) <= GET_B(colourTo))
+            b = (GET_B(colourTo) - (((GET_B(colourTo) - GET_B(colourFrom)) * intensity) / 10));
+        else
+            b = (GET_B(colourTo) + (((GET_B(colourFrom) - GET_B(colourTo)) * intensity) / 10));
+
+        colour = RGB(r, g, b);
+    }
+    
+    LoadPalette(&colour, BG_PLTT_ID(0) + palSlot, sizeof(colour));
+    LoadPalette(&colour, BG_PLTT_ID(1) + palSlot, sizeof(colour));
 }
 
 static void Task_NewGameSamuelSpeech_MainSpeech(u8 taskId)
@@ -1540,6 +1598,16 @@ static void Task_NewGameSamuelSpeechSub_WaitForCastform(u8 taskId)
 
 static void Task_NewGameSamuelSpeech_AndYouAre(u8 taskId)
 {
+    if (gTasks[taskId].tTARC != 0x80)
+    {
+        for (u8 palSlot = 1; palSlot < 15; palSlot++)
+        {
+            UpdateCelebiBackgroundColour(palSlot, gTasks[taskId].tTARC);
+        }
+        gTasks[taskId].tTARC++;
+        return;
+    }
+    
     if (!RunTextPrintersAndIsPrinter0Active())
     {
         sStartedPokeBallTask = FALSE;
@@ -1558,17 +1626,18 @@ static void Task_NewGameSamuelSpeech_StartSamuelCastformPlatformFade(u8 taskId)
         gSprites[gTasks[taskId].tCastformSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         NewGameSamuelSpeech_StartFadeOutTarget1InTarget2(taskId, 2);
         NewGameSamuelSpeech_StartFadePlatformIn(taskId, 1);
-        gTasks[taskId].tTimer = 64;
+        gTasks[taskId].tTimer = 16;
         gTasks[taskId].func = Task_NewGameSamuelSpeech_SlidePlatformAway;
+        gTasks[taskId].tBG1HOFS = 80;
     }
 }
 
 static void Task_NewGameSamuelSpeech_SlidePlatformAway(u8 taskId)
 {
-    if (gTasks[taskId].tBG1HOFS != -60)
+    if (gTasks[taskId].tBG1HOFS != 100)
     {
-        gTasks[taskId].tBG1HOFS -= 2;
-        SetGpuReg(REG_OFFSET_BG1HOFS, gTasks[taskId].tBG1HOFS);
+        gTasks[taskId].tBG1HOFS += 1;
+        SetGpuReg(REG_OFFSET_BG1VOFS, gTasks[taskId].tBG1HOFS);
     }
     else
     {
@@ -1804,6 +1873,7 @@ static void Task_NewGameSamuelSpeech_ProcessNameYesNoMenu(u8 taskId)
             NewGameSamuelSpeech_StartFadeOutTarget1InTarget2(taskId, 2);
             NewGameSamuelSpeech_StartFadePlatformIn(taskId, 1);
             gTasks[taskId].func = Task_NewGameSamuelSpeech_SlidePlatformAway2;
+            gTasks[taskId].tBG1HOFS = 100;
             break;
         case MENU_B_PRESSED:
         case 1:
@@ -1815,10 +1885,10 @@ static void Task_NewGameSamuelSpeech_ProcessNameYesNoMenu(u8 taskId)
 
 static void Task_NewGameSamuelSpeech_SlidePlatformAway2(u8 taskId)
 {
-    if (gTasks[taskId].tBG1HOFS)
+    if (gTasks[taskId].tBG1HOFS != 80)
     {
-        gTasks[taskId].tBG1HOFS += 2;
-        SetGpuReg(REG_OFFSET_BG1HOFS, gTasks[taskId].tBG1HOFS);
+        gTasks[taskId].tBG1HOFS -= 1;
+        SetGpuReg(REG_OFFSET_BG1VOFS, gTasks[taskId].tBG1HOFS);
     }
     else
     {
@@ -1848,7 +1918,7 @@ static void Task_NewGameSamuelSpeech_ReshowSamuelCastform(u8 taskId)
         spriteId = gTasks[taskId].tCastformSpriteId;
         gSprites[spriteId].x = 145;
         gSprites[spriteId].y = 75;
-        gSprites[spriteId].invisible = FALSE;
+        // gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         NewGameSamuelSpeech_StartFadeInTarget1OutTarget2(taskId, 2);
         NewGameSamuelSpeech_StartFadePlatformOut(taskId, 1);
@@ -1873,7 +1943,7 @@ static void Task_NewGameSamuelSpeech_WaitForSpriteFadeInAndTextPrinter(u8 taskId
             gSprites[gTasks[taskId].tCastformSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
             NewGameSamuelSpeech_StartFadeOutTarget1InTarget2(taskId, 2);
             NewGameSamuelSpeech_StartFadePlatformIn(taskId, 1);
-            gTasks[taskId].tTimer = 64;
+            gTasks[taskId].tTimer = 32;
             gTasks[taskId].func = Task_NewGameSamuelSpeech_AreYouReady;
         }
     }
@@ -1984,16 +2054,16 @@ static void CB2_NewGameSamuelSpeech_ReturnFromNamingScreen(void)
     SetGpuReg(REG_OFFSET_BG2HOFS, 0);
     SetGpuReg(REG_OFFSET_BG2VOFS, 0);
     SetGpuReg(REG_OFFSET_BG1HOFS, 0);
-    SetGpuReg(REG_OFFSET_BG1VOFS, 0);
+    SetGpuReg(REG_OFFSET_BG1VOFS, 100);
     SetGpuReg(REG_OFFSET_BG0HOFS, 0);
     SetGpuReg(REG_OFFSET_BG0VOFS, 0);
     DmaFill16(3, 0, VRAM, VRAM_SIZE);
     DmaFill32(3, 0, OAM, OAM_SIZE);
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
     ResetPaletteFade();
-    DecompressDataWithHeaderVram(ReturnShadowGfx(), (u8 *)VRAM);
-    DecompressDataWithHeaderVram(ReturnSpeechBgMap(), (u8 *)(BG_SCREEN_ADDR(7)));
-    LoadPalette(ReturnSpeechBgPals(), BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+    DecompressDataWithHeaderVram(sSamuelSpeechCelebi_Tiles, (u8 *)VRAM);
+    DecompressDataWithHeaderVram(sSamuelSpeechCelebi_Tilemap, (u8 *)(BG_SCREEN_ADDR(7)));
+    LoadPalette(sSamuelSpeechBgPals_Celebi, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
     ResetTasks();
     taskId = CreateTask(Task_NewGameSamuelSpeech_ReturnFromNamingScreenShowTextbox, 0);
     gTasks[taskId].tTimer = 5;
@@ -2017,7 +2087,7 @@ static void CB2_NewGameSamuelSpeech_ReturnFromNamingScreen(void)
     gSprites[spriteId].y = 76;
     gSprites[spriteId].invisible = FALSE;
     gTasks[taskId].tPlayerSpriteId = spriteId;
-    SetGpuReg(REG_OFFSET_BG1HOFS, -60);
+    SetGpuReg(REG_OFFSET_BG1VOFS, 100);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     SetGpuReg(REG_OFFSET_WIN0H, 0);
     SetGpuReg(REG_OFFSET_WIN0V, 0);
@@ -2509,13 +2579,13 @@ static void Task_NewGameSamuelSpeech_ReturnFromNamingScreenShowTextbox(u8 taskId
     }
 }
 
-static const u32 *ReturnShadowGfx(void)
+static const u32 UNUSED *ReturnShadowGfx(void)
 {
     switch (gIkigaiLegendaryScreen)
     {
         default:
         case IKIGAI_INTERFACE_GREEN:
-            return sSamuelSpeechShadowGfx_Green;
+            return sSamuelSpeechCelebi_Tiles;
         
         case IKIGAI_INTERFACE_BLUE:
             return sSamuelSpeechShadowGfx_Blue;
@@ -2528,13 +2598,13 @@ static const u32 *ReturnShadowGfx(void)
     }
 }
 
-static const u32 *ReturnSpeechBgMap(void)
+static const u32 UNUSED *ReturnSpeechBgMap(void)
 {
     switch (gIkigaiLegendaryScreen)
     {
         default:
         case IKIGAI_INTERFACE_GREEN:
-            return sSamuelSpeechBgMap_Green;
+            return sSamuelSpeechCelebi_Tilemap;
         
         case IKIGAI_INTERFACE_BLUE:
             return sSamuelSpeechBgMap_Blue;
@@ -2547,13 +2617,13 @@ static const u32 *ReturnSpeechBgMap(void)
     }
 }
 
-static const void *ReturnSpeechBgPals(void)
+static const void UNUSED *ReturnSpeechBgPals(void)
 {
     switch (gIkigaiLegendaryScreen)
     {
         default:
         case IKIGAI_INTERFACE_GREEN:
-            return sSamuelSpeechBgPals_Green;
+            return sSamuelSpeechBgPals_Celebi;
         
         case IKIGAI_INTERFACE_BLUE:
             return sSamuelSpeechBgPals_Blue;

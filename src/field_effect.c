@@ -255,9 +255,9 @@ static u8 sActiveList[32];
 extern u8 *gFieldEffectScriptPointers[];
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 
-static const u32 sNewGameSamuelTop_Gfx[] = INCBIN_U32("graphics/samuel_speech/samuel_top.4bpp");
-static const u32 sNewGameSamuelBottom_Gfx[] = INCBIN_U32("graphics/samuel_speech/samuel_bottom.4bpp");
-static const u32 sNewGameSamuelBottomBriefcase_Gfx[] = INCBIN_U32("graphics/samuel_speech/samuel_bottom_briefcase.4bpp");
+static const u32 sNewGameSamuelTop_Gfx[] = INCBIN_U32("graphics/samuel_speech/transparent.4bpp");
+static const u32 sNewGameSamuelBottom_Gfx[] = INCBIN_U32("graphics/samuel_speech/transparent.4bpp");
+static const u32 sNewGameSamuelBottomBriefcase_Gfx[] = INCBIN_U32("graphics/samuel_speech/transparent.4bpp");
 static const u16 sNewGameSamuel_Pal[16] = INCBIN_U16("graphics/samuel_speech/samuel.gbapal");
 
 static const u32 sPokeballGlow_Gfx[] = INCBIN_U32("graphics/field_effects/pics/pokeball_glow.4bpp");
