@@ -142,7 +142,10 @@ enum BattlerId
 #define STATUS1_PSN_ANY          (STATUS1_POISON | STATUS1_TOXIC_POISON)
 #define STATUS1_ANY              (STATUS1_SLEEP | STATUS1_POISON | STATUS1_BURN | STATUS1_FREEZE | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON | STATUS1_FROSTBITE)
 
-#define STATUS1_REFRESH          (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON | STATUS1_FROSTBITE)
+#define STATUS1_CAN_MOVE         (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON | STATUS1_FROSTBITE)
+#define STATUS1_INCAPACITATED    (STATUS1_SLEEP | STATUS1_FREEZE)
+#define STATUS1_ICY_ANY          (STATUS1_FREEZE | STATUS1_FROSTBITE)
+#define STATUS1_DAMAGING         (STATUS1_PSN_ANY | STATUS1_BURN | STATUS1_FROSTBITE)
 
 enum VolatileFlags
 {
@@ -177,7 +180,9 @@ enum VolatileFlags
     F(VOLATILE_CURSED,                          cursed,                            (u32, 1), V_BATON_PASSABLE) \
     F(VOLATILE_FORESIGHT,                       foresight,                         (u32, 1)) \
     F(VOLATILE_DRAGON_CHEER,                    dragonCheer,                       (u32, 1), V_BATON_PASSABLE) \
-    F(VOLATILE_FOCUS_ENERGY,                    focusEnergy,                       (u32, 1), V_BATON_PASSABLE)
+    F(VOLATILE_FOCUS_ENERGY,                    focusEnergy,                       (u32, 1), V_BATON_PASSABLE) \
+    F(VOLATILE_MUD_SPORT,                       mudSport,                          (u32, 1), V_BATON_PASSABLE) \
+    F(VOLATILE_WATER_SPORT,                     waterSport,                        (u32, 1), V_BATON_PASSABLE)
 
 /* Use within a macro to get the maximum allowed value for a volatile. Requires _typeBitSize and debug parameters as input. */
 #define GET_VOLATILE_MAXIMUM(_typeBitSize, ...) INVOKE_WITH_B(GET_VOLATILE_MAXIMUM_, _typeBitSize)
