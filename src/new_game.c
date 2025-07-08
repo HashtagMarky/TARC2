@@ -188,7 +188,7 @@ static void WarpToEchofern(void)
     FlagSet(FLAG_HIDE_MAP_NAME_POPUP);
     FlagSet(FLAG_SUPPRESS_MUGSHOT);
     FlagSet(FLAG_SUPPRESS_FOLLOWER);
-    SetWarpDestination(MAP_GROUP(MAP_ECHOFERN_VILLAGE), MAP_NUM(MAP_ECHOFERN_VILLAGE), WARP_ID_NONE, -1, -1);
+    SetWarpDestination(MAP_GROUP(MAP_PLAYER_HOUSE), MAP_NUM(MAP_PLAYER_HOUSE), WARP_ID_NONE, 4, 3);
     WarpIntoMap();
 }
 

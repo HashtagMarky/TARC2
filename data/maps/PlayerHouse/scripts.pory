@@ -1,0 +1,11 @@
+mapscripts PlayerHouse_MapScripts {}
+
+script EventScript_PlayerHouse_Mom
+{
+    mnmbox(format("Hi, I'm Mum."))
+}
+
+script EventScript_Trigger_PlayerHouse_MomRoom
+{
+    playerbox(format("I shouldn't go into Mum's room."), emoteMugshot=MUGSHOT_EMOTE_HAPPY)
+}

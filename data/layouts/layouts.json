@@ -4490,6 +4490,16 @@
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/EchofernVillage/border.bin",
       "blockdata_filepath": "data/layouts/EchofernVillage/map.bin"
+    },
+    {
+      "id": "LAYOUT_PLAYER_HOUSE",
+      "name": "PlayerHouse_Layout",
+      "width": 12,
+      "height": 12,
+      "primary_tileset": "gTileset_SSPathfinderIndoors",
+      "secondary_tileset": "gTileset_SSPathfinder_Cabin_Bathroom",
+      "border_filepath": "data/layouts/PlayerHouse/border.bin",
+      "blockdata_filepath": "data/layouts/PlayerHouse/map.bin"
     }
   ]
 }

@@ -634,6 +634,7 @@
     "VyratonIndoors_MayorsOffice"
   ],
   "gMapGroup_Echofern": [
-    "EchofernVillage"
+    "EchofernVillage",
+    "PlayerHouse"
   ]
 }
