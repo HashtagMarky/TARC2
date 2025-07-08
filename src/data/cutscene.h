@@ -7,24 +7,15 @@
 #include "constants/flags.h"
 #include "main.h"
 
-extern const u8 PetalburgCity_EventScript_CutsceneOneEnd[];
-extern const u8 PetalburgCity_EventScript_CutsceneTwoEnd[];
+extern const u8 EventScript_PlayerHouse_PlayerWakeUp_Skip[];
 
 const struct CutscenesSkips sCutsceneSkipScripts[] =
 {
-    [PETALBURG_TEST_ONE] =
+    [PLAYER_HOUSE_WAKE_UP] =
     {
-        .scriptCutsceneSkipPtr = PetalburgCity_EventScript_CutsceneOneEnd,
+        .scriptCutsceneSkipPtr = EventScript_PlayerHouse_PlayerWakeUp_Skip,
 #if CUTSCENE_FLAG_TRACKING == TRUE
-        .flag = FLAG_TEMP_1,
-#endif
-    },
-
-    [PETALBURG_TEST_TWO] =
-    {
-        .scriptCutsceneSkipPtr = PetalburgCity_EventScript_CutsceneTwoEnd,
-#if CUTSCENE_FLAG_TRACKING == TRUE
-        .flag = FLAG_TEMP_2,
+        .flag = FLAG_UNUSED_0x020,
 #endif
     },
 };

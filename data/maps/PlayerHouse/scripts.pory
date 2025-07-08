@@ -1,8 +1,31 @@
-mapscripts PlayerHouse_MapScripts {}
+mapscripts PlayerHouse_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        VAR_IKIGAI_INTRO_STATE, 0: EventScript_PlayerHouse_PlayerWakeUp
+    ]
+}
 
 script EventScript_PlayerHouse_Mom
 {
     mnmbox(format("Hi, I'm Mum."))
+}
+
+script EventScript_PlayerHouse_PlayerWakeUp
+{
+    startcutscene(PLAYER_HOUSE_WAKE_UP)
+    playerbox(format("Wow what a strange dream.\nThis is a long bit of exposition\p10\p9\p8\p7\p6\p5\p4\p3\p2\p1\nIt's done."), EMOTE_THINK)
+    setflag(FLAG_UNUSED_0x020)
+    setvar(VAR_IKIGAI_INTRO_STATE, 1)
+    endcutscene
+}
+
+script EventScript_PlayerHouse_PlayerWakeUp_Skip
+{
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    delay(30)
+    setvar(VAR_IKIGAI_INTRO_STATE, 1)
+    fadescreen(FADE_FROM_BLACK)
 }
 
 script EventScript_Trigger_PlayerHouse_MomRoom

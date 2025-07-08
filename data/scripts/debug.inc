@@ -149,6 +149,9 @@ Debug_OpenCalendar::
 	end
 
 Debug_EventScript_Script_1::
+	warp MAP_PLAYER_HOUSE, 4, 3
+	setvar VAR_IKIGAI_INTRO_STATE, 0
+	waitstate
 	release
 	end
 

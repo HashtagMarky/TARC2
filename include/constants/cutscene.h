@@ -3,8 +3,7 @@
 
 enum Cutscenes
 {
-    PETALBURG_TEST_ONE,
-    PETALBURG_TEST_TWO,
+    PLAYER_HOUSE_WAKE_UP,
     CUTSCENE_COUNT,
 };
 

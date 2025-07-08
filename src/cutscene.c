@@ -49,7 +49,9 @@ static const struct SpriteTemplate sCutsceneSkipButtonTemplate = {
 static void Task_SkippableCutscene(u8 taskId);
 static bool32 TaskHelper_SkippableCutscene_CheckCutsceneFlag(u32 cutscene);
 static void TaskHelper_SkippableCutscene_SetCutsceneFlag(u32 cutscene);
+#if CUTSCENE_FLAG_TRACKING == FALSE
 static bool32 TaskHelper_SkippableCutscene_GetSetCutsceneFlagSaveStruct(u32 cutscene, bool32 setFlag);
+#endif
 
 
 #define tCutscene data[0]
@@ -130,12 +132,12 @@ static void TaskHelper_SkippableCutscene_SetCutsceneFlag(u32 cutscene)
 #endif
 }
 
+#if CUTSCENE_FLAG_TRACKING == FALSE
 static bool32 TaskHelper_SkippableCutscene_GetSetCutsceneFlagSaveStruct(u32 cutscene, bool32 setFlag)
 {
-    u32 index, bit, mask;
     s32 retVal = 0;
-
-#if CUTSCENE_FLAG_TRACKING == FALSE
+    u32 index, bit, mask;
+    
     if (cutscene >= CUTSCENE_COUNT)
         return retVal;
 
@@ -147,9 +149,9 @@ static bool32 TaskHelper_SkippableCutscene_GetSetCutsceneFlagSaveStruct(u32 cuts
         gSaveBlock3Ptr->flagCutscenes[index] |= mask;
     else
         retVal = ((gSaveBlock3Ptr->flagCutscenes[index] & mask) != 0);
-#endif
 
     return retVal;
 }
+#endif
 #undef tCutscene
 #undef tSpriteId
