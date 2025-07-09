@@ -34,10 +34,10 @@
 
 void GetOverworldMonSpecies(void)
 {
-    gSpecialVar_0x8005 = gObjectEvents[gSelectedObjectEvent].shiny;
     SantizeOverworldMonLevel();
+    struct ObjectEvent *objEvent = &gObjectEvents[gSelectedObjectEvent];
 
-    switch (gObjectEvents[gSelectedObjectEvent].graphicsId)
+    switch (objEvent->graphicsId)
     {
     case OBJ_EVENT_GFX_RAYQUAZA_STILL:
     case OBJ_EVENT_GFX_RAYQUAZA:
@@ -279,12 +279,16 @@ void GetOverworldMonSpecies(void)
         break;
     
     default:
-        // Include next line to rectify bit shifting caused by changes to gObjectEvents[gSelectedObjectEvent].trainerRange_berryTreeId
-        // gObjectEvents[gSelectedObjectEvent].graphicsId -= (OW_FORM(&gObjectEvents[gSelectedObjectEvent]) << OBJ_EVENT_GFX_SPECIES_BITS);
-        if (gObjectEvents[gSelectedObjectEvent].graphicsId > OBJ_EVENT_GFX_SPECIES(NONE) && gObjectEvents[gSelectedObjectEvent].graphicsId < OBJ_EVENT_GFX_SPECIES(EGG))
-            gSpecialVar_0x8004 = gObjectEvents[gSelectedObjectEvent].graphicsId - OBJ_EVENT_GFX_SPECIES(NONE);    
+        if (IS_OW_MON_OBJ(objEvent))
+        {
+            gSpecialVar_0x8004 = OW_SPECIES(objEvent);
+            gSpecialVar_0x8005 = OW_SHINY(objEvent);
+        } 
         else
+        {
             gSpecialVar_0x8004 = SPECIES_NONE;
+            gSpecialVar_0x8005 = FALSE;
+        }
         break;
     }
 }
