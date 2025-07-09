@@ -37,7 +37,7 @@
   "object_events": [
     {
       "local_id": "LOCALID_CELEBI",
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(CELEBI)",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES_SHINY(CELEBI)",
       "x": 25,
       "y": 8,
       "elevation": 0,
