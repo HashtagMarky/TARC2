@@ -3,6 +3,7 @@ mapscripts PlayerHouse_MapScripts {
     [
         VAR_IKIGAI_INTRO_STATE, 0: EventScript_PlayerHouse_PlayerWakeUp
     ]
+    MAP_SCRIPT_ON_RESUME { dynamicmusicmovememnt }
 }
 
 script EventScript_PlayerHouse_Mom

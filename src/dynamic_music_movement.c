@@ -45,6 +45,17 @@ static const struct DynamicMusicData sMovementDynamicMusicData[] =
             .fadeSpeed = 7,
         },
     },
+
+    [MUS_HG_NATIONAL_PARK] =
+    {
+        .musicBackground =
+        {
+            .volumeMax = FALSE,
+            .fadeStart = 0,
+            .trackBits = 0b001110010000,
+            .fadeSpeed = 7,
+        },
+    },
 };
 
 void MPlayFadeOutFromVol(struct MusicPlayerInfo *mplayInfo, u16 speed, u16 volume)
