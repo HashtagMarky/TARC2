@@ -6587,8 +6587,8 @@ static void DebugAction_DynamicMusic_InstrumentRemove(u8 taskId)
     else if (sDynamicMusicInput == INSTRUMENT_COUNT)
         DynamicMusic_RemoveAllInstrumentNotPlaying();
 
-    Debug_DestroyMenu_Full(taskId);
-    ScriptContext_Enable();
+    // Debug_DestroyMenu_Full(taskId);
+    // ScriptContext_Enable();
 }
 
 static void DebugAction_DynamicMusic_InstrumentRestore(u8 taskId)
@@ -6598,8 +6598,8 @@ static void DebugAction_DynamicMusic_InstrumentRestore(u8 taskId)
     else if (sDynamicMusicInput == INSTRUMENT_COUNT)
         DynamicMusic_RestoreAllInstrumentPlaying();
 
-    Debug_DestroyMenu_Full(taskId);
-    ScriptContext_Enable();
+    // Debug_DestroyMenu_Full(taskId);
+    // ScriptContext_Enable();
 }
 
 static void DebugAction_DynamicMusic_InstrumentPlayOnly(u8 taskId)
@@ -6610,8 +6610,8 @@ static void DebugAction_DynamicMusic_InstrumentPlayOnly(u8 taskId)
     else if (sDynamicMusicInput == INSTRUMENT_COUNT)
         DynamicMusic_PlayOnlyInstrumentPlaying();
 
-    Debug_DestroyMenu_Full(taskId);
-    ScriptContext_Enable();
+    // Debug_DestroyMenu_Full(taskId);
+    // ScriptContext_Enable();
 }
 
 static void DebugAction_DynamicMusic_TrackRemove(u8 taskId)
@@ -6623,8 +6623,8 @@ static void DebugAction_DynamicMusic_TrackRemove(u8 taskId)
         trackBits = 1 << (sDynamicMusicInput - 1);
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0);
 
-    Debug_DestroyMenu_Full(taskId);
-    ScriptContext_Enable();
+    // Debug_DestroyMenu_Full(taskId);
+    // ScriptContext_Enable();
 }
 
 static void DebugAction_DynamicMusic_TrackRestore(u8 taskId)
@@ -6636,8 +6636,8 @@ static void DebugAction_DynamicMusic_TrackRestore(u8 taskId)
         trackBits = 1 << (sDynamicMusicInput - 1);
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0x100);
 
-    Debug_DestroyMenu_Full(taskId);
-    ScriptContext_Enable();
+    // Debug_DestroyMenu_Full(taskId);
+    // ScriptContext_Enable();
 }
 
 static void DebugAction_DynamicMusic_TrackPlayOnly(u8 taskId)
@@ -6650,8 +6650,8 @@ static void DebugAction_DynamicMusic_TrackPlayOnly(u8 taskId)
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0);
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, trackBits, 0x100);
     
-    Debug_DestroyMenu_Full(taskId);
-    ScriptContext_Enable();
+    // Debug_DestroyMenu_Full(taskId);
+    // ScriptContext_Enable();
 }
 
 static void DebugAction_DynamicMusic_Movement(u8 taskId)
