@@ -1,7 +1,7 @@
 #ifndef GUARD_CUTSCENE_H
 #define GUARD_CUTSCENE_H
 
-#define CUTSCENE_FLAG_TRACKING TRUE
+#define CUTSCENE_FLAG_TRACKING FALSE
 // By default this requires a flag to be defined for each cutscene that is created.
 // I just prefered the more cursed route of saving the bits directly in the saveblock,
 // so decided to keep the functionality in. Preproc is used for the minor space savings

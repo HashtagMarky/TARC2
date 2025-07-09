@@ -4,6 +4,7 @@ Mindscape_MapScripts::
 Mindscape_EventScript_Celebi::
 	@ setseenmon SPECIES_CELEBI
 	mnmbox Mindscape_Text_Celebi, PMD=TRUE, mugshotEmotion=MUGSHOT_EMOTE_PAIN
+	clearflag FLAG_DONT_TRANSITION_MUSIC
 	warp MAP_PLAYER_HOUSE, 4, 3
 	releaseall
 	end

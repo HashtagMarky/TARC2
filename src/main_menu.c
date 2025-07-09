@@ -1996,7 +1996,7 @@ static void Task_NewGameSamuelSpeech_ShrinkPlayer(u8 taskId)
             StartSpriteAffineAnim(&gSprites[spriteId], 0);
             gSprites[spriteId].callback = SpriteCB_MovePlayerDownWhileShrinking;
             BeginNormalPaletteFade(PALETTES_BG, 0, 0, 16, RGB_BLACK);
-            FadeOutBGM(4);
+            // FadeOutBGM(4);
             gTasks[taskId].func = Task_NewGameSamuelSpeech_WaitForPlayerShrink;
         }
     }

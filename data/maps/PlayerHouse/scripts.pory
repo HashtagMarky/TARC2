@@ -14,7 +14,6 @@ script EventScript_PlayerHouse_PlayerWakeUp
 {
     startcutscene(PLAYER_HOUSE_WAKE_UP)
     playerbox(format("Wow what a strange dream.\nThis is a long bit of exposition\p10\p9\p8\p7\p6\p5\p4\p3\p2\p1\nIt's done."), EMOTE_THINK)
-    setflag(FLAG_UNUSED_0x020)
     setvar(VAR_IKIGAI_INTRO_STATE, 1)
     endcutscene
 }

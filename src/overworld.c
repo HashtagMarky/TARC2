@@ -1822,7 +1822,7 @@ static bool8 RunFieldCallback(void)
 void CB2_NewGame(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    StopMapMusic();
+    // StopMapMusic();
     ResetSafariZoneFlag_();
     NewGameInitData();
     ResetInitialPlayerAvatarState();

@@ -15,7 +15,7 @@ const struct CutscenesSkips sCutsceneSkipScripts[] =
     {
         .scriptCutsceneSkipPtr = EventScript_PlayerHouse_PlayerWakeUp_Skip,
 #if CUTSCENE_FLAG_TRACKING == TRUE
-        .flag = FLAG_UNUSED_0x020,
+        .flag = FLAG_TEMP_1,
 #endif
     },
 };
