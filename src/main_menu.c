@@ -261,8 +261,8 @@ static const void UNUSED *ReturnSpeechBgPals(void);
 // .rodata
 
 static const u16 sSamuelSpeechBgPals_Celebi[][16] = {
-    INCBIN_U16("graphics/samuel_speech/celebi_tiles.gbapal"),
-    INCBIN_U16("graphics/samuel_speech/celebi_tiles.gbapal")
+    INCBIN_U16("graphics/samuel_speech/celebi_shiny.gbapal"),
+    INCBIN_U16("graphics/samuel_speech/celebi_shiny.gbapal")
 };
 static const u16 sSamuelSpeechBgPals_Celebi_Black[][16] = {
     INCBIN_U16("graphics/samuel_speech/celebi_black.gbapal"),
