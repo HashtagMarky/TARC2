@@ -37,12 +37,14 @@ EventScript_PlayerHouse_PlayerWakeUp_Skip::
 # 26 "data//maps/PlayerHouse/scripts.pory"
 	delay 30
 # 27 "data//maps/PlayerHouse/scripts.pory"
+	setvar VAR_IKIGAI_INTRO_STATE, 1
+# 28 "data//maps/PlayerHouse/scripts.pory"
 	fadescreen FADE_FROM_BLACK
 	return
 
 
 EventScript_Trigger_PlayerHouse_MomRoom::
-# 32 "data//maps/PlayerHouse/scripts.pory"
+# 33 "data//maps/PlayerHouse/scripts.pory"
 	playerbox EventScript_Trigger_PlayerHouse_MomRoom_Text_0, emoteMugshot = MUGSHOT_EMOTE_HAPPY
 	return
 
@@ -68,5 +70,5 @@ EventScript_PlayerHouse_PlayerWakeUp_Text_0:
 	.string "It's done.$"
 
 EventScript_Trigger_PlayerHouse_MomRoom_Text_0:
-# 32 "data//maps/PlayerHouse/scripts.pory"
+# 33 "data//maps/PlayerHouse/scripts.pory"
 	.string "I shouldn't go into Mum's room.$"
