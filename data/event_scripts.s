@@ -1185,3 +1185,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/EchofernVillage/scripts.inc"
 
 	.include "data/maps/PlayerHouse/scripts.inc"
+
+	.include "data/maps/Mindscape/scripts.inc"

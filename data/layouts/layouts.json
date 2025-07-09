@@ -4484,10 +4484,10 @@
     {
       "id": "LAYOUT_ECHOFERN_VILLAGE",
       "name": "EchofernVillage_Layout",
-      "width": 20,
-      "height": 20,
+      "width": 80,
+      "height": 60,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
+      "secondary_tileset": "gTileset_Lilycove",
       "border_filepath": "data/layouts/EchofernVillage/border.bin",
       "blockdata_filepath": "data/layouts/EchofernVillage/map.bin"
     },
@@ -4500,6 +4500,16 @@
       "secondary_tileset": "gTileset_SSPathfinder_Cabin_Bathroom",
       "border_filepath": "data/layouts/PlayerHouse/border.bin",
       "blockdata_filepath": "data/layouts/PlayerHouse/map.bin"
+    },
+    {
+      "id": "LAYOUT_MINDSCAPE",
+      "name": "Mindscape_Layout",
+      "width": 50,
+      "height": 50,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/Mindscape/border.bin",
+      "blockdata_filepath": "data/layouts/Mindscape/map.bin"
     }
   ]
 }
