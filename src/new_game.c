@@ -186,7 +186,7 @@ static void WarpToEchofern(void)
     InitTimeBasedEvents();
     FlagSet(FLAG_PAUSE_TIME);
     FlagSet(FLAG_HIDE_MAP_NAME_POPUP);
-    FlagSet(FLAG_SUPPRESS_MUGSHOT);
+    // FlagSet(FLAG_SUPPRESS_MUGSHOT);
     FlagSet(FLAG_SUPPRESS_FOLLOWER);
     // SetWarpDestination(MAP_GROUP(MAP_PLAYER_HOUSE), MAP_NUM(MAP_PLAYER_HOUSE), WARP_ID_NONE, 4, 3);
     SetWarpDestination(MAP_GROUP(MAP_MINDSCAPE), MAP_NUM(MAP_MINDSCAPE), WARP_ID_NONE, 25, 25);
