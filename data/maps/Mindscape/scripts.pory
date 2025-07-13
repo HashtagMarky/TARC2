@@ -1,0 +1,28 @@
+mapscripts Mindscape_MapScripts {}
+
+script Mindscape_EventScript_Celebi
+{
+	// setseenmon SPECIES_CELEBI
+	mnmbox(Mindscape_Text_Celebi, PMD=TRUE, mugshotEmotion=MUGSHOT_EMOTE_PAIN)
+    attitudemultipush(ATTITUDE_HUMBLE, "Of course I will help you.")
+    attitudemultipush(ATTITUDE_DOMINANT, "No, I refuse.")
+    attitudechoice
+    if (var(VAR_RESULT) == ATTITUDE_DOMINANT)
+    {
+        callnative(StartCredits)
+        end
+    }
+	clearflag(FLAG_DONT_TRANSITION_MUSIC)
+	warp(MAP_PLAYER_HOUSE, 4, 3)
+	releaseall
+	end
+}
+
+text Mindscape_Text_Celebi
+{
+	format("
+    Urgh... Flavor text...\n
+    I am Celebi.\p
+    {SPEAKER_NAME NAME_AUTO}{CHANGE_MUGSHOT_EMOTE MUGSHOT_EMOTE_DETERMINED}{SHOW_POKEDEX_HEADER}
+    More flavour text.")
+}
