@@ -2,6 +2,10 @@ import argparse
 import os
 
 
+if not os.path.exists("Makefile"):
+    print("Please run this script from your root folder.")
+    quit()
+
 def hex_to_rgb(hex_color):
     hex_color = hex_color.lstrip('#')
     return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
@@ -23,7 +27,7 @@ def format_palette(colors):
     return "\n".join(f"{r} {g} {b}" for r, g, b in colors)
 
 def save_palette(filepath, colors):
-    filepath = f"../../graphics/{filepath}"
+    filepath = f"graphics/{filepath}"
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
 
     header = ["JASC-PAL", "0100", "16"]
