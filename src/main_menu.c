@@ -1603,18 +1603,23 @@ static void Task_TARC_CelebiFade(u8 taskId)
         UpdateCelebiBackgroundColour(palSlot, gTasks[taskId].tTARC);
     }
 
-    if ((gTasks[taskId].tTARC & 1) == 0)
-    {
-        gTasks[taskId].tTARC += 2;
-        if (gTasks[taskId].tTARC >= 128)
-            gTasks[taskId].tTARC = 127;
-    }
+    if (gTasks[taskId].tTARC == 208)
+        gTasks[taskId].tTARC = 48;
     else
-    {
-        gTasks[taskId].tTARC -= 2;
-        if (gTasks[taskId].tTARC <= 65)
-            gTasks[taskId].tTARC = 66;
-    }
+        gTasks[taskId].tTARC++;
+
+    // if ((gTasks[taskId].tTARC & 1) == 0)
+    // {
+    //     gTasks[taskId].tTARC += 2;
+    //     if (gTasks[taskId].tTARC >= 128)
+    //         gTasks[taskId].tTARC = 127;
+    // }
+    // else
+    // {
+    //     gTasks[taskId].tTARC -= 2;
+    //     if (gTasks[taskId].tTARC <= 65)
+    //         gTasks[taskId].tTARC = 66;
+    // }
 }
 
 static void Task_NewGameSamuelSpeech_AndYouAre(u8 taskId)
