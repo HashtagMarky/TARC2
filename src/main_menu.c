@@ -1596,18 +1596,43 @@ static void Task_NewGameSamuelSpeechSub_WaitForCastform(u8 taskId)
 
 #undef tState
 
+static void Task_TARC_CelebiFade(u8 taskId)
+{
+    for (u8 palSlot = 1; palSlot < 15; palSlot++)
+    {
+        UpdateCelebiBackgroundColour(palSlot, gTasks[taskId].tTARC);
+    }
+
+    if (gTasks[taskId].tTARC == 208)
+        gTasks[taskId].tTARC = 48;
+    else
+        gTasks[taskId].tTARC++;
+
+    // if ((gTasks[taskId].tTARC & 1) == 0)
+    // {
+    //     gTasks[taskId].tTARC += 2;
+    //     if (gTasks[taskId].tTARC >= 128)
+    //         gTasks[taskId].tTARC = 127;
+    // }
+    // else
+    // {
+    //     gTasks[taskId].tTARC -= 2;
+    //     if (gTasks[taskId].tTARC <= 65)
+    //         gTasks[taskId].tTARC = 66;
+    // }
+}
+
 static void Task_NewGameSamuelSpeech_AndYouAre(u8 taskId)
 {
-    if (gTasks[taskId].tTARC != 0x80)
+    if (!FuncIsActiveTask(Task_TARC_CelebiFade))
+        CreateTask(Task_TARC_CelebiFade, 0);
+    
+    if (gTasks[taskId].tTARC < 0x80)
     {
-        for (u8 palSlot = 1; palSlot < 15; palSlot++)
-        {
-            UpdateCelebiBackgroundColour(palSlot, gTasks[taskId].tTARC);
-        }
-        gTasks[taskId].tTARC++;
+        gTasks[taskId].tTARC += 2;
         return;
     }
-    
+
     if (!RunTextPrintersAndIsPrinter0Active())
     {
         sStartedPokeBallTask = FALSE;
@@ -1829,6 +1854,7 @@ static void Task_NewGameSamuelSpeech_WaitPressBeforeNameChoice(u8 taskId)
     if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON)))
     {
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        DestroyTask(FindTaskIdByFunc(Task_TARC_CelebiFade));
         gTasks[taskId].func = Task_NewGameSamuelSpeech_StartNamingScreen;
     }
 }
@@ -1848,6 +1874,8 @@ static void Task_NewGameSamuelSpeech_StartNamingScreen(u8 taskId)
 
 static void Task_NewGameSamuelSpeech_SoItsPlayerName(u8 taskId)
 {
+    CreateTask(Task_TARC_CelebiFade, 0);
+    
     NewGameSamuelSpeech_ClearWindow(0);
     StringExpandPlaceholders(gStringVar4, gText_Samuel_SoYourePlayer);
     AddTextPrinterForMessage(TRUE);
@@ -2004,6 +2032,7 @@ static void Task_NewGameSamuelSpeech_ShrinkPlayer(u8 taskId)
 
 static void Task_NewGameSamuelSpeech_WaitForPlayerShrink(u8 taskId)
 {
+    DestroyTask(FindTaskIdByFunc(Task_TARC_CelebiFade));
     u8 spriteId = gTasks[taskId].tPlayerSpriteId;
 
     if (gSprites[spriteId].affineAnimEnded)
@@ -2063,7 +2092,7 @@ static void CB2_NewGameSamuelSpeech_ReturnFromNamingScreen(void)
     ResetPaletteFade();
     DecompressDataWithHeaderVram(sSamuelSpeechCelebi_Tiles, (u8 *)VRAM);
     DecompressDataWithHeaderVram(sSamuelSpeechCelebi_Tilemap, (u8 *)(BG_SCREEN_ADDR(7)));
-    LoadPalette(sSamuelSpeechBgPals_Celebi, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+    LoadPalette(sSamuelSpeechBgPals_Celebi_Black, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
     ResetTasks();
     taskId = CreateTask(Task_NewGameSamuelSpeech_ReturnFromNamingScreenShowTextbox, 0);
     gTasks[taskId].tTimer = 5;

@@ -12,7 +12,7 @@ gText_Samuel_Castform_Unused:: @@ See strings.c
 	.string "you'll see around town, Castform.{PAUSE 96}\p"
 
 gText_Samuel_MainSpeech::
-	.string "Can you feel my prescense?\n"
+	.string "Can you feel my presence?\n"
 	.string "As I can feel yours?\l"
 	.string "I apologise for us meeting this way.\p"
 	.string "I'd like to do so through a deeper\n"
