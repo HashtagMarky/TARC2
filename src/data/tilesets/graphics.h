@@ -1779,4 +1779,55 @@ const u16 gTilesetPalettes_IkigaiOutdoors_Town[][16] =
     INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/12.gbapal"),
 };
 
+const u16 gTilesetPalettes_IkigaiOutdoors_Town_Summer[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/summer/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/summer/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/summer/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/summer/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/summer/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/12.gbapal"),
+};
+
+const u16 gTilesetPalettes_IkigaiOutdoors_Town_Autumn[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/autumn/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/autumn/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/autumn/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/autumn/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/autumn/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/12.gbapal"),
+};
+
+const u16 gTilesetPalettes_IkigaiOutdoors_Town_Winter[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/winter/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/winter/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/winter/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/winter/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/winter/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ikigai_outdoors_town/palettes/12.gbapal"),
+};
+
 const u32 gTilesetTiles_IkigaiOutdoors_Town[] = INCBIN_U32("data/tilesets/secondary/ikigai_outdoors_town/tiles.4bpp.lz");
