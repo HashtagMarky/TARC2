@@ -17,6 +17,8 @@ dir_raw_tilesets="${porytiles_dir}raw/"
 dir_raw_tilesets_primary="${dir_raw_tilesets}primary/"
 dir_raw_tilesets_secondary="${dir_raw_tilesets}secondary/"
 
+primary_outdoor_tileset_name="IkigaiOutdoors"
+
 ## Misc.
 lastcmd=""
 doubleconfirm="1"
@@ -87,6 +89,10 @@ while(true); do
                 python3 "${porytiles_dir}seasonal_pals.py" \
                 "${dir_compiled_primary}${tileset}/palettes/" \
                 "${dir_raw_tilesets_primary}${tilesetsrc}/seasonal.csv"
+            elif [[ "${tilesetsrc}" == ${primary_outdoor_tileset_name}* ]] && [ -f "${dir_raw_tilesets_primary}${primary_outdoor_tileset_name}/seasonal.csv" ]; then
+                python3 "${porytiles_dir}seasonal_pals.py" \
+                "${dir_compiled_primary}${tileset}/palettes/" \
+                "${dir_raw_tilesets_primary}${primary_outdoor_tileset_name}/seasonal.csv"
             fi
             ;;
         2)
@@ -139,6 +145,10 @@ while(true); do
                 python3 "${porytiles_dir}seasonal_pals.py" \
                 "${dir_compiled_secondary}${tileset}/palettes/" \
                 "${dir_raw_tilesets_secondary}${tilesetsrc}/seasonal.csv"
+            elif [[ "${tilesetsrc}" == ${primary_outdoor_tileset_name}* ]] && [ -f "${dir_raw_tilesets_primary}${primary_outdoor_tileset_name}/seasonal.csv" ]; then
+                python3 "${porytiles_dir}seasonal_pals.py" \
+                "${dir_compiled_secondary}${tileset}/palettes/" \
+                "${dir_raw_tilesets_primary}${primary_outdoor_tileset_name}/seasonal.csv"
             fi
 
             # write ${tilesetsrc2} to a .txt file for use later
