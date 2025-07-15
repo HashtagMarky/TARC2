@@ -880,3 +880,14 @@ const struct Tileset gTileset_IkigaiOutdoors =
     .metatileAttributes = gMetatileAttributes_IkigaiOutdoors,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_IkigaiOutdoors_Town =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_IkigaiOutdoors_Town,
+    .palettes = gTilesetPalettes_IkigaiOutdoors_Town,
+    .metatiles = gMetatiles_IkigaiOutdoors_Town,
+    .metatileAttributes = gMetatileAttributes_IkigaiOutdoors_Town,
+    .callback = NULL,
+};
