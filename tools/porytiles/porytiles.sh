@@ -116,7 +116,7 @@ while(true); do
             else
                     read -p "Folder of the resulting compiled tileset in data/tilesets: " tileset
 
-                    read -p "Folder in ${dir_raw_tilesets_secondary} contains the the metatile layers: "     tilesetsrc
+                    read -p "Folder in ${dir_raw_tilesets_secondary} that contains the metatile layers: "     tilesetsrc
 
                     read -p "Folder in ${dir_raw_tilesets_primary} for the related primary tileset: (-1 to use cached src) "  tilesetsrc2
 
