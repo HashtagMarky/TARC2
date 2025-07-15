@@ -15,7 +15,7 @@
   "connections": [
     {
       "map": "MAP_ECHOFERN_VILLAGE",
-      "offset": -24,
+      "offset": -22,
       "direction": "left"
     }
   ],

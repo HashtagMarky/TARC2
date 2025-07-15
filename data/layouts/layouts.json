@@ -4486,8 +4486,8 @@
       "name": "EchofernVillage_Layout",
       "width": 40,
       "height": 40,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Lilycove",
+      "primary_tileset": "gTileset_IkigaiOutdoors",
+      "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/EchofernVillage/border.bin",
       "blockdata_filepath": "data/layouts/EchofernVillage/map.bin"
     },
@@ -4516,7 +4516,7 @@
       "name": "EchofernForest_Layout",
       "width": 40,
       "height": 26,
-      "primary_tileset": "gTileset_General",
+      "primary_tileset": "gTileset_IkigaiOutdoors",
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/EchofernForest/border.bin",
       "blockdata_filepath": "data/layouts/EchofernForest/map.bin"

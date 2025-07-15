@@ -15,14 +15,14 @@
   "connections": [
     {
       "map": "MAP_ECHOFERN_FOREST",
-      "offset": 24,
+      "offset": 22,
       "direction": "right"
     }
   ],
   "object_events": [],
   "warp_events": [
     {
-      "x": 15,
+      "x": 12,
       "y": 27,
       "elevation": 0,
       "dest_map": "MAP_PLAYER_HOUSE",
