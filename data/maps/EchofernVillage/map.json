@@ -22,8 +22,8 @@
   "object_events": [],
   "warp_events": [
     {
-      "x": 12,
-      "y": 26,
+      "x": 33,
+      "y": 4,
       "elevation": 0,
       "dest_map": "MAP_PLAYER_HOUSE",
       "dest_warp_id": "0"
