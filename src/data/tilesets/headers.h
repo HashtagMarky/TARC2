@@ -878,7 +878,7 @@ const struct Tileset gTileset_IkigaiOutdoors =
     .palettes_winter = gTilesetPalettes_IkigaiOutdoors_Winter,
     .metatiles = gMetatiles_IkigaiOutdoors,
     .metatileAttributes = gMetatileAttributes_IkigaiOutdoors,
-    .callback = NULL,
+    .callback = InitTilesetAnim_IkigaiOutdoor,
 };
 
 const struct Tileset gTileset_IkigaiOutdoors_Town =
