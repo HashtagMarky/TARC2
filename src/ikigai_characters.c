@@ -18,6 +18,7 @@
 #include "fpmath.h"
 #include "battle_util.h"
 #include "field_message_box.h"
+#include "bg.h"
 
 static s32 ClampedOpinionDelta(s32 opinionCurrent, s32 opinionDelta);
 static uq4_12_t GetGymTypeEffectiveness(u16 species, bool32 speciesAtk);
@@ -932,8 +933,9 @@ u8 CreateDialogueOptionIconSprite(enum DialogueOption dialogue)
     sheet.data = gDialogueOptions[dialogue].iconImage;
     pal.data = gDialogueOptions[dialogue].iconPal;
 
-    LoadCompressedSpriteSheet(&sheet);
     LoadSpritePalette(&pal);
+    WaitForFreshVBlank();
+    LoadCompressedSpriteSheet(&sheet);
 
     spriteTemplate = Alloc(sizeof(*spriteTemplate));
     if (spriteTemplate == NULL)
@@ -969,8 +971,9 @@ u8 CreateAttitudeIconSprite(enum AttitudeId attitude)
     sheet.data = gDialogueAttitudes[attitude].iconImage;
     pal.data = gDialogueAttitudes[attitude].iconPal;
 
-    LoadCompressedSpriteSheet(&sheet);
     LoadSpritePalette(&pal);
+    WaitForFreshVBlank();
+    LoadCompressedSpriteSheet(&sheet);
 
     spriteTemplate = Alloc(sizeof(*spriteTemplate));
     if (spriteTemplate == NULL)

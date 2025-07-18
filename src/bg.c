@@ -6,6 +6,9 @@
 #include "malloc.h"
 #include "menu.h"
 #include "decompress.h"
+#include "io_reg.h"
+#include "link.h"
+#include "main.h"
 
 #define DISPCNT_ALL_BG_AND_MODE_BITS    (DISPCNT_BG_ALL_ON | 0x7)
 
@@ -1245,6 +1248,18 @@ bool32 IsTileMapOutsideWram(u32 bg)
 
 void WaitForFreshVBlank(void)
 {
-    while (REG_VCOUNT >= 160);
-    while (REG_VCOUNT < 160);
+    gMain.intrCheck &= ~INTR_FLAG_VBLANK;
+
+    if (gWirelessCommType != 0)
+    {
+        // Desynchronization may occur if wireless adapter is connected
+        // and we call VBlankIntrWait();
+        while (!(gMain.intrCheck & INTR_FLAG_VBLANK))
+            ;
+    }
+    else
+    {
+        while (REG_VCOUNT >= 160);
+        while (REG_VCOUNT < 160);
+    }
 }
