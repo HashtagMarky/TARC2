@@ -1094,7 +1094,7 @@ u16 GetLocalRockSmashMon(void)
         const struct WildPokemonInfo *rockSmashMonsInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].rockSmashMonsInfo;
 
         if (rockSmashMonsInfo)
-            return rockSmashMonsInfo->wildPokemon[ChooseWildMonIndex_WaterRock()].species;
+            return rockSmashMonsInfo->wildPokemon[ChooseWildMonIndex_Rocks()].species;
     }
     return SPECIES_NONE;
 }
