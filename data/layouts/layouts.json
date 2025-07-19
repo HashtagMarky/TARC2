@@ -4485,7 +4485,7 @@
       "id": "LAYOUT_ECHOFERN_VILLAGE",
       "name": "EchofernVillage_Layout",
       "width": 40,
-      "height": 40,
+      "height": 42,
       "primary_tileset": "gTileset_IkigaiOutdoors",
       "secondary_tileset": "gTileset_IkigaiOutdoors_Town",
       "border_filepath": "data/layouts/EchofernVillage/border.bin",
@@ -4520,6 +4520,16 @@
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/EchofernForest/border.bin",
       "blockdata_filepath": "data/layouts/EchofernForest/map.bin"
+    },
+    {
+      "id": "LAYOUT_GREEN_VEIN",
+      "name": "GreenVein_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_IkigaiOutdoors",
+      "secondary_tileset": "gTileset_IkigaiOutdoors_Town",
+      "border_filepath": "data/layouts/GreenVein/border.bin",
+      "blockdata_filepath": "data/layouts/GreenVein/map.bin"
     }
   ]
 }

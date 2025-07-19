@@ -11491,6 +11491,282 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_ECHOFERN_VILLAGE",
+          "base_label": "gEchofernVillage",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 36,
+                "max_level": 100,
+                "species": "SPECIES_VENUSAUR"
+              },
+              {
+                "min_level": 11,
+                "max_level": 17,
+                "species": "SPECIES_LOTAD"
+              },
+              {
+                "min_level": 5,
+                "max_level": 30,
+                "species": "SPECIES_ODDISH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_PARAS"
+              },
+              {
+                "min_level": 30,
+                "max_level": 40,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 10,
+                "max_level": 35,
+                "species": "SPECIES_TOEDSCOOL"
+              },
+              {
+                "min_level": 50,
+                "max_level": 100,
+                "species": "SPECIES_KLEAVOR"
+              },
+              {
+                "min_level": 20,
+                "max_level": 39,
+                "species": "SPECIES_GRAFAIAI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 19,
+                "species": "SPECIES_SEWADDLE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 33,
+                "species": "SPECIES_SWADLOON"
+              },
+              {
+                "min_level": 5,
+                "max_level": 10,
+                "species": "SPECIES_WURMPLE"
+              },
+              {
+                "min_level": 20,
+                "max_level": 45,
+                "species": "SPECIES_CHERRIM"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ECHOFERN_VILLAGE",
+          "base_label": "gEchofernVillage_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 18,
+                "max_level": 32,
+                "species": "SPECIES_SCYTHER"
+              },
+              {
+                "min_level": 12,
+                "max_level": 23,
+                "species": "SPECIES_MURKROW"
+              },
+              {
+                "min_level": 2,
+                "max_level": 13,
+                "species": "SPECIES_TYMPOLE"
+              },
+              {
+                "min_level": 36,
+                "max_level": 67,
+                "species": "SPECIES_SCEPTILE"
+              },
+              {
+                "min_level": 12,
+                "max_level": 30,
+                "species": "SPECIES_BEAUTIFLY"
+              },
+              {
+                "min_level": 3,
+                "max_level": 13,
+                "species": "SPECIES_STARLY"
+              },
+              {
+                "min_level": 14,
+                "max_level": 29,
+                "species": "SPECIES_CHATOT"
+              },
+              {
+                "min_level": 18,
+                "max_level": 29,
+                "species": "SPECIES_FROGADIER"
+              },
+              {
+                "min_level": 17,
+                "max_level": 33,
+                "species": "SPECIES_BUTTERFREE"
+              },
+              {
+                "min_level": 34,
+                "max_level": 59,
+                "species": "SPECIES_HONCHKROW"
+              },
+              {
+                "min_level": 18,
+                "max_level": 26,
+                "species": "SPECIES_SKIPLOOM"
+              },
+              {
+                "min_level": 4,
+                "max_level": 12,
+                "species": "SPECIES_PINECO"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ECHOFERN_VILLAGE",
+          "base_label": "gEchofernVillage_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 12,
+                "max_level": 32,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 54,
+                "max_level": 67,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 36,
+                "max_level": 56,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 26,
+                "max_level": 42,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 35,
+                "max_level": 43,
+                "species": "SPECIES_SHIINOTIC"
+              },
+              {
+                "min_level": 34,
+                "max_level": 54,
+                "species": "SPECIES_TREVENANT"
+              },
+              {
+                "min_level": 11,
+                "max_level": 23,
+                "species": "SPECIES_MORELULL"
+              },
+              {
+                "min_level": 31,
+                "max_level": 43,
+                "species": "SPECIES_GREAVARD"
+              },
+              {
+                "min_level": 13,
+                "max_level": 27,
+                "species": "SPECIES_SHEDINJA"
+              },
+              {
+                "min_level": 23,
+                "max_level": 44,
+                "species": "SPECIES_NOCTOWL"
+              },
+              {
+                "min_level": 8,
+                "max_level": 22,
+                "species": "SPECIES_HOOTHOOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 68,
+                "species": "SPECIES_GENGAR"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ECHOFERN_VILLAGE",
+          "base_label": "gEchofernVillage_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_PHANTUMP"
+              },
+              {
+                "min_level": 16,
+                "max_level": 31,
+                "species": "SPECIES_SPIDOPS"
+              },
+              {
+                "min_level": 5,
+                "max_level": 43,
+                "species": "SPECIES_ILLUMISE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 42,
+                "species": "SPECIES_VOLBEAT"
+              },
+              {
+                "min_level": 5,
+                "max_level": 25,
+                "species": "SPECIES_MURKROW"
+              },
+              {
+                "min_level": 5,
+                "max_level": 23,
+                "species": "SPECIES_VENONAT"
+              },
+              {
+                "min_level": 46,
+                "max_level": 64,
+                "species": "SPECIES_ZOROARK"
+              },
+              {
+                "min_level": 68,
+                "max_level": 100,
+                "species": "SPECIES_ANNIHILAPE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 13,
+                "species": "SPECIES_SHROODLE"
+              },
+              {
+                "min_level": 12,
+                "max_level": 23,
+                "species": "SPECIES_POLIWAG"
+              },
+              {
+                "min_level": 31,
+                "max_level": 41,
+                "species": "SPECIES_ARIADOS"
+              },
+              {
+                "min_level": 5,
+                "max_level": 14,
+                "species": "SPECIES_GASTLY"
+              }
+            ]
+          }
         }
       ]
     },
