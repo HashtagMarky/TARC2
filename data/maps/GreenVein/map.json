@@ -15,8 +15,13 @@
   "connections": [
     {
       "map": "MAP_ECHOFERN_VILLAGE",
-      "offset": -17,
+      "offset": 0,
       "direction": "down"
+    },
+    {
+      "map": "MAP_UPPER_RIVER_STREAM",
+      "offset": 12,
+      "direction": "left"
     }
   ],
   "object_events": [],

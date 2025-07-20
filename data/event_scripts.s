@@ -1191,3 +1191,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/EchofernForest/scripts.inc"
 
 	.include "data/maps/GreenVein/scripts.inc"
+
+	.include "data/maps/UpperRiverStream/scripts.inc"

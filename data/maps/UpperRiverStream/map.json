@@ -1,7 +1,7 @@
 {
-  "id": "MAP_ECHOFERN_FOREST",
-  "name": "EchofernForest",
-  "layout": "LAYOUT_ECHOFERN_FOREST",
+  "id": "MAP_UPPER_RIVER_STREAM",
+  "name": "UpperRiverStream",
+  "layout": "LAYOUT_UPPER_RIVER_STREAM",
   "music": "MUS_DUMMY",
   "region_map_section": "MAPSEC_ABANDONED_SHIP",
   "requires_flash": false,
@@ -15,8 +15,13 @@
   "connections": [
     {
       "map": "MAP_ECHOFERN_VILLAGE",
-      "offset": -26,
-      "direction": "left"
+      "offset": 8,
+      "direction": "right"
+    },
+    {
+      "map": "MAP_GREEN_VEIN",
+      "offset": -12,
+      "direction": "right"
     }
   ],
   "object_events": [],

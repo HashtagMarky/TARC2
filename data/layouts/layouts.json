@@ -4485,7 +4485,7 @@
       "id": "LAYOUT_ECHOFERN_VILLAGE",
       "name": "EchofernVillage_Layout",
       "width": 40,
-      "height": 42,
+      "height": 44,
       "primary_tileset": "gTileset_IkigaiOutdoors",
       "secondary_tileset": "gTileset_IkigaiOutdoors_Town",
       "border_filepath": "data/layouts/EchofernVillage/border.bin",
@@ -4524,12 +4524,22 @@
     {
       "id": "LAYOUT_GREEN_VEIN",
       "name": "GreenVein_Layout",
-      "width": 20,
+      "width": 38,
       "height": 20,
       "primary_tileset": "gTileset_IkigaiOutdoors",
       "secondary_tileset": "gTileset_IkigaiOutdoors_Town",
       "border_filepath": "data/layouts/GreenVein/border.bin",
       "blockdata_filepath": "data/layouts/GreenVein/map.bin"
+    },
+    {
+      "id": "LAYOUT_UPPER_RIVER_STREAM",
+      "name": "UpperRiverStream_Layout",
+      "width": 20,
+      "height": 46,
+      "primary_tileset": "gTileset_IkigaiOutdoors",
+      "secondary_tileset": "gTileset_IkigaiOutdoors_Town",
+      "border_filepath": "data/layouts/UpperRiverStream/border.bin",
+      "blockdata_filepath": "data/layouts/UpperRiverStream/map.bin"
     }
   ]
 }
