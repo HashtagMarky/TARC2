@@ -14,49 +14,46 @@ gText_Samuel_Castform_Unused:: @@ See strings.c
 
 gText_Samuel_MainSpeech::
     .string "Can you feel it?\n"
-    .string "That pulse between us…\l"
-    .string "A thread pulled taut across time.\p"
-    .string "I regret that we meet like this,\n"
-    .string "only a whisper through the veil.\p"
-    .string "But your heart… it is kind.\n"
-    .string "It glows through the dark.\p"
-    .string "Will you be my champion?\n"
-    .string "One who acts with care and will?\p"
-    .string "You need not answer now.\n"
-    .string "But the moment will return…\l"
-    .string "Just as all moments do.\p"
-    .string "I wish to meet you face-to-face,\n"
-    .string "beyond thought… beyond dreams.\p"
-    .string "Keep calling out, keep reaching,\n"
-	.string "as the veil thins between us.\n"
-    .string "And I shall find you.\p"
+    .string "The thread that tugs at the edges?\p"
+    .string "Faint, but real.\n"
+    .string "I've been following it…\l"
+    .string "I've been following you.\p"
+    .string "This isn't how I hoped to reach you…\n"
+    .string "In only a flicker. A whisper.\p"
+    .string "So I need to know more…\n"
+    .string "Enough to bring you fully through.\p"
+    .string "This isn't the place for discussion.\n"
+    .string "We must meet properly.\p"
+    .string "Help me understand who you are.\n"
+    .string "So I can find you… clearly.\p"
     .string "$"
 
 gText_Samuel_TellMeAboutYou::
-	.string "Help me search for you…\n"
-	.string "Tell me, child…$"
+    .string "Tell me… what should I know?$"
 
 gText_Samuel_BoyOrGirl::
 	.string "What do you look like?$"
 
 gText_Samuel_ForgottenName::
-	.string "And what should I call you?\n"
-	.string "What is my potential champion's name?$"
+	.string "And what should I call you?$"
 
 gText_Samuel_SoYourePlayer::
 	.string "{PLAYER}{KUN}?\n"
 	.string "Your name is… {PLAYER}{KUN}?$"
 
 gText_Samuel_JobIsYours::
-    .string "Then I name you, {PLAYER}:\n"
-    .string "Bearer of Care, and Guardian of Heart.\p"
-    .string "Regressiion resistance walks within you.\p"
+    .string "That’s enough, thank you.\n"
+    .string "The shape of you has begun to form.\p"
+    .string "You’ve carried more than most remember.\n"
+    .string "It echoes in you still.\p"
     .string "$"
 
 gText_Samuel_TravelSafely::
-	.string "Brace yourself, child.\n"
-    .string "I have found a thread.\l"
-    .string "It is time for us to meet.\p"
+    .string "Hold still.\n"
+    .string "The thread is steady now.\l"
+    .string "I can pull you through.\p"
+    .string "We will speak, in the quiet\n"
+	.string "between moments…\p"
     .string "$"
 
 gText_Samuel_ChooseTones::

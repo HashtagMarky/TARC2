@@ -37,11 +37,11 @@ Mindscape_EventScript_Celebi_10:
 Mindscape_EventScript_Celebi_1:
 # 44 "data//maps/Mindscape/scripts.pory"
 	mnmbox Mindscape_EventScript_Celebi_Text_5, PMD = TRUE, mugshotEmotion = MUGSHOT_EMOTE_JOYOUS
-# 47 "data//maps/Mindscape/scripts.pory"
+# 52 "data//maps/Mindscape/scripts.pory"
 	clearflag FLAG_DONT_TRANSITION_MUSIC
-# 48 "data//maps/Mindscape/scripts.pory"
+# 53 "data//maps/Mindscape/scripts.pory"
 	warp MAP_PLAYER_HOUSE, 4, 3
-# 49 "data//maps/Mindscape/scripts.pory"
+# 54 "data//maps/Mindscape/scripts.pory"
 	releaseall
 	end
 
@@ -93,22 +93,27 @@ Mindscape_EventScript_Celebi_Text_4:
 
 Mindscape_EventScript_Celebi_Text_5:
 # 45 "data//maps/Mindscape/scripts.pory"
-	.string "I knew you would, {PLAYER}.\n"
-	.string "But I am overjoyed to hear it.\p"
-	.string "You must remain vigilant.\n"
-	.string "I'll not be able to help you.$"
+	.string "I knew you would agree.\n"
+	.string "But I'm glad… truly.\l"
+	.string "Now, let me explain -\p"
+	.string "No! The link, it's fraying…\n"
+	.string "I won't reach you again so easily.\p"
+	.string "Go where memory clings to stone…\n"
+	.string "There, perhaps, we can speak in full.$"
 
 Mindscape_Text_Celebi::
-# 53 "data//maps/Mindscape/scripts.pory"
+# 58 "data//maps/Mindscape/scripts.pory"
 	.string "Hghh…\n"
 	.string "So far… I've reached so far…\l"
 	.string "Yet the thread holds…\p"
-	.string "You can hear me?\n"
+	.string "I didn't realise…\n"
+	.string "That it would take so much…\p"
+	.string "But, you can hear me?\n"
 	.string "Then the veil has parted…\l"
 	.string "And you've stepped through.\p"
 	.string "{CHANGE_MUGSHOT_EMOTE MUGSHOT_EMOTE_SIGH}You see me now, not in thoughts,\n"
 	.string "but in presence. In stillness.\l"
-	.string "Even, if not in physicality.\p"
+	.string "Even, if not in true physicality.\p"
 	.string "{CHANGE_MUGSHOT_EMOTE MUGSHOT_EMOTE_HAPPY}I'm glad you can meet me now…\n"
 	.string "See me, presented before you…\l"
 	.string "Across silence, across time.\p"

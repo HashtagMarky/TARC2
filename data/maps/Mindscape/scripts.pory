@@ -42,8 +42,13 @@ script Mindscape_EventScript_Celebi
         }
     }
     mnmbox(format(
-        "I knew you would, {PLAYER}.\n But I am overjoyed to hear it.\p You must remain vigilant.\n I'll not be able to help you."
-    ), PMD=TRUE, mugshotEmotion=MUGSHOT_EMOTE_JOYOUS)
+        "I knew you would agree.\n"
+        "But I'm glad… truly.\l"
+        "Now, let me explain -\p"
+        "No! The link, it's fraying…\n"
+        "I won't reach you again so easily.\p"
+        "Go where memory clings to stone…\n"
+        "There, perhaps, we can speak in full."), PMD=TRUE, mugshotEmotion=MUGSHOT_EMOTE_JOYOUS)
 	clearflag(FLAG_DONT_TRANSITION_MUSIC)
 	warp(MAP_PLAYER_HOUSE, 4, 3)
 	releaseall
@@ -57,13 +62,15 @@ text Mindscape_Text_Celebi
         "Hghh…\n"
         "So far… I've reached so far…\l"
         "Yet the thread holds…\p"
-        "You can hear me?\n"
+        "I didn't realise…\n"
+        "That it would take so much…\p"
+        "But, you can hear me?\n"
         "Then the veil has parted…\l"
         "And you've stepped through.\p"
 
         "{CHANGE_MUGSHOT_EMOTE MUGSHOT_EMOTE_SIGH}You see me now, not in thoughts,\n"
         "but in presence. In stillness.\l"
-        "Even, if not in physicality.\p"
+        "Even, if not in true physicality.\p"
 
         "{CHANGE_MUGSHOT_EMOTE MUGSHOT_EMOTE_HAPPY}I'm glad you can meet me now…\n"
         "See me, presented before you…\l"
