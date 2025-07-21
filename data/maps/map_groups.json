@@ -36,7 +36,8 @@
     "gMapGroup_IndoorRoute124",
     "gMapGroup_VyratonOutdoors",
     "gMapGroup_VyratonIndoors",
-    "gMapGroup_Echofern"
+    "gMapGroup_Echofern",
+    "gMapGroup_EchofernIndoors"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
@@ -640,5 +641,6 @@
     "EchofernForest",
     "GreenVein",
     "UpperRiverStream"
-  ]
+  ],
+  "gMapGroup_EchofernIndoors": []
 }

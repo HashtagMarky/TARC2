@@ -1,0 +1,111 @@
+mapscripts EchofernVillage_MapScripts {}
+
+
+// Warning Scripts
+script EchofernVillage_EventScript_Warning {
+    lock
+    msgbox(EchofernVillage_Text_Warning)
+    release
+    end
+}
+script EchofernVillage_EventScript_Dangerous {
+    lock
+    randomelement (1, 2, 3, 4, 5, 6, 7, 8, 9)
+    
+    if (var(VAR_RESULT) == 1) {
+        call(EchofernVillage_MonCry_Annihilape)
+    }
+
+    if (var(VAR_RESULT) == 2) {
+        call(EchofernVillage_MonCry_Kleavor)
+    }
+
+    if (var(VAR_RESULT) == 3) {
+        call(EchofernVillage_MonCry_Trevenant)
+    }
+
+    if (var(VAR_RESULT) == 4) {
+        goto(EchofernVillage_MonCry_Pangoro)
+    }
+
+    if (var(VAR_RESULT) == 5) {
+        call(EchofernVillage_MonCry_Scolipede)
+    }
+
+    if (var(VAR_RESULT) == 6) {
+        call(EchofernVillage_MonCry_Ursaring)
+    }
+
+    if (var(VAR_RESULT) == 7) {
+        call(EchofernVillage_MonCry_Haxorus)
+    }
+
+    if (var(VAR_RESULT) == 8) {
+        call(EchofernVillage_MonCry_Basculegion)
+    }
+
+    if (var(VAR_RESULT) == 9) {
+        call(EchofernVillage_MonCry_Hatterene)
+    }
+    applymovement(LOCALID_PLAYER, moves(
+        delay_16
+        emote_exclamation_mark
+        walk_fast_down * 2
+        walk_in_place_fast_up
+        step_end
+    ))
+    release
+    end
+}
+script EchofernVillage_MonCry_Annihilape {
+    playmoncry(SPECIES_ANNIHILAPE, CRY_MODE_NORMAL)
+    return
+}
+script EchofernVillage_MonCry_Kleavor {
+    playmoncry(SPECIES_KLEAVOR, CRY_MODE_NORMAL)
+    return
+}
+script EchofernVillage_MonCry_Trevenant {
+    playmoncry(SPECIES_TREVENANT, CRY_MODE_NORMAL)
+    return
+}
+script EchofernVillage_MonCry_Scolipede {
+    playmoncry(SPECIES_SCOLIPEDE, CRY_MODE_NORMAL)
+    return
+}
+script EchofernVillage_MonCry_Ursaring {
+    playmoncry(SPECIES_URSARING, CRY_MODE_NORMAL)
+    return
+}
+script EchofernVillage_MonCry_Haxorus {
+    playmoncry(SPECIES_HAXORUS, CRY_MODE_NORMAL)
+    return
+}
+script EchofernVillage_MonCry_Basculegion {
+    playmoncry(SPECIES_BASCULEGION, CRY_MODE_NORMAL)
+    return
+}
+script EchofernVillage_MonCry_Hatterene {
+    playmoncry(SPECIES_HATTERENE, CRY_MODE_NORMAL)
+    return
+}
+script EchofernVillage_MonCry_Pangoro {
+    playmoncry(SPECIES_PANGORO, CRY_MODE_NORMAL)
+    applymovement(LOCALID_PLAYER, moves(
+        delay_16
+        emote_exclamation_mark
+        walk_fast_down * 2
+        walk_in_place_fast_up
+        step_end
+    ))
+    waitmoncry
+    msgbox(format("...?\p Was that psf?"))
+    release
+    end
+}
+
+text EchofernVillage_Text_Warning {
+    format("
+        This cliff edge looks dangerous...\p
+        I really shouldn't continue further...")
+}
